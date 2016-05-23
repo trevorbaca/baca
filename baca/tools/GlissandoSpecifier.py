@@ -1,14 +1,8 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import abctools
-from abjad.tools import patterntools
-from abjad.tools import rhythmmakertools
-from abjad.tools import scoretools
-from abjad.tools import spannertools
-from abjad.tools.topleveltools import attach
-from abjad.tools.topleveltools import inspect_
+import abjad
 
 
-class GlissandoSpecifier(abctools.AbjadObject):
+class GlissandoSpecifier(abjad.abctools.AbjadObject):
     r'''Glissando specifier.
 
     ::
@@ -248,13 +242,13 @@ class GlissandoSpecifier(abctools.AbjadObject):
         self,
         patterns=None,
         ):
-        if isinstance(patterns, patterntools.Pattern):
+        if isinstance(patterns, abjad.patterntools.Pattern):
             patterns = (patterns,)
         patterns = patterns or ()
         patterns = tuple(patterns)
         prototype = (
-            patterntools.Pattern,
-            patterntools.CompoundPattern,
+            abjad.patterntools.Pattern,
+            abjad.patterntools.CompoundPattern,
             )
         assert all(isinstance(_, prototype) for _ in patterns), repr(patterns)
         self._patterns = patterns
@@ -276,23 +270,23 @@ class GlissandoSpecifier(abctools.AbjadObject):
     ### PRIVATE METHODS ###
 
     def _apply_pattern(self , pattern, logical_tie):
-        if isinstance(pattern, rhythmmakertools.SilenceMask):
+        if isinstance(pattern, abjad.rhythmmakertools.SilenceMask):
             return
         make_glissando_prototype = (
-            patterntools.Pattern,
-            rhythmmakertools.SustainMask,
+            abjad.patterntools.Pattern,
+            abjad.rhythmmakertools.SustainMask,
             )
         assert isinstance(pattern, make_glissando_prototype)
-        note_or_chord = (scoretools.Note, scoretools.Chord)
+        note_or_chord = (abjad.scoretools.Note, abjad.scoretools.Chord)
         if isinstance(pattern, make_glissando_prototype):
             last_leaf = logical_tie.tail
             if not isinstance(last_leaf, note_or_chord):
                 return
-            next_leaf = inspect_(last_leaf).get_leaf(1)
+            next_leaf = abjad.inspect_(last_leaf).get_leaf(1)
             if not isinstance(next_leaf, note_or_chord):
                 return
             leaves = [last_leaf, next_leaf]
-            attach(spannertools.Glissando(), leaves)
+            abjad.attach(abjad.spannertools.Glissando(), leaves)
 
     ### PUBLIC PROPERTIES ###
 

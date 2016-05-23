@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
-from abjad.tools.sequencetools.Sequence import Sequence
+import abjad
+import baca
 
 
-class DivisionSequence(Sequence):
+class DivisionSequence(abjad.sequencetools.Sequence):
     r'''Division sequence.
     '''
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Segment-maker components'
+    __documentation_section__ = 'Segments'
 
     __slots__ = (
         )
@@ -28,7 +29,6 @@ class DivisionSequence(Sequence):
 
         Returns new division sequence.
         '''
-        import baca
         maker = baca.tools.SplitByDurationsDivisionCallback(
             compound_meter_multiplier=compound_meter_multiplier,
             cyclic=cyclic,

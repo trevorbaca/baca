@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import abctools
+import abjad
 
 
-class TempoSpecifier(abctools.AbjadObject):
+class TempoSpecifier(abjad.abctools.AbjadObject):
     r'''Tempo specifier.
 
     ::

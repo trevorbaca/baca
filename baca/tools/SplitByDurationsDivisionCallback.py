@@ -1,13 +1,8 @@
 # -*- encoding: utf-8 -*-
-from abjad.tools import durationtools
-from abjad.tools import mathtools
-from abjad.tools import metertools
-from abjad.tools import sequencetools
-from abjad.tools.abctools.AbjadValueObject import AbjadValueObject
-from abjad.tools.topleveltools import new
+import abjad
 
 
-class SplitByDurationsDivisionCallback(AbjadValueObject):
+class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
     r'''Split-by-durations division callback.
 
     ::
@@ -46,7 +41,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
         ..  doctest::
 
-            >>> staff = maker._get_rhythmic_staff(lilypond_file)
+            >>> staff = maker._get_staff(lilypond_file)
             >>> f(staff)
             \new RhythmicStaff {
                 {
@@ -104,7 +99,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
         ..  doctest::
 
-            >>> staff = maker._get_rhythmic_staff(lilypond_file)
+            >>> staff = maker._get_staff(lilypond_file)
             >>> f(staff)
             \new RhythmicStaff {
                 {
@@ -137,7 +132,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Division-handling'
+    __documentation_section__ = 'Divisions'
 
     __slots__ = (
         '_callbacks',
@@ -153,7 +148,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
     def __init__(
         self,
-        compound_meter_multiplier=durationtools.Multiplier(1),
+        compound_meter_multiplier=abjad.durationtools.Multiplier(1),
         cyclic=True,
         durations=(),
         pattern_rotation_index=0,
@@ -161,7 +156,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
         remainder_fuse_threshold=None,
         ):
         compound_meter_multiplier = compound_meter_multiplier or 1
-        compound_meter_multiplier = durationtools.Multiplier(
+        compound_meter_multiplier = abjad.durationtools.Multiplier(
             compound_meter_multiplier)
         self._compound_meter_multiplier = compound_meter_multiplier
         assert isinstance(cyclic, bool), repr(cyclic)
@@ -169,7 +164,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
         durations = durations or ()
         pattern_ = []
         for division in durations:
-            division = durationtools.Division(division)
+            division = abjad.durationtools.Division(division)
             pattern_.append(division)
         durations = tuple(pattern_)
         self._pattern = durations
@@ -178,7 +173,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
         assert isinstance(pattern_rotation_index, int)
         self._pattern_rotation_index = pattern_rotation_index
         if remainder_fuse_threshold is not None:
-            remainder_fuse_threshold = durationtools.Duration(
+            remainder_fuse_threshold = abjad.durationtools.Duration(
                 remainder_fuse_threshold,
                 )
         self._remainder_fuse_threshold = remainder_fuse_threshold
@@ -222,7 +217,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -265,7 +260,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -314,7 +309,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -360,7 +355,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -462,9 +457,9 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
         start_offset = divisions[0].start_offset
         division_lists = []
         for i, division in enumerate(divisions):
-            input_division = durationtools.Division(division)
-            input_duration = durationtools.Duration(input_division)
-            input_meter = metertools.Meter(input_division)
+            input_division = abjad.durationtools.Division(division)
+            input_duration = abjad.durationtools.Duration(input_division)
+            input_meter = abjad.metertools.Meter(input_division)
             assert 0 < input_division, repr(input_division)
             if not self.durations:
                 division_list = [input_division]
@@ -475,23 +470,23 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
             elif input_meter.is_compound:
                 multiplier = self.compound_meter_multiplier
                 durations = [
-                    durationtools.Duration(multiplier * _)
+                    abjad.durationtools.Duration(multiplier * _)
                     for _ in self.durations
                     ]
             division_list = list(durations)
             pattern_rotation_index = self.pattern_rotation_index or 0
             pattern_rotation_index *= i
-            division_list = sequencetools.rotate_sequence(
+            division_list = abjad.sequencetools.rotate_sequence(
                 division_list,
                 pattern_rotation_index,
                 )
             if self.cyclic:
-                division_list = sequencetools.repeat_sequence_to_weight(
+                division_list = abjad.sequencetools.repeat_sequence_to_weight(
                     division_list,
                     input_division,
                     allow_total=Less,
                     )
-            total_duration = durationtools.Duration(sum(division_list))
+            total_duration = abjad.durationtools.Duration(sum(division_list))
             if total_duration == input_duration:
                 division_lists.append(division_list)
                 continue
@@ -500,13 +495,13 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
                 message = message.format(input_division, durations)
                 raise Exception(message)
             remainder = input_division - total_duration
-            remainder = durationtools.Division(remainder)
+            remainder = abjad.durationtools.Division(remainder)
             if self.remainder == Left:
                 if self.remainder_fuse_threshold is None:
                     division_list.insert(0, remainder)
                 elif remainder <= self.remainder_fuse_threshold:
                     fused_value = division_list[0] + remainder
-                    fused_value = durationtools.Division(fused_value)
+                    fused_value = abjad.durationtools.Division(fused_value)
                     division_list[0] = fused_value
                 else:
                     division_list.insert(0, remainder)
@@ -515,13 +510,13 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
                     division_list.append(remainder)
                 elif remainder <= self.remainder_fuse_threshold:
                     fused_value = division_list[-1] + remainder
-                    fused_value = durationtools.Division(fused_value)
+                    fused_value = abjad.durationtools.Division(fused_value)
                     division_list[-1] = fused_value
                 else:
                     division_list.append(remainder)
             else:
                 raise ValueError((self.remainder, remainder))
-            total_duration = durationtools.Duration(sum(division_list))
+            total_duration = abjad.durationtools.Duration(sum(division_list))
             pair = total_duration, input_duration
             assert total_duration == input_duration, pair
             division_lists.append(division_list)
@@ -537,8 +532,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
     @property
     def _storage_format_specification(self):
-        from abjad.tools import systemtools
-        manager = systemtools.StorageFormatManager
+        manager = abjad.systemtools.StorageFormatManager
         keyword_argument_names = \
             manager.get_signature_keyword_argument_names(self)
         keyword_argument_names = list(keyword_argument_names)
@@ -550,7 +544,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
             keyword_argument_names.remove('remainder')
         if self.pattern_rotation_index == 0:
             keyword_argument_names.remove('pattern_rotation_index')
-        return systemtools.StorageFormatSpecification(
+        return abjad.systemtools.StorageFormatSpecification(
             self,
             keyword_argument_names=keyword_argument_names,
             )
@@ -595,7 +589,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = rhythm_maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -647,7 +641,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = rhythm_maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -713,7 +707,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -771,7 +765,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -835,7 +829,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -883,7 +877,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -953,7 +947,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -1011,7 +1005,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -1069,7 +1063,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -1135,7 +1129,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -1178,7 +1172,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -1225,7 +1219,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -1270,7 +1264,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -1328,7 +1322,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -1373,7 +1367,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -1418,7 +1412,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -1465,7 +1459,7 @@ class SplitByDurationsDivisionCallback(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {

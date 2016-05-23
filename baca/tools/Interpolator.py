@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
+import abjad
 import fractions
-from abjad.tools import abctools
 
 
-class Interpolator(abctools.AbjadObject):
+class Interpolator(abjad.abctools.AbjadObject):
     r'''Interpolator.
     
     ::
@@ -12,7 +12,7 @@ class Interpolator(abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 1.** Interpolates linearly from -5 up to 5:
+        **Example.** Interpolates linearly from -5 up to 5:
 
         ::
 
@@ -34,7 +34,7 @@ class Interpolator(abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Utility classes'
+    __documentation_section__ = 'Utilities'
 
     ### PUBLIC METHODS ###
 

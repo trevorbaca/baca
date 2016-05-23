@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
+import abjad
 import copy
 import itertools
-from abjad.tools import abctools
-from abjad.tools import datastructuretools
-from abjad.tools import pitchtools
 
 
-class MicrotonalDeviationSpecifier(abctools.AbjadObject):
+class MicrotonalDeviationSpecifier(abjad.abctools.AbjadObject):
     r'''Microtonal deviation specifier.
 
     ::
@@ -138,7 +136,6 @@ class MicrotonalDeviationSpecifier(abctools.AbjadObject):
         deposit_annotations=None,
         number_lists=None,
         ):
-        from abjad.tools import pitchtools
         if deposit_annotations is not None:
             deposit_annotations = tuple(deposit_annotations)
         self._deposit_annotations = deposit_annotations
@@ -157,7 +154,7 @@ class MicrotonalDeviationSpecifier(abctools.AbjadObject):
         '''
         if self.number_lists is None:
             return
-        number_lists = datastructuretools.CyclicTuple(self.number_lists)
+        number_lists = abjad.datastructuretools.CyclicTuple(self.number_lists)
         number_list_index = 0
         pairs = itertools.groupby(
             logical_ties,
@@ -168,7 +165,7 @@ class MicrotonalDeviationSpecifier(abctools.AbjadObject):
             if len(values) == 1:
                 continue
             number_list = number_lists[number_list_index]
-            number_list = datastructuretools.CyclicTuple(number_list)
+            number_list = abjad.datastructuretools.CyclicTuple(number_list)
             for i, logical_tie in enumerate(values):
                 number = number_list[i]
                 for note in logical_tie:
@@ -184,7 +181,7 @@ class MicrotonalDeviationSpecifier(abctools.AbjadObject):
             return
         written_pitch = note.written_pitch
         written_pitch = \
-            pitchtools.transpose_named_pitch_by_numbered_interval_and_respell(
+            abjad.pitchtools.transpose_named_pitch_by_numbered_interval_and_respell(
             written_pitch, 0, number)
         note.written_pitch = written_pitch
 
@@ -192,7 +189,7 @@ class MicrotonalDeviationSpecifier(abctools.AbjadObject):
         if not self.deposit_annotations:
             return
         for annotation_name in self.deposit_annotations:
-            annotation = indicatortools.Annotation(annotation_name, True)
+            annotation = abjad.indicatortools.Annotation(annotation_name, True)
             attach(annotation, note)
 
     ### PUBLIC PROPERTIES ###

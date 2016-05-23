@@ -1,17 +1,8 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import durationtools
-from abjad.tools import indicatortools
-from abjad.tools import schemetools
-from abjad.tools import scoretools
-from abjad.tools import timespantools
-from abjad.tools.abctools.AbjadObject import AbjadObject
-from abjad.tools.topleveltools import attach
-from abjad.tools.topleveltools import inspect_
-from abjad.tools.topleveltools import iterate
-from abjad.tools.topleveltools import set_
+import abjad
 
 
-class SpacingSpecifier(AbjadObject):
+class SpacingSpecifier(abjad.abctools.AbjadObject):
     r'''Spacing specifier.
 
     ::
@@ -600,6 +591,175 @@ class SpacingSpecifier(AbjadObject):
                 >>
             >>
 
+    ..  container:: example
+
+        **Example 6.** Works with accelerando and ritardando figures:
+
+        ::
+
+            >>> segment_maker = baca.tools.SegmentMaker(
+            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            ...     spacing_specifier=baca.tools.SpacingSpecifier(
+            ...         minimum_width=Duration(1, 8),
+            ...         ),
+            ...     time_signatures=[(4, 8), (3, 8)],
+            ...     )
+
+        ::
+
+            >>> specifiers = segment_maker.append_specifiers(
+            ...     ('vn', baca.tools.stages(1)),
+            ...     [
+            ...         baca.pitch.pitches('E4 F4'),
+            ...         baca.tools.RhythmSpecifier(
+            ...             rhythm_maker=rhythmmakertools.AccelerandoRhythmMaker(
+            ...                 beam_specifier=rhythmmakertools.BeamSpecifier(
+            ...                 use_feather_beams=True,
+            ...                     ),
+            ...                 interpolation_specifiers=rhythmmakertools.InterpolationSpecifier(
+            ...                     start_duration=Duration(1, 8),
+            ...                     stop_duration=Duration(1, 20),
+            ...                     written_duration=Duration(1, 16),
+            ...                     ),
+            ...                 tuplet_spelling_specifier=rhythmmakertools.TupletSpellingSpecifier(
+            ...                     use_note_duration_bracket=True,
+            ...                     ),
+            ...                 ),
+            ...             ),
+            ...         ],
+            ...     )
+
+        ::
+
+            >>> result = segment_maker(is_doc_example=True)
+            >>> lilypond_file, segment_metadata = result
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> score = lilypond_file.score_block.items[0]
+            >>> f(score)
+            \context Score = "Score" <<
+                \tag violin
+                \context TimeSignatureContext = "Time Signature Context" <<
+                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                    }
+                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        {
+                            \time 4/8
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
+                            \newSpacingSection
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
+                            \newSpacingSection
+                            s1 * 3/8
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" {
+                        \clef "treble"
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            \override TupletNumber.text = \markup {
+                                \scale
+                                    #'(0.75 . 0.75)
+                                    \score
+                                        {
+                                            \new Score \with {
+                                                \override SpacingSpanner.spacing-increment = #0.5
+                                                proportionalNotationDuration = ##f
+                                            } <<
+                                                \new RhythmicStaff \with {
+                                                    \remove Time_signature_engraver
+                                                    \remove Staff_symbol_engraver
+                                                    \override Stem.direction = #up
+                                                    \override Stem.length = #5
+                                                    \override TupletBracket.bracket-visibility = ##t
+                                                    \override TupletBracket.direction = #up
+                                                    \override TupletBracket.padding = #1.25
+                                                    \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                                    \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                                    tupletFullLength = ##t
+                                                } {
+                                                    c'2
+                                                }
+                                            >>
+                                            \layout {
+                                                indent = #0
+                                                ragged-right = ##t
+                                            }
+                                        }
+                                }
+                            \times 1/1 {
+                                \once \override Beam.grow-direction = #right
+                                e'16 * 63/32 [
+                                f'16 * 115/64
+                                e'16 * 91/64
+                                f'16 * 35/32
+                                e'16 * 29/32
+                                f'16 * 13/16 ]
+                            }
+                            \revert TupletNumber.text
+                            \override TupletNumber.text = \markup {
+                                \scale
+                                    #'(0.75 . 0.75)
+                                    \score
+                                        {
+                                            \new Score \with {
+                                                \override SpacingSpanner.spacing-increment = #0.5
+                                                proportionalNotationDuration = ##f
+                                            } <<
+                                                \new RhythmicStaff \with {
+                                                    \remove Time_signature_engraver
+                                                    \remove Staff_symbol_engraver
+                                                    \override Stem.direction = #up
+                                                    \override Stem.length = #5
+                                                    \override TupletBracket.bracket-visibility = ##t
+                                                    \override TupletBracket.direction = #up
+                                                    \override TupletBracket.padding = #1.25
+                                                    \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                                    \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                                    tupletFullLength = ##t
+                                                } {
+                                                    c'4.
+                                                }
+                                            >>
+                                            \layout {
+                                                indent = #0
+                                                ragged-right = ##t
+                                            }
+                                        }
+                                }
+                            \times 1/1 {
+                                \once \override Beam.grow-direction = #right
+                                e'16 * 117/64 [
+                                f'16 * 99/64
+                                e'16 * 69/64
+                                f'16 * 13/16
+                                e'16 * 47/64 ]
+                                \bar "|"
+                            }
+                            \revert TupletNumber.text
+                        }
+                    }
+                >>
+            >>
+
+        Minimum duration in each measure is taken from the **nonmultiplied**
+        duration of each note.
+
     '''
 
     ### CLASS VARIABLES ###
@@ -623,14 +783,14 @@ class SpacingSpecifier(AbjadObject):
         overrides=None,
         ):
         if fermata_measure_width is not None:
-            fermata_measure_width = durationtools.Duration(
+            fermata_measure_width = abjad.durationtools.Duration(
                 fermata_measure_width)
         self._fermata_measure_width = fermata_measure_width
         if minimum_width is not None:
-            minimum_width = durationtools.Duration(minimum_width)
+            minimum_width = abjad.durationtools.Duration(minimum_width)
         self._minimum_width = minimum_width    
         if multiplier is not None:
-            multiplier = durationtools.Multiplier(multiplier)
+            multiplier = abjad.durationtools.Multiplier(multiplier)
         self._multiplier = multiplier
         if overrides is not None:
             overrides = tuple(overrides)
@@ -645,13 +805,13 @@ class SpacingSpecifier(AbjadObject):
         '''
         score = segment_maker._score
         skip_context = score['Time Signature Context Skips']
-        leaves = iterate(score).by_leaf()
+        leaves = abjad.iterate(score).by_leaf()
         minimum_leaf_durations_by_measure = \
             self._get_minimum_leaf_durations_by_measure(skip_context, leaves)
         fermata_start_offsets = segment_maker._fermata_start_offsets
-        skips = iterate(skip_context).by_leaf(scoretools.Skip)
+        skips = abjad.iterate(skip_context).by_leaf(abjad.scoretools.Skip)
         for measure_index, skip in enumerate(skips):
-            measure_timespan = inspect_(skip).get_timespan()
+            measure_timespan = abjad.inspect_(skip).get_timespan()
             if (self.fermata_measure_width is not None and
                 measure_timespan.start_offset in fermata_start_offsets):
                 duration = self.fermata_measure_width
@@ -662,10 +822,10 @@ class SpacingSpecifier(AbjadObject):
                         duration = self.minimum_width
                 if self.multiplier is not None:
                     duration = duration / self.multiplier
-            command = indicatortools.LilyPondCommand('newSpacingSection')
-            attach(command, skip)
-            moment = schemetools.SchemeMoment(duration)
-            set_(skip).score.proportional_notation_duration = moment
+            command = abjad.indicatortools.LilyPondCommand('newSpacingSection')
+            abjad.attach(command, skip)
+            moment = abjad.schemetools.SchemeMoment(duration)
+            abjad.set_(skip).score.proportional_notation_duration = moment
 
     ### PRIVATE METHODS ###
 
@@ -673,22 +833,31 @@ class SpacingSpecifier(AbjadObject):
         measure_timespans = []
         leaf_durations_by_measure = []
         for skip in skip_context:
-            measure_timespan = inspect_(skip).get_timespan()
+            measure_timespan = abjad.inspect_(skip).get_timespan()
             measure_timespans.append(measure_timespan)
             leaf_durations_by_measure.append([])
         leaf_timespans = set()
         leaf_count = 0
         for leaf in leaves:
-            leaf_timespan = inspect_(leaf).get_timespan()
-            leaf_timespans.add(leaf_timespan)
+            leaf_timespan = abjad.inspect_(leaf).get_timespan()
+            leaf_duration = leaf_timespan.duration
+            prototype = (
+                abjad.durationtools.Multiplier,
+                abjad.mathtools.NonreducedFraction,
+                )
+            multiplier = abjad.inspect_(leaf).get_indicator(prototype)
+            if multiplier is not None:
+                leaf_duration = leaf_duration / multiplier
+            pair = (leaf_timespan, leaf_duration)
+            leaf_timespans.add(pair)
             leaf_count += 1
         measure_index = 0
         measure_timespan = measure_timespans[measure_index]
         leaf_timespans = list(leaf_timespans)
-        leaf_timespans.sort(key=lambda _: _.start_offset)
+        leaf_timespans.sort(key=lambda _: _[0].start_offset)
         start_offset = 0
-        for leaf_timespan in leaf_timespans:
-            leaf_duration = leaf_timespan.duration
+        for pair in leaf_timespans:
+            leaf_timespan, leaf_duration = pair
             assert start_offset <= leaf_timespan.start_offset
             start_offset = leaf_timespan.start_offset
             if leaf_timespan.starts_during_timespan(measure_timespan):

@@ -1,15 +1,9 @@
 # -*- coding: utf-8 -*-
+import abjad
 import copy
-from abjad.tools import abctools
-from abjad.tools import indicatortools
-from abjad.tools import scoretools
-from abjad.tools import selectiontools
-from abjad.tools import spannertools
-from abjad.tools.topleveltools import attach
-from abjad.tools.topleveltools import iterate
 
 
-class TransitionSpecifier(abctools.AbjadObject):
+class TransitionSpecifier(abjad.abctools.AbjadObject):
     r'''Transition specifier.
 
     ::
@@ -186,36 +180,36 @@ class TransitionSpecifier(abctools.AbjadObject):
 
         Returns none.
         '''
-        if isinstance(components[0], selectiontools.LogicalTie):
-            leaves = iterate(components).by_leaf()
+        if isinstance(components[0], abjad.selectiontools.LogicalTie):
+            leaves = abjad.iterate(components).by_leaf()
             leaves = list(leaves)
         else:
-            assert isinstance(components[0], scoretools.Leaf)
+            assert isinstance(components[0], abjad.scoretools.Leaf)
             leaves = components
         start_leaf = leaves[0]
         stop_leaf = leaves[-1]
         if self.start_markup is not None:
             start_markup = copy.copy(self.start_markup)
             start_markup = start_markup.override(('font-name', 'Palatino'))
-            attach(start_markup, start_leaf, is_annotation=True)
+            abjad.attach(start_markup, start_leaf, is_annotation=True)
         arrow = self._get_arrow()
-        attach(arrow, start_leaf)
+        abjad.attach(arrow, start_leaf)
         if self.stop_markup is not None:
             stop_markup = copy.copy(self.stop_markup)
             stop_markup = stop_markup.override(('font-name', 'Palatino'))
-            attach(stop_markup, stop_leaf, is_annotation=True)
-        attach(spannertools.TextSpanner(), leaves)
+            abjad.attach(stop_markup, stop_leaf, is_annotation=True)
+        abjad.attach(abjad.spannertools.TextSpanner(), leaves)
 
     ### PRIVATE METHODS ###
 
     def _get_arrow(self):
         if self.solid:
-            return indicatortools.Arrow()
+            return abjad.indicatortools.Arrow()
         return self._make_dashed_arrow()
 
     @staticmethod
     def _make_dashed_arrow():
-        return indicatortools.Arrow(
+        return abjad.indicatortools.Arrow(
             dash_fraction=0.25,
             dash_period=1.5,
             left_broken_text=False,
@@ -229,10 +223,10 @@ class TransitionSpecifier(abctools.AbjadObject):
 
     @property
     def solid(self):
-        r'''Is true when transition should be a solid line instead of a 
-        dashed line.
+        r'''Is true when specifier renders transition as a solid line instead
+        of a dashed line.
 
-        Is false when transition should be a dashed line.
+        Is false when specifier renders transitions as a dashed line.
 
         Defaults to none.
 

@@ -1,12 +1,9 @@
 # -*- encoding: utf-8 -*-
-from abjad.tools import durationtools
-from abjad.tools import mathtools
-from abjad.tools import sequencetools
-from abjad.tools.abctools import AbjadValueObject
-from abjad.tools.topleveltools import new
+import abjad
+import baca
 
 
-class DivisionMaker(AbjadValueObject):
+class DivisionMaker(abjad.abctools.AbjadValueObject):
     r'''Division-maker.
 
     ::
@@ -50,7 +47,7 @@ class DivisionMaker(AbjadValueObject):
 
         ..  doctest::
 
-            >>> staff = rhythm_maker._get_rhythmic_staff(lilypond_file)
+            >>> staff = rhythm_maker._get_staff(lilypond_file)
             >>> f(staff)
             \new RhythmicStaff {
                 {
@@ -105,7 +102,7 @@ class DivisionMaker(AbjadValueObject):
 
         ..  doctest::
 
-            >>> staff = rhythm_maker._get_rhythmic_staff(lilypond_file)
+            >>> staff = rhythm_maker._get_staff(lilypond_file)
             >>> f(staff)
             \new RhythmicStaff {
                 c'1...
@@ -147,7 +144,7 @@ class DivisionMaker(AbjadValueObject):
 
         ..  doctest::
 
-            >>> staff = rhythm_maker._get_rhythmic_staff(lilypond_file)
+            >>> staff = rhythm_maker._get_staff(lilypond_file)
             >>> f(staff)
             \new RhythmicStaff {
                 c'4
@@ -195,7 +192,7 @@ class DivisionMaker(AbjadValueObject):
 
         ..  doctest::
 
-            >>> staff = rhythm_maker._get_rhythmic_staff(lilypond_file)
+            >>> staff = rhythm_maker._get_staff(lilypond_file)
             >>> f(staff)
             \new RhythmicStaff {
                 {
@@ -249,7 +246,7 @@ class DivisionMaker(AbjadValueObject):
 
         ..  doctest::
 
-            >>> staff = rhythm_maker._get_rhythmic_staff(lilypond_file)
+            >>> staff = rhythm_maker._get_staff(lilypond_file)
             >>> f(staff)
             \new RhythmicStaff {
                 c'2.
@@ -299,7 +296,7 @@ class DivisionMaker(AbjadValueObject):
 
         ..  doctest::
 
-            >>> staff = rhythm_maker._get_rhythmic_staff(lilypond_file)
+            >>> staff = rhythm_maker._get_staff(lilypond_file)
             >>> f(staff)
             \new RhythmicStaff {
                 c'2.
@@ -316,7 +313,7 @@ class DivisionMaker(AbjadValueObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Division-handling'
+    __documentation_section__ = 'Divisions'
 
     __slots__ = (
         '_callbacks',
@@ -355,7 +352,7 @@ class DivisionMaker(AbjadValueObject):
     def _append_callback(self, callback):
         callbacks = self.callbacks or ()
         callbacks = callbacks + (callback,)
-        result = new(self)
+        result = abjad.new(self)
         result._callbacks = callbacks
         return result
 
@@ -370,27 +367,27 @@ class DivisionMaker(AbjadValueObject):
 
     @staticmethod
     def _to_divisions(expr, start_offset=None):
-        if isinstance(expr, durationtools.Division):
-            result = durationtools.Division(expr)
+        if isinstance(expr, abjad.durationtools.Division):
+            result = abjad.durationtools.Division(expr)
             if start_offset is not None:
                 result._start_offset = start_offset
                 start_offset += result.duration
-        elif isinstance(expr, mathtools.NonreducedFraction):
-            result = durationtools.Division(expr.pair)
+        elif isinstance(expr, abjad.mathtools.NonreducedFraction):
+            result = abjad.durationtools.Division(expr.pair)
             if start_offset is not None:
                 result._start_offset = start_offset
                 start_offset += result.duration
         elif hasattr(expr, 'pair'):
-            result = durationtools.Division(expr.pair)
+            result = abjad.durationtools.Division(expr.pair)
             if start_offset is not None:
                 result._start_offset = start_offset
                 start_offset += result.duration
         elif isinstance(expr, tuple):
-            result = durationtools.Division(expr)
+            result = abjad.durationtools.Division(expr)
             if start_offset is not None:
                 result._start_offset = start_offset
                 start_offset += result.duration
-        elif isinstance(expr, (list, sequencetools.Sequence)):
+        elif isinstance(expr, (list, abjad.sequencetools.Sequence)):
             result = []
             for element in expr:
                 new_element, start_offset = DivisionMaker._to_divisions(
@@ -456,7 +453,6 @@ class DivisionMaker(AbjadValueObject):
 
         Returns new division-maker.
         '''
-        import baca
         callback = baca.tools.FlattenDivisionCallback(depth=depth)
         return self._append_callback(callback)
 
@@ -498,7 +494,7 @@ class DivisionMaker(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = rhythm_maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     c'1..
@@ -506,7 +502,6 @@ class DivisionMaker(AbjadValueObject):
                 }
 
         '''
-        import baca
         callback = baca.tools.FuseByCountsDivisionCallback(
             cyclic=cyclic,
             counts=counts,
@@ -707,7 +702,6 @@ class DivisionMaker(AbjadValueObject):
 
         Returns new division-maker.
         '''
-        import baca
         callback = baca.tools.PartitionDivisionCallback(
             counts=counts,
             fuse_assignable_total_duration=fuse_assignable_total_duration,
@@ -718,7 +712,7 @@ class DivisionMaker(AbjadValueObject):
 
     def split_by_durations(
         self,
-        compound_meter_multiplier=durationtools.Multiplier(1),
+        compound_meter_multiplier=abjad.durationtools.Multiplier(1),
         cyclic=True,
         durations=(),
         pattern_rotation_index=0,
@@ -763,7 +757,7 @@ class DivisionMaker(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = rhythm_maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -823,7 +817,7 @@ class DivisionMaker(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = rhythm_maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -848,7 +842,6 @@ class DivisionMaker(AbjadValueObject):
 
         Returns new division-maker.
         '''
-        import baca
         callback = baca.tools.SplitByDurationsDivisionCallback(
             compound_meter_multiplier=compound_meter_multiplier,
             cyclic=cyclic,
@@ -899,7 +892,7 @@ class DivisionMaker(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = rhythm_maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -953,7 +946,7 @@ class DivisionMaker(AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_rhythmic_staff(lilypond_file)
+                >>> staff = rhythm_maker._get_staff(lilypond_file)
                 >>> f(staff)
                 \new RhythmicStaff {
                     {
@@ -971,7 +964,6 @@ class DivisionMaker(AbjadValueObject):
 
         Returns new division-maker.
         '''
-        import baca
         callback = baca.tools.SplitByRoundedRatiosDivisionCallback(
             ratios=ratios,
             )

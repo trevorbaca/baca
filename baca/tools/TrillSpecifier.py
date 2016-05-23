@@ -1,14 +1,8 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import abctools
-from abjad.tools import durationtools
-from abjad.tools import scoretools
-from abjad.tools import selectiontools
-from abjad.tools import spannertools
-from abjad.tools.topleveltools import attach
-from abjad.tools.topleveltools import inspect_
+import abjad
 
 
-class TrillSpecifier(abctools.AbjadObject):
+class TrillSpecifier(abjad.abctools.AbjadObject):
     r'''Trill specifier.
 
     ::
@@ -98,7 +92,7 @@ class TrillSpecifier(abctools.AbjadObject):
                             e'2 \startTrillSpan
                             f'4. \stopTrillSpan \startTrillSpan
                             e'2 \stopTrillSpan \startTrillSpan
-                            f'4. \stopTrillSpan \stopTrillSpan \startTrillSpan
+                            f'4. \stopTrillSpan
                             \bar "|"
                         }
                     }
@@ -146,15 +140,15 @@ class TrillSpecifier(abctools.AbjadObject):
         assert isinstance(is_harmonic, (bool, type(None)))
         self._is_harmonic = is_harmonic
         if minimum_written_duration is not None:
-            minimum_written_duration = durationtools.Duration(
+            minimum_written_duration = abjad.durationtools.Duration(
                 minimum_written_duration)
         self._minimum_written_duration = minimum_written_duration
         if maximum_written_duration is not None:
-            maximum_written_duration = durationtools.Duration(
+            maximum_written_duration = abjad.durationtools.Duration(
                 maximum_written_duration)
         self._maximum_written_duration = maximum_written_duration
         if pitch is not None:
-            pitch = pitchtools.NamedPitch(pitch)
+            pitch = abjad.pitchtools.NamedPitch(pitch)
         self._pitch = pitch
 
     ### SPECIAL METHODS ###
@@ -164,10 +158,11 @@ class TrillSpecifier(abctools.AbjadObject):
 
         Returns none.
         '''
-        if isinstance(logical_ties[0], scoretools.Leaf):
-            logical_ties = [selectiontools.LogicalTie(_) for _ in logical_ties]
+        if isinstance(logical_ties[0], abjad.scoretools.Leaf):
+            logical_ties = [
+                abjad.selectiontools.LogicalTie(_) for _ in logical_ties]
         for logical_tie in logical_ties:
-            written_duration = durationtools.Duration(0)
+            written_duration = abjad.durationtools.Duration(0)
             for note in logical_tie:
                 written_duration += note.written_duration
             if self.minimum_written_duration is not None:
@@ -176,7 +171,7 @@ class TrillSpecifier(abctools.AbjadObject):
             if self.maximum_written_duration is not None:
                 if self.maximum_written_duration <= written_duration:
                     continue
-            spanner = spannertools.TrillSpanner(
+            spanner = abjad.spannertools.TrillSpanner(
                 interval=self.interval,
                 is_harmonic=self.is_harmonic,
                 pitch=self.pitch,
@@ -191,16 +186,17 @@ class TrillSpecifier(abctools.AbjadObject):
                     break
             if skip_spanner:
                 continue
-            next_leaf = inspect_(leaves[-1]).get_leaf(1)
+            next_leaf = abjad.inspect_(leaves[-1]).get_leaf(1)
             if next_leaf is not None:
                 leaves.append(next_leaf)
-            attach(spanner, leaves)
+            if 1 < len(leaves):
+                abjad.attach(spanner, leaves)
 
     def _has_forbidden_annotation(self, leaf):
         if self.forbidden_annotations is None:
             return False
         for forbidden_annotation in self.forbidden_annotations:
-            if inspect_(leaf).get_annotation(forbidden_annotation):
+            if abjad.inspect_(leaf).get_annotation(forbidden_annotation):
                 return True
         return False
 
@@ -237,8 +233,8 @@ class TrillSpecifier(abctools.AbjadObject):
 
     @property
     def is_harmonic(self):
-        r'''Is true when trill pitch note head should format as a white
-        diamond. Otherwise false.
+        r'''Is true when specifier formats trill pitch note head as a white
+        diamond.
 
         Defaults to false.
 

@@ -1,19 +1,9 @@
 # -*- coding: utf-8 -*-
+import abjad
 import baca
-from abjad.tools import abctools
-from abjad.tools import durationtools
-from abjad.tools import expressiontools
-from abjad.tools import indicatortools
-from abjad.tools import instrumenttools
-from abjad.tools import mathtools
-from abjad.tools import rhythmmakertools
-from abjad.tools import scoretools
-from abjad.tools import selectiontools
-from abjad.tools import sequencetools
-from abjad.tools.topleveltools import inspect_
 
 
-class RhythmSpecifier(abctools.AbjadObject):
+class RhythmSpecifier(abjad.abctools.AbjadObject):
     r'''Rhythm specifier.
 
     ::
@@ -77,6 +67,7 @@ class RhythmSpecifier(abctools.AbjadObject):
         '_division_expression',
         '_hide_untuned_percussion_markup', # remove
         '_instrument', # remove
+        '_patterns',
         '_reference_meters',
         '_rewrite_meter',
         '_rhythm_maker',
@@ -98,6 +89,7 @@ class RhythmSpecifier(abctools.AbjadObject):
         division_maker=None,
         division_expression=None,
         instrument=None,
+        patterns=None,
         reference_meters=None,
         rewrite_meter=None,
         rhythm_maker=None,
@@ -118,13 +110,26 @@ class RhythmSpecifier(abctools.AbjadObject):
             raise Exception(message)
         self._division_maker = division_maker
         if division_expression is not None:
-            prototype = expressiontools.SequenceExpression
+            prototype = abjad.expressiontools.SequenceExpression
             assert isinstance(division_expression, prototype), repr(
                 division_expression)
         self._division_expression = division_expression
         self._hide_untuned_percussion_markup = False
         self._instrument = instrument
+        if patterns is not None:
+            prototype = (
+                abjad.patterntools.CompoundPattern,
+                abjad.patterntools.Pattern,
+                abjad.patterntools.PatternInventory,
+                )
+            if isinstance(patterns, prototype):
+                patterns = [patterns]
+            for pattern in patterns:
+                assert isinstance(pattern, prototype), repr(pattern)
+        self._patterns = patterns
         self._reference_meters = reference_meters
+        if rewrite_meter is not None:
+            rewrite_meter = bool(rewrite_meter)
         self._rewrite_meter = rewrite_meter
         self._rhythm_maker = rhythm_maker
         self._rhythm_overwrites = rhythm_overwrites
@@ -135,7 +140,11 @@ class RhythmSpecifier(abctools.AbjadObject):
         self._stages = stages
         self._start_tempo = start_tempo
         self._stop_tempo = stop_tempo
+        if tie_first is not None:
+            tie_first = bool(tie_first)
         self._tie_first = tie_first
+        if tie_last is not None:
+            tie_last = bool(tie_last)
         self._tie_last = tie_last
 
     ### SPECIAL METHODS ###
@@ -150,16 +159,16 @@ class RhythmSpecifier(abctools.AbjadObject):
 
         Returns contribution with music payload.
         '''
-        import baca
         for time_signature in time_signatures:
-            assert isinstance(time_signature, indicatortools.TimeSignature)
+            prototype = abjad.indicatortools.TimeSignature
+            assert isinstance(time_signature, prototype), repr(time_signature)
         if start_offset is not None:
-            assert isinstance(start_offset, durationtools.Offset)
+            assert isinstance(start_offset, abjad.durationtools.Offset)
         music, start_offset = self._make_rhythm(time_signatures, start_offset)
-        assert isinstance(music, (tuple, list, scoretools.Voice)), repr(music)
+        assert isinstance(music, (tuple, list, abjad.scoretools.Voice))
         first_leaf = self._get_first_leaf(music)
         last_leaf = self._get_last_leaf(music)
-        prototype = instrumenttools.Percussion
+        prototype = abjad.instrumenttools.Percussion
         if self.instrument is not None:
             self._attach_instrument(
                 self.instrument, 
@@ -168,20 +177,20 @@ class RhythmSpecifier(abctools.AbjadObject):
                 scope=Staff,
                 )
         if self.clef is not None:
-            attach(self.clef, first_leaf, scope=scoretools.Staff)
-        pitched_prototype = (scoretools.Note, scoretools.Chord)
+            abjad.attach(self.clef, first_leaf, scope=abjad.scoretools.Staff)
+        pitched_prototype = (abjad.scoretools.Note, abjad.scoretools.Chord)
         if self.staff_line_count is not None:
             self._set_staff_line_count(first_leaf, self.staff_line_count)
-        elif self.clef == indicatortools.Clef('percussion'):
+        elif self.clef == abjad.indicatortools.Clef('percussion'):
             self._set_staff_line_count(first_leaf, 1)
         if self.tie_first and isinstance(first_leaf, pitched_prototype):
-            attach('tie to me', first_leaf)
+            abjad.attach('tie to me', first_leaf)
             if self._use_messiaen_style_ties:
-                attach('use messiaen style ties', first_leaf)
+                abjad.attach('use messiaen style ties', first_leaf)
         if self.tie_last and isinstance(last_leaf, pitched_prototype):
-            attach('tie from me', last_leaf)
+            abjad.attach('tie from me', last_leaf)
             if self._use_messiaen_style_ties:
-                attach('use messiaen style ties', last_leaf)
+                abjad.attach('use messiaen style ties', last_leaf)
         contribution = baca.tools.Contribution(
             payload=music,
             start_offset=start_offset,
@@ -192,28 +201,26 @@ class RhythmSpecifier(abctools.AbjadObject):
 
     @property
     def _default_division_maker(self):
-        import experimental
         division_maker = baca.tools.DivisionMaker()
         return division_maker
 
     @property
     def _default_rhythm_maker(self):
-        mask = rhythmmakertools.silence_all(use_multimeasure_rests=True) 
-        multimeasure_rests = rhythmmakertools.NoteRhythmMaker(
+        mask = abjad.rhythmmakertools.silence_all(use_multimeasure_rests=True) 
+        multimeasure_rests = abjad.rhythmmakertools.NoteRhythmMaker(
             division_masks=[mask],
             )
         return multimeasure_rests
 
     @property
     def _storage_format_specification(self):
-        from abjad.tools import systemtools
-        manager = systemtools.StorageFormatManager
+        manager = abjad.systemtools.StorageFormatManager
         keyword_argument_names = \
             manager.get_signature_keyword_argument_names(self)
         if not self.rhythm_overwrites:
             keyword_argument_names = list(keyword_argument_names)
             keyword_argument_names.remove('rhythm_overwrites')
-        return systemtools.StorageFormatSpecification(
+        return abjad.systemtools.StorageFormatSpecification(
             self,
             keyword_argument_names=keyword_argument_names,
             )
@@ -228,7 +235,28 @@ class RhythmSpecifier(abctools.AbjadObject):
 
     @staticmethod
     def _all_are_selections(expr):
-        return all(isinstance(_, selectiontools.Selection) for _ in expr)
+        return all(isinstance(_, abjad.selectiontools.Selection) for _ in expr)
+
+    def _apply_figure_rhythm_maker(self, figure_list, figure_token):
+        assert len(figure_list) == len(figure_token)
+        total_length = len(figure_list)
+        patterns = self._get_patterns()
+        for index, stage_token in enumerate(figure_token):
+            for pattern in patterns:
+                if pattern.matches_index(
+                    index=index,
+                    total_length=total_length,
+                    ):
+                    stage_selection = self._apply_payload(stage_token)
+                    figure_list[index] = stage_selection
+        return figure_list
+
+    def _apply_payload(self, stage_token):
+        rhythm_maker = self._get_rhythm_maker()
+        stage_selections, state_manifest = rhythm_maker([stage_token])
+        assert len(stage_selections) == 1, repr(stage_selections)
+        stage_selection = stage_selections[0]
+        return stage_selection
 
     def _attach_instrument(
         self, 
@@ -243,14 +271,14 @@ class RhythmSpecifier(abctools.AbjadObject):
             effective_staff_name,
             materials_package,
             )
-        attach(instrument, component, scope=scope)
+        abjad.attach(instrument, component, scope=scope)
 
     def _attach_untuned_percussion_markup(self, leaf):
         name = self.instrument.instrument_name
         name = name.lower()
-        markup = markuptools.Markup(name, direction=Up)
+        markup = abjad.markuptools.Markup(name, direction=Up)
         markup = markup.box().override(('box-padding', 0.5))
-        attach(markup, leaf)
+        abjad.attach(markup, leaf)
 
     def _check_instrument(
         self, 
@@ -267,15 +295,15 @@ class RhythmSpecifier(abctools.AbjadObject):
 
     @staticmethod
     def _durations_to_divisions(durations, start_offset):
-        divisions = [durationtools.Division(_) for _ in durations]
+        divisions = [abjad.durationtools.Division(_) for _ in durations]
         durations = [_.duration for _ in divisions]
-        start_offset = durationtools.Offset(start_offset)
+        start_offset = abjad.durationtools.Offset(start_offset)
         durations.insert(0, start_offset)
-        start_offsets = mathtools.cumulative_sums(durations)[1:-1]
+        start_offsets = abjad.mathtools.cumulative_sums(durations)[1:-1]
         assert len(divisions) == len(start_offsets)
         divisions_ = []
         for division, start_offset in zip(divisions, start_offsets):
-            division_ = durationtools.Division(
+            division_ = abjad.durationtools.Division(
                 division,
                 start_offset=start_offset,
                 )
@@ -290,27 +318,37 @@ class RhythmSpecifier(abctools.AbjadObject):
 
     def _get_first_leaf(self, music):
         first_item = music[0]
-        if isinstance(first_item, selectiontools.Selection):
+        if isinstance(first_item, abjad.selectiontools.Selection):
             first_component = first_item[0]
         else:
             first_component = first_item
-        first_leaf = inspect_(first_component).get_leaf(0)
-        assert isinstance(first_leaf, scoretools.Leaf), repr(first_leaf)
+        first_leaf = abjad.inspect_(first_component).get_leaf(0)
+        assert isinstance(first_leaf, abjad.scoretools.Leaf), repr(first_leaf)
         return first_leaf
 
     def _get_last_leaf(self, music):
         last_item = music[-1]
-        if isinstance(last_item, selectiontools.Selection):
+        if isinstance(last_item, abjad.selectiontools.Selection):
             last_component = last_item[-1]
         else:
             last_component = last_item
-        assert isinstance(last_component, scoretools.Component), repr(last_component)
-        if isinstance(last_component, scoretools.Leaf):
+        assert isinstance(last_component, abjad.scoretools.Component)
+        if isinstance(last_component, abjad.scoretools.Leaf):
             last_leaf = last_component
         else:
-            last_leaf = inspect_(last_component).get_leaf(-1)
-        assert isinstance(last_leaf, scoretools.Leaf), repr((last_component, last_leaf))
+            last_leaf = abjad.inspect_(last_component).get_leaf(-1)
+        assert isinstance(last_leaf, abjad.scoretools.Leaf)
         return last_leaf
+
+    def _get_patterns(self):
+        if self.patterns is None:
+            return [abjad.patterntools.select_all()]
+        return self.patterns
+
+#    def _get_rhythm_maker(self):
+#        if self.rhythm_maker is None:
+#            return baca.tools.FigureRhythmMaker()
+#        return self.rhythm_maker
 
     def _get_rhythm_maker(self):
         if self.rhythm_maker is not None:
@@ -319,16 +357,16 @@ class RhythmSpecifier(abctools.AbjadObject):
 
     def _make_rhythm(self, time_signatures, start_offset):
         rhythm_maker = self._get_rhythm_maker()
-        if isinstance(rhythm_maker, selectiontools.Selection):
+        if isinstance(rhythm_maker, abjad.selectiontools.Selection):
             selections = [rhythm_maker]
-        elif isinstance(rhythm_maker, rhythmmakertools.RhythmMaker):
+        elif isinstance(rhythm_maker, abjad.rhythmmakertools.RhythmMaker):
             division_maker = self._get_division_maker()
             divisions = self._durations_to_divisions(
                 time_signatures,
                 start_offset,
                 )
             divisions = division_maker(divisions)
-            divisions = sequencetools.flatten_sequence(divisions)
+            divisions = abjad.sequencetools.flatten_sequence(divisions)
             contribution = self._select_divisions(divisions, start_offset)
             divisions = contribution.payload
             start_offset = contribution.start_offset
@@ -339,7 +377,7 @@ class RhythmSpecifier(abctools.AbjadObject):
             raise TypeError(message)
         assert self._all_are_selections(selections), repr(selections)
         if self.split_at_measure_boundaries:
-            specifier = rhythmmakertools.DurationSpellingSpecifier
+            specifier = abjad.rhythmmakertools.DurationSpellingSpecifier
             selections = specifier._split_at_measure_boundaries(
                 selections, 
                 time_signatures,
@@ -347,7 +385,7 @@ class RhythmSpecifier(abctools.AbjadObject):
                 )
             assert self._all_are_selections(selections), repr(selections)
         if self.rewrite_meter:
-            specifier = rhythmmakertools.DurationSpellingSpecifier
+            specifier = abjad.rhythmmakertools.DurationSpellingSpecifier
             selections = specifier._rewrite_meter_(
                 selections, 
                 time_signatures,
@@ -357,19 +395,20 @@ class RhythmSpecifier(abctools.AbjadObject):
                 )
         if not self.rhythm_overwrites:
             return selections, start_offset
-        dummy_measures = scoretools.make_spacer_skip_measures(time_signatures)
-        dummy_time_signature_voice = scoretools.Voice(dummy_measures)
-        dummy_music_voice = scoretools.Voice()
+        dummy_measures = abjad.scoretools.make_spacer_skip_measures(
+            time_signatures)
+        dummy_time_signature_voice = abjad.scoretools.Voice(dummy_measures)
+        dummy_music_voice = abjad.scoretools.Voice()
         dummy_music_voice.extend(selections)
         dummy_staff = Staff([dummy_time_signature_voice, dummy_music_voice])
         dummy_staff.is_simultaneous = True
         for rhythm_overwrite in self.rhythm_overwrites:
             selector, division_maker, rhythm_maker = rhythm_overwrite
             old_music_selection = selector(dummy_music_voice)
-            prototype = selectiontools.Selection
+            prototype = abjad.selectiontools.Selection
             #if 1 < len(old_music_selection):
             if True:
-                old_music_selection = selectiontools.SliceSelection(
+                old_music_selection = abjad.selectiontools.SliceSelection(
                     old_music_selection)
                 result = old_music_selection._get_parent_and_start_stop_indices()
                 parent, start_index, stop_index = result
@@ -381,7 +420,7 @@ class RhythmSpecifier(abctools.AbjadObject):
                 dummy_music_voice[start_index:stop_index+1] = \
                     new_music_selection
             #elif len(old_music_selection) == 1:
-            #    prototype = selectiontools.Selection
+            #    prototype = abjad.selectiontools.Selection
             #    assert isinstance(old_music_selection[0], prototype)
             #    old_music_selection = old_music_selection[0]
             #    old_duration = old_music_selection.get_duration()
@@ -396,10 +435,9 @@ class RhythmSpecifier(abctools.AbjadObject):
         return dummy_music_voice, start_offset
 
     def _select_divisions(self, divisions, start_offset):
-        import baca
         if self.division_expression is not None:
             divisions = self.division_expression(divisions)
-            if not isinstance(divisions, sequencetools.Sequence):
+            if not isinstance(divisions, abjad.sequencetools.Sequence):
                 message = 'must be division sequence: {!r}.'
                 message = message.format(divisions)
                 raise Exception(message)
@@ -411,14 +449,14 @@ class RhythmSpecifier(abctools.AbjadObject):
         return contribution
 
     def _set_staff_line_count(self, first_leaf, staff_line_count):
-        command = indicatortools.LilyPondCommand('stopStaff')
-        attach(command, first_leaf)
+        command = abjad.indicatortools.LilyPondCommand('stopStaff')
+        abjad.attach(command, first_leaf)
         string = "override Staff.StaffSymbol #'line-count = #{}"
         string = string.format(staff_line_count)
-        command = indicatortools.LilyPondCommand(string)
-        attach(command, first_leaf)
-        command = indicatortools.LilyPondCommand('startStaff')
-        attach(command, first_leaf)
+        command = abjad.indicatortools.LilyPondCommand(string)
+        abjad.attach(command, first_leaf)
+        command = abjad.indicatortools.LilyPondCommand('startStaff')
+        abjad.attach(command, first_leaf)
 
     ### PUBLIC PROPERTIES ###
 
@@ -461,6 +499,18 @@ class RhythmSpecifier(abctools.AbjadObject):
         return self._instrument
 
     @property
+    def patterns(self):
+        r'''Gets patterns.
+
+        Set to patterns or none.
+
+        Defaults to none.
+
+        Returns patterns or none.
+        '''
+        return self._patterns
+
+    @property
     def reference_meters(self):
         r'''Gets reference meters.
 
@@ -476,7 +526,7 @@ class RhythmSpecifier(abctools.AbjadObject):
 
     @property
     def rewrite_meter(self):
-        r'''Is true when music-maker should rewrite meter.
+        r'''Is true when specifier rewrites meter.
 
         Set to true or false.
 
@@ -504,7 +554,7 @@ class RhythmSpecifier(abctools.AbjadObject):
 
     @property
     def split_at_measure_boundaries(self):
-        r'''Is true when music-maker should split at measure boundaries.
+        r'''Is true when specifier splits at measure boundaries.
 
         Set to true, false or none.
 
@@ -522,7 +572,7 @@ class RhythmSpecifier(abctools.AbjadObject):
 
         Xylophone music-maker always returns 5.
         '''
-        if isinstance(self.instrument, instrumenttools.Xylophone):
+        if isinstance(self.instrument, abjad.instrumenttools.Xylophone):
             return 5
         return self._staff_line_count
 
@@ -572,8 +622,8 @@ class RhythmSpecifier(abctools.AbjadObject):
 
     @property
     def tie_first(self):
-        r'''Is true when first note or chord should be tied into. Otherwise
-        false.
+        r'''Is true when specifier ties into first note or chord.
+        Otherwise false.
 
         Set to true, false or none.
 
@@ -583,8 +633,8 @@ class RhythmSpecifier(abctools.AbjadObject):
 
     @property
     def tie_last(self):
-        r'''Is true when last note or chord should be tied into. Otherwise
-        false.
+        r'''Is true when specifier ties into last note or chord.
+        Otherwise false.
 
         Set to true, false or none.
 

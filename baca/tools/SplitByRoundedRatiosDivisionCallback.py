@@ -1,11 +1,8 @@
 # -*- encoding: utf-8 -*-
-from abjad.tools import datastructuretools
-from abjad.tools import durationtools
-from abjad.tools import mathtools
-from abjad.tools.abctools.AbjadValueObject import AbjadValueObject
+import abjad
 
 
-class SplitByRoundedRatiosDivisionCallback(AbjadValueObject):
+class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
     r'''Split-by-rounded-ratios division callback.
 
     ::
@@ -55,7 +52,7 @@ class SplitByRoundedRatiosDivisionCallback(AbjadValueObject):
 
     ### CLASS ATTRIBUTES ###
 
-    __documentation_section__ = 'Division-handling'
+    __documentation_section__ = 'Divisions'
 
     __slots__ = (
         '_ratios',
@@ -69,7 +66,7 @@ class SplitByRoundedRatiosDivisionCallback(AbjadValueObject):
         ):
         if ratios is not None:
             ratios = ratios or ()
-            ratios = [mathtools.Ratio(_) for _ in ratios]
+            ratios = [abjad.mathtools.Ratio(_) for _ in ratios]
             ratios = tuple(ratios)
         self._ratios = ratios
 
@@ -160,12 +157,12 @@ class SplitByRoundedRatiosDivisionCallback(AbjadValueObject):
         ratios = self._get_ratios()
         for i, division in enumerate(divisions):
             ratio = ratios[i]
-            numerators = mathtools.partition_integer_by_ratio(
+            numerators = abjad.mathtools.partition_integer_by_ratio(
                 division.numerator,
                 ratio,
                 )
             division_list = [
-                durationtools.Division((numerator, division.denominator))
+                abjad.durationtools.Division((numerator, division.denominator))
                 for numerator in numerators
                 ]
             division_lists.append(division_list)
@@ -181,8 +178,8 @@ class SplitByRoundedRatiosDivisionCallback(AbjadValueObject):
         if self.ratios:
             ratios = self.ratios
         else:
-            ratios = (mathtools.Ratio([1]),)
-        ratios = datastructuretools.CyclicTuple(ratios)
+            ratios = (abjad.mathtools.Ratio([1]),)
+        ratios = abjad.datastructuretools.CyclicTuple(ratios)
         return ratios
 
     ### PUBLIC PROPERTIES ###

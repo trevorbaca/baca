@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import abctools
+import abjad
 
 
-class Contribution(abctools.AbjadValueObject):
+class Contribution(abjad.abctools.AbjadValueObject):
     r'''Contribution.
     '''
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Segment-maker components'
+    __documentation_section__ = 'Segments'
 
     __slots__ = (
         '_payload',

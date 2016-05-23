@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from abjad.tools.expressiontools.Expression import Expression
+import abjad
 
 
-class MeasureExpression(Expression):
+class MeasureExpression(abjad.expressiontools.Expression):
     r'''Measure expression.
 
     ::
@@ -29,7 +29,7 @@ class MeasureExpression(Expression):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Segment-maker components'
+    __documentation_section__ = 'Segments'
 
     __slots__ = (
         '_start_number',

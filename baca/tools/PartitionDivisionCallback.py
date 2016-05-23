@@ -1,11 +1,9 @@
 # -*- encoding: utf-8 -*-
-from abjad.tools import durationtools
-from abjad.tools import mathtools
-from abjad.tools import sequencetools
-from abjad.tools.abctools import AbjadValueObject
+import abjad
+import baca
 
 
-class PartitionDivisionCallback(AbjadValueObject):
+class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
     r'''Partition division callback.
 
     ::
@@ -114,7 +112,7 @@ class PartitionDivisionCallback(AbjadValueObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Division-handling'
+    __documentation_section__ = 'Divisions'
 
     __slots__ = (
         '_counts',
@@ -208,7 +206,6 @@ class PartitionDivisionCallback(AbjadValueObject):
 
         Returns list of division lists.
         '''
-        import baca
         grouped_divisions = []
         divisions, start_offset = baca.tools.DivisionMaker._to_divisions(
             divisions)
@@ -247,7 +244,7 @@ class PartitionDivisionCallback(AbjadValueObject):
 
         Returns string.
         '''
-        return AbjadValueObject.__format__(
+        return abjad.abctools.AbjadValueObject.__format__(
             self,
             format_specification=format_specification,
             )
@@ -264,7 +261,7 @@ class PartitionDivisionCallback(AbjadValueObject):
 
         Returns string.
         '''
-        return AbjadValueObject.__repr__(self)
+        return abjad.abctools.AbjadValueObject.__repr__(self)
 
     ### PRIVATE METHODS ###
 
@@ -273,21 +270,21 @@ class PartitionDivisionCallback(AbjadValueObject):
         beat_list_ = []
         for beat in beat_list:
             if hasattr(beat, 'duration'):
-                beat = durationtools.Division(beat.duration)
+                beat = abjad.durationtools.Division(beat.duration)
             else:
-                beat = durationtools.Division(beat)
+                beat = abjad.durationtools.Division(beat)
             beat_list_.append(beat)
         beat_list = beat_list_
         total_duration = sum(beat_list)
-        total_duration = durationtools.Duration(total_duration)
+        total_duration = abjad.durationtools.Duration(total_duration)
         if (total_duration.is_assignable and 
             self.fuse_assignable_total_duration):
-            return [[durationtools.Division(total_duration)]]
+            return [[abjad.durationtools.Division(total_duration)]]
         if self.counts is None:
             beat_group = list(beat_list)
             grouped_beat_list = [beat_group]
             return grouped_beat_list
-        grouped_beat_list = sequencetools.partition_sequence_by_counts(
+        grouped_beat_list = abjad.sequencetools.partition_sequence_by_counts(
             beat_list,
             counts=self.counts,
             cyclic=True,
@@ -298,7 +295,8 @@ class PartitionDivisionCallback(AbjadValueObject):
             return grouped_beat_list
         remainder_length = len(beat_list) - beats_included
         if self.remainder_direction == Left:
-            grouped_beat_list = sequencetools.partition_sequence_by_counts(
+            grouped_beat_list = \
+                abjad.sequencetools.partition_sequence_by_counts(
                 beat_list[remainder_length:],
                 counts=self.counts,
                 cyclic=True,
@@ -310,7 +308,8 @@ class PartitionDivisionCallback(AbjadValueObject):
             else:
                 grouped_beat_list.insert(0, remainder)
         else:
-            grouped_beat_list = sequencetools.partition_sequence_by_counts(
+            grouped_beat_list = \
+                abjad.sequencetools.partition_sequence_by_counts(
                 beat_list[:-remainder_length],
                 counts=self.counts,
                 cyclic=True,
@@ -327,8 +326,8 @@ class PartitionDivisionCallback(AbjadValueObject):
 
     @property
     def append_remainder(self):
-        r'''Is true when remainder beat group should fuse to next closest beat
-        group. Otherwise false.
+        r'''Is true when remainder beat group fuses to next closest beat group.
+        Otherwise false.
 
         ..  container:: example
 
@@ -512,8 +511,8 @@ class PartitionDivisionCallback(AbjadValueObject):
 
     @property
     def fuse_assignable_total_duration(self):
-        r'''Is true when assignable total duration of all input beats should
-        be fused into a single duration. Otherwise false.
+        r'''Is true when assignable total duration of all input beats fuse into
+        a single duration. Otherwise false.
 
         ..  container:: example
 

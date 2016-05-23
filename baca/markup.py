@@ -219,6 +219,12 @@ def attackless():
 def col_legno_battuto():
     return make_markup('col legno battuto')
 
+def delicatiss():
+    return make_markup('delicatiss.')
+
+def delicatissimo():
+    return make_markup('delicatissimo')
+
 def directly_on_bridge_bow_diagonally():
     string = 'directly on bridge:'
     string += ' bow diagonally to produce white noise w/ no pitch',

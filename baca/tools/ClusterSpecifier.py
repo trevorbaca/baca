@@ -1,17 +1,8 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import abctools
-from abjad.tools import datastructuretools
-from abjad.tools import indicatortools
-from abjad.tools import mathtools
-from abjad.tools import pitchtools
-from abjad.tools import scoretools
-from abjad.tools import systemtools
-from abjad.tools.topleveltools import attach
-from abjad.tools.topleveltools import inspect_
-from abjad.tools.topleveltools import mutate
+import abjad
 
 
-class ClusterSpecifier(abctools.AbjadObject):
+class ClusterSpecifier(abjad.abctools.AbjadObject):
     r'''Cluster specifier.
 
     ::
@@ -196,10 +187,10 @@ class ClusterSpecifier(abctools.AbjadObject):
         assert isinstance(hide_natural_markup, (bool, type(None)))
         self._hide_natural_markup = hide_natural_markup
         if start_pitch is not None:
-            start_pitch = pitchtools.NamedPitch(start_pitch)
+            start_pitch = abjad.pitchtools.NamedPitch(start_pitch)
         self._start_pitch = start_pitch
         if widths is not None:
-            assert mathtools.all_are_nonnegative_integers(widths), repr(widths)
+            assert abjad.mathtools.all_are_nonnegative_integers(widths)
         self._widths = widths
 
     ### SPECIAL METHODS ###
@@ -211,10 +202,10 @@ class ClusterSpecifier(abctools.AbjadObject):
         '''
         if self.widths is None:
             return
-        widths = datastructuretools.CyclicTuple(self.widths)
+        widths = abjad.datastructuretools.CyclicTuple(self.widths)
         first_note = logical_ties[0].head
-        root = inspect_(first_note).get_parentage().root
-        with systemtools.ForbidUpdate(component=root):
+        root = abjad.inspect_(first_note).get_parentage().root
+        with abjad.systemtools.ForbidUpdate(component=root):
             for index, logical_tie in enumerate(logical_ties):
                 width = widths[index]
                 for note in logical_tie:
@@ -230,19 +221,19 @@ class ClusterSpecifier(abctools.AbjadObject):
         else:
             start_pitch = note.written_pitch
             pitches = self._make_pitches(start_pitch, width)
-        chord = scoretools.Chord(pitches, note.written_duration)
-        mutate(note).replace(chord)
-        indicator = indicatortools.KeyCluster(
+        chord = abjad.scoretools.Chord(pitches, note.written_duration)
+        abjad.mutate(note).replace(chord)
+        indicator = abjad.indicatortools.KeyCluster(
             include_black_keys=not self.hide_flat_markup,
             include_white_keys=not self.hide_natural_markup,
             )
-        attach(indicator, chord)
+        abjad.attach(indicator, chord)
 
     def _make_pitches(self, start_pitch, width):
         pitches = [start_pitch]
         for i in range(width-1):
-            pitch = pitches[-1] + pitchtools.NamedInterval('M3')
-            pitch = pitchtools.NamedPitch(pitch.diatonic_pitch_name)
+            pitch = pitches[-1] + abjad.pitchtools.NamedInterval('M3')
+            pitch = abjad.pitchtools.NamedPitch(pitch.diatonic_pitch_name)
             assert pitch.accidental.name == 'natural'
             pitches.append(pitch)
         return pitches
@@ -251,7 +242,7 @@ class ClusterSpecifier(abctools.AbjadObject):
 
     @property
     def hide_flat_markup(self):
-        r'''Is true when cluster should hide flat markup.
+        r'''Is true when cluster hides flat markup.
 
         ..  container:: example
 
@@ -395,7 +386,7 @@ class ClusterSpecifier(abctools.AbjadObject):
 
     @property
     def hide_natural_markup(self):
-        r'''Is true when cluster should hide natural markup.
+        r'''Is true when cluster hides natural markup.
 
         ..  container:: example
 
@@ -1120,7 +1111,7 @@ class ClusterSpecifier(abctools.AbjadObject):
                 ...     ('vn', baca.tools.stages(1)),
                 ...     [
                 ...         baca.rhythm.make_messiaen_note_rhythm_specifier(),
-                ...         baca.pitch.pitches('E4'),
+                ...         baca.pitch.pitches('E4', allow_repeated_pitches=True),
                 ...         baca.tools.ClusterSpecifier(
                 ...             widths=None,
                 ...             ),
@@ -1194,7 +1185,7 @@ class ClusterSpecifier(abctools.AbjadObject):
 
         Inteprets positive integers as widths in thirds.
 
-        Interprets zero to mean input note or chord should be left unchanged.
+        Interprets zero to mean input note or chord is left unchanged.
 
         Set to nonnegative integers or none.
 

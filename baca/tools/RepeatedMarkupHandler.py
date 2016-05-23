@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import datastructuretools
-from abjad.tools import markuptools
-from abjad.tools import scoretools
+import abjad
 from baca.tools.ArticulationHandler import ArticulationHandler
-from abjad.tools.topleveltools import attach
-from abjad.tools.topleveltools import iterate
 
 
 class RepeatedMarkupHandler(ArticulationHandler):
@@ -53,7 +49,7 @@ class RepeatedMarkupHandler(ArticulationHandler):
 
     def __init__(self, markups=None):
         if markups is not None:
-            markups = [markuptools.Markup(_) for _ in markups]
+            markups = [abjad.markuptools.Markup(_) for _ in markups]
             markups = tuple(markups)
         self._markups = markups
 
@@ -64,11 +60,11 @@ class RepeatedMarkupHandler(ArticulationHandler):
 
         Returns none.
         '''
-        markups = datastructuretools.CyclicTuple(self.markups)
+        markups = abjad.datastructuretools.CyclicTuple(self.markups)
         for i, logical_tie in enumerate(logical_ties):
             markup = markups[i]
-            markup = markuptools.Markup(markup)
-            attach(markup, logical_tie.head)
+            markup = abjad.markuptools.Markup(markup)
+            abjad.attach(markup, logical_tie.head)
 
     ### PUBLIC PROPERTIES ###
 

@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
+import abjad
 import baca
-from abjad.tools import abctools
-from abjad.tools import datastructuretools
-from abjad.tools import mathtools
-from abjad.tools import pitchtools
-from abjad.tools import sequencetools
 
 
-class ZaggedPitchClassMaker(abctools.AbjadObject):
+class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
     r'''Zagged pitch-class maker.
 
     ::
@@ -77,7 +73,7 @@ class ZaggedPitchClassMaker(abctools.AbjadObject):
 
     ### CLASS ATTRIBUTES ###
 
-    __documentation_section__ = 'Makers'
+    __documentation_section__ = 'Utilities'
 
     __slots__ = (
         '_division_ratios',
@@ -111,7 +107,7 @@ class ZaggedPitchClassMaker(abctools.AbjadObject):
             -1, 
             1,
             )
-        prototype = (tuple, mathtools.Ratio)
+        prototype = (tuple, abjad.mathtools.Ratio)
         if self.division_ratios is None:
             division_ratios = [[1]]
         elif all(isinstance(_, prototype) for _ in self.division_ratios):
@@ -122,38 +118,38 @@ class ZaggedPitchClassMaker(abctools.AbjadObject):
                 -1, 
                 1,
                 )
-            division_ratios = sequencetools.flatten_sequence(
+            division_ratios = abjad.sequencetools.flatten_sequence(
                 division_ratios, 
                 depth=1,
                 )
-        division_ratios = [mathtools.Ratio(_) for _ in division_ratios]
-        division_ratios = datastructuretools.CyclicTuple(division_ratios)
+        division_ratios = [abjad.mathtools.Ratio(_) for _ in division_ratios]
+        division_ratios = abjad.datastructuretools.CyclicTuple(division_ratios)
         pc_cells_copy = pc_cells[:]
         pc_cells = []
         for i, pc_segment in enumerate(pc_cells_copy):
-            parts = sequencetools.partition_sequence_by_ratio_of_lengths(
+            parts = abjad.sequencetools.partition_sequence_by_ratio_of_lengths(
                 pc_segment, 
                 division_ratios[i],
                 )
             pc_cells.extend(parts)
         grouping_counts = self.grouping_counts or [1]
-        pc_cells = sequencetools.partition_sequence_by_counts(
+        pc_cells = abjad.sequencetools.partition_sequence_by_counts(
             pc_cells, 
             grouping_counts, 
             cyclic=True, 
             overhang=True,
             )
         # this block was uncommented during krummzeit
-        #pc_cells = [sequencetools.join_subsequences(x) for x in pc_cells]
-        #pc_cells = sequencetools.partition_sequence_by_counts(
+        #pc_cells = [abjad.sequencetools.join_subsequences(x) for x in pc_cells]
+        #pc_cells = abjad.sequencetools.partition_sequence_by_counts(
         #    pc_cells, 
         #    grouping_counts, 
         #    cyclic=True, 
         #    overhang=True,
         #    )
-        material = pitchtools.PitchClassTree(
+        material = baca.tools.PitchClassTree(
             items=pc_cells,
-            item_class=pitchtools.NumberedPitchClass,
+            item_class=abjad.pitchtools.NumberedPitchClass,
             )
         return material
 
@@ -164,14 +160,13 @@ class ZaggedPitchClassMaker(abctools.AbjadObject):
 
         Returns boolean.
         '''
-        from abjad.tools import systemtools
-        return systemtools.StorageFormatManager.compare(self, expr)
+        return abjad.systemtools.StorageFormatManager.compare(self, expr)
 
     def __hash__(self):
         r'''Hashes zagged pitch-class maker.
         '''
-        from abjad.tools import systemtools
-        hash_values = systemtools.StorageFormatManager.get_hash_values(self)
+        hash_values = \
+            abjad.systemtools.StorageFormatManager.get_hash_values(self)
         return hash(hash_values)
 
     ### PRIVATE PROPERTIES ###

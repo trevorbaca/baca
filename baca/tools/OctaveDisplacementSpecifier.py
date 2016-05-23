@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import abctools
-from abjad.tools import datastructuretools
-from abjad.tools import pitchtools
-from abjad.tools import scoretools
-from abjad.tools import selectiontools
+import abjad
 
 
-class OctaveDisplacementSpecifier(abctools.AbjadObject):
+class OctaveDisplacementSpecifier(abjad.abctools.AbjadObject):
     r"""Octave displacement specifier.
 
     ::
@@ -136,10 +132,9 @@ class OctaveDisplacementSpecifier(abctools.AbjadObject):
         self,
         displacements=None,
         ):
-        from abjad.tools import pitchtools
         displacements = tuple(displacements)
         assert self._is_octave_displacement_vector(displacements)
-        displacements = datastructuretools.CyclicTuple(displacements)
+        displacements = abjad.datastructuretools.CyclicTuple(displacements)
         self._displacements = displacements
 
     ### SPECIAL METHODS ###
@@ -150,11 +145,11 @@ class OctaveDisplacementSpecifier(abctools.AbjadObject):
         Returns none.
         '''
         for i, logical_tie in enumerate(logical_ties):
-            assert isinstance(logical_tie, selectiontools.LogicalTie)
+            assert isinstance(logical_tie, abjad.selectiontools.LogicalTie)
             displacement = self.displacements[i]
-            interval = pitchtools.NumberedInterval(displacement * 12)
+            interval = abjad.pitchtools.NumberedInterval(displacement * 12)
             for note in logical_tie:
-                assert isinstance(note, scoretools.Note), repr(note)
+                assert isinstance(note, abjad.scoretools.Note), repr(note)
                 written_pitch = note.written_pitch
                 written_pitch += interval
                 note.written_pitch = written_pitch

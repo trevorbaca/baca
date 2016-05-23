@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import abctools
-from abjad.tools import indicatortools
-from abjad.tools import instrumenttools
-from abjad.tools import scoretools
-from abjad.tools.topleveltools import attach
+import abjad
 from baca.tools.ScoreTemplate import ScoreTemplate
 
 
@@ -118,7 +114,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Score templates'
+    __documentation_section__ = 'Templates'
 
     voice_abbreviations = {
         'vn': 'Violin Music Voice',
@@ -143,53 +139,56 @@ class StringTrioScoreTemplate(ScoreTemplate):
             )
         tag_string = '.'.join(instrument_tags)
         tag_string = 'tag {}'.format(tag_string)
-        tag_command = indicatortools.LilyPondCommand(tag_string, 'before')
-        attach(tag_command, time_signature_context)
+        tag_command = abjad.indicatortools.LilyPondCommand(
+            tag_string,
+            'before',
+            )
+        abjad.attach(tag_command, time_signature_context)
 
-        violin_music_voice = scoretools.Voice(
+        violin_music_voice = abjad.scoretools.Voice(
             [], 
             context_name='ViolinMusicVoice',
             name=self.voice_abbreviations['vn'],
             )
-        violin_music_staff = scoretools.Staff(
+        violin_music_staff = abjad.scoretools.Staff(
             [violin_music_voice], 
             context_name='ViolinMusicStaff',
             name='Violin Music Staff',
             )
-        violin = instrumenttools.Violin()
-        attach(violin, violin_music_staff)
-        attach(indicatortools.Clef('treble'), violin_music_staff)
+        violin = abjad.instrumenttools.Violin()
+        abjad.attach(violin, violin_music_staff)
+        abjad.attach(abjad.indicatortools.Clef('treble'), violin_music_staff)
         self._attach_tag('violin', violin_music_staff)
 
-        viola_music_voice = scoretools.Voice(
+        viola_music_voice = abjad.scoretools.Voice(
             [], 
             context_name='ViolaMusicVoice',
             name=self.voice_abbreviations['va'],
             )
-        viola_music_staff = scoretools.Staff(
+        viola_music_staff = abjad.scoretools.Staff(
             [viola_music_voice], 
             context_name='ViolaMusicStaff',
             name='Viola Music Staff',
             )
-        attach(instrumenttools.Viola(), viola_music_staff)
-        attach(indicatortools.Clef('alto'), viola_music_staff)
+        abjad.attach(abjad.instrumenttools.Viola(), viola_music_staff)
+        abjad.attach(abjad.indicatortools.Clef('alto'), viola_music_staff)
         self._attach_tag('viola', viola_music_staff)
 
-        cello_music_voice = scoretools.Voice(
+        cello_music_voice = abjad.scoretools.Voice(
             [], 
             context_name='CelloMusicVoice',
             name=self.voice_abbreviations['vc'],
             )
-        cello_music_staff = scoretools.Staff(
+        cello_music_staff = abjad.scoretools.Staff(
             [cello_music_voice], 
             context_name='CelloMusicStaff',
             name='Cello Music Staff',
             )
-        attach(instrumenttools.Cello(), cello_music_staff)
-        attach(indicatortools.Clef('bass'), cello_music_staff)
+        abjad.attach(abjad.instrumenttools.Cello(), cello_music_staff)
+        abjad.attach(abjad.indicatortools.Clef('bass'), cello_music_staff)
         self._attach_tag('cello', cello_music_staff)
 
-        string_section_staff_group = scoretools.StaffGroup(
+        string_section_staff_group = abjad.scoretools.StaffGroup(
             [
                 violin_music_staff, 
                 viola_music_staff, 
@@ -199,7 +198,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             name='String Section Staff Group',
             )
 
-        music_context = scoretools.Context(
+        music_context = abjad.scoretools.Context(
             [
                 string_section_staff_group,
             ],
@@ -208,7 +207,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             name='Music Context',
             )
 
-        score = scoretools.Score(
+        score = abjad.scoretools.Score(
             [
             time_signature_context,
             music_context,

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from abjad import *
 import baca
+from abjad import *
 
 
 def test_tools_ZaggedPitchClassMaker_01():
@@ -19,7 +19,7 @@ def test_tools_ZaggedPitchClassMaker_01():
 
     pitch_class_tree = maker()
 
-    assert pitch_class_tree == pitchtools.PitchClassTree(
+    assert pitch_class_tree == baca.tools.PitchClassTree(
         [
             [
                 [
@@ -118,7 +118,7 @@ def test_tools_ZaggedPitchClassMaker_02():
 
     pitch_class_tree = maker()
 
-    assert pitch_class_tree == pitchtools.PitchClassTree(
+    assert pitch_class_tree == baca.tools.PitchClassTree(
         [
             [
                 [
@@ -210,7 +210,7 @@ def test_tools_ZaggedPitchClassMaker_03():
 
     pitch_class_tree = maker()
 
-    assert pitch_class_tree == pitchtools.PitchClassTree(
+    assert pitch_class_tree == baca.tools.PitchClassTree(
         [
             [
                 [

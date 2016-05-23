@@ -1,18 +1,8 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import abctools
-from abjad.tools import durationtools
-from abjad.tools import indicatortools
-from abjad.tools import lilypondfiletools
-from abjad.tools import markuptools
-from abjad.tools import schemetools
-from abjad.tools import scoretools
-from abjad.tools import spannertools
-from abjad.tools.topleveltools import attach
-from abjad.tools.topleveltools import override
-from abjad.tools.topleveltools import set_
+import abjad
 
 
-class TimeSignatureGroups(abctools.AbjadObject):
+class TimeSignatureGroups(abjad.abctools.AbjadObject):
     r'''Time signature groups.
 
     ::
@@ -59,7 +49,7 @@ class TimeSignatureGroups(abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Output products'
+    __documentation_section__ = 'Utilities'
 
     __slots__ = (
         '_groups',
@@ -68,7 +58,7 @@ class TimeSignatureGroups(abctools.AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self, groups):
-        prototype = indicatortools.TimeSignature
+        prototype = abjad.indicatortools.TimeSignature
         for group in groups:
             assert all(isinstance(_, prototype) for _ in group), repr(group)
         self._groups = groups
@@ -92,14 +82,14 @@ class TimeSignatureGroups(abctools.AbjadObject):
             } <<
                 \new Staff \with {
                     \consists Horizontal_bracket_engraver
-                    \override Clef #'stencil = ##f
-                    \override HorizontalBracket #'bracket-flare = #'(0 . 0)
-                    \override HorizontalBracket #'direction = #up
-                    \override HorizontalBracket #'extra-offset = #'(-4 . 0)
-                    \override HorizontalBracket #'staff-padding = #2.5
-                    \override Rest #'transparent = ##t
-                    \override TextScript #'extra-offset = #'(-4 . 0)
-                    \override TextScript #'staff-padding = #4.5
+                    \override Clef.stencil = ##f
+                    \override HorizontalBracket.bracket-flare = #'(0 . 0)
+                    \override HorizontalBracket.direction = #up
+                    \override HorizontalBracket.extra-offset = #'(-4 . 0)
+                    \override HorizontalBracket.staff-padding = #2.5
+                    \override Rest.transparent = ##t
+                    \override TextScript.extra-offset = #'(-4 . 0)
+                    \override TextScript.staff-padding = #4.5
                 } {
                     {
                         \time 3/8
@@ -144,31 +134,32 @@ class TimeSignatureGroups(abctools.AbjadObject):
 
         Returns LilyPond file.
         ''' 
-        staff = scoretools.Staff()
+        staff = abjad.scoretools.Staff()
         staff.consists_commands.append('Horizontal_bracket_engraver')
         for group_index, group in enumerate(self.groups):
             measure_group = self._make_measure_group(group)
-            spanner = spannertools.HorizontalBracketSpanner()
-            attach(spanner, measure_group)
+            spanner = abjad.spannertools.HorizontalBracketSpanner()
+            leaves = list(abjad.iterate(measure_group).by_leaf())
+            abjad.attach(spanner, leaves)
             staff.extend(measure_group)
-            markup = markuptools.Markup(group_index, direction=Up)
+            markup = abjad.markuptools.Markup(group_index, direction=Up)
             markup = markup.smaller()
             markup = markup.circle()
-            attach(markup, measure_group[0])
+            abjad.attach(markup, measure_group[0])
         slide = -4
-        override(staff).clef.stencil = False
-        override(staff).horizontal_bracket.bracket_flare = (0, 0)
-        override(staff).horizontal_bracket.direction = Up
-        override(staff).horizontal_bracket.extra_offset = (slide, 0)
-        override(staff).horizontal_bracket.staff_padding = 2.5
-        override(staff).rest.transparent = True
-        override(staff).text_script.extra_offset = (slide, 0)
-        override(staff).text_script.staff_padding = 4.5
-        score = scoretools.Score([staff])
-        moment = schemetools.SchemeMoment((1, 8))
-        set_(score).proportional_notation_duration = moment
-        lilypond_file = lilypondfiletools.make_basic_lilypond_file(score)
-        lilypond_file.header_block.tagline = markuptools.Markup.null()
+        abjad.override(staff).clef.stencil = False
+        abjad.override(staff).horizontal_bracket.bracket_flare = (0, 0)
+        abjad.override(staff).horizontal_bracket.direction = Up
+        abjad.override(staff).horizontal_bracket.extra_offset = (slide, 0)
+        abjad.override(staff).horizontal_bracket.staff_padding = 2.5
+        abjad.override(staff).rest.transparent = True
+        abjad.override(staff).text_script.extra_offset = (slide, 0)
+        abjad.override(staff).text_script.staff_padding = 4.5
+        score = abjad.scoretools.Score([staff])
+        moment = abjad.schemetools.SchemeMoment((1, 8))
+        abjad.set_(score).proportional_notation_duration = moment
+        lilypond_file = abjad.lilypondfiletools.make_basic_lilypond_file(score)
+        lilypond_file.header_block.tagline = abjad.markuptools.Markup.null()
         return lilypond_file
 
     ### PRIVATE METHODS ###
@@ -176,10 +167,11 @@ class TimeSignatureGroups(abctools.AbjadObject):
     def _make_measure_group(self, group):
         measure_group = []
         for time_signature in group:
-            multiplier = durationtools.Multiplier(time_signature.duration)
-            rest = scoretools.Rest(durationtools.Duration(1))
-            attach(multiplier, rest)
-            measure = scoretools.Measure(time_signature, [rest])
+            multiplier = abjad.durationtools.Multiplier(
+                time_signature.duration)
+            rest = abjad.scoretools.Rest(abjad.durationtools.Duration(1))
+            abjad.attach(multiplier, rest)
+            measure = abjad.scoretools.Measure(time_signature, [rest])
             measure.always_format_time_signature = True
             measure_group.append(measure)
         return measure_group

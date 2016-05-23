@@ -1,16 +1,5 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import datastructuretools
-from abjad.tools import durationtools
-from abjad.tools import indicatortools
-from abjad.tools import schemetools
-from abjad.tools import scoretools
-from abjad.tools import selectiontools
-from abjad.tools import sequencetools
-from abjad.tools import spannertools
-from abjad.tools.topleveltools import attach
-from abjad.tools.topleveltools import inspect_
-from abjad.tools.topleveltools import iterate
-from abjad.tools.topleveltools import override
+import abjad
 from baca.tools.Handler import Handler
 
 
@@ -42,12 +31,12 @@ class HairpinHandler(Handler):
 
             >>> print(format(staff))
             \new Staff {
-                \once \override Hairpin #'circled-tip = ##t
+                \once \override Hairpin.circled-tip = ##t
                 c'4 ~ \> \f
                 c'4 ~
                 c'4 \!
                 r4
-                \once \override Hairpin #'circled-tip = ##t
+                \once \override Hairpin.circled-tip = ##t
                 d'4 ~ \<
                 d'4 ~
                 d'4 \f
@@ -112,19 +101,19 @@ class HairpinHandler(Handler):
         for element in hairpin_tokens:
             if isinstance(element, str):
                 element = tuple(element.split())
-                if not spannertools.Hairpin._is_hairpin_token(element):
+                if not abjad.spannertools.Hairpin._is_hairpin_token(element):
                     message = 'must be valid hairpin token: {!r}.'
                     message = message.format(element)
                     raise Exception(message)
             tokens.append(element)
         hairpin_tokens = tokens
-        hairpin_tokens = datastructuretools.CyclicTuple(hairpin_tokens)
+        hairpin_tokens = abjad.datastructuretools.CyclicTuple(hairpin_tokens)
         self._hairpin_tokens = hairpin_tokens
         if include_following_rests is not None:
             include_following_rests = bool(include_following_rests)
         self._include_following_rests = include_following_rests
         if minimum_duration is not None:
-            minimum_duration = durationtools.Duration(minimum_duration)
+            minimum_duration = abjad.durationtools.Duration(minimum_duration)
         self._minimum_duration = minimum_duration
         if omit_lone_note_dynamic is not None:
             omit_lone_note_dynamic = bool(omit_lone_note_dynamic)
@@ -151,9 +140,10 @@ class HairpinHandler(Handler):
         '''
         if not logical_ties:
             return
-        if not isinstance(logical_ties[0], selectiontools.LogicalTie):
-            assert isinstance(logical_ties[0], scoretools.Leaf)
-            logical_ties = [selectiontools.LogicalTie(_) for _ in logical_ties]
+        if not isinstance(logical_ties[0], abjad.selectiontools.LogicalTie):
+            assert isinstance(logical_ties[0], abjad.scoretools.Leaf)
+            logical_ties = [
+                abjad.selectiontools.LogicalTie(_) for _ in logical_ties]
         if (self.span == 'contiguous notes and chords'
             or isinstance(self.span, (tuple, list))):
             groups = self._group_contiguous_logical_ties(logical_ties)
@@ -183,8 +173,11 @@ class HairpinHandler(Handler):
                 continue
             if self.include_following_rests:
                 last_note = notes_to_span[-1]
-                next_leaf = inspect_(last_note).get_leaf(1)
-                prototype = (scoretools.Rest, scoretools.MultimeasureRest)
+                next_leaf = abjad.inspect_(last_note).get_leaf(1)
+                prototype = (
+                    abjad.scoretools.Rest,
+                    abjad.scoretools.MultimeasureRest,
+                    )
                 if isinstance(next_leaf, prototype):
                     notes_to_span.append(next_leaf)
             if len(notes_to_span) == 1 and self.omit_lone_note_dynamic:
@@ -195,8 +188,8 @@ class HairpinHandler(Handler):
                 if start_dynamic == 'niente':
                     message = 'can not attach niente dynamics to components.'
                     raise Exception(message)
-                dynamic = indicatortools.Dynamic(start_dynamic)
-                attach(dynamic, notes[0])
+                dynamic = abjad.indicatortools.Dynamic(start_dynamic)
+                abjad.attach(dynamic, notes[0])
                 continue
             hairpin_token = hairpin_tokens[group_index]
             if hairpin_token is None:
@@ -204,20 +197,20 @@ class HairpinHandler(Handler):
             if isinstance(hairpin_token, tuple):
                 descriptor = ' '.join([_ for _ in hairpin_token if _])
                 include_rests = bool(self.include_following_rests)
-                hairpin = spannertools.Hairpin(
+                hairpin = abjad.spannertools.Hairpin(
                     descriptor=descriptor,
                     include_rests=include_rests,
                     )
-                attach(hairpin, notes_to_span)
+                abjad.attach(hairpin, notes_to_span)
             # hook to allow callable custom classes like SwellSpecifier
             else:
                 hairpin_token(notes_to_span)
             if self.flare:
                 first_note = notes_to_span[0]
-                prototype = scoretools.Note
+                prototype = abjad.scoretools.Note
                 assert isinstance(first_note, prototype), repr(first_note)
-                stencil = schemetools.Scheme('flared-hairpin')
-                override(first_note).hairpin.stencil = stencil
+                stencil = abjad.schemetools.Scheme('flared-hairpin')
+                abjad.override(first_note).hairpin.stencil = stencil
 
     ### PRIVATE METHODS ###
 
@@ -246,7 +239,7 @@ class HairpinHandler(Handler):
 
     def _partition_by_enchained_counts(self, leaves, counts):
         assert isinstance(leaves, list), repr(leaves)
-        counts = datastructuretools.CyclicTuple(counts)
+        counts = abjad.datastructuretools.CyclicTuple(counts)
         shards = []
         shard_index = 0
         leaf_start_index = 0
@@ -265,7 +258,7 @@ class HairpinHandler(Handler):
     def _partition_enchained_groups(self, groups):
         new_groups = []
         for group in groups:
-            leaves = iterate(group).by_class(scoretools.Leaf)
+            leaves = abjad.iterate(group).by_leaf()
             leaves = list(leaves)
             shards = self._partition_by_enchained_counts(
                 leaves,
@@ -278,9 +271,9 @@ class HairpinHandler(Handler):
     def _partition_groups(self, groups):
         new_groups = []
         for group in groups:
-            leaves = iterate(group).by_class(scoretools.Leaf)
+            leaves = abjad.iterate(group).by_leaf()
             leaves = list(leaves)
-            shards = sequencetools.partition_sequence_by_counts(
+            shards = abjad.sequencetools.partition_sequence_by_counts(
                 leaves,
                 counts=self.span,
                 cyclic=True,
@@ -294,7 +287,7 @@ class HairpinHandler(Handler):
 
     @property
     def enchain_hairpins(self):
-        r'''Is true when hairpins should enchain. Otherwise false.
+        r'''Is true when hairpins enchain. Otherwise false.
 
         ..  container:: example
 
@@ -424,12 +417,12 @@ class HairpinHandler(Handler):
 
                 >>> print(format(staff))
                 \new Staff {
-                    \once \override Hairpin #'stencil = #flared-hairpin
+                    \once \override Hairpin.stencil = #flared-hairpin
                     c'4 ~ \> \f
                     c'4 ~
                     c'4 \p
                     r4
-                    \once \override Hairpin #'stencil = #flared-hairpin
+                    \once \override Hairpin.stencil = #flared-hairpin
                     d'4 ~ \< \p
                     d'4 ~
                     d'4 \f
@@ -538,7 +531,7 @@ class HairpinHandler(Handler):
 
     @property
     def include_following_rests(self):
-        r'''Is true if every hairpin should extend to include rests
+        r'''Is true if every hairpin extends to include rests
         following the last note or chord in each hairpin. Otherwise false.
 
         ..  container:: example
@@ -564,12 +557,12 @@ class HairpinHandler(Handler):
                 >>> print(format(staff))
                 \new Staff {
                     c'8 ~ \< \p
-                    \once \override Hairpin #'circled-tip = ##t
+                    \once \override Hairpin.circled-tip = ##t
                     c'8 ~ \f \> \f
                     c'8 \!
                     r8
                     c'8 ~ \< \p
-                    \once \override Hairpin #'circled-tip = ##t
+                    \once \override Hairpin.circled-tip = ##t
                     c'8 ~ \f \> \f
                     c'8 \!
                     r8
@@ -599,12 +592,12 @@ class HairpinHandler(Handler):
                 >>> print(format(staff))
                 \new Staff {
                     c'8 ~ \< \p
-                    \once \override Hairpin #'circled-tip = ##t
+                    \once \override Hairpin.circled-tip = ##t
                     c'8 ~ \f \> \f
                     c'8
                     r8 \!
                     c'8 ~ \< \p
-                    \once \override Hairpin #'circled-tip = ##t
+                    \once \override Hairpin.circled-tip = ##t
                     c'8 ~ \f \> \f
                     c'8
                     r8 \!
@@ -634,12 +627,12 @@ class HairpinHandler(Handler):
                 >>> print(format(staff))
                 \new Staff {
                     c'8 ~ \< \p
-                    \once \override Hairpin #'circled-tip = ##t
+                    \once \override Hairpin.circled-tip = ##t
                     c'8 ~ \f \> \f
                     c'8
                     r8 \!
                     c'8 ~ \< \p
-                    \once \override Hairpin #'circled-tip = ##t
+                    \once \override Hairpin.circled-tip = ##t
                     c'8 ~ \f \> \f
                     c'8 ~
                     c'8
@@ -664,8 +657,8 @@ class HairpinHandler(Handler):
 
     @property
     def omit_lone_note_dynamic(self):
-        r'''Is true when start dynamic of hairpin should not be attached to
-        lone notes. Otherwise false.
+        r'''Is true when start dynamic of hairpin does not attach to lone
+        notes. Otherwise false.
 
         ..  container:: example
 

@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
+import abjad
 import copy
-from abjad.tools import abctools
-from abjad.tools import scoretools
-from abjad.tools import spannertools
-from abjad.tools.topleveltools import attach
 
 
-class SwellSpecifier(abctools.AbjadObject):
+class SwellSpecifier(abjad.abctools.AbjadObject):
     r'''Swell specifier.
 
     ::
@@ -102,32 +99,32 @@ class SwellSpecifier(abctools.AbjadObject):
                         \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             {
-                                \once \override Hairpin #'circled-tip = ##t
+                                \once \override Hairpin.circled-tip = ##t
                                 e'8 \< [
                                 e'8 \p
-                                \once \override Hairpin #'circled-tip = ##t
+                                \once \override Hairpin.circled-tip = ##t
                                 e'8 \> \p
                                 e'8 \! ]
                             }
                             {
-                                \once \override Hairpin #'circled-tip = ##t
+                                \once \override Hairpin.circled-tip = ##t
                                 e'8 \< [
-                                \once \override Hairpin #'circled-tip = ##t
+                                \once \override Hairpin.circled-tip = ##t
                                 e'8 \p \> \p
                                 e'8 \! ]
                             }
                             {
-                                \once \override Hairpin #'circled-tip = ##t
+                                \once \override Hairpin.circled-tip = ##t
                                 e'8 \< [
                                 e'8 \p
-                                \once \override Hairpin #'circled-tip = ##t
+                                \once \override Hairpin.circled-tip = ##t
                                 e'8 \> \p
                                 e'8 \! ]
                             }
                             {
-                                \once \override Hairpin #'circled-tip = ##t
+                                \once \override Hairpin.circled-tip = ##t
                                 e'8 \< [
-                                \once \override Hairpin #'circled-tip = ##t
+                                \once \override Hairpin.circled-tip = ##t
                                 e'8 \p \> \p
                                 e'8 \! ]
                                 \bar "|"
@@ -175,7 +172,7 @@ class SwellSpecifier(abctools.AbjadObject):
 
         Returns none.
         '''
-        start_hairpin = spannertools.Hairpin(
+        start_hairpin = abjad.spannertools.Hairpin(
             self.start_token,
             include_rests=True,
             )
@@ -185,21 +182,22 @@ class SwellSpecifier(abctools.AbjadObject):
             #raise Exception(message)
             if len(leaves) == 0:
                 return
+            prototype = (abjad.scoretools.Note, abjad.scoretools.Chord)
             for leaf in leaves:
-                if isinstance(leaf, (scoretools.Note, scoretools.Chord)):
+                if isinstance(leaf, prototype):
                     lone_dynamic = start_hairpin.stop_dynamic
                     lone_dynamic = copy.copy(lone_dynamic)
-                    attach(lone_dynamic, leaf)
+                    abjad.attach(lone_dynamic, leaf)
                     break
             return
         start_leaves = leaves[:self.start_count]
-        attach(start_hairpin, start_leaves)
-        stop_hairpin = spannertools.Hairpin(
+        abjad.attach(start_hairpin, start_leaves)
+        stop_hairpin = abjad.spannertools.Hairpin(
             self.stop_token,
             include_rests=True,
             )
         stop_leaves = leaves[-self.stop_count:]
-        attach(stop_hairpin, stop_leaves)
+        abjad.attach(stop_hairpin, stop_leaves)
 
     ### PUBLIC PROPERTIES ###
 

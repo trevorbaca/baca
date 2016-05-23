@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import abctools
-from abjad.tools import pitchtools
-from abjad.tools import timespantools
+import abjad
 
 
-class RegistrationTransitionSpecifier(abctools.AbjadObject):
-    r'''Registration transition specifier.
+class RegisterTransitionSpecifier(abjad.abctools.AbjadObject):
+    r'''Register transition specifier.
 
     ::
 
@@ -13,8 +11,7 @@ class RegistrationTransitionSpecifier(abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 1.** Starts at the octave of C4 and then transitions to the
-        octave of C5:
+        **Example 1.** Transitions from the octave of C4 to the octave of C5:
 
             >>> segment_maker = baca.tools.SegmentMaker(
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
@@ -28,7 +25,7 @@ class RegistrationTransitionSpecifier(abctools.AbjadObject):
             ...     [
             ...         baca.pitch.pitches('C4 D4 E4 F4'),
             ...         baca.rhythm.make_even_run_rhythm_specifier(),
-            ...         baca.tools.RegistrationTransitionSpecifier(
+            ...         baca.tools.RegisterTransitionSpecifier(
             ...             start_registration=pitchtools.Registration(
             ...                 [('[A0, C8]', 0)],
             ...                 ),
@@ -142,8 +139,8 @@ class RegistrationTransitionSpecifier(abctools.AbjadObject):
         start_registration=None,
         stop_registration=None,
         ):
-        assert isinstance(start_registration, pitchtools.Registration)
-        assert isinstance(stop_registration, pitchtools.Registration)
+        assert isinstance(start_registration, abjad.pitchtools.Registration)
+        assert isinstance(stop_registration, abjad.pitchtools.Registration)
         assert len(start_registration) == len(stop_registration)
         self._start_registration = start_registration
         self._stop_registration = stop_registration
@@ -151,11 +148,15 @@ class RegistrationTransitionSpecifier(abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     # TODO: extend SegmentMaker to pass timespan in here
-    def __call__(self, logical_ties, timespan):
+    def __call__(self, logical_ties, timespan=None):
         r'''Calls registration transition specifier.
 
         Returns none.
         '''
+        if timespan is None:
+            return self._apply_outside_score(logical_ties)
+        if not isinstance(logical_ties[0], abjad.selectiontools.LogicalTie):
+            logical_ties = abjad.iterate(logical_ties).by_logical_tie()
         for logical_tie in logical_ties:
             offset = logical_tie.get_timespan().start_offset
             registration = self._make_interpolated_registration(
@@ -164,12 +165,30 @@ class RegistrationTransitionSpecifier(abctools.AbjadObject):
                 )
             for note in logical_tie:
                 written_pitch = registration([note.written_pitch])
-                note.written_pitch = written_pitch
+                self._set_pitch(note, written_pitch)
 
     ### PRIVATE METHODS ###
 
+    def _apply_outside_score(self, logical_ties):
+        if not isinstance(logical_ties[0], abjad.selectiontools.LogicalTie):
+            logical_ties = list(abjad.iterate(logical_ties).by_logical_tie())
+        durations = [_.get_duration() for _ in logical_ties]
+        duration = sum(durations)
+        timespan = abjad.timespantools.Timespan(0, duration)
+        current_start_offset = 0
+        for logical_tie in logical_ties:
+            registration = self._make_interpolated_registration(
+                current_start_offset, 
+                timespan,
+                )
+            for note in logical_tie:
+                written_pitch = registration([note.written_pitch])
+                note.written_pitch = written_pitch
+            duration = logical_tie.get_duration()
+            current_start_offset += duration
+
     def _make_interpolated_registration(self, offset, timespan):
-        assert timespantools.offset_happens_during_timespan(
+        assert abjad.timespantools.offset_happens_during_timespan(
             timespan=timespan,
             offset=offset,
             ), repr((timespan, offset))
@@ -181,11 +200,11 @@ class RegistrationTransitionSpecifier(abctools.AbjadObject):
         pairs = zip(start_components, stop_components)
         for start_component, stop_component in pairs:
             start_pitch = start_component.source_pitch_range.start_pitch
-            start_pitch = pitchtools.NumberedPitch(start_pitch)
+            start_pitch = abjad.pitchtools.NumberedPitch(start_pitch)
             stop_pitch = stop_component.source_pitch_range.start_pitch
             lower_range_pitch = start_pitch.interpolate(stop_pitch, fraction)
             start_pitch = start_component.source_pitch_range.stop_pitch
-            start_pitch = pitchtools.NumberedPitch(start_pitch)
+            start_pitch = abjad.pitchtools.NumberedPitch(start_pitch)
             stop_pitch = stop_component.source_pitch_range.stop_pitch
             upper_range_pitch = start_pitch.interpolate(stop_pitch, fraction)
             range_string = '[{}, {})'
@@ -194,20 +213,25 @@ class RegistrationTransitionSpecifier(abctools.AbjadObject):
                 upper_range_pitch.pitch_class_octave_label,
                 )
             start_pitch = start_component.target_octave_start_pitch
-            start_pitch = pitchtools.NumberedPitch(start_pitch)
+            start_pitch = abjad.pitchtools.NumberedPitch(start_pitch)
             stop_pitch = stop_component.target_octave_start_pitch
             target_octave_start_pitch = start_pitch.interpolate(
                 stop_pitch,
                 fraction,
                 )
-            component = pitchtools.RegistrationComponent(
+            component = abjad.pitchtools.RegistrationComponent(
                 source_pitch_range=range_string,
                 target_octave_start_pitch=target_octave_start_pitch,
                 )
             components.append(component)
-        registration = pitchtools.Registration(components)
+        registration = abjad.pitchtools.Registration(components)
         return registration
     
+    @staticmethod
+    def _set_pitch(note, written_pitch):
+        note.written_pitch = written_pitch
+        abjad.detach('not yet registered', note)
+
     ### PUBLIC PROPERTIES ###
 
     @property

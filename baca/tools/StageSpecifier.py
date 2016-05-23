@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import abctools
+import abjad
 
 
-class StageSpecifier(abctools.AbjadObject):
+class StageSpecifier(abjad.abctools.AbjadObject):
     r'''Stage specifier.
 
     ::

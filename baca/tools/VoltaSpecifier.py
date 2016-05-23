@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import abctools
+import abjad
 
 
-class VoltaSpecifier(abctools.AbjadObject):
+class VoltaSpecifier(abjad.abctools.AbjadObject):
     r'''Volta specifier.
 
     ::
@@ -28,7 +28,7 @@ class VoltaSpecifier(abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.tools.stages(1)),
             ...     [
-            ...         baca.pitch.pitches('E4'),
+            ...         baca.pitch.pitches('E4', allow_repeated_pitches=True),
             ...         baca.rhythm.make_messiaen_note_rhythm_specifier(),
             ...         ],
             ...     )

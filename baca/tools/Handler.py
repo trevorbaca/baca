@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 import abc
-from abjad.tools import abctools
-from abjad.tools import scoretools
+import abjad
 
 
-class Handler(abctools.AbjadValueObject):
+class Handler(abjad.abctools.AbjadValueObject):
     r'''Handler.
     '''
 
@@ -31,8 +30,7 @@ class Handler(abctools.AbjadValueObject):
 
         Returns true or false.
         '''
-        from abjad.tools import systemtools
-        return systemtools.StorageFormatManager.compare(self, expr)
+        return abjad.systemtools.StorageFormatManager.compare(self, expr)
 
     def __format__(self, format_specification=''):
         r'''Formats handler.
@@ -42,9 +40,9 @@ class Handler(abctools.AbjadValueObject):
 
         Returns string.
         '''
-        from abjad.tools import systemtools
         if format_specification in ('', 'storage'):
-            return systemtools.StorageFormatManager.get_storage_format(self)
+            return abjad.systemtools.StorageFormatManager.get_storage_format(
+                self)
         return str(self)
 
     def __hash__(self):
@@ -52,8 +50,8 @@ class Handler(abctools.AbjadValueObject):
 
         Returns integer.
         '''
-        from abjad.tools import systemtools
-        hash_values = systemtools.StorageFormatManager.get_hash_values(self)
+        hash_values = abjad.systemtools.StorageFormatManager.get_hash_values(
+            self)
         return hash(hash_values)
 
     ### PRIVATE METHODS ###
@@ -62,12 +60,12 @@ class Handler(abctools.AbjadValueObject):
     def _remove_outer_rests_from_sequence(sequence):
         first_keep_index = None
         for i, element in enumerate(sequence):
-            if not isinstance(element, scoretools.Rest):
+            if not isinstance(element, abjad.scoretools.Rest):
                 first_keep_index = i
                 break
         last_keep_index = None
         for i, element in enumerate(reversed(sequence)):
-            if not isinstance(element, scoretools.Rest):
+            if not isinstance(element, abjad.scoretools.Rest):
                 last_keep_index = len(sequence) - i
                 break
         return sequence[first_keep_index:last_keep_index]

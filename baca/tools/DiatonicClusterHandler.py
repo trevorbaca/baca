@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import datastructuretools
-from abjad.tools import pitchtools
-from abjad.tools import scoretools
-from abjad.tools.topleveltools import iterate
-from abjad.tools.topleveltools import mutate
+import abjad
 from baca.tools.Handler import Handler
 
 
@@ -50,7 +46,8 @@ class DiatonicClusterHandler(Handler):
     def __init__(self, cluster_widths=None):
         Handler.__init__(self)
         if cluster_widths is not None:
-            cluster_widths = datastructuretools.CyclicTuple(cluster_widths)
+            cluster_widths = abjad.datastructuretools.CyclicTuple(
+                cluster_widths)
         self._cluster_widths = cluster_widths
 
     ### SPECIAL METHODS ###
@@ -60,21 +57,22 @@ class DiatonicClusterHandler(Handler):
 
         Returns none.
         '''
-        for i, note in enumerate(iterate(expr).by_class(scoretools.Note)):
+        for i, note in enumerate(
+            abjad.iterate(expr).by_class(abjad.scoretools.Note)):
             cluster_width = self.cluster_widths[i]
             start = note.written_pitch.diatonic_pitch_number
             diatonic_numbers = range(start, start + cluster_width)
             chromatic_numbers = [
                 (12 * (x // 7)) +
-                pitchtools.PitchClass._diatonic_pitch_class_number_to_pitch_class_number[
+                abjad.pitchtools.PitchClass._diatonic_pitch_class_number_to_pitch_class_number[
                     x % 7]
                 for x in diatonic_numbers
                 ]
-            chord_pitches = [pitchtools.NamedPitch(x)
+            chord_pitches = [abjad.pitchtools.NamedPitch(x)
                 for x in chromatic_numbers]
-            chord = scoretools.Chord(note)
+            chord = abjad.scoretools.Chord(note)
             chord.note_heads[:] = chord_pitches
-            mutate(note).replace(chord)
+            abjad.mutate(note).replace(chord)
 
     ### PUBLIC PROPERTIES ###
 

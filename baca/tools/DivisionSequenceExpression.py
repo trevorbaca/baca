@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
+import abjad
 import baca
-from abjad.tools.expressiontools.SequenceExpression import SequenceExpression
 
 
-class DivisionSequenceExpression(SequenceExpression):
+class DivisionSequenceExpression(abjad.expressiontools.SequenceExpression):
     r'''Division expression.
 
     ..  container:: example
@@ -106,7 +106,7 @@ class DivisionSequenceExpression(SequenceExpression):
 
     ### CLASS VARIALBES ###
 
-    __documentation_section__ = 'Segment-maker components'
+    __documentation_section__ = 'Segments'
 
     __slots__ = (
         )
@@ -114,8 +114,7 @@ class DivisionSequenceExpression(SequenceExpression):
     ### INITIALIZER ###
 
     def __init__(self, callbacks=None):
-        import baca
-        superclass = super(SequenceExpression, self)
+        superclass = super(abjad.expressiontools.SequenceExpression, self)
         superclass.__init__(callbacks=callbacks)
         self._client_class = baca.tools.DivisionSequence
 

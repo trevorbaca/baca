@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import pitchtools
+import abjad
 from baca.tools.Handler import Handler
 
 
@@ -20,7 +20,7 @@ class OctaveTranspositionHandler(Handler):
     def __init__(self, octave_transposition_mapping=None):
         if octave_transposition_mapping is not None:
             octave_transposition_mapping = \
-                pitchtools.Registration(
+                abjad.pitchtools.Registration(
                     octave_transposition_mapping)
         self._octave_transposition_mapping = octave_transposition_mapping
 
@@ -31,16 +31,19 @@ class OctaveTranspositionHandler(Handler):
 
         Returns none.
         '''
-        for leaf in iterate(expr).by_class(scoretools.Leaf):
+        for leaf in iterate(expr).by_leaf():
             if isinstance(leaf, Note):
                 n = leaf.pitch.pitch_number
-                n = pitchtools.transpose_pitch_number_by_octave_transposition_mapping(
+                n = abjad.pitchtools.transpose_pitch_number_by_octave_transposition_mapping(
                     n, self.octave_transposition_mapping)
                 leaf.pitch = n
             elif isinstance(leaf, Chord):
                 nn = [nh.pitch.pitch_number for nh in leaf]
-                nn = [pitchtools.transpose_pitch_number_by_octave_transposition_mapping(
-                    n, self.octave_transposition_mapping) for n in nn]
+                nn = [
+                    abjad.pitchtools.transpose_pitch_number_by_octave_transposition_mapping(
+                    n, self.octave_transposition_mapping)
+                    for n in nn
+                    ]
                 leaf.pitches = nn
 
     ### PUBLIC PROPERTIES ###

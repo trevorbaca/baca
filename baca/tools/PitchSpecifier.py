@@ -1,16 +1,10 @@
 # -*- coding: utf-8 -*-
+import abjad
 import collections
-from abjad.tools import abctools
-from abjad.tools import datastructuretools
-from abjad.tools import mathtools
-from abjad.tools import pitchtools
-from abjad.tools import scoretools
-from abjad.tools import selectiontools
-from abjad.tools.topleveltools import mutate
 
 
 # TODO: write comprehensive tests
-class PitchSpecifier(abctools.AbjadObject):
+class PitchSpecifier(abjad.abctools.AbjadObject):
     r'''Pitch specifier.
 
     ::
@@ -131,6 +125,7 @@ class PitchSpecifier(abctools.AbjadObject):
 
     __slots__ = (
         '_acyclic',
+        '_allow_repeated_pitches',
         '_counts',
         '_mutates_score',
         '_operators',
@@ -146,6 +141,7 @@ class PitchSpecifier(abctools.AbjadObject):
     def __init__(
         self,
         acyclic=None,
+        allow_repeated_pitches=None,
         counts=None,
         mutates_score=None,
         operators=None,
@@ -157,8 +153,11 @@ class PitchSpecifier(abctools.AbjadObject):
         if acyclic is not None:
             acyclic = bool(acyclic)
         self._acyclic = acyclic
+        if allow_repeated_pitches is not None:
+            allow_repeated_pitches = bool(allow_repeated_pitches)
+        self._allow_repeated_pitches = allow_repeated_pitches
         if counts is not None:
-            assert mathtools.all_are_positive_integers(counts), repr(counts)
+            assert abjad.mathtools.all_are_positive_integers(counts)
         self._counts = counts
         # because chords sometimes replace notes
         #self._mutates_score = True
@@ -173,13 +172,13 @@ class PitchSpecifier(abctools.AbjadObject):
         if isinstance(source, str):
             self._use_exact_spelling = True
         elif (isinstance(source, collections.Iterable) and 
-            isinstance(source[0], pitchtools.NamedPitch)):
+            isinstance(source[0], abjad.pitchtools.NamedPitch)):
             self._use_exact_spelling = True
         elif (isinstance(source, collections.Iterable) and 
-            isinstance(source[0], pitchtools.Segment)):
+            isinstance(source[0], abjad.pitchtools.Segment)):
             self._use_exact_spelling = True
         elif (isinstance(source, collections.Iterable) and 
-            isinstance(source[0], pitchtools.Set)):
+            isinstance(source[0], abjad.pitchtools.Set)):
             self._use_exact_spelling = True
         else:
             self._use_exact_spelling = False
@@ -189,12 +188,12 @@ class PitchSpecifier(abctools.AbjadObject):
             source_  = []
             for element in source:
                 try:
-                    element = pitchtools.NamedPitch(element)
+                    element = abjad.pitchtools.NamedPitch(element)
                 except ValueError:
                     pass
                 source_.append(element)
             source = source_
-            source = datastructuretools.CyclicTuple(source)
+            source = abjad.datastructuretools.CyclicTuple(source)
         self._source = source
         if start_index is not None:
             assert isinstance(start_index, int), repr(start_index)
@@ -213,10 +212,12 @@ class PitchSpecifier(abctools.AbjadObject):
             message = '{!r} has no logical ties.'
             message = message.format(self)
             raise Exception(message)
-        if isinstance(logical_ties[0], scoretools.Leaf):
-            logical_ties = [selectiontools.LogicalTie(_) for _ in logical_ties]
+        if not isinstance(logical_ties[0], abjad.selectiontools.LogicalTie):
+            logical_ties = list(abjad.iterate(logical_ties).by_logical_tie())
+        for logical_tie in logical_ties:
+            assert isinstance(logical_tie, abjad.selectiontools.LogicalTie)
         counts = self.counts or [1]
-        counts = datastructuretools.CyclicTuple(counts)
+        counts = abjad.datastructuretools.CyclicTuple(counts)
         start_index = self.start_index
         if start_index is None:
             start_index = 0
@@ -239,7 +240,7 @@ class PitchSpecifier(abctools.AbjadObject):
             source = self.source
             if self.reverse:
                 source = reversed(source)
-                source = datastructuretools.CyclicTuple(source)
+                source = abjad.datastructuretools.CyclicTuple(source)
                 absolute_start_index = source_length - absolute_start_index - 1
             current_count_index = 0
             current_count = counts[current_count_index]
@@ -251,7 +252,7 @@ class PitchSpecifier(abctools.AbjadObject):
                 repetition_count = index // len(self.source)
                 if (self.repetition_intervals is not None and
                     0 < repetition_count):
-                    repetition_intervals = datastructuretools.CyclicTuple(
+                    repetition_intervals = abjad.datastructuretools.CyclicTuple(
                         self.repetition_intervals)
                     repetition_intervals = repetition_intervals[
                         :repetition_count]
@@ -267,28 +268,32 @@ class PitchSpecifier(abctools.AbjadObject):
                 if self.operators:
                     for operator_ in self.operators:
                         pitch_expression = operator_(pitch_expression)
-                if isinstance(pitch_expression, pitchtools.Pitch):
+                if isinstance(pitch_expression, abjad.pitchtools.Pitch):
                     if self._use_exact_spelling:
                         pitch = pitch_expression
-                        assert isinstance(pitch, pitchtools.NamedPitch), pitch
+                        assert isinstance(pitch, abjad.pitchtools.NamedPitch)
                     else:
-                        pitch_expression = pitchtools.NumberedPitch(
+                        pitch_expression = abjad.pitchtools.NumberedPitch(
                             pitch_expression)
-                        pitch = pitchtools.NamedPitch(pitch_expression)
-                elif isinstance(pitch_expression, pitchtools.Segment):
+                        pitch = abjad.pitchtools.NamedPitch(pitch_expression)
+                elif isinstance(pitch_expression, abjad.pitchtools.Segment):
                     pitch = pitch_expression
                 else:
                     message = 'must be pitch or pitch segment: {!r}.'
                     message = message.format(pitch_expression)
                     raise Exception(message)
                 for note in logical_tie:
-                    if isinstance(pitch, pitchtools.Pitch):
-                        note.written_pitch = pitch
-                    elif isinstance(pitch, pitchtools.PitchSegment):
+                    if isinstance(pitch, abjad.pitchtools.Pitch):
+                        #note.written_pitch = pitch
+                        self._set_pitch(note, pitch)
+                    elif isinstance(pitch, abjad.pitchtools.PitchSegment):
                         assert isinstance(pitch, collections.Iterable)
-                        chord = scoretools.Chord(pitch, note.written_duration)
+                        chord = abjad.scoretools.Chord(
+                            pitch,
+                            note.written_duration,
+                            )
                         # TODO: check and make sure *overrides* are preserved!
-                        mutate(note).replace(chord)
+                        abjad.mutate(note).replace(chord)
                     else:
                         message = 'must be pitch or pitch segment: {!r}.'
                         message = message.format(pitch)
@@ -306,9 +311,24 @@ class PitchSpecifier(abctools.AbjadObject):
                         written_pitch = note.written_pitch
                         pitch_expression = written_pitch.numbered_pitch_class
                         pitch_expression = operator_(pitch_expression)
-                        written_pitch = pitchtools.NamedPitch(pitch_expression)
-                        note.written_pitch = written_pitch
+                        written_pitch = abjad.pitchtools.NamedPitch(
+                            pitch_expression)
+                        #note.written_pitch = written_pitch
+                        self._set_pitch(note, written_pitch)
 
+    ### PRIVATE METHODS ###
+
+    def _set_pitch(self, leaf, pitch):
+        string = 'not yet pitched'
+        if abjad.inspect_(leaf).has_indicator(string):
+            abjad.detach(string, leaf)
+        if isinstance(leaf, abjad.Note):
+            leaf.written_pitch = pitch
+        elif isinstance(leaf, abjad.Chord):
+            raise NotImplementedError
+        if self.allow_repeated_pitches:
+            abjad.attach('repeated pitch allowed', leaf)
+            
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -322,6 +342,18 @@ class PitchSpecifier(abctools.AbjadObject):
         Returns true, false or none.
         '''
         return self._acyclic
+
+    @property
+    def allow_repeated_pitches(self):
+        r'''Is true when specifier allows repeated pitches.
+
+        Defaults to none.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        '''
+        return self._allow_repeated_pitches
 
     @property
     def counts(self):
@@ -514,7 +546,7 @@ class PitchSpecifier(abctools.AbjadObject):
 
     @property
     def reverse(self):
-        r'''Is true when pitch specifier should read pitches in reverse.
+        r'''Is true when pitch specifier reads pitches in reverse.
 
         ..  container:: example
 
@@ -644,13 +676,13 @@ class PitchSpecifier(abctools.AbjadObject):
         if self.acyclic:
             source = list(self.source)
         else:
-            source = datastructuretools.CyclicTuple(self.source)
+            source = abjad.datastructuretools.CyclicTuple(self.source)
         start_index = self.start_index or 0
         index += start_index
         pitch_expression = source[index]
         repetition_count = index // len(self.source)
         if self.repetition_intervals is not None and 0 < repetition_count:
-            repetition_intervals = datastructuretools.CyclicTuple(
+            repetition_intervals = abjad.datastructuretools.CyclicTuple(
                 self.repetition_intervals)
             repetition_intervals = repetition_intervals[:repetition_count]
             repetition_interval = sum(repetition_intervals)

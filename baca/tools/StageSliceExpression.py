@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-from abjad.tools.expressiontools.Expression import Expression
+import abjad
 
 
-class StageSliceExpression(Expression):
+class StageSliceExpression(abjad.expressiontools.Expression):
     r'''Stage slice expression.
     '''
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Segment-maker components'
+    __documentation_section__ = 'Segments'
 
     __slots__ = (
         '_start_number',

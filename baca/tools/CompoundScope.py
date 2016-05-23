@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
+import abjad
 import collections
-from abjad.tools import abctools
-from abjad.tools import scoretools
-from abjad.tools.topleveltools import inspect_
 
 
-class CompoundScope(abctools.AbjadObject):
+class CompoundScope(abjad.abctools.AbjadObject):
     r'''Compound scope.
 
     ::
@@ -66,7 +64,7 @@ class CompoundScope(abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Segment-maker components'
+    __documentation_section__ = 'Segments'
 
     __slots__ = (
         '_simple_scopes',
@@ -95,8 +93,9 @@ class CompoundScope(abctools.AbjadObject):
         if self._timespan_map is None:
             message = 'must construct timespan map first.'
             raise Exception(message)
-        voice = inspect_(component).get_parentage().get_first(scoretools.Voice)
-        component_timespan = inspect_(component).get_timespan()
+        voice = abjad.inspect_(component).get_parentage().get_first(
+            abjad.scoretools.Voice)
+        component_timespan = abjad.inspect_(component).get_timespan()
         for voice_name, scope_timespan in self._timespan_map:
             if voice_name == voice.name:
                 if component_timespan.starts_during_timespan(scope_timespan):

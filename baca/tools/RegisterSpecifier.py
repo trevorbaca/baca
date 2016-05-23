@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import abctools
+import abjad
 
 
-class RegistrationSpecifier(abctools.AbjadObject):
-    r"""Registration specifier.
+class RegisterSpecifier(abjad.abctools.AbjadObject):
+    r"""Register specifier.
 
     ::
 
@@ -27,7 +27,7 @@ class RegistrationSpecifier(abctools.AbjadObject):
             ...     [
             ...         baca.pitch.pitches('G4 G4 G4 G4 Eb4 Eb4 Eb4'),
             ...         baca.rhythm.make_even_run_rhythm_specifier(),
-            ...         baca.tools.RegistrationSpecifier(
+            ...         baca.tools.RegisterSpecifier(
             ...             registration=pitchtools.Registration(
             ...                 [('[A0, C4)', 15), ('[C4, C8)', 27)],
             ...                 ),
@@ -134,22 +134,31 @@ class RegistrationSpecifier(abctools.AbjadObject):
         self,
         registration=None,
         ):
-        from abjad.tools import pitchtools
-        prototype = (type(None), pitchtools.Registration)
+        prototype = (type(None), abjad.pitchtools.Registration)
         assert isinstance(registration, prototype), repr(registration)
         self._registration = registration
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, logical_ties):
-        r'''Calls registration specifier.
+    def __call__(self, expr):
+        r'''Calls registration specifier on `expr`.
 
         Returns none.
         '''
-        for logical_tie in logical_ties:
+        for logical_tie in abjad.iterate(expr).by_logical_tie(
+            pitched=True,
+            with_grace_notes=True,
+            ):
             for note in logical_tie:
                 written_pitch = self.registration([note.written_pitch])
-                note.written_pitch = written_pitch
+                self._set_pitch(note, written_pitch)
+
+    ### PRIVATE METHODS ###
+
+    @staticmethod
+    def _set_pitch(note, written_pitch):
+        note.written_pitch = written_pitch
+        abjad.detach('not yet registered', note)
 
     ### PUBLIC PROPERTIES ###
 
@@ -161,7 +170,7 @@ class RegistrationSpecifier(abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.RegistrationSpecifier(
+                >>> specifier = baca.tools.RegisterSpecifier(
                 ...     registration=pitchtools.Registration(
                 ...         [('[A0, C4)', 15), ('[C4, C8)', 27)],
                 ...         ),

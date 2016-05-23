@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import scoretools
+import abjad
 from baca.tools.Handler import Handler
 
 
@@ -27,14 +27,14 @@ class TimewisePitchClassHandler(Handler):
 
         Returns none.
         '''
-        classes = (scoretools.Note, scoretools.Chord)
+        classes = (abjad.scoretools.Note, abjad.scoretools.Chord)
         for leaf in \
-            scoretools.iterate_components_forward_in_expr(expr, classes):
+            abjad.scoretools.iterate_components_forward_in_expr(expr, classes):
             if isinstance(leaf, scoretools.Note):
                 pitch_class = \
                     self.pitch_class_server.get_next_n_nodes_at_level(1, -1)
                 leaf.written_pitch = pitch_class
-            elif isinstance(leaf, scoretools.Chord):
+            elif isinstance(leaf, abjad.scoretools.Chord):
                 pitch_classes = \
                     self.pitch_class_server.get_next_n_nodes_at_level(
                         len(leaf), -1)

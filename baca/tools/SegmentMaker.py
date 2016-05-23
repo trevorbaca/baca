@@ -1,36 +1,14 @@
 # -*- encoding: utf-8 -*-
+import abjad
+import baca
 import copy
+import experimental
 import os
 import time
 import traceback
-import baca
-from abjad.tools import datastructuretools
-from abjad.tools import durationtools
-from abjad.tools import expressiontools
-from abjad.tools import indicatortools
-from abjad.tools import instrumenttools
-from abjad.tools import lilypondfiletools
-from abjad.tools import markuptools
-from abjad.tools import mathtools
-from abjad.tools import rhythmmakertools
-from abjad.tools import scoretools
-from abjad.tools import selectiontools
-from abjad.tools import sequencetools
-from abjad.tools import spannertools
-from abjad.tools import templatetools
-from abjad.tools import timespantools
-from abjad.tools.topleveltools import attach
-from abjad.tools.topleveltools import detach
-from abjad.tools.topleveltools import inspect_
-from abjad.tools.topleveltools import iterate
-from abjad.tools.topleveltools import new
-from abjad.tools.topleveltools import override
-from abjad.tools.topleveltools import select
-from abjad.tools.topleveltools import set_
-from experimental.tools import makertools
 
 
-class SegmentMaker(makertools.SegmentMaker):
+class SegmentMaker(experimental.makertools.SegmentMaker):
     r'''Segment-maker.
 
     ::
@@ -128,7 +106,7 @@ class SegmentMaker(makertools.SegmentMaker):
 
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.tools.stages(1)),
-            ...     baca.rhythm.make_messiaen_note_rhythm_specifier(),
+            ...     baca.rhythm.make_even_run_rhythm_specifier(),
             ...     )
 
         ::
@@ -186,123 +164,111 @@ class SegmentMaker(makertools.SegmentMaker):
                     \context ViolinMusicStaff = "Violin Music Staff" {
                         \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
-                            c'2
-                            c'4.
-                            c'2
-                            c'4.
-                            \bar "|"
+                            {
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override Flag.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                c'8 [
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override Flag.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                c'8
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override Flag.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                c'8
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override Flag.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                c'8 ]
+                            }
+                            {
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override Flag.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                c'8 [
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override Flag.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                c'8
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override Flag.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                c'8 ]
+                            }
+                            {
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override Flag.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                c'8 [
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override Flag.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                c'8
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override Flag.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                c'8
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override Flag.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                c'8 ]
+                            }
+                            {
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override Flag.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                c'8 [
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override Flag.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                c'8
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override Flag.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                c'8 ]
+                                \bar "|"
+                            }
                         }
                     }
                 >>
             >>
 
-    ..  container:: example
-
-        **Example 3.** Labels logical ties:
-
-        ::
-
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-        ::
-
-            >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.tools.stages(1)),
-            ...     [
-            ...         baca.rhythm.make_messiaen_note_rhythm_specifier(),
-            ...         label().with_indices(),
-            ...         ],
-            ...     )
-
-        ::
-
-            >>> result = segment_maker(is_doc_example=True)
-            >>> lilypond_file, segment_metadata = result
-            >>> show(lilypond_file) # doctest: +SKIP
-
-        ..  doctest::
-
-            >>> score = lilypond_file.score_block.items[0]
-            >>> f(score)
-            \context Score = "Score" <<
-                \tag violin
-                \context TimeSignatureContext = "Time Signature Context" <<
-                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
-                        {
-                            \time 4/8
-                            R1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            R1 * 3/8
-                        }
-                        {
-                            \time 4/8
-                            R1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            R1 * 3/8
-                        }
-                    }
-                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
-                        {
-                            \time 4/8
-                            s1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            s1 * 3/8
-                        }
-                        {
-                            \time 4/8
-                            s1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            s1 * 3/8
-                        }
-                    }
-                >>
-                \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \clef "treble"
-                        \context ViolinMusicVoice = "Violin Music Voice" {
-                            c'2
-                                ^ \markup {
-                                    \small
-                                        0
-                                    }
-                            c'4.
-                                ^ \markup {
-                                    \small
-                                        1
-                                    }
-                            c'2
-                                ^ \markup {
-                                    \small
-                                        2
-                                    }
-                            c'4.
-                                ^ \markup {
-                                    \small
-                                        3
-                                    }
-                            \bar "|"
-                        }
-                    }
-                >>
-            >>
+        Segment colors unpitched notes blue.
 
     '''
 
     ### CLASS ATTRIBUTES ###
 
-    __documentation_section__ = 'Segment-maker components'
+    __documentation_section__ = 'Segments'
 
     __slots__ = (
         '_cached_leaves_with_rests',
@@ -313,6 +279,8 @@ class SegmentMaker(makertools.SegmentMaker):
         '_final_barline',
         '_final_markup',
         '_final_markup_extra_offset',
+        '_ignore_unpitched_notes',
+        '_ignore_unregistered_pitches',
         '_label_clock_time',
         '_label_stage_numbers',
         '_measures_per_stage',
@@ -323,8 +291,10 @@ class SegmentMaker(makertools.SegmentMaker):
         '_score',
         '_score_package',
         '_score_template',
+        '_skips_instead_of_rests',
         '_spacing_map',
         '_spacing_specifier',
+        '_stage_label_base_string',
         '_stages',
         '_tempo_specifier',
         '_time_signatures',
@@ -357,16 +327,20 @@ class SegmentMaker(makertools.SegmentMaker):
         final_barline=None,
         final_markup=None,
         final_markup_extra_offset=None,
+        ignore_unpitched_notes=None,
+        ignore_unregistered_pitches=None,
         label_clock_time=None,
-        label_stage_numbers=None,
+        label_stages=None,
         measures_per_stage=None,
         print_segment_duration=None,
         print_timings=None,
         rehearsal_letter=None,
         score_package=None,
         score_template=None,
+        skips_instead_of_rests=None,
         spacing_map=None,
         spacing_specifier=None,
+        stage_label_base_string=None,
         tempo_specifier=None,
         time_signatures=None,
         transpose_score=None,
@@ -377,17 +351,25 @@ class SegmentMaker(makertools.SegmentMaker):
         self._cached_leaves_with_rests = None
         self._cached_leaves_without_rests = None
         self._fermata_start_offsets = []
+        if final_barline is not None:
+            assert isinstance(final_barline, str), repr(final_barline)
         self._final_barline = final_barline
         if final_markup is not None:
-            assert isinstance(final_markup, markuptools.Markup)
+            assert isinstance(final_markup, abjad.markuptools.Markup)
         self._final_markup = final_markup
         if final_markup_extra_offset is not None:
             assert isinstance(final_markup_extra_offset, tuple)
         self._final_markup_extra_offset = final_markup_extra_offset
+        if ignore_unpitched_notes is not None:
+            ignore_unpitched_notes = bool(ignore_unpitched_notes)
+        self._ignore_unpitched_notes = ignore_unpitched_notes
+        if ignore_unregistered_pitches is not None:
+            ignore_unregistered_pitches = bool(ignore_unregistered_pitches)
+        self._ignore_unregistered_pitches = ignore_unregistered_pitches
         assert isinstance(label_clock_time, (bool, type(None)))
         self._label_clock_time = label_clock_time
-        assert isinstance(label_stage_numbers, (bool, type(None)))
-        self._label_stage_numbers = label_stage_numbers
+        assert isinstance(label_stages, (bool, type(None)))
+        self._label_stage_numbers = label_stages
         self._measures_per_stage = measures_per_stage
         self._print_segment_duration = print_segment_duration
         self._print_timings = print_timings
@@ -398,10 +380,16 @@ class SegmentMaker(makertools.SegmentMaker):
         if score_template is not None:
             assert isinstance(score_template, baca.tools.ScoreTemplate)
         self._score_template = score_template
+        if skips_instead_of_rests is not None:
+            skips_instead_of_rests = bool(skips_instead_of_rests)
+        self._skips_instead_of_rests = skips_instead_of_rests
         self._spacing_map = spacing_map
         if spacing_specifier is not None:
             assert isinstance(spacing_specifier, baca.tools.SpacingSpecifier)
         self._spacing_specifier = spacing_specifier
+        if stage_label_base_string is not None:
+            assert isinstance(stage_label_base_string, str)
+        self._stage_label_base_string = stage_label_base_string
         self._tempo_specifier = tempo_specifier
         if transpose_score is not None:
             transpose_score = bool(transpose_score)
@@ -421,9 +409,9 @@ class SegmentMaker(makertools.SegmentMaker):
         Returns LilyPond file and segment metadata.
         '''
         self._segment_metadata = segment_metadata or \
-            datastructuretools.TypedOrderedDict()
+            abjad.datastructuretools.TypedOrderedDict()
         self._previous_segment_metadata = previous_segment_metadata or \
-            datastructuretools.TypedOrderedDict()
+            abjad.datastructuretools.TypedOrderedDict()
         self._make_score()
         self._remove_score_template_start_instruments()
         self._remove_score_template_start_clefs()
@@ -432,6 +420,7 @@ class SegmentMaker(makertools.SegmentMaker):
         self._label_stage_numbers_()
         self._interpret_rhythm_specifiers()
         #self._hide_fermata_measure_staff_lines()
+        self._extend_beams()
         self._interpret_scoped_specifiers()
         self._shorten_long_repeat_ties()
         self._attach_first_segment_default_instruments()
@@ -446,10 +435,12 @@ class SegmentMaker(makertools.SegmentMaker):
         self._attach_rehearsal_mark()
         self._add_final_barline()
         self._add_final_markup()
+        self._color_unregistered_pitches()
+        self._color_unpitched_notes()
         self._check_well_formedness()
         self._update_segment_metadata()
         self._print_segment_duration_()
-        return self.lilypond_file, self._segment_metadata
+        return self._lilypond_file, self._segment_metadata
 
     ### PRIVATE PROPERTIES ###
 
@@ -460,12 +451,11 @@ class SegmentMaker(makertools.SegmentMaker):
     ### PRIVATE METHODS ###
 
     def _add_final_barline(self):
-        if isinstance(self.final_barline, str):
+        abbreviation = '|'
+        if self._is_last_segment():
+            abbreviation = '|.'
+        if self.final_barline:
             abbreviation = self.final_barline
-        else:
-            abbreviation = '|'
-            if self._is_last_segment():
-                abbreviation = '|.'
         self._score.add_final_bar_line(
             abbreviation=abbreviation, 
             to_each_voice=True,
@@ -480,42 +470,42 @@ class SegmentMaker(makertools.SegmentMaker):
             )
 
     def _apply_first_and_last_ties(self, voice):
-        dummy_tie = spannertools.Tie()
-        for current_leaf in iterate(voice).by_leaf():
+        dummy_tie = abjad.spannertools.Tie()
+        for current_leaf in abjad.iterate(voice).by_leaf():
             if not dummy_tie._attachment_test(current_leaf):
                 continue
-            if inspect_(current_leaf).has_indicator('tie to me'):
-                previous_leaf = inspect_(current_leaf).get_leaf(-1)
+            if abjad.inspect_(current_leaf).has_indicator('tie to me'):
+                previous_leaf = abjad.inspect_(current_leaf).get_leaf(-1)
                 if dummy_tie._attachment_test(previous_leaf):
-                    previous_logical_tie = inspect_(previous_leaf).get_logical_tie()
+                    previous_logical_tie = abjad.inspect_(previous_leaf).get_logical_tie()
                     if current_leaf not in previous_logical_tie:
-                        current_logical_tie = inspect_(current_leaf).get_logical_tie()
+                        current_logical_tie = abjad.inspect_(current_leaf).get_logical_tie()
                         leaves = previous_logical_tie + current_logical_tie
-                        detach(spannertools.Tie, previous_leaf)
-                        detach(spannertools.Tie, current_leaf)
-                        inspector = inspect_(current_leaf)
+                        abjad.detach(abjad.spannertools.Tie, previous_leaf)
+                        abjad.detach(abjad.spannertools.Tie, current_leaf)
+                        inspector = abjad.inspect_(current_leaf)
                         use_messiaen_style_ties = inspector.has_indicator(
                             'use messiaen style ties')
-                        tie = spannertools.Tie(
+                        tie = abjad.spannertools.Tie(
                             use_messiaen_style_ties=use_messiaen_style_ties)
-                        attach(tie, leaves)
-                detach('tie to me', current_leaf)
-            if inspect_(current_leaf).has_indicator('tie from me'):
-                next_leaf = inspect_(current_leaf).get_leaf(1)
-                if spannertools.Tie._attachment_test(next_leaf):
-                    current_logical_tie = inspect_(current_leaf).get_logical_tie()
+                        abjad.attach(tie, leaves)
+                abjad.detach('tie to me', current_leaf)
+            if abjad.inspect_(current_leaf).has_indicator('tie from me'):
+                next_leaf = abjad.inspect_(current_leaf).get_leaf(1)
+                if abjad.spannertools.Tie._attachment_test(next_leaf):
+                    current_logical_tie = abjad.inspect_(current_leaf).get_logical_tie()
                     if next_leaf not in current_logical_tie:
-                        next_logical_tie = inspect_(next_leaf).get_logical_tie()
+                        next_logical_tie = abjad.inspect_(next_leaf).get_logical_tie()
                         leaves = current_logical_tie + next_logical_tie
-                        detach(spannertools.Tie, current_leaf)
-                        detach(spannertools.Tie, next_leaf)
-                        inspector = inspect_(current_leaf)
+                        abjad.detach(abjad.spannertools.Tie, current_leaf)
+                        abjad.detach(abjad.spannertools.Tie, next_leaf)
+                        inspector = abjad.inspect_(current_leaf)
                         use_messiaen_style_ties = inspector.has_indicator(
                             'use messiaen style ties')
-                        tie = spannertools.Tie(
+                        tie = abjad.spannertools.Tie(
                             use_messiaen_style_ties=use_messiaen_style_ties)
-                        attach(tie, leaves)
-                detach('tie from me', current_leaf)
+                        abjad.attach(tie, leaves)
+                abjad.detach('tie from me', current_leaf)
 
     def _apply_previous_segment_end_settings(self):
         if self._is_first_segment():
@@ -534,13 +524,13 @@ class SegmentMaker(makertools.SegmentMaker):
             message = message.format(self._get_segment_identifier())
             print(message)
             return
-        for context in iterate(self._score).by_class(scoretools.Context):
+        for context in abjad.iterate(self._score).by_class(abjad.scoretools.Context):
             previous_instrument_name = previous_instruments.get(context.name)
             if not previous_instrument_name:
                 continue
-            first_leaf = inspect_(context).get_leaf(0)
-            prototype = instrumenttools.Instrument
-            instrument = inspect_(first_leaf).get_effective(prototype)
+            first_leaf = abjad.inspect_(context).get_leaf(0)
+            prototype = abjad.instrumenttools.Instrument
+            instrument = abjad.inspect_(first_leaf).get_effective(prototype)
             if instrument is not None:
                 continue
             previous_instrument = self._get_instrument_by_name(
@@ -551,9 +541,9 @@ class SegmentMaker(makertools.SegmentMaker):
                 message = 'can not previous instrument for {}.'
                 message = message.format(context.name)
                 raise Exception(message)
-            copied_previous_instrument = new(previous_instrument)
+            copied_previous_instrument = abjad.new(previous_instrument)
             copied_previous_instrument._default_scope = context.context_name
-            attach(copied_previous_instrument, context)
+            abjad.attach(copied_previous_instrument, context)
         key = 'end_clefs_by_staff'
         previous_clefs = self._previous_segment_metadata.get(key)
         if not previous_clefs:
@@ -561,17 +551,17 @@ class SegmentMaker(makertools.SegmentMaker):
             message = message.format(self._get_segment_identifier())
             print(message)
             return
-        for staff in iterate(self._score).by_class(scoretools.Staff):
+        for staff in abjad.iterate(self._score).by_class(abjad.Staff):
             previous_clef_name = previous_clefs.get(staff.name)
             if not previous_clef_name:
                 continue
-            first_leaf = inspect_(staff).get_leaf(0)
-            prototype = indicatortools.Clef
-            clef = inspect_(first_leaf).get_effective(prototype)
+            first_leaf = abjad.inspect_(staff).get_leaf(0)
+            prototype = abjad.indicatortools.Clef
+            clef = abjad.inspect_(first_leaf).get_effective(prototype)
             if clef is not None:
                 continue
-            clef = indicatortools.Clef(previous_clef_name)
-            attach(clef, staff)
+            clef = abjad.indicatortools.Clef(previous_clef_name)
+            abjad.attach(clef, staff)
 
     def _apply_spacing_specifier(self):
         start_time = time.time()
@@ -595,10 +585,10 @@ class SegmentMaker(makertools.SegmentMaker):
                 specifier(selection, timespan)
             else:
                 specifier(selection)
-        elif isinstance(specifier, spannertools.Spanner):
-            attach(copy.copy(specifier), selection)
+        elif isinstance(specifier, abjad.spannertools.Spanner):
+            abjad.attach(copy.copy(specifier), selection)
         else:
-            attach(specifier, selection[0])
+            abjad.attach(specifier, selection[0])
 
     def _assert_valid_stage_number(self, stage_number):
         if not 1 <= stage_number <= self.stage_count:
@@ -611,10 +601,10 @@ class SegmentMaker(makertools.SegmentMaker):
             return
         context = self._score['Time Signature Context Multimeasure Rests']
         directive_prototype = (
-            indicatortools.Fermata,
-            indicatortools.BreathMark,
+            abjad.indicatortools.Fermata,
+            abjad.indicatortools.BreathMark,
             )
-        rest_prototype = scoretools.MultimeasureRest
+        rest_prototype = abjad.MultimeasureRest
         for stage_number, directive in self.tempo_specifier:
             if not isinstance(directive, directive_prototype):
                 continue
@@ -622,11 +612,12 @@ class SegmentMaker(makertools.SegmentMaker):
             result = self._stage_number_to_measure_indices(stage_number)
             start_measure_index, stop_measure_index = result
             start_measure = context[start_measure_index]
-            assert isinstance(start_measure, scoretools.Measure), start_measure
+            assert isinstance(start_measure, abjad.Measure), repr(
+                start_measure)
             start_skip = start_measure[0]
             assert isinstance(start_skip, rest_prototype), start_skip
             fermata_y_offset = None
-            if isinstance(directive, indicatortools.Fermata):
+            if isinstance(directive, abjad.indicatortools.Fermata):
                 if directive.command == 'shortfermata':
                     string = 'scripts.ushortfermata'
                     fermata_y_offset = -7
@@ -643,18 +634,18 @@ class SegmentMaker(makertools.SegmentMaker):
                     message = 'unknown fermata command: {!r}.'
                     message = message.format(directive.command)
                     raise Exception(message)
-                directive = markuptools.Markup.musicglyph(string)
+                directive = abjad.markuptools.Markup.musicglyph(string)
             else:
-                directive = new(directive)
-            attach(directive, start_skip)
+                directive = abjad.new(directive)
+            abjad.attach(directive, start_skip)
             if fermata_y_offset is not None:
                 grob_proxy = override(start_skip).multi_measure_rest_text
                 grob_proxy.extra_offset = (0, fermata_y_offset)
             proxy = override(start_skip)
             proxy.score.multi_measure_rest.transparent = True
             override(start_skip).score.time_signature.stencil = False
-            attach('fermata measure', start_skip)
-            start_offset = inspect_(start_skip).get_timespan().start_offset
+            abjad.attach('fermata measure', start_skip)
+            start_offset = abjad.inspect_(start_skip).get_timespan().start_offset
             self._fermata_start_offsets.append(start_offset)
 
     def _attach_first_segment_default_clefs(self):
@@ -662,21 +653,21 @@ class SegmentMaker(makertools.SegmentMaker):
             return
         cached_clefs = self._cached_score_template_start_clefs
         previous_clefs = self._previous_segment_metadata.get(
-            'end_clefs_by_staff', datastructuretools.TypedOrderedDict())
-        prototype = indicatortools.Clef
-        for staff in iterate(self._score).by_class(scoretools.Staff):
-            if inspect_(staff).has_indicator(prototype):
+            'end_clefs_by_staff', abjad.datastructuretools.TypedOrderedDict())
+        prototype = abjad.indicatortools.Clef
+        for staff in abjad.iterate(self._score).by_class(abjad.Staff):
+            if abjad.inspect_(staff).has_indicator(prototype):
                 continue
-            first_leaf = inspect_(staff).get_leaf(0)
+            first_leaf = abjad.inspect_(staff).get_leaf(0)
             if (first_leaf is None or
-                not inspect_(first_leaf).has_indicator(prototype)):
+                not abjad.inspect_(first_leaf).has_indicator(prototype)):
                 clef_name = previous_clefs.get(staff.name)
                 if clef_name is None:
                     clef_name = cached_clefs.get(staff.name)
                 # TODO: remove if-clause
                 if clef_name is not None:
-                    clef = indicatortools.Clef(clef_name)
-                    attach(clef, staff)
+                    clef = abjad.indicatortools.Clef(clef_name)
+                    abjad.attach(clef, staff)
 
     def _attach_first_segment_default_instruments(self):
         if not self._is_first_segment():
@@ -686,21 +677,21 @@ class SegmentMaker(makertools.SegmentMaker):
         cached_instruments = self._cached_score_template_start_instruments
         previous_instruments = self._previous_segment_metadata.get(
             'end_instruments_by_context',
-            datastructuretools.TypedOrderedDict(),
+            abjad.datastructuretools.TypedOrderedDict(),
             )
-        prototype = instrumenttools.Instrument
+        prototype = abjad.instrumenttools.Instrument
         contexts_with_instrument_names = self._contexts_with_instrument_names
-        for context in iterate(self._score).by_class(scoretools.Context):
+        for context in abjad.iterate(self._score).by_class(abjad.scoretools.Context):
             if context.name not in contexts_with_instrument_names:
                 continue
-            if inspect_(context).has_indicator(prototype):
+            if abjad.inspect_(context).has_indicator(prototype):
                 continue
-            first_leaf = inspect_(context).get_leaf(0)
+            first_leaf = abjad.inspect_(context).get_leaf(0)
             if (first_leaf is not None and 
-                inspect_(first_leaf).has_indicator(prototype)):
+                abjad.inspect_(first_leaf).has_indicator(prototype)):
                 continue
             if (first_leaf is None or
-                not inspect_(first_leaf).has_indicator(prototype)):
+                not abjad.inspect_(first_leaf).has_indicator(prototype)):
                 instrument_name = previous_instruments.get(context.name)
                 if instrument_name is None:
                     instrument_name = cached_instruments.get(context.name)
@@ -708,7 +699,7 @@ class SegmentMaker(makertools.SegmentMaker):
                     instrument_name]
                 instrument = copy.deepcopy(instrument)
                 instrument._default_scope = context.context_name
-                attach(instrument, context)
+                abjad.attach(instrument, context)
 
     def _attach_rehearsal_mark(self):
         if self.rehearsal_letter == '':
@@ -723,44 +714,83 @@ class SegmentMaker(makertools.SegmentMaker):
             letter_number = ord(rehearsal_letter) - ord('A') + 1
         if letter_number == 0:
             return
-        rehearsal_mark = indicatortools.RehearsalMark(number=letter_number)
+        rehearsal_mark = abjad.indicatortools.RehearsalMark(
+            number=letter_number
+            )
         voice = self._score['Time Signature Context Skips']
-        first_leaf = inspect_(voice).get_leaf(0)
-        attach(rehearsal_mark, first_leaf)
+        first_leaf = abjad.inspect_(voice).get_leaf(0)
+        abjad.attach(rehearsal_mark, first_leaf)
 
     def _attach_tempo_indicators(self):
         if not self.tempo_specifier:
             return
         context = self._score['Time Signature Context Skips']
         # TODO: adjust TempoSpanner to make this possible:
-        #attach(spannertools.TempoSpanner(), context)
-        skips = list(iterate(context).by_class(scoretools.Leaf))
-        left_broken_text = markuptools.Markup().null()
+        #abjad.attach(abjad.spannertools.TempoSpanner(), context)
+        skips = list(abjad.iterate(context).by_leaf())
+        left_broken_text = abjad.markuptools.Markup().null()
         left_broken_text._direction = None
-        tempo_spanner = spannertools.TempoSpanner(
+        tempo_spanner = abjad.spannertools.TempoSpanner(
             left_broken_padding=0,
             left_broken_text=left_broken_text,
             start_with_parenthesized_tempo=False,
             )
-        attach(tempo_spanner, skips)
+        abjad.attach(tempo_spanner, skips)
         for stage_number, directive in self.tempo_specifier:
             self._assert_valid_stage_number(stage_number)
             result = self._stage_number_to_measure_indices(stage_number)
             start_measure_index, stop_measure_index = result
             start_measure = context[start_measure_index]
-            assert isinstance(start_measure, scoretools.Measure), start_measure
+            assert isinstance(start_measure, abjad.Measure), repr(
+                start_measure)
             start_skip = start_measure[0]
-            prototype = (scoretools.Skip, scoretools.MultimeasureRest)
+            prototype = (abjad.Skip, 
+                abjad.MultimeasureRest)
             assert isinstance(start_skip, prototype), start_skip
             # TODO: adjust TempoSpanner to make measure attachment work
-            attach(directive, start_skip, is_annotation=True)
+            abjad.attach(directive, start_skip, is_annotation=True)
 
     def _check_well_formedness(self):
-        score_block = self.lilypond_file['score']
+        import baca
+        score_block = self._lilypond_file['score']
         score = score_block['Score']
-        if not inspect_(score).is_well_formed():
-            string = inspect_(score).tabulate_well_formedness_violations()
+        if not abjad.inspect_(score).is_well_formed():
+            inspector = abjad.inspect_(score)
+            string = inspector.tabulate_well_formedness_violations()
             raise Exception(string)
+        manager = baca.tools.WellformednessManager()
+        if not manager.is_well_formed(score):
+            string = manager.tabulate_well_formedness_violations(score)
+            raise Exception(string)
+
+    def _color_unpitched_notes(self):
+        if self.ignore_unpitched_notes:
+            return
+        color = 'blue'
+        agent = abjad.iterate(self._score)
+        for note in agent.by_leaf(prototype=abjad.Note, with_grace_notes=True):
+            if abjad.inspect_(note).has_indicator('not yet pitched'):
+                abjad.override(note).beam.color = color
+                abjad.override(note).dots.color = color
+                abjad.override(note).flag.color = color
+                abjad.override(note).note_head.color = color
+                abjad.override(note).stem.color = color
+
+    def _color_unregistered_pitches(self):
+        if self.ignore_unregistered_pitches:
+            return
+        color = 'magenta'
+        prototype = (abjad.Note, abjad.Chord)
+        score = self._score
+        agent = abjad.iterate(score)
+        for note in agent.by_leaf(prototype, with_grace_notes=True):
+            if abjad.inspect_(note).has_indicator('not yet registered'):
+                abjad.override(note).accidental.color = color
+                abjad.override(note).beam.color = color
+                abjad.override(note).dots.color = color
+                abjad.override(note).flag.color = color
+                abjad.override(note).note_head.color = color
+                abjad.override(note).stem.color = color
 
     def _compound_scope_to_logical_ties(
         self, 
@@ -773,7 +803,7 @@ class SegmentMaker(makertools.SegmentMaker):
             result = self._get_stage_numbers(scope.stages)
             start_stage, stop_stage = result
             offsets = self._get_offsets(start_stage, stop_stage)
-            timespan = timespantools.Timespan(*offsets)
+            timespan = abjad.timespantools.Timespan(*offsets)
             timespan_map.append((scope.voice_name, timespan))
             timespans.append(timespan)
         compound_scope._timespan_map = timespan_map
@@ -782,17 +812,17 @@ class SegmentMaker(makertools.SegmentMaker):
         leaves = self._get_cached_leaves(include_rests=include_rests)
         for note in leaves:
             if note in compound_scope:
-                logical_tie = inspect_(note).get_logical_tie()
+                logical_tie = abjad.inspect_(note).get_logical_tie()
                 if logical_tie.head is note:
                     logical_ties.append(logical_tie)
         start_offset = min(_.start_offset for _ in timespans)
         stop_offset = max(_.stop_offset for _ in timespans)
-        timespan = timespantools.Timespan(start_offset, stop_offset)
+        timespan = abjad.timespantools.Timespan(start_offset, stop_offset)
         if not logical_ties:
             message = '{!r} selects no logical ties.'
             message = message.format(scoped_specifier)
             raise Exception(message)
-        return select(logical_ties), timespan
+        return abjad.select(logical_ties), timespan
 
     def _compound_scope_to_topmost_components(self, compound_scope):
         r'''Use for label expressions.
@@ -802,18 +832,18 @@ class SegmentMaker(makertools.SegmentMaker):
             result = self._get_stage_numbers(scope.stages)
             start_stage, stop_stage = result
             offsets = self._get_offsets(start_stage, stop_stage)
-            timespan = timespantools.Timespan(*offsets)
+            timespan = abjad.timespantools.Timespan(*offsets)
             timespan_map.append((scope.voice_name, timespan))
             timespans.append(timespan)
         compound_scope._timespan_map = timespan_map
         voice_names = [_[0] for _ in timespan_map]
         topmost_components = []
-        for voice in iterate(self._score).by_class(scoretools.Voice):
+        for voice in abjad.iterate(self._score).by_class(abjad.Voice):
             if 'Context' in voice.__class__.__name__:
                 continue
-            result = iterate(voice).by_topmost_logical_ties_and_components()
+            result = abjad.iterate(voice).by_topmost_logical_ties_and_components()
             for expr in result:
-                if isinstance(expr, selectiontools.LogicalTie):
+                if isinstance(expr, abjad.selectiontools.LogicalTie):
                     component = expr.head
                 else:
                     component = expr
@@ -821,8 +851,8 @@ class SegmentMaker(makertools.SegmentMaker):
                     topmost_components.append(expr)
         start_offset = min(_.start_offset for _ in timespans)
         stop_offset = max(_.stop_offset for _ in timespans)
-        timespan = timespantools.Timespan(start_offset, stop_offset)
-        return select(topmost_components), timespan
+        timespan = abjad.timespantools.Timespan(start_offset, stop_offset)
+        return abjad.select(topmost_components), timespan
 
     def _contributions_do_not_overlap(self, contributions):
         previous_stop_offset = 0
@@ -854,7 +884,7 @@ class SegmentMaker(makertools.SegmentMaker):
             leaves = leaves[start_index:stop_index]
             if specifier_wrapper.with_previous_leaf:
                 first_leaf = leaves[0]
-                inspector = inspect_(first_leaf)
+                inspector = abjad.inspect_(first_leaf)
                 previous_leaf = inspector.get_leaf(-1)
                 if previous_leaf is None:
                     message = 'previous leaf is none: {!r}.'
@@ -863,21 +893,22 @@ class SegmentMaker(makertools.SegmentMaker):
                 leaves.insert(0, previous_leaf)
             if specifier_wrapper.with_next_leaf:
                 last_leaf = leaves[-1]
-                inspector = inspect_(last_leaf)
+                inspector = abjad.inspect_(last_leaf)
                 next_leaf = inspector.get_leaf(1)
                 if next_leaf is None:
                     message = 'next leaf is none: {!r}.'
                     message = message.format(scoped_specifier)
                     raise Exception(message)
                 leaves.append(next_leaf)
-            selection = select(leaves)
+            selection = abjad.select(leaves)
         else:
             result = self._compound_scope_to_logical_ties(
                 scoped_specifier,
                 compound_scope,
                 )
             selection = result[0]
-        assert isinstance(selection, selectiontools.Selection), repr(selection)
+        assert isinstance(selection, abjad.selectiontools.Selection), repr(
+            selection)
         if not selection:
             message = '{!r} selects nothing.'
             message = message.format(scoped_specifier)
@@ -887,37 +918,98 @@ class SegmentMaker(makertools.SegmentMaker):
             timespan = self._selection_to_timespan(selection)
         return selection, timespan
 
+    @staticmethod
+    def _extend_beam(leaf):
+        beam = abjad.inspect_(leaf).get_spanner(abjad.Beam)
+        if beam is None:
+            return
+        all_leaves = []
+        all_leaves.extend(beam.components)
+        durations = []
+        if hasattr(beam, 'durations'):
+            durations.extend(beam.durations)
+        else:
+            duration = abjad.select(beam.components).get_duration()
+            durations.append(duration)
+        intervening_skips = []
+        index = 1
+        while True:
+            next_leaf = abjad.inspect_(leaf).get_leaf(index)
+            if next_leaf is None:
+                return
+            index += 1
+            if isinstance(next_leaf, abjad.Skip):
+                intervening_skips.append(next_leaf)
+                continue
+            break
+        abjad.detach(abjad.Beam, leaf)
+        all_leaves.extend(intervening_skips)
+        if intervening_skips:
+            intervening_skips = abjad.select(intervening_skips)
+            duration = intervening_skips.get_duration()
+            durations.append(duration)
+        beam = abjad.inspect_(next_leaf).get_spanner(abjad.Beam)
+        if beam is None:
+            all_leaves.append(next_leaf)
+            duration = abjad.inspect_(next_leaf).get_duration()
+            durations.append(duration)
+        else:
+            all_leaves.extend(beam.components)
+            if hasattr(beam, 'durations'):
+                durations.extend(beam.durations)
+            else:
+                duration = abjad.select(beam.components).get_duration()
+                durations.append(duration)
+        abjad.detach(abjad.Beam, next_leaf)
+        all_leaves = abjad.select(all_leaves)
+        assert all_leaves.get_duration() == sum(durations)
+        beam = abjad.spannertools.DuratedComplexBeam(
+            beam_rests=True,
+            durations=durations,
+            )
+        abjad.attach(beam, all_leaves)
+            
+    def _extend_beams(self):
+        score = self._score
+        leaves = []
+        for leaf in abjad.iterate(score).by_leaf():
+            if abjad.inspect_(leaf).get_indicator('extend beam'):
+                leaves.append(leaf)
+        for leaf in leaves:
+            self._extend_beam(leaf)
+        
     def _get_cached_leaves(self, include_rests=False):
         if include_rests:
             if self._cached_leaves_with_rests is None:
                 prototype = (
-                    scoretools.Note,
-                    scoretools.Rest,
-                    scoretools.Chord,
+                    abjad.Chord,
+                    abjad.Note,
+                    abjad.Rest,
+                    abjad.Skip,
                     )
-                leaves = list(iterate(self._score).by_timeline(prototype))
+                leaves = list(abjad.iterate(self._score).by_timeline(prototype))
                 self._cached_leaves_with_rests = leaves
             leaves = self._cached_leaves_with_rests
         else:
             if self._cached_leaves_without_rests is None:
                 prototype = (
-                    scoretools.Note,
-                    scoretools.Chord,
+                    abjad.Note,
+                    abjad.Chord,
                     )
-                leaves = list(iterate(self._score).by_timeline(prototype))
+                leaves = list(abjad.iterate(self._score).by_timeline(prototype))
                 self._cached_leaves_without_rests = leaves
             leaves = self._cached_leaves_without_rests
         return leaves
 
     def _get_end_clefs(self):
-        result = datastructuretools.TypedOrderedDict()
-        staves = iterate(self._score).by_class(scoretools.Staff)
+        result = abjad.datastructuretools.TypedOrderedDict()
+        staves = abjad.iterate(self._score).by_class(abjad.Staff)
         staves = [_ for _ in staves if _.is_semantic]
         staves.sort(key=lambda x: x.name)
-        prototype = indicatortools.Clef
+        prototype = abjad.indicatortools.Clef
         for staff in staves:
-            last_leaf = inspect_(staff).get_leaf(-1)
-            clef = inspect_(last_leaf).get_effective(prototype)
+            last_leaf = abjad.inspect_(staff).get_leaf(-1)
+            clef = abjad.inspect_(last_leaf).get_effective(prototype)
             if clef:
                 result[staff.name] = clef.name
             else:
@@ -925,16 +1017,16 @@ class SegmentMaker(makertools.SegmentMaker):
         return result
 
     def _get_end_instruments(self):
-        result = datastructuretools.TypedOrderedDict()
-        contexts = iterate(self._score).by_class(scoretools.Context)
+        result = abjad.datastructuretools.TypedOrderedDict()
+        contexts = abjad.iterate(self._score).by_class(abjad.scoretools.Context)
         contexts = list(contexts)
         contexts.sort(key=lambda x: x.name)
-        prototype = instrumenttools.Instrument
+        prototype = abjad.instrumenttools.Instrument
         for context in contexts:
-            if not inspect_(context).has_indicator(prototype):
+            if not abjad.inspect_(context).has_indicator(prototype):
                 continue
-            last_leaf = inspect_(context).get_leaf(-1)
-            instrument = inspect_(last_leaf).get_effective(prototype)
+            last_leaf = abjad.inspect_(context).get_leaf(-1)
+            instrument = abjad.inspect_(last_leaf).get_effective(prototype)
             if instrument is None:
                 continue
             result[context.name] = instrument.instrument_name
@@ -951,9 +1043,9 @@ class SegmentMaker(makertools.SegmentMaker):
 
     def _get_end_tempo_name(self):
         context = self._score['Time Signature Context Skips']
-        last_leaf = inspect_(context).get_leaf(-1)
-        prototype = indicatortools.Tempo
-        effective_tempo = inspect_(last_leaf).get_effective(prototype)
+        last_leaf = abjad.inspect_(context).get_leaf(-1)
+        prototype = abjad.indicatortools.Tempo
+        effective_tempo = abjad.inspect_(last_leaf).get_effective(prototype)
         if not effective_tempo:
             return
         if self.score_package is None:
@@ -971,8 +1063,8 @@ class SegmentMaker(makertools.SegmentMaker):
     def _get_end_time_signature(self):
         context = self._score['Time Signature Context Skips']
         last_measure = context[-1]
-        prototype = indicatortools.TimeSignature
-        time_signature = inspect_(last_measure).get_effective(prototype)
+        prototype = abjad.indicatortools.TimeSignature
+        time_signature = abjad.inspect_(last_measure).get_effective(prototype)
         if not time_signature:
             return
         string = str(time_signature)
@@ -992,13 +1084,13 @@ class SegmentMaker(makertools.SegmentMaker):
         result = self._stage_number_to_measure_indices(start_stage)
         start_measure_index, stop_measure_index = result
         start_measure = context[start_measure_index]
-        assert isinstance(start_measure, scoretools.Measure), start_measure
-        start_offset = inspect_(start_measure).get_timespan().start_offset
+        assert isinstance(start_measure, abjad.Measure), start_measure
+        start_offset = abjad.inspect_(start_measure).get_timespan().start_offset
         result = self._stage_number_to_measure_indices(stop_stage)
         start_measure_index, stop_measure_index = result
         stop_measure = context[stop_measure_index]
-        assert isinstance(stop_measure, scoretools.Measure), stop_measure
-        stop_offset = inspect_(stop_measure).get_timespan().stop_offset
+        assert isinstance(stop_measure, abjad.Measure), stop_measure
+        stop_offset = abjad.inspect_(stop_measure).get_timespan().stop_offset
         return start_offset, stop_offset
 
     def _get_previous_instrument(self, staff_name):
@@ -1012,6 +1104,8 @@ class SegmentMaker(makertools.SegmentMaker):
         return instrument
 
     def _get_rehearsal_letter(self):
+        if self.rehearsal_letter:
+            return self.rehearsal_letter
         segment_number = self._get_segment_number()
         if segment_number == 1:
             return ''
@@ -1080,10 +1174,9 @@ class SegmentMaker(makertools.SegmentMaker):
         return includes
 
     def _get_time_signatures(self, start_stage=None, stop_stage=None):
-        import baca
         counts = len(self.time_signatures), sum(self.measures_per_stage)
         assert counts[0] == counts[1], counts
-        stages = sequencetools.partition_sequence_by_counts(
+        stages = abjad.sequencetools.partition_sequence_by_counts(
             self.time_signatures,
             self.measures_per_stage,
             )
@@ -1093,7 +1186,7 @@ class SegmentMaker(makertools.SegmentMaker):
         else:
             stop_index = stop_stage
             stages = stages[start_index:stop_index]
-            time_signatures = sequencetools.flatten_sequence(stages)
+            time_signatures = abjad.sequencetools.flatten_sequence(stages)
         start_offset, stop_offset = self._get_offsets(start_stage, stop_stage)
         contribution = baca.tools.Contribution(
             payload=time_signatures,
@@ -1107,18 +1200,18 @@ class SegmentMaker(makertools.SegmentMaker):
             self._cached_leaves_without_rests = None
 
     def _hide_fermata_measure_staff_lines(self):
-        for leaf in iterate(self._score).by_leaf():
-            start_offset = inspect_(leaf).get_timespan().start_offset
+        for leaf in abjad.iterate(self._score).by_leaf():
+            start_offset = abjad.inspect_(leaf).get_timespan().start_offset
             if start_offset in self._fermata_start_offsets:
-                spanner = spannertools.HiddenStaffSpanner()
-                attach(spanner, leaf)
+                spanner = abjad.spannertools.HiddenStaffSpanner()
+                abjad.attach(spanner, leaf)
 
     def _initialize_time_signatures(self, time_signatures):
         time_signatures = time_signatures or ()
         time_signatures_ = list(time_signatures)
         time_signatures_ = []
         for time_signature in time_signatures:
-            time_signature = indicatortools.TimeSignature(time_signature)
+            time_signature = abjad.indicatortools.TimeSignature(time_signature)
             time_signatures_.append(time_signature)
         time_signatures_ = tuple(time_signatures_)
         if not time_signatures_:
@@ -1127,14 +1220,14 @@ class SegmentMaker(makertools.SegmentMaker):
 
     def _intercalate_rests(self, contributions):
         durations = [_.duration for _ in self.time_signatures]
-        start_offsets = mathtools.cumulative_sums(durations)
+        start_offsets = abjad.mathtools.cumulative_sums(durations)
         segment_duration = start_offsets[-1]
         start_offsets = start_offsets[:-1]
-        start_offsets = [durationtools.Offset(_) for _ in start_offsets]
+        start_offsets = [abjad.durationtools.Offset(_) for _ in start_offsets]
         assert len(start_offsets) == len(self.time_signatures)
         pairs = zip(start_offsets, self.time_signatures)
         result = []
-        previous_stop_offset = durationtools.Offset(0)
+        previous_stop_offset = abjad.durationtools.Offset(0)
         for contribution in contributions:
             if contribution.start_offset < previous_stop_offset:
                 raise Exception
@@ -1163,17 +1256,20 @@ class SegmentMaker(makertools.SegmentMaker):
         self._attach_tempo_indicators()
         self._attach_fermatas()
         self._make_spacing_regions()
-        for voice in iterate(self._score).by_class(scoretools.Voice):
+        for voice in abjad.iterate(self._score).by_class(abjad.Voice):
             self._interpret_rhythm_specifiers_for_voice(voice)
 
     def _interpret_rhythm_specifiers_for_voice(self, voice):
         assert not len(voice), repr(voice)
         rhythm_specifiers = self._get_rhythm_specifiers_for_voice(voice.name)
         if not rhythm_specifiers:
-            measures = self._make_rests()
+            if self.skips_instead_of_rests:
+                measures = self._make_skips()
+            else:
+                measures = self._make_rests()
             voice.extend(measures) 
             return
-        effective_staff = inspect_(voice).get_effective_staff()
+        effective_staff = abjad.inspect_(voice).get_effective_staff()
         effective_staff_name = effective_staff.context_name
         contributions = []
         for rhythm_specifier in rhythm_specifiers:
@@ -1243,27 +1339,27 @@ class SegmentMaker(makertools.SegmentMaker):
             return
         skip_context = self._score['Time Signature Context Skips']
         skips = []
-        for skip in iterate(skip_context).by_leaf(scoretools.Skip):
-            start_offset = inspect_(skip).get_timespan().start_offset
+        for skip in abjad.iterate(skip_context).by_leaf(abjad.Skip):
+            start_offset = abjad.inspect_(skip).get_timespan().start_offset
             if start_offset in self._fermata_start_offsets:
                 continue
             skips.append(skip)
-        skips = select(skips)
-        label(skips).with_start_offsets(clock_time=True, font_size=-2)
+        skips = abjad.select(skips)
+        abjad.label(skips).with_start_offsets(clock_time=True, font_size=-2)
 
     def _label_instrument_changes(self):
-        prototype = instrumenttools.Instrument
-        for staff in iterate(self._score).by_class(scoretools.Staff):
-            leaves = iterate(staff).by_class(scoretools.Leaf)
+        prototype = abjad.instrumenttools.Instrument
+        for staff in abjad.iterate(self._score).by_class(abjad.Staff):
+            leaves = abjad.iterate(staff).by_leaf()
             for leaf_index, leaf in enumerate(leaves):
-                instruments = inspect_(leaf).get_indicators(prototype)
+                instruments = abjad.inspect_(leaf).get_indicators(prototype)
                 if not instruments:
                     continue
                 assert len(instruments) == 1
                 current_instrument = instruments[0]
-                previous_leaf = inspect_(leaf).get_leaf(-1)
+                previous_leaf = abjad.inspect_(leaf).get_leaf(-1)
                 if previous_leaf is not None:
-                    result = inspect_(previous_leaf).get_effective(prototype)
+                    result = abjad.inspect_(previous_leaf).get_effective(prototype)
                     previous_instrument = result
                 elif (leaf_index == 0 and 
                     1 < self._get_segment_number()):
@@ -1274,41 +1370,47 @@ class SegmentMaker(makertools.SegmentMaker):
                 if previous_instrument != current_instrument:
                     markup = self._make_instrument_change_markup(
                         current_instrument)
-                    attach(markup, leaf)
+                    abjad.attach(markup, leaf)
 
     def _label_stage_numbers_(self):
-        if not self.label_stage_numbers:
+        if not self.label_stages:
             return
         context = self._score['Time Signature Context Skips']
         for stage_index in range(self.stage_count):
             stage_number = stage_index + 1
             result = self._stage_number_to_measure_indices(stage_number)
             start_measure_index, stop_measure_index = result
-            base = self._get_name() or self._get_rehearsal_letter()
-            string = '[{}.{}]'.format(base, stage_number)
-            markup = markuptools.Markup(string)
+            base = self.stage_label_base_string
+            base = base or self._get_name()
+            base = base or self._get_rehearsal_letter()
+            if base not in ('', None):
+                string = '[{}.{}]'.format(base, stage_number)
+            else:
+                string = '[{}]'.format(stage_number)
+            markup = abjad.markuptools.Markup(string)
             markup = markup.with_color('blue')
             markup = markup.fontsize(-3)
             start_measure = context[start_measure_index]
-            attach(markup, start_measure)
+            abjad.attach(markup, start_measure)
 
     def _make_instrument_change_markup(self, instrument):
         string = 'to {}'.format(instrument.instrument_name)
-        markup = markuptools.Markup(string, direction=Up)
+        markup = abjad.markuptools.Markup(string, direction=Up)
         markup = markup.box().override(('box-padding', 0.75))
         return markup
 
     def _make_intercalated_rests(self, start_offset, stop_offset, pairs):
         duration = stop_offset - start_offset
-        rest = scoretools.MultimeasureRest(durationtools.Duration(1))
-        multiplier = durationtools.Multiplier(duration)
-        attach(multiplier, rest)
-        selection = select(rest)
+        rest = abjad.MultimeasureRest(
+            abjad.durationtools.Duration(1))
+        multiplier = abjad.durationtools.Multiplier(duration)
+        abjad.attach(multiplier, rest)
+        selection = abjad.select(rest)
         return selection
 
     def _make_lilypond_file(self, is_doc_example=None):
         includes = self._get_stylesheet_includes(is_doc_example=is_doc_example)
-        lilypond_file = lilypondfiletools.make_basic_lilypond_file(
+        lilypond_file = abjad.lilypondfiletools.make_basic_lilypond_file(
             music=self._score,
             date_time_token=False,
             includes=includes,
@@ -1330,16 +1432,18 @@ class SegmentMaker(makertools.SegmentMaker):
         measures = []
         time_signatures = time_signatures or self.time_signatures
         for time_signature in time_signatures:
-            time_signature = indicatortools.TimeSignature(time_signature)
-            rest = scoretools.MultimeasureRest(durationtools.Duration(1))
-            multiplier = durationtools.Multiplier(time_signature.duration)
-            attach(multiplier, rest)
-            measure = scoretools.Measure(
+            time_signature = abjad.indicatortools.TimeSignature(time_signature)
+            rest = abjad.MultimeasureRest(
+                abjad.durationtools.Duration(1))
+            multiplier = abjad.durationtools.Multiplier(
+                time_signature.duration)
+            abjad.attach(multiplier, rest)
+            measure = abjad.Measure(
                 time_signature,
                 [rest],
                 )
             measures.append(measure)
-        measures = selectiontools.Selection(measures)
+        measures = abjad.selectiontools.Selection(measures)
         return measures
 
     def _make_music_for_time_signature_context(self):
@@ -1348,13 +1452,13 @@ class SegmentMaker(makertools.SegmentMaker):
         rhythm_specifiers = self._get_rhythm_specifiers_for_voice(voice_name)
         for rhythm_specifier in rhythm_specifiers:
             if rhythm_specifier.start_tempo is not None:
-                start_tempo = new(rhythm_specifier.start_tempo)
-                first_leaf = inspect_(context).get_leaf(0)
-                attach(start_tempo, first_leaf, scope=Score)
+                start_tempo = abjad.new(rhythm_specifier.start_tempo)
+                first_leaf = abjad.inspect_(context).get_leaf(0)
+                abjad.attach(start_tempo, first_leaf, scope=Score)
             if rhythm_specifier.stop_tempo is not None:
-                stop_tempo = new(rhythm_specifier.stop_tempo)
-                last_leaf = inspect_(context).get_leaf(-1)
-                attach(stop_tempo, last_leaf, scope=Score)
+                stop_tempo = abjad.new(rhythm_specifier.stop_tempo)
+                last_leaf = abjad.inspect_(context).get_leaf(-1)
+                abjad.attach(stop_tempo, last_leaf, scope=Score)
 
     def _make_music_for_voice_old(self, voice):
         assert not len(voice), repr(voice)
@@ -1365,7 +1469,7 @@ class SegmentMaker(makertools.SegmentMaker):
             measures = self._make_rests()
             voice.extend(measures) 
             return
-        effective_staff = inspect_(voice).get_effective_staff()
+        effective_staff = abjad.inspect_(voice).get_effective_staff()
         effective_staff_name = effective_staff.context_name
         next_stage = 1
         contributions = []
@@ -1401,11 +1505,11 @@ class SegmentMaker(makertools.SegmentMaker):
 
     def _make_rests(self, time_signatures=None):
         time_signatures = time_signatures or self.time_signatures
-        specifier = rhythmmakertools.DurationSpellingSpecifier(
+        specifier = abjad.rhythmmakertools.DurationSpellingSpecifier(
             spell_metrically='unassignable',
             )
-        mask = rhythmmakertools.silence_all(use_multimeasure_rests=True)
-        rhythm_maker = rhythmmakertools.NoteRhythmMaker(
+        mask = abjad.rhythmmakertools.silence_all(use_multimeasure_rests=True)
+        rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker(
             division_masks=[mask],
             )
         selections = rhythm_maker(time_signatures)
@@ -1415,31 +1519,38 @@ class SegmentMaker(makertools.SegmentMaker):
         score = self.score_template()
         first_bar_number = self._segment_metadata.get('first_bar_number')
         if first_bar_number is not None:
-            set_(score).current_bar_number = first_bar_number
+            abjad.set_(score).current_bar_number = first_bar_number
         self._score = score
+
+    def _make_skips(self, time_signatures=None):
+        time_signatures = time_signatures or self.time_signatures
+        rhythm_maker = abjad.rhythmmakertools.SkipRhythmMaker()
+        selections = rhythm_maker(time_signatures)
+        return selections
 
     def _make_skip_filled_measures(self, time_signatures=None):
         time_signatures = time_signatures or self.time_signatures
-        measures = scoretools.make_spacer_skip_measures(time_signatures)
+        measures = abjad.scoretools.make_spacer_skip_measures(time_signatures)
         return measures
-
+        
     def _make_spacing_regions(self):
         if not self.spacing_map:
             return
         context = self._score['Time Signature Context Skips']
-        skips = list(iterate(context).by_class(scoretools.Leaf))
+        skips = list(abjad.iterate(context).by_leaf())
         for stage_number, duration in self.spacing_map:
             self._assert_valid_stage_number(stage_number)
             result = self._stage_number_to_measure_indices(stage_number)
             start_measure_index, stop_measure_index = result
             start_measure = context[start_measure_index]
-            assert isinstance(start_measure, scoretools.Measure), start_measure
+            assert isinstance(start_measure, abjad.Measure), repr(
+                start_measure)
             start_skip = start_measure[0]
-            assert isinstance(start_skip, scoretools.Skip), start_skip
-            command = indicatortools.LilyPondCommand('newSpacingSection')
-            attach(command, start_skip)
-            moment = schemetools.SchemeMoment(duration)
-            set_(start_skip).score.proportional_notation_duration = moment
+            assert isinstance(start_skip, abjad.Skip), start_skip
+            command = abjad.indicatortools.LilyPondCommand('newSpacingSection')
+            abjad.attach(command, start_skip)
+            moment = abjad.schemetools.SchemeMoment(duration)
+            abjad.set_(start_skip).score.proportional_notation_duration = moment
 
     def _make_volta_containers(self):
         if not self.volta_specifier:
@@ -1447,7 +1558,7 @@ class SegmentMaker(makertools.SegmentMaker):
         context = self._score['Time Signature Context Skips']
         measures = context[:]
         for measure in measures:
-            assert isinstance(measure, scoretools.Measure), repr(measure)
+            assert isinstance(measure, abjad.Measure), repr(measure)
         for expression in self.volta_specifier:
             if isinstance(expression, baca.tools.MeasureExpression):
                 measure_start_number = expression.start_number
@@ -1469,31 +1580,32 @@ class SegmentMaker(makertools.SegmentMaker):
                 message = message.format(expression)
                 raise NotImplementedError(message)
             volta_measures = measures[measure_start_number:measure_stop_number]
-            container = scoretools.Container(volta_measures)
-            command = indicatortools.Repeat()
-            attach(command, container)
+            container = abjad.Container(volta_measures)
+            command = abjad.indicatortools.Repeat()
+            abjad.attach(command, container)
 
     def _move_instruments_from_notes_back_to_rests(self):
-        prototype = instrumenttools.Instrument
-        rest_prototype = (scoretools.Rest, scoretools.MultimeasureRest)
-        for leaf in iterate(self._score).by_class(scoretools.Leaf):
-            instruments = inspect_(leaf).get_indicators(prototype)
+        prototype = abjad.instrumenttools.Instrument
+        rest_prototype = (abjad.Rest, 
+            abjad.MultimeasureRest)
+        for leaf in abjad.iterate(self._score).by_leaf():
+            instruments = abjad.inspect_(leaf).get_indicators(prototype)
             if not instruments:
                 continue
             assert len(instruments) == 1
             instrument = instruments[0]
             current_leaf = leaf
-            previous_leaf = inspect_(current_leaf).get_leaf(-1)
+            previous_leaf = abjad.inspect_(current_leaf).get_leaf(-1)
             if not isinstance(previous_leaf, rest_prototype):
                 continue
             while True:
                 current_leaf = previous_leaf
-                previous_leaf = inspect_(current_leaf).get_leaf(-1)
+                previous_leaf = abjad.inspect_(current_leaf).get_leaf(-1)
                 if previous_leaf is None:
                     break
                 if not isinstance(previous_leaf, rest_prototype):
                     new_instrument = copy.deepcopy(instrument)
-                    attach(new_instrument, current_leaf)
+                    abjad.attach(new_instrument, current_leaf)
                     break
         
     def _populate_time_signature_context(self):
@@ -1509,13 +1621,13 @@ class SegmentMaker(makertools.SegmentMaker):
             return
         context = self._score['Time Signature Context Skips']
         current_tempo = None
-        leaves = iterate(context).by_class(scoretools.Leaf)
+        leaves = abjad.iterate(context).by_leaf()
         measure_summaries = []
         tempo_index = 0
         is_trending = False
         for i, leaf in enumerate(leaves):
-            duration = inspect_(leaf).get_duration()
-            tempi = inspect_(leaf).get_indicators(indicatortools.Tempo)
+            duration = abjad.inspect_(leaf).get_duration()
+            tempi = abjad.inspect_(leaf).get_indicators(abjad.indicatortools.Tempo)
             if tempi:
                 current_tempo = tempi[0]
                 for measure_summary in measure_summaries[tempo_index:]:
@@ -1523,9 +1635,9 @@ class SegmentMaker(makertools.SegmentMaker):
                     measure_summary[-1] = current_tempo
                 tempo_index = i
                 is_trending = False
-            if inspect_(leaf).has_indicator(Accelerando):
+            if abjad.inspect_(leaf).has_indicator(Accelerando):
                 is_trending = True
-            if inspect_(leaf).has_indicator(Ritardando):
+            if abjad.inspect_(leaf).has_indicator(Ritardando):
                 is_trending = True
             next_tempo = None
             measure_summary = [
@@ -1535,7 +1647,7 @@ class SegmentMaker(makertools.SegmentMaker):
                 next_tempo, 
                 ]
             measure_summaries.append(measure_summary)
-        total_duration = durationtools.Duration(0)
+        total_duration = abjad.durationtools.Duration(0)
         for measure_summary in measure_summaries:
             duration, current_tempo, is_trending, next_tempo = measure_summary
             if is_trending and current_tempo is not None:
@@ -1551,34 +1663,34 @@ class SegmentMaker(makertools.SegmentMaker):
             duration_ /= 1000
             total_duration += duration_
         total_duration = int(round(total_duration))
-        identifier = stringtools.pluralize('second', total_duration)
+        identifier = abjad.stringtools.pluralize('second', total_duration)
         message = 'segment duration {} {} ...'
         message = message.format(total_duration, identifier)
         print(message)
 
     def _remove_score_template_start_clefs(self):
-        dictionary = datastructuretools.TypedOrderedDict()
+        dictionary = abjad.datastructuretools.TypedOrderedDict()
         self._cached_score_template_start_clefs = dictionary
-        prototype = indicatortools.Clef
-        for context in iterate(self._score).by_class(scoretools.Context):
-            if not inspect_(context).has_indicator(prototype):
+        prototype = abjad.indicatortools.Clef
+        for context in abjad.iterate(self._score).by_class(abjad.scoretools.Context):
+            if not abjad.inspect_(context).has_indicator(prototype):
                 continue
-            clef = inspect_(context).get_indicator(prototype)
+            clef = abjad.inspect_(context).get_indicator(prototype)
             self._cached_score_template_start_clefs[context.name] = clef.name
-            detach(indicatortools.Clef, context)
+            abjad.detach(abjad.indicatortools.Clef, context)
 
     def _remove_score_template_start_instruments(self):
-        dictionary = datastructuretools.TypedOrderedDict()
+        dictionary = abjad.datastructuretools.TypedOrderedDict()
         self._cached_score_template_start_instruments = dictionary
-        for context in iterate(self._score).by_class(scoretools.Context):
-            prototype = instrumenttools.Instrument
-            if not inspect_(context).get_indicator(prototype):
+        for context in abjad.iterate(self._score).by_class(abjad.scoretools.Context):
+            prototype = abjad.instrumenttools.Instrument
+            if not abjad.inspect_(context).get_indicator(prototype):
                 continue
-            instrument = inspect_(context).get_indicator(prototype)
+            instrument = abjad.inspect_(context).get_indicator(prototype)
             instrument_name = instrument.instrument_name
             self._cached_score_template_start_instruments[context.name] = \
                 instrument_name
-            detach(instrumenttools.Instrument, context)
+            abjad.detach(abjad.instrumenttools.Instrument, context)
         
     def _scope_to_leaves(self, scope):
         if not isinstance(scope, baca.tools.SimpleScope):
@@ -1588,59 +1700,59 @@ class SegmentMaker(makertools.SegmentMaker):
         result = self._get_stage_numbers(scope.stages)
         start_stage, stop_stage = result
         offsets = self._get_offsets(start_stage, stop_stage)
-        stages_timespan = timespantools.Timespan(*offsets)
+        stages_timespan = abjad.timespantools.Timespan(*offsets)
         voice = self._score[scope.voice_name]
         leaves = []
-        for leaf in iterate(voice).by_leaf():
-            leaf_timespan = inspect_(leaf).get_timespan()
+        for leaf in abjad.iterate(voice).by_leaf():
+            leaf_timespan = abjad.inspect_(leaf).get_timespan()
             if leaf_timespan.starts_during_timespan(stages_timespan):
                 leaves.append(leaf)
             elif leaves:
                 break
-        return select(leaves )
+        return abjad.select(leaves )
 
     def _selection_to_timespan(self, selection):
-            if isinstance(selection[0], selectiontools.LogicalTie):
+            if isinstance(selection[0], abjad.selectiontools.LogicalTie):
                 first = selection[0].head
             else:
                 first = selection[0]
-            if isinstance(selection[-1], selectiontools.LogicalTie):
+            if isinstance(selection[-1], abjad.selectiontools.LogicalTie):
                 last = selection[-1][-1]
             else:
                 last = selection[-1]
-            start_offset = inspect_(first).get_timespan().start_offset
-            stop_offset = inspect_(last).get_timespan().stop_offset
-            timespan = timespantools.Timespan(
+            start_offset = abjad.inspect_(first).get_timespan().start_offset
+            stop_offset = abjad.inspect_(last).get_timespan().stop_offset
+            timespan = abjad.timespantools.Timespan(
                 start_offset=start_offset,
                 stop_offset=stop_offset,
                 )
             return timespan
 
     def _shorten_long_repeat_ties(self):
-        leaves = iterate(self._score).by_class(scoretools.Leaf)
+        leaves = abjad.iterate(self._score).by_leaf()
         for leaf in leaves:
-            ties = inspect_(leaf).get_spanners(spannertools.Tie)
+            ties = abjad.inspect_(leaf).get_spanners(abjad.spannertools.Tie)
             if not ties:
                 continue
             tie = ties.pop()
             if not tie.use_messiaen_style_ties:
                 continue
-            previous_leaf = inspect_(leaf).get_leaf(-1)
+            previous_leaf = abjad.inspect_(leaf).get_leaf(-1)
             if previous_leaf is None:
                 continue
-            minimum_duration = durationtools.Duration(1, 8)
-            if inspect_(previous_leaf).get_duration() < minimum_duration:
+            minimum_duration = abjad.durationtools.Duration(1, 8)
+            if abjad.inspect_(previous_leaf).get_duration() < minimum_duration:
                 string = r"shape #'((2 . 0) (1 . 0) (0.5 . 0) (0 . 0)) RepeatTie"
-                command = indicatortools.LilyPondCommand(string)
-                attach(command, leaf)
+                command = abjad.indicatortools.LilyPondCommand(string)
+                abjad.attach(command, leaf)
 
     def _stage_number_to_measure_indices(self, stage_number):
         if self.stage_count < stage_number:
             message = 'segment has only {} {} (not {}).'
-            unit = stringtools.pluralize('stage', self.stage_count)
+            unit = abjad.stringtools.pluralize('stage', self.stage_count)
             message = message.format(self.stage_count, unit, stage_number)
             raise Exception(message)
-        measure_indices = mathtools.cumulative_sums(self.measures_per_stage)
+        measure_indices = abjad.mathtools.cumulative_sums(self.measures_per_stage)
         start_measure_index = measure_indices[stage_number-1]
         stop_measure_index = measure_indices[stage_number] - 1
         return start_measure_index, stop_measure_index
@@ -1670,13 +1782,13 @@ class SegmentMaker(makertools.SegmentMaker):
     def _transpose_instruments(self):
         if not self.transpose_score:
             return
-        pitched_prototype = (scoretools.Note, scoretools.Chord)
-        for voice in iterate(self._score).by_class(scoretools.Voice):
-            for leaf in iterate(voice).by_class(scoretools.Leaf):
+        pitched_prototype = (abjad.Note, abjad.Chord)
+        for voice in abjad.iterate(self._score).by_class(abjad.Voice):
+            for leaf in abjad.iterate(voice).by_leaf(with_grace_notes=True):
                 if not isinstance(leaf, pitched_prototype):
                     continue
-                inspector = inspect_(leaf)
-                prototype = instrumenttools.Instrument
+                inspector = abjad.inspect_(leaf)
+                prototype = abjad.instrumenttools.Instrument
                 instrument = inspector.get_effective(prototype)
                 if instrument is None:
                     continue
@@ -1750,17 +1862,1066 @@ class SegmentMaker(makertools.SegmentMaker):
 
     @property
     def final_barline(self):
-        r'''Is true when final barline should appear.
+        r'''Gets final barline.
 
-        Set to true, false, none or explicit barline string.
+        ..  container:: example
 
-        Returns true, false, none or explicit barline string.
+            **Example 1.** Nonlast segment sets final barline to ``'|'``:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+            This is default behavior.
+
+        ..  container:: example
+
+            **Example 2.** Last segment in score sets final barline to
+            ``'|.'``:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     )
+
+            ::
+
+                >>> segment_metadata = {'segment_count': 1}
+                >>> result = segment_maker(
+                ...     is_doc_example=True,
+                ...     segment_metadata=segment_metadata,
+                ...     )
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                    \bar "|."
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+            This is default behavior.
+
+        ..  container:: example
+
+            **Example 3.** Nonlast segment sets final barline explicitly:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     final_barline='||',
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                    \bar "||"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            **Example 4.** Last segment in score sets final barline explicitly:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     final_barline='||',
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     )
+
+            ::
+
+                >>> segment_metadata = {'segment_count': 1}
+                >>> result = segment_maker(
+                ...     is_doc_example=True,
+                ...     segment_metadata=segment_metadata,
+                ...     )
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                    \bar "||"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        Set to barline string or none.
+
+        Returns barline string or none.
         '''
         return self._final_barline
 
     @property
     def final_markup(self):
         r'''Gets final markup.
+    
+        ..  container:: example
+
+            **Example 1.** Without final markup:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+            This is default behavior.
+
+        ..  container:: example
+
+            **Example 2.** With final markup:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     final_barline='|.',
+                ...     final_markup=Markup('Madison, WI'),
+                ...     final_markup_extra_offset=(-9, -2),
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    \once \override TextScript.extra-offset = #'(-9 . -2)
+                                    c'8 ] - \markup { "Madison, WI" }
+                                    \bar "|."
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        Defaults to none.
 
         Set to markup or none.
 
@@ -1770,7 +2931,11 @@ class SegmentMaker(makertools.SegmentMaker):
 
     @property
     def final_markup_extra_offset(self):
-        r'''Gets markup extra offset.
+        r'''Gets final markup extra offset.
+
+        See example for final markup, above.
+
+        Defaults to none.
 
         Set to pair or none.
 
@@ -1779,8 +2944,1126 @@ class SegmentMaker(makertools.SegmentMaker):
         return self._final_markup_extra_offset
 
     @property
+    def ignore_unpitched_notes(self):
+        r'''Is true when segment ignores unpitched notes.
+
+        Is false when segment colors unpitched notes.
+
+        ..  container:: example
+
+            **Example 1.** Colors unpitched notes:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+            This is default behavior.
+
+        ..  container:: example
+
+            **Example 2.** Ignores unpitched notes:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     ignore_unpitched_notes=True,
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    c'8 [
+                                    c'8
+                                    c'8
+                                    c'8 ]
+                                }
+                                {
+                                    c'8 [
+                                    c'8
+                                    c'8 ]
+                                }
+                                {
+                                    c'8 [
+                                    c'8
+                                    c'8
+                                    c'8 ]
+                                }
+                                {
+                                    c'8 [
+                                    c'8
+                                    c'8 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        Defaults to none.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        '''
+        return self._ignore_unpitched_notes
+
+    @property
+    def ignore_unregistered_pitches(self):
+        r'''Is true when segment ignores unregistered pitches.
+
+        Is false when segment colors unregistered pitches.
+
+        ..  container:: example
+
+            **Example 1.** Colors unregistered pitches:
+
+                >>> figure_maker = baca.tools.FigureMaker(
+                ...     baca.tools.RhythmSpecifier(
+                ...         patterns=patterntools.select_all(),
+                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...             acciaccatura_specifiers=[
+                ...                 baca.tools.AcciaccaturaSpecifier(),
+                ...                 ],
+                ...             talea=rhythmmakertools.Talea(
+                ...                 counts=[3],
+                ...                 denominator=16,
+                ...                 ),
+                ...             ),
+                ...         ),
+                ...     annotate_unregistered_pitches=True,
+                ...     preferred_denominator=8,
+                ...     )
+
+            ::
+
+                >>> figure_tokens = [
+                ...     [[4]],
+                ...     [[6, 2, 3, 5, 9, 8, 0]],
+                ...     [[11]],
+                ...     [[10, 7, 9, 8, 0, 5]],
+                ...     ]
+                >>> figures, time_signatures = [], []
+                >>> for figure_token in figure_tokens:
+                ...     result = figure_maker(figure_token)
+                ...     selection, time_signature, state_manifest = result
+                ...     figures.append(selection)
+                ...     time_signatures.append(time_signature)    
+                ...
+                >>> figures_ = []
+                >>> for figure in figures:
+                ...     figures_.extend(figure)
+                ...
+                >>> figures = select(figures_)
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     spacing_specifier=baca.tools.SpacingSpecifier(
+                ...         minimum_width=Duration(1, 24),
+                ...         ),
+                ...     time_signatures=time_signatures,
+                ...     )
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.tools.RhythmSpecifier(
+                ...         rhythm_maker=figures,
+                ...         ),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> score = lilypond_file.score_block.items[0]
+                >>> override(score).spacing_spanner.strict_grace_spacing = False
+                >>> override(score).spacing_spanner.strict_note_spacing = False
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" \with {
+                    \override SpacingSpanner.strict-grace-spacing = ##f
+                    \override SpacingSpanner.strict-note-spacing = ##f
+                } <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 3/16
+                                R1 * 3/16
+                            }
+                            {
+                                R1 * 3/16
+                            }
+                            {
+                                R1 * 3/16
+                            }
+                            {
+                                R1 * 3/16
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 3/16
+                            }
+                            {
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 3/16
+                            }
+                            {
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 3/16
+                            }
+                            {
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 3/16
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    {
+                                        \once \override Accidental.color = #magenta
+                                        \once \override Beam.color = #magenta
+                                        \once \override Dots.color = #magenta
+                                        \once \override Flag.color = #magenta
+                                        \once \override NoteHead.color = #magenta
+                                        \once \override Stem.color = #magenta
+                                        e'8.
+                                    }
+                                }
+                                {
+                                    {
+                                        \acciaccatura {
+                                            \once \override Accidental.color = #magenta
+                                            \once \override Beam.color = #magenta
+                                            \once \override Dots.color = #magenta
+                                            \once \override Flag.color = #magenta
+                                            \once \override NoteHead.color = #magenta
+                                            \once \override Stem.color = #magenta
+                                            fs'16 [
+                                            \once \override Accidental.color = #magenta
+                                            \once \override Beam.color = #magenta
+                                            \once \override Dots.color = #magenta
+                                            \once \override Flag.color = #magenta
+                                            \once \override NoteHead.color = #magenta
+                                            \once \override Stem.color = #magenta
+                                            d'16
+                                            \once \override Accidental.color = #magenta
+                                            \once \override Beam.color = #magenta
+                                            \once \override Dots.color = #magenta
+                                            \once \override Flag.color = #magenta
+                                            \once \override NoteHead.color = #magenta
+                                            \once \override Stem.color = #magenta
+                                            ef'16
+                                            \once \override Accidental.color = #magenta
+                                            \once \override Beam.color = #magenta
+                                            \once \override Dots.color = #magenta
+                                            \once \override Flag.color = #magenta
+                                            \once \override NoteHead.color = #magenta
+                                            \once \override Stem.color = #magenta
+                                            f'16
+                                            \once \override Accidental.color = #magenta
+                                            \once \override Beam.color = #magenta
+                                            \once \override Dots.color = #magenta
+                                            \once \override Flag.color = #magenta
+                                            \once \override NoteHead.color = #magenta
+                                            \once \override Stem.color = #magenta
+                                            a'16
+                                            \once \override Accidental.color = #magenta
+                                            \once \override Beam.color = #magenta
+                                            \once \override Dots.color = #magenta
+                                            \once \override Flag.color = #magenta
+                                            \once \override NoteHead.color = #magenta
+                                            \once \override Stem.color = #magenta
+                                            af'16 ]
+                                        }
+                                        \once \override Accidental.color = #magenta
+                                        \once \override Beam.color = #magenta
+                                        \once \override Dots.color = #magenta
+                                        \once \override Flag.color = #magenta
+                                        \once \override NoteHead.color = #magenta
+                                        \once \override Stem.color = #magenta
+                                        c'8.
+                                    }
+                                }
+                                {
+                                    {
+                                        \once \override Accidental.color = #magenta
+                                        \once \override Beam.color = #magenta
+                                        \once \override Dots.color = #magenta
+                                        \once \override Flag.color = #magenta
+                                        \once \override NoteHead.color = #magenta
+                                        \once \override Stem.color = #magenta
+                                        b'8.
+                                    }
+                                }
+                                {
+                                    {
+                                        \acciaccatura {
+                                            \once \override Accidental.color = #magenta
+                                            \once \override Beam.color = #magenta
+                                            \once \override Dots.color = #magenta
+                                            \once \override Flag.color = #magenta
+                                            \once \override NoteHead.color = #magenta
+                                            \once \override Stem.color = #magenta
+                                            bf'16 [
+                                            \once \override Accidental.color = #magenta
+                                            \once \override Beam.color = #magenta
+                                            \once \override Dots.color = #magenta
+                                            \once \override Flag.color = #magenta
+                                            \once \override NoteHead.color = #magenta
+                                            \once \override Stem.color = #magenta
+                                            g'16
+                                            \once \override Accidental.color = #magenta
+                                            \once \override Beam.color = #magenta
+                                            \once \override Dots.color = #magenta
+                                            \once \override Flag.color = #magenta
+                                            \once \override NoteHead.color = #magenta
+                                            \once \override Stem.color = #magenta
+                                            a'16
+                                            \once \override Accidental.color = #magenta
+                                            \once \override Beam.color = #magenta
+                                            \once \override Dots.color = #magenta
+                                            \once \override Flag.color = #magenta
+                                            \once \override NoteHead.color = #magenta
+                                            \once \override Stem.color = #magenta
+                                            af'16
+                                            \once \override Accidental.color = #magenta
+                                            \once \override Beam.color = #magenta
+                                            \once \override Dots.color = #magenta
+                                            \once \override Flag.color = #magenta
+                                            \once \override NoteHead.color = #magenta
+                                            \once \override Stem.color = #magenta
+                                            c'16 ]
+                                        }
+                                        \once \override Accidental.color = #magenta
+                                        \once \override Beam.color = #magenta
+                                        \once \override Dots.color = #magenta
+                                        \once \override Flag.color = #magenta
+                                        \once \override NoteHead.color = #magenta
+                                        \once \override Stem.color = #magenta
+                                        f'8.
+                                        \bar "|"
+                                    }
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+            This is default behavior.
+
+        ..  container:: example
+
+            **Example 2.** Ignores unregistered pitches:
+
+                >>> figure_maker = baca.tools.FigureMaker(
+                ...     baca.tools.RhythmSpecifier(
+                ...         patterns=patterntools.select_all(),
+                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...             acciaccatura_specifiers=[
+                ...                 baca.tools.AcciaccaturaSpecifier(),
+                ...                 ],
+                ...             talea=rhythmmakertools.Talea(
+                ...                 counts=[3],
+                ...                 denominator=16,
+                ...                 ),
+                ...             ),
+                ...         ),
+                ...     annotate_unregistered_pitches=True,
+                ...     preferred_denominator=8,
+                ...     )
+
+            ::
+
+                >>> figure_tokens = [
+                ...     [[4]],
+                ...     [[6, 2, 3, 5, 9, 8, 0]],
+                ...     [[11]],
+                ...     [[10, 7, 9, 8, 0, 5]],
+                ...     ]
+                >>> figures, time_signatures = [], []
+                >>> for figure_token in figure_tokens:
+                ...     result = figure_maker(figure_token)
+                ...     selection, time_signature, state_manifest = result
+                ...     figures.append(selection)
+                ...     time_signatures.append(time_signature)    
+                ...
+                >>> figures_ = []
+                >>> for figure in figures:
+                ...     figures_.extend(figure)
+                ...
+                >>> figures = select(figures_)
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     ignore_unregistered_pitches=True,
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     spacing_specifier=baca.tools.SpacingSpecifier(
+                ...         minimum_width=Duration(1, 24),
+                ...         ),
+                ...     time_signatures=time_signatures,
+                ...     )
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.tools.RhythmSpecifier(
+                ...         rhythm_maker=figures,
+                ...         ),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> score = lilypond_file.score_block.items[0]
+                >>> override(score).spacing_spanner.strict_grace_spacing = False
+                >>> override(score).spacing_spanner.strict_note_spacing = False
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" \with {
+                    \override SpacingSpanner.strict-grace-spacing = ##f
+                    \override SpacingSpanner.strict-note-spacing = ##f
+                } <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 3/16
+                                R1 * 3/16
+                            }
+                            {
+                                R1 * 3/16
+                            }
+                            {
+                                R1 * 3/16
+                            }
+                            {
+                                R1 * 3/16
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 3/16
+                            }
+                            {
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 3/16
+                            }
+                            {
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 3/16
+                            }
+                            {
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 3/16
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    {
+                                        e'8.
+                                    }
+                                }
+                                {
+                                    {
+                                        \acciaccatura {
+                                            fs'16 [
+                                            d'16
+                                            ef'16
+                                            f'16
+                                            a'16
+                                            af'16 ]
+                                        }
+                                        c'8.
+                                    }
+                                }
+                                {
+                                    {
+                                        b'8.
+                                    }
+                                }
+                                {
+                                    {
+                                        \acciaccatura {
+                                            bf'16 [
+                                            g'16
+                                            a'16
+                                            af'16
+                                            c'16 ]
+                                        }
+                                        f'8.
+                                        \bar "|"
+                                    }
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        Defaults to none.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        '''
+        return self._ignore_unregistered_pitches
+
+    @property
     def label_clock_time(self):
-        r'''Is true when segment should label clock time.
+        r'''Is true when segment labels clock time. Otherwise false.
+
+        ..  container:: example
+
+            **Example 1.** Does not label clock time:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     tempo_specifier=baca.tools.TempoSpecifier([
+                ...         (1, Tempo(Duration(1, 8), 90)),
+                ...         ]),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2 ^ \markup {
+                                    \fontsize
+                                        #-6
+                                        \general-align
+                                            #Y
+                                            #DOWN
+                                            \note-by-number
+                                                #3
+                                                #0
+                                                #1
+                                    \upright
+                                        {
+                                            =
+                                            90
+                                        }
+                                    }
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
+                
+        ..  container:: example
+
+            **Example 2.** Does label clock time:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     label_clock_time=True,
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     tempo_specifier=baca.tools.TempoSpecifier([
+                ...         (1, Tempo(Duration(1, 8), 90)),
+                ...         ]),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                                    ^ \markup {
+                                        \fontsize
+                                            #-2
+                                            0'00''
+                                        }
+                                    ^ \markup {
+                                    \fontsize
+                                        #-6
+                                        \general-align
+                                            #Y
+                                            #DOWN
+                                            \note-by-number
+                                                #3
+                                                #0
+                                                #1
+                                    \upright
+                                        {
+                                            =
+                                            90
+                                        }
+                                    }
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                                    ^ \markup {
+                                        \fontsize
+                                            #-2
+                                            0'02''
+                                        }
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                                    ^ \markup {
+                                        \fontsize
+                                            #-2
+                                            0'04''
+                                        }
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                                    ^ \markup {
+                                        \fontsize
+                                            #-2
+                                            0'07''
+                                        }
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
 
         Defaults to none.
 
@@ -1791,8 +4074,543 @@ class SegmentMaker(makertools.SegmentMaker):
         return self._label_clock_time
 
     @property
-    def label_stage_numbers(self):
-        r'''Is true when segment should label stage numbers.
+    def label_stages(self):
+        r'''Is true when segment labels stage numbers.
+
+        ..  container:: example
+
+            **Example 1.** Does not label stages:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+            This is default behavior.
+
+        ..  container:: example
+
+            **Example 2.** Labels stage numbers:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     label_stages=True,
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                                    - \markup {
+                                        \fontsize
+                                            #-3
+                                            \with-color
+                                                #blue
+                                                [1]
+                                        }
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            **Example 3.** Labels numbers with segment name:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     label_stages=True,
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     )
+
+            ::
+
+                >>> segment_metadata = {'name': 'K'}
+                >>> result = segment_maker(
+                ...     is_doc_example=True,
+                ...     segment_metadata=segment_metadata,
+                ...     )
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                                    - \markup {
+                                        \fontsize
+                                            #-3
+                                            \with-color
+                                                #blue
+                                                [K.1]
+                                        }
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
 
         Defaults to none.
 
@@ -1827,8 +4645,11 @@ class SegmentMaker(makertools.SegmentMaker):
 
     @property
     def print_segment_duration(self):
-        r'''Is true when segment-maker should print approximate segment
-        duration in seconds. Otherwise false.
+        r'''Is true when segment prints duration in seconds.
+        
+        Output prints to terminal.
+
+        Defaults to none.
 
         Set to true, false or none.
 
@@ -1838,8 +4659,11 @@ class SegmentMaker(makertools.SegmentMaker):
 
     @property
     def print_timings(self):
-        r'''Is true when segment-maker should print interpret timings.
-        Otherwise false.
+        r'''Is true when segment prints interpreter timings.
+
+        Output prints to terminal.
+
+        Defaults to none.
 
         Set to true, false or none.
 
@@ -1875,7 +4699,13 @@ class SegmentMaker(makertools.SegmentMaker):
     def score_package(self):
         r'''Gets score package.
 
-        Returns package.
+        ..  todo:: Deprecated.
+
+        Defaults to none.
+
+        Set to score package or none.
+
+        Returns score package or none.
         '''
         return self._score_package
 
@@ -1883,17 +4713,210 @@ class SegmentMaker(makertools.SegmentMaker):
     def score_template(self):
         r'''Gets score template.
 
-        Returns ``self.score_template()`` when ``self.score_template`` is not
-        none.
+        ..  container:: example
 
-        Returns ``self.score_package.tools.ScoreTemplate()`` when
-        ``self.score_template`` is none.
+            **Example 1.** Gets none:
 
-        Returns score template.
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker()
+
+            ::
+
+                >>> segment_maker.score_template is None
+                True
+
+        ..  container:: example
+
+            **Example 2.** Gets score template:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     )
+
+            ::
+
+                >>> segment_maker.score_template
+                ViolinSoloScoreTemplate()
+
+        Defaults to none.
+
+        Set to score template or none.
+
+        Returns score template or none.
         '''
-        if self._score_template is not None:
-            return self._score_template
-        return self.score_package.tools.ScoreTemplate()
+        return self._score_template
+
+    @property
+    def skips_instead_of_rests(self):
+        r'''Is true when segment fills empty measures with skips.
+
+        Is false when segment fills empty measures with multimeasure rests.
+
+        ..  container:: example
+
+            **Example 1.** Fills empty measures with multimeasure rests:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                R1 * 1/2
+                                R1 * 3/8
+                                R1 * 1/2
+                                R1 * 3/8
+                                \bar "|"
+                            }
+                        }
+                    >>
+                >>
+
+            This is default behavior.
+
+        ..  container:: example
+
+            **Example 2.** Fills empty measures with skips:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     skips_instead_of_rests=True,
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                s1 * 1/2
+                                s1 * 3/8
+                                s1 * 1/2
+                                s1 * 3/8
+                                \bar "|"
+                            }
+                        }
+                    >>
+                >>
+
+        Defaults to none.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        '''
+        return self._skips_instead_of_rests
 
     @property
     def spacing_map(self):
@@ -1928,12 +4951,755 @@ class SegmentMaker(makertools.SegmentMaker):
         return len(self.measures_per_stage)
 
     @property
+    def stage_label_base_string(self):
+        r'''Gets stage label base string.
+
+        ..  container:: example
+
+            **Example 1.** Takes base string from segment name:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     label_stages=True,
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     )
+
+            ::
+
+                >>> segment_metadata = {'name': 'K'}
+                >>> result = segment_maker(
+                ...     is_doc_example=True,
+                ...     segment_metadata=segment_metadata,
+                ...     )
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                                    - \markup {
+                                        \fontsize
+                                            #-3
+                                            \with-color
+                                                #blue
+                                                [K.1]
+                                        }
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+            This is default behavior.
+
+        ..  container:: example
+
+            **Example 2.** Takes base string from stage label property:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     label_stages=True,
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     stage_label_base_string='intermezzo',
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     )
+
+            ::
+
+                >>> segment_metadata = {'name': 'K'}
+                >>> result = segment_maker(
+                ...     is_doc_example=True,
+                ...     segment_metadata=segment_metadata,
+                ...     )
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                                    - \markup {
+                                        \fontsize
+                                            #-3
+                                            \with-color
+                                                #blue
+                                                [intermezzo.1]
+                                        }
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        Defaults to none.
+
+        Set to string or none.
+
+        Returns string or none.
+        '''
+        return self._stage_label_base_string
+
+    @property
     def tempo_specifier(self):
         r'''Gets tempo specifier.
 
-        Set to tempo specifier.
+        ..  container:: example
 
-        Returns tempo specifier.
+            **Example 1.** Without tempo specifier:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            **Example 2.** With tempo specifier:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     tempo_specifier=baca.tools.TempoSpecifier([
+                ...         (1, Tempo(Duration(1, 8), 90)),
+                ...         ]),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2 ^ \markup {
+                                    \fontsize
+                                        #-6
+                                        \general-align
+                                            #Y
+                                            #DOWN
+                                            \note-by-number
+                                                #3
+                                                #0
+                                                #1
+                                    \upright
+                                        {
+                                            =
+                                            90
+                                        }
+                                    }
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        Defaults to none.
+
+        Set to tempo specifier or none.
+
+        Returns tempo specifier or none.
         '''
         return self._tempo_specifier
 
@@ -1949,8 +5715,118 @@ class SegmentMaker(makertools.SegmentMaker):
 
     @property
     def transpose_score(self):
-        r'''Is true when segment should notate transposing instruments
-        at written pitch rather than at sounding pitch.
+        r'''Is true when segment transposes score.
+
+        ..  container:: example
+
+            **Example 1.** Does not transpose score:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     [
+                ...         baca.rhythm.make_even_run_rhythm_specifier(),
+                ...         baca.pitch.pitches('E4 F4'),
+                ...         ],
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    e'8 [
+                                    f'8
+                                    e'8
+                                    f'8 ]
+                                }
+                                {
+                                    e'8 [
+                                    f'8
+                                    e'8 ]
+                                }
+                                {
+                                    f'8 [
+                                    e'8
+                                    f'8
+                                    e'8 ]
+                                }
+                                {
+                                    f'8 [
+                                    e'8
+                                    f'8 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+            This is default behavior.
+
+        ..  note:: Build example with transposing instrument.
+
+        ..  note:: Score package must currently be passed in for transposition
+            to work. Eventually instrument inventory will be passed instead.
 
         Defaults to none.
 
@@ -1964,9 +5840,359 @@ class SegmentMaker(makertools.SegmentMaker):
     def volta_specifier(self):
         r'''Gets volta specifier.
 
-        Set to volta specifier.
+        ..  container:: example
 
-        Returns volta specifier.
+            **Example 1.** Without volta specifier:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            **Example 2.** With volta specifier:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     volta_specifier=baca.tools.VoltaSpecifier([
+                ...         baca.tools.MeasureExpression(1, 2),
+                ...         ]),
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            \repeat volta 2
+                            {
+                                {
+                                    \time 3/8
+                                    s1 * 3/8
+                                }
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        Defaults to none.
+
+        Set to volta specifier or none.
+
+        Returns volta specifier or none.
         '''
         return self._volta_specifier
 
@@ -1974,6 +6200,236 @@ class SegmentMaker(makertools.SegmentMaker):
 
     def append_specifiers(self, scopes, specifiers, **kwargs):
         r'''Appends each specifier in `specifiers` to each scope in `scopes`.
+
+        ..  container:: example
+
+            **Example 1.** With label specifier:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     [
+                ...         baca.rhythm.make_even_run_rhythm_specifier(),
+                ...         label().with_indices(),
+                ...         ],
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                        ^ \markup {
+                                            \small
+                                                0
+                                            }
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                        ^ \markup {
+                                            \small
+                                                1
+                                            }
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                        ^ \markup {
+                                            \small
+                                                2
+                                            }
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                        ^ \markup {
+                                            \small
+                                                3
+                                            }
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                        ^ \markup {
+                                            \small
+                                                4
+                                            }
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                        ^ \markup {
+                                            \small
+                                                5
+                                            }
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                        ^ \markup {
+                                            \small
+                                                6
+                                            }
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                        ^ \markup {
+                                            \small
+                                                7
+                                            }
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                        ^ \markup {
+                                            \small
+                                                8
+                                            }
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                        ^ \markup {
+                                            \small
+                                                9
+                                            }
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                        ^ \markup {
+                                            \small
+                                                10
+                                            }
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                        ^ \markup {
+                                            \small
+                                                11
+                                            }
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                        ^ \markup {
+                                            \small
+                                                12
+                                            }
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                        ^ \markup {
+                                            \small
+                                                13
+                                            }
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
 
         Returns scoped specifiers.
         '''
@@ -1992,9 +6448,9 @@ class SegmentMaker(makertools.SegmentMaker):
                     message = message.format(scope)
                     raise Exception(message)
                 default_scope = None
-                if isinstance(specifier, instrumenttools.Instrument):
+                if isinstance(specifier, abjad.instrumenttools.Instrument):
                     default_scope = specifier._default_scope
-                specifier = new(specifier, **kwargs)
+                specifier = abjad.new(specifier, **kwargs)
                 if default_scope is not None:
                     specifier._default_scope = default_scope
                 specifier_ = baca.tools.ScopedSpecifier(
@@ -2026,7 +6482,7 @@ class SegmentMaker(makertools.SegmentMaker):
         else:
             target_scope = baca.tools.SimpleScope(*target_scope)
         rhythm_specifier = rhythm_specifier.specifier
-        new_rhythm_specifier = new(rhythm_specifier, **kwargs)
+        new_rhythm_specifier = abjad.new(rhythm_specifier, **kwargs)
         new_scoped_specifier = baca.tools.ScopedSpecifier(
             target_scope,
             new_rhythm_specifier,

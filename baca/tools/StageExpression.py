@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-from abjad.tools.expressiontools.Expression import Expression
+import abjad
 
 
-class StageExpression(Expression):
+class StageExpression(abjad.expressiontools.Expression):
     r'''Stage expression.
     '''
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Expressions'
+    __documentation_section__ = 'Utilities'
 
     __slots__ = (
         '_stage_start_number',

@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
+import abjad
 import itertools
-from abjad.tools import abctools
-from abjad.tools import datastructuretools
-from abjad.tools import indicatortools
-from abjad.tools import mathtools
-from abjad.tools.topleveltools import attach
 
 
-class ColorFingeringSpecifier(abctools.AbjadObject):
+class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
     r'''ColorFingeringSpecifier specifier.
 
     ::
@@ -30,7 +26,7 @@ class ColorFingeringSpecifier(abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.tools.stages(1)),
             ...     [
-            ...         baca.pitch.pitches('E4'),
+            ...         baca.pitch.pitches('E4', allow_repeated_pitches=True),
             ...         baca.rhythm.make_messiaen_note_rhythm_specifier(),
             ...         baca.tools.ColorFingeringSpecifier(
             ...             number_lists=([0, 1, 2, 1],),
@@ -144,7 +140,6 @@ class ColorFingeringSpecifier(abctools.AbjadObject):
         deposit_annotations=None,
         number_lists=None,
         ):
-        from abjad.tools import pitchtools
         self._by_pitch_run = by_pitch_run
         if deposit_annotations is not None:
             deposit_annotations = tuple(deposit_annotations)
@@ -152,7 +147,7 @@ class ColorFingeringSpecifier(abctools.AbjadObject):
         if number_lists is not None:
             number_lists = tuple(number_lists)
             for number_list in number_lists:
-                assert mathtools.all_are_nonnegative_integers(number_list)
+                assert abjad.mathtools.all_are_nonnegative_integers(number_list)
         self._number_lists = number_lists
 
     ### SPECIAL METHODS ###
@@ -164,16 +159,16 @@ class ColorFingeringSpecifier(abctools.AbjadObject):
         '''
         if self.number_lists is None:
             return
-        number_lists = datastructuretools.CyclicTuple(self.number_lists)
+        number_lists = abjad.datastructuretools.CyclicTuple(self.number_lists)
         if not self.by_pitch_run:
             assert len(self.number_lists) == 1
             number_list = self.number_lists[0]
-            number_list = datastructuretools.CyclicTuple(number_list)
+            number_list = abjad.datastructuretools.CyclicTuple(number_list)
             for i, logical_tie in enumerate(logical_ties):
                 number = number_list[i]
                 if not number == 0:
-                    fingering = indicatortools.ColorFingering(number)
-                    attach(fingering, logical_tie.head)
+                    fingering = abjad.indicatortools.ColorFingering(number)
+                    abjad.attach(fingering, logical_tie.head)
                 self._attach_deposit_annotations(logical_tie.head)
         else:
             number_list_index = 0
@@ -186,12 +181,12 @@ class ColorFingeringSpecifier(abctools.AbjadObject):
                 if len(values) == 1 and not self.by_pitch_run:
                     continue
                 number_list = number_lists[number_list_index]
-                number_list = datastructuretools.CyclicTuple(number_list)
+                number_list = abjad.datastructuretools.CyclicTuple(number_list)
                 for i, logical_tie in enumerate(values):
                     number = number_list[i]
                     if not number == 0:
-                        fingering = indicatortools.ColorFingering(number)
-                        attach(fingering, logical_tie.head)
+                        fingering = abjad.indicatortools.ColorFingering(number)
+                        abjad.attach(fingering, logical_tie.head)
                     self._attach_deposit_annotations(logical_tie.head)
                 number_list_index += 1
 
@@ -201,8 +196,8 @@ class ColorFingeringSpecifier(abctools.AbjadObject):
         if not self.deposit_annotations:
             return
         for annotation_name in self.deposit_annotations:
-            annotation = indicatortools.Annotation(annotation_name, True)
-            attach(annotation, note)
+            annotation = abjad.indicatortools.Annotation(annotation_name, True)
+            abjad.attach(annotation, note)
 
     ### PUBLIC PROPERTIES ###
 
@@ -337,7 +332,10 @@ class ColorFingeringSpecifier(abctools.AbjadObject):
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.tools.stages(1)),
                 ...     [
-                ...         baca.pitch.pitches('C4 D4 D4 D4 E4 F4 F4'),
+                ...         baca.pitch.pitches(
+                ...             'C4 D4 D4 D4 E4 F4 F4',
+                ...             allow_repeated_pitches=True,
+                ...             ),
                 ...         baca.rhythm.make_even_run_rhythm_specifier(),
                 ...         baca.tools.ColorFingeringSpecifier(
                 ...             by_pitch_run=True,

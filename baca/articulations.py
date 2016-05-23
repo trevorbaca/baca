@@ -87,7 +87,7 @@ def stem_tremolo(pattern=None):
 def tremolo_down(n, maximum_adjustment=-1.5):
     import baca
     pair = (0, -n)
-    return experimental.tools.baca.tools.OverrideHandler(
+    return experimental.tools.baca.tools.OverrideSpecifier(
         grob_name='stem_tremolo',
         attribute_name='extra_offset',
         attribute_value=str(pair),

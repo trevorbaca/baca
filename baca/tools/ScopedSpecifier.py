@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import abctools
+import abjad
 
 
-class ScopedSpecifier(abctools.AbjadObject):
+class ScopedSpecifier(abjad.abctools.AbjadObject):
     r'''Scoped specifier.
 
     ::
@@ -124,7 +124,7 @@ class ScopedSpecifier(abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Segment-maker components'
+    __documentation_section__ = 'Segments'
 
     __slots__ = (
         '_scope',

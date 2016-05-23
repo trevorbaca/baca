@@ -1,15 +1,14 @@
 # -*- encoding: utf-8 -*-
-from abjad.tools import sequencetools
-from abjad.tools.abctools import AbjadValueObject
+import abjad
 
 
-class FlattenDivisionCallback(AbjadValueObject):
+class FlattenDivisionCallback(abjad.abctools.AbjadValueObject):
     r'''Flatten division callback.
     '''
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Division-handling'
+    __documentation_section__ = 'Divisions'
 
     __slots__ = (
         '_depth',
@@ -27,7 +26,7 @@ class FlattenDivisionCallback(AbjadValueObject):
 
         Returns list of divisions or list of division lists.
         '''
-        return sequencetools.flatten_sequence(
+        return abjad.sequencetools.flatten_sequence(
             expr, 
             depth=self.depth,
             )

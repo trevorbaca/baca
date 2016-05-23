@@ -1,12 +1,6 @@
 # -*- coding: utf-8 -*-
+import abjad
 import copy
-from abjad.tools import datastructuretools
-from abjad.tools import indicatortools
-from abjad.tools import scoretools
-from abjad.tools.topleveltools import attach
-from abjad.tools.topleveltools import inspect_
-from abjad.tools.topleveltools import iterate
-from abjad.tools.topleveltools import select
 from baca.tools.ArticulationHandler import ArticulationHandler
 
 
@@ -102,23 +96,23 @@ class PatternedArticulationsHandler(ArticulationHandler):
 
         Returns none.
         '''
-        articulation_lists = datastructuretools.CyclicTuple(
+        articulation_lists = abjad.datastructuretools.CyclicTuple(
             self.articulation_lists)
-        prototype = (scoretools.Note, scoretools.Chord)
-        notes_and_chords = list(iterate(expr).by_class(prototype))
+        prototype = (abjad.scoretools.Note, abjad.scoretools.Chord)
+        notes_and_chords = list(abjad.iterate(expr).by_class(prototype))
         notes_and_chords = notes_and_chords[skip_first:]
         if skip_last:
             notes_and_chords = notes_and_chords[:-skip_last]
         i = 0
         for note_or_chord in notes_and_chords:
-            logical_tie = inspect_(note_or_chord).get_logical_tie()
+            logical_tie = abjad.inspect_(note_or_chord).get_logical_tie()
             duration = logical_tie.get_duration()
             articulation_list = articulation_lists[offset+i]
             if articulation_list is None:
                 i += 1
                 continue
             articulation_list = [
-                indicatortools.Articulation(_)
+                abjad.indicatortools.Articulation(_)
                 for _ in articulation_list
                 ]
             if self.minimum_duration is not None:
@@ -128,25 +122,25 @@ class PatternedArticulationsHandler(ArticulationHandler):
                 if self.maximum_duration < duration:
                     continue
             if self.minimum_written_pitch is not None:
-                if isinstance(note_or_chord, scoretools.Note):
+                if isinstance(note_or_chord, abjad.scoretools.Note):
                     minimum_written_pitch = note_or_chord.written_pitch
                 else:
                     minimum_written_pitch = note_or_chord.writen_pitches[0]
                 if minimum_written_pitch < self.minimum_written_pitch:
                     continue
             if self.maximum_written_pitch is not None:
-                if isinstance(note_or_chord, scoretools.Note):
+                if isinstance(note_or_chord, abjad.scoretools.Note):
                     maximum_written_pitch = note_or_chord.written_pitch
                 else:
                     maximum_written_pitch = note_or_chord.written_pitches[-1]
                 if self.maximum_written_pitch < maximum_written_pitch:
                     continue
-            logical_tie = inspect_(note_or_chord).get_logical_tie()
+            logical_tie = abjad.inspect_(note_or_chord).get_logical_tie()
             if note_or_chord is logical_tie.head:
                 for articulation in articulation_list:
                     # TODO: make new(articulation) work
                     articulation = copy.copy(articulation)
-                    attach(articulation, note_or_chord)
+                    abjad.attach(articulation, note_or_chord)
                 i += 1
         return expr
 

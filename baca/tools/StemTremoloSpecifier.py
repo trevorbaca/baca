@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import abctools
-from abjad.tools import indicatortools
-from abjad.tools import patterntools
-from abjad.tools.topleveltools import attach
+import abjad
 
 
-class StemTremoloSpecifier(abctools.AbjadObject):
+class StemTremoloSpecifier(abjad.abctools.AbjadObject):
     r'''Stem tremolo specifier.
 
     ::
@@ -138,10 +135,9 @@ class StemTremoloSpecifier(abctools.AbjadObject):
         self,
         patterns=None,
         ):
-        from abjad.tools import pitchtools
         if patterns is not None:
             patterns = tuple(patterns)
-            prototype = patterntools.Pattern
+            prototype = abjad.patterntools.Pattern
             assert all(isinstance(_, prototype) for _ in patterns)
         self._patterns = patterns
 
@@ -157,9 +153,10 @@ class StemTremoloSpecifier(abctools.AbjadObject):
             for durations in self.patterns:
                 if durations.matches_index(i, total_logical_ties):
                     hash_mark_count = 32
-                    stem_tremolo = indicatortools.StemTremolo(hash_mark_count)
+                    stem_tremolo = abjad.indicatortools.StemTremolo(
+                        hash_mark_count)
                     for leaf in logical_tie:
-                        attach(stem_tremolo, leaf)
+                        abjad.attach(stem_tremolo, leaf)
                     break
 
     ### PUBLIC PROPERTIES ###

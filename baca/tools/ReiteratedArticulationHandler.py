@@ -1,14 +1,6 @@
 # -*- coding: utf-8 -*-
+import abjad
 import copy
-from abjad.tools import datastructuretools
-from abjad.tools import indicatortools
-from abjad.tools import patterntools
-from abjad.tools import scoretools
-from abjad.tools.topleveltools import attach
-from abjad.tools.topleveltools import inspect_
-from abjad.tools.topleveltools import iterate
-from abjad.tools.topleveltools import new
-from abjad.tools.topleveltools import select
 from baca.tools.ArticulationHandler import ArticulationHandler
 
 
@@ -59,7 +51,10 @@ class ReiteratedArticulationHandler(ArticulationHandler):
                 raise TypeError(message)
         self._articulation_list = articulation_list
         if pattern is not None:
-            prototype = (patterntools.Pattern, patterntools.CompoundPattern)
+            prototype = (
+                abjad.patterntools.Pattern,
+                abjad.patterntools.CompoundPattern,
+                )
             assert isinstance(pattern, prototype), repr(pattern)
         self._pattern = pattern
         self._skip_ties = skip_ties
@@ -71,8 +66,8 @@ class ReiteratedArticulationHandler(ArticulationHandler):
 
         Returns none.
         '''
-        prototype = (scoretools.Note, scoretools.Chord)
-        notes_and_chords = list(iterate(expr).by_class(prototype))
+        prototype = (abjad.scoretools.Note, abjad.scoretools.Chord)
+        notes_and_chords = list(abjad.iterate(expr).by_class(prototype))
         notes_and_chords = notes_and_chords[skip_first:]
         if skip_last:
             notes_and_chords = notes_and_chords[:-skip_last]
@@ -81,7 +76,7 @@ class ReiteratedArticulationHandler(ArticulationHandler):
             if self.pattern is not None:
                 if not self.pattern.matches_index(i, total_length):
                     continue
-            logical_tie = inspect_(note_or_chord).get_logical_tie()
+            logical_tie = abjad.inspect_(note_or_chord).get_logical_tie()
             if self.skip_ties and not logical_tie.is_trivial:
                 continue
             if not note_or_chord is logical_tie.head:
@@ -94,26 +89,26 @@ class ReiteratedArticulationHandler(ArticulationHandler):
                 if self.maximum_duration <= duration:
                     continue
             if self.minimum_written_pitch is not None:
-                if isinstance(note_or_chord, scoretools.Note):
+                if isinstance(note_or_chord, abjad.scoretools.Note):
                     minimum_written_pitch = note_or_chord.pitch
                 else:
                     minimum_written_pitch = note_or_chord.written_pitches[0]
                 if minimum_written_pitch < self.minimum_written_pitch:
                     continue
             if self.maximum_written_pitch is not None:
-                if isinstance(note_or_chord, scoretools.Note):
+                if isinstance(note_or_chord, abjad.scoretools.Note):
                     maximum_written_pitch = note_or_chord.written_pitch
                 else:
                     maximum_written_pitch = note_or_chord.written_pitches[-1]
                 if self.maximum_written_pitch < maximum_written_pitch:
                     continue
             articulations = [
-                indicatortools.Articulation(_)
+                abjad.indicatortools.Articulation(_)
                 for _ in self.articulation_list
                 ]
             for articulation in articulations:
                 articulation = copy.deepcopy(articulation)
-                attach(articulation, note_or_chord)
+                abjad.attach(articulation, note_or_chord)
         return expr
 
     ### PUBLIC PROPERTIES ###
@@ -140,7 +135,7 @@ class ReiteratedArticulationHandler(ArticulationHandler):
 
     @property
     def skip_ties(self):
-        r'''Is true when handler should skip ties. Otherwise false.
+        r'''Is true when handler skips ties. Otherwise false.
 
         ..  container:: example
 

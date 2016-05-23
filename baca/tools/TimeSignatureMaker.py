@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
+import abjad
 import baca
-from abjad.tools import abctools
-from abjad.tools import datastructuretools
-from abjad.tools import indicatortools
-from abjad.tools import sequencetools
-from abjad.tools.topleveltools import sequence
 
 
-class TimeSignatureMaker(abctools.AbjadObject):
+class TimeSignatureMaker(abjad.abctools.AbjadObject):
     r'''Time signature maker.
 
     ::
@@ -53,7 +49,7 @@ class TimeSignatureMaker(abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Makers'
+    __documentation_section__ = 'Utilities'
 
     __slots__ = (
         '_repeat_count',
@@ -86,13 +82,13 @@ class TimeSignatureMaker(abctools.AbjadObject):
 
         Returns measures per stage, tempo map and time signatures.
         '''
-        time_signatures = sequence(self.time_signatures)
+        time_signatures = abjad.sequence(self.time_signatures)
         time_signatures = time_signatures.rotate(self.rotation)
         time_signatures = time_signatures.flatten(depth=1)
         items = []
         for item in self.stage_specifier:
-            if isinstance(item, indicatortools.Fermata):
-                item = indicatortools.TimeSignature((1, 4))
+            if isinstance(item, abjad.indicatortools.Fermata):
+                item = abjad.indicatortools.TimeSignature((1, 4))
             items.append(item)
         stage_specifier = baca.tools.StageSpecifier(items=items)
         time_signature_groups = self._make_time_signature_groups(
@@ -101,7 +97,7 @@ class TimeSignatureMaker(abctools.AbjadObject):
             time_signatures,
             )
         measures_per_stage = [len(_) for _ in time_signature_groups]
-        time_signatures = sequencetools.flatten_sequence(
+        time_signatures = abjad.sequencetools.flatten_sequence(
             time_signature_groups,
             depth=1,
             )
@@ -118,11 +114,11 @@ class TimeSignatureMaker(abctools.AbjadObject):
         stage_specifier,
         time_signatures,
         ):
-        time_signatures = datastructuretools.CyclicTuple(time_signatures)
+        time_signatures = abjad.datastructuretools.CyclicTuple(time_signatures)
         time_signature_lists = []
         index = 0
         for x in stage_specifier:
-            if isinstance(x, indicatortools.TimeSignature):
+            if isinstance(x, abjad.indicatortools.TimeSignature):
                 time_signature_list = [x]
             elif isinstance(x, (tuple, list)):
                 time_signature_list = list(x)

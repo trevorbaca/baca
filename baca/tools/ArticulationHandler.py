@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import abc
-from abjad.tools import durationtools
-from abjad.tools import pitchtools
+import abjad
 from baca.tools.Handler import Handler
 
 
@@ -35,11 +34,13 @@ class ArticulationHandler(Handler):
         if minimum_duration is None:
             self._minimum_duration = minimum_duration
         else:
-            self._minimum_duration = durationtools.Duration(minimum_duration)
+            self._minimum_duration = abjad.durationtools.Duration(
+                minimum_duration)
         if maximum_duration is None:
             self._maximum_duration = maximum_duration
         else:
-            self._maximum_duration = durationtools.Duration(maximum_duration)
+            self._maximum_duration = abjad.durationtools.Duration(
+                maximum_duration)
         if minimum_written_pitch is None:
             self._minimum_written_pitch = minimum_written_pitch
         else:
@@ -49,7 +50,7 @@ class ArticulationHandler(Handler):
             self._maximum_written_pitch = maximum_written_pitch
         else:
             self._maximum_written_pitch = \
-                pitchtools.NamedPitch(maximum_written_pitch)
+                abjad.pitchtools.NamedPitch(maximum_written_pitch)
 
     ### PUBLIC PROPERTIES ###
 

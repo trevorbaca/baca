@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import abctools
+import abjad
 
 
-class SpecifierWrapper(abctools.AbjadObject):
+class SpecifierWrapper(abjad.abctools.AbjadObject):
     r'''Specifier wrapper.
 
     ::
@@ -33,7 +33,7 @@ class SpecifierWrapper(abctools.AbjadObject):
 
     ### CLASS VARIABLES ##
 
-    __documentation_section__ = 'Segment-maker components'
+    __documentation_section__ = 'Segments'
 
     __slots__ = (
         '_prototype',
@@ -107,7 +107,7 @@ class SpecifierWrapper(abctools.AbjadObject):
 
     @property
     def with_next_leaf(self):
-        r'''Is true when specifier should include next leaf (after last leaf).
+        r'''Is true when specifier includes next leaf (after last leaf).
         Otherwise false.
 
         Set to true, false or none.
@@ -118,8 +118,8 @@ class SpecifierWrapper(abctools.AbjadObject):
 
     @property
     def with_previous_leaf(self):
-        r'''Is true when specifier should include previous leaf (before first
-        leaf). Otherwise false.
+        r'''Is true when specifier includes previous leaf (before first leaf).
+        Otherwise false.
 
         Set to true, false or none.
 

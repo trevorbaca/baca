@@ -1,11 +1,5 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import datastructuretools
-from abjad.tools import durationtools
-from abjad.tools import indicatortools
-from abjad.tools import scoretools
-from abjad.tools.topleveltools import attach
-from abjad.tools.topleveltools import inspect_
-from abjad.tools.topleveltools import iterate
+import abjad
 from baca.tools.Handler import Handler
 
 
@@ -87,11 +81,11 @@ class ReiteratedDynamicHandler(Handler):
             assert isinstance(dynamic_name, str), repr(dynamic_name)
             dynamic_names = dynamic_name.split()
         for dynamic_name in dynamic_names:
-            assert indicatortools.Dynamic.is_dynamic_name(dynamic_name)
-        dynamic_names = datastructuretools.CyclicTuple(dynamic_names)
+            assert abjad.indicatortools.Dynamic.is_dynamic_name(dynamic_name)
+        dynamic_names = abjad.datastructuretools.CyclicTuple(dynamic_names)
         self._dynamic_names = dynamic_names
         if minimum_duration is not None:
-            minimum_duration = durationtools.Duration(minimum_duration)
+            minimum_duration = abjad.durationtools.Duration(minimum_duration)
         self._minimum_duration = minimum_duration
 
     ### SPECIAL METHODS ###
@@ -102,18 +96,18 @@ class ReiteratedDynamicHandler(Handler):
         Returns none.
         '''
         note_or_chords = []
-        prototype = (scoretools.Note, scoretools.Chord)
-        logical_ties = iterate(expr).by_logical_tie()
+        prototype = (abjad.scoretools.Note, abjad.scoretools.Chord)
+        logical_ties = abjad.iterate(expr).by_logical_tie()
         logical_ties = [
             _ for _ in logical_ties if isinstance(_.head, prototype)]
         for i, logical_tie in enumerate(logical_ties):
-            #indicatortools.Dynamic(self.dynamic_name)(note_or_chord)
+            #abjad.indicatortools.Dynamic(self.dynamic_name)(note_or_chord)
             dynamic_name = self._dynamic_names[i]
-            command = indicatortools.LilyPondCommand(
+            command = abjad.indicatortools.LilyPondCommand(
                 dynamic_name,
                 'right',
                 )
-            attach(command, logical_tie.head)
+            abjad.attach(command, logical_tie.head)
         return expr
 
     ### PUBLIC PROPERTIES ###
