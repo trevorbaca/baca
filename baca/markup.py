@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import markuptools
+import abjad
 
 
 ### factory functions ###
@@ -7,7 +7,7 @@ from abjad.tools import markuptools
 def make_markup(string, direction=Up, is_new=True, whiteout=True):
     if not is_new:
         string = '({})'.format(string)
-    markup = markuptools.Markup(string, direction=direction)
+    markup = abjad.Markup(string, direction=direction)
     markup = markup.upright()
     if whiteout:
         markup = markup.whiteout()
@@ -17,10 +17,25 @@ def make_markup_lines(strings, direction=Up):
     assert isinstance(strings, list), repr(strings)
     lines = []
     for string in strings:
-        line = markuptools.Markup(string).line()
+        line = abjad.Markup(string).line()
         lines.append(line)
-    markup = markuptools.Markup.column(lines, direction=Up)
+    markup = abjad.Markup.column(lines, direction=Up)
     return markup
+
+def make_markup_specifier(markups):
+    import baca
+    return baca.tools.MarkupSpecifier(
+        markup=markups,
+        )
+
+def make_repeated_markup(markups):
+    import baca
+    return baca.tools.MarkupSpecifier(
+        markup=markups,
+        selector=abjad.select().
+            by_logical_tie(pitched=True).
+            get_item(0, apply_to_each=True),
+        )
 
 def make_two_part_transition_markup(
     string_1,
@@ -46,14 +61,14 @@ def make_two_part_transition_markup(
 def _make_instrument_name_markup(string, space, column=True):
     parts = string.split()
     if len(parts) == 1:
-        markup = markuptools.Markup(parts[0]).hcenter_in(space)
+        markup = abjad.Markup(parts[0]).hcenter_in(space)
     elif column:
-        markups = [markuptools.Markup(_) for _ in parts]
-        markup = markuptools.Markup.center_column(markups, direction=None)
+        markups = [abjad.Markup(_) for _ in parts]
+        markup = abjad.Markup.center_column(markups, direction=None)
         markup = markup.hcenter_in(space)
     else:
-        markups = [markuptools.Markup(_) for _ in parts]
-        markup = markuptools.Markup.line(*markups)
+        markups = [abjad.Markup(_) for _ in parts]
+        markup = abjad.Markup.line(*markups)
         markup = markup.hcenter_in(space)
     return markup
 
@@ -269,7 +284,7 @@ def lv_possibile():
     return make_markup('l.v. possibile')
 
 def make_boxed_markup(string, whiteout=True):
-    markup = markuptools.Markup(string, direction=Up)
+    markup = abjad.Markup(string, direction=Up)
     markup = markup.box().override(('box-padding', 0.5))
     if whiteout:
         markup = markup.whiteout()
@@ -279,9 +294,9 @@ def make_boxed_markup_lines(strings, direction=Up, whiteout=True):
     assert isinstance(strings, list), repr(strings)
     lines = []
     for string in strings:
-        line = markuptools.Markup(string).line()
+        line = abjad.Markup(string).line()
         lines.append(line)
-    markup = markuptools.Markup.column(lines, direction=Up)
+    markup = abjad.Markup.column(lines, direction=Up)
     markup = markup.box().override(('box-padding', 0.5))
     if whiteout:
         markup = markup.whiteout()
@@ -289,7 +304,7 @@ def make_boxed_markup_lines(strings, direction=Up, whiteout=True):
 
 def make_boxed_repeat_count(count):
     string = 'x{}'.format(count)
-    markup = markuptools.Markup(string, direction=Up)
+    markup = abjad.Markup(string, direction=Up)
     markup = markup.sans().bold().fontsize(6).upright()
     markup = markup.box().override(('box-padding', 0.5))
     return markup
@@ -318,12 +333,6 @@ def make_pos_ord_fractional_scratch(numerator, denominator):
     string = 'pos. ord. + {}/{} scratch'
     string = string.format(numerator, denominator)
     return make_markup(string)
-
-def make_repeated_markup(markups):
-    import baca
-    return baca.tools.RepeatedMarkupHandler(
-        markups=markups,
-        )
 
 def make_string_number(n):
     to_roman_numeral = {
@@ -564,11 +573,11 @@ def senza_vib():
     return make_markup('senza vib.')
 
 def sparse_clicks():
-    first_line = markuptools.Markup(
+    first_line = abjad.Markup(
         'sparse, individual clicks with extremely slow bow')
     first_line = first_line.line()
-    second_line = markuptools.Markup('(1-2/sec. in irregular rhythm)').line()
-    markup = markuptools.Markup.column([first_line, second_line], direction=Up)
+    second_line = abjad.Markup('(1-2/sec. in irregular rhythm)').line()
+    markup = abjad.Markup.column([first_line, second_line], direction=Up)
     return markup
 
 def spazz():

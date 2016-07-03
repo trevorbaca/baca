@@ -12,7 +12,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example.** Default figure-maker:
+        **Example 1.** Default figure-maker:
 
         ::
 
@@ -58,6 +58,17 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 }
             }
 
+    ..  container:: example
+
+        **Example 2.** Unknown keyword raises exception
+
+        ::
+
+            >>> baca.tools.FigureMaker(color='red')
+            Traceback (most recent call last):
+            ...
+            Exception: unknown keyword: 'color'.
+
     '''
 
     ### CLASS VARIABLES ###
@@ -71,6 +82,11 @@ class FigureMaker(abjad.abctools.AbjadObject):
         '_specifiers',
         )
 
+    _keywords = (
+        'annotate_unregistered_pitches',
+        'preferred_denominator',
+        )
+
     _state_variables = (
         '_next_figure',
         )
@@ -81,6 +97,11 @@ class FigureMaker(abjad.abctools.AbjadObject):
         annotate_unregistered_pitches = keywords.get(
             'annotate_unregistered_pitches')
         preferred_denominator = keywords.get('preferred_denominator')
+        for name in keywords:
+            if name not in self._keywords:
+                message = 'unknown keyword: {!r}.'
+                message = message.format(name)
+                raise Exception(message)
         if annotate_unregistered_pitches is not None:
             annotate_unregistered_pitches = bool(annotate_unregistered_pitches)
         self._annotate_unregistered_pitches = annotate_unregistered_pitches
@@ -552,7 +573,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['.'],
                 ...         selector=selectortools.Selector().
-                ...             by_class(scoretools.Note),
+                ...             by_class(Note, flatten=True),
                 ...         ),
                 ...     )
 
@@ -606,12 +627,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(
-                ...         articulations=['.', '-'],
+                ...         articulations=[('.', '-')],
                 ...         selector=selectortools.Selector().
                 ...             by_class(scoretools.Tuplet).
                 ...             get_slice(
                 ...                 start=1, stop=-1, apply_to_each=True).
-                ...             by_class(scoretools.Note),
+                ...             by_class(Note, flatten=True),
                 ...         ),
                 ...     )
 
@@ -1323,7 +1344,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...         articulations=['.'],
                 ...         selector=selectortools.Selector().
                 ...             by_class(scoretools.Tuplet, flatten=True).
-                ...             get_slice(start=1, apply_to_each=True),
+                ...             get_slice(start=1, apply_to_each=True).
+                ...             by_class(Note, flatten=True),
                 ...         ),
                 ...     baca.tools.SpannerSpecifier(
                 ...         selector=selectortools.Selector().

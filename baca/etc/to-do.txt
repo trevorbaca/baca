@@ -102,7 +102,7 @@ DEVELOPMENT TO-DO
 
 22. Use CompoundSpecifier to implement baca.pitch.natural_harmonics().
     The factory function will return a CompoundSpecifier that joins
-    PitchSpecifier and OverrideHandler.
+    PitchSpecifier and OverrideSpecifier.
 
 23. Cache segment logical ties and possibly also leaves during specifier
     interpretation. This should be the first optimization.
@@ -152,7 +152,7 @@ DEVELOPMENT TO-DO
     each new (uninterpreted) specifier against all the specifiers that have
     already been interpreted. Raise an exception when two specifiers of the
     same type overlap in scope. This will, for example, altert when two
-    OverrideHandlers have been set against overlapping scopes in the same
+    PitchSpecifiers have been set against overlapping scopes in the same
     segment.
 
 28. Teach SpacingSpecifier algorithm about barline-crossing tuplets.

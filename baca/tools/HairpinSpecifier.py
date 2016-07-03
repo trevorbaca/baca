@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 import abjad
-from baca.tools.Handler import Handler
 
 
-class HairpinHandler(Handler):
-    r'''Hairpin handler.
+class HairpinSpecifier(abjad.abctools.AbjadObject):
+    r'''Hairpin specifier.
 
     ::
 
@@ -16,7 +15,7 @@ class HairpinHandler(Handler):
 
         ::
 
-            >>> handler = baca.tools.HairpinHandler(
+            >>> specifier = baca.tools.HairpinSpecifier(
             ...     hairpin_tokens=['f > niente', 'niente < f'],
             ...     span='nontrivial ties',
             ...     )
@@ -24,7 +23,7 @@ class HairpinHandler(Handler):
             >>> staff = Staff(string)
             >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
             >>> logical_ties = list(logical_ties)
-            >>> handler(logical_ties)
+            >>> specifier(logical_ties)
             >>> show(staff) # doctest: +SKIP
 
         ..  doctest::
@@ -45,12 +44,12 @@ class HairpinHandler(Handler):
 
     ..  container:: example
 
-        **Example 2.** Gets storage format of handler:
+        **Example 2.** Gets storage format of specifier:
 
         ::
 
-            >>> print(format(handler))
-            baca.tools.HairpinHandler(
+            >>> print(format(specifier))
+            baca.tools.HairpinSpecifier(
                 hairpin_tokens=datastructuretools.CyclicTuple(
                     [
                         ('f', '>', 'niente'),
@@ -64,7 +63,7 @@ class HairpinHandler(Handler):
 
     ### CLASS ATTRIBUTES ###
 
-    __documentation_section__ = 'Handlers'
+    __documentation_section__ = 'Specifiers'
 
     __slots__ = (
         '_enchain_hairpins',
@@ -132,7 +131,7 @@ class HairpinHandler(Handler):
     ### SPECIAL METHODS ###
 
     def __call__(self, logical_ties):
-        r'''Calls hairpin handler on `logical_ties`.
+        r'''Calls hairpin specifier on `logical_ties`.
 
         Passes silently when `logical_ties` is empty.
 
@@ -295,7 +294,7 @@ class HairpinHandler(Handler):
 
             ::
 
-                >>> handler = baca.tools.HairpinHandler(
+                >>> specifier = baca.tools.HairpinSpecifier(
                 ...     hairpin_tokens=['p < f', 'f > p'],
                 ...     span=[3, 2],
                 ...     )
@@ -303,7 +302,7 @@ class HairpinHandler(Handler):
                 >>> staff = Staff(string)
                 >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
-                >>> handler(logical_ties)
+                >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
 
             ..  doctest::
@@ -326,7 +325,7 @@ class HairpinHandler(Handler):
 
             ::
 
-                >>> handler = baca.tools.HairpinHandler(
+                >>> specifier = baca.tools.HairpinSpecifier(
                 ...     enchain_hairpins=True,
                 ...     hairpin_tokens=['p < f', 'f > p'],
                 ...     span=[3, 2],
@@ -335,7 +334,7 @@ class HairpinHandler(Handler):
                 >>> staff = Staff(string)
                 >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
-                >>> handler(logical_ties)
+                >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
 
             ..  doctest::
@@ -370,7 +369,7 @@ class HairpinHandler(Handler):
 
             ::
 
-                >>> handler = baca.tools.HairpinHandler(
+                >>> specifier = baca.tools.HairpinSpecifier(
                 ...     hairpin_tokens=['f > p', 'p < f'],
                 ...     span='nontrivial ties',
                 ...     )
@@ -378,7 +377,7 @@ class HairpinHandler(Handler):
                 >>> staff = Staff(string)
                 >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
-                >>> handler(logical_ties)
+                >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
 
             ..  doctest::
@@ -401,7 +400,7 @@ class HairpinHandler(Handler):
 
             ::
 
-                >>> handler = baca.tools.HairpinHandler(
+                >>> specifier = baca.tools.HairpinSpecifier(
                 ...     flare=True,
                 ...     hairpin_tokens=['f > p', 'p < f'],
                 ...     span='nontrivial ties',
@@ -410,7 +409,7 @@ class HairpinHandler(Handler):
                 >>> staff = Staff(string)
                 >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
-                >>> handler(logical_ties)
+                >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
 
             ..  doctest::
@@ -440,7 +439,7 @@ class HairpinHandler(Handler):
 
     @property
     def hairpin_tokens(self):
-        r'''Gets hairpin tokens of handler.
+        r'''Gets hairpin tokens of specifier.
 
         ..  container:: example
 
@@ -448,7 +447,7 @@ class HairpinHandler(Handler):
 
             ::
 
-                >>> handler = baca.tools.HairpinHandler(
+                >>> specifier = baca.tools.HairpinSpecifier(
                 ...     hairpin_tokens=['p < f'],
                 ...     span=[4],
                 ...     )
@@ -456,7 +455,7 @@ class HairpinHandler(Handler):
                 >>> staff = Staff(string)
                 >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
-                >>> handler(logical_ties)
+                >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
 
             ..  doctest::
@@ -487,7 +486,7 @@ class HairpinHandler(Handler):
 
             ::
 
-                >>> handler = baca.tools.HairpinHandler(
+                >>> specifier = baca.tools.HairpinSpecifier(
                 ...     hairpin_tokens=[None, 'p < f'],
                 ...     span=[4],
                 ...     )
@@ -495,7 +494,7 @@ class HairpinHandler(Handler):
                 >>> staff = Staff(string)
                 >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
-                >>> handler(logical_ties)
+                >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
 
             ..  doctest::
@@ -540,7 +539,7 @@ class HairpinHandler(Handler):
 
             ::
 
-                >>> handler = baca.tools.HairpinHandler(
+                >>> specifier = baca.tools.HairpinSpecifier(
                 ...     enchain_hairpins=True,
                 ...     hairpin_tokens=['p < f', 'f > niente'],
                 ...     span=[2, 3],
@@ -549,7 +548,7 @@ class HairpinHandler(Handler):
                 >>> staff = Staff(string)
                 >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
-                >>> handler(logical_ties)
+                >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
 
             ..  doctest::
@@ -574,7 +573,7 @@ class HairpinHandler(Handler):
 
             ::
 
-                >>> handler = baca.tools.HairpinHandler(
+                >>> specifier = baca.tools.HairpinSpecifier(
                 ...     enchain_hairpins=True,
                 ...     hairpin_tokens=['p < f', 'f > niente'],
                 ...     include_following_rests=True,
@@ -584,7 +583,7 @@ class HairpinHandler(Handler):
                 >>> staff = Staff(string)
                 >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
-                >>> handler(logical_ties)
+                >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
 
             ..  doctest::
@@ -609,7 +608,7 @@ class HairpinHandler(Handler):
 
             ::
 
-                >>> handler = baca.tools.HairpinHandler(
+                >>> specifier = baca.tools.HairpinSpecifier(
                 ...     enchain_hairpins=True,
                 ...     hairpin_tokens=['p < f', 'f > niente'],
                 ...     include_following_rests=True,
@@ -619,7 +618,7 @@ class HairpinHandler(Handler):
                 >>> staff = Staff(string)
                 >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
-                >>> handler(logical_ties)
+                >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
 
             ..  doctest::
@@ -649,7 +648,7 @@ class HairpinHandler(Handler):
 
     @property
     def minimum_duration(self):
-        r'''Gets minimum duration of handler.
+        r'''Gets minimum duration of specifier.
 
         Returns duration or none.
         '''
@@ -666,14 +665,14 @@ class HairpinHandler(Handler):
 
             ::
 
-                >>> handler = baca.tools.HairpinHandler(
+                >>> specifier = baca.tools.HairpinSpecifier(
                 ...     hairpin_tokens=['ppp < p'],
                 ...     span='nontrivial ties',
                 ...     )
                 >>> staff = Staff("c'4 ~ c'8 d'8 ~ d'4 r4 e'4 g'4 fs'4 ~ fs'4")
                 >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
-                >>> handler(logical_ties)
+                >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
 
             ..  doctest::
@@ -697,7 +696,7 @@ class HairpinHandler(Handler):
 
             ::
 
-                >>> handler = baca.tools.HairpinHandler(
+                >>> specifier = baca.tools.HairpinSpecifier(
                 ...     hairpin_tokens=['ppp < p'],
                 ...     omit_lone_note_dynamic=True,
                 ...     span='nontrivial ties',
@@ -705,7 +704,7 @@ class HairpinHandler(Handler):
                 >>> staff = Staff("c'4 ~ c'8 d'8 ~ d'4 r4 e'4 g'4 fs'4 ~ fs'4")
                 >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
-                >>> handler(logical_ties)
+                >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
 
             ..  doctest::
@@ -733,7 +732,7 @@ class HairpinHandler(Handler):
 
     @property
     def patterns(self):
-        r'''Gets patterns of handler.
+        r'''Gets patterns of specifier.
 
         Set to patterns or none.
         '''
@@ -741,7 +740,7 @@ class HairpinHandler(Handler):
 
     @property
     def span(self):
-        r'''Gets span of handler.
+        r'''Gets span of specifier.
         
         ..  container:: example
 
@@ -749,14 +748,14 @@ class HairpinHandler(Handler):
 
             ::
 
-                >>> handler = baca.tools.HairpinHandler(
+                >>> specifier = baca.tools.HairpinSpecifier(
                 ...     hairpin_tokens=['ppp < p'],
                 ...     span='contiguous notes and chords',
                 ...     )
                 >>> staff = Staff("c'4 ~ c'8 d'8 ~ d'4 r4 e'4 g'4 fs'4 ~ fs'4")
                 >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
-                >>> handler(logical_ties)
+                >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
 
             ..  doctest::
@@ -780,7 +779,7 @@ class HairpinHandler(Handler):
 
             ::
 
-                >>> handler = baca.tools.HairpinHandler(
+                >>> specifier = baca.tools.HairpinSpecifier(
                 ...     hairpin_tokens=['ppp < p'],
                 ...     omit_lone_note_dynamic=True,
                 ...     span='nontrivial ties',
@@ -788,7 +787,7 @@ class HairpinHandler(Handler):
                 >>> staff = Staff("c'4 ~ c'8 d'8 ~ d'4 r4 e'4 g'4 fs'4 ~ fs'4")
                 >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
-                >>> handler(logical_ties)
+                >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
 
             ..  doctest::
@@ -813,7 +812,7 @@ class HairpinHandler(Handler):
 
             ::
 
-                >>> handler = baca.tools.HairpinHandler(
+                >>> specifier = baca.tools.HairpinSpecifier(
                 ...     hairpin_tokens=['p < f'],
                 ...     span=[3, 4],
                 ...     )
@@ -821,7 +820,7 @@ class HairpinHandler(Handler):
                 >>> staff = Staff(string)
                 >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
-                >>> handler(logical_ties)
+                >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
 
             ..  doctest::

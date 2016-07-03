@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 import abjad
-from baca.tools.Handler import Handler
 
 
-class DiatonicClusterHandler(Handler):
-    r'''Diatonic cluster handler.
+class DiatonicClusterSpecifier(abjad.abctools.AbjadObject):
+    r'''Diatonic cluster specifier.
 
     ::
 
@@ -15,10 +14,10 @@ class DiatonicClusterHandler(Handler):
         ::
 
             >>> staff = Staff("c' d' e' f'")
-            >>> handler = baca.tools.DiatonicClusterHandler(
+            >>> specifier = baca.tools.DiatonicClusterSpecifier(
             ...     cluster_widths=[4, 6],
             ...     )
-            >>> handler(staff)
+            >>> specifier(staff)
             >>> show(staff) # doctest: +SKIP
 
         ..  doctest::
@@ -35,7 +34,7 @@ class DiatonicClusterHandler(Handler):
 
     ### CLASS ATTRIBUTES ###
 
-    __documentation_section__ = 'Handlers'
+    __documentation_section__ = 'Specifiers'
 
     __slots__ = (
         '_cluster_widths',
@@ -44,7 +43,6 @@ class DiatonicClusterHandler(Handler):
     ### INITIALIZER ###
 
     def __init__(self, cluster_widths=None):
-        Handler.__init__(self)
         if cluster_widths is not None:
             cluster_widths = abjad.datastructuretools.CyclicTuple(
                 cluster_widths)
@@ -53,12 +51,12 @@ class DiatonicClusterHandler(Handler):
     ### SPECIAL METHODS ###
 
     def __call__(self, expr):
-        r'''Calls diatonic cluster handler on `expr`.
+        r'''Calls specifier on `expr`.
 
         Returns none.
         '''
         for i, note in enumerate(
-            abjad.iterate(expr).by_class(abjad.scoretools.Note)):
+            abjad.iterate(expr).by_class(abjad.Note)):
             cluster_width = self.cluster_widths[i]
             start = note.written_pitch.diatonic_pitch_number
             diatonic_numbers = range(start, start + cluster_width)
@@ -70,7 +68,7 @@ class DiatonicClusterHandler(Handler):
                 ]
             chord_pitches = [abjad.pitchtools.NamedPitch(x)
                 for x in chromatic_numbers]
-            chord = abjad.scoretools.Chord(note)
+            chord = abjad.Chord(note)
             chord.note_heads[:] = chord_pitches
             abjad.mutate(note).replace(chord)
 
@@ -78,7 +76,11 @@ class DiatonicClusterHandler(Handler):
 
     @property
     def cluster_widths(self):
-        r'''Gets cluster widths of handler.
+        r'''Gets cluster widths.
+
+        Defaults to none.
+
+        Set to positive integers or none.
 
         Returns tuple of positive integers or none.
         '''

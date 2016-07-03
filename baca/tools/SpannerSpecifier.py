@@ -81,7 +81,103 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
     def selector(self):
         r'''Gets selector.
 
-        Defaults to none.
+        ..  container:: example
+
+            **Example 1.** Selects leaves:
+
+            ::
+
+                >>> figure_maker = baca.tools.FigureMaker(
+                ...     baca.tools.SpannerSpecifier(
+                ...         spanner=Slur(),
+                ...         ),
+                ...     )
+
+            ::
+
+                >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> result = figure_maker(figure_token)
+                >>> selection, time_signature, state_manifest = result
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
+                ...     [selection],
+                ...     [time_signature],
+                ...     pitched_staff=True,
+                ...     )
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> class_ = rhythmmakertools.RhythmMaker
+                >>> staff = class_._get_staff(lilypond_file)
+                >>> f(staff)
+                \new Staff {
+                    {
+                        \time 9/16
+                        {
+                            {
+                                c'16 [ (
+                                d'16
+                                bf'16 ]
+                            }
+                            {
+                                fs''16 [
+                                e''16
+                                ef''16
+                                af''16
+                                g''16 ]
+                            }
+                            {
+                                a'16 )
+                            }
+                        }
+                    }
+                }
+
+            This is default behavior.
+
+        ..  container:: example
+
+            **Example 2.** Selects leaves:
+
+            ::
+
+                >>> figure_maker = baca.tools.FigureMaker(
+                ...     baca.tools.SpannerSpecifier(
+                ...         spanner=Slur(),
+                ...         ),
+                ...     )
+
+            ::
+
+                >>> figure_token = [[0]]
+                >>> result = figure_maker(figure_token)
+                >>> selection, time_signature, state_manifest = result
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
+                ...     [selection],
+                ...     [time_signature],
+                ...     pitched_staff=True,
+                ...     )
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> class_ = rhythmmakertools.RhythmMaker
+                >>> staff = class_._get_staff(lilypond_file)
+                >>> f(staff)
+                \new Staff {
+                    {
+                        \time 1/16
+                        {
+                            {
+                                c'16
+                            }
+                        }
+                    }
+                }
+
+            Spanner refuses to span a single leaf.
+
+        Defaults to leaves.
 
         Set to selector or none.
 

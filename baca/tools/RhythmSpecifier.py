@@ -345,11 +345,6 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
             return [abjad.patterntools.select_all()]
         return self.patterns
 
-#    def _get_rhythm_maker(self):
-#        if self.rhythm_maker is None:
-#            return baca.tools.FigureRhythmMaker()
-#        return self.rhythm_maker
-
     def _get_rhythm_maker(self):
         if self.rhythm_maker is not None:
             return self.rhythm_maker

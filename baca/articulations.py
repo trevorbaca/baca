@@ -1,88 +1,68 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import durationtools
-from abjad.tools import indicatortools
+import abjad
 
 
-def accents(pattern=None):
+def accents():
     import baca
-    return baca.tools.ReiteratedArticulationHandler(
-        articulation_list=['>'],
-        pattern=pattern,
-        )
+    return baca.tools.ArticulationSpecifier(articulations=['>'])
 
 def alternate_accented_bow_strokes():
     import baca
-    return baca.tools.PatternedArticulationsHandler(
-        articulation_lists=(['upbow', 'accent'], ['downbow', 'accent']),
+    return baca.tools.ArticulationSpecifier(
+        articulations=(['upbow', 'accent'], ['downbow', 'accent']),
         )
 
 def alternate_bow_strokes(downbow_first=True):
     import baca
     if downbow_first:
-        return baca.tools.PatternedArticulationsHandler(
-            articulation_lists=(['downbow'], ['upbow']),
+        return baca.tools.ArticulationSpecifier(
+            articulations=(['downbow'], ['upbow']),
             )
     else:
-        return baca.tools.PatternedArticulationsHandler(
-            articulation_lists=(['upbow'], ['downbow']),
+        return baca.tools.ArticulationSpecifier(
+            articulations=(['upbow'], ['downbow']),
             )
 
 def down_bows():
     import baca
-    return baca.tools.ReiteratedArticulationHandler(
-        articulation_list=['downbow'],
-        )
+    return baca.tools.ArticulationSpecifier(articulations=['downbow'])
 
 def double_tonguing():
     import baca
-    return baca.tools.ReiteratedArticulationHandler(
-        articulation_list=['tongue #2'],
-        )
+    return baca.tools.ArticulationSpecifier(articulations=['tongue #2'])
 
 def flageolet():
-    return indicatortools.LilyPondCommand('flageolet', format_slot='right')
-
-def laissez_vibrer(pattern=None):
-    import baca
-    return baca.tools.ReiteratedArticulationHandler(
-        articulation_list=['laissezVibrer'],
-        pattern=pattern,
+    return abjad.indicatortools.LilyPondCommand(
+        'flageolet',
+        format_slot='right',
         )
+
+def laissez_vibrer():
+    import baca
+    return baca.tools.ArticulationSpecifier(articulations=['laissezVibrer'])
 
 def marcati():
     import baca
-    return baca.tools.ReiteratedArticulationHandler(
-        articulation_list=['marcato'],
-        skip_ties=True,
-        )
+    # TODO: avoid nontrivial logical ties
+    return baca.tools.ArticulationSpecifier(articulations=['marcato'])
 
 def staccati():
     import baca
-    return baca.tools.ReiteratedArticulationHandler(
-        articulation_list=['staccato'],
-        maximum_duration=durationtools.Duration(1, 2),
-        skip_ties=True,
-        )
+    # TODO: avoid nontrivial logical ties
+    return baca.tools.ArticulationSpecifier(articulations=['staccato'])
 
 def staccatissimi():
     import baca
-    return baca.tools.ReiteratedArticulationHandler(
-        articulation_list=['staccatissimo'],
-        skip_ties=True,
-        )
+    # TODO: avoid nontrivial logical ties
+    return baca.tools.ArticulationSpecifier(articulations=['staccatissimo'])
 
 def tenuti():
     import baca
-    return baca.tools.ReiteratedArticulationHandler(
-        articulation_list=['tenuto'],
-        )
+    return baca.tools.ArticulationSpecifier(articulations=['tenuto'])
 
-def stem_tremolo(pattern=None):
+def stem_tremolo():
     import baca
-    return baca.tools.StemTremoloHandler(
-        hash_mark_counts=[32],
-        pattern=pattern,
-        )
+    return baca.tools.StemTremoloSpecifier(tremolo_flags=32)
 
 def tremolo_down(n, maximum_adjustment=-1.5):
     import baca
@@ -91,7 +71,7 @@ def tremolo_down(n, maximum_adjustment=-1.5):
         grob_name='stem_tremolo',
         attribute_name='extra_offset',
         attribute_value=str(pair),
-        maximum_written_duration=durationtools.Duration(1),
+        maximum_written_duration=abjad.Duration(1),
         maximum_settings={
             'grob_name': 'stem_tremolo',
             'attribute_name': 'extra_offset',
@@ -101,6 +81,4 @@ def tremolo_down(n, maximum_adjustment=-1.5):
 
 def up_bows():
     import baca
-    return baca.tools.ReiteratedArticulationHandler(
-        articulation_list=['upbow'],
-        )
+    return baca.tools.ArticulationSpecifier(articulations=['upbow'])
