@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import abjad
 import baca
+import copy
 
 
 class FigureMaker(abjad.abctools.AbjadObject):
@@ -60,7 +61,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 2.** Unknown keyword raises exception
+        **Example 2.** Unknown keyword raises exception:
 
         ::
 
@@ -76,16 +77,35 @@ class FigureMaker(abjad.abctools.AbjadObject):
     __documentation_section__ = 'Figures'
 
     __slots__ = (
+        '_allow_repeated_pitches',
         '_annotate_unregistered_pitches',
         '_next_figure',
         '_preferred_denominator',
         '_specifiers',
         )
 
-    _keywords = (
+    _foreshadow_tag = 'foreshadow'
+
+    _incomplete_tag = 'incomplete'
+
+    _initializer_keywords = (
+        'allow_repeated_pitches',
         'annotate_unregistered_pitches',
         'preferred_denominator',
         )
+
+    _calltime_keywords = _initializer_keywords + (
+        'extend_beam',
+        'figure_name',
+        'is_foreshadow',
+        'is_incomplete',
+        'is_recollection',
+        'state_manifest',
+        )
+
+    _recollection_tag = 'recollection'
+
+    _repeated_pitch_allowed_string = 'repeated pitch allowed'
 
     _state_variables = (
         '_next_figure',
@@ -94,14 +114,18 @@ class FigureMaker(abjad.abctools.AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self, *specifiers, **keywords):
+        allow_repeated_pitches = keywords.get('allow_repeated_pitches')
         annotate_unregistered_pitches = keywords.get(
             'annotate_unregistered_pitches')
         preferred_denominator = keywords.get('preferred_denominator')
         for name in keywords:
-            if name not in self._keywords:
+            if name not in self._initializer_keywords:
                 message = 'unknown keyword: {!r}.'
                 message = message.format(name)
                 raise Exception(message)
+        if allow_repeated_pitches is not None:
+            allow_repeated_pitches = bool(allow_repeated_pitches)
+        self._allow_repeated_pitches = allow_repeated_pitches
         if annotate_unregistered_pitches is not None:
             annotate_unregistered_pitches = bool(annotate_unregistered_pitches)
         self._annotate_unregistered_pitches = annotate_unregistered_pitches
@@ -121,15 +145,39 @@ class FigureMaker(abjad.abctools.AbjadObject):
         ):
         r'''Calls figure-maker on `figure_token`.
 
+        ..  container:: example
+
+            **Example.** Unknown keyword raises exception:
+
+            ::
+
+                >>> figure_maker = baca.tools.FigureMaker()
+
+            ::
+
+                >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> result = figure_maker(figure_token, color='red')
+                Traceback (most recent call last):
+                ...
+                Exception: unknown keyword: 'color'.
+
         Returns selection, time signature, state manifest.
         '''
         annotate_unregistered_pitches = keywords.get(
             'annotate_unregistered_pitches')
         exhaustive = keywords.get('exhaustive')
         extend_beam = keywords.get('extend_beam')
+        figure_name = keywords.get('figure_name')
+        is_foreshadow = keywords.get('is_foreshadow')
+        is_incomplete = keywords.get('is_incomplete')
+        is_recollection = keywords.get('is_recollection')
         preferred_denominator = keywords.get('preferred_denominator')
         state_manifest = keywords.get('state_manifest')
-        exhaustive = bool(exhaustive)
+        for keyword in keywords:
+            if keyword not in self._calltime_keywords:
+                message = 'unknown keyword: {!r}.'
+                message = message.format(keyword)
+                raise Exception(message)
         self._apply_state_manifest(state_manifest)
         container = self._make_selections(figure_token)
         self._annotate_unregistered_pitches_(
@@ -138,6 +186,14 @@ class FigureMaker(abjad.abctools.AbjadObject):
             )
         assert isinstance(container, abjad.Container), repr(container)
         self._apply_calltime_specifiers(container, specifiers)
+        self._label_figure_name_(container, figure_name)
+        self._annotate_figure_token(container, figure_token)
+        self._annotate_deployment(
+            container,
+            is_foreshadow=is_foreshadow,
+            is_recollection=is_recollection,
+            )
+        self._annotate_repeated_pitches(container)
         self._extend_beam_(container, extend_beam)
         self._check_well_formedness(container)
         time_signature = self._make_time_signature(
@@ -167,6 +223,35 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
     ### PRIVATE METHODS ###
 
+    def _annotate_repeated_pitches(self, container):
+        if not self.allow_repeated_pitches:
+            return
+        for leaf in abjad.iterate(container).by_leaf(pitched=True):
+            abjad.attach(self._repeated_pitch_allowed_string, leaf)
+
+    def _annotate_deployment(
+        self,
+        object_,
+        is_foreshadow=False,
+        is_incomplete=False,
+        is_recollection=False,
+        ):
+        if not is_foreshadow and not is_recollection and not is_incomplete:
+            return
+        for leaf in abjad.iterate(object_).by_leaf():
+            if is_foreshadow:
+                abjad.attach(self._foreshadow_tag, leaf)
+            if is_incomplete:
+                abjad.attach(self._incomplete_tag, leaf)
+            if is_recollection:
+                abjad.attach(self._recollection_tag, leaf)
+
+    @staticmethod
+    def _annotate_figure_token(container, figure_token):
+        for leaf in abjad.iterate(container).by_leaf():
+            figure_token_ = copy.deepcopy(figure_token)
+            abjad.attach(figure_token_, leaf)
+
     def _annotate_unregistered_pitches_(
         self,
         expr,
@@ -181,11 +266,22 @@ class FigureMaker(abjad.abctools.AbjadObject):
         for note in agent.by_leaf(prototype, with_grace_notes=True):
             abjad.attach('not yet registered', note)
 
-    def _apply_calltime_specifiers(self, selections, specifiers):
-        if specifiers is None:
-            return
+    def _apply_calltime_specifiers(self, container, specifiers):
+        assert isinstance(container, abjad.Container), repr(container)
+        selections = [abjad.select(_) for _ in container]
+        nested_selections = None
         for specifier in specifiers:
-            specifier(selections)
+            if isinstance(specifier, baca.tools.RhythmSpecifier):
+                continue
+            if isinstance(specifier, abjad.rhythmmakertools.BeamSpecifier):
+                specifier._detach_all_beams(selections)
+            if isinstance(specifier, baca.tools.NestingSpecifier):
+                nested_selections = specifier(selections)
+            else:
+                specifier(selections)
+        if nested_selections is not None:
+            return nested_selections
+        return selections
 
     def _apply_specifiers(self, selections):
         nested_selections = None
@@ -260,6 +356,37 @@ class FigureMaker(abjad.abctools.AbjadObject):
             result.append(specifier)
         return result
 
+    @staticmethod
+    def _label_figure_name_(container, figure_name):
+        if figure_name is None:
+            return
+        figure_name = str(figure_name)
+        parts = figure_name.split('_')
+        if len(parts) == 1:
+            body = parts[0]
+            figure_name = abjad.Markup(body)
+        elif len(parts) == 2:
+            body, subscript = parts
+            figure_name = abjad.Markup.concat([
+                abjad.Markup(body),
+                abjad.Markup(subscript).sub(),
+                ])
+        else:
+            message = 'unrecognized figure name: {!r}.'
+            message = message.format(figure_name)
+            raise Exception(figure_name)
+        figure_name = abjad.Markup.concat([
+            '[',
+            figure_name,
+            ']',
+            ])
+        figure_name = figure_name.with_color('darkgreen')
+        figure_name = figure_name.fontsize(3)
+        figure_name = abjad.Markup(figure_name, direction=Up)
+        figure_name._annotation = 'figure name'
+        leaves = list(abjad.iterate(container).by_leaf())
+        abjad.attach(figure_name, leaves[0])
+
     def _make_selections(self, figure_token):
         tagged_rhythms = []
         rhythm_specifiers = self._get_rhythm_specifiers()
@@ -302,8 +429,20 @@ class FigureMaker(abjad.abctools.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
+    def allow_repeated_pitches(self):
+        r'''Is true when figure-maker allows repeated pitches.
+
+        Defaults to none.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        '''
+        return self._allow_repeated_pitches
+
+    @property
     def annotate_unregistered_pitches(self):
-        r'''Is true when figure maker annotates unregistered pitches.
+        r'''Is true when figure-maker annotates unregistered pitches.
 
         Defaults to none.
 

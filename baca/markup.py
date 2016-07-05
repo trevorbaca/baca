@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import abjad
+import baca
 
 
 ### factory functions ###
@@ -22,14 +23,32 @@ def make_markup_lines(strings, direction=Up):
     markup = abjad.Markup.column(lines, direction=Up)
     return markup
 
-def make_markup_specifier(markups):
-    import baca
+def make_markup_lines_specifier(strings, direction=Up, selector=None):
+    markup = make_markup_lines(strings, direction=direction)
     return baca.tools.MarkupSpecifier(
-        markup=markups,
+        markup=markup,
+        selector=selector,
+        )
+
+def make_markup_specifier(
+    string,
+    direction=Up,
+    is_new=True,
+    selector=None,
+    whiteout=True,
+    ):
+    markup = make_markup(
+        string,
+        direction=direction,
+        is_new=is_new,
+        whiteout=whiteout,
+        )
+    return baca.tools.MarkupSpecifier(
+        markup=markup,
+        selector=selector,
         )
 
 def make_repeated_markup(markups):
-    import baca
     return baca.tools.MarkupSpecifier(
         markup=markups,
         selector=abjad.select().
@@ -271,6 +290,12 @@ def glissando_lentissimo():
 def gridato_possibile():
     return make_markup('gridato possibile')
 
+def kn_rasg(is_new=True):
+    return make_markup('kn. rasg.', is_new=is_new)
+
+def knuckle_rasg(is_new=True):
+    return make_markup('knuckle rasg.', is_new=is_new)
+
 def leggieriss():
     return make_markup('leggieriss.')
 
@@ -289,6 +314,13 @@ def make_boxed_markup(string, whiteout=True):
     if whiteout:
         markup = markup.whiteout()
     return markup
+
+def make_boxed_markup_specifier(string, whiteout=True):
+    markup = abjad.Markup(string, direction=Up)
+    markup = markup.box().override(('box-padding', 0.5))
+    if whiteout:
+        markup = markup.whiteout()
+    return baca.tools.MarkupSpecifier(markup=markup)
 
 def make_boxed_markup_lines(strings, direction=Up, whiteout=True):
     assert isinstance(strings, list), repr(strings)
@@ -382,6 +414,12 @@ def molto_pont_plus_vib_molto(
 
 def MP_XFB_flaut():
     return make_markup('MP + XFB flaut.')
+
+def nail_rasg(is_new=True):
+    return make_markup('nail rasg.', is_new=is_new)
+
+def nail_rasgueado(is_new=True):
+    return make_markup('nail rasgueado', is_new=is_new)
 
 def non_flautando():
     return make_markup('non flautando')
@@ -536,6 +574,9 @@ def pont_XFB():
 def pont_XFB_flaut():
     return make_markup('pont. + XFB flaut.')
 
+def ponticello(is_new=True):
+    return make_markup('ponticello', is_new=is_new)
+
 def pos_ord():
     return make_markup('pos. ord.')
 
@@ -589,11 +630,17 @@ def spazzolato():
 def spazzolato_1_2_clt():
     return make_markup('spazzolato (1/2 clt)')
 
+def still(is_new=True):
+    return make_markup('still', is_new=is_new)
+
 def subito_non_armonichi_e_non_gridato():
     return make_markup('subito non armonichi e non gridato')
 
 def subito_ordinario():
     return make_markup('subito ordinario')
+
+def tamb_tr(is_new=True):
+    return make_markup('tamb. tr.', is_new=is_new)
 
 def tasto(is_new=True):
     return make_markup('tasto', is_new=is_new)

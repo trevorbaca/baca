@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import abjad
+import baca
 import numbers
 
 
 def beam_positions(n):
-    import baca
     assert isinstance(n, (int, float)), repr(n)
     return baca.tools.OverrideSpecifier(
         grob_name='beam',
@@ -13,7 +13,6 @@ def beam_positions(n):
         )
 
 def cross_note_heads():
-    import baca
     return baca.tools.OverrideSpecifier(
         grob_name='note_head',
         attribute_name='style',
@@ -21,7 +20,6 @@ def cross_note_heads():
         )
 
 def dynamic_line_spanner_staff_padding(n):
-    import baca
     return baca.tools.OverrideSpecifier(
         grob_name='dynamic_line_spanner',
         attribute_name='staff_padding',
@@ -29,7 +27,6 @@ def dynamic_line_spanner_staff_padding(n):
         )
 
 def dynamic_line_spanner_up():
-    import baca
     return baca.tools.OverrideSpecifier(
         grob_name='dynamic_line_spanner',
         attribute_name='direction',
@@ -37,7 +34,6 @@ def dynamic_line_spanner_up():
         )
 
 def natural_harmonics():
-    import baca
     return baca.tools.OverrideSpecifier(
         grob_name='note_head',
         attribute_name='style',
@@ -45,7 +41,6 @@ def natural_harmonics():
         )
 
 def proportional_notation_duration(duration):
-    import baca
     assert isinstance(duration, tuple), repr(duration)
     assert len(duration) == 2, repr(duration)
     moment = abjad.schemetools.SchemeMoment(duration)
@@ -56,7 +51,6 @@ def proportional_notation_duration(duration):
         )
 
 def repeat_tie_down():
-    import baca
     return baca.tools.OverrideSpecifier(
         grob_name='repeat_tie',
         attribute_name='direction',
@@ -64,15 +58,20 @@ def repeat_tie_down():
         )
 
 def repeat_tie_up():
-    import baca
     return baca.tools.OverrideSpecifier(
         grob_name='repeat_tie',
         attribute_name='direction',
         attribute_value='Up',
         )
 
+def script_direction(direction):
+    return baca.tools.OverrideSpecifier(
+        grob_name='script',
+        attribute_name='direction',
+        attribute_value=str(direction),
+        )
+
 def stem_direction(direction):
-    import baca
     return baca.tools.OverrideSpecifier(
         grob_name='stem',
         attribute_name='direction',
@@ -80,7 +79,6 @@ def stem_direction(direction):
         )
 
 def stem_down():
-    import baca
     return baca.tools.OverrideSpecifier(
         grob_name='stem',
         attribute_name='direction',
@@ -88,7 +86,6 @@ def stem_down():
         )
 
 def stem_up():
-    import baca
     return baca.tools.OverrideSpecifier(
         grob_name='stem',
         attribute_name='direction',
@@ -96,15 +93,20 @@ def stem_up():
         )
 
 def text_script_color(color):
-    import baca
     return baca.tools.OverrideSpecifier(
         grob_name='text_script',
         attribute_name='color',
         attribute_value=repr(color),
         )
 
+def text_script_down():
+    return baca.tools.OverrideSpecifier(
+        grob_name='text_script',
+        attribute_name='direction',
+        attribute_value='Down',
+        )
+
 def text_script_padding(n):
-    import baca
     assert isinstance(n, numbers.Number), repr(n)
     return baca.tools.OverrideSpecifier(
         grob_name='text_script',
@@ -113,7 +115,6 @@ def text_script_padding(n):
         )
 
 def text_script_staff_padding(n):
-    import baca
     assert isinstance(n, numbers.Number), repr(n)
     return baca.tools.OverrideSpecifier(
         grob_name='text_script',
@@ -121,8 +122,14 @@ def text_script_staff_padding(n):
         attribute_value=n,
         )
 
+def text_script_up():
+    return baca.tools.OverrideSpecifier(
+        grob_name='text_script',
+        attribute_name='direction',
+        attribute_value='Up',
+        )
+
 def text_spanner_staff_padding(n):
-    import baca
     return baca.tools.OverrideSpecifier(
         grob_name='text_spanner',
         attribute_name='staff_padding',
@@ -130,7 +137,6 @@ def text_spanner_staff_padding(n):
         )
 
 def tie_direction(direction):
-    import baca
     return baca.tools.OverrideSpecifier(
         grob_name='tie',
         attribute_name='direction',
@@ -138,7 +144,6 @@ def tie_direction(direction):
         )
 
 def time_signature_extra_offset(extra_offset_pair):
-    import baca
     assert isinstance(extra_offset_pair, tuple), repr(extra_offset_pair)
     return baca.tools.OverrideSpecifier(
         context_name='score',
@@ -148,15 +153,20 @@ def time_signature_extra_offset(extra_offset_pair):
         )
 
 def tuplet_bracket_down():
-    import baca
     return baca.tools.OverrideSpecifier(
         grob_name='tuplet_bracket',
         attribute_name='direction',
         attribute_value=Down,
         )
 
+def tuplet_bracket_extra_offset(pair):
+    return baca.tools.OverrideSpecifier(
+        grob_name='tuplet_bracket',
+        attribute_name='extra_offset',
+        attribute_value=pair,
+        )
+
 def tuplet_bracket_staff_padding(n):
-    import baca
     return baca.tools.OverrideSpecifier(
         grob_name='tuplet_bracket',
         attribute_name='staff_padding',
@@ -164,9 +174,15 @@ def tuplet_bracket_staff_padding(n):
         )
 
 def tuplet_bracket_up():
-    import baca
     return baca.tools.OverrideSpecifier(
         grob_name='tuplet_bracket',
         attribute_name='direction',
         attribute_value='Up',
+        )
+        
+def tuplet_number_extra_offset(pair):
+    return baca.tools.OverrideSpecifier(
+        grob_name='tuplet_number',
+        attribute_name='extra_offset',
+        attribute_value=pair,
         )

@@ -11,7 +11,7 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 1.**
+        **Example.** Transposes to the octave of Eb5:
 
         ::
 
@@ -25,11 +25,11 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.tools.stages(1)),
             ...     [
-            ...         baca.pitch.pitches('G4 G4 G4 G4 Eb4 Eb4 Eb4'),
+            ...         baca.pitch.pitches('G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4'),
             ...         baca.rhythm.make_even_run_rhythm_specifier(),
             ...         baca.tools.RegisterSpecifier(
             ...             registration=pitchtools.Registration(
-            ...                 [('[A0, C4)', 15), ('[C4, C8)', 27)],
+            ...                 [('[A0, C8]', 15)],
             ...                 ),
             ...             ),
             ...         ],
@@ -91,26 +91,26 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
                         \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             {
-                                g'''8 [
-                                g'''8
-                                g'''8
-                                g'''8 ]
+                                g''8 [
+                                gqs''8
+                                gs''8
+                                gtqs''8 ]
                             }
                             {
-                                ef'''8 [
-                                ef'''8
-                                ef'''8 ]
+                                aqf''8 [
+                                af''8
+                                atqf''8 ]
                             }
                             {
-                                g'''8 [
-                                g'''8
-                                g'''8
-                                g'''8 ]
+                                g''8 [
+                                gqs''8
+                                gs''8
+                                gtqs''8 ]
                             }
                             {
-                                ef'''8 [
-                                ef'''8
-                                ef'''8 ]
+                                aqf''8 [
+                                af''8
+                                atqf''8 ]
                                 \bar "|"
                             }
                         }

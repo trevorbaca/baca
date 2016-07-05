@@ -808,7 +808,11 @@ class SpacingSpecifier(abjad.abctools.AbjadObject):
         leaves = abjad.iterate(score).by_leaf()
         minimum_leaf_durations_by_measure = \
             self._get_minimum_leaf_durations_by_measure(skip_context, leaves)
-        fermata_start_offsets = segment_maker._fermata_start_offsets
+        fermata_start_offsets = getattr(
+            segment_maker,
+            '_fermata_start_offsets',
+            [],
+            )
         skips = abjad.iterate(skip_context).by_leaf(abjad.scoretools.Skip)
         for measure_index, skip in enumerate(skips):
             measure_timespan = abjad.inspect_(skip).get_timespan()

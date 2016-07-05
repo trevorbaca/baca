@@ -112,7 +112,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
     Treats input as time signatures. Glues input together into hypermeasures
     according to optional measure counts. Postprocesses resulting
-    hypermeasures with optional secondary division maker.
+    hypermeasures with optional secondary division-maker.
 
     Follows the two-step configure-once / call-repeatly pattern shown here.
     '''
@@ -611,7 +611,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
     @property
     def counts(self):
-        r'''Gets measure counts of hypermeasure division maker.
+        r'''Gets measure counts of hypermeasure division-maker.
 
         Set to (possibly empty) list or tuple of positive integers.
 
@@ -621,7 +621,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
     @property
     def cyclic(self):
-        r'''Is true when hypermeasure division maker treats measure 
+        r'''Is true when hypermeasure division-maker treats measure 
         counts cyclically. Otherwise false.
 
         Set to true or false.

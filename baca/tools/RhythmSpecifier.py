@@ -104,7 +104,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
         ):
         self._clef = clef
         if division_expression is not None and division_maker is not None:
-            message = 'can not set both division expression and division maker'
+            message = 'can not set both division expression and division-maker'
             message += ':\n{} {}.'
             message = message.format(division_expression, division_maker)
             raise Exception(message)
@@ -475,11 +475,11 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
 
     @property
     def division_maker(self):
-        r'''Gets division maker.
+        r'''Gets division-maker.
 
-        Set to none or division maker.
+        Set to none or division-maker.
 
-        Returns none or division maker.
+        Returns none or division-maker.
         '''
         return self._division_maker
 

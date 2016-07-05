@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import abjad
 
 
 def change(expr, visitor):
@@ -7,12 +8,15 @@ def change(expr, visitor):
     Returns `expr`.
     '''
     if isinstance(expr, list):
-        for x in expr[:]:
-            expr[expr.index(x)] = change(x, visitor)
+        for component in expr[:]:
+            new_component = change(component, visitor)
+            expr[expr.index(component)] = new_component
         return expr
-    elif hasattr(expr, 'music'):
-        for m in expr.music[:]:
-            expr.music[expr.music.index(m)] = change(m, visitor)
+    elif hasattr(expr, '_music'):
+        for component in expr._music[:]:
+            new_component = change(component, visitor)
+            if new_component is not None:
+                abjad.mutate(component).replace([new_component])
         return expr
     else:
         return visitor.visit(expr)

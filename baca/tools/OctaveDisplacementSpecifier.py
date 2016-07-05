@@ -11,7 +11,7 @@ class OctaveDisplacementSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 1.**
+        **Example.** Displaces octaves:
 
         ::
 
@@ -128,22 +128,25 @@ class OctaveDisplacementSpecifier(abjad.abctools.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        displacements=None,
-        ):
-        displacements = tuple(displacements)
-        assert self._is_octave_displacement_vector(displacements)
-        displacements = abjad.datastructuretools.CyclicTuple(displacements)
+    def __init__(self, displacements=None):
+        if displacements is not None:
+            displacements = tuple(displacements)
+            assert self._is_octave_displacement_vector(displacements)
+            displacements = abjad.datastructuretools.CyclicTuple(displacements)
         self._displacements = displacements
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, logical_ties):
-        r'''Calls displacement specifier.
+    def __call__(self, expr=None):
+        r'''Calls specifier on `expr`.
 
         Returns none.
         '''
+        if self.displacements is None:
+            return
+        logical_ties = abjad.iterate(expr).by_logical_tie(
+            with_grace_notes=True,
+            )
         for i, logical_tie in enumerate(logical_ties):
             assert isinstance(logical_tie, abjad.selectiontools.LogicalTie)
             displacement = self.displacements[i]
@@ -182,8 +185,10 @@ class OctaveDisplacementSpecifier(abjad.abctools.AbjadObject):
                 >>> specifier.displacements
                 CyclicTuple([0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2])
 
+        Defaults to none.
+
         Set to integers or none.
 
-        Returns cyclic tuple or none.
+        Returns cyclic tuple of integers or none.
         '''
         return self._displacements

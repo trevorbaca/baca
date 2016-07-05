@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import abjad
+import baca
 
 
 def make_ancora_dynamic(dynamic_name, direction=Down):
@@ -33,7 +34,6 @@ def make_hairpins(
     omit_lone_note_dynamic=None,
     span='contiguous notes and chords',
     ):
-    import baca
     hairpin_tokens_ = []
     for hairpin_token in hairpin_tokens:
         if isinstance(hairpin_token, str):
@@ -51,7 +51,6 @@ def make_hairpins(
         )
 
 def make_niente_swell_specifiers(dynamics):
-    import baca
     swell_specifiers = []
     for dynamic in dynamics:
         start_token = 'niente < {}'
@@ -74,7 +73,6 @@ def make_possibile_dynamic(dynamic_name, direction=Down):
     return markup
 
 def make_reiterated_dynamic(dynamic_name):
-    import baca
     return baca.tools.ArticulationSpecifier(
         articulations=[dynamic_name],
         )

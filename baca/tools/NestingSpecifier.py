@@ -46,7 +46,9 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
             return selections
         tuplets = []
         for selection in selections:
-            assert isinstance(selection, abjad.selectiontools.Selection)
+            if not isinstance(selection, abjad.selectiontools.Selection):
+                message = 'should be selection: {!r}.'
+                message = message.format(selection)
             assert len(selection) == 1, repr(selection)
             assert isinstance(selection[0], abjad.scoretools.Tuplet)
             tuplets.append(selection[0])

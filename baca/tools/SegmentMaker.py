@@ -271,14 +271,17 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
     __documentation_section__ = 'Segments'
 
     __slots__ = (
+        '_allow_figure_names',
         '_cached_leaves_with_rests',
         '_cached_leaves_without_rests',
         '_cached_score_template_start_clefs',
         '_cached_score_template_start_instruments',
+        '_design_checker',
         '_fermata_start_offsets',
         '_final_barline',
         '_final_markup',
         '_final_markup_extra_offset',
+        '_ignore_duplicate_pitch_classes',
         '_ignore_unpitched_notes',
         '_ignore_unregistered_pitches',
         '_label_clock_time',
@@ -324,9 +327,12 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
     def __init__(
         self,
+        allow_figure_names=None,
+        design_checker=None,
         final_barline=None,
         final_markup=None,
         final_markup_extra_offset=None,
+        ignore_duplicate_pitch_classes=None,
         ignore_unpitched_notes=None,
         ignore_unregistered_pitches=None,
         label_clock_time=None,
@@ -348,8 +354,12 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         ):
         superclass = super(SegmentMaker, self)
         superclass.__init__()
+        if allow_figure_names is not None:
+            allow_figure_names = bool(allow_figure_names)
+        self._allow_figure_names = allow_figure_names
         self._cached_leaves_with_rests = None
         self._cached_leaves_without_rests = None
+        self._design_checker = design_checker
         self._fermata_start_offsets = []
         if final_barline is not None:
             assert isinstance(final_barline, str), repr(final_barline)
@@ -360,15 +370,21 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         if final_markup_extra_offset is not None:
             assert isinstance(final_markup_extra_offset, tuple)
         self._final_markup_extra_offset = final_markup_extra_offset
+        if ignore_duplicate_pitch_classes is not None:
+            ignore_duplicate_pitch_classes = bool(
+                ignore_duplicate_pitch_classes)
+        self._ignore_duplicate_pitch_classes = ignore_duplicate_pitch_classes
         if ignore_unpitched_notes is not None:
             ignore_unpitched_notes = bool(ignore_unpitched_notes)
         self._ignore_unpitched_notes = ignore_unpitched_notes
         if ignore_unregistered_pitches is not None:
             ignore_unregistered_pitches = bool(ignore_unregistered_pitches)
         self._ignore_unregistered_pitches = ignore_unregistered_pitches
-        assert isinstance(label_clock_time, (bool, type(None)))
+        if label_clock_time is not None:
+            label_clock_time = bool(label_clock_time)
         self._label_clock_time = label_clock_time
-        assert isinstance(label_stages, (bool, type(None)))
+        if label_stages is not None:
+            label_stages = bool(label_stages)
         self._label_stage_numbers = label_stages
         self._measures_per_stage = measures_per_stage
         self._print_segment_duration = print_segment_duration
@@ -422,6 +438,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         #self._hide_fermata_measure_staff_lines()
         self._extend_beams()
         self._interpret_scoped_specifiers()
+        self._detach_figure_names()
         self._shorten_long_repeat_ties()
         self._attach_first_segment_default_instruments()
         self._attach_first_segment_default_clefs()
@@ -438,6 +455,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         self._color_unregistered_pitches()
         self._color_unpitched_notes()
         self._check_well_formedness()
+        self._check_design()
         self._update_segment_metadata()
         self._print_segment_duration_()
         return self._lilypond_file, self._segment_metadata
@@ -750,6 +768,11 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             # TODO: adjust TempoSpanner to make measure attachment work
             abjad.attach(directive, start_skip, is_annotation=True)
 
+    def _check_design(self):
+        if self.design_checker is None:
+            return
+        return self.design_checker(self._score)
+
     def _check_well_formedness(self):
         import baca
         score_block = self._lilypond_file['score']
@@ -758,6 +781,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             inspector = abjad.inspect_(score)
             string = inspector.tabulate_well_formedness_violations()
             raise Exception(string)
+        if self.ignore_duplicate_pitch_classes:
+            return
         manager = baca.tools.WellformednessManager()
         if not manager.is_well_formed(score):
             string = manager.tabulate_well_formedness_violations(score)
@@ -865,6 +890,15 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             stop_offset = start_offset + duration
             previous_stop_offset = stop_offset
         return True
+
+    def _detach_figure_names(self):
+        if self.allow_figure_names:
+            return
+        for leaf in abjad.iterate(self._score).by_leaf():
+            markups = abjad.inspect_(leaf).get_indicators(abjad.Markup)
+            for markup in markups:
+                if markup._annotation == 'figure name':
+                    abjad.detach(markup, leaf)
 
     def _evaluate_selector(
         self,
@@ -1747,12 +1781,15 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 abjad.attach(command, leaf)
 
     def _stage_number_to_measure_indices(self, stage_number):
+        if stage_number == 'end':
+            stage_number = self.stage_count
         if self.stage_count < stage_number:
             message = 'segment has only {} {} (not {}).'
             unit = abjad.stringtools.pluralize('stage', self.stage_count)
             message = message.format(self.stage_count, unit, stage_number)
             raise Exception(message)
-        measure_indices = abjad.mathtools.cumulative_sums(self.measures_per_stage)
+        measure_indices = abjad.mathtools.cumulative_sums(
+            self.measures_per_stage)
         start_measure_index = measure_indices[stage_number-1]
         stop_measure_index = measure_indices[stage_number] - 1
         return start_measure_index, stop_measure_index
@@ -1859,6 +1896,374 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         self._segment_metadata = segment_metadata
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def allow_figure_names(self):
+        r'''Is true when segment allows figure names.
+
+        Is false when segment strips figure names.
+
+        ..  container:: example
+
+            **Example 1.** Strips figure names:
+
+                >>> figure_maker = baca.tools.FigureMaker()
+
+            ::
+
+                >>> figure_tokens = [
+                ...     [[4]],
+                ...     [[6, 2, 3, 5, 9, 8, 0]],
+                ...     [[11]],
+                ...     [[10, 7, 9, 8, 0, 5]],
+                ...     ]
+                >>> figures, time_signatures = [], []
+                >>> for i, figure_token in enumerate(figure_tokens):
+                ...     result = figure_maker(figure_token, figure_name=i)
+                ...     selection, time_signature, state_manifest = result
+                ...     figures.append(selection)
+                ...     time_signatures.append(time_signature)    
+                ...
+                >>> figures_ = []
+                >>> for figure in figures:
+                ...     figures_.extend(figure)
+                ...
+                >>> figures = select(figures_)
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     spacing_specifier=baca.tools.SpacingSpecifier(
+                ...         minimum_width=Duration(1, 24),
+                ...         ),
+                ...     time_signatures=time_signatures,
+                ...     )
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.tools.RhythmSpecifier(
+                ...         rhythm_maker=figures,
+                ...         ),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> score = lilypond_file.score_block.items[0]
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 1/16
+                                R1 * 1/16
+                            }
+                            {
+                                \time 7/16
+                                R1 * 7/16
+                            }
+                            {
+                                \time 1/16
+                                R1 * 1/16
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 1/16
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 1/16
+                            }
+                            {
+                                \time 7/16
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 7/16
+                            }
+                            {
+                                \time 1/16
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 1/16
+                            }
+                            {
+                                \time 3/8
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    {
+                                        e'16
+                                    }
+                                }
+                                {
+                                    {
+                                        fs'16 [
+                                        d'16
+                                        ef'16
+                                        f'16
+                                        a'16
+                                        af'16
+                                        c'16 ]
+                                    }
+                                }
+                                {
+                                    {
+                                        b'16
+                                    }
+                                }
+                                {
+                                    {
+                                        bf'16 [
+                                        g'16
+                                        a'16
+                                        af'16
+                                        c'16
+                                        f'16 ]
+                                        \bar "|"
+                                    }
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+            This is default behavior.
+
+        ..  container:: example
+
+            **Example 2.** Allows figure names:
+
+                >>> figure_maker = baca.tools.FigureMaker()
+
+            ::
+
+                >>> figure_tokens = [
+                ...     [[4]],
+                ...     [[6, 2, 3, 5, 9, 8, 0]],
+                ...     [[11]],
+                ...     [[10, 7, 9, 8, 0, 5]],
+                ...     ]
+                >>> figures, time_signatures = [], []
+                >>> for i, figure_token in enumerate(figure_tokens):
+                ...     result = figure_maker(figure_token, figure_name=i)
+                ...     selection, time_signature, state_manifest = result
+                ...     figures.append(selection)
+                ...     time_signatures.append(time_signature)    
+                ...
+                >>> figures_ = []
+                >>> for figure in figures:
+                ...     figures_.extend(figure)
+                ...
+                >>> figures = select(figures_)
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     allow_figure_names=True,
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     spacing_specifier=baca.tools.SpacingSpecifier(
+                ...         minimum_width=Duration(1, 24),
+                ...         ),
+                ...     time_signatures=time_signatures,
+                ...     )
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     baca.tools.RhythmSpecifier(
+                ...         rhythm_maker=figures,
+                ...         ),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> score = lilypond_file.score_block.items[0]
+                >>> override(score).text_script.staff_padding = 3
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" \with {
+                    \override TextScript.staff-padding = #3
+                } <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 1/16
+                                R1 * 1/16
+                            }
+                            {
+                                \time 7/16
+                                R1 * 7/16
+                            }
+                            {
+                                \time 1/16
+                                R1 * 1/16
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 1/16
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 1/16
+                            }
+                            {
+                                \time 7/16
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 7/16
+                            }
+                            {
+                                \time 1/16
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 1/16
+                            }
+                            {
+                                \time 3/8
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    {
+                                        e'16
+                                            ^ \markup {
+                                                \fontsize
+                                                    #3
+                                                    \with-color
+                                                        #darkgreen
+                                                        \concat
+                                                            {
+                                                                [
+                                                                0
+                                                                ]
+                                                            }
+                                                }
+                                    }
+                                }
+                                {
+                                    {
+                                        fs'16 [
+                                            ^ \markup {
+                                                \fontsize
+                                                    #3
+                                                    \with-color
+                                                        #darkgreen
+                                                        \concat
+                                                            {
+                                                                [
+                                                                1
+                                                                ]
+                                                            }
+                                                }
+                                        d'16
+                                        ef'16
+                                        f'16
+                                        a'16
+                                        af'16
+                                        c'16 ]
+                                    }
+                                }
+                                {
+                                    {
+                                        b'16
+                                            ^ \markup {
+                                                \fontsize
+                                                    #3
+                                                    \with-color
+                                                        #darkgreen
+                                                        \concat
+                                                            {
+                                                                [
+                                                                2
+                                                                ]
+                                                            }
+                                                }
+                                    }
+                                }
+                                {
+                                    {
+                                        bf'16 [
+                                            ^ \markup {
+                                                \fontsize
+                                                    #3
+                                                    \with-color
+                                                        #darkgreen
+                                                        \concat
+                                                            {
+                                                                [
+                                                                3
+                                                                ]
+                                                            }
+                                                }
+                                        g'16
+                                        a'16
+                                        af'16
+                                        c'16
+                                        f'16 ]
+                                        \bar "|"
+                                    }
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        Defaults to none.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        '''
+        return self._allow_figure_names
+
+    @property
+    def design_checker(self):
+        r'''Gets design-checker.
+
+        Defaults to none.
+
+        Set to design-checker or none.
+
+        Returns design-checker or none.
+        '''
+        return self._design_checker
 
     @property
     def final_barline(self):
@@ -2943,6 +3348,20 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         '''
         return self._final_markup_extra_offset
 
+    @property
+    def ignore_duplicate_pitch_classes(self):
+        r'''Is true when segment ignores duplicate pitch-classes.
+
+        Is false when segment raises exception on duplicate pitch-classes.
+
+        Defaults to none.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        '''
+        return self._ignore_duplicate_pitch_classes
+    
     @property
     def ignore_unpitched_notes(self):
         r'''Is true when segment ignores unpitched notes.

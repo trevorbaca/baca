@@ -38,7 +38,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
                 >>> staff = Staff("c'4 c' d' d'")
                 >>> manager = baca.tools.WellformednessManager()
                 >>> manager(staff)
-                [([Note("c'4"), Note("d'4")], 4, 'check_duplicate_pitch_classes')]
+                [([LogicalTie(Note("c'4"),), LogicalTie(Note("d'4"),)], 4, 'check_duplicate_pitch_classes')]
 
         Returns violators, total, check triples.
         '''
@@ -87,7 +87,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
                 >>> manager = baca.tools.WellformednessManager
                 >>> manager.check_duplicate_pitch_classes(staff)
-                ([Note("c'4"), Note("d'4")], 4)
+                ([LogicalTie(Note("c'4"),), LogicalTie(Note("d'4"),)], 4)
 
         ..  container:: example
 
@@ -102,35 +102,73 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
                 >>> manager = baca.tools.WellformednessManager
                 >>> manager.check_duplicate_pitch_classes(staff)
-                ([Note("e''4")], 4)
+                ([LogicalTie(Note("e''4"),)], 4)
+
+        ..  container:: example
+
+            **Example 4.** Finds duplicate pitch-classes between sequential
+            voices:
+
+            ::
+
+                >>> voice_1 = Voice("c'4 d'")
+                >>> voice_2 = Voice("d''4 e''")
+                >>> staff = Staff([voice_1, voice_2])
+                >>> show(staff) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(staff)
+                \new Staff {
+                    \new Voice {
+                        c'4
+                        d'4
+                    }
+                    \new Voice {
+                        d''4
+                        e''4
+                    }
+                }
+
+            ::
+
+                >>> manager = baca.tools.WellformednessManager
+                >>> manager.check_duplicate_pitch_classes(staff)
+                ([LogicalTie(Note("d''4"),)], 4)
 
         Returns violators and total.
         '''
         violators = []
         total = 0
-        leaves = abjad.iterate(expr).by_leaf()
         not_yet_pitched_string = 'not yet pitched'
-        allow_repeated_pitches_string = 'allow repeated pitches'
-        for leaf_1 in abjad.iterate(expr).by_leaf():
+        notes = abjad.iterate(expr).by_logical_tie(
+            pitched=True,
+            with_grace_notes=True,
+            )
+        notes = list(notes)
+        notes.sort(
+            key=lambda _: abjad.inspect_(_.head).get_timespan().start_offset)
+        pairs = abjad.sequencetools.iterate_sequence_nwise(notes)
+        for leaf_1, leaf_2 in pairs:
+            if not isinstance(leaf_1.head, abjad.Note):
+                continue
+            if not isinstance(leaf_2.head, abjad.Note):
+                continue
             total += 1
-            if not isinstance(leaf_1, abjad.Note):
+            if abjad.inspect_(leaf_1.head).has_indicator(not_yet_pitched_string):
                 continue
-            if abjad.inspect_(leaf_1).has_indicator(not_yet_pitched_string):
+            if abjad.inspect_(leaf_2.head).has_indicator(not_yet_pitched_string):
                 continue
-            leaf_2 = abjad.inspect_(leaf_1).get_leaf(1)
-            if not isinstance(leaf_2, abjad.Note):
-                continue
-            if abjad.inspect_(leaf_2).has_indicator(not_yet_pitched_string):
-                continue
-            pitch_class_1 = leaf_1.written_pitch.named_pitch_class
-            pitch_class_2 = leaf_2.written_pitch.named_pitch_class
+            pitch_class_1 = leaf_1.head.written_pitch.named_pitch_class
+            pitch_class_2 = leaf_2.head.written_pitch.named_pitch_class
             if not pitch_class_1 == pitch_class_2:
                 continue
             string = 'repeated pitch allowed'
-            if (abjad.inspect_(leaf_1).has_indicator(string) and
-                abjad.inspect_(leaf_2).has_indicator(string)):
+            if (abjad.inspect_(leaf_1.head).has_indicator(string) and
+                abjad.inspect_(leaf_2.head).has_indicator(string)):
                 continue
             violators.append(leaf_2)
+        total += 1
         return violators, total
 
     def is_well_formed(self, expr=None):

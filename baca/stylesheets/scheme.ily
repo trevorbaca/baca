@@ -1,4 +1,4 @@
-%%% BAČA HOUSE SCHEME DEFINITIONS %%%
+%%% BAČA SCHEME DEFINITIONS %%%
 
 %%% OVAL BAR NUMBERS %%%
 
@@ -16,6 +16,20 @@
 #(define (format-oval-barnumbers barnum measure-pos alt-number context)
  (make-oval-markup
   (robust-bar-number-function barnum measure-pos alt-number context)))
+
+%%% SLAP TONGUE %%%
+
+slap =
+#(define-music-function (parser location music) (ly:music?)
+#{
+  \override NoteHead #'stencil = #(lambda (grob)
+    (grob-interpret-markup grob
+      (markup #:musicglyph "scripts.sforzato")))
+  \override NoteHead #'extra-offset = #'(0.1 . 0.0)
+  $music
+  \revert NoteHead #'stencil
+  \revert NoteHead #'extra-offset
+#})
 
 %%% TONGUE COMMAND FOR DOUBLE- AND TRIPLE-TONGUING WITH STACCATI %%%
 
@@ -44,3 +58,45 @@ sfpp = #(make-dynamic-script "sfpp")
 
 sffz = #(make-dynamic-script "sffz")
 sfffz = #(make-dynamic-script "sfffz")
+
+%%% SHAPE NOTE HEADS %%%
+
+blackDiamondNoteHead = #(
+    define-music-function (parser location music) (ly:music?)
+    #{
+    \once \override NoteHead.style = #'harmonic-black
+    $music
+    #}
+    )
+
+diamondNoteHead = #(
+    define-music-function (parser location music) (ly:music?)
+    #{
+    \once \override NoteHead.style = #'harmonic
+    $music
+    #}
+    )
+
+semicircleNoteHead = #(
+    define-music-function (parser location music) (ly:music?)
+    #{
+    \once \set shapeNoteStyles = ##(re re re re re re re)
+    $music
+    #}
+    )
+
+squareNoteHead = #(
+    define-music-function (parser location music) (ly:music?)
+    #{
+    \once \set shapeNoteStyles = ##(la la la la la la la)
+    $music
+    #}
+    )
+
+triangleNoteHead = #(
+    define-music-function (parser location music) (ly:music?)
+    #{
+    \once \set shapeNoteStyles = ##(do do do do do do do)
+    $music
+    #}
+    )

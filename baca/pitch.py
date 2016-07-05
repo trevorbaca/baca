@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
+import abjad
 import baca
-from abjad.tools import pitchtools
 
+
+def displacement(displacements):
+    return baca.tools.OctaveDisplacementSpecifier(
+        displacements=displacements,
+        )
 
 def fixed_pitches(source):
     return baca.tools.PitchSpecifier(
@@ -18,7 +23,7 @@ def infinite_pitches(source, repetition_intervals):
 def invert(axis=None):
     return baca.tools.PitchSpecifier(
         operators=[
-            pitchtools.Inversion(axis=axis),
+            abjad.pitchtools.Inversion(axis=axis),
             ]
         )
 
@@ -31,7 +36,7 @@ def pitches(source, allow_repeated_pitches=True):
 def register(start_pitch, stop_pitch=None):
     if stop_pitch is None:
         return baca.tools.RegisterSpecifier(
-            registration=pitchtools.Registration(
+            registration=abjad.pitchtools.Registration(
                 [('[A0, C8]', start_pitch)],
                 ),
             )
@@ -43,6 +48,6 @@ def register(start_pitch, stop_pitch=None):
 def transpose(index=0):
     return baca.tools.PitchSpecifier(
         operators=[
-            pitchtools.Transposition(index),
+            abjad.pitchtools.Transposition(index),
             ]
         )

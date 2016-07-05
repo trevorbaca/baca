@@ -1,22 +1,19 @@
 # -*- coding: utf-8 -*-
+import abjad
 import baca
-from abjad.tools import durationtools
-from abjad.tools import spannertools
-from abjad.tools import patterntools
-from abjad.tools.markuptools import Markup
 
 
 def clef_spanner(clef='percussion'):
-    return spannertools.ClefSpanner(clef=clef)
+    return abjad.spannertools.ClefSpanner(clef=clef)
 
 def five_line_staff():
-    return spannertools.StaffLinesSpanner(lines=5)
+    return abjad.spannertools.StaffLinesSpanner(lines=5)
 
 def grid_poss_to_flaut_poss():
-    left_text = Markup('grid. possibile').italic().larger() + Markup.hspace(1)
-    right_text = Markup.hspace(1) + Markup('flaut. possibile')
+    left_text = abjad.Markup('grid. possibile').italic().larger() + abjad.Markup.hspace(1)
+    right_text = abjad.Markup.hspace(1) + abjad.Markup('flaut. possibile')
     right_text = right_text.italic().larger()
-    grid_poss_to_flaut_poss = spannertools.TextSpanner(
+    grid_poss_to_flaut_poss = abjad.spannertools.TextSpanner(
         overrides = {
             'text_spanner__bound_details__left__padding': -1,
             'text_spanner__bound_details__left__stencil_align_dir_y': 0,
@@ -45,9 +42,9 @@ def make_transition(start_markup=None, stop_markup=None):
         )
 
 def molto_flaut_to_molto_grid():
-    left_text = Markup('molto flautando').italic().larger() + Markup.hspace(1)
-    right_text = Markup.hspace(1) + Markup('molto gridato').italic().larger()
-    molto_flaut_to_molto_grid = spannertools.TextSpanner(
+    left_text = abjad.Markup('molto flautando').italic().larger() + abjad.Markup.hspace(1)
+    right_text = abjad.Markup.hspace(1) + abjad.Markup('molto gridato').italic().larger()
+    molto_flaut_to_molto_grid = abjad.spannertools.TextSpanner(
         overrides = {
             'text_spanner__bound_details__left__padding': -1,
             'text_spanner__bound_details__left__stencil_align_dir_y': 0,
@@ -65,16 +62,16 @@ def molto_flaut_to_molto_grid():
     )
 
 def one_line_staff():
-    return spannertools.StaffLinesSpanner(lines=1)
+    return abjad.spannertools.StaffLinesSpanner(lines=1)
 
 def ottava():
-    return spannertools.OctavationSpanner(start=1, stop=0)
+    return abjad.spannertools.OctavationSpanner(start=1, stop=0)
 
 def ottava_bassa():
-    return spannertools.OctavationSpanner(start=-1, stop=0)
+    return abjad.spannertools.OctavationSpanner(start=-1, stop=0)
 
 def percussion_staff():
-    return spannertools.ClefSpanner(clef='percussion')
+    return abjad.spannertools.ClefSpanner(clef='percussion')
 
 def pervasive_trills():
     return baca.tools.TrillSpecifier(
@@ -93,6 +90,9 @@ def pervasive_trills_at_pitch(pitch, is_harmonic=None):
         minimum_written_duration=None,
         pitch=pitch,
         )
+
+def slur():
+    return baca.tools.SpannerSpecifier(spanner=abjad.Slur())
     
 def trill_quarter_notes():
     return baca.tools.TrillSpecifier(
@@ -101,4 +101,4 @@ def trill_quarter_notes():
         )
 
 def two_line_staff():
-    return spannertools.StaffLinesSpanner(lines=2)
+    return abjad.spannertools.StaffLinesSpanner(lines=2)
