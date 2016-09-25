@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from abjad import *
+import abjad
 from baca.tools.rotate_nested import rotate_nested
 
 
@@ -24,7 +24,8 @@ def helianthate(sequence, outer_index_of_rotation, inner_index_of_rotation):
             [3, 1, 2], [7, 8, 6], [2, 3, 1], [5, 4]]
 
     '''
-    if not all([not isinstance(x, scoretools.Component) for x in sequence]):
+    if not all([
+        not isinstance(x, abjad.scoretools.Component) for x in sequence]):
         message = 'function not defined for score components.'
         raise TypeError(message)
     start = list(sequence[:])

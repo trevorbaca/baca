@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from abjad import *
+import abjad
 
 
 #def blank(l, positions):
@@ -11,8 +11,7 @@ def replace_measure_contents_with_rests(l, positions):
     result = []
     for i, m in enumerate(l):
         if (i + 1) in positions:
-            #rests = scoretools.make_rests(m.contents_duration)
             duration = inspect_(m).get_duration()
-            rests = scoretools.make_rests(duration)
-            new_measure = Measure(m.time_signature, rests)
+            rests = abjad.scoretools.make_rests(duration)
+            new_measure = abjad.Measure(m.time_signature, rests)
             l[i] = new_measure

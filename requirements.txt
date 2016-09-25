@@ -1,3 +1,6 @@
--e git://github.com/trevorbaca/baca.git#egg=consort
--e git://github.com/Abjad/abjad.git#egg=abjad [development]
+# Commented out because the Travis config file currently clones Abjad
+#   and checks out the trevor/dev branch.
+# Uncomment when the Travis config file no longer clones Abjad:
+#-e git://github.com/Abjad/abjad.git#egg=abjad [development]
+
 funcsigs

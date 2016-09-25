@@ -25,7 +25,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
             >>> result = segment_maker(is_doc_example=True)
             >>> lilypond_file, segment_metadata = result
-            >>> show(lilypond_file) # doctest +SKIP
+            >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
 

@@ -237,6 +237,18 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
     def _all_are_selections(expr):
         return all(isinstance(_, abjad.selectiontools.Selection) for _ in expr)
 
+    @staticmethod
+    def _annotate_unpitched_notes(expr):
+        for leaf in abjad.iterate(expr).by_leaf():
+            if isinstance(leaf, abjad.Chord):
+                message = 'rhythm-makers produce only notes and rests: {!r}.'
+                message = message.format(leaf)
+                raise Exception(message)
+            elif isinstance(leaf, abjad.Note):
+                abjad.attach('not yet pitched', leaf)
+            else:
+                raise TypeError(leaf)
+
     def _apply_figure_rhythm_maker(self, figure_list, figure_token):
         assert len(figure_list) == len(figure_token)
         total_length = len(figure_list)
@@ -366,6 +378,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
             divisions = contribution.payload
             start_offset = contribution.start_offset
             selections = rhythm_maker(divisions)
+            self._annotate_unpitched_notes(selections)
         else:
             message = 'must be rhythm-maker or explicit selection: {!r}.'
             message = message.format(rhythm_maker)

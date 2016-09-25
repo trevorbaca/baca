@@ -1,8 +1,10 @@
-from abjad import *
-from baca.pitch_old.Constellation import Constellation
+# -*- coding: utf-8 -*-
+import abjad
 
 
-class ConstellationCircuit(object):
+class ConstellationCircuit(abjad.abctools.AbjadObject):
+    r'''Constellation circuit.
+    '''
 
     def __init__(self, partitioned_generator_pnls, pitch_range):
         self._partitioned_generator_pnls = partitioned_generator_pnls
@@ -47,20 +49,24 @@ class ConstellationCircuit(object):
     ### PRIVATE METHODS ###
 
     def _constellate_partitioned_generator_pnls(self):
+        from baca.pitch_old.Constellation import Constellation
         self._constellations = []
         enumeration = enumerate(self._partitioned_generator_pnls)
         for i, partitioned_generator_pnl in enumeration:
             constellation_number = i + 1
-            constellation = Constellation(self, partitioned_generator_pnl)
+            constellation = Constellation(
+                self,
+                partitioned_generator_pnl,
+                )
             self._constellations.append(constellation)
 
     def _make_lilypond_file_and_score_from_chords(self, chords):
-        result = scoretools.make_piano_sketch_score_from_leaves(chords)
+        result = abjad.scoretools.make_piano_sketch_score_from_leaves(chords)
         score, treble, bass = result
         score.override.text_script.staff_padding = 10
-        moment = schemetools.SchemeMoment(1, 30)
+        moment = abjad.schemetools.SchemeMoment(1, 30)
         score.set.proportional_notation_duration = moment
-        lilypond_file = lilypondfiletools.make_basic_lilypond_file(score)
+        lilypond_file = abjad.lilypondfiletools.make_basic_lilypond_file(score)
         lilypond_file.default_paper_size = 'letter', 'landscape'
         lilypond_file.global_staff_size = 18
         lilypond_file.layout_block.indent = 0
@@ -75,7 +81,7 @@ class ConstellationCircuit(object):
         lilypond_file, score = result
         show(lilypond_file)
 
-    ### READ-ONLY PUBLIC PROPERTIES ###
+    ### PUBLIC PROPERTIES ###
 
     @property
     def generator_chords(self):
@@ -113,7 +119,7 @@ class ConstellationCircuit(object):
 
     def show_colored_generator_chords_and_pivot_chords(self):
         chords = zip(self._colored_generators, self.pivot_chords)
-        chords = sequencetools.flatten_sequence(chords, depth = 1)
+        chords = abjad.sequencetools.flatten_sequence(chords, depth = 1)
         self._show_chords(chords)
 
     def show_generator_chords(self):
@@ -121,7 +127,7 @@ class ConstellationCircuit(object):
 
     def show_generator_chords_and_pivot_chords(self):
         chords = zip(self.generator_chords, self.pivot_chords)
-        chords = sequencetools.flatten_sequence(chords, depth = 1)
+        chords = abjad.sequencetools.flatten_sequence(chords, depth = 1)
         self._show_chords(chords)
 
     def show_pivot_chords(self):

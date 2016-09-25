@@ -13,21 +13,25 @@
     Decide the name of the score package.
 
 3.  Use IDE (new) to create the score package.
-    [Need to check and see if this populates score metadata or not.]
+    IDE supplies title and year metadata.
+    [TODO: include 'composer' metadata automatically score __metadata__py.]
 
 4.  Edit score metadata by hand with (meta).
     For example:
-    metadata = datastructuretools.TypedOrderedDict(
+    metadata = abjad.datastructuretools.TypedOrderedDict(
         [
-            ('catalog_number', 'AWN-018'),
-            ('composer', 'Ba\xc4\x8da'),
+            ('catalog_number', 'AWN-015'),
+            ('composer', 'Ba\xc4\x8da'), # TODO: include automatically
             ('forces_tagline', 'for eight players'),
-            ('paper_dimensions', '17 x 11 in'),
-            ('price', '\\$80 / \\euro 72'),
+            ('paper_dimensions', '17 x 11 in'), # remove
+            ('price', '\\$80 / \\euro 72'), # remove
             ('title', 'Fabergé Investigations'),
             ('year', 2016),
             ]
         )
+    [TODO: remove paper dimensions.]
+    [TODO: remove price.]
+    NOTE: score title will note yet appear in IDE main screen output.
 
 5.  Quit the IDE.
     Edit ~/.profile and add score package navigation aliases.
@@ -35,6 +39,7 @@
         export FABERGE=$SCORES/faberge
         alias fabx="clear; cd $FABERGE/faberge"
         alias fab="fabx; start-abjad-ide fab"
+    Quit the terminal.
     Restart the terminal.
 
 6.  Change to score package score directory in all three terminal windows.
@@ -42,12 +47,24 @@
     Use window group when terminal starts.
     Restart the terminal.
 
-7.  Create new to-do.txt file with (ee > new > to-do.txt).
+7.  Start the IDE at new score. For example: "fab".
+    Create new to-do.txt file with (ee > new > to-do.txt).
 
 8.  Create new stages.txt file with (ee > new > stages.txt).
 
 9.  Edit stages.txt and define score stages verbally.
-    Commit with (ci).
+    Commit with (ci): "Started new score."
+    [TODO: does full score title appear in IDE after commit?]
+
+9.5 TODO: update abjad/.../example_score/tools/ScoreTemplate.py.
+    Remove 'from abjad import Score, Staff, Voice'.
+    Remove 'from abjad.tools import abctools'.
+    Use 'import abjad' instead.
+
+9.6 TODO: update abjad/.../example_score/tools/SegmentMaker.py.
+    Remove 'from abjad.tools import abctools'.
+    Remove 'from abjad.tools import lilypondfiletools'.
+    Use 'import abjad' instead.
 
 10. Copy an existing score template with (oo > cp).
     Edit ScoreTemplate.py by hand.
@@ -67,7 +84,7 @@
     Run (dfk).
     Eventually run (pdfm).
 
-13. Copy an existing time signatures package with (mm > cp).
+13. If required copy an existing time signatures package with (mm > cp).
     Edit time_signatures/definition.py by hand.
     Run (dfk).
     Eventually run (pdfm).
@@ -117,13 +134,16 @@
     (gg > new > segment_a > meta > define 'name' by hand)
     ...
     (gg > new > segment_q > meta > define 'name' by hand)
+    NOTE: change 'segment_introduction' to 'segment__introduction', if needed.
 
 20. Define stub version of first segment.
     Go to (%introduction).
     Copy an existing definition.py with (cp).
     Edit introduction/definition.py by hand.
+    Define figure infrastructure if figure-oriented.
     Define segment-maker.
-    Do not define time or color.
+    If time signature-originated, define no music.
+    If figure-originated, define only one figure.
     Run (pdfm) repeatedly until PDF renders successfully.
     Check title typography.
     Edit stylesheet.ily with (@sty).

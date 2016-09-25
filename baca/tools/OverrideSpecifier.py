@@ -66,7 +66,7 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, expr):
-        r'''Calls handler.
+        r'''Calls specifier.
 
         Returns none.
         '''
@@ -143,7 +143,7 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
     @property
     def maximum_settings(self):
         r'''Gets maximum settings for leaves with written duration
-        greater than or equal to maximum written duration of handler.
+        greater than or equal to maximum written duration of specifier.
 
         ..  todo: Write examples and tests.
 

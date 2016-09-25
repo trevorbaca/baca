@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from abjad import *
+import abjad
 
 
 def repeat_subruns_to_length(notes, pairs, history=False):
@@ -23,7 +23,7 @@ def repeat_subruns_to_length(notes, pairs, history=False):
 
     Returns list of components.
     '''
-    assert all([isinstance(x, Note) for x in notes])
+    assert all([isinstance(x, abjad.Note) for x in notes])
     assert isinstance(pairs, list)
     assert all([len(x) == 3 for x in pairs])
     instructions = []
@@ -33,14 +33,14 @@ def repeat_subruns_to_length(notes, pairs, history=False):
         for i in range(pair[0], pair[0] + pair[1]):
             source = notes[i%len_notes]
             pitch_number = source.written_pitch.pitch_number
-            new_note = Note(pitch_number, source.written_duration)
+            new_note = abjad.Note(pitch_number, source.written_duration)
             if history:
-                attach(history, new_note)
+                abjad.attach(history, new_note)
             new_notes.append(new_note)
         reps = pair[-1]
         instruction = (pair[0] + pair[1], new_notes, reps)
         instructions.append(instruction)
     for index, new_notes, reps in reversed(sorted(instructions)):
-        new_notes = selectiontools.Selection(new_notes)
-        new_notes = mutate(new_notes).copy(n=reps)
+        new_notes = abjad.selectiontools.Selection(new_notes)
+        new_notes = abjad.mutate(new_notes).copy(n=reps)
         notes[index:index] = new_notes

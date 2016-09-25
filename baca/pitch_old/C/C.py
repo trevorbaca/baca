@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from abjad import *
+import abjad
 from baca.tools.constellate import constellate
 
 
@@ -18,6 +18,6 @@ partitioned_generator_pnls = [
     [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]]
 ]
 
-pitch_range = pitchtools.PitchRange('[A0, C8]')
+pitch_range = abjad.pitchtools.PitchRange('[A0, C8]')
 
 C = [constellate(pgpnl, pitch_range) for pgpnl in partitioned_generator_pnls]

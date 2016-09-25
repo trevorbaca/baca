@@ -2,18 +2,22 @@ language: python
 
 python:
     - 2.7
-    - 3.4
+    - 3.5
 
 sudo: false
 
 before_install:
-    - wget -q http://download.linuxaudio.org/lilypond/binaries/linux-64/lilypond-2.19.28-1.linux-64.sh
-    - sh lilypond-2.19.28-1.linux-64.sh --batch
     - export PATH=/home/travis/bin:$PATH
-    - pip install coveralls
-    - pip install coverage
+    - wget -q http://download.linuxaudio.org/lilypond/binaries/linux-64/lilypond-2.19.50-1.linux-64.sh
+    - sh lilypond-2.19.50-1.linux-64.sh --batch
+    - git clone https://github.com/Abjad/abjad.git; cd abjad; git checkout trevor/dev; pip install -e .[development]
+    - echo `git branch`
+    - cd ..
+    - pip install --upgrade pip
 
 install:
+    - pip install coveralls
+    - pip install coverage
     - pip install -r requirements.txt
     - pip install -e . 
 

@@ -1,27 +1,33 @@
-from abjad import *
+# -*- coding: utf-8 -*-
+import abjad
 
 
 def constellate(pitch_number_lists, pitch_range, flatten=True):
-    '''Return outer product of octave transpositions of 
-    pitch_number_lists in pitch_range.
+    '''Constellates `pitch_number_lists`.
+    
+    Returns outer product of octave transpositions of 
+    `pitch_number_lists` in `pitch_range`.
     '''
 
-    if not isinstance(pitch_range, pitchtools.PitchRange):
-        raise TypeError('must be pitch range.')
+    if not isinstance(pitch_range, abjad.pitchtools.PitchRange):
+        message = 'must be pitch range: {!r}.'
+        message = message.format(pitch_range)
+        raise TypeError(message)
 
     transposition_list = []
-    for pnl in pitch_number_lists:
-        transpositions = pitch_range.list_octave_transpositions(pnl)
+    for list_ in pitch_number_lists:
+        transpositions = pitch_range.list_octave_transpositions(list_)
         transposition_list.append(transpositions)
 
-    result = sequencetools.yield_outer_product_of_sequences(transposition_list)
+    result = abjad.sequencetools.yield_outer_product_of_sequences(
+        transposition_list)
     result = list(result)
 
     if flatten:
         for i, part in enumerate(result):
-            result[i] = sequencetools.flatten_sequence(part)
+            result[i] = abjad.sequencetools.flatten_sequence(part)
 
-    for pnl in result:
-        pnl.sort()
+    for list_ in result:
+        list_.sort()
 
     return result
