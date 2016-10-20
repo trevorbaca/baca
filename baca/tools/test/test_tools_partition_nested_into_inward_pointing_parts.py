@@ -1,29 +1,35 @@
-from baca import tools
+# -*- coding: utf-8 -*-
+import baca
 
 
 def test_tools_partition_nested_into_inward_pointing_parts_01():
-    '''Partition only negative values by default.
+    '''Partitions only negative values by default.
     '''
 
-    l = [[1, 1, 5]]
-    t = tools.partition_nested_into_inward_pointing_parts(l)
-    assert t == [[1, 1, 5]]
+    sequence_ = [[1, 1, 5]]
+    parts = baca.tools.partition_nested_into_inward_pointing_parts(sequence_)
+    assert parts == [[1, 1, 5]]
 
-    l = [[1, 1, -5]]
-    t = tools.partition_nested_into_inward_pointing_parts(l)
-    assert t == [[1, 1, 1, -4]]
+    sequence_ = [[1, 1, -5]]
+    parts = baca.tools.partition_nested_into_inward_pointing_parts(sequence_)
+    assert parts == [[1, 1, 1, -4]]
 
 
 def test_tools_partition_nested_into_inward_pointing_parts_02():
-    '''Partition positive values according to target.
+    '''Partitions positive values according to target.
     '''
 
-    l = [[1], [5], [5, 1], [1, 5], [5, 5], [1, 5, 1]]
-    t = tools.partition_nested_into_inward_pointing_parts(
-        l, target = 'positive')
-    assert t == [[1], [4, 1], [4, 1, 1], [1, 1, 4], [4, 1, 1, 4], [1, 4, 1, 1]]
+    sequence_ = [[1], [5], [5, 1], [1, 5], [5, 5], [1, 5, 1]]
+    parts = baca.tools.partition_nested_into_inward_pointing_parts(
+        sequence_,
+        target='positive',
+        )
+    assert parts == [
+        [1], [4, 1], [4, 1, 1], [1, 1, 4], [4, 1, 1, 4], [1, 4, 1, 1]]
 
-    l = [[1, 1, -5]]
-    t = tools.partition_nested_into_inward_pointing_parts(
-        l, target = 'positive')
-    assert t == [[1, 1, -5]]
+    sequence_ = [[1, 1, -5]]
+    parts = baca.tools.partition_nested_into_inward_pointing_parts(
+        sequence_,
+        target='positive',
+        )
+    assert parts == [[1, 1, -5]]

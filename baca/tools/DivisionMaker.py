@@ -433,7 +433,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> division_maker.callbacks
-                (SplitByDurationsDivisionCallback(compound_meter_multiplier=Multiplier(1, 1), durations=(Division((1, 4)),)),)
+                (SplitByDurationsDivisionCallback(compound_meter_multiplier=Multiplier(1, 1), cyclic=True, durations=(Division((1, 4)),), pattern_rotation_index=0, remainder=Right),)
 
         Returns tuple of zero or more callbacks.
         '''

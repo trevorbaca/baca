@@ -45,10 +45,12 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
                 division_expression=expressiontools.SequenceExpression(
                     callbacks=(
                         expressiontools.Callback(
-                            name='Sequence.sum',
+                            'Sequence.sum',
+                            string_expression='sum({})',
                             ),
                         expressiontools.Callback(
-                            name='Sequence.__init__',
+                            'Sequence.__init__',
+                            string_expression='sequence({})',
                             ),
                         ),
                     ),

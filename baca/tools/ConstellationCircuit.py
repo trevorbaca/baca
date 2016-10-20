@@ -49,12 +49,12 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
     ### PRIVATE METHODS ###
 
     def _constellate_partitioned_generator_pnls(self):
-        from baca.pitch_old.Constellation import Constellation
+        import baca
         self._constellations = []
         enumeration = enumerate(self._partitioned_generator_pnls)
         for i, partitioned_generator_pnl in enumeration:
             constellation_number = i + 1
-            constellation = Constellation(
+            constellation = baca.tools.Constellation(
                 self,
                 partitioned_generator_pnl,
                 )

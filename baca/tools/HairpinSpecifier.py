@@ -94,7 +94,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
         self._enchain_hairpins = enchain_hairpins
         self._flare = flare
         hairpin_tokens = hairpin_tokens or []
-        prototype = (list, tuple)
+        prototype = (list, tuple, abjad.datastructuretools.CyclicTuple)
         assert isinstance(hairpin_tokens, prototype), repr(hairpin_tokens)
         tokens = []
         for element in hairpin_tokens:

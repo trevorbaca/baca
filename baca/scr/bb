@@ -1,2 +1,0 @@
-abjad-book --skip-rendering index.rst.raw index.rst
-html-docs

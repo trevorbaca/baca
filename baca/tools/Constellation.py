@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import abjad
-from baca.tools.constellate import constellate
 
 
 class Constellation(abjad.abctools.AbjadObject):
@@ -83,7 +82,8 @@ class Constellation(abjad.abctools.AbjadObject):
         return next_constellation
 
     def _constellate_partitioned_generator_pitch_numbers(self):
-        self._pitch_number_lists = constellate(
+        import baca
+        self._pitch_number_lists = baca.tools.constellate(
             self._partitioned_generator_pitch_numbers, 
             self.pitch_range,
             )

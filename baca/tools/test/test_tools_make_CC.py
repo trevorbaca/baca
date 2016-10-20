@@ -1,73 +1,75 @@
-from abjad import *
+# -*- coding: utf-8 -*-
 import baca
+from abjad import *
+CC = baca.tools.make_CC()
 
 
-def test_baca_pitch_CC_01():
+def test_tools_make_CC_01():
     r'''Test __getitem__.
     '''
 
-    assert len(baca.pitch_old.CC[0]) == 180
-    assert len(baca.pitch_old.CC[1]) == 140
-    assert len(baca.pitch_old.CC[2]) == 80
-    assert len(baca.pitch_old.CC[3]) == 100
-    assert len(baca.pitch_old.CC[4]) == 180
-    assert len(baca.pitch_old.CC[5]) == 150
-    assert len(baca.pitch_old.CC[6]) == 120
-    assert len(baca.pitch_old.CC[7]) == 108
+    assert len(CC[0]) == 180
+    assert len(CC[1]) == 140
+    assert len(CC[2]) == 80
+    assert len(CC[3]) == 100
+    assert len(CC[4]) == 180
+    assert len(CC[5]) == 150
+    assert len(CC[6]) == 120
+    assert len(CC[7]) == 108
 
 
-def test_baca_pitch_CC_02():
+def test_tools_make_CC_02():
     r'''Test __len__.
     '''
 
-    assert len(baca.pitch_old.CC) == 8
+    assert len(CC) == 8
 
 
-def test_baca_pitch_CC_03():
+def test_tools_make_CC_03():
     r'''Test generator numbers.
     '''
 
     numbers = [80, 59, 56, 60, 83, 65, 79, 94]
-    assert baca.pitch_old.CC._generator_chord_numbers == numbers
+    assert CC._generator_chord_numbers == numbers
 
 
-def test_baca_pitch_CC_04():
+def test_tools_make_CC_04():
     r'''Test pivot numbers.
     '''
 
     numbers = [80, 75, 60, 73, 117, 69, 108, 99]
-    assert baca.pitch_old.CC._pivot_chord_numbers == numbers
+    assert CC._pivot_chord_numbers == numbers
 
 
-def test_baca_pitch_CC_05():
+def test_tools_make_CC_05():
     r'''Test get signature one.
     '''
 
-    assert baca.pitch_old.CC.get(1) is baca.pitch_old.CC[0]
-    assert baca.pitch_old.CC.get(2) is baca.pitch_old.CC[1]
-    assert baca.pitch_old.CC.get(3) is baca.pitch_old.CC[2]
-    assert baca.pitch_old.CC.get(4) is baca.pitch_old.CC[3]
-    assert baca.pitch_old.CC.get(5) is baca.pitch_old.CC[4]
-    assert baca.pitch_old.CC.get(6) is baca.pitch_old.CC[5]
-    assert baca.pitch_old.CC.get(7) is baca.pitch_old.CC[6]
-    assert baca.pitch_old.CC.get(8) is baca.pitch_old.CC[7]
+    assert CC.get(1) is CC[0]
+    assert CC.get(2) is CC[1]
+    assert CC.get(3) is CC[2]
+    assert CC.get(4) is CC[3]
+    assert CC.get(5) is CC[4]
+    assert CC.get(6) is CC[5]
+    assert CC.get(7) is CC[6]
+    assert CC.get(8) is CC[7]
 
 
-def test_baca_pitch_CCa06():
+def test_tools_make_CCa06():
     r'''Test get signature two.
     '''
 
-    assert baca.pitch_old.CC.get(1, 1) is baca.pitch_old.CC[0][0]
-    assert baca.pitch_old.CC.get(1, 2) is baca.pitch_old.CC[0][1]
-    assert baca.pitch_old.CC.get(1, 3) is baca.pitch_old.CC[0][2]
-    assert baca.pitch_old.CC.get(1, 4) is baca.pitch_old.CC[0][3]
+    assert CC.get(1, 1) is CC[0][0]
+    assert CC.get(1, 2) is CC[0][1]
+    assert CC.get(1, 3) is CC[0][2]
+    assert CC.get(1, 4) is CC[0][3]
 
 
-def test_baca_pitch_CC_07():
+def test_tools_make_CC_07():
     r'''Test generators.
     '''
 
-    staff = Staff(baca.pitch_old.CC.generator_chords)
+    staff = Staff(CC.generator_chords)
 
     assert systemtools.TestManager.compare(
         staff,
@@ -86,18 +88,18 @@ def test_baca_pitch_CC_07():
         )
 
 
-def test_baca_pitch_CC_08():
+def test_tools_make_CC_08():
     r'''Test pitch range.
     '''
 
-    assert baca.pitch_old.CC.pitch_range == pitchtools.PitchRange('[A0, C8]')
+    assert CC.pitch_range == pitchtools.PitchRange('[A0, C8]')
 
 
-def test_baca_pitch_CC_09():
+def test_tools_make_CC_09():
     r'''Test pivots.
     '''
 
-    staff = Staff(baca.pitch_old.CC.pivot_chords)
+    staff = Staff(CC.pivot_chords)
 
     assert systemtools.TestManager.compare(
         staff,

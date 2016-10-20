@@ -7,7 +7,21 @@ transcribed here by Trevor. To use the procedures described here you will need
 the Git client installed on your local machine and you will sometimes need to
 visit the Abjad project pages hosted on GitHub. Run `git --version` to check
 that the Git client is installed on your machine. The Abjad GitHub pages are
-hosted at https://github.com/Abjad/abjad. Git commands used in this workflow:
+hosted at https://github.com/Abjad/abjad.
+
+CONTENTS:
+
+    * Command inventory
+    * Rebasing on master
+    * Single-commit workflow (changes already made)
+    * Single-commit workflow (changes not yet made)
+    * Setting up a development branch
+    * Cherry-picking from development to feature branches
+
+Command inventory
+=================
+
+Git commands used in these workflows:
 
     git branch
     git branch -d <branch-name>
@@ -36,430 +50,111 @@ new commits that your branch doesn't have. Finally assume that you want the
 mainline commits in your branch. How best to add mainline commits to your
 branch? One approach is to rebase your branch on master.
 
-1. Fetch origin:
+1. Check out master:
 
         (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
-        13:01 $ git fetch origin
+        08:43 $ git checkout master
+        Switched to branch 'master'
+        Your branch is behind 'origin/master' by 4 commits, and can be fast-forwarded.
+        (use "git pull" to update your local branch)
+
+2. Fetch from master:
+
+        08:43 $ git fetch
+        (abjad3) ✔ ~/abjad/abjad [master ↓·4|✔] 
 
     Nothing seems to happen. So perhaps this step is unncessary.
 
-2. Rebase on master:
+3. (Maybe) pull from master:
 
-        (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
-        13:01 $ git rebase origin/master
-        First, rewinding head to replay your work on top of it...
-        Applying: Added ForteNumber class to pitchtools.
-        Applying: Improved ForteNumber initialization.
-        Applying: Changed pitchtools.ForteNumber to pitchtools.SetClass.
+        (abjad3) ✔ ~/abjad/abjad [master ↓·4|✔] 
+        08:49 $ git pull
+        Updating 8336f29..16b7f68
+        Fast-forward
+        abjad/tools/lilypondparsertools/GuileProxy.py      |  2 +-
+        .../LilyPondLexicalDefinition.py                   | 56 +++++++---------------
+        abjad/tools/lilypondparsertools/LilyPondParser.py  | 12 +++--
+        .../LilyPondSyntacticalDefinition.py               |  4 +-
+        abjad/tools/systemtools/Configuration.py           |  3 +-
+        5 files changed, 30 insertions(+), 47 deletions(-)
 
-    Git "rewinds" the head of your branch to the current state of
-    origin/master.
-    
-    Then Git reapplies your commits.
+    Is this step necessary? Or is fetching sufficient?
 
-    The local copy of your branch now differs from the remote copy of your
-    branch.
+4. Check out your development branch:
 
-    If everything goes well then asking for status will show something like
-    this:
-
-        (abjad3) ✔ ~/abjad/abjad [trevor/dev ↓·3↑·18|✔] 
-        13:02 $ git st
-        On branch trevor/dev
-        Your branch and 'origin/trevor/dev' have diverged,
-        and have 18 and 3 different commits each, respectively.
-        (use "git pull" to merge the remote branch into yours)
-        nothing to commit, working directory clean
-
-    What if things go differently? It's possible Git might tell you things like
-    this:
-
-        (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
-        11:00 $ git rebase origin/master
-        First, rewinding head to replay your work on top of it...
-        Applying: Added ForteNumber class to pitchtools.
-        Applying: Improved ForteNumber initialization.
-        Applying: Changed pitchtools.ForteNumber to pitchtools.SetClass.
-        Applying: Added ForteNumber class to pitchtools.
-        Applying: Improved ForteNumber initialization.
-        Applying: Changed pitchtools.ForteNumber to pitchtools.SetClass.
-        Using index info to reconstruct a base tree...
-        Falling back to patching base and 3-way merge...
-        Applying: Pulled in vimrc updates..
-        Applying: Removed pitchtools.instantiate_pitch_and_interval_test_collection().
-        Applying: Removed pitchtools.inventory_named_inversion_equivalent_interval_classes().
-        Applying: Added IterationAgent.by_pitch_pair().
-        Applying: Removed pitchtools.iterate_named_pitch_pairs_in_expr().
-        Applying: Renamed pitchtools.list_ordered_pitch_pairs().
-        Applying: Removed pitchtools.list_ordered_pitch_pairs().
-        Applying: Removed pitchtools.list_unordered_named_pitch_pairs_in_expr().
-        Applying: Reoved pitchtools.list_pitch_numbers_in_expr().
-        Applying: Deprecated pitchtools.list_numbered_interval_numbers_pairwise().
-        Applying: Removed pitchtools.list_numbered_intervals_pairwise().
-        Applying: Removed pitchtools.list_numbered_inversion_equivalent_interval_classes_in_expr.
-        Applying: Cleaned up pitchtools.list_named_pitches_in_expr().
-        Applying: Renamed pitchtools.list_named_pitches_in_expr().
-        Applying: Changed pitchtools.list_pitches() return type.
-        Applying: Renamed pitchtools.list_pitches().
-        Applying: Deprecated pitchtools.iterate_pitches().
-        Applying: Removed pitchtools.iterate_pitches(). CHANGE.
-        Applying: Removed pitchtools.set_written_pitch_of_pitched_components_in_expr().
-        Applying: Removed pitchtools.sort_named_pitch_carriers_in_expr().
-        Applying: Replaced pitchtools.yield_all_pitch_class_sets().
-        Applying: Replaced pitchtools.transpose_named_pitch_by_numbered_interval_and_respell().
-        Applying: Deprecated pitchtools.transpose_pitch_number_by_octave_transposition_mapping().
-        Applying: Removed pitchtools.transpose_pitch_number_by_octave_transposition_mapping().
-        Applying: Removed pitchtools.transpose_pitch_expr_into_pitch_range().
-        Applying: Removed pitchtools.transpose_pitch_class_number_to_pitch_number_neighbor().
-        Applying: Added NamedInterval.transpose() and NumberedInterval.transpose().
-        Applying: Replaced pitchtools.transpose_pitch_carrier_by_interval(). MILESTONE.
-        Using index info to reconstruct a base tree...
-        M	abjad/tools/pitchtools/NamedPitch.py
-        Falling back to patching base and 3-way merge...
-        error: Your local changes to the following files would be overwritten by merge:
-            abjad/tools/pitchtools/SetClass.py
-        Please commit your changes or stash them before you merge.
-        Aborting
-        error: Failed to merge in the changes.
-        Patch failed at 0034 Replaced pitchtools.transpose_pitch_carrier_by_interval(). MILESTONE.
-        The copy of the patch that failed is found in: .git/rebase-apply/patch
-
-        When you have resolved this problem, run "git rebase --continue".
-        If you prefer to skip this patch, run "git rebase --skip" instead.
-        To check out the original branch and stop rebasing, run "git rebase --abort".
-
-    Asking for status when this happens gives something like this:
-
-        (abjad3) ✔ ~/abjad/abjad [:46943d7|✔] 
-        11:13 $ git st
-        rebase in progress; onto 8336f29
-        You are currently rebasing branch 'trevor/dev' on '8336f29'.
-        (all conflicts fixed: run "git rebase --continue")
-
-        nothing to commit, working tree clean
-
-    Aborting the rebase will look like this:
-
-        (abjad3) ✔ ~/abjad/abjad [:46943d7|✔] 
-        11:16 $ git rebase --abort
-
-        (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
-        11:16 $ git st
-        On branch trevor/dev
+        (abjad3) ✔ ~/abjad/abjad [master|✔] 
+        08:52 $ git checkout trevor/dev
+        Switched to branch 'trevor/dev'
         Your branch is up-to-date with 'origin/trevor/dev'.
-        nothing to commit, working tree clean
 
-    But fixing the rebase is tricky. There were no local changes in the branch
-    prior to rebasing. So why does Git complain about local changes during
-    rebasing?
-
-    In this case I copy `pitchtools/SetClass.py` to the desktop and try again.
-    This time I tell Git to continue rebasing:
-
-        (abjad3) ✘-128 ~/abjad/abjad [:38dac4f|✔] 
-        11:18 $ git rebase --continue
-        Applying: Replaced pitchtools.transpose_pitch_carrier_by_interval(). MILESTONE.
-        No changes - did you forget to use 'git add'?
-        If there is nothing left to stage, chances are that something else
-        already introduced the same changes; you might want to skip this patch.
-
-        When you have resolved this problem, run "git rebase --continue".
-        If you prefer to skip this patch, run "git rebase --skip" instead.
-        To check out the original branch and stop rebasing, run "git rebase --abort".
-
-    There is nothing to add:
-
-        (abjad3) ✔ ~/abjad/abjad [:38dac4f|✔] 
-        11:20 $ git st
-        rebase in progress; onto 8336f29
-        You are currently rebasing branch 'trevor/dev' on '8336f29'.
-        (all conflicts fixed: run "git rebase --continue")
-
-        nothing to commit, working tree clean
-
-    So I tell Git to skip the next patch to be rebased:
-
-        (abjad3) ✔ ~/abjad/abjad [:38dac4f|✔] 
-        11:22 $ git rebase --skip
-        Applying: Added 'cardinality' property to PitchSet, PitchClassSet, IntervalSet.
-        Applying: Implementing PitchClassSet.normal_order.
-        Applying: Implementing PitchClassSet.normal_order.
-        Applying: Fixed PitchClassSet string representation.
-        Applying: Implemented PitchClassSet.normal_order. NEW.
-        Applying: Refactored PitchClassSet.normal_order as PitchClassSet.get_normal_order().
-        Applying: Implemented PitchClassSet.get_prime_form(). NEW.
-        Applying: Defined normal order and prime form for empty pitch-class sets.
-        Applying: Implemented SetClass ranking and unranking algorithms.
-        Using index info to reconstruct a base tree...
-        M	abjad/tools/pitchtools/SetClass.py
-        .git/rebase-apply/patch:546: trailing whitespace.
-            
-        .git/rebase-apply/patch:561: trailing whitespace.
-            
-        warning: 2 lines add whitespace errors.
-        Falling back to patching base and 3-way merge...
-        Auto-merging abjad/tools/pitchtools/SetClass.py
-        Applying: Implemented SetClass.from_pitch_class_set().
-        Using index info to reconstruct a base tree...
-        M	abjad/tools/pitchtools/SetClass.py
-        Falling back to patching base and 3-way merge...
-        Auto-merging abjad/tools/pitchtools/SetClass.py
-        CONFLICT (content): Merge conflict in abjad/tools/pitchtools/SetClass.py
-        error: Failed to merge in the changes.
-        Patch failed at 0044 Implemented SetClass.from_pitch_class_set().
-        The copy of the patch that failed is found in: .git/rebase-apply/patch
-
-        When you have resolved this problem, run "git rebase --continue".
-        If you prefer to skip this patch, run "git rebase --skip" instead.
-        To check out the original branch and stop rebasing, run "git rebase --abort".
-
-    I ask for status to understand what this means:
-
-        (abjad3) ✔ ~/abjad/abjad [:b78ad99|✖ 1✔] 
-        11:23 $ git st
-        rebase in progress; onto 8336f29
-        You are currently rebasing branch 'trevor/dev' on '8336f29'.
-        (fix conflicts and then run "git rebase --continue")
-        (use "git rebase --skip" to skip this patch)
-        (use "git rebase --abort" to check out the original branch)
-
-        Unmerged paths:
-        (use "git reset HEAD <file>..." to unstage)
-        (use "git add <file>..." to mark resolution)
-
-            both modified:   tools/pitchtools/SetClass.py
-
-        no changes added to commit (use "git add" and/or "git commit -a")
-
-    Notice that the patch hex key has changed from `:38dac4f` to `:b78ad99`.
-    Presumably this indicates that Git has made it further in the rebase by
-    applying more commits.
-
-    Git seems to think that only `pitchtools/SetClass.py` has changed. Using
-    Vim to inspect the file shows a 728-line file. This is much shorter than
-    the 1677-line file I saved to the desktop before rebasing. Reading through
-    the file also shows a single merge conflict.
-
-    So what are my options? I could fix the merge conflict by hand. But this
-    seems like a bad idea. Because fixing the version of
-    `pitchtools/SetClass.py` now present in my branch will still only get me a
-    very old version of the file. So because I have a copy of the most recent
-    version of the file, I'll try adding that to my branch and continuing the
-    rebase.
-
-    It appears to have eventually worked. Required many cycles of:
-
-        (abjad3) ✔ ~/abjad/abjad [:b78ad99|✖ 1✔] 
-        11:23 $ cp ~/Desktop/SetClass tools/pitchtools
-        11:23 $ git add tools/pitchtools/SetClass.py
-        11:23 $ git rebase --continue
-
-    And sometimes:
-
-        (abjad3) ✔ ~/abjad/abjad [:b78ad99|✖ 1✔] 
-        11:23 $ cp ~/Desktop/SetClass tools/pitchtools
-        11:23 $ git add tools/pitchtools/SetClass.py
-        11:23 $ git rebase --skip
-
-    The `pitchtools/SetClass.py` file now, correctly, has 1677 lines.
-
-    Asking for status now gives this:
-
-        (abjad3) ✔ ~/abjad/abjad [trevor/dev ↓·58↑·59|✔] 
-        11:34 $ git st
-        On branch trevor/dev
-        Your branch and 'origin/trevor/dev' have diverged,
-        and have 59 and 58 different commits each, respectively.
-        (use "git pull" to merge the remote branch into yours)
-        nothing to commit, working tree clean
-
-    Note the `[trevor/dev ↓·58↑·59|✔]` branch status indicator.
-
-3. Pull. If there are no merge conflicts then things will look like this:
-
-        (abjad3) ✔ ~/abjad/abjad [trevor/dev ↓·3↑·18|✔] 
-        13:02 $ git pull
-        Merge made by the 'recursive' strategy.
-
-    I can't explain why Git notifies about a "recursive" merge.
-
-    If there are merge conflicts then things will look like this:
-
-        (abjad3) ✔ ~/abjad/abjad [trevor/dev ↓·58↑·59|✔] 
-        11:37 $ git pull
-        CONFLICT (modify/delete): abjad/tools/pitchtools/transpose_pitch_carrier_by_interval.py deleted in 186ca9ec1a593f039134bd6e57170c1d50292c11 and modified in HEAD. Version HEAD of abjad/tools/pitchtools/transpose_pitch_carrier_by_interval.py left in tree.
-        Removing abjad/tools/pitchtools/test/test_pitchtools_transpose_pitch_carrier_by_interval.py
-        Auto-merging abjad/tools/pitchtools/NumberedPitch.py
-        CONFLICT (content): Merge conflict in abjad/tools/pitchtools/NumberedPitch.py
-        Auto-merging abjad/tools/pitchtools/NamedPitch.py
-        CONFLICT (content): Merge conflict in abjad/tools/pitchtools/NamedPitch.py
-        Automatic merge failed; fix conflicts and then commit the result.
-
-    Asking for status will show something like this:
-
-        (abjad3) ✔ ~/abjad/abjad [trevor/dev ↓·58↑·59|●2✖ 3] 
-        11:38 $ git st
-        On branch trevor/dev
-        Your branch and 'origin/trevor/dev' have diverged,
-        and have 59 and 58 different commits each, respectively.
-        (use "git pull" to merge the remote branch into yours)
-        You have unmerged paths.
-        (fix conflicts and run "git commit")
-        (use "git merge --abort" to abort the merge)
-
-        Changes to be committed:
-
-            modified:   tools/pitchtools/__init__.py
-            deleted:    tools/pitchtools/test/test_pitchtools_transpose_pitch_carrier_by_interval.py
-
-        Unmerged paths:
-        (use "git add/rm <file>..." as appropriate to mark resolution)
-
-            both modified:   tools/pitchtools/NamedPitch.py
-            both modified:   tools/pitchtools/NumberedPitch.py
-            deleted by them: tools/pitchtools/transpose_pitch_carrier_by_interval.py
-
-    What does this mean? The branch status indicator `[trevor/dev ↓·58↑·59|●2✖
-    3]` shows that there are two files with merge conflicts and three unmerged
-    paths. Reading through the files that Git lists as "unmerged paths" shows
-    that `pitchtools/NamedPitch.py` and `pitchtools.NumberedPitch` have merge
-    conflicts.
-
-    I fixed the small merge conflicts in `pitchtools/NamedPitch.py` and
-    `pitchtools.NumberedPitch` by hand.
-
-    The file `pitchtools/transpose_pitch_carrier_by_interval.py` should be
-    deleted. But rebasing has somehow added the file back to my branch. How to
-    proceed? Maybe no action is required because `git st` shows the file
-    scheduled for deletion anyway.
-
-    So I add my changes to the two files whose merge conflicts I fixed by hand:
-
-        (abjad3) ✔ ~/abjad/abjad [trevor/dev ↓·58↑·59|●2✖ 3] 
-        11:46 $ git add tools/pitchtools/NamedPitch.py 
-        (abjad3) ✔ ~/abjad/abjad [trevor/dev ↓·58↑·59|●3✖ 2] 
-        11:47 $ git add tools/pitchtools/NumberedPitch.py 
-
-    And then I ask for status:
-
-        (abjad3) ✔ ~/abjad/abjad [trevor/dev ↓·58↑·59|●4✖ 1] 
-        11:47 $ git st
-        On branch trevor/dev
-        Your branch and 'origin/trevor/dev' have diverged,
-        and have 59 and 58 different commits each, respectively.
-        (use "git pull" to merge the remote branch into yours)
-        You have unmerged paths.
-        (fix conflicts and run "git commit")
-        (use "git merge --abort" to abort the merge)
-
-        Changes to be committed:
-
-            modified:   tools/pitchtools/NamedPitch.py
-            modified:   tools/pitchtools/NumberedPitch.py
-            modified:   tools/pitchtools/__init__.py
-            deleted:    tools/pitchtools/test/test_pitchtools_transpose_pitch_carrier_by_interval.py
-
-        Unmerged paths:
-        (use "git add/rm <file>..." as appropriate to mark resolution)
-
-            deleted by them: tools/pitchtools/transpose_pitch_carrier_by_interval.py
-
-    Commit does not work because of one remaining unmerged path:
-
-        (abjad3) ✔ ~/abjad/abjad [trevor/dev ↓·58↑·59|●4✖ 1] 
-        11:48 $ git commit
-        U	abjad/tools/pitchtools/transpose_pitch_carrier_by_interval.py
-        error: commit is not possible because you have unmerged files.
-        hint: Fix them up in the work tree, and then use 'git add/rm <file>'
-        hint: as appropriate to mark resolution and make a commit.
-        fatal: Exiting because of an unresolved conflict.
-
-    So I remove:
-
-        (abjad3) ✔ ~/abjad/abjad [trevor/dev ↓·58↑·59|●4✖ 1] 
-        11:49 $ git rm tools/pitchtools/transpose_pitch_carrier_by_interval.py 
-        abjad/tools/pitchtools/transpose_pitch_carrier_by_interval.py: needs merge
-        rm 'abjad/tools/pitchtools/transpose_pitch_carrier_by_interval.py'
-
-    And then ask for status:
-
-        (abjad3) ✔ ~/abjad/abjad [trevor/dev ↓·58↑·59|●5] 
-        11:49 $ git st
-        On branch trevor/dev
-        Your branch and 'origin/trevor/dev' have diverged,
-        and have 59 and 58 different commits each, respectively.
-        (use "git pull" to merge the remote branch into yours)
-        All conflicts fixed but you are still merging.
-        (use "git commit" to conclude merge)
-
-        Changes to be committed:
-
-            modified:   tools/pitchtools/NamedPitch.py
-            modified:   tools/pitchtools/NumberedPitch.py
-            modified:   tools/pitchtools/__init__.py
-            deleted:    tools/pitchtools/test/test_pitchtools_transpose_pitch_carrier_by_interval.py
-            deleted:    tools/pitchtools/transpose_pitch_carrier_by_interval.py
-
-    And then commit:
-
-        (abjad3) ✔ ~/abjad/abjad [trevor/dev ↓·58↑·59|●5] 
-        11:49 $ git commit
-        [trevor/dev 0592e15] Merged branch 'trevor/dev' of https://github.com/Abjad/abjad into trevor/dev
-
-    And then ask for status:
-
-        (abjad3) ✔ ~/abjad/abjad [trevor/dev ↑·60|✔] 
-        11:50 $ git st
-        On branch trevor/dev
-        Your branch is ahead of 'origin/trevor/dev' by 60 commits.
-        (use "git push" to publish your local commits)
-        nothing to commit, working tree clean
-
-    After pulling, the local copy of your will be ahead of the remote copy of
-    your branch:
-
-        (abjad3) ✔ ~/abjad/abjad [trevor/dev ↑·19|✔] 
-        13:02 $ git st
-        On branch trevor/dev
-        Your branch is ahead of 'origin/trevor/dev' by 19 commits.
-        (use "git push" to publish your local commits)
-        nothing to commit, working directory clean
-
-    The `[trevor/dev ↑·19|✔]` BSI is a good thing. This means that the local
-    copy of the branch has 19 commits that the remote copy doesn't yet have.
-
-4. Add, commit, push:
-
-        (abjad3) ✔ ~/abjad/abjad [trevor/dev ↑·19|✔] 
-        13:03 $ git add .
-
-        (abjad3) ✔ ~/abjad/abjad [trevor/dev ↑·19|●1] 
-        13:03 $ git commit
-        [trevor/dev 4ecff29] Pulled in vimrc updates..
+5. **Interactively** rebase your development branch on master:
+
+        (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
+        08:53 $ git rebase -i master
+
+    Git will open a file in Vim:
+
+        pick b14b9aa Added SetClass class to pitchtools.
+        pick 6308a61 Pulled in vimrc updates..
+        pick 2f62a57 Removed pitchtools.instantiate_pitch_and_interval_test_collection().
+        < snip >
+        pick 576a5ca Updated boilerplate score __metadata__.py file.
+        pick 80c2842 Added empty __init__.py to example_score/test/ directory.
+        pick 8ad1ebc Removed empty __init__ from example_score/test/ directory.
+        pick 7462c5d Repeated NamedPitch, NumberedPitch __sub__() change.
+
+        # Rebase 16b7f68..7462c5d onto 16b7f68 (48 command(s))
+        #
+        # Commands:
+        # p, pick = use commit
+        # r, reword = use commit, but edit the commit message
+        # e, edit = use commit, but stop for amending
+        # s, squash = use commit, but meld into previous commit
+        # f, fixup = like "squash", but discard this commit's log message
+        # x, exec = run command (the rest of the line) using shell
+        # d, drop = remove commit
+        #
+        # These lines can be re-ordered; they are executed from top to bottom.
+        #
+        # If you remove a line here THAT COMMIT WILL BE LOST.
+        #
+        # However, if you remove everything, the rebase will be aborted.
+        #
+        # Note that empty commits are commented out
+
+    Change pick commands to other commands, as needed.
+
+    Step-by-step instructions are impossible here.
+
+    Write and quit Vim.
+
+        (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
+        08:53 $ git rebase -i master
+        [detached HEAD 4b22a04] Pulled in vimrc updates.
+        Date: Sat Oct 22 13:03:14 2016 -0500
         1 file changed, 1 insertion(+), 1 deletion(-)
+        Successfully rebased and updated refs/heads/trevor/dev.
 
-        (abjad3) ✔ ~/abjad/abjad [trevor/dev ↑·20|✔] 
-        13:03 $ git push
-        Counting objects: 24, done.
+6. Force-push:
+
+        (abjad3) ✔ ~/abjad/abjad [trevor/dev ↓·48↑·52|✔] 
+        08:55 $ git push -f
+        Counting objects: 398, done.
         Delta compression using up to 4 threads.
-        Compressing objects: 100% (23/23), done.
-        Writing objects: 100% (24/24), 2.75 KiB | 0 bytes/s, done.
-        Total 24 (delta 17), reused 0 (delta 0)
-        remote: Resolving deltas: 100% (17/17), completed with 6 local objects.
+        Compressing objects: 100% (397/397), done.
+        Writing objects: 100% (398/398), 58.98 KiB | 0 bytes/s, done.
+        Total 398 (delta 339), reused 0 (delta 0)
+        remote: Resolving deltas: 100% (339/339), completed with 73 local objects.
         To https://github.com/Abjad/abjad.git
-        0fcc3a7..4ecff29  trevor/dev -> trevor/dev
+        + 7462c5d...c86ad9e trevor/dev -> trevor/dev (forced update)
 
-    And now the local and remote copies of your branch match:
+7. Done:
 
         (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
-        13:03 $ git st
+        08:57 $ git st
         On branch trevor/dev
         Your branch is up-to-date with 'origin/trevor/dev'.
-        nothing to commit, working directory clean
-
-    Note, however, that repeating the steps of the rebase (as shown above) will
-    cause you to have to go back through all the merge conflict resolution once
-    again.
+        nothing to commit, working tree clean
 
 
 Single-commit workflow (changes not already made)
@@ -752,21 +447,21 @@ feature branch persists:
     Confirm that prune has no effect.
 
 
-Core contributor workflow: setting up a personal development branch (PDB)
-=========================================================================
+Setting up a development branch
+===============================
 
 Are you going to be contributing a lot of code to Abjad? Then consider setting
-up a personal development branch (PDB) as a customizable staging area for your
-work.
+up a personal development branch as a customizable staging area for your work.
 
 1. This workflow revolves around three branches on your local machine:
 
     1. master
-    2. a personal development branch (PDB)
-    3. one (or more) feature branches (FB)
+    2. a development branch
+    3. one (or more) feature branches
 
-    The master and PDB branches will persist on your machine indefinitely. You
-    will create and remove FBs on an as-needed basis, as described below.
+    The master and development branches will persist on your machine
+    indefinitely. You will create and remove feature branches on an as-needed
+    basis, as described below.
 
 2. Clone a local copy of the Abjad repository to your local machine. (If you
 have a local copy of the Abjad repository you can skip this step.)
@@ -983,74 +678,49 @@ commits to constitute some sort of user-relevant feature, move on to the next
 steps.
 
 
-Cherry-picking (from your development branch to a feature branch)
-=================================================================
+Cherry-picking (from development to feature branches)
+=====================================================
 
-You'll accumulate commits in your DB after working in it for a while. Every so
-often you'll want to collect some commits in your DB and make them into a
-feature that can be added into the Abjad mainline. You do this by
-cherry-picking commits from your DB into a feature branch (FB) that you'll
-create specifically for this purpose.
+What to do after you development branch starts to accumulate commits? Every so
+often you'll want to collect commits in your development branch and make
+them into a feature that can be added into the Abjad mainline. You do this by
+cherry-picking commits from your development branch into a feature branch that
+you'll create specifically for this purpose.
 
-1. Check out master. Pull:
+1. Check out master:
 
         (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
         12:11 $ git checkout master
         Switched to branch 'master'
-        Your branch is behind 'origin/master' by 7 commits, and can be fast-forwarded.
-        (use "git pull" to update your local branch)
+        Your branch is up-to-date with 'origin/master'.
 
-        (abjad3) ✔ ~/abjad/abjad [master ↓·7|✔] 
-        12:11 $ git pull
-        Updating 5a15d9f..8336f29
-        Fast-forward
-        README.rst                                         |  15 +-
-        abjad/_version.py                                  |   2 +-
-        abjad/docs/source/conf.py                          |   6 +-
-        abjad/docs/source/installation.rst                 |   8 +-
-        abjad/etc/packaging/packaging_checklist.txt        |  69 +++----
-        abjad/etc/packaging/packaging_transcript.txt       |  40 +++++
-        abjad/scr/devel/make-packaging-transcript.py       |  31 ++--
-        abjad/tools/expressiontools/Callback.py            |   9 +-
-        abjad/tools/pitchtools/Accidental.py               | 200 ++++++++++++++-------
-        abjad/tools/pitchtools/NamedPitch.py               |  17 +-
-        abjad/tools/pitchtools/NamedPitchClass.py          |  16 +-
-        abjad/tools/pitchtools/Pitch.py                    |  14 +-
-        abjad/tools/pitchtools/PitchRange.py               |  34 ++--
-        .../test/test_pitchtools_Accidental___cmp__.py     |  30 +---
-        .../test/test_pitchtools_Accidental___eq__.py      |   7 -
-        .../test/test_pitchtools_Accidental___init__.py    |   3 +-
-        .../test_pitchtools_Accidental_abbreviation.py     |   6 -
-        .../test_pitchtools_Accidental_is_abbreviation.py  |  13 --
-        .../test/test_pitchtools_Accidental_is_adjusted.py |   1 -
-        ...htools_Accidental_symbolic_accidental_string.py |   1 -
-        abjad/tools/systemtools/AbjadConfiguration.py      |   4 +-
-        abjad/tools/systemtools/IOManager.py               |  41 +++--
-        .../test/test_systemtools_IOManager_open_file.py   |   3 +-
-        tox.ini                                            |  15 ++
-        24 files changed, 351 insertions(+), 234 deletions(-)
-        create mode 100644 tox.ini
+2. Pull master:
 
-2. Check out your development branch. Pull:
+        (abjad3) ✔ ~/abjad/abjad [master|✔] 
+        10:21 $ git pull
+        Already up-to-date.
+
+3. Check out your development branch:
 
         (abjad3) ✔ ~/abjad/abjad [master|✔] 
         12:11 $ git checkout trevor/dev
         Switched to branch 'trevor/dev'
         Your branch is up-to-date with 'origin/trevor/dev'.
 
+4. Pull your development branch:
+
         (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
         12:12 $ git pull
         Already up-to-date.
 
-3. Decide which DB commits you want to gather together into a feature.
+5. Decide which DB commits you want to gather together into a feature.
 
         (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
-        12:14 $ git lga
-
+        12:14 $ git lg
 
     Note hash suffixes to use in the next step.
 
-4. Switch back to master (IMPORTANT):
+6. Switch back to master (IMPORTANT):
 
         (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
         12:06 $ git checkout master
@@ -1062,76 +732,86 @@ create specifically for this purpose.
     the current branch. And we will want to create a feature branch *based on
     master* (and not based on your development branch).
 
-5. Create a feature branch using Git's checkout command:
+7. Create a feature branch using Git's checkout command:
 
         (abjad3) ✔ ~/abjad/abjad [master|✔] 
         12:18 $ git checkout -b trevor-pitchtools-cleanup
         Switched to a new branch 'trevor-pitchtools-cleanup'
 
-    Optionally you can run tests on your FB now just to make sure everything is
-    ok before populating your FB:
+    Optionally you can run tests on your feature branch now just to make sure
+    everything is ok before populating your feature branch:
 
-        (abjad3) ✔ ~/abjad/abjad [trevor/pitchtools-cleanup L|✔] 
+        (abjad3) ✔ ~/abjad/abjad [trevor/update-score-metadata-file L|✔] 
         14:47 $ ajv doctest tools/pitchtools
         ...
     
-6. Populate your feature branch with hash suffixes from step 4, above:
+8. Populate your feature branch with cherry-picked commits:
 
-        (abjad3) ✔ ~/abjad/abjad [trevor/pitchtools-cleanup L|✔] 
-        15:08 $ git cherry-pick d11109d
-        [trevor/pitchtools-cleanup 8ff6d84] Added ForteNumber class to pitchtools.
-        Date: Wed Oct 5 11:21:47 2016 -0500
-        1 file changed, 76 insertions(+)
-        create mode 100644 abjad/tools/pitchtools/ForteNumber.py
-
-        (abjad3) ✔ ~/abjad/abjad [trevor/pitchtools-cleanup L|✔] 
-        15:08 $ git cherry-pick e06302e
-        [trevor/pitchtools-cleanup 0806cc6] Improved ForteNumber initialization.
-        Date: Thu Oct 6 09:45:06 2016 -0500
-        1 file changed, 1 insertion(+), 1 deletion(-)
-
-        (abjad3) ✔ ~/abjad/abjad [trevor/pitchtools-cleanup L|✔] 
-        15:11 $ git cherry-pick 2bf112d
-        [trevor/pitchtools-cleanup c78bcf8] Changed pitchtools.ForteNumber to pitchtools.SetClass.
-        Date: Sat Oct 22 12:38:28 2016 -0500
-        1 file changed, 8 insertions(+), 8 deletions(-)
-        rename abjad/tools/pitchtools/{ForteNumber.py => SetClass.py} (74%)
-
-        ...
+        (abjad3) ✔ ~/abjad/abjad [trevor/update-score-metadata-file L|✔] 
+        10:24 $ git cherry-pick c96a20c
+        [trevor/update-score-metadata-file b4240a0] CONFIG: Updated vimrc and boilerplate score __metadata__.py file.
+        Date: Sat Oct 22 13:03:14 2016 -0500
+        2 files changed, 3 insertions(+), 3 deletions(-)
 
     Call `cherry-pick` as many times as necessary.
 
-    You can run tests between cherry picks to convince yourself that things are
-    ok after each cherry pick, or after every couple of cherry picks.
+    You can run tests between cherry-picks to convince yourself that things are
+    ok after each cherry-pick. Calling `git st` between cherry-picks shows
+    nothing.
 
-    Note that calling `git st` during (and between) cherry picks apparently
-    shows nothing.
+9. Push:
 
-7. Push:
-
-        (abjad3) ✔ ~/abjad/abjad [trevor-pitchtools-cleanup L|✔] 
-        12:25 $ git push
-        fatal: The current branch trevor-pitchtools-cleanup has no upstream branch.
+        (abjad3) ✔ ~/abjad/abjad [trevor/update-score-metadata-file L|✔] 
+        10:25 $ git push
+        fatal: The current branch trevor/update-score-metadata-file has no upstream branch.
         To push the current branch and set the remote as upstream, use
 
-            git push --set-upstream origin trevor-pitchtools-cleanup
+            git push --set-upstream origin trevor/update-score-metadata-file
 
-        (abjad3) ✘-128 ~/abjad/abjad [trevor-pitchtools-cleanup L|✔] 
-        12:25 $ git push --set-upstream origin trevor-pitchtools-cleanup
-        Counting objects: 234, done.
+        (abjad3) ✘-128 ~/abjad/abjad [trevor/update-score-metadata-file L|✔] 
+        10:25 $ git push --set-upstream origin trevor/update-score-metadata-file
+        Counting objects: 10, done.
         Delta compression using up to 4 threads.
-        Compressing objects: 100% (234/234), done.
-        Writing objects: 100% (234/234), 28.45 KiB | 0 bytes/s, done.
-        Total 234 (delta 204), reused 0 (delta 0)
-        remote: Resolving deltas: 100% (204/204), completed with 39 local objects.
+        Compressing objects: 100% (9/9), done.
+        Writing objects: 100% (10/10), 1.07 KiB | 0 bytes/s, done.
+        Total 10 (delta 7), reused 0 (delta 0)
+        remote: Resolving deltas: 100% (7/7), completed with 7 local objects.
         To https://github.com/Abjad/abjad.git
-        * [new branch]      trevor-pitchtools-cleanup -> trevor-pitchtools-cleanup
-        Branch trevor-pitchtools-cleanup set up to track remote branch trevor-pitchtools-cleanup from origin.
+        * [new branch]      trevor/update-score-metadata-file -> trevor/update-score-metadata-file
+        Branch trevor/update-score-metadata-file set up to track remote branch trevor/update-score-metadata-file from origin.
 
-5. Visit GitHub at http://github.com/Abjad/abjad:
+10. Visit GitHub at http://github.com/Abjad/abjad:
 
     - You'll be notified that you can make a PR from the newly pushed branch.
     - Make the PR ("Compare & pull request" > "Create pull request").
     - Wait for tests to pass.
     - Make corrections in your feature branch and push again, if necessary.
     - Merge the branch via the PR page.
+    - Delete the branch.
+
+11. Return to the terminal and check out master:
+
+        (abjad3) ✘-128 ~/abjad/abjad [trevor/update-score-metadata-file L|✔] 
+        14:21 $ git checkout master
+        Switched to branch 'master'
+        Your branch is behind 'origin/master' by 2 commits, and can be fast-forwarded.
+        (use "git pull" to update your local branch)
+
+12. Pull master:
+
+        (abjad3) ✔ ~/abjad/abjad [master ↓·2|✔] 
+        14:23 $ git pull
+        Updating 16b7f68..b6253f4
+        Fast-forward
+        abjad/boilerplate/example_score/example_score/__metadata__.py | 4 ++--
+        abjad/etc/editors/vimrc                                       | 2 +-
+        2 files changed, 3 insertions(+), 3 deletions(-)
+
+13. Delete the feature branch:
+
+        (abjad3) ✔ ~/abjad/abjad [master|✔] 
+        14:21 $ git branch -d trevor/update-score-metadata-file
+        Deleted branch trevor/update-score-metadata-file (was b4240a0).
+
+I think that's it. That is, I don't think it's necessary to check out your
+development branch and interactively rebase on master.

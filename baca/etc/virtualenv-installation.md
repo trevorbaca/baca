@@ -889,21 +889,151 @@ Start Abjad:
     Abjad 2.20 (development)
     >>> 
 
-Some tests fail. But I think everything is working fine.
+Run tests.
 
-29 doctests fail:    
+Python's inflect module is not yet installed:
 
-    FAILED: tools/datastructuretools/CyclicTuple.py
-    FAILED: tools/pitchtools/PitchClassSegment.py
-    FAILED: tools/pitchtools/TwelveToneRow.py
-    FAILED: tools/rhythmmakertools/EvenDivisionRhythmMaker.py
-    FAILED: tools/rhythmmakertools/InciseSpecifier.py
-    FAILED: tools/rhythmmakertools/IncisedRhythmMaker.py
-    FAILED: tools/rhythmmakertools/TaleaRhythmMaker.py
-    12634 passed, 29 failed out of 12663 tests in 898 modules.
+    (abjad2) ✔ ~/baca/baca [master|✔] 
+    15:51 $ python
+    Python 2.7.10 (default, Jul 30 2016, 18:31:42) 
+    [GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.34)] on darwin
+    Type "help", "copyright", "credits" or "license" for more information.
+    >>> import inflect
+    Traceback (most recent call last):
+    File "<stdin>", line 1, in <module>
+    ImportError: No module named inflect
 
-22 pytests fail:
+Install inflect:
 
-    ========= 22 failed, 10165 passed, 528 skipped in 256.44 seconds ==========
+    (abjad2) ✔ ~/baca/baca [master|✚ 1] 
+    15:51 $ pip install inflect
+    Collecting inflect
+    Downloading inflect-0.2.5-py2.py3-none-any.whl (58kB)
+        100% |████████████████████████████████| 61kB 997kB/s 
+    Installing collected packages: inflect
+    Successfully installed inflect-0.2.5
 
-I think the failing tests have to do with a recent change to CyclicTuple.
+Run make_baca_api.py.
+
+Abjad is now broken under the Python 3 virtual environment:
+
+    (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
+    17:35 $ abjad
+    Traceback (most recent call last):
+    File "/Users/trevorbaca/.virtualenvs/abjad3/bin/abjad", line 6, in <module>
+        from pkg_resources import load_entry_point
+    File "/Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages/pkg_resources/__init__.py", line 2991, in <module>
+        @_call_aside
+    File "/Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages/pkg_resources/__init__.py", line 2977, in _call_aside
+        f(*args, **kwargs)
+    File "/Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages/pkg_resources/__init__.py", line 3004, in _initialize_master_working_set
+        working_set = WorkingSet._build_master()
+    File "/Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages/pkg_resources/__init__.py", line 662, in _build_master
+        ws.require(__requires__)
+    File "/Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages/pkg_resources/__init__.py", line 970, in require
+        needed = self.resolve(parse_requirements(requirements))
+    File "/Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages/pkg_resources/__init__.py", line 856, in resolve
+        raise DistributionNotFound(req, requirers)
+    pkg_resources.DistributionNotFound: The 'mock' distribution was not found and is required by Abjad
+
+And indeed the 'mock' module appears to be missing under the Python 3 virtual
+environment:
+
+    (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
+    17:35 $ python
+    Python 3.5.1 (default, Oct  6 2016, 09:12:24) 
+    [GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.38)] on darwin
+    Type "help", "copyright", "credits" or "license" for more information.
+    >>> import mock
+    Traceback (most recent call last):
+    File "<stdin>", line 1, in <module>
+    ImportError: No module named 'mock'
+
+Even though it is present under the Python 2 virtual environment:
+
+    (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
+    17:36 $ workon abjad2
+
+    (abjad2) ✔ ~/abjad/abjad [trevor/dev|✔] 
+    17:36 $ python
+    Python 2.7.10 (default, Jul 30 2016, 18:31:42) 
+    [GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.34)] on darwin
+    Type "help", "copyright", "credits" or "license" for more information.
+    >>> import mock
+    >>> 
+
+So what does this mean?
+
+"Reinstalling" Abjad under Python 3 appears to hurt more than help:
+
+    (abjad3) ✔ ~/abjad [trevor/dev|✔] 
+    17:38 $ cd ~/abjad
+
+    (abjad3) ✔ ~/abjad [trevor/dev|✔] 
+    17:38 $ pip install -e .[development,ipython]
+    Obtaining file:///Users/trevorbaca/abjad
+    Requirement already satisfied: ply in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from Abjad==2.20)
+    Requirement already satisfied: six in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from Abjad==2.20)
+    Requirement already satisfied: pytest>=3.0.0 in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from Abjad==2.20)
+    Requirement already satisfied: sphinx>=1.4 in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from Abjad==2.20)
+    Requirement already satisfied: sphinx-rtd-theme in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from Abjad==2.20)
+    Requirement already satisfied: PyPDF2 in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from Abjad==2.20)
+    Requirement already satisfied: ipython in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from Abjad==2.20)
+    Requirement already satisfied: jupyter in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from Abjad==2.20)
+    Requirement already satisfied: py>=1.4.29 in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from pytest>=3.0.0->Abjad==2.20)
+    Requirement already satisfied: snowballstemmer>=1.1 in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from sphinx>=1.4->Abjad==2.20)
+    Requirement already satisfied: docutils>=0.11 in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from sphinx>=1.4->Abjad==2.20)
+    Requirement already satisfied: imagesize in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from sphinx>=1.4->Abjad==2.20)
+    Requirement already satisfied: alabaster<0.8,>=0.7 in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from sphinx>=1.4->Abjad==2.20)
+    Requirement already satisfied: Pygments>=2.0 in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from sphinx>=1.4->Abjad==2.20)
+    Requirement already satisfied: Jinja2>=2.3 in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from sphinx>=1.4->Abjad==2.20)
+    Requirement already satisfied: babel!=2.0,>=1.3 in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from sphinx>=1.4->Abjad==2.20)
+    Requirement already satisfied: simplegeneric>0.8 in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from ipython->Abjad==2.20)
+    Requirement already satisfied: traitlets>=4.2 in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from ipython->Abjad==2.20)
+    Requirement already satisfied: pexpect; sys_platform != "win32" in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from ipython->Abjad==2.20)
+    Requirement already satisfied: setuptools>=18.5 in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from ipython->Abjad==2.20)
+    Requirement already satisfied: prompt-toolkit<2.0.0,>=1.0.3 in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from ipython->Abjad==2.20)
+    Requirement already satisfied: pickleshare in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from ipython->Abjad==2.20)
+    Requirement already satisfied: appnope; sys_platform == "darwin" in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from ipython->Abjad==2.20)
+    Requirement already satisfied: decorator in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from ipython->Abjad==2.20)
+    Requirement already satisfied: nbconvert in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from jupyter->Abjad==2.20)
+    Requirement already satisfied: ipykernel in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from jupyter->Abjad==2.20)
+    Requirement already satisfied: ipywidgets in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from jupyter->Abjad==2.20)
+    Requirement already satisfied: jupyter-console in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from jupyter->Abjad==2.20)
+    Requirement already satisfied: qtconsole in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from jupyter->Abjad==2.20)
+    Requirement already satisfied: notebook in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from jupyter->Abjad==2.20)
+    Requirement already satisfied: MarkupSafe in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from Jinja2>=2.3->sphinx>=1.4->Abjad==2.20)
+    Requirement already satisfied: pytz>=0a in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from babel!=2.0,>=1.3->sphinx>=1.4->Abjad==2.20)
+    Requirement already satisfied: ipython-genutils in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from traitlets>=4.2->ipython->Abjad==2.20)
+    Requirement already satisfied: ptyprocess>=0.5 in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from pexpect; sys_platform != "win32"->ipython->Abjad==2.20)
+    Requirement already satisfied: wcwidth in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from prompt-toolkit<2.0.0,>=1.0.3->ipython->Abjad==2.20)
+    Requirement already satisfied: mistune!=0.6 in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from nbconvert->jupyter->Abjad==2.20)
+    Requirement already satisfied: nbformat in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from nbconvert->jupyter->Abjad==2.20)
+    Requirement already satisfied: jupyter-core in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from nbconvert->jupyter->Abjad==2.20)
+    Requirement already satisfied: entrypoints in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from nbconvert->jupyter->Abjad==2.20)
+    Requirement already satisfied: jupyter-client in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from ipykernel->jupyter->Abjad==2.20)
+    Requirement already satisfied: tornado>=4.0 in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from ipykernel->jupyter->Abjad==2.20)
+    Requirement already satisfied: widgetsnbextension>=1.2.6 in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from ipywidgets->jupyter->Abjad==2.20)
+    Requirement already satisfied: terminado>=0.3.3; sys_platform != "win32" in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from notebook->jupyter->Abjad==2.20)
+    Requirement already satisfied: jsonschema!=2.5.0,>=2.0 in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from nbformat->nbconvert->jupyter->Abjad==2.20)
+    Requirement already satisfied: pyzmq>=13 in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from jupyter-client->ipykernel->jupyter->Abjad==2.20)
+    Installing collected packages: Abjad
+    Found existing installation: Abjad 2.20
+    Exception:
+    Traceback (most recent call last):
+    File "/Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages/pip/basecommand.py", line 215, in main
+        status = self.run(options, args)
+    File "/Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages/pip/commands/install.py", line 342, in run
+        prefix=options.prefix_path,
+    File "/Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages/pip/req/req_set.py", line 778, in install
+        requirement.uninstall(auto_confirm=True)
+    File "/Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages/pip/req/req_install.py", line 703, in uninstall
+        '(at %s)' % (link_pointer, self.name, dist.location)
+    AssertionError: Egg-link /Users/trevorbaca/Documents/abjad does not match installed location of Abjad (at /Users/trevorbaca/abjad)
+
+Although now, magically, Abjad works:
+
+    (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
+    17:40 $ abjad
+    Abjad 2.20 (development)
+    >>> 

@@ -5,9 +5,7 @@ from baca import dynamics
 from baca import markup
 from baca import overrides
 from baca import pitch
-from baca import pitch_old
 from baca import rhythm
-from baca import rhythm_old
 from baca import select_
 from baca import selector
 from baca import spanners

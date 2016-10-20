@@ -1,0 +1,18 @@
+body='{
+"request": {
+  "branch":"master"
+}}'
+
+# TRAVIS LIMITS TO 10 BUILDS AT A TIME
+for repo in \
+    akasha archipel betoerung cary desir \
+    dornen faberge hijinks huitzil ikribu
+do
+    curl -s -X POST \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Travis-API-Version: 3" \
+    -H "Authorization: token nXLfNt4QfLfWrbteWEGsiw" \
+    -d "$body" \
+    https://api.travis-ci.org/repo/trevorbaca%2F$repo/requests
+done

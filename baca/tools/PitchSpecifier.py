@@ -412,7 +412,7 @@ class PitchSpecifier(abjad.abctools.AbjadObject):
                 >>> specifier = baca.tools.PitchSpecifier(
                 ...     operators=[
                 ...         pitchtools.Inversion(),
-                ...         pitchtools.Transposition(2),
+                ...         pitchtools.Transposition(n=2),
                 ...         ],
                 ...     source=[19, 13, 15, 16, 17, 23],
                 ...     )
@@ -420,7 +420,7 @@ class PitchSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> specifier.operators
-                (Inversion(), Transposition(index=2))
+                (Inversion(), Transposition(n=2))
 
         Defaults to none.
 

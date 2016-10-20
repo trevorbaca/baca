@@ -180,9 +180,7 @@ class MicrotonalDeviationSpecifier(abjad.abctools.AbjadObject):
         if number == 0:
             return
         written_pitch = note.written_pitch
-        written_pitch = \
-            abjad.pitchtools.transpose_named_pitch_by_numbered_interval_and_respell(
-            written_pitch, 0, number)
+        written_pitch = written_pitch.transpose_staff_position(0, number)
         note.written_pitch = written_pitch
 
     def _attach_deposit_annotations(self, note):

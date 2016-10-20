@@ -38,7 +38,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
                 >>> staff = Staff("c'4 c' d' d'")
                 >>> manager = baca.tools.WellformednessManager()
                 >>> manager(staff)
-                [([LogicalTie(Note("c'4"),), LogicalTie(Note("d'4"),)], 4, 'check_duplicate_pitch_classes')]
+                [([LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")])], 4, 'check_duplicate_pitch_classes')]
 
         Returns violators, total, check triples.
         '''
@@ -87,7 +87,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
                 >>> manager = baca.tools.WellformednessManager
                 >>> manager.check_duplicate_pitch_classes(staff)
-                ([LogicalTie(Note("c'4"),), LogicalTie(Note("d'4"),)], 4)
+                ([LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")])], 4)
 
         ..  container:: example
 
@@ -102,7 +102,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
                 >>> manager = baca.tools.WellformednessManager
                 >>> manager.check_duplicate_pitch_classes(staff)
-                ([LogicalTie(Note("e''4"),)], 4)
+                ([LogicalTie([Note("e''4")])], 4)
 
         ..  container:: example
 
@@ -134,7 +134,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
                 >>> manager = baca.tools.WellformednessManager
                 >>> manager.check_duplicate_pitch_classes(staff)
-                ([LogicalTie(Note("d''4"),)], 4)
+                ([LogicalTie([Note("d''4")])], 4)
 
         Returns violators and total.
         '''

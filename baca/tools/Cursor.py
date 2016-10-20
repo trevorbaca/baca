@@ -92,8 +92,8 @@ class Cursor(abjad.abctools.AbjadObject):
 
         Returns true or false.
         '''
-        from abjad.tools import systemtools
-        return systemtools.StorageFormatManager.compare(self, expr)
+        superclass = super(Cursor, self)
+        return superclass.__eq__(expr)
 
     def __hash__(self):
         r'''Hashes cursor.
@@ -398,6 +398,36 @@ class Cursor(abjad.abctools.AbjadObject):
         return self._source
 
     ### PUBLIC METHODS ###
+
+    @staticmethod
+    def from_pitch_class_segments(pitch_class_segments):
+        r'''Makes cursor from `pitch_class_segments`.
+
+        ..  container:: example
+
+            **Example 1.** Makes cursor from pitch-class segments:
+
+            ::
+
+                >>> number_lists = [[13, 13.5, 11], [-2, 2, 1.5]]
+                >>> baca.tools.Cursor.from_pitch_class_segments(
+                ...     number_lists,
+                ...     )
+                Cursor(source=CyclicTuple([PitchClassSegment([1, 1.5, 11]), PitchClassSegment([10, 2, 1.5])]))
+
+        Coerces numeric `pitch_class_segments`.
+
+        Returns cursor.
+        '''
+        cells = []
+        for pitch_class_segment in pitch_class_segments:
+                pitch_class_segment = abjad.pitchtools.PitchClassSegment(
+                    pitch_class_segment,
+                    )
+                cells.append(pitch_class_segment)
+        cells = abjad.datastructuretools.CyclicTuple(cells)
+        cursor = Cursor(source=cells)
+        return cursor
 
     def next(self, count=1):
         r'''Gets next `count` elements in source.
