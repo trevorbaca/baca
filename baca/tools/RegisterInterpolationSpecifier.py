@@ -11,7 +11,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 1.** Holds register constant:
+        Holds register constant:
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
             >>> segment_maker = baca.tools.SegmentMaker(
@@ -173,8 +173,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 2.** Register interpolates from the octave of C5 to the
-        octave of C4:
+        Register interpolates from the octave of C5 to the octave of C4:
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
             >>> segment_maker = baca.tools.SegmentMaker(
@@ -336,8 +335,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 3.** Register interpolates from the octave of C4 to the
-        octave of C5:
+        Register interpolates from the octave of C4 to the octave of C5:
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
             >>> segment_maker = baca.tools.SegmentMaker(
@@ -499,8 +497,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 4.** Register interpolates from the octave of C5 to the
-        octave of C3:
+        Register interpolates from the octave of C5 to the octave of C3:
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
             >>> segment_maker = baca.tools.SegmentMaker(
@@ -662,8 +659,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 5.** Register interpolates from the octave of C3 to the
-        octave of C5:
+        Register interpolates from the octave of C3 to the octave of C5:
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
             >>> segment_maker = baca.tools.SegmentMaker(

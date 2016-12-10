@@ -305,6 +305,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         '_volta_specifier',
         )
 
+    _publish_storage_format = True
+
     _string_trio_stylesheet_path = os.path.join(
         '..',
         '..',
@@ -774,7 +776,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         return self.design_checker(self._score)
 
     def _check_well_formedness(self):
-        import baca
         score_block = self._lilypond_file['score']
         score = score_block['Score']
         if not abjad.inspect_(score).is_well_formed():
@@ -6617,7 +6618,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
     ### PUBLIC METHODS ###
 
-    def append_specifiers(self, scopes, specifiers, **kwargs):
+    def append_specifiers(self, scopes, specifiers, **keywords):
         r'''Appends each specifier in `specifiers` to each scope in `scopes`.
 
         ..  container:: example
@@ -6869,7 +6870,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 default_scope = None
                 if isinstance(specifier, abjad.instrumenttools.Instrument):
                     default_scope = specifier._default_scope
-                specifier = abjad.new(specifier, **kwargs)
+                specifier = abjad.new(specifier, **keywords)
                 if default_scope is not None:
                     specifier._default_scope = default_scope
                 specifier_ = baca.tools.ScopedSpecifier(
@@ -6880,13 +6881,13 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 specifiers_.append(specifier_)
         return specifiers_
 
-    def copy_specifier(self, scoped_offset, target_scope, **kwargs):
+    def copy_specifier(self, scoped_offset, target_scope, **keywords):
         r'''Copies rhythm specifier.
         
         Gets rhythm specifier defined at `scoped_offset`.
         
         Makes new rhythm specifier with `target_scope` and optional
-        `kwargs`.
+        `keywords`.
 
         Appends rhythm specifier to segment-maker.
 
@@ -6901,7 +6902,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         else:
             target_scope = baca.tools.SimpleScope(*target_scope)
         rhythm_specifier = rhythm_specifier.specifier
-        new_rhythm_specifier = abjad.new(rhythm_specifier, **kwargs)
+        new_rhythm_specifier = abjad.new(rhythm_specifier, **keywords)
         new_scoped_specifier = baca.tools.ScopedSpecifier(
             target_scope,
             new_rhythm_specifier,

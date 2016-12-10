@@ -77,15 +77,19 @@ class Matrix(abjad.abctools.AbjadObject):
     Standard transforms of linear algebra remain to be implemented.
     '''
 
+    ### CLASS VARIABLES ###
+
+    __documentation_section__ = 'Utilities'
+
     ### INITIALIZER ###
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **keywords):
         if len(args) == 1:
-            assert not kwargs
+            assert not keywords
             rows, columns = self._initialize_from_rows(args[0])
-        elif 'columns' in kwargs:
+        elif 'columns' in keywords:
             assert not args
-            rows, columns = self._initialize_from_columns(kwargs['columns'])
+            rows, columns = self._initialize_from_columns(keywords['columns'])
         elif len(args) == 0:
             rows, columns = self._initialize_from_rows([[0], [0]])
         else:

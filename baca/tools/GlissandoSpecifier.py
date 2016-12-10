@@ -11,7 +11,7 @@ class GlissandoSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 1.** Selects all logical ties:
+        Selects all logical ties:
 
         ::
 
@@ -118,7 +118,7 @@ class GlissandoSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 2.** Selects first and last logical ties:
+        Selects first and last logical ties:
 
         ::
 

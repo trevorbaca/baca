@@ -11,7 +11,7 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example.** Transposes to the octave of Eb5:
+        Transposes to the octave of Eb5:
 
         ::
 

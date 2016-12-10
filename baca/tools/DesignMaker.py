@@ -23,6 +23,8 @@ class DesignMaker(abjad.abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
+    __documentation_section__ = 'Utilities'
+
     __slots__ = (
         '_result',
         )

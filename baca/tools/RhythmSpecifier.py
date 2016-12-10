@@ -12,7 +12,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 1.** Specifies rhythm:
+        Specifies rhythm:
 
         ::
 
@@ -29,7 +29,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 2.** Specifies rhythm:
+        Specifies rhythm:
 
         ::
 
@@ -215,19 +215,6 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
         return multimeasure_rests
 
     @property
-    def _storage_format_specification(self):
-        manager = abjad.systemtools.StorageFormatManager
-        keyword_argument_names = \
-            manager.get_signature_keyword_argument_names(self)
-        if not self.rhythm_overwrites:
-            keyword_argument_names = list(keyword_argument_names)
-            keyword_argument_names.remove('rhythm_overwrites')
-        return abjad.systemtools.StorageFormatSpecification(
-            self,
-            keyword_argument_names=keyword_argument_names,
-            )
-
-    @property
     def _use_messiaen_style_ties(self):
         if self.rhythm_maker.tie_specifier is None:
             return False
@@ -251,9 +238,9 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
             else:
                 raise TypeError(leaf)
 
-    def _apply_figure_rhythm_maker(self, figure_list, figure_token):
-        assert len(figure_list) == len(figure_token)
-        total_length = len(figure_list)
+    def _apply_figure_rhythm_maker(self, figure_token, selections):
+        assert len(selections) == len(figure_token)
+        total_length = len(selections)
         patterns = self._get_patterns()
         for index, stage_token in enumerate(figure_token):
             for pattern in patterns:
@@ -262,8 +249,8 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
                     total_length=total_length,
                     ):
                     stage_selection = self._apply_payload(stage_token)
-                    figure_list[index] = stage_selection
-        return figure_list
+                    selections[index] = stage_selection
+        return selections
 
     def _apply_payload(self, stage_token):
         rhythm_maker = self._get_rhythm_maker()
@@ -363,6 +350,17 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
         if self.rhythm_maker is not None:
             return self.rhythm_maker
         return self._default_rhythm_maker
+
+    def _get_storage_format_specification(self):
+        agent = abjad.systemtools.StorageFormatAgent(self)
+        keyword_argument_names = agent.signature_keyword_names
+        if not self.rhythm_overwrites:
+            keyword_argument_names = list(keyword_argument_names)
+            keyword_argument_names.remove('rhythm_overwrites')
+        return abjad.systemtools.StorageFormatSpecification(
+            self,
+            keyword_argument_names=keyword_argument_names,
+            )
 
     def _make_rhythm(self, time_signatures, start_offset):
         rhythm_maker = self._get_rhythm_maker()

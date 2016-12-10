@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
+import abjad
 import baca
-from abjad import *
 
 
 def test_tools_constellate_01():
 
-    pitch_range = pitchtools.PitchRange('[C4, C#7]')
+    pitch_range = abjad.pitchtools.PitchRange('[C4, C#7]')
     segments = baca.tools.constellate([[0, 2, 10], [16, 19, 20]], pitch_range)
 
     assert segments == [
@@ -23,7 +23,7 @@ def test_tools_constellate_01():
 
 def test_tools_constellate_02():
 
-    pitch_range = pitchtools.PitchRange('[C4, C#7]')
+    pitch_range = abjad.pitchtools.PitchRange('[C4, C#7]')
     segments = baca.tools.constellate([[4, 8, 11], [7, 15, 17]], pitch_range)
 
     assert segments == [

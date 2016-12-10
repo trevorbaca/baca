@@ -11,8 +11,6 @@ class TempoSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example.**
-
         ::
 
             >>> segment_maker = baca.tools.SegmentMaker(
@@ -162,7 +160,7 @@ class TempoSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Gets item 1:
+            Gets item 1:
 
             ::
 
@@ -189,7 +187,7 @@ class TempoSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Gets items:
+            Gets items:
 
             ::
 

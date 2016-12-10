@@ -11,8 +11,6 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example.**
-
         ::
 
             >>> baca.tools.SpannerSpecifier()
@@ -107,9 +105,7 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 9/16
@@ -161,9 +157,7 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 1/16

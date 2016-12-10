@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import abjad
+import baca
 
 
 class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
@@ -11,7 +12,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example.** Default acciaccatura specifier:
+        Default acciaccatura specifier:
 
         ::
 
@@ -49,8 +50,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> staff = rhythm_maker._get_staff(lilypond_file)
-            >>> f(staff)
+            >>> f(lilypond_file[Staff])
             \new Staff {
                 {
                     \time 3/4
@@ -120,7 +120,6 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
         lmr_specifier=None,
         stage_pattern=None,
         ):
-        import baca
         if durations is not None:
             assert isinstance(durations, list), repr(durations)
             durations = [abjad.durationtools.Duration(_) for _ in durations]
@@ -177,7 +176,6 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
         return self.durations or [abjad.durationtools.Duration(1, 16)]
 
     def _get_lmr_specifier(self):
-        import baca
         if self.lmr_specifier is not None:
             return self.lmr_specifier
         return baca.tools.LMRSpecifier()
@@ -193,7 +191,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Sixteenth-note acciaccaturas:
+            Sixteenth-note acciaccaturas:
 
             ::
 
@@ -231,8 +229,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -286,7 +283,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Eighth-note acciaccaturas:
+            Eighth-note acciaccaturas:
 
             ::
 
@@ -326,8 +323,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -391,7 +387,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** As many acciaccaturas as possible per stage:
+            As many acciaccaturas as possible per stage:
 
             ::
 
@@ -429,8 +425,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -484,8 +479,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** At most two acciaccaturas at the beginning of every
-            stage:
+            At most two acciaccaturas at the beginning of every stage:
 
             ::
 
@@ -529,8 +523,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 3/2
@@ -582,8 +575,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 3.** At most two acciaccaturas at the end of every
-            stage:
+            At most two acciaccaturas at the end of every stage:
 
             ::
 
@@ -627,8 +619,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 3/2
@@ -680,8 +671,8 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 4.** At most two acciaccaturas at the beginning of every
-            stage and then at most two acciaccaturas at the end of every stage:
+            At most two acciaccaturas at the beginning of every stage and then
+            at most two acciaccaturas at the end of every stage:
 
             ::
 
@@ -726,8 +717,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 9/8
@@ -783,8 +773,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 5.** As many acciaccaturas as possible in the middle of
-            every stage:
+            As many acciaccaturas as possible in the middle of every stage:
 
             ::
 
@@ -826,8 +815,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 11/8
@@ -889,7 +877,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Applies to all stages:
+            Applies to all stages:
 
             ::
 
@@ -927,8 +915,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -982,7 +969,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Applies to last stage:
+            Applies to last stage:
 
             ::
 
@@ -1022,8 +1009,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 2/1
@@ -1067,7 +1053,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 3.** Applies to every other stage:
+            Applies to every other stage:
 
             ::
 
@@ -1107,8 +1093,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 3/2

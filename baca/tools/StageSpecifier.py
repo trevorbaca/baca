@@ -11,7 +11,7 @@ class StageSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 1.** Counts with a single explicit time signature mixed in:
+        Counts with a single explicit time signature mixed in:
 
         ::
 
@@ -37,7 +37,7 @@ class StageSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 2.** Counts with a run of explicit time signatures mixed in:
+        Counts with a run of explicit time signatures mixed in:
 
         ::
 
@@ -88,7 +88,7 @@ class StageSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example.** Gets items:
+            Gets items:
 
             ::
 
@@ -116,7 +116,7 @@ class StageSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example.** Gets items:
+            Gets items:
 
             ::
 
@@ -146,7 +146,7 @@ class StageSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example.** Gets stage count:
+            Gets stage count:
 
             ::
 
@@ -173,10 +173,9 @@ class StageSpecifier(abjad.abctools.AbjadObject):
 
         Returns tuple of pairs.
         '''
-        from abjad.tools import indicatortools
         fermata_entries = []
         for stage_index, item in enumerate(self):
-            if isinstance(item, indicatortools.Fermata):
+            if isinstance(item, abjad.Fermata):
                 stage_number = stage_index + 1
                 fermata_entry = (stage_number, item)
                 fermata_entries.append(fermata_entry)

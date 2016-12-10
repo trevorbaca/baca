@@ -11,7 +11,7 @@ class RegisterTransitionSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 1.** Transitions from the octave of C4 to the octave of C5:
+        Transitions from the octave of C4 to the octave of C5:
 
             >>> segment_maker = baca.tools.SegmentMaker(
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),

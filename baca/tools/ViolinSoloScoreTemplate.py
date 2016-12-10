@@ -90,7 +90,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Templates'
+    __documentation_section__ = 'Utilities'
 
     voice_abbreviations = {
         'vn': 'Violin Music Voice',

@@ -11,7 +11,7 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example.** Default LMR specifier:
+        Default LMR specifier:
 
         ::
 
@@ -256,7 +256,7 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Left counts equal to a single 1:
+            Left counts equal to a single 1:
 
             ::
 
@@ -341,7 +341,7 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Left counts all equal to 1:
+            Left counts all equal to 1:
 
             ::
 
@@ -458,7 +458,7 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Left length equal to 2:
+            Left length equal to 2:
 
             ::
 
@@ -567,7 +567,7 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Cyclic middle counts equal to [2]:
+            Cyclic middle counts equal to [2]:
 
             ::
 
@@ -663,7 +663,7 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Reversed cyclic middle counts equal to [2]:
+            Reversed cyclic middle counts equal to [2]:
 
             ::
 
@@ -759,7 +759,7 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Priority to the left:
+            Priority to the left:
 
             ::
 
@@ -837,7 +837,7 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Priority to the right:
+            Priority to the right:
 
             ::
 
@@ -954,7 +954,7 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Right length equal to 2:
+            Right length equal to 2:
 
             ::
 
@@ -1025,8 +1025,7 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Right length equal to 2 and left counts equal to
-            [1]:
+            Right length equal to 2 and left counts equal to [1]:
 
             ::
 

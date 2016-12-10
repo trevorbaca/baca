@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import mathtools
-from abjad.tools import sequencetools
-from fractions import Fraction
+import abjad
 
 
 def partition_to_avoid_octave_adjacencies(l, direction):
@@ -14,7 +12,7 @@ def partition_to_avoid_octave_adjacencies(l, direction):
     part = result[-1]
 
     for x in l:
-        if not isinstance(x, (int, float, Fraction)):
+        if not isinstance(x, (int, float, abjad.Fraction)):
             raise TypeError('integer or rational.')
         if x % 12 in [y % 12 for y in part]:
             first_value = [y for y in part if y % 12 == x % 12][0]
@@ -24,11 +22,11 @@ def partition_to_avoid_octave_adjacencies(l, direction):
             disputed_part = part[first_index+1:]
             new_part = []
             ## divvy up disputed part
-            left, right = mathtools.partition_integer_into_halves(
+            left, right = abjad.mathtools.partition_integer_into_halves(
                 len(disputed_part), bigger = direction)
 
-            #disputed_parts = sequencetools.partition_by_lengths(disputed_part, [left, right])
-            disputed_parts = sequencetools.partition_sequence_once_by_counts_without_overhang(
+            #disputed_parts = abjad.sequencetools.partition_by_lengths(disputed_part, [left, right])
+            disputed_parts = abjad.sequencetools.partition_sequence_once_by_counts_without_overhang(
                 disputed_part, [left, right])
             left_disputed_part, right_disputed_part = disputed_parts
 

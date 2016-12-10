@@ -11,7 +11,7 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 1.** Trills notes a quarter note in duration or greater:
+        Trills notes a quarter note in duration or greater:
 
         ::
 

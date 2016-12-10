@@ -1,10 +1,17 @@
 # -*- coding: utf-8 -*-
 import abjad
+import baca
 
 
 class ConstellationCircuit(abjad.abctools.AbjadObject):
     r'''Constellation circuit.
     '''
+
+    ### CLASS VARIABLES ###
+
+    __documentation_section__ = 'Utilities'
+
+    ### INITIALIZER ###
 
     def __init__(self, partitioned_generator_pnls, pitch_range):
         self._partitioned_generator_pnls = partitioned_generator_pnls
@@ -49,7 +56,6 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
     ### PRIVATE METHODS ###
 
     def _constellate_partitioned_generator_pnls(self):
-        import baca
         self._constellations = []
         enumeration = enumerate(self._partitioned_generator_pnls)
         for i, partitioned_generator_pnl in enumeration:

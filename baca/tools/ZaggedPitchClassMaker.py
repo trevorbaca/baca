@@ -161,14 +161,14 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
 
         Returns boolean.
         '''
-        return abjad.systemtools.StorageFormatManager.compare(self, expr)
+        agent = abjad.systemtools.StorageFormatAgent(self)
+        return agent.compare(expr)
 
     def __hash__(self):
         r'''Hashes zagged pitch-class maker.
         '''
-        hash_values = \
-            abjad.systemtools.StorageFormatManager.get_hash_values(self)
-        return hash(hash_values)
+        agent = abjad.systemtools.StorageFormatAgent(self)
+        return hash(agent.hash_values)
 
     ### PRIVATE PROPERTIES ###
 

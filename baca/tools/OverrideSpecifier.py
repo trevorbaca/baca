@@ -12,8 +12,6 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example.**
-
         ::
 
             >>> baca.tools.OverrideSpecifier()

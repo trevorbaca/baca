@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import abjad
+import baca
 import collections
 
 
@@ -74,7 +75,7 @@ class CompoundScope(abjad.abctools.AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self, simple_scopes=None):
-        import baca
+        #import baca
         if simple_scopes is not None:
             assert isinstance(simple_scopes, (tuple, list))
             simple_scopes_ = []
@@ -106,7 +107,7 @@ class CompoundScope(abjad.abctools.AbjadObject):
 
     @staticmethod
     def _is_stage_pair(expr):
-        import baca
+        #import baca
         if isinstance(expr, baca.tools.StageExpression):
             return True
         if isinstance(expr, tuple):
@@ -118,7 +119,7 @@ class CompoundScope(abjad.abctools.AbjadObject):
 
     @classmethod
     def _to_compound_scope(class_, scope, score_template=None):
-        import baca
+        #import baca
         if isinstance(scope, baca.tools.SimpleScope):
             scope = baca.tools.CompoundScope(scope)
         elif isinstance(scope, baca.tools.CompoundScope):
@@ -153,7 +154,7 @@ class CompoundScope(abjad.abctools.AbjadObject):
 
     @classmethod
     def _to_simple_scopes(class_, scope_token, score_template=None):
-        import baca
+        #import baca
         if not isinstance(scope_token, collections.Sequence):
             message = 'scope token {!r} must be sequence.'
             message = message.format(scope_token)

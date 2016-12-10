@@ -12,8 +12,6 @@ class SettingSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example.**
-
         ::
 
             >>> baca.tools.SettingSpecifier()

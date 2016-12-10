@@ -11,7 +11,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example.** Selects notes and chords:
+        Selects notes and chords:
 
         ::
 
@@ -192,7 +192,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Selects first and last logical ties:
+            Selects first and last logical ties:
 
             ::
 
@@ -302,7 +302,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Selects every other logical tie:
+            Selects every other logical tie:
 
             ::
 
@@ -419,7 +419,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Selects notes and chords:
+            Selects notes and chords:
 
             ::
 
@@ -526,7 +526,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Selects last seven notes and chords:
+            Selects last seven notes and chords:
 
             ::
 
@@ -647,7 +647,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** With thirty-second-valued tremolo flags:
+            With thirty-second-valued tremolo flags:
 
             ::
 
@@ -754,7 +754,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** With sixteenth-valued tremolo flags:
+            With sixteenth-valued tremolo flags:
 
             ::
 

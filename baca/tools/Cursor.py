@@ -12,7 +12,7 @@ class Cursor(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 1.** Gets elements one at a time:
+        Gets elements one at a time:
 
         ::
 
@@ -23,21 +23,21 @@ class Cursor(abjad.abctools.AbjadObject):
         ::
 
                 >>> cursor.next()
-                (13,)
+                [13]
                 >>> cursor.next()
-                ('da capo',)
+                ['da capo']
                 >>> cursor.next()
-                (Note("cs'8."),)
+                [Note("cs'8.")]
                 >>> cursor.next()
-                ('rit.',)
+                ['rit.']
                 >>> cursor.next()
-                (13,)
+                [13]
                 >>> cursor.next()
-                ('da capo',)
+                ['da capo']
 
     ..  container:: example
 
-        **Example 2.** Gets different numbers of elements at a time:
+        Gets different numbers of elements at a time:
 
         ::
 
@@ -48,17 +48,17 @@ class Cursor(abjad.abctools.AbjadObject):
         ::
 
             >>> cursor.next(count=2)
-            (13, 'da capo')
+            [13, 'da capo']
             >>> cursor.next(count=-1)
-            ('da capo',)
+            ['da capo']
             >>> cursor.next(count=2)
-            ('da capo', Note("cs'8."))
+            ['da capo', Note("cs'8.")]
             >>> cursor.next(count=-1)
-            (Note("cs'8."),)
+            [Note("cs'8.")]
             >>> cursor.next(count=2)
-            (Note("cs'8."), 'rit.')
+            [Note("cs'8."), 'rit.']
             >>> cursor.next(count=-1)
-            ('rit.',)
+            ['rit.']
 
     '''
 
@@ -67,8 +67,11 @@ class Cursor(abjad.abctools.AbjadObject):
     __documentation_section__ = 'Utilities'
 
     __slots__ = (
+        '_lone_items',
         '_position',
+        '_singletons',
         '_source',
+        '_suppress_exception',
         )
 
     ### INITIALIZER ###
@@ -77,12 +80,20 @@ class Cursor(abjad.abctools.AbjadObject):
         self,
         source=None,
         position=None,
+        singletons=None,
+        suppress_exception=None,
         ):
         source = source or ()
         assert isinstance(source, collections.Iterable), repr(source)
         self._source = source
         assert isinstance(position, (int, type(None))), repr(position)
         self._position = position
+        if singletons is not None:
+            singletons = bool(singletons)
+        self._singletons = singletons
+        if suppress_exception is not None:
+            suppress_exception = bool(suppress_exception)
+        self._suppress_exception = suppress_exception
 
     ### SPECIAL METHODS ###
 
@@ -109,7 +120,7 @@ class Cursor(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example.** Iterates acyclic cursor:
+            Iterates acyclic cursor:
 
             ::
 
@@ -124,7 +135,7 @@ class Cursor(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example.** Iterates cyclic cursor:
+            Iterates cyclic cursor:
 
             ::
 
@@ -142,6 +153,24 @@ class Cursor(abjad.abctools.AbjadObject):
         '''
         return iter(self.source)
 
+    def __len__(self):
+        r'''Gets length of cursor.
+
+        ..  container:: example
+
+            ::
+
+                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
+                >>> cursor = baca.tools.Cursor(source=source)
+                >>> len(cursor)
+                4
+
+        Defined equal to length of cursor source.
+
+        Returns nonnegative integer.
+        '''
+        return len(self.source)
+
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -149,8 +178,6 @@ class Cursor(abjad.abctools.AbjadObject):
         r'''Is true when cursor is exhausted.
 
         ..  container:: example
-
-            **Example.**
 
             ::
 
@@ -162,22 +189,22 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> cursor.next(), cursor.is_exhausted
-                ((13,), False)
+                ([13], False)
 
             ::
 
                 >>> cursor.next(), cursor.is_exhausted
-                (('da capo',), False)
+                (['da capo'], False)
 
             ::
 
                 >>> cursor.next(), cursor.is_exhausted
-                ((Note("cs'8."),), False)
+                ([Note("cs'8.")], False)
 
             ::
 
                 >>> cursor.next(), cursor.is_exhausted
-                (('rit.',), True)
+                (['rit.'], True)
 
         Returns true or false.
         '''
@@ -195,7 +222,7 @@ class Cursor(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Position starting at none:
+            Position starting at none:
 
             ::
 
@@ -211,13 +238,13 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> cursor.next()
-                (13,)
+                [13]
                 >>> cursor.next()
-                ('da capo',)
+                ['da capo']
                 >>> cursor.next()
-                (Note("cs'8."),)
+                [Note("cs'8.")]
                 >>> cursor.next()
-                ('rit.',)
+                ['rit.']
 
             ::
 
@@ -236,19 +263,19 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> cursor.next(count=-1)
-                ('rit.',)
+                ['rit.']
                 >>> cursor.next(count=-1)
-                (Note("cs'8."),)
+                [Note("cs'8.")]
                 >>> cursor.next(count=-1)
-                ('da capo',)
+                ['da capo']
                 >>> cursor.next(count=-1)
-                (13,)
+                [13]
 
             This is default behavior.
 
         ..  container:: example
 
-            **Example 1.** Position starting at 0:
+            Position starting at 0:
 
             ::
 
@@ -267,13 +294,13 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> cursor.next()
-                (13,)
+                [13]
                 >>> cursor.next()
-                ('da capo',)
+                ['da capo']
                 >>> cursor.next()
-                (Note("cs'8."),)
+                [Note("cs'8.")]
                 >>> cursor.next()
-                ('rit.',)
+                ['rit.']
 
             ::
 
@@ -292,19 +319,19 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> cursor.next(count=-1)
-                ('rit.',)
+                ['rit.']
                 >>> cursor.next(count=-1)
-                (Note("cs'8."),)
+                [Note("cs'8.")]
                 >>> cursor.next(count=-1)
-                ('da capo',)
+                ['da capo']
                 >>> cursor.next(count=-1)
-                (13,)
+                [13]
 
             This is default behavior.
 
         ..  container:: example
 
-            **Example 3.** Position starting at -1:
+            Position starting at -1:
 
             ::
 
@@ -323,13 +350,13 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> cursor.next()
-                ('rit.',)
+                ['rit.']
                 >>> cursor.next()
-                (13,)
+                [13]
                 >>> cursor.next()
-                ('da capo',)
+                ['da capo']
                 >>> cursor.next()
-                (Note("cs'8."),)
+                [Note("cs'8.")]
 
             ::
 
@@ -348,17 +375,110 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> cursor.next(count=-1)
-                (Note("cs'8."),)
+                [Note("cs'8.")]
                 >>> cursor.next(count=-1)
-                ('da capo',)
+                ['da capo']
                 >>> cursor.next(count=-1)
-                (13,)
+                [13]
                 >>> cursor.next(count=-1)
-                ('rit.',)
+                ['rit.']
 
         Returns tuple.
         '''
         return self._position
+
+    @property
+    def singletons(self):
+        r'''Is true when cursor returns singletons not enclosed within a list.
+        If false when cursor returns singletons enclosed within a list.
+
+        ..  container:: example
+
+            Returns singletons enclosed within a list:
+
+            ::
+
+                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
+                >>> cursor = baca.tools.Cursor(
+                ...     source=source,
+                ...     suppress_exception=True,
+                ...     )
+
+            ::
+
+                >>> cursor.next()
+                [13]
+
+            ::
+
+                >>> cursor.next()
+                ['da capo']
+
+            ::
+
+                >>> cursor.next()
+                [Note("cs'8.")]
+
+            ::
+
+                >>> cursor.next()
+                ['rit.']
+
+            ::
+
+                >>> cursor.next()
+                []
+
+            ::
+
+                >>> cursor.next()
+                []
+
+        ..  container:: example
+
+            Returns singletons free of enclosing list:
+
+            ::
+
+                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
+                >>> cursor = baca.tools.Cursor(
+                ...     source=source,
+                ...     singletons=True,
+                ...     suppress_exception=True,
+                ...     )
+
+            ::
+
+                >>> cursor.next()
+                13
+
+            ::
+
+                >>> cursor.next()
+                'da capo'
+
+            ::
+
+                >>> cursor.next()
+                Note("cs'8.")
+
+            ::
+
+                >>> cursor.next()
+                'rit.'
+
+            ::
+
+                >>> cursor.next() is None
+                True
+
+            ::
+
+                >>> cursor.next() is None
+                True
+
+        '''
+        return self._singletons
 
     @property
     def source(self):
@@ -366,7 +486,7 @@ class Cursor(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** List source:
+            List source:
 
             ::
 
@@ -380,7 +500,7 @@ class Cursor(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Cyclic tuple source:
+            Cyclic tuple source:
 
             ::
 
@@ -397,6 +517,103 @@ class Cursor(abjad.abctools.AbjadObject):
         '''
         return self._source
 
+    @property
+    def suppress_exception(self):
+        r'''Is true when cursor returns none on exhaustion.
+        Is false when cursor raises exception on exhaustion.
+
+        ..  container:: example
+
+            Exhausted cursor raises exception:
+
+            ::
+
+                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
+                >>> cursor = baca.tools.Cursor(source=source)
+                >>> cursor.is_exhausted
+                False
+
+            ::
+
+                >>> cursor.next()
+                [13]
+
+            ::
+
+                >>> cursor.next()
+                ['da capo']
+
+            ::
+
+                >>> cursor.next()
+                [Note("cs'8.")]
+
+            ::
+
+                >>> cursor.next()
+                ['rit.']
+
+            ::
+
+                >>> cursor.next()
+                Traceback (most recent call last):
+                ...
+                Exception: cursor length only 4.
+
+            ::
+
+                >>> cursor.next()
+                Traceback (most recent call last):
+                ...
+                Exception: cursor length only 4.
+
+        ..  container:: example
+
+            Exhausted cursor returns none:
+
+            ::
+
+                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
+                >>> cursor = baca.tools.Cursor(
+                ...     source=source,
+                ...     suppress_exception=True,
+                ...     )
+                >>> cursor.is_exhausted
+                False
+
+            ::
+
+                >>> cursor.next()
+                [13]
+
+            ::
+
+                >>> cursor.next()
+                ['da capo']
+
+            ::
+
+                >>> cursor.next()
+                [Note("cs'8.")]
+
+            ::
+
+                >>> cursor.next()
+                ['rit.']
+
+            ::
+
+                >>> cursor.next()
+                []
+
+            ::
+
+                >>> cursor.next()
+                []
+
+        '''
+        return self._suppress_exception
+
     ### PUBLIC METHODS ###
 
     @staticmethod
@@ -405,7 +622,7 @@ class Cursor(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Makes cursor from pitch-class segments:
+            Makes cursor from pitch-class segments:
 
             ::
 
@@ -434,7 +651,7 @@ class Cursor(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Gets elements one at a time:
+            Gets elements one at a time:
 
             ::
 
@@ -445,21 +662,21 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> cursor.next()
-                (13,)
+                [13]
                 >>> cursor.next()
-                ('da capo',)
+                ['da capo']
                 >>> cursor.next()
-                (Note("cs'8."),)
+                [Note("cs'8.")]
                 >>> cursor.next()
-                ('rit.',)
+                ['rit.']
                 >>> cursor.next()
-                (13,)
+                [13]
                 >>> cursor.next()
-                ('da capo',)
+                ['da capo']
 
         ..  container:: example
 
-            **Example 2.** Gets elements one at a time in reverse:
+            Gets elements one at a time in reverse:
 
             ::
 
@@ -470,17 +687,17 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> cursor.next(count=-1)
-                ('rit.',)
+                ['rit.']
                 >>> cursor.next(count=-1)
-                (Note("cs'8."),)
+                [Note("cs'8.")]
                 >>> cursor.next(count=-1)
-                ('da capo',)
+                ['da capo']
                 >>> cursor.next(count=-1)
-                (13,)
+                [13]
 
         ..  container:: example
 
-            **Example 3.** Gets same two elements forward and back:
+            Gets same two elements forward and back:
 
             ::
 
@@ -491,17 +708,17 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> cursor.next(count=2)
-                (13, 'da capo')
+                [13, 'da capo']
                 >>> cursor.next(count=-2)
-                ('da capo', 13)
+                ['da capo', 13]
                 >>> cursor.next(count=2)
-                (13, 'da capo')
+                [13, 'da capo']
                 >>> cursor.next(count=-2)
-                ('da capo', 13)
+                ['da capo', 13]
 
         ..  container:: example
 
-            **Example 4.** Gets different numbers of elements at a time:
+            Gets different numbers of elements at a time:
 
             ::
 
@@ -512,21 +729,21 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> cursor.next(count=2)
-                (13, 'da capo')
+                [13, 'da capo']
                 >>> cursor.next(count=-1)
-                ('da capo',)
+                ['da capo']
                 >>> cursor.next(count=2)
-                ('da capo', Note("cs'8."))
+                ['da capo', Note("cs'8.")]
                 >>> cursor.next(count=-1)
-                (Note("cs'8."),)
+                [Note("cs'8.")]
                 >>> cursor.next(count=2)
-                (Note("cs'8."), 'rit.')
+                [Note("cs'8."), 'rit.']
                 >>> cursor.next(count=-1)
-                ('rit.',)
+                ['rit.']
 
         ..  container:: example
 
-            **Example 5.** Gets different numbers of elements at a time:
+            Gets different numbers of elements at a time:
 
             ::
 
@@ -537,21 +754,21 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> cursor.next(count=2)
-                (13, 'da capo')
+                [13, 'da capo']
                 >>> cursor.next(count=-3)
-                ('da capo', 13, 'rit.')
+                ['da capo', 13, 'rit.']
                 >>> cursor.next(count=2)
-                ('rit.', 13)
+                ['rit.', 13]
                 >>> cursor.next(count=-3)
-                (13, 'rit.', Note("cs'8."))
+                [13, 'rit.', Note("cs'8.")]
                 >>> cursor.next(count=2)
-                (Note("cs'8."), 'rit.')
+                [Note("cs'8."), 'rit.']
                 >>> cursor.next(count=-3)
-                ('rit.', Note("cs'8."), 'da capo')
+                ['rit.', Note("cs'8."), 'da capo']
 
         ..  container:: example
 
-            **Example 6.** Raises exception when cursor is exhausted:
+            Raises exception when cursor is exhausted:
 
             ::
 
@@ -574,21 +791,27 @@ class Cursor(abjad.abctools.AbjadObject):
             for i in range(count):
                 try:
                     element = self.source[self.position]
+                    result.append(element)
                 except IndexError:
-                    message = 'cursor length only {}.'
-                    message = message.format(len(self.source))
-                    raise Exception(message)
-                result.append(element)
+                    if not self.suppress_exception:
+                        message = 'cursor length only {}.'
+                        message = message.format(len(self.source))
+                        raise Exception(message)
                 self._position += 1
         elif count < 0:
             for i in range(abs(count)):
                 self._position -= 1
                 try:
                     element = self.source[self.position]
+                    result.append(element)
                 except IndexError:
-                    message = 'cursor length only {}.'
-                    message = message.format(len(self.source))
-                    raise Exception(message)
-                result.append(element)
-        result = tuple(result)
+                    if not self.suppress_exception:
+                        message = 'cursor length only {}.'
+                        message = message.format(len(self.source))
+                        raise Exception(message)
+        if self.singletons:
+            if len(result) == 0:
+                result = None
+            elif len(result) == 1:
+                result = result[0]
         return result

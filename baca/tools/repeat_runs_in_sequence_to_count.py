@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import abjad
 
 
 def repeat_runs_in_sequence_to_count(sequence, tokens):
@@ -79,8 +80,7 @@ def repeat_runs_in_sequence_to_count(sequence, tokens):
     ``sequencetools.repeat_subruns_to_weight()``  and
     ``sequencetools.repeat_subruns_to_sum()``.
     '''
-    from abjad.tools import scoretools
-    assert all(not isinstance(x, scoretools.Component) for x in sequence)
+    assert all(not isinstance(x, abjad.scoretools.Component) for x in sequence)
     assert isinstance(tokens, list)
     assert all(len(x) == 3 for x in tokens)
     sequence = list(sequence)

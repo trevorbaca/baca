@@ -11,7 +11,7 @@ class OctaveDisplacementSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example.** Displaces octaves:
+        Displaces octaves:
 
         ::
 

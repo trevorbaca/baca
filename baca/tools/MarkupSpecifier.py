@@ -11,8 +11,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example.** Markup specifier selects head of first pitched logical
-        tie:
+        Markup specifier selects head of first pitched logical tie:
 
         ::
 
@@ -44,9 +43,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> class_ = rhythmmakertools.RhythmMaker
-            >>> staff = class_._get_staff(lilypond_file)
-            >>> f(staff)
+            >>> f(lilypond_file[Staff])
             \new Staff {
                 {
                     \time 5/4
@@ -151,8 +148,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Markup specifier selects head of first pitched
-            logical tie:
+            Markup specifier selects head of first pitched logical tie:
 
             ::
 
@@ -184,9 +180,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 5/4
@@ -218,8 +212,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Markup specifier selects heads of pitched logical
-            ties:
+            Markup specifier selects heads of pitched logical ties:
 
             ::
 
@@ -253,9 +246,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 5/4

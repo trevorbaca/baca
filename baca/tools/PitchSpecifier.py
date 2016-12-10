@@ -13,7 +13,7 @@ class PitchSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 1.** With pitch numbers:
+        With pitch numbers:
 
         ::
 
@@ -361,7 +361,7 @@ class PitchSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Gets counts:
+            Gets counts:
 
             ::
 
@@ -405,7 +405,7 @@ class PitchSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Gets operators:
+            Gets operators:
 
             ::
 
@@ -437,7 +437,7 @@ class PitchSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** With no repetition intervals:
+            With no repetition intervals:
 
             ::
 
@@ -470,7 +470,7 @@ class PitchSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** With fixed repetition interval:
+            With fixed repetition interval:
 
             ::
 
@@ -504,7 +504,7 @@ class PitchSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 3.** With patterned repetition intervals:
+            With patterned repetition intervals:
 
             ::
 
@@ -550,7 +550,7 @@ class PitchSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Reverses pitch specifier:
+            Reverses pitch specifier:
 
             ::
 
@@ -579,7 +579,7 @@ class PitchSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Gets source:
+            Gets source:
 
             ::
 
@@ -613,7 +613,7 @@ class PitchSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Gets start index:
+            Gets start index:
 
             ::
 
@@ -643,7 +643,7 @@ class PitchSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Gets pitches:
+            Gets pitches:
 
             ::
                 

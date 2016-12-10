@@ -11,7 +11,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example.** Selects heads of pitched logical ties:
+        Selects heads of pitched logical ties:
 
         ::
 
@@ -43,9 +43,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> class_ = rhythmmakertools.RhythmMaker
-            >>> staff = class_._get_staff(lilypond_file)
-            >>> f(staff)
+            >>> f(lilypond_file[Staff])
             \new Staff {
                 {
                     \time 5/4
@@ -157,7 +155,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Accents the head of every pitched logical tie:
+            Accents the head of every pitched logical tie:
 
             ::
 
@@ -189,9 +187,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 5/4
@@ -221,7 +217,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Patterns accents:
+            Patterns accents:
 
             ::
 
@@ -257,9 +253,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 5/4
@@ -289,7 +283,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 3.** Patterns accents with staccati:
+            Patterns accents with staccati:
 
             ::
 
@@ -325,9 +319,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 5/4
@@ -357,7 +349,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 4.** Patterns accented tenuti with staccati:
+            Patterns accented tenuti with staccati:
 
             ::
 
@@ -393,9 +385,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 5/4
@@ -425,7 +415,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 5.** With reiterated dynamics:
+            With reiterated dynamics:
 
             ::
 
@@ -457,9 +447,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 5/4
@@ -501,7 +489,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example.** Selects heads of pitched logical ties:
+            Selects heads of pitched logical ties:
 
             ::
 
@@ -533,9 +521,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 5/4

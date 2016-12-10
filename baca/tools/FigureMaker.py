@@ -13,7 +13,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 1.** Default figure-maker:
+        Default figure-maker:
 
         ::
 
@@ -33,9 +33,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> class_ = rhythmmakertools.RhythmMaker
-            >>> staff = class_._get_staff(lilypond_file)
-            >>> f(staff)
+            >>> f(lilypond_file[Staff])
             \new Staff {
                 {
                     \time 9/16
@@ -59,17 +57,6 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 }
             }
 
-    ..  container:: example
-
-        **Example 2.** Unknown keyword raises exception:
-
-        ::
-
-            >>> baca.tools.FigureMaker(color='red')
-            Traceback (most recent call last):
-            ...
-            Exception: unknown keyword: 'color'.
-
     '''
 
     ### CLASS VARIABLES ###
@@ -88,20 +75,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
     _incomplete_tag = 'incomplete'
 
-    _initializer_keywords = (
-        'allow_repeated_pitches',
-        'annotate_unregistered_pitches',
-        'preferred_denominator',
-        )
-
-    _calltime_keywords = _initializer_keywords + (
-        'extend_beam',
-        'figure_name',
-        'is_foreshadow',
-        'is_incomplete',
-        'is_recollection',
-        'state_manifest',
-        )
+    _publish_storage_format = True
 
     _recollection_tag = 'recollection'
 
@@ -113,16 +87,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, *specifiers, **keywords):
-        allow_repeated_pitches = keywords.get('allow_repeated_pitches')
-        annotate_unregistered_pitches = keywords.get(
-            'annotate_unregistered_pitches')
-        preferred_denominator = keywords.get('preferred_denominator')
-        for name in keywords:
-            if name not in self._initializer_keywords:
-                message = 'unknown keyword: {!r}.'
-                message = message.format(name)
-                raise Exception(message)
+    def __init__(
+        self,
+        *specifiers,
+        allow_repeated_pitches=None,
+        annotate_unregistered_pitches=None,
+        preferred_denominator=None
+        ):
         if allow_repeated_pitches is not None:
             allow_repeated_pitches = bool(allow_repeated_pitches)
         self._allow_repeated_pitches = allow_repeated_pitches
@@ -141,45 +112,41 @@ class FigureMaker(abjad.abctools.AbjadObject):
         self,
         figure_token,
         *specifiers,
-        **keywords
+        allow_repeated_pitches=None,
+        annotate_unregistered_pitches=None,
+        exhaustive=None,
+        extend_beam=None,
+        figure_name=None,
+        imbrication_map=None,
+        is_foreshadow=None,
+        is_incomplete=None,
+        is_recollection=None,
+        polyphony_map=None,
+        preferred_denominator=None,
+        state_manifest=None
         ):
-        r'''Calls figure-maker on `figure_token`.
-
-        ..  container:: example
-
-            **Example.** Unknown keyword raises exception:
-
-            ::
-
-                >>> figure_maker = baca.tools.FigureMaker()
-
-            ::
-
-                >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> result = figure_maker(figure_token, color='red')
-                Traceback (most recent call last):
-                ...
-                Exception: unknown keyword: 'color'.
+        r'''Calls figure-maker on `figure_token` with keywords.
 
         Returns selection, time signature, state manifest.
         '''
-        annotate_unregistered_pitches = keywords.get(
-            'annotate_unregistered_pitches')
-        exhaustive = keywords.get('exhaustive')
-        extend_beam = keywords.get('extend_beam')
-        figure_name = keywords.get('figure_name')
-        is_foreshadow = keywords.get('is_foreshadow')
-        is_incomplete = keywords.get('is_incomplete')
-        is_recollection = keywords.get('is_recollection')
-        preferred_denominator = keywords.get('preferred_denominator')
-        state_manifest = keywords.get('state_manifest')
-        for keyword in keywords:
-            if keyword not in self._calltime_keywords:
-                message = 'unknown keyword: {!r}.'
-                message = message.format(keyword)
-                raise Exception(message)
         self._apply_state_manifest(state_manifest)
-        container = self._make_selections(figure_token)
+        voice_name = None
+        if (isinstance(figure_token, tuple) and
+            isinstance(figure_token[0], str)):
+            assert len(figure_token) == 2, repr(figure_token)
+            voice_name, figure_token = figure_token
+        selections = self._make_selections(figure_token)
+        container = abjad.Container(selections)
+        imbricated_selections = self._make_imbricated_selections(
+            container,
+            imbrication_map,
+            )
+        result = baca.tools.PolyphonySpecifier._make_polyphony_selections(
+            container,
+            polyphony_map,
+            )
+        polyphony_selections, hauptstimme_skip = result
+        self._apply_specifiers(selections)
         self._annotate_unregistered_pitches_(
             container,
             annotate_unregistered_pitches=annotate_unregistered_pitches,
@@ -196,32 +163,31 @@ class FigureMaker(abjad.abctools.AbjadObject):
         self._annotate_repeated_pitches(container)
         self._extend_beam_(container, extend_beam)
         self._check_well_formedness(container)
+        state_manifest = self._make_state_manifest()
+        if hauptstimme_skip is not None:
+            selection = abjad.select([hauptstimme_skip, container])
+        else:
+            selection = abjad.select([container])
         time_signature = self._make_time_signature(
-            container,
+            selection,
+            polyphony_selections,
             preferred_denominator=preferred_denominator,
             )
-        state_manifest = self._make_state_manifest()
-        selection = abjad.select(container)
-        assert len(selection) == 1
-        return selection, time_signature, state_manifest
-
-    ### PRIVATE PROPERTIES ###
-
-    @property
-    def _storage_format_specification(self):
-        from abjad.tools import systemtools
-        keyword_argument_names = (
-            'annotate_unregistered_pitches',
-            'preferred_denominator',
-            )
-        positional_argument_values = self.specifiers
-        return systemtools.StorageFormatSpecification(
-            self,
-            keyword_argument_names=keyword_argument_names,
-            positional_argument_values=positional_argument_values,
-            )
+        if not polyphony_selections and not imbricated_selections:
+            selections = selection
+        else:
+            assert voice_name is not None
+            selections = {voice_name: [selection]}
+            selections.update(imbricated_selections)
+            selections.update(polyphony_selections)
+        return selections, time_signature, state_manifest
 
     ### PRIVATE METHODS ###
+
+    @staticmethod
+    def _all_are_selections(object_):
+        prototype = abjad.selectiontools.Selection
+        return all(isinstance(_, prototype) for _ in object_)
 
     def _annotate_repeated_pitches(self, container):
         if not self.allow_repeated_pitches:
@@ -284,10 +250,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
         return selections
 
     def _apply_specifiers(self, selections):
+        assert self._all_are_selections(selections), repr(selections)
         nested_selections = None
         specifiers = self.specifiers or []
         for specifier in specifiers:
             if isinstance(specifier, baca.tools.RhythmSpecifier):
+                continue
+            if isinstance(specifier, baca.tools.ImbricationSpecifier):
                 continue
             if isinstance(specifier, abjad.rhythmmakertools.BeamSpecifier):
                 specifier._detach_all_beams(selections)
@@ -305,10 +274,6 @@ class FigureMaker(abjad.abctools.AbjadObject):
         for key in state_manifest:
             value = state_manifest[key]
             setattr(self, key, value)
-
-    def _assemble_tagged_rhythms(tagged_rhythms):
-        selection = abjad.selectiontools.Selection()
-        return selection
 
     @staticmethod
     def _check_well_formedness(selections):
@@ -342,6 +307,17 @@ class FigureMaker(abjad.abctools.AbjadObject):
         last_leaf = leaves[-1]
         abjad.attach('extend beam', last_leaf)
 
+    def _get_imbrication_specifiers(self):
+        result = []
+        specifiers = self.specifiers or []
+        for specifier in specifiers:
+            if isinstance(specifier, baca.tools.ImbricationSpecifier):
+                result.append(specifier)
+        if not result:
+            specifier = baca.tools.ImbricationSpecifier()
+            result.append(specifier)
+        return result
+
     def _get_rhythm_specifiers(self):
         result = []
         specifiers = self.specifiers or []
@@ -355,6 +331,16 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 )
             result.append(specifier)
         return result
+
+    def _get_storage_format_specification(self):
+        agent = abjad.systemtools.StorageFormatAgent(self)
+        keyword_argument_names = agent.signature_keyword_names
+        positional_argument_values = self.specifiers
+        return abjad.systemtools.StorageFormatSpecification(
+            self,
+            keyword_argument_names=keyword_argument_names,
+            positional_argument_values=positional_argument_values,
+            )
 
     @staticmethod
     def _label_figure_name_(container, figure_name):
@@ -387,19 +373,30 @@ class FigureMaker(abjad.abctools.AbjadObject):
         leaves = list(abjad.iterate(container).by_leaf())
         abjad.attach(figure_name, leaves[0])
 
+    def _make_imbricated_selections(self, container_, imbrication_map):
+        imbrication_map = imbrication_map or {}
+        selections = {}
+        for voice_name in imbrication_map:
+            token = imbrication_map[voice_name]
+            if isinstance(token, tuple):
+                imbrication_specifier, token = token
+            else:
+                imbrication_specifier = baca.tools.ImbricationSpecifier()
+            container = imbrication_specifier(container_, token)
+            selection = abjad.select(container)
+            selections[voice_name] = [selection]
+        return selections
+
     def _make_selections(self, figure_token):
-        tagged_rhythms = []
+        selections = len(figure_token) * [None]
         rhythm_specifiers = self._get_rhythm_specifiers()
-        figure_list = len(figure_token) * [None]
         for rhythm_specifier in rhythm_specifiers:
-            figure_selection = rhythm_specifier._apply_figure_rhythm_maker(
-                figure_list=figure_list,
+            rhythm_specifier._apply_figure_rhythm_maker(
                 figure_token=figure_token,
+                selections=selections,
                 )
-        assert isinstance(figure_list, list), repr(figure_list)
-        container = abjad.Container(figure_list)
-        selections = self._apply_specifiers(figure_list)
-        return container
+        assert self._all_are_selections(selections)
+        return selections
 
     def _make_state_manifest(self):
         state_manifest = {}
@@ -408,11 +405,21 @@ class FigureMaker(abjad.abctools.AbjadObject):
             state_manifest[name] = value
         return state_manifest
 
-    def _make_time_signature(self, container, preferred_denominator=None):
+    def _make_time_signature(
+        self,
+        selection,
+        polyphony_selections,
+        preferred_denominator=None,
+        ):
         if preferred_denominator is None:
             preferred_denominator = self.preferred_denominator
         time_signatures = []
-        duration = abjad.inspect_(container).get_duration()
+        polyphony_selections = list(polyphony_selections.values())
+        assert all(len(_) == 1 for _ in polyphony_selections)
+        polyphony_selections = [_[0] for _ in polyphony_selections]
+        selections = [selection] + polyphony_selections
+        durations = [_.get_duration() for _ in selections]
+        duration = max(durations)
         if preferred_denominator is not None:
             duration = duration.with_denominator(preferred_denominator)
         time_signature = abjad.indicatortools.TimeSignature(duration)
@@ -458,7 +465,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** No preferred denominator:
+            No preferred denominator:
 
             ::
 
@@ -482,9 +489,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -515,8 +520,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Preferred denominator supplied at configuration
-            time:
+            Preferred denominator supplied at configuration time:
 
             ::
 
@@ -542,9 +546,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 12/16
@@ -573,7 +575,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 3.** Preferred denominator supplied at call time:
+            Preferred denominator supplied at call time:
 
             ::
 
@@ -600,9 +602,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 6/8
@@ -631,8 +631,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 4.** Preferred denominator supplied at call time
-            overrides preferred denominator supplied at configuration time:
+            Preferred denominator supplied at call time overrides preferred
+            denominator supplied at configuration time:
 
             ::
 
@@ -661,9 +661,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 6/8
@@ -704,7 +702,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Articulation specifier:
+            Articulation specifier:
 
             ::
 
@@ -726,14 +724,11 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [time_signature],
                 ...     pitched_staff=True,
                 ...     )
-                >>> class_ = rhythmmakertools.RhythmMaker
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 9/16
@@ -759,8 +754,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Articulation specifier selects notes of nonfirst and
-            nonlast tuplets:
+            Articulation specifier selects notes of nonfirst and nonlast
+            tuplets:
 
             ::
 
@@ -785,14 +780,11 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [time_signature],
                 ...     pitched_staff=True,
                 ...     )
-                >>> class_ = rhythmmakertools.RhythmMaker
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 9/16
@@ -818,8 +810,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 3.** Register specifier transposes to octave rooted on
-            F#3:
+            Register specifier transposes to octave rooted on F#3:
 
             ::
 
@@ -845,9 +836,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 9/16
@@ -873,8 +862,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 4.** Register transition specifier transposes from octave
-            of C4 to octave of C5:
+            Register transition specifier transposes from octave of C4 to
+            octave of C5:
 
             ::
 
@@ -903,9 +892,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 9/16
@@ -931,7 +918,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 5.** Hairpin specifier selects all leaves:
+            Hairpin specifier selects all leaves:
 
             ::
 
@@ -955,16 +942,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [time_signature],
                 ...     pitched_staff=True,
                 ...     )
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).dynamic_line_spanner.staff_padding = 4.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override DynamicLineSpanner.staff-padding = #4.5
                 } {
@@ -994,7 +978,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 6.** Hairpin specifier selects runs of notes:
+            Hairpin specifier selects runs of notes:
 
             ::
 
@@ -1021,16 +1005,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [time_signature],
                 ...     pitched_staff=True,
                 ...     )
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).dynamic_line_spanner.staff_padding = 4.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override DynamicLineSpanner.staff-padding = #4.5
                 } {
@@ -1060,8 +1041,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 7.** Hairpin specifiers select notes of first and last
-            tuplet:
+            Hairpin specifiers select notes of first and last tuplet:
 
             ::
 
@@ -1094,16 +1074,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [time_signature],
                 ...     pitched_staff=True,
                 ...     )
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).dynamic_line_spanner.staff_padding = 4.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override DynamicLineSpanner.staff-padding = #4.5
                 } {
@@ -1133,8 +1110,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 8.** Hairpin specifiers treat first two tuplets and then
-            the rest:
+            Hairpin specifiers treat first two tuplets and then the rest:
 
             ::
 
@@ -1169,16 +1145,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [time_signature],
                 ...     pitched_staff=True,
                 ...     )
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).dynamic_line_spanner.staff_padding = 6
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override DynamicLineSpanner.staff-padding = #6
                 } {
@@ -1208,7 +1181,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 9.** Slur specifier selects all leaves:
+            Slur specifier selects all leaves:
 
             ::
 
@@ -1232,16 +1205,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [time_signature],
                 ...     pitched_staff=True,
                 ...     )
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override Stem.direction = #down
                 } {
@@ -1273,8 +1243,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 10.** Slur specifier selects all components in each
-            tuplet:
+            Slur specifier selects all components in each tuplet:
 
             ::
 
@@ -1301,16 +1270,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [time_signature],
                 ...     pitched_staff=True,
                 ...     )
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override Stem.direction = #down
                 } {
@@ -1340,8 +1306,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 11.** Slur specifier selects first two components of each
-            tuplet:
+            Slur specifier selects first two components of each tuplet:
 
             ::
 
@@ -1368,16 +1333,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [time_signature],
                 ...     pitched_staff=True,
                 ...     )
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override Stem.direction = #down
                 } {
@@ -1407,8 +1369,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 12.** Slur specifier selects last two components of each
-            tuplet:
+            Slur specifier selects last two components of each tuplet:
 
             ::
 
@@ -1435,16 +1396,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [time_signature],
                 ...     pitched_staff=True,
                 ...     )
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override Stem.direction = #down
                 } {
@@ -1474,7 +1432,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 13.** Slur and articulation specifiers:
+            Slur and articulation specifiers:
 
             ::
 
@@ -1511,16 +1469,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [time_signature],
                 ...     pitched_staff=True,
                 ...     )
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override Stem.direction = #down
                 } {
@@ -1572,8 +1527,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 14.** Slur specifier selects leaves of first tuplet plus
-            following leaf:
+            Slur specifier selects leaves of first tuplet plus following leaf:
 
             ::
 
@@ -1602,16 +1556,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [time_signature],
                 ...     pitched_staff=True,
                 ...     )
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override Stem.direction = #down
                 } {
@@ -1641,7 +1592,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 15.** Beam specifier beams divisions together:
+            Beam specifier beams divisions together:
 
             ::
 
@@ -1665,16 +1616,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [time_signature],
                 ...     pitched_staff=True,
                 ...     )
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).beam.positions = (-6, -6)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override Beam.positions = #'(-6 . -6)
                 } {
@@ -1726,7 +1674,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 16.** Beam specifier beams nothing:
+            Beam specifier beams nothing:
 
             ::
 
@@ -1754,9 +1702,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 11/16
@@ -1784,7 +1730,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 17.** Nesting specifier augments one sixteenth:
+            Nesting specifier augments one sixteenth:
 
             ::
 
@@ -1811,16 +1757,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [time_signature],
                 ...     pitched_staff=True,
                 ...     )
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).beam.positions = (-5.5, -5.5)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override Beam.positions = #'(-5.5 . -5.5)
                 } {
@@ -1875,8 +1818,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 18.** Nesting specifier augments first two stages
-            one sixteenth:
+            Nesting specifier augments first two stages one sixteenth:
 
             ::
 
@@ -1906,16 +1848,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [time_signature],
                 ...     pitched_staff=True,
                 ...     )
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).beam.positions = (-5.5, -5.5)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override Beam.positions = #'(-5.5 . -5.5)
                 } {
@@ -1970,7 +1909,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 19.** Sixteenths followed by eighths:
+            Sixteenths followed by eighths:
 
             ::
 
@@ -2009,9 +1948,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 15/16
@@ -2037,7 +1974,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 20.** Sixteenths surrounding dotted eighths:
+            Sixteenths surrounding dotted eighths:
 
             ::
 
@@ -2076,9 +2013,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 19/16
@@ -2104,7 +2039,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 21.** Sixteenths surrounding argumented dotted eighths:
+            Sixteenths surrounding argumented dotted eighths:
 
             ::
 
@@ -2144,9 +2079,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 5/4
@@ -2173,7 +2106,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 22.** Augmented sixteenths surrounding dotted eighths:
+            Augmented sixteenths surrounding dotted eighths:
 
             ::
 
@@ -2213,9 +2146,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 5/4
@@ -2242,7 +2173,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 23.** Diminished sixteenths surrounding dotted eighths:
+            Diminished sixteenths surrounding dotted eighths:
 
             ::
 
@@ -2282,9 +2213,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> class_ = rhythmmakertools.RhythmMaker
-                >>> staff = class_._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 9/8

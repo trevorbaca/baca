@@ -41,8 +41,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  doctest::
 
-            >>> staff = rhythm_maker._get_staff(lilypond_file)
-            >>> f(staff)
+            >>> f(lilypond_file[Staff])
             \new RhythmicStaff {
                 c'2
                 c'1
@@ -89,8 +88,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  doctest::
 
-            >>> staff = rhythm_maker._get_staff(lilypond_file)
-            >>> f(staff)
+            >>> f(lilypond_file[Staff])
             \new RhythmicStaff {
                 c'8.
                 c'8.
@@ -183,8 +181,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     {
                         \time 2/8
@@ -237,8 +234,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     c'2
                     c'1
@@ -287,8 +283,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     c'8.
                     c'8.
@@ -341,8 +336,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     c'8
                     c'8.
@@ -389,8 +383,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     c'\breve
                 }
@@ -435,8 +428,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     c'8.
                     c'8.
@@ -486,8 +478,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     c'8
                     c'8.
@@ -575,23 +566,6 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
             )
         return division_lists
 
-    ### PRIVATE PROPERTIES ###
-    
-    @property
-    def _storage_format_specification(self):
-        manager = abjad.systemtools.StorageFormatManager
-        keyword_argument_names = \
-            manager.get_signature_keyword_argument_names(self)
-        keyword_argument_names = list(keyword_argument_names)
-        if self.cyclic == True:
-            keyword_argument_names.remove('cyclic')
-        if not self.counts:
-            keyword_argument_names.remove('counts')
-        return abjad.systemtools.StorageFormatSpecification(
-            self,
-            keyword_argument_names=keyword_argument_names,
-            )
-
     ### PRIVATE METHODS ###
 
     def _coerce_divisions(self, divisions):
@@ -606,6 +580,19 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
             division_ = abjad.durationtools.Division(argument)
             divisions_.append(division_)
         return divisions_
+
+    def _get_storage_format_specification(self):
+        agent = abjad.systemtools.StorageFormatAgent
+        keyword_argument_names = agent.signature_keyword_names
+        keyword_argument_names = list(keyword_argument_names)
+        if self.cyclic == True:
+            keyword_argument_names.remove('cyclic')
+        if not self.counts:
+            keyword_argument_names.remove('counts')
+        return abjad.systemtools.StorageFormatSpecification(
+            self,
+            keyword_argument_names=keyword_argument_names,
+            )
 
     ### PUBLIC PROPERTIES ###
 

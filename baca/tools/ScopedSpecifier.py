@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import abjad
+import baca
 
 
 class ScopedSpecifier(abjad.abctools.AbjadObject):
@@ -134,7 +135,6 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self, scope=None, specifier=None):
-        import baca
         if isinstance(scope, tuple):
             scope = baca.tools.SimpleScope(*scope)
         prototype = (baca.tools.SimpleScope, baca.tools.CompoundScope)

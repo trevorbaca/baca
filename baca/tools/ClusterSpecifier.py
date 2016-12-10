@@ -11,7 +11,7 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 1.**
+        Clusters widths alternating 3 and 4:
 
         ::
 
@@ -246,7 +246,7 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Hides flat markup:
+            Hides flat markup:
 
             ::
 
@@ -390,7 +390,7 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Hides natural markup:
+            Hides natural markup:
 
             ::
 
@@ -534,7 +534,7 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Takes start pitch from input notes:
+            Takes start pitch from input notes:
 
             ::
 
@@ -683,7 +683,7 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Sets start pitch explicitly:
+            Sets start pitch explicitly:
 
             ::
 
@@ -843,7 +843,7 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Increasing widths:
+            Increasing widths:
 
             ::
 
@@ -977,7 +977,7 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Patterned widths:
+            Patterned widths:
 
             ::
 
@@ -1096,7 +1096,7 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 3.** Leaves notes and chords unchanged:
+            Leaves notes and chords unchanged:
 
             ::
 

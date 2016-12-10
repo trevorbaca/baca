@@ -925,7 +925,7 @@ Abjad is now broken under the Python 3 virtual environment:
     File "/Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages/pkg_resources/__init__.py", line 2991, in <module>
         @_call_aside
     File "/Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages/pkg_resources/__init__.py", line 2977, in _call_aside
-        f(*args, **kwargs)
+        f(*args, **keywords)
     File "/Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages/pkg_resources/__init__.py", line 3004, in _initialize_master_working_set
         working_set = WorkingSet._build_master()
     File "/Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages/pkg_resources/__init__.py", line 662, in _build_master

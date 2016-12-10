@@ -110,13 +110,13 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
 
     @property
     def lmr_specifier(self):
-        r'''Gets partition specifier.
+        r'''Gets LMR specifier.
 
         Defaults to none.
 
-        Set to partition specifier or none.
+        Set to LMR specifier or none.
 
-        Returns partition specifier or none.
+        Returns LMR specifier or none.
         '''
         return self._lmr_specifier
 

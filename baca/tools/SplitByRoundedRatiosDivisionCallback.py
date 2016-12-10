@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 import abjad
+import baca
 
 
 class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
@@ -146,7 +147,6 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
 
         Returns possibly empty list of division lists.
         '''
-        import baca
         divisions = divisions or []
         if not divisions:
             return []

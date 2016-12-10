@@ -9,7 +9,7 @@ class ScoreTemplate(abjad.abctools.AbjadValueObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Templates'
+    __documentation_section__ = 'Utilities'
 
     voice_abbreviations = {
         }

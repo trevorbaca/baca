@@ -533,7 +533,7 @@ class PitchClassTree(Tree):
 
     ### SPECIAL METHODS ###
 
-    def __graph__(self, **kwargs):
+    def __graph__(self, **keywords):
         r'''Graphs pitch-class tree.
 
         ..  container:: example
@@ -686,7 +686,7 @@ class PitchClassTree(Tree):
         Returns Graphviz graph.
         '''
         superclass = super(PitchClassTree, self)
-        return superclass.__graph__(**kwargs)
+        return superclass.__graph__(**keywords)
         
     def __illustrate__(
         self,
@@ -697,7 +697,7 @@ class PitchClassTree(Tree):
         global_staff_size=16,
         markup_direction=Up,
         set_classes=False,
-        **kwargs
+        **keywords
         ):
         r'''Illustrates pitch-class tree.
 
@@ -1015,13 +1015,13 @@ class PitchClassTree(Tree):
         abjad.override(score).spacing_spanner.strict_note_spacing = True
         abjad.override(score).spacing_spanner.uniform_stretching = True
         abjad.override(score).text_script.X_extent = False
-        if 'title' in kwargs:
-            title = kwargs.get('title') 
+        if 'title' in keywords:
+            title = keywords.get('title') 
             if not isinstance(title, abjad.Markup):
                 title = abjad.Markup(title)
             lilypond_file.header_block.title = title
-        if 'subtitle' in kwargs:
-            markup = abjad.Markup(kwargs.get('subtitle'))
+        if 'subtitle' in keywords:
+            markup = abjad.Markup(keywords.get('subtitle'))
             lilypond_file.header_block.subtitle = markup
         string = 'accidentalStyle dodecaphonic'
         command = abjad.indicatortools.LilyPondCommand(string)

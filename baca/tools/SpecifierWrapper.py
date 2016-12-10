@@ -11,8 +11,8 @@ class SpecifierWrapper(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 1.** Dynamic placed on first leaf that starts in stage
-        (rather than on first tie chain that starts in stage):
+        Dynamic placed on first leaf that starts in stage (rather than on first
+        tie chain that starts in stage):
 
         ::
 

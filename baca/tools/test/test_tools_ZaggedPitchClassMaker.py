@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
+import abjad
 import baca
-from abjad import *
 
 
 def test_tools_ZaggedPitchClassMaker_01():
@@ -23,80 +23,80 @@ def test_tools_ZaggedPitchClassMaker_01():
         [
             [
                 [
-                    pitchtools.NumberedPitchClass(0),
-                    pitchtools.NumberedPitchClass(1),
-                    pitchtools.NumberedPitchClass(2),
+                    abjad.pitchtools.NumberedPitchClass(0),
+                    abjad.pitchtools.NumberedPitchClass(1),
+                    abjad.pitchtools.NumberedPitchClass(2),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(3),
-                    pitchtools.NumberedPitchClass(4),
+                    abjad.pitchtools.NumberedPitchClass(3),
+                    abjad.pitchtools.NumberedPitchClass(4),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(4),
-                    pitchtools.NumberedPitchClass(3),
+                    abjad.pitchtools.NumberedPitchClass(4),
+                    abjad.pitchtools.NumberedPitchClass(3),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(2),
-                    pitchtools.NumberedPitchClass(0),
-                    pitchtools.NumberedPitchClass(1),
+                    abjad.pitchtools.NumberedPitchClass(2),
+                    abjad.pitchtools.NumberedPitchClass(0),
+                    abjad.pitchtools.NumberedPitchClass(1),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(1),
-                    pitchtools.NumberedPitchClass(2),
-                    pitchtools.NumberedPitchClass(0),
+                    abjad.pitchtools.NumberedPitchClass(1),
+                    abjad.pitchtools.NumberedPitchClass(2),
+                    abjad.pitchtools.NumberedPitchClass(0),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(3),
-                    pitchtools.NumberedPitchClass(4),
+                    abjad.pitchtools.NumberedPitchClass(3),
+                    abjad.pitchtools.NumberedPitchClass(4),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(4),
-                    pitchtools.NumberedPitchClass(3),
+                    abjad.pitchtools.NumberedPitchClass(4),
+                    abjad.pitchtools.NumberedPitchClass(3),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(0),
-                    pitchtools.NumberedPitchClass(1),
-                    pitchtools.NumberedPitchClass(2),
+                    abjad.pitchtools.NumberedPitchClass(0),
+                    abjad.pitchtools.NumberedPitchClass(1),
+                    abjad.pitchtools.NumberedPitchClass(2),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(2),
-                    pitchtools.NumberedPitchClass(0),
-                    pitchtools.NumberedPitchClass(1),
+                    abjad.pitchtools.NumberedPitchClass(2),
+                    abjad.pitchtools.NumberedPitchClass(0),
+                    abjad.pitchtools.NumberedPitchClass(1),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(3),
-                    pitchtools.NumberedPitchClass(4),
+                    abjad.pitchtools.NumberedPitchClass(3),
+                    abjad.pitchtools.NumberedPitchClass(4),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(4),
-                    pitchtools.NumberedPitchClass(3),
+                    abjad.pitchtools.NumberedPitchClass(4),
+                    abjad.pitchtools.NumberedPitchClass(3),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(1),
-                    pitchtools.NumberedPitchClass(2),
-                    pitchtools.NumberedPitchClass(0),
+                    abjad.pitchtools.NumberedPitchClass(1),
+                    abjad.pitchtools.NumberedPitchClass(2),
+                    abjad.pitchtools.NumberedPitchClass(0),
                     ],
                 ],
             ]
@@ -122,72 +122,72 @@ def test_tools_ZaggedPitchClassMaker_02():
         [
             [
                 [
-                    pitchtools.NumberedPitchClass(0),
-                    pitchtools.NumberedPitchClass(1),
-                    pitchtools.NumberedPitchClass(2),
+                    abjad.pitchtools.NumberedPitchClass(0),
+                    abjad.pitchtools.NumberedPitchClass(1),
+                    abjad.pitchtools.NumberedPitchClass(2),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(3),
-                    pitchtools.NumberedPitchClass(4),
+                    abjad.pitchtools.NumberedPitchClass(3),
+                    abjad.pitchtools.NumberedPitchClass(4),
                     ],
                 [
-                    pitchtools.NumberedPitchClass(4),
-                    pitchtools.NumberedPitchClass(3),
-                    ],
-                ],
-            [
-                [
-                    pitchtools.NumberedPitchClass(2),
-                    pitchtools.NumberedPitchClass(0),
-                    pitchtools.NumberedPitchClass(1),
+                    abjad.pitchtools.NumberedPitchClass(4),
+                    abjad.pitchtools.NumberedPitchClass(3),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(1),
-                    pitchtools.NumberedPitchClass(2),
-                    pitchtools.NumberedPitchClass(0),
-                    ],
-                [
-                    pitchtools.NumberedPitchClass(3),
-                    pitchtools.NumberedPitchClass(4),
+                    abjad.pitchtools.NumberedPitchClass(2),
+                    abjad.pitchtools.NumberedPitchClass(0),
+                    abjad.pitchtools.NumberedPitchClass(1),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(4),
-                    pitchtools.NumberedPitchClass(3),
+                    abjad.pitchtools.NumberedPitchClass(1),
+                    abjad.pitchtools.NumberedPitchClass(2),
+                    abjad.pitchtools.NumberedPitchClass(0),
+                    ],
+                [
+                    abjad.pitchtools.NumberedPitchClass(3),
+                    abjad.pitchtools.NumberedPitchClass(4),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(0),
-                    pitchtools.NumberedPitchClass(1),
-                    pitchtools.NumberedPitchClass(2),
-                    ],
-                [
-                    pitchtools.NumberedPitchClass(2),
-                    pitchtools.NumberedPitchClass(0),
-                    pitchtools.NumberedPitchClass(1),
+                    abjad.pitchtools.NumberedPitchClass(4),
+                    abjad.pitchtools.NumberedPitchClass(3),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(3),
-                    pitchtools.NumberedPitchClass(4),
+                    abjad.pitchtools.NumberedPitchClass(0),
+                    abjad.pitchtools.NumberedPitchClass(1),
+                    abjad.pitchtools.NumberedPitchClass(2),
+                    ],
+                [
+                    abjad.pitchtools.NumberedPitchClass(2),
+                    abjad.pitchtools.NumberedPitchClass(0),
+                    abjad.pitchtools.NumberedPitchClass(1),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(4),
-                    pitchtools.NumberedPitchClass(3),
+                    abjad.pitchtools.NumberedPitchClass(3),
+                    abjad.pitchtools.NumberedPitchClass(4),
+                    ],
+                ],
+            [
+                [
+                    abjad.pitchtools.NumberedPitchClass(4),
+                    abjad.pitchtools.NumberedPitchClass(3),
                     ],
                 [
-                    pitchtools.NumberedPitchClass(1),
-                    pitchtools.NumberedPitchClass(2),
-                    pitchtools.NumberedPitchClass(0),
+                    abjad.pitchtools.NumberedPitchClass(1),
+                    abjad.pitchtools.NumberedPitchClass(2),
+                    abjad.pitchtools.NumberedPitchClass(0),
                     ],
                 ],
             ]
@@ -214,98 +214,98 @@ def test_tools_ZaggedPitchClassMaker_03():
         [
             [
                 [
-                    pitchtools.NumberedPitchClass(0),
-                    pitchtools.NumberedPitchClass(1),
+                    abjad.pitchtools.NumberedPitchClass(0),
+                    abjad.pitchtools.NumberedPitchClass(1),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(2),
-                    pitchtools.NumberedPitchClass(3),
+                    abjad.pitchtools.NumberedPitchClass(2),
+                    abjad.pitchtools.NumberedPitchClass(3),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(4),
-                    pitchtools.NumberedPitchClass(5),
+                    abjad.pitchtools.NumberedPitchClass(4),
+                    abjad.pitchtools.NumberedPitchClass(5),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(6),
-                    pitchtools.NumberedPitchClass(7),
+                    abjad.pitchtools.NumberedPitchClass(6),
+                    abjad.pitchtools.NumberedPitchClass(7),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(7),
-                    pitchtools.NumberedPitchClass(4),
+                    abjad.pitchtools.NumberedPitchClass(7),
+                    abjad.pitchtools.NumberedPitchClass(4),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(5),
-                    pitchtools.NumberedPitchClass(6),
+                    abjad.pitchtools.NumberedPitchClass(5),
+                    abjad.pitchtools.NumberedPitchClass(6),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(3),
-                    pitchtools.NumberedPitchClass(0),
+                    abjad.pitchtools.NumberedPitchClass(3),
+                    abjad.pitchtools.NumberedPitchClass(0),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(1),
-                    pitchtools.NumberedPitchClass(2),
+                    abjad.pitchtools.NumberedPitchClass(1),
+                    abjad.pitchtools.NumberedPitchClass(2),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(2),
-                    pitchtools.NumberedPitchClass(3),
+                    abjad.pitchtools.NumberedPitchClass(2),
+                    abjad.pitchtools.NumberedPitchClass(3),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(0),
-                    pitchtools.NumberedPitchClass(1),
+                    abjad.pitchtools.NumberedPitchClass(0),
+                    abjad.pitchtools.NumberedPitchClass(1),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(6),
-                    pitchtools.NumberedPitchClass(7),
+                    abjad.pitchtools.NumberedPitchClass(6),
+                    abjad.pitchtools.NumberedPitchClass(7),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(4),
-                    pitchtools.NumberedPitchClass(5),
+                    abjad.pitchtools.NumberedPitchClass(4),
+                    abjad.pitchtools.NumberedPitchClass(5),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(5),
-                    pitchtools.NumberedPitchClass(6),
+                    abjad.pitchtools.NumberedPitchClass(5),
+                    abjad.pitchtools.NumberedPitchClass(6),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(7),
-                    pitchtools.NumberedPitchClass(4),
+                    abjad.pitchtools.NumberedPitchClass(7),
+                    abjad.pitchtools.NumberedPitchClass(4),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(1),
-                    pitchtools.NumberedPitchClass(2),
+                    abjad.pitchtools.NumberedPitchClass(1),
+                    abjad.pitchtools.NumberedPitchClass(2),
                     ],
                 ],
             [
                 [
-                    pitchtools.NumberedPitchClass(3),
-                    pitchtools.NumberedPitchClass(0),
+                    abjad.pitchtools.NumberedPitchClass(3),
+                    abjad.pitchtools.NumberedPitchClass(0),
                     ],
                 ],
             ]

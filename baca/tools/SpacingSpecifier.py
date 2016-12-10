@@ -11,7 +11,7 @@ class SpacingSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 1.** No spacing specifier:
+        No spacing specifier:
 
         ::
 
@@ -118,7 +118,7 @@ class SpacingSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 2.** Null spacing specifier:
+        Null spacing specifier:
 
         ::
 
@@ -234,8 +234,7 @@ class SpacingSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 3.** Measurewise proportional spacing based on minimum
-        duration per measure:
+        Measurewise proportional spacing based on minimum duration per measure:
 
         ::
 
@@ -353,8 +352,8 @@ class SpacingSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 4.** Measurewise proportional spacing based on twice the
-        minimum duration per measure:
+        Measurewise proportional spacing based on twice the minimum duration
+        per measure:
 
         ::
 
@@ -472,9 +471,8 @@ class SpacingSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 5.** Measurewise proportional spacing based on twice the
-        minimum duration per measure with minimum width equal to an eighth
-        note:
+        Measurewise proportional spacing based on twice the minimum duration
+        per measure with minimum width equal to an eighth note:
 
         ::
 
@@ -593,7 +591,7 @@ class SpacingSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 6.** Works with accelerando and ritardando figures:
+        Works with accelerando and ritardando figures:
 
         ::
 

@@ -376,7 +376,7 @@ class Tree(abjad.abctools.AbjadObject):
         '''
         return self._children[expr]
 
-    def __graph__(self, **kwargs):
+    def __graph__(self, **keywords):
         r'''Graphs tree.
 
         ..  container:: example

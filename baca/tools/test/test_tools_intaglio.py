@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-import pytest
+import abjad
 import baca
-from abjad import *
+import pytest
 
 
 def test_tools_intaglio_01():
@@ -13,7 +13,7 @@ def test_tools_intaglio_01():
 
     assert result == [[3], [1, 4], [4, 4, 2], [2, 4, 4]]
     assert len(l) == len(result)
-    assert [mathtools.weight(x) for x in result] == l
+    assert [abjad.mathtools.weight(x) for x in result] == l
 
 
 def test_tools_intaglio_02():
@@ -23,7 +23,7 @@ def test_tools_intaglio_02():
 
     assert result == [[3], [2, 3], [2, 5, 3], [2, 5, 3]]
     assert len(l) == len(result)
-    assert [mathtools.weight(x) for x in result] == l
+    assert [abjad.mathtools.weight(x) for x in result] == l
 
 
 def test_tools_intaglio_03():
@@ -35,7 +35,7 @@ def test_tools_intaglio_03():
 
     assert result == [[3], [1, 4], [1, 4, 5], [4, 5, 1]]
     assert len(l) == len(result)
-    assert [mathtools.weight(x) for x in result] == l
+    assert [abjad.mathtools.weight(x) for x in result] == l
 
 
 def test_tools_intaglio_04():
@@ -47,7 +47,7 @@ def test_tools_intaglio_04():
 
     assert result == [[3], [1, -4], [-1, 4, -5], [4, -5, 1]]
     assert len(l) == len(result)
-    assert [mathtools.weight(x) for x in result] == l
+    assert [abjad.mathtools.weight(x) for x in result] == l
 
 
 def test_tools_intaglio_05():

@@ -13,7 +13,7 @@ class MicrotonalDeviationSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 1.** With alternating up- and down-quatertones:
+        With alternating up- and down-quatertones:
 
         ::
 

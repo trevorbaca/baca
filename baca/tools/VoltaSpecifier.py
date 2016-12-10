@@ -11,8 +11,6 @@ class VoltaSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example.**
-
         ::
 
             >>> segment_maker = baca.tools.SegmentMaker(
@@ -125,7 +123,7 @@ class VoltaSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example.** Gets items:
+            Gets items:
 
             ::
 
@@ -151,7 +149,7 @@ class VoltaSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example.**
+            Gets items:
 
             ::
 

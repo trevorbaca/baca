@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
+import abjad
 import baca
-from abjad import *
 CC = baca.tools.make_CC()
 
 
@@ -69,9 +69,9 @@ def test_tools_make_CC_07():
     r'''Test generators.
     '''
 
-    staff = Staff(CC.generator_chords)
+    staff = abjad.Staff(CC.generator_chords)
 
-    assert systemtools.TestManager.compare(
+    assert abjad.systemtools.TestManager.compare(
         staff,
         r"""
         \new Staff {
@@ -92,16 +92,16 @@ def test_tools_make_CC_08():
     r'''Test pitch range.
     '''
 
-    assert CC.pitch_range == pitchtools.PitchRange('[A0, C8]')
+    assert CC.pitch_range == abjad.pitchtools.PitchRange('[A0, C8]')
 
 
 def test_tools_make_CC_09():
     r'''Test pivots.
     '''
 
-    staff = Staff(CC.pivot_chords)
+    staff = abjad.Staff(CC.pivot_chords)
 
-    assert systemtools.TestManager.compare(
+    assert abjad.systemtools.TestManager.compare(
         staff,
         r"""
         \new Staff {

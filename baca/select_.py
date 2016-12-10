@@ -10,9 +10,7 @@ def first_leaf(specifier):
     import baca
     return baca.select_.leaf(specifier, n=0)
 
-def first_note(
-    specifier,
-    ):
+def first_note(specifier):
     r'''Selects first note or chord.
 
     Returns specifier wrapper.

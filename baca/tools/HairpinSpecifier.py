@@ -11,7 +11,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 1.** Attaches hairpins to nontrivial ties:
+        Attaches hairpins to nontrivial ties:
 
         ::
 
@@ -44,7 +44,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 2.** Gets storage format of specifier:
+        Gets storage format of specifier:
 
         ::
 
@@ -290,7 +290,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Spans groups of notes and chords:
+            Spans groups of notes and chords:
 
             ::
 
@@ -321,7 +321,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Spans enchained groups of notes and chords:
+            Spans enchained groups of notes and chords:
 
             ::
 
@@ -365,7 +365,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Does not flare hairpins:
+            Does not flare hairpins:
 
             ::
 
@@ -396,7 +396,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
                 
         ..  container:: example
 
-            **Example 2.** Does flare hairpins:
+            Does flare hairpins:
 
             ::
 
@@ -443,7 +443,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Spans notes and chords in repeating groups of 4:
+            Spans notes and chords in repeating groups of 4:
 
             ::
 
@@ -482,7 +482,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Omits every other group:
+            Omits every other group:
 
             ::
 
@@ -535,7 +535,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Does not include following rests:
+            Does not include following rests:
 
             ::
 
@@ -569,7 +569,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Includes following rests:
+            Includes following rests:
 
             ::
 
@@ -604,7 +604,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 3.** Includes following multimeasure rests:
+            Includes following multimeasure rests:
 
             ::
 
@@ -661,7 +661,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Does not omit lone note dynamic:
+            Does not omit lone note dynamic:
 
             ::
 
@@ -692,7 +692,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Omits lone note dynamic:
+            Omits lone note dynamic:
 
             ::
 
@@ -744,7 +744,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
         
         ..  container:: example
 
-            **Example 1.** Spans contiguous notes and chords:
+            Spans contiguous notes and chords:
 
             ::
 
@@ -775,7 +775,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Spans nontrivial ties:
+            Spans nontrivial ties:
 
             ::
 
@@ -807,8 +807,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 3.** Spans notes and chords grouped in repeating groups
-            of 3 and 4:
+            Spans notes and chords grouped in repeating groups of 3 and 4:
 
             ::
 

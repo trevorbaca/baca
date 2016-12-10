@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 import abjad
+import baca
 
 
 class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
@@ -41,8 +42,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  doctest::
 
-            >>> staff = maker._get_staff(lilypond_file)
-            >>> f(staff)
+            >>> f(lilypond_file[Staff])
             \new RhythmicStaff {
                 {
                     \time 7/8
@@ -99,8 +99,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  doctest::
 
-            >>> staff = maker._get_staff(lilypond_file)
-            >>> f(staff)
+            >>> f(lilypond_file[Staff])
             \new RhythmicStaff {
                 {
                     \time 7/8
@@ -217,8 +216,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     {
                         \time 3/4
@@ -260,8 +258,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     {
                         \time 7/8
@@ -309,8 +306,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     {
                         \time 2/4
@@ -355,8 +351,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     {
                         \time 6/32
@@ -448,7 +443,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         Returns possibly empty list of division lists.
         '''
-        import baca
         divisions = divisions or []
         if not divisions:
             return divisions
@@ -528,13 +522,11 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
             )
         return division_lists
 
-    ### PRIVATE PROPERTIES ###
+    ### PRIVATE METHODS ###
 
-    @property
-    def _storage_format_specification(self):
-        manager = abjad.systemtools.StorageFormatManager
-        keyword_argument_names = \
-            manager.get_signature_keyword_argument_names(self)
+    def _get_storage_format_specification(self):
+        agent = abjad.systemtools.StorageFormatAgent
+        keyword_argument_names = agent.signature_keyword_names
         keyword_argument_names = list(keyword_argument_names)
         if self.cyclic == True:
             keyword_argument_names.remove('cyclic')
@@ -589,8 +581,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     {
                         \time 3/4
@@ -641,8 +632,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     {
                         \time 3/4
@@ -707,8 +697,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     {
                         \time 7/8
@@ -765,8 +754,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     {
                         \time 7/8
@@ -829,8 +817,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     {
                         \time 7/8
@@ -877,8 +864,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     {
                         \time 7/8
@@ -947,8 +933,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     {
                         \time 7/16
@@ -1005,8 +990,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     {
                         \time 7/16
@@ -1063,8 +1047,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     {
                         \time 7/16
@@ -1129,8 +1112,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     {
                         \time 3/4
@@ -1172,8 +1154,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     {
                         \time 3/4
@@ -1219,8 +1200,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     {
                         \time 3/4
@@ -1264,8 +1244,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     {
                         \time 3/4
@@ -1322,8 +1301,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     {
                         \time 5/8
@@ -1367,8 +1345,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     {
                         \time 5/8
@@ -1412,8 +1389,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     {
                         \time 5/8
@@ -1459,8 +1435,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> staff = maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new RhythmicStaff {
                     {
                         \time 5/8

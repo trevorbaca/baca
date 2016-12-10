@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import mathtools
+import abjad
 
 
 def map_elements_to_numbered_sublists(sequence):
@@ -32,7 +32,7 @@ def map_elements_to_numbered_sublists(sequence):
     for length in sequence:
         abs_length = abs(length)
         part = range(current, current + abs_length)
-        part = [mathtools.sign(length) * x for x in part]
+        part = [abjad.mathtools.sign(length) * x for x in part]
         result.append(part)
         current += abs_length
     return result

@@ -14,7 +14,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
     ..  container:: example
 
-        **Example.** Sixteenths and eighths:
+        Sixteenths and eighths:
 
         ::
 
@@ -39,8 +39,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  doctest::
 
-            >>> staff = rhythm_maker._get_staff(lilypond_file)
-            >>> f(staff)
+            >>> f(lilypond_file[Staff])
             \new Staff {
                 {
                     \time 5/16
@@ -67,8 +66,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  doctest::
 
-            >>> staff = rhythm_maker._get_staff(lilypond_file)
-            >>> f(staff)
+            >>> f(lilypond_file[Staff])
             \new Staff {
                 {
                     \time 3/8
@@ -96,8 +94,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  doctest::
 
-            >>> staff = rhythm_maker._get_staff(lilypond_file)
-            >>> f(staff)
+            >>> f(lilypond_file[Staff])
             \new Staff {
                 {
                     \time 1/16
@@ -121,8 +118,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  doctest::
 
-            >>> staff = rhythm_maker._get_staff(lilypond_file)
-            >>> f(staff)
+            >>> f(lilypond_file[Staff])
             \new Staff {
                 {
                     \time 13/16
@@ -214,7 +210,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 1.** Without state manifest:
+            Without state manifest:
 
             ::
 
@@ -239,8 +235,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -270,7 +265,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 2.** With state manifest:
+            With state manifest:
 
             ::
 
@@ -299,8 +294,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -403,7 +397,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example -1.** Set exponent less than 1 for decreasing durations:
+            Set exponent less than 1 for decreasing durations:
 
             ::
 
@@ -422,7 +416,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 0.** Set exponent to 1 for trivial multipliers:
+            Set exponent to 1 for trivial multipliers:
 
             ::
 
@@ -438,8 +432,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 1.** Set exponent greater than 1 for increasing
-            durations:
+            Set exponent greater than 1 for increasing durations:
 
             ::
 
@@ -566,7 +559,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             grace_containers, stage_token = acciaccatura_specifier(stage_token)
             assert len(grace_containers) == len(stage_token)
         for pitch_expression in stage_token:
-            #raise Exception(expression)
+            #raise Exception(pitch_expression)
             prototype = abjad.pitchtools.NumberedPitchClass
             if isinstance(pitch_expression, prototype):
                 pitch_expression = pitch_expression.pitch_class_number
@@ -682,7 +675,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 1.** Graced quarters:
+            Graced quarters:
 
             ::
 
@@ -720,8 +713,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 3/2
@@ -773,7 +765,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 2.** Graced rests:
+            Graced rests:
 
             ::
 
@@ -814,8 +806,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 7/4
@@ -876,7 +867,15 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                     }
                 }
 
-        Defaults to none.
+        ..  container:: example
+
+            Defaults to none:
+
+            ::
+
+                >>> rhythm_maker = baca.tools.FigureRhythmMaker()
+                >>> rhythm_maker.acciaccatura_specifiers is None
+                True
 
         Set to acciaccatura specifiers or none.
 
@@ -890,7 +889,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 1.** Beams each division:
+            Beams each division by default:
 
             ::
 
@@ -912,14 +911,13 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [duration],
                 ...     pitched_staff=True,
                 ...     )
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
@@ -946,11 +944,9 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                     }
                 }
 
-            This is default behavior.
-
         ..  container:: example
 
-            **Example 2.** Beams divisions together:
+            Beams divisions together:
 
             ::
 
@@ -975,14 +971,13 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [duration],
                 ...     pitched_staff=True,
                 ...     )
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).beam.positions = (-5.5, -5.5)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override Beam.positions = #'(-5.5 . -5.5)
                 } {
@@ -1029,7 +1024,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 3.** Beams nothing:
+            Beams nothing:
 
             ::
 
@@ -1058,8 +1053,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 15/16
@@ -1086,7 +1080,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 4.** Does not beam rests:
+            Does not beam rests:
 
             ::
 
@@ -1108,14 +1102,13 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [duration],
                 ...     pitched_staff=True,
                 ...     )
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
@@ -1144,7 +1137,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 5.** Does beam rests:
+            Does beam rests:
 
             ::
 
@@ -1169,14 +1162,13 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [duration],
                 ...     pitched_staff=True,
                 ...     )
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
@@ -1205,7 +1197,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 6.** Beams rests with stemlets:
+            Beams rests with stemlets:
 
             ::
 
@@ -1231,14 +1223,13 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [duration],
                 ...     pitched_staff=True,
                 ...     )
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
@@ -1271,7 +1262,15 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                     }
                 }
 
-        Defaults to none.
+        ..  container:: example
+
+            Defaults to none:
+
+            ::
+
+                >>> rhythm_maker = baca.tools.FigureRhythmMaker()
+                >>> rhythm_maker.beam_specifier is None
+                True
 
         Set to beam specifier or none.
 
@@ -1285,7 +1284,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 1.** No division masks:
+            No division masks:
 
             ::
 
@@ -1310,8 +1309,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -1335,7 +1333,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 2.** Silences every other division:
+            Silences every other division:
 
             ::
 
@@ -1363,8 +1361,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -1382,7 +1379,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 3.** Sustains every other division:
+            Sustains every other division:
 
             ::
 
@@ -1410,8 +1407,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -1427,7 +1423,15 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                     }
                 }
 
-        Defaults to none.
+        ..  container:: example
+
+            Defaults to none:
+
+            ::
+
+                >>> rhythm_maker = baca.tools.FigureRhythmMaker()
+                >>> rhythm_maker.division_masks is None
+                True
 
         Set to division masks or none.
 
@@ -1441,8 +1445,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 1.** Spells nonassignable durations with monontonically
-            decreasing durations:
+            Spells nonassignable durations with monontonically decreasing
+            durations by default:
 
             ::
 
@@ -1467,8 +1471,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 39/32
@@ -1493,12 +1496,10 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                     }
                 }
 
-            This is default behavior.
-
         ..  container:: example
 
-            **Example 2.** Spells nonassignable durations with monontonically
-            increasing durations:
+            Spells nonassignable durations with monontonically increasing
+            durations:
 
             ::
 
@@ -1526,8 +1527,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 39/32
@@ -1552,7 +1552,15 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                     }
                 }
 
-        Defaults to none.
+        ..  container:: example
+
+            Defaults to none:
+
+            ::
+
+                >>> rhythm_maker = baca.tools.FigureRhythmMaker()
+                >>> rhythm_maker.duration_spelling_specifier is None
+                True
 
         Set to duration spelling specifier or none.
 
@@ -1566,7 +1574,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 1.** Silences every third logical tie:
+            Silences every third logical tie:
 
             ::
 
@@ -1594,8 +1602,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -1619,7 +1626,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 2.** Silences first and last logical ties:
+            Silences first and last logical ties:
 
             ::
 
@@ -1648,8 +1655,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -1671,7 +1677,15 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                     }
                 }
 
-        Defaults to none.
+        ..  container:: example
+
+            Defaults to none:
+
+            ::
+
+                >>> rhythm_maker = baca.tools.FigureRhythmMaker()
+                >>> rhythm_maker.logical_tie_masks is None
+                True
 
         Set to patterns or none.
 
@@ -1685,20 +1699,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 1.** Default talea:
-
-            ::
-
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker()
-
-            ::
-
-                >>> rhythm_maker.talea is None
-                True
-
-        ..  container:: example
-
-            **Example 2.** Custom talea:
+            Custom talea:
 
             ::
 
@@ -1714,7 +1715,15 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> rhythm_maker.talea
                 Talea(counts=(1, 1, 2), denominator=16)
 
-        Defaults to none.
+        ..  container:: example
+
+            Defaults to none:
+
+            ::
+
+                >>> rhythm_maker = baca.tools.FigureRhythmMaker()
+                >>> rhythm_maker.talea is None
+                True
 
         Set to talea or none.
 
@@ -1728,7 +1737,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 1.** Ties across divisions:
+            Ties across divisions with matching pitches:
 
             ::
 
@@ -1744,45 +1753,6 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[0, 2, 10], [10, 16, 15, 20, 19], [19]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  doctest::
-
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
-                \new Staff {
-                    {
-                        \time 3/4
-                        {
-                            c'16 [
-                            d'16
-                            bf'8 ~ ]
-                        }
-                        {
-                            bf'16 [
-                            e''16
-                            ef''8
-                            af''16
-                            g''16 ~ ]
-                        }
-                        {
-                            g''8
-                        }
-                    }
-                }
-
-            Ties only notes with the same pitch:
-
-            ::
-
                 >>> stage_tokens = [[0, 2, 10], [10, 16, 15, 20, 19], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
                 >>> duration = sum([_.get_duration() for _ in selections])
@@ -1795,8 +1765,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -1807,45 +1776,6 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                         }
                         {
                             bf'16 [
-                            e''16
-                            ef''8
-                            af''16
-                            g''16 ]
-                        }
-                        {
-                            a'8
-                        }
-                    }
-                }
-
-            Ties only notes with the same pitch:
-
-            ::
-
-                >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  doctest::
-
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
-                \new Staff {
-                    {
-                        \time 3/4
-                        {
-                            c'16 [
-                            d'16
-                            bf'8 ]
-                        }
-                        {
-                            fs''16 [
                             e''16
                             ef''8
                             af''16
@@ -1859,7 +1789,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 2.** Ties consecutive notes of like pitch:
+            Ties consecutive notes with matching pitches:
 
             ::
 
@@ -1887,8 +1817,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -1910,7 +1839,15 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                     }
                 }
 
-        Defaults to none.
+        ..  container:: example
+
+            Defaults to none:
+
+            ::
+
+                >>> rhythm_maker = baca.tools.FigureRhythmMaker()
+                >>> rhythm_maker.tie_specifier is None
+                True
 
         Set to tie specifier or none.
 
@@ -1924,7 +1861,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 1.** One extra count per division:
+            One extra count per division:
 
             ::
 
@@ -1950,8 +1887,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 15/16
@@ -1978,7 +1914,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 2.** One missing count per division:
+            One missing count per division:
 
             ::
 
@@ -2004,8 +1940,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff {
                     {
                         \time 5/8
@@ -2031,7 +1966,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 3.** Accelerandi:
+            Accelerandi:
 
             ::
 
@@ -2060,15 +1995,14 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [duration],
                 ...     pitched_staff=True,
                 ...     )
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).beam.positions = (-5, -5)
                 >>> override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override Beam.positions = #'(-5 . -5)
                     \override Stem.direction = #down
@@ -2272,248 +2206,9 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                     }
                 }
 
-            ::
-
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
-                ...     time_treatments=['accel'],
-                ...     talea=rhythmmakertools.Talea(
-                ...         counts=[1],
-                ...         denominator=8,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> stage_tokens = [
-                ...     [0],
-                ...     [2, 10],
-                ...     [18, 16, 15],
-                ...     [20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     [20, 19, 9, 0, 2, 10],
-                ...     ]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> override(staff).beam.positions = (-5, -5)
-                >>> override(staff).stem.direction = Down
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  doctest::
-
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
-                \new Staff \with {
-                    \override Beam.positions = #'(-5 . -5)
-                    \override Stem.direction = #down
-                } {
-                    {
-                        \time 21/8
-                        {
-                            c'8
-                        }
-                        \override TupletNumber.text = \markup {
-                            \scale
-                                #'(0.75 . 0.75)
-                                \score
-                                    {
-                                        \new Score \with {
-                                            \override SpacingSpanner.spacing-increment = #0.5
-                                            proportionalNotationDuration = ##f
-                                        } <<
-                                            \new RhythmicStaff \with {
-                                                \remove Time_signature_engraver
-                                                \remove Staff_symbol_engraver
-                                                \override Stem.direction = #up
-                                                \override Stem.length = #5
-                                                \override TupletBracket.bracket-visibility = ##t
-                                                \override TupletBracket.direction = #up
-                                                \override TupletBracket.padding = #1.25
-                                                \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                                \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                                tupletFullLength = ##t
-                                            } {
-                                                c'4
-                                            }
-                                        >>
-                                        \layout {
-                                            indent = #0
-                                            ragged-right = ##t
-                                        }
-                                    }
-                            }
-                        \times 1/1 {
-                            \once \override Beam.grow-direction = #right
-                            d'8 * 1328/1024 [
-                            bf'8 * 720/1024 ]
-                        }
-                        \revert TupletNumber.text
-                        \override TupletNumber.text = \markup {
-                            \scale
-                                #'(0.75 . 0.75)
-                                \score
-                                    {
-                                        \new Score \with {
-                                            \override SpacingSpanner.spacing-increment = #0.5
-                                            proportionalNotationDuration = ##f
-                                        } <<
-                                            \new RhythmicStaff \with {
-                                                \remove Time_signature_engraver
-                                                \remove Staff_symbol_engraver
-                                                \override Stem.direction = #up
-                                                \override Stem.length = #5
-                                                \override TupletBracket.bracket-visibility = ##t
-                                                \override TupletBracket.direction = #up
-                                                \override TupletBracket.padding = #1.25
-                                                \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                                \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                                tupletFullLength = ##t
-                                            } {
-                                                c'4.
-                                            }
-                                        >>
-                                        \layout {
-                                            indent = #0
-                                            ragged-right = ##t
-                                        }
-                                    }
-                            }
-                        \times 1/1 {
-                            \once \override Beam.grow-direction = #right
-                            fs''8 * 1544/1024 [
-                            e''8 * 840/1024
-                            ef''8 * 688/1024 ]
-                        }
-                        \revert TupletNumber.text
-                        \override TupletNumber.text = \markup {
-                            \scale
-                                #'(0.75 . 0.75)
-                                \score
-                                    {
-                                        \new Score \with {
-                                            \override SpacingSpanner.spacing-increment = #0.5
-                                            proportionalNotationDuration = ##f
-                                        } <<
-                                            \new RhythmicStaff \with {
-                                                \remove Time_signature_engraver
-                                                \remove Staff_symbol_engraver
-                                                \override Stem.direction = #up
-                                                \override Stem.length = #5
-                                                \override TupletBracket.bracket-visibility = ##t
-                                                \override TupletBracket.direction = #up
-                                                \override TupletBracket.padding = #1.25
-                                                \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                                \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                                tupletFullLength = ##t
-                                            } {
-                                                c'2
-                                            }
-                                        >>
-                                        \layout {
-                                            indent = #0
-                                            ragged-right = ##t
-                                        }
-                                    }
-                            }
-                        \times 1/1 {
-                            \once \override Beam.grow-direction = #right
-                            af''8 * 1720/1024 [
-                            g''8 * 936/1024
-                            a'8 * 768/1024
-                            c'8 * 672/1024 ]
-                        }
-                        \revert TupletNumber.text
-                        \override TupletNumber.text = \markup {
-                            \scale
-                                #'(0.75 . 0.75)
-                                \score
-                                    {
-                                        \new Score \with {
-                                            \override SpacingSpanner.spacing-increment = #0.5
-                                            proportionalNotationDuration = ##f
-                                        } <<
-                                            \new RhythmicStaff \with {
-                                                \remove Time_signature_engraver
-                                                \remove Staff_symbol_engraver
-                                                \override Stem.direction = #up
-                                                \override Stem.length = #5
-                                                \override TupletBracket.bracket-visibility = ##t
-                                                \override TupletBracket.direction = #up
-                                                \override TupletBracket.padding = #1.25
-                                                \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                                \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                                tupletFullLength = ##t
-                                            } {
-                                                c'2 ~
-                                                c'8
-                                            }
-                                        >>
-                                        \layout {
-                                            indent = #0
-                                            ragged-right = ##t
-                                        }
-                                    }
-                            }
-                        \times 1/1 {
-                            \once \override Beam.grow-direction = #right
-                            d'8 * 1872/1024 [
-                            bf'8 * 1016/1024
-                            fs''8 * 832/1024
-                            e''8 * 736/1024
-                            ef''8 * 664/1024 ]
-                        }
-                        \revert TupletNumber.text
-                        \override TupletNumber.text = \markup {
-                            \scale
-                                #'(0.75 . 0.75)
-                                \score
-                                    {
-                                        \new Score \with {
-                                            \override SpacingSpanner.spacing-increment = #0.5
-                                            proportionalNotationDuration = ##f
-                                        } <<
-                                            \new RhythmicStaff \with {
-                                                \remove Time_signature_engraver
-                                                \remove Staff_symbol_engraver
-                                                \override Stem.direction = #up
-                                                \override Stem.length = #5
-                                                \override TupletBracket.bracket-visibility = ##t
-                                                \override TupletBracket.direction = #up
-                                                \override TupletBracket.padding = #1.25
-                                                \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                                \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                                tupletFullLength = ##t
-                                            } {
-                                                c'2.
-                                            }
-                                        >>
-                                        \layout {
-                                            indent = #0
-                                            ragged-right = ##t
-                                        }
-                                    }
-                            }
-                        \times 1/1 {
-                            \once \override Beam.grow-direction = #right
-                            af''8 * 2008/1024 [
-                            g''8 * 1088/1024
-                            a'8 * 888/1024
-                            c'8 * 784/1024
-                            d'8 * 712/1024
-                            bf'8 * 664/1024 ]
-                        }
-                        \revert TupletNumber.text
-                    }
-                }
-
         ..  container:: example
 
-            **Example 4.** Ritardandi:
+            Ritardandi:
 
             ::
 
@@ -2542,15 +2237,14 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [duration],
                 ...     pitched_staff=True,
                 ...     )
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).beam.positions = (-5, -5)
                 >>> override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override Beam.positions = #'(-5 . -5)
                     \override Stem.direction = #down
@@ -2754,248 +2448,9 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                     }
                 }
 
-            ::
-
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
-                ...     time_treatments=['rit'],
-                ...     talea=rhythmmakertools.Talea(
-                ...         counts=[1],
-                ...         denominator=8,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> stage_tokens = [
-                ...     [0],
-                ...     [2, 10],
-                ...     [18, 16, 15],
-                ...     [20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     [20, 19, 9, 0, 2, 10],
-                ...     ]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> override(staff).beam.positions = (-5, -5)
-                >>> override(staff).stem.direction = Down
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  doctest::
-
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
-                \new Staff \with {
-                    \override Beam.positions = #'(-5 . -5)
-                    \override Stem.direction = #down
-                } {
-                    {
-                        \time 21/8
-                        {
-                            c'8
-                        }
-                        \override TupletNumber.text = \markup {
-                            \scale
-                                #'(0.75 . 0.75)
-                                \score
-                                    {
-                                        \new Score \with {
-                                            \override SpacingSpanner.spacing-increment = #0.5
-                                            proportionalNotationDuration = ##f
-                                        } <<
-                                            \new RhythmicStaff \with {
-                                                \remove Time_signature_engraver
-                                                \remove Staff_symbol_engraver
-                                                \override Stem.direction = #up
-                                                \override Stem.length = #5
-                                                \override TupletBracket.bracket-visibility = ##t
-                                                \override TupletBracket.direction = #up
-                                                \override TupletBracket.padding = #1.25
-                                                \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                                \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                                tupletFullLength = ##t
-                                            } {
-                                                c'4
-                                            }
-                                        >>
-                                        \layout {
-                                            indent = #0
-                                            ragged-right = ##t
-                                        }
-                                    }
-                            }
-                        \times 1/1 {
-                            \once \override Beam.grow-direction = #left
-                            d'8 * 664/1024 [
-                            bf'8 * 1384/1024 ]
-                        }
-                        \revert TupletNumber.text
-                        \override TupletNumber.text = \markup {
-                            \scale
-                                #'(0.75 . 0.75)
-                                \score
-                                    {
-                                        \new Score \with {
-                                            \override SpacingSpanner.spacing-increment = #0.5
-                                            proportionalNotationDuration = ##f
-                                        } <<
-                                            \new RhythmicStaff \with {
-                                                \remove Time_signature_engraver
-                                                \remove Staff_symbol_engraver
-                                                \override Stem.direction = #up
-                                                \override Stem.length = #5
-                                                \override TupletBracket.bracket-visibility = ##t
-                                                \override TupletBracket.direction = #up
-                                                \override TupletBracket.padding = #1.25
-                                                \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                                \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                                tupletFullLength = ##t
-                                            } {
-                                                c'4.
-                                            }
-                                        >>
-                                        \layout {
-                                            indent = #0
-                                            ragged-right = ##t
-                                        }
-                                    }
-                            }
-                        \times 1/1 {
-                            \once \override Beam.grow-direction = #left
-                            fs''8 * 512/1024 [
-                            e''8 * 1072/1024
-                            ef''8 * 1488/1024 ]
-                        }
-                        \revert TupletNumber.text
-                        \override TupletNumber.text = \markup {
-                            \scale
-                                #'(0.75 . 0.75)
-                                \score
-                                    {
-                                        \new Score \with {
-                                            \override SpacingSpanner.spacing-increment = #0.5
-                                            proportionalNotationDuration = ##f
-                                        } <<
-                                            \new RhythmicStaff \with {
-                                                \remove Time_signature_engraver
-                                                \remove Staff_symbol_engraver
-                                                \override Stem.direction = #up
-                                                \override Stem.length = #5
-                                                \override TupletBracket.bracket-visibility = ##t
-                                                \override TupletBracket.direction = #up
-                                                \override TupletBracket.padding = #1.25
-                                                \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                                \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                                tupletFullLength = ##t
-                                            } {
-                                                c'2
-                                            }
-                                        >>
-                                        \layout {
-                                            indent = #0
-                                            ragged-right = ##t
-                                        }
-                                    }
-                            }
-                        \times 1/1 {
-                            \once \override Beam.grow-direction = #left
-                            af''8 * 432/1024 [
-                            g''8 * 896/1024
-                            a'8 * 1240/1024
-                            c'8 * 1528/1024 ]
-                        }
-                        \revert TupletNumber.text
-                        \override TupletNumber.text = \markup {
-                            \scale
-                                #'(0.75 . 0.75)
-                                \score
-                                    {
-                                        \new Score \with {
-                                            \override SpacingSpanner.spacing-increment = #0.5
-                                            proportionalNotationDuration = ##f
-                                        } <<
-                                            \new RhythmicStaff \with {
-                                                \remove Time_signature_engraver
-                                                \remove Staff_symbol_engraver
-                                                \override Stem.direction = #up
-                                                \override Stem.length = #5
-                                                \override TupletBracket.bracket-visibility = ##t
-                                                \override TupletBracket.direction = #up
-                                                \override TupletBracket.padding = #1.25
-                                                \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                                \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                                tupletFullLength = ##t
-                                            } {
-                                                c'2 ~
-                                                c'8
-                                            }
-                                        >>
-                                        \layout {
-                                            indent = #0
-                                            ragged-right = ##t
-                                        }
-                                    }
-                            }
-                        \times 1/1 {
-                            \once \override Beam.grow-direction = #left
-                            d'8 * 376/1024 [
-                            bf'8 * 784/1024
-                            fs''8 * 1080/1024
-                            e''8 * 1328/1024
-                            ef''8 * 1552/1024 ]
-                        }
-                        \revert TupletNumber.text
-                        \override TupletNumber.text = \markup {
-                            \scale
-                                #'(0.75 . 0.75)
-                                \score
-                                    {
-                                        \new Score \with {
-                                            \override SpacingSpanner.spacing-increment = #0.5
-                                            proportionalNotationDuration = ##f
-                                        } <<
-                                            \new RhythmicStaff \with {
-                                                \remove Time_signature_engraver
-                                                \remove Staff_symbol_engraver
-                                                \override Stem.direction = #up
-                                                \override Stem.length = #5
-                                                \override TupletBracket.bracket-visibility = ##t
-                                                \override TupletBracket.direction = #up
-                                                \override TupletBracket.padding = #1.25
-                                                \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                                \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                                tupletFullLength = ##t
-                                            } {
-                                                c'2.
-                                            }
-                                        >>
-                                        \layout {
-                                            indent = #0
-                                            ragged-right = ##t
-                                        }
-                                    }
-                            }
-                        \times 1/1 {
-                            \once \override Beam.grow-direction = #left
-                            af''8 * 336/1024 [
-                            g''8 * 696/1024
-                            a'8 * 960/1024
-                            c'8 * 1184/1024
-                            d'8 * 1392/1024
-                            bf'8 * 1576/1024 ]
-                        }
-                        \revert TupletNumber.text
-                    }
-                }
-
         ..  container:: example
 
-            **Example 5.** Accelerandi followed by ritardandi:
+            Accelerandi followed by ritardandi:
 
             ::
 
@@ -3022,15 +2477,14 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [duration],
                 ...     pitched_staff=True,
                 ...     )
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).beam.positions = (-5, -5)
                 >>> override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override Beam.positions = #'(-5 . -5)
                     \override Stem.direction = #down
@@ -3202,7 +2656,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 6.** Mixed accelerandi, ritardandi and prolation:
+            Mixed accelerandi, ritardandi and prolation:
 
             ::
 
@@ -3231,15 +2685,14 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [duration],
                 ...     pitched_staff=True,
                 ...     )
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).beam.positions = (-5, -5)
                 >>> override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override Beam.positions = #'(-5 . -5)
                     \override Stem.direction = #down
@@ -3427,7 +2880,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 7.** Stages specified by tuplet multiplier:
+            Stages specified by tuplet multiplier:
 
             ::
 
@@ -3456,15 +2909,14 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [duration],
                 ...     pitched_staff=True,
                 ...     )
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).beam.positions = (-6, -6)
                 >>> override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override Beam.positions = #'(-6 . -6)
                     \override Stem.direction = #down
@@ -3513,7 +2965,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 8.** Stage durations equal to a quarter:
+            Stage durations equal to a quarter:
 
             ::
 
@@ -3545,15 +2997,14 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [duration],
                 ...     pitched_staff=True,
                 ...     )
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).beam.positions = (-6, -6)
                 >>> override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override Beam.positions = #'(-6 . -6)
                     \override Stem.direction = #down
@@ -3596,6 +3047,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                     }
                 }
 
+        ..  container:: example
+
             Stage durations alternating between a quarter and a dotted quarter:
 
             ::
@@ -3628,15 +3081,14 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [duration],
                 ...     pitched_staff=True,
                 ...     )
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).beam.positions = (-6, -6)
                 >>> override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override Beam.positions = #'(-6 . -6)
                     \override Stem.direction = #down
@@ -3690,7 +3142,15 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                     }
                 }
 
-        Defaults to none.
+        ..  container:: example
+
+            Defaults to none:
+
+            ::
+
+                >>> rhythm_maker = baca.tools.FigureRhythmMaker()
+                >>> rhythm_maker.time_treatments is None
+                True
 
         Set to time treatments or none.
         
@@ -3707,7 +3167,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            **Example 1.** Does not simplify redudant tuplets:
+            Does not simplify redudant tuplets by default:
 
             ::
 
@@ -3729,14 +3189,13 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [duration],
                 ...     pitched_staff=True,
                 ...     )
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
@@ -3765,11 +3224,9 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                     }
                 }
 
-            This is default behavior.
-
         ..  container:: example
 
-            **Example 2.** Simplifies redudant tuplets:
+            Simplifies redudant tuplets:
 
             ::
 
@@ -3794,14 +3251,13 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [duration],
                 ...     pitched_staff=True,
                 ...     )
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
+                >>> staff = lilypond_file[Staff]
                 >>> override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> staff = rhythm_maker._get_staff(lilypond_file)
-                >>> f(staff)
+                >>> f(lilypond_file[Staff])
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
@@ -3830,7 +3286,15 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                     }
                 }
 
-        Defaults to none.
+        ..  container:: example
+
+            Defaults to none:
+
+            ::
+
+                >>> rhythm_maker = baca.tools.FigureRhythmMaker()
+                >>> rhythm_maker.tuplet_spelling_specifier is None
+                True
 
         Set to tuplet spelling specifier or none.
 

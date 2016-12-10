@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import datastructuretools
-from abjad.tools import scoretools
-from abjad.tools import sequencetools
-from abjad.tools import pitchtools
+import abjad
 
 
 def insert_and_transpose(notes, subrun_tokens):
-    '''Inserts and transposes nested subruns in `notes`
-    according to `subrun_tokens`.
+    '''Inserts and transposes nested subruns in `notes` according to
+    `subrun_tokens`.
 
     ::
 
@@ -73,7 +70,7 @@ def insert_and_transpose(notes, subrun_tokens):
     Returns list of integers and / or floats.
     '''
     assert isinstance(notes, list)
-    assert all(isinstance(x, scoretools.Note) for x in notes)
+    assert all(isinstance(x, abjad.Note) for x in notes)
     assert isinstance(subrun_tokens, list)
     len_notes = len(notes)
     instructions = []
@@ -81,12 +78,12 @@ def insert_and_transpose(notes, subrun_tokens):
         pairs = _make_index_length_pairs(subrun_token)
         for anchor_index, subrun_length in pairs:
             anchor_note = notes[anchor_index % len_notes]
-            anchor_pitch = pitchtools.NamedPitch.from_pitch_carrier(
+            anchor_pitch = abjad.NamedPitch.from_pitch_carrier(
                 anchor_note)
             anchor_written_duration = anchor_note.written_duration
             source_start_index = anchor_index + 1
             source_stop_index = source_start_index + subrun_length + 1
-            cyclic_notes = datastructuretools.CyclicTuple(notes)
+            cyclic_notes = abjad.datastructuretools.CyclicTuple(notes)
             subrun_source = cyclic_notes[source_start_index:source_stop_index]
             subrun_intervals = _get_intervals_in_subrun(subrun_source)
             new_notes = _make_new_notes(
@@ -100,12 +97,12 @@ def insert_and_transpose(notes, subrun_tokens):
 def _get_intervals_in_subrun(subrun_source):
     subrun_source = list(subrun_source)
     result = [0]
-    for first, second in sequencetools.iterate_sequence_nwise(
+    for first, second in abjad.sequencetools.iterate_sequence_nwise(
         subrun_source):
-        first_pitch = pitchtools.NamedPitch.from_pitch_carrier(first)
-        second_pitch = pitchtools.NamedPitch.from_pitch_carrier(second)
-        interval = pitchtools.NumberedPitch(second_pitch).pitch_number - \
-            pitchtools.NumberedPitch(first_pitch).pitch_number
+        first_pitch = abjad.NamedPitch.from_pitch_carrier(first)
+        second_pitch = abjad.NamedPitch.from_pitch_carrier(second)
+        interval = abjad.pitchtools.NumberedPitch(second_pitch).pitch_number - \
+            abjad.pitchtools.NumberedPitch(first_pitch).pitch_number
         result.append(interval + result[-1])
     result.pop(0)
     return result
@@ -126,8 +123,8 @@ def _make_index_length_pairs(subrun_token):
 def _make_new_notes(anchor_pitch, anchor_written_duration, subrun_intervals):
     new_notes = []
     for subrun_interval in subrun_intervals:
-        new_pc = (pitchtools.NumberedPitch(anchor_pitch).pitch_number +
+        new_pc = (abjad.pitchtools.NumberedPitch(anchor_pitch).pitch_number +
             subrun_interval) % 12
-        new_note = scoretools.Note(new_pc, anchor_written_duration)
+        new_note = abjad.Note(new_pc, anchor_written_duration)
         new_notes.append(new_note)
     return new_notes

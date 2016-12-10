@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import mathtools
+import abjad
 
 
 def partition_nested_into_canonic_parts(expr):
@@ -36,7 +36,7 @@ def partition_nested_into_canonic_parts(expr):
 
     '''
     if isinstance(expr, int):
-        return mathtools.partition_integer_into_canonic_parts(expr)
+        return abjad.mathtools.partition_integer_into_canonic_parts(expr)
     elif isinstance(expr, list):
         result = []
         for subexpr in expr:

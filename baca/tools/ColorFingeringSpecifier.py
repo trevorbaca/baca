@@ -4,7 +4,7 @@ import itertools
 
 
 class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
-    r'''ColorFingeringSpecifier specifier.
+    r'''Color fingering specifier.
 
     ::
 
@@ -12,7 +12,7 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 1.** Initializes with number lists:
+        Initializes with number lists:
 
         ::
 
@@ -208,7 +208,7 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Attaches color fingerings to every note:
+            Attaches color fingerings to every note:
 
             ::
 
@@ -318,7 +318,7 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Attaches color fingerings by pitch run:
+            Attaches color fingerings by pitch run:
 
             ::
 

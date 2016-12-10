@@ -12,8 +12,6 @@ class SwellSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 1.** 
-
         ::
 
 

@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
+import abjad
 import baca
-from abjad import *
 
 
 def test_tools_insert_and_transpose_01():
     '''Inserts are shown in brackets.
     '''
 
-    items = [Note(_, (1, 4)) for _ in [0, 2, 7, 9, 5, 11, 4]]
+    items = [abjad.Note(_, (1, 4)) for _ in [0, 2, 7, 9, 5, 11, 4]]
     subrun_tokens = [(0, [2, 4]), (4, [3, 1])]
     baca.tools.insert_and_transpose(items, subrun_tokens)
 
     pitch_classes = []
     for item in items:
-        if isinstance(item, Note):
+        if isinstance(item, abjad.Note):
             pitch_classes.append(item.written_pitch.pitch_class_number)
         else:
             assert isinstance(item, list), repr(item)

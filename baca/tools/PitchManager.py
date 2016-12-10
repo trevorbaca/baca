@@ -11,6 +11,10 @@ class PitchManager(abjad.abctools.AbjadObject):
 
     '''
 
+    ### CLASS VARIABLES ###
+
+    __documentation_section__ = 'Utilities'
+
     ### PUBLIC METHODS ###
 
     @staticmethod
@@ -783,21 +787,20 @@ class PitchManager(abjad.abctools.AbjadObject):
                 True
 
         '''
-        from abjad.tools import pitchtools
         operators = []
         if transposition:
             for n in range(12):
-                operator = pitchtools.CompoundOperator()
+                operator = abjad.pitchtools.CompoundOperator()
                 operator = operator.transpose(n=n)
                 operators.append(operator)
         else:
-            operator = pitchtools.CompoundOperator()
+            operator = abjad.pitchtools.CompoundOperator()
             operator = operator.transpose()
             operators.append(operator)
         if inversion:
             operators_ = operators[:]
             for operator in operators:
-                operator_ = pitchtools.CompoundOperator()
+                operator_ = abjad.pitchtools.CompoundOperator()
                 operator_ = operator_.invert()
                 foo = list(operator_._operators)
                 foo.extend(operator.operators)

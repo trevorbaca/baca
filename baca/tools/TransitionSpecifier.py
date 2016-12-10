@@ -12,7 +12,7 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 1.** Specifies transition from ordinario to ponticello:
+        Specifies transition from ordinario to ponticello:
 
         ::
 
