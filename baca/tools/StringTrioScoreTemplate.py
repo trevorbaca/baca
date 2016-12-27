@@ -8,11 +8,10 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
-
-        **Example 1.**
 
         ::
 
@@ -29,8 +28,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
         ..  doctest::
 
-            >>> score = lilypond_file.score_block.items[0]
-            >>> f(score)
+            >>> f(lilypond_file[Score])
             \context Score = "Score" <<
                 \tag violin.viola.cello
                 \context TimeSignatureContext = "Time Signature Context" <<

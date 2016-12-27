@@ -5,18 +5,21 @@ import abjad
 def map_elements_to_numbered_sublists(sequence):
     '''Maps `sequence` elements to numbered sublists.
 
+    ::
+
+        >>> import abjad
         >>> import baca
 
     ::
 
-        >>> sequence = [1, 2, -3, -4, 5]
-        >>> baca.tools.map_elements_to_numbered_sublists(sequence)
+        >>> list_ = [1, 2, -3, -4, 5]
+        >>> baca.tools.map_elements_to_numbered_sublists(list_)
         [[1], [2, 3], [-4, -5, -6], [-7, -8, -9, -10], [11, 12, 13, 14, 15]]
 
     ::
 
-        >>> sequence = [1, 0, -3, -4, 5]
-        >>> baca.tools.map_elements_to_numbered_sublists(sequence)
+        >>> list_ = [1, 0, -3, -4, 5]
+        >>> baca.tools.map_elements_to_numbered_sublists(list_)
         [[1], [], [-2, -3, -4], [-5, -6, -7, -8], [9, 10, 11, 12, 13]]
 
     Starts numbering at ``1``.

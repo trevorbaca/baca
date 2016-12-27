@@ -7,11 +7,10 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
-
-        **Example.** Initializes wellformedness manager:
 
         ::
 
@@ -30,8 +29,6 @@ class WellformednessManager(abjad.abctools.AbjadObject):
         r'''Calls wellformedness checks on `expr`.
 
         ..  container:: example
-
-            **Example 1.**
 
             ::
 
@@ -61,7 +58,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Finds no duplicates:
+            Finds no duplicates:
 
             ::
 
@@ -76,7 +73,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Finds duplicate pitches:
+            Finds duplicate pitches:
 
             ::
 
@@ -91,7 +88,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 3.** Finds duplicate pitch-classes:
+            Finds duplicate pitch-classes:
 
             ::
 
@@ -106,8 +103,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 4.** Finds duplicate pitch-classes between sequential
-            voices:
+            Finds duplicate pitch-classes between sequential voices:
 
             ::
 
@@ -176,7 +172,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Is well-formed:
+            Is well-formed:
 
             ::
 
@@ -187,7 +183,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
                 
         ..  container:: example
 
-            **Example 2.** Repeated pitches are not well-formed:
+            Repeated pitches are not well-formed:
 
             ::
 
@@ -209,7 +205,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Is well-formed:
+            Is well-formed:
 
             ::
 
@@ -221,7 +217,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Repeated pitches are not well-formed:
+            Repeated pitches are not well-formed:
 
             ::
 

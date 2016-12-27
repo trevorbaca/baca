@@ -8,11 +8,12 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
 
-        **Example 1.** Makes scoped pitch specifier:
+        Makes scoped pitch specifier:
 
         ::
 
@@ -48,7 +49,7 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 2.** Makes pitch specifier with compound scope:
+        Makes pitch specifier with compound scope:
 
         ::
 
@@ -95,7 +96,7 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 3.** Makes scoped displacement specifier:
+        Makes scoped displacement specifier:
 
         ::
 
@@ -152,7 +153,7 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Gets scope:
+            Gets scope:
 
             ::
 
@@ -185,7 +186,7 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Gets specifier:
+            Gets specifier:
 
             ::
 

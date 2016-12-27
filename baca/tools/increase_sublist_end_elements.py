@@ -3,6 +3,11 @@
 
 def increase_sublist_end_elements(l, s):
     '''Increases sublist end elements.
+
+    ::
+
+        >>> import abjad
+        >>> import baca
     
     Adds elements in `s` to the first and last elements of
     corresponding sublists in `l`.
@@ -20,10 +25,6 @@ def increase_sublist_end_elements(l, s):
 
     Note that only the end elements of the sublists of `l` change.
     Any middle elements in the sublists of `l` are left untouched:
-
-    ::
-
-        >>> import baca
 
     ::
 

@@ -8,11 +8,12 @@ class DivisionSequenceExpression(abjad.expressiontools.SequenceExpression):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
 
-        **Example 1.** Inherits from sequence expression:
+        Inherits from sequence expression:
 
         ::
 
@@ -26,7 +27,7 @@ class DivisionSequenceExpression(abjad.expressiontools.SequenceExpression):
 
     ..  container:: example
 
-        **Example 2.** Splits into quarter notes:
+        Splits into quarter notes:
 
         ::
 
@@ -43,7 +44,7 @@ class DivisionSequenceExpression(abjad.expressiontools.SequenceExpression):
 
     ..  container:: example
 
-        **Example 3.** Splits into quarter notes and flattens result:
+        Splits into quarter notes and flattens result:
 
         ::
 
@@ -61,8 +62,7 @@ class DivisionSequenceExpression(abjad.expressiontools.SequenceExpression):
 
     ..  container:: example
 
-        **Example 4.** Splits into quarter notes with compound meter
-        multiplier:
+        Splits into quarter notes with compound meter multiplier:
 
         ::
 
@@ -80,8 +80,8 @@ class DivisionSequenceExpression(abjad.expressiontools.SequenceExpression):
 
     ..  container:: example
 
-        **Example 5.** Splits into quarter notes with compound meter multiplier
-        and gets division of each:
+        Splits into quarter notes with compound meter multiplier and gets
+        division of each:
 
         ::
 

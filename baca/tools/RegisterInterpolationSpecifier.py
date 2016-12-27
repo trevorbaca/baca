@@ -7,6 +7,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
@@ -42,8 +43,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> score = lilypond_file.score_block.items[0]
-            >>> f(score)
+            >>> f(lilypond_file[Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -204,8 +204,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> score = lilypond_file.score_block.items[0]
-            >>> f(score)
+            >>> f(lilypond_file[Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -366,8 +365,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> score = lilypond_file.score_block.items[0]
-            >>> f(score)
+            >>> f(lilypond_file[Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -528,8 +526,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> score = lilypond_file.score_block.items[0]
-            >>> f(score)
+            >>> f(lilypond_file[Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -690,8 +687,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> score = lilypond_file.score_block.items[0]
-            >>> f(score)
+            >>> f(lilypond_file[Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<

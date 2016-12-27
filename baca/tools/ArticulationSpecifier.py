@@ -7,11 +7,12 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
 
-        Selects heads of pitched logical ties:
+        Selects heads of pitched logical ties by default:
 
         ::
 
@@ -34,11 +35,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
             >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> result = figure_maker(figure_token)
             >>> selection, time_signature, state_manifest = result
-            >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-            ...     [selection],
-            ...     [time_signature],
-            ...     pitched_staff=True,
-            ...     )
+            >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -71,8 +68,6 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 }
             }
 
-        This is default behavior.
-            
     '''
 
     ### CLASS VARIABLES ###
@@ -178,11 +173,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -244,11 +235,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -310,11 +297,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -376,11 +359,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -438,11 +417,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -489,7 +464,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            Selects heads of pitched logical ties:
+            Selects heads of pitched logical ties by default:
 
             ::
 
@@ -512,11 +487,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -549,9 +520,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                     }
                 }
 
-            This is default behavior.
-
-        Defaults to heads of pitched logical ties.
+        Defaults to none.
 
         Set to selector or none.
 

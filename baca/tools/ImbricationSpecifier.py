@@ -47,9 +47,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             >>> selections, time_signature, state_manifest = result
             >>> lilypond_file = rhythmmakertools.make_lilypond_file(
             ...     selections,
-            ...     [time_signature],
             ...     attach_lilypond_voice_commands=True,
-            ...     pitched_staff=True,
             ...     )
             >>> show(lilypond_file) # doctest: +SKIP
 
@@ -205,9 +203,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             >>> selections, time_signature, state_manifest = result
             >>> lilypond_file = rhythmmakertools.make_lilypond_file(
             ...     selections,
-            ...     [time_signature],
             ...     attach_lilypond_voice_commands=True,
-            ...     pitched_staff=True,
             ...     )
             >>> show(lilypond_file) # doctest: +SKIP
 
@@ -449,9 +445,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     selections,
-                ...     [time_signature],
                 ...     attach_lilypond_voice_commands=True,
-                ...     pitched_staff=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -575,9 +569,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     selections,
-                ...     [time_signature],
                 ...     attach_lilypond_voice_commands=True,
-                ...     pitched_staff=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -691,9 +683,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     selections,
-                ...     [time_signature],
                 ...     attach_lilypond_voice_commands=True,
-                ...     pitched_staff=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -948,9 +938,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     selections,
-                ...     [time_signature],
                 ...     attach_lilypond_voice_commands=True,
-                ...     pitched_staff=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1156,9 +1144,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     selections,
-                ...     [time_signature],
                 ...     attach_lilypond_voice_commands=True,
-                ...     pitched_staff=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1328,9 +1314,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     selections,
-                ...     [time_signature],
                 ...     attach_lilypond_voice_commands=True,
-                ...     pitched_staff=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1516,9 +1500,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     selections,
-                ...     [time_signature],
                 ...     attach_lilypond_voice_commands=True,
-                ...     pitched_staff=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1660,9 +1642,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     selections,
-                ...     [time_signature],
                 ...     attach_lilypond_voice_commands=True,
-                ...     pitched_staff=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1815,9 +1795,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     selections,
-                ...     [time_signature],
                 ...     attach_lilypond_voice_commands=True,
-                ...     pitched_staff=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1969,9 +1947,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     selections,
-                ...     [time_signature],
                 ...     attach_lilypond_voice_commands=True,
-                ...     pitched_staff=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -2116,9 +2092,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     selections,
-                ...     [time_signature],
                 ...     attach_lilypond_voice_commands=True,
-                ...     pitched_staff=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
 

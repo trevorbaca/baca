@@ -62,9 +62,9 @@ class Constellation(abjad.abctools.AbjadObject):
 
     @property
     def _generator_pitch_numbers(self):
-        sequence = abjad.sequencetools.flatten_sequence(
-            self._partitioned_generator_pitch_numbers)
-        return list(sorted(sequence))
+        result = self._partitioned_generator_pitch_numbers
+        result = abjad.sequencetools.flatten_sequence(result)
+        return list(sorted(result))
 
     @property
     def _next(self):

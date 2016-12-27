@@ -5,11 +5,15 @@ import abjad
 class Counter(abjad.abctools.AbjadObject):
     r'''Counter.
 
+    ::
+
+        >>> import abjad
+        >>> import baca
+
     ..  container:: example
 
-        **Example 1.** Initializes to zero and increments by 1:
+        Initializes to zero and increments by 1:
         
-            >>> import baca
             >>> counter = baca.tools.Counter(start=0)
             >>> counter.start, counter.current
             (0, 0)
@@ -27,9 +31,8 @@ class Counter(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 2.** Initializes to zero and increments by 2:
+        Initializes to zero and increments by 2:
         
-            >>> import baca
             >>> counter = baca.tools.Counter(start=0)
             >>> counter.start, counter.current
             (0, 0)
@@ -47,9 +50,8 @@ class Counter(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        **Example 2.** Initializes to 10 and increments by different values:
+        Initializes to 10 and increments by different values:
         
-            >>> import baca
             >>> counter = baca.tools.Counter(start=10)
             >>> counter.start, counter.current
             (10, 10)

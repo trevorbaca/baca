@@ -8,11 +8,10 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
-
-        **Example.**
 
         ::
 

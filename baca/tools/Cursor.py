@@ -8,6 +8,7 @@ class Cursor(abjad.abctools.AbjadObject):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
@@ -222,7 +223,7 @@ class Cursor(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            Position starting at none:
+            Position starts at none by default:
 
             ::
 
@@ -270,8 +271,6 @@ class Cursor(abjad.abctools.AbjadObject):
                 ['da capo']
                 >>> cursor.next(count=-1)
                 [13]
-
-            This is default behavior.
 
         ..  container:: example
 
@@ -326,8 +325,6 @@ class Cursor(abjad.abctools.AbjadObject):
                 ['da capo']
                 >>> cursor.next(count=-1)
                 [13]
-
-            This is default behavior.
 
         ..  container:: example
 

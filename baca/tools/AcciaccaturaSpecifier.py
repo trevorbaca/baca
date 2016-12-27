@@ -8,6 +8,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
@@ -37,13 +38,8 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
             >>> selections, state_manifest = rhythm_maker(stage_tokens)
-            >>> durations = sum([_.get_duration() for _ in selections])
-            >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-            ...     selections,
-            ...     [durations],
-            ...     pitched_staff=True,
-            ...     )
-            >>> score = lilypond_file.score_block.items[0]
+            >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
+            >>> score = lilypond_file[Score]
             >>> override(score).spacing_spanner.strict_grace_spacing = False
             >>> override(score).spacing_spanner.strict_note_spacing = False
             >>> show(lilypond_file) # doctest: +SKIP 
@@ -191,7 +187,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            Sixteenth-note acciaccaturas:
+            Sixteenth-note acciaccaturas by default:
 
             ::
 
@@ -216,13 +212,8 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> durations = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [durations],
-                ...     pitched_staff=True,
-                ...     )
-                >>> score = lilypond_file.score_block.items[0]
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
+                >>> score = lilypond_file[Score]
                 >>> override(score).spacing_spanner.strict_grace_spacing = False
                 >>> override(score).spacing_spanner.strict_note_spacing = False
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -279,8 +270,6 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                     }
                 }
 
-            This is default behavior.
-
         ..  container:: example
 
             Eighth-note acciaccaturas:
@@ -310,13 +299,8 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> durations = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [durations],
-                ...     pitched_staff=True,
-                ...     )
-                >>> score = lilypond_file.score_block.items[0]
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
+                >>> score = lilypond_file[Score]
                 >>> override(score).spacing_spanner.strict_grace_spacing = False
                 >>> override(score).spacing_spanner.strict_note_spacing = False
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -412,13 +396,8 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> durations = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [durations],
-                ...     pitched_staff=True,
-                ...     )
-                >>> score = lilypond_file.score_block.items[0]
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
+                >>> score = lilypond_file[Score]
                 >>> override(score).spacing_spanner.strict_grace_spacing = False
                 >>> override(score).spacing_spanner.strict_note_spacing = False
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -475,8 +454,6 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                     }
                 }
 
-            This is default behavior.
-
         ..  container:: example
 
             At most two acciaccaturas at the beginning of every stage:
@@ -510,13 +487,8 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> durations = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [durations],
-                ...     pitched_staff=True,
-                ...     )
-                >>> score = lilypond_file.score_block.items[0]
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
+                >>> score = lilypond_file[Score]
                 >>> override(score).spacing_spanner.strict_grace_spacing = False
                 >>> override(score).spacing_spanner.strict_note_spacing = False
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -606,13 +578,8 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> durations = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [durations],
-                ...     pitched_staff=True,
-                ...     )
-                >>> score = lilypond_file.score_block.items[0]
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
+                >>> score = lilypond_file[Score]
                 >>> override(score).spacing_spanner.strict_grace_spacing = False
                 >>> override(score).spacing_spanner.strict_note_spacing = False
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -704,13 +671,8 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> durations = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [durations],
-                ...     pitched_staff=True,
-                ...     )
-                >>> score = lilypond_file.score_block.items[0]
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
+                >>> score = lilypond_file[Score]
                 >>> override(score).spacing_spanner.strict_grace_spacing = False
                 >>> override(score).spacing_spanner.strict_note_spacing = False
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -802,13 +764,8 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> durations = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [durations],
-                ...     pitched_staff=True,
-                ...     )
-                >>> score = lilypond_file.score_block.items[0]
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
+                >>> score = lilypond_file[Score]
                 >>> override(score).spacing_spanner.strict_grace_spacing = False
                 >>> override(score).spacing_spanner.strict_note_spacing = False
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -877,7 +834,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            Applies to all stages:
+            Applies to all stages by default:
 
             ::
 
@@ -902,13 +859,8 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> durations = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [durations],
-                ...     pitched_staff=True,
-                ...     )
-                >>> score = lilypond_file.score_block.items[0]
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
+                >>> score = lilypond_file[Score]
                 >>> override(score).spacing_spanner.strict_grace_spacing = False
                 >>> override(score).spacing_spanner.strict_note_spacing = False
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -965,8 +917,6 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                     }
                 }
 
-            This is default behavior.
-
         ..  container:: example
 
             Applies to last stage:
@@ -996,13 +946,8 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> durations = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [durations],
-                ...     pitched_staff=True,
-                ...     )
-                >>> score = lilypond_file.score_block.items[0]
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
+                >>> score = lilypond_file[Score]
                 >>> override(score).spacing_spanner.strict_grace_spacing = False
                 >>> override(score).spacing_spanner.strict_note_spacing = False
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1080,13 +1025,8 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> durations = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [durations],
-                ...     pitched_staff=True,
-                ...     )
-                >>> score = lilypond_file.score_block.items[0]
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
+                >>> score = lilypond_file[Score]
                 >>> override(score).spacing_spanner.strict_grace_spacing = False
                 >>> override(score).spacing_spanner.strict_note_spacing = False
                 >>> show(lilypond_file) # doctest: +SKIP

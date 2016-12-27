@@ -7,6 +7,7 @@ def intaglio(l, s, t=1):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ::

@@ -7,6 +7,7 @@ def sectionalize(n, ratio):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ::

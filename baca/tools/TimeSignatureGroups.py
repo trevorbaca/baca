@@ -7,11 +7,12 @@ class TimeSignatureGroups(abjad.abctools.AbjadObject):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
 
-        **Example 1.** Time signature groups:
+        Time signature groups:
 
         ::
 
@@ -75,8 +76,7 @@ class TimeSignatureGroups(abjad.abctools.AbjadObject):
         ..  doctest::
 
             >>> lilypond_file = groups.__illustrate__()
-            >>> score = lilypond_file.score_block.items[0]
-            >>> f(score)
+            >>> f(lilypond_file[Score])
             \new Score \with {
                 proportionalNotationDuration = #(ly:make-moment 1 8)
             } <<

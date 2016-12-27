@@ -8,11 +8,12 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
 
-        **Example 1.** Fuses divisions together two at a time:
+        Fuses divisions together two at a time:
 
         ::
 
@@ -50,8 +51,8 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
     ..  container:: example
 
-        **Example 2.** Fuses divisions together two at a time. Then splits
-        resulting divisions by ``3/16`` durations:
+        Fuses divisions together two at a time. Then splits resulting divisions
+        by ``3/16`` durations:
 
         ::
 
@@ -81,7 +82,6 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = rhythmmakertools.make_lilypond_file(
             ...     music,
-            ...     divisions,
             ...     time_signatures=input_divisions,
             ...     )
             >>> show(lilypond_file) # doctest: +SKIP
@@ -154,7 +154,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 1.** Returns divisions unfused:
+            Returns divisions unfused:
 
             ::
 
@@ -174,7 +174,6 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=input_divisions,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -205,7 +204,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 2.** Fuses divisions two at a time:
+            Fuses divisions two at a time:
 
             ::
 
@@ -227,7 +226,6 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=input_divisions,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -243,8 +241,8 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 3a.** Fuses divisions two at a time.
-            Then splits fused divisions by ``3/16`` durations.
+            Fuses divisions two at a time. Then splits fused divisions by
+            ``3/16`` durations.
 
             Remainders to the right:
             
@@ -276,7 +274,6 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=input_divisions,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -299,7 +296,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
                     c'8
                 }
 
-            **Example 3b.** Remainders to the left:
+            Remainders to the left:
             
             ::
 
@@ -329,7 +326,6 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=input_divisions,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -354,7 +350,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 4.** Fuses all divisions:
+            Fuses all divisions:
 
             ::
 
@@ -376,7 +372,6 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=input_divisions,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -390,8 +385,8 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 5a.** Fuses all divisions. Then splits fused divisions
-            by ``3/8`` durations:
+            Fuses all divisions. Then splits fused divisions by ``3/8``
+            durations:
 
             Remainder at right:
 
@@ -421,7 +416,6 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=input_divisions,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -443,7 +437,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
                     c'8
                 }
 
-            **Example 5b.** Remainder at left:
+            Remainder at left:
 
             ::
 
@@ -471,7 +465,6 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=input_divisions,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -495,7 +488,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 6.** Empty input:
+            Empty input:
 
             ::
 
@@ -504,7 +497,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> for division_list in division_lists:
                 ...     division_list
 
-            **Example 7.** Works with start offset:
+            Works with start offset:
 
             ::
 

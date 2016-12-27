@@ -8,6 +8,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
@@ -37,7 +38,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
     ..  container:: example
 
-        **Example 1a.** Beat lists grouped in pairs. Remainder at right:
+        Beat lists grouped in pairs. Remainder at right:
 
         ::
 
@@ -54,7 +55,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
             [[Division((3, 8)), Division((3, 8))], [Division((3, 8)), Division((3, 8))]]
             [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4))]]
 
-        **Example 1b.** Beat lists grouped in pairs. Remainder fused at right:
+        Beat lists grouped in pairs. Remainder fused at right:
 
         ::
 
@@ -73,7 +74,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
     ..  container:: example
 
-        **Example 2a.** Beat lists grouped in pairs. Remainder at left:
+        Beat lists grouped in pairs. Remainder at left:
 
         ::
 
@@ -90,7 +91,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
             [[Division((3, 8)), Division((3, 8))], [Division((3, 8)), Division((3, 8))]]
             [[Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
 
-        **Example 1b.** Beat lists grouped in pairs. Remainder fused at left:
+        Beat lists grouped in pairs. Remainder fused at left:
 
         ::
 
@@ -142,7 +143,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 1.** Groups beat list elements into pairs:
+            Groups beat list elements into pairs:
 
             ::
 
@@ -158,7 +159,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 2.** Groups beat list elements into groups of three:
+            Groups beat list elements into groups of three:
 
             ::
 
@@ -174,7 +175,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 3.** Works with start offset:
+            Works with start offset:
 
             ::
 
@@ -331,8 +332,8 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 1.** Groups beats into pairs. Remainder at right.
-            Does not fuse remainder:
+            Groups beats into pairs. Remainder at right. Does not fuse
+            remainder:
 
             ::
 
@@ -389,7 +390,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 2.** Groups beats into groups of two. Remainder at right.
+            Groups beats into groups of two. Remainder at right.
             Fuses remainder to nearest group:
 
             ::
@@ -457,7 +458,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 1.** Groups beats into a single group:
+            Groups beats into a single group:
 
             ::
 
@@ -473,7 +474,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 1.** Groups beats into pairs:
+            Groups beats into pairs:
 
             ::
 
@@ -489,7 +490,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 2.** Groups beats into groups of three:
+            Groups beats into groups of three:
 
             ::
 
@@ -516,8 +517,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 1.** Groups beats into pairs. Does not fuse assignable
-            total durations:
+            Groups beats into pairs. Does not fuse assignable total durations:
 
             ::
 
@@ -573,8 +573,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 2.** Groups beats into pairs. Fuse assignable total
-            durations:
+            Groups beats into pairs. Fuse assignable total durations:
 
             ::
 
@@ -642,7 +641,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 1a.** Groups beats into pairs. Remainder at right:
+            Groups beats into pairs. Remainder at right:
 
             ::
 
@@ -689,7 +688,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 1b.** Groups beats into pairs. Remainder at left:
+            Groups beats into pairs. Remainder at left:
 
             ::
 

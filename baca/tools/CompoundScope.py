@@ -9,11 +9,12 @@ class CompoundScope(abjad.abctools.AbjadObject):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
     
-        **Example 1.** Makes four-part compound scope:
+        Makes four-part compound scope:
 
         ::
 
@@ -50,7 +51,7 @@ class CompoundScope(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Makes empty compound scope:
+            Makes empty compound scope:
 
             ::
 

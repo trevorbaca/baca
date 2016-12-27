@@ -7,11 +7,12 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
 
-        Selects notes and chords:
+        Selects notes and chords by default:
 
         ::
 
@@ -39,8 +40,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> score = lilypond_file.score_block.items[0]
-            >>> f(score)
+            >>> f(lilypond_file[Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -113,8 +113,6 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
                     }
                 >>
             >>
-
-        This is default behavior.
 
     '''
 
@@ -225,8 +223,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -334,8 +331,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -419,7 +415,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            Selects notes and chords:
+            Selects notes and chords by default:
 
             ::
 
@@ -447,8 +443,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -522,8 +517,6 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
                     >>
                 >>
 
-            This is default behavior.
-
         ..  container:: example
 
             Selects last seven notes and chords:
@@ -558,8 +551,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -647,7 +639,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            With thirty-second-valued tremolo flags:
+            Gets thirty-second-valued tremolo flags by default:
 
             ::
 
@@ -675,8 +667,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -750,8 +741,6 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
                     >>
                 >>
 
-            This is default behavior.
-
         ..  container:: example
 
             With sixteenth-valued tremolo flags:
@@ -784,8 +773,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<

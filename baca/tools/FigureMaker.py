@@ -9,6 +9,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
@@ -24,11 +25,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
             >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> result = figure_maker(figure_token)
             >>> selection, time_signature, state_manifest = result
-            >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-            ...     [selection],
-            ...     [time_signature],
-            ...     pitched_staff=True,
-            ...     )
+            >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -465,7 +462,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            No preferred denominator:
+            No preferred denominator by default:
 
             ::
 
@@ -480,11 +477,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -516,8 +509,6 @@ class FigureMaker(abjad.abctools.AbjadObject):
                     }
                 }
 
-            This is default behavior.
-
         ..  container:: example
 
             Preferred denominator supplied at configuration time:
@@ -539,8 +530,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 >>> selection, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
+                ...     time_signatures=[time_signature],
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -595,8 +585,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 >>> selection, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
+                ...     time_signatures=[time_signature],
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -654,8 +643,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 >>> selection, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
+                ...     time_signatures=[time_signature],
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -719,11 +707,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -775,11 +759,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -827,11 +807,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -883,11 +859,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -937,11 +909,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).dynamic_line_spanner.staff_padding = 4.5
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1000,11 +968,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).dynamic_line_spanner.staff_padding = 4.5
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1069,11 +1033,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).dynamic_line_spanner.staff_padding = 4.5
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1140,11 +1100,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).dynamic_line_spanner.staff_padding = 6
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1181,7 +1137,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            Slur specifier selects all leaves:
+            Spanner specifier selects all leaves by default:
 
             ::
 
@@ -1200,11 +1156,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1239,8 +1191,6 @@ class FigureMaker(abjad.abctools.AbjadObject):
                     }
                 }
 
-            This is default behavior.
-
         ..  container:: example
 
             Slur specifier selects all components in each tuplet:
@@ -1265,11 +1215,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1328,11 +1274,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1391,11 +1333,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1464,11 +1402,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1551,11 +1485,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1611,11 +1541,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).beam.positions = (-6, -6)
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1693,11 +1619,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1752,11 +1674,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).beam.positions = (-5.5, -5.5)
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1843,11 +1761,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).beam.positions = (-5.5, -5.5)
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1939,11 +1853,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -2004,11 +1914,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -2070,11 +1976,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -2137,11 +2039,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -2204,11 +2102,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::

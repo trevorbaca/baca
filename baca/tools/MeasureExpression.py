@@ -7,11 +7,12 @@ class MeasureExpression(abjad.expressiontools.Expression):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
 
-        **Example 1.** Selects measures from indices 2 to 4:
+        Selects measures from indices 2 to 4:
 
         ::
 

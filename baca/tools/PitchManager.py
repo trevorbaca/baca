@@ -7,6 +7,7 @@ class PitchManager(abjad.abctools.AbjadObject):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     '''

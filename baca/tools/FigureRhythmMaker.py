@@ -10,6 +10,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
@@ -29,12 +30,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             >>> stage_tokens = [[0, 2, 10, 8]]
             >>> selections, state_manifest = rhythm_maker(stage_tokens)
-            >>> duration = sum([_.get_duration() for _ in selections])
-            >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-            ...     selections,
-            ...     [duration],
-            ...     pitched_staff=True,
-            ...     )
+            >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -56,12 +52,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             >>> stage_tokens = [[18, 16, 15, 20, 19]]
             >>> selections, state_manifest = rhythm_maker(stage_tokens)
-            >>> duration = sum([_.get_duration() for _ in selections])
-            >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-            ...     selections,
-            ...     [duration],
-            ...     pitched_staff=True,
-            ...     )
+            >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -84,12 +75,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             >>> stage_tokens = [[9]]
             >>> selections, state_manifest = rhythm_maker(stage_tokens)
-            >>> duration = sum([_.get_duration() for _ in selections])
-            >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-            ...     selections,
-            ...     [duration],
-            ...     pitched_staff=True,
-            ...     )
+            >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -108,12 +94,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             >>> stage_tokens = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
             >>> selections, state_manifest = rhythm_maker(stage_tokens)
-            >>> duration = sum([_.get_duration() for _ in selections])
-            >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-            ...     selections,
-            ...     [duration],
-            ...     pitched_staff=True,
-            ...     )
+            >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -225,12 +206,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -284,12 +260,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     stage_tokens,
                 ...     state_manifest=state_manifest, 
                 ...     )
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -700,13 +671,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> durations = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [durations],
-                ...     pitched_staff=True,
-                ...     )
-                >>> score = lilypond_file.score_block.items[0]
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
+                >>> score = lilypond_file[Score]
                 >>> override(score).spacing_spanner.strict_grace_spacing = False
                 >>> override(score).spacing_spanner.strict_note_spacing = False
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -793,13 +759,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [20, 19, 9, 0, 2, 10, None],
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> durations = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [durations],
-                ...     pitched_staff=True,
-                ...     )
-                >>> score = lilypond_file.score_block.items[0]
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
+                >>> score = lilypond_file[Score]
                 >>> override(score).spacing_spanner.strict_grace_spacing = False
                 >>> override(score).spacing_spanner.strict_note_spacing = False
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -905,12 +866,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -965,12 +921,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).beam.positions = (-5.5, -5.5)
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1043,12 +994,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1096,12 +1042,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> stage_tokens = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1156,12 +1097,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> stage_tokens = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1217,12 +1153,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> stage_tokens = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1299,12 +1230,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1351,12 +1277,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1397,12 +1318,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1461,12 +1377,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1517,12 +1428,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1592,12 +1498,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1645,12 +1546,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1755,12 +1651,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> stage_tokens = [[0, 2, 10], [10, 16, 15, 20, 19], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1807,12 +1698,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> stage_tokens = [[0, 2, 10], [10, 16, 16, 19, 19], [19]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1877,12 +1763,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1930,12 +1811,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1989,12 +1865,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).beam.positions = (-5, -5)
                 >>> override(staff).stem.direction = Down
@@ -2231,12 +2102,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).beam.positions = (-5, -5)
                 >>> override(staff).stem.direction = Down
@@ -2471,12 +2337,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [19, 9, 0, 2, 10, 18],
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).beam.positions = (-5, -5)
                 >>> override(staff).stem.direction = Down
@@ -2679,12 +2540,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [19, 9, 0, 2, 10],
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).beam.positions = (-5, -5)
                 >>> override(staff).stem.direction = Down
@@ -2903,12 +2759,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).beam.positions = (-6, -6)
                 >>> override(staff).stem.direction = Down
@@ -2991,12 +2842,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).beam.positions = (-6, -6)
                 >>> override(staff).stem.direction = Down
@@ -3075,12 +2921,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [19, 9, 0, 2, 10],
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).beam.positions = (-6, -6)
                 >>> override(staff).stem.direction = Down
@@ -3183,12 +3024,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> stage_tokens = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -3245,12 +3081,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> stage_tokens = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
-                >>> duration = sum([_.get_duration() for _ in selections])
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
-                ...     [duration],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
                 >>> staff = lilypond_file[Staff]
                 >>> override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP

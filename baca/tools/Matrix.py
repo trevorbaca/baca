@@ -7,6 +7,7 @@ class Matrix(abjad.abctools.AbjadObject):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     Initializes from rows:

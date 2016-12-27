@@ -7,11 +7,12 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
     
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
 
-        Markup specifier selects head of first pitched logical tie:
+        Markup specifier selects head of first pitched logical tie by default:
 
         ::
 
@@ -34,11 +35,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
             >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> result = figure_maker(figure_token)
             >>> selection, time_signature, state_manifest = result
-            >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-            ...     [selection],
-            ...     [time_signature],
-            ...     pitched_staff=True,
-            ...     )
+            >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -70,8 +67,6 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
                     }
                 }
             }
-
-        This is default behavior.
 
     '''
 
@@ -148,7 +143,8 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            Markup specifier selects head of first pitched logical tie:
+            Markup specifier selects head of first pitched logical tie by
+            default:
 
             ::
 
@@ -171,11 +167,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
                 >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -208,8 +200,6 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
                     }
                 }
 
-            This is default behavior.
-
         ..  container:: example
 
             Markup specifier selects heads of pitched logical ties:
@@ -237,11 +227,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
                 >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::

@@ -7,6 +7,7 @@ def repeat_subruns_to_length(notes, pairs, history=False):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ::

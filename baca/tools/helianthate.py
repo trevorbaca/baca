@@ -8,6 +8,7 @@ def helianthate(sequence_, n=0, m=0):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example

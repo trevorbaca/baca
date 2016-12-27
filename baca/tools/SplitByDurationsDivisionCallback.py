@@ -8,11 +8,12 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
 
-        **Example 1.** Makes quarter-valued divisions with remainder at right:
+        Makes quarter-valued divisions with remainder at right:
 
         ::
 
@@ -35,7 +36,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
             >>> music = maker(divisions)
             >>> lilypond_file = rhythmmakertools.make_lilypond_file(
             ...     music,
-            ...     divisions,
             ...     time_signatures=time_signatures,
             ...     )
             >>> show(lilypond_file) # doctest: +SKIP
@@ -66,7 +66,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
     ..  container:: example
 
-        **Example 2.** Makes quarter-valued divisions with remainder at left:
+        Makes quarter-valued divisions with remainder at left:
 
         ::
 
@@ -92,7 +92,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
             >>> music = maker(divisions)
             >>> lilypond_file = rhythmmakertools.make_lilypond_file(
             ...     music,
-            ...     divisions,
             ...     time_signatures=time_signatures,
             ...     )
             >>> show(lilypond_file) # doctest: +SKIP
@@ -185,7 +184,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 1.** Splits divisions without remainder:
+            Splits divisions without remainder:
 
             ::
 
@@ -209,7 +208,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -228,7 +226,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 2.** Splits divisions with remainder:
+            Splits divisions with remainder:
 
             ::
 
@@ -251,7 +249,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -274,7 +271,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 3.** Multiple divisions:
+            Multiple divisions:
 
             ::
 
@@ -299,7 +296,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -323,7 +319,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 4.** No durations:
+            No durations:
 
             ::
 
@@ -344,7 +340,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -363,7 +358,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 5.** Empty input:
+            Empty input:
 
             ::
 
@@ -375,7 +370,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 6.** Works with start offset:
+            Works with start offset:
 
             ::
 
@@ -400,7 +395,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 [Division((1, 4), start_offset=Offset(1, 4)), Division((1, 4), start_offset=Offset(1, 2))]
                 [Division((1, 4), start_offset=Offset(3, 4)), Division((1, 4), start_offset=Offset(1, 1)), Division((1, 4), start_offset=Offset(5, 4))]
 
-            **Example 7.** Works with start offset:
+            Works with start offset:
 
             ::
 
@@ -549,7 +544,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 1.** No compound meter multiplier:
+            No compound meter multiplier:
 
             ::
 
@@ -574,7 +569,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -599,7 +593,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 2.** Compound meter multiplier equal to ``3/2``:
+            Compound meter multiplier equal to ``3/2``:
 
             ::
 
@@ -625,7 +619,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -665,7 +658,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 1.** Reads durations cyclically for each input division:
+            Reads durations cyclically for each input division:
 
             ::
 
@@ -690,7 +683,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -721,7 +713,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 2.** Reads durations only once per input division:
+            Reads durations only once per input division:
 
             ::
 
@@ -747,7 +739,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -788,8 +779,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 1.** Returns input division unchanged when durations is
-            empty:
+            Returns input division unchanged when durations is empty:
 
                 >>> maker = baca.tools.SplitByDurationsDivisionCallback()
 
@@ -810,7 +800,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -834,7 +823,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 2.** Applies durations to each input division:
+            Applies durations to each input division:
 
                 >>> maker = baca.tools.SplitByDurationsDivisionCallback(
                 ...     durations=[(1, 4)],
@@ -857,7 +846,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -900,7 +888,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 1.** Does not rotate durations:
+            Does not rotate durations:
 
             ::
 
@@ -926,7 +914,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -955,8 +942,8 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 2.** Rotates durations one element to the left on each new
-            input division:
+            Rotates durations one element to the left on each new input
+            division:
 
             ::
 
@@ -983,7 +970,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1012,8 +998,8 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 3.** Rotates durations one element to the right on each new
-            input division:
+            Rotates durations one element to the right on each new input
+            division:
 
             ::
 
@@ -1040,7 +1026,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1081,7 +1066,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 1.** Positions remainder to right of noncyclic durations:
+            Positions remainder to right of noncyclic durations:
 
             ::
 
@@ -1105,7 +1090,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1124,7 +1108,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 2.** Positions remainder to right of cyclic durations:
+            Positions remainder to right of cyclic durations:
 
             ::
 
@@ -1147,7 +1131,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1168,7 +1151,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 3.** Positions remainder to left of noncyclic durations:
+            Positions remainder to left of noncyclic durations:
 
             ::
 
@@ -1193,7 +1176,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1212,7 +1194,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 4.** Positions remainder to left of cyclic durations:
+            Positions remainder to left of cyclic durations:
 
             ::
 
@@ -1237,7 +1219,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1270,7 +1251,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 1.** No threshold. Remainder unfused to the right:
+            No threshold. Remainder unfused to the right:
 
             ::
 
@@ -1294,7 +1275,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1313,8 +1293,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 2.** Remainder less than or equal to ``1/8`` fused 
-            to the right:
+            Remainder less than or equal to ``1/8`` fused to the right:
 
             ::
 
@@ -1338,7 +1317,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1356,7 +1334,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 3.** No threshold. Remainder unfused to the left:
+            No threshold. Remainder unfused to the left:
 
             ::
 
@@ -1382,7 +1360,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1401,8 +1378,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 4.** Remainder less than or equal to ``1/8`` fused to the
-            left:
+            Remainder less than or equal to ``1/8`` fused to the left:
 
             ::
 
@@ -1428,7 +1404,6 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> music = maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP

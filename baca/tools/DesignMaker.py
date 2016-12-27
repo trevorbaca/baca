@@ -8,11 +8,12 @@ class DesignMaker(abjad.abctools.AbjadObject):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
 
-        **Example.** Initializes design-maker:
+        Initializes design-maker:
 
         ::
 

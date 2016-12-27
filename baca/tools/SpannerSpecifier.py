@@ -7,6 +7,7 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
@@ -81,7 +82,7 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Selects leaves:
+            Selects leaves by default:
 
             ::
 
@@ -96,11 +97,7 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
                 >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -129,11 +126,9 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
                     }
                 }
 
-            This is default behavior.
-
         ..  container:: example
 
-            **Example 2.** Selects leaves:
+            Selects leaves:
 
             ::
 
@@ -145,14 +140,10 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_token = [[0]]
+                >>> figure_token = [[1]]
                 >>> result = figure_maker(figure_token)
                 >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     [selection],
-                ...     [time_signature],
-                ...     pitched_staff=True,
-                ...     )
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -163,7 +154,7 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
                         \time 1/16
                         {
                             {
-                                c'16
+                                cs'16
                             }
                         }
                     }

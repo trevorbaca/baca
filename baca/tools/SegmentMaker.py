@@ -13,11 +13,12 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
 
-        **Example 1.** With empty input:
+        With empty input:
 
         ::
 
@@ -34,8 +35,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ..  doctest::
 
-            >>> score = lilypond_file.score_block.items[0]
-            >>> f(score)
+            >>> f(lilypond_file[Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -93,7 +93,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
     ..  container:: example
 
-        **Example 2.** With notes:
+        With notes:
 
         ::
 
@@ -117,8 +117,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ..  doctest::
 
-            >>> score = lilypond_file.score_block.items[0]
-            >>> f(score)
+            >>> f(lilypond_file[Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -1906,7 +1905,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ..  container:: example
 
-            **Example 1.** Strips figure names:
+            Strips figure names by default:
 
                 >>> figure_maker = baca.tools.FigureMaker()
 
@@ -1951,13 +1950,11 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> result = segment_maker(is_doc_example=True)
                 >>> lilypond_file, segment_metadata = result
-                >>> score = lilypond_file.score_block.items[0]
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> show(lilypond_file[Score]) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -2048,11 +2045,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     >>
                 >>
 
-            This is default behavior.
-
         ..  container:: example
 
-            **Example 2.** Allows figure names:
+            Allows figure names:
 
                 >>> figure_maker = baca.tools.FigureMaker()
 
@@ -2098,14 +2093,13 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> result = segment_maker(is_doc_example=True)
                 >>> lilypond_file, segment_metadata = result
-                >>> score = lilypond_file.score_block.items[0]
+                >>> score = lilypond_file[Score]
                 >>> override(score).text_script.staff_padding = 3
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" \with {
                     \override TextScript.staff-padding = #3
                 } <<
@@ -2272,7 +2266,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ..  container:: example
 
-            **Example 1.** Nonlast segment sets final barline to ``'|'``:
+            Nonlast segment sets final barline to ``'|'`` by default:
 
             ::
 
@@ -2296,8 +2290,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -2441,12 +2434,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     >>
                 >>
 
-            This is default behavior.
-
         ..  container:: example
 
-            **Example 2.** Last segment in score sets final barline to
-            ``'|.'``:
+            Last segment in score sets final barline to ``'|.'`` by default:
 
             ::
 
@@ -2474,8 +2464,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -2619,11 +2608,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     >>
                 >>
 
-            This is default behavior.
-
         ..  container:: example
 
-            **Example 3.** Nonlast segment sets final barline explicitly:
+            Nonlast segment sets final barline explicitly:
 
             ::
 
@@ -2648,8 +2635,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -2795,7 +2781,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ..  container:: example
 
-            **Example 4.** Last segment in score sets final barline explicitly:
+            Last segment in score sets final barline explicitly:
 
             ::
 
@@ -2824,8 +2810,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -2981,7 +2966,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
     
         ..  container:: example
 
-            **Example 1.** Without final markup:
+            No final markup by default:
 
             ::
 
@@ -3005,8 +2990,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -3150,11 +3134,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     >>
                 >>
 
-            This is default behavior.
-
         ..  container:: example
 
-            **Example 2.** With final markup:
+            With final markup:
 
             ::
 
@@ -3181,8 +3163,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -3371,7 +3352,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ..  container:: example
 
-            **Example 1.** Colors unpitched notes:
+            Colors unpitched notes by default:
 
             ::
 
@@ -3395,8 +3376,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -3540,11 +3520,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     >>
                 >>
 
-            This is default behavior.
-
         ..  container:: example
 
-            **Example 2.** Ignores unpitched notes:
+            Ignores unpitched notes:
 
             ::
 
@@ -3569,8 +3547,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -3660,7 +3637,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ..  container:: example
 
-            **Example 1.** Colors unregistered pitches:
+            Colors unregistered pitches by default:
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.RhythmSpecifier(
@@ -3720,15 +3697,14 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> result = segment_maker(is_doc_example=True)
                 >>> lilypond_file, segment_metadata = result
-                >>> score = lilypond_file.score_block.items[0]
+                >>> score = lilypond_file[Score]
                 >>> override(score).spacing_spanner.strict_grace_spacing = False
                 >>> override(score).spacing_spanner.strict_note_spacing = False
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" \with {
                     \override SpacingSpanner.strict-grace-spacing = ##f
                     \override SpacingSpanner.strict-note-spacing = ##f
@@ -3909,11 +3885,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     >>
                 >>
 
-            This is default behavior.
-
         ..  container:: example
 
-            **Example 2.** Ignores unregistered pitches:
+            Ignores unregistered pitches:
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.RhythmSpecifier(
@@ -3974,15 +3948,14 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> result = segment_maker(is_doc_example=True)
                 >>> lilypond_file, segment_metadata = result
-                >>> score = lilypond_file.score_block.items[0]
+                >>> score = lilypond_file[Score]
                 >>> override(score).spacing_spanner.strict_grace_spacing = False
                 >>> override(score).spacing_spanner.strict_note_spacing = False
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" \with {
                     \override SpacingSpanner.strict-grace-spacing = ##f
                     \override SpacingSpanner.strict-note-spacing = ##f
@@ -4087,7 +4060,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ..  container:: example
 
-            **Example 1.** Does not label clock time:
+            Does not label clock time:
 
             ::
 
@@ -4114,8 +4087,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -4276,7 +4248,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 
         ..  container:: example
 
-            **Example 2.** Does label clock time:
+            Does label clock time:
 
             ::
 
@@ -4304,8 +4276,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -4499,7 +4470,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ..  container:: example
 
-            **Example 1.** Does not label stages:
+            Does not label stages by default:
 
             ::
 
@@ -4523,8 +4494,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -4668,11 +4638,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     >>
                 >>
 
-            This is default behavior.
-
         ..  container:: example
 
-            **Example 2.** Labels stage numbers:
+            Labels stage numbers:
 
             ::
 
@@ -4697,8 +4665,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -4851,7 +4818,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ..  container:: example
 
-            **Example 3.** Labels numbers with segment name:
+            Labels numbers with segment name:
 
             ::
 
@@ -4880,8 +4847,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -5135,7 +5101,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ..  container:: example
 
-            **Example 1.** Gets none:
+            Gets none:
 
             ::
 
@@ -5148,7 +5114,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ..  container:: example
 
-            **Example 2.** Gets score template:
+            Gets score template:
 
             ::
 
@@ -5177,7 +5143,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ..  container:: example
 
-            **Example 1.** Fills empty measures with multimeasure rests:
+            Fills empty measures with multimeasure rests by default:
 
             ::
 
@@ -5194,8 +5160,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -5251,11 +5216,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     >>
                 >>
 
-            This is default behavior.
-
         ..  container:: example
 
-            **Example 2.** Fills empty measures with skips:
+            Fills empty measures with skips:
 
             ::
 
@@ -5273,8 +5236,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -5376,7 +5338,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ..  container:: example
 
-            **Example 1.** Takes base string from segment name:
+            Takes base string from segment name by default:
 
             ::
 
@@ -5405,8 +5367,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -5557,11 +5518,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     >>
                 >>
 
-            This is default behavior.
-
         ..  container:: example
 
-            **Example 2.** Takes base string from stage label property:
+            Takes base string from stage label property:
 
             ::
 
@@ -5591,8 +5550,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -5757,7 +5715,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ..  container:: example
 
-            **Example 1.** Without tempo specifier:
+            Without tempo specifier:
 
             ::
 
@@ -5781,8 +5739,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -5928,7 +5885,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ..  container:: example
 
-            **Example 2.** With tempo specifier:
+            With tempo specifier:
 
             ::
 
@@ -5955,8 +5912,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -6139,7 +6095,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ..  container:: example
 
-            **Example 1.** Does not transpose score:
+            Does not transpose score by default:
 
             ::
 
@@ -6166,8 +6122,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -6241,8 +6196,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     >>
                 >>
 
-            This is default behavior.
-
         ..  note:: Build example with transposing instrument.
 
         ..  note:: Score package must currently be passed in for transposition
@@ -6262,7 +6215,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ..  container:: example
 
-            **Example 1.** Without volta specifier:
+            Without volta specifier:
 
             ::
 
@@ -6286,8 +6239,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -6433,7 +6385,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ..  container:: example
 
-            **Example 2.** With volta specifier:
+            With volta specifier:
 
             ::
 
@@ -6460,8 +6412,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -6623,7 +6574,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ..  container:: example
 
-            **Example 1.** With label specifier:
+            With label specifier:
 
             ::
 
@@ -6650,8 +6601,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> score = lilypond_file.score_block.items[0]
-                >>> f(score)
+                >>> f(lilypond_file[Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<

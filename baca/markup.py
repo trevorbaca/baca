@@ -96,11 +96,12 @@ def make_instrument_name_markup(string, column=True):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
 
-        **Example 1.** Makes instrument name markup in column:
+        Makes instrument name markup in column:
 
         ::
 
@@ -125,7 +126,7 @@ def make_instrument_name_markup(string, column=True):
 
     ..  container:: example
 
-        **Example 2.** Makes instrument name markup in line:
+        Makes instrument name markup in line:
 
         ::
 
@@ -166,7 +167,7 @@ def make_short_instrument_name_markup(string, column=True):
 
     ..  container:: example
 
-        **Example 1.** Makes short instrument name markup in column:
+        Makes short instrument name markup in column:
 
         ::
 
@@ -193,7 +194,7 @@ def make_short_instrument_name_markup(string, column=True):
 
     ..  container:: example
 
-        **Example 2.** Makes short instrument name markup in line:
+        Makes short instrument name markup in line:
 
         ::
 

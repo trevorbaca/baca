@@ -8,12 +8,12 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
 
-        **Example 1.** Splits every division by ``1/4`` with remainder at 
-        right:
+        Splits every division by ``1/4`` with remainder at right:
 
         ::
 
@@ -40,7 +40,6 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = rhythmmakertools.make_lilypond_file(
             ...     music,
-            ...     divisions,
             ...     time_signatures=input_divisions,
             ...     )
             >>> show(lilypond_file) # doctest: +SKIP
@@ -71,7 +70,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
     ..  container:: example
 
-        **Example 2a.** Fuses divisions:
+        Fuses divisions:
 
         ::
 
@@ -94,7 +93,6 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = rhythmmakertools.make_lilypond_file(
             ...     music,
-            ...     divisions,
             ...     time_signatures=input_divisions,
             ...     )
             >>> show(lilypond_file) # doctest: +SKIP
@@ -106,8 +104,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
                 c'1...
             }
 
-        **Example 2b.** Fuses divisions and then splits by ``1/4`` with
-        remainder on right:
+        Fuses divisions and then splits by ``1/4`` with remainder on right:
 
         ::
 
@@ -134,7 +131,6 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = rhythmmakertools.make_lilypond_file(
             ...     music,
-            ...     divisions,
             ...     time_signatures=input_divisions,
             ...     )
             >>> show(lilypond_file) # doctest: +SKIP
@@ -156,7 +152,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
     ..  container:: example
 
-        **Example 3a.** Splits every division by ``3/8``:
+        Splits every division by ``3/8``:
 
         ::
 
@@ -182,7 +178,6 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = rhythmmakertools.make_lilypond_file(
             ...     music,
-            ...     divisions,
             ...     time_signatures=input_divisions,
             ...     )
             >>> show(lilypond_file) # doctest: +SKIP
@@ -208,8 +203,8 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
                 }
             }
 
-        **Example 3b.** Splits every division by ``3/8`` and then fuses
-        flattened divisions into differently sized groups:
+        Splits every division by ``3/8`` and then fuses flattened divisions
+        into differently sized groups:
 
         ::
 
@@ -235,7 +230,6 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = rhythmmakertools.make_lilypond_file(
             ...     music,
-            ...     divisions,
             ...     time_signatures=input_divisions,
             ...     )
             >>> show(lilypond_file) # doctest: +SKIP
@@ -251,9 +245,8 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
     ..  container:: example
 
-        **Example 4.** Splits every division by ``3/8`` and then fuses
-        flattened divisions into differently sized groups. Works with start
-        offset:
+        Splits every division by ``3/8`` and then fuses flattened divisions
+        into differently sized groups. Works with start offset:
 
         ::
 
@@ -284,7 +277,6 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = rhythmmakertools.make_lilypond_file(
             ...     music,
-            ...     divisions,
             ...     time_signatures=input_divisions,
             ...     )
             >>> show(lilypond_file) # doctest: +SKIP
@@ -402,7 +394,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 1.** No callbacks:
+            No callbacks:
 
             ::
 
@@ -415,7 +407,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 2.** One callback:
+            One callback:
 
             ::
 
@@ -459,7 +451,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 1.** Fuses every two divisions together:
+            Fuses every two divisions together:
  
             ::
 
@@ -481,7 +473,6 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=input_divisions,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -512,8 +503,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 1a.** Partitions divisions into pairs with remainder at
-            right:
+            Partitions divisions into pairs with remainder at right:
 
             ::
 
@@ -531,8 +521,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
                 >>> division_list
                 [[Division((1, 8)), Division((1, 8))], [Division((1, 4)), Division((1, 4))], [Division((1, 16))]]
 
-            **Example 1b.** Partitions divisions into pairs with remainder
-            appended at right:
+            Partitions divisions into pairs with remainder appended at right:
 
             ::
 
@@ -550,8 +539,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
                 >>> division_list
                 [[Division((1, 8)), Division((1, 8))], [Division((1, 4)), Division((1, 4)), Division((1, 16))]]
 
-            **Example 1c.** Partitions divisions into pairs with remainder at
-            left:
+            Partitions divisions into pairs with remainder at left:
 
             ::
 
@@ -569,8 +557,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
                 >>> division_list
                 [[Division((1, 8))], [Division((1, 8)), Division((1, 4))], [Division((1, 4)), Division((1, 16))]]
 
-            **Example 1d.** Partitions divisions into pairs with remainder
-            appeneded at left:
+            Partitions divisions into pairs with remainder appeneded at left:
 
             ::
 
@@ -593,8 +580,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 2a.** Partitions division lists into pairs with
-            remainders at right:
+            Partitions division lists into pairs with remainders at right:
 
             ::
 
@@ -617,8 +603,8 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
                 [[Division((1, 8)), Division((1, 8))], [Division((1, 4))]]
                 [[Division((1, 8)), Division((1, 8))], [Division((1, 4)), Division((1, 4))], [Division((1, 16))]]
 
-            **Example 2b.** Partitions division lists into pairs with
-            remainders appended at right:
+            Partitions division lists into pairs with remainders appended at
+            right:
 
             ::
 
@@ -641,8 +627,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
                 [[Division((1, 8)), Division((1, 8)), Division((1, 4))]]
                 [[Division((1, 8)), Division((1, 8))], [Division((1, 4)), Division((1, 4)), Division((1, 16))]]
 
-            **Example 2c.** Partitions division lists into pairs with
-            remainders at left:
+            Partitions division lists into pairs with remainders at left:
 
             ::
 
@@ -665,8 +650,8 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
                 [[Division((1, 8))], [Division((1, 8)), Division((1, 4))]]
                 [[Division((1, 8))], [Division((1, 8)), Division((1, 4))], [Division((1, 4)), Division((1, 16))]]
 
-            **Example 2d.** Partitions division lists into pairs with
-            remainders appended at left:
+            Partitions division lists into pairs with remainders appended at
+            left:
 
             ::
 
@@ -716,8 +701,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 1.** Makes quarter-valued divisions with remainder at 
-            right:
+            Makes quarter-valued divisions with remainder at right:
 
             ::
 
@@ -743,7 +727,6 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -774,8 +757,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 2.** Makes quarter-valued divisions with remainder at 
-            left:
+            Makes quarter-valued divisions with remainder at left:
 
             ::
 
@@ -802,7 +784,6 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -851,7 +832,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 1.** Makes divisions with ``2:1`` ratios:
+            Makes divisions with ``2:1`` ratios:
 
             ::
 
@@ -876,7 +857,6 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=input_divisions,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -900,8 +880,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 2.** Makes divisions with alternating ``2:1`` and 
-            ``1:1:1`` ratios:
+            Makes divisions with alternating ``2:1`` and ``1:1:1`` ratios:
 
             ::
 
@@ -929,7 +908,6 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
-                ...     divisions,
                 ...     time_signatures=input_divisions,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP

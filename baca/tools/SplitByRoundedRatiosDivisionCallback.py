@@ -8,11 +8,12 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
 
-        **Example 1.** Makes divisions with ``2:1`` ratios:
+        Makes divisions with ``2:1`` ratios:
 
         ::
 
@@ -27,8 +28,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
 
     ..  container:: example
 
-        **Example 2.** Makes divisions with alternating ``2:1`` and ``1:1:1``
-        ratios:
+        Makes divisions with alternating ``2:1`` and ``1:1:1`` ratios:
 
         ::
 
@@ -78,7 +78,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 1.** Calls maker on nonempty input:
+            Calls maker on nonempty input:
 
             ::
 
@@ -95,7 +95,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 2.** Calls maker on empty input:
+            Calls maker on empty input:
 
             ::
 
@@ -109,7 +109,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 3.** Works with start offset:
+            Works with start offset:
 
             ::
 
@@ -190,7 +190,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 1.** Gets trivial ratio of ``1``:
+            Gets trivial ratio of ``1`` by default:
 
             ::
 
@@ -203,11 +203,9 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
                 [Division((7, 4))]
                 [Division((6, 4))]
 
-            This is default behavior when `ratios` is set to none.
-
         ..  container:: example
 
-            **Example 2.** Gets ratios equal to ``1:1``:
+            Gets ratios equal to ``1:1``:
 
             ::
 
@@ -222,7 +220,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 3.** Gets ratios equal to ``2:1``:
+            Gets ratios equal to ``2:1``:
 
             ::
 
@@ -237,7 +235,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 4.** Gets ratios equal to ``1:1:1``:
+            Gets ratios equal to ``1:1:1``:
 
             ::
 
@@ -252,8 +250,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-            **Example 5.** Gets ratios equal to ``2:1`` and ``1:1:1``
-            alternately:
+            Gets ratios equal to ``2:1`` and ``1:1:1`` alternately:
 
             ::
 

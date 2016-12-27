@@ -8,6 +8,7 @@ def insert_and_transpose(notes, subrun_tokens):
 
     ::
 
+        >>> import abjad
         >>> import baca
 
     ::

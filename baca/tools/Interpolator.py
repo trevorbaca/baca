@@ -8,11 +8,12 @@ class Interpolator(abjad.abctools.AbjadObject):
     
     ::
 
+        >>> import abjad
         >>> import baca
 
     ..  container:: example
 
-        **Example.** Interpolates linearly from -5 up to 5:
+        Interpolates linearly from -5 up to 5:
 
         ::
 
@@ -44,7 +45,7 @@ class Interpolator(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 1.** Interpolates linearly from -5 up to 5:
+            Interpolates linearly from -5 up to 5:
 
             ::
 
@@ -64,7 +65,7 @@ class Interpolator(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            **Example 2.** Interpolates linearly from 2 down to 1:
+            Interpolates linearly from 2 down to 1:
 
             ::
 

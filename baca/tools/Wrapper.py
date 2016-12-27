@@ -3,6 +3,12 @@
 
 class Wrapper(object):
     r'''Wrapper.
+
+    ::
+
+        >>> import abjad
+        >>> import baca
+
     '''
 
     ### CLASS VARIABLES ###
@@ -10,6 +16,8 @@ class Wrapper(object):
     __slots__ = (
         '_payload',
         )
+
+    __documentation_section__ = 'Utilities'
 
     ### INITIALIZER ###
 
