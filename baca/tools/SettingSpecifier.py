@@ -20,7 +20,7 @@ class SettingSpecifier(abjad.abctools.AbjadObject):
 
     '''
 
-    ### CLASS settingS ###
+    ### CLASS VARIABLES ###
 
     __documentation_section__ = 'Specifiers'
 

@@ -24,7 +24,7 @@ class OctaveDisplacementSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.tools.stages(1)),
+            ...     ('vn', baca.select.stages(1)),
             ...     [
             ...         baca.pitch.pitches('G4'),
             ...         baca.rhythm.make_even_run_rhythm_specifier(),
@@ -150,7 +150,7 @@ class OctaveDisplacementSpecifier(abjad.abctools.AbjadObject):
         for i, logical_tie in enumerate(logical_ties):
             assert isinstance(logical_tie, abjad.selectiontools.LogicalTie)
             displacement = self.displacements[i]
-            interval = abjad.pitchtools.NumberedInterval(displacement * 12)
+            interval = abjad.NumberedInterval(12*displacement)
             for note in logical_tie:
                 assert isinstance(note, abjad.scoretools.Note), repr(note)
                 written_pitch = note.written_pitch

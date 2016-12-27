@@ -24,7 +24,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
             >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.tools.stages(1)),
+            ...     ('vn', baca.select.stages(1)),
             ...     [
             ...         baca.pitch.pitches(pitches),
             ...         baca.rhythm.make_even_run_rhythm_specifier(),
@@ -185,7 +185,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
             >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.tools.stages(1)),
+            ...     ('vn', baca.select.stages(1)),
             ...     [
             ...         baca.pitch.pitches(pitches),
             ...         baca.rhythm.make_even_run_rhythm_specifier(),
@@ -346,7 +346,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
             >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.tools.stages(1)),
+            ...     ('vn', baca.select.stages(1)),
             ...     [
             ...         baca.pitch.pitches(pitches),
             ...         baca.rhythm.make_even_run_rhythm_specifier(),
@@ -507,7 +507,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
             >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.tools.stages(1)),
+            ...     ('vn', baca.select.stages(1)),
             ...     [
             ...         baca.pitch.pitches(pitches),
             ...         baca.rhythm.make_even_run_rhythm_specifier(),
@@ -668,7 +668,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
             >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.tools.stages(1)),
+            ...     ('vn', baca.select.stages(1)),
             ...     [
             ...         baca.pitch.pitches(pitches),
             ...         baca.rhythm.make_even_run_rhythm_specifier(),
@@ -817,7 +817,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
     '''
 
-    ### CLASS VARIABLES ##
+    ### CLASS VARIABLES ###
 
     __documentation_section__ = 'Specifiers'
 
@@ -833,9 +833,9 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
         start_pitch=None,
         stop_pitch=None,
         ):
-        start_pitch = abjad.pitchtools.NumberedPitch(start_pitch)
+        start_pitch = abjad.NumberedPitch(start_pitch)
         self._start_pitch = start_pitch
-        stop_pitch = abjad.pitchtools.NumberedPitch(stop_pitch)
+        stop_pitch = abjad.NumberedPitch(stop_pitch)
         self._stop_pitch = stop_pitch
 
     ### SPECIAL METHODS ###

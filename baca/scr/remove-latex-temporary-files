@@ -20,4 +20,6 @@ if __name__ == '__main__':
          os.system('rm ' + path)
 
    if total:
-      print '%s files removed ...\n' % total
+      message =  '{} files removed ...\n'
+      message = message.format(total)
+      print(message)

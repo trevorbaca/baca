@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import abjad
+import baca
 
 
 class PitchManager(abjad.abctools.AbjadObject):
@@ -38,13 +39,13 @@ class PitchManager(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [-2, -1, 6, 7, -1, 7]
-                >>> segment_1 = pitchtools.PitchClassSegment(items=items)
+                >>> segment_1 = abjad.PitchClassSegment(items=items)
                 >>> show(segment_1) # doctest: +SKIP
 
             ::
 
                 >>> items = [9, 2, 1, 6, 2, 6]
-                >>> segment_2 = pitchtools.PitchClassSegment(items=items)
+                >>> segment_2 = abjad.PitchClassSegment(items=items)
                 >>> show(segment_2) # doctest: +SKIP
 
         ..  container:: example
@@ -94,7 +95,7 @@ class PitchManager(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_2 = pitchtools.PitchClassSegment(items=[0, 1, 2])
+                >>> segment_2 = abjad.PitchClassSegment(items=[0, 1, 2])
                 >>> baca.tools.PitchManager.get_matching_transforms(
                 ...     segment_2,
                 ...     segment_1,
@@ -154,7 +155,7 @@ class PitchManager(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [-2, -1, 6, 7, -1, 7]
-                >>> J = pitchtools.PitchClassSegment(items=items)
+                >>> J = abjad.PitchClassSegment(items=items)
                 >>> show(J) # doctest: +SKIP
 
         ..  container:: example
@@ -826,7 +827,7 @@ class PitchManager(abjad.abctools.AbjadObject):
         if alpha:
             operators_ = operators[:]
             for operator in operators:
-                operator_ = operator.alpha()
+                operator_ = baca.tools.Alpha() + operator
                 operators_.append(operator_)
             operators = operators_
         if retrograde:

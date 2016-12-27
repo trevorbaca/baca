@@ -262,7 +262,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
         ::
 
             >>> divisions = [(7, 8), (3, 8), (5, 8)]
-            >>> divisions = [durationtools.Division(_) for _ in divisions]
+            >>> divisions = [baca.tools.Division(_) for _ in divisions]
             >>> divisions[0]._start_offset = Offset(1, 4)
             >>> divisions = division_maker(divisions)
             >>> for division in divisions:
@@ -353,23 +353,23 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
     @staticmethod
     def _to_divisions(expr, start_offset=None):
-        if isinstance(expr, abjad.durationtools.Division):
-            result = abjad.durationtools.Division(expr)
+        if isinstance(expr, baca.tools.Division):
+            result = baca.tools.Division(expr)
             if start_offset is not None:
                 result._start_offset = start_offset
                 start_offset += result.duration
         elif isinstance(expr, abjad.mathtools.NonreducedFraction):
-            result = abjad.durationtools.Division(expr.pair)
+            result = baca.tools.Division(expr.pair)
             if start_offset is not None:
                 result._start_offset = start_offset
                 start_offset += result.duration
         elif hasattr(expr, 'pair'):
-            result = abjad.durationtools.Division(expr.pair)
+            result = baca.tools.Division(expr.pair)
             if start_offset is not None:
                 result._start_offset = start_offset
                 start_offset += result.duration
         elif isinstance(expr, tuple):
-            result = abjad.durationtools.Division(expr)
+            result = baca.tools.Division(expr)
             if start_offset is not None:
                 result._start_offset = start_offset
                 start_offset += result.duration

@@ -5,6 +5,45 @@ import baca
 
 class Constellation(abjad.abctools.AbjadObject):
     r'''Constellation.
+
+    ::
+
+        >>> import abjad
+        >>> import baca
+
+    ..  container:: example
+
+        ::
+
+            >>> cells = [
+            ...     [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]],
+            ...     [[-12, -10, -2], [4, 11, 27, 33, 37], [8, 17, 19, 30]],
+            ...     [[-8, 2, 15, 25], [-1, 20, 29, 31], [0, 10, 21, 42]],
+            ...     [[-8, 2, 10, 21], [0, 11, 32, 41], [15, 25, 42, 43]],
+            ...     [[-12, -9, 1, 4], [-1, 18, 20, 33], [14, 19, 22, 29]],
+            ...     [[-10, -2, 0, 5], [-5, 3, 13, 16], [11, 30, 32, 45]],
+            ...     [[-10, -2, 5, 15, 25], [-1, 7, 18, 20], [0, 28, 33]],
+            ...     [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]],
+            ...     ]
+            >>> range_ = abjad.PitchRange('[A0, C8]')
+            >>> constellation_circuit = baca.tools.ConstellationCircuit(
+            ...     cells,
+            ...     range_,
+            ...     )
+
+        ::
+
+            >>> for constellation in constellation_circuit:
+            ...     constellation
+            Constellation(180)
+            Constellation(140)
+            Constellation(80)
+            Constellation(100)
+            Constellation(180)
+            Constellation(150)
+            Constellation(120)
+            Constellation(108)
+
     '''
 
     ### CLASS VARIABLES ###
@@ -23,17 +62,76 @@ class Constellation(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __contains__(self, chord):
-        return chord in self._pitch_number_lists
+    def __contains__(self, pitch_set):
+        r'''Is true when constellation contains `pitch_set`.
+
+        ..  container:: example
+
+            ::
+
+                >>> pitch_set = [-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11]
+                >>> constellation = constellation_circuit[0]
+                >>> pitch_set in constellation
+                True
+
+        ..  container:: example
+
+            ::
+
+                >>> constellation = constellation_circuit[0]
+                >>> [-38] in constellation
+                False
+
+        Returns true or false.
+        '''
+        return pitch_set in self._pitch_number_lists
 
     def __getitem__(self, i):
+        r'''Gets pitch set at `i` in constellation.
+
+        ..  container:: example
+
+            ::
+
+                >>> constellation = constellation_circuit[0]
+                >>> constellation[0]
+                [-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11]
+
+        Returns list.
+        '''
         return self._pitch_number_lists[i]
 
     def __len__(self):
+        r'''Gets length of constellation.
+
+        ..  container::
+
+            ::
+
+                >>> constellation = constellation_circuit[0]
+                >>> len(constellation)
+                180
+
+        Returns nonnegative integer.
+        '''
         return len(self._pitch_number_lists)
 
     def __repr__(self):
-        return '%s(%s)' % (type(self).__name__, len(self))
+        r'''Gets interpreter representation of constellation.
+
+        ..  container:: example
+
+            ::
+
+                >>> constellation = constellation_circuit[0]
+                >>> constellation
+                Constellation(180)
+
+
+        '''
+        string = '{}({})'
+        string = string.format(type(self).__name__, len(self))
+        return string
 
     ### PRIVATE PROPERTIES ###
 
@@ -46,8 +144,7 @@ class Constellation(abjad.abctools.AbjadObject):
     @property
     def _colored_generator(self):
         generator_chord = self.generator_chord
-        labeltools.color_chord_note_heads_by_pitch_class_color_map(
-            generator_chord, self._color_map)
+        abjad.label(generator_chord).color_note_heads(self._color_map)
         return generator_chord
 
     @property
@@ -89,7 +186,7 @@ class Constellation(abjad.abctools.AbjadObject):
         return next_constellation
 
     def _constellate_partitioned_generator_pitch_numbers(self):
-        self._pitch_number_lists = baca.tools.constellate(
+        self._pitch_number_lists = baca.pitch.constellate(
             self._partitioned_generator_pitch_numbers, 
             self.pitch_range,
             )
@@ -106,7 +203,7 @@ class Constellation(abjad.abctools.AbjadObject):
         score.override.text_script.staff_padding = 10
         score.set.proportional_notation_duration = \
             abjad.schemetools.SchemeMoment(1, 30)
-        lilypond_file = abjad.lilypondfiletools.make_basic_lilypond_file(score)
+        lilypond_file = abjad.lilypondfiletools.LilyPondFile.new(score)
         lilypond_file.default_paper_size = 'letter', 'landscape'
         lilypond_file.global_staff_size = 18
         lilypond_file.layout_block.indent = 0
@@ -129,10 +226,37 @@ class Constellation(abjad.abctools.AbjadObject):
 
     @property
     def constellation_number(self):
+        r'''Gets constellation number.
+
+        ..  container:: example
+
+            ::
+
+                >>> constellation = constellation_circuit[0]
+                >>> constellation.constellation_number
+                1
+
+        Returns positive integer.
+        '''
         return self._circuit._constellations.index(self) + 1
 
     @property
     def generator_chord(self):
+        r"""Gets generator chord.
+
+        ..  container:: example
+
+            ::
+
+                >>> constellation = constellation_circuit[0]
+                >>> show(constellation.generator_chord) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(constellation.generator_chord)
+                <c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4 - \markup { 1-80 }
+
+        """
         pitch_numbers = self._generator_pitch_numbers
         generator_chord = abjad.Chord(pitch_numbers, (1, 4))
         self._label_chord(generator_chord)
@@ -140,14 +264,59 @@ class Constellation(abjad.abctools.AbjadObject):
 
     @property
     def partitioned_generator_pitch_numbers(self):
+        r'''Gets partitioned generator pitch numbers.
+
+        ..  container:: example
+
+            ::
+
+                >>> for constellation in constellation_circuit:
+                ...     constellation.partitioned_generator_pitch_numbers
+                [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]]
+                [[-12, -10, -2], [4, 11, 27, 33, 37], [8, 17, 19, 30]]
+                [[-8, 2, 15, 25], [-1, 20, 29, 31], [0, 10, 21, 42]]
+                [[-8, 2, 10, 21], [0, 11, 32, 41], [15, 25, 42, 43]]
+                [[-12, -9, 1, 4], [-1, 18, 20, 33], [14, 19, 22, 29]]
+                [[-10, -2, 0, 5], [-5, 3, 13, 16], [11, 30, 32, 45]]
+                [[-10, -2, 5, 15, 25], [-1, 7, 18, 20], [0, 28, 33]]
+                [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]]
+
+        Returns list of lists.
+        '''
         return self._partitioned_generator_pitch_numbers
 
     @property
     def pitch_range(self):
+        r'''Gets pitch range of constellation.
+
+        ..  container:: example
+
+            ::
+
+                >>> constellation = constellation_circuit[0]
+                >>> constellation.pitch_range
+                PitchRange(range_string='[A0, C8]')
+
+        '''
         return self._circuit.pitch_range
 
     @property
     def pivot_chord(self):
+        r"""Gets pivot chord.
+
+        ..  container:: example
+
+            ::
+
+                >>> constellation = constellation_circuit[0]
+                >>> show(constellation.pivot_chord) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(constellation.pivot_chord)
+                <c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4 - \markup { 1-80 }
+
+        """
         next_pitch_number_list = self._next._generator_pitch_numbers
         pivot_chord = abjad.Chord(next_pitch_number_list, (1, 4))
         self._label_chord(pivot_chord)
@@ -157,12 +326,35 @@ class Constellation(abjad.abctools.AbjadObject):
 
     def get_chord(self, chord_number):
         '''Gets chord with 1-indexed chord number.
+
+        ..  container:: example
+
+            ::
+
+                >>> constellation = constellation_circuit[0]
+                >>> constellation.get_chord(1)
+                [-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11]
+
+        Returns list of numbers.
         '''
         assert 1 <= chord_number
         chord_index = chord_number - 1
         return self._pitch_number_lists[chord_index]
 
     def get_number_of_chord(self, chord):
+        r'''Gets number of chord.
+        
+        ..  container:: example
+
+            ::
+
+                >>> constellation = constellation_circuit[0]
+                >>> chord = constellation.get_chord(17)
+                >>> constellation.get_number_of_chord(chord)
+                17
+
+        Returns positive integer.
+        '''
         chord = abjad.Chord(chord, (1, 4))
         pitch_numbers = [x.pitch_number for x in chord.written_pitches]
         for pnl_index, pnl in enumerate(self):

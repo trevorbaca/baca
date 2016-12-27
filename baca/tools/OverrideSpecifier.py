@@ -139,12 +139,13 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
         '''
         return self._grob_name
 
+    # TODO: write examples and tests
     @property
     def maximum_settings(self):
         r'''Gets maximum settings for leaves with written duration
         greater than or equal to maximum written duration of specifier.
 
-        ..  todo: Write examples and tests.
+        ..  note:: Write examples and tests.
 
         Set to dictionary or none.
         '''

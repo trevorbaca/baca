@@ -27,11 +27,12 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
             ...         ],
             ...         grouping_counts=[1, 1, 1, 2, 3],
             ...     )
+            >>> pitch_class_tree = maker()
+            >>> show(pitch_class_tree) # doctest: +SKIP
 
         ::
 
-            >>> indigo_pitch_classes = maker()
-            >>> for tree in indigo_pitch_classes:
+            >>> for tree in pitch_class_tree:
             ...     tree.get_payload(nested=True)
             [[NumberedPitchClass(7), NumberedPitchClass(1), NumberedPitchClass(3), NumberedPitchClass(4), NumberedPitchClass(5), NumberedPitchClass(11)]]
             [[NumberedPitchClass(3), NumberedPitchClass(5), NumberedPitchClass(6), NumberedPitchClass(7)]]
@@ -102,7 +103,7 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
 
         Returns pitch-class tree.
         '''
-        pc_cells = baca.tools.helianthate(
+        pc_cells = baca.transforms.helianthate(
             self.pc_cells, 
             -1, 
             1,
@@ -113,7 +114,7 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
         elif all(isinstance(_, prototype) for _ in self.division_ratios):
             division_ratios = self.division_ratios
         elif all(isinstance(_, list) for _ in self.division_ratios):
-            division_ratios = baca.tools.helianthate(
+            division_ratios = baca.transforms.helianthate(
                 self.division_ratios, 
                 -1, 
                 1,
@@ -147,9 +148,9 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
         #    cyclic=True, 
         #    overhang=True,
         #    )
-        material = baca.tools.PitchClassTree(
+        material = baca.tools.PitchTree(
             items=pc_cells,
-            item_class=abjad.pitchtools.NumberedPitchClass,
+            item_class=abjad.NumberedPitchClass,
             )
         return material
 
@@ -186,6 +187,75 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
     def division_ratios(self):
         r'''Gets division cells of maker.
 
+        ..  container:: example
+
+            Same as helianthation when division ratios and grouping counts are
+            both none:
+
+            ::
+
+
+                >>> maker = baca.tools.ZaggedPitchClassMaker(
+                ...     pc_cells=[[0, 1, 2], [3, 4]],
+                ...     division_ratios=None,
+                ...     grouping_counts=None,
+                ...     )
+                >>> pitch_class_tree = maker()
+                >>> show(pitch_class_tree) # doctest: +SKIP
+
+            ::
+
+                >>> for tree in pitch_class_tree:
+                ...     tree.get_payload(nested=True)
+                [[NumberedPitchClass(0), NumberedPitchClass(1), NumberedPitchClass(2)]]
+                [[NumberedPitchClass(3), NumberedPitchClass(4)]]
+                [[NumberedPitchClass(4), NumberedPitchClass(3)]]
+                [[NumberedPitchClass(2), NumberedPitchClass(0), NumberedPitchClass(1)]]
+                [[NumberedPitchClass(1), NumberedPitchClass(2), NumberedPitchClass(0)]]
+                [[NumberedPitchClass(3), NumberedPitchClass(4)]]
+                [[NumberedPitchClass(4), NumberedPitchClass(3)]]
+                [[NumberedPitchClass(0), NumberedPitchClass(1), NumberedPitchClass(2)]]
+                [[NumberedPitchClass(2), NumberedPitchClass(0), NumberedPitchClass(1)]]
+                [[NumberedPitchClass(3), NumberedPitchClass(4)]]
+                [[NumberedPitchClass(4), NumberedPitchClass(3)]]
+                [[NumberedPitchClass(1), NumberedPitchClass(2), NumberedPitchClass(0)]]
+
+        ..  container:: example
+
+            Divides every cell in half:
+
+            ::
+
+
+                >>> maker = baca.tools.ZaggedPitchClassMaker(
+                ...     pc_cells=[[0, 1, 2, 3], [4, 5, 6, 7]],
+                ...     division_ratios=[[(1, 1)]],
+                ...     grouping_counts=None,
+                ...     )
+                >>> pitch_class_tree = maker()
+                >>> show(pitch_class_tree) # doctest: +SKIP
+
+            ::
+
+                >>> for tree in pitch_class_tree:
+                ...     tree.get_payload(nested=True)
+                [[NumberedPitchClass(0), NumberedPitchClass(1)]]
+                [[NumberedPitchClass(2), NumberedPitchClass(3)]]
+                [[NumberedPitchClass(4), NumberedPitchClass(5)]]
+                [[NumberedPitchClass(6), NumberedPitchClass(7)]]
+                [[NumberedPitchClass(7), NumberedPitchClass(4)]]
+                [[NumberedPitchClass(5), NumberedPitchClass(6)]]
+                [[NumberedPitchClass(3), NumberedPitchClass(0)]]
+                [[NumberedPitchClass(1), NumberedPitchClass(2)]]
+                [[NumberedPitchClass(2), NumberedPitchClass(3)]]
+                [[NumberedPitchClass(0), NumberedPitchClass(1)]]
+                [[NumberedPitchClass(6), NumberedPitchClass(7)]]
+                [[NumberedPitchClass(4), NumberedPitchClass(5)]]
+                [[NumberedPitchClass(5), NumberedPitchClass(6)]]
+                [[NumberedPitchClass(7), NumberedPitchClass(4)]]
+                [[NumberedPitchClass(1), NumberedPitchClass(2)]]
+                [[NumberedPitchClass(3), NumberedPitchClass(0)]]
+
         Returns list of lists.
         '''
         return self._division_ratios
@@ -193,6 +263,34 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
     @property
     def grouping_counts(self):
         r'''Gets grouping counts of maker.
+
+        ..  container:: example
+
+            Groups helianthated cells:
+
+            ::
+
+
+                >>> maker = baca.tools.ZaggedPitchClassMaker(
+                ...     pc_cells=[[0, 1, 2], [3, 4]],
+                ...     division_ratios=None,
+                ...     grouping_counts=[1, 2],
+                ...     )
+                >>> pitch_class_tree = maker()
+                >>> show(pitch_class_tree) # doctest: +SKIP
+
+            ::
+
+                >>> for tree in pitch_class_tree:
+                ...     tree.get_payload(nested=True)
+                [[NumberedPitchClass(0), NumberedPitchClass(1), NumberedPitchClass(2)]]
+                [[NumberedPitchClass(3), NumberedPitchClass(4)], [NumberedPitchClass(4), NumberedPitchClass(3)]]
+                [[NumberedPitchClass(2), NumberedPitchClass(0), NumberedPitchClass(1)]]
+                [[NumberedPitchClass(1), NumberedPitchClass(2), NumberedPitchClass(0)], [NumberedPitchClass(3), NumberedPitchClass(4)]]
+                [[NumberedPitchClass(4), NumberedPitchClass(3)]]
+                [[NumberedPitchClass(0), NumberedPitchClass(1), NumberedPitchClass(2)], [NumberedPitchClass(2), NumberedPitchClass(0), NumberedPitchClass(1)]]
+                [[NumberedPitchClass(3), NumberedPitchClass(4)]]
+                [[NumberedPitchClass(4), NumberedPitchClass(3)], [NumberedPitchClass(1), NumberedPitchClass(2), NumberedPitchClass(0)]]
 
         Returns nonempty list of positive integers.
         '''

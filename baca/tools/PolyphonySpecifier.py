@@ -31,18 +31,18 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
             ...                 ),
             ...             ),
             ...         ),
-            ...     local_anchor_selector=baca.selector.logical_tie(-3),
-            ...     remote_anchor_selector=baca.selector.logical_tie(0),
+            ...     local_anchor_selector=baca.select.logical_tie(-3),
+            ...     remote_anchor_selector=baca.select.logical_tie(0),
             ...     )
             >>> specifier_1b = abjad.new(
             ...     specifier_1a,
-            ...     local_anchor_selector=baca.selector.logical_tie(2),
-            ...     remote_anchor_selector=baca.selector.logical_tie(4),
+            ...     local_anchor_selector=baca.select.logical_tie(2),
+            ...     remote_anchor_selector=baca.select.logical_tie(4),
             ...     )
             >>> specifier_1c = abjad.new(
             ...     specifier_1a,
-            ...     local_anchor_selector=baca.selector.logical_tie(1),
-            ...     remote_anchor_selector=baca.selector.logical_tie(-2),
+            ...     local_anchor_selector=baca.select.logical_tie(1),
+            ...     remote_anchor_selector=baca.select.logical_tie(-2),
             ...     )
             >>> figure_maker = baca.tools.FigureMaker(
             ...     baca.tools.ArticulationSpecifier(
@@ -269,7 +269,7 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
             selections_by_voice[voice_name] = fused_selection_pair
 
     def _get_local_anchor(self, selection):
-        selector = self.local_anchor_selector or baca.selector.first_leaf()
+        selector = self.local_anchor_selector or baca.select.first_leaf()
         local_anchor = selector(selection)
         if isinstance(local_anchor, abjad.selectiontools.Selection):
             local_anchor = local_anchor[0]
@@ -280,7 +280,7 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
         return local_anchor
 
     def _get_remote_anchor(self, remote_container):
-        selector = self.remote_anchor_selector or baca.selector.first_leaf()
+        selector = self.remote_anchor_selector or baca.select.first_leaf()
         remote_anchor = selector(remote_container)
         if isinstance(remote_anchor, abjad.selectiontools.Selection):
             remote_anchor = remote_anchor[0]
@@ -364,7 +364,7 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     local_anchor_selector=baca.selector.logical_tie(1),
+                ...     local_anchor_selector=baca.select.logical_tie(1),
                 ...     )
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(
@@ -468,8 +468,8 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     local_anchor_selector=baca.selector.logical_tie(-2),
-                ...     remote_anchor_selector=baca.selector.logical_tie(-1),
+                ...     local_anchor_selector=baca.select.logical_tie(-2),
+                ...     remote_anchor_selector=baca.select.logical_tie(-1),
                 ...     )
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(
@@ -573,13 +573,13 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     local_anchor_selector=baca.selector.logical_tie(1),
-                ...     remote_anchor_selector=baca.selector.logical_tie(1),
+                ...     local_anchor_selector=baca.select.logical_tie(1),
+                ...     remote_anchor_selector=baca.select.logical_tie(1),
                 ...     )
                 >>> specifier_1b = abjad.new(
                 ...     specifier_1a,
-                ...     local_anchor_selector=baca.selector.logical_tie(-2),
-                ...     remote_anchor_selector=baca.selector.logical_tie(-2),
+                ...     local_anchor_selector=baca.select.logical_tie(-2),
+                ...     remote_anchor_selector=baca.select.logical_tie(-2),
                 ...     )
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(

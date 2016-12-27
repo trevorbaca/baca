@@ -32,7 +32,7 @@ class SpecifierWrapper(abjad.abctools.AbjadObject):
 
     '''
 
-    ### CLASS VARIABLES ##
+    ### CLASS VARIABLES ###
 
     __documentation_section__ = 'Segments'
 

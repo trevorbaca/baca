@@ -22,15 +22,15 @@ class RegisterTransitionSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.tools.stages(1)),
+            ...     ('vn', baca.select.stages(1)),
             ...     [
             ...         baca.pitch.pitches('C4 D4 E4 F4'),
             ...         baca.rhythm.make_even_run_rhythm_specifier(),
             ...         baca.tools.RegisterTransitionSpecifier(
-            ...             start_registration=pitchtools.Registration(
+            ...             start_registration=abjad.pitchtools.Registration(
             ...                 [('[A0, C8]', 0)],
             ...                 ),
-            ...             stop_registration=pitchtools.Registration(
+            ...             stop_registration=abjad.pitchtools.Registration(
             ...                 [('[A0, C8]', 12)],
             ...                 ),
             ...             ),
@@ -121,7 +121,7 @@ class RegisterTransitionSpecifier(abjad.abctools.AbjadObject):
 
     '''
 
-    ### CLASS VARIABLES ##
+    ### CLASS VARIABLES ###
 
     __documentation_section__ = 'Specifiers'
 
@@ -200,11 +200,11 @@ class RegisterTransitionSpecifier(abjad.abctools.AbjadObject):
         pairs = zip(start_components, stop_components)
         for start_component, stop_component in pairs:
             start_pitch = start_component.source_pitch_range.start_pitch
-            start_pitch = abjad.pitchtools.NumberedPitch(start_pitch)
+            start_pitch = abjad.NumberedPitch(start_pitch)
             stop_pitch = stop_component.source_pitch_range.start_pitch
             lower_range_pitch = start_pitch.interpolate(stop_pitch, fraction)
             start_pitch = start_component.source_pitch_range.stop_pitch
-            start_pitch = abjad.pitchtools.NumberedPitch(start_pitch)
+            start_pitch = abjad.NumberedPitch(start_pitch)
             stop_pitch = stop_component.source_pitch_range.stop_pitch
             upper_range_pitch = start_pitch.interpolate(stop_pitch, fraction)
             range_string = '[{}, {})'
@@ -213,7 +213,7 @@ class RegisterTransitionSpecifier(abjad.abctools.AbjadObject):
                 upper_range_pitch.pitch_class_octave_label,
                 )
             start_pitch = start_component.target_octave_start_pitch
-            start_pitch = abjad.pitchtools.NumberedPitch(start_pitch)
+            start_pitch = abjad.NumberedPitch(start_pitch)
             stop_pitch = stop_component.target_octave_start_pitch
             target_octave_start_pitch = start_pitch.interpolate(
                 stop_pitch,

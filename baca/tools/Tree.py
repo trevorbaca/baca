@@ -161,7 +161,7 @@ class Tree(abjad.abctools.AbjadObject):
         '_item_class',
         '_items',
         '_equivalence_markup',
-        '_expression',
+        '_tracked_expression',
         '_name',
         '_name_markup',
         '_parent',
@@ -180,7 +180,7 @@ class Tree(abjad.abctools.AbjadObject):
         name_markup=None,
         ):
         self._children = []
-        self._expression = None
+        self._tracked_expression = None
         self._item_class = item_class
         if name is not None:
             assert isinstance(name, str), repr(name)
@@ -470,6 +470,26 @@ class Tree(abjad.abctools.AbjadObject):
         '''
         return super(Tree, self).__hash__()
 
+# TODO: make this work without recursion error
+#    def __iter__(self):
+#        r'''Iterates tree at level -1.
+#
+#        ..  container:: example
+#
+#            Gets node:
+#
+#            ::
+#
+#                >>> items = [[[0, 1], [2, 3]], [4, 5]]
+#                >>> tree = baca.tools.Tree(items=items)
+#
+#            ::
+#
+#                >>> tree.__iter__()
+#
+#        '''
+#        return self.iterate(level=-1)
+
     def __len__(self):
         r'''Gets length of tree.
 
@@ -540,6 +560,15 @@ class Tree(abjad.abctools.AbjadObject):
         return self._get_parentage()[-1]
 
     ### PRIVATE METHODS ###
+
+    def _apply_to_leaves_and_emit_new_tree(self, operator):
+        result = abjad.new(self)
+        for leaf in result.iterate(level=-1):
+            assert not len(leaf), repr(leaf)
+            pitch = leaf._items
+            pitch = operator(pitch) 
+            leaf._set_leaf_item(pitch)
+        return result
 
     def _are_internal_nodes(self, object_):
         if (isinstance(object_, collections.Iterable) and
@@ -1051,7 +1080,7 @@ class Tree(abjad.abctools.AbjadObject):
     def _initialize_internal_nodes(self, items):
         children = []
         for item in items:
-            expression = getattr(item, '_expression', None)
+            expression = getattr(item, '_tracked_expression', None)
             equivalence_markup = getattr(item, '_equivalence_markup', None)
             child = type(self)(
                 items=item,
@@ -1059,7 +1088,7 @@ class Tree(abjad.abctools.AbjadObject):
                 name=getattr(item, '_name', None),
                 name_markup=getattr(item, '_name_markup', None)
                 )
-            child._expression = expression
+            child._tracked_expression = expression
             child._equivalence_markup = equivalence_markup
             child._parent = self
             children.append(child)
@@ -1234,6 +1263,11 @@ class Tree(abjad.abctools.AbjadObject):
                     else:
                         sibling._parent._remove_node(sibling)
 
+    def _set_leaf_item(self, item):
+        assert self._is_leaf(), repr(self)
+        self._items = item
+        self._payload = item
+
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -1339,8 +1373,8 @@ class Tree(abjad.abctools.AbjadObject):
 
         Returns string or none.
         '''
-        if self._expression is not None:
-            return self._expression.get_string(name=self._name)
+        if self._tracked_expression is not None:
+            return self._tracked_expression.get_string(name=self._name)
         return self._name
 
     @property

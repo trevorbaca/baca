@@ -67,8 +67,7 @@ class DiatonicClusterSpecifier(abjad.abctools.AbjadObject):
                     x % 7]
                 for x in diatonic_numbers
                 ]
-            chord_pitches = [abjad.pitchtools.NamedPitch(x)
-                for x in chromatic_numbers]
+            chord_pitches = [abjad.NamedPitch(_) for _ in chromatic_numbers]
             chord = abjad.Chord(note)
             chord.note_heads[:] = chord_pitches
             abjad.mutate(note).replace(chord)

@@ -173,8 +173,11 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         self._next_attack = 0
         self._next_stage = 0
         self._state_manifest = collections.OrderedDict()
-        if talea is not None:
-            assert isinstance(talea, abjad.rhythmmakertools.Talea)
+        talea = talea or abjad.rhythmmakertools.Talea()
+        if not isinstance(talea, abjad.rhythmmakertools.Talea):
+            message = 'must be talea: {!r}.'
+            message = message.format(talea)
+            raise TypeError(message)
         self._talea = talea
         if time_treatments is not None:
             for time_treatment in time_treatments:
@@ -531,7 +534,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             assert len(grace_containers) == len(stage_token)
         for pitch_expression in stage_token:
             #raise Exception(pitch_expression)
-            prototype = abjad.pitchtools.NumberedPitchClass
+            prototype = abjad.NumberedPitchClass
             if isinstance(pitch_expression, prototype):
                 pitch_expression = pitch_expression.pitch_class_number
             count = self._next_attack
@@ -544,6 +547,17 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                     specifier.decrease_durations_monotonically,
                 )
             leaves.extend(leaves_)
+            count = self._next_attack
+            if talea[count] < 0:
+                self._next_attack += 1
+                duration = -talea[count]
+                leaves_ = abjad.scoretools.make_leaves(
+                    [None],
+                    [duration],
+                    decrease_durations_monotonically=\
+                        specifier.decrease_durations_monotonically,
+                    )
+                leaves.extend(leaves_)
         leaf_selection = abjad.selectiontools.Selection(leaves)
         if isinstance(time_treatment, int):
             tuplet = self._make_tuplet_with_extra_count(
@@ -1595,35 +1609,74 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            Custom talea:
+            With rests:
 
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                ...     beam_specifier=rhythmmakertools.BeamSpecifier(
+                ...         beam_rests=True,
+                ...         stemlet_length=1.5,
+                ...         ),
                 ...     talea=rhythmmakertools.Talea(
-                ...         counts=[1, 1, 2],
+                ...         counts=[3, -1, 2, 2],
                 ...         denominator=16,
                 ...         ),
                 ...     )
 
             ::
 
-                >>> rhythm_maker.talea
-                Talea(counts=(1, 1, 2), denominator=16)
+                >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file(selections)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[Staff])
+                \new Staff {
+                    {
+                        \time 3/2
+                        {
+                            \override Staff.Stem.stemlet-length = #1.5
+                            c'8. [
+                            r16
+                            d'8
+                            bf'8 ]
+                            \revert Staff.Stem.stemlet-length
+                        }
+                        {
+                            \override Staff.Stem.stemlet-length = #1.5
+                            fs''8. [
+                            r16
+                            e''8
+                            ef''8
+                            af''8.
+                            r16
+                            g''8 ]
+                            \revert Staff.Stem.stemlet-length
+                        }
+                        {
+                            \override Staff.Stem.stemlet-length = #1.5
+                            a'8
+                            \revert Staff.Stem.stemlet-length
+                        }
+                    }
+                }
 
         ..  container:: example
 
-            Defaults to none:
+            Defaults to even sixteenths:
 
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker()
-                >>> rhythm_maker.talea is None
-                True
+                >>> rhythm_maker.talea
+                Talea(counts=(1,), denominator=16)
 
         Set to talea or none.
 
-        Returns talea or none.
+        Returns talea.
         '''
         return self._talea
 

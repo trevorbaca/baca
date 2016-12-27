@@ -635,8 +635,8 @@ class Cursor(abjad.abctools.AbjadObject):
         '''
         cells = []
         for pitch_class_segment in pitch_class_segments:
-                pitch_class_segment = abjad.pitchtools.PitchClassSegment(
-                    pitch_class_segment,
+                pitch_class_segment = abjad.PitchClassSegment(
+                    items=pitch_class_segment,
                     )
                 cells.append(pitch_class_segment)
         cells = abjad.datastructuretools.CyclicTuple(cells)

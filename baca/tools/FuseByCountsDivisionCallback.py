@@ -508,7 +508,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
-                >>> divisions = [durationtools.Division(_) for _ in divisions]
+                >>> divisions = [baca.tools.Division(_) for _ in divisions]
                 >>> divisions[0] = new(divisions[0], start_offset=Offset(1, 4))
                 >>> divisions
                 [Division((0, 1), start_offset=Offset(1, 4)), Division((2, 8)), Division((4, 8)), Division((4, 8)), Division((2, 4))]
@@ -537,7 +537,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
                 overhang=True,
                 )
             divisions = [sum(_) for _ in parts]
-        divisions = [abjad.durationtools.Division(_) for _ in divisions]
+        divisions = [baca.tools.Division(_) for _ in divisions]
         if self.secondary_division_maker is None:
             divisions, start_offset = baca.tools.DivisionMaker._to_divisions(
                 divisions,
@@ -551,7 +551,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
             else:
                 division_list = [division]
             division_list = [
-                abjad.durationtools.Division(_) for _ in division_list]
+                baca.tools.Division(_) for _ in division_list]
             division_lists.append(division_list)
         division_lists, start_offset = baca.tools.DivisionMaker._to_divisions(
             division_lists, 
@@ -570,12 +570,12 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
                 argument = division.duration
             else:
                 argument = division
-            division_ = abjad.durationtools.Division(argument)
+            division_ = baca.tools.Division(argument)
             divisions_.append(division_)
         return divisions_
 
     def _get_storage_format_specification(self):
-        agent = abjad.systemtools.StorageFormatAgent
+        agent = abjad.systemtools.StorageFormatAgent(self)
         keyword_argument_names = agent.signature_keyword_names
         keyword_argument_names = list(keyword_argument_names)
         if self.cyclic == True:

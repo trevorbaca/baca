@@ -24,7 +24,7 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.tools.stages(1)),
+            ...     ('vn', baca.select.stages(1)),
             ...     [
             ...         baca.pitch.pitches('E4 F4'),
             ...         baca.rhythm.make_messiaen_note_rhythm_specifier(),
@@ -101,7 +101,7 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
 
     '''
 
-    ### CLASS VARIABLES ##
+    ### CLASS VARIABLES ###
 
     __documentation_section__ = 'Specifiers'
 
@@ -148,7 +148,7 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
                 maximum_written_duration)
         self._maximum_written_duration = maximum_written_duration
         if pitch is not None:
-            pitch = abjad.pitchtools.NamedPitch(pitch)
+            pitch = abjad.NamedPitch(pitch)
         self._pitch = pitch
 
     ### SPECIAL METHODS ###

@@ -158,7 +158,7 @@ class TimeSignatureGroups(abjad.abctools.AbjadObject):
         score = abjad.scoretools.Score([staff])
         moment = abjad.schemetools.SchemeMoment((1, 8))
         abjad.set_(score).proportional_notation_duration = moment
-        lilypond_file = abjad.lilypondfiletools.make_basic_lilypond_file(score)
+        lilypond_file = abjad.lilypondfiletools.LilyPondFile.new(score)
         lilypond_file.header_block.tagline = abjad.markuptools.Markup.null()
         return lilypond_file
 

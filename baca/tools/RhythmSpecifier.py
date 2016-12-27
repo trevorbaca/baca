@@ -41,17 +41,23 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> print(format(rhythm_specifier))
+            >>> f(rhythm_specifier)
             baca.tools.RhythmSpecifier(
-                division_expression=expressiontools.SequenceExpression(
+                division_expression=expressiontools.Expression(
                     callbacks=(
-                        expressiontools.Callback(
-                            'Sequence.sum',
-                            string_expression='sum({})',
+                        expressiontools.Expression(
+                            evaluation_template='abjad.sequencetools.Sequence',
+                            formula_string_template='{}',
+                            is_initializer=True,
                             ),
-                        expressiontools.Callback(
-                            'Sequence.__init__',
-                            string_expression='sequence({})',
+                        expressiontools.Expression(
+                            evaluation_template='{}.sum()',
+                            formula_string_template='sum({})',
+                            ),
+                        expressiontools.Expression(
+                            evaluation_template='abjad.sequencetools.Sequence',
+                            formula_string_template='{}',
+                            is_initializer=True,
                             ),
                         ),
                     ),
@@ -84,6 +90,8 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
         '_tie_last',
         )
 
+    _publish_storage_format = True
+
     ### INITIALIZER ###    
 
     def __init__(
@@ -113,7 +121,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
             raise Exception(message)
         self._division_maker = division_maker
         if division_expression is not None:
-            prototype = abjad.expressiontools.SequenceExpression
+            prototype = abjad.expressiontools.Expression
             assert isinstance(division_expression, prototype), repr(
                 division_expression)
         self._division_expression = division_expression
@@ -239,7 +247,13 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
             else:
                 raise TypeError(leaf)
 
-    def _apply_figure_rhythm_maker(self, figure_token, selections):
+    def _apply_figure_rhythm_maker(
+        self,
+        figure_token,
+        selections,
+        talea__counts=None,
+        talea__denominator=None,
+        ):
         assert len(selections) == len(figure_token)
         total_length = len(selections)
         patterns = self._get_patterns()
@@ -249,12 +263,28 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
                     index=index,
                     total_length=total_length,
                     ):
-                    stage_selection = self._apply_payload(stage_token)
+                    stage_selection = self._apply_payload(
+                        stage_token,
+                        talea__counts=talea__counts,
+                        talea__denominator=talea__denominator,
+                        )
                     selections[index] = stage_selection
         return selections
 
-    def _apply_payload(self, stage_token):
+    def _apply_payload(
+        self,
+        stage_token,
+        talea__counts=None,
+        talea__denominator=None,
+        ):
         rhythm_maker = self._get_rhythm_maker()
+        keywords = {}
+        if talea__counts is not None:
+            keywords['talea__counts'] = talea__counts
+        if talea__denominator is not None:
+            keywords['talea__denominator'] = talea__denominator
+        if keywords:
+            rhythm_maker = abjad.new(rhythm_maker, **keywords)
         stage_selections, state_manifest = rhythm_maker([stage_token])
         assert len(stage_selections) == 1, repr(stage_selections)
         stage_selection = stage_selections[0]
@@ -297,7 +327,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
 
     @staticmethod
     def _durations_to_divisions(durations, start_offset):
-        divisions = [abjad.durationtools.Division(_) for _ in durations]
+        divisions = [baca.tools.Division(_) for _ in durations]
         durations = [_.duration for _ in divisions]
         start_offset = abjad.durationtools.Offset(start_offset)
         durations.insert(0, start_offset)
@@ -305,7 +335,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
         assert len(divisions) == len(start_offsets)
         divisions_ = []
         for division, start_offset in zip(divisions, start_offsets):
-            division_ = abjad.durationtools.Division(
+            division_ = baca.tools.Division(
                 division,
                 start_offset=start_offset,
                 )

@@ -152,13 +152,13 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, sequence_):
-        r'''Calls LMR specifier on `sequence_`.
+    def __call__(self, sequence):
+        r'''Calls LMR specifier on `sequence`.
 
         Returns list of subsequences.
         '''
-        top_lengths = self._get_top_lengths(len(sequence_))
-        top_parts = abjad.sequence(sequence_).partition_by_counts(
+        top_lengths = self._get_top_lengths(len(sequence))
+        top_parts = abjad.sequence(sequence).partition_by_counts(
             top_lengths,
             cyclic=False,
             overhang=Exact,

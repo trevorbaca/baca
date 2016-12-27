@@ -554,10 +554,10 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
                 >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> pitch_classes = [
-                ...     abjad.pitchtools.NumberedPitchClass(10),
-                ...     abjad.pitchtools.NumberedPitchClass(6),
-                ...     abjad.pitchtools.NumberedPitchClass(4),
-                ...     abjad.pitchtools.NumberedPitchClass(3),
+                ...     abjad.NumberedPitchClass(10),
+                ...     abjad.NumberedPitchClass(6),
+                ...     abjad.NumberedPitchClass(4),
+                ...     abjad.NumberedPitchClass(3),
                 ...     ]
                 >>> imbrication_map = {
                 ...     'Voice 1': (specifier, pitch_classes),
@@ -669,8 +669,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> imbricated_pitches = [
                 ...     0,
-                ...     baca.tools.wrap(10),
-                ...     baca.tools.wrap(18),
+                ...     baca.pitch.protect(10),
+                ...     baca.pitch.protect(18),
                 ...     10, 18,
                 ...     ]
                 >>> imbrication_map = {
@@ -801,7 +801,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                     skip = abjad.Skip(duration)
                     abjad.mutate(note).replace([skip])
             elif self._matches_pitch(logical_tie.head, pitch_number):
-                if isinstance(pitch_number, baca.tools.Wrapper):
+                if isinstance(pitch_number, baca.tools.Shell):
                     for note in logical_tie:
                         duration = note.written_duration
                         skip = abjad.Skip(duration)
@@ -855,23 +855,23 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
     @staticmethod
     def _matches_pitch(note, pitch_object):
-        if isinstance(pitch_object, baca.tools.Wrapper):
+        if isinstance(pitch_object, baca.tools.Shell):
             pitch_object = pitch_object.payload
         if pitch_object is None:
             return False
         elif isinstance(pitch_object, (int, float)):
             source = note.written_pitch.pitch_number
-        elif isinstance(pitch_object, abjad.pitchtools.NamedPitch):
+        elif isinstance(pitch_object, abjad.NamedPitch):
             source = note.written_pitch
-        elif isinstance(pitch_object, abjad.pitchtools.NumberedPitch):
+        elif isinstance(pitch_object, abjad.NumberedPitch):
             source = note.written_pitch
-            source = abjad.pitchtools.NumberedPitch(source)
-        elif isinstance(pitch_object, abjad.pitchtools.NamedPitchClass):
+            source = abjad.NumberedPitch(source)
+        elif isinstance(pitch_object, abjad.NamedPitchClass):
             source = note.written_pitch
-            source = abjad.pitchtools.NamedPitchClass(source)
-        elif isinstance(pitch_object, abjad.pitchtools.NumberedPitchClass):
+            source = abjad.NamedPitchClass(source)
+        elif isinstance(pitch_object, abjad.NumberedPitchClass):
             source = note.written_pitch
-            source = abjad.pitchtools.NumberedPitchClass(source)
+            source = abjad.NumberedPitchClass(source)
         else:
             message = 'unknown pitch object: {!r}.'
             message = message.format(pitch_object)
@@ -1295,7 +1295,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         beam_divisions_together=True,
                 ...         beam_rests=True,
                 ...         ),
-                ...     selector=baca.selector.pitched_logical_ties(-9)
+                ...     selector=baca.select.pitched_logical_ties(-9)
                 ...     )
 
             ::

@@ -51,7 +51,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
     Follows the two-step configure-once / call-repeatedly pattern shown here.
     '''
 
-    ### CLASS ATTRIBUTES ###
+    ### CLASS VARIABLES ###
 
     __documentation_section__ = 'Divisions'
 
@@ -120,7 +120,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> divisions = [(7, 4), (6, 4)]
-                >>> divisions = [durationtools.Division(_) for _ in divisions]
+                >>> divisions = [baca.tools.Division(_) for _ in divisions]
                 >>> divisions[0]._start_offset = Offset(1, 4)
                 >>> divisions
                 [Division((7, 4), start_offset=Offset(1, 4)), Division((6, 4))]
@@ -162,7 +162,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
                 ratio,
                 )
             division_list = [
-                abjad.durationtools.Division((numerator, division.denominator))
+                baca.tools.Division((numerator, division.denominator))
                 for numerator in numerators
                 ]
             division_lists.append(division_list)

@@ -120,9 +120,137 @@ class FigureMaker(abjad.abctools.AbjadObject):
         is_recollection=None,
         polyphony_map=None,
         preferred_denominator=None,
-        state_manifest=None
+        state_manifest=None,
+        talea__counts=None,
+        talea__denominator=None
         ):
         r'''Calls figure-maker on `figure_token` with keywords.
+
+        ..  container:: example
+
+            Default figure-maker:
+
+            ::
+
+                >>> figure_maker = baca.tools.FigureMaker()
+
+            ::
+
+                >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> result = figure_maker(figure_token)
+                >>> selection, time_signature, state_manifest = result
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[Staff])
+                \new Staff {
+                    {
+                        \time 9/16
+                        {
+                            {
+                                c'16 [
+                                d'16
+                                bf'16 ]
+                            }
+                            {
+                                fs''16 [
+                                e''16
+                                ef''16
+                                af''16
+                                g''16 ]
+                            }
+                            {
+                                a'16
+                            }
+                        }
+                    }
+                }
+
+        ..  container:: example
+
+            Calltime counts:
+
+            ::
+
+                >>> figure_maker = baca.tools.FigureMaker()
+
+            ::
+
+                >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> result = figure_maker(figure_token, talea__counts=[1, 2])
+                >>> selection, time_signature, state_manifest = result
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[Staff])
+                \new Staff {
+                    {
+                        \time 3/4
+                        {
+                            {
+                                c'16 [
+                                d'8
+                                bf'16 ]
+                            }
+                            {
+                                fs''16 [
+                                e''8
+                                ef''16
+                                af''8
+                                g''16 ]
+                            }
+                            {
+                                a'16
+                            }
+                        }
+                    }
+                }
+
+        ..  container:: example
+
+            Calltime denominator:
+
+            ::
+
+                >>> figure_maker = baca.tools.FigureMaker()
+
+            ::
+
+                >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> result = figure_maker(figure_token, talea__denominator=32)
+                >>> selection, time_signature, state_manifest = result
+                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[Staff])
+                \new Staff {
+                    {
+                        \time 9/32
+                        {
+                            {
+                                c'32 [
+                                d'32
+                                bf'32 ]
+                            }
+                            {
+                                fs''32 [
+                                e''32
+                                ef''32
+                                af''32
+                                g''32 ]
+                            }
+                            {
+                                a'32
+                            }
+                        }
+                    }
+                }
 
         Returns selection, time signature, state manifest.
         '''
@@ -132,7 +260,11 @@ class FigureMaker(abjad.abctools.AbjadObject):
             isinstance(figure_token[0], str)):
             assert len(figure_token) == 2, repr(figure_token)
             voice_name, figure_token = figure_token
-        selections = self._make_selections(figure_token)
+        selections = self._make_selections(
+            figure_token,
+            talea__counts=talea__counts,
+            talea__denominator=talea__denominator,
+            )
         container = abjad.Container(selections)
         imbricated_selections = self._make_imbricated_selections(
             container,
@@ -234,6 +366,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
         selections = [abjad.select(_) for _ in container]
         nested_selections = None
         for specifier in specifiers:
+            if isinstance(specifier, baca.tools.FigurePitchSpecifier):
+                continue
             if isinstance(specifier, baca.tools.RhythmSpecifier):
                 continue
             if isinstance(specifier, abjad.rhythmmakertools.BeamSpecifier):
@@ -246,14 +380,34 @@ class FigureMaker(abjad.abctools.AbjadObject):
             return nested_selections
         return selections
 
+    def _apply_figure_pitch_specifiers(self, figure_token):
+        specifiers = []
+        for specifier in self.specifiers or []:
+            if isinstance(specifier, baca.tools.FigurePitchSpecifier):
+                specifiers.append(specifier)
+        for specifier in specifiers:
+            figure_token = specifier(figure_token)
+        if (isinstance(figure_token, list) and
+            isinstance(figure_token[0], baca.tools.PitchTree)):
+            figure_token_ = []
+            for pitch_tree in figure_token:
+                payload = pitch_tree.get_payload(nested=True) 
+                figure_token_.extend(payload)
+            figure_token = figure_token_
+        elif isinstance(figure_token, baca.tools.PitchTree):
+            figure_token = figure_token.get_payload(nested=True)
+        return figure_token
+
     def _apply_specifiers(self, selections):
         assert self._all_are_selections(selections), repr(selections)
         nested_selections = None
         specifiers = self.specifiers or []
         for specifier in specifiers:
-            if isinstance(specifier, baca.tools.RhythmSpecifier):
+            if isinstance(specifier, baca.tools.FigurePitchSpecifier):
                 continue
             if isinstance(specifier, baca.tools.ImbricationSpecifier):
+                continue
+            if isinstance(specifier, baca.tools.RhythmSpecifier):
                 continue
             if isinstance(specifier, abjad.rhythmmakertools.BeamSpecifier):
                 specifier._detach_all_beams(selections)
@@ -344,6 +498,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
         if figure_name is None:
             return
         figure_name = str(figure_name)
+        original_figure_name = figure_name
         parts = figure_name.split('_')
         if len(parts) == 1:
             body = parts[0]
@@ -366,7 +521,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
         figure_name = figure_name.with_color('darkgreen')
         figure_name = figure_name.fontsize(3)
         figure_name = abjad.Markup(figure_name, direction=Up)
-        figure_name._annotation = 'figure name'
+        annotation = 'figure name: {}'.format(original_figure_name)
+        figure_name._annotation = annotation
         leaves = list(abjad.iterate(container).by_leaf())
         abjad.attach(figure_name, leaves[0])
 
@@ -384,15 +540,23 @@ class FigureMaker(abjad.abctools.AbjadObject):
             selections[voice_name] = [selection]
         return selections
 
-    def _make_selections(self, figure_token):
+    def _make_selections(
+        self,
+        figure_token,
+        talea__counts=None,
+        talea__denominator=None,
+        ):
+        figure_token = self._apply_figure_pitch_specifiers(figure_token)
         selections = len(figure_token) * [None]
         rhythm_specifiers = self._get_rhythm_specifiers()
         for rhythm_specifier in rhythm_specifiers:
             rhythm_specifier._apply_figure_rhythm_maker(
                 figure_token=figure_token,
                 selections=selections,
+                talea__counts=talea__counts,
+                talea__denominator=talea__denominator,
                 )
-        assert self._all_are_selections(selections)
+        assert self._all_are_selections(selections), repr(selections)
         return selections
 
     def _make_state_manifest(self):

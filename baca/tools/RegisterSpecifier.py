@@ -24,12 +24,12 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.tools.stages(1)),
+            ...     ('vn', baca.select.stages(1)),
             ...     [
             ...         baca.pitch.pitches('G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4'),
             ...         baca.rhythm.make_even_run_rhythm_specifier(),
             ...         baca.tools.RegisterSpecifier(
-            ...             registration=pitchtools.Registration(
+            ...             registration=abjad.pitchtools.Registration(
             ...                 [('[A0, C8]', 15)],
             ...                 ),
             ...             ),
@@ -120,7 +120,7 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
 
     """
 
-    ### CLASS VARIABLES ##
+    ### CLASS VARIABLES ###
 
     __documentation_section__ = 'Specifiers'
 
@@ -171,7 +171,7 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> specifier = baca.tools.RegisterSpecifier(
-                ...     registration=pitchtools.Registration(
+                ...     registration=abjad.pitchtools.Registration(
                 ...         [('[A0, C4)', 15), ('[C4, C8)', 27)],
                 ...         ),
                 ...     )

@@ -180,7 +180,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> callback = baca.tools.PartitionDivisionCallback(counts=[3])
-                >>> divisions = 6 * [durationtools.Division((1, 4))]
+                >>> divisions = 6 * [baca.tools.Division((1, 4))]
                 >>> divisions[0]._start_offset = Offset(1, 4)
 
             ::
@@ -271,16 +271,16 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
         beat_list_ = []
         for beat in beat_list:
             if hasattr(beat, 'duration'):
-                beat = abjad.durationtools.Division(beat.duration)
+                beat = baca.tools.Division(beat.duration)
             else:
-                beat = abjad.durationtools.Division(beat)
+                beat = baca.tools.Division(beat)
             beat_list_.append(beat)
         beat_list = beat_list_
         total_duration = sum(beat_list)
         total_duration = abjad.durationtools.Duration(total_duration)
         if (total_duration.is_assignable and 
             self.fuse_assignable_total_duration):
-            return [[abjad.durationtools.Division(total_duration)]]
+            return [[baca.tools.Division(total_duration)]]
         if self.counts is None:
             beat_group = list(beat_list)
             grouped_beat_list = [beat_group]

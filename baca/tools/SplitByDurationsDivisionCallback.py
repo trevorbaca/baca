@@ -162,7 +162,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
         durations = durations or ()
         pattern_ = []
         for division in durations:
-            division = abjad.durationtools.Division(division)
+            division = baca.tools.Division(division)
             pattern_.append(division)
         durations = tuple(pattern_)
         self._pattern = durations
@@ -382,7 +382,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> divisions = [(2, 4), (3, 4)]
-                >>> divisions = [durationtools.Division(_) for _ in divisions]
+                >>> divisions = [baca.tools.Division(_) for _ in divisions]
                 >>> divisions[0]._start_offset = Offset(1, 4)
                 >>> divisions
                 [Division((2, 4), start_offset=Offset(1, 4)), Division((3, 4))]
@@ -411,7 +411,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
-                >>> divisions = [durationtools.Division(_) for _ in divisions]
+                >>> divisions = [baca.tools.Division(_) for _ in divisions]
                 >>> divisions[0]._start_offset = Offset(1, 4)
 
             ::
@@ -446,7 +446,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
         start_offset = divisions[0].start_offset
         division_lists = []
         for i, division in enumerate(divisions):
-            input_division = abjad.durationtools.Division(division)
+            input_division = baca.tools.Division(division)
             input_duration = abjad.durationtools.Duration(input_division)
             input_meter = abjad.metertools.Meter(input_division)
             assert 0 < input_division, repr(input_division)
@@ -484,13 +484,13 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 message = message.format(input_division, durations)
                 raise Exception(message)
             remainder = input_division - total_duration
-            remainder = abjad.durationtools.Division(remainder)
+            remainder = baca.tools.Division(remainder)
             if self.remainder == Left:
                 if self.remainder_fuse_threshold is None:
                     division_list.insert(0, remainder)
                 elif remainder <= self.remainder_fuse_threshold:
                     fused_value = division_list[0] + remainder
-                    fused_value = abjad.durationtools.Division(fused_value)
+                    fused_value = baca.tools.Division(fused_value)
                     division_list[0] = fused_value
                 else:
                     division_list.insert(0, remainder)
@@ -499,7 +499,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                     division_list.append(remainder)
                 elif remainder <= self.remainder_fuse_threshold:
                     fused_value = division_list[-1] + remainder
-                    fused_value = abjad.durationtools.Division(fused_value)
+                    fused_value = baca.tools.Division(fused_value)
                     division_list[-1] = fused_value
                 else:
                     division_list.append(remainder)
@@ -520,7 +520,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
     ### PRIVATE METHODS ###
 
     def _get_storage_format_specification(self):
-        agent = abjad.systemtools.StorageFormatAgent
+        agent = abjad.systemtools.StorageFormatAgent(self)
         keyword_argument_names = agent.signature_keyword_names
         keyword_argument_names = list(keyword_argument_names)
         if self.cyclic == True:

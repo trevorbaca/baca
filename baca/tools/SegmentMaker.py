@@ -105,7 +105,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         ::
 
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.tools.stages(1)),
+            ...     ('vn', baca.select.stages(1)),
             ...     baca.rhythm.make_even_run_rhythm_specifier(),
             ...     )
 
@@ -897,7 +897,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         for leaf in abjad.iterate(self._score).by_leaf():
             markups = abjad.inspect_(leaf).get_indicators(abjad.Markup)
             for markup in markups:
-                if markup._annotation == 'figure name':
+                if (isinstance(markup._annotation, str) and
+                    markup._annotation.startswith('figure name:')):
                     abjad.detach(markup, leaf)
 
     def _evaluate_selector(
@@ -1444,7 +1445,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
     def _make_lilypond_file(self, is_doc_example=None):
         includes = self._get_stylesheet_includes(is_doc_example=is_doc_example)
-        lilypond_file = abjad.lilypondfiletools.make_basic_lilypond_file(
+        lilypond_file = abjad.lilypondfiletools.LilyPondFile.new(
             music=self._score,
             date_time_token=False,
             includes=includes,
@@ -1940,7 +1941,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=figures,
                 ...         ),
@@ -2083,7 +2084,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=figures,
                 ...         ),
@@ -2278,7 +2279,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.rhythm.make_even_run_rhythm_specifier(),
                 ...     )
 
@@ -2448,7 +2449,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.rhythm.make_even_run_rhythm_specifier(),
                 ...     )
 
@@ -2623,7 +2624,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.rhythm.make_even_run_rhythm_specifier(),
                 ...     )
 
@@ -2794,7 +2795,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.rhythm.make_even_run_rhythm_specifier(),
                 ...     )
 
@@ -2978,7 +2979,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.rhythm.make_even_run_rhythm_specifier(),
                 ...     )
 
@@ -3151,7 +3152,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.rhythm.make_even_run_rhythm_specifier(),
                 ...     )
 
@@ -3364,7 +3365,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.rhythm.make_even_run_rhythm_specifier(),
                 ...     )
 
@@ -3535,7 +3536,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.rhythm.make_even_run_rhythm_specifier(),
                 ...     )
 
@@ -3687,7 +3688,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=figures,
                 ...         ),
@@ -3938,7 +3939,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=figures,
                 ...         ),
@@ -4075,7 +4076,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.rhythm.make_even_run_rhythm_specifier(),
                 ...     )
 
@@ -4264,7 +4265,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.rhythm.make_even_run_rhythm_specifier(),
                 ...     )
 
@@ -4482,7 +4483,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.rhythm.make_even_run_rhythm_specifier(),
                 ...     )
 
@@ -4653,7 +4654,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.rhythm.make_even_run_rhythm_specifier(),
                 ...     )
 
@@ -4831,7 +4832,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.rhythm.make_even_run_rhythm_specifier(),
                 ...     )
 
@@ -5081,11 +5082,12 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         '''
         return self._scoped_specifiers
 
+    # TODO: remove
     @property
     def score_package(self):
         r'''Gets score package.
 
-        ..  todo:: Deprecated.
+        ..  note:: Deprecated.
 
         Defaults to none.
 
@@ -5351,7 +5353,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.rhythm.make_even_run_rhythm_specifier(),
                 ...     )
 
@@ -5534,7 +5536,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.rhythm.make_even_run_rhythm_specifier(),
                 ...     )
 
@@ -5727,7 +5729,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.rhythm.make_even_run_rhythm_specifier(),
                 ...     )
 
@@ -5900,7 +5902,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.rhythm.make_even_run_rhythm_specifier(),
                 ...     )
 
@@ -6107,7 +6109,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     [
                 ...         baca.rhythm.make_even_run_rhythm_specifier(),
                 ...         baca.pitch.pitches('E4 F4'),
@@ -6227,7 +6229,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.rhythm.make_even_run_rhythm_specifier(),
                 ...     )
 
@@ -6400,7 +6402,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     baca.rhythm.make_even_run_rhythm_specifier(),
                 ...     )
 
@@ -6586,7 +6588,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.tools.stages(1)),
+                ...     ('vn', baca.select.stages(1)),
                 ...     [
                 ...         baca.rhythm.make_even_run_rhythm_specifier(),
                 ...         label().with_indices(),
