@@ -81,13 +81,13 @@ class SpacingIndication(abjad.abctools.AbjadValueObject):
 
     ### SPECIAL METHODS ###
 
-    def __eq__(self, expr):
+    def __eq__(self, argument):
         r'''Spacing indications compare equal when normalized
         spacing durations compare equal.
         '''
-        if isinstance(expr, SpacingIndication):
+        if isinstance(argument, SpacingIndication):
             if self.normalized_spacing_duration == \
-                expr.normalized_spacing_duration:
+                argument.normalized_spacing_duration:
                 return True
         return False
 

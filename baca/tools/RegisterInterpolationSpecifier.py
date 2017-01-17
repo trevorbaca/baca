@@ -840,12 +840,12 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, expr):
-        r'''Calls register interpolation specifier on `expr`.
+    def __call__(self, argument):
+        r'''Calls register interpolation specifier on `argument`.
 
         Returns none.
         '''
-        logical_ties = abjad.iterate(expr).by_logical_tie(
+        logical_ties = abjad.iterate(argument).by_logical_tie(
             pitched=True,
             with_grace_notes=True,
             )

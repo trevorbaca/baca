@@ -97,8 +97,8 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, expr):
-        r'''Calls specifier on `expr`.
+    def __call__(self, argument):
+        r'''Calls specifier on `argument`.
 
         Returns none.
         '''
@@ -106,7 +106,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
             return
         selector = self._get_selector()
         #print(selector)
-        selections = selector(expr)
+        selections = selector(argument)
         #raise Exception(selections)
         for item in selections:
             markup = abjad.new(self.markup)

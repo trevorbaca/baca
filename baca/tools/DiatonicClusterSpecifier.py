@@ -51,13 +51,13 @@ class DiatonicClusterSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, expr):
-        r'''Calls specifier on `expr`.
+    def __call__(self, argument):
+        r'''Calls specifier on `argument`.
 
         Returns none.
         '''
         for i, note in enumerate(
-            abjad.iterate(expr).by_class(abjad.Note)):
+            abjad.iterate(argument).by_class(abjad.Note)):
             cluster_width = self.cluster_widths[i]
             start = note.written_pitch.diatonic_pitch_number
             diatonic_numbers = range(start, start + cluster_width)

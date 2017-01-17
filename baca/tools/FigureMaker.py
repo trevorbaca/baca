@@ -262,6 +262,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
             voice_name, figure_token = figure_token
         selections = self._make_selections(
             figure_token,
+            *specifiers,
             talea__counts=talea__counts,
             talea__denominator=talea__denominator,
             )
@@ -349,7 +350,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
     def _annotate_unregistered_pitches_(
         self,
-        expr,
+        argument,
         annotate_unregistered_pitches=None,
         ):
         if annotate_unregistered_pitches is None:
@@ -357,7 +358,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
         if not annotate_unregistered_pitches:
             return
         prototype = (abjad.Note, abjad.Chord)
-        agent = abjad.iterate(expr)
+        agent = abjad.iterate(argument)
         for note in agent.by_leaf(prototype, with_grace_notes=True):
             abjad.attach('not yet registered', note)
 
@@ -380,13 +381,14 @@ class FigureMaker(abjad.abctools.AbjadObject):
             return nested_selections
         return selections
 
-    def _apply_figure_pitch_specifiers(self, figure_token):
-        specifiers = []
-        for specifier in self.specifiers or []:
-            if isinstance(specifier, baca.tools.FigurePitchSpecifier):
-                specifiers.append(specifier)
+    def _apply_figure_pitch_specifiers(self, figure_token, *specifiers):
+        figure_pitch_specifiers = []
+        specifiers = list(self.specifiers or []) + list(specifiers)
         for specifier in specifiers:
-            figure_token = specifier(figure_token)
+            if isinstance(specifier, baca.tools.FigurePitchSpecifier):
+                figure_pitch_specifiers.append(specifier)
+        for figure_pitch_specifier in figure_pitch_specifiers:
+            figure_token = figure_pitch_specifier(figure_token)
         if (isinstance(figure_token, list) and
             isinstance(figure_token[0], baca.tools.PitchTree)):
             figure_token_ = []
@@ -543,10 +545,14 @@ class FigureMaker(abjad.abctools.AbjadObject):
     def _make_selections(
         self,
         figure_token,
+        *specifiers,
         talea__counts=None,
-        talea__denominator=None,
+        talea__denominator=None
         ):
-        figure_token = self._apply_figure_pitch_specifiers(figure_token)
+        figure_token = self._apply_figure_pitch_specifiers(
+            figure_token,
+            *specifiers
+            )
         selections = len(figure_token) * [None]
         rhythm_specifiers = self._get_rhythm_specifiers()
         for rhythm_specifier in rhythm_specifiers:

@@ -9,7 +9,7 @@ class DivisionSequence(abjad.sequencetools.Sequence):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Segments'
+    __documentation_section__ = 'Divisions'
 
     __slots__ = (
         )

@@ -119,10 +119,7 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
                 -1, 
                 1,
                 )
-            division_ratios = abjad.sequencetools.flatten_sequence(
-                division_ratios, 
-                depth=1,
-                )
+            division_ratios = baca.Sequence(division_ratios).flatten(depth=1)
         division_ratios = [abjad.mathtools.Ratio(_) for _ in division_ratios]
         division_ratios = abjad.datastructuretools.CyclicTuple(division_ratios)
         pc_cells_copy = pc_cells[:]
@@ -134,16 +131,14 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
                 )
             pc_cells.extend(parts)
         grouping_counts = self.grouping_counts or [1]
-        pc_cells = abjad.sequencetools.partition_sequence_by_counts(
-            pc_cells, 
+        pc_cells = baca.Sequence(pc_cells).partition_by_counts(
             grouping_counts, 
             cyclic=True, 
             overhang=True,
             )
         # this block was uncommented during krummzeit
         #pc_cells = [abjad.sequencetools.join_subsequences(x) for x in pc_cells]
-        #pc_cells = abjad.sequencetools.partition_sequence_by_counts(
-        #    pc_cells, 
+        #pc_cells = baca.Sequence(pc_cells).partition_by_counts(
         #    grouping_counts, 
         #    cyclic=True, 
         #    overhang=True,
@@ -154,15 +149,15 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
             )
         return material
 
-    def __eq__(self, expr):
-        r'''Is true when `expr` is a zagged pitch-class with type and 
+    def __eq__(self, argument):
+        r'''Is true when `argument` is a zagged pitch-class with type and 
         public properties equal to those of this zagged pitch-class maker.
         Otherwise false.
 
         Returns boolean.
         '''
         agent = abjad.systemtools.StorageFormatAgent(self)
-        return agent.compare(expr)
+        return agent.compare(argument)
 
     def __hash__(self):
         r'''Hashes zagged pitch-class maker.

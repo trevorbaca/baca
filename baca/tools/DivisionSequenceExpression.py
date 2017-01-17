@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 import abjad
 import baca
+import inspect
 
 
-class DivisionSequenceExpression(abjad.expressiontools.Expression):
+class DivisionSequenceExpression(abjad.Expression):
     r'''Division expression.
 
-    ..  note:: Reimplement as frozen expression on DivisionSequence.
+    ..  note:: Reimplement as signatured-decorated DivisionSequence method.
 
     ::
 
@@ -117,7 +118,7 @@ class DivisionSequenceExpression(abjad.expressiontools.Expression):
 
     ### CLASS VARIALBES ###
 
-    __documentation_section__ = 'Segments'
+    __documentation_section__ = 'Divisions'
 
     __slots__ = (
         )
@@ -167,7 +168,7 @@ class DivisionSequenceExpression(abjad.expressiontools.Expression):
         template += ', remainder={remainder}'
         template += ', remainder_fuse_threshold={remainder_fuse_threshold}'
         template += ')'
-        template = template.format(
+        evaluation_template = template.format(
             compound_meter_multiplier=compound_meter_multiplier,
             cyclic=cyclic,
             durations=durations,
@@ -175,26 +176,24 @@ class DivisionSequenceExpression(abjad.expressiontools.Expression):
             remainder=remainder,
             remainder_fuse_threshold=remainder_fuse_threshold,
             )
-        return self.append_callback(
-            evaluation_template=template,
+        callback = abjad.Expression._frame_to_callback(
+            inspect.currentframe(),
+            evaluation_template=evaluation_template,
             module_names=['baca'],
             )
+        return self.append_callback(callback)
 
     def division_sequence(self):
-        r'''Makes divison sequence initializer callback.
+        r'''Makes divison sequence expression.
 
         Returns expression.
         '''
-        formula_string_template = 'division_sequence({})'
-        template = 'baca.tools.DivisionSequence'
-        callback = type(self)(
-            evaluation_template=template,
-            formula_string_template=formula_string_template,
-            is_initializer=True,
+        class_ = baca.tools.DivisionSequence
+        callback = self._make_initializer_callback(
+            class_,
+            markup_expression=abjad.Expression().markup(),
             module_names=['baca'],
+            string_template='{}',
             )
-        callbacks = self.callbacks or ()
-        callbacks = callbacks + (callback,)
-        result = type(self)(callbacks=callbacks)
-        result._proxy_class = baca.tools.DivisionSequence
-        return result
+        expression = self.append_callback(callback)
+        return abjad.new(expression, proxy_class=class_)

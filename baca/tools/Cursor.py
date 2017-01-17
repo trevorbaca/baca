@@ -98,14 +98,14 @@ class Cursor(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __eq__(self, expr):
-        r'''Is true when `expr` is a cursor with keyword
+    def __eq__(self, argument):
+        r'''Is true when `argument` is a cursor with keyword
         arguments equal to this cursor. Otherwise false.
 
         Returns true or false.
         '''
         superclass = super(Cursor, self)
-        return superclass.__eq__(expr)
+        return superclass.__eq__(argument)
 
     def __hash__(self):
         r'''Hashes cursor.

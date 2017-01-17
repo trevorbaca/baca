@@ -241,7 +241,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
             ::
 
                 >>> constellation_circuit.get(8, 108)
-                [-12, 17, 23, 26, 27, 31, 34, 37, 40, 42, 44, 45]
+                Sequence([-12, 17, 23, 26, 27, 31, 34, 37, 40, 42, 44, 45])
 
         Returns constellation or list.
         '''
@@ -770,7 +770,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
         Returns LilyPond file.
         """
         chords = list(zip(self._colored_generator_chords, self.pivot_chords))
-        chords = abjad.sequencetools.flatten_sequence(chords, depth=1)
+        chords = baca.Sequence(chords).flatten(depth=1)
         return self._illustrate_chords(chords)
 
     def illustrate_generator_chords(self):
@@ -890,7 +890,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
         Returns LilyPond file.
         """
         chords = list(zip(self.generator_chords, self.pivot_chords))
-        chords = abjad.sequencetools.flatten_sequence(chords, depth=1)
+        chords = baca.Sequence(chords).flatten(depth=1)
         return self._illustrate_chords(chords)
 
     def illustrate_pivot_chords(self):

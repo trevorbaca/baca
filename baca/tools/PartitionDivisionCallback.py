@@ -50,10 +50,11 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
             >>> grouped_beat_lists = callback(beat_lists)
             >>> for grouped_beat_list in grouped_beat_lists:
             ...     grouped_beat_list
-            [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
-            [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4))]]
-            [[Division((3, 8)), Division((3, 8))], [Division((3, 8)), Division((3, 8))]]
-            [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4))]]
+            ...
+            Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+            [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
+            Sequence([Sequence([Division((3, 8)), Division((3, 8))]), Sequence([Division((3, 8)), Division((3, 8))])])
+            [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
 
         Beat lists grouped in pairs. Remainder fused at right:
 
@@ -67,10 +68,11 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
             >>> grouped_beat_lists = callback(beat_lists)
             >>> for grouped_beat_list in grouped_beat_lists:
             ...     grouped_beat_list
-            [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
-            [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4)), Division((1, 4))]]
-            [[Division((3, 8)), Division((3, 8))], [Division((3, 8)), Division((3, 8))]]
-            [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4)), Division((1, 4))]]
+            ...
+            Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+            [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))])]
+            Sequence([Sequence([Division((3, 8)), Division((3, 8))]), Sequence([Division((3, 8)), Division((3, 8))])])
+            [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))])]
 
     ..  container:: example
 
@@ -86,10 +88,11 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
             >>> grouped_beat_lists = callback(beat_lists)
             >>> for grouped_beat_list in grouped_beat_lists:
             ...     grouped_beat_list
-            [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
-            [[Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
-            [[Division((3, 8)), Division((3, 8))], [Division((3, 8)), Division((3, 8))]]
-            [[Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
+            ...
+            Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+            [[Division((1, 4))], Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])]
+            Sequence([Sequence([Division((3, 8)), Division((3, 8))]), Sequence([Division((3, 8)), Division((3, 8))])])
+            [[Division((1, 4))], Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])]
 
         Beat lists grouped in pairs. Remainder fused at left:
 
@@ -103,10 +106,11 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
             >>> grouped_beat_lists = callback(beat_lists)
             >>> for grouped_beat_list in grouped_beat_lists:
             ...     grouped_beat_list
-            [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
-            [[Division((1, 4)), Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
-            [[Division((3, 8)), Division((3, 8))], [Division((3, 8)), Division((3, 8))]]
-            [[Division((1, 4)), Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
+            ...
+            Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+            [Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])]
+            Sequence([Sequence([Division((3, 8)), Division((3, 8))]), Sequence([Division((3, 8)), Division((3, 8))])])
+            [Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])]
 
     Groups beats into conductors' groups.
     '''
@@ -153,7 +157,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> division = 6 * [(1, 4)]
                 >>> grouped_divisions = callback([division])
                 >>> grouped_divisions[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
+                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2, 2]
 
@@ -169,7 +176,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> division = 6 * [(1, 4)]
                 >>> grouped_divisions = callback([division])
                 >>> grouped_divisions[0]
-                [[Division((1, 4)), Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4)), Division((1, 4))]]
+                Sequence([Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))])])
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [3, 3]
 
@@ -285,8 +295,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
             beat_group = list(beat_list)
             grouped_beat_list = [beat_group]
             return grouped_beat_list
-        grouped_beat_list = abjad.sequencetools.partition_sequence_by_counts(
-            beat_list,
+        grouped_beat_list = baca.Sequence(beat_list).partition_by_counts(
             counts=self.counts,
             cyclic=True,
             overhang=False,
@@ -296,26 +305,26 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
             return grouped_beat_list
         remainder_length = len(beat_list) - beats_included
         if self.remainder_direction == Left:
-            grouped_beat_list = \
-                abjad.sequencetools.partition_sequence_by_counts(
-                beat_list[remainder_length:],
+            grouped_beat_list = baca.Sequence(
+                beat_list[remainder_length:]).partition_by_counts(
                 counts=self.counts,
                 cyclic=True,
                 overhang=False
                 )
+            grouped_beat_list = list(grouped_beat_list)
             remainder = beat_list[:remainder_length]
             if self.append_remainder:
                 grouped_beat_list[0] = remainder + grouped_beat_list[0]
             else:
                 grouped_beat_list.insert(0, remainder)
         else:
-            grouped_beat_list = \
-                abjad.sequencetools.partition_sequence_by_counts(
-                beat_list[:-remainder_length],
+            grouped_beat_list = baca.Sequence(
+                beat_list[:-remainder_length]).partition_by_counts(
                 counts=self.counts,
                 cyclic=True,
                 overhang=False
                 )
+            grouped_beat_list = list(grouped_beat_list)
             remainder = beat_list[-remainder_length:]
             if self.append_remainder:
                 grouped_beat_list[-1] = grouped_beat_list[-1] + remainder
@@ -348,7 +357,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 5 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4))]]
+                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2, 1]
 
@@ -357,7 +369,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 6 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
+                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2, 2]
 
@@ -366,7 +381,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 7 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4))]]
+                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2, 2, 1]
 
@@ -375,7 +393,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 8 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
+                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2, 2, 2]
 
@@ -384,7 +405,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 9 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4))]]
+                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2, 2, 2, 1]
 
@@ -406,7 +430,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 5 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4)), Division((1, 4))]]
+                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))])]
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 3]
 
@@ -415,7 +442,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 6 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
+                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2, 2]
 
@@ -424,7 +454,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 7 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4)), Division((1, 4))]]
+                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))])]
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2, 3]
 
@@ -433,7 +466,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 8 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
+                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2, 2, 2]
 
@@ -442,7 +478,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 9 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4)), Division((1, 4))]]
+                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))])]
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2, 2, 3]
 
@@ -484,7 +523,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 6 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
+                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2, 2]
 
@@ -500,7 +542,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 6 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4)), Division((1, 4))]]
+                Sequence([Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))])])
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [3, 3]
 
@@ -531,7 +576,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 5 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4))]]
+                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2, 1]
 
@@ -540,7 +588,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 6 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
+                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2, 2]
 
@@ -549,7 +600,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 7 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4))]]
+                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2, 2, 1]
 
@@ -558,7 +612,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 8 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
+                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2, 2, 2]
 
@@ -567,7 +624,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 9 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4))]]
+                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2, 2, 2, 1]
 
@@ -587,7 +647,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 5 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4))]]
+                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2, 1]
 
@@ -623,7 +686,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 9 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4))]]
+                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2, 2, 2, 1]
 
@@ -655,7 +721,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 4 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
+                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2]
 
@@ -664,7 +733,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 5 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4))]]
+                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2, 1]
 
@@ -673,7 +745,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 6 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
+                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2, 2]
 
@@ -682,7 +757,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 7 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4))]]
+                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2, 2, 1]
 
@@ -702,7 +780,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 4 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
+                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2]
 
@@ -711,7 +792,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 5 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
+                [[Division((1, 4))], Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])]
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [1, 2, 2]
 
@@ -720,7 +804,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 6 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
+                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [2, 2, 2]
 
@@ -729,7 +816,10 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> beat_list = 7 * [(1, 4)]
                 >>> grouped_beat_lists = callback([beat_list])
                 >>> grouped_beat_lists[0]
-                [[Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
+                [[Division((1, 4))], Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])]
+
+            ::
+
                 >>> [len(beat_group) for beat_group in _]
                 [1, 2, 2, 2]
 

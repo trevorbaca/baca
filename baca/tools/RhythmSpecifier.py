@@ -44,22 +44,65 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
             >>> f(rhythm_specifier)
             baca.tools.RhythmSpecifier(
                 division_expression=expressiontools.Expression(
-                    callbacks=(
+                    callbacks=[
                         expressiontools.Expression(
                             evaluation_template='abjad.sequencetools.Sequence',
-                            formula_string_template='{}',
                             is_initializer=True,
+                            markup_expression=expressiontools.Expression(
+                                callbacks=[
+                                    expressiontools.Expression(
+                                        evaluation_template='abjad.markuptools.Markup',
+                                        is_initializer=True,
+                                        ),
+                                    ],
+                                proxy_class=markuptools.Markup,
+                                ),
+                            string_template='{}',
                             ),
                         expressiontools.Expression(
                             evaluation_template='{}.sum()',
-                            formula_string_template='sum({})',
+                            markup_expression=expressiontools.Expression(
+                                callbacks=[
+                                    expressiontools.Expression(
+                                        evaluation_template='[{}]',
+                                        ),
+                                    expressiontools.Expression(
+                                        evaluation_template='abjad.markuptools.MarkupList',
+                                        is_initializer=True,
+                                        ),
+                                    expressiontools.Expression(
+                                        evaluation_template="{}.insert(i=0, item='sum(')",
+                                        force_return=True,
+                                        ),
+                                    expressiontools.Expression(
+                                        evaluation_template="{}.append(item=')')",
+                                        force_return=True,
+                                        ),
+                                    expressiontools.Expression(
+                                        evaluation_template='{}.concat()',
+                                        ),
+                                    ],
+                                has_parentheses=True,
+                                proxy_class=markuptools.MarkupList,
+                                ),
+                            string_template='sum({})',
                             ),
                         expressiontools.Expression(
                             evaluation_template='abjad.sequencetools.Sequence',
-                            formula_string_template='{}',
                             is_initializer=True,
+                            markup_expression=expressiontools.Expression(
+                                callbacks=[
+                                    expressiontools.Expression(
+                                        evaluation_template='abjad.markuptools.Markup',
+                                        is_initializer=True,
+                                        ),
+                                    ],
+                                proxy_class=markuptools.Markup,
+                                ),
+                            string_template='{}',
                             ),
-                        ),
+                        ],
+                    proxy_class=sequencetools.Sequence,
                     ),
                 rhythm_maker=rhythmmakertools.NoteRhythmMaker(),
                 )
@@ -232,12 +275,12 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
     ### PRIVATE METHODS ###
 
     @staticmethod
-    def _all_are_selections(expr):
-        return all(isinstance(_, abjad.selectiontools.Selection) for _ in expr)
+    def _all_are_selections(argument):
+        return all(isinstance(_, abjad.selectiontools.Selection) for _ in argument)
 
     @staticmethod
-    def _annotate_unpitched_notes(expr):
-        for leaf in abjad.iterate(expr).by_leaf():
+    def _annotate_unpitched_notes(argument):
+        for leaf in abjad.iterate(argument).by_leaf():
             if isinstance(leaf, abjad.Chord):
                 message = 'rhythm-makers produce only notes and rests: {!r}.'
                 message = message.format(leaf)
@@ -404,7 +447,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
                 start_offset,
                 )
             divisions = division_maker(divisions)
-            divisions = abjad.sequencetools.flatten_sequence(divisions)
+            divisions = baca.Sequence(divisions).flatten()
             contribution = self._select_divisions(divisions, start_offset)
             divisions = contribution.payload
             start_offset = contribution.start_offset

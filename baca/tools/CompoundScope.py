@@ -107,14 +107,14 @@ class CompoundScope(abjad.abctools.AbjadObject):
     ### PRIVATE METHODS ###
 
     @staticmethod
-    def _is_stage_pair(expr):
+    def _is_stage_pair(argument):
         #import baca
-        if isinstance(expr, baca.tools.StageExpression):
+        if isinstance(argument, baca.tools.StageExpression):
             return True
-        if isinstance(expr, tuple):
-            if len(expr) == 2:
-                if isinstance(expr[0], int):
-                    if isinstance(expr[-1], int):
+        if isinstance(argument, tuple):
+            if len(argument) == 2:
+                if isinstance(argument[0], int):
+                    if isinstance(argument[-1], int):
                         return True
         return False
 

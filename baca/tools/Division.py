@@ -290,8 +290,8 @@ class Division(abjad.NonreducedFraction):
 
     ### SPECIAL METHODS###
 
-    def __add__(self, expr):
-        r'''Adds `expr` to division.
+    def __add__(self, argument):
+        r'''Adds `argument` to division.
 
         ..  container:: example
 
@@ -388,18 +388,18 @@ class Division(abjad.NonreducedFraction):
 
         Returns new division.
         '''
-        if not isinstance(expr, type(self)):
-            expr = type(self)(expr)
+        if not isinstance(argument, type(self)):
+            argument = type(self)(argument)
         start_offsets = []
         stop_offsets = []
         if self.start_offset is not None:
             start_offsets.append(self.start_offset)
             stop_offsets.append(self.stop_offset)
-        if expr.start_offset is not None:
-            start_offsets.append(expr.start_offset)
-            stop_offsets.append(expr.stop_offset)
+        if argument.start_offset is not None:
+            start_offsets.append(argument.start_offset)
+            stop_offsets.append(argument.stop_offset)
         superclass = super(Division, self)
-        sum_ = superclass.__add__(expr)
+        sum_ = superclass.__add__(argument)
         if not start_offsets:
             division = type(self)(sum_)
         elif len(start_offsets) == 1:
@@ -412,7 +412,7 @@ class Division(abjad.NonreducedFraction):
             division = type(self)(duration)
             division = division.with_denominator(self.denominator)
             if not division.denominator == self.denominator:
-                division = division.with_denominator(expr.denominator)
+                division = division.with_denominator(argument.denominator)
             division = type(self)(division, start_offset=start_offset)
         else:
             raise Exception
@@ -447,8 +447,8 @@ class Division(abjad.NonreducedFraction):
         '''
         return repr(self)
 
-    def __sub__(self, expr):
-        r'''Subtracts `expr` from division.
+    def __sub__(self, argument):
+        r'''Subtracts `argument` from division.
 
         ..  container:: example
 
@@ -575,22 +575,22 @@ class Division(abjad.NonreducedFraction):
 
         Returns new division.
         '''
-        if not isinstance(expr, type(self)):
-            expr = type(self)(expr, start_offset=self.start_offset)
+        if not isinstance(argument, type(self)):
+            argument = type(self)(argument, start_offset=self.start_offset)
 
         self_has_start_offset = bool(self.start_offset is not None)
-        expr_has_start_offset = bool(expr.start_offset is not None)
+        expr_has_start_offset = bool(argument.start_offset is not None)
         if not self_has_start_offset == expr_has_start_offset:
             message = 'both divisions must have (or not have) start offsets.'
             raise Exception(message)
 
-        if self.start_offset is expr.start_offset is None:
+        if self.start_offset is argument.start_offset is None:
             superclass = super(Division, self)
-            difference = superclass.__sub__(expr)
+            difference = superclass.__sub__(argument)
             return self._from_pair(difference)
 
         my_timespan = self._to_timespan()
-        expr_timespan = expr._to_timespan()
+        expr_timespan = argument._to_timespan()
         inventory = my_timespan - expr_timespan
 
         negate_result = False

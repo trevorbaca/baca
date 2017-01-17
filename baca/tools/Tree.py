@@ -161,9 +161,7 @@ class Tree(abjad.abctools.AbjadObject):
         '_item_class',
         '_items',
         '_equivalence_markup',
-        '_tracked_expression',
-        '_name',
-        '_name_markup',
+        '_expression',
         '_parent',
         '_payload',
         )
@@ -172,22 +170,10 @@ class Tree(abjad.abctools.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        items=None,
-        item_class=None,
-        name=None,
-        name_markup=None,
-        ):
+    def __init__(self, items=None, item_class=None):
         self._children = []
-        self._tracked_expression = None
+        self._expression = None
         self._item_class = item_class
-        if name is not None:
-            assert isinstance(name, str), repr(name)
-        self._name = name
-        if name_markup is not None:
-            name_markup = abjad.Markup(name_markup)
-        self._name_markup = name_markup
         self._parent = None
         self._payload = None
         if self._are_internal_nodes(items):
@@ -198,8 +184,8 @@ class Tree(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __contains__(self, expr):
-        r'''Is true when tree contains `expr`.
+    def __contains__(self, argument):
+        r'''Is true when tree contains `argument`.
 
         ..  container:: example
 
@@ -233,10 +219,10 @@ class Tree(abjad.abctools.AbjadObject):
 
         Returns true or false.
         '''
-        return expr in self._children
+        return argument in self._children
 
-    def __eq__(self, expr):
-        r'''Is true when `expr` is the same type as tree and when the payload
+    def __eq__(self, argument):
+        r'''Is true when `argument` is the same type as tree and when the payload
         of all subtrees are equal.
 
         ..  container:: example
@@ -275,12 +261,12 @@ class Tree(abjad.abctools.AbjadObject):
 
         Returns true or false.
         '''
-        if isinstance(expr, type(self)):
-            if self._payload is not None or expr._payload is not None:
-                return self._payload == expr._payload
-            if len(self) == len(expr):
+        if isinstance(argument, type(self)):
+            if self._payload is not None or argument._payload is not None:
+                return self._payload == argument._payload
+            if len(self) == len(argument):
                 for x, y in zip(
-                    self._noncyclic_children, expr._noncyclic_children):
+                    self._noncyclic_children, argument._noncyclic_children):
                     if not x == y:
                         return False
                 else:
@@ -297,7 +283,7 @@ class Tree(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.tools.Tree(items=items, name='J')
+                >>> tree = baca.tools.Tree(items=items)
 
             ::
 
@@ -339,7 +325,6 @@ class Tree(abjad.abctools.AbjadObject):
                                 ],
                             ),
                         ],
-                    name='J',
                     )
 
         Returns string.
@@ -347,8 +332,8 @@ class Tree(abjad.abctools.AbjadObject):
         superclass = super(Tree, self)
         return superclass.__format__(format_specification=format_specification)
 
-    def __getitem__(self, expr):
-        r'''Gets `expr` from tree.
+    def __getitem__(self, argument):
+        r'''Gets `argument` from tree.
 
         ..  container:: example
 
@@ -375,7 +360,7 @@ class Tree(abjad.abctools.AbjadObject):
 
         Returns node.
         '''
-        return self._children[expr]
+        return self._children[argument]
 
     def __graph__(self, **keywords):
         r'''Graphs tree.
@@ -387,7 +372,7 @@ class Tree(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.tools.Tree(items=items, name='J')
+                >>> tree = baca.tools.Tree(items=items)
 
             ::
 
@@ -972,11 +957,6 @@ class Tree(abjad.abctools.AbjadObject):
             result = result[index]
         return result
 
-    def _get_node_markup(self, direction=None):
-        Expression = abjad.expressiontools.Expression
-        markup = Expression._get_expression_markup(self, direction=direction)
-        return markup
-
     def _get_parentage(self, include_self=True):
         '''Gets parentage.
 
@@ -1080,15 +1060,10 @@ class Tree(abjad.abctools.AbjadObject):
     def _initialize_internal_nodes(self, items):
         children = []
         for item in items:
-            expression = getattr(item, '_tracked_expression', None)
+            expression = getattr(item, '_expression', None)
             equivalence_markup = getattr(item, '_equivalence_markup', None)
-            child = type(self)(
-                items=item,
-                item_class=self.item_class,
-                name=getattr(item, '_name', None),
-                name_markup=getattr(item, '_name_markup', None)
-                )
-            child._tracked_expression = expression
+            child = type(self)(items=item, item_class=self.item_class)
+            child._expression = expression
             child._equivalence_markup = equivalence_markup
             child._parent = self
             children.append(child)
@@ -1336,58 +1311,6 @@ class Tree(abjad.abctools.AbjadObject):
         Returns class or none.
         '''
         return self._item_class
-
-    @property
-    def name(self):
-        r'''Gets name.
-
-        ..  container:: example
-
-            Gets name:
-
-            ::
-
-                >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.tools.Tree(items=items, name='J')
-
-            ::
-
-                >>> tree.name
-                'J'
-
-        ..  container:: example
-
-            Defaults to none:
-
-            ::
-
-                >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.tools.Tree(items=items)
-
-            ::
-
-                >>> tree.name is None
-                True
-
-        Set to string or none.
-
-        Returns string or none.
-        '''
-        if self._tracked_expression is not None:
-            return self._tracked_expression.get_string(name=self._name)
-        return self._name
-
-    @property
-    def name_markup(self):
-        r'''Gets tree name markup.
-
-        Defaults to none.
-
-        Set to markup or none.
-
-        Returns markup or none.
-        '''
-        return self._name_markup
 
     ### PUBLIC METHODS ###
 

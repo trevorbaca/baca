@@ -25,8 +25,8 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, expr=None):
-        r'''Calls wellformedness checks on `expr`.
+    def __call__(self, argument=None):
+        r'''Calls wellformedness checks on `argument`.
 
         ..  container:: example
 
@@ -39,13 +39,13 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
         Returns violators, total, check triples.
         '''
-        if expr is None:
+        if argument is None:
             return
         check_names = [x for x in dir(self) if x.startswith('check_')]
         triples = []
         for current_check_name in sorted(check_names):
             current_check = getattr(self, current_check_name)
-            current_violators, current_total = current_check(expr=expr)
+            current_violators, current_total = current_check(argument=argument)
             triple = (current_violators, current_total, current_check_name)
             triples.append(triple)
         return triples
@@ -53,7 +53,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
     ### PUBLIC METHODS ###
 
     @staticmethod
-    def check_duplicate_pitch_classes(expr=None):
+    def check_duplicate_pitch_classes(argument=None):
         r'''Checks duplicate pitch-classes by voice.
 
         ..  container:: example
@@ -137,7 +137,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
         violators = []
         total = 0
         not_yet_pitched_string = 'not yet pitched'
-        notes = abjad.iterate(expr).by_logical_tie(
+        notes = abjad.iterate(argument).by_logical_tie(
             pitched=True,
             with_grace_notes=True,
             )
@@ -167,8 +167,8 @@ class WellformednessManager(abjad.abctools.AbjadObject):
         total += 1
         return violators, total
 
-    def is_well_formed(self, expr=None):
-        r'''Is true when `expr` is well-formed.
+    def is_well_formed(self, argument=None):
+        r'''Is true when `argument` is well-formed.
 
         ..  container:: example
 
@@ -194,13 +194,13 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
         Returns true or false.
         '''
-        triples = self(expr)
+        triples = self(argument)
         for violators, total, check_name in triples:
             if violators:
                 return False
         return True
 
-    def tabulate_well_formedness_violations(self, expr=None):
+    def tabulate_well_formedness_violations(self, argument=None):
         r'''Tabulates wellformedness violations.
 
         ..  container:: example
@@ -229,7 +229,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
         Returns string.
         '''
-        triples = self(expr)
+        triples = self(argument)
         strings = []
         for violators, total, check_name in triples:
             violator_count = len(violators)

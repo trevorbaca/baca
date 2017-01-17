@@ -69,7 +69,11 @@ class Constellation(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> pitch_set = [-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11]
+                >>> pitch_numbers = [
+                ...     -38, -36, -34, -29, -28, -25,
+                ...     -21, -20, -19, -18, -15, -11,
+                ...     ]
+                >>> pitch_set = baca.Sequence(items=pitch_numbers)
                 >>> constellation = constellation_circuit[0]
                 >>> pitch_set in constellation
                 True
@@ -95,7 +99,7 @@ class Constellation(abjad.abctools.AbjadObject):
 
                 >>> constellation = constellation_circuit[0]
                 >>> constellation[0]
-                [-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11]
+                Sequence([-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11])
 
         Returns list.
         '''
@@ -160,7 +164,7 @@ class Constellation(abjad.abctools.AbjadObject):
     @property
     def _generator_pitch_numbers(self):
         result = self._partitioned_generator_pitch_numbers
-        result = abjad.sequencetools.flatten_sequence(result)
+        result = baca.Sequence(result).flatten()
         return list(sorted(result))
 
     @property
@@ -333,7 +337,7 @@ class Constellation(abjad.abctools.AbjadObject):
 
                 >>> constellation = constellation_circuit[0]
                 >>> constellation.get_chord(1)
-                [-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11]
+                Sequence([-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11])
 
         Returns list of numbers.
         '''
@@ -356,11 +360,11 @@ class Constellation(abjad.abctools.AbjadObject):
         Returns positive integer.
         '''
         chord = abjad.Chord(chord, (1, 4))
-        pitch_numbers = [x.pitch_number for x in chord.written_pitches]
-        for pnl_index, pnl in enumerate(self):
-            if pnl == pitch_numbers:
-                pnl_number = pnl_index + 1
-                return pnl_number
+        pitch_numbers = [_.pitch_number for _ in chord.written_pitches]
+        pitch_numbers = baca.Sequence(items=pitch_numbers)
+        for i, pitch_number_list in enumerate(self):
+            if pitch_number_list == pitch_numbers:
+                return i + 1
         message = '{} not in {}'
         message = message.format(chord, self)
         raise ValueError(message)

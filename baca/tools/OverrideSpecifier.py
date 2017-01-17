@@ -64,12 +64,12 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, expr):
+    def __call__(self, argument):
         r'''Calls specifier.
 
         Returns none.
         '''
-        leaves = abjad.iterate(expr).by_leaf()
+        leaves = abjad.iterate(argument).by_leaf()
         # TODO: use named string format fields
         if self.context_name is not None:
             statement = 'abjad.override(leaf).{}.{}.{} = {}'

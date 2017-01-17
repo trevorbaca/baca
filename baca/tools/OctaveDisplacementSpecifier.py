@@ -137,14 +137,14 @@ class OctaveDisplacementSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, expr=None):
-        r'''Calls specifier on `expr`.
+    def __call__(self, argument=None):
+        r'''Calls specifier on `argument`.
 
         Returns none.
         '''
         if self.displacements is None:
             return
-        logical_ties = abjad.iterate(expr).by_logical_tie(
+        logical_ties = abjad.iterate(argument).by_logical_tie(
             with_grace_notes=True,
             )
         for i, logical_tie in enumerate(logical_ties):
@@ -159,9 +159,9 @@ class OctaveDisplacementSpecifier(abjad.abctools.AbjadObject):
 
     ### PRIVATE METHODS ###
 
-    def _is_octave_displacement_vector(self, expr):
-        if isinstance(expr, (tuple, list)):
-            if all(isinstance(_, int) for _ in expr):
+    def _is_octave_displacement_vector(self, argument):
+        if isinstance(argument, (tuple, list)):
+            if all(isinstance(_, int) for _ in argument):
                 return True
         return False
 

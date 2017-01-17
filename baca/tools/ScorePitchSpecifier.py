@@ -202,8 +202,8 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     # TODO: write comprehensive tests
-    def __call__(self, expr):
-        r'''Calls pitch specifier on `expr`.
+    def __call__(self, argument):
+        r'''Calls pitch specifier on `argument`.
 
         ..  note:: Write comprehensive tests.
 
@@ -239,14 +239,14 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
         Returns none.
         '''
-        if not expr:
+        if not argument:
             message = '{!r} has no input.'
             message = message.format(self)
             raise Exception(message)
-        if isinstance(expr[0], abjad.selectiontools.LogicalTie):
-            logical_ties = expr
+        if isinstance(argument[0], abjad.selectiontools.LogicalTie):
+            logical_ties = argument
         else:
-            logical_ties = list(abjad.iterate(expr).by_logical_tie())
+            logical_ties = list(abjad.iterate(argument).by_logical_tie())
         for logical_tie in logical_ties:
             assert isinstance(logical_tie, abjad.selectiontools.LogicalTie)
         counts = self.counts or [1]

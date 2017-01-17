@@ -17,13 +17,12 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> transposition = abjad.Transposition(n=3)
-            >>> accumulator = baca.accumulate([transposition])
+            >>> # expression = baca.sequence().accumulate([transposition])
+            >>> transposition = baca.pitch_class_segment().transpose(n=3)
+            >>> transposition = baca.sequence().map(transposition)
             >>> figure_maker = baca.tools.FigureMaker(
             ...     baca.tools.FigurePitchSpecifier(
-            ...         expressions=[
-            ...             accumulator,
-            ...             ],
+            ...         expressions=[transposition],
             ...         to_pitch_classes=True,
             ...         ),
             ...     )
@@ -41,23 +40,8 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
             >>> f(lilypond_file[Staff])
             \new Staff {
                 {
-                    \time 9/4
+                    \time 9/16
                     {
-                        {
-                            c'16 [
-                            d'16
-                            bf'16 ]
-                        }
-                        {
-                            fs'16 [
-                            e'16
-                            ef'16
-                            af'16
-                            g'16 ]
-                        }
-                        {
-                            a'16
-                        }
                         {
                             ef'16 [
                             f'16
@@ -73,36 +57,6 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
                         {
                             c'16
                         }
-                        {
-                            fs'16 [
-                            af'16
-                            e'16 ]
-                        }
-                        {
-                            c'16 [
-                            bf'16
-                            a'16
-                            d'16
-                            cs'16 ]
-                        }
-                        {
-                            ef'16
-                        }
-                        {
-                            a'16 [
-                            b'16
-                            g'16 ]
-                        }
-                        {
-                            ef'16 [
-                            cs'16
-                            c'16
-                            f'16
-                            e'16 ]
-                        }
-                        {
-                            fs'16
-                        }
                     }
                 }
             }
@@ -114,7 +68,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Figures'
 
     __slots__ = (
         '_expressions',
@@ -142,10 +96,12 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
         '''
         if figure_token is None:
             return
-        result = self._to_pitch_tree(figure_token)
+        figure_token = self._to_pitch_class_segments(figure_token)
+        assert isinstance(figure_token, baca.Sequence), repr(figure_token)
         for expression in self.expressions or []:
-            result = expression(result)
-        return result
+            assert isinstance(expression, abjad.Expression), repr(expression)
+            figure_token = expression(figure_token)
+        return figure_token
 
     def __repr__(self, figure_token=None):
         r'''Gets interpreter representation.
@@ -163,6 +119,13 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
         return superclass.__repr__()
 
     ### PRIVATE METHODS ###
+
+    def _to_pitch_class_segments(self, figure_token):
+        segments = []
+        for list_ in figure_token:
+            segment = baca.PitchClassSegment(items=list_)
+            segments.append(segment)
+        return baca.Sequence(items=segments)
 
     def _to_pitch_tree(self, figure_token):
         item_class = None
@@ -185,11 +148,11 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
+                >>> transposition = baca.pitch_class_segment().transpose(n=3)
+                >>> transposition = baca.sequence().map(transposition)
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.FigurePitchSpecifier(
-                ...         expressions=[
-                ...             abjad.Transposition(n=3),
-                ...             ],
+                ...         expressions=[transposition],
                 ...         ),
                 ...     )
 
@@ -211,17 +174,17 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
                             {
                                 ef'16 [
                                 f'16
-                                cs''16 ]
+                                cs'16 ]
                             }
                             {
-                                a''16 [
-                                g''16
-                                fs''16
-                                b''16
-                                bf''16 ]
+                                a'16 [
+                                g'16
+                                fs'16
+                                b'16
+                                bf'16 ]
                             }
                             {
-                                c''16
+                                c'16
                             }
                         }
                     }

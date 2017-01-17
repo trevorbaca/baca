@@ -78,7 +78,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
         ::
 
             >>> rhythm_maker = rhythmmakertools.NoteRhythmMaker()
-            >>> divisions = sequencetools.flatten_sequence(division_lists)
+            >>> divisions = baca.Sequence(division_lists).flatten()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = rhythmmakertools.make_lilypond_file(
             ...     music,
@@ -270,7 +270,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> rhythm_maker = rhythmmakertools.NoteRhythmMaker()
-                >>> divisions = sequencetools.flatten_sequence(division_lists)
+                >>> divisions = baca.Sequence(division_lists).flatten()
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
@@ -322,7 +322,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> rhythm_maker = rhythmmakertools.NoteRhythmMaker()
-                >>> divisions = sequencetools.flatten_sequence(division_lists)
+                >>> divisions = baca.Sequence(division_lists).flatten()
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
@@ -412,7 +412,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> rhythm_maker = rhythmmakertools.NoteRhythmMaker()
-                >>> divisions = sequencetools.flatten_sequence(division_lists)
+                >>> divisions = baca.Sequence(division_lists).flatten()
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
@@ -461,7 +461,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> rhythm_maker = rhythmmakertools.NoteRhythmMaker()
-                >>> divisions = sequencetools.flatten_sequence(division_lists)
+                >>> divisions = baca.Sequence(division_lists).flatten()
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
@@ -530,8 +530,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
             self.counts == abjad.mathtools.Infinity()):
             divisions = [sum(divisions)]
         elif self.counts:
-            parts = abjad.sequencetools.partition_sequence_by_counts(
-                divisions,
+            parts = baca.Sequence(divisions).partition_by_counts(
                 self.counts,
                 cyclic=self.cyclic,
                 overhang=True,

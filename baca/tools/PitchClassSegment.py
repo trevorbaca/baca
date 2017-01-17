@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import abjad
+import baca
 import inspect
 
 
@@ -72,6 +73,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
     ### PUBLIC METHODS ###
 
+    @abjad.expressiontools.Signature(is_operator=True, method_name='A')
     def alpha(self):
         r'''Gets alpha transform of segment.
 
@@ -82,7 +84,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             ::
 
                 >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-                >>> J = baca.pitch_class_segment(items=items, name='J')
+                >>> J = baca.pitch_class_segment(items=items)
 
             ::
 
@@ -97,7 +99,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 ::
 
                     >>> J.alpha()
-                    PitchClassSegment([11, 11.5, 7, 6, 11.5, 6], name='A(J)')
+                    PitchClassSegment([11, 11.5, 7, 6, 11.5, 6])
 
                 ::
 
@@ -110,19 +112,6 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     >>> f(lilypond_file[Voice])
                     \new Voice {
                         b'8
-                            ^ \markup {
-                                \concat
-                                    {
-                                        A
-                                        \concat
-                                            {
-                                                \hspace
-                                                    #0.4
-                                                \bold
-                                                    J
-                                            }
-                                    }
-                                }
                         bqs'8
                         g'8
                         fs'8
@@ -139,7 +128,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     >>> expression = baca.pitch_class_segment(name='J')
                     >>> expression = expression.alpha()
                     >>> expression([-2, -1.5, 6, 7, -1.5, 7])
-                    PitchClassSegment([11, 11.5, 7, 6, 11.5, 6], name='A(J)')
+                    PitchClassSegment([11, 11.5, 7, 6, 11.5, 6])
 
                 ::
 
@@ -152,19 +141,6 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     >>> f(lilypond_file[Voice])
                     \new Voice {
                         b'8
-                            ^ \markup {
-                                \concat
-                                    {
-                                        A
-                                        \concat
-                                            {
-                                                \hspace
-                                                    #0.4
-                                                \bold
-                                                    J
-                                            }
-                                    }
-                                }
                         bqs'8
                         g'8
                         fs'8
@@ -183,7 +159,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 ::
 
                     >>> J.alpha().alpha()
-                    PitchClassSegment([10, 10.5, 6, 7, 10.5, 7], name='A(A(J))')
+                    PitchClassSegment([10, 10.5, 6, 7, 10.5, 7])
 
                 ::
 
@@ -196,23 +172,6 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     >>> f(lilypond_file[Voice])
                     \new Voice {
                         bf'8
-                            ^ \markup {
-                                \concat
-                                    {
-                                        A
-                                        \concat
-                                            {
-                                                A
-                                                \concat
-                                                    {
-                                                        \hspace
-                                                            #0.4
-                                                        \bold
-                                                            J
-                                                    }
-                                            }
-                                    }
-                                }
                         bqf'8
                         fs'8
                         g'8
@@ -234,17 +193,28 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     >>> expression = baca.pitch_class_segment(name='J')
                     >>> expression = expression.alpha()
                     >>> expression = expression.alpha()
+
+                ::
+
                     >>> expression([-2, -1.5, 6, 7, -1.5, 7])
-                    PitchClassSegment([10, 10.5, 6, 7, 10.5, 7], name='A(A(J))')
+                    PitchClassSegment([10, 10.5, 6, 7, 10.5, 7])
+
+                ::
+
+                    >>> expression.get_string()
+                    'A(A(J))'
 
                 ::
 
                     >>> segment = expression([-2, -1.5, 6, 7, -1.5, 7])
-                    >>> show(segment) # doctest: +SKIP
+                    >>> markup = expression.get_markup()
+                    >>> show(segment, figure_name=markup) # doctest: +SKIP
 
                 ..  doctest::
 
-                    >>> lilypond_file = segment.__illustrate__()
+                    >>> lilypond_file = segment.__illustrate__(
+                    ...     figure_name=markup,
+                    ...     )
                     >>> f(lilypond_file[Voice])
                     \new Voice {
                         bf'8
@@ -255,13 +225,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
                                         \concat
                                             {
                                                 A
-                                                \concat
-                                                    {
-                                                        \hspace
-                                                            #0.4
-                                                        \bold
-                                                            J
-                                                    }
+                                                \bold
+                                                    J
                                             }
                                     }
                                 }
@@ -289,8 +254,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 True
 
         '''
-        if self._frozen_expression:
-            return self._make_callback(inspect.currentframe())
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
         numbers = []
         for pc in self:
             pc = abs(float(pc))
@@ -308,30 +273,20 @@ class PitchClassSegment(abjad.PitchClassSegment):
             else:
                 number = int(number)
             numbers.append(number)
-        template = 'A({})'
-        expression = abjad.Expression()
-        expression = expression.wrap_in_list()
-        expression = expression.markup_list()
-        expression = expression.insert(0, 'A')
-        expression = expression.concat()
-        segment = abjad.new(self, items=numbers, name=self._name)
-        abjad.Expression._track_expression(
-            self,
-            segment,
-            'alpha',
-            formula_markup_expression=expression,
-            formula_string_template=template,
-            )
-        return segment
+        return type(self)(items=numbers)
 
 
 def _pitch_class_segment(items=None, **keywords):
     if items:
         return PitchClassSegment(items=items, **keywords)
-    expression = abjad.Expression()
-    return expression._initialize(
+    name = keywords.pop('name', None)
+    expression = baca.Expression(name=name)
+    callback = expression._make_initializer_callback(
         PitchClassSegment,
-        formula_string_template='pcs({})',
+        markup_expression=abjad.Expression().markup(),
         module_names=['baca'],
+        string_template='{}',
         **keywords
         )
+    expression = expression.append_callback(callback)
+    return abjad.new(expression, proxy_class=PitchClassSegment)

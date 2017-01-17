@@ -53,8 +53,8 @@ class SettingSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, expr):
-        r'''Calls specifier on `expr`.
+    def __call__(self, argument):
+        r'''Calls specifier on `argument`.
 
         Returns none.
         '''
@@ -73,7 +73,7 @@ class SettingSpecifier(abjad.abctools.AbjadObject):
                 self.setting_value,
                 )
         selector = self._get_selector()
-        items = selector(expr)
+        items = selector(argument)
         globals_ = globals()
         globals_.update(abjad.__dict__.copy())
         globals_['SchemeMoment'] = abjad.schemetools.SchemeMoment

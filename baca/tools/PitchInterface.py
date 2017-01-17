@@ -20,8 +20,8 @@ class PitchInterface(object):
     ### PUBLIC METHODS ###
 
     @staticmethod
-    def constellate(cells, range_, flatten=True):
-        '''Constellates `cells` in `range_`.
+    def constellate(cells, range, flatten=True):
+        '''Constellates `cells` in `range`.
 
         ..  container:: example
 
@@ -32,15 +32,15 @@ class PitchInterface(object):
                 >>> segments = baca.pitch.constellate(pitches, range_)
                 >>> for segment in segments:
                 ...     segment
-                [0, 2, 4, 7, 8, 10]
-                [0, 2, 10, 16, 19, 20]
-                [0, 2, 10, 28, 31, 32]
-                [4, 7, 8, 12, 14, 22]
-                [12, 14, 16, 19, 20, 22]
-                [12, 14, 22, 28, 31, 32]
-                [4, 7, 8, 24, 26, 34]
-                [16, 19, 20, 24, 26, 34]
-                [24, 26, 28, 31, 32, 34]
+                Sequence([0, 2, 4, 7, 8, 10])
+                Sequence([0, 2, 10, 16, 19, 20])
+                Sequence([0, 2, 10, 28, 31, 32])
+                Sequence([4, 7, 8, 12, 14, 22])
+                Sequence([12, 14, 16, 19, 20, 22])
+                Sequence([12, 14, 22, 28, 31, 32])
+                Sequence([4, 7, 8, 24, 26, 34])
+                Sequence([16, 19, 20, 24, 26, 34])
+                Sequence([24, 26, 28, 31, 32, 34])
 
         ..  container:: example
 
@@ -51,31 +51,31 @@ class PitchInterface(object):
                 >>> segments = baca.pitch.constellate(pitches, range_)
                 >>> for segment in segments:
                 ...     segment
-                [4, 7, 8, 11, 15, 17]
-                [4, 8, 11, 19, 27, 29]
-                [7, 15, 16, 17, 20, 23]
-                [16, 19, 20, 23, 27, 29]
-                [7, 15, 17, 28, 32, 35]
-                [19, 27, 28, 29, 32, 35]
+                Sequence([4, 7, 8, 11, 15, 17])
+                Sequence([4, 8, 11, 19, 27, 29])
+                Sequence([7, 15, 16, 17, 20, 23])
+                Sequence([16, 19, 20, 23, 27, 29])
+                Sequence([7, 15, 17, 28, 32, 35])
+                Sequence([19, 27, 28, 29, 32, 35])
 
-        Returns outer product of octave transpositions of `cells` in `range_`.
+        Returns outer product of octave transpositions of `cells` in `range`.
         '''
-        if not isinstance(range_, abjad.PitchRange):
+        if not isinstance(range, abjad.PitchRange):
             message = 'must be pitch range: {!r}.'
-            message = message.format(range_)
+            message = message.format(range)
             raise TypeError(message)
         transposition_list = []
         for cell in cells:
-            transpositions = range_.list_octave_transpositions(cell)
+            transpositions = range.list_octave_transpositions(cell)
             transposition_list.append(transpositions)
-        result = abjad.sequencetools.yield_outer_product_of_sequences(
-            transposition_list)
+        enumeration = abjad.sequencetools.Enumeration(transposition_list)
+        result = enumeration.yield_outer_product()
         result = list(result)
         if flatten:
             for i, part in enumerate(result):
-                result[i] = abjad.sequencetools.flatten_sequence(part)
-        for cell in result:
-            cell.sort()
+                result[i] = baca.Sequence(part).flatten()
+        for i, cell in enumerate(result[:]):
+            result[i] = cell.sort()
         return result
 
     @staticmethod

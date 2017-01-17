@@ -42,7 +42,7 @@ class TimeSignatureMaker(abjad.abctools.AbjadObject):
         ::
 
             >>> time_signatures
-            [(1, 16), (2, 16), (3, 16), (1, 8), TimeSignature((1, 4))]
+            Sequence([(1, 16), (2, 16), (3, 16), (1, 8), TimeSignature((1, 4))])
 
     '''
 
@@ -96,10 +96,7 @@ class TimeSignatureMaker(abjad.abctools.AbjadObject):
             time_signatures,
             )
         measures_per_stage = [len(_) for _ in time_signature_groups]
-        time_signatures = abjad.sequencetools.flatten_sequence(
-            time_signature_groups,
-            depth=1,
-            )
+        time_signatures = baca.Sequence(time_signature_groups).flatten(depth=1)
         fermata_entries = self.stage_specifier.make_fermata_entries()
         items = self.tempo_specifier.items + fermata_entries
         tempo_specifier = baca.tools.TempoSpecifier(items=items)

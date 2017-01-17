@@ -867,13 +867,13 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             if 'Context' in voice.__class__.__name__:
                 continue
             result = abjad.iterate(voice).by_topmost_logical_ties_and_components()
-            for expr in result:
-                if isinstance(expr, abjad.selectiontools.LogicalTie):
-                    component = expr.head
+            for argument in result:
+                if isinstance(argument, abjad.selectiontools.LogicalTie):
+                    component = argument.head
                 else:
-                    component = expr
+                    component = argument
                 if component in compound_scope:
-                    topmost_components.append(expr)
+                    topmost_components.append(argument)
         start_offset = min(_.start_offset for _ in timespans)
         stop_offset = max(_.stop_offset for _ in timespans)
         timespan = abjad.timespantools.Timespan(start_offset, stop_offset)
@@ -1187,15 +1187,15 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
     def _get_segment_number(self):
         return self._segment_metadata.get('segment_number', 1)
 
-    def _get_stage_numbers(self, expr):
-        if isinstance(expr, baca.tools.StageExpression):
-            stage_start_number = expr.stage_start_number
-            stage_stop_number = expr.stage_stop_number
-        elif isinstance(expr, tuple):
-            stage_start_number, stage_stop_number = expr
+    def _get_stage_numbers(self, argument):
+        if isinstance(argument, baca.tools.StageExpression):
+            stage_start_number = argument.stage_start_number
+            stage_stop_number = argument.stage_stop_number
+        elif isinstance(argument, tuple):
+            stage_start_number, stage_stop_number = argument
         else:
             message = 'must be stage expression or tuple: {!r}.'
-            message = message.format(expr)
+            message = message.format(argument)
             raise TypeError(message)
         return stage_start_number, stage_stop_number
 
@@ -1211,8 +1211,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
     def _get_time_signatures(self, start_stage=None, stop_stage=None):
         counts = len(self.time_signatures), sum(self.measures_per_stage)
         assert counts[0] == counts[1], counts
-        stages = abjad.sequencetools.partition_sequence_by_counts(
-            self.time_signatures,
+        stages = baca.Sequence(self.time_signatures).partition_by_counts(
             self.measures_per_stage,
             )
         start_index = start_stage - 1
@@ -1221,7 +1220,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         else:
             stop_index = stop_stage
             stages = stages[start_index:stop_index]
-            time_signatures = abjad.sequencetools.flatten_sequence(stages)
+            time_signatures = baca.Sequence(stages).flatten()
         start_offset, stop_offset = self._get_offsets(start_stage, stop_stage)
         contribution = baca.tools.Contribution(
             payload=time_signatures,
@@ -1436,11 +1435,13 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
     def _make_intercalated_rests(self, start_offset, stop_offset, pairs):
         duration = stop_offset - start_offset
-        rest = abjad.MultimeasureRest(
-            abjad.durationtools.Duration(1))
-        multiplier = abjad.durationtools.Multiplier(duration)
-        abjad.attach(multiplier, rest)
-        selection = abjad.select(rest)
+        multiplier = abjad.Multiplier(duration)
+        #rest = abjad.MultimeasureRest(abjad.Duration(1))
+        #abjad.attach(multiplier, rest)
+        #selection = abjad.select(rest)
+        skip = abjad.Skip(abjad.Duration(1))
+        abjad.attach(multiplier, skip)
+        selection = abjad.select(skip)
         return selection
 
     def _make_lilypond_file(self, is_doc_example=None):

@@ -118,7 +118,7 @@ class VoltaSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __getitem__(self, expr):
+    def __getitem__(self, argument):
         r'''Gets item.
 
         ..  container:: example
@@ -139,7 +139,7 @@ class VoltaSpecifier(abjad.abctools.AbjadObject):
 
         Returns item.
         '''
-        return self.items.__getitem__(expr)
+        return self.items.__getitem__(argument)
 
     ### PUBLIC PROPERTIES ###
 

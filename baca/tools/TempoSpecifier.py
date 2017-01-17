@@ -129,7 +129,7 @@ class TempoSpecifier(abjad.abctools.AbjadObject):
                                 f'8
                                 e'8 ]
                             }
-                            R1 * 7/8
+                            s1 * 7/8
                             \bar "|"
                         }
                     }
@@ -155,7 +155,7 @@ class TempoSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __getitem__(self, expr):
+    def __getitem__(self, argument):
         r'''Gets item.
 
         ..  container:: example
@@ -177,7 +177,7 @@ class TempoSpecifier(abjad.abctools.AbjadObject):
 
         Returns item.
         '''
-        return self.items.__getitem__(expr)
+        return self.items.__getitem__(argument)
 
     ### PUBLIC PROPERTIES ###
 

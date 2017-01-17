@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 import abjad
+import baca
 
 
 class FlattenDivisionCallback(abjad.abctools.AbjadValueObject):
@@ -21,15 +22,12 @@ class FlattenDivisionCallback(abjad.abctools.AbjadValueObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, expr):
-        r'''Calls flatten division callback on `expr`.
+    def __call__(self, argument):
+        r'''Calls flatten division callback on `argument`.
 
         Returns list of divisions or list of division lists.
         '''
-        return abjad.sequencetools.flatten_sequence(
-            expr, 
-            depth=self.depth,
-            )
+        return baca.Sequence(argument).flatten(depth=self.depth)
 
     ### PUBLIC PROPERTIES ###
 

@@ -36,7 +36,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
         ::
 
             >>> rhythm_maker = rhythmmakertools.NoteRhythmMaker()
-            >>> divisions = sequencetools.flatten_sequence(division_lists)
+            >>> divisions = baca.Sequence(division_lists).flatten()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = rhythmmakertools.make_lilypond_file(
             ...     music,
@@ -127,7 +127,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
         ::
 
             >>> rhythm_maker = rhythmmakertools.NoteRhythmMaker()
-            >>> divisions = sequencetools.flatten_sequence(division_lists)
+            >>> divisions = baca.Sequence(division_lists).flatten()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = rhythmmakertools.make_lilypond_file(
             ...     music,
@@ -174,7 +174,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
         ::
 
             >>> rhythm_maker = rhythmmakertools.NoteRhythmMaker()
-            >>> divisions = sequencetools.flatten_sequence(division_lists)
+            >>> divisions = baca.Sequence(division_lists).flatten()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = rhythmmakertools.make_lilypond_file(
             ...     music,
@@ -318,19 +318,19 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, expr=None):
-        r'''Makes divisions from `expr`.
+    def __call__(self, argument=None):
+        r'''Makes divisions from `argument`.
 
-        Pass in `expr` as either a list of divisions or as a list of division
+        Pass in `argument` as either a list of divisions or as a list of division
         lists.
 
         Returns either a list of divisions or a list of division lists.
         '''
-        expr = expr or []
-        expr, start_offset = self._to_divisions(expr)
+        argument = argument or []
+        argument, start_offset = self._to_divisions(argument)
         for callback in self.callbacks:
-            expr = callback(expr)
-        result, start_offset = self._to_divisions(expr)
+            argument = callback(argument)
+        result, start_offset = self._to_divisions(argument)
         return result
 
     ### PRIVATE METHODS ###
@@ -343,47 +343,47 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
         return result
 
     @staticmethod
-    def _is_flat_list(expr):
-        if isinstance(expr, list):
-            if not(expr):
+    def _is_flat_list(argument):
+        if isinstance(argument, list):
+            if not(argument):
                 return True
-            elif not isinstance(expr[0], list):
+            elif not isinstance(argument[0], list):
                 return True
         return False
 
     @staticmethod
-    def _to_divisions(expr, start_offset=None):
-        if isinstance(expr, baca.tools.Division):
-            result = baca.tools.Division(expr)
+    def _to_divisions(argument, start_offset=None):
+        if isinstance(argument, baca.tools.Division):
+            result = baca.tools.Division(argument)
             if start_offset is not None:
                 result._start_offset = start_offset
                 start_offset += result.duration
-        elif isinstance(expr, abjad.mathtools.NonreducedFraction):
-            result = baca.tools.Division(expr.pair)
+        elif isinstance(argument, abjad.mathtools.NonreducedFraction):
+            result = baca.tools.Division(argument.pair)
             if start_offset is not None:
                 result._start_offset = start_offset
                 start_offset += result.duration
-        elif hasattr(expr, 'pair'):
-            result = baca.tools.Division(expr.pair)
+        elif hasattr(argument, 'pair'):
+            result = baca.tools.Division(argument.pair)
             if start_offset is not None:
                 result._start_offset = start_offset
                 start_offset += result.duration
-        elif isinstance(expr, tuple):
-            result = baca.tools.Division(expr)
+        elif isinstance(argument, tuple):
+            result = baca.tools.Division(argument)
             if start_offset is not None:
                 result._start_offset = start_offset
                 start_offset += result.duration
-        elif isinstance(expr, (list, abjad.sequencetools.Sequence)):
+        elif isinstance(argument, (list, abjad.sequencetools.Sequence)):
             result = []
-            for element in expr:
+            for element in argument:
                 new_element, start_offset = DivisionMaker._to_divisions(
                     element,
                     start_offset=start_offset,
                     )
                 result.append(new_element)
-            result = type(expr)(result)
+            result = type(argument)(result)
         else:
-            raise TypeError(repr(expr))
+            raise TypeError(repr(argument))
         return result, start_offset
 
     ### PUBLIC PROPERTIES ###
@@ -517,9 +517,12 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> divisions = [(1, 8), (1, 8), (1, 4), (1, 4), (1, 16)]
-                >>> division_list = division_maker(divisions)
-                >>> division_list
-                [[Division((1, 8)), Division((1, 8))], [Division((1, 4)), Division((1, 4))], [Division((1, 16))]]
+                >>> for item in division_maker(divisions):
+                ...     item
+                ...
+                Sequence([Division((1, 8)), Division((1, 8))])
+                Sequence([Division((1, 4)), Division((1, 4))])
+                [Division((1, 16))]
 
             Partitions divisions into pairs with remainder appended at right:
 
@@ -535,9 +538,11 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> divisions = [(1, 8), (1, 8), (1, 4), (1, 4), (1, 16)]
-                >>> division_list = division_maker(divisions)
-                >>> division_list
-                [[Division((1, 8)), Division((1, 8))], [Division((1, 4)), Division((1, 4)), Division((1, 16))]]
+                >>> for item in division_maker(divisions):
+                ...     item
+                ...
+                Sequence([Division((1, 8)), Division((1, 8))])
+                Sequence([Division((1, 4)), Division((1, 4)), Division((1, 16))])
 
             Partitions divisions into pairs with remainder at left:
 
@@ -553,9 +558,12 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> divisions = [(1, 8), (1, 8), (1, 4), (1, 4), (1, 16)]
-                >>> division_list = division_maker(divisions)
-                >>> division_list
-                [[Division((1, 8))], [Division((1, 8)), Division((1, 4))], [Division((1, 4)), Division((1, 16))]]
+                >>> for item in division_maker(divisions):
+                ...     item
+                ...
+                [Division((1, 8))]
+                Sequence([Division((1, 8)), Division((1, 4))])
+                Sequence([Division((1, 4)), Division((1, 16))])
 
             Partitions divisions into pairs with remainder appeneded at left:
 
@@ -571,9 +579,11 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> divisions = [(1, 8), (1, 8), (1, 4), (1, 4), (1, 16)]
-                >>> division_lists = division_maker(divisions)
-                >>> division_lists
-                [[Division((1, 8)), Division((1, 8)), Division((1, 4))], [Division((1, 4)), Division((1, 16))]]
+                >>> for item in division_maker(divisions):
+                ...     item
+                ...
+                Sequence([Division((1, 8)), Division((1, 8)), Division((1, 4))])
+                Sequence([Division((1, 4)), Division((1, 16))])
 
             These examples show how the class partitions a flat list of
             divisions. Output equal to one nested division list.
@@ -600,8 +610,9 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
                 >>> partitioned_division_lists = division_maker(division_lists)
                 >>> for partitioned_division_list in partitioned_division_lists:
                 ...     partitioned_division_list
-                [[Division((1, 8)), Division((1, 8))], [Division((1, 4))]]
-                [[Division((1, 8)), Division((1, 8))], [Division((1, 4)), Division((1, 4))], [Division((1, 16))]]
+                ...
+                [Sequence([Division((1, 8)), Division((1, 8))]), [Division((1, 4))]]
+                [Sequence([Division((1, 8)), Division((1, 8))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 16))]]
 
             Partitions division lists into pairs with remainders appended at
             right:
@@ -624,8 +635,9 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
                 >>> partitioned_division_lists = division_maker(division_lists)
                 >>> for partitioned_division_list in partitioned_division_lists:
                 ...     partitioned_division_list
-                [[Division((1, 8)), Division((1, 8)), Division((1, 4))]]
-                [[Division((1, 8)), Division((1, 8))], [Division((1, 4)), Division((1, 4)), Division((1, 16))]]
+                ...
+                [Sequence([Division((1, 8)), Division((1, 8)), Division((1, 4))])]
+                [Sequence([Division((1, 8)), Division((1, 8))]), Sequence([Division((1, 4)), Division((1, 4)), Division((1, 16))])]
 
             Partitions division lists into pairs with remainders at left:
 
@@ -647,8 +659,9 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
                 >>> partitioned_division_lists = division_maker(division_lists)
                 >>> for partitioned_division_list in partitioned_division_lists:
                 ...     partitioned_division_list
-                [[Division((1, 8))], [Division((1, 8)), Division((1, 4))]]
-                [[Division((1, 8))], [Division((1, 8)), Division((1, 4))], [Division((1, 4)), Division((1, 16))]]
+                ...
+                [[Division((1, 8))], Sequence([Division((1, 8)), Division((1, 4))])]
+                [[Division((1, 8))], Sequence([Division((1, 8)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 16))])]
 
             Partitions division lists into pairs with remainders appended at
             left:
@@ -671,8 +684,9 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
                 >>> partitioned_division_lists = division_maker(division_lists)
                 >>> for partitioned_division_list in partitioned_division_lists:
                 ...     partitioned_division_list
-                [[Division((1, 8)), Division((1, 8)), Division((1, 4))]]
-                [[Division((1, 8)), Division((1, 8)), Division((1, 4))], [Division((1, 4)), Division((1, 16))]]
+                ...
+                [Sequence([Division((1, 8)), Division((1, 8)), Division((1, 4))])]
+                [Sequence([Division((1, 8)), Division((1, 8)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 16))])]
 
             These examples show how the class automatically maps over multiple
             input division lists. Output equal to arbitrarily many nested
@@ -723,7 +737,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> rhythm_maker = rhythmmakertools.NoteRhythmMaker()
-                >>> divisions = sequencetools.flatten_sequence(division_lists)
+                >>> divisions = baca.Sequence(division_lists).flatten()
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
@@ -780,7 +794,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> rhythm_maker = rhythmmakertools.NoteRhythmMaker()
-                >>> divisions = sequencetools.flatten_sequence(division_lists)
+                >>> divisions = baca.Sequence(division_lists).flatten()
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
@@ -853,7 +867,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> rhythm_maker = rhythmmakertools.NoteRhythmMaker()
-                >>> divisions = sequencetools.flatten_sequence(division_lists)
+                >>> divisions = baca.Sequence(division_lists).flatten()
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,
@@ -904,7 +918,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> rhythm_maker = rhythmmakertools.NoteRhythmMaker()
-                >>> divisions = sequencetools.flatten_sequence(division_lists)
+                >>> divisions = baca.Sequence(division_lists).flatten()
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
                 ...     music,

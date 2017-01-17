@@ -260,9 +260,9 @@ class PitchTree(Tree):
         ::
 
             >>> items = [
-            ...     baca.tools.PitchTree([4, 6, 10], name='J'),
-            ...     baca.tools.PitchTree([9, 7, 8, 11, 9, 1], name='K'),
-            ...     baca.tools.PitchTree([0, 2, 3, 5], name='L'),
+            ...     baca.tools.PitchTree([4, 6, 10]),
+            ...     baca.tools.PitchTree([9, 7, 8, 11, 9, 1]),
+            ...     baca.tools.PitchTree([0, 2, 3, 5]),
             ...     ]
             >>> tree = baca.tools.PitchTree(items=items)
             >>> lilypond_file = tree.__illustrate__(
@@ -294,18 +294,10 @@ class PitchTree(Tree):
                     } {
                         \time 1/8
                         e'8 \startGroup
-                            ^ \markup {
-                                \bold
-                                    J
-                                }
                         fs'8
                         bf'8 \stopGroup
                         s8
                         a'8 \startGroup
-                            ^ \markup {
-                                \bold
-                                    K
-                                }
                         g'8
                         af'8
                         b'8
@@ -313,10 +305,6 @@ class PitchTree(Tree):
                         cs'8 \stopGroup
                         s8
                         c'8 \startGroup
-                            ^ \markup {
-                                \bold
-                                    L
-                                }
                         d'8
                         ef'8
                         f'8 \stopGroup
@@ -334,9 +322,9 @@ class PitchTree(Tree):
         ::
 
             >>> items = [
-            ...     abjad.PitchClassSegment([4, 6, 10], name='J'),
-            ...     abjad.PitchClassSegment([9, 7, 8, 11, 9, 1], name='K'),
-            ...     abjad.PitchClassSegment([0, 2, 3, 5], name='L'),
+            ...     abjad.PitchClassSegment([4, 6, 10]),
+            ...     abjad.PitchClassSegment([9, 7, 8, 11, 9, 1]),
+            ...     abjad.PitchClassSegment([0, 2, 3, 5]),
             ...     ]
             >>> items = [segment.rotate(n=1) for segment in items]
             >>> tree = baca.tools.PitchTree(items=items)
@@ -367,44 +355,10 @@ class PitchTree(Tree):
                     } {
                         \time 1/8
                         bf'8 \startGroup
-                            ^ \markup {
-                                \concat
-                                    {
-                                        r
-                                        \hspace
-                                            #-0.2
-                                        \sub
-                                            1
-                                        \concat
-                                            {
-                                                \hspace
-                                                    #0.4
-                                                \bold
-                                                    J
-                                            }
-                                    }
-                                }
                         e'8
                         fs'8 \stopGroup
                         s8
                         cs'8 \startGroup
-                            ^ \markup {
-                                \concat
-                                    {
-                                        r
-                                        \hspace
-                                            #-0.2
-                                        \sub
-                                            1
-                                        \concat
-                                            {
-                                                \hspace
-                                                    #0.4
-                                                \bold
-                                                    K
-                                            }
-                                    }
-                                }
                         a'8
                         g'8
                         af'8
@@ -412,23 +366,6 @@ class PitchTree(Tree):
                         a'8 \stopGroup
                         s8
                         f'8 \startGroup
-                            ^ \markup {
-                                \concat
-                                    {
-                                        r
-                                        \hspace
-                                            #-0.2
-                                        \sub
-                                            1
-                                        \concat
-                                            {
-                                                \hspace
-                                                    #0.4
-                                                \bold
-                                                    L
-                                            }
-                                    }
-                                }
                         c'8
                         d'8
                         ef'8 \stopGroup
@@ -445,9 +382,9 @@ class PitchTree(Tree):
 
         ::
 
-            >>> segment_1 = abjad.PitchClassSegment([4, 6, 10], name='J')
-            >>> segment_2 = abjad.PitchClassSegment([9, 7, 8, 11, 9, 1], name='K')
-            >>> segment_3 = abjad.PitchClassSegment([0, 2, 3, 5], name='L')
+            >>> segment_1 = abjad.PitchClassSegment([4, 6, 10])
+            >>> segment_2 = abjad.PitchClassSegment([9, 7, 8, 11, 9, 1])
+            >>> segment_3 = abjad.PitchClassSegment([0, 2, 3, 5])
             >>> segment_1 = segment_1.transpose(n=1)
             >>> segment_2 = segment_2.transpose(n=1)
             >>> segment_3 = segment_3.transpose(n=1)
@@ -546,44 +483,10 @@ class PitchTree(Tree):
                     } {
                         \time 1/8
                         f'8 \startGroup \startGroup
-                            ^ \markup {
-                                \concat
-                                    {
-                                        T
-                                        \hspace
-                                            #-0.2
-                                        \sub
-                                            1
-                                        \concat
-                                            {
-                                                \hspace
-                                                    #0.4
-                                                \bold
-                                                    J
-                                            }
-                                    }
-                                }
                         g'8
                         b'8 \stopGroup
                         s8
                         bf'8 \startGroup
-                            ^ \markup {
-                                \concat
-                                    {
-                                        T
-                                        \hspace
-                                            #-0.2
-                                        \sub
-                                            1
-                                        \concat
-                                            {
-                                                \hspace
-                                                    #0.4
-                                                \bold
-                                                    K
-                                            }
-                                    }
-                                }
                         af'8
                         a'8
                         c'8
@@ -591,23 +494,6 @@ class PitchTree(Tree):
                         d'8 \stopGroup \stopGroup
                         s8
                         cs'8 \startGroup
-                            ^ \markup {
-                                \concat
-                                    {
-                                        T
-                                        \hspace
-                                            #-0.2
-                                        \sub
-                                            1
-                                        \concat
-                                            {
-                                                \hspace
-                                                    #0.4
-                                                \bold
-                                                    L
-                                            }
-                                    }
-                                }
                         ef'8
                         e'8
                         fs'8 \stopGroup
@@ -633,16 +519,12 @@ class PitchTree(Tree):
         self,
         items=None,
         item_class=None,
-        name=None,
-        name_markup=None,
         ):
         item_class = item_class or abjad.NumberedPitch
         Tree.__init__(
             self,
             items=items,
             item_class=item_class,
-            name=name,
-            name_markup=name_markup,
             )
 
     ### SPECIAL METHODS ###
@@ -963,9 +845,9 @@ class PitchTree(Tree):
 
             ::
 
-                >>> segment_1 = abjad.PitchClassSegment([4, 6, 10], name='J')
-                >>> segment_2 = abjad.PitchClassSegment([9, 7, 8, 11, 9, 1], name='K')
-                >>> segment_3 = abjad.PitchClassSegment([0, 2, 3, 5], name='L')
+                >>> segment_1 = abjad.PitchClassSegment([4, 6, 10])
+                >>> segment_2 = abjad.PitchClassSegment([9, 7, 8, 11, 9, 1])
+                >>> segment_3 = abjad.PitchClassSegment([0, 2, 3, 5])
                 >>> segment_1 = segment_1.transpose(n=1)
                 >>> segment_2 = segment_2.transpose(n=1)
                 >>> segment_3 = segment_3.transpose(n=1)
@@ -1000,46 +882,12 @@ class PitchTree(Tree):
                         } {
                             \time 1/8
                             f'8 \startGroup \startGroup
-                                ^ \markup {
-                                    \concat
-                                        {
-                                            T
-                                            \hspace
-                                                #-0.2
-                                            \sub
-                                                1
-                                            \concat
-                                                {
-                                                    \hspace
-                                                        #0.4
-                                                    \bold
-                                                        J
-                                                }
-                                        }
-                                    }
                                 - \tweak staff-padding #7
                                 _ \markup { 0 }
                             g'8
                             b'8 \stopGroup
                             s8
                             bf'8 \startGroup
-                                ^ \markup {
-                                    \concat
-                                        {
-                                            T
-                                            \hspace
-                                                #-0.2
-                                            \sub
-                                                1
-                                            \concat
-                                                {
-                                                    \hspace
-                                                        #0.4
-                                                    \bold
-                                                        K
-                                                }
-                                        }
-                                    }
                                 - \tweak staff-padding #7
                                 _ \markup { 1 }
                             af'8
@@ -1049,23 +897,6 @@ class PitchTree(Tree):
                             d'8 \stopGroup \stopGroup
                             s8
                             cs'8 \startGroup
-                                ^ \markup {
-                                    \concat
-                                        {
-                                            T
-                                            \hspace
-                                                #-0.2
-                                            \sub
-                                                1
-                                            \concat
-                                                {
-                                                    \hspace
-                                                        #0.4
-                                                    \bold
-                                                        L
-                                                }
-                                        }
-                                    }
                                 - \tweak staff-padding #7
                                 _ \markup { 2 }
                             ef'8
@@ -1274,11 +1105,17 @@ class PitchTree(Tree):
                 )
             if node._is_leftmost_leaf():
                 for parent in node._get_parentage(include_self=True):
-                    node_markup = parent._get_node_markup(
-                        direction=markup_direction,
-                        )
-                    if node_markup is not None:
-                        abjad.attach(node_markup, note)
+                    #node_markup = parent._get_node_markup(
+                    #    direction=markup_direction,
+                    #    )
+                    if parent._expression is not None:
+                        node_markup = parent._expression.get_markup()
+                        if node_markup is not None:
+                            node_markup = abjad.new(
+                                node_markup,
+                                direction=markup_direction,
+                                )
+                            abjad.attach(node_markup, note)
             voice.append(note)
             if node._is_rightmost_leaf():
                 if after_cell_spacing:
@@ -1288,133 +1125,6 @@ class PitchTree(Tree):
                 leaf_list.append(note)
 
     ### PUBLIC METHODS ###
-
-    def alpha(self):
-        r"""Gets alpha transform of tree.
-
-        ..  container:: example
-
-            Example tree:
-
-            ::
-
-                >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
-                >>> tree = baca.tools.PitchTree(items=items)
-                >>> show(tree) # doctest: +SKIP
-
-            ..  doctest::
-
-                >>> lilypond_file = tree.__illustrate__()
-                >>> f(lilypond_file[Score])
-                \new Score \with {
-                    \override BarLine.transparent = ##t
-                    \override BarNumber.stencil = ##f
-                    \override Beam.stencil = ##f
-                    \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = #4
-                    \override SpacingSpanner.strict-grace-spacing = ##t
-                    \override SpacingSpanner.strict-note-spacing = ##t
-                    \override SpacingSpanner.uniform-stretching = ##t
-                    \override Stem.stencil = ##f
-                    \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = #2
-                    \override TimeSignature.stencil = ##f
-                    proportionalNotationDuration = #(ly:make-moment 1 16)
-                } <<
-                    \new Staff {
-                        \new Voice \with {
-                            \consists Horizontal_bracket_engraver
-                        } {
-                            \time 1/8
-                            e''8 \startGroup ^ \markup { 0 }
-                            fs''8
-                            bf'8 \stopGroup
-                            s8
-                            a'8 \startGroup ^ \markup { 1 }
-                            g'8
-                            af'8
-                            b'8
-                            a'8
-                            cs'8 \stopGroup
-                            s8
-                            c'8 \startGroup ^ \markup { 2 }
-                            d'8
-                            ef'8
-                            f'8 \stopGroup
-                            s8
-                            \bar "|."
-                            \override Score.BarLine.transparent = ##f
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Gets alpha transform of tree. Treats pitches as pitch-classes:
-
-            ::
-
-                >>> alpha = tree.alpha()
-                >>> show(alpha) # doctest: +SKIP
-
-            ..  doctest::
-
-                >>> lilypond_file = alpha.__illustrate__()
-                >>> f(lilypond_file[Score])
-                \new Score \with {
-                    \override BarLine.transparent = ##t
-                    \override BarNumber.stencil = ##f
-                    \override Beam.stencil = ##f
-                    \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = #4
-                    \override SpacingSpanner.strict-grace-spacing = ##t
-                    \override SpacingSpanner.strict-note-spacing = ##t
-                    \override SpacingSpanner.uniform-stretching = ##t
-                    \override Stem.stencil = ##f
-                    \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = #2
-                    \override TimeSignature.stencil = ##f
-                    proportionalNotationDuration = #(ly:make-moment 1 16)
-                } <<
-                    \new Staff {
-                        \new Voice \with {
-                            \consists Horizontal_bracket_engraver
-                        } {
-                            \time 1/8
-                            f'8 \startGroup ^ \markup { 0 }
-                            g'8
-                            b'8 \stopGroup
-                            s8
-                            af'8 \startGroup ^ \markup { 1 }
-                            fs'8
-                            a'8
-                            bf'8
-                            af'8
-                            c'8 \stopGroup
-                            s8
-                            cs'8 \startGroup ^ \markup { 2 }
-                            ef'8
-                            d'8
-                            e'8 \stopGroup
-                            s8
-                            \bar "|."
-                            \override Score.BarLine.transparent = ##f
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Returns new tree:
-
-            ::
-
-                >>> isinstance(alpha, baca.tools.PitchTree)
-                True
-
-        """
-        operator = baca.tools.Alpha()
-        return self._apply_to_leaves_and_emit_new_tree(operator)
 
     def has_repeats(self):
         r'''Is true when tree has repeats.

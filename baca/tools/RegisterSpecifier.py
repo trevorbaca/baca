@@ -140,12 +140,12 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, expr):
-        r'''Calls registration specifier on `expr`.
+    def __call__(self, argument):
+        r'''Calls registration specifier on `argument`.
 
         Returns none.
         '''
-        for logical_tie in abjad.iterate(expr).by_logical_tie(
+        for logical_tie in abjad.iterate(argument).by_logical_tie(
             pitched=True,
             with_grace_notes=True,
             ):

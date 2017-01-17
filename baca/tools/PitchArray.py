@@ -360,7 +360,7 @@ class PitchArray(abjad.abctools.AbjadObject):
 
         Returns tuple.
         '''
-        return abjad.sequencetools.flatten_sequence(self.pitches_by_row)
+        return baca.Sequence(self.pitches_by_row).flatten()
 
     @property
     def pitches_by_row(self):
@@ -644,8 +644,7 @@ class PitchArray(abjad.abctools.AbjadObject):
                 )
             part_lengths = [len(part) for part in parts]
             cells = pitch_array_row.cells
-            grouped_cells = abjad.sequencetools.partition_sequence_by_counts(
-                cells,
+            grouped_cells = baca.Sequence(cells).partition_by_counts(
                 part_lengths,
                 cyclic=False,
                 overhang=False,

@@ -14,7 +14,7 @@ from baca.tools.WrapInterface import WrapInterface as wrap
 
 ### toplevel functions ###
 
-from baca.tools.Accumulator import _accumulate as accumulate
+from baca.tools.Expression import Expression
 from baca.tools.PitchClassSegment import PitchClassSegment
 from baca.tools.PitchClassSegment import \
     _pitch_class_segment as pitch_class_segment

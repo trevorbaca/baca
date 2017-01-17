@@ -49,17 +49,17 @@ class DynamicSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, expr):
-        r'''Calls specifier on `expr`.
+    def __call__(self, argument):
+        r'''Calls specifier on `argument`.
 
         Returns none.
         '''
         if self.dynamic is None:
             return
-        #print(expr)
+        #print(argument)
         selector = self._get_selector()
         #print(selector)
-        selections = selector(expr)
+        selections = selector(argument)
         #print(selections)
         for selection in selections:
             if isinstance(self.dynamic, abjad.spannertools.Hairpin):

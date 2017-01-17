@@ -148,13 +148,13 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, expr):
-        r'''Calls specifier on `expr`.
+    def __call__(self, argument):
+        r'''Calls specifier on `argument`.
 
         Returns none.
         '''
         selector = self._get_selector()
-        selection = selector(expr)
+        selection = selector(argument)
         total_items = len(selection)
         for i, item in enumerate(selection):
             patterns = self._get_patterns()
