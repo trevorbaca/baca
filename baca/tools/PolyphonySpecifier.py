@@ -31,18 +31,18 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
             ...                 ),
             ...             ),
             ...         ),
-            ...     local_anchor_selector=baca.select.logical_tie(-3),
-            ...     remote_anchor_selector=baca.select.logical_tie(0),
+            ...     local_anchor=baca.select.logical_tie(-3),
+            ...     remote_anchor=baca.select.logical_tie(0),
             ...     )
             >>> specifier_1b = abjad.new(
             ...     specifier_1a,
-            ...     local_anchor_selector=baca.select.logical_tie(2),
-            ...     remote_anchor_selector=baca.select.logical_tie(4),
+            ...     local_anchor=baca.select.logical_tie(2),
+            ...     remote_anchor=baca.select.logical_tie(4),
             ...     )
             >>> specifier_1c = abjad.new(
             ...     specifier_1a,
-            ...     local_anchor_selector=baca.select.logical_tie(1),
-            ...     remote_anchor_selector=baca.select.logical_tie(-2),
+            ...     local_anchor=baca.select.logical_tie(1),
+            ...     remote_anchor=baca.select.logical_tie(-2),
             ...     )
             >>> figure_maker = baca.tools.FigureMaker(
             ...     baca.tools.ArticulationSpecifier(
@@ -61,19 +61,19 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> segment_list = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> polyphony_map = [
             ...     ('Voice 1', [[18, 16, 15, 20, 19]], specifier_1a),
             ...     ('Voice 1', [[18, 16, 15, 20, 19]], specifier_1b),
             ...     ('Voice 1', [[18, 16, 15, 20, 19]], specifier_1c),
             ...     ]
-            >>> result = figure_maker(
-            ...     ('Voice 2', figure_token),
+            >>> contribution = figure_maker(
+            ...     segment_list,
+            ...     'Voice 2',
             ...     polyphony_map=polyphony_map,
             ...     )
-            >>> selections, time_signature, state_manifest = result
             >>> lilypond_file = abjad.rhythmmakertools.make_lilypond_file(
-            ...     selections,
+            ...     contribution.selections,
             ...     attach_lilypond_voice_commands=True,
             ...     )
             >>> show(lilypond_file) # doctest: +SKIP
@@ -156,8 +156,8 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
 
     __slots__ = (
         '_figure_maker',
-        '_local_anchor_selector',
-        '_remote_anchor_selector',
+        '_local_anchor',
+        '_remote_anchor',
         )
 
     ### INITIALIZER ###
@@ -165,8 +165,8 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
     def __init__(
         self,
         figure_maker=None,
-        local_anchor_selector=None,
-        remote_anchor_selector=None,
+        local_anchor=None,
+        remote_anchor=None,
         ):
         if figure_maker is not None:
             if not isinstance(figure_maker, baca.tools.FigureMaker):
@@ -175,29 +175,28 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
                 raise TypeError(message)
         self._figure_maker = figure_maker
         prototype = abjad.selectortools.Selector
-        if local_anchor_selector is not None:
-            if not isinstance(local_anchor_selector, prototype):
+        if local_anchor is not None:
+            if not isinstance(local_anchor, prototype):
                 message = 'must be selector or none: {!r}.'
-                message = message.format(local_anchor_selector)
+                message = message.format(local_anchor)
                 raise TypeError(message)
-        self._local_anchor_selector = local_anchor_selector
-        if remote_anchor_selector is not None:
-            if not isinstance(remote_anchor_selector, prototype):
+        self._local_anchor = local_anchor
+        if remote_anchor is not None:
+            if not isinstance(remote_anchor, prototype):
                 message = 'must be selector or none: {!r}.'
-                message = message.format(remote_anchor_selector)
+                message = message.format(remote_anchor)
                 raise TypeError(message)
-        self._remote_anchor_selector = remote_anchor_selector
+        self._remote_anchor = remote_anchor
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, container, figure_token):
-        r'''Calls polyphony specifier on `container` and `figure_token`.
+    def __call__(self, container, segment_list, voice_name):
+        r'''Calls polyphony specifier on `container` and `segment_list`.
 
         Returns selection.
         '''
-        result = self.figure_maker(figure_token)
-        selection, time_signature, state_manifest = result
-        local_anchor = self._get_local_anchor(selection)
+        contribution = self.figure_maker(segment_list, voice_name)
+        local_anchor = self._get_local_anchor(contribution[voice_name])
         remote_anchor = self._get_remote_anchor(container)
         timespan = abjad.inspect_(local_anchor).get_timespan()
         local_preanchor_duration = abjad.Duration(timespan.start_offset)
@@ -205,7 +204,7 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
         remote_preanchor_duration = abjad.Duration(timespan.start_offset)
         start_offset = remote_preanchor_duration - local_preanchor_duration
         start_offset = abjad.Offset(start_offset)
-        return start_offset, selection
+        return start_offset, contribution[voice_name]
 
     ### PRIVATE METHODS ###
 
@@ -217,6 +216,7 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
             if len(selection_pairs) == 1:
                 selection_pair = selection_pairs[0]
                 offset, selection = selection_pair
+                assert isinstance(selection, abjad.Selection), repr(selection)
                 if 0 < offset:
                     multiplier = abjad.Multiplier(offset)
                     skip = abjad.Skip(1)
@@ -227,11 +227,16 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
                 selection_pair = list(selection_pair)
                 selections_by_voice[voice_name] = selection_pair
                 continue
+            for selection_pair in selection_pairs:
+                assert len(selection_pair) == 2, repr(selection_pair)
+                offset, selection = selection_pair
+                assert isinstance(selection, abjad.Selection), repr(selection)
             selection_pairs.sort(key=lambda _: _[0])
             first_start_offset = selection_pairs[0][0]
             timespans = abjad.timespantools.TimespanInventory()
             for selection_pair in selection_pairs:
                 start_offset, selection = selection_pair
+                assert isinstance(selection, abjad.Selection), repr(selection)
                 duration = selection.get_duration()
                 stop_offset = start_offset + duration
                 timespan = abjad.timespantools.Timespan(
@@ -241,14 +246,14 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
                 timespans.append(timespan)
             gaps = ~timespans
             if 0 < first_start_offset:
-                first_gap = abjad.timespantools.Timespan(0, first_start_offset)
+                first_gap = abjad.Timespan(0, first_start_offset)
                 gaps.append(first_gap)
             selections = selection_pairs + list(gaps)
-            def sort_function(object_):
-                if isinstance(object_, tuple):
-                    return object_[0]
+            def sort_function(argument):
+                if isinstance(argument, tuple):
+                    return argument[0]
                 else:
-                    return object_.start_offset
+                    return argument.start_offset
             selections.sort(key=sort_function)
             fused_selection = []
             for selection in selections:
@@ -256,7 +261,7 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
                     selection_ = selection[1]
                     fused_selection.extend(selection_)
                 else:
-                    assert isinstance(selection, abjad.timespantools.Timespan)
+                    assert isinstance(selection, abjad.Timespan)
                     multiplier = abjad.Multiplier(selection.duration)
                     skip = abjad.Skip(1)
                     abjad.attach(multiplier, skip)
@@ -269,24 +274,24 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
             selections_by_voice[voice_name] = fused_selection_pair
 
     def _get_local_anchor(self, selection):
-        selector = self.local_anchor_selector or baca.select.first_leaf()
+        selector = self.local_anchor or baca.select.first_leaf()
         local_anchor = selector(selection)
         if isinstance(local_anchor, abjad.selectiontools.Selection):
             local_anchor = local_anchor[0]
         if not isinstance(local_anchor, abjad.scoretools.Component):
             message = 'must select selection or component: {!r}.'
-            message = message.format(local_anchor_selector)
+            message = message.format(local_anchor)
             raise Exception(message)
         return local_anchor
 
     def _get_remote_anchor(self, remote_container):
-        selector = self.remote_anchor_selector or baca.select.first_leaf()
+        selector = self.remote_anchor or baca.select.first_leaf()
         remote_anchor = selector(remote_container)
         if isinstance(remote_anchor, abjad.selectiontools.Selection):
             remote_anchor = remote_anchor[0]
         if not isinstance(remote_anchor, abjad.scoretools.Component):
             message = 'must select selection or component: {!r}.'
-            message = message.format(remote_anchor_selector)
+            message = message.format(remote_anchor)
             raise Exception(message)
         return remote_anchor
 
@@ -299,9 +304,10 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
         for entry in polyphony_map:
             assert isinstance(entry, tuple), repr(entry)
             assert len(entry) == 3, repr(entry)
-            voice_name, figure_token, polyphony_specifier = entry
-            result = polyphony_specifier(container, figure_token)
+            voice_name, segment_list, polyphony_specifier = entry
+            result = polyphony_specifier(container, segment_list, voice_name)
             start_offset, selection = result
+            assert isinstance(selection, abjad.Selection), repr(selection)
             if voice_name not in selections_by_voice:
                 selections_by_voice[voice_name] = []
             selections_by_voice[voice_name].append((start_offset, selection))
@@ -311,7 +317,8 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
         for voice_name, offset_selection in selections_by_voice.items():
             offset = offset_selection[0]
             selection = offset_selection[1]
-            selections_by_voice[voice_name] = [selection]
+            #selections_by_voice[voice_name] = [selection]
+            selections_by_voice[voice_name] = selection
             if offset < 0:
                 multiplier = abjad.Multiplier(-offset)
                 skip = abjad.Skip(1)
@@ -339,7 +346,7 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
         return self._figure_maker
 
     @property
-    def local_anchor_selector(self):
+    def local_anchor(self):
         r'''Gets local alignment selector.
 
         ..  container:: example
@@ -364,7 +371,7 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     local_anchor_selector=baca.select.logical_tie(1),
+                ...     local_anchor=baca.select.logical_tie(1),
                 ...     )
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(
@@ -383,17 +390,17 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> segment_list = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> polyphony_map = [
                 ...     ('Voice 1', [[18, 16, 15, 20, 19]], specifier),
                 ...     ]
-                >>> result = figure_maker(
-                ...     ('Voice 2', figure_token),
+                >>> contribution = figure_maker(
+                ...     segment_list,
+                ...     'Voice 2',
                 ...     polyphony_map=polyphony_map,
                 ...     )
-                >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = abjad.rhythmmakertools.make_lilypond_file(
-                ...     selections,
+                ...     contribution.selections,
                 ...     attach_lilypond_voice_commands=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -468,8 +475,8 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     local_anchor_selector=baca.select.logical_tie(-2),
-                ...     remote_anchor_selector=baca.select.logical_tie(-1),
+                ...     local_anchor=baca.select.logical_tie(-2),
+                ...     remote_anchor=baca.select.logical_tie(-1),
                 ...     )
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(
@@ -488,17 +495,17 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> segment_list = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> polyphony_map = [
                 ...     ('Voice 1', [[18, 16, 15, 20, 19]], specifier),
                 ...     ]
-                >>> result = figure_maker(
-                ...     ('Voice 2', figure_token),
+                >>> contribution = figure_maker(
+                ...     segment_list,
+                ...     'Voice 2',
                 ...     polyphony_map=polyphony_map,
                 ...     )
-                >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = abjad.rhythmmakertools.make_lilypond_file(
-                ...     selections,
+                ...     contribution.selections,
                 ...     attach_lilypond_voice_commands=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -573,13 +580,13 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     local_anchor_selector=baca.select.logical_tie(1),
-                ...     remote_anchor_selector=baca.select.logical_tie(1),
+                ...     local_anchor=baca.select.logical_tie(1),
+                ...     remote_anchor=baca.select.logical_tie(1),
                 ...     )
                 >>> specifier_1b = abjad.new(
                 ...     specifier_1a,
-                ...     local_anchor_selector=baca.select.logical_tie(-2),
-                ...     remote_anchor_selector=baca.select.logical_tie(-2),
+                ...     local_anchor=baca.select.logical_tie(-2),
+                ...     remote_anchor=baca.select.logical_tie(-2),
                 ...     )
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(
@@ -598,18 +605,18 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> segment_list = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> polyphony_map = [
                 ...     ('Voice 1', [[18, 16, 15, 20, 19]], specifier_1a),
                 ...     ('Voice 1', [[18, 16, 15, 20, 19]], specifier_1b),
                 ...     ]
-                >>> result = figure_maker(
-                ...     ('Voice 2', figure_token),
+                >>> contribution = figure_maker(
+                ...     segment_list,
+                ...     'Voice 2',
                 ...     polyphony_map=polyphony_map,
                 ...     )
-                >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = abjad.rhythmmakertools.make_lilypond_file(
-                ...     selections,
+                ...     contribution.selections,
                 ...     attach_lilypond_voice_commands=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -679,10 +686,10 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
 
         Returns selector or none.
         '''
-        return self._local_anchor_selector
+        return self._local_anchor
 
     @property
-    def remote_anchor_selector(self):
+    def remote_anchor(self):
         r'''Gets remote alignment selector.
 
         See local anchor selector examples, above.
@@ -693,4 +700,4 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
 
         Returns selector or none.
         '''
-        return self._remote_anchor_selector
+        return self._remote_anchor

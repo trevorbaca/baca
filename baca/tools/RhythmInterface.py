@@ -1,12 +1,6 @@
 # -*- coding: utf-8 -*-
+import abjad
 import baca
-# TODO: reduce import regime to 'import abjad'
-from abjad.tools import durationtools
-from abjad.tools import mathtools
-from abjad.tools import patterntools
-from abjad.tools import rhythmmakertools
-from abjad.tools.topleveltools import new
-from abjad.tools.topleveltools import sequence
 
 
 class RhythmInterface(object):
@@ -26,11 +20,26 @@ class RhythmInterface(object):
     ### PUBLIC METHODS ###
 
     @staticmethod
+    def beam_everything():
+        return abjad.rhythmmakertools.BeamSpecifier(
+            beam_divisions_together=True,
+            beam_each_division=True,
+            beam_rests=True,
+            )
+
+    @staticmethod
+    def flags():
+        return abjad.rhythmmakertools.BeamSpecifier(
+            beam_divisions_together=False,
+            beam_each_division=False,
+            )
+
+    @staticmethod
     def fuse_compound_quarter_divisions(counts):
         expression = baca.tools.DivisionSequenceExpression()
         expression = expression.split_by_durations(
-            compound_meter_multiplier=durationtools.Multiplier((3, 2)),
-            durations=[durationtools.Duration(1, 4)],
+            compound_meter_multiplier=abjad.Multiplier((3, 2)),
+            durations=[abjad.Duration(1, 4)],
             )
         expression = expression.flatten()
         expression = expression.partition_by_counts(
@@ -44,11 +53,33 @@ class RhythmInterface(object):
         return expression
 
     @staticmethod
+    def imbricate(
+        voice_name,
+        segment,
+        *specifiers,
+        allow_unused_pitches=None,
+        extend_beam=None,
+        hocket=None,
+        selector=None,
+        truncate_ties=None
+        ):
+        return baca.tools.ImbricationSpecifier(
+            voice_name,
+            segment,
+            *specifiers,
+            allow_unused_pitches=allow_unused_pitches,
+            extend_beam=extend_beam,
+            hocket=hocket,
+            selector=selector,
+            truncate_ties=truncate_ties,
+            )
+
+    @staticmethod
     def make_compound_quarter_divisions():
         expression = baca.tools.DivisionSequenceExpression()
         expression = expression.split_by_durations(
-            compound_meter_multiplier=durationtools.Multiplier((3, 2)),
-            durations=[durationtools.Duration(1, 4)],
+            compound_meter_multiplier=abjad.Multiplier((3, 2)),
+            durations=[abjad.Duration(1, 4)],
             )
         expression = expression.flatten()
         return expression
@@ -60,12 +91,12 @@ class RhythmInterface(object):
         else:
             tuplet_ratios = [tuplet_ratio]
         return baca.tools.RhythmSpecifier(
-            division_expression=sequence()
+            division_expression=abjad.sequence()
                 .sum()
                 .sequence()
                 ,
-            rhythm_maker=rhythmmakertools.TupletRhythmMaker(
-                tie_specifier=rhythmmakertools.TieSpecifier(
+            rhythm_maker=abjad.rhythmmakertools.TupletRhythmMaker(
+                tie_specifier=abjad.rhythmmakertools.TieSpecifier(
                     use_messiaen_style_ties=True,
                     ),
                 tuplet_ratios=tuplet_ratios,
@@ -75,15 +106,15 @@ class RhythmInterface(object):
     @staticmethod
     def make_even_run_rhythm_specifier():
         return baca.tools.RhythmSpecifier(
-            rhythm_maker=rhythmmakertools.EvenRunRhythmMaker()
+            rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker()
             )
 
     @staticmethod
     def make_messiaen_note_rhythm_specifier():
         return baca.tools.RhythmSpecifier(
             rewrite_meter=True,
-            rhythm_maker=rhythmmakertools.NoteRhythmMaker(
-                tie_specifier=rhythmmakertools.TieSpecifier(
+            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
+                tie_specifier=abjad.rhythmmakertools.TieSpecifier(
                     use_messiaen_style_ties=True,
                     ),
                 ),
@@ -93,8 +124,8 @@ class RhythmInterface(object):
     def make_messiaen_tied_note_rhythm_specifier():
         return baca.tools.RhythmSpecifier(
             rewrite_meter=True,
-            rhythm_maker=rhythmmakertools.NoteRhythmMaker(
-                tie_specifier=rhythmmakertools.TieSpecifier(
+            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
+                tie_specifier=abjad.rhythmmakertools.TieSpecifier(
                     tie_across_divisions=True,
                     use_messiaen_style_ties=True,
                     ),
@@ -103,12 +134,12 @@ class RhythmInterface(object):
 
     @staticmethod
     def make_multimeasure_rest_rhythm_specifier():
-        mask = rhythmmakertools.SilenceMask(
-            pattern=patterntools.select_all(),
+        mask = abjad.rhythmmakertools.SilenceMask(
+            pattern=abjad.patterntools.select_all(),
             use_multimeasure_rests=True,
             )
         return baca.tools.RhythmSpecifier(
-            rhythm_maker=rhythmmakertools.NoteRhythmMaker(
+            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
                 division_masks=[mask],
                 ),
             )
@@ -117,26 +148,26 @@ class RhythmInterface(object):
     def make_note_rhythm_specifier():
         return baca.tools.RhythmSpecifier(
             rewrite_meter=True,
-            rhythm_maker=rhythmmakertools.NoteRhythmMaker()
+            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker()
             )
 
     @staticmethod
     def make_repeated_duration_rhythm_specifier(durations):
-        if isinstance(durations, durationtools.Duration):
+        if isinstance(durations, abjad.Duration):
             durations = [durations]
         elif isinstance(durations, tuple):
             assert len(durations) == 2
-            durations = [durationtools.Duration(durations)]
+            durations = [abjad.Duration(durations)]
         return baca.tools.RhythmSpecifier(
-            division_expression=sequence()
+            division_expression=abjad.sequence()
                 .sum()
                 .sequence()
                 .split(durations, cyclic=True, overhang=True)
                 .flatten()
                 ,
             rewrite_meter=True,
-            rhythm_maker=rhythmmakertools.NoteRhythmMaker(
-                tie_specifier=rhythmmakertools.TieSpecifier(
+            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
+                tie_specifier=abjad.rhythmmakertools.TieSpecifier(
                     use_messiaen_style_ties=True,
                     ),
                 ),
@@ -144,21 +175,21 @@ class RhythmInterface(object):
 
     @staticmethod
     def make_rest_rhythm_specifier():
-        mask = rhythmmakertools.SilenceMask(
-            pattern=patterntools.select_all(),
+        mask = abjad.rhythmmakertools.SilenceMask(
+            pattern=abjad.patterntools.select_all(),
             )
         return baca.tools.RhythmSpecifier(
-            rhythm_maker=rhythmmakertools.NoteRhythmMaker(
+            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
                 division_masks=[mask],
                 ),
             )
 
     @staticmethod
     def make_single_attack_rhythm_specifier(duration):
-        duration = durationtools.Duration(duration)
+        duration = abjad.Duration(duration)
         numerator, denominator = duration.pair
-        rhythm_maker = rhythmmakertools.IncisedRhythmMaker(
-            incise_specifier=rhythmmakertools.InciseSpecifier(
+        rhythm_maker = abjad.rhythmmakertools.IncisedRhythmMaker(
+            incise_specifier=abjad.rhythmmakertools.InciseSpecifier(
                 fill_with_notes=False,
                 outer_divisions_only=True,
                 prefix_talea=[numerator],
@@ -174,7 +205,7 @@ class RhythmInterface(object):
     def make_strict_quarter_divisions():
         expression = baca.tools.DivisionSequenceExpression()
         expression = expression.split_by_durations(
-            durations=[durationtools.Duration(1, 4)]
+            durations=[abjad.Duration(1, 4)]
             )
         expression = expression.flatten()
         return expression
@@ -186,8 +217,8 @@ class RhythmInterface(object):
         stop_talea=[3, -1],
         ):
         return baca.tools.RhythmSpecifier(
-            rhythm_maker=rhythmmakertools.IncisedRhythmMaker(
-                incise_specifier = rhythmmakertools.InciseSpecifier(
+            rhythm_maker=abjad.rhythmmakertools.IncisedRhythmMaker(
+                incise_specifier = abjad.rhythmmakertools.InciseSpecifier(
                     outer_divisions_only=True,
                     prefix_talea=start_talea,
                     prefix_counts=[len(start_talea)],
@@ -195,7 +226,7 @@ class RhythmInterface(object):
                     suffix_counts=[len(stop_talea)],
                     talea_denominator=denominator,
                     ),
-                tie_specifier=rhythmmakertools.TieSpecifier(
+                tie_specifier=abjad.rhythmmakertools.TieSpecifier(
                     tie_consecutive_notes=True,
                     use_messiaen_style_ties=True,
                     ),
@@ -205,7 +236,7 @@ class RhythmInterface(object):
     @staticmethod
     def make_tied_repeated_duration_rhythm_specifier(durations):
         specifier = make_repeated_duration_rhythm_specifier(durations)
-        specifier = new(
+        specifier = abjad.new(
             specifier,
             rewrite_meter=False,
             rhythm_maker__tie_specifier__tie_across_divisions=True,
@@ -213,9 +244,18 @@ class RhythmInterface(object):
         return specifier
 
     @staticmethod
+    def nest(time_treatments=None):
+        if not isinstance(time_treatments, list):
+            time_treatments = [time_treatments]
+        return baca.tools.NestingSpecifier(
+            lmr_specifier=None,
+            time_treatments=time_treatments,
+            )
+
+    @staticmethod
     def split_by_durations(durations):
-        durations = [durationtools.Duration(_) for _ in durations]
-        expression = sequence()
+        durations = [abjad.Duration(_) for _ in durations]
+        expression = abjad.sequence()
         expression = expression.flatten()
         expression = expression.sum()
         expression = expression.sequence()

@@ -24,7 +24,7 @@ class Division(abjad.NonreducedFraction):
 
         ::
 
-            >>> print(format(division))
+            >>> f(division)
             baca.tools.Division(
                 (3, 8),
                 payload=rhythmmakertools.NoteRhythmMaker(),
@@ -44,7 +44,7 @@ class Division(abjad.NonreducedFraction):
 
         ::
 
-            >>> print(format(division))
+            >>> f(division)
             baca.tools.Division(
                 (3, 8),
                 start_offset=durationtools.Offset(5, 4),
@@ -60,7 +60,7 @@ class Division(abjad.NonreducedFraction):
 
         ::
 
-            >>> print(format(division))
+            >>> f(division)
             baca.tools.Division(
                 (3, 8)
                 )
@@ -80,7 +80,7 @@ class Division(abjad.NonreducedFraction):
 
         ::
 
-            >>> print(format(new_division))
+            >>> f(new_division)
             baca.tools.Division(
                 (3, 8),
                 payload=rhythmmakertools.NoteRhythmMaker(),
@@ -103,7 +103,7 @@ class Division(abjad.NonreducedFraction):
 
         ::
 
-            >>> print(format(new_division))
+            >>> f(new_division)
             baca.tools.Division(
                 (6, 4),
                 payload=rhythmmakertools.NoteRhythmMaker(),
@@ -120,7 +120,7 @@ class Division(abjad.NonreducedFraction):
 
         ::
 
-            >>> print(format(division))
+            >>> f(division)
             baca.tools.Division(
                 (0, 1)
                 )
@@ -146,6 +146,7 @@ class Division(abjad.NonreducedFraction):
 
             >>> for division in divisions:
             ...     print(division)
+            ...
             Division((1, 8), start_offset=Offset(0, 1))
             Division((1, 8), start_offset=Offset(1, 8))
             Division((1, 8), start_offset=Offset(1, 4))
@@ -203,6 +204,7 @@ class Division(abjad.NonreducedFraction):
 
             >>> for division in divisions:
             ...     print(division)
+            ...
             Division((1, 8), start_offset=Offset(0, 1))
             Division((1, 8), start_offset=Offset(1, 8))
             Division((1, 8), start_offset=Offset(1, 4))
@@ -224,6 +226,7 @@ class Division(abjad.NonreducedFraction):
             ...     print(message)
             ...     for division in part:
             ...         print('\t' + str(division))
+            ...
             part 0
                 Division((1, 8), start_offset=Offset(0, 1))
                 Division((1, 8), start_offset=Offset(1, 8))
@@ -258,6 +261,8 @@ class Division(abjad.NonreducedFraction):
         '_payload',
         '_start_offset',
         )
+
+    _publish_storage_format = True
 
     ### INITIALIZER ###
 

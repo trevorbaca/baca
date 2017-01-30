@@ -20,7 +20,7 @@ class MeasureExpression(abjad.expressiontools.Expression):
         
         ::
 
-            >>> print(format(expression))
+            >>> f(expression)
             baca.tools.MeasureExpression(
                 start_number=2,
                 stop_number=4,

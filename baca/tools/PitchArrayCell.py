@@ -58,7 +58,7 @@ class PitchArrayCell(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> print(format(cell.parent_array))
+            >>> f(cell.parent_array)
             baca.tools.PitchArray(
                 rows=(
                     baca.tools.PitchArrayRow(
@@ -92,7 +92,7 @@ class PitchArrayCell(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> print(format(cell.parent_column))
+            >>> f(cell.parent_column)
             baca.tools.PitchArrayColumn(
                 cells=(
                     baca.tools.PitchArrayCell(
@@ -106,7 +106,7 @@ class PitchArrayCell(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> print(format(cell.parent_row))
+            >>> f(cell.parent_row)
             baca.tools.PitchArrayRow(
                 cells=(
                     baca.tools.PitchArrayCell(
@@ -158,6 +158,8 @@ class PitchArrayCell(abjad.abctools.AbjadObject):
         '_row_parent',
         '_width',
         )
+
+    _publish_storage_format = True
 
     ### INTIALIZER ###
 

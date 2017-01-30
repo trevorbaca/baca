@@ -26,8 +26,8 @@ class GlissandoSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
             ...     [
-            ...         baca.pitch.pitches('E4 D5 F4 E5 G4 F5'),
-            ...         baca.rhythm.make_even_run_rhythm_specifier(),
+            ...         baca.pitches('E4 D5 F4 E5 G4 F5'),
+            ...         baca.make_even_run_rhythm_specifier(),
             ...         baca.tools.GlissandoSpecifier(
             ...             patterns=patterntools.select_all(),
             ...             ),
@@ -132,8 +132,8 @@ class GlissandoSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
             ...     [
-            ...         baca.pitch.pitches('E4 D5 F4 E5 G4 F5'),
-            ...         baca.rhythm.make_even_run_rhythm_specifier(),
+            ...         baca.pitches('E4 D5 F4 E5 G4 F5'),
+            ...         baca.make_even_run_rhythm_specifier(),
             ...         baca.tools.GlissandoSpecifier(
             ...             patterns=[
             ...                 patterntools.select_first(1),
@@ -313,7 +313,7 @@ class GlissandoSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> specifier.patterns
-                (Pattern(indices=(0, 1), period=2), Pattern(indices=(0,)))
+                (Pattern(indices=[0, 1], period=2), Pattern(indices=[0]))
 
         Set to patterns or none.
 

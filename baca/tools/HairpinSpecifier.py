@@ -30,7 +30,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> print(format(staff))
+            >>> f(staff)
             \new Staff {
                 \once \override Hairpin.circled-tip = ##t
                 c'4 ~ \> \f
@@ -50,7 +50,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> print(format(specifier))
+            >>> f(specifier)
             baca.tools.HairpinSpecifier(
                 hairpin_tokens=datastructuretools.CyclicTuple(
                     [
@@ -77,6 +77,8 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
         '_patterns',
         '_span',
         )
+
+    _publish_storage_format = True
 
     ### INITIALIZER ###
 
@@ -308,7 +310,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> print(format(staff))
+                >>> f(staff)
                 \new Staff {
                     c'8 ~ \< \p
                     c'8 ~
@@ -340,7 +342,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> print(format(staff))
+                >>> f(staff)
                 \new Staff {
                     c'8 ~ \< \p
                     c'8 ~
@@ -383,7 +385,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> print(format(staff))
+                >>> f(staff)
                 \new Staff {
                     c'4 ~ \> \f
                     c'4 ~
@@ -415,7 +417,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> print(format(staff))
+                >>> f(staff)
                 \new Staff {
                     \once \override Hairpin.stencil = #flared-hairpin
                     c'4 ~ \> \f
@@ -461,7 +463,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> print(format(staff))
+                >>> f(staff)
                 \new Staff {
                     c'16 \< \p
                     d'16
@@ -500,7 +502,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> print(format(staff))
+                >>> f(staff)
                 \new Staff {
                     c'16
                     d'16
@@ -554,7 +556,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> print(format(staff))
+                >>> f(staff)
                 \new Staff {
                     c'8 ~ \< \p
                     \once \override Hairpin.circled-tip = ##t
@@ -589,7 +591,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> print(format(staff))
+                >>> f(staff)
                 \new Staff {
                     c'8 ~ \< \p
                     \once \override Hairpin.circled-tip = ##t
@@ -624,7 +626,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> print(format(staff))
+                >>> f(staff)
                 \new Staff {
                     c'8 ~ \< \p
                     \once \override Hairpin.circled-tip = ##t
@@ -678,7 +680,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> print(format(staff))
+                >>> f(staff)
                 \new Staff {
                     c'4 ~ \< \ppp
                     c'8 \p
@@ -710,7 +712,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> print(format(staff))
+                >>> f(staff)
                 \new Staff {
                     c'4 ~ \< \ppp
                     c'8 \p
@@ -761,7 +763,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> print(format(staff))
+                >>> f(staff)
                 \new Staff {
                     c'4 ~ \< \ppp
                     c'8
@@ -793,7 +795,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> print(format(staff))
+                >>> f(staff)
                 \new Staff {
                     c'4 ~ \< \ppp
                     c'8 \p
@@ -825,7 +827,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> print(format(staff))
+                >>> f(staff)
                 \new Staff {
                     c'16 \< \p
                     d'16 ~

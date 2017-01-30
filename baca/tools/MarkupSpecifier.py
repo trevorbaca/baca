@@ -32,18 +32,16 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> result = figure_maker(figure_token)
-            >>> selection, time_signature, state_manifest = result
-            >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
+            >>> segment_list = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = figure_maker(segment_list, 'Voice 1')
+            >>> lilypond_file = figure_maker.make(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
 
             >>> f(lilypond_file[Staff])
-            \new Staff {
-                {
-                    \time 5/4
+            \new Staff <<
+                \context Voice = "Voice 1" {
                     {
                         {
                             c'8 ~ [ - \markup { * }
@@ -66,7 +64,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
                         }
                     }
                 }
-            }
+            >>
 
     '''
 
@@ -164,18 +162,16 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> result = figure_maker(figure_token)
-                >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
+                >>> segment_list = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker(segment_list, 'Voice 1')
+                >>> lilypond_file = figure_maker.make(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
                 >>> f(lilypond_file[Staff])
-                \new Staff {
-                    {
-                        \time 5/4
+                \new Staff <<
+                    \context Voice = "Voice 1" {
                         {
                             {
                                 c'8 ~ [ - \markup { * }
@@ -198,7 +194,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
                             }
                         }
                     }
-                }
+                >>
 
         ..  container:: example
 
@@ -224,18 +220,16 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> result = figure_maker(figure_token)
-                >>> selection, time_signature, state_manifest = result
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file([selection])
+                >>> segment_list = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker(segment_list, 'Voice 1')
+                >>> lilypond_file = figure_maker.make(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
                 >>> f(lilypond_file[Staff])
-                \new Staff {
-                    {
-                        \time 5/4
+                \new Staff <<
+                    \context Voice = "Voice 1" {
                         {
                             {
                                 c'8 ~ [ - \markup { * }
@@ -258,7 +252,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
                             }
                         }
                     }
-                }
+                >>
 
         Defaults to head of first pitched logical tie.
 

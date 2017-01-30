@@ -367,59 +367,59 @@ class MarkupInterface(object):
         return class_.make_markup('l.v. possibile')
 
     @classmethod
-    def make_boxed_markup(string, whiteout=True):
+    def make_boxed_markup(class_, string, whiteout=True):
         markup = abjad.Markup(string, direction=Up)
-        markup = markup.box(class_).override(('box-padding', 0.5))
+        markup = markup.box().override(('box-padding', 0.5))
         if whiteout:
-            markup = markup.whiteout(class_)
+            markup = markup.whiteout()
         return markup
 
-    @classmethod
+    @staticmethod
     def make_boxed_markup_specifier(string, whiteout=True):
         markup = abjad.Markup(string, direction=Up)
-        markup = markup.box(class_).override(('box-padding', 0.5))
+        markup = markup.box().override(('box-padding', 0.5))
         if whiteout:
-            markup = markup.whiteout(class_)
+            markup = markup.whiteout()
         return baca.tools.MarkupSpecifier(markup=markup)
 
-    @classmethod
+    @staticmethod
     def make_boxed_markup_lines(strings, direction=Up, whiteout=True):
         assert isinstance(strings, list), repr(strings)
         lines = []
         for string in strings:
-            line = abjad.Markup(string).line(class_)
+            line = abjad.Markup(string).line()
             lines.append(line)
-        markup = abjad.Markup.column(lines, direction=Up)
-        markup = markup.box(class_).override(('box-padding', 0.5))
+        markup = abjad.MarkupList(lines, direction=direction).column()
+        markup = markup.box().override(('box-padding', 0.5))
         if whiteout:
-            markup = markup.whiteout(class_)
+            markup = markup.whiteout()
         return markup
 
-    @classmethod
+    @staticmethod
     def make_boxed_repeat_count(count):
         string = 'x{}'.format(count)
         markup = abjad.Markup(string, direction=Up)
-        markup = markup.sans(class_).bold().fontsize(6).upright()
-        markup = markup.box(class_).override(('box-padding', 0.5))
+        markup = markup.sans().bold().fontsize(6).upright()
+        markup = markup.box().override(('box-padding', 0.5))
         return markup
 
-    @classmethod
+    @staticmethod
     def make_one_click_every(lower, upper):
         string = '1 click/{}-{} sec.'
         string = string.format(lower, upper)
-        return class_.make_markup(string)
+        return MarkupInterface.make_markup(string)
 
-    @classmethod
+    @staticmethod
     def make_clicks_per_second(lower, upper):
         string = '{}-{} clicks/sec.'
         string = string.format(lower, upper)
-        return class_.make_markup(string)
+        return MarkupInterface.make_markup(string)
 
-    @classmethod
+    @staticmethod
     def make_fractional_OB(numerator, denominator):
         string = '{}/{}OB'
         string = string.format(numerator, denominator)
-        return class_.make_markup(string)
+        return MarkupInterface.make_markup(string)
 
     @classmethod
     def make_fractional_scratch(numerator, denominator):

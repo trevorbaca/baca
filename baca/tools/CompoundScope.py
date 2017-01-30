@@ -27,7 +27,7 @@ class CompoundScope(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> print(format(scope, 'storage'))
+            >>> f(scope)
             baca.tools.CompoundScope(
                 simple_scopes=(
                     baca.tools.SimpleScope(
@@ -59,7 +59,7 @@ class CompoundScope(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> print(format(compound_scope))
+                >>> f(compound_scope)
                 baca.tools.CompoundScope()
 
     '''
@@ -72,6 +72,8 @@ class CompoundScope(abjad.abctools.AbjadObject):
         '_simple_scopes',
         '_timespan_map',
         )
+
+    _publish_storage_format = True
 
     ### INITIALIZER ###
 

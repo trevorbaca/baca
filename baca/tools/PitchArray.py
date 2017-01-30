@@ -24,7 +24,7 @@ class PitchArray(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> print(format(pitch_array))
+            >>> f(pitch_array)
             baca.tools.PitchArray(
                 rows=(
                     baca.tools.PitchArrayRow(
@@ -66,6 +66,8 @@ class PitchArray(abjad.abctools.AbjadObject):
         '_columns',
         '_rows',
         )
+
+    _publish_storage_format = True
 
     ### INITIALIZER ###
 
@@ -309,8 +311,8 @@ class PitchArray(abjad.abctools.AbjadObject):
         Returns tuple.
         '''
         columns = []
-        for i, cells in enumerate(
-            abjad.sequencetools.zip_sequences(self.rows, truncate=False)):
+        cells = baca.Sequence(self.rows).zip(truncate=False)
+        for i, cells in enumerate(cells):
             column = baca.tools.PitchArrayColumn(cells)
             column._parent_array = self
             column._column_index = i
@@ -719,8 +721,8 @@ class PitchArray(abjad.abctools.AbjadObject):
                 unspanned_indices.append(i)
         array_depth = self.depth
         subarrays = []
-        for start_column, stop_column in \
-            abjad.sequencetools.iterate_sequence_nwise(unspanned_indices):
+        pairs = abjad.Sequence(unspanned_indices).nwise()
+        for start_column, stop_column in pairs:
             upper_left_pair = (0, start_column)
             lower_right_pair = (array_depth, stop_column)
             subarray = self.copy_subarray(upper_left_pair, lower_right_pair)

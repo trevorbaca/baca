@@ -555,11 +555,11 @@ class Tree(abjad.abctools.AbjadObject):
             leaf._set_leaf_item(pitch)
         return result
 
-    def _are_internal_nodes(self, object_):
-        if (isinstance(object_, collections.Iterable) and
-            not isinstance(object_, str)):
+    def _are_internal_nodes(self, argument):
+        if (isinstance(argument, collections.Iterable) and
+            not isinstance(argument, str)):
             return True
-        if isinstance(object_, type(self)) and len(object_):
+        if isinstance(argument, type(self)) and len(argument):
             return True
         return False
 

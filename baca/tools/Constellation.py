@@ -190,7 +190,7 @@ class Constellation(abjad.abctools.AbjadObject):
         return next_constellation
 
     def _constellate_partitioned_generator_pitch_numbers(self):
-        self._pitch_number_lists = baca.pitch.constellate(
+        self._pitch_number_lists = baca.constellate(
             self._partitioned_generator_pitch_numbers, 
             self.pitch_range,
             )

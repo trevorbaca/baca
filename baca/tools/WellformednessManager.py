@@ -144,8 +144,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
         notes = list(notes)
         notes.sort(
             key=lambda _: abjad.inspect_(_.head).get_timespan().start_offset)
-        pairs = abjad.sequencetools.iterate_sequence_nwise(notes)
-        for leaf_1, leaf_2 in pairs:
+        for leaf_1, leaf_2 in abjad.Sequence(notes).nwise():
             if not isinstance(leaf_1.head, abjad.Note):
                 continue
             if not isinstance(leaf_2.head, abjad.Note):

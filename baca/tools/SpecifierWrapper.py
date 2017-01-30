@@ -23,7 +23,7 @@ class SpecifierWrapper(abjad.abctools.AbjadObject):
 
         ::
             
-            >>> print(format(specifier_wrapper))
+            >>> f(specifier_wrapper)
             baca.tools.SpecifierWrapper(
                 specifier=indicatortools.Dynamic(
                     name='p',
@@ -44,6 +44,8 @@ class SpecifierWrapper(abjad.abctools.AbjadObject):
         '_with_next_leaf',
         '_with_previous_leaf',
         )
+
+    _publish_storage_format = True
 
     ### INITIALIZER ###
 

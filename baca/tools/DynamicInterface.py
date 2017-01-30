@@ -20,6 +20,26 @@ class DynamicInterface(object):
     ### PUBLIC METHODS ###
 
     @staticmethod
+    def dynamic_down():
+        command = abjad.LilyPondCommand('dynamicDown')
+        return baca.wrap.leaves(command)
+
+    @staticmethod
+    def dynamic_first_note(dynamic):
+        dynamic = abjad.Dynamic(dynamic)
+        prototype = (abjad.Note, abjad.Chord)
+        selector = abjad.select().by_class(prototype=prototype)
+        return baca.tools.DynamicSpecifier(
+            dynamic=dynamic,
+            selector=selector,
+            )
+
+    @staticmethod
+    def dynamic_up():
+        command = abjad.LilyPondCommand('dynamicUp')
+        return baca.wrap.leaves(command)
+
+    @staticmethod
     def make_ancora_dynamic(dynamic_name, direction=Down):
         markup = abjad.Markup(dynamic_name).dynamic()
         markup += abjad.Markup('ancora').upright()

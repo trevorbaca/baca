@@ -20,3 +20,26 @@ from baca.tools.PitchClassSegment import \
     _pitch_class_segment as pitch_class_segment
 from baca.tools.Sequence import Sequence
 from baca.tools.Sequence import _sequence as sequence
+
+def _import_static_methods(interface_class, interface_class_name):
+    for name in dir(interface_class):
+        if name.startswith('_'):
+            continue
+        statement = '{} = {}.{}'
+        statement = statement.format(name, interface_class_name, name)
+        exec(statement, globals())
+
+_import_static_methods(articulations, 'articulations')
+_import_static_methods(dynamics, 'dynamics')
+_import_static_methods(overrides, 'overrides')
+_import_static_methods(pitch, 'pitch')
+_import_static_methods(rhythm, 'rhythm')
+_import_static_methods(spanners, 'spanners')
+_import_static_methods(transforms, 'transforms')
+
+# these interfaces must be module-referenced:
+# baca.markup.*()
+# baca.select.*()
+# baca.wrap.*()
+
+make_markup_specifier = markup.make_markup_specifier

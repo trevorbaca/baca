@@ -25,7 +25,7 @@ class StageSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> print(format(specifier))
+            >>> f(specifier)
             baca.tools.StageSpecifier(
                 items=(
                     4,
@@ -51,7 +51,7 @@ class StageSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> print(format(specifier))
+            >>> f(specifier)
             baca.tools.StageSpecifier(
                 items=(
                     4,
@@ -74,6 +74,8 @@ class StageSpecifier(abjad.abctools.AbjadObject):
     __slots__ = (
         '_items',
         )
+
+    _publish_storage_format = True
 
     ### INITIALIZER ###
 

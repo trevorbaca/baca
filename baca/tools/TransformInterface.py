@@ -31,7 +31,7 @@ class TransformInterface(object):
             ::
 
                 >>> sequence = [[1, 2, 3], [4, 5], [6, 7, 8]]
-                >>> sequence = baca.transforms.helianthate(sequence, n=-1, m=1)
+                >>> sequence = baca.helianthate(sequence, n=-1, m=1)
                 >>> for item in sequence:
                 ...     item
                 [1, 2, 3]
@@ -62,7 +62,7 @@ class TransformInterface(object):
                 >>> J = abjad.PitchClassSegment(items=[0, 2, 4])
                 >>> K = abjad.PitchClassSegment(items=[5, 6])
                 >>> L = abjad.PitchClassSegment(items=[7, 9, 11])
-                >>> sequence = baca.transforms.helianthate([J, K, L], n=-1, m=1)
+                >>> sequence = baca.helianthate([J, K, L], n=-1, m=1)
                 >>> for item in sequence:
                 ...     item
                 ...
@@ -92,7 +92,7 @@ class TransformInterface(object):
             ::
 
                 >>> sequence = [[1, 2, 3], [4, 5], [6, 7, 8]]
-                >>> baca.transforms.helianthate(sequence)
+                >>> baca.helianthate(sequence)
                 [[1, 2, 3], [4, 5], [6, 7, 8]]
 
         Returns new object with type equal to that of `sequence`.

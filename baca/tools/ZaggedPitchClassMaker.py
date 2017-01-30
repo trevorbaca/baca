@@ -103,7 +103,7 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
 
         Returns pitch-class tree.
         '''
-        pc_cells = baca.transforms.helianthate(
+        pc_cells = baca.helianthate(
             self.pc_cells, 
             -1, 
             1,
@@ -114,7 +114,7 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
         elif all(isinstance(_, prototype) for _ in self.division_ratios):
             division_ratios = self.division_ratios
         elif all(isinstance(_, list) for _ in self.division_ratios):
-            division_ratios = baca.transforms.helianthate(
+            division_ratios = baca.helianthate(
                 self.division_ratios, 
                 -1, 
                 1,
@@ -125,8 +125,7 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
         pc_cells_copy = pc_cells[:]
         pc_cells = []
         for i, pc_segment in enumerate(pc_cells_copy):
-            parts = abjad.sequencetools.partition_sequence_by_ratio_of_lengths(
-                pc_segment, 
+            parts = baca.Sequence(pc_segment).partition_by_ratio_of_lengths(
                 division_ratios[i],
                 )
             pc_cells.extend(parts)

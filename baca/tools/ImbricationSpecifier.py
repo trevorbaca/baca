@@ -34,19 +34,21 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_token = [
+            >>> segment_list = [
             ...     [0, 2, 10, 18, 16],
             ...     [15, 20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     ]
-            >>> imbrication_map = {'Voice 1': [2, 19, 9, 18, 16]}
-            >>> result = figure_maker(
-            ...     ('Voice 2', figure_token),
-            ...     imbrication_map=imbrication_map,
+            >>> contribution = figure_maker(
+            ...     segment_list,
+            ...     'Voice 2',
+            ...     baca.tools.ImbricationSpecifier(
+            ...         segment=[2, 19, 9, 18, 16],
+            ...         voice_name='Voice 1',
+            ...         ),
             ...     )
-            >>> selections, time_signature, state_manifest = result
             >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-            ...     selections,
+            ...     contribution.selections,
             ...     attach_lilypond_voice_commands=True,
             ...     )
             >>> show(lilypond_file) # doctest: +SKIP
@@ -65,6 +67,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
+                            \override TupletBracket.stencil = ##f
+                            \override TupletNumber.stencil = ##f
                             {
                                 s16
                                 d'16
@@ -86,6 +90,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                                 e''16 ]
                                 s16
                             }
+                            \revert TupletBracket.stencil
+                            \revert TupletNumber.stencil
                         }
                     }
                     \context Voice = "Voice 2" {
@@ -166,43 +172,32 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
-            >>> specifier_1 = baca.tools.ImbricationSpecifier(
-            ...     baca.tools.ArticulationSpecifier(
-            ...         articulations=['.'],
-            ...         ),
-            ...     rhythmmakertools.BeamSpecifier(
-            ...         beam_divisions_together=True,
-            ...         beam_rests=True,
-            ...         ),
-            ...     )
-            >>> specifier_2 = baca.tools.ImbricationSpecifier(
-            ...     baca.tools.ArticulationSpecifier(
-            ...         articulations=['>'],
-            ...         ),
-            ...     rhythmmakertools.BeamSpecifier(
-            ...         beam_divisions_together=True,
-            ...         beam_rests=True,
-            ...         ),
-            ...     )
 
         ::
 
-            >>> figure_token = [
+            >>> segment_list = [
             ...     [0, 2, 10, 18, 16],
             ...     [15, 20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     ]
-            >>> imbrication_map = {
-            ...     'Voice 1': (specifier_1, [2, 19, 9]),
-            ...     'Voice 3': (specifier_2, [16, 10, 18]),
-            ...     }
-            >>> result = figure_maker(
-            ...     ('Voice 2', figure_token),
-            ...     imbrication_map=imbrication_map,
+            >>> contribution = figure_maker(
+            ...     segment_list,
+            ...     'Voice 2',
+            ...     baca.tools.ImbricationSpecifier(
+            ...         'Voice 1',
+            ...         [2, 19, 9],
+            ...         baca.beam_everything(),
+            ...         baca.staccati(),
+            ...         ),
+            ...     baca.tools.ImbricationSpecifier(
+            ...         'Voice 3',
+            ...         [16, 10, 18],
+            ...         baca.beam_everything(),
+            ...         baca.accents(),
+            ...         ),
             ...     )
-            >>> selections, time_signature, state_manifest = result
             >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-            ...     selections,
+            ...     contribution.selections,
             ...     attach_lilypond_voice_commands=True,
             ...     )
             >>> show(lilypond_file) # doctest: +SKIP
@@ -221,6 +216,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
+                            \override TupletBracket.stencil = ##f
+                            \override TupletNumber.stencil = ##f
                             {
                                 s16 [
                                 \set stemLeftBeamCount = #2
@@ -248,6 +245,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                                 s16
                                 s16 ]
                             }
+                            \revert TupletBracket.stencil
+                            \revert TupletNumber.stencil
                         }
                     }
                     \context Voice = "Voice 2" {
@@ -309,6 +308,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                     \context Voice = "Voice 3" {
                         \voiceThree
                         {
+                            \override TupletBracket.stencil = ##f
+                            \override TupletNumber.stencil = ##f
                             {
                                 s16 [
                                 s16
@@ -336,6 +337,172 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                                 s16
                                 s16 ]
                             }
+                            \revert TupletBracket.stencil
+                            \revert TupletNumber.stencil
+                        }
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
+        Hides tuplet brackets above imbricated voice:
+
+        ::
+
+            >>> figure_maker = baca.tools.FigureMaker(
+            ...     baca.tools.ArticulationSpecifier(
+            ...         articulations=['.'],
+            ...     ),
+            ...     baca.tools.RhythmSpecifier(
+            ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+            ...             talea=rhythmmakertools.Talea(
+            ...                 counts=[1],
+            ...                 denominator=16,
+            ...                 ),
+            ...             time_treatments=[1],
+            ...             ),
+            ...         ),
+            ...     rhythmmakertools.BeamSpecifier(
+            ...         beam_divisions_together=True,
+            ...         beam_rests=True,
+            ...         ),
+            ...     )
+
+        ::
+
+            >>> segment_list = [
+            ...     [0, 2, 10, 18, 16],
+            ...     [15, 20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     ]
+            >>> contribution = figure_maker(
+            ...     segment_list,
+            ...     'Voice 2',
+            ...     baca.tools.ImbricationSpecifier(
+            ...         'Voice 1',
+            ...         [2, 19, 9, 18, 16],
+            ...         baca.accents(),
+            ...         baca.beam_everything(),
+            ...         ),
+            ...     )
+            >>> lilypond_file = rhythmmakertools.make_lilypond_file(
+            ...     contribution.selections,
+            ...     attach_lilypond_voice_commands=True,
+            ...     )
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> f(lilypond_file[Score])
+            \new Score <<
+                \new TimeSignatureContext {
+                    {
+                        \time 9/8
+                        s1 * 9/8
+                    }
+                }
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \override TupletBracket.stencil = ##f
+                            \override TupletNumber.stencil = ##f
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 6/5 {
+                                s16 [
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                d'16 -\accent
+                                s16
+                                s16
+                                s16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 6/5 {
+                                s16
+                                s16
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                g''16 -\accent
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                a'16 -\accent
+                                s16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 6/5 {
+                                s16
+                                s16
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                fs''16 -\accent
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                e''16 -\accent
+                                s16 ]
+                            }
+                            \revert TupletBracket.stencil
+                            \revert TupletNumber.stencil
+                        }
+                    }
+                    \context Voice = "Voice 2" {
+                        \voiceTwo
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 6/5 {
+                                \set stemLeftBeamCount = #0
+                                \set stemRightBeamCount = #2
+                                c'16 -\staccato [
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                d'16 -\staccato
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                bf'16 -\staccato
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                fs''16 -\staccato
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #1
+                                e''16 -\staccato
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 6/5 {
+                                \set stemLeftBeamCount = #1
+                                \set stemRightBeamCount = #2
+                                ef''16 -\staccato
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                af''16 -\staccato
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                g''16 -\staccato
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                a'16 -\staccato
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #1
+                                c'16 -\staccato
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 6/5 {
+                                \set stemLeftBeamCount = #1
+                                \set stemRightBeamCount = #2
+                                d'16 -\staccato
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                bf'16 -\staccato
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                fs''16 -\staccato
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                e''16 -\staccato
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #0
+                                ef''16 -\staccato ]
+                            }
                         }
                     }
                 >>
@@ -349,26 +516,41 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
     __slots__ = (
         '_allow_unused_pitches',
+        '_extend_beam',
         '_hocket',
+        '_segment',
         '_selector',
         '_specifiers',
         '_truncate_ties',
+        '_voice_name',
         )
+
+    _extend_beam_tag = 'extend beam'
 
     ### INITIALIZER ###
 
     def __init__(
         self,
+        voice_name=None,
+        segment=None,
         *specifiers,
         allow_unused_pitches=None,
+        extend_beam=None,
         hocket=None,
         selector=None,
         truncate_ties=None
         ):
+        if voice_name is not None:
+            assert isinstance(voice_name, str), repr(voice_name)
+        self._voice_name = voice_name
+        self._segment = segment
         self._specifiers = specifiers
         if allow_unused_pitches is not None:
             allow_unused_pitches = bool(allow_unused_pitches)
         self._allow_unused_pitches = allow_unused_pitches
+        if extend_beam is not None:
+            extend_beam = bool(extend_beam)
+        self._extend_beam = extend_beam
         if hocket is not None:
             hocket = bool(hocket)
         self._hocket = hocket
@@ -384,7 +566,12 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, container, imbrication_token):
+    def __call__(
+        self,
+        container,
+        #imbrication_token,
+        #extend_beam=False,
+        ):
         r'''Calls specifier on `container` with `imbrication_token`.
 
         ..  container:: example
@@ -419,32 +606,26 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...             ),
                 ...         ),
                 ...     )
-                >>> imbrication_specifier = baca.tools.ImbricationSpecifier(
-                ...     baca.tools.ArticulationSpecifier(
-                ...         articulations=['>'],
-                ...         ),
-                ...     rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         beam_rests=True,
-                ...         ),
-                ...     )
 
             ::
 
-                >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> pair = (imbrication_specifier, [2, 15, 20])
-                >>> imbrication_map = {'Voice 3': pair}
+                >>> segment_list = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> polyphony_map = [
                 ...     ('Voice 1', [[18, 16, 15, 20, 19], [9]], polyphony_specifier),
                 ...     ]
-                >>> result = figure_maker(
-                ...     ('Voice 2', figure_token),
-                ...     imbrication_map=imbrication_map,
+                >>> contribution = figure_maker(
+                ...     segment_list,
+                ...     'Voice 2',
+                ...     baca.tools.ImbricationSpecifier(
+                ...         'Voice 3',
+                ...         [2, 15, 20],
+                ...         baca.accents(),
+                ...         baca.beam_everything(),
+                ...         ),
                 ...     polyphony_map=polyphony_map,
                 ...     )
-                >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
+                ...     contribution.selections,
                 ...     attach_lilypond_voice_commands=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -498,6 +679,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                         \context Voice = "Voice 3" {
                             \voiceThree
                             {
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
                                 {
                                     s8. [
                                     \set stemLeftBeamCount = #1
@@ -519,6 +702,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                                 {
                                     s8. ]
                                 }
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
                             }
                         }
                     >>
@@ -540,35 +725,28 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...             ),
                 ...         ),
                 ...     )
-                >>> specifier = baca.tools.ImbricationSpecifier(
-                ...     baca.tools.ArticulationSpecifier(
-                ...         articulations=['>'],
-                ...         ),
-                ...     rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         beam_rests=True,
-                ...         ),
-                ...     )
 
             ::
 
-                >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> pitch_classes = [
+                >>> segment_list = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> segment = [
                 ...     abjad.NumberedPitchClass(10),
                 ...     abjad.NumberedPitchClass(6),
                 ...     abjad.NumberedPitchClass(4),
                 ...     abjad.NumberedPitchClass(3),
                 ...     ]
-                >>> imbrication_map = {
-                ...     'Voice 1': (specifier, pitch_classes),
-                ...     }
-                >>> result = figure_maker(
-                ...     ('Voice 2', figure_token),
-                ...     imbrication_map=imbrication_map,
+                >>> contribution = figure_maker(
+                ...     segment_list,
+                ...     'Voice 2',
+                ...     baca.tools.ImbricationSpecifier(
+                ...         'Voice 1',
+                ...         segment,
+                ...         baca.accents(),
+                ...         baca.beam_everything(),
+                ...         ),
                 ...     )
-                >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
+                ...     contribution.selections,
                 ...     attach_lilypond_voice_commands=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -587,6 +765,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                         \context Voice = "Voice 1" {
                             \voiceOne
                             {
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
                                 {
                                     s8. [
                                     s8.
@@ -610,6 +790,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                                 {
                                     s8. ]
                                 }
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
                             }
                         }
                         \context Voice = "Voice 2" {
@@ -651,38 +833,31 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...             ),
                 ...         ),
                 ...     )
-                >>> specifier = baca.tools.ImbricationSpecifier(
-                ...     baca.tools.ArticulationSpecifier(
-                ...         articulations=['>'],
-                ...         ),
-                ...     rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         beam_rests=True,
-                ...         ),
-                ...     )
 
             ::
 
-                >>> figure_token = [
+                >>> segment_list = [
                 ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
                 ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
                 ...     ]
                 >>> imbricated_pitches = [
                 ...     0,
-                ...     baca.pitch.protect(10),
-                ...     baca.pitch.protect(18),
+                ...     baca.coat(10),
+                ...     baca.coat(18),
                 ...     10, 18,
                 ...     ]
-                >>> imbrication_map = {
-                ...     'Voice 1': (specifier, imbricated_pitches),
-                ...     }
-                >>> result = figure_maker(
-                ...     ('Voice 2', figure_token),
-                ...     imbrication_map=imbrication_map,
+                >>> contribution = figure_maker(
+                ...     segment_list,
+                ...     'Voice 2',
+                ...     baca.tools.ImbricationSpecifier(
+                ...         'Voice 1',
+                ...         imbricated_pitches,
+                ...         baca.accents(),
+                ...         baca.beam_everything(),
+                ...         ),
                 ...     )
-                >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
+                ...     contribution.selections,
                 ...     attach_lilypond_voice_commands=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -701,6 +876,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                         \context Voice = "Voice 1" {
                             \voiceOne
                             {
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
                                 {
                                     \set stemLeftBeamCount = #0
                                     \set stemRightBeamCount = #2
@@ -733,6 +910,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                                     s16
                                     s16 ]
                                 }
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
                             }
                         }
                         \context Voice = "Voice 2" {
@@ -769,14 +948,231 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                     >>
                 >>
 
+        ..  container:: example
+
+            Segment-maker allows for beam extension.
+            
+            Extends beam across figures:
+
+                >>> figure_maker = baca.tools.FigureMaker(
+                ...     rhythmmakertools.BeamSpecifier(
+                ...         beam_divisions_together=True,
+                ...         ),
+                ...     )
+
+            ::
+
+                >>> voice_1_selections = []
+                >>> voice_2_selections = []
+                >>> time_signatures = []
+                >>> contribution = figure_maker(
+                ...     [[0, 2, 10, 18], [16, 15, 23]],
+                ...     'Voice 2',
+                ...     baca.tools.ImbricationSpecifier(
+                ...         'Voice 1',
+                ...         [2, 10],
+                ...         baca.staccati(),
+                ...         baca.beam_everything(),
+                ...         extend_beam=True,
+                ...         ),
+                ...     )
+                >>> dictionary = contribution.selections
+                >>> voice_1_selections.append(dictionary['Voice 1'])
+                >>> voice_2_selections.append(dictionary['Voice 2'])
+                >>> time_signatures.append(contribution.time_signature)    
+                >>> contribution = figure_maker(
+                ...     [[19, 13, 9, 8]],
+                ...     'Voice 2',
+                ...     baca.tools.ImbricationSpecifier(
+                ...         'Voice 1',
+                ...         [13, 9],
+                ...         baca.staccati(),
+                ...         baca.beam_everything(),
+                ...         ),
+                ...     )
+                >>> dictionary = contribution.selections
+                >>> voice_1_selections.append(dictionary['Voice 1'])
+                >>> voice_2_selections.append(dictionary['Voice 2'])
+                >>> time_signatures.append(contribution.time_signature)    
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     ignore_duplicate_pitch_classes=True,
+                ...     measures_per_stage=[1, 1],
+                ...     score_template=baca.tools.TwoVoiceStaffScoreTemplate(),
+                ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
+                ...         minimum_width=Duration(1, 24),
+                ...         ),
+                ...     time_signatures=time_signatures,
+                ...     )
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('v2', baca.select.stages(1)),
+                ...     baca.tools.RhythmSpecifier(
+                ...         rhythm_maker=voice_2_selections[0],
+                ...         ),
+                ...     )
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('v2', baca.select.stages(2)),
+                ...     baca.tools.RhythmSpecifier(
+                ...         rhythm_maker=voice_2_selections[1],
+                ...         ),
+                ...     )
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('v1', baca.select.stages(1)),
+                ...     baca.tools.RhythmSpecifier(
+                ...         rhythm_maker=voice_1_selections[0],
+                ...         ),
+                ...     )
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('v1', baca.select.stages(2)),
+                ...     baca.tools.RhythmSpecifier(
+                ...         rhythm_maker=voice_1_selections[1],
+                ...         ),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> voice = lilypond_file['Music Voice 2']
+                >>> abjad.override(voice).beam.positions = (-5, -5)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+
+            ..  doctest::
+
+                >>> f(lilypond_file[Score])
+                \context Score = "Score" <<
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 7/16
+                                R1 * 7/16
+                            }
+                            {
+                                \time 1/4
+                                R1 * 1/4
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 7/16
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 7/16
+                            }
+                            {
+                                \time 1/4
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 1/4
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \context MusicStaff = "Music Staff" <<
+                            \context MusicVoiceOne = "Music Voice 1" {
+                                {
+                                    \override TupletBracket.stencil = ##f
+                                    \override TupletNumber.stencil = ##f
+                                    {
+                                        s16 [
+                                        \set stemLeftBeamCount = #2
+                                        \set stemRightBeamCount = #2
+                                        d'16 -\staccato
+                                        \set stemLeftBeamCount = #2
+                                        \set stemRightBeamCount = #2
+                                        bf'16 -\staccato
+                                        s16
+                                    }
+                                    {
+                                        s16
+                                        s16
+                                        s16
+                                    }
+                                    \revert TupletBracket.stencil
+                                    \revert TupletNumber.stencil
+                                }
+                                {
+                                    \override TupletBracket.stencil = ##f
+                                    \override TupletNumber.stencil = ##f
+                                    {
+                                        s16
+                                        \set stemLeftBeamCount = #2
+                                        \set stemRightBeamCount = #2
+                                        cs''16 -\staccato
+                                        \set stemLeftBeamCount = #2
+                                        \set stemRightBeamCount = #2
+                                        a'16 -\staccato
+                                        s16 ]
+                                        \bar "|"
+                                    }
+                                    \revert TupletBracket.stencil
+                                    \revert TupletNumber.stencil
+                                }
+                            }
+                            \context MusicVoiceTwo = "Music Voice 2" \with {
+                                \override Beam.positions = #'(-5 . -5)
+                            } {
+                                {
+                                    {
+                                        \set stemLeftBeamCount = #0
+                                        \set stemRightBeamCount = #2
+                                        c'16 [
+                                        \set stemLeftBeamCount = #2
+                                        \set stemRightBeamCount = #2
+                                        d'16
+                                        \set stemLeftBeamCount = #2
+                                        \set stemRightBeamCount = #2
+                                        bf'16
+                                        \set stemLeftBeamCount = #2
+                                        \set stemRightBeamCount = #1
+                                        fs''16
+                                    }
+                                    {
+                                        \set stemLeftBeamCount = #1
+                                        \set stemRightBeamCount = #2
+                                        e''16
+                                        \set stemLeftBeamCount = #2
+                                        \set stemRightBeamCount = #2
+                                        ef''16
+                                        \set stemLeftBeamCount = #2
+                                        \set stemRightBeamCount = #0
+                                        b''16 ]
+                                    }
+                                }
+                                {
+                                    {
+                                        \set stemLeftBeamCount = #0
+                                        \set stemRightBeamCount = #2
+                                        g''16 [
+                                        \set stemLeftBeamCount = #2
+                                        \set stemRightBeamCount = #2
+                                        cs''16
+                                        \set stemLeftBeamCount = #2
+                                        \set stemRightBeamCount = #2
+                                        a'16
+                                        \set stemLeftBeamCount = #2
+                                        \set stemRightBeamCount = #0
+                                        af'16 ]
+                                        \bar "|"
+                                    }
+                                }
+                            }
+                        >>
+                    >>
+                >>
+
         Returns new container.
         '''
         original_container = container
         container = copy.deepcopy(container)
-        imbrication_token = abjad.sequence(imbrication_token)
-        imbrication_token = imbrication_token.flatten()
+        abjad.override(container).tuplet_bracket.stencil = False
+        abjad.override(container).tuplet_number.stencil = False
+        segment = baca.sequence(self.segment).flatten()
         cursor = baca.tools.Cursor(
-            imbrication_token,
+            segment,
             singletons=True,
             suppress_exception=True,
             )
@@ -801,7 +1197,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                     skip = abjad.Skip(duration)
                     abjad.mutate(note).replace([skip])
             elif self._matches_pitch(logical_tie.head, pitch_number):
-                if isinstance(pitch_number, baca.tools.Shell):
+                if isinstance(pitch_number, baca.tools.Coat):
                     for note in logical_tie:
                         duration = note.written_duration
                         skip = abjad.Skip(duration)
@@ -829,7 +1225,12 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             message = message.format(cursor, cursor.position-1, len(cursor))
             raise Exception(message)
         self._apply_specifiers(container)
-        return container
+        if self.extend_beam:
+            leaves = list(abjad.iterate(container).by_leaf())
+            last_leaf = leaves[-1]
+            abjad.attach(self._extend_beam_tag, last_leaf)
+        selection = abjad.select(container)
+        return {self.voice_name: selection}
 
     ### PRIVATE METHODS ###
 
@@ -855,8 +1256,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
     @staticmethod
     def _matches_pitch(note, pitch_object):
-        if isinstance(pitch_object, baca.tools.Shell):
-            pitch_object = pitch_object.payload
+        if isinstance(pitch_object, baca.tools.Coat):
+            pitch_object = pitch_object.argument
         if pitch_object is None:
             return False
         elif isinstance(pitch_object, (int, float)):
@@ -911,33 +1312,26 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         beam_rests=True,
                 ...         ),
                 ...     )
-                >>> specifier = baca.tools.ImbricationSpecifier(
-                ...     baca.tools.ArticulationSpecifier(
-                ...         articulations=['>'],
-                ...     ),
-                ...     rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         beam_rests=True,
-                ...         ),
-                ...     allow_unused_pitches=True,
-                ...     )
 
             ::
 
-                >>> figure_token = [
+                >>> segment_list = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     ]
-                >>> imbrication_map = {
-                ...     'Voice 1': (specifier, [2, 19, 9, 18, 16]),
-                ...     }
-                >>> result = figure_maker(
-                ...     ('Voice 2', figure_token),
-                ...     imbrication_map=imbrication_map,
+                >>> contribution = figure_maker(
+                ...     segment_list,
+                ...     'Voice 2',
+                ...     baca.tools.ImbricationSpecifier(
+                ...         'Voice 1',
+                ...         [2, 19, 9, 18, 16],
+                ...         baca.accents(),
+                ...         baca.beam_everything(),
+                ...         allow_unused_pitches=True,
+                ...         ),
                 ...     )
-                >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
+                ...     contribution.selections,
                 ...     attach_lilypond_voice_commands=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -956,6 +1350,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                         \context Voice = "Voice 1" {
                             \voiceOne
                             {
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
                                 {
                                     s16 [
                                     \set stemLeftBeamCount = #2
@@ -976,6 +1372,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                                     a'16 -\accent
                                     s16 ]
                                 }
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
                             }
                         }
                         \context Voice = "Voice 2" {
@@ -1043,29 +1441,22 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         beam_rests=True,
                 ...         ),
                 ...     )
-                >>> specifier = baca.tools.ImbricationSpecifier(
-                ...     baca.tools.ArticulationSpecifier(
-                ...         articulations=['>'],
-                ...     ),
-                ...     rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         beam_rests=True,
-                ...         ),
-                ...     allow_unused_pitches=False,
-                ...     )
 
             ::
 
-                >>> figure_token = [
+                >>> segment_list = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     ]
-                >>> imbrication_map = {
-                ...     'Voice 1': (specifier, [2, 19, 9, 18, 16]),
-                ...     }
                 >>> result = figure_maker(
-                ...     ('Voice 2', figure_token),
-                ...     imbrication_map=imbrication_map,
+                ...     segment_list,
+                ...     'Voice 2',
+                ...     baca.tools.ImbricationSpecifier(
+                ...         'Voice 1',
+                ...         [2, 19, 9, 18, 16],
+                ...         baca.accents(),
+                ...         baca.beam_everything(),
+                ...         ),
                 ...     )
                 Traceback (most recent call last):
                     ...
@@ -1088,6 +1479,16 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
         Returns true, false or none.
         '''
         return self._allow_unused_pitches
+
+    @property
+    def extend_beam(self):
+        r'''Is true when specifier extends beam.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        '''
+        return self._extend_beam
 
     @property
     def hocket(self):
@@ -1116,34 +1517,27 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         beam_rests=True,
                 ...         ),
                 ...     )
-                >>> specifier = baca.tools.ImbricationSpecifier(
-                ...     baca.tools.ArticulationSpecifier(
-                ...         articulations=['>'],
-                ...     ),
-                ...     rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         beam_rests=True,
-                ...         ),
-                ...     hocket=True,
-                ...     )
 
             ::
 
-                >>> figure_token = [
+                >>> segment_list = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
                 ...     ]
-                >>> imbrication_map = {
-                ...     'Voice 1': (specifier, [2, 19, 9, 18, 16]),
-                ...     }
-                >>> result = figure_maker(
-                ...     ('Voice 2', figure_token),
-                ...     imbrication_map=imbrication_map,
+                >>> contribution = figure_maker(
+                ...     segment_list,
+                ...     'Voice 2',
+                ...     baca.tools.ImbricationSpecifier(
+                ...         'Voice 1',
+                ...         [2, 19, 9, 18, 16],
+                ...         baca.accents(),
+                ...         baca.beam_everything(),
+                ...         hocket=True,
+                ...         ),
                 ...     )
-                >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
+                ...     contribution.selections,
                 ...     attach_lilypond_voice_commands=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1162,6 +1556,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                         \context Voice = "Voice 1" {
                             \voiceOne
                             {
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
                                 {
                                     s16 [
                                     \set stemLeftBeamCount = #2
@@ -1193,6 +1589,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                                     e''16 -\accent
                                     s16 ]
                                 }
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
                             }
                         }
                         \context Voice = "Voice 2" {
@@ -1261,6 +1659,14 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
         return self._hocket
 
     @property
+    def segment(self):
+        r'''Gets segment.
+
+        Returns pitch or pitch-class segment.
+        '''
+        return self._segment
+        
+    @property
     def selector(self):
         r'''Gets selector.
 
@@ -1287,33 +1693,26 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         beam_rests=True,
                 ...         ),
                 ...     )
-                >>> specifier = baca.tools.ImbricationSpecifier(
-                ...     baca.tools.ArticulationSpecifier(
-                ...         articulations=['>'],
-                ...     ),
-                ...     rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         beam_rests=True,
-                ...         ),
-                ...     selector=baca.select.pitched_logical_ties(-9)
-                ...     )
 
             ::
 
-                >>> figure_token = [
+                >>> segment_list = [
                 ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
                 ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
                 ...     ]
-                >>> imbrication_map = {
-                ...     'Voice 1': (specifier, [2, 18, 16, 15]),
-                ...     }
-                >>> result = figure_maker(
-                ...     ('Voice 2', figure_token),
-                ...     imbrication_map=imbrication_map,
+                >>> contribution = figure_maker(
+                ...     segment_list,
+                ...     'Voice 2',
+                ...     baca.tools.ImbricationSpecifier(
+                ...         'Voice 1',
+                ...         [2, 18, 16, 15],
+                ...         baca.accents(),
+                ...         baca.beam_everything(),
+                ...         selector=baca.select.pitched_logical_ties(-9),
+                ...         ),
                 ...     )
-                >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
+                ...     contribution.selections,
                 ...     attach_lilypond_voice_commands=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1332,6 +1731,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                         \context Voice = "Voice 1" {
                             \voiceOne
                             {
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
                                 {
                                     s16 [
                                     s16
@@ -1366,6 +1767,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                                     s16
                                     s16 ]
                                 }
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
                             }
                         }
                         \context Voice = "Voice 2" {
@@ -1477,29 +1880,27 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         beam_divisions_together=True,
                 ...         ),
                 ...     )
-                >>> specifier = baca.tools.ImbricationSpecifier(
-                ...     rhythmmakertools.BeamSpecifier(
-                ...         beam_each_division=False,
-                ...         ),
-                ...     )
 
             ::
 
-                >>> figure_token = [
+                >>> segment_list = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
                 ...     ]
-                >>> imbrication_map = {
-                ...     'Voice 1': (specifier, [2, 19, 9, 18, 16]),
-                ...     }
-                >>> result = figure_maker(
-                ...     ('Voice 2', figure_token),
-                ...     imbrication_map=imbrication_map,
+                >>> contribution = figure_maker(
+                ...     segment_list,
+                ...     'Voice 2',
+                ...     baca.tools.ImbricationSpecifier(
+                ...         'Voice 1',
+                ...         [2, 19, 9, 18, 16],
+                ...         abjad.rhythmmakertools.BeamSpecifier(
+                ...             beam_each_division=False,
+                ...             ),
+                ...         ),
                 ...     )
-                >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
+                ...     contribution.selections,
                 ...     attach_lilypond_voice_commands=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1518,6 +1919,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                         \context Voice = "Voice 1" {
                             \voiceOne
                             {
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
                                 {
                                     s16
                                     d'16
@@ -1539,6 +1942,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                                     e''16
                                     s16
                                 }
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
                             }
                         }
                         \context Voice = "Voice 2" {
@@ -1619,29 +2024,27 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         beam_divisions_together=True,
                 ...         ),
                 ...     )
-                >>> specifier = baca.tools.ImbricationSpecifier(
-                ...     rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         ),
-                ...     )
 
             ::
 
-                >>> figure_token = [
+                >>> segment_list = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
                 ...     ]
-                >>> imbrication_map = {
-                ...     'Voice 1': (specifier, [2, 19, 9, 18, 16]),
-                ...     }
-                >>> result = figure_maker(
-                ...     ('Voice 2', figure_token),
-                ...     imbrication_map=imbrication_map,
+                >>> contribution = figure_maker(
+                ...     segment_list,
+                ...     'Voice 2',
+                ...     baca.tools.ImbricationSpecifier(
+                ...         'Voice 1',
+                ...         [2, 19, 9, 18, 16],
+                ...         abjad.rhythmmakertools.BeamSpecifier(
+                ...             beam_divisions_together=True,
+                ...             ),
+                ...         ),
                 ...     )
-                >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
+                ...     contribution.selections,
                 ...     attach_lilypond_voice_commands=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1660,6 +2063,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                         \context Voice = "Voice 1" {
                             \voiceOne
                             {
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
                                 {
                                     s16
                                     \set stemLeftBeamCount = #2
@@ -1691,6 +2096,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                                     e''16 ]
                                     s16
                                 }
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
                             }
                         }
                         \context Voice = "Voice 2" {
@@ -1771,30 +2178,25 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         beam_divisions_together=True,
                 ...         ),
                 ...     )
-                >>> specifier = baca.tools.ImbricationSpecifier(
-                ...     rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         beam_rests=True,
-                ...         ),
-                ...     )
 
             ::
 
-                >>> figure_token = [
+                >>> segment_list = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
                 ...     ]
-                >>> imbrication_map = {
-                ...     'Voice 1': (specifier, [2, 19, 9, 18, 16]),
-                ...     }
-                >>> result = figure_maker(
-                ...     ('Voice 2', figure_token),
-                ...     imbrication_map=imbrication_map,
+                >>> contribution = figure_maker(
+                ...     segment_list,
+                ...     'Voice 2',
+                ...     baca.tools.ImbricationSpecifier(
+                ...         'Voice 1',
+                ...         [2, 19, 9, 18, 16],
+                ...         baca.beam_everything(),
+                ...         ),
                 ...     )
-                >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
+                ...     contribution.selections,
                 ...     attach_lilypond_voice_commands=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1813,6 +2215,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                         \context Voice = "Voice 1" {
                             \voiceOne
                             {
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
                                 {
                                     s16 [
                                     \set stemLeftBeamCount = #2
@@ -1844,6 +2248,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                                     e''16
                                     s16 ]
                                 }
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
                             }
                         }
                         \context Voice = "Voice 2" {
@@ -1924,29 +2330,27 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         beam_divisions_together=True,
                 ...         ),
                 ...     )
-                >>> specifier = baca.tools.ImbricationSpecifier(
-                ...     rhythmmakertools.BeamSpecifier(
-                ...         beam_rests=True,
-                ...         ),
-                ...     )
 
             ::
 
-                >>> figure_token = [
+                >>> segment_list = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
                 ...     ]
-                >>> imbrication_map = {
-                ...     'Voice 1': (specifier, [2, 19, 9, 18, 16])
-                ...     }
-                >>> result = figure_maker(
-                ...     ('Voice 2', figure_token),
-                ...     imbrication_map=imbrication_map,
+                >>> contribution = figure_maker(
+                ...     segment_list,
+                ...     'Voice 2',
+                ...     baca.tools.ImbricationSpecifier(
+                ...         'Voice 1',
+                ...         [2, 19, 9, 18, 16],
+                ...         abjad.rhythmmakertools.BeamSpecifier(
+                ...             beam_rests=True,
+                ...             ),
+                ...         ),
                 ...     )
-                >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
+                ...     contribution.selections,
                 ...     attach_lilypond_voice_commands=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1965,6 +2369,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                         \context Voice = "Voice 1" {
                             \voiceOne
                             {
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
                                 {
                                     s16 [
                                     d'16
@@ -1986,6 +2392,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                                     e''16
                                     s16 ]
                                 }
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
                             }
                         }
                         \context Voice = "Voice 2" {
@@ -2071,27 +2479,22 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...             ),
                 ...         ),
                 ...     )
-                >>> specifier = baca.tools.ImbricationSpecifier(
-                ...     rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         beam_rests=True,
-                ...         ),
-                ...     truncate_ties=True,
-                ...     )
 
             ::
 
-                >>> figure_token = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> imbrication_map = {
-                ...     'Voice 1': (specifier, [2, 10, 18, 19, 9]),
-                ...     }
-                >>> result = figure_maker(
-                ...     ('Voice 2', figure_token),
-                ...     imbrication_map=imbrication_map,
+                >>> segment_list = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker(
+                ...     segment_list,
+                ...     'Voice 2',
+                ...     baca.tools.ImbricationSpecifier(
+                ...         'Voice 1',
+                ...         [2, 10, 18, 19, 9],
+                ...         baca.beam_everything(),
+                ...         truncate_ties=True,
+                ...         ),
                 ...     )
-                >>> selections, time_signature, state_manifest = result
                 >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     selections,
+                ...     contribution.selections,
                 ...     attach_lilypond_voice_commands=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -2110,6 +2513,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                         \context Voice = "Voice 1" {
                             \voiceOne
                             {
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
                                 {
                                     s8 [
                                     s32
@@ -2144,6 +2549,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                                     a'8
                                     s32 ]
                                 }
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
                             }
                         }
                         \context Voice = "Voice 2" {
@@ -2193,3 +2600,11 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
         Returns true, false or none.
         '''
         return self._truncate_ties
+
+    @property
+    def voice_name(self):
+        r'''Gets voice name.
+
+        Returns string.
+        '''
+        return self._voice_name

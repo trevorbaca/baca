@@ -71,8 +71,7 @@ class DesignMaker(abjad.abctools.AbjadObject):
     @staticmethod
     def _check_duplicate_pitch_classes(design):
         leaves = design.get_payload()
-        pairs = abjad.sequencetools.iterate_sequence_nwise(leaves)
-        for leaf_1, leaf_2 in pairs:
+        for leaf_1, leaf_2 in abjad.Sequence(leaves).nwise():
             if leaf_1 == leaf_2:
                 message = 'duplicate {!r}.'
                 message = message.format(leaf_1)

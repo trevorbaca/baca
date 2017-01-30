@@ -348,20 +348,20 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         return abjad.datastructuretools.CyclicTuple(self.time_treatments)
 
     @staticmethod
-    def _is_time_treatment(object_):
-        if object_ is None:
+    def _is_time_treatment(argument):
+        if argument is None:
             return True
-        elif isinstance(object_, int):
+        elif isinstance(argument, int):
             return True
-        elif isinstance(object_, str):
+        elif isinstance(argument, str):
             return True
-        elif isinstance(object_, abjad.mathtools.Ratio):
+        elif isinstance(argument, abjad.mathtools.Ratio):
             return True
-        elif isinstance(object_, abjad.durationtools.Multiplier):
+        elif isinstance(argument, abjad.durationtools.Multiplier):
             return True
-        elif object_.__class__ is abjad.durationtools.Duration:
+        elif argument.__class__ is abjad.durationtools.Duration:
             return True
-        elif object_ in ('accel', 'rit'):
+        elif argument in ('accel', 'rit'):
             return True
         return False
 
@@ -1672,7 +1672,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker()
                 >>> rhythm_maker.talea
-                Talea(counts=(1,), denominator=16)
+                Talea(counts=[1], denominator=16)
 
         Set to talea or none.
 

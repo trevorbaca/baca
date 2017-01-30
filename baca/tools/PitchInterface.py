@@ -20,6 +20,12 @@ class PitchInterface(object):
     ### PUBLIC METHODS ###
 
     @staticmethod
+    def coat(argument):
+        r'''Coats `argument`.
+        '''
+        return baca.tools.Coat(argument)
+
+    @staticmethod
     def constellate(cells, range, flatten=True):
         '''Constellates `cells` in `range`.
 
@@ -29,7 +35,7 @@ class PitchInterface(object):
 
                 >>> pitches = [[0, 2, 10], [16, 19, 20]]
                 >>> range_ = abjad.PitchRange('[C4, C#7]')
-                >>> segments = baca.pitch.constellate(pitches, range_)
+                >>> segments = baca.constellate(pitches, range_)
                 >>> for segment in segments:
                 ...     segment
                 Sequence([0, 2, 4, 7, 8, 10])
@@ -48,7 +54,7 @@ class PitchInterface(object):
 
                 >>> pitches = [[4, 8, 11], [7, 15, 17]]
                 >>> range_ = abjad.PitchRange('[C4, C#7]')
-                >>> segments = baca.pitch.constellate(pitches, range_)
+                >>> segments = baca.constellate(pitches, range_)
                 >>> for segment in segments:
                 ...     segment
                 Sequence([4, 7, 8, 11, 15, 17])
@@ -107,17 +113,20 @@ class PitchInterface(object):
             )
 
     @staticmethod
+    def invert_segments(axis=None):
+        operator = baca.pitch_class_segment().invert(axis=axis)
+        expression = baca.sequence().map(operator)
+        return baca.tools.FigurePitchSpecifier(
+            expressions=[expression],
+            to_pitch_classes=True,
+            )
+
+    @staticmethod
     def pitches(source, allow_repeated_pitches=True):
         return baca.tools.ScorePitchSpecifier(
             allow_repeated_pitches=True,
             source=source,
             )
-
-    @staticmethod
-    def protect(payload):
-        r'''Protects `payload` with shell. 
-        '''
-        return baca.tools.Shell(payload)
 
     @staticmethod
     def register(start_pitch, stop_pitch=None):
@@ -138,4 +147,13 @@ class PitchInterface(object):
             operators=[
                 abjad.Transposition(n=n),
                 ]
+            )
+
+    @staticmethod
+    def transpose_segments(n=0):
+        operator = baca.pitch_class_segment().transpose(n=n)
+        expression = baca.sequence().map(operator)
+        return baca.tools.FigurePitchSpecifier(
+            expressions=[expression],
+            to_pitch_classes=True,
             )

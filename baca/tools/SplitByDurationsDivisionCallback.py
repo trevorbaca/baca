@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import abjad
 import baca
 
@@ -469,11 +469,11 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 division_list).rotate(n=pattern_rotation_index)
             division_list = list(division_list)
             if self.cyclic:
-                division_list = abjad.sequencetools.repeat_sequence_to_weight(
-                    division_list,
+                division_list = baca.Sequence(division_list).repeat_to_weight(
                     input_division,
                     allow_total=Less,
                     )
+                division_list = list(division_list)
             total_duration = abjad.durationtools.Duration(sum(division_list))
             if total_duration == input_duration:
                 division_lists.append(division_list)

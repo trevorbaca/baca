@@ -2,7 +2,7 @@
 import abjad
 
 
-class SpacingSpecifier(abjad.abctools.AbjadObject):
+class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
     r'''Spacing specifier.
 
     ::
@@ -26,7 +26,7 @@ class SpacingSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
             ...     [
-            ...         baca.pitch.pitches('E4 F4'),
+            ...         baca.pitches('E4 F4'),
             ...         baca.tools.RhythmSpecifier(
             ...             rhythm_maker=rhythmmakertools.EvenRunRhythmMaker(),
             ...             ),
@@ -124,7 +124,7 @@ class SpacingSpecifier(abjad.abctools.AbjadObject):
 
             >>> segment_maker = baca.tools.SegmentMaker(
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.tools.SpacingSpecifier(),
+            ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(),
             ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
             ...     )
 
@@ -133,7 +133,7 @@ class SpacingSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
             ...     [
-            ...         baca.pitch.pitches('E4 F4'),
+            ...         baca.pitches('E4 F4'),
             ...         baca.tools.RhythmSpecifier(
             ...             rhythm_maker=rhythmmakertools.EvenRunRhythmMaker(),
             ...             ),
@@ -239,7 +239,7 @@ class SpacingSpecifier(abjad.abctools.AbjadObject):
 
             >>> segment_maker = baca.tools.SegmentMaker(
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.tools.SpacingSpecifier(
+            ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
             ...         multiplier=Multiplier(1),
             ...         ),
             ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
@@ -250,7 +250,7 @@ class SpacingSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
             ...     [
-            ...         baca.pitch.pitches('E4 F4'),
+            ...         baca.pitches('E4 F4'),
             ...         baca.tools.RhythmSpecifier(
             ...             rhythm_maker=rhythmmakertools.EvenRunRhythmMaker(),
             ...             ),
@@ -357,7 +357,7 @@ class SpacingSpecifier(abjad.abctools.AbjadObject):
 
             >>> segment_maker = baca.tools.SegmentMaker(
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.tools.SpacingSpecifier(
+            ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
             ...         multiplier=Multiplier(2),
             ...         ),
             ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
@@ -368,7 +368,7 @@ class SpacingSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
             ...     [
-            ...         baca.pitch.pitches('E4 F4'),
+            ...         baca.pitches('E4 F4'),
             ...         baca.tools.RhythmSpecifier(
             ...             rhythm_maker=rhythmmakertools.EvenRunRhythmMaker(),
             ...             ),
@@ -475,7 +475,7 @@ class SpacingSpecifier(abjad.abctools.AbjadObject):
 
             >>> segment_maker = baca.tools.SegmentMaker(
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.tools.SpacingSpecifier(
+            ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
             ...         multiplier=Multiplier(2),
             ...         minimum_width=Duration(1, 8),
             ...         ),
@@ -487,7 +487,7 @@ class SpacingSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
             ...     [
-            ...         baca.pitch.pitches('E4 F4'),
+            ...         baca.pitches('E4 F4'),
             ...         baca.tools.RhythmSpecifier(
             ...             rhythm_maker=rhythmmakertools.EvenRunRhythmMaker(),
             ...             ),
@@ -593,7 +593,7 @@ class SpacingSpecifier(abjad.abctools.AbjadObject):
 
             >>> segment_maker = baca.tools.SegmentMaker(
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.tools.SpacingSpecifier(
+            ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
             ...         minimum_width=Duration(1, 8),
             ...         ),
             ...     time_signatures=[(4, 8), (3, 8)],
@@ -604,7 +604,7 @@ class SpacingSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
             ...     [
-            ...         baca.pitch.pitches('E4 F4'),
+            ...         baca.pitches('E4 F4'),
             ...         baca.tools.RhythmSpecifier(
             ...             rhythm_maker=rhythmmakertools.AccelerandoRhythmMaker(
             ...                 beam_specifier=rhythmmakertools.BeamSpecifier(

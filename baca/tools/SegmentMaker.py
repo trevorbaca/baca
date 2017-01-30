@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import abjad
 import baca
 import copy
@@ -106,7 +106,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
-            ...     baca.rhythm.make_even_run_rhythm_specifier(),
+            ...     baca.make_even_run_rhythm_specifier(),
             ...     )
 
         ::
@@ -280,6 +280,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         '_final_barline',
         '_final_markup',
         '_final_markup_extra_offset',
+        '_hide_instrument_names',
         '_ignore_duplicate_pitch_classes',
         '_ignore_unpitched_notes',
         '_ignore_unregistered_pitches',
@@ -304,9 +305,33 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         '_volta_specifier',
         )
 
+    _absolute_string_trio_stylesheet_path = os.path.join(
+        '/',
+        'Users',
+        'trevorbaca',
+        'Scores',
+        '_docs',
+        'source',
+        '_stylesheets',
+        'string-trio-stylesheet.ily',
+        )
+        
+    _absolute_two_voice_staff_stylesheet_path = os.path.join(
+        '/',
+        'Users',
+        'trevorbaca',
+        'Scores',
+        '_docs',
+        'source',
+        '_stylesheets',
+        'two-voice-staff-stylesheet.ily',
+        )
+
+    _extend_beam_tag = 'extend beam'
+
     _publish_storage_format = True
 
-    _string_trio_stylesheet_path = os.path.join(
+    _relative_string_trio_stylesheet_path = os.path.join(
         '..',
         '..',
         '..',
@@ -314,6 +339,16 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         'source',
         '_stylesheets',
         'string-trio-stylesheet.ily',
+        )
+
+    _relative_two_voice_staff_stylesheet_path = os.path.join(
+        '..',
+        '..',
+        '..',
+        '..',
+        'source',
+        '_stylesheets',
+        'two-voice-staff-stylesheet.ily',
         )
 
     _score_package_stylesheet_path = os.path.join(
@@ -333,6 +368,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         final_barline=None,
         final_markup=None,
         final_markup_extra_offset=None,
+        hide_instrument_names=None,
         ignore_duplicate_pitch_classes=None,
         ignore_unpitched_notes=None,
         ignore_unregistered_pitches=None,
@@ -362,7 +398,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         self._cached_leaves_without_rests = None
         self._design_checker = design_checker
         self._fermata_start_offsets = []
-        if final_barline is not None:
+        if final_barline not in (None, Exact):
             assert isinstance(final_barline, str), repr(final_barline)
         self._final_barline = final_barline
         if final_markup is not None:
@@ -371,6 +407,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         if final_markup_extra_offset is not None:
             assert isinstance(final_markup_extra_offset, tuple)
         self._final_markup_extra_offset = final_markup_extra_offset
+        if hide_instrument_names is not None:
+            hide_instrument_names = bool(hide_instrument_names)
+        self._hide_instrument_names = hide_instrument_names
         if ignore_duplicate_pitch_classes is not None:
             ignore_duplicate_pitch_classes = bool(
                 ignore_duplicate_pitch_classes)
@@ -402,7 +441,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         self._skips_instead_of_rests = skips_instead_of_rests
         self._spacing_map = spacing_map
         if spacing_specifier is not None:
-            assert isinstance(spacing_specifier, baca.tools.SpacingSpecifier)
+            assert isinstance(spacing_specifier, baca.tools.HorizontalSpacingSpecifier)
         self._spacing_specifier = spacing_specifier
         if stage_label_base_string is not None:
             assert isinstance(stage_label_base_string, str)
@@ -418,6 +457,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
     def __call__(
         self, 
         is_doc_example=None,
+        is_test=None,
         segment_metadata=None,
         previous_segment_metadata=None,
         ):
@@ -432,7 +472,10 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         self._make_score()
         self._remove_score_template_start_instruments()
         self._remove_score_template_start_clefs()
-        self._make_lilypond_file(is_doc_example=is_doc_example)
+        self._make_lilypond_file(
+            is_doc_example=is_doc_example,
+            is_test=is_test,
+            )
         self._populate_time_signature_context()
         self._label_stage_numbers_()
         self._interpret_rhythm_specifiers()
@@ -448,6 +491,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         self._make_volta_containers()
         self._label_clock_time_()
         #self._move_instruments_from_notes_back_to_rests()
+        self._hide_instrument_names_()
         self._label_instrument_changes()
         self._transpose_instruments()
         self._attach_rehearsal_mark()
@@ -473,12 +517,18 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         abbreviation = '|'
         if self._is_last_segment():
             abbreviation = '|.'
-        if self.final_barline:
+        if isinstance(self.final_barline, str):
             abbreviation = self.final_barline
         self._score.add_final_bar_line(
             abbreviation=abbreviation, 
             to_each_voice=True,
             )
+        if self.final_barline is Exact:
+            selection = abjad.select(self._score)
+            last_leaf = selection._get_component(abjad.scoretools.Leaf, -1)
+            command = 'override Score.BarLine.transparent = ##f'
+            command = abjad.LilyPondCommand(command)
+            abjad.attach(command, last_leaf)
 
     def _add_final_markup(self):
         if self.final_markup is None:
@@ -775,8 +825,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         return self.design_checker(self._score)
 
     def _check_well_formedness(self):
-        score_block = self._lilypond_file['score']
-        score = score_block['Score']
+        score = self._lilypond_file['Score']
         if not abjad.inspect_(score).is_well_formed():
             inspector = abjad.inspect_(score)
             string = inspector.tabulate_well_formedness_violations()
@@ -974,8 +1023,10 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 return
             index += 1
             if isinstance(next_leaf, abjad.Skip):
-                intervening_skips.append(next_leaf)
-                continue
+                beam = abjad.inspect_(next_leaf).get_spanner(abjad.Beam)
+                if beam is None:
+                    intervening_skips.append(next_leaf)
+                    continue
             break
         abjad.detach(abjad.Beam, leaf)
         all_leaves.extend(intervening_skips)
@@ -1008,7 +1059,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         score = self._score
         leaves = []
         for leaf in abjad.iterate(score).by_leaf():
-            if abjad.inspect_(leaf).get_indicator('extend beam'):
+            if abjad.inspect_(leaf).get_indicator(self._extend_beam_tag):
                 leaves.append(leaf)
         for leaf in leaves:
             self._extend_beam(leaf)
@@ -1199,9 +1250,18 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             raise TypeError(message)
         return stage_start_number, stage_stop_number
 
-    def _get_stylesheet_includes(self, is_doc_example=None):
+    def _get_stylesheet_includes(self, is_doc_example=None, is_test=None):
         if is_doc_example:
-            return [self._string_trio_stylesheet_path]
+            if is_test:
+                if abjad.inspect_(self._score).get_indicator('two-voice'):
+                    return [self._absolute_two_voice_staff_stylesheet_path]
+                else:
+                    return [self._absolute_string_trio_stylesheet_path]
+            else:
+                if abjad.inspect_(self._score).get_indicator('two-voice'):
+                    return [self._relative_two_voice_staff_stylesheet_path]
+                else:
+                    return [self._relative_string_trio_stylesheet_path]
         includes = []
         includes.append(self._score_package_stylesheet_path)
         if 1 < self._get_segment_number():
@@ -1381,6 +1441,15 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         skips = abjad.select(skips)
         abjad.label(skips).with_start_offsets(clock_time=True, font_size=-2)
 
+    def _hide_instrument_names_(self):
+        if not self.hide_instrument_names:
+            return
+        classes = (abjad.Staff, abjad.StaffGroup)
+        prototype = abjad.instrumenttools.Instrument
+        for staff in abjad.iterate(self._score).by_class(classes):
+            if abjad.inspect_(staff).get_indicator(prototype):
+                abjad.detach(prototype, staff)
+
     def _label_instrument_changes(self):
         prototype = abjad.instrumenttools.Instrument
         for staff in abjad.iterate(self._score).by_class(abjad.Staff):
@@ -1393,7 +1462,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 current_instrument = instruments[0]
                 previous_leaf = abjad.inspect_(leaf).get_leaf(-1)
                 if previous_leaf is not None:
-                    result = abjad.inspect_(previous_leaf).get_effective(prototype)
+                    agent = abjad.inspect_(previous_leaf)
+                    result = agent.get_effective(prototype)
                     previous_instrument = result
                 elif (leaf_index == 0 and 
                     1 < self._get_segment_number()):
@@ -1444,8 +1514,11 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         selection = abjad.select(skip)
         return selection
 
-    def _make_lilypond_file(self, is_doc_example=None):
-        includes = self._get_stylesheet_includes(is_doc_example=is_doc_example)
+    def _make_lilypond_file(self, is_doc_example=None, is_test=None):
+        includes = self._get_stylesheet_includes(
+            is_doc_example=is_doc_example,
+            is_test=is_test,
+            )
         lilypond_file = abjad.lilypondfiletools.LilyPondFile.new(
             music=self._score,
             date_time_token=False,
@@ -1457,7 +1530,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             if getattr(item, 'name', None) in block_names:
                 lilypond_file.items.remove(item)
         if not is_doc_example:
-            #block_names = ('header', 'layout', 'paper')
             block_names = ('header',)
             for item in lilypond_file.items[:]:
                 if getattr(item, 'name', None) in block_names:
@@ -1783,7 +1855,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 abjad.attach(command, leaf)
 
     def _stage_number_to_measure_indices(self, stage_number):
-        if stage_number == 'end':
+        if stage_number is Infinity:
             stage_number = self.stage_count
         if self.stage_count < stage_number:
             message = 'segment has only {} {} (not {}).'
@@ -1913,18 +1985,21 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> figure_tokens = [
+                >>> segment_lists = [
                 ...     [[4]],
                 ...     [[6, 2, 3, 5, 9, 8, 0]],
                 ...     [[11]],
                 ...     [[10, 7, 9, 8, 0, 5]],
                 ...     ]
                 >>> figures, time_signatures = [], []
-                >>> for i, figure_token in enumerate(figure_tokens):
-                ...     result = figure_maker(figure_token, figure_name=i)
-                ...     selection, time_signature, state_manifest = result
-                ...     figures.append(selection)
-                ...     time_signatures.append(time_signature)    
+                >>> for i, segment_list in enumerate(segment_lists):
+                ...     contribution = figure_maker(
+                ...         segment_list,
+                ...         'Voice 1',
+                ...         figure_name=i,
+                ...         )
+                ...     figures.append(contribution['Voice 1'])
+                ...     time_signatures.append(contribution.time_signature)    
                 ...
                 >>> figures_ = []
                 >>> for figure in figures:
@@ -1936,7 +2011,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> segment_maker = baca.tools.SegmentMaker(
                 ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-                ...     spacing_specifier=baca.tools.SpacingSpecifier(
+                ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
                 ...         minimum_width=Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
@@ -1952,7 +2027,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> result = segment_maker(is_doc_example=True)
                 >>> lilypond_file, segment_metadata = result
-                >>> show(lilypond_file[Score]) # doctest: +SKIP
+                >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
@@ -2055,18 +2130,21 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> figure_tokens = [
+                >>> segment_lists = [
                 ...     [[4]],
                 ...     [[6, 2, 3, 5, 9, 8, 0]],
                 ...     [[11]],
                 ...     [[10, 7, 9, 8, 0, 5]],
                 ...     ]
                 >>> figures, time_signatures = [], []
-                >>> for i, figure_token in enumerate(figure_tokens):
-                ...     result = figure_maker(figure_token, figure_name=i)
-                ...     selection, time_signature, state_manifest = result
-                ...     figures.append(selection)
-                ...     time_signatures.append(time_signature)    
+                >>> for i, segment_list in enumerate(segment_lists):
+                ...     contribution = figure_maker(
+                ...         segment_list,
+                ...         'Voice 1',
+                ...         figure_name=i,
+                ...         )
+                ...     figures.append(contribution['Voice 1'])
+                ...     time_signatures.append(contribution.time_signature)    
                 ...
                 >>> figures_ = []
                 >>> for figure in figures:
@@ -2079,7 +2157,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> segment_maker = baca.tools.SegmentMaker(
                 ...     allow_figure_names=True,
                 ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-                ...     spacing_specifier=baca.tools.SpacingSpecifier(
+                ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
                 ...         minimum_width=Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
@@ -2262,6 +2340,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         '''
         return self._design_checker
 
+    # TODO: write examples showing Score.BarLine.transparent = ##f
+    #       for mensurstriche final_barline=Exact
     @property
     def final_barline(self):
         r'''Gets final barline.
@@ -2281,7 +2361,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     baca.make_even_run_rhythm_specifier(),
                 ...     )
 
             ::
@@ -2451,7 +2531,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     baca.make_even_run_rhythm_specifier(),
                 ...     )
 
             ::
@@ -2626,7 +2706,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     baca.make_even_run_rhythm_specifier(),
                 ...     )
 
             ::
@@ -2797,7 +2877,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     baca.make_even_run_rhythm_specifier(),
                 ...     )
 
             ::
@@ -2981,7 +3061,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     baca.make_even_run_rhythm_specifier(),
                 ...     )
 
             ::
@@ -3154,7 +3234,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     baca.make_even_run_rhythm_specifier(),
                 ...     )
 
             ::
@@ -3332,6 +3412,17 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         '''
         return self._final_markup_extra_offset
 
+    # TODO: write examples
+    @property
+    def hide_instrument_names(self):
+        r'''Is true when segment hides instrument names.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        '''
+        return self._hide_instrument_names
+
     @property
     def ignore_duplicate_pitch_classes(self):
         r'''Is true when segment ignores duplicate pitch-classes.
@@ -3367,7 +3458,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     baca.make_even_run_rhythm_specifier(),
                 ...     )
 
             ::
@@ -3538,7 +3629,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     baca.make_even_run_rhythm_specifier(),
                 ...     )
 
             ::
@@ -3660,18 +3751,17 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> figure_tokens = [
+                >>> segment_lists = [
                 ...     [[4]],
                 ...     [[6, 2, 3, 5, 9, 8, 0]],
                 ...     [[11]],
                 ...     [[10, 7, 9, 8, 0, 5]],
                 ...     ]
                 >>> figures, time_signatures = [], []
-                >>> for figure_token in figure_tokens:
-                ...     result = figure_maker(figure_token)
-                ...     selection, time_signature, state_manifest = result
-                ...     figures.append(selection)
-                ...     time_signatures.append(time_signature)    
+                >>> for segment_list in segment_lists:
+                ...     contribution = figure_maker(segment_list, 'Voice 1')
+                ...     figures.append(contribution['Voice 1'])
+                ...     time_signatures.append(contribution.time_signature)    
                 ...
                 >>> figures_ = []
                 >>> for figure in figures:
@@ -3683,7 +3773,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> segment_maker = baca.tools.SegmentMaker(
                 ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-                ...     spacing_specifier=baca.tools.SpacingSpecifier(
+                ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
                 ...         minimum_width=Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
@@ -3910,18 +4000,17 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> figure_tokens = [
+                >>> segment_lists = [
                 ...     [[4]],
                 ...     [[6, 2, 3, 5, 9, 8, 0]],
                 ...     [[11]],
                 ...     [[10, 7, 9, 8, 0, 5]],
                 ...     ]
                 >>> figures, time_signatures = [], []
-                >>> for figure_token in figure_tokens:
-                ...     result = figure_maker(figure_token)
-                ...     selection, time_signature, state_manifest = result
-                ...     figures.append(selection)
-                ...     time_signatures.append(time_signature)    
+                >>> for segment_list in segment_lists:
+                ...     contribution = figure_maker(segment_list, 'Voice 1')
+                ...     figures.append(contribution['Voice 1'])
+                ...     time_signatures.append(contribution.time_signature)    
                 ...
                 >>> figures_ = []
                 >>> for figure in figures:
@@ -3934,7 +4023,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> segment_maker = baca.tools.SegmentMaker(
                 ...     ignore_unregistered_pitches=True,
                 ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-                ...     spacing_specifier=baca.tools.SpacingSpecifier(
+                ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
                 ...         minimum_width=Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
@@ -4078,7 +4167,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     baca.make_even_run_rhythm_specifier(),
                 ...     )
 
             ::
@@ -4267,7 +4356,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     baca.make_even_run_rhythm_specifier(),
                 ...     )
 
             ::
@@ -4485,7 +4574,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     baca.make_even_run_rhythm_specifier(),
                 ...     )
 
             ::
@@ -4656,7 +4745,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     baca.make_even_run_rhythm_specifier(),
                 ...     )
 
             ::
@@ -4834,7 +4923,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     baca.make_even_run_rhythm_specifier(),
                 ...     )
 
             ::
@@ -5355,7 +5444,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     baca.make_even_run_rhythm_specifier(),
                 ...     )
 
             ::
@@ -5538,7 +5627,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     baca.make_even_run_rhythm_specifier(),
                 ...     )
 
             ::
@@ -5731,7 +5820,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     baca.make_even_run_rhythm_specifier(),
                 ...     )
 
             ::
@@ -5904,7 +5993,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     baca.make_even_run_rhythm_specifier(),
                 ...     )
 
             ::
@@ -6112,8 +6201,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
                 ...     [
-                ...         baca.rhythm.make_even_run_rhythm_specifier(),
-                ...         baca.pitch.pitches('E4 F4'),
+                ...         baca.make_even_run_rhythm_specifier(),
+                ...         baca.pitches('E4 F4'),
                 ...         ],
                 ...     )
 
@@ -6231,7 +6320,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     baca.make_even_run_rhythm_specifier(),
                 ...     )
 
             ::
@@ -6404,7 +6493,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     baca.rhythm.make_even_run_rhythm_specifier(),
+                ...     baca.make_even_run_rhythm_specifier(),
                 ...     )
 
             ::
@@ -6591,7 +6680,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
                 ...     [
-                ...         baca.rhythm.make_even_run_rhythm_specifier(),
+                ...         baca.make_even_run_rhythm_specifier(),
                 ...         label().with_indices(),
                 ...         ],
                 ...     )

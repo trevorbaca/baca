@@ -26,7 +26,7 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> print(format(specifier))
+            >>> f(specifier)
             baca.tools.ScopedSpecifier(
                 scope=baca.tools.SimpleScope(
                     voice_name='Violin Music Voice',
@@ -65,7 +65,7 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> print(format(specifier))
+            >>> f(specifier)
             baca.tools.ScopedSpecifier(
                 scope=baca.tools.CompoundScope(
                     simple_scopes=(
@@ -109,7 +109,7 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> print(format(specifier))
+            >>> f(specifier)
             baca.tools.ScopedSpecifier(
                 scope=baca.tools.SimpleScope(
                     voice_name='Violin Music Voice',
@@ -132,6 +132,8 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
         '_scope',
         '_specifier',
         )
+
+    _publish_storage_format = True
 
     ### INITIALIZER ###
 
@@ -166,7 +168,7 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> print(format(specifier.scope))
+                >>> f(specifier.scope)
                 baca.tools.SimpleScope(
                     voice_name='Violin Music Voice',
                     stages=(1, 4),
@@ -199,7 +201,7 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> print(format(specifier.specifier))
+                >>> f(specifier.specifier)
                 baca.tools.ScorePitchSpecifier(
                     source=datastructuretools.CyclicTuple(
                         [

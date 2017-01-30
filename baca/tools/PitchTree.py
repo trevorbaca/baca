@@ -1008,11 +1008,7 @@ class PitchTree(Tree):
         if not color_repeats:
             return
         leaves = abjad.iterate(voice).by_class(prototype=abjad.Note)
-        pairs = abjad.sequencetools.iterate_sequence_nwise(
-            leaves,
-            n=2,
-            wrapped=True,
-            )
+        pairs = abjad.Sequence(leaves).nwise(n=2, wrapped=True)
         current_color = 'red'
         for left, right in pairs:
             if not left.written_pitch == right.written_pitch:
@@ -1280,12 +1276,7 @@ class PitchTree(Tree):
         Returns true or false.
         '''
         leaves = self.iterate(level=-1)
-        pairs = abjad.sequencetools.iterate_sequence_nwise(
-            leaves,
-            n=2,
-            wrapped=True,
-            )
-        for left, right in pairs:
+        for left, right in abjad.Sequence(leaves).nwise(n=2, wrapped=True):
             if left == right:
                 return True
         return False

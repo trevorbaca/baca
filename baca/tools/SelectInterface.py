@@ -41,6 +41,13 @@ class SelectInterface(object):
         return selector
 
     @staticmethod
+    def note(n=0):
+        selector = abjad.select()
+        selector = selector.by_class(flatten=True, prototype=abjad.Note)
+        selector = selector.get_item(n, apply_to_each=False)
+        return selector
+
+    @staticmethod
     def pitched_logical_tie(n=0):
         selector = abjad.select()
         selector = selector.by_logical_tie(flatten=True, pitched=True)

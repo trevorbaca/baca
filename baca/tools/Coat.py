@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 
-class Shell(object):
-    r'''Shell.
+class Coat(object):
+    r'''Coat.
 
     ::
 
@@ -16,18 +16,18 @@ class Shell(object):
     __documentation_section__ = 'Utilities'
 
     __slots__ = (
-        '_payload',
+        '_argument',
         )
 
     ### INITIALIZER ###
 
-    def __init__(self, payload):
-        self._payload = payload
+    def __init__(self, argument):
+        self._argument = argument
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def payload(self):
-        r'''Gets payload.
+    def argument(self):
+        r'''Gets argument.
         '''
-        return self._payload
+        return self._argument

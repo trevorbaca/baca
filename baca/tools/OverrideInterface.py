@@ -50,7 +50,7 @@ class OverrideInterface(object):
         return baca.tools.OverrideSpecifier(
             grob_name='dynamic_line_spanner',
             attribute_name='direction',
-            attribute_value='Up',
+            attribute_value=Up,
             )
 
     @staticmethod
@@ -77,7 +77,7 @@ class OverrideInterface(object):
         return baca.tools.OverrideSpecifier(
             grob_name='repeat_tie',
             attribute_name='direction',
-            attribute_value='Down',
+            attribute_value=Down,
             )
 
     @staticmethod
@@ -85,7 +85,7 @@ class OverrideInterface(object):
         return baca.tools.OverrideSpecifier(
             grob_name='repeat_tie',
             attribute_name='direction',
-            attribute_value='Up',
+            attribute_value=Up,
             )
 
     @staticmethod
@@ -94,6 +94,22 @@ class OverrideInterface(object):
             grob_name='script',
             attribute_name='direction',
             attribute_value=str(direction),
+            )
+
+    @staticmethod
+    def script_down():
+        return baca.tools.OverrideSpecifier(
+            grob_name='script',
+            attribute_name='direction',
+            attribute_value=Down,
+            )
+
+    @staticmethod
+    def script_up():
+        return baca.tools.OverrideSpecifier(
+            grob_name='script',
+            attribute_name='direction',
+            attribute_value=Up,
             )
 
     @staticmethod
@@ -109,7 +125,7 @@ class OverrideInterface(object):
         return baca.tools.OverrideSpecifier(
             grob_name='stem',
             attribute_name='direction',
-            attribute_value='Down',
+            attribute_value=Down,
             )
 
     @staticmethod
@@ -117,7 +133,7 @@ class OverrideInterface(object):
         return baca.tools.OverrideSpecifier(
             grob_name='stem',
             attribute_name='direction',
-            attribute_value='Up',
+            attribute_value=Up,
             )
 
     @staticmethod
@@ -133,7 +149,7 @@ class OverrideInterface(object):
         return baca.tools.OverrideSpecifier(
             grob_name='text_script',
             attribute_name='direction',
-            attribute_value='Down',
+            attribute_value=Down,
             )
 
     @staticmethod
@@ -159,7 +175,7 @@ class OverrideInterface(object):
         return baca.tools.OverrideSpecifier(
             grob_name='text_script',
             attribute_name='direction',
-            attribute_value='Up',
+            attribute_value=Up,
             )
 
     @staticmethod
@@ -217,7 +233,7 @@ class OverrideInterface(object):
         return baca.tools.OverrideSpecifier(
             grob_name='tuplet_bracket',
             attribute_name='direction',
-            attribute_value='Up',
+            attribute_value=Up,
             )
             
     @staticmethod

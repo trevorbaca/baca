@@ -5,6 +5,237 @@ import baca
 
 class NestingSpecifier(abjad.abctools.AbjadObject):
     r'''Nesting specifier.
+
+    ::
+
+        >>> import abjad
+        >>> import baca
+
+    ..  container:: example
+
+        Nesting specifier augments one sixteenth:
+
+        ::
+
+            >>> figure_maker = baca.tools.FigureMaker(
+            ...     baca.tools.NestingSpecifier(
+            ...         time_treatments=['+1/16'],
+            ...         ),
+            ...     rhythmmakertools.BeamSpecifier(
+            ...         beam_divisions_together=True,
+            ...         ),
+            ...     )
+
+        ::
+
+            >>> segment_list = [
+            ...     [0, 2, 10, 18],
+            ...     [16, 15, 23],
+            ...     [19, 13, 9, 8],
+            ...     ]
+            >>> contribution = figure_maker(segment_list, 'Voice 1')
+            >>> lilypond_file = figure_maker.make(contribution)
+            >>> staff = lilypond_file[Staff]
+            >>> override(staff).beam.positions = (-5.5, -5.5)
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> f(lilypond_file[Staff])
+            \new Staff \with {
+                \override Beam.positions = #'(-5.5 . -5.5)
+            } <<
+                \context Voice = "Voice 1" {
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 12/11 {
+                            {
+                                \set stemLeftBeamCount = #0
+                                \set stemRightBeamCount = #2
+                                c'16 [
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                d'16
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                bf'16
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #1
+                                fs''16
+                            }
+                            {
+                                \set stemLeftBeamCount = #1
+                                \set stemRightBeamCount = #2
+                                e''16
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                ef''16
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #1
+                                b''16
+                            }
+                            {
+                                \set stemLeftBeamCount = #1
+                                \set stemRightBeamCount = #2
+                                g''16
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                cs''16
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                a'16
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #0
+                                af'16 ]
+                            }
+                        }
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Calltime nesting specifier preserves beam subdivisions and works with
+        extend beam:
+
+            >>> figure_maker = baca.tools.FigureMaker(
+            ...     rhythmmakertools.BeamSpecifier(
+            ...         beam_divisions_together=True,
+            ...         ),
+            ...     )
+
+        ::
+
+            >>> containers, time_signatures = [], []
+            >>> contribution = figure_maker(
+            ...     [[0, 2, 10, 18], [16, 15, 23]],
+            ...     'Voice 1',
+            ...     baca.tools.NestingSpecifier(
+            ...         time_treatments=['+1/16'],
+            ...         ),
+            ...     extend_beam=True,
+            ...     )
+            >>> containers.extend(contribution['Voice 1'])
+            >>> time_signatures.append(contribution.time_signature)    
+            >>> contribution = figure_maker([[19, 13, 9, 8]], 'Voice 1')
+            >>> containers.extend(contribution['Voice 1'])
+            >>> time_signatures.append(contribution.time_signature)    
+            >>> selection = abjad.select(containers)
+
+        ::
+
+            >>> segment_maker = baca.tools.SegmentMaker(
+            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
+            ...         minimum_width=Duration(1, 24),
+            ...         ),
+            ...     time_signatures=time_signatures,
+            ...     )
+            >>> specifiers = segment_maker.append_specifiers(
+            ...     ('vn', baca.select.stages(1)),
+            ...     baca.tools.RhythmSpecifier(
+            ...         rhythm_maker=selection,
+            ...         ),
+            ...     )
+
+        ::
+
+            >>> result = segment_maker(is_doc_example=True)
+            >>> lilypond_file, segment_metadata = result
+            >>> staff = lilypond_file[Staff]
+            >>> override(staff).beam.positions = (-5.5, -5.5)
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> f(lilypond_file[Score])
+            \context Score = "Score" <<
+                \tag violin
+                \context TimeSignatureContext = "Time Signature Context" <<
+                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                        {
+                            \time 1/2
+                            R1 * 1/2
+                        }
+                        {
+                            \time 1/4
+                            R1 * 1/4
+                        }
+                    }
+                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        {
+                            \time 1/2
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \newSpacingSection
+                            s1 * 1/2
+                        }
+                        {
+                            \time 1/4
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \newSpacingSection
+                            s1 * 1/4
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" \with {
+                        \override Beam.positions = #'(-5.5 . -5.5)
+                    } {
+                        \clef "treble"
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            {
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 8/7 {
+                                    {
+                                        \set stemLeftBeamCount = #0
+                                        \set stemRightBeamCount = #2
+                                        c'16 [
+                                        \set stemLeftBeamCount = #2
+                                        \set stemRightBeamCount = #2
+                                        d'16
+                                        \set stemLeftBeamCount = #2
+                                        \set stemRightBeamCount = #2
+                                        bf'16
+                                        \set stemLeftBeamCount = #2
+                                        \set stemRightBeamCount = #1
+                                        fs''16
+                                    }
+                                    {
+                                        \set stemLeftBeamCount = #1
+                                        \set stemRightBeamCount = #2
+                                        e''16
+                                        \set stemLeftBeamCount = #2
+                                        \set stemRightBeamCount = #2
+                                        ef''16
+                                        \set stemLeftBeamCount = #2
+                                        \set stemRightBeamCount = #1
+                                        b''16
+                                    }
+                                }
+                            }
+                            {
+                                {
+                                    \set stemLeftBeamCount = #1
+                                    \set stemRightBeamCount = #2
+                                    g''16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    cs''16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    a'16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #0
+                                    af'16 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    }
+                >>
+            >>
+
     '''
 
     ### CLASS VARIABLES ###
@@ -108,6 +339,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
 
     ### PUBLIC PROPERTIES ###
 
+    # TODO: write LMR specifier examples
     @property
     def lmr_specifier(self):
         r'''Gets LMR specifier.

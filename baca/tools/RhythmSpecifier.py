@@ -23,7 +23,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> print(format(rhythm_specifier))
+            >>> f(rhythm_specifier)
             baca.tools.RhythmSpecifier(
                 rhythm_maker=rhythmmakertools.NoteRhythmMaker(),
                 )
@@ -219,7 +219,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
         if start_offset is not None:
             assert isinstance(start_offset, abjad.durationtools.Offset)
         music, start_offset = self._make_rhythm(time_signatures, start_offset)
-        assert isinstance(music, (tuple, list, abjad.scoretools.Voice))
+        assert isinstance(music, (tuple, list, abjad.Voice))
         first_leaf = self._get_first_leaf(music)
         last_leaf = self._get_last_leaf(music)
         prototype = abjad.instrumenttools.Percussion
@@ -231,8 +231,8 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
                 scope=Staff,
                 )
         if self.clef is not None:
-            abjad.attach(self.clef, first_leaf, scope=abjad.scoretools.Staff)
-        pitched_prototype = (abjad.scoretools.Note, abjad.scoretools.Chord)
+            abjad.attach(self.clef, first_leaf, scope=abjad.Staff)
+        pitched_prototype = (abjad.Note, abjad.Chord)
         if self.staff_line_count is not None:
             self._set_staff_line_count(first_leaf, self.staff_line_count)
         elif self.clef == abjad.indicatortools.Clef('percussion'):
@@ -276,7 +276,8 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
 
     @staticmethod
     def _all_are_selections(argument):
-        return all(isinstance(_, abjad.selectiontools.Selection) for _ in argument)
+        return all(
+            isinstance(_, abjad.selectiontools.Selection) for _ in argument)
 
     @staticmethod
     def _annotate_unpitched_notes(argument):
@@ -292,15 +293,16 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
 
     def _apply_figure_rhythm_maker(
         self,
-        figure_token,
+        segment_list,
         selections,
         talea__counts=None,
         talea__denominator=None,
+        time_treatments=None,
         ):
-        assert len(selections) == len(figure_token)
+        assert len(selections) == len(segment_list)
         total_length = len(selections)
         patterns = self._get_patterns()
-        for index, stage_token in enumerate(figure_token):
+        for index, stage_token in enumerate(segment_list):
             for pattern in patterns:
                 if pattern.matches_index(
                     index=index,
@@ -310,6 +312,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
                         stage_token,
                         talea__counts=talea__counts,
                         talea__denominator=talea__denominator,
+                        time_treatments=time_treatments,
                         )
                     selections[index] = stage_selection
         return selections
@@ -319,6 +322,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
         stage_token,
         talea__counts=None,
         talea__denominator=None,
+        time_treatments=None,
         ):
         rhythm_maker = self._get_rhythm_maker()
         keywords = {}
@@ -326,6 +330,8 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
             keywords['talea__counts'] = talea__counts
         if talea__denominator is not None:
             keywords['talea__denominator'] = talea__denominator
+        if time_treatments is not None:
+            keywords['time_treatments'] = time_treatments
         if keywords:
             rhythm_maker = abjad.new(rhythm_maker, **keywords)
         stage_selections, state_manifest = rhythm_maker([stage_token])
@@ -479,8 +485,8 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
             return selections, start_offset
         dummy_measures = abjad.scoretools.make_spacer_skip_measures(
             time_signatures)
-        dummy_time_signature_voice = abjad.scoretools.Voice(dummy_measures)
-        dummy_music_voice = abjad.scoretools.Voice()
+        dummy_time_signature_voice = abjad.Voice(dummy_measures)
+        dummy_music_voice = abjad.Voice()
         dummy_music_voice.extend(selections)
         dummy_staff = Staff([dummy_time_signature_voice, dummy_music_voice])
         dummy_staff.is_simultaneous = True

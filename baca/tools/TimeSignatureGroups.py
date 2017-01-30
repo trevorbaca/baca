@@ -25,7 +25,7 @@ class TimeSignatureGroups(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> print(format(groups, 'storage'))
+            >>> f(groups)
             baca.tools.TimeSignatureGroups(
                 [
                     [
@@ -55,6 +55,8 @@ class TimeSignatureGroups(abjad.abctools.AbjadObject):
     __slots__ = (
         '_groups',
         )
+
+    _publish_storage_format = True
 
     ### INITIALIZER ###
 

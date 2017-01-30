@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import abjad
 import baca
 
@@ -126,6 +126,8 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
         '_remainder_direction',
         )
 
+    _publish_storage_format = True
+
     ### INITIALIZER ###
 
     def __init__(
@@ -246,7 +248,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> callback = baca.tools.PartitionDivisionCallback()
-                >>> print(format(callback))
+                >>> f(callback)
                 baca.tools.PartitionDivisionCallback(
                     fuse_assignable_total_duration=False,
                     append_remainder=False,

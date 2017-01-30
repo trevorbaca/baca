@@ -28,7 +28,7 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> print(format(array[0]))
+            >>> f(array[0])
             baca.tools.PitchArrayRow(
                 cells=(
                     baca.tools.PitchArrayCell(
@@ -75,6 +75,8 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
         '_parent_array',
         '_pitch_range',
         )
+
+    _publish_storage_format = True
 
     ### INITIALIZER ###
 

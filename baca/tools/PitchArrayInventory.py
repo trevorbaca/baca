@@ -10,11 +10,6 @@ class PitchArrayInventory(abjad.datastructuretools.TypedList):
         >>> import abjad
         >>> import baca
 
-    ::
-
-        >>> import abjad
-        >>> import baca
-
     ..  container:: example
 
         A pitch array inventory:
@@ -38,7 +33,7 @@ class PitchArrayInventory(abjad.datastructuretools.TypedList):
 
         ::
 
-            >>> print(format(inventory))
+            >>> f(inventory)
             baca.tools.PitchArrayInventory(
                 [
                     baca.tools.PitchArray(
@@ -125,6 +120,8 @@ class PitchArrayInventory(abjad.datastructuretools.TypedList):
 
     __slots__ = (
         )
+
+    _publish_storage_format = True
 
     ### PUBLIC METHODS ###
 

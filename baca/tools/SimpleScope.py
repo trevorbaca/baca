@@ -22,7 +22,7 @@ class SimpleScope(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> print(format(scope, 'storage'))
+            >>> f(scope)
             baca.tools.SimpleScope(
                 voice_name='Violin Music Voice',
                 stages=(1, 9),
@@ -38,6 +38,8 @@ class SimpleScope(abjad.abctools.AbjadObject):
         '_voice_name',
         '_stages',
         )
+
+    _publish_storage_format = True
 
     ### INITIALIZER ###
 

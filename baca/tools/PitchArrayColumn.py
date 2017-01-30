@@ -32,7 +32,7 @@ class PitchArrayColumn(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> print(format(array.columns[0]))
+            >>> f(array.columns[0])
             baca.tools.PitchArrayColumn(
                 cells=(
                     baca.tools.PitchArrayCell(
@@ -64,6 +64,8 @@ class PitchArrayColumn(abjad.abctools.AbjadValueObject):
         '_column_index',
         '_parent_array',
         )
+
+    _publish_storage_format = True
 
     ### INITIALIZER ###
 
@@ -293,8 +295,7 @@ class PitchArrayColumn(abjad.abctools.AbjadValueObject):
 
         Returns true or false.
         '''
-        pairs = abjad.sequencetools.iterate_sequence_nwise(self.cells)
-        for upper, lower in pairs:
+        for upper, lower in abjad.Sequence(self.cells).nwise():
             lower_pitches = lower.pitches or ()
             for lower_pitch in lower_pitches:
                 upper_pitches = upper.pitches or ()
