@@ -156,11 +156,11 @@ class TempoSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __getitem__(self, argument):
-        r'''Gets item.
+        r'''Gets pair or pair slice identified by `argument`.
 
         ..  container:: example
 
-            Gets item 1:
+            Gets pair 1:
 
             ::
 
@@ -175,7 +175,7 @@ class TempoSpecifier(abjad.abctools.AbjadObject):
                 >>> tempo_specifier[1]
                 (1, Accelerando())
 
-        Returns item.
+        Returns pair or slice of pairs.
         '''
         return self.items.__getitem__(argument)
 

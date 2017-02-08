@@ -71,6 +71,36 @@ class PitchClassSegment(abjad.PitchClassSegment):
     __slots__ = (
         )
 
+    ### SPECIAL METHODS ###
+
+    def __eq__(self, argument):
+        r'''Is true when segment equals `argument`. Otherwise false.
+
+        ..  container:: example
+
+            Works with Abjad pitch-class segments:
+
+            ::
+
+                >>> segment_1 = abjad.PitchClassSegment([0, 1, 2, 3])
+                >>> segment_2 = baca.PitchClassSegment([0, 1, 2, 3])
+
+            ::
+
+                >>> segment_1 == segment_2
+                True
+
+            ::
+
+                >>> segment_2 == segment_1
+                True
+
+        '''
+        if (not issubclass(type(argument), type(self)) and
+            not issubclass(type(self), type(argument))):
+            return False
+        return self._collection == argument._collection
+
     ### PUBLIC METHODS ###
 
     @abjad.expressiontools.Signature(is_operator=True, method_name='A')

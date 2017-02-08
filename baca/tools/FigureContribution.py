@@ -71,11 +71,11 @@ class FigureContribution(abjad.abctools.AbjadValueObject):
     ### SPECIAL METHODS ###
 
     def __getitem__(self, voice_name):
-        r'''Gets selection list for `voice_name`.
+        r'''Gets `voice_name` selection list.
 
         Returns list of selections.
         '''
-        return self.selections[voice_name]
+        return self.selections.__getitem__(voice_name)
 
     def __iter__(self):
         r'''Iterates figure contribution.

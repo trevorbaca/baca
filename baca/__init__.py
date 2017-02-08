@@ -18,6 +18,7 @@ from baca.tools.Expression import Expression
 from baca.tools.PitchClassSegment import PitchClassSegment
 from baca.tools.PitchClassSegment import \
     _pitch_class_segment as pitch_class_segment
+from baca.tools.SegmentList import SegmentList
 from baca.tools.Sequence import Sequence
 from baca.tools.Sequence import _sequence as sequence
 

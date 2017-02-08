@@ -61,21 +61,18 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_list = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> polyphony_map = [
             ...     ('Voice 1', [[18, 16, 15, 20, 19]], specifier_1a),
             ...     ('Voice 1', [[18, 16, 15, 20, 19]], specifier_1b),
             ...     ('Voice 1', [[18, 16, 15, 20, 19]], specifier_1c),
             ...     ]
             >>> contribution = figure_maker(
-            ...     segment_list,
             ...     'Voice 2',
+            ...     segments,
             ...     polyphony_map=polyphony_map,
             ...     )
-            >>> lilypond_file = abjad.rhythmmakertools.make_lilypond_file(
-            ...     contribution.selections,
-            ...     attach_lilypond_voice_commands=True,
-            ...     )
+            >>> lilypond_file = figure_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -190,12 +187,14 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, container, segment_list, voice_name):
-        r'''Calls polyphony specifier on `container` and `segment_list`.
+    def __call__(self, voice_name, segments, container):
+        r'''Calls polyphony specifier on `voice_name, `segments` and
+        `container`.
 
         Returns selection.
         '''
-        contribution = self.figure_maker(segment_list, voice_name)
+        assert isinstance(voice_name, str), repr(voice_name)
+        contribution = self.figure_maker(voice_name, segments)
         local_anchor = self._get_local_anchor(contribution[voice_name])
         remote_anchor = self._get_remote_anchor(container)
         timespan = abjad.inspect_(local_anchor).get_timespan()
@@ -304,8 +303,8 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
         for entry in polyphony_map:
             assert isinstance(entry, tuple), repr(entry)
             assert len(entry) == 3, repr(entry)
-            voice_name, segment_list, polyphony_specifier = entry
-            result = polyphony_specifier(container, segment_list, voice_name)
+            voice_name, segments, polyphony_specifier = entry
+            result = polyphony_specifier(voice_name, segments, container)
             start_offset, selection = result
             assert isinstance(selection, abjad.Selection), repr(selection)
             if voice_name not in selections_by_voice:
@@ -317,7 +316,6 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
         for voice_name, offset_selection in selections_by_voice.items():
             offset = offset_selection[0]
             selection = offset_selection[1]
-            #selections_by_voice[voice_name] = [selection]
             selections_by_voice[voice_name] = selection
             if offset < 0:
                 multiplier = abjad.Multiplier(-offset)
@@ -390,19 +388,16 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_list = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> polyphony_map = [
                 ...     ('Voice 1', [[18, 16, 15, 20, 19]], specifier),
                 ...     ]
                 >>> contribution = figure_maker(
-                ...     segment_list,
                 ...     'Voice 2',
+                ...     segments,
                 ...     polyphony_map=polyphony_map,
                 ...     )
-                >>> lilypond_file = abjad.rhythmmakertools.make_lilypond_file(
-                ...     contribution.selections,
-                ...     attach_lilypond_voice_commands=True,
-                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -495,19 +490,16 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_list = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> polyphony_map = [
                 ...     ('Voice 1', [[18, 16, 15, 20, 19]], specifier),
                 ...     ]
                 >>> contribution = figure_maker(
-                ...     segment_list,
                 ...     'Voice 2',
+                ...     segments,
                 ...     polyphony_map=polyphony_map,
                 ...     )
-                >>> lilypond_file = abjad.rhythmmakertools.make_lilypond_file(
-                ...     contribution.selections,
-                ...     attach_lilypond_voice_commands=True,
-                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -605,20 +597,17 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_list = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> polyphony_map = [
                 ...     ('Voice 1', [[18, 16, 15, 20, 19]], specifier_1a),
                 ...     ('Voice 1', [[18, 16, 15, 20, 19]], specifier_1b),
                 ...     ]
                 >>> contribution = figure_maker(
-                ...     segment_list,
                 ...     'Voice 2',
+                ...     segments,
                 ...     polyphony_map=polyphony_map,
                 ...     )
-                >>> lilypond_file = abjad.rhythmmakertools.make_lilypond_file(
-                ...     contribution.selections,
-                ...     attach_lilypond_voice_commands=True,
-                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::

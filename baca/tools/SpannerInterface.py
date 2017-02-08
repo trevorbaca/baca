@@ -125,6 +125,11 @@ class SpannerInterface(object):
         return baca.tools.SpannerSpecifier(spanner=abjad.Slur())
         
     @staticmethod
+    def tie(messiaen=False):
+        tie = abjad.Tie(use_messiaen_style_ties=messiaen)
+        return baca.tools.SpannerSpecifier(spanner=tie)
+
+    @staticmethod
     def trill_quarter_notes():
         return baca.tools.TrillSpecifier(
             forbidden_annotations=['color fingering', 'color microtone'],

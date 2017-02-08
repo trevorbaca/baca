@@ -20,6 +20,59 @@ class PitchInterface(object):
     ### PUBLIC METHODS ###
 
     @staticmethod
+    def arpeggiate_up(pattern=None):
+        return baca.tools.ArpeggiationSpacingSpecifier(
+            direction=Up,
+            pattern=pattern,
+            )
+
+    @staticmethod
+    def arpeggiate_down(pattern=None):
+        return baca.tools.ArpeggiationSpacingSpecifier(
+            direction=Down,
+            pattern=pattern,
+            )
+
+    @staticmethod
+    def bass_to_octave(octave_number):
+        return baca.tools.RegisterToOctaveSpecifier(
+            anchor=Bottom,
+            octave_number=octave_number,
+            )
+
+    @staticmethod
+    def center_to_octave(octave_number):
+        return baca.tools.RegisterToOctaveSpecifier(
+            anchor=Center,
+            octave_number=octave_number,
+            )
+
+    @staticmethod
+    def chord():
+        return baca.tools.SimultaneitySpecifier()
+
+    @staticmethod
+    def chord_spacing_down(bass=None, soprano=None):
+        return baca.tools.ChordalSpacingSpecifier(
+            bass=bass,
+            direction=Down,
+            soprano=soprano,
+            )
+
+    @staticmethod
+    def chord_spacing_up(bass=None, soprano=None):
+        return baca.tools.ChordalSpacingSpecifier(
+            bass=bass,
+            direction=Up,
+            soprano=soprano,
+            )
+
+    @staticmethod
+    def clef(name):
+        clef = abjad.Clef(name)
+        return baca.wrap.leaves(clef)
+
+    @staticmethod
     def coat(argument):
         r'''Coats `argument`.
         '''
@@ -142,11 +195,28 @@ class PitchInterface(object):
             )
 
     @staticmethod
+    def remove_duplicate_pitch_classes():
+        return baca.tools.FigurePitchSpecifier(
+            remove_duplicate_pitch_classes=True,
+            )
+
+    @staticmethod
+    def remove_duplicate_pitches():
+        return baca.tools.FigurePitchSpecifier(
+            remove_duplicate_pitches=True,
+            )
+
+    @staticmethod
+    def soprano_to_octave(octave_number):
+        return baca.tools.RegisterToOctaveSpecifier(
+            anchor=Top,
+            octave_number=octave_number,
+            )
+
+    @staticmethod
     def transpose(n=0):
         return baca.tools.ScorePitchSpecifier(
-            operators=[
-                abjad.Transposition(n=n),
-                ]
+            operators=[abjad.Transposition(n=n)],
             )
 
     @staticmethod

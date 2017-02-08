@@ -87,7 +87,7 @@ class StageSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __getitem__(self, argument):
-        r'''Gets item.
+        r'''Gets stage or stage slice identified by `argument`.
 
         ..  container:: example
 

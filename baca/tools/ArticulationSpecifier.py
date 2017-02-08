@@ -22,7 +22,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
             ...         ),
             ...     baca.tools.RhythmSpecifier(
             ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-            ...             talea=rhythmmakertools.Talea(
+            ...             talea=abjad.rhythmmakertools.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],
             ...                 denominator=32,
             ...                 ),
@@ -33,15 +33,16 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = figure_maker(segments, 'Voice 1')
-            >>> lilypond_file = figure_maker.make(contribution)
+            >>> contribution = figure_maker('Voice 1', segments)
+            >>> lilypond_file = figure_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
 
-            >>> f(lilypond_file[Staff])
+            >>> f(lilypond_file[abjad.Staff])
             \new Staff <<
                 \context Voice = "Voice 1" {
+                    \voiceOne
                     {
                         {
                             c'8 -\accent ~ [
@@ -158,7 +159,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 ...         ),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
                 ...                 denominator=32,
                 ...                 ),
@@ -169,15 +170,16 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker(segments, 'Voice 1')
-                >>> lilypond_file = figure_maker.make(contribution)
+                >>> contribution = figure_maker('Voice 1', segments)
+                >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
+                        \voiceOne
                         {
                             {
                                 c'8 -\accent ~ [
@@ -218,7 +220,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 ...         ),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
                 ...                 denominator=32,
                 ...                 ),
@@ -229,15 +231,16 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker(segments, 'Voice 1')
-                >>> lilypond_file = figure_maker.make(contribution)
+                >>> contribution = figure_maker('Voice 1', segments)
+                >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
+                        \voiceOne
                         {
                             {
                                 c'8 -\accent ~ [
@@ -278,7 +281,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 ...         ),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
                 ...                 denominator=32,
                 ...                 ),
@@ -289,15 +292,16 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker(segments, 'Voice 1')
-                >>> lilypond_file = figure_maker.make(contribution)
+                >>> contribution = figure_maker('Voice 1', segments)
+                >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
+                        \voiceOne
                         {
                             {
                                 c'8 -\accent ~ [
@@ -338,7 +342,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 ...         ),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
                 ...                 denominator=32,
                 ...                 ),
@@ -349,15 +353,16 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker(segments, 'Voice 1')
-                >>> lilypond_file = figure_maker.make(contribution)
+                >>> contribution = figure_maker('Voice 1', segments)
+                >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
+                        \voiceOne
                         {
                             {
                                 c'8 -\accent -\tenuto ~ [
@@ -394,7 +399,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 ...         ),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
                 ...                 denominator=32,
                 ...                 ),
@@ -405,15 +410,16 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker(segments, 'Voice 1')
-                >>> lilypond_file = figure_maker.make(contribution)
+                >>> contribution = figure_maker('Voice 1', segments)
+                >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
+                        \voiceOne
                         {
                             {
                                 c'8 -\f ~ [
@@ -462,7 +468,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 ...         ),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
                 ...                 denominator=32,
                 ...                 ),
@@ -473,15 +479,16 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker(segments, 'Voice 1')
-                >>> lilypond_file = figure_maker.make(contribution)
+                >>> contribution = figure_maker('Voice 1', segments)
+                >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
+                        \voiceOne
                         {
                             {
                                 c'8 -\accent ~ [

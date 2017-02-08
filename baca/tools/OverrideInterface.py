@@ -89,6 +89,22 @@ class OverrideInterface(object):
             )
 
     @staticmethod
+    def rest_down():
+        return baca.tools.OverrideSpecifier(
+            grob_name='rest',
+            attribute_name='direction',
+            attribute_value=Down,
+            )
+
+    @staticmethod
+    def rest_up():
+        return baca.tools.OverrideSpecifier(
+            grob_name='rest',
+            attribute_name='direction',
+            attribute_value=Up,
+            )
+
+    @staticmethod
     def script_direction(direction):
         return baca.tools.OverrideSpecifier(
             grob_name='script',
@@ -134,6 +150,15 @@ class OverrideInterface(object):
             grob_name='stem',
             attribute_name='direction',
             attribute_value=Up,
+            )
+
+    @staticmethod
+    def strict_note_spacing_off():
+        return baca.tools.OverrideSpecifier(
+            context_name='score',
+            grob_name='spacing_spanner',
+            attribute_name='strict_note_spacing',
+            attribute_value=False,
             )
 
     @staticmethod

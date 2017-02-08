@@ -333,7 +333,7 @@ class Tree(abjad.abctools.AbjadObject):
         return superclass.__format__(format_specification=format_specification)
 
     def __getitem__(self, argument):
-        r'''Gets `argument` from tree.
+        r'''Gets node or node slice identified by `argument`.
 
         ..  container:: example
 
@@ -358,9 +358,9 @@ class Tree(abjad.abctools.AbjadObject):
                 >>> tree[-1:]
                 [Tree(items=[Tree(items=4), Tree(items=5)])]
 
-        Returns node.
+        Returns node or slice of nodes.
         '''
-        return self._children[argument]
+        return self._children.__getitem__(argument)
 
     def __graph__(self, **keywords):
         r'''Graphs tree.

@@ -293,39 +293,67 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
 
     def _apply_figure_rhythm_maker(
         self,
-        segment_list,
+        segments,
         selections,
+        division_masks=None,
+        logical_tie_masks=None,
         talea__counts=None,
         talea__denominator=None,
         time_treatments=None,
         ):
-        assert len(selections) == len(segment_list)
+        assert len(selections) == len(segments)
         total_length = len(selections)
         patterns = self._get_patterns()
-        for index, stage_token in enumerate(segment_list):
+        prototype = (abjad.pitchtools.Segment, list)
+        as_chords = getattr(segments, 'as_chords', False)
+        for index, segment in enumerate(segments):
+            assert isinstance(segment, prototype), repr(segment)
+            segment_ = segment
+            if as_chords:
+                segment_ = segment[:1]
             for pattern in patterns:
-                if pattern.matches_index(
+                if not pattern.matches_index(
                     index=index,
                     total_length=total_length,
                     ):
-                    stage_selection = self._apply_payload(
-                        stage_token,
-                        talea__counts=talea__counts,
-                        talea__denominator=talea__denominator,
-                        time_treatments=time_treatments,
-                        )
+                    continue
+                stage_selection = self._apply_payload(
+                    segment_,
+                    division_masks=division_masks,
+                    logical_tie_masks=logical_tie_masks,
+                    talea__counts=talea__counts,
+                    talea__denominator=talea__denominator,
+                    time_treatments=time_treatments,
+                    )
+                if not as_chords:
                     selections[index] = stage_selection
+                    continue
+                notes = abjad.iterate(stage_selection).by_class(abjad.Note)
+                notes = list(notes)
+                assert len(notes) == 1, repr(stage_selection)
+                note = notes[0]
+                duration = note.written_duration
+                pitches = segment
+                chord = abjad.Chord(pitches, duration)
+                abjad.mutate(note).replace([chord])
+                selections[index] = stage_selection
         return selections
 
     def _apply_payload(
         self,
-        stage_token,
+        segment,
+        division_masks=None,
+        logical_tie_masks=None,
         talea__counts=None,
         talea__denominator=None,
         time_treatments=None,
         ):
         rhythm_maker = self._get_rhythm_maker()
         keywords = {}
+        if division_masks is not None:
+            keywords['division_masks'] = division_masks
+        if logical_tie_masks is not None:
+            keywords['logical_tie_masks'] = logical_tie_masks
         if talea__counts is not None:
             keywords['talea__counts'] = talea__counts
         if talea__denominator is not None:
@@ -334,7 +362,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
             keywords['time_treatments'] = time_treatments
         if keywords:
             rhythm_maker = abjad.new(rhythm_maker, **keywords)
-        stage_selections, state_manifest = rhythm_maker([stage_token])
+        stage_selections, state_manifest = rhythm_maker([segment])
         assert len(stage_selections) == 1, repr(stage_selections)
         stage_selection = stage_selections[0]
         return stage_selection

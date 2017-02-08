@@ -28,13 +28,13 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_list = [
+            >>> segments = [
             ...     [0, 2, 10, 18],
             ...     [16, 15, 23],
             ...     [19, 13, 9, 8],
             ...     ]
-            >>> contribution = figure_maker(segment_list, 'Voice 1')
-            >>> lilypond_file = figure_maker.make(contribution)
+            >>> contribution = figure_maker('Voice 1', segments)
+            >>> lilypond_file = figure_maker.show(contribution)
             >>> staff = lilypond_file[Staff]
             >>> override(staff).beam.positions = (-5.5, -5.5)
             >>> show(lilypond_file) # doctest: +SKIP
@@ -46,6 +46,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
                 \override Beam.positions = #'(-5.5 . -5.5)
             } <<
                 \context Voice = "Voice 1" {
+                    \voiceOne
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 12/11 {
@@ -108,8 +109,8 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
 
             >>> containers, time_signatures = [], []
             >>> contribution = figure_maker(
-            ...     [[0, 2, 10, 18], [16, 15, 23]],
             ...     'Voice 1',
+            ...     [[0, 2, 10, 18], [16, 15, 23]],
             ...     baca.tools.NestingSpecifier(
             ...         time_treatments=['+1/16'],
             ...         ),
@@ -117,7 +118,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
             ...     )
             >>> containers.extend(contribution['Voice 1'])
             >>> time_signatures.append(contribution.time_signature)    
-            >>> contribution = figure_maker([[19, 13, 9, 8]], 'Voice 1')
+            >>> contribution = figure_maker('Voice 1', [[19, 13, 9, 8]])
             >>> containers.extend(contribution['Voice 1'])
             >>> time_signatures.append(contribution.time_signature)    
             >>> selection = abjad.select(containers)

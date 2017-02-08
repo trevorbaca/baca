@@ -253,6 +253,53 @@ class RhythmInterface(object):
             )
 
     @staticmethod
+    def rests_after(counts, denominator=16):
+        return baca.tools.RestAffixSpecifier(
+            denominator=denominator,
+            suffix=counts,
+            )
+
+    @staticmethod
+    def rests_around(prefix, suffix, denominator=16):
+        return baca.tools.RestAffixSpecifier(
+            denominator=denominator,
+            prefix=prefix,
+            suffix=suffix,
+            )
+
+    @staticmethod
+    def rests_before(counts, denominator=16):
+        return baca.tools.RestAffixSpecifier(
+            denominator=denominator,
+            prefix=counts,
+            )
+
+    @staticmethod
+    def skips_after(counts, denominator=16):
+        return baca.tools.RestAffixSpecifier(
+            denominator=denominator,
+            skips_instead_of_rests=True,
+            suffix=counts,
+            )
+
+    @staticmethod
+    def skips_around(prefix, suffix, denominator=16):
+        return baca.tools.RestAffixSpecifier(
+            denominator=denominator,
+            prefix=prefix,
+            skips_instead_of_rests=True,
+            suffix=suffix,
+            )
+
+    @staticmethod
+    def skips_before(counts, denominator=16):
+        return baca.tools.RestAffixSpecifier(
+            denominator=denominator,
+            prefix=counts,
+            skips_instead_of_rests=True,
+            )
+        
+    @staticmethod
     def split_by_durations(durations):
         durations = [abjad.Duration(_) for _ in durations]
         expression = abjad.sequence()

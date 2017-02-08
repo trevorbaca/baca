@@ -158,7 +158,7 @@ class PitchArray(abjad.abctools.AbjadObject):
 
         Returns pitch array row.
         '''
-        return self.rows[argument]
+        return self.rows.__getitem__(argument)
 
     def __hash__(self):
         r'''Hashes pitch array.

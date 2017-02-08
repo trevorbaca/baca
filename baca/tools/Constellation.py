@@ -90,8 +90,8 @@ class Constellation(abjad.abctools.AbjadObject):
         '''
         return pitch_set in self._pitch_number_lists
 
-    def __getitem__(self, i):
-        r'''Gets pitch set at `i` in constellation.
+    def __getitem__(self, argument):
+        r'''Gets item or slice identified by `argument`.
 
         ..  container:: example
 
@@ -103,7 +103,7 @@ class Constellation(abjad.abctools.AbjadObject):
 
         Returns list.
         '''
-        return self._pitch_number_lists[i]
+        return self._pitch_number_lists.__getitem__(argument)
 
     def __len__(self):
         r'''Gets length of constellation.

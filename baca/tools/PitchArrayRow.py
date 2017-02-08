@@ -129,9 +129,9 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
         return False
 
     def __getitem__(self, argument):
-        r'''Gets pitch array cell `argument` from pitch array row.
+        r'''Gets cell or cell slice identified by `argument`.
 
-        Returns pitch array cell.
+        Returns pitch array cell or slice of pitch array cells.
         '''
         if isinstance(argument, int):
             if 0 <= argument < self.width:

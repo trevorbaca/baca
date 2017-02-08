@@ -56,9 +56,9 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
                 >>> accumulator = baca.tools.FigureAccumulator()
                 >>> accumulator(
                 ...     accumulator.figure_maker(
+                ...         'Voice 1',
                 ...         [[0, 1, 2, 3]],
                 ...         figure_name='D',
-                ...         voice_name='Voice 1',
                 ...         ),
                 ...     )
 
@@ -66,9 +66,9 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
 
                 >>> accumulator(
                 ...     accumulator.figure_maker(
+                ...         'Voice 1',
                 ...         [[4, 5, 6, 7]],
                 ...         figure_name='D',
-                ...         voice_name='Voice 1',
                 ...         ),
                 ...     )
                 Traceback (most recent call last):
@@ -229,16 +229,6 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
 
     def _populate_segment_maker(self, segment_maker):
         self._assemble_floating_selections(segment_maker)
-#        for voice_name in self.selections:
-#            selection = abjad.sequence(self.selections[voice_name])
-#            selection = selection.flatten()
-#            selection = abjad.selectiontools.Selection(selection)
-#            segment_maker.append_specifiers(
-#                (voice_name, baca.select.stages(1, 1)),
-#                baca.tools.RhythmSpecifier(
-#                    rhythm_maker=selection,
-#                    ),
-#                )
 
     ### PUBLIC PROPERTIES ###
 
@@ -279,3 +269,15 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
         selection = self._insert_skips(floating_selections, voice_name)
         assert isinstance(selection, abjad.Selection), repr(selection)
         return selection
+
+    @staticmethod
+    def show(contribution, time_signatures):
+        r'''Makes rhythm-maker-style LilyPond file for documentation examples.
+
+        Returns LilyPond file.
+        '''
+        return abjad.rhythmmakertools.make_lilypond_file(
+            contribution,
+            divisions=time_signatures,
+            pitched_staff=True,
+            )

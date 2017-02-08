@@ -133,11 +133,11 @@ class DivisionSequenceExpression(abjad.Expression):
         proxy_method = self.__getattr__('__add__')
         return proxy_method(i)
 
-    def __getitem__(self, i):
+    def __getitem__(self, argument):
         r'''Gets proxy method.
         '''
         proxy_method = self.__getattr__('__getitem__')
-        return proxy_method(i)
+        return proxy_method(argument)
 
     def __radd__(self, i):
         r'''Gets proxy method.

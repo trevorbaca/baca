@@ -119,11 +119,12 @@ class VoltaSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __getitem__(self, argument):
-        r'''Gets item.
+        r'''Gets measure expression or slice of measure expressions
+        identified by `argument`.
 
         ..  container:: example
 
-            Gets items:
+            Gets measure expression:
 
             ::
 
@@ -137,7 +138,7 @@ class VoltaSpecifier(abjad.abctools.AbjadObject):
                 >>> volta_specifier[1]
                 MeasureExpression(start_number=16, stop_number=18)
 
-        Returns item.
+        Returns measure expression or slice of measure expression.
         '''
         return self.items.__getitem__(argument)
 

@@ -20,6 +20,13 @@ class SelectInterface(object):
     ### PUBLIC METHODS ###
 
     @staticmethod
+    def chord(n=0):
+        selector = abjad.select()
+        selector = selector.by_class(flatten=True, prototype=abjad.Chord)
+        selector = selector.get_item(n, apply_to_each=False)
+        return selector
+
+    @staticmethod
     def first_leaf():
         selector = abjad.select()
         selector = selector.by_leaf(flatten=True)
@@ -62,6 +69,13 @@ class SelectInterface(object):
             selector = selector.get_slice(stop=n, apply_to_each=False)
         else:
             selector = selector.get_slice(start=n, apply_to_each=False)
+        return selector
+
+    @staticmethod
+    def rest(n=0):
+        selector = abjad.select()
+        selector = selector.by_class(flatten=True, prototype=abjad.Rest)
+        selector = selector.get_item(n, apply_to_each=False)
         return selector
 
     @staticmethod

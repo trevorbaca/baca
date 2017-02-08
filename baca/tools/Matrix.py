@@ -104,8 +104,8 @@ class Matrix(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __getitem__(self, i):
-        r'''Gets row `i` from matrix.
+    def __getitem__(self, argument):
+        r'''Gets row `argument` from matrix.
 
         ::
 
@@ -114,7 +114,7 @@ class Matrix(abjad.abctools.AbjadObject):
 
         Returns row.
         '''
-        return self.rows[i]
+        return self.rows.__getitem__(argument)
 
     def __repr__(self):
         r'''Gets interpreter representation of matrix.

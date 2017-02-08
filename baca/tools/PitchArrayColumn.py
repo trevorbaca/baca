@@ -92,11 +92,11 @@ class PitchArrayColumn(abjad.abctools.AbjadValueObject):
         return False
 
     def __getitem__(self, argument):
-        r'''Gets item `argument` from pitch array column.
+        r'''Gets cell or cell slice identified by `argument`.
 
-        Returns pitch arrach cell.
+        Returns pitch array cell or slice or pitch array cells.
         '''
-        return self.cells[argument]
+        return self.cells.__getitem__(argument)
 
     def __hash__(self):
         r'''Hashes pitch array column.

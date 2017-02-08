@@ -319,7 +319,6 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
                     raise Exception(message)
                 for note in logical_tie:
                     if isinstance(pitch, abjad.pitchtools.Pitch):
-                        #note.written_pitch = pitch
                         self._set_pitch(note, pitch)
                     elif isinstance(pitch, abjad.PitchSegment):
                         assert isinstance(pitch, collections.Iterable)
@@ -347,7 +346,6 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
                         pitch_expression = written_pitch.numbered_pitch_class
                         pitch_expression = operator_(pitch_expression)
                         written_pitch = abjad.NamedPitch(pitch_expression)
-                        #note.written_pitch = written_pitch
                         self._set_pitch(note, written_pitch)
 
     ### PRIVATE METHODS ###

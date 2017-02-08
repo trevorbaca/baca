@@ -32,9 +32,9 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_list = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = figure_maker(segment_list, 'Voice 1')
-            >>> lilypond_file = figure_maker.make(contribution)
+            >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = figure_maker('Voice 1', segments)
+            >>> lilypond_file = figure_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -42,6 +42,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
             >>> f(lilypond_file[Staff])
             \new Staff <<
                 \context Voice = "Voice 1" {
+                    \voiceOne
                     {
                         {
                             c'8 ~ [ - \markup { * }
@@ -162,9 +163,9 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_list = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker(segment_list, 'Voice 1')
-                >>> lilypond_file = figure_maker.make(contribution)
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker('Voice 1', segments)
+                >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -172,6 +173,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
                 >>> f(lilypond_file[Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
+                        \voiceOne
                         {
                             {
                                 c'8 ~ [ - \markup { * }
@@ -220,9 +222,9 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_list = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker(segment_list, 'Voice 1')
-                >>> lilypond_file = figure_maker.make(contribution)
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker('Voice 1', segments)
+                >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -230,6 +232,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
                 >>> f(lilypond_file[Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
+                        \voiceOne
                         {
                             {
                                 c'8 ~ [ - \markup { * }

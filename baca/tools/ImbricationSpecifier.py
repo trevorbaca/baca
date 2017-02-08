@@ -34,23 +34,20 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_list = [
+            >>> segments = [
             ...     [0, 2, 10, 18, 16],
             ...     [15, 20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     ]
             >>> contribution = figure_maker(
-            ...     segment_list,
             ...     'Voice 2',
+            ...     segments,
             ...     baca.tools.ImbricationSpecifier(
             ...         segment=[2, 19, 9, 18, 16],
             ...         voice_name='Voice 1',
             ...         ),
             ...     )
-            >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-            ...     contribution.selections,
-            ...     attach_lilypond_voice_commands=True,
-            ...     )
+            >>> lilypond_file = figure_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -175,14 +172,14 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_list = [
+            >>> segments = [
             ...     [0, 2, 10, 18, 16],
             ...     [15, 20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     ]
             >>> contribution = figure_maker(
-            ...     segment_list,
             ...     'Voice 2',
+            ...     segments,
             ...     baca.tools.ImbricationSpecifier(
             ...         'Voice 1',
             ...         [2, 19, 9],
@@ -196,10 +193,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             ...         baca.accents(),
             ...         ),
             ...     )
-            >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-            ...     contribution.selections,
-            ...     attach_lilypond_voice_commands=True,
-            ...     )
+            >>> lilypond_file = figure_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -371,14 +365,14 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_list = [
+            >>> segments = [
             ...     [0, 2, 10, 18, 16],
             ...     [15, 20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     ]
             >>> contribution = figure_maker(
-            ...     segment_list,
             ...     'Voice 2',
+            ...     segments,
             ...     baca.tools.ImbricationSpecifier(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
@@ -386,10 +380,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             ...         baca.beam_everything(),
             ...         ),
             ...     )
-            >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-            ...     contribution.selections,
-            ...     attach_lilypond_voice_commands=True,
-            ...     )
+            >>> lilypond_file = figure_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -609,13 +600,13 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_list = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> polyphony_map = [
                 ...     ('Voice 1', [[18, 16, 15, 20, 19], [9]], polyphony_specifier),
                 ...     ]
                 >>> contribution = figure_maker(
-                ...     segment_list,
                 ...     'Voice 2',
+                ...     segments,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 3',
                 ...         [2, 15, 20],
@@ -624,10 +615,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         ),
                 ...     polyphony_map=polyphony_map,
                 ...     )
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     contribution.selections,
-                ...     attach_lilypond_voice_commands=True,
-                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -728,7 +716,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_list = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> segment = [
                 ...     abjad.NumberedPitchClass(10),
                 ...     abjad.NumberedPitchClass(6),
@@ -736,8 +724,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     abjad.NumberedPitchClass(3),
                 ...     ]
                 >>> contribution = figure_maker(
-                ...     segment_list,
                 ...     'Voice 2',
+                ...     segments,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         segment,
@@ -745,10 +733,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         baca.beam_everything(),
                 ...         ),
                 ...     )
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     contribution.selections,
-                ...     attach_lilypond_voice_commands=True,
-                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -836,7 +821,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_list = [
+                >>> segments = [
                 ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
                 ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
                 ...     ]
@@ -847,8 +832,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     10, 18,
                 ...     ]
                 >>> contribution = figure_maker(
-                ...     segment_list,
                 ...     'Voice 2',
+                ...     segments,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         imbricated_pitches,
@@ -856,10 +841,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         baca.beam_everything(),
                 ...         ),
                 ...     )
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     contribution.selections,
-                ...     attach_lilypond_voice_commands=True,
-                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -966,8 +948,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> voice_2_selections = []
                 >>> time_signatures = []
                 >>> contribution = figure_maker(
-                ...     [[0, 2, 10, 18], [16, 15, 23]],
                 ...     'Voice 2',
+                ...     [[0, 2, 10, 18], [16, 15, 23]],
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         [2, 10],
@@ -981,8 +963,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> voice_2_selections.append(dictionary['Voice 2'])
                 >>> time_signatures.append(contribution.time_signature)    
                 >>> contribution = figure_maker(
-                ...     [[19, 13, 9, 8]],
                 ...     'Voice 2',
+                ...     [[19, 13, 9, 8]],
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         [13, 9],
@@ -1315,13 +1297,13 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_list = [
+                >>> segments = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     ]
                 >>> contribution = figure_maker(
-                ...     segment_list,
                 ...     'Voice 2',
+                ...     segments,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
@@ -1330,10 +1312,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         allow_unused_pitches=True,
                 ...         ),
                 ...     )
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     contribution.selections,
-                ...     attach_lilypond_voice_commands=True,
-                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1444,13 +1423,13 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_list = [
+                >>> segments = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     ]
                 >>> result = figure_maker(
-                ...     segment_list,
                 ...     'Voice 2',
+                ...     segments,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
@@ -1520,14 +1499,14 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_list = [
+                >>> segments = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
                 ...     ]
                 >>> contribution = figure_maker(
-                ...     segment_list,
                 ...     'Voice 2',
+                ...     segments,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
@@ -1536,10 +1515,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         hocket=True,
                 ...         ),
                 ...     )
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     contribution.selections,
-                ...     attach_lilypond_voice_commands=True,
-                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1696,13 +1672,13 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_list = [
+                >>> segments = [
                 ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
                 ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
                 ...     ]
                 >>> contribution = figure_maker(
-                ...     segment_list,
                 ...     'Voice 2',
+                ...     segments,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         [2, 18, 16, 15],
@@ -1711,10 +1687,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         selector=baca.select.pitched_logical_ties(-9),
                 ...         ),
                 ...     )
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     contribution.selections,
-                ...     attach_lilypond_voice_commands=True,
-                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1883,14 +1856,14 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_list = [
+                >>> segments = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
                 ...     ]
                 >>> contribution = figure_maker(
-                ...     segment_list,
                 ...     'Voice 2',
+                ...     segments,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
@@ -1899,10 +1872,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...             ),
                 ...         ),
                 ...     )
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     contribution.selections,
-                ...     attach_lilypond_voice_commands=True,
-                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -2027,14 +1997,14 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_list = [
+                >>> segments = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
                 ...     ]
                 >>> contribution = figure_maker(
-                ...     segment_list,
                 ...     'Voice 2',
+                ...     segments,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
@@ -2043,10 +2013,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...             ),
                 ...         ),
                 ...     )
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     contribution.selections,
-                ...     attach_lilypond_voice_commands=True,
-                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -2181,24 +2148,21 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_list = [
+                >>> segments = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
                 ...     ]
                 >>> contribution = figure_maker(
-                ...     segment_list,
                 ...     'Voice 2',
+                ...     segments,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         baca.beam_everything(),
                 ...         ),
                 ...     )
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     contribution.selections,
-                ...     attach_lilypond_voice_commands=True,
-                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -2333,14 +2297,14 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_list = [
+                >>> segments = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
                 ...     ]
                 >>> contribution = figure_maker(
-                ...     segment_list,
                 ...     'Voice 2',
+                ...     segments,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
@@ -2349,10 +2313,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...             ),
                 ...         ),
                 ...     )
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     contribution.selections,
-                ...     attach_lilypond_voice_commands=True,
-                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -2482,10 +2443,10 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_list = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> contribution = figure_maker(
-                ...     segment_list,
                 ...     'Voice 2',
+                ...     segments,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         [2, 10, 18, 19, 9],
@@ -2493,10 +2454,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         truncate_ties=True,
                 ...         ),
                 ...     )
-                >>> lilypond_file = rhythmmakertools.make_lilypond_file(
-                ...     contribution.selections,
-                ...     attach_lilypond_voice_commands=True,
-                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::

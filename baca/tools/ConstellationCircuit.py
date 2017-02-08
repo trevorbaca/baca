@@ -60,8 +60,8 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __getitem__(self, i):
-        r'''Gets constellation in circuit.
+    def __getitem__(self, argument):
+        r'''Gets item or slice identified by `argument`.
 
         ..  container:: example
 
@@ -72,7 +72,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
 
         Returns constellation.
         '''
-        return self._constellations[i]
+        return self._constellations.__getitem__(argument)
 
     def __len__(self):
         r'''Gets length of circuit.
