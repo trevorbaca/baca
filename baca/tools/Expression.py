@@ -50,12 +50,12 @@ class Expression(abjad.Expression):
 
             ::
 
-                >>> PitchClassSegment([-2, -1.5, 6, 7, -1.5, 7])
+                >>> baca.PitchClassSegment([-2, -1.5, 6, 7, -1.5, 7])
                 PitchClassSegment([10, 10.5, 6, 7, 10.5, 7])
 
             ::
 
-                >>> segment = PitchClassSegment([-2, -1.5, 6, 7, -1.5, 7])
+                >>> segment = baca.PitchClassSegment([-2, -1.5, 6, 7, -1.5, 7])
                 >>> show(segment) # doctest: +SKIP
 
             ..  container:: example expression

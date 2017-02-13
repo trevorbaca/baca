@@ -14,7 +14,7 @@ class DiatonicClusterSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> staff = Staff("c' d' e' f'")
+            >>> staff = abjad.Staff("c' d' e' f'")
             >>> specifier = baca.tools.DiatonicClusterSpecifier(
             ...     cluster_widths=[4, 6],
             ...     )

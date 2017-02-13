@@ -19,7 +19,7 @@ class StageSpecifier(abjad.abctools.AbjadObject):
             >>> specifier = baca.tools.StageSpecifier([
             ...     4,
             ...     4,
-            ...     4, TimeSignature((1, 4)),
+            ...     4, abjad.TimeSignature((1, 4)),
             ...     4,
             ...     ])
 
@@ -45,7 +45,7 @@ class StageSpecifier(abjad.abctools.AbjadObject):
             >>> specifier = baca.tools.StageSpecifier([
             ...     4,
             ...     4,
-            ...     4, [TimeSignature((5, 4)), TimeSignature((5, 4))],
+            ...     4, [abjad.TimeSignature((5, 4)), abjad.TimeSignature((5, 4))],
             ...     4,
             ...     ])
 
@@ -98,7 +98,7 @@ class StageSpecifier(abjad.abctools.AbjadObject):
                 >>> specifier = baca.tools.StageSpecifier([
                 ...     4,
                 ...     4,
-                ...     4, TimeSignature((1, 4)),
+                ...     4, abjad.TimeSignature((1, 4)),
                 ...     4,
                 ...     ])
 
@@ -126,7 +126,7 @@ class StageSpecifier(abjad.abctools.AbjadObject):
                 >>> specifier = baca.tools.StageSpecifier([
                 ...     4,
                 ...     4,
-                ...     4, TimeSignature((1, 4)),
+                ...     4, abjad.TimeSignature((1, 4)),
                 ...     4,
                 ...     ])
 
@@ -156,7 +156,7 @@ class StageSpecifier(abjad.abctools.AbjadObject):
                 >>> specifier = baca.tools.StageSpecifier([
                 ...     4,
                 ...     4,
-                ...     4, TimeSignature((1, 4)),
+                ...     4, abjad.TimeSignature((1, 4)),
                 ...     4,
                 ...     ])
 

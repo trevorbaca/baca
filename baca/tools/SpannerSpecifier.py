@@ -65,6 +65,9 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
         spanner = abjad.new(self.spanner)
         leaves = list(abjad.iterate(selection).by_leaf())
         if 1 < len(leaves):
+            if isinstance(spanner, abjad.Tie):
+                for leaf in leaves:
+                    abjad.detach(abjad.Tie, leaf)
             abjad.attach(spanner, leaves)
 
     def _get_selector(self):
@@ -88,7 +91,7 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.SpannerSpecifier(
-                ...         spanner=Slur(),
+                ...         spanner=abjad.Slur(),
                 ...         ),
                 ...     )
 
@@ -101,7 +104,7 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -127,13 +130,13 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            Selects leaves:
+            Spanner refuses to span a single leaf:
 
             ::
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.SpannerSpecifier(
-                ...         spanner=Slur(),
+                ...         spanner=abjad.Slur(),
                 ...         ),
                 ...     )
 
@@ -146,7 +149,7 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -157,8 +160,6 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
                         }
                     }
                 >>
-
-            Spanner refuses to span a single leaf.
 
         Defaults to leaves.
 
@@ -171,6 +172,73 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
     @property
     def spanner(self):
         r'''Gets spanner.
+
+        ..  container:: example
+
+            Ties are smart enough to remove existing ties prior to attach:
+
+            ::
+
+                >>> figure_maker = baca.tools.FigureMaker()
+
+            ::
+
+                >>> contribution = figure_maker(
+                ...     'Voice 1',
+                ...     [[14, 14, 14]],
+                ...     talea_counts=[5],
+                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            {
+                                d''4 ~
+                                d''16
+                                d''4 ~
+                                d''16
+                                d''4 ~
+                                d''16
+                            }
+                        }
+                    }
+                >>
+
+            ::
+
+                >>> contribution = figure_maker(
+                ...     'Voice 1',
+                ...     [[14, 14, 14]],
+                ...     baca.tools.SpannerSpecifier(spanner=abjad.Tie()),
+                ...     talea_counts=[5],
+                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            {
+                                d''4 ~
+                                d''16 ~
+                                d''4 ~
+                                d''16 ~
+                                d''4 ~
+                                d''16
+                            }
+                        }
+                    }
+                >>
 
         Defaults to none.
 

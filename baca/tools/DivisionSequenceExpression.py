@@ -38,7 +38,7 @@ class DivisionSequenceExpression(abjad.Expression):
             >>> expression = baca.tools.DivisionSequenceExpression()
             >>> expression = expression.division_sequence()
             >>> expression = expression.split_by_durations(
-            ...     durations=[Duration(1, 4)],
+            ...     durations=[(1, 4)],
             ...     )
 
         ::
@@ -56,7 +56,7 @@ class DivisionSequenceExpression(abjad.Expression):
             >>> expression = baca.tools.DivisionSequenceExpression()
             >>> expression = expression.division_sequence()
             >>> expression = expression.split_by_durations(
-            ...     durations=[Duration(1, 4)],
+            ...     durations=[(1, 4)],
             ...     )
             >>> expression = expression.flatten()
 
@@ -75,8 +75,8 @@ class DivisionSequenceExpression(abjad.Expression):
             >>> expression = baca.tools.DivisionSequenceExpression()
             >>> expression = expression.division_sequence()
             >>> expression = expression.split_by_durations(
-            ...     compound_meter_multiplier=Multiplier((3, 2)),
-            ...     durations=[Duration(1, 4)],
+            ...     compound_meter_multiplier=(3, 2),
+            ...     durations=[(1, 4)],
             ...     )
 
         ::
@@ -98,8 +98,8 @@ class DivisionSequenceExpression(abjad.Expression):
             >>> expression = baca.tools.DivisionSequenceExpression()
             >>> expression = expression.division_sequence()
             >>> expression = expression.split_by_durations(
-            ...     compound_meter_multiplier=Multiplier((3, 2)),
-            ...     durations=[Duration(1, 4)],
+            ...     compound_meter_multiplier=(3, 2),
+            ...     durations=[(1, 4)],
             ...     )
             >>> expression_2 = baca.tools.DivisionSequenceExpression()
             >>> expression_2 = expression_2.division_sequence()[0]

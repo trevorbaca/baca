@@ -32,7 +32,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> staff = Staff("c'4 c' d' d'")
+                >>> staff = abjad.Staff("c'4 c' d' d'")
                 >>> manager = baca.tools.WellformednessManager()
                 >>> manager(staff)
                 [([LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")])], 4, 'check_duplicate_pitch_classes')]
@@ -62,7 +62,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> staff = Staff("c'4 d' e' f'")
+                >>> staff = abjad.Staff("c'4 d' e' f'")
                 >>> show(staff) # doctest: +SKIP
 
             ::
@@ -77,7 +77,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> staff = Staff("c'4 c' d' d'")
+                >>> staff = abjad.Staff("c'4 c' d' d'")
                 >>> show(staff) # doctest: +SKIP
 
             ::
@@ -92,7 +92,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> staff = Staff("c'4 d' e' e''")
+                >>> staff = abjad.Staff("c'4 d' e' e''")
                 >>> show(staff) # doctest: +SKIP
 
             ::
@@ -107,9 +107,9 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> voice_1 = Voice("c'4 d'")
-                >>> voice_2 = Voice("d''4 e''")
-                >>> staff = Staff([voice_1, voice_2])
+                >>> voice_1 = abjad.Voice("c'4 d'")
+                >>> voice_2 = abjad.Voice("d''4 e''")
+                >>> staff = abjad.Staff([voice_1, voice_2])
                 >>> show(staff) # doctest: +SKIP
 
             ..  doctest::
@@ -175,7 +175,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> staff = Staff("c'4 d' e' f'")
+                >>> staff = abjad.Staff("c'4 d' e' f'")
                 >>> manager = baca.tools.WellformednessManager()
                 >>> manager.is_well_formed(staff)
                 True
@@ -186,7 +186,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> staff = Staff("c'4 c' d' d'")
+                >>> staff = abjad.Staff("c'4 c' d' d'")
                 >>> manager = baca.tools.WellformednessManager()
                 >>> manager.is_well_formed(staff)
                 False
@@ -208,7 +208,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> staff = Staff("c'4 d' e' f'")
+                >>> staff = abjad.Staff("c'4 d' e' f'")
                 >>> manager = baca.tools.WellformednessManager()
                 >>> string = manager.tabulate_well_formedness_violations(staff)
                 >>> print(string)
@@ -220,7 +220,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> staff = Staff("c'4 c' d' d'")
+                >>> staff = abjad.Staff("c'4 c' d' d'")
                 >>> manager = baca.tools.WellformednessManager()
                 >>> string = manager.tabulate_well_formedness_violations(staff)
                 >>> print(string)

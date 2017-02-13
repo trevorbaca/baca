@@ -74,14 +74,11 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
         rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker(
             division_masks=[abjad.rhythmmakertools.silence_all()],
             )
-        targets = []
         if self.pattern is None:
-            targets.append(selections)
+            targets = [selections]
         else:
-            total_length = len(selections)
-            for i, selection in enumerate(selections): 
-                if self.pattern.matches_index(i, total_length):
-                    targets.append(selection)
+            pattern = self.pattern or abjad.select_all() 
+            targets = pattern.get_matching_items(selections)
         for target in targets:
             leaves = list(abjad.iterate(target).by_leaf())
             if self.prefix:
@@ -143,7 +140,7 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -199,7 +196,7 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -256,7 +253,7 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -319,7 +316,7 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -382,7 +379,7 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne

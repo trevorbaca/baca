@@ -28,7 +28,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
             ...     [
             ...         baca.pitches('E4 F4'),
             ...         baca.tools.RhythmSpecifier(
-            ...             rhythm_maker=rhythmmakertools.EvenRunRhythmMaker(),
+            ...             rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
             ...             ),
             ...         ],
             ...     )
@@ -41,7 +41,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -135,7 +135,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
             ...     [
             ...         baca.pitches('E4 F4'),
             ...         baca.tools.RhythmSpecifier(
-            ...             rhythm_maker=rhythmmakertools.EvenRunRhythmMaker(),
+            ...             rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
             ...             ),
             ...         ],
             ...     )
@@ -148,7 +148,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -240,7 +240,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
             >>> segment_maker = baca.tools.SegmentMaker(
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
             ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
-            ...         multiplier=Multiplier(1),
+            ...         multiplier=abjad.Multiplier(1),
             ...         ),
             ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
             ...     )
@@ -252,7 +252,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
             ...     [
             ...         baca.pitches('E4 F4'),
             ...         baca.tools.RhythmSpecifier(
-            ...             rhythm_maker=rhythmmakertools.EvenRunRhythmMaker(),
+            ...             rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
             ...             ),
             ...         ],
             ...     )
@@ -265,7 +265,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -358,7 +358,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
             >>> segment_maker = baca.tools.SegmentMaker(
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
             ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
-            ...         multiplier=Multiplier(2),
+            ...         multiplier=abjad.Multiplier(2),
             ...         ),
             ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
             ...     )
@@ -370,7 +370,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
             ...     [
             ...         baca.pitches('E4 F4'),
             ...         baca.tools.RhythmSpecifier(
-            ...             rhythm_maker=rhythmmakertools.EvenRunRhythmMaker(),
+            ...             rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
             ...             ),
             ...         ],
             ...     )
@@ -383,7 +383,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -476,8 +476,8 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
             >>> segment_maker = baca.tools.SegmentMaker(
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
             ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
-            ...         multiplier=Multiplier(2),
-            ...         minimum_width=Duration(1, 8),
+            ...         multiplier=abjad.Multiplier(2),
+            ...         minimum_width=abjad.Duration(1, 8),
             ...         ),
             ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
             ...     )
@@ -489,7 +489,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
             ...     [
             ...         baca.pitches('E4 F4'),
             ...         baca.tools.RhythmSpecifier(
-            ...             rhythm_maker=rhythmmakertools.EvenRunRhythmMaker(),
+            ...             rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
             ...             ),
             ...         ],
             ...     )
@@ -502,7 +502,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -594,7 +594,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
             >>> segment_maker = baca.tools.SegmentMaker(
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
             ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
-            ...         minimum_width=Duration(1, 8),
+            ...         minimum_width=abjad.Duration(1, 8),
             ...         ),
             ...     time_signatures=[(4, 8), (3, 8)],
             ...     )
@@ -606,16 +606,16 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
             ...     [
             ...         baca.pitches('E4 F4'),
             ...         baca.tools.RhythmSpecifier(
-            ...             rhythm_maker=rhythmmakertools.AccelerandoRhythmMaker(
-            ...                 beam_specifier=rhythmmakertools.BeamSpecifier(
+            ...             rhythm_maker=abjad.rhythmmakertools.AccelerandoRhythmMaker(
+            ...                 beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
             ...                 use_feather_beams=True,
             ...                     ),
-            ...                 interpolation_specifiers=rhythmmakertools.InterpolationSpecifier(
-            ...                     start_duration=Duration(1, 8),
-            ...                     stop_duration=Duration(1, 20),
-            ...                     written_duration=Duration(1, 16),
+            ...                 interpolation_specifiers=abjad.rhythmmakertools.InterpolationSpecifier(
+            ...                     start_duration=abjad.Duration(1, 8),
+            ...                     stop_duration=abjad.Duration(1, 20),
+            ...                     written_duration=abjad.Duration(1, 16),
             ...                     ),
-            ...                 tuplet_spelling_specifier=rhythmmakertools.TupletSpellingSpecifier(
+            ...                 tuplet_spelling_specifier=abjad.rhythmmakertools.TupletSpellingSpecifier(
             ...                     use_note_duration_bracket=True,
             ...                     ),
             ...                 ),
@@ -631,7 +631,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -776,14 +776,13 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
         overrides=None,
         ):
         if fermata_measure_width is not None:
-            fermata_measure_width = abjad.durationtools.Duration(
-                fermata_measure_width)
+            fermata_measure_width = abjad.Duration(fermata_measure_width)
         self._fermata_measure_width = fermata_measure_width
         if minimum_width is not None:
-            minimum_width = abjad.durationtools.Duration(minimum_width)
+            minimum_width = abjad.Duration(minimum_width)
         self._minimum_width = minimum_width    
         if multiplier is not None:
-            multiplier = abjad.durationtools.Multiplier(multiplier)
+            multiplier = abjad.Multiplier(multiplier)
         self._multiplier = multiplier
         if overrides is not None:
             overrides = tuple(overrides)
@@ -838,10 +837,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
         for leaf in leaves:
             leaf_timespan = abjad.inspect_(leaf).get_timespan()
             leaf_duration = leaf_timespan.duration
-            prototype = (
-                abjad.durationtools.Multiplier,
-                abjad.mathtools.NonreducedFraction,
-                )
+            prototype = (abjad.Multiplier, abjad.NonreducedFraction)
             multiplier = abjad.inspect_(leaf).get_indicator(prototype)
             if multiplier is not None:
                 leaf_duration = leaf_duration / multiplier

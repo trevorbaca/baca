@@ -293,6 +293,31 @@ class PitchArrayColumn(abjad.abctools.AbjadValueObject):
         r'''Is true when pitch array column has voice crossing. Otherwise
         false.
 
+        ..  container:: example
+
+            ::
+
+                >>> array = baca.tools.PitchArray([
+                ...     [1, (2, 1), (-1.5, 2)],
+                ...     [(7, 2), (6, 1), 1],
+                ...     ])
+
+            ::
+
+                >>> print(array)
+                [  ] [d'] [bqf    ]
+                [g'     ] [fs'] [ ]
+
+            ::
+
+                >>> for column in array.columns:
+                ...     column.has_voice_crossing
+                ...
+                False
+                True
+                True
+                False
+
         Returns true or false.
         '''
         for upper, lower in abjad.Sequence(self.cells).nwise():
@@ -338,26 +363,70 @@ class PitchArrayColumn(abjad.abctools.AbjadValueObject):
     def start_cells(self):
         r'''Gets start cells in pitch array column.
 
-        Returns tuple.
+        ..  container:: example
+
+            ::
+
+                >>> array = baca.tools.PitchArray([
+                ...     [1, (2, 1), ([-2, -1.5], 2)],
+                ...     [(7, 2), (6, 1), 1],
+                ...     ])
+
+            ::
+
+                >>> print(array)
+                [  ] [d'] [bf bqf    ]
+                [g'     ] [fs'   ] [ ]
+
+            ::
+
+                >>> for column in array.columns:
+                ...     column.start_cells
+                ...
+                [PitchArrayCell(width=1), PitchArrayCell(pitches=[NamedPitch("g'")], width=2)]
+                [PitchArrayCell(pitches=[NamedPitch("d'")], width=1)]
+                [PitchArrayCell(pitches=[NamedPitch('bf'), NamedPitch('bqf')], width=2), PitchArrayCell(pitches=[NamedPitch("fs'")], width=1)]
+                [PitchArrayCell(width=1)]
+
+        Returns list.
         '''
         start_cells = []
         column_index = self.column_index
         for cell in self.cells:
             if cell.column_indices[0] == column_index:
                 start_cells.append(cell)
-        return tuple(start_cells)
+        return list(start_cells)
 
     @property
     def start_pitches(self):
         r'''Gets start pitches in pitch array column.
 
-        Returns tuple.
+        ..  container:: example
+
+            ::
+
+                >>> array = baca.tools.PitchArray([
+                ...     [1, (2, 1), ([-2, -1.5], 2)],
+                ...     [(7, 2), (6, 1), 1],
+                ...     ])
+
+            ::
+
+                >>> for column in array.columns:
+                ...     column.start_pitches
+                ...
+                [NamedPitch("g'")]
+                [NamedPitch("d'")]
+                [NamedPitch('bf'), NamedPitch('bqf'), NamedPitch("fs'")]
+                []
+
+        Returns list.
         '''
         start_pitches = []
         for cell in self.start_cells:
             if cell.pitches is not None:
                 start_pitches.extend(cell.pitches)
-        return tuple(start_pitches)
+        return list(start_pitches)
 
     @property
     def stop_cells(self):

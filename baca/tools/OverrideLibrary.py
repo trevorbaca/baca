@@ -4,7 +4,7 @@ import baca
 import numbers
 
 
-class OverrideInterface(object):
+class OverrideLibrary(object):
     r'''Override interface.
 
     ::
@@ -16,7 +16,7 @@ class OverrideInterface(object):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Interfaces'
+    __documentation_section__ = 'Library'
 
     ### PUBLIC METHODS ###
 

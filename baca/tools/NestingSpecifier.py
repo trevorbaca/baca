@@ -21,7 +21,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
             ...     baca.tools.NestingSpecifier(
             ...         time_treatments=['+1/16'],
             ...         ),
-            ...     rhythmmakertools.BeamSpecifier(
+            ...     abjad.rhythmmakertools.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
@@ -35,13 +35,13 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
             ...     ]
             >>> contribution = figure_maker('Voice 1', segments)
             >>> lilypond_file = figure_maker.show(contribution)
-            >>> staff = lilypond_file[Staff]
-            >>> override(staff).beam.positions = (-5.5, -5.5)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
 
-            >>> f(lilypond_file[Staff])
+            >>> f(lilypond_file[abjad.Staff])
             \new Staff \with {
                 \override Beam.positions = #'(-5.5 . -5.5)
             } <<
@@ -100,7 +100,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
         extend beam:
 
             >>> figure_maker = baca.tools.FigureMaker(
-            ...     rhythmmakertools.BeamSpecifier(
+            ...     abjad.rhythmmakertools.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
@@ -128,7 +128,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
             >>> segment_maker = baca.tools.SegmentMaker(
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
             ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
-            ...         minimum_width=Duration(1, 24),
+            ...         minimum_width=abjad.Duration(1, 24),
             ...         ),
             ...     time_signatures=time_signatures,
             ...     )
@@ -143,13 +143,13 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
 
             >>> result = segment_maker(is_doc_example=True)
             >>> lilypond_file, segment_metadata = result
-            >>> staff = lilypond_file[Staff]
-            >>> override(staff).beam.positions = (-5.5, -5.5)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
 
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -282,7 +282,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
                 message = 'should be selection: {!r}.'
                 message = message.format(selection)
             assert len(selection) == 1, repr(selection)
-            assert isinstance(selection[0], abjad.scoretools.Tuplet)
+            assert isinstance(selection[0], abjad.Tuplet)
             tuplets.append(selection[0])
         if self.lmr_specifier is None:
             tuplet_selections = [abjad.select(tuplets)]
@@ -317,17 +317,17 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
     def _make_nested_tuplet(tuplet_selection, time_treatment):
         assert isinstance(tuplet_selection, abjad.selectiontools.Selection)
         for tuplet in tuplet_selection:
-            assert isinstance(tuplet, abjad.scoretools.Tuplet), repr(tuplet)
+            assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
         if isinstance(time_treatment, str):
-            addendum = abjad.durationtools.Duration(time_treatment)
+            addendum = abjad.Duration(time_treatment)
             duration = tuplet_selection.get_duration() + addendum
             tuplet = abjad.scoretools.FixedDurationTuplet(
                 duration,
                 tuplet_selection,
                 )
-        elif time_treatment.__class__ is abjad.durationtools.Multiplier:
-            tuplet = abjad.scoretools.Tuplet(time_treatment, tuplet_selection)
-        elif time_treatment.__class__ is abjad.durationtools.Duration:
+        elif time_treatment.__class__ is abjad.Multiplier:
+            tuplet = abjad.Tuplet(time_treatment, tuplet_selection)
+        elif time_treatment.__class__ is abjad.Duration:
             tuplet = abjad.scoretools.FixedDurationTuplet(
                 time_treatment,
                 tuplet_selection,

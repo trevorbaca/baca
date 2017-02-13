@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class SelectInterface(object):
+class SelectLibrary(object):
     r'''Select interface.
 
     ::
@@ -15,7 +15,7 @@ class SelectInterface(object):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Interfaces'
+    __documentation_section__ = 'Library'
 
     ### PUBLIC METHODS ###
 

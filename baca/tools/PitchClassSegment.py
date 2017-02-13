@@ -27,7 +27,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             ..  doctest::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[Voice])
+                >>> f(lilypond_file[abjad.Voice])
                 \new Voice {
                     bf'8
                     bqf'8
@@ -50,7 +50,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             ..  doctest::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[Voice])
+                >>> f(lilypond_file[abjad.Voice])
                 \new Voice {
                     bf'8
                     bqf'8
@@ -139,7 +139,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 ..  doctest::
 
                     >>> lilypond_file = segment.__illustrate__()
-                    >>> f(lilypond_file[Voice])
+                    >>> f(lilypond_file[abjad.Voice])
                     \new Voice {
                         b'8
                         bqs'8
@@ -168,7 +168,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 ..  doctest::
 
                     >>> lilypond_file = segment.__illustrate__()
-                    >>> f(lilypond_file[Voice])
+                    >>> f(lilypond_file[abjad.Voice])
                     \new Voice {
                         b'8
                         bqs'8
@@ -199,7 +199,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 ..  doctest::
 
                     >>> lilypond_file = segment.__illustrate__()
-                    >>> f(lilypond_file[Voice])
+                    >>> f(lilypond_file[abjad.Voice])
                     \new Voice {
                         bf'8
                         bqf'8
@@ -245,7 +245,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     >>> lilypond_file = segment.__illustrate__(
                     ...     figure_name=markup,
                     ...     )
-                    >>> f(lilypond_file[Voice])
+                    >>> f(lilypond_file[abjad.Voice])
                     \new Voice {
                         bf'8
                             ^ \markup {

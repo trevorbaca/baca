@@ -40,7 +40,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -121,7 +121,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
     __documentation_section__ = 'Specifiers'
 
     __slots__ = (
-        '_patterns',
+        '_pattern',
         '_selector',
         '_tremolo_flags',
         )
@@ -130,15 +130,14 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
     def __init__(
         self,
-        patterns=None,
+        pattern=None,
         selector=None,
         tremolo_flags=32,
         ):
-        if patterns is not None:
-            patterns = tuple(patterns)
-            prototype = abjad.patterntools.Pattern
-            assert all(isinstance(_, prototype) for _ in patterns)
-        self._patterns = patterns
+        if pattern is not None:
+            prototype = (abjad.Pattern, abjad.patterntools.CompoundPattern)
+            assert isinstance(pattern, prototype), repr(pattern)
+        self._pattern = pattern
         if selector is not None:
             assert isinstance(selector, abjad.selectortools.Selector)
         self._selector = selector
@@ -155,24 +154,13 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
         '''
         selector = self._get_selector()
         selection = selector(argument)
-        total_items = len(selection)
-        for i, item in enumerate(selection):
-            patterns = self._get_patterns()
-            for pattern in patterns:
-                if pattern.matches_index(i, total_items):
-                    tremolo_flags = 32
-                    stem_tremolo = abjad.indicatortools.StemTremolo(
-                        tremolo_flags=self.tremolo_flags
-                        )
-                    abjad.attach(stem_tremolo, item)
-                    break
+        pattern = self.pattern or abjad.select_all()
+        items = pattern.get_matching_items(selection)
+        for item in items:
+            stem_tremolo = abjad.StemTremolo(tremolo_flags=self.tremolo_flags)
+            abjad.attach(stem_tremolo, item)
 
     ### PRIVATE METHODS ###
-
-    def _get_patterns(self):
-        if self.patterns is None:
-            return [abjad.patterntools.select_all()]
-        return self.patterns
 
     def _get_selector(self):
         if self.selector is None:
@@ -185,8 +173,8 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def patterns(self):
-        r'''Gets patterns.
+    def pattern(self):
+        r'''Gets pattern.
 
         ..  container:: example
 
@@ -201,16 +189,14 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
+                >>> pattern = abjad.select_first() | abjad.select_last()
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
                 ...     [
                 ...         baca.pitches('E4 F4'),
                 ...         baca.make_even_run_rhythm_specifier(),
                 ...         baca.tools.StemTremoloSpecifier(
-                ...             patterns=[
-                ...                 patterntools.select_first(),
-                ...                 patterntools.select_last(),
-                ...                 ],
+                ...             pattern=pattern,
                 ...             ),
                 ...         ],
                 ...     )
@@ -223,7 +209,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -316,9 +302,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
                 ...         baca.pitches('E4 F4'),
                 ...         baca.make_even_run_rhythm_specifier(),
                 ...         baca.tools.StemTremoloSpecifier(
-                ...             patterns=[
-                ...                 patterntools.select_every([1], period=2),
-                ...                 ],
+                ...             pattern=abjad.select_every([1], period=2),
                 ...             ),
                 ...         ],
                 ...     )
@@ -331,7 +315,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -405,9 +389,11 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
                     >>
                 >>
 
-        Set to boolean patterns or none.
+        Set to pattern or none.
+
+        Returns pattern or none.
         '''
-        return self._patterns
+        return self._pattern
 
     @property
     def selector(self):
@@ -443,7 +429,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -536,7 +522,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
                 ...         baca.pitches('E4 F4'),
                 ...         baca.make_even_run_rhythm_specifier(),
                 ...         baca.tools.StemTremoloSpecifier(
-                ...             selector=select().
+                ...             selector=abjad.select().
                 ...                 by_leaf(flatten=True).
                 ...                 get_slice(start=-7, apply_to_each=False),
                 ...             ),
@@ -551,7 +537,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -667,7 +653,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -773,7 +759,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<

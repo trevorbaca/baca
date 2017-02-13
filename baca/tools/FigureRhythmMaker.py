@@ -20,7 +20,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         ::
 
             >>> rhythm_maker = baca.tools.FigureRhythmMaker(
-            ...     talea=rhythmmakertools.Talea(
+            ...     talea=abjad.rhythmmakertools.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -35,7 +35,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Staff])
+            >>> f(lilypond_file[abjad.Staff])
             \new Staff {
                 {
                     \time 5/16
@@ -57,7 +57,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Staff])
+            >>> f(lilypond_file[abjad.Staff])
             \new Staff {
                 {
                     \time 3/8
@@ -80,7 +80,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Staff])
+            >>> f(lilypond_file[abjad.Staff])
             \new Staff {
                 {
                     \time 1/16
@@ -99,7 +99,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Staff])
+            >>> f(lilypond_file[abjad.Staff])
             \new Staff {
                 {
                     \time 13/16
@@ -199,7 +199,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
                 ...         ),
@@ -214,7 +214,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -249,7 +249,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
                 ...         ),
@@ -268,7 +268,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -355,11 +355,11 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             return True
         elif isinstance(argument, str):
             return True
-        elif isinstance(argument, abjad.mathtools.Ratio):
+        elif isinstance(argument, abjad.Ratio):
             return True
-        elif isinstance(argument, abjad.durationtools.Multiplier):
+        elif isinstance(argument, abjad.Multiplier):
             return True
-        elif argument.__class__ is abjad.durationtools.Duration:
+        elif argument.__class__ is abjad.Duration:
             return True
         elif argument in ('accel', 'rit'):
             return True
@@ -376,7 +376,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> class_ = baca.tools.FigureRhythmMaker
-                >>> durations = 4 * [Duration(1)]
+                >>> durations = 4 * [abjad.Duration(1)]
                 >>> result = class_._make_accelerando_multipliers(
                 ...     durations,
                 ...     0.5,
@@ -395,7 +395,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> class_ = baca.tools.FigureRhythmMaker
-                >>> durations = 4 * [Duration(1)]
+                >>> durations = 4 * [abjad.Duration(1)]
                 >>> result = class_._make_accelerando_multipliers(durations, 1)
                 >>> for multiplier in result: multiplier
                 ...
@@ -411,7 +411,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> class_ = baca.tools.FigureRhythmMaker
-                >>> durations = 4 * [Duration(1)]
+                >>> durations = 4 * [abjad.Duration(1)]
                 >>> result = class_._make_accelerando_multipliers(
                 ...     durations,
                 ...     0.5,
@@ -481,7 +481,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             abjad.override(leaf_selection[0]).beam.grow_direction = Left
         tuplet.force_times_command = True
         duration = abjad.inspect_(tuplet).get_duration()
-        duration = abjad.durationtools.Duration(duration)
+        duration = abjad.Duration(duration)
         markup = duration.to_score_markup()
         markup = markup.scale((0.75, 0.75))
         abjad.override(tuplet).tuplet_number.text = markup
@@ -567,14 +567,13 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 )
         elif time_treatment in ('accel', 'rit'):
             tuplet = self._make_accelerando(leaf_selection, time_treatment)
-        elif isinstance(time_treatment, abjad.mathtools.Ratio):
+        elif isinstance(time_treatment, abjad.Ratio):
             numerator, denominator = time_treatment.numbers
-            multiplier = abjad.mathtools.NonreducedFraction(
-                (denominator, numerator))
+            multiplier = abjad.NonreducedFraction((denominator, numerator))
             tuplet = abjad.scoretools.Tuplet(multiplier, leaf_selection)
         elif isinstance(time_treatment, abjad.durationtools.Multiplier):
             tuplet = abjad.scoretools.Tuplet(time_treatment, leaf_selection)
-        elif time_treatment.__class__ is abjad.durationtools.Duration:
+        elif time_treatment.__class__ is abjad.Duration:
             tuplet_duration = time_treatment
             contents_duration = leaf_selection.get_duration()
             multiplier = tuplet_duration / contents_duration
@@ -668,7 +667,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     acciaccatura_specifiers=[
                 ...         baca.tools.AcciaccaturaSpecifier()
                 ...         ],
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1],
                 ...         denominator=4,
                 ...         ),
@@ -686,14 +685,14 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
                 >>> lilypond_file = rhythm_maker.show(selections)
-                >>> score = lilypond_file[Score]
-                >>> override(score).spacing_spanner.strict_grace_spacing = False
-                >>> override(score).spacing_spanner.strict_note_spacing = False
+                >>> score = lilypond_file[abjad.Score]
+                >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
+                >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 3/2
@@ -755,7 +754,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...             lmr_specifier=baca.tools.LMRSpecifier()
                 ...             ),
                 ...         ],
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1],
                 ...         denominator=4,
                 ...         ),
@@ -774,14 +773,14 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
                 >>> lilypond_file = rhythm_maker.show(selections)
-                >>> score = lilypond_file[Score]
-                >>> override(score).spacing_spanner.strict_grace_spacing = False
-                >>> override(score).spacing_spanner.strict_note_spacing = False
+                >>> score = lilypond_file[abjad.Score]
+                >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
+                >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 7/4
@@ -869,7 +868,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
                 ...         ),
@@ -881,13 +880,13 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
                 >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).tuplet_bracket.staff_padding = 1.5
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
@@ -921,10 +920,10 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
-                ...     beam_specifier=rhythmmakertools.BeamSpecifier(
+                ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
                 ...         ),
@@ -936,13 +935,13 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
                 >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).beam.positions = (-5.5, -5.5)
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override Beam.positions = #'(-5.5 . -5.5)
                 } {
@@ -994,10 +993,10 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
-                ...     beam_specifier=rhythmmakertools.BeamSpecifier(
+                ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_each_division=False,
                 ...         ),
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
                 ...         ),
@@ -1013,7 +1012,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 15/16
@@ -1045,7 +1044,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
                 ...         ),
@@ -1057,13 +1056,13 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> stage_tokens = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
                 >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).tuplet_bracket.staff_padding = 1.5
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
@@ -1097,10 +1096,10 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
-                ...     beam_specifier=rhythmmakertools.BeamSpecifier(
+                ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_rests=True,
                 ...     ),
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
                 ...         ),
@@ -1112,13 +1111,13 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> stage_tokens = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
                 >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).tuplet_bracket.staff_padding = 1.5
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
@@ -1152,11 +1151,11 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
-                ...     beam_specifier=rhythmmakertools.BeamSpecifier(
+                ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_rests=True,
                 ...         stemlet_length=0.75,
                 ...     ),
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
                 ...         ),
@@ -1168,13 +1167,13 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> stage_tokens = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
                 >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).tuplet_bracket.staff_padding = 1.5
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
@@ -1234,7 +1233,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
                 ...         ),
@@ -1249,7 +1248,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -1279,9 +1278,9 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
                 ...     division_masks=[
-                ...         rhythmmakertools.silence_every([1], period=2),
+                ...         abjad.silence_every([1], period=2),
                 ...         ],
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
                 ...         ),
@@ -1296,7 +1295,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -1320,9 +1319,9 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
                 ...     division_masks=[
-                ...         rhythmmakertools.sustain_every([1], period=2),
+                ...         abjad.sustain_every([1], period=2),
                 ...         ],
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
                 ...         ),
@@ -1337,7 +1336,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -1381,7 +1380,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[4, 4, 5],
                 ...         denominator=32,
                 ...         ),
@@ -1396,7 +1395,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 39/32
@@ -1429,10 +1428,10 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
-                ...     duration_spelling_specifier=rhythmmakertools.DurationSpellingSpecifier(
+                ...     duration_spelling_specifier=abjad.rhythmmakertools.DurationSpellingSpecifier(
                 ...         decrease_durations_monotonically=False,
                 ...         ),
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[4, 4, 5],
                 ...         denominator=32,
                 ...         ),
@@ -1447,7 +1446,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 39/32
@@ -1500,9 +1499,9 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
                 ...     logical_tie_masks=[
-                ...         rhythmmakertools.silence_every([2], period=3),
+                ...         abjad.silence_every([2], period=3),
                 ...         ],
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
                 ...         ),
@@ -1517,7 +1516,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -1547,10 +1546,10 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
                 ...     logical_tie_masks=[
-                ...         rhythmmakertools.silence_first(),
-                ...         rhythmmakertools.silence_last(),
+                ...         abjad.silence_first(),
+                ...         abjad.silence_last(),
                 ...         ],
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
                 ...         ),
@@ -1565,7 +1564,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -1614,11 +1613,11 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
-                ...     beam_specifier=rhythmmakertools.BeamSpecifier(
+                ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_rests=True,
                 ...         stemlet_length=1.5,
                 ...         ),
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[3, -1, 2, 2],
                 ...         denominator=16,
                 ...         ),
@@ -1633,7 +1632,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 3/2
@@ -1666,6 +1665,44 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
+            With very large nonassignable counts:
+
+            ::
+
+                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                ...     talea=abjad.rhythmmakertools.Talea(
+                ...         counts=[29],
+                ...         denominator=64,
+                ...         ),
+                ...     tie_specifier=abjad.rhythmmakertools.TieSpecifier(
+                ...         use_messiaen_style_ties=True,
+                ...         ),
+                ...     )
+
+            ::
+
+                >>> stage_tokens = [[0, 2]]
+                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> lilypond_file = rhythm_maker.show(selections)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff {
+                    {
+                        \time 29/32
+                        {
+                            c'4..
+                            c'64 \repeatTie
+                            d'4..
+                            d'64 \repeatTie
+                        }
+                    }
+                }
+
+        ..  container:: example
+
             Defaults to even sixteenths:
 
             ::
@@ -1691,11 +1728,11 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
                 ...         ),
-                ...     tie_specifier=rhythmmakertools.TieSpecifier(
+                ...     tie_specifier=abjad.rhythmmakertools.TieSpecifier(
                 ...         tie_across_divisions=True,
                 ...         ),
                 ...     )
@@ -1709,7 +1746,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -1738,11 +1775,11 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
                 ...         ),
-                ...     tie_specifier=rhythmmakertools.TieSpecifier(
+                ...     tie_specifier=abjad.rhythmmakertools.TieSpecifier(
                 ...         tie_consecutive_notes=True,
                 ...         ),
                 ...     )
@@ -1756,7 +1793,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -1806,7 +1843,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
                 ...     time_treatments=[1],
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
                 ...         ),
@@ -1821,7 +1858,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 15/16
@@ -1854,7 +1891,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
                 ...     time_treatments=[-1],
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
                 ...         ),
@@ -1869,7 +1906,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 5/8
@@ -1901,7 +1938,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
                 ...     time_treatments=['accel'],
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1],
                 ...         denominator=16,
                 ...         ),
@@ -1919,14 +1956,14 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
                 >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).beam.positions = (-5, -5)
-                >>> override(staff).stem.direction = Down
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).beam.positions = (-5, -5)
+                >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override Beam.positions = #'(-5 . -5)
                     \override Stem.direction = #down
@@ -2138,7 +2175,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
                 ...     time_treatments=['rit'],
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1],
                 ...         denominator=16,
                 ...         ),
@@ -2156,14 +2193,14 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
                 >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).beam.positions = (-5, -5)
-                >>> override(staff).stem.direction = Down
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).beam.positions = (-5, -5)
+                >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override Beam.positions = #'(-5 . -5)
                     \override Stem.direction = #down
@@ -2375,7 +2412,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
                 ...     time_treatments=['accel', 'rit'],
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1],
                 ...         denominator=16,
                 ...         ),
@@ -2391,14 +2428,14 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
                 >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).beam.positions = (-5, -5)
-                >>> override(staff).stem.direction = Down
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).beam.positions = (-5, -5)
+                >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override Beam.positions = #'(-5 . -5)
                     \override Stem.direction = #down
@@ -2576,7 +2613,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
                 ...     time_treatments=['accel', -2, 'rit'],
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1],
                 ...         denominator=16,
                 ...         ),
@@ -2594,14 +2631,14 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
                 >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).beam.positions = (-5, -5)
-                >>> override(staff).stem.direction = Down
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).beam.positions = (-5, -5)
+                >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override Beam.positions = #'(-5 . -5)
                     \override Stem.direction = #down
@@ -2794,8 +2831,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
-                ...     time_treatments=[mathtools.Ratio((3, 2))],
-                ...     talea=rhythmmakertools.Talea(
+                ...     time_treatments=[abjad.Ratio((3, 2))],
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1],
                 ...         denominator=8,
                 ...         ),
@@ -2813,14 +2850,14 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
                 >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).beam.positions = (-6, -6)
-                >>> override(staff).stem.direction = Down
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).beam.positions = (-6, -6)
+                >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override Beam.positions = #'(-6 . -6)
                     \override Stem.direction = #down
@@ -2874,13 +2911,13 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
-                ...     time_treatments=[Duration(1, 4)],
-                ...     talea=rhythmmakertools.Talea(
+                ...     time_treatments=[abjad.Duration(1, 4)],
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1],
                 ...         denominator=8,
                 ...         ),
-                ...     tuplet_spelling_specifier=rhythmmakertools.TupletSpellingSpecifier(
-                ...         preferred_denominator=Duration(1, 16),
+                ...     tuplet_spelling_specifier=abjad.rhythmmakertools.TupletSpellingSpecifier(
+                ...         preferred_denominator=abjad.Duration(1, 16),
                 ...         ),
                 ...     )
 
@@ -2896,14 +2933,14 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
                 >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).beam.positions = (-6, -6)
-                >>> override(staff).stem.direction = Down
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).beam.positions = (-6, -6)
+                >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override Beam.positions = #'(-6 . -6)
                     \override Stem.direction = #down
@@ -2953,13 +2990,13 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
-                ...     time_treatments=[Duration(1, 4), Duration(3, 8)],
-                ...     talea=rhythmmakertools.Talea(
+                ...     time_treatments=[abjad.Duration(1, 4), abjad.Duration(3, 8)],
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=8,
                 ...         ),
-                ...     tuplet_spelling_specifier=rhythmmakertools.TupletSpellingSpecifier(
-                ...         preferred_denominator=Duration(1, 16),
+                ...     tuplet_spelling_specifier=abjad.rhythmmakertools.TupletSpellingSpecifier(
+                ...         preferred_denominator=abjad.Duration(1, 16),
                 ...         ),
                 ...     )
 
@@ -2975,14 +3012,14 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     ]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
                 >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).beam.positions = (-6, -6)
-                >>> override(staff).stem.direction = Down
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).beam.positions = (-6, -6)
+                >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override Beam.positions = #'(-6 . -6)
                     \override Stem.direction = #down
@@ -3066,7 +3103,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[3],
                 ...         denominator=16,
                 ...         ),
@@ -3078,13 +3115,13 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> stage_tokens = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
                 >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).tuplet_bracket.staff_padding = 1.5
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
@@ -3120,12 +3157,12 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
-                ...     talea=rhythmmakertools.Talea(
+                ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[3],
                 ...         denominator=16,
                 ...         ),
                 ...     time_treatments=[-2],
-                ...     tuplet_spelling_specifier=rhythmmakertools.TupletSpellingSpecifier(
+                ...     tuplet_spelling_specifier=abjad.rhythmmakertools.TupletSpellingSpecifier(
                 ...         simplify_redundant_tuplets=True,
                 ...         ),
                 ...     )
@@ -3135,13 +3172,13 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> stage_tokens = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
                 >>> selections, state_manifest = rhythm_maker(stage_tokens)
                 >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).tuplet_bracket.staff_padding = 1.5
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {

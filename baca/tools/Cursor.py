@@ -17,8 +17,8 @@ class Cursor(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
-            >>> source = datastructuretools.CyclicTuple(source)
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = abjad.CyclicTuple(source)
             >>> cursor = baca.tools.Cursor(source=source)
 
         ::
@@ -42,8 +42,8 @@ class Cursor(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
-            >>> source = datastructuretools.CyclicTuple(source)
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = abjad.CyclicTuple(source)
             >>> cursor = baca.tools.Cursor(source=source)
 
         ::
@@ -125,7 +125,7 @@ class Cursor(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
                 >>> cursor = baca.tools.Cursor(source=source)
                 >>> for item in cursor:
                 ...     item
@@ -140,8 +140,8 @@ class Cursor(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
-                >>> source = datastructuretools.CyclicTuple(source)
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+                >>> source = abjad.CyclicTuple(source)
                 >>> cursor = baca.tools.Cursor(source=source)
                 >>> for item in cursor:
                 ...     item
@@ -161,7 +161,7 @@ class Cursor(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
                 >>> cursor = baca.tools.Cursor(source=source)
                 >>> len(cursor)
                 4
@@ -182,7 +182,7 @@ class Cursor(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
                 >>> cursor = baca.tools.Cursor(source=source)
                 >>> cursor.is_exhausted
                 False
@@ -227,8 +227,8 @@ class Cursor(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
-                >>> source = datastructuretools.CyclicTuple(source)
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+                >>> source = abjad.CyclicTuple(source)
                 >>> cursor = baca.tools.Cursor(source=source)
 
             ::
@@ -249,8 +249,8 @@ class Cursor(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
-                >>> source = datastructuretools.CyclicTuple(source)
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+                >>> source = abjad.CyclicTuple(source)
                 >>> cursor = baca.tools.Cursor(
                 ...     source=source,
                 ...     position=None,
@@ -278,8 +278,8 @@ class Cursor(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
-                >>> source = datastructuretools.CyclicTuple(source)
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+                >>> source = abjad.CyclicTuple(source)
                 >>> cursor = baca.tools.Cursor(
                 ...     source=source,
                 ...     position=0,
@@ -303,8 +303,8 @@ class Cursor(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
-                >>> source = datastructuretools.CyclicTuple(source)
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+                >>> source = abjad.CyclicTuple(source)
                 >>> cursor = baca.tools.Cursor(
                 ...     source=source,
                 ...     position=0,
@@ -332,8 +332,8 @@ class Cursor(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
-                >>> source = datastructuretools.CyclicTuple(source)
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+                >>> source = abjad.CyclicTuple(source)
                 >>> cursor = baca.tools.Cursor(
                 ...     source=source,
                 ...     position=-1,
@@ -357,8 +357,8 @@ class Cursor(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
-                >>> source = datastructuretools.CyclicTuple(source)
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+                >>> source = abjad.CyclicTuple(source)
                 >>> cursor = baca.tools.Cursor(
                 ...     source=source,
                 ...     position=-1,
@@ -395,7 +395,7 @@ class Cursor(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
                 >>> cursor = baca.tools.Cursor(
                 ...     source=source,
                 ...     suppress_exception=True,
@@ -437,7 +437,7 @@ class Cursor(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
                 >>> cursor = baca.tools.Cursor(
                 ...     source=source,
                 ...     singletons=True,
@@ -487,7 +487,7 @@ class Cursor(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
                 >>> cursor = baca.tools.Cursor(source=source)
 
             ::
@@ -501,8 +501,8 @@ class Cursor(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
-                >>> source = datastructuretools.CyclicTuple(source)
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+                >>> source = abjad.CyclicTuple(source)
                 >>> cursor = baca.tools.Cursor(source=source)
 
             ::
@@ -525,7 +525,7 @@ class Cursor(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
                 >>> cursor = baca.tools.Cursor(source=source)
                 >>> cursor.is_exhausted
                 False
@@ -570,7 +570,7 @@ class Cursor(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
                 >>> cursor = baca.tools.Cursor(
                 ...     source=source,
                 ...     suppress_exception=True,
@@ -639,7 +639,7 @@ class Cursor(abjad.abctools.AbjadObject):
                     items=pitch_class_segment,
                     )
                 cells.append(pitch_class_segment)
-        cells = abjad.datastructuretools.CyclicTuple(cells)
+        cells = abjad.CyclicTuple(cells)
         cursor = Cursor(source=cells)
         return cursor
 
@@ -652,8 +652,8 @@ class Cursor(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
-                >>> source = datastructuretools.CyclicTuple(source)
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+                >>> source = abjad.CyclicTuple(source)
                 >>> cursor = baca.tools.Cursor(source=source)
 
             ::
@@ -677,8 +677,8 @@ class Cursor(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
-                >>> source = datastructuretools.CyclicTuple(source)
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+                >>> source = abjad.CyclicTuple(source)
                 >>> cursor = baca.tools.Cursor(source=source)
 
             ::
@@ -698,8 +698,8 @@ class Cursor(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
-                >>> source = datastructuretools.CyclicTuple(source)
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+                >>> source = abjad.CyclicTuple(source)
                 >>> cursor = baca.tools.Cursor(source=source)
 
             ::
@@ -719,8 +719,8 @@ class Cursor(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
-                >>> source = datastructuretools.CyclicTuple(source)
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+                >>> source = abjad.CyclicTuple(source)
                 >>> cursor = baca.tools.Cursor(source=source)
 
             ::
@@ -744,8 +744,8 @@ class Cursor(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
-                >>> source = datastructuretools.CyclicTuple(source)
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+                >>> source = abjad.CyclicTuple(source)
                 >>> cursor = baca.tools.Cursor(source=source)
 
             ::
@@ -769,7 +769,7 @@ class Cursor(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> source = [13, 'da capo', Note("cs'8."), 'rit.']
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
                 >>> cursor = baca.tools.Cursor(source=source)
 
             ::

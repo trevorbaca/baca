@@ -22,7 +22,7 @@ class ExpressionGallery(object):
 
         ::
 
-            >>> transposition = Expression()
+            >>> transposition = baca.Expression()
             >>> transposition = transposition.pitch_class_segment()
             >>> transposition = transposition.transpose(n=3)
             >>> expression = baca.sequence(name='J')
@@ -79,7 +79,7 @@ class ExpressionGallery(object):
 
         ::
 
-            >>> transposition = Expression()
+            >>> transposition = baca.Expression()
             >>> transposition = transposition.pitch_class_segment()
             >>> transposition = transposition.transpose(n=3)
             >>> expression = baca.sequence(name='J')
@@ -139,7 +139,7 @@ class ExpressionGallery(object):
 
         ::
 
-            >>> transposition = Expression()
+            >>> transposition = baca.Expression()
             >>> transposition = transposition.pitch_class_segment()
             >>> transposition = transposition.transpose(n=3)
             >>> expression = baca.sequence(name='J')

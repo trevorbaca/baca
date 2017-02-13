@@ -28,7 +28,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin.viola.cello
                 \context TimeSignatureContext = "Time Signature Context" <<

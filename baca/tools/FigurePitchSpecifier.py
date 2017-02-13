@@ -37,7 +37,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Staff])
+            >>> f(lilypond_file[abjad.Staff])
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -249,7 +249,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -314,7 +314,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -359,7 +359,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne

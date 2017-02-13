@@ -212,7 +212,6 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
                 beam_divisions_together=True,
                 ),
             baca.tools.RhythmSpecifier(
-                patterns=abjad.patterntools.select_all(),
                 rhythm_maker=baca.tools.FigureRhythmMaker(
                     talea=abjad.rhythmmakertools.Talea(
                         counts=[1],

@@ -92,6 +92,30 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
     def __add__(self, argument):
         r'''Concatenates `argument` to pitch array row.
 
+        ..  container:: example
+
+            ::
+
+                >>> array = baca.tools.PitchArray([[1, 2, 1], [2, 1, 1]])
+                >>> array[0].cells[0].append_pitch(0)
+                >>> array[0].cells[1].append_pitch(2)
+                >>> array[1].cells[2].append_pitch(4)
+
+            ::
+
+                >>> print(array)
+                [c'] [d'    ] [  ]
+                [       ] [ ] [e']
+
+            ::
+
+                >>> new_row = array[0] + array[1]
+
+            ::
+
+                >>> print(new_row)
+                [c'] [d'] [ ] [ ] [ ] [e']
+
         Returns new pitch array row.
         '''
         if not isinstance(argument, PitchArrayRow):
@@ -179,6 +203,31 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
 
     def __iadd__(self, argument):
         r'''Adds `argument` to pitch array row in place.
+
+        ..  container:: example
+
+            ::
+
+                >>> array = baca.tools.PitchArray([[1, 2, 1], [2, 1, 1]])
+                >>> array[0].cells[0].append_pitch(0)
+                >>> array[0].cells[1].append_pitch(2)
+                >>> array[1].cells[2].append_pitch(4)
+
+            ::
+
+                >>> print(array)
+                [c'] [d'    ] [  ]
+                [       ] [ ] [e']
+
+            ::
+
+                >>> row = array[0].withdraw()
+                >>> row += row
+
+            ::
+
+                >>> print(row)
+                [c'] [d'] [ ] [c'] [d'] [ ]
 
         Returns pitch array row.
         '''
@@ -386,6 +435,34 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
     def append(self, cell):
         r'''Appends `cell` to pitch array row.
 
+        ..  container:: example
+
+            ::
+
+                >>> array = baca.tools.PitchArray([[1, 2, 1], [2, 1, 1]])
+                >>> array[0].cells[0].append_pitch(abjad.NamedPitch(0))
+                >>> array[0].cells[1].append_pitch(abjad.NamedPitch(2))
+                >>> array[0].cells[1].append_pitch(abjad.NamedPitch(4))
+
+            ::
+
+                >>> print(array)
+                [c'] [d' e'    ] [ ]
+                [          ] [ ] [ ]
+
+            ::
+
+                >>> cell = baca.tools.PitchArrayCell(width=1)
+                >>> array[0].append(cell)
+                >>> cell = baca.tools.PitchArrayCell(width=1)
+                >>> array[1].append(cell)
+
+            ::
+
+                >>> print(array)
+                [c'] [d' e'    ] [ ] [ ]
+                [          ] [ ] [ ] [ ]
+
         Returns none.
         '''
         assert isinstance(cell, baca.tools.PitchArrayCell), repr(cell)
@@ -394,6 +471,31 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
 
     def apply_pitches(self, pitch_tokens):
         r'''Applies `pitch_tokens` to pitch cells in pitch array row.
+
+        ..  container:: example
+
+            ::
+
+                >>> array = baca.tools.PitchArray([
+                ...     [1, (0, 1), (0, 2)],
+                ...     [(0, 2), (0, 1), 1],
+                ...     ])
+
+            ::
+
+                >>> print(array)
+                [  ] [c'] [c'    ]
+                [c'     ] [c'] [ ]
+
+            ::
+
+                >>> array[0].apply_pitches([-2, -1.5])
+
+            ::
+
+                >>> print(array)
+                [  ] [bf] [bqf    ]
+                [c'     ] [c' ] [ ]
 
         Returns none.
         '''
@@ -407,6 +509,30 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
 
     def copy_subrow(self, start=None, stop=None):
         r'''Copies subrow of pitch array row from `start` to `stop`.
+
+        ..  container:: example
+
+            ::
+
+                >>> array = baca.tools.PitchArray([[1, 2, 1], [2, 1, 1]])
+                >>> array[0].cells[0].append_pitch(0)
+                >>> array[0].cells[1].append_pitch(2)
+                >>> array[1].cells[2].append_pitch(4)
+
+            ::
+
+                >>> print(array)
+                [c'] [d'    ] [  ]
+                [       ] [ ] [e']
+
+            ::
+
+                >>> subrow = array[0].copy_subrow(2, None)
+
+            ::
+
+                >>> print(subrow)
+                [d'] [ ]
 
         Returns new pitch array row.
         '''
@@ -433,6 +559,31 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
     def empty_pitches(self):
         r'''Empties pitches in pitch array row.
 
+        ..  container:: example
+
+            ::
+
+                >>> array = baca.tools.PitchArray([[1, 2, 1], [2, 1, 1]])
+                >>> array[0].cells[0].append_pitch(0)
+                >>> array[0].cells[1].append_pitch(2)
+                >>> array[1].cells[2].append_pitch(4)
+
+            ::
+
+                >>> print(array)
+                [c'] [d'    ] [  ]
+                [       ] [ ] [e']
+
+            ::
+
+                >>> array[0].empty_pitches()
+
+            ::
+
+                >>> print(array)
+                [ ] [     ] [  ]
+                [     ] [ ] [e']
+
         Returns none.
         '''
         for cell in self.cells:
@@ -440,6 +591,34 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
 
     def extend(self, cells):
         r'''Extends pitch array row with `cells`.
+
+        ..  container:: example
+
+            ::
+
+                >>> array = baca.tools.PitchArray([[1, 2, 1], [2, 1, 1]])
+                >>> array[0].cells[0].append_pitch(0)
+                >>> array[0].cells[1].append_pitch(2)
+                >>> array[1].cells[2].append_pitch(4)
+
+            ::
+
+                >>> print(array)
+                [c'] [d'    ] [  ]
+                [       ] [ ] [e']
+
+            ::
+
+                >>> cells = [baca.tools.PitchArrayCell(width=_) for _ in [1, 1, 1]]
+                >>> array[0].extend(cells)
+                >>> cell = baca.tools.PitchArrayCell(width=3)
+                >>> array[1].append(cell)
+
+            ::
+
+                >>> print(array)
+                [c'] [d'    ] [  ] [ ] [ ] [ ]
+                [       ] [ ] [e'] [     ]
 
         Returns none.
         '''
@@ -449,6 +628,36 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
     def has_spanning_cell_over_index(self, i):
         r'''Is true when pitch array row has one or more cells spanning over
         index `i`. Otherwise false.
+
+        ..  container:: example
+
+            ::
+
+                >>> array = baca.tools.PitchArray([[1, 2, 1], [2, 1, 1]])
+                >>> array[0].cells[0].append_pitch(0)
+                >>> array[0].cells[1].append_pitch(2)
+                >>> array[1].cells[2].append_pitch(4)
+
+            ::
+
+                >>> print(array)
+                [c'] [d'    ] [  ]
+                [       ] [ ] [e']
+
+            ::
+
+                >>> for row in array:
+                ...     for i in range(4):
+                ...         i, row.has_spanning_cell_over_index(i)
+                ...
+                (0, False)
+                (1, False)
+                (2, True)
+                (3, False)
+                (0, False)
+                (1, True)
+                (2, False)
+                (3, False)
 
         Returns true or false.
         '''

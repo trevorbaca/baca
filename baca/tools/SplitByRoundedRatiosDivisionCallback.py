@@ -18,7 +18,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
         ::
 
             >>> maker = baca.tools.SplitByRoundedRatiosDivisionCallback(
-            ...     ratios=[mathtools.Ratio([2, 1])],
+            ...     ratios=[abjad.Ratio([2, 1])],
             ...     )
             >>> lists = maker([(7, 4), (6, 4)])
             >>> for list_ in lists:
@@ -33,7 +33,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
         ::
 
             >>> maker = baca.tools.SplitByRoundedRatiosDivisionCallback(
-            ...     ratios=[mathtools.Ratio([2, 1]), mathtools.Ratio([1, 1, 1])],
+            ...     ratios=[abjad.Ratio([2, 1]), abjad.Ratio([1, 1, 1])],
             ...     )
             >>> lists = maker([(7, 4), (6, 4), (5, 4), (4, 4)])
             >>> for list_ in lists:
@@ -67,7 +67,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
         ):
         if ratios is not None:
             ratios = ratios or ()
-            ratios = [abjad.mathtools.Ratio(_) for _ in ratios]
+            ratios = [abjad.Ratio(_) for _ in ratios]
             ratios = tuple(ratios)
         self._ratios = ratios
 
@@ -83,7 +83,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> maker = baca.tools.SplitByRoundedRatiosDivisionCallback(
-                ...     ratios=[mathtools.Ratio([1, 1])],
+                ...     ratios=[abjad.Ratio([1, 1])],
                 ...     )
                 >>> lists = maker([(7, 4), (6, 4)])
                 >>> for list_ in lists:
@@ -100,7 +100,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> maker = baca.tools.SplitByRoundedRatiosDivisionCallback(
-                ...     ratios=[mathtools.Ratio([1, 1])],
+                ...     ratios=[abjad.Ratio([1, 1])],
                 ...     )
                 >>> maker([])
                 []
@@ -114,14 +114,14 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> maker = baca.tools.SplitByRoundedRatiosDivisionCallback(
-                ...     ratios=[mathtools.Ratio([1, 1])],
+                ...     ratios=[abjad.Ratio([1, 1])],
                 ...     )
 
             ::
 
                 >>> divisions = [(7, 4), (6, 4)]
                 >>> divisions = [baca.tools.Division(_) for _ in divisions]
-                >>> divisions[0]._start_offset = Offset(1, 4)
+                >>> divisions[0]._start_offset = abjad.Offset(1, 4)
                 >>> divisions
                 [Division((7, 4), start_offset=Offset(1, 4)), Division((6, 4))]
 
@@ -135,6 +135,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
 
                 >>> for division in division_lists[0]:
                 ...     division
+                ...
                 Division((4, 4), start_offset=Offset(1, 4))
                 Division((3, 4), start_offset=Offset(5, 4))
 
@@ -142,6 +143,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
 
                 >>> for division in division_lists[1]:
                 ...     division
+                ...
                 Division((3, 4), start_offset=Offset(2, 1))
                 Division((3, 4), start_offset=Offset(11, 4))
 
@@ -178,7 +180,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
         if self.ratios:
             ratios = self.ratios
         else:
-            ratios = (abjad.mathtools.Ratio([1]),)
+            ratios = (abjad.Ratio([1]),)
         ratios = abjad.datastructuretools.CyclicTuple(ratios)
         return ratios
 
@@ -195,7 +197,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> maker = baca.tools.SplitByRoundedRatiosDivisionCallback(
-                ...     ratios=[mathtools.Ratio([1])],
+                ...     ratios=[abjad.Ratio([1])],
                 ...     )
                 >>> lists = maker([(7, 4), (6, 4)])
                 >>> for list_ in lists:
@@ -210,7 +212,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> maker = baca.tools.SplitByRoundedRatiosDivisionCallback(
-                ...     ratios=[mathtools.Ratio([1, 1])],
+                ...     ratios=[abjad.Ratio([1, 1])],
                 ...     )
                 >>> lists = maker([(7, 4), (6, 4)])
                 >>> for list_ in lists:
@@ -225,7 +227,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> maker = baca.tools.SplitByRoundedRatiosDivisionCallback(
-                ...     ratios=[mathtools.Ratio([2, 1])],
+                ...     ratios=[abjad.Ratio([2, 1])],
                 ...     )
                 >>> lists = maker([(7, 4), (6, 4)])
                 >>> for list_ in lists:
@@ -240,7 +242,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> maker = baca.tools.SplitByRoundedRatiosDivisionCallback(
-                ...     ratios=[mathtools.Ratio([1, 1, 1])],
+                ...     ratios=[abjad.Ratio([1, 1, 1])],
                 ...     )
                 >>> lists = maker([(7, 4), (6, 4)])
                 >>> for list_ in lists:
@@ -255,7 +257,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> maker = baca.tools.SplitByRoundedRatiosDivisionCallback(
-                ...     ratios=[mathtools.Ratio([2, 1]), mathtools.Ratio([1, 1, 1])],
+                ...     ratios=[abjad.Ratio([2, 1]), abjad.Ratio([1, 1, 1])],
                 ...     )
                 >>> lists = maker([(7, 4), (6, 4), (5, 4), (4, 4)])
                 >>> for list_ in lists:

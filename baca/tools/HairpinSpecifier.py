@@ -22,8 +22,8 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
             ...     span='nontrivial ties',
             ...     )
             >>> string = "c'4 ~ c' ~ c' r4 d'4 ~ d' ~ d' r4"
-            >>> staff = Staff(string)
-            >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
+            >>> staff = abjad.Staff(string)
+            >>> logical_ties = abjad.iterate(staff).by_logical_tie(pitched=True)
             >>> logical_ties = list(logical_ties)
             >>> specifier(logical_ties)
             >>> show(staff) # doctest: +SKIP
@@ -74,7 +74,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
         '_include_following_rests',
         '_minimum_duration',
         '_omit_lone_note_dynamic',
-        '_patterns',
+        '_pattern',
         '_span',
         )
 
@@ -90,7 +90,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
         include_following_rests=None,
         minimum_duration=None,
         omit_lone_note_dynamic=None,
-        patterns=None,
+        pattern=None,
         span='contiguous notes and chords',
         ):
         if enchain_hairpins is not None:
@@ -121,9 +121,10 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
         if omit_lone_note_dynamic is not None:
             omit_lone_note_dynamic = bool(omit_lone_note_dynamic)
         self._omit_lone_note_dynamic = omit_lone_note_dynamic
-        if patterns is not None:
-            assert isinstance(patterns, (list, tuple)), repr(patterns)
-        self._patterns = patterns
+        if pattern is not None:
+            prototype = (abjad.Pattern, abjad.patterntools.CompoundPattern)
+            assert isinstance(pattern, prototype), repr(prototype)
+        self._pattern = pattern
         strings = (
             'contiguous notes and chords',
             'nontrivial ties',
@@ -169,9 +170,9 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
                 continue
             total_notes = len(notes)
             notes_to_span = []
-            for note_index, note in enumerate(notes):
-                if self._index_matches_patterns(note_index, total_notes):
-                    notes_to_span.append(note)
+            pattern = self.pattern or abjad.select_all()
+            notes_to_span = pattern.get_matching_items(notes)
+            notes_to_span = list(notes_to_span)
             if not notes_to_span:
                 continue
             if self.include_following_rests:
@@ -231,14 +232,6 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
         if current_group:
             result.append(current_group)
         return result
-
-    def _index_matches_patterns(self, index, total):
-        if not self.patterns:
-            return True
-        for pattern in self.patterns:
-            if pattern.matches_index(index, total):
-                return True
-        return False
 
     def _partition_by_enchained_counts(self, leaves, counts):
         assert isinstance(leaves, list), repr(leaves)
@@ -302,8 +295,8 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
                 ...     span=[3, 2],
                 ...     )
                 >>> string = "c'8 ~ c' ~ c' ~ c' ~ c' ~ c' ~ c' ~ c'"
-                >>> staff = Staff(string)
-                >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
+                >>> staff = abjad.Staff(string)
+                >>> logical_ties = abjad.iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
                 >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
@@ -334,8 +327,8 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
                 ...     span=[3, 2],
                 ...     )
                 >>> string = "c'8 ~ c' ~ c' ~ c' ~ c' ~ c' ~ c' ~ c'"
-                >>> staff = Staff(string)
-                >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
+                >>> staff = abjad.Staff(string)
+                >>> logical_ties = abjad.iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
                 >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
@@ -377,8 +370,8 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
                 ...     span='nontrivial ties',
                 ...     )
                 >>> string = "c'4 ~ c' ~ c' r4 d'4 ~ d' ~ d' r4"
-                >>> staff = Staff(string)
-                >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
+                >>> staff = abjad.Staff(string)
+                >>> logical_ties = abjad.iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
                 >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
@@ -409,8 +402,8 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
                 ...     span='nontrivial ties',
                 ...     )
                 >>> string = "c'4 ~ c' ~ c' r4 d'4 ~ d' ~ d' r4"
-                >>> staff = Staff(string)
-                >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
+                >>> staff = abjad.Staff(string)
+                >>> logical_ties = abjad.iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
                 >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
@@ -455,8 +448,8 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
                 ...     span=[4],
                 ...     )
                 >>> string = "c'16 d' e' f' ~ f' e' d' c' ~ c' d' e' f' ~ f' e' d' c'"
-                >>> staff = Staff(string)
-                >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
+                >>> staff = abjad.Staff(string)
+                >>> logical_ties = abjad.iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
                 >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
@@ -494,8 +487,8 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
                 ...     span=[4],
                 ...     )
                 >>> string = "c'16 d' e' f' ~ f' e' d' c' ~ c' d' e' f' ~ f' e' d' c'"
-                >>> staff = Staff(string)
-                >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
+                >>> staff = abjad.Staff(string)
+                >>> logical_ties = abjad.iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
                 >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
@@ -548,8 +541,8 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
                 ...     span=[2, 3],
                 ...     )
                 >>> string = "c'8 ~ c' ~ c' r c' ~ c' ~ c' r"
-                >>> staff = Staff(string)
-                >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
+                >>> staff = abjad.Staff(string)
+                >>> logical_ties = abjad.iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
                 >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
@@ -583,8 +576,8 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
                 ...     span=[2, 3],
                 ...     )
                 >>> string = "c'8 ~ c' ~ c' r c' ~ c' ~ c' r"
-                >>> staff = Staff(string)
-                >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
+                >>> staff = abjad.Staff(string)
+                >>> logical_ties = abjad.iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
                 >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
@@ -618,8 +611,8 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
                 ...     span=[2, 3],
                 ...     )
                 >>> string = "c'8 ~ c' ~ c' r c' ~ c' ~ c' ~ c' R1"
-                >>> staff = Staff(string)
-                >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
+                >>> staff = abjad.Staff(string)
+                >>> logical_ties = abjad.iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
                 >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
@@ -672,8 +665,8 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
                 ...     hairpin_tokens=['ppp < p'],
                 ...     span='nontrivial ties',
                 ...     )
-                >>> staff = Staff("c'4 ~ c'8 d'8 ~ d'4 r4 e'4 g'4 fs'4 ~ fs'4")
-                >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
+                >>> staff = abjad.Staff("c'4 ~ c'8 d'8 ~ d'4 r4 e'4 g'4 fs'4 ~ fs'4")
+                >>> logical_ties = abjad.iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
                 >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
@@ -704,8 +697,8 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
                 ...     omit_lone_note_dynamic=True,
                 ...     span='nontrivial ties',
                 ...     )
-                >>> staff = Staff("c'4 ~ c'8 d'8 ~ d'4 r4 e'4 g'4 fs'4 ~ fs'4")
-                >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
+                >>> staff = abjad.Staff("c'4 ~ c'8 d'8 ~ d'4 r4 e'4 g'4 fs'4 ~ fs'4")
+                >>> logical_ties = abjad.iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
                 >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
@@ -734,12 +727,14 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
         return self._omit_lone_note_dynamic
 
     @property
-    def patterns(self):
-        r'''Gets patterns of specifier.
+    def pattern(self):
+        r'''Gets pattern.
 
-        Set to patterns or none.
+        Set to pattern or none.
+
+        Returns pattern or none.
         '''
-        return self._patterns
+        return self._pattern
 
     @property
     def span(self):
@@ -755,8 +750,8 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
                 ...     hairpin_tokens=['ppp < p'],
                 ...     span='contiguous notes and chords',
                 ...     )
-                >>> staff = Staff("c'4 ~ c'8 d'8 ~ d'4 r4 e'4 g'4 fs'4 ~ fs'4")
-                >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
+                >>> staff = abjad.Staff("c'4 ~ c'8 d'8 ~ d'4 r4 e'4 g'4 fs'4 ~ fs'4")
+                >>> logical_ties = abjad.iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
                 >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
@@ -787,8 +782,8 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
                 ...     omit_lone_note_dynamic=True,
                 ...     span='nontrivial ties',
                 ...     )
-                >>> staff = Staff("c'4 ~ c'8 d'8 ~ d'4 r4 e'4 g'4 fs'4 ~ fs'4")
-                >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
+                >>> staff = abjad.Staff("c'4 ~ c'8 d'8 ~ d'4 r4 e'4 g'4 fs'4 ~ fs'4")
+                >>> logical_ties = abjad.iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
                 >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP
@@ -819,8 +814,8 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
                 ...     span=[3, 4],
                 ...     )
                 >>> string = "c'16 d' ~ d' e' c' d' ~ d' e' c' d' ~ d' e' c'8 e'8"
-                >>> staff = Staff(string)
-                >>> logical_ties = iterate(staff).by_logical_tie(pitched=True)
+                >>> staff = abjad.Staff(string)
+                >>> logical_ties = abjad.iterate(staff).by_logical_tie(pitched=True)
                 >>> logical_ties = list(logical_ties)
                 >>> specifier(logical_ties)
                 >>> show(staff) # doctest: +SKIP

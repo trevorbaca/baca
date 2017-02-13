@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import abjad
+import baca
 
 
 class RegisterSpecifier(abjad.abctools.AbjadObject):
@@ -12,7 +13,7 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        Transposes to the octave of Eb5:
+        With segment-maker:
 
         ::
 
@@ -29,7 +30,7 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
             ...         baca.pitches('G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4'),
             ...         baca.make_even_run_rhythm_specifier(),
             ...         baca.tools.RegisterSpecifier(
-            ...             registration=abjad.pitchtools.Registration(
+            ...             registration=abjad.Registration(
             ...                 [('[A0, C8]', 15)],
             ...                 ),
             ...             ),
@@ -44,7 +45,7 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -118,6 +119,54 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
                 >>
             >>
 
+    ..  container:: example
+
+        With figure-maker:
+
+        ::
+
+            >>> figure_maker = baca.tools.FigureMaker()
+
+        ::
+
+            >>> contribution = figure_maker(
+            ...     'Voice 1',
+            ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
+            ...     baca.tools.RegisterSpecifier(
+            ...         registration=abjad.Registration(
+            ...             [('[A0, C8]', 15)],
+            ...             ),
+            ...         ),
+            ...     )
+            >>> lilypond_file = figure_maker.show(contribution)
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> f(lilypond_file[abjad.Staff])
+            \new Staff <<
+                \context Voice = "Voice 1" {
+                    \voiceOne
+                    {
+                        {
+                            bf''16 [
+                            c'''16
+                            d'''16 ]
+                        }
+                        {
+                            bf''16 [
+                            c'''16
+                            d'''16 ]
+                        }
+                        {
+                            bf''16 [
+                            c'''16
+                            d'''16 ]
+                        }
+                    }
+                }
+            >>
+
     """
 
     ### CLASS VARIABLES ###
@@ -125,33 +174,48 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
     __documentation_section__ = 'Specifiers'
 
     __slots__ = (
+        '_pattern',
         '_registration',
         )
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        registration=None,
-        ):
-        prototype = (type(None), abjad.pitchtools.Registration)
-        assert isinstance(registration, prototype), repr(registration)
+    def __init__(self, pattern=None, registration=None):
+        if pattern is not None:
+            assert isinstance(pattern, abjad.Pattern), repr(pattern)
+        self._pattern = pattern
+        if registration is not None:
+            prototype = abjad.Registration
+            assert isinstance(registration, prototype), repr(registration)
         self._registration = registration
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument):
+    def __call__(self, argument=None):
         r'''Calls registration specifier on `argument`.
 
         Returns none.
         '''
-        for logical_tie in abjad.iterate(argument).by_logical_tie(
-            pitched=True,
-            with_grace_notes=True,
-            ):
-            for note in logical_tie:
-                written_pitch = self.registration([note.written_pitch])
-                self._set_pitch(note, written_pitch)
+        if argument is None:
+            return
+        if isinstance(argument, baca.tools.ScopedSpecifier):
+            selections = [argument]
+        if isinstance(argument, abjad.Selection):
+            selections = [argument]
+        else:
+            assert isinstance(argument, list), repr(argument)
+            assert isinstance(argument[0], abjad.Selection), repr(argument)
+            selections = argument
+        pattern = self.pattern or abjad.select_all()
+        selections = pattern.get_matching_items(selections)
+        for selection in selections:
+            for logical_tie in abjad.iterate(selection).by_logical_tie(
+                pitched=True,
+                with_grace_notes=True,
+                ):
+                for note in logical_tie:
+                    written_pitch = self.registration([note.written_pitch])
+                    self._set_pitch(note, written_pitch)
 
     ### PRIVATE METHODS ###
 
@@ -163,6 +227,114 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
+    def pattern(self):
+        r'''Gets pattern.
+
+        ..  container:: example
+
+            First stage only:
+
+            ::
+
+                >>> figure_maker = baca.tools.FigureMaker()
+
+            ::
+
+                >>> contribution = figure_maker(
+                ...     'Voice 1',
+                ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
+                ...     baca.tools.RegisterSpecifier(
+                ...         pattern=abjad.select_first(),
+                ...         registration=abjad.Registration(
+                ...             [('[A0, C8]', 0)],
+                ...             ),
+                ...         ),
+                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            {
+                                bf'16 [
+                                c'16
+                                d'16 ]
+                            }
+                            {
+                                bf'16 [
+                                c''16
+                                d''16 ]
+                            }
+                            {
+                                bf'16 [
+                                c''16
+                                d''16 ]
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Last stage only:
+
+            ::
+
+                >>> figure_maker = baca.tools.FigureMaker()
+
+            ::
+
+                >>> contribution = figure_maker(
+                ...     'Voice 1',
+                ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
+                ...     baca.tools.RegisterSpecifier(
+                ...         pattern=abjad.select_last(),
+                ...         registration=abjad.Registration(
+                ...             [('[A0, C8]', 0)],
+                ...             ),
+                ...         ),
+                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            {
+                                bf'16 [
+                                c''16
+                                d''16 ]
+                            }
+                            {
+                                bf'16 [
+                                c''16
+                                d''16 ]
+                            }
+                            {
+                                bf'16 [
+                                c'16
+                                d'16 ]
+                            }
+                        }
+                    }
+                >>
+
+        Set to pattern or none.
+
+        Returns pattern or none.
+        '''
+        return self._pattern
+
+    @property
     def registration(self):
         r'''Gets registration.
 
@@ -171,7 +343,7 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> specifier = baca.tools.RegisterSpecifier(
-                ...     registration=abjad.pitchtools.Registration(
+                ...     registration=abjad.Registration(
                 ...         [('[A0, C4)', 15), ('[C4, C8)', 27)],
                 ...         ),
                 ...     )

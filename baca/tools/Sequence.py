@@ -51,7 +51,7 @@ class Sequence(abjad.Sequence):
             ..  doctest::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[Voice])
+                >>> f(lilypond_file[abjad.Voice])
                 \new Voice {
                     bf'8
                     bqf'8
@@ -117,7 +117,7 @@ class Sequence(abjad.Sequence):
             ..  doctest::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[Voice])
+                >>> f(lilypond_file[abjad.Voice])
                 \new Voice {
                     b'8
                     bqs'8
@@ -168,7 +168,7 @@ class Sequence(abjad.Sequence):
                 >>> lilypond_file = segment.__illustrate__(
                 ...     figure_name=markup,
                 ...     )
-                >>> f(lilypond_file[Voice])
+                >>> f(lilypond_file[abjad.Voice])
                 \new Voice {
                     b'8
                         ^ \markup {

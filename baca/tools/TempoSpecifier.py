@@ -18,8 +18,8 @@ class TempoSpecifier(abjad.abctools.AbjadObject):
             ...     measures_per_stage=[2, 2],
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
             ...     tempo_specifier=baca.tools.TempoSpecifier([
-            ...         (1, Tempo(Duration(1, 4), 90)),
-            ...         (2, Tempo(Duration(1, 4), 72)),
+            ...         (1, abjad.Tempo((1, 4), 90)),
+            ...         (2, abjad.Tempo((1, 4), 72)),
             ...         ]),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
@@ -42,7 +42,7 @@ class TempoSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -165,9 +165,9 @@ class TempoSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> tempo_specifier = baca.tools.TempoSpecifier([
-                ...     (1, Tempo(Duration(1, 4), 90)),
-                ...     (1, Accelerando()),
-                ...     (4, Tempo(Duration(1, 4), 120)),
+                ...     (1, abjad.Tempo((1, 4), 90)),
+                ...     (1, abjad.Accelerando()),
+                ...     (4, abjad.Tempo((1, 4), 120)),
                 ...     ])
 
             ::
@@ -192,9 +192,9 @@ class TempoSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> tempo_specifier = baca.tools.TempoSpecifier([
-                ...     (1, Tempo(Duration(1, 4), 90)),
-                ...     (1, Accelerando()),
-                ...     (4, Tempo(Duration(1, 4), 120)),
+                ...     (1, abjad.Tempo((1, 4), 90)),
+                ...     (1, abjad.Accelerando()),
+                ...     (4, abjad.Tempo((1, 4), 120)),
                 ...     ])
 
             ::

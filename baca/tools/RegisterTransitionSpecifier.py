@@ -27,10 +27,10 @@ class RegisterTransitionSpecifier(abjad.abctools.AbjadObject):
             ...         baca.pitches('C4 D4 E4 F4'),
             ...         baca.make_even_run_rhythm_specifier(),
             ...         baca.tools.RegisterTransitionSpecifier(
-            ...             start_registration=abjad.pitchtools.Registration(
+            ...             start_registration=abjad.Registration(
             ...                 [('[A0, C8]', 0)],
             ...                 ),
-            ...             stop_registration=abjad.pitchtools.Registration(
+            ...             stop_registration=abjad.Registration(
             ...                 [('[A0, C8]', 12)],
             ...                 ),
             ...             ),
@@ -45,7 +45,7 @@ class RegisterTransitionSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -139,8 +139,8 @@ class RegisterTransitionSpecifier(abjad.abctools.AbjadObject):
         start_registration=None,
         stop_registration=None,
         ):
-        assert isinstance(start_registration, abjad.pitchtools.Registration)
-        assert isinstance(stop_registration, abjad.pitchtools.Registration)
+        assert isinstance(start_registration, abjad.Registration)
+        assert isinstance(stop_registration, abjad.Registration)
         assert len(start_registration) == len(stop_registration)
         self._start_registration = start_registration
         self._stop_registration = stop_registration
@@ -224,7 +224,7 @@ class RegisterTransitionSpecifier(abjad.abctools.AbjadObject):
                 target_octave_start_pitch=target_octave_start_pitch,
                 )
             components.append(component)
-        registration = abjad.pitchtools.Registration(components)
+        registration = abjad.Registration(components)
         return registration
     
     @staticmethod

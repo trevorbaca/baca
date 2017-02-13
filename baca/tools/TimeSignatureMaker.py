@@ -22,10 +22,10 @@ class TimeSignatureMaker(abjad.abctools.AbjadObject):
             >>> stage_specifier = baca.tools.StageSpecifier([
             ...     2,
             ...     2,
-            ...     Fermata('longfermata'),
+            ...     abjad.Fermata('longfermata'),
             ...     ])
             >>> tempo_specifier = baca.tools.TempoSpecifier([
-            ...     (1, Tempo(Duration(1, 4), 90)),
+            ...     (1, abjad.Tempo((1, 4), 90)),
             ...     ])
             >>> maker = baca.tools.TimeSignatureMaker(
             ...     time_signatures=time_signatures,

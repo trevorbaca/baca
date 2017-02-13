@@ -18,11 +18,11 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
             >>> figure_maker = baca.tools.FigureMaker(
             ...     baca.tools.MarkupSpecifier(
-            ...         markup=Markup('*'),
+            ...         markup=abjad.Markup('*'),
             ...         ),
             ...     baca.tools.RhythmSpecifier(
             ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-            ...             talea=rhythmmakertools.Talea(
+            ...             talea=abjad.rhythmmakertools.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],
             ...                 denominator=32,
             ...                 ),
@@ -39,7 +39,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Staff])
+            >>> f(lilypond_file[abjad.Staff])
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -149,11 +149,11 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.MarkupSpecifier(
-                ...         markup=Markup('*'),
+                ...         markup=abjad.Markup('*'),
                 ...         ),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
                 ...                 denominator=32,
                 ...                 ),
@@ -170,7 +170,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -206,13 +206,14 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.MarkupSpecifier(
-                ...         markup=Markup('*'),
-                ...         selector=select().by_logical_tie(pitched=True).
+                ...         markup=abjad.Markup('*'),
+                ...         selector=abjad.select().
+                ...         by_logical_tie(pitched=True).
                 ...         get_item(0, apply_to_each=True),
                 ...         ),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
                 ...                 denominator=32,
                 ...                 ),
@@ -229,7 +230,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne

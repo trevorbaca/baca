@@ -43,21 +43,19 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
     __slots__ = (
         '_direction',
         '_pattern',
-        '_start',
         )
 
     _publish_storage_format = True
 
     ### INITIALIZER ###
 
-    def __init__(self, direction=None, pattern=None, start=None):
+    def __init__(self, direction=None, pattern=None):
         if direction is not None:
             assert direction in (Up, Down), repr(direction)
         self._direction = direction
         if pattern is not None:
             assert isinstance(pattern, abjad.Pattern), repr(pattern)
         self._pattern = pattern
-        self._start = start
 
     ### SPECIAL METHODS ###
 
@@ -98,7 +96,6 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
             if pattern.matches_index(i, total_length):
                 pitch_classes = pitch_class_segments[i]
                 pitch_classes = list(pitch_classes)
-                start = self.start or pitch_classes[0]
                 if direction is Up:
                     pitches = class_._to_tightly_spaced_pitches_ascending(
                         pitch_classes,
@@ -141,7 +138,7 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -187,7 +184,7 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -226,13 +223,3 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
         Returns pattern or none.
         '''
         return self._pattern
-
-    @property
-    def start(self):
-        r'''Gets start.
-
-        Set to up, down or none.
-
-        Returns up, down or none.
-        '''
-        return self._start

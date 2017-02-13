@@ -19,14 +19,14 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
             >>> division_maker = baca.tools.DivisionMaker()
             >>> division_maker = division_maker.split_by_durations(
-            ...     compound_meter_multiplier=Multiplier(3, 2),
+            ...     compound_meter_multiplier=(3, 2),
             ...     durations=[(1, 4)],
             ...     )
             >>> meters = [
-            ...     metertools.Meter((4, 4)),
-            ...     metertools.Meter((5, 4)),
-            ...     metertools.Meter((6, 4)),
-            ...     metertools.Meter((7, 4)),
+            ...     abjad.Meter((4, 4)),
+            ...     abjad.Meter((5, 4)),
+            ...     abjad.Meter((6, 4)),
+            ...     abjad.Meter((7, 4)),
             ...     ]
             >>> beat_lists = division_maker(meters)
             >>> for beat_list in beat_lists:
@@ -193,7 +193,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
                 >>> callback = baca.tools.PartitionDivisionCallback(counts=[3])
                 >>> divisions = 6 * [baca.tools.Division((1, 4))]
-                >>> divisions[0]._start_offset = Offset(1, 4)
+                >>> divisions[0]._start_offset = abjad.Offset(1, 4)
 
             ::
 

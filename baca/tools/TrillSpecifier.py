@@ -29,7 +29,7 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
             ...         baca.pitches('E4 F4'),
             ...         baca.make_messiaen_note_rhythm_specifier(),
             ...         baca.tools.TrillSpecifier(
-            ...             minimum_written_duration=Duration(1, 4),
+            ...             minimum_written_duration=abjad.Duration(1, 4),
             ...             maximum_written_duration=None,
             ...             ),
             ...         ],
@@ -43,7 +43,7 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -140,12 +140,10 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
         assert isinstance(is_harmonic, (bool, type(None)))
         self._is_harmonic = is_harmonic
         if minimum_written_duration is not None:
-            minimum_written_duration = abjad.durationtools.Duration(
-                minimum_written_duration)
+            minimum_written_duration = abjad.Duration(minimum_written_duration)
         self._minimum_written_duration = minimum_written_duration
         if maximum_written_duration is not None:
-            maximum_written_duration = abjad.durationtools.Duration(
-                maximum_written_duration)
+            maximum_written_duration = abjad.Duration(maximum_written_duration)
         self._maximum_written_duration = maximum_written_duration
         if pitch is not None:
             pitch = abjad.NamedPitch(pitch)
@@ -162,7 +160,7 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
             logical_ties = [
                 abjad.selectiontools.LogicalTie(_) for _ in logical_ties]
         for logical_tie in logical_ties:
-            written_duration = abjad.durationtools.Duration(0)
+            written_duration = abjad.Duration(0)
             for note in logical_tie:
                 written_duration += note.written_duration
             if self.minimum_written_duration is not None:

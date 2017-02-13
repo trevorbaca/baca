@@ -18,7 +18,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> for segment in baca.tools.SegmentList([
+            >>> for segment in baca.SegmentList([
             ...     [12, 14, 18, 17],
             ...     [16, 20, 19],
             ...     ]):
@@ -33,7 +33,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> for segment in baca.tools.SegmentList([
+            >>> for segment in baca.SegmentList([
             ...     [12, 14, 18, 17],
             ...     [16, 20, 19],
             ...     ],
@@ -50,7 +50,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> for segment in baca.tools.SegmentList([
+            >>> for segment in baca.SegmentList([
             ...     [12, 14, 18, 17],
             ...     [16, 20, 19],
             ...     ],
@@ -67,7 +67,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> for segment in baca.tools.SegmentList([
+            >>> for segment in baca.SegmentList([
             ...     [12, 14, 18, 17],
             ...     [16, 20, 19],
             ...     ],
@@ -84,7 +84,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> for segment in baca.tools.SegmentList([
+            >>> for segment in baca.SegmentList([
             ...     [12, 14, 18, 17],
             ...     "ff'' gs'' g''",
             ...     ]):
@@ -95,11 +95,32 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
     ..  container:: example
 
+        Initializes from segment list:
+
+        ::
+
+            >>> segments = baca.SegmentList([[12, 13, 14], [15, 16, 17]])
+            >>> baca.SegmentList(segments)
+            SegmentList([<12, 13, 14>, <15, 16, 17>])
+
+    ..  container:: example
+
+        Initializes from list of segment lists:
+
+        ::
+
+            >>> segment_list_1 = baca.SegmentList([[12, 13, 14]])
+            >>> segment_list_2 = baca.SegmentList([[15, 16, 17]])
+            >>> baca.SegmentList([segment_list_1, segment_list_2])
+            SegmentList([<12, 13, 14>, <15, 16, 17>])
+
+    ..  container:: example
+
         Initializes empty:
 
         ::
 
-            >>> baca.tools.SegmentList()
+            >>> baca.SegmentList()
             SegmentList([])
 
     '''
@@ -151,8 +172,8 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
         ..  container:: example
 
-                >>> segments_1 = baca.tools.SegmentList([[12, 14, 18, 17]])
-                >>> segments_2 = baca.tools.SegmentList([[16, 20, 19]])
+                >>> segments_1 = baca.SegmentList([[12, 14, 18, 17]])
+                >>> segments_2 = baca.SegmentList([[16, 20, 19]])
                 >>> segments_1 + segments_2
                 SegmentList([<12, 14, 18, 17>, <16, 20, 19>])
 
@@ -166,6 +187,94 @@ class SegmentList(abjad.abctools.AbjadValueObject):
         segments = self.segments + argument_segments
         return abjad.new(self, segments=segments)
 
+    def __eq__(self, argument):
+        r'''Is true when `argument` is a segment list with segments equal to
+        those of this segment list. Otherwise false.
+
+        ..  container:: example
+
+            ::
+
+                >>> segments_1 = baca.SegmentList([[12, 13, 14], [15, 16, 17]])
+                >>> segments_2 = baca.SegmentList([[12, 13, 14], [15, 16, 17]])
+                >>> segments_3 = baca.SegmentList([[12, 13, 14]])
+
+            ::
+
+                >>> segments_1 == segments_1
+                True
+
+            ::
+
+                >>> segments_1 == segments_2
+                True
+
+            ::
+
+                >>> segments_1 == segments_3
+                False
+
+            ::
+
+                >>> segments_2 == segments_1
+                True
+
+            ::
+
+                >>> segments_2 == segments_2
+                True
+
+            ::
+
+                >>> segments_2 == segments_3
+                False
+
+            ::
+
+                >>> segments_3 == segments_1
+                False
+
+            ::
+
+                >>> segments_3 == segments_2
+                False
+
+            ::
+
+                >>> segments_3 == segments_3
+                True
+
+        ..  container:: example
+
+            Ignores item class:
+
+            ::
+
+                >>> segments_1 = baca.SegmentList(
+                ...     segments=[[12, 13, 14], [15, 16, 17]],
+                ...     item_class=None,
+                ...     )
+                >>> segments_2 = baca.SegmentList(
+                ...     segments=[[12, 13, 14], [15, 16, 17]],
+                ...     item_class=abjad.NumberedPitch,
+                ...     )
+
+            ::
+
+                >>> segments_1.item_class == segments_2.item_class
+                False
+
+            ::
+
+                >>> segments_1 == segments_2
+                True
+
+        Returns true or false.
+        '''
+        if not isinstance(argument, type(self)):
+            return False
+        return self.segments == argument.segments
+
     def __format__(self, format_specification=''):
         r'''Gets storage format of segments.
 
@@ -173,7 +282,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = baca.tools.SegmentList([
+                >>> segments = baca.SegmentList([
                 ...     [12, 14, 18, 17],
                 ...     [16, 20, 19],
                 ...     ])
@@ -217,7 +326,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = baca.tools.SegmentList([
+                >>> segments = baca.SegmentList([
                 ...     [12, 14, 18, 17],
                 ...     [16, 20, 19],
                 ...     ])
@@ -238,7 +347,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = baca.tools.SegmentList([
+                >>> segments = baca.SegmentList([
                 ...     [12, 14, 18, 17],
                 ...     [16, 20, 19],
                 ...     ])
@@ -269,7 +378,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = baca.tools.SegmentList([
+                >>> segments = baca.SegmentList([
                 ...     [12, 14, 18, 17],
                 ...     [16, 20, 19],
                 ...     ])
@@ -281,7 +390,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
             ..  doctest::
 
                 >>> lilypond_file = segments.__illustrate__()
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -329,7 +438,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = baca.tools.SegmentList([
+                >>> segments = baca.SegmentList([
                 ...     [12, 14, 18, 17],
                 ...     [16, 20, 19],
                 ...     ])
@@ -350,7 +459,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> baca.tools.SegmentList([
+                >>> baca.SegmentList([
                 ...     [12, 14, 18, 17],
                 ...     [16, 20, 19],
                 ...     ])
@@ -371,10 +480,16 @@ class SegmentList(abjad.abctools.AbjadValueObject):
     def _coerce(self, segments):
         segments_ = []
         prototype = (abjad.PitchSegment, abjad.PitchClassSegment)
-        for segment in segments or []:
-            segment_ = self._initialize_segment(segment)
-            assert isinstance(segment_, prototype), repr(segment_)
-            segments_.append(segment_)
+        for item in segments or []:
+            if isinstance(item, type(self)):
+                for segment in item:
+                    segment_ = self._initialize_segment(segment)
+                    assert isinstance(segment_, prototype), repr(segment_)
+                    segments_.append(segment_)
+            else:
+                segment_ = self._initialize_segment(item)
+                assert isinstance(segment_, prototype), repr(segment_)
+                segments_.append(segment_)
         return segments_
 
     def _get_pitch_class_class(self):
@@ -475,7 +590,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = baca.tools.SegmentList([
+                >>> segments = baca.SegmentList([
                 ...     [12, 14, 18, 17],
                 ...     [16, 20, 19],
                 ...     ])
@@ -499,7 +614,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = baca.tools.SegmentList(
+                >>> segments = baca.SegmentList(
                 ...     [[5, 12, 14, 18, 17], [16, 17, 19]],
                 ...     )
 
@@ -512,7 +627,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = baca.tools.SegmentList(
+                >>> segments = baca.SegmentList(
                 ...     [[5, 12, 14, 18, 17], [16, 17, 19]],
                 ...     item_class=abjad.NamedPitch,
                 ...     )
@@ -533,7 +648,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = baca.tools.SegmentList([
+                >>> segments = baca.SegmentList([
                 ...     [5, 12, 14, 18, 17],
                 ...     [16, 17, 19],
                 ...     ])
@@ -553,6 +668,52 @@ class SegmentList(abjad.abctools.AbjadValueObject):
             segments.append(segment)
         return abjad.new(self, segments=segments)
 
+    def partition(self, argument, cyclic=False, overhang=False):
+        r'''Partitions segments according to `argument`.
+
+        ..  container:: example
+
+            ::
+
+                >>> segments = baca.SegmentList([
+                ...     [5, 12, 14, 18, 17],
+                ...     [16, 17, 19],
+                ...     [16, 17, 19],
+                ...     ])
+
+            ::
+
+                >>> segments
+                SegmentList([<5, 12, 14, 18, 17>, <16, 17, 19>, <16, 17, 19>])
+
+            ::
+
+                >>> sequence = segments.partition([1, 2], overhang=Exact)
+                >>> for segments in sequence:
+                ...     segments
+                ...
+                SegmentList([<5, 12, 14, 18, 17>])
+                SegmentList([<16, 17, 19>, <16, 17, 19>])
+
+            ::
+
+                >>> isinstance(sequence, baca.Sequence)
+                True
+
+        Returns sequence.
+        '''
+        if isinstance(argument, abjad.Ratio):
+            message = 'implement ratio-partition at some point.'
+            raise NotImplementedError(message)
+        sequence = baca.Sequence(self)
+        parts = sequence.partition_by_counts(
+            argument,
+            cyclic=cyclic,
+            overhang=overhang,
+            )
+        segment_lists = [abjad.new(self, segments=_) for _ in parts]
+        return baca.Sequence(segment_lists)
+
     def read(self, counts=None):
         r'''Reads segments by `counts`.
 
@@ -560,7 +721,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = baca.tools.SegmentList([
+                >>> segments = baca.SegmentList([
                 ...     [5, 12, 14, 18, 17],
                 ...     [16, 17, 19],
                 ...     ])
@@ -601,7 +762,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = baca.tools.SegmentList([
+                >>> segments = baca.SegmentList([
                 ...     [5, 12, 14, 18, 17],
                 ...     [16, 17, 19],
                 ...     ])
@@ -641,7 +802,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = baca.tools.SegmentList([
+                >>> segments = baca.SegmentList([
                 ...     [5, 12, 14, 17, 18, 17],
                 ...     [16, 17, 19, 17],
                 ...     [16, 17, 19, 17],
@@ -658,7 +819,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = baca.tools.SegmentList([
+                >>> segments = baca.SegmentList([
                 ...     [5, 12, 14, 17, 18, 17],
                 ...     [16, 17, 19, 17],
                 ...     [16, 17, 19, 17],
@@ -675,7 +836,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = baca.tools.SegmentList([
+                >>> segments = baca.SegmentList([
                 ...     [5, 12, 14, 17, 18, 17],
                 ...     [16, 17, 19, 17],
                 ...     [16, 17, 19, 17],
@@ -736,7 +897,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
                 ::
 
-                    >>> segments = baca.tools.SegmentList(
+                    >>> segments = baca.SegmentList(
                     ...     [[12, 14, 18, 17], [16, 20, 19]],
                     ...     item_class=abjad.NumberedPitch,
                     ...     )
@@ -750,7 +911,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
                 ::
 
-                    >>> segments = baca.tools.SegmentList(
+                    >>> segments = baca.SegmentList(
                     ...     [[0, 2, 6, 5], [4, 8, 7]],
                     ...     item_class=abjad.NumberedPitchClass,
                     ...     )
@@ -768,7 +929,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
                 ::
 
-                    >>> segments = baca.tools.SegmentList(
+                    >>> segments = baca.SegmentList(
                     ...     [[12, 14, 18, 17], [16, 20, 19]],
                     ...     item_class=abjad.NamedPitch,
                     ...     )
@@ -782,7 +943,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
                 ::
 
-                    >>> segments = baca.tools.SegmentList(
+                    >>> segments = baca.SegmentList(
                     ...     [[0, 2, 6, 5], [4, 8, 7]],
                     ...     item_class=abjad.NamedPitchClass,
                     ...     )
@@ -812,7 +973,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
                 ::
 
-                    >>> segments = baca.tools.SegmentList(
+                    >>> segments = baca.SegmentList(
                     ...     [[12, 14, 18, 17], [16, 20, 19]],
                     ...     item_class=abjad.NumberedPitch,
                     ...     )
@@ -826,7 +987,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
                 ::
 
-                    >>> segments = baca.tools.SegmentList(
+                    >>> segments = baca.SegmentList(
                     ...     [[0, 2, 6, 5], [4, 8, 7]],
                     ...     item_class=abjad.NumberedPitchClass,
                     ...     )
@@ -844,7 +1005,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
                 ::
 
-                    >>> segments = baca.tools.SegmentList(
+                    >>> segments = baca.SegmentList(
                     ...     [[12, 14, 18, 17], [16, 20, 19]],
                     ...     item_class=abjad.NamedPitch,
                     ...     )
@@ -858,7 +1019,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
                 ::
 
-                    >>> segments = baca.tools.SegmentList(
+                    >>> segments = baca.SegmentList(
                     ...     [[0, 2, 6, 5], [4, 8, 7]],
                     ...     item_class=abjad.NamedPitchClass,
                     ...     )

@@ -2,7 +2,7 @@
 import baca
 
 
-class WrapInterface(object):
+class WrapLibrary(object):
     r'''Wrap interface.
 
     ::
@@ -14,7 +14,7 @@ class WrapInterface(object):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Interfaces'
+    __documentation_section__ = 'Library'
 
     ### PUBLIC METHODS ###
 

@@ -150,7 +150,6 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 segments_.append(segments[i])
             else:
                 pitch_classes = list(pitch_class_segments[i])
-                #raise Exception(pitch_classes)
                 bass, soprano = None, None
                 if self.bass is not None:
                     bass = abjad.NumberedPitchClass(self.bass)

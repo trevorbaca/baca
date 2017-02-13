@@ -43,7 +43,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -221,7 +221,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> staff = Staff("c'8 c' c' c' c' c' c' c'")
+                >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
                 >>> specifier(staff)
                 >>> show(staff) # doctest: +SKIP
 
@@ -447,7 +447,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> staff = Staff("c'8 c' c' c' c' c' c' c'")
+                >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
                 >>> specifier(staff)
                 >>> show(staff) # doctest: +SKIP
 
@@ -480,7 +480,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> staff = Staff("c'8 c' c' c' c' c' c' c'")
+                >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
                 >>> specifier(staff)
                 >>> show(staff) # doctest: +SKIP
 
@@ -514,7 +514,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> staff = Staff("c'8 c' c' c' c' c' c' c'")
+                >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
                 >>> specifier(staff)
                 >>> show(staff) # doctest: +SKIP
 

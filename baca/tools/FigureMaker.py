@@ -29,7 +29,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Staff])
+            >>> f(lilypond_file[abjad.Staff])
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -65,6 +65,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
         '_next_figure',
         '_preferred_denominator',
         '_specifiers',
+        '_thread',
         '_voice_names',
         )
 
@@ -92,6 +93,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
         allow_repeated_pitches=None,
         annotate_unregistered_pitches=None,
         preferred_denominator=None,
+        thread=None,
         voice_names=None
         ):
         if allow_repeated_pitches is not None:
@@ -105,6 +107,9 @@ class FigureMaker(abjad.abctools.AbjadObject):
             assert abjad.mathtools.is_positive_integer(preferred_denominator)
         self._preferred_denominator = preferred_denominator
         self._specifiers = specifiers
+        if thread is not None:
+            thread = bool(thread)
+        self._thread = thread
         if voice_names is not None:
             assert all([isinstance(_, str) for _ in voice_names])
         self._voice_names = voice_names
@@ -133,8 +138,9 @@ class FigureMaker(abjad.abctools.AbjadObject):
         preferred_denominator=None,
         remote_anchor=None,
         state_manifest=None,
-        talea__counts=None,
-        talea__denominator=None,
+        talea_counts=None,
+        talea_denominator=None,
+        thread=None,
         time_treatments=None
         ):
         r'''Calls figure-maker on `segments` with keywords.
@@ -156,7 +162,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -194,14 +200,14 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 >>> contribution = figure_maker(
                 ...     'Voice 1',
                 ...     segments,
-                ...     talea__counts=[1, 2],
+                ...     talea_counts=[1, 2],
                 ...     )
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -239,14 +245,14 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 >>> contribution = figure_maker(
                 ...     'Voice 1',
                 ...     segments,
-                ...     talea__denominator=32,
+                ...     talea_denominator=32,
                 ...     )
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -291,7 +297,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -330,8 +336,9 @@ class FigureMaker(abjad.abctools.AbjadObject):
             specifiers,
             division_masks=division_masks,
             logical_tie_masks=logical_tie_masks,
-            talea__counts=talea__counts,
-            talea__denominator=talea__denominator,
+            talea_counts=talea_counts,
+            talea_denominator=talea_denominator,
+            thread=thread,
             time_treatments=time_treatments,
             )
         container = abjad.Container(selections)
@@ -597,7 +604,6 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 unused_specifiers.append(specifier)
         if not result:
             specifier = baca.tools.RhythmSpecifier(
-                patterns=abjad.patterntools.select_all(),
                 rhythm_maker=baca.tools.FigureRhythmMaker(),
                 )
             result.append(specifier)
@@ -652,8 +658,9 @@ class FigureMaker(abjad.abctools.AbjadObject):
         specifiers,
         division_masks=None,
         logical_tie_masks=None,
-        talea__counts=None,
-        talea__denominator=None,
+        talea_counts=None,
+        talea_denominator=None,
+        thread=None,
         time_treatments=None,
         ):
         segments, specifiers = self._apply_figure_pitch_specifiers(
@@ -668,6 +675,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
             segments,
             specifiers,
             )
+        thread = thread or self.thread
         selections = len(segments) * [None]
         specifiers, rhythm_specifiers = self._get_rhythm_specifiers(specifiers)
         for rhythm_specifier in rhythm_specifiers:
@@ -676,8 +684,9 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 selections=selections,
                 division_masks=division_masks,
                 logical_tie_masks=logical_tie_masks,
-                talea__counts=talea__counts,
-                talea__denominator=talea__denominator,
+                talea_counts=talea_counts,
+                talea_denominator=talea_denominator,
+                thread=thread,
                 time_treatments=time_treatments,
                 )
         assert self._all_are_selections(selections), repr(selections)
@@ -792,7 +801,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -845,7 +854,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -900,7 +909,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -958,7 +967,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1006,8 +1015,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['.'],
-                ...         selector=selectortools.Selector().
-                ...             by_class(Note, flatten=True),
+                ...         selector=abjad.select().
+                ...             by_class(abjad.Note, flatten=True),
                 ...         ),
                 ...     )
 
@@ -1020,7 +1029,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1054,11 +1063,11 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=[('.', '-')],
-                ...         selector=selectortools.Selector().
-                ...             by_class(scoretools.Tuplet).
+                ...         selector=abjad.select().
+                ...             by_class(abjad.Tuplet).
                 ...             get_slice(
                 ...                 start=1, stop=-1, apply_to_each=True).
-                ...             by_class(Note, flatten=True),
+                ...             by_class(abjad.Note, flatten=True),
                 ...         ),
                 ...     )
 
@@ -1071,7 +1080,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1103,7 +1112,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.RegisterSpecifier(
-                ...         registration=pitchtools.Registration(
+                ...         registration=abjad.Registration(
                 ...             [('[A0, C8]', -6)],
                 ...             ),
                 ...         ),
@@ -1118,7 +1127,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1151,10 +1160,10 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.RegisterTransitionSpecifier(
-                ...         start_registration=pitchtools.Registration(
+                ...         start_registration=abjad.Registration(
                 ...             [('[A0, C8]', 0)],
                 ...             ),
-                ...         stop_registration=pitchtools.Registration(
+                ...         stop_registration=abjad.Registration(
                 ...             [('[A0, C8]', 12)],
                 ...             ),
                 ...         ),
@@ -1169,7 +1178,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1201,7 +1210,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.DynamicSpecifier(
-                ...         dynamic=spannertools.Hairpin('p < f'),
+                ...         dynamic=abjad.Hairpin('p < f'),
                 ...         ),
                 ...     )
 
@@ -1214,13 +1223,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> contribution = figure_maker('Voice 1', segments)
                 >>> lilypond_file = figure_maker.show(contribution)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).dynamic_line_spanner.staff_padding = 4.5
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override DynamicLineSpanner.staff-padding = #4.5
                 } <<
@@ -1256,10 +1265,10 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.DynamicSpecifier(
-                ...         dynamic=spannertools.Hairpin('p < f'),
-                ...         selector=selectortools.Selector().
+                ...         dynamic=abjad.Hairpin('p < f'),
+                ...         selector=abjad.select().
                 ...             by_leaf().
-                ...             by_run(scoretools.Note),
+                ...             by_run(abjad.Note),
                 ...         ),
                 ...     )
 
@@ -1283,13 +1292,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...         ),
                 ...     )
                 >>> lilypond_file = figure_maker.show(contribution)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).dynamic_line_spanner.staff_padding = 4.5
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override DynamicLineSpanner.staff-padding = #4.5
                 } <<
@@ -1325,15 +1334,15 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.DynamicSpecifier(
-                ...         dynamic=spannertools.Hairpin('p < f'),
-                ...         selector=selectortools.Selector().
-                ...             by_class(scoretools.Tuplet).
+                ...         dynamic=abjad.Hairpin('p < f'),
+                ...         selector=abjad.select().
+                ...             by_class(abjad.Tuplet).
                 ...             get_item(0, apply_to_each=True),
                 ...         ),
                 ...     baca.tools.DynamicSpecifier(
-                ...         dynamic=spannertools.Hairpin('f > p'),
-                ...         selector=selectortools.Selector().
-                ...             by_class(scoretools.Tuplet).
+                ...         dynamic=abjad.Hairpin('f > p'),
+                ...         selector=abjad.select().
+                ...             by_class(abjad.Tuplet).
                 ...             get_item(-1, apply_to_each=True),
                 ...         ),
                 ...     )
@@ -1347,13 +1356,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> contribution = figure_maker('Voice 1', segments)
                 >>> lilypond_file = figure_maker.show(contribution)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).dynamic_line_spanner.staff_padding = 4.5
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override DynamicLineSpanner.staff-padding = #4.5
                 } <<
@@ -1389,16 +1398,16 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.DynamicSpecifier(
-                ...         dynamic=spannertools.Hairpin('p < f'),
-                ...         selector=selectortools.Selector().
-                ...             by_class(scoretools.Tuplet).
+                ...         dynamic=abjad.Hairpin('p < f'),
+                ...         selector=abjad.select().
+                ...             by_class(abjad.Tuplet).
                 ...             get_slice(stop=2, apply_to_each=True).
                 ...             by_leaf(),
                 ...         ),
                 ...     baca.tools.DynamicSpecifier(
-                ...         dynamic=spannertools.Hairpin('f > p'),
-                ...         selector=selectortools.Selector().
-                ...             by_class(scoretools.Tuplet).
+                ...         dynamic=abjad.Hairpin('f > p'),
+                ...         selector=abjad.select().
+                ...             by_class(abjad.Tuplet).
                 ...             get_slice(start=2, apply_to_each=True).
                 ...             by_leaf(),
                 ...         ),
@@ -1413,13 +1422,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> contribution = figure_maker('Voice 1', segments)
                 >>> lilypond_file = figure_maker.show(contribution)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).dynamic_line_spanner.staff_padding = 6
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 6
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override DynamicLineSpanner.staff-padding = #6
                 } <<
@@ -1455,7 +1464,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.SpannerSpecifier(
-                ...         spanner=spannertools.Slur(),
+                ...         spanner=abjad.Slur(),
                 ...         ),
                 ...     )
 
@@ -1468,13 +1477,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> contribution = figure_maker('Voice 1', segments)
                 >>> lilypond_file = figure_maker.show(contribution)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).stem.direction = Down
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override Stem.direction = #down
                 } <<
@@ -1510,10 +1519,10 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.SpannerSpecifier(
-                ...         selector=selectortools.Selector().
-                ...             by_class(scoretools.Tuplet, flatten=True).
+                ...         selector=abjad.select().
+                ...             by_class(abjad.Tuplet, flatten=True).
                 ...             get_slice(apply_to_each=True),
-                ...         spanner=spannertools.Slur(),
+                ...         spanner=abjad.Slur(),
                 ...         ),
                 ...     )
 
@@ -1526,13 +1535,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> contribution = figure_maker('Voice 1', segments)
                 >>> lilypond_file = figure_maker.show(contribution)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).stem.direction = Down
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override Stem.direction = #down
                 } <<
@@ -1568,10 +1577,10 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.SpannerSpecifier(
-                ...         selector=selectortools.Selector().
-                ...             by_class(scoretools.Tuplet, flatten=True).
+                ...         selector=abjad.select().
+                ...             by_class(abjad.Tuplet, flatten=True).
                 ...             get_slice(stop=2, apply_to_each=True),
-                ...         spanner=spannertools.Slur(),
+                ...         spanner=abjad.Slur(),
                 ...         ),
                 ...     )
 
@@ -1584,13 +1593,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> contribution = figure_maker('Voice 1', segments)
                 >>> lilypond_file = figure_maker.show(contribution)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).stem.direction = Down
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override Stem.direction = #down
                 } <<
@@ -1626,10 +1635,10 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.SpannerSpecifier(
-                ...         selector=selectortools.Selector().
-                ...             by_class(scoretools.Tuplet, flatten=True).
+                ...         selector=abjad.select().
+                ...             by_class(abjad.Tuplet, flatten=True).
                 ...             get_slice(start=-2, apply_to_each=True),
-                ...         spanner=spannertools.Slur(),
+                ...         spanner=abjad.Slur(),
                 ...         ),
                 ...     )
 
@@ -1642,13 +1651,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> contribution = figure_maker('Voice 1', segments)
                 >>> lilypond_file = figure_maker.show(contribution)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).stem.direction = Down
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override Stem.direction = #down
                 } <<
@@ -1685,18 +1694,18 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['.'],
-                ...         selector=selectortools.Selector().
-                ...             by_class(scoretools.Tuplet, flatten=True).
+                ...         selector=abjad.select().
+                ...             by_class(abjad.Tuplet, flatten=True).
                 ...             get_slice(start=1, apply_to_each=True).
-                ...             by_class(Note, flatten=True),
+                ...             by_class(abjad.Note, flatten=True),
                 ...         ),
                 ...     baca.tools.SpannerSpecifier(
-                ...         selector=selectortools.Selector().
-                ...             by_class(scoretools.Tuplet, flatten=True).
+                ...         selector=abjad.select().
+                ...             by_class(abjad.Tuplet, flatten=True).
                 ...             get_slice(stop=2, apply_to_each=True),
-                ...         spanner=spannertools.Slur(),
+                ...         spanner=abjad.Slur(),
                 ...         ),
-                ...     rhythmmakertools.BeamSpecifier(
+                ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
                 ...     )
@@ -1710,13 +1719,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> contribution = figure_maker('Voice 1', segments)
                 >>> lilypond_file = figure_maker.show(contribution)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).stem.direction = Down
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override Stem.direction = #down
                 } <<
@@ -1774,12 +1783,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.SpannerSpecifier(
-                ...         selector=selectortools.Selector().
-                ...             by_class(scoretools.Tuplet).
+                ...         selector=abjad.select().
+                ...             by_class(abjad.Tuplet).
                 ...             get_slice(stop=1).
                 ...             by_leaf(flatten=False).
                 ...             with_next_leaf(),
-                ...         spanner=spannertools.Slur(),
+                ...         spanner=abjad.Slur(),
                 ...         ),
                 ...     )
 
@@ -1792,13 +1801,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> contribution = figure_maker('Voice 1', segments)
                 >>> lilypond_file = figure_maker.show(contribution)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).stem.direction = Down
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override Stem.direction = #down
                 } <<
@@ -1833,7 +1842,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> figure_maker = baca.tools.FigureMaker(
-                ...     rhythmmakertools.BeamSpecifier(
+                ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
                 ...     )
@@ -1847,13 +1856,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> contribution = figure_maker('Voice 1', segments)
                 >>> lilypond_file = figure_maker.show(contribution)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).beam.positions = (-6, -6)
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).beam.positions = (-6, -6)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override Beam.positions = #'(-6 . -6)
                 } <<
@@ -1910,7 +1919,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> figure_maker = baca.tools.FigureMaker(
-                ...     rhythmmakertools.BeamSpecifier(
+                ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_each_division=False,
                 ...         ),
                 ...     )
@@ -1928,7 +1937,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1964,7 +1973,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     baca.tools.NestingSpecifier(
                 ...         time_treatments=['+1/16'],
                 ...         ),
-                ...     rhythmmakertools.BeamSpecifier(
+                ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
                 ...     )
@@ -1978,13 +1987,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> contribution = figure_maker('Voice 1', segments)
                 >>> lilypond_file = figure_maker.show(contribution)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).beam.positions = (-5.5, -5.5)
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override Beam.positions = #'(-5.5 . -5.5)
                 } <<
@@ -2050,7 +2059,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...             ),
                 ...         time_treatments=['+1/16', None],
                 ...         ),
-                ...     rhythmmakertools.BeamSpecifier(
+                ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
                 ...     )
@@ -2064,13 +2073,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> contribution = figure_maker('Voice 1', segments)
                 >>> lilypond_file = figure_maker.show(contribution)
-                >>> staff = lilypond_file[Staff]
-                >>> override(staff).beam.positions = (-5.5, -5.5)
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
                     \override Beam.positions = #'(-5.5 . -5.5)
                 } <<
@@ -2131,18 +2140,17 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.RhythmSpecifier(
-                ...         patterns=patterntools.select_all(),
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=8,
                 ...                 ),
                 ...             ),
                 ...         ),
                 ...     baca.tools.RhythmSpecifier(
-                ...         patterns=patterntools.select_first(),
+                ...         pattern=abjad.select_first(),
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
                 ...                 ),
@@ -2159,7 +2167,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2191,18 +2199,17 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.RhythmSpecifier(
-                ...         patterns=patterntools.select_all(),
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
                 ...                 ),
                 ...             ),
                 ...         ),
                 ...     baca.tools.RhythmSpecifier(
-                ...         patterns=patterntools.select(indices=[0, -1]),
+                ...         pattern=abjad.Pattern(indices=[0, -1]),
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
                 ...                 ),
@@ -2219,7 +2226,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2251,9 +2258,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.RhythmSpecifier(
-                ...         patterns=patterntools.select_all(),
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
                 ...                 ),
@@ -2261,9 +2267,9 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...             ),
                 ...         ),
                 ...     baca.tools.RhythmSpecifier(
-                ...         patterns=patterntools.select(indices=[0, -1]),
+                ...         pattern=abjad.Pattern(indices=[0, -1]),
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
                 ...                 ),
@@ -2280,7 +2286,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2313,18 +2319,17 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.RhythmSpecifier(
-                ...         patterns=patterntools.select_all(),
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
                 ...                 ),
                 ...             ),
                 ...         ),
                 ...     baca.tools.RhythmSpecifier(
-                ...         patterns=patterntools.select(indices=[0, -1]),
+                ...         pattern=abjad.Pattern(indices=[0, -1]),
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
                 ...                 ),
@@ -2342,7 +2347,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2375,18 +2380,17 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.RhythmSpecifier(
-                ...         patterns=patterntools.select_all(),
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
                 ...                 ),
                 ...             ),
                 ...         ),
                 ...     baca.tools.RhythmSpecifier(
-                ...         patterns=patterntools.select(indices=[0, -1]),
+                ...         pattern=abjad.Pattern(indices=[0, -1]),
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
                 ...                 ),
@@ -2404,7 +2408,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Staff])
+                >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2435,6 +2439,103 @@ class FigureMaker(abjad.abctools.AbjadObject):
         Returns specifiers or none.
         '''
         return self._specifiers
+
+    @property
+    def thread(self):
+        r'''Is true when figure-maker threads rhythm-maker over stages.
+
+        ..  container:: example
+
+            Does not thread rhythm-maker over segments:
+
+            ::
+
+                >>> figure_maker = baca.tools.FigureMaker()
+
+            ::
+
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker(
+                ...     'Voice 1',
+                ...     segments,
+                ...     talea_counts=[1, 2, 3],
+                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            {
+                                c'16 [
+                                d'8
+                                bf'8. ]
+                            }
+                            {
+                                fs''16 [
+                                e''8
+                                ef''8.
+                                af''16
+                                g''8 ]
+                            }
+                            {
+                                a'16
+                            }
+                        }
+                    }
+                >>
+
+            Does thread rhythm-maker over segments:
+
+            ::
+
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker(
+                ...     'Voice 1',
+                ...     segments,
+                ...     talea_counts=[1, 2, 3],
+                ...     thread=True,
+                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            {
+                                c'16 [
+                                d'8
+                                bf'8. ]
+                            }
+                            {
+                                fs''16 [
+                                e''8
+                                ef''8.
+                                af''16
+                                g''8 ]
+                            }
+                            {
+                                a'8.
+                            }
+                        }
+                    }
+                >>
+
+        Set to true, false or none.
+
+        Defaults to none.
+
+        Returns true, false or none.
+        '''
+        return self._thread
 
     @property
     def voice_names(self):

@@ -21,7 +21,6 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
             ...             articulations=['>'],
             ...             ),
             ...         baca.tools.RhythmSpecifier(
-            ...             patterns=abjad.patterntools.select_all(),
             ...             rhythm_maker=baca.tools.FigureRhythmMaker(
             ...                 talea=abjad.rhythmmakertools.Talea(
             ...                     counts=[2],
@@ -49,7 +48,6 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
             ...         articulations=['.'],
             ...         ),
             ...     baca.tools.RhythmSpecifier(
-            ...         patterns=abjad.patterntools.select_all(),
             ...         rhythm_maker=baca.tools.FigureRhythmMaker(
             ...             talea=abjad.rhythmmakertools.Talea(
             ...                 counts=[3],
@@ -77,7 +75,7 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \new Score <<
                 \new TimeSignatureContext {
                     {
@@ -359,7 +357,6 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
                 ...             articulations=['>'],
                 ...             ),
                 ...         baca.tools.RhythmSpecifier(
-                ...             patterns=abjad.patterntools.select_all(),
                 ...             rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...                 talea=abjad.rhythmmakertools.Talea(
                 ...                     counts=[2],
@@ -376,7 +373,6 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
                 ...         articulations=['.'],
                 ...         ),
                 ...     baca.tools.RhythmSpecifier(
-                ...         patterns=abjad.patterntools.select_all(),
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
@@ -402,7 +398,7 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new TimeSignatureContext {
                         {
@@ -460,7 +456,6 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
                 ...             articulations=['>'],
                 ...             ),
                 ...         baca.tools.RhythmSpecifier(
-                ...             patterns=abjad.patterntools.select_all(),
                 ...             rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...                 talea=abjad.rhythmmakertools.Talea(
                 ...                     counts=[2],
@@ -478,7 +473,6 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
                 ...         articulations=['.'],
                 ...         ),
                 ...     baca.tools.RhythmSpecifier(
-                ...         patterns=abjad.patterntools.select_all(),
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
@@ -504,7 +498,7 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new TimeSignatureContext {
                         {
@@ -562,7 +556,6 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
                 ...             articulations=['>'],
                 ...             ),
                 ...         baca.tools.RhythmSpecifier(
-                ...             patterns=abjad.patterntools.select_all(),
                 ...             rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...                 talea=abjad.rhythmmakertools.Talea(
                 ...                     counts=[2],
@@ -585,7 +578,6 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
                 ...         articulations=['.'],
                 ...         ),
                 ...     baca.tools.RhythmSpecifier(
-                ...         patterns=abjad.patterntools.select_all(),
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
@@ -612,7 +604,7 @@ class PolyphonySpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new TimeSignatureContext {
                         {

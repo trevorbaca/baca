@@ -2,7 +2,7 @@
 import abjad
 
 
-class ArticulationInterface(object):
+class ArticulationLibrary(object):
     '''Articulation interface.
 
     ::
@@ -14,7 +14,7 @@ class ArticulationInterface(object):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Interfaces'
+    __documentation_section__ = 'Library'
 
     ### PUBLIC METHODS ###
 

@@ -35,7 +35,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -117,7 +117,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -271,6 +271,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
     __slots__ = (
         '_allow_figure_names',
+        '_annotate_out_of_range_pitches',
         '_cached_leaves_with_rests',
         '_cached_leaves_without_rests',
         '_cached_score_template_start_clefs',
@@ -289,6 +290,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         '_measures_per_stage',
         '_print_segment_duration',
         '_print_timings',
+        '_range_checker',
         '_rehearsal_letter',
         '_scoped_specifiers',
         '_score',
@@ -364,6 +366,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
     def __init__(
         self,
         allow_figure_names=None,
+        annotate_out_of_range_pitches=None,
         design_checker=None,
         final_barline=None,
         final_markup=None,
@@ -377,6 +380,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         measures_per_stage=None,
         print_segment_duration=None,
         print_timings=None,
+        range_checker=None,
         rehearsal_letter=None,
         score_package=None,
         score_template=None,
@@ -394,6 +398,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         if allow_figure_names is not None:
             allow_figure_names = bool(allow_figure_names)
         self._allow_figure_names = allow_figure_names
+        if annotate_out_of_range_pitches is not None:
+            annotate_out_of_range_pitches = bool(annotate_out_of_range_pitches)
+        self._annotate_out_of_range_pitches = annotate_out_of_range_pitches
         self._cached_leaves_with_rests = None
         self._cached_leaves_without_rests = None
         self._design_checker = design_checker
@@ -402,7 +409,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             assert isinstance(final_barline, str), repr(final_barline)
         self._final_barline = final_barline
         if final_markup is not None:
-            assert isinstance(final_markup, abjad.markuptools.Markup)
+            assert isinstance(final_markup, abjad.Markup)
         self._final_markup = final_markup
         if final_markup_extra_offset is not None:
             assert isinstance(final_markup_extra_offset, tuple)
@@ -429,6 +436,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         self._measures_per_stage = measures_per_stage
         self._print_segment_duration = print_segment_duration
         self._print_timings = print_timings
+        self._range_checker = range_checker
         self._rehearsal_letter = rehearsal_letter
         self._scoped_specifiers = []
         self._initialize_time_signatures(time_signatures)
@@ -501,6 +509,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         self._color_unpitched_notes()
         self._check_well_formedness()
         self._check_design()
+        self._check_range()
         self._update_segment_metadata()
         self._print_segment_duration_()
         return self._lilypond_file, self._segment_metadata
@@ -703,16 +712,16 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     message = 'unknown fermata command: {!r}.'
                     message = message.format(directive.command)
                     raise Exception(message)
-                directive = abjad.markuptools.Markup.musicglyph(string)
+                directive = abjad.Markup.musicglyph(string)
             else:
                 directive = abjad.new(directive)
             abjad.attach(directive, start_skip)
             if fermata_y_offset is not None:
-                grob_proxy = override(start_skip).multi_measure_rest_text
+                grob_proxy = abjad.override(start_skip).multi_measure_rest_text
                 grob_proxy.extra_offset = (0, fermata_y_offset)
-            proxy = override(start_skip)
+            proxy = abjad.override(start_skip)
             proxy.score.multi_measure_rest.transparent = True
-            override(start_skip).score.time_signature.stencil = False
+            abjad.override(start_skip).score.time_signature.stencil = False
             abjad.attach('fermata measure', start_skip)
             start_offset = abjad.inspect_(start_skip).get_timespan().start_offset
             self._fermata_start_offsets.append(start_offset)
@@ -795,11 +804,11 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             return
         context = self._score['Time Signature Context Skips']
         # TODO: adjust TempoSpanner to make this possible:
-        #abjad.attach(abjad.spannertools.TempoSpanner(), context)
+        #abjad.attach(abjad.TempoSpanner(), context)
         skips = list(abjad.iterate(context).by_leaf())
-        left_broken_text = abjad.markuptools.Markup().null()
+        left_broken_text = abjad.Markup().null()
         left_broken_text._direction = None
-        tempo_spanner = abjad.spannertools.TempoSpanner(
+        tempo_spanner = abjad.TempoSpanner(
             left_broken_padding=0,
             left_broken_text=left_broken_text,
             start_with_parenthesized_tempo=False,
@@ -823,6 +832,23 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         if self.design_checker is None:
             return
         return self.design_checker(self._score)
+
+    def _check_range(self):
+        if not self.range_checker:
+            return
+        if isinstance(self.range_checker, abjad.PitchRange):
+            for voice in abjad.iterate(self._score).by_class(abjad.Voice):
+                for leaf in abjad.iterate(voice).by_leaf(pitched=True):
+                    if leaf not in self.range_checker:
+                        if self.annotate_out_of_range_pitches:
+                            abjad.label(leaf).color_leaves('red')
+                            abjad.attach(abjad.Markup('*'), leaf)
+                        else:
+                            message = 'out of range: {!r}.'
+                            message = message.format(leaf)
+                            raise Exception(message)
+        else:
+            raise NotImplementedError(self.range_checker)
 
     def _check_well_formedness(self):
         score = self._lilypond_file['Score']
@@ -1130,7 +1156,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
     def _get_end_tempo_name(self):
         context = self._score['Time Signature Context Skips']
         last_leaf = abjad.inspect_(context).get_leaf(-1)
-        prototype = abjad.indicatortools.Tempo
+        prototype = abjad.Tempo
         effective_tempo = abjad.inspect_(last_leaf).get_effective(prototype)
         if not effective_tempo:
             return
@@ -1491,7 +1517,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 string = '[{}.{}]'.format(base, stage_number)
             else:
                 string = '[{}]'.format(stage_number)
-            markup = abjad.markuptools.Markup(string)
+            markup = abjad.Markup(string)
             markup = markup.with_color('blue')
             markup = markup.fontsize(-3)
             start_measure = context[start_measure_index]
@@ -1499,7 +1525,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
     def _make_instrument_change_markup(self, instrument):
         string = 'to {}'.format(instrument.instrument_name)
-        markup = abjad.markuptools.Markup(string, direction=Up)
+        markup = abjad.Markup(string, direction=Up)
         markup = markup.box().override(('box-padding', 0.75))
         return markup
 
@@ -1541,10 +1567,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         time_signatures = time_signatures or self.time_signatures
         for time_signature in time_signatures:
             time_signature = abjad.indicatortools.TimeSignature(time_signature)
-            rest = abjad.MultimeasureRest(
-                abjad.durationtools.Duration(1))
-            multiplier = abjad.durationtools.Multiplier(
-                time_signature.duration)
+            rest = abjad.MultimeasureRest(abjad.Duration(1))
+            multiplier = abjad.Multiplier(time_signature.duration)
             abjad.attach(multiplier, rest)
             measure = abjad.Measure(
                 time_signature,
@@ -1616,7 +1640,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         specifier = abjad.rhythmmakertools.DurationSpellingSpecifier(
             spell_metrically='unassignable',
             )
-        mask = abjad.rhythmmakertools.silence_all(use_multimeasure_rests=True)
+        mask = abjad.silence_all(use_multimeasure_rests=True)
         rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker(
             division_masks=[mask],
             )
@@ -1735,7 +1759,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         is_trending = False
         for i, leaf in enumerate(leaves):
             duration = abjad.inspect_(leaf).get_duration()
-            tempi = abjad.inspect_(leaf).get_indicators(abjad.indicatortools.Tempo)
+            tempi = abjad.inspect_(leaf).get_indicators(abjad.Tempo)
             if tempi:
                 current_tempo = tempi[0]
                 for measure_summary in measure_summaries[tempo_index:]:
@@ -1755,7 +1779,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 next_tempo, 
                 ]
             measure_summaries.append(measure_summary)
-        total_duration = abjad.durationtools.Duration(0)
+        total_duration = abjad.Duration(0)
         for measure_summary in measure_summaries:
             duration, current_tempo, is_trending, next_tempo = measure_summary
             if is_trending and current_tempo is not None:
@@ -1848,7 +1872,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             previous_leaf = abjad.inspect_(leaf).get_leaf(-1)
             if previous_leaf is None:
                 continue
-            minimum_duration = abjad.durationtools.Duration(1, 8)
+            minimum_duration = abjad.Duration(1, 8)
             if abjad.inspect_(previous_leaf).get_duration() < minimum_duration:
                 string = r"shape #'((2 . 0) (1 . 0) (0.5 . 0) (0 . 0)) RepeatTie"
                 command = abjad.indicatortools.LilyPondCommand(string)
@@ -2005,14 +2029,14 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> for figure in figures:
                 ...     figures_.extend(figure)
                 ...
-                >>> figures = select(figures_)
+                >>> figures = abjad.select(figures_)
 
             ::
 
                 >>> segment_maker = baca.tools.SegmentMaker(
                 ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
                 ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
-                ...         minimum_width=Duration(1, 24),
+                ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
@@ -2031,7 +2055,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -2150,7 +2174,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> for figure in figures:
                 ...     figures_.extend(figure)
                 ...
-                >>> figures = select(figures_)
+                >>> figures = abjad.select(figures_)
 
             ::
 
@@ -2158,7 +2182,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 ...     allow_figure_names=True,
                 ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
                 ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
-                ...         minimum_width=Duration(1, 24),
+                ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
@@ -2173,13 +2197,13 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> result = segment_maker(is_doc_example=True)
                 >>> lilypond_file, segment_metadata = result
-                >>> score = lilypond_file[Score]
-                >>> override(score).text_script.staff_padding = 3
+                >>> score = lilypond_file[abjad.Score]
+                >>> abjad.override(score).text_script.staff_padding = 3
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" \with {
                     \override TextScript.staff-padding = #3
                 } <<
@@ -2329,6 +2353,17 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         return self._allow_figure_names
 
     @property
+    def annotate_out_of_range_pitches(self):
+        r'''Is true when segment-maker annotates out-of-range pitches instead
+        of raising exception.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        '''
+        return self._annotate_out_of_range_pitches
+
+    @property
     def design_checker(self):
         r'''Gets design-checker.
 
@@ -2372,7 +2407,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -2546,7 +2581,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -2717,7 +2752,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -2892,7 +2927,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -3072,7 +3107,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -3224,7 +3259,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> segment_maker = baca.tools.SegmentMaker(
                 ...     final_barline='|.',
-                ...     final_markup=Markup('Madison, WI'),
+                ...     final_markup=abjad.Markup('Madison, WI'),
                 ...     final_markup_extra_offset=(-9, -2),
                 ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -3245,7 +3280,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -3469,7 +3504,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -3640,7 +3675,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -3734,12 +3769,11 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.RhythmSpecifier(
-                ...         patterns=patterntools.select_all(),
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             acciaccatura_specifiers=[
                 ...                 baca.tools.AcciaccaturaSpecifier(),
                 ...                 ],
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
                 ...                 ),
@@ -3767,14 +3801,14 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> for figure in figures:
                 ...     figures_.extend(figure)
                 ...
-                >>> figures = select(figures_)
+                >>> figures = abjad.select(figures_)
 
             ::
 
                 >>> segment_maker = baca.tools.SegmentMaker(
                 ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
                 ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
-                ...         minimum_width=Duration(1, 24),
+                ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
@@ -3789,14 +3823,14 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> result = segment_maker(is_doc_example=True)
                 >>> lilypond_file, segment_metadata = result
-                >>> score = lilypond_file[Score]
-                >>> override(score).spacing_spanner.strict_grace_spacing = False
-                >>> override(score).spacing_spanner.strict_note_spacing = False
+                >>> score = lilypond_file[abjad.Score]
+                >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
+                >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" \with {
                     \override SpacingSpanner.strict-grace-spacing = ##f
                     \override SpacingSpanner.strict-note-spacing = ##f
@@ -3983,12 +4017,11 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.RhythmSpecifier(
-                ...         patterns=patterntools.select_all(),
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             acciaccatura_specifiers=[
                 ...                 baca.tools.AcciaccaturaSpecifier(),
                 ...                 ],
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
                 ...                 ),
@@ -4016,7 +4049,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> for figure in figures:
                 ...     figures_.extend(figure)
                 ...
-                >>> figures = select(figures_)
+                >>> figures = abjad.select(figures_)
 
             ::
 
@@ -4024,7 +4057,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 ...     ignore_unregistered_pitches=True,
                 ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
                 ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
-                ...         minimum_width=Duration(1, 24),
+                ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
@@ -4039,14 +4072,14 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> result = segment_maker(is_doc_example=True)
                 >>> lilypond_file, segment_metadata = result
-                >>> score = lilypond_file[Score]
-                >>> override(score).spacing_spanner.strict_grace_spacing = False
-                >>> override(score).spacing_spanner.strict_note_spacing = False
+                >>> score = lilypond_file[abjad.Score]
+                >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
+                >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" \with {
                     \override SpacingSpanner.strict-grace-spacing = ##f
                     \override SpacingSpanner.strict-note-spacing = ##f
@@ -4158,7 +4191,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> segment_maker = baca.tools.SegmentMaker(
                 ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
                 ...     tempo_specifier=baca.tools.TempoSpecifier([
-                ...         (1, Tempo(Duration(1, 8), 90)),
+                ...         (1, abjad.Tempo((1, 8), 90)),
                 ...         ]),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
@@ -4178,7 +4211,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -4347,7 +4380,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 ...     label_clock_time=True,
                 ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
                 ...     tempo_specifier=baca.tools.TempoSpecifier([
-                ...         (1, Tempo(Duration(1, 8), 90)),
+                ...         (1, abjad.Tempo((1, 8), 90)),
                 ...         ]),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
@@ -4367,7 +4400,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -4585,7 +4618,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -4756,7 +4789,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -4938,7 +4971,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -5149,6 +5182,16 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         return self._print_timings
 
     @property
+    def range_checker(self):
+        r'''Gets range checker.
+
+        Set to pitch range, true, false or none.
+
+        Returns pitch range, true, false or none.
+        '''
+        return self._range_checker
+
+    @property
     def rehearsal_letter(self):
         r'''Gets rehearsal letter.
 
@@ -5252,7 +5295,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -5328,7 +5371,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -5459,7 +5502,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -5642,7 +5685,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -5831,7 +5874,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -5984,7 +6027,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> segment_maker = baca.tools.SegmentMaker(
                 ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
                 ...     tempo_specifier=baca.tools.TempoSpecifier([
-                ...         (1, Tempo(Duration(1, 8), 90)),
+                ...         (1, abjad.Tempo((1, 8), 90)),
                 ...         ]),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
@@ -6004,7 +6047,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -6214,7 +6257,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -6331,7 +6374,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -6504,7 +6547,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<
@@ -6681,7 +6724,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 ...     ('vn', baca.select.stages(1)),
                 ...     [
                 ...         baca.make_even_run_rhythm_specifier(),
-                ...         label().with_indices(),
+                ...         abjad.label().with_indices(),
                 ...         ],
                 ...     )
 
@@ -6693,7 +6736,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context TimeSignatureContext = "Time Signature Context" <<

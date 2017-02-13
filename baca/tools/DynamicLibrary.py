@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class DynamicInterface(object):
+class DynamicLibrary(object):
     r'''Dynamic interface.
 
     ::
@@ -15,7 +15,7 @@ class DynamicInterface(object):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Interfaces'
+    __documentation_section__ = 'Library'
 
     ### PUBLIC METHODS ###
 

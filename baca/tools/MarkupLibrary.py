@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class MarkupInterface(object):
+class MarkupLibrary(object):
     r'''Markup interface.
 
     ::
@@ -15,7 +15,7 @@ class MarkupInterface(object):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Interfaces'
+    __documentation_section__ = 'Library'
 
     ### PUBLIC METHODS ###
 
@@ -407,19 +407,19 @@ class MarkupInterface(object):
     def make_one_click_every(lower, upper):
         string = '1 click/{}-{} sec.'
         string = string.format(lower, upper)
-        return MarkupInterface.make_markup(string)
+        return MarkupLibrary.make_markup(string)
 
     @staticmethod
     def make_clicks_per_second(lower, upper):
         string = '{}-{} clicks/sec.'
         string = string.format(lower, upper)
-        return MarkupInterface.make_markup(string)
+        return MarkupLibrary.make_markup(string)
 
     @staticmethod
     def make_fractional_OB(numerator, denominator):
         string = '{}/{}OB'
         string = string.format(numerator, denominator)
-        return MarkupInterface.make_markup(string)
+        return MarkupLibrary.make_markup(string)
 
     @classmethod
     def make_fractional_scratch(numerator, denominator):

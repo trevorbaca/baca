@@ -21,13 +21,13 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             >>> figure_maker = baca.tools.FigureMaker(
             ...     baca.tools.RhythmSpecifier(
             ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-            ...             talea=rhythmmakertools.Talea(
+            ...             talea=abjad.rhythmmakertools.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
             ...                 ),
             ...             ),
             ...         ),
-            ...     rhythmmakertools.BeamSpecifier(
+            ...     abjad.rhythmmakertools.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
@@ -52,7 +52,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \new Score <<
                 \new TimeSignatureContext {
                     {
@@ -159,13 +159,13 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             >>> figure_maker = baca.tools.FigureMaker(
             ...     baca.tools.RhythmSpecifier(
             ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-            ...             talea=rhythmmakertools.Talea(
+            ...             talea=abjad.rhythmmakertools.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
             ...                 ),
             ...             ),
             ...         ),
-            ...     rhythmmakertools.BeamSpecifier(
+            ...     abjad.rhythmmakertools.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
@@ -198,7 +198,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \new Score <<
                 \new TimeSignatureContext {
                     {
@@ -350,14 +350,14 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             ...     ),
             ...     baca.tools.RhythmSpecifier(
             ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-            ...             talea=rhythmmakertools.Talea(
+            ...             talea=abjad.rhythmmakertools.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
             ...                 ),
             ...             time_treatments=[1],
             ...             ),
             ...         ),
-            ...     rhythmmakertools.BeamSpecifier(
+            ...     abjad.rhythmmakertools.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         beam_rests=True,
             ...         ),
@@ -385,7 +385,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \new Score <<
                 \new TimeSignatureContext {
                     {
@@ -574,7 +574,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
                 ...                 ),
@@ -587,9 +587,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...             articulations=['.'],
                 ...             ),
                 ...         baca.tools.RhythmSpecifier(
-                ...             patterns=patterntools.select_all(),
                 ...             rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...                 talea=rhythmmakertools.Talea(
+                ...                 talea=abjad.rhythmmakertools.Talea(
                 ...                     counts=[2],
                 ...                     denominator=16,
                 ...                     ),
@@ -620,7 +619,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new TimeSignatureContext {
                         {
@@ -706,7 +705,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
                 ...                 ),
@@ -738,7 +737,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new TimeSignatureContext {
                         {
@@ -811,7 +810,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
                 ...                 ),
@@ -846,7 +845,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new TimeSignatureContext {
                         {
@@ -937,7 +936,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             Extends beam across figures:
 
                 >>> figure_maker = baca.tools.FigureMaker(
-                ...     rhythmmakertools.BeamSpecifier(
+                ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
                 ...     )
@@ -984,7 +983,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     measures_per_stage=[1, 1],
                 ...     score_template=baca.tools.TwoVoiceStaffScoreTemplate(),
                 ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
-                ...         minimum_width=Duration(1, 24),
+                ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
@@ -1024,7 +1023,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context TimeSignatureContext = "Time Signature Context" <<
                         \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
@@ -1283,13 +1282,13 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     ),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     rhythmmakertools.BeamSpecifier(
+                ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         beam_rests=True,
                 ...         ),
@@ -1317,7 +1316,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new TimeSignatureContext {
                         {
@@ -1409,13 +1408,13 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     ),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     rhythmmakertools.BeamSpecifier(
+                ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         beam_rests=True,
                 ...         ),
@@ -1485,13 +1484,13 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     ),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     rhythmmakertools.BeamSpecifier(
+                ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         beam_rests=True,
                 ...         ),
@@ -1520,7 +1519,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new TimeSignatureContext {
                         {
@@ -1658,13 +1657,13 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     ),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     rhythmmakertools.BeamSpecifier(
+                ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         beam_rests=True,
                 ...         ),
@@ -1692,7 +1691,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new TimeSignatureContext {
                         {
@@ -1843,13 +1842,13 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     rhythmmakertools.BeamSpecifier(
+                ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
                 ...     )
@@ -1877,7 +1876,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new TimeSignatureContext {
                         {
@@ -1984,13 +1983,13 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     rhythmmakertools.BeamSpecifier(
+                ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
                 ...     )
@@ -2018,7 +2017,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new TimeSignatureContext {
                         {
@@ -2135,13 +2134,13 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     rhythmmakertools.BeamSpecifier(
+                ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
                 ...     )
@@ -2167,7 +2166,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new TimeSignatureContext {
                         {
@@ -2284,13 +2283,13 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     rhythmmakertools.BeamSpecifier(
+                ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
                 ...     )
@@ -2318,7 +2317,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new TimeSignatureContext {
                         {
@@ -2433,7 +2432,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> figure_maker = baca.tools.FigureMaker(
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=rhythmmakertools.Talea(
+                ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5],
                 ...                 denominator=32,
                 ...                 ),
@@ -2459,7 +2458,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new TimeSignatureContext {
                         {

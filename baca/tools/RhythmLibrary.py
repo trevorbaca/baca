@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class RhythmInterface(object):
+class RhythmLibrary(object):
     r'''Rhythm interface.
 
     ::
@@ -15,9 +15,16 @@ class RhythmInterface(object):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Interfaces'
+    __documentation_section__ = 'Library'
 
     ### PUBLIC METHODS ###
+
+    @staticmethod
+    def beam_divisions(beam_rests=False):
+        return abjad.rhythmmakertools.BeamSpecifier(
+            beam_each_division=True,
+            beam_rests=beam_rests,
+            )
 
     @staticmethod
     def beam_everything():

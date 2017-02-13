@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class TransformInterface(object):
+class TransformLibrary(object):
     r'''Transform interface.
 
     ::
@@ -15,7 +15,7 @@ class TransformInterface(object):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Interfaces'
+    __documentation_section__ = 'Library'
 
     ### PUBLIC METHODS ###
 

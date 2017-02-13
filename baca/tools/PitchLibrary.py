@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class PitchInterface(object):
+class PitchLibrary(object):
     r'''Pitch interface.
 
     ::
@@ -15,7 +15,7 @@ class PitchInterface(object):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Interfaces'
+    __documentation_section__ = 'Library'
 
     ### PUBLIC METHODS ###
 
@@ -52,18 +52,20 @@ class PitchInterface(object):
         return baca.tools.SimultaneitySpecifier()
 
     @staticmethod
-    def chord_spacing_down(bass=None, soprano=None):
+    def chord_spacing_down(bass=None, pattern=None, soprano=None):
         return baca.tools.ChordalSpacingSpecifier(
             bass=bass,
             direction=Down,
+            pattern=pattern,
             soprano=soprano,
             )
 
     @staticmethod
-    def chord_spacing_up(bass=None, soprano=None):
+    def chord_spacing_up(bass=None, pattern=None, soprano=None):
         return baca.tools.ChordalSpacingSpecifier(
             bass=bass,
             direction=Up,
+            pattern=pattern,
             soprano=soprano,
             )
 
@@ -185,7 +187,7 @@ class PitchInterface(object):
     def register(start_pitch, stop_pitch=None):
         if stop_pitch is None:
             return baca.tools.RegisterSpecifier(
-                registration=abjad.pitchtools.Registration(
+                registration=abjad.Registration(
                     [('[A0, C8]', start_pitch)],
                     ),
                 )

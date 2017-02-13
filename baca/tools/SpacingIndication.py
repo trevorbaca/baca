@@ -17,8 +17,8 @@ class SpacingIndication(abjad.abctools.AbjadValueObject):
 
     ::
 
-        >>> tempo = Tempo(Duration(1, 8), 44)
-        >>> indication = baca.tools.SpacingIndication(tempo, Duration(1, 68))
+        >>> tempo = abjad.Tempo((1, 8), 44)
+        >>> indication = baca.tools.SpacingIndication(tempo, abjad.Duration(1, 68))
 
     ::
 
@@ -54,7 +54,6 @@ class SpacingIndication(abjad.abctools.AbjadValueObject):
     ### INITIALIZER ###
 
     def __init__(self, *args):
-        from abjad.tools import indicatortools
         if len(args) == 1 and isinstance(args[0], type(self)):
             self._tempo_indication = args[0].tempo_indication
             self._proportional_notation_duration = \
@@ -62,14 +61,14 @@ class SpacingIndication(abjad.abctools.AbjadValueObject):
         elif len(args) == 2:
             tempo = args[0]
             if isinstance(tempo, tuple):
-                tempo = indicatortools.Tempo(*tempo)
+                tempo = abjad.Tempo(*tempo)
             tempo_indication = tempo
             proportional_notation_duration = abjad.Duration(args[1])
             self._tempo_indication = tempo_indication
             self._proportional_notation_duration = \
                 proportional_notation_duration
         elif len(args) == 0:
-            tempo = indicatortools.Tempo()
+            tempo = abjad.Tempo()
             proportional_notation_duration = abjad.Duration(1, 68)
             self._tempo_indication = tempo
             self._proportional_notation_duration = \

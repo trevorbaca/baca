@@ -267,7 +267,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \new Score \with {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
@@ -517,7 +517,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \new Score \with {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
@@ -785,7 +785,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \new Score \with {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
@@ -836,7 +836,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \new Score \with {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
@@ -905,7 +905,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
 
             ..  doctest::
 
-                >>> f(lilypond_file[Score])
+                >>> f(lilypond_file[abjad.Score])
                 \new Score \with {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t

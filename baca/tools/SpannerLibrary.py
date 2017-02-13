@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class SpannerInterface(object):
+class SpannerLibrary(object):
     r'''Spanner interface.
 
     ::
@@ -15,7 +15,7 @@ class SpannerInterface(object):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Interfaces'
+    __documentation_section__ = 'Library'
 
     ### PUBLIC METHODS ###
 
@@ -52,7 +52,7 @@ class SpannerInterface(object):
     @staticmethod
     def glissandi():
         return baca.tools.GlissandoSpecifier(
-            patterns=patterntools.select_last(1, inverted=True),
+            pattern=abjad.select_last(1, inverted=True),
             )
 
     @staticmethod
@@ -123,6 +123,15 @@ class SpannerInterface(object):
     @staticmethod
     def slur():
         return baca.tools.SpannerSpecifier(spanner=abjad.Slur())
+
+    @staticmethod
+    def slur_every_tuplet():
+        return baca.tools.SpannerSpecifier(
+            selector=abjad.select().
+                by_class(abjad.Tuplet, flatten=True).
+                get_slice(apply_to_each=True),
+            spanner=abjad.Slur(),
+            )
         
     @staticmethod
     def tie(messiaen=False):

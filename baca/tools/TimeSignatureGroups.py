@@ -17,9 +17,9 @@ class TimeSignatureGroups(abjad.abctools.AbjadObject):
         ::
 
             >>> group_1 = [(3, 8), (3, 16), (3, 16)]
-            >>> group_1 = [TimeSignature(_) for _ in group_1]
+            >>> group_1 = [abjad.TimeSignature(_) for _ in group_1]
             >>> group_2 = [(5, 8), (5, 16), (5, 16), (5, 16)]
-            >>> group_2 = [TimeSignature(_) for _ in group_2]
+            >>> group_2 = [abjad.TimeSignature(_) for _ in group_2]
             >>> groups = [group_1, group_2]
             >>> groups = baca.tools.TimeSignatureGroups(groups)
 
@@ -78,7 +78,7 @@ class TimeSignatureGroups(abjad.abctools.AbjadObject):
         ..  doctest::
 
             >>> lilypond_file = groups.__illustrate__()
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \new Score \with {
                 proportionalNotationDuration = #(ly:make-moment 1 8)
             } <<

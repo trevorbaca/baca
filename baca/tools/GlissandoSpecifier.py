@@ -29,7 +29,7 @@ class GlissandoSpecifier(abjad.abctools.AbjadObject):
             ...         baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...         baca.make_even_run_rhythm_specifier(),
             ...         baca.tools.GlissandoSpecifier(
-            ...             patterns=patterntools.select_all(),
+            ...             pattern=abjad.select_all(),
             ...             ),
             ...         ],
             ...     )
@@ -42,7 +42,7 @@ class GlissandoSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -129,16 +129,14 @@ class GlissandoSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
+            >>> pattern = abjad.select_first(1) | abjad.select_last(2)
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
             ...     [
             ...         baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...         baca.make_even_run_rhythm_specifier(),
             ...         baca.tools.GlissandoSpecifier(
-            ...             patterns=[
-            ...                 patterntools.select_first(1),
-            ...                 patterntools.select_last(2),
-            ...                 ],
+            ...             pattern=pattern,
             ...             ),
             ...         ],
             ...     )
@@ -151,7 +149,7 @@ class GlissandoSpecifier(abjad.abctools.AbjadObject):
 
         ..  doctest::
 
-            >>> f(lilypond_file[Score])
+            >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context TimeSignatureContext = "Time Signature Context" <<
@@ -225,6 +223,53 @@ class GlissandoSpecifier(abjad.abctools.AbjadObject):
                 >>
             >>
 
+    ..  container:: example
+
+        Selects first stage with figure-maker:
+
+        ::
+
+            >>> figure_maker = baca.tools.FigureMaker()
+
+        ::
+
+            >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = figure_maker(
+            ...     'Voice 1',
+            ...     segments,
+            ...     baca.tools.GlissandoSpecifier(
+            ...         pattern=abjad.select_first(),
+            ...         ),
+            ...     )
+            >>> lilypond_file = figure_maker.show(contribution)
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> f(lilypond_file[abjad.Staff])
+            \new Staff <<
+                \context Voice = "Voice 1" {
+                    \voiceOne
+                    {
+                        {
+                            c'16 \glissando [
+                            d'16 \glissando
+                            bf'16 ] \glissando
+                        }
+                        {
+                            fs''16 [
+                            e''16
+                            ef''16
+                            af''16
+                            g''16 ]
+                        }
+                        {
+                            a'16
+                        }
+                    }
+                }
+            >>
+
     '''
 
     ### CLASS VARIABLES ##
@@ -232,91 +277,88 @@ class GlissandoSpecifier(abjad.abctools.AbjadObject):
     __documentation_section__ = 'Specifiers'
 
     __slots__ = (
-        '_patterns',
+        '_pattern',
         )
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        patterns=None,
-        ):
-        if isinstance(patterns, abjad.patterntools.Pattern):
-            patterns = (patterns,)
-        patterns = patterns or ()
-        patterns = tuple(patterns)
-        prototype = (
-            abjad.patterntools.Pattern,
-            abjad.patterntools.CompoundPattern,
-            )
-        assert all(isinstance(_, prototype) for _ in patterns), repr(patterns)
-        self._patterns = patterns
+    def __init__(self, pattern=None):
+        prototype = (abjad.Pattern, abjad.patterntools.CompoundPattern)
+        if not pattern is None:
+            assert isinstance(pattern, prototype), repr(pattern)
+        self._pattern = pattern
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, logical_ties):
-        r'''Calls glissando specifier on `logical_ties`.
+    def __call__(self, argument=None):
+        r'''Calls glissando specifier on `argument`.
 
         Returns none.
         '''
-        logical_tie_count = len(logical_ties)
-        for index, logical_tie in enumerate(logical_ties):
-            for pattern in reversed(self.patterns):
-                if pattern.matches_index(index, logical_tie_count):
-                    self._apply_pattern(pattern, logical_tie)
-                    break
+        if argument is None:
+            return
+        pattern = self.pattern or abjad.select_all()
+        if isinstance(argument, list):
+            selections = argument
+            assert isinstance(selections[0], abjad.Selection), repr(argument) 
+            selections = pattern.get_matching_items(selections)
+            for selection in selections:
+                logical_ties = abjad.iterate(selection).by_logical_tie(
+                    pitched=True)
+                for logical_tie in logical_ties:
+                    self._attach_glissando(logical_tie)
+        else:
+            selection = argument
+            assert isinstance(selection, abjad.Selection), repr(selection)
+            logical_ties = pattern.get_matching_items(selection)
+            for logical_tie in logical_ties:
+                self._attach_glissando(logical_tie)
 
     ### PRIVATE METHODS ###
 
-    def _apply_pattern(self , pattern, logical_tie):
-        if isinstance(pattern, abjad.rhythmmakertools.SilenceMask):
-            return
-        make_glissando_prototype = (
-            abjad.patterntools.Pattern,
-            abjad.rhythmmakertools.SustainMask,
-            )
-        assert isinstance(pattern, make_glissando_prototype)
+    def _attach_glissando(self , logical_tie):
         note_or_chord = (abjad.scoretools.Note, abjad.scoretools.Chord)
-        if isinstance(pattern, make_glissando_prototype):
-            last_leaf = logical_tie.tail
-            if not isinstance(last_leaf, note_or_chord):
-                return
-            next_leaf = abjad.inspect_(last_leaf).get_leaf(1)
-            if not isinstance(next_leaf, note_or_chord):
-                return
-            leaves = [last_leaf, next_leaf]
-            abjad.attach(abjad.spannertools.Glissando(), leaves)
+        last_leaf = logical_tie.tail
+        if not isinstance(last_leaf, note_or_chord):
+            return
+        next_leaf = abjad.inspect_(last_leaf).get_leaf(1)
+        if not isinstance(next_leaf, note_or_chord):
+            return
+        leaves = [last_leaf, next_leaf]
+        abjad.attach(abjad.Glissando(), leaves)
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def patterns(self):
-        r'''Gets patterns.
+    def pattern(self):
+        r'''Gets pattern.
 
         ..  container:: example
 
             ::
 
                 >>> specifier = baca.tools.GlissandoSpecifier(
-                ...     patterns=[
-                ...         patterntools.Pattern(
-                ...             indices=[0, 1],
-                ...             period=2,
-                ...             ),
-                ...         patterntools.Pattern(
-                ...             indices=[0],
-                ...             ),
-                ...         ],
+                ...     pattern=abjad.select_first(1) | abjad.select_last(2),
                 ...     )
         
 
             ::
 
-                >>> specifier.patterns
-                (Pattern(indices=[0, 1], period=2), Pattern(indices=[0]))
+                >>> f(specifier.pattern)
+                patterntools.CompoundPattern(
+                    (
+                        patterntools.Pattern(
+                            indices=[0],
+                            ),
+                        patterntools.Pattern(
+                            indices=[-2, -1],
+                            ),
+                        ),
+                    operator='or',
+                    )
 
-        Set to patterns or none.
+        Set to pattern or none.
 
-        Returns tuple of patterns or none.
+        Returns pattern or none.
         '''
-        return self._patterns
+        return self._pattern
