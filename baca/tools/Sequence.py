@@ -1183,6 +1183,7 @@ class Sequence(abjad.Sequence):
                     >>> sequence = sequence.helianthate(n=-1, m=1)
                     >>> for item in sequence:
                     ...     item
+                    ...
                     [1, 2, 3]
                     [4, 5]
                     [6, 7, 8]
