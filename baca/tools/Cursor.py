@@ -75,6 +75,8 @@ class Cursor(abjad.abctools.AbjadObject):
         '_suppress_exception',
         )
 
+    _publish_storage_format = True
+
     ### INITIALIZER ###
 
     def __init__(
@@ -812,3 +814,35 @@ class Cursor(abjad.abctools.AbjadObject):
             elif len(result) == 1:
                 result = result[0]
         return result
+
+    def reset(self):
+        r'''Resets cursor.
+
+        ..  container:: example
+
+            ::
+
+                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+                >>> cursor = baca.tools.Cursor(source=source)
+
+            ::
+
+                >>> cursor.next()
+                [13]
+                >>> cursor.next()
+                ['da capo']
+
+            ::
+
+                >>> cursor.reset()
+
+            ::
+
+                >>> cursor.next()
+                [13]
+                >>> cursor.next()
+                ['da capo']
+
+        Returns none.
+        '''
+        self._position = 0

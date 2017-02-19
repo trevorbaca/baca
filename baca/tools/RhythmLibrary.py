@@ -20,6 +20,27 @@ class RhythmLibrary(object):
     ### PUBLIC METHODS ###
 
     @staticmethod
+    def anchor(remote_voice_name, remote_selector=None, local_selector=None):
+        return baca.tools.AnchorSpecifier(
+            local_selector=local_selector,
+            remote_selector=remote_selector,
+            remote_voice_name=remote_voice_name,
+            )
+
+    @staticmethod
+    def anchor_after(
+        remote_voice_name,
+        remote_selector=None,
+        local_selector=None,
+        ):
+        return baca.tools.AnchorSpecifier(
+            just_after=True,
+            local_selector=local_selector,
+            remote_selector=remote_selector,
+            remote_voice_name=remote_voice_name,
+            )
+
+    @staticmethod
     def beam_divisions(beam_rests=False):
         return abjad.rhythmmakertools.BeamSpecifier(
             beam_each_division=True,
@@ -92,6 +113,12 @@ class RhythmLibrary(object):
         return expression
 
     @staticmethod
+    def make_even_run_rhythm_specifier():
+        return baca.tools.RhythmSpecifier(
+            rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker()
+            )
+
+    @staticmethod
     def make_fused_tuplet_monad_rhythm_specifier(tuplet_ratio=None):
         if tuplet_ratio is None:
             tuplet_ratios = [(1,)]
@@ -108,12 +135,6 @@ class RhythmLibrary(object):
                     ),
                 tuplet_ratios=tuplet_ratios,
                 ),
-            )
-
-    @staticmethod
-    def make_even_run_rhythm_specifier():
-        return baca.tools.RhythmSpecifier(
-            rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker()
             )
 
     @staticmethod
@@ -209,15 +230,6 @@ class RhythmLibrary(object):
             )
 
     @staticmethod
-    def make_strict_quarter_divisions():
-        expression = baca.tools.DivisionSequenceExpression()
-        expression = expression.split_by_durations(
-            durations=[abjad.Duration(1, 4)]
-            )
-        expression = expression.flatten()
-        return expression
-
-    @staticmethod
     def make_single_taper_rhythm_specifier(
         denominator=16,
         start_talea=[4],
@@ -241,6 +253,15 @@ class RhythmLibrary(object):
             )
 
     @staticmethod
+    def make_strict_quarter_divisions():
+        expression = baca.tools.DivisionSequenceExpression()
+        expression = expression.split_by_durations(
+            durations=[abjad.Duration(1, 4)]
+            )
+        expression = expression.flatten()
+        return expression
+
+    @staticmethod
     def make_tied_repeated_duration_rhythm_specifier(durations):
         specifier = make_repeated_duration_rhythm_specifier(durations)
         specifier = abjad.new(
@@ -260,48 +281,42 @@ class RhythmLibrary(object):
             )
 
     @staticmethod
-    def rests_after(counts, denominator=16):
+    def rests_after(counts):
         return baca.tools.RestAffixSpecifier(
-            denominator=denominator,
             suffix=counts,
             )
 
     @staticmethod
-    def rests_around(prefix, suffix, denominator=16):
+    def rests_around(prefix, suffix):
         return baca.tools.RestAffixSpecifier(
-            denominator=denominator,
             prefix=prefix,
             suffix=suffix,
             )
 
     @staticmethod
-    def rests_before(counts, denominator=16):
+    def rests_before(counts):
         return baca.tools.RestAffixSpecifier(
-            denominator=denominator,
             prefix=counts,
             )
 
     @staticmethod
-    def skips_after(counts, denominator=16):
+    def skips_after(counts):
         return baca.tools.RestAffixSpecifier(
-            denominator=denominator,
             skips_instead_of_rests=True,
             suffix=counts,
             )
 
     @staticmethod
-    def skips_around(prefix, suffix, denominator=16):
+    def skips_around(prefix, suffix):
         return baca.tools.RestAffixSpecifier(
-            denominator=denominator,
             prefix=prefix,
             skips_instead_of_rests=True,
             suffix=suffix,
             )
 
     @staticmethod
-    def skips_before(counts, denominator=16):
+    def skips_before(counts):
         return baca.tools.RestAffixSpecifier(
-            denominator=denominator,
             prefix=counts,
             skips_instead_of_rests=True,
             )

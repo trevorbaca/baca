@@ -27,6 +27,13 @@ class SelectLibrary(object):
         return selector
 
     @staticmethod
+    def every_tuplet():
+        selector = abjad.select()
+        selector = selector.by_class(abjad.Tuplet, flatten=True)
+        selector = selector.get_slice(apply_to_each=True)
+        return selector
+
+    @staticmethod
     def first_leaf():
         selector = abjad.select()
         selector = selector.by_leaf(flatten=True)

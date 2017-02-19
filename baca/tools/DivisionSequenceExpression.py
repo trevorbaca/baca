@@ -147,6 +147,21 @@ class DivisionSequenceExpression(abjad.Expression):
 
     ### PUBLIC METHODS ###
 
+    def division_sequence(self):
+        r'''Makes divison sequence expression.
+
+        Returns expression.
+        '''
+        class_ = baca.tools.DivisionSequence
+        callback = self._make_initializer_callback(
+            class_,
+            markup_expression=abjad.Expression().markup(),
+            module_names=['baca'],
+            string_template='{}',
+            )
+        expression = self.append_callback(callback)
+        return abjad.new(expression, proxy_class=class_)
+
     def split_by_durations(
         self, 
         compound_meter_multiplier=None,
@@ -182,18 +197,3 @@ class DivisionSequenceExpression(abjad.Expression):
             module_names=['baca'],
             )
         return self.append_callback(callback)
-
-    def division_sequence(self):
-        r'''Makes divison sequence expression.
-
-        Returns expression.
-        '''
-        class_ = baca.tools.DivisionSequence
-        callback = self._make_initializer_callback(
-            class_,
-            markup_expression=abjad.Expression().markup(),
-            module_names=['baca'],
-            string_template='{}',
-            )
-        expression = self.append_callback(callback)
-        return abjad.new(expression, proxy_class=class_)

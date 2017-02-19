@@ -28,8 +28,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ::
 
-            >>> stage_tokens = [[0, 2, 10, 8]]
-            >>> selections, state_manifest = rhythm_maker(stage_tokens)
+            >>> segments = [[0, 2, 10, 8]]
+            >>> selections, state_manifest = rhythm_maker(segments)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> show(lilypond_file) # doctest: +SKIP
 
@@ -50,8 +50,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ::
 
-            >>> stage_tokens = [[18, 16, 15, 20, 19]]
-            >>> selections, state_manifest = rhythm_maker(stage_tokens)
+            >>> segments = [[18, 16, 15, 20, 19]]
+            >>> selections, state_manifest = rhythm_maker(segments)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> show(lilypond_file) # doctest: +SKIP
 
@@ -73,8 +73,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ::
 
-            >>> stage_tokens = [[9]]
-            >>> selections, state_manifest = rhythm_maker(stage_tokens)
+            >>> segments = [[9]]
+            >>> selections, state_manifest = rhythm_maker(segments)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> show(lilypond_file) # doctest: +SKIP
 
@@ -92,8 +92,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ::
 
-            >>> stage_tokens = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state_manifest = rhythm_maker(stage_tokens)
+            >>> segments = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
+            >>> selections, state_manifest = rhythm_maker(segments)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> show(lilypond_file) # doctest: +SKIP
 
@@ -131,7 +131,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
     __slots__ = (
         '_acciaccatura_specifiers',
         '_next_attack',
-        '_next_stage',
+        '_next_segment',
         '_state_manifest',
         '_talea',
         '_time_treatments',
@@ -139,7 +139,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
     _state_variables = (
         '_next_attack',
-        '_next_stage',
+        '_next_segment',
         )
 
     ### INITIALIZER ###
@@ -171,7 +171,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 assert isinstance(acciaccatura_specifier, prototype)
         self._acciaccatura_specifiers = acciaccatura_specifiers
         self._next_attack = 0
-        self._next_stage = 0
+        self._next_segment = 0
         self._state_manifest = collections.OrderedDict()
         talea = talea or abjad.rhythmmakertools.Talea()
         if not isinstance(talea, abjad.rhythmmakertools.Talea):
@@ -189,8 +189,15 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, stage_tokens, state_manifest=None):
-        r'''Calls rhythm-maker on `stage_tokens`.
+    def __call__(
+        self,
+        segments,
+        rest_affix_specifier=None,
+        segment_index=None,
+        state_manifest=None,
+        total_segments=None,
+        ):
+        r'''Calls rhythm-maker on `segments`.
 
         ..  container:: example
 
@@ -207,8 +214,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -240,7 +247,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> rhythm_maker._print_state_manifest()
                 _next_attack: 9
-                _next_stage: 3
+                _next_segment: 3
 
         ..  container:: example
 
@@ -257,10 +264,10 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> state_manifest = {'_next_attack': 2}
                 >>> selections, state_manifest = rhythm_maker(
-                ...     stage_tokens,
+                ...     segments,
                 ...     state_manifest=state_manifest, 
                 ...     )
                 >>> lilypond_file = rhythm_maker.show(selections)
@@ -294,19 +301,53 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> rhythm_maker._print_state_manifest()
                 _next_attack: 11
-                _next_stage: 3
+                _next_segment: 3
 
 
         Returns selections together with state manifest.
         '''
         self._apply_state_manifest(state_manifest)
-        selections = self._make_music(stage_tokens)
+        selections = self._make_music(
+            segments,
+            rest_affix_specifier=rest_affix_specifier,
+            segment_index=segment_index,
+            total_segments=total_segments,
+            )
         selections = self._apply_specifiers(selections)
         self._check_well_formedness(selections)
         state_manifest = self._make_state_manifest()
         return selections, state_manifest
 
     ### PRIVATE METHODS ###
+
+    @staticmethod
+    def _add_rest_affixes(
+        leaves,
+        talea,
+        rest_prefix,
+        rest_suffix,
+        affix_skips_instead_of_rests,
+        decrease_durations,
+        ):
+        if rest_prefix:
+            durations = [(_, talea.denominator) for _ in rest_prefix]
+            leaves_ = abjad.scoretools.make_leaves(
+                [None],
+                durations,
+                decrease_durations_monotonically=decrease_durations,
+                skips_instead_of_rests=affix_skips_instead_of_rests,
+                )
+            leaves[0:0] = leaves_
+        if rest_suffix:
+            durations = [(_, talea.denominator) for _ in rest_suffix]
+            leaves_ = abjad.scoretools.make_leaves(
+                [None],
+                durations,
+                decrease_durations_monotonically=decrease_durations,
+                skips_instead_of_rests=affix_skips_instead_of_rests,
+                )
+            leaves.extend(leaves_)
+        return leaves
 
     def _apply_state_manifest(self, state_manifest=None):
         for name in self._state_variables:
@@ -337,6 +378,14 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         assert sum(durations) == total_duration
         return durations
 
+    def _get_acciaccatura_specifier(self, segment_index, total_segments):
+        if not self.acciaccatura_specifiers:
+            return
+        for acciaccatura_specifier in self.acciaccatura_specifiers:
+            pattern = acciaccatura_specifier._get_pattern()
+            if pattern.matches_index(segment_index, total_segments):
+                return acciaccatura_specifier
+
     def _get_talea(self):
         if self.talea is not None:
             return self.talea
@@ -344,8 +393,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
     def _get_time_treatments(self):
         if not self.time_treatments:
-            return abjad.datastructuretools.CyclicTuple([0])
-        return abjad.datastructuretools.CyclicTuple(self.time_treatments)
+            return abjad.CyclicTuple([0])
+        return abjad.CyclicTuple(self.time_treatments)
 
     @staticmethod
     def _is_time_treatment(argument):
@@ -364,6 +413,35 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         elif argument in ('accel', 'rit'):
             return True
         return False
+
+    @classmethod
+    def _make_accelerando(class_, leaf_selection, accelerando_indicator):
+        assert accelerando_indicator in ('accel', 'rit')
+        tuplet = abjad.scoretools.Tuplet((1, 1), leaf_selection)
+        if len(tuplet) == 1:
+            return tuplet
+        total_duration = leaf_selection.get_duration()
+        durations = [abjad.inspect_(_).get_duration() for _ in leaf_selection]
+        if accelerando_indicator == 'accel':
+            exponent = 0.625 
+        elif accelerando_indicator == 'rit':
+            exponent = 1.625
+        multipliers = class_._make_accelerando_multipliers(durations, exponent)
+        assert len(leaf_selection) == len(multipliers)
+        for multiplier, leaf in zip(multipliers, leaf_selection):
+            abjad.attach(multiplier, leaf)
+        rhythm_maker_class = abjad.rhythmmakertools.AccelerandoRhythmMaker
+        if rhythm_maker_class._is_accelerando(leaf_selection):
+            abjad.override(leaf_selection[0]).beam.grow_direction = Right
+        elif rhythm_maker_class._is_ritardando(leaf_selection):
+            abjad.override(leaf_selection[0]).beam.grow_direction = Left
+        tuplet.force_times_command = True
+        duration = abjad.inspect_(tuplet).get_duration()
+        duration = abjad.Duration(duration)
+        markup = duration.to_score_markup()
+        markup = markup.scale((0.75, 0.75))
+        abjad.override(tuplet).tuplet_number.text = markup
+        return tuplet
 
     @classmethod
     def _make_accelerando_multipliers(class_, durations, exponent):
@@ -458,40 +536,51 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             multipliers.append(multiplier)
         return multipliers
 
-    @classmethod
-    def _make_accelerando(class_, leaf_selection, accelerando_indicator):
-        assert accelerando_indicator in ('accel', 'rit')
-        tuplet = abjad.scoretools.Tuplet((1, 1), leaf_selection)
-        if len(tuplet) == 1:
-            return tuplet
-        total_duration = leaf_selection.get_duration()
-        durations = [abjad.inspect_(_).get_duration() for _ in leaf_selection]
-        if accelerando_indicator == 'accel':
-            exponent = 0.625 
-        elif accelerando_indicator == 'rit':
-            exponent = 1.625
-        multipliers = class_._make_accelerando_multipliers(durations, exponent)
-        assert len(leaf_selection) == len(multipliers)
-        for multiplier, leaf in zip(multipliers, leaf_selection):
-            abjad.attach(multiplier, leaf)
-        rhythm_maker_class = abjad.rhythmmakertools.AccelerandoRhythmMaker
-        if rhythm_maker_class._is_accelerando(leaf_selection):
-            abjad.override(leaf_selection[0]).beam.grow_direction = Right
-        elif rhythm_maker_class._is_ritardando(leaf_selection):
-            abjad.override(leaf_selection[0]).beam.grow_direction = Left
-        tuplet.force_times_command = True
-        duration = abjad.inspect_(tuplet).get_duration()
-        duration = abjad.Duration(duration)
-        markup = duration.to_score_markup()
-        markup = markup.scale((0.75, 0.75))
-        abjad.override(tuplet).tuplet_number.text = markup
-        return tuplet
-
-    def _make_music(self, stage_tokens):
-        total_stages = len(stage_tokens)
+    def _make_music(
+        self,
+        segments,
+        rest_affix_specifier=None,
+        segment_index=None,
+        total_segments=None,
+        ):
+        segment_count = len(segments)
         selections = []
-        for stage_token in stage_tokens:
-            selection = self._make_selection(stage_token, total_stages)
+        if segment_index is None:
+            for i, segment in enumerate(segments):
+                if rest_affix_specifier is not None:
+                    result = rest_affix_specifier(i, segment_count)
+                    rest_prefix, rest_suffix = result
+                    affix_skips_instead_of_rests = \
+                        rest_affix_specifier.skips_instead_of_rests
+                else:
+                    rest_prefix, rest_suffix = None, None
+                    affix_skips_instead_of_rests = None
+                selection = self._make_selection(
+                    segment,
+                    segment_count,
+                    rest_prefix=rest_prefix,
+                    rest_suffix=rest_suffix,
+                    affix_skips_instead_of_rests=affix_skips_instead_of_rests,
+                    )
+                selections.append(selection)
+        else:
+            assert len(segments) == 1, repr(segments)
+            segment = segments[0]
+            if rest_affix_specifier is not None:
+                result = rest_affix_specifier(segment_index, total_segments)
+                rest_prefix, rest_suffix = result
+                affix_skips_instead_of_rests = \
+                    rest_affix_specifier.skips_instead_of_rests
+            else:
+                rest_prefix, rest_suffix = None, None
+                affix_skips_instead_of_rests = None
+            selection = self._make_selection(
+                segment,
+                segment_count,
+                rest_prefix=rest_prefix,
+                rest_suffix=rest_suffix,
+                affix_skips_instead_of_rests=affix_skips_instead_of_rests,
+                )
             selections.append(selection)
         beam_specifier = self._get_beam_specifier()
         beam_specifier(selections)
@@ -504,60 +593,88 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 )
         return selections
 
-    def _get_acciaccatura_specifier(self, stage_index, total_stages):
-        if not self.acciaccatura_specifiers:
-            return
-        for acciaccatura_specifier in self.acciaccatura_specifiers:
-            pattern = acciaccatura_specifier._get_stage_pattern()
-            if pattern.matches_index(stage_index, total_stages):
-                return acciaccatura_specifier
-
-    def _make_selection(self, stage_token, total_stages):
-        stage_index = self._next_stage
+    def _make_selection(
+        self,
+        segment,
+        segment_count,
+        rest_prefix=None,
+        rest_suffix=None,
+        affix_skips_instead_of_rests=None,
+        ):
+        segment_index = self._next_segment
         acciaccatura_specifier = self._get_acciaccatura_specifier(
-            stage_index,
-            total_stages,
+            segment_index,
+            segment_count,
             )
-        self._next_stage += 1
-        if not stage_token:
+        self._next_segment += 1
+        if not segment:
             return abjad.selectiontools.Selection()
         talea = self._get_talea()
         leaves = []
         specifier = self._get_duration_spelling_specifier()
-        current_selection = self._next_stage - 1
+        decrease_durations = specifier.decrease_durations_monotonically
+        current_selection = self._next_segment - 1
         time_treatment = self._get_time_treatments()[current_selection]
         if time_treatment is None:
             time_treatment = 0
         grace_containers = None
         if acciaccatura_specifier is not None:
-            grace_containers, stage_token = acciaccatura_specifier(stage_token)
-            assert len(grace_containers) == len(stage_token)
-        for pitch_expression in stage_token:
-            #raise Exception(pitch_expression)
+            grace_containers, segment = acciaccatura_specifier(segment)
+            assert len(grace_containers) == len(segment)
+        for pitch_expression in segment:
             prototype = abjad.NumberedPitchClass
             if isinstance(pitch_expression, prototype):
                 pitch_expression = pitch_expression.pitch_class_number
             count = self._next_attack
-            self._next_attack += 1
-            duration = talea[count]
-            leaves_ = abjad.scoretools.make_leaves(
-                [pitch_expression],
-                [duration],
-                decrease_durations_monotonically=\
-                    specifier.decrease_durations_monotonically,
-                )
-            leaves.extend(leaves_)
-            count = self._next_attack
-            if talea[count] < 0:
+            while talea[count] < 0:
                 self._next_attack += 1
                 duration = -talea[count]
                 leaves_ = abjad.scoretools.make_leaves(
                     [None],
                     [duration],
-                    decrease_durations_monotonically=\
-                        specifier.decrease_durations_monotonically,
+                    decrease_durations_monotonically=decrease_durations,
                     )
                 leaves.extend(leaves_)
+                count = self._next_attack
+            self._next_attack += 1
+            duration = talea[count]
+            assert 0 <  duration, repr(duration)
+            skips_instead_of_rests = False
+            if (isinstance(pitch_expression, tuple) and
+                len(pitch_expression) == 2 and
+                pitch_expression[-1] in (None, 'skip')):
+                multiplier = pitch_expression[0]
+                duration = abjad.Duration(1, talea.denominator)
+                duration *= multiplier
+                if pitch_expression[-1] == 'skip':
+                    skips_instead_of_rests = True
+                pitch_expression = None
+            leaves_ = abjad.scoretools.make_leaves(
+                [pitch_expression],
+                [duration],
+                decrease_durations_monotonically=decrease_durations,
+                skips_instead_of_rests=skips_instead_of_rests,
+                )
+            leaves.extend(leaves_)
+            count = self._next_attack
+            while talea[count] < 0 and not count % len(talea) == 0:
+                self._next_attack += 1
+                duration = -talea[count]
+                leaves_ = abjad.scoretools.make_leaves(
+                    [None],
+                    [duration],
+                    decrease_durations_monotonically=decrease_durations,
+                    )
+                leaves.extend(leaves_)
+                count = self._next_attack
+        leaves = self._add_rest_affixes(
+            leaves,
+            talea,
+            rest_prefix,
+            rest_suffix,
+            affix_skips_instead_of_rests,
+            decrease_durations,
+            )
         leaf_selection = abjad.selectiontools.Selection(leaves)
         if isinstance(time_treatment, int):
             tuplet = self._make_tuplet_with_extra_count(
@@ -675,7 +792,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [
+                >>> segments = [
                 ...     [0],
                 ...     [2, 10],
                 ...     [18, 16, 15],
@@ -683,7 +800,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [2, 10, 18, 16, 15],
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -762,7 +879,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [
+                >>> segments = [
                 ...     [None],
                 ...     [0, None],
                 ...     [2, 10, None],
@@ -771,7 +888,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [2, 10, 18, 16, 15, None],
                 ...     [20, 19, 9, 0, 2, 10, None],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -877,8 +994,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
@@ -932,8 +1049,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
@@ -1005,8 +1122,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1053,8 +1170,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> segments = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
@@ -1108,8 +1225,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> segments = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
@@ -1164,8 +1281,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> segments = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
@@ -1241,8 +1358,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1288,8 +1405,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1329,8 +1446,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1388,8 +1505,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1439,8 +1556,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1509,8 +1626,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1557,8 +1674,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1625,8 +1742,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1681,8 +1798,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[0, 2]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> segments = [[0, 2]]
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1739,8 +1856,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[0, 2, 10], [10, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> segments = [[0, 2, 10], [10, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1786,8 +1903,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[0, 2, 10], [10, 16, 16, 19, 19], [19]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> segments = [[0, 2, 10], [10, 16, 16, 19, 19], [19]]
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1851,8 +1968,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1899,8 +2016,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1946,7 +2063,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [
+                >>> segments = [
                 ...     [0],
                 ...     [2, 10],
                 ...     [18, 16, 15],
@@ -1954,7 +2071,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [2, 10, 18, 16, 15],
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).beam.positions = (-5, -5)
@@ -2183,7 +2300,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [
+                >>> segments = [
                 ...     [0],
                 ...     [2, 10],
                 ...     [18, 16, 15],
@@ -2191,7 +2308,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [2, 10, 18, 16, 15],
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).beam.positions = (-5, -5)
@@ -2420,13 +2537,13 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [
+                >>> segments = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0, 2],
                 ...     [10, 18, 16, 15, 20],
                 ...     [19, 9, 0, 2, 10, 18],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).beam.positions = (-5, -5)
@@ -2621,7 +2738,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [
+                >>> segments = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
@@ -2629,7 +2746,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [10, 18, 16, 15, 20],
                 ...     [19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).beam.positions = (-5, -5)
@@ -2826,7 +2943,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            Stages specified by tuplet multiplier:
+            Specified by tuplet multiplier:
 
             ::
 
@@ -2840,7 +2957,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [
+                >>> segments = [
                 ...     [0],
                 ...     [2, 10],
                 ...     [18, 16, 15],
@@ -2848,7 +2965,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [2, 10, 18, 16, 15],
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).beam.positions = (-6, -6)
@@ -2906,7 +3023,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            Stage durations equal to a quarter:
+            Segment durations equal to a quarter:
 
             ::
 
@@ -2923,7 +3040,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [
+                >>> segments = [
                 ...     [0],
                 ...     [2, 10],
                 ...     [18, 16, 15],
@@ -2931,7 +3048,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [2, 10, 18, 16, 15],
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).beam.positions = (-6, -6)
@@ -2985,7 +3102,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            Stage durations alternating between a quarter and a dotted quarter:
+            Segment durations alternating between a quarter and a dotted
+            quarter:
 
             ::
 
@@ -3002,7 +3120,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [
+                >>> segments = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
@@ -3010,7 +3128,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [10, 18, 16, 15, 20],
                 ...     [19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).beam.positions = (-6, -6)
@@ -3112,8 +3230,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> segments = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
@@ -3169,8 +3287,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> stage_tokens = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> segments = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5

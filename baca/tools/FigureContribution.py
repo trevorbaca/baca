@@ -25,10 +25,9 @@ class FigureContribution(abjad.abctools.AbjadValueObject):
     __documentation_section__ = 'Segments'
 
     __slots__ = (
+        '_anchor',
         '_figure_name',
         '_hide_time_signature',
-        '_local_anchor',
-        '_remote_anchor',
         '_selections',
         '_state_manifest',
         '_time_signature',
@@ -38,32 +37,23 @@ class FigureContribution(abjad.abctools.AbjadValueObject):
 
     def __init__(
         self,
+        anchor=None,
         figure_name=None,
         hide_time_signature=None,
-        local_anchor=None,
-        remote_anchor=None,
         selections=None,
         state_manifest=None,
         time_signature=None,
         ):
+        if (anchor is not None and
+            not isinstance(anchor, baca.tools.AnchorSpecifier)):
+            message = 'must be anchor specifier: {!r}.'
+            message = message.format(anchor)
+            raise TypeError(message)
+        self._anchor = anchor
         self._figure_name = figure_name
         if hide_time_signature is not None:
             hide_time_signature = bool(hide_time_signature)
         self._hide_time_signature = hide_time_signature
-        prototype = abjad.selectortools.Selector
-        if local_anchor is not None:
-            if not isinstance(local_anchor, prototype):
-                message = 'must be selector: {!r}.'
-                message = message.format(local_anchor)
-                raise TypeError(message)
-        self._local_anchor = local_anchor
-        prototype = baca.tools.VoicedSelector
-        if remote_anchor is not None:
-            if not isinstance(remote_anchor, prototype):
-                message = 'must be voiced selector: {!r}.'
-                message = message.format(remote_anchor)
-                raise TypeError(message)
-        self._remote_anchor = remote_anchor
         self._selections = selections
         self._state_manifest = state_manifest
         self._time_signature = time_signature
@@ -99,6 +89,14 @@ class FigureContribution(abjad.abctools.AbjadValueObject):
     ### PUBLIC PROPERTIES ###
 
     @property
+    def anchor(self):
+        r'''Gets anchor.
+
+        Returns anchor specifier or none.
+        '''
+        return self._anchor
+
+    @property
     def figure_name(self):
         r'''Gets figure name.
 
@@ -113,22 +111,6 @@ class FigureContribution(abjad.abctools.AbjadValueObject):
         Returns true, false or none.
         '''
         return self._hide_time_signature
-
-    @property
-    def local_anchor(self):
-        r'''Gets local anchor selector.
-
-        Returns selector or none.
-        '''
-        return self._local_anchor
-
-    @property
-    def remote_anchor(self):
-        r'''Gets remote anchor selector.
-
-        Returns selector or none.
-        '''
-        return self._remote_anchor
 
     @property
     def selections(self):

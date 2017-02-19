@@ -26,15 +26,13 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
 
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
-            ...     [
-            ...         baca.pitches('G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4'),
-            ...         baca.make_even_run_rhythm_specifier(),
-            ...         baca.tools.RegisterSpecifier(
-            ...             registration=abjad.Registration(
-            ...                 [('[A0, C8]', 15)],
-            ...                 ),
+            ...     baca.pitches('G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4'),
+            ...     baca.make_even_run_rhythm_specifier(),
+            ...     baca.tools.RegisterSpecifier(
+            ...         registration=abjad.Registration(
+            ...             [('[A0, C8]', 15)],
             ...             ),
-            ...         ],
+            ...         ),
             ...     )
 
         ::

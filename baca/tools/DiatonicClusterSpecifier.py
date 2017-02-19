@@ -45,7 +45,7 @@ class DiatonicClusterSpecifier(abjad.abctools.AbjadObject):
 
     def __init__(self, cluster_widths=None):
         if cluster_widths is not None:
-            cluster_widths = abjad.datastructuretools.CyclicTuple(
+            cluster_widths = abjad.CyclicTuple(
                 cluster_widths)
         self._cluster_widths = cluster_widths
 

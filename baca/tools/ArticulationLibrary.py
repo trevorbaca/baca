@@ -43,14 +43,14 @@ class ArticulationLibrary(object):
                 )
 
     @staticmethod
-    def down_bows():
-        import baca
-        return baca.tools.ArticulationSpecifier(articulations=['downbow'])
-
-    @staticmethod
     def double_tonguing():
         import baca
         return baca.tools.ArticulationSpecifier(articulations=['tongue #2'])
+
+    @staticmethod
+    def down_bows():
+        import baca
+        return baca.tools.ArticulationSpecifier(articulations=['downbow'])
 
     @staticmethod
     def flageolet():
@@ -83,14 +83,14 @@ class ArticulationLibrary(object):
         return baca.tools.ArticulationSpecifier(articulations=['staccatissimo'])
 
     @staticmethod
-    def tenuti():
-        import baca
-        return baca.tools.ArticulationSpecifier(articulations=['tenuto'])
-
-    @staticmethod
     def stem_tremolo():
         import baca
         return baca.tools.StemTremoloSpecifier(tremolo_flags=32)
+
+    @staticmethod
+    def tenuti():
+        import baca
+        return baca.tools.ArticulationSpecifier(articulations=['tenuto'])
 
     @staticmethod
     def tremolo_down(n, maximum_adjustment=-1.5):

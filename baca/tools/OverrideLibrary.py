@@ -97,6 +97,14 @@ class OverrideLibrary(object):
             )
 
     @staticmethod
+    def rest_position(n):
+        return baca.tools.OverrideSpecifier(
+            grob_name='rest',
+            attribute_name='staff_position',
+            attribute_value=n,
+            )
+
+    @staticmethod
     def rest_up():
         return baca.tools.OverrideSpecifier(
             grob_name='rest',

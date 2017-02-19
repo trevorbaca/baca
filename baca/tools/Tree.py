@@ -1246,38 +1246,6 @@ class Tree(abjad.abctools.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def items(self):
-        r'''Gets items.
-
-        ..  container:: example
-
-            Gets items:
-
-            ::
-
-                >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.tools.Tree(items=items)
-
-            ::
-
-                >>> for item in tree.items:
-                ...     item
-                Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
-                Tree(items=[Tree(items=4), Tree(items=5)])
-
-        ..  container:: example
-
-            Returns list:
-
-            ::
-
-                >>> isinstance(tree.items, list)
-                True
-
-        '''
-        return self._items
-
-    @property
     def item_class(self):
         r'''Gets item class.
 
@@ -1311,6 +1279,38 @@ class Tree(abjad.abctools.AbjadObject):
         Returns class or none.
         '''
         return self._item_class
+
+    @property
+    def items(self):
+        r'''Gets items.
+
+        ..  container:: example
+
+            Gets items:
+
+            ::
+
+                >>> items = [[[0, 1], [2, 3]], [4, 5]]
+                >>> tree = baca.tools.Tree(items=items)
+
+            ::
+
+                >>> for item in tree.items:
+                ...     item
+                Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
+                Tree(items=[Tree(items=4), Tree(items=5)])
+
+        ..  container:: example
+
+            Returns list:
+
+            ::
+
+                >>> isinstance(tree.items, list)
+                True
+
+        '''
+        return self._items
 
     ### PUBLIC METHODS ###
 

@@ -21,25 +21,22 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
         '_figure_maker',
         '_figure_names',
         '_floating_selections',
-        '_selections',
         '_time_signatures',
-        )
-
-    _all_voice_names = (
-        'Voice 1',
-        'Voice 2',
-        'Voice 3',
-        'Voice 4',
+        '_voice_names',
         )
 
     ### INITIALIZER ###
 
-    def __init__(self):
+    def __init__(self, score_template):
+        voice_names = []
+        dummy_score = score_template()
+        for voice in abjad.iterate(dummy_score).by_class(abjad.Voice):
+            voice_names.append(voice.name)
+        self._voice_names = voice_names
         self._current_offset = abjad.Offset(0)
         self._figure_maker = self._make_default_figure_maker()
         self._figure_names = []
         self._floating_selections = self._make_voice_dictionary()
-        self._selections = self._make_voice_dictionary()
         self._time_signatures = []
 
     ### SPECIAL METHODS ###
@@ -53,10 +50,11 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> accumulator = baca.tools.FigureAccumulator()
+                >>> score_template = baca.tools.StringTrioScoreTemplate()
+                >>> accumulator = baca.tools.FigureAccumulator(score_template)
                 >>> accumulator(
                 ...     accumulator.figure_maker(
-                ...         'Voice 1',
+                ...         'Violin Music Voice',
                 ...         [[0, 1, 2, 3]],
                 ...         figure_name='D',
                 ...         ),
@@ -66,7 +64,7 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
 
                 >>> accumulator(
                 ...     accumulator.figure_maker(
-                ...         'Voice 1',
+                ...         'Violin Music Voice',
                 ...         [[4, 5, 6, 7]],
                 ...         figure_name='D',
                 ...         ),
@@ -78,22 +76,10 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
         Returns none.
         '''
         self._cache_figure_name(figure_contribution)
-        self._cache_selections(figure_contribution)
-        self._cache_floating_selections(figure_contribution)
+        self._cache_floating_selection(figure_contribution)
         self._cache_time_signature(figure_contribution)
 
     ### PRIVATE METHODS ###
-
-    def _assemble_floating_selections(self, segment_maker):
-        for voice_name in sorted(self.selections):
-            selection = self.assemble(voice_name)
-            if selection:
-                segment_maker.append_specifiers(
-                    (voice_name, baca.select.stages(1, 1)),
-                    baca.tools.RhythmSpecifier(
-                        rhythm_maker=selection,
-                        ),
-                    )
 
     def _cache_figure_name(self, figure_contribution):
         if figure_contribution.figure_name is None:
@@ -104,7 +90,7 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
             raise Exception(message)
         self._figure_names.append(figure_contribution.figure_name)
 
-    def _cache_floating_selections(self, figure_contribution):
+    def _cache_floating_selection(self, figure_contribution):
         for voice_name in figure_contribution:
             selection = figure_contribution[voice_name]
             if not selection:
@@ -122,42 +108,68 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
             self._floating_selections[voice_name].append(floating_selection)
         self._current_offset = stop_offset
 
-    def _cache_selections(self, figure_contribution):
-        for voice_name in self.selections:
-            if voice_name in figure_contribution:
-                selections = figure_contribution[voice_name]
-                self.selections[voice_name].extend(selections)
-            else:
-                figure_duration = figure_contribution._get_duration()
-                multiplier = abjad.Multiplier(figure_duration)
-                skip = abjad.Skip(1)
-                abjad.attach(multiplier, skip)
-                selection = abjad.selectiontools.Selection([skip])
-                self.selections[voice_name].append(selection)
-
     def _cache_time_signature(self, figure_contribution):
         if figure_contribution.hide_time_signature:
             return
-        if figure_contribution.remote_anchor is None:
+        if (figure_contribution.anchor is None or
+            figure_contribution.hide_time_signature is False):
             self.time_signatures.append(figure_contribution.time_signature)
 
+    def _get_leaf_timespan(self, leaf, floating_selections):
+        found_leaf = False
+        for floating_selection in floating_selections:
+            leaf_start_offset = abjad.Offset(0)
+            for leaf_ in abjad.iterate(floating_selection.selection).by_leaf():
+                leaf_duration = abjad.inspect_(leaf_).get_duration()
+                if leaf_ is leaf:
+                    found_leaf = True
+                    break
+                leaf_start_offset += leaf_duration
+            if found_leaf:
+                break
+        if not found_leaf:
+            message = 'can not find {!r} in floating selections.'
+            message = message.format(leaf)
+            raise Exception(message)
+        selection_start_offset = floating_selection.timespan.start_offset
+        leaf_start_offset = selection_start_offset + leaf_start_offset
+        leaf_stop_offset = leaf_start_offset + leaf_duration
+        return abjad.Timespan(leaf_start_offset, leaf_stop_offset)
+
     def _get_start_offset(self, selection, figure_contribution):
-        if figure_contribution.remote_anchor is None:
+        anchored = False
+        if figure_contribution.anchor is not None:
+            remote_voice_name = figure_contribution.anchor.remote_voice_name
+            remote_selector = figure_contribution.anchor.remote_selector
+            just_after = figure_contribution.anchor.just_after
+            anchored = True
+        else:
+            remote_voice_name = None
+            remote_selector = None
+            just_after = None
+        if remote_voice_name is None:
             return self._current_offset
-        voice_name = figure_contribution.remote_anchor.voice_name
-        selector = figure_contribution.remote_anchor.selector
-        selections = self.selections[voice_name]
-        result = selector(selections)
+        remote_selector = remote_selector or baca.select.leaf(0)
+        floating_selections = self._floating_selections[remote_voice_name]
+        selections = [_.selection for _ in floating_selections]
+        result = remote_selector(selections)
         selected_leaves = list(abjad.iterate(result).by_leaf())
         first_selected_leaf = selected_leaves[0]
-        dummy_container = abjad.Container(selections)
-        timespan = abjad.inspect_(first_selected_leaf).get_timespan()
-        del(dummy_container[:])
-        remote_anchor_start_offset = timespan.start_offset
+        timespan = self._get_leaf_timespan(
+            first_selected_leaf,
+            floating_selections,
+            )
+        if just_after:
+            remote_anchor_start_offset = timespan.stop_offset
+        else:
+            remote_anchor_start_offset = timespan.start_offset
         local_anchor_start_offset = abjad.Offset(0)
-        if figure_contribution.local_anchor is not None:
-            selector = figure_contribution.local_anchor
-            result = selector(selection)
+        if figure_contribution.anchor is not None:
+            local_selector = figure_contribution.anchor.local_selector
+        else:
+            local_selector = None
+        if local_selector is not None:
+            result = local_selector(selection)
             selected_leaves = list(abjad.iterate(result).by_leaf())
             first_selected_leaf = selected_leaves[0]
             dummy_container = abjad.Container(selection)
@@ -211,7 +223,7 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
             abjad.rhythmmakertools.BeamSpecifier(
                 beam_divisions_together=True,
                 ),
-            baca.tools.RhythmSpecifier(
+            baca.tools.FigureRhythmSpecifier(
                 rhythm_maker=baca.tools.FigureRhythmMaker(
                     talea=abjad.rhythmmakertools.Talea(
                         counts=[1],
@@ -219,15 +231,12 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
                         ),
                     ),
                 ),
-            annotate_unregistered_pitches=True,
+            color_unregistered_pitches=True,
             preferred_denominator=16,
             )
 
     def _make_voice_dictionary(self):
-        return dict([(_, []) for _ in self._all_voice_names])
-
-    def _populate_segment_maker(self, segment_maker):
-        self._assemble_floating_selections(segment_maker)
+        return dict([(_, []) for _ in self._voice_names])
 
     ### PUBLIC PROPERTIES ###
 
@@ -238,14 +247,6 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
         Returns figure-maker.
         '''
         return self._figure_maker
-
-    @property
-    def selections(self):
-        r'''Gets selections by voice name.
-
-        Returns dictionary.
-        '''
-        return self._selections
 
     @property
     def time_signatures(self):
@@ -268,6 +269,21 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
         selection = self._insert_skips(floating_selections, voice_name)
         assert isinstance(selection, abjad.Selection), repr(selection)
         return selection
+
+    def populate_segment_maker(self, segment_maker):
+        r'''Populates `segment_maker`.
+
+        Returns none.
+        '''
+        for voice_name in sorted(self._floating_selections):
+            selection = self.assemble(voice_name)
+            if selection:
+                segment_maker.append_specifiers(
+                    (voice_name, baca.select.stages(1, 1)),
+                    baca.tools.RhythmSpecifier(
+                        rhythm_maker=selection,
+                        ),
+                    )
 
     @staticmethod
     def show(contribution, time_signatures):

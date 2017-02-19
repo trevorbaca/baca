@@ -26,10 +26,8 @@ class VoltaSpecifier(abjad.abctools.AbjadObject):
 
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
-            ...     [
-            ...         baca.pitches('E4', allow_repeated_pitches=True),
-            ...         baca.make_messiaen_note_rhythm_specifier(),
-            ...         ],
+            ...     baca.pitches('E4', allow_repeat_pitches=True),
+            ...     baca.make_messiaen_note_rhythm_specifier(),
             ...     )
 
         ::

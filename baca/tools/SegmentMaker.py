@@ -270,8 +270,11 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
     __documentation_section__ = 'Segments'
 
     __slots__ = (
+        '_allow_empty_selectors',
         '_allow_figure_names',
-        '_annotate_out_of_range_pitches',
+        '_color_octaves',
+        '_color_out_of_range_pitches',
+        '_color_repeat_pitch_classes',
         '_cached_leaves_with_rests',
         '_cached_leaves_without_rests',
         '_cached_score_template_start_clefs',
@@ -282,7 +285,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         '_final_markup',
         '_final_markup_extra_offset',
         '_hide_instrument_names',
-        '_ignore_duplicate_pitch_classes',
+        '_ignore_repeat_pitch_classes',
         '_ignore_unpitched_notes',
         '_ignore_unregistered_pitches',
         '_label_clock_time',
@@ -365,14 +368,17 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
     def __init__(
         self,
+        allow_empty_selectors=None,
         allow_figure_names=None,
-        annotate_out_of_range_pitches=None,
+        color_octaves=None,
+        color_out_of_range_pitches=None,
+        color_repeat_pitch_classes=None,
         design_checker=None,
         final_barline=None,
         final_markup=None,
         final_markup_extra_offset=None,
         hide_instrument_names=None,
-        ignore_duplicate_pitch_classes=None,
+        ignore_repeat_pitch_classes=None,
         ignore_unpitched_notes=None,
         ignore_unregistered_pitches=None,
         label_clock_time=None,
@@ -395,12 +401,21 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         ):
         superclass = super(SegmentMaker, self)
         superclass.__init__()
+        if allow_empty_selectors is not None:
+            allow_empty_selectors = bool(allow_empty_selectors)
+        self._allow_empty_selectors = allow_empty_selectors
         if allow_figure_names is not None:
             allow_figure_names = bool(allow_figure_names)
         self._allow_figure_names = allow_figure_names
-        if annotate_out_of_range_pitches is not None:
-            annotate_out_of_range_pitches = bool(annotate_out_of_range_pitches)
-        self._annotate_out_of_range_pitches = annotate_out_of_range_pitches
+        if color_octaves is not None:
+            color_octaves = bool(color_octaves)
+        self._color_octaves = color_octaves
+        if color_out_of_range_pitches is not None:
+            color_out_of_range_pitches = bool(color_out_of_range_pitches)
+        self._color_out_of_range_pitches = color_out_of_range_pitches
+        if color_repeat_pitch_classes is not None:
+            color_repeat_pitch_classes = bool(color_repeat_pitch_classes)
+        self._color_repeat_pitch_classes = color_repeat_pitch_classes
         self._cached_leaves_with_rests = None
         self._cached_leaves_without_rests = None
         self._design_checker = design_checker
@@ -417,10 +432,10 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         if hide_instrument_names is not None:
             hide_instrument_names = bool(hide_instrument_names)
         self._hide_instrument_names = hide_instrument_names
-        if ignore_duplicate_pitch_classes is not None:
-            ignore_duplicate_pitch_classes = bool(
-                ignore_duplicate_pitch_classes)
-        self._ignore_duplicate_pitch_classes = ignore_duplicate_pitch_classes
+        if ignore_repeat_pitch_classes is not None:
+            ignore_repeat_pitch_classes = bool(
+                ignore_repeat_pitch_classes)
+        self._ignore_repeat_pitch_classes = ignore_repeat_pitch_classes
         if ignore_unpitched_notes is not None:
             ignore_unpitched_notes = bool(ignore_unpitched_notes)
         self._ignore_unpitched_notes = ignore_unpitched_notes
@@ -474,9 +489,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         Returns LilyPond file and segment metadata.
         '''
         self._segment_metadata = segment_metadata or \
-            abjad.datastructuretools.TypedOrderedDict()
+            abjad.TypedOrderedDict()
         self._previous_segment_metadata = previous_segment_metadata or \
-            abjad.datastructuretools.TypedOrderedDict()
+            abjad.TypedOrderedDict()
         self._make_score()
         self._remove_score_template_start_instruments()
         self._remove_score_template_start_clefs()
@@ -510,6 +525,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         self._check_well_formedness()
         self._check_design()
         self._check_range()
+        self._color_repeat_pitch_classes_()
+        self._color_octaves_()
         self._update_segment_metadata()
         self._print_segment_duration_()
         return self._lilypond_file, self._segment_metadata
@@ -731,7 +748,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             return
         cached_clefs = self._cached_score_template_start_clefs
         previous_clefs = self._previous_segment_metadata.get(
-            'end_clefs_by_staff', abjad.datastructuretools.TypedOrderedDict())
+            'end_clefs_by_staff', abjad.TypedOrderedDict())
         prototype = abjad.indicatortools.Clef
         for staff in abjad.iterate(self._score).by_class(abjad.Staff):
             if abjad.inspect_(staff).has_indicator(prototype):
@@ -755,7 +772,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         cached_instruments = self._cached_score_template_start_instruments
         previous_instruments = self._previous_segment_metadata.get(
             'end_instruments_by_context',
-            abjad.datastructuretools.TypedOrderedDict(),
+            abjad.TypedOrderedDict(),
             )
         prototype = abjad.instrumenttools.Instrument
         contexts_with_instrument_names = self._contexts_with_instrument_names
@@ -837,12 +854,14 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         if not self.range_checker:
             return
         if isinstance(self.range_checker, abjad.PitchRange):
+            markup = abjad.Markup('*', direction=Up)
+            abjad.tweak(markup).color = 'red'
             for voice in abjad.iterate(self._score).by_class(abjad.Voice):
                 for leaf in abjad.iterate(voice).by_leaf(pitched=True):
                     if leaf not in self.range_checker:
-                        if self.annotate_out_of_range_pitches:
+                        if self.color_out_of_range_pitches:
                             abjad.label(leaf).color_leaves('red')
-                            abjad.attach(abjad.Markup('*'), leaf)
+                            abjad.attach(markup, leaf)
                         else:
                             message = 'out of range: {!r}.'
                             message = message.format(leaf)
@@ -856,12 +875,58 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             inspector = abjad.inspect_(score)
             string = inspector.tabulate_well_formedness_violations()
             raise Exception(string)
-        if self.ignore_duplicate_pitch_classes:
+        if (self.color_octaves or
+            self.color_repeat_pitch_classes or
+            self.ignore_repeat_pitch_classes):
             return
         manager = baca.tools.WellformednessManager()
         if not manager.is_well_formed(score):
             string = manager.tabulate_well_formedness_violations(score)
             raise Exception(string)
+
+    def _color_octaves_(self):
+        if not self.color_octaves:
+            return
+        score = self._score
+        vertical_moments = abjad.iterate(score).by_vertical_moment()
+        markup = abjad.Markup('OCTAVE', direction=Up)
+        abjad.tweak(markup).color = 'red'
+        for vertical_moment in vertical_moments:
+            pitches = []
+            for leaf in vertical_moment.leaves:
+                if isinstance(leaf, abjad.Note):
+                    pitches.append(leaf.written_pitch)
+                elif isinstance(leaf, abjad.Chord):
+                    pitches.extend(leaf.written_pitches)
+            if not pitches:
+                continue
+            pitch_classes = [_.pitch_class for _ in pitches]
+            if baca.PitchClassSegment(pitch_classes).has_duplicates():
+                notes_and_chords = vertical_moment.notes_and_chords
+                notes_and_chords = abjad.select(notes_and_chords)
+                abjad.label(notes_and_chords).color_leaves('red')
+                for leaf in notes_and_chords:
+                    abjad.attach(markup, leaf)
+
+    def _color_repeat_pitch_classes_(self):
+        if not self.color_repeat_pitch_classes:
+            return
+        markup = abjad.Markup('@', direction=Up)
+        abjad.tweak(markup).color = 'red'
+        for voice in abjad.iterate(self._score).by_class(abjad.Voice):
+            previous_logical_tie, previous_pitch_class = None, None
+            agent = abjad.iterate(voice)
+            for logical_tie in agent.by_logical_tie(pitched=True):
+                pitch_class = logical_tie.head.written_pitch.pitch_class
+                if pitch_class == previous_pitch_class:
+                    abjad.label(previous_logical_tie).color_leaves('red')
+                    for leaf in previous_logical_tie:
+                        abjad.attach(markup, leaf)
+                    abjad.label(logical_tie).color_leaves('red')
+                    for leaf in logical_tie:
+                        abjad.attach(markup, leaf)
+                previous_logical_tie = logical_tie
+                previous_pitch_class = pitch_class
 
     def _color_unpitched_notes(self):
         if self.ignore_unpitched_notes:
@@ -919,9 +984,12 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         stop_offset = max(_.stop_offset for _ in timespans)
         timespan = abjad.timespantools.Timespan(start_offset, stop_offset)
         if not logical_ties:
-            message = '{!r} selects no logical ties.'
-            message = message.format(scoped_specifier)
-            raise Exception(message)
+            message = 'EMPTY SELECTION: {}'
+            message = message.format(format(scoped_specifier))
+            if self.allow_empty_selectors:
+                print(message)
+            else:
+                raise Exception(message)
         return abjad.select(logical_ties), timespan
 
     def _compound_scope_to_topmost_components(self, compound_scope):
@@ -1020,9 +1088,12 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         assert isinstance(selection, abjad.selectiontools.Selection), repr(
             selection)
         if not selection:
-            message = '{!r} selects nothing.'
-            message = message.format(scoped_specifier)
-            raise Exception(message)
+            message = 'EMPTY SELECTION: {}'
+            message = message.format(format(scoped_specifier))
+            if self.allow_empty_selectors:
+                print(message)
+            else:
+                raise Exception(message)
         timespan = None
         if getattr(specifier, '_include_selection_timespan', False):
             timespan = self._selection_to_timespan(selection)
@@ -1114,7 +1185,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         return leaves
 
     def _get_end_clefs(self):
-        result = abjad.datastructuretools.TypedOrderedDict()
+        result = abjad.TypedOrderedDict()
         staves = abjad.iterate(self._score).by_class(abjad.Staff)
         staves = [_ for _ in staves if _.is_semantic]
         staves.sort(key=lambda x: x.name)
@@ -1129,7 +1200,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         return result
 
     def _get_end_instruments(self):
-        result = abjad.datastructuretools.TypedOrderedDict()
+        result = abjad.TypedOrderedDict()
         contexts = abjad.iterate(self._score).by_class(abjad.scoretools.Context)
         contexts = list(contexts)
         contexts.sort(key=lambda x: x.name)
@@ -1326,6 +1397,15 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 spanner = abjad.spannertools.HiddenStaffSpanner()
                 abjad.attach(spanner, leaf)
 
+    def _hide_instrument_names_(self):
+        if not self.hide_instrument_names:
+            return
+        classes = (abjad.Staff, abjad.StaffGroup)
+        prototype = abjad.instrumenttools.Instrument
+        for staff in abjad.iterate(self._score).by_class(classes):
+            if abjad.inspect_(staff).get_indicator(prototype):
+                abjad.detach(prototype, staff)
+
     def _initialize_time_signatures(self, time_signatures):
         time_signatures = time_signatures or ()
         time_signatures_ = list(time_signatures)
@@ -1466,15 +1546,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             skips.append(skip)
         skips = abjad.select(skips)
         abjad.label(skips).with_start_offsets(clock_time=True, font_size=-2)
-
-    def _hide_instrument_names_(self):
-        if not self.hide_instrument_names:
-            return
-        classes = (abjad.Staff, abjad.StaffGroup)
-        prototype = abjad.instrumenttools.Instrument
-        for staff in abjad.iterate(self._score).by_class(classes):
-            if abjad.inspect_(staff).get_indicator(prototype):
-                abjad.detach(prototype, staff)
 
     def _label_instrument_changes(self):
         prototype = abjad.instrumenttools.Instrument
@@ -1654,17 +1725,17 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             abjad.set_(score).current_bar_number = first_bar_number
         self._score = score
 
+    def _make_skip_filled_measures(self, time_signatures=None):
+        time_signatures = time_signatures or self.time_signatures
+        measures = abjad.scoretools.make_spacer_skip_measures(time_signatures)
+        return measures
+        
     def _make_skips(self, time_signatures=None):
         time_signatures = time_signatures or self.time_signatures
         rhythm_maker = abjad.rhythmmakertools.SkipRhythmMaker()
         selections = rhythm_maker(time_signatures)
         return selections
 
-    def _make_skip_filled_measures(self, time_signatures=None):
-        time_signatures = time_signatures or self.time_signatures
-        measures = abjad.scoretools.make_spacer_skip_measures(time_signatures)
-        return measures
-        
     def _make_spacing_regions(self):
         if not self.spacing_map:
             return
@@ -1801,7 +1872,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         print(message)
 
     def _remove_score_template_start_clefs(self):
-        dictionary = abjad.datastructuretools.TypedOrderedDict()
+        dictionary = abjad.TypedOrderedDict()
         self._cached_score_template_start_clefs = dictionary
         prototype = abjad.indicatortools.Clef
         for context in abjad.iterate(self._score).by_class(abjad.scoretools.Context):
@@ -1812,7 +1883,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             abjad.detach(abjad.indicatortools.Clef, context)
 
     def _remove_score_template_start_instruments(self):
-        dictionary = abjad.datastructuretools.TypedOrderedDict()
+        dictionary = abjad.TypedOrderedDict()
         self._cached_score_template_start_instruments = dictionary
         for context in abjad.iterate(self._score).by_class(abjad.scoretools.Context):
             prototype = abjad.instrumenttools.Instrument
@@ -1994,6 +2065,20 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         self._segment_metadata = segment_metadata
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def allow_empty_selectors(self):
+        r'''Is true when segment allows empty selectors.
+
+        Otherwise segment raises exception on empty selectors.
+
+        Set to true, false or none.
+
+        Defaults to none.
+
+        Returns true, false or none.
+        '''
+        return self._allow_empty_selectors
 
     @property
     def allow_figure_names(self):
@@ -2265,14 +2350,12 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                                             ^ \markup {
                                                 \fontsize
                                                     #3
-                                                    \with-color
-                                                        #darkgreen
-                                                        \concat
-                                                            {
-                                                                [
-                                                                0
-                                                                ]
-                                                            }
+                                                    \concat
+                                                        {
+                                                            [
+                                                            0
+                                                            ]
+                                                        }
                                                 }
                                     }
                                 }
@@ -2282,14 +2365,12 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                                             ^ \markup {
                                                 \fontsize
                                                     #3
-                                                    \with-color
-                                                        #darkgreen
-                                                        \concat
-                                                            {
-                                                                [
-                                                                1
-                                                                ]
-                                                            }
+                                                    \concat
+                                                        {
+                                                            [
+                                                            1
+                                                            ]
+                                                        }
                                                 }
                                         d'16
                                         ef'16
@@ -2305,14 +2386,12 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                                             ^ \markup {
                                                 \fontsize
                                                     #3
-                                                    \with-color
-                                                        #darkgreen
-                                                        \concat
-                                                            {
-                                                                [
-                                                                2
-                                                                ]
-                                                            }
+                                                    \concat
+                                                        {
+                                                            [
+                                                            2
+                                                            ]
+                                                        }
                                                 }
                                     }
                                 }
@@ -2322,14 +2401,12 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                                             ^ \markup {
                                                 \fontsize
                                                     #3
-                                                    \with-color
-                                                        #darkgreen
-                                                        \concat
-                                                            {
-                                                                [
-                                                                3
-                                                                ]
-                                                            }
+                                                    \concat
+                                                        {
+                                                            [
+                                                            3
+                                                            ]
+                                                        }
                                                 }
                                         g'16
                                         a'16
@@ -2353,15 +2430,497 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         return self._allow_figure_names
 
     @property
-    def annotate_out_of_range_pitches(self):
-        r'''Is true when segment-maker annotates out-of-range pitches instead
-        of raising exception.
+    def color_octaves(self):
+        r'''Is true when segment-maker colors octaves.
+
+        ..  container:: example
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     color_octaves=True,
+                ...     score_template=baca.tools.StringTrioScoreTemplate(),
+                ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
+                ...         minimum_width=abjad.Duration(1, 24),
+                ...         ),
+                ...     time_signatures=[abjad.TimeSignature((6, 16))],
+                ...     )
+
+            ::
+
+                >>> figure_maker = baca.tools.FigureMaker()
+                >>> contribution = figure_maker(
+                ...     'Violin Music Voice',
+                ...     [[2, 4, 5, 7, 9, 11]],
+                ...     )
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.select.stages(1)),
+                ...     baca.tools.RhythmSpecifier(
+                ...         rhythm_maker=contribution['Violin Music Voice'],
+                ...         ),
+                ...     )
+
+            ::
+
+                >>> contribution = figure_maker(
+                ...     'Cello Music Voice',
+                ...     [[-3, -5, -7, -8, -10, -12]],
+                ...     )
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vc', baca.select.stages(1)),
+                ...     baca.tools.RhythmSpecifier(
+                ...         rhythm_maker=contribution['Cello Music Voice'],
+                ...         ),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Score])
+                \context Score = "Score" <<
+                    \tag violin.viola.cello
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 6/16
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \context StringSectionStaffGroup = "String Section Staff Group" <<
+                            \tag violin
+                            \context ViolinMusicStaff = "Violin Music Staff" {
+                                \clef "treble"
+                                \context ViolinMusicVoice = "Violin Music Voice" {
+                                    {
+                                        {
+                                            d'16 [
+                                            e'16
+                                            \once \override Accidental.color = #red
+                                            \once \override Beam.color = #red
+                                            \once \override Dots.color = #red
+                                            \once \override NoteHead.color = #red
+                                            \once \override Stem.color = #red
+                                            f'16
+                                                - \tweak color #red
+                                                ^ \markup { OCTAVE }
+                                            g'16
+                                            a'16
+                                            b'16 ]
+                                            \bar "|"
+                                        }
+                                    }
+                                }
+                            }
+                            \tag viola
+                            \context ViolaMusicStaff = "Viola Music Staff" {
+                                \clef "alto"
+                                \context ViolaMusicVoice = "Viola Music Voice" {
+                                    R1 * 3/8
+                                    \bar "|"
+                                }
+                            }
+                            \tag cello
+                            \context CelloMusicStaff = "Cello Music Staff" {
+                                \clef "bass"
+                                \context CelloMusicVoice = "Cello Music Voice" {
+                                    {
+                                        {
+                                            a16 [
+                                            g16
+                                            \once \override Accidental.color = #red
+                                            \once \override Beam.color = #red
+                                            \once \override Dots.color = #red
+                                            \once \override NoteHead.color = #red
+                                            \once \override Stem.color = #red
+                                            f16
+                                                - \tweak color #red
+                                                ^ \markup { OCTAVE }
+                                            e16
+                                            d16
+                                            c16 ]
+                                            \bar "|"
+                                        }
+                                    }
+                                }
+                            }
+                        >>
+                    >>
+                >>
 
         Set to true, false or none.
 
+        Defaults to none.
+
         Returns true, false or none.
         '''
-        return self._annotate_out_of_range_pitches
+        return self._color_octaves
+
+    @property
+    def color_out_of_range_pitches(self):
+        r'''Is true when segment-maker colors out-of-range pitches.
+
+        ..  container:: example
+
+            ::
+
+                >>> figure_maker = baca.tools.FigureMaker()
+
+            ::
+
+                >>> segment_lists = [
+                ...     [[4]],
+                ...     [[-12, 2, 3, 5, 8, 9, 0]],
+                ...     [[11]],
+                ...     [[10, 7, 9, 10, 0, 5]],
+                ...     ]
+                >>> figures, time_signatures = [], []
+                >>> for i, segments in enumerate(segment_lists):
+                ...     contribution = figure_maker(
+                ...         'Voice 1',
+                ...         segments,
+                ...         figure_name=i,
+                ...         )
+                ...     figures.append(contribution['Voice 1'])
+                ...     time_signatures.append(contribution.time_signature)    
+                ...
+                >>> figures_ = []
+                >>> for figure in figures:
+                ...     figures_.extend(figure)
+                ...
+                >>> figures = abjad.select(figures_)
+
+            ::
+
+                >>> pitch_range = abjad.instrumenttools.Violin().pitch_range
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     color_out_of_range_pitches=True,
+                ...     range_checker=pitch_range,
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
+                ...         minimum_width=abjad.Duration(1, 24),
+                ...         ),
+                ...     time_signatures=time_signatures,
+                ...     )
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.select.stages(1)),
+                ...     baca.tools.RhythmSpecifier(
+                ...         rhythm_maker=figures,
+                ...         ),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Score])
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 1/16
+                                R1 * 1/16
+                            }
+                            {
+                                \time 7/16
+                                R1 * 7/16
+                            }
+                            {
+                                \time 1/16
+                                R1 * 1/16
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 1/16
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 1/16
+                            }
+                            {
+                                \time 7/16
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 7/16
+                            }
+                            {
+                                \time 1/16
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 1/16
+                            }
+                            {
+                                \time 3/8
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    {
+                                        e'16
+                                    }
+                                }
+                                {
+                                    {
+                                        \once \override Accidental.color = #red
+                                        \once \override Beam.color = #red
+                                        \once \override Dots.color = #red
+                                        \once \override NoteHead.color = #red
+                                        \once \override Stem.color = #red
+                                        c16 [
+                                            - \tweak color #red
+                                            ^ \markup { * }
+                                        d'16
+                                        ef'16
+                                        f'16
+                                        af'16
+                                        a'16
+                                        c'16 ]
+                                    }
+                                }
+                                {
+                                    {
+                                        b'16
+                                    }
+                                }
+                                {
+                                    {
+                                        bf'16 [
+                                        g'16
+                                        a'16
+                                        bf'16
+                                        c'16
+                                        f'16 ]
+                                        \bar "|"
+                                    }
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        Set to true, false or none.
+
+        Defaults to none.
+
+        Returns true, false or none.
+        '''
+        return self._color_out_of_range_pitches
+
+    @property
+    def color_repeat_pitch_classes(self):
+        r'''Is true when segment-maker colors repeat pitch-classes.
+
+        ..  container:: example
+
+            ::
+
+                >>> figure_maker = baca.tools.FigureMaker()
+
+            ::
+
+                >>> segment_lists = [
+                ...     [[4]],
+                ...     [[6, 2, 3, 5, 9, 9, 0]],
+                ...     [[11]],
+                ...     [[10, 7, 9, 12, 0, 5]],
+                ...     ]
+                >>> figures, time_signatures = [], []
+                >>> for i, segments in enumerate(segment_lists):
+                ...     contribution = figure_maker(
+                ...         'Voice 1',
+                ...         segments,
+                ...         figure_name=i,
+                ...         )
+                ...     figures.append(contribution['Voice 1'])
+                ...     time_signatures.append(contribution.time_signature)    
+                ...
+                >>> figures_ = []
+                >>> for figure in figures:
+                ...     figures_.extend(figure)
+                ...
+                >>> figures = abjad.select(figures_)
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     color_repeat_pitch_classes=True,
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
+                ...         minimum_width=abjad.Duration(1, 24),
+                ...         ),
+                ...     time_signatures=time_signatures,
+                ...     )
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.select.stages(1)),
+                ...     baca.tools.RhythmSpecifier(
+                ...         rhythm_maker=figures,
+                ...         ),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Score])
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 1/16
+                                R1 * 1/16
+                            }
+                            {
+                                \time 7/16
+                                R1 * 7/16
+                            }
+                            {
+                                \time 1/16
+                                R1 * 1/16
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 1/16
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 1/16
+                            }
+                            {
+                                \time 7/16
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 7/16
+                            }
+                            {
+                                \time 1/16
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 1/16
+                            }
+                            {
+                                \time 3/8
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                                \newSpacingSection
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    {
+                                        e'16
+                                    }
+                                }
+                                {
+                                    {
+                                        fs'16 [
+                                        d'16
+                                        ef'16
+                                        f'16
+                                        \once \override Accidental.color = #red
+                                        \once \override Beam.color = #red
+                                        \once \override Dots.color = #red
+                                        \once \override NoteHead.color = #red
+                                        \once \override Stem.color = #red
+                                        a'16
+                                            - \tweak color #red
+                                            ^ \markup { @ }
+                                        \once \override Accidental.color = #red
+                                        \once \override Beam.color = #red
+                                        \once \override Dots.color = #red
+                                        \once \override NoteHead.color = #red
+                                        \once \override Stem.color = #red
+                                        a'16
+                                            - \tweak color #red
+                                            ^ \markup { @ }
+                                        c'16 ]
+                                    }
+                                }
+                                {
+                                    {
+                                        b'16
+                                    }
+                                }
+                                {
+                                    {
+                                        bf'16 [
+                                        g'16
+                                        a'16
+                                        \once \override Accidental.color = #red
+                                        \once \override Beam.color = #red
+                                        \once \override Dots.color = #red
+                                        \once \override NoteHead.color = #red
+                                        \once \override Stem.color = #red
+                                        c''16
+                                            - \tweak color #red
+                                            ^ \markup { @ }
+                                        \once \override Accidental.color = #red
+                                        \once \override Beam.color = #red
+                                        \once \override Dots.color = #red
+                                        \once \override NoteHead.color = #red
+                                        \once \override Stem.color = #red
+                                        c'16
+                                            - \tweak color #red
+                                            ^ \markup { @ }
+                                        f'16 ]
+                                        \bar "|"
+                                    }
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        Set to true, false or none.
+
+        Defaults to none.
+
+        Returns true, false or none.
+        '''
+        return self._color_repeat_pitch_classes
 
     @property
     def design_checker(self):
@@ -3459,10 +4018,10 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         return self._hide_instrument_names
 
     @property
-    def ignore_duplicate_pitch_classes(self):
-        r'''Is true when segment ignores duplicate pitch-classes.
+    def ignore_repeat_pitch_classes(self):
+        r'''Is true when segment ignores repeat pitch-classes.
 
-        Is false when segment raises exception on duplicate pitch-classes.
+        Is false when segment raises exception on repeat pitch-classes.
 
         Defaults to none.
 
@@ -3470,7 +4029,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         Returns true, false or none.
         '''
-        return self._ignore_duplicate_pitch_classes
+        return self._ignore_repeat_pitch_classes
     
     @property
     def ignore_unpitched_notes(self):
@@ -3768,7 +4327,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             Colors unregistered pitches by default:
 
                 >>> figure_maker = baca.tools.FigureMaker(
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             acciaccatura_specifiers=[
                 ...                 baca.tools.AcciaccaturaSpecifier(),
@@ -3779,7 +4338,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     annotate_unregistered_pitches=True,
+                ...     color_unregistered_pitches=True,
                 ...     preferred_denominator=8,
                 ...     )
 
@@ -4016,7 +4575,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             Ignores unregistered pitches:
 
                 >>> figure_maker = baca.tools.FigureMaker(
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             acciaccatura_specifiers=[
                 ...                 baca.tools.AcciaccaturaSpecifier(),
@@ -4027,7 +4586,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     annotate_unregistered_pitches=True,
+                ...     color_unregistered_pitches=True,
                 ...     preferred_denominator=8,
                 ...     )
 
@@ -6243,10 +6802,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     [
-                ...         baca.make_even_run_rhythm_specifier(),
-                ...         baca.pitches('E4 F4'),
-                ...         ],
+                ...     baca.make_even_run_rhythm_specifier(),
+                ...     baca.pitches('E4 F4'),
                 ...     )
 
             ::
@@ -6704,7 +7261,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
     ### PUBLIC METHODS ###
 
-    def append_specifiers(self, scopes, specifiers, **keywords):
+    def append_specifiers(self, scopes, *specifiers, **keywords):
         r'''Appends each specifier in `specifiers` to each scope in `scopes`.
 
         ..  container:: example
@@ -6722,10 +7279,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     [
-                ...         baca.make_even_run_rhythm_specifier(),
-                ...         abjad.label().with_indices(),
-                ...         ],
+                ...     baca.make_even_run_rhythm_specifier(),
+                ...     abjad.label().with_indices(),
                 ...     )
 
             ::
@@ -6938,13 +7493,19 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         Returns scoped specifiers.
         '''
+        if keywords != {}:
+            message = 'found specifier keywords: {!r}.'
+            message = message.format(keywords)
+            raise Exception(message)
         scopes = self._unpack_scopes(
             scopes,
             score_template=self.score_template,
             )
-        if not isinstance(specifiers, (tuple, list)):
-            specifiers = [specifiers]
-        assert isinstance(specifiers, (tuple, list)), repr(specifiers)
+        assert isinstance(specifiers, tuple), repr(specifiers)
+        if specifiers and isinstance(specifiers[0], list):
+            message = 'REFACTOR: remove outer list: {!r}.'
+            message = message.format(specifiers)
+            raise Exception(message)
         specifiers_ = []
         for scope in scopes:
             for specifier in specifiers:

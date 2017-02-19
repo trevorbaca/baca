@@ -35,7 +35,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
                 >>> staff = abjad.Staff("c'4 c' d' d'")
                 >>> manager = baca.tools.WellformednessManager()
                 >>> manager(staff)
-                [([LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")])], 4, 'check_duplicate_pitch_classes')]
+                [([LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")])], 4, 'check_repeat_pitch_classes')]
 
         Returns violators, total, check triples.
         '''
@@ -53,12 +53,12 @@ class WellformednessManager(abjad.abctools.AbjadObject):
     ### PUBLIC METHODS ###
 
     @staticmethod
-    def check_duplicate_pitch_classes(argument=None):
-        r'''Checks duplicate pitch-classes by voice.
+    def check_repeat_pitch_classes(argument=None):
+        r'''Checks repeat pitch-classes by voice.
 
         ..  container:: example
 
-            Finds no duplicates:
+            Finds no repeats:
 
             ::
 
@@ -68,12 +68,12 @@ class WellformednessManager(abjad.abctools.AbjadObject):
             ::
 
                 >>> manager = baca.tools.WellformednessManager
-                >>> manager.check_duplicate_pitch_classes(staff)
+                >>> manager.check_repeat_pitch_classes(staff)
                 ([], 4)
 
         ..  container:: example
 
-            Finds duplicate pitches:
+            Finds repeat pitches:
 
             ::
 
@@ -83,12 +83,12 @@ class WellformednessManager(abjad.abctools.AbjadObject):
             ::
 
                 >>> manager = baca.tools.WellformednessManager
-                >>> manager.check_duplicate_pitch_classes(staff)
+                >>> manager.check_repeat_pitch_classes(staff)
                 ([LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")])], 4)
 
         ..  container:: example
 
-            Finds duplicate pitch-classes:
+            Finds repeat pitch-classes:
 
             ::
 
@@ -98,12 +98,12 @@ class WellformednessManager(abjad.abctools.AbjadObject):
             ::
 
                 >>> manager = baca.tools.WellformednessManager
-                >>> manager.check_duplicate_pitch_classes(staff)
+                >>> manager.check_repeat_pitch_classes(staff)
                 ([LogicalTie([Note("e''4")])], 4)
 
         ..  container:: example
 
-            Finds duplicate pitch-classes between sequential voices:
+            Finds repeat pitch-classes between sequential voices:
 
             ::
 
@@ -129,7 +129,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
             ::
 
                 >>> manager = baca.tools.WellformednessManager
-                >>> manager.check_duplicate_pitch_classes(staff)
+                >>> manager.check_repeat_pitch_classes(staff)
                 ([LogicalTie([Note("d''4")])], 4)
 
         Returns violators and total.
@@ -158,7 +158,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
             pitch_class_2 = leaf_2.head.written_pitch.named_pitch_class
             if not pitch_class_1 == pitch_class_2:
                 continue
-            string = 'repeated pitch allowed'
+            string = 'repeat pitch allowed'
             if (abjad.inspect_(leaf_1.head).has_indicator(string) and
                 abjad.inspect_(leaf_2.head).has_indicator(string)):
                 continue
@@ -182,7 +182,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
                 
         ..  container:: example
 
-            Repeated pitches are not well-formed:
+            Repeat pitches are not well-formed:
 
             ::
 
@@ -212,11 +212,11 @@ class WellformednessManager(abjad.abctools.AbjadObject):
                 >>> manager = baca.tools.WellformednessManager()
                 >>> string = manager.tabulate_well_formedness_violations(staff)
                 >>> print(string)
-                0 /	4 duplicate pitch classes
+                0 /	4 repeat pitch classes
 
         ..  container:: example
 
-            Repeated pitches are not well-formed:
+            Repeat pitches are not well-formed:
 
             ::
 
@@ -224,7 +224,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
                 >>> manager = baca.tools.WellformednessManager()
                 >>> string = manager.tabulate_well_formedness_violations(staff)
                 >>> print(string)
-                2 /	4 duplicate pitch classes
+                2 /	4 repeat pitch classes
 
         Returns string.
         '''

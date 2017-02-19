@@ -2,7 +2,6 @@
 import abjad
 
 
-# TODO: write examples
 class OverrideSpecifier(abjad.abctools.AbjadObject):
     r'''Override specifier.
     
@@ -10,6 +9,215 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
 
         >>> import abjad
         >>> import baca
+
+    ..  container:: example
+
+        With figure-maker:
+
+        ::
+
+            >>> figure_maker = baca.tools.FigureMaker(
+            ...     baca.tools.OverrideSpecifier(
+            ...         grob_name='beam',
+            ...         attribute_name='positions',
+            ...         attribute_value='(-6, -6)',
+            ...         ),
+            ...     baca.tools.OverrideSpecifier(
+            ...         grob_name='stem',
+            ...         attribute_name='direction',
+            ...         attribute_value=Down,
+            ...         ),
+            ...     )
+
+        ::
+
+            >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = figure_maker('Voice 1', segments)
+            >>> lilypond_file = figure_maker.show(contribution)
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> f(lilypond_file[abjad.Staff])
+            \new Staff <<
+                \context Voice = "Voice 1" {
+                    \voiceOne
+                    {
+                        {
+                            \once \override Beam.positions = #'(-6 . -6)
+                            \once \override Stem.direction = #down
+                            c'16 [
+                            \once \override Beam.positions = #'(-6 . -6)
+                            \once \override Stem.direction = #down
+                            d'16
+                            \once \override Beam.positions = #'(-6 . -6)
+                            \once \override Stem.direction = #down
+                            bf'16 ]
+                        }
+                        {
+                            \once \override Beam.positions = #'(-6 . -6)
+                            \once \override Stem.direction = #down
+                            fs''16 [
+                            \once \override Beam.positions = #'(-6 . -6)
+                            \once \override Stem.direction = #down
+                            e''16
+                            \once \override Beam.positions = #'(-6 . -6)
+                            \once \override Stem.direction = #down
+                            ef''16
+                            \once \override Beam.positions = #'(-6 . -6)
+                            \once \override Stem.direction = #down
+                            af''16
+                            \once \override Beam.positions = #'(-6 . -6)
+                            \once \override Stem.direction = #down
+                            g''16 ]
+                        }
+                        {
+                            \once \override Beam.positions = #'(-6 . -6)
+                            \once \override Stem.direction = #down
+                            a'16
+                        }
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        With segment-maker:
+
+        ::
+
+            >>> segment_maker = baca.tools.SegmentMaker(
+            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+        ::
+
+            >>> specifiers = segment_maker.append_specifiers(
+            ...     ('vn', baca.select.stages(1)),
+            ...     baca.make_even_run_rhythm_specifier(),
+            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+            ...     baca.tools.OverrideSpecifier(
+            ...         grob_name='beam',
+            ...         attribute_name='positions',
+            ...         attribute_value='(-6, -6)',
+            ...         ),
+            ...     baca.tools.OverrideSpecifier(
+            ...         grob_name='stem',
+            ...         attribute_name='direction',
+            ...         attribute_value=Down,
+            ...         ),
+            ...     )
+
+        ::
+
+            >>> result = segment_maker(is_doc_example=True)
+            >>> lilypond_file, segment_metadata = result
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> f(lilypond_file[abjad.Score])
+            \context Score = "Score" <<
+                \tag violin
+                \context TimeSignatureContext = "Time Signature Context" <<
+                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                    }
+                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" {
+                        \clef "treble"
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            {
+                                \once \override Beam.positions = #'(-6 . -6)
+                                \once \override Stem.direction = #down
+                                e'8 [
+                                \once \override Beam.positions = #'(-6 . -6)
+                                \once \override Stem.direction = #down
+                                d''8
+                                \once \override Beam.positions = #'(-6 . -6)
+                                \once \override Stem.direction = #down
+                                f'8
+                                \once \override Beam.positions = #'(-6 . -6)
+                                \once \override Stem.direction = #down
+                                e''8 ]
+                            }
+                            {
+                                \once \override Beam.positions = #'(-6 . -6)
+                                \once \override Stem.direction = #down
+                                g'8 [
+                                \once \override Beam.positions = #'(-6 . -6)
+                                \once \override Stem.direction = #down
+                                f''8
+                                \once \override Beam.positions = #'(-6 . -6)
+                                \once \override Stem.direction = #down
+                                e'8 ]
+                            }
+                            {
+                                \once \override Beam.positions = #'(-6 . -6)
+                                \once \override Stem.direction = #down
+                                d''8 [
+                                \once \override Beam.positions = #'(-6 . -6)
+                                \once \override Stem.direction = #down
+                                f'8
+                                \once \override Beam.positions = #'(-6 . -6)
+                                \once \override Stem.direction = #down
+                                e''8
+                                \once \override Beam.positions = #'(-6 . -6)
+                                \once \override Stem.direction = #down
+                                g'8 ]
+                            }
+                            {
+                                \once \override Beam.positions = #'(-6 . -6)
+                                \once \override Stem.direction = #down
+                                f''8 [
+                                \once \override Beam.positions = #'(-6 . -6)
+                                \once \override Stem.direction = #down
+                                e'8
+                                \once \override Beam.positions = #'(-6 . -6)
+                                \once \override Stem.direction = #down
+                                d''8 ]
+                                \bar "|"
+                            }
+                        }
+                    }
+                >>
+            >>
 
     ..  container:: example
 
@@ -69,37 +277,31 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
 
         Returns none.
         '''
-        leaves = abjad.iterate(argument).by_leaf()
-        # TODO: use named string format fields
+        statement = 'abjad.override(leaf)'
         if self.context_name is not None:
-            statement = 'abjad.override(leaf).{}.{}.{} = {}'
-            statement = statement.format(
-                self.context_name,
-                self.grob_name,
-                self.attribute_name,
-                self.attribute_value,
-                )
-        else:
-            statement = 'abjad.override(leaf).{}.{} = {}'
-            statement = statement.format(
-                self.grob_name,
-                self.attribute_name,
-                self.attribute_value,
-                )
+            statement += '.{context_name}'
+        statement += '.{grob_name}.{attribute_name} = {attribute_value}'
         if self.maximum_written_duration is not None:
-            maximum_statement = 'abjad.override(leaf).{}.{} = {}'
-            maximum_statement = maximum_statement.format(
-                self.maximum_settings['grob_name'],
-                self.maximum_settings['attribute_name'],
-                self.maximum_settings['attribute_value'],
-                )
-        for leaf in leaves:
-            if self.maximum_written_duration is not None:
-                if self.maximum_written_duration <= leaf.written_duration:
-                    if maximum_statement is not None:
-                        exec(maximum_statement, globals(), locals())
-                    continue
-            exec(statement, globals(), locals())
+            context_name = self.maximum_settings['context_name']
+            grob_name = self.maximum_settings['grob_name']
+            attribute_name = self.maximum_settings['attribute_name']
+            attribute_value = self.maximum_settings['attribute_value']
+        else:
+            context_name = self.context_name
+            grob_name = self.grob_name
+            attribute_name = self.attribute_name
+            attribute_value = self.attribute_value
+        statement = statement.format(
+            context_name=context_name,
+            grob_name=grob_name,
+            attribute_name=attribute_name,
+            attribute_value=attribute_value,
+            )
+        for leaf in abjad.iterate(argument).by_leaf():
+            if  (self.maximum_written_duration is None or
+                (self.maximum_written_duration is not None and
+                self.maximum_written_duration <= leaf.written_duration)):
+                exec(statement, globals(), locals())
 
     ### PUBLIC PROPERTIES ###
 
@@ -139,7 +341,7 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
         '''
         return self._grob_name
 
-    # TODO: write examples and tests
+    # TODO: replace with explicit inequality
     @property
     def maximum_settings(self):
         r'''Gets maximum settings for leaves with written duration
@@ -151,6 +353,7 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
         '''
         return self._maximum_settings
 
+    # TODO: replace with explicit inequality
     @property
     def maximum_written_duration(self):
         r'''Gets maximum written duration.

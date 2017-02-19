@@ -306,6 +306,135 @@ class PitchClassSegment(abjad.PitchClassSegment):
         return type(self)(items=numbers)
 
 
+    def has_duplicates(self):
+        r'''Is true when pitch-class segment has duplicates.
+
+        ..  container:: example
+
+            ::
+
+                >>> items = [-2, -1.5, 6, 7]
+                >>> segment = baca.pitch_class_segment(items=items)
+                >>> show(segment) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = segment.__illustrate__()
+                >>> f(lilypond_file[abjad.Voice])
+                \new Voice {
+                    bf'8
+                    bqf'8
+                    fs'8
+                    g'8
+                    \bar "|."
+                    \override Score.BarLine.transparent = ##f
+                }
+
+            ::
+
+                >>> segment.has_duplicates()
+                False
+
+        ..  container:: example
+
+            ::
+
+                >>> items = [-2, -1.5, 6, 7, -1.5, 7]
+                >>> segment = baca.pitch_class_segment(items=items)
+                >>> show(segment) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = segment.__illustrate__()
+                >>> f(lilypond_file[abjad.Voice])
+                \new Voice {
+                    bf'8
+                    bqf'8
+                    fs'8
+                    g'8
+                    bqf'8
+                    g'8
+                    \bar "|."
+                    \override Score.BarLine.transparent = ##f
+                }
+
+            ::
+
+                >>> segment.has_duplicates()
+                True
+
+        Returns true or false.
+        '''
+        return not len(set(self)) == len(self)
+
+    def has_repeats(self):
+        r'''Is true when pitch-class segment has repeats.
+
+        ..  container:: example
+
+            ::
+
+                >>> items = [-2, -1.5, 6, 7, -1.5, 7]
+                >>> segment = baca.pitch_class_segment(items=items)
+                >>> show(segment) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = segment.__illustrate__()
+                >>> f(lilypond_file[abjad.Voice])
+                \new Voice {
+                    bf'8
+                    bqf'8
+                    fs'8
+                    g'8
+                    bqf'8
+                    g'8
+                    \bar "|."
+                    \override Score.BarLine.transparent = ##f
+                }
+
+            ::
+
+                >>> segment.has_repeats()
+                False                
+
+        ..  container:: example
+
+            ::
+
+                >>> items = [-2, -1.5, 6, 7, 7]
+                >>> segment = baca.pitch_class_segment(items=items)
+                >>> show(segment) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = segment.__illustrate__()
+                >>> f(lilypond_file[abjad.Voice])
+                \new Voice {
+                    bf'8
+                    bqf'8
+                    fs'8
+                    g'8
+                    g'8
+                    \bar "|."
+                    \override Score.BarLine.transparent = ##f
+                }
+
+            ::
+
+                >>> segment.has_repeats()
+                True                
+
+        Returns true or false.
+        '''
+        previous_item = None
+        for item in self:
+            if item == previous_item:
+                return True
+            previous_item = item
+        return False
+
+
 def _pitch_class_segment(items=None, **keywords):
     if items:
         return PitchClassSegment(items=items, **keywords)

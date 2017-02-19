@@ -375,14 +375,6 @@ class MarkupLibrary(object):
         return markup
 
     @staticmethod
-    def make_boxed_markup_specifier(string, whiteout=True):
-        markup = abjad.Markup(string, direction=Up)
-        markup = markup.box().override(('box-padding', 0.5))
-        if whiteout:
-            markup = markup.whiteout()
-        return baca.tools.MarkupSpecifier(markup=markup)
-
-    @staticmethod
     def make_boxed_markup_lines(strings, direction=Up, whiteout=True):
         assert isinstance(strings, list), repr(strings)
         lines = []
@@ -396,18 +388,20 @@ class MarkupLibrary(object):
         return markup
 
     @staticmethod
+    def make_boxed_markup_specifier(string, whiteout=True):
+        markup = abjad.Markup(string, direction=Up)
+        markup = markup.box().override(('box-padding', 0.5))
+        if whiteout:
+            markup = markup.whiteout()
+        return baca.tools.MarkupSpecifier(markup=markup)
+
+    @staticmethod
     def make_boxed_repeat_count(count):
         string = 'x{}'.format(count)
         markup = abjad.Markup(string, direction=Up)
         markup = markup.sans().bold().fontsize(6).upright()
         markup = markup.box().override(('box-padding', 0.5))
         return markup
-
-    @staticmethod
-    def make_one_click_every(lower, upper):
-        string = '1 click/{}-{} sec.'
-        string = string.format(lower, upper)
-        return MarkupLibrary.make_markup(string)
 
     @staticmethod
     def make_clicks_per_second(lower, upper):
@@ -426,6 +420,12 @@ class MarkupLibrary(object):
         string = '{}/{} scratch'
         string = string.format(numerator, denominator)
         return class_.make_markup(string)
+
+    @staticmethod
+    def make_one_click_every(lower, upper):
+        string = '1 click/{}-{} sec.'
+        string = string.format(lower, upper)
+        return MarkupLibrary.make_markup(string)
 
     @classmethod
     def make_pos_ord_fractional_scratch(numerator, denominator):
@@ -652,19 +652,6 @@ class MarkupLibrary(object):
             )
 
     @classmethod
-    def poco_pont_plus_vib_mod(
-        class_,
-        first_is_new=True,
-        second_is_new=True,
-        ):
-        return class_.make_two_part_transition_markup(
-            'poco pont.',
-            'vib. mod.',
-            first_is_new=first_is_new,
-            second_is_new=second_is_new,
-            )
-
-    @classmethod
     def poco_pont_plus_sub_vib_mod(
         class_,
         first_is_new=True,
@@ -673,6 +660,19 @@ class MarkupLibrary(object):
         return class_.make_two_part_transition_markup(
             'poco pont.',
             'sub. vib. mod.',
+            first_is_new=first_is_new,
+            second_is_new=second_is_new,
+            )
+
+    @classmethod
+    def poco_pont_plus_vib_mod(
+        class_,
+        first_is_new=True,
+        second_is_new=True,
+        ):
+        return class_.make_two_part_transition_markup(
+            'poco pont.',
+            'vib. mod.',
             first_is_new=first_is_new,
             second_is_new=second_is_new,
             )
@@ -828,10 +828,6 @@ class MarkupLibrary(object):
         return class_.make_markup('tasto + poco scratch')
 
     @classmethod
-    def tasto_plus_scratch_moltiss(class_):
-        return class_.make_markup('tasto + scratch moltiss.')
-
-    @classmethod
     def tasto_plus_poco_vib(
         class_,
         first_is_new=True,
@@ -843,6 +839,10 @@ class MarkupLibrary(object):
             first_is_new=first_is_new,
             second_is_new=second_is_new,
             )
+
+    @classmethod
+    def tasto_plus_scratch_moltiss(class_):
+        return class_.make_markup('tasto + scratch moltiss.')
 
     @classmethod
     def tasto_poss(class_, is_new=True):

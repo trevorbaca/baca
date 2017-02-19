@@ -311,7 +311,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
 
     def _get_time_treatments(self):
         if self.time_treatments:
-            return abjad.datastructuretools.CyclicTuple(self.time_treatments)
+            return abjad.CyclicTuple(self.time_treatments)
 
     @staticmethod
     def _make_nested_tuplet(tuplet_selection, time_treatment):

@@ -60,8 +60,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
     __documentation_section__ = 'Figures'
 
     __slots__ = (
-        '_allow_repeated_pitches',
-        '_annotate_unregistered_pitches',
+        '_allow_repeat_pitches',
+        '_color_unregistered_pitches',
         '_next_figure',
         '_preferred_denominator',
         '_specifiers',
@@ -79,7 +79,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
     _recollection_tag = 'recollection'
 
-    _repeated_pitch_allowed_string = 'repeated pitch allowed'
+    _repeat_pitch_allowed_string = 'repeat pitch allowed'
 
     _state_variables = (
         '_next_figure',
@@ -90,18 +90,18 @@ class FigureMaker(abjad.abctools.AbjadObject):
     def __init__(
         self,
         *specifiers,
-        allow_repeated_pitches=None,
-        annotate_unregistered_pitches=None,
+        allow_repeat_pitches=None,
+        color_unregistered_pitches=None,
         preferred_denominator=None,
         thread=None,
         voice_names=None
         ):
-        if allow_repeated_pitches is not None:
-            allow_repeated_pitches = bool(allow_repeated_pitches)
-        self._allow_repeated_pitches = allow_repeated_pitches
-        if annotate_unregistered_pitches is not None:
-            annotate_unregistered_pitches = bool(annotate_unregistered_pitches)
-        self._annotate_unregistered_pitches = annotate_unregistered_pitches
+        if allow_repeat_pitches is not None:
+            allow_repeat_pitches = bool(allow_repeat_pitches)
+        self._allow_repeat_pitches = allow_repeat_pitches
+        if color_unregistered_pitches is not None:
+            color_unregistered_pitches = bool(color_unregistered_pitches)
+        self._color_unregistered_pitches = color_unregistered_pitches
         self._next_figure = 0
         if preferred_denominator is not None:
             assert abjad.mathtools.is_positive_integer(preferred_denominator)
@@ -121,8 +121,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
         voice_name,
         segments,
         *specifiers,
-        allow_repeated_pitches=None,
-        annotate_unregistered_pitches=None,
+        allow_repeat_pitches=None,
+        color_unregistered_pitches=None,
         division_masks=None,
         exhaustive=None,
         extend_beam=None,
@@ -132,11 +132,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
         is_foreshadow=None,
         is_incomplete=None,
         is_recollection=None,
-        local_anchor=None,
         logical_tie_masks=None,
-        polyphony_map=None,
         preferred_denominator=None,
-        remote_anchor=None,
         state_manifest=None,
         talea_counts=None,
         talea_denominator=None,
@@ -323,38 +320,292 @@ class FigureMaker(abjad.abctools.AbjadObject):
                     }
                 >>
 
+        ..  container:: example
+
+            Rest input:
+
+            ::
+
+                >>> figure_maker = baca.tools.FigureMaker()
+
+            ::
+
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker(
+                ...     'Voice 1',
+                ...     [abjad.Rest((3, 8)), abjad.Rest((3, 8))],
+                ...     baca.nest('+1/8'),
+                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 7/6 {
+                                {
+                                    r4.
+                                    r4.
+                                }
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            The following negative-valued talea count patterns work:
+
+            ::
+
+                >>> figure_maker = baca.tools.FigureMaker()
+
+            ::
+
+                >>> contribution = figure_maker(
+                ...     'Voice 1',
+                ...     [[18, 16, 15, 20, 19]],
+                ...     talea_counts=[2, -1],
+                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            {
+                                fs''8
+                                r16
+                                e''8
+                                r16
+                                ef''8
+                                r16
+                                af''8
+                                r16
+                                g''8
+                                r16
+                            }
+                        }
+                    }
+                >>
+
+            ::
+
+                >>> contribution = figure_maker(
+                ...     'Voice 1',
+                ...     [[18, 16, 15, 20, 19]],
+                ...     talea_counts=[2, -1, -1],
+                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            {
+                                fs''8
+                                r16
+                                r16
+                                e''8
+                                r16
+                                r16
+                                ef''8
+                                r16
+                                r16
+                                af''8
+                                r16
+                                r16
+                                g''8
+                                r16
+                                r16
+                            }
+                        }
+                    }
+                >>
+
+            ::
+
+                >>> contribution = figure_maker(
+                ...     'Voice 1',
+                ...     [[18, 16, 15, 20, 19]],
+                ...     talea_counts=[-1, 2],
+                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            {
+                                r16
+                                fs''8
+                                r16
+                                e''8
+                                r16
+                                ef''8
+                                r16
+                                af''8
+                                r16
+                                g''8
+                            }
+                        }
+                    }
+                >>
+
+            ::
+
+                >>> contribution = figure_maker(
+                ...     'Voice 1',
+                ...     [[18, 16, 15, 20, 19]],
+                ...     talea_counts=[-1, -1, 2],
+                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            {
+                                r16
+                                r16
+                                fs''8
+                                r16
+                                r16
+                                e''8
+                                r16
+                                r16
+                                ef''8
+                                r16
+                                r16
+                                af''8
+                                r16
+                                r16
+                                g''8
+                            }
+                        }
+                    }
+                >>
+
+            ::
+
+                >>> contribution = figure_maker(
+                ...     'Voice 1',
+                ...     [[18, 16, 15, 20, 19]],
+                ...     talea_counts=[-1, -1, 2, -2, -2],
+                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            {
+                                r16
+                                r16
+                                fs''8
+                                r8
+                                r8
+                                r16
+                                r16
+                                e''8
+                                r8
+                                r8
+                                r16
+                                r16
+                                ef''8
+                                r8
+                                r8
+                                r16
+                                r16
+                                af''8
+                                r8
+                                r8
+                                r16
+                                r16
+                                g''8
+                                r8
+                                r8
+                            }
+                        }
+                    }
+                >>
+
         ..  note:: Write hide_time_signature calltime examples.
 
         Returns selection, time signature, state manifest.
         '''
         self._validate_voice_name(voice_name)
-        segments = self._coerce_segments(segments)
         self._apply_state_manifest(state_manifest)
         specifiers = list(self.specifiers or []) + list(specifiers)
-        selections, specifiers = self._make_selections(
-            segments,
-            specifiers,
-            division_masks=division_masks,
-            logical_tie_masks=logical_tie_masks,
-            talea_counts=talea_counts,
-            talea_denominator=talea_denominator,
-            thread=thread,
-            time_treatments=time_treatments,
-            )
+        if all(isinstance(_, abjad.Rest) for _ in segments):
+            tuplet = abjad.Tuplet((1, 1), segments)
+            selections = [abjad.select(tuplet)]
+            specifiers = [
+                _ for _ in specifiers
+                if not isinstance(_, baca.tools.FigureRhythmSpecifier)
+                ]
+        else:
+            segments = self._coerce_segments(segments)
+            segments, specifiers = self._apply_figure_pitch_specifiers(
+                segments,
+                specifiers,
+                )
+            segments, specifiers = self._apply_spacing_specifiers(
+                segments,
+                specifiers,
+                )
+            segments, specifiers = self._apply_simultaneity_specifiers(
+                segments,
+                specifiers,
+                )
+            selections, specifiers = self._apply_rhythm_specifiers(
+                segments,
+                specifiers,
+                division_masks=division_masks,
+                logical_tie_masks=logical_tie_masks,
+                talea_counts=talea_counts,
+                talea_denominator=talea_denominator,
+                thread=thread,
+                time_treatments=time_treatments,
+                )
+        anchor, specifiers = self._get_anchor_specifier(specifiers)
         container = abjad.Container(selections)
-        self._annotate_unregistered_pitches_(
+        self._color_unregistered_pitches_(
             container,
-            annotate_unregistered_pitches=annotate_unregistered_pitches,
+            color_unregistered_pitches=color_unregistered_pitches,
             )
+        specifiers = self._apply_cluster_specifiers(selections, specifiers)
         specifiers = self._apply_nesting_specifiers(selections, specifiers)
         specifiers = self._apply_register_specifiers(selections, specifiers)
-        result = self._apply_imbrication_specifiers(container, specifiers)
-        imbricated_selections, specifiers = result
-        result = baca.tools.PolyphonySpecifier._make_polyphony_selections(
+        imbricated_selections, specifiers = self._apply_imbrication_specifiers(
             container,
-            polyphony_map,
+            specifiers,
             )
-        polyphony_selections, hauptstimme_skip = result
         self._apply_remaining_specifiers(selections, specifiers)
         self._label_figure_name_(container, figure_name)
         self._annotate_segment_list(container, segments)
@@ -363,29 +614,23 @@ class FigureMaker(abjad.abctools.AbjadObject):
             is_foreshadow=is_foreshadow,
             is_recollection=is_recollection,
             )
-        self._annotate_repeated_pitches(container)
+        self._annotate_repeat_pitches(container)
         self._extend_beam_(container, extend_beam)
         self._check_well_formedness(container)
         state_manifest = self._make_state_manifest()
-        if hauptstimme_skip is not None:
-            selection = abjad.select([hauptstimme_skip, container])
-        else:
-            selection = abjad.select([container])
+        selection = abjad.select([container])
         time_signature = self._make_time_signature(
             selection,
-            polyphony_selections,
             preferred_denominator=preferred_denominator,
             )
         selections = {voice_name: selection}
         selections.update(imbricated_selections)
-        selections.update(polyphony_selections)
         for value in selections.values():
             assert isinstance(value, abjad.Selection), repr(value)
         return baca.tools.FigureContribution(
+            anchor=anchor,
             figure_name=figure_name,
             hide_time_signature=hide_time_signature,
-            local_anchor=local_anchor,
-            remote_anchor=remote_anchor,
             selections=selections,
             state_manifest=state_manifest,
             time_signature=time_signature,
@@ -397,12 +642,6 @@ class FigureMaker(abjad.abctools.AbjadObject):
     def _all_are_selections(argument):
         prototype = abjad.selectiontools.Selection
         return all(isinstance(_, prototype) for _ in argument)
-
-    def _annotate_repeated_pitches(self, container):
-        if not self.allow_repeated_pitches:
-            return
-        for leaf in abjad.iterate(container).by_leaf(pitched=True):
-            abjad.attach(self._repeated_pitch_allowed_string, leaf)
 
     def _annotate_deployment(
         self,
@@ -421,25 +660,27 @@ class FigureMaker(abjad.abctools.AbjadObject):
             if is_recollection:
                 abjad.attach(self._recollection_tag, leaf)
 
+    def _annotate_repeat_pitches(self, container):
+        if not self.allow_repeat_pitches:
+            return
+        for leaf in abjad.iterate(container).by_leaf(pitched=True):
+            abjad.attach(self._repeat_pitch_allowed_string, leaf)
+
     @staticmethod
     def _annotate_segment_list(container, segments):
         for leaf in abjad.iterate(container).by_leaf():
             segments_ = copy.deepcopy(segments)
             abjad.attach(segments_, leaf)
 
-    def _annotate_unregistered_pitches_(
-        self,
-        argument,
-        annotate_unregistered_pitches=None,
-        ):
-        if annotate_unregistered_pitches is None:
-            annotate_unregistered_pitches = self.annotate_unregistered_pitches
-        if not annotate_unregistered_pitches:
-            return
-        prototype = (abjad.Note, abjad.Chord)
-        agent = abjad.iterate(argument)
-        for note in agent.by_leaf(prototype, with_grace_notes=True):
-            abjad.attach('not yet registered', note)
+    def _apply_cluster_specifiers(self, selections, specifiers):
+        assert self._all_are_selections(selections), repr(selections)
+        specifiers_ = []
+        for specifier in specifiers:
+            if isinstance(specifier, baca.tools.ClusterSpecifier):
+                specifier(selections)
+            else:
+                specifiers_.append(specifier)
+        return specifiers_
 
     def _apply_figure_pitch_specifiers(self, segments, specifiers):
         prototype = (baca.tools.SegmentList, list, abjad.Sequence)
@@ -496,14 +737,50 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 specifier._detach_all_beams(selections)
             specifier(selections)
 
-    def _apply_rest_affix_specifiers(self, selections, specifiers):
-        unused_specifiers = []
+    def _apply_rhythm_specifiers(
+        self,
+        segments,
+        specifiers,
+        division_masks=None,
+        logical_tie_masks=None,
+        talea_counts=None,
+        talea_denominator=None,
+        thread=None,
+        time_treatments=None,
+        ):
+        selections = len(segments) * [None]
+        rhythm_specifiers, rest_affix_specifiers, specifiers_ = [], [], []
         for specifier in specifiers:
-            if isinstance(specifier, baca.tools.RestAffixSpecifier):
-                specifier(selections)
+            if isinstance(specifier, baca.tools.FigureRhythmSpecifier):
+                rhythm_specifiers.append(specifier)
+            elif isinstance(specifier, baca.tools.RestAffixSpecifier):
+                rest_affix_specifiers.append(specifier)
             else:
-                unused_specifiers.append(specifier)
-        return unused_specifiers
+                specifiers_.append(specifier)
+        if not rhythm_specifiers:
+            rhythm_specifiers.append(self._make_default_rhythm_specifier())
+        if not rest_affix_specifiers:
+            rest_affix_specifier = None
+        elif len(rest_affix_specifiers) == 1:
+            rest_affix_specifier = rest_affix_specifiers[0]
+        else:
+            message = 'no more than 1 rest affix specifier allowed: {!r}.'
+            message = message.format(rest_affix_specifiers)
+            raise Exception(message)
+        thread = thread or self.thread
+        for specifier in rhythm_specifiers:
+            specifier(
+                segments=segments,
+                selections=selections,
+                division_masks=division_masks,
+                logical_tie_masks=logical_tie_masks,
+                rest_affix_specifier=rest_affix_specifier,
+                talea_counts=talea_counts,
+                talea_denominator=talea_denominator,
+                thread=thread,
+                time_treatments=time_treatments,
+                )
+        return selections, specifiers_
 
     def _apply_simultaneity_specifiers(self, segments, specifiers):
         specifiers_, unused_specifiers = [], []
@@ -562,6 +839,20 @@ class FigureMaker(abjad.abctools.AbjadObject):
             item_class=item_class,
             )
 
+    def _color_unregistered_pitches_(
+        self,
+        argument,
+        color_unregistered_pitches=None,
+        ):
+        if color_unregistered_pitches is None:
+            color_unregistered_pitches = self.color_unregistered_pitches
+        if not color_unregistered_pitches:
+            return
+        prototype = (abjad.Note, abjad.Chord)
+        agent = abjad.iterate(argument)
+        for note in agent.by_leaf(prototype, with_grace_notes=True):
+            abjad.attach('not yet registered', note)
+
     @staticmethod
     def _exactly_double(selections):
         length = len(selections)
@@ -584,30 +875,23 @@ class FigureMaker(abjad.abctools.AbjadObject):
         last_leaf = leaves[-1]
         abjad.attach(self._extend_beam_tag, last_leaf)
 
-    def _get_imbrication_specifiers(self):
-        result = []
-        specifiers = self.specifiers or []
+    @staticmethod
+    def _get_anchor_specifier(specifiers):
+        anchor_specifiers, specifiers_ = [], []
         for specifier in specifiers:
-            if isinstance(specifier, baca.tools.ImbricationSpecifier):
-                result.append(specifier)
-        if not result:
-            specifier = baca.tools.ImbricationSpecifier()
-            result.append(specifier)
-        return result
-
-    def _get_rhythm_specifiers(self, specifiers):
-        unused_specifiers, result = [], []
-        for specifier in specifiers:
-            if isinstance(specifier, baca.tools.RhythmSpecifier):
-                result.append(specifier)
+            if isinstance(specifier, baca.tools.AnchorSpecifier):
+                anchor_specifiers.append(specifier)
             else:
-                unused_specifiers.append(specifier)
-        if not result:
-            specifier = baca.tools.RhythmSpecifier(
-                rhythm_maker=baca.tools.FigureRhythmMaker(),
-                )
-            result.append(specifier)
-        return unused_specifiers, result
+                specifiers_.append(specifier)
+        if not anchor_specifiers:
+            anchor_specifier = None
+        elif len(anchor_specifiers) == 1:
+            anchor_specifier = anchor_specifiers[0]
+        else:
+            message = 'only one anchor specifier allowed: {!r}.'
+            message = message.format(anchor_specifiers)
+            raise Exception(message)
+        return anchor_specifier, specifiers_
 
     def _get_storage_format_specification(self):
         agent = abjad.systemtools.StorageFormatAgent(self)
@@ -644,7 +928,6 @@ class FigureMaker(abjad.abctools.AbjadObject):
             figure_name,
             ']',
             ])
-        figure_name = figure_name.with_color('darkgreen')
         figure_name = figure_name.fontsize(3)
         figure_name = abjad.Markup(figure_name, direction=Up)
         annotation = 'figure name: {}'.format(original_figure_name)
@@ -652,47 +935,11 @@ class FigureMaker(abjad.abctools.AbjadObject):
         leaves = list(abjad.iterate(container).by_leaf())
         abjad.attach(figure_name, leaves[0])
 
-    def _make_selections(
-        self,
-        segments,
-        specifiers,
-        division_masks=None,
-        logical_tie_masks=None,
-        talea_counts=None,
-        talea_denominator=None,
-        thread=None,
-        time_treatments=None,
-        ):
-        segments, specifiers = self._apply_figure_pitch_specifiers(
-            segments,
-            specifiers,
+    @staticmethod
+    def _make_default_rhythm_specifier():
+        return baca.tools.FigureRhythmSpecifier(
+            rhythm_maker=baca.tools.FigureRhythmMaker(),
             )
-        segments, specifiers = self._apply_spacing_specifiers(
-            segments,
-            specifiers,
-            )
-        segments, specifiers = self._apply_simultaneity_specifiers(
-            segments,
-            specifiers,
-            )
-        thread = thread or self.thread
-        selections = len(segments) * [None]
-        specifiers, rhythm_specifiers = self._get_rhythm_specifiers(specifiers)
-        for rhythm_specifier in rhythm_specifiers:
-            rhythm_specifier._apply_figure_rhythm_maker(
-                segments=segments,
-                selections=selections,
-                division_masks=division_masks,
-                logical_tie_masks=logical_tie_masks,
-                talea_counts=talea_counts,
-                talea_denominator=talea_denominator,
-                thread=thread,
-                time_treatments=time_treatments,
-                )
-        assert self._all_are_selections(selections), repr(selections)
-        specifiers = self._apply_rest_affix_specifiers(selections, specifiers)
-        assert self._all_are_selections(selections), repr(selections)
-        return selections, specifiers
 
     def _make_state_manifest(self):
         state_manifest = {}
@@ -701,21 +948,10 @@ class FigureMaker(abjad.abctools.AbjadObject):
             state_manifest[name] = value
         return state_manifest
 
-    def _make_time_signature(
-        self,
-        selection,
-        polyphony_selections,
-        preferred_denominator=None,
-        ):
+    def _make_time_signature(self, selection, preferred_denominator=None):
         if preferred_denominator is None:
             preferred_denominator = self.preferred_denominator
-        time_signatures = []
-        polyphony_selections = list(polyphony_selections.values())
-        for selection in polyphony_selections:
-            assert isinstance(selection, abjad.Selection), repr(selection)
-        selections = [selection] + polyphony_selections
-        durations = [_.get_duration() for _ in selections]
-        duration = max(durations)
+        duration = selection.get_duration()
         if preferred_denominator is not None:
             duration = duration.with_denominator(preferred_denominator)
         time_signature = abjad.indicatortools.TimeSignature(duration)
@@ -753,8 +989,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def allow_repeated_pitches(self):
-        r'''Is true when figure-maker allows repeated pitches.
+    def allow_repeat_pitches(self):
+        r'''Is true when figure-maker allows repeat pitches.
 
         Defaults to none.
 
@@ -762,11 +998,11 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         Returns true, false or none.
         '''
-        return self._allow_repeated_pitches
+        return self._allow_repeat_pitches
 
     @property
-    def annotate_unregistered_pitches(self):
-        r'''Is true when figure-maker annotates unregistered pitches.
+    def color_unregistered_pitches(self):
+        r'''Is true when figure-maker colors unregistered pitches.
 
         Defaults to none.
 
@@ -774,7 +1010,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         Returns true, false or none.
         '''
-        return self._annotate_unregistered_pitches
+        return self._color_unregistered_pitches
 
     @property
     def preferred_denominator(self):
@@ -1283,7 +1519,6 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     'Voice 1',
                 ...     segments,
                 ...     baca.tools.RestAffixSpecifier(
-                ...         denominator=16,
                 ...         pattern=abjad.Pattern(
                 ...             indices=[0, -1],
                 ...             inverted=True,
@@ -2048,7 +2283,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            Nesting specifier augments first two stages one sixteenth:
+            Nesting specifier augments first two segments one sixteenth:
 
             ::
 
@@ -2139,7 +2374,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> figure_maker = baca.tools.FigureMaker(
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
@@ -2147,7 +2382,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.tools.FigureRhythmSpecifier(
                 ...         pattern=abjad.select_first(),
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -2198,7 +2433,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> figure_maker = baca.tools.FigureMaker(
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
@@ -2206,7 +2441,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.tools.FigureRhythmSpecifier(
                 ...         pattern=abjad.Pattern(indices=[0, -1]),
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -2257,7 +2492,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> figure_maker = baca.tools.FigureMaker(
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
@@ -2266,7 +2501,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...             time_treatments=[1],
                 ...             ),
                 ...         ),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.tools.FigureRhythmSpecifier(
                 ...         pattern=abjad.Pattern(indices=[0, -1]),
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -2318,7 +2553,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> figure_maker = baca.tools.FigureMaker(
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
@@ -2326,7 +2561,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.tools.FigureRhythmSpecifier(
                 ...         pattern=abjad.Pattern(indices=[0, -1]),
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -2379,7 +2614,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> figure_maker = baca.tools.FigureMaker(
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
@@ -2387,7 +2622,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.tools.FigureRhythmSpecifier(
                 ...         pattern=abjad.Pattern(indices=[0, -1]),
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -2442,7 +2677,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
     @property
     def thread(self):
-        r'''Is true when figure-maker threads rhythm-maker over stages.
+        r'''Is true when figure-maker threads rhythm-maker over segments.
 
         ..  container:: example
 

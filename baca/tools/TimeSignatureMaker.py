@@ -110,7 +110,7 @@ class TimeSignatureMaker(abjad.abctools.AbjadObject):
         stage_specifier,
         time_signatures,
         ):
-        time_signatures = abjad.datastructuretools.CyclicTuple(time_signatures)
+        time_signatures = abjad.CyclicTuple(time_signatures)
         time_signature_lists = []
         index = 0
         for x in stage_specifier:

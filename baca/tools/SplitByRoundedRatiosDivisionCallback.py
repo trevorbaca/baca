@@ -181,7 +181,7 @@ class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
             ratios = self.ratios
         else:
             ratios = (abjad.Ratio([1]),)
-        ratios = abjad.datastructuretools.CyclicTuple(ratios)
+        ratios = abjad.CyclicTuple(ratios)
         return ratios
 
     ### PUBLIC PROPERTIES ###

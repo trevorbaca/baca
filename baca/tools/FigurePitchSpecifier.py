@@ -291,6 +291,52 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
             return list(self._expressions)
 
     @property
+    def remove_duplicate_pitch_classes(self):
+        r'''Is true when specifier removes duplicate pitch-classes.
+
+        ..  container:: example
+
+            ::
+
+                >>> specifier = baca.tools.FigurePitchSpecifier(
+                ...     remove_duplicate_pitch_classes=True
+                ...     )
+                >>> segments = [[0, 2, 10], [18, 16, 15, 22, 19], [9]]
+                >>> for segment in specifier(segments):
+                ...     segment
+                ...
+                PitchSegment([0, 2, 10])
+                PitchSegment([18, 16, 15, 19])
+                PitchSegment([9])
+
+        Returns true, false or none.
+        '''
+        return self._remove_duplicate_pitch_classes
+
+    @property
+    def remove_duplicates(self):
+        r'''Is true when specifier removes duplicates.
+
+        ..  container:: example
+
+            ::
+
+                >>> specifier = baca.tools.FigurePitchSpecifier(
+                ...     remove_duplicates=True
+                ...     )
+                >>> segments = [[0, 2, 10], [18, 16, 15, 10, 19], [9]]
+                >>> for segment in specifier(segments):
+                ...     segment
+                ...
+                PitchSegment([0, 2, 10])
+                PitchSegment([18, 16, 15, 19])
+                PitchSegment([9])
+
+        Returns true, false or none.
+        '''
+        return self._remove_duplicates
+
+    @property
     def to_pitch_classes(self):
         r'''Is true when specifier changes pitches to pitch-classes.
         Otherwise false.
@@ -429,49 +475,3 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
         Returns true, false or none.
         '''
         return self._to_pitch_classes
-
-    @property
-    def remove_duplicate_pitch_classes(self):
-        r'''Is true when specifier removes duplicate pitch-classes.
-
-        ..  container:: example
-
-            ::
-
-                >>> specifier = baca.tools.FigurePitchSpecifier(
-                ...     remove_duplicate_pitch_classes=True
-                ...     )
-                >>> segments = [[0, 2, 10], [18, 16, 15, 22, 19], [9]]
-                >>> for segment in specifier(segments):
-                ...     segment
-                ...
-                PitchSegment([0, 2, 10])
-                PitchSegment([18, 16, 15, 19])
-                PitchSegment([9])
-
-        Returns true, false or none.
-        '''
-        return self._remove_duplicate_pitch_classes
-
-    @property
-    def remove_duplicates(self):
-        r'''Is true when specifier removes duplicates.
-
-        ..  container:: example
-
-            ::
-
-                >>> specifier = baca.tools.FigurePitchSpecifier(
-                ...     remove_duplicates=True
-                ...     )
-                >>> segments = [[0, 2, 10], [18, 16, 15, 10, 19], [9]]
-                >>> for segment in specifier(segments):
-                ...     segment
-                ...
-                PitchSegment([0, 2, 10])
-                PitchSegment([18, 16, 15, 19])
-                PitchSegment([9])
-
-        Returns true, false or none.
-        '''
-        return self._remove_duplicates

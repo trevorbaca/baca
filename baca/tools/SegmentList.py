@@ -688,6 +688,56 @@ class SegmentList(abjad.abctools.AbjadValueObject):
             segments.extend(sequence_)
         return type(self)(segments=segments)
 
+    def cursor(self):
+        r'''Wraps segments in cursor.
+
+        ..  container:: example
+
+            ::
+
+                >>> segments = baca.SegmentList([[5, 12, 14, 18], [16, 17]])
+                >>> cursor = segments.cursor()
+
+            ::
+
+                >>> f(cursor)
+                baca.tools.Cursor(
+                    source=baca.tools.SegmentList(
+                        segments=[
+                            pitchtools.PitchSegment(
+                                (
+                                    pitchtools.NumberedPitch(5),
+                                    pitchtools.NumberedPitch(12),
+                                    pitchtools.NumberedPitch(14),
+                                    pitchtools.NumberedPitch(18),
+                                    ),
+                                item_class=pitchtools.NumberedPitch,
+                                ),
+                            pitchtools.PitchSegment(
+                                (
+                                    pitchtools.NumberedPitch(16),
+                                    pitchtools.NumberedPitch(17),
+                                    ),
+                                item_class=pitchtools.NumberedPitch,
+                                ),
+                            ],
+                        ),
+                    )
+
+            ::
+
+                >>> cursor.next()
+                [PitchSegment([5, 12, 14, 18])]
+
+            ::
+
+                >>> cursor.next()
+                [PitchSegment([16, 17])]
+
+        Returns cursor.
+        '''
+        return baca.Cursor(self)
+
     def flatten(self):
         r'''Flattens segments.
 
@@ -1041,7 +1091,6 @@ class SegmentList(abjad.abctools.AbjadValueObject):
         segments = segments.helianthate(n=n, m=m)
         return abjad.new(self, segments=segments)
 
-
     def join(self):
         r'''Joins segments.
 
@@ -1191,7 +1240,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
     # TODO: change indices to pattern
     # TODO: add level=-1 keyword
-    def remove(self, indices=None):
+    def remove(self, indices=None, period=None):
         r'''Removes segments at `indices`.
 
         ..  container:: example
@@ -1205,7 +1254,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
         Returns new segment list.
         '''
         sequence = baca.Sequence(items=self)
-        segments = sequence.remove(indices=indices)
+        segments = sequence.remove(indices=indices, period=period)
         return abjad.new(self, segments=segments)
    
     def remove_duplicate_pitch_classes(self, level=-1):
@@ -1452,9 +1501,33 @@ class SegmentList(abjad.abctools.AbjadValueObject):
             raise ValueError(message)
         return abjad.new(self, segments=segments_)
 
+    def repeat(self, n=1):
+        r'''Repeats segments.
+
+        ..  container:: example
+
+            ::
+
+                >>> segments = baca.SegmentList([[12, 14, 18, 17], [16, 19]])
+                >>> for segment in segments.repeat(n=3):
+                ...     segment
+                PitchSegment([12, 14, 18, 17])
+                PitchSegment([16, 19])
+                PitchSegment([12, 14, 18, 17])
+                PitchSegment([16, 19])
+                PitchSegment([12, 14, 18, 17])
+                PitchSegment([16, 19])
+        
+        Returns new segment list.
+        '''
+        segments = baca.Sequence(items=self)
+        segments = segments.repeat(n=n)
+        segments = segments.flatten(depth=1)
+        return abjad.new(self, segments=segments)
+
     # TODO: change indices to pattern
     # TODO: add level=-1 keyword
-    def retain(self, indices=None):
+    def retain(self, indices=None, period=None):
         r'''Retains segments at `indices`.
 
         ..  container:: example
@@ -1465,10 +1538,20 @@ class SegmentList(abjad.abctools.AbjadValueObject):
                 >>> segments.retain([0, -1])
                 SegmentList([<0, 1>, <5, 6>])
 
+        ..  container:: example
+
+            ::
+
+                >>> segments = baca.SegmentList(
+                ...     [[0, 1], [2, 3], [4], [5, 6], [7], [8]],
+                ...     )
+                >>> segments.retain([0], period=2)
+                SegmentList([<0, 1>, <4>, <7>])
+
         Returns new segment list.
         '''
         sequence = baca.Sequence(items=self)
-        segments = sequence.retain(indices=indices)
+        segments = sequence.retain(indices=indices, period=period)
         return abjad.new(self, segments=segments)
 
     def to_pitch_classes(self):

@@ -25,14 +25,12 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
 
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
-            ...     [
-            ...         baca.pitches('E4 F4'),
-            ...         baca.make_messiaen_note_rhythm_specifier(),
-            ...         baca.tools.TrillSpecifier(
-            ...             minimum_written_duration=abjad.Duration(1, 4),
-            ...             maximum_written_duration=None,
-            ...             ),
-            ...         ],
+            ...     baca.pitches('E4 F4'),
+            ...     baca.make_messiaen_note_rhythm_specifier(),
+            ...     baca.tools.TrillSpecifier(
+            ...         minimum_written_duration=abjad.Duration(1, 4),
+            ...         maximum_written_duration=None,
+            ...         ),
             ...     )
 
         ::

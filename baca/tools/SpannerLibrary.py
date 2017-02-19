@@ -28,6 +28,12 @@ class SpannerLibrary(object):
         return abjad.spannertools.StaffLinesSpanner(lines=5)
 
     @staticmethod
+    def glissandi():
+        return baca.tools.GlissandoSpecifier(
+            pattern=abjad.select_last(1, inverted=True),
+            )
+
+    @staticmethod
     def grid_poss_to_flaut_poss():
         left_text = abjad.Markup('grid. possibile').italic().larger() + abjad.Markup.hspace(1)
         right_text = abjad.Markup.hspace(1) + abjad.Markup('flaut. possibile')
@@ -48,12 +54,6 @@ class SpannerLibrary(object):
                 'text_spanner__dash_period': 1.5,
             }
         )
-
-    @staticmethod
-    def glissandi():
-        return baca.tools.GlissandoSpecifier(
-            pattern=abjad.select_last(1, inverted=True),
-            )
 
     @staticmethod
     def make_transition(start_markup=None, stop_markup=None):

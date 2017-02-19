@@ -26,13 +26,11 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
 
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
-            ...     [
-            ...         baca.pitches('E4', allow_repeated_pitches=True),
-            ...         baca.make_messiaen_note_rhythm_specifier(),
-            ...         baca.tools.ColorFingeringSpecifier(
-            ...             number_lists=([0, 1, 2, 1],),
-            ...             ),
-            ...         ],
+            ...     baca.pitches('E4', allow_repeat_pitches=True),
+            ...     baca.make_messiaen_note_rhythm_specifier(),
+            ...     baca.tools.ColorFingeringSpecifier(
+            ...         number_lists=([0, 1, 2, 1],),
+            ...         ),
             ...     )
 
         ::
@@ -159,11 +157,11 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
         '''
         if self.number_lists is None:
             return
-        number_lists = abjad.datastructuretools.CyclicTuple(self.number_lists)
+        number_lists = abjad.CyclicTuple(self.number_lists)
         if not self.by_pitch_run:
             assert len(self.number_lists) == 1
             number_list = self.number_lists[0]
-            number_list = abjad.datastructuretools.CyclicTuple(number_list)
+            number_list = abjad.CyclicTuple(number_list)
             for i, logical_tie in enumerate(logical_ties):
                 number = number_list[i]
                 if not number == 0:
@@ -181,7 +179,7 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
                 if len(values) == 1 and not self.by_pitch_run:
                     continue
                 number_list = number_lists[number_list_index]
-                number_list = abjad.datastructuretools.CyclicTuple(number_list)
+                number_list = abjad.CyclicTuple(number_list)
                 for i, logical_tie in enumerate(values):
                     number = number_list[i]
                     if not number == 0:
@@ -221,13 +219,11 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     [
-                ...         baca.pitches('C4 D4 E4 F4'),
-                ...         baca.make_messiaen_note_rhythm_specifier(),
-                ...         baca.tools.ColorFingeringSpecifier(
-                ...             number_lists=([0, 1, 2, 1],),
-                ...             ),
-                ...         ],
+                ...     baca.pitches('C4 D4 E4 F4'),
+                ...     baca.make_messiaen_note_rhythm_specifier(),
+                ...     baca.tools.ColorFingeringSpecifier(
+                ...         number_lists=([0, 1, 2, 1],),
+                ...         ),
                 ...     )
 
             ::
@@ -330,17 +326,15 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     [
-                ...         baca.pitches(
-                ...             'C4 D4 D4 D4 E4 F4 F4',
-                ...             allow_repeated_pitches=True,
-                ...             ),
-                ...         baca.make_even_run_rhythm_specifier(),
-                ...         baca.tools.ColorFingeringSpecifier(
-                ...             by_pitch_run=True,
-                ...             number_lists=([1, 2, 1],),
-                ...             ),
-                ...         ],
+                ...     baca.pitches(
+                ...         'C4 D4 D4 D4 E4 F4 F4',
+                ...         allow_repeat_pitches=True,
+                ...         ),
+                ...     baca.make_even_run_rhythm_specifier(),
+                ...     baca.tools.ColorFingeringSpecifier(
+                ...         by_pitch_run=True,
+                ...         number_lists=([1, 2, 1],),
+                ...         ),
                 ...     )
 
             ::

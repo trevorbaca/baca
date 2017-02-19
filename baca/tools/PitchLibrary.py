@@ -20,16 +20,16 @@ class PitchLibrary(object):
     ### PUBLIC METHODS ###
 
     @staticmethod
-    def arpeggiate_up(pattern=None):
+    def arpeggiate_down(pattern=None):
         return baca.tools.ArpeggiationSpacingSpecifier(
-            direction=Up,
+            direction=Down,
             pattern=pattern,
             )
 
     @staticmethod
-    def arpeggiate_down(pattern=None):
+    def arpeggiate_up(pattern=None):
         return baca.tools.ArpeggiationSpacingSpecifier(
-            direction=Down,
+            direction=Up,
             pattern=pattern,
             )
 
@@ -177,9 +177,9 @@ class PitchLibrary(object):
             )
 
     @staticmethod
-    def pitches(source, allow_repeated_pitches=True):
+    def pitches(source, allow_repeat_pitches=True):
         return baca.tools.ScorePitchSpecifier(
-            allow_repeated_pitches=True,
+            allow_repeat_pitches=True,
             source=source,
             )
 

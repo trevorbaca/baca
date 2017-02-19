@@ -12,6 +12,8 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
+        With figure-maker:
+
         Selects heads of pitched logical ties by default:
 
         ::
@@ -20,7 +22,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
             ...     baca.tools.ArticulationSpecifier(
             ...         articulations=['>'],
             ...         ),
-            ...     baca.tools.RhythmSpecifier(
+            ...     baca.tools.FigureRhythmSpecifier(
             ...         rhythm_maker=baca.tools.FigureRhythmMaker(
             ...             talea=abjad.rhythmmakertools.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],
@@ -65,6 +67,110 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                         }
                     }
                 }
+            >>
+
+    ..  container:: example
+
+        With segment-maker:
+
+        ::
+
+            >>> segment_maker = baca.tools.SegmentMaker(
+            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+        ::
+
+            >>> specifiers = segment_maker.append_specifiers(
+            ...     ('vn', baca.select.stages(1)),
+            ...     baca.make_even_run_rhythm_specifier(),
+            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+            ...     baca.tools.ArticulationSpecifier(
+            ...         articulations=['.'],
+            ...         ),
+            ...     )
+
+        ::
+
+            >>> result = segment_maker(is_doc_example=True)
+            >>> lilypond_file, segment_metadata = result
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> f(lilypond_file[abjad.Score])
+            \context Score = "Score" <<
+                \tag violin
+                \context TimeSignatureContext = "Time Signature Context" <<
+                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                    }
+                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" {
+                        \clef "treble"
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            {
+                                e'8 -\staccato [
+                                d''8 -\staccato
+                                f'8 -\staccato
+                                e''8 -\staccato ]
+                            }
+                            {
+                                g'8 -\staccato [
+                                f''8 -\staccato
+                                e'8 -\staccato ]
+                            }
+                            {
+                                d''8 -\staccato [
+                                f'8 -\staccato
+                                e''8 -\staccato
+                                g'8 -\staccato ]
+                            }
+                            {
+                                f''8 -\staccato [
+                                e'8 -\staccato
+                                d''8 -\staccato ]
+                                \bar "|"
+                            }
+                        }
+                    }
+                >>
             >>
 
     '''
@@ -118,7 +224,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
     def _get_articulations(self):
         articulations = self.articulations or ()
-        articulations = abjad.datastructuretools.CyclicTuple(articulations)
+        articulations = abjad.CyclicTuple(articulations)
         return articulations
 
     def _get_selector(self):
@@ -157,7 +263,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['>'],
                 ...         ),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
@@ -218,7 +324,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 ...             '>', None,
                 ...             ],
                 ...         ),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
@@ -279,7 +385,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 ...             '>', '.',
                 ...             ],
                 ...         ),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
@@ -340,7 +446,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 ...             ('>', '-'), '.',
                 ...             ],
                 ...         ),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
@@ -397,7 +503,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['f'],
                 ...         ),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
@@ -466,7 +572,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['>'],
                 ...         ),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],

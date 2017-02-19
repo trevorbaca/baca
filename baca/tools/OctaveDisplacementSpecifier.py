@@ -25,13 +25,11 @@ class OctaveDisplacementSpecifier(abjad.abctools.AbjadObject):
 
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
-            ...     [
-            ...         baca.pitches('G4'),
-            ...         baca.make_even_run_rhythm_specifier(),
-            ...         baca.tools.OctaveDisplacementSpecifier(
-            ...             displacements=[0, 0, 1, 1, 0, 0, -1, -1, 2, 2],
-            ...             ),
-            ...         ],
+            ...     baca.pitches('G4'),
+            ...     baca.make_even_run_rhythm_specifier(),
+            ...     baca.tools.OctaveDisplacementSpecifier(
+            ...         displacements=[0, 0, 1, 1, 0, 0, -1, -1, 2, 2],
+            ...         ),
             ...     )
 
         ::
@@ -132,7 +130,7 @@ class OctaveDisplacementSpecifier(abjad.abctools.AbjadObject):
         if displacements is not None:
             displacements = tuple(displacements)
             assert self._is_octave_displacement_vector(displacements)
-            displacements = abjad.datastructuretools.CyclicTuple(displacements)
+            displacements = abjad.CyclicTuple(displacements)
         self._displacements = displacements
 
     ### SPECIAL METHODS ###

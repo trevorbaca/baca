@@ -27,12 +27,10 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
-            ...     [
-            ...         baca.make_even_run_rhythm_specifier(),
-            ...         baca.tools.ScorePitchSpecifier(
-            ...             source=[19, 13, 15, 16, 17, 23],
-            ...             ),
-            ...         ],
+            ...     baca.make_even_run_rhythm_specifier(),
+            ...     baca.tools.ScorePitchSpecifier(
+            ...         source=[19, 13, 15, 16, 17, 23],
+            ...         ),
             ...     )
 
         ::
@@ -125,7 +123,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
     __slots__ = (
         '_acyclic',
-        '_allow_repeated_pitches',
+        '_allow_repeat_pitches',
         '_counts',
         '_mutates_score',
         '_operators',
@@ -143,7 +141,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
     def __init__(
         self,
         acyclic=None,
-        allow_repeated_pitches=None,
+        allow_repeat_pitches=None,
         counts=None,
         mutates_score=None,
         operators=None,
@@ -155,9 +153,9 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
         if acyclic is not None:
             acyclic = bool(acyclic)
         self._acyclic = acyclic
-        if allow_repeated_pitches is not None:
-            allow_repeated_pitches = bool(allow_repeated_pitches)
-        self._allow_repeated_pitches = allow_repeated_pitches
+        if allow_repeat_pitches is not None:
+            allow_repeat_pitches = bool(allow_repeat_pitches)
+        self._allow_repeat_pitches = allow_repeat_pitches
         if counts is not None:
             assert abjad.mathtools.all_are_positive_integers(counts)
         self._counts = counts
@@ -195,7 +193,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
                     pass
                 source_.append(element)
             source = source_
-            source = abjad.datastructuretools.CyclicTuple(source)
+            source = abjad.CyclicTuple(source)
         self._source = source
         if start_index is not None:
             assert isinstance(start_index, int), repr(start_index)
@@ -252,7 +250,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
         for logical_tie in logical_ties:
             assert isinstance(logical_tie, abjad.selectiontools.LogicalTie)
         counts = self.counts or [1]
-        counts = abjad.datastructuretools.CyclicTuple(counts)
+        counts = abjad.CyclicTuple(counts)
         start_index = self.start_index
         if start_index is None:
             start_index = 0
@@ -275,7 +273,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
             source = self.source
             if self.reverse:
                 source = reversed(source)
-                source = abjad.datastructuretools.CyclicTuple(source)
+                source = abjad.CyclicTuple(source)
                 absolute_start_index = source_length - absolute_start_index - 1
             current_count_index = 0
             current_count = counts[current_count_index]
@@ -287,7 +285,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
                 repetition_count = index // len(self.source)
                 if (self.repetition_intervals is not None and
                     0 < repetition_count):
-                    repetition_intervals = abjad.datastructuretools.CyclicTuple(
+                    repetition_intervals = abjad.CyclicTuple(
                         self.repetition_intervals)
                     repetition_intervals = repetition_intervals[
                         :repetition_count]
@@ -358,8 +356,8 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
             leaf.written_pitch = pitch
         elif isinstance(leaf, abjad.Chord):
             raise NotImplementedError
-        if self.allow_repeated_pitches:
-            abjad.attach('repeated pitch allowed', leaf)
+        if self.allow_repeat_pitches:
+            abjad.attach('repeat pitch allowed', leaf)
             
     ### PUBLIC PROPERTIES ###
 
@@ -376,8 +374,8 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
         return self._acyclic
 
     @property
-    def allow_repeated_pitches(self):
-        r'''Is true when specifier allows repeated pitches.
+    def allow_repeat_pitches(self):
+        r'''Is true when specifier allows repeat pitches.
 
         Defaults to none.
 
@@ -385,7 +383,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
         Returns true, false or none.
         '''
-        return self._allow_repeated_pitches
+        return self._allow_repeat_pitches
 
     @property
     def counts(self):
@@ -795,13 +793,13 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
         if self.acyclic:
             source = list(self.source)
         else:
-            source = abjad.datastructuretools.CyclicTuple(self.source)
+            source = abjad.CyclicTuple(self.source)
         start_index = self.start_index or 0
         index += start_index
         pitch_expression = source[index]
         repetition_count = index // len(self.source)
         if self.repetition_intervals is not None and 0 < repetition_count:
-            repetition_intervals = abjad.datastructuretools.CyclicTuple(
+            repetition_intervals = abjad.CyclicTuple(
                 self.repetition_intervals)
             repetition_intervals = repetition_intervals[:repetition_count]
             repetition_interval = sum(repetition_intervals)

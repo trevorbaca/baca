@@ -20,7 +20,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
             ...     baca.tools.MarkupSpecifier(
             ...         markup=abjad.Markup('*'),
             ...         ),
-            ...     baca.tools.RhythmSpecifier(
+            ...     baca.tools.FigureRhythmSpecifier(
             ...         rhythm_maker=baca.tools.FigureRhythmMaker(
             ...             talea=abjad.rhythmmakertools.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],
@@ -151,7 +151,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
                 ...     baca.tools.MarkupSpecifier(
                 ...         markup=abjad.Markup('*'),
                 ...         ),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
@@ -211,7 +211,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
                 ...         by_logical_tie(pitched=True).
                 ...         get_item(0, apply_to_each=True),
                 ...         ),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],

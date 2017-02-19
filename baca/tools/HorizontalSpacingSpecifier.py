@@ -25,12 +25,10 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
-            ...     [
-            ...         baca.pitches('E4 F4'),
-            ...         baca.tools.RhythmSpecifier(
-            ...             rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
-            ...             ),
-            ...         ],
+            ...     baca.pitches('E4 F4'),
+            ...     baca.tools.RhythmSpecifier(
+            ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
+            ...         ),
             ...     )
 
         ::
@@ -132,12 +130,10 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
-            ...     [
-            ...         baca.pitches('E4 F4'),
-            ...         baca.tools.RhythmSpecifier(
-            ...             rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
-            ...             ),
-            ...         ],
+            ...     baca.pitches('E4 F4'),
+            ...     baca.tools.RhythmSpecifier(
+            ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
+            ...         ),
             ...     )
 
         ::
@@ -249,12 +245,10 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
-            ...     [
-            ...         baca.pitches('E4 F4'),
-            ...         baca.tools.RhythmSpecifier(
-            ...             rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
-            ...             ),
-            ...         ],
+            ...     baca.pitches('E4 F4'),
+            ...     baca.tools.RhythmSpecifier(
+            ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
+            ...         ),
             ...     )
 
         ::
@@ -367,12 +361,10 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
-            ...     [
-            ...         baca.pitches('E4 F4'),
-            ...         baca.tools.RhythmSpecifier(
-            ...             rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
-            ...             ),
-            ...         ],
+            ...     baca.pitches('E4 F4'),
+            ...     baca.tools.RhythmSpecifier(
+            ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
+            ...         ),
             ...     )
 
         ::
@@ -486,12 +478,10 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
-            ...     [
-            ...         baca.pitches('E4 F4'),
-            ...         baca.tools.RhythmSpecifier(
-            ...             rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
-            ...             ),
-            ...         ],
+            ...     baca.pitches('E4 F4'),
+            ...     baca.tools.RhythmSpecifier(
+            ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
+            ...         ),
             ...     )
 
         ::
@@ -603,24 +593,22 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
-            ...     [
-            ...         baca.pitches('E4 F4'),
-            ...         baca.tools.RhythmSpecifier(
-            ...             rhythm_maker=abjad.rhythmmakertools.AccelerandoRhythmMaker(
-            ...                 beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
-            ...                 use_feather_beams=True,
-            ...                     ),
-            ...                 interpolation_specifiers=abjad.rhythmmakertools.InterpolationSpecifier(
-            ...                     start_duration=abjad.Duration(1, 8),
-            ...                     stop_duration=abjad.Duration(1, 20),
-            ...                     written_duration=abjad.Duration(1, 16),
-            ...                     ),
-            ...                 tuplet_spelling_specifier=abjad.rhythmmakertools.TupletSpellingSpecifier(
-            ...                     use_note_duration_bracket=True,
-            ...                     ),
+            ...     baca.pitches('E4 F4'),
+            ...     baca.tools.RhythmSpecifier(
+            ...         rhythm_maker=abjad.rhythmmakertools.AccelerandoRhythmMaker(
+            ...             beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
+            ...             use_feather_beams=True,
+            ...                 ),
+            ...             interpolation_specifiers=abjad.rhythmmakertools.InterpolationSpecifier(
+            ...                 start_duration=abjad.Duration(1, 8),
+            ...                 stop_duration=abjad.Duration(1, 20),
+            ...                 written_duration=abjad.Duration(1, 16),
+            ...                 ),
+            ...             tuplet_spelling_specifier=abjad.rhythmmakertools.TupletSpellingSpecifier(
+            ...                 use_note_duration_bracket=True,
             ...                 ),
             ...             ),
-            ...         ],
+            ...         ),
             ...     )
 
         ::
@@ -791,15 +779,17 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, segment_maker):
-        r'''Calls spacing specifier.
+        r'''Calls specifier on `segment_maker`.
 
         Returns none.
         '''
         score = segment_maker._score
         skip_context = score['Time Signature Context Skips']
         leaves = abjad.iterate(score).by_leaf()
-        minimum_leaf_durations_by_measure = \
-            self._get_minimum_leaf_durations_by_measure(skip_context, leaves)
+        minimum_durations_by_measure = self._get_minimum_durations_by_measure(
+            skip_context,
+            leaves,
+            )
         fermata_start_offsets = getattr(
             segment_maker,
             '_fermata_start_offsets',
@@ -812,7 +802,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
                 measure_timespan.start_offset in fermata_start_offsets):
                 duration = self.fermata_measure_width
             else:
-                duration = minimum_leaf_durations_by_measure[measure_index]
+                duration = minimum_durations_by_measure[measure_index]
                 if self.minimum_width is not None:
                     if self.minimum_width < duration:
                         duration = self.minimum_width
@@ -825,13 +815,13 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
     ### PRIVATE METHODS ###
 
-    def _get_minimum_leaf_durations_by_measure(self, skip_context, leaves):
+    def _get_minimum_durations_by_measure(self, skip_context, leaves):
         measure_timespans = []
-        leaf_durations_by_measure = []
+        durations_by_measure = []
         for skip in skip_context:
             measure_timespan = abjad.inspect_(skip).get_timespan()
             measure_timespans.append(measure_timespan)
-            leaf_durations_by_measure.append([])
+            durations_by_measure.append([])
         leaf_timespans = set()
         leaf_count = 0
         for leaf in leaves:
@@ -854,16 +844,16 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
             assert start_offset <= leaf_timespan.start_offset
             start_offset = leaf_timespan.start_offset
             if leaf_timespan.starts_during_timespan(measure_timespan):
-                leaf_durations_by_measure[measure_index].append(leaf_duration)
+                durations_by_measure[measure_index].append(leaf_duration)
             else:
                 measure_index += 1
+                if len(measure_timespans) <= measure_index:
+                    continue
                 measure_timespan = measure_timespans[measure_index]
                 assert leaf_timespan.starts_during_timespan(measure_timespan)
-                leaf_durations_by_measure[measure_index].append(leaf_duration)
-        minimum_leaf_durations_by_measure = [
-            min(_) for _ in leaf_durations_by_measure
-            ]
-        return minimum_leaf_durations_by_measure
+                durations_by_measure[measure_index].append(leaf_duration)
+        minimum_durations_by_measure = [min(_) for _ in durations_by_measure]
+        return minimum_durations_by_measure
 
     ### PUBLIC PROPERTIES ###
 

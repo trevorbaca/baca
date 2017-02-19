@@ -119,7 +119,6 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
         '_division_expression',
         '_hide_untuned_percussion_markup', # remove
         '_instrument', # remove
-        '_pattern',
         '_reference_meters',
         '_rewrite_meter',
         '_rhythm_maker',
@@ -143,7 +142,6 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
         division_maker=None,
         division_expression=None,
         instrument=None,
-        pattern=None,
         reference_meters=None,
         rewrite_meter=None,
         rhythm_maker=None,
@@ -170,10 +168,6 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
         self._division_expression = division_expression
         self._hide_untuned_percussion_markup = False
         self._instrument = instrument
-        if pattern is not None:
-            prototype = (abjad.patterntools.CompoundPattern, abjad.Pattern)
-            assert isinstance(pattern, prototype), repr(pattern)
-        self._pattern = pattern
         self._reference_meters = reference_meters
         if rewrite_meter is not None:
             rewrite_meter = bool(rewrite_meter)
@@ -284,69 +278,6 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
             else:
                 raise TypeError(leaf)
 
-    def _apply_figure_rhythm_maker(
-        self,
-        segments,
-        selections,
-        division_masks=None,
-        logical_tie_masks=None,
-        talea_counts=None,
-        talea_denominator=None,
-        thread=None,
-        time_treatments=None,
-        ):
-        assert len(selections) == len(segments)
-        rhythm_maker = self._get_rhythm_maker(
-            division_masks=division_masks,
-            logical_tie_masks=logical_tie_masks,
-            talea_counts=talea_counts,
-            talea_denominator=talea_denominator,
-            time_treatments=time_treatments,
-            )
-        length = len(selections)
-        pattern = self.pattern or abjad.select_all()
-        prototype = (abjad.pitchtools.Segment, list)
-        as_chords = getattr(segments, 'as_chords', False)
-        segments_, indices = [], []
-        for index, segment in enumerate(segments):
-            assert isinstance(segment, prototype), repr(segment)
-            segment_ = segment
-            if as_chords:
-                segment_ = segment[:1]
-            if not pattern.matches_index(index, length):
-                continue
-            segments_.append(segment_)
-            indices.append(index)
-        if thread:
-            stage_selections, state_manifest = rhythm_maker(segments_)
-        else:
-            stage_selections = []
-            for segment_ in segments_:
-                stage_selections_, stage_manifest = rhythm_maker([segment_])
-                stage_selections.extend(stage_selections_)
-        triples = zip(indices, stage_selections, segments)
-        for index, stage_selection, segment in triples:
-            assert len(stage_selection) == 1, repr(stage_selection)
-            if not as_chords:
-                selections[index] = stage_selection
-                continue
-            assert len(stage_selection) == 1, repr(stage_selection)
-            tuplet = stage_selection[0]
-            assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
-            agent = abjad.iterate(stage_selection)
-            logical_ties = agent.by_logical_tie(pitched=True)
-            logical_ties = list(logical_ties)
-            assert len(logical_ties) == 1, repr(stage_selection)
-            logical_tie = logical_ties[0]
-            for note in logical_tie.leaves:
-                assert isinstance(note, abjad.Note), repr(note)
-                duration = note.written_duration
-                pitches = segment
-                chord = abjad.Chord(pitches, duration)
-                abjad.mutate(note).replace([chord])
-            selections[index] = stage_selection
-        return selections
-
     def _attach_instrument(
         self, 
         instrument, 
@@ -429,30 +360,6 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
         assert isinstance(last_leaf, abjad.scoretools.Leaf)
         return last_leaf
 
-    def _get_rhythm_maker(
-        self,
-        division_masks=None,
-        logical_tie_masks=None,
-        talea_counts=None,
-        talea_denominator=None,
-        time_treatments=None,
-        ):
-        rhythm_maker = self.rhythm_maker or self._default_rhythm_maker
-        keywords = {}
-        if division_masks is not None:
-            keywords['division_masks'] = division_masks
-        if logical_tie_masks is not None:
-            keywords['logical_tie_masks'] = logical_tie_masks
-        if talea_counts is not None:
-            keywords['talea__counts'] = talea_counts
-        if talea_denominator is not None:
-            keywords['talea__denominator'] = talea_denominator
-        if time_treatments is not None:
-            keywords['time_treatments'] = time_treatments
-        if keywords:
-            rhythm_maker = abjad.new(rhythm_maker, **keywords)
-        return rhythm_maker
-
     def _get_storage_format_specification(self):
         agent = abjad.systemtools.StorageFormatAgent(self)
         keyword_argument_names = agent.signature_keyword_names
@@ -465,7 +372,6 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
             )
 
     def _make_rhythm(self, time_signatures, start_offset):
-        #rhythm_maker = self._get_rhythm_maker()
         rhythm_maker = self.rhythm_maker or self._default_rhythm_maker
         if isinstance(rhythm_maker, abjad.selectiontools.Selection):
             selections = [rhythm_maker]
@@ -608,18 +514,6 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
         Returns instrument or none.
         '''
         return self._instrument
-
-    @property
-    def pattern(self):
-        r'''Gets pattern.
-
-        Set to pattern or none.
-
-        Defaults to none.
-
-        Returns pattern or none.
-        '''
-        return self._pattern
 
     @property
     def reference_meters(self):

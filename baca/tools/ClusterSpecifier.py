@@ -3,7 +3,7 @@ import abjad
 
 
 class ClusterSpecifier(abjad.abctools.AbjadObject):
-    r'''Cluster specifier.
+    r"""Cluster specifier.
 
     ::
 
@@ -11,6 +11,188 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
         >>> import baca
 
     ..  container:: example
+
+        With figure-maker:
+
+        ::
+
+            >>> figure_maker = baca.tools.FigureMaker(
+            ...     baca.tools.ClusterSpecifier(
+            ...         widths=[3, 4],
+            ...         ),
+            ...     )
+
+        ::
+
+            >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = figure_maker('Voice 1', segments)
+            >>> lilypond_file = figure_maker.show(contribution)
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> f(lilypond_file[abjad.Staff])
+            \new Staff <<
+                \context Voice = "Voice 1" {
+                    \voiceOne
+                    {
+                        {
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <c' e' g'>16 [
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <d' f' a' c''>16
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <bf' d'' f''>16 ]
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                        }
+                        {
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <fs'' a'' c''' e'''>16 [
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <e'' g'' b''>16
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <ef'' g'' b'' d'''>16
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <af'' c''' e'''>16
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <g'' b'' d''' f'''>16 ]
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                        }
+                        {
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <a' c'' e''>16
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                        }
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        With segment-maker:
 
         Clusters widths alternating 3 and 4:
 
@@ -25,13 +207,11 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
 
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
-            ...     [
-            ...         baca.pitches('E4'),
-            ...         baca.make_messiaen_note_rhythm_specifier(),
-            ...         baca.tools.ClusterSpecifier(
-            ...             widths=[3, 4],
-            ...             ),
-            ...         ],
+            ...     baca.pitches('E4'),
+            ...     baca.make_messiaen_note_rhythm_specifier(),
+            ...     baca.tools.ClusterSpecifier(
+            ...         widths=[3, 4],
+            ...         ),
             ...     )
 
         ::
@@ -158,7 +338,7 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
                 >>
             >>
 
-    '''
+    """
 
     ### CLASS VARIABLES ##
 
@@ -195,14 +375,16 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, logical_ties):
-        r'''Calls cluster specifier.
+    def __call__(self, argument):
+        r'''Calls specifier on `argument`.
 
         Returns none.
         '''
         if self.widths is None:
             return
-        widths = abjad.datastructuretools.CyclicTuple(self.widths)
+        widths = abjad.CyclicTuple(self.widths)
+        logical_ties = abjad.iterate(argument).by_logical_tie()
+        logical_ties = list(logical_ties)
         first_note = logical_ties[0].head
         root = abjad.inspect_(first_note).get_parentage().root
         with abjad.systemtools.ForbidUpdate(component=root):
@@ -259,14 +441,12 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     [
-                ...         baca.pitches('E4'),
-                ...         baca.make_messiaen_note_rhythm_specifier(),
-                ...         baca.tools.ClusterSpecifier(
-                ...             hide_flat_markup=True,
-                ...             widths=[3],
-                ...             ),
-                ...         ],
+                ...     baca.pitches('E4'),
+                ...     baca.make_messiaen_note_rhythm_specifier(),
+                ...     baca.tools.ClusterSpecifier(
+                ...         hide_flat_markup=True,
+                ...         widths=[3],
+                ...         ),
                 ...     )
 
             ::
@@ -402,14 +582,12 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     [
-                ...         baca.pitches('E4'),
-                ...         baca.make_messiaen_note_rhythm_specifier(),
-                ...         baca.tools.ClusterSpecifier(
-                ...             hide_natural_markup=True,
-                ...             widths=[3],
-                ...             ),
-                ...         ],
+                ...     baca.pitches('E4'),
+                ...     baca.make_messiaen_note_rhythm_specifier(),
+                ...     baca.tools.ClusterSpecifier(
+                ...         hide_natural_markup=True,
+                ...         widths=[3],
+                ...         ),
                 ...     )
 
             ::
@@ -545,13 +723,11 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     [
-                ...         baca.make_messiaen_note_rhythm_specifier(),
-                ...         baca.pitches('C4 D4 E4 F4'),
-                ...         baca.tools.ClusterSpecifier(
-                ...             widths=[3],
-                ...             ),
-                ...         ],
+                ...     baca.make_messiaen_note_rhythm_specifier(),
+                ...     baca.pitches('C4 D4 E4 F4'),
+                ...     baca.tools.ClusterSpecifier(
+                ...         widths=[3],
+                ...         ),
                 ...     )
 
             ::
@@ -693,14 +869,12 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     [
-                ...         baca.make_messiaen_note_rhythm_specifier(),
-                ...         baca.pitches('C4 D4 E4 F4'),
-                ...         baca.tools.ClusterSpecifier(
-                ...             start_pitch='G4',
-                ...             widths=[3],
-                ...             ),
-                ...         ],
+                ...     baca.make_messiaen_note_rhythm_specifier(),
+                ...     baca.pitches('C4 D4 E4 F4'),
+                ...     baca.tools.ClusterSpecifier(
+                ...         start_pitch='G4',
+                ...         widths=[3],
+                ...         ),
                 ...     )
 
             ::
@@ -852,13 +1026,11 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     [
-                ...         baca.pitches('E4'),
-                ...         baca.make_messiaen_note_rhythm_specifier(),
-                ...         baca.tools.ClusterSpecifier(
-                ...             widths=[0, 1, 2, 3],
-                ...             ),
-                ...         ],
+                ...     baca.pitches('E4'),
+                ...     baca.make_messiaen_note_rhythm_specifier(),
+                ...     baca.tools.ClusterSpecifier(
+                ...         widths=[0, 1, 2, 3],
+                ...         ),
                 ...     )
 
             ::
@@ -985,13 +1157,11 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     [
-                ...         baca.make_messiaen_note_rhythm_specifier(),
-                ...         baca.pitches('E4'),
-                ...         baca.tools.ClusterSpecifier(
-                ...             widths=[0, 3],
-                ...             ),
-                ...         ],
+                ...     baca.make_messiaen_note_rhythm_specifier(),
+                ...     baca.pitches('E4'),
+                ...     baca.tools.ClusterSpecifier(
+                ...         widths=[0, 3],
+                ...         ),
                 ...     )
 
             ::
@@ -1103,13 +1273,11 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select.stages(1)),
-                ...     [
-                ...         baca.make_messiaen_note_rhythm_specifier(),
-                ...         baca.pitches('E4', allow_repeated_pitches=True),
-                ...         baca.tools.ClusterSpecifier(
-                ...             widths=None,
-                ...             ),
-                ...         ],
+                ...     baca.make_messiaen_note_rhythm_specifier(),
+                ...     baca.pitches('E4', allow_repeat_pitches=True),
+                ...     baca.tools.ClusterSpecifier(
+                ...         widths=None,
+                ...         ),
                 ...     )
 
             ::

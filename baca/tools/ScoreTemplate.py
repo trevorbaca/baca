@@ -14,6 +14,9 @@ class ScoreTemplate(abjad.abctools.AbjadValueObject):
     voice_abbreviations = {
         }
 
+    voice_colors = {
+        }
+
     ### SPECIAL METHODS ###
 
     @abc.abstractmethod
@@ -29,7 +32,10 @@ class ScoreTemplate(abjad.abctools.AbjadValueObject):
     def _attach_tag(self, instrument_tag, context):
         assert isinstance(instrument_tag, str), repr(str)
         tag_string = 'tag {}'.format(instrument_tag)
-        tag_command = abjad.indicatortools.LilyPondCommand(tag_string, 'before')
+        tag_command = abjad.indicatortools.LilyPondCommand(
+            tag_string,
+            'before',
+            )
         abjad.attach(tag_command, context)
 
     def _make_time_signature_context(self):
@@ -51,3 +57,18 @@ class ScoreTemplate(abjad.abctools.AbjadValueObject):
             name='Time Signature Context',
             )
         return time_signature_context
+
+    def _validate_voice_names(self, score):
+        voice_names = []
+        for voice in abjad.iterate(score).by_class(abjad.Voice):
+            voice_names.append(voice.name)
+        for voice_name in sorted(self.voice_abbreviations.items()):
+            if voice_name not in voice_names:
+                message = 'voice not found in score: {!r}.'
+                message = message.format(voice_name)
+                raise Exception(message)
+        for voice_name in sorted(self.voice_colors):
+            if voice_name not in voice_names:
+                message = 'voice not found in score: {!r}.'
+                message = message.format(voice_name)
+                raise Exception(message)

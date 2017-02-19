@@ -27,13 +27,11 @@ class MicrotonalDeviationSpecifier(abjad.abctools.AbjadObject):
 
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
-            ...     [
-            ...         baca.pitches('E4'),
-            ...         baca.make_even_run_rhythm_specifier(),
-            ...         baca.tools.MicrotonalDeviationSpecifier(
-            ...             number_lists=([0, 0.5, 0, -0.5],),
-            ...             ),
-            ...         ],
+            ...     baca.pitches('E4'),
+            ...     baca.make_even_run_rhythm_specifier(),
+            ...     baca.tools.MicrotonalDeviationSpecifier(
+            ...         number_lists=([0, 0.5, 0, -0.5],),
+            ...         ),
             ...     )
 
         ::
@@ -154,7 +152,7 @@ class MicrotonalDeviationSpecifier(abjad.abctools.AbjadObject):
         '''
         if self.number_lists is None:
             return
-        number_lists = abjad.datastructuretools.CyclicTuple(self.number_lists)
+        number_lists = abjad.CyclicTuple(self.number_lists)
         number_list_index = 0
         pairs = itertools.groupby(
             logical_ties,
@@ -165,7 +163,7 @@ class MicrotonalDeviationSpecifier(abjad.abctools.AbjadObject):
             if len(values) == 1:
                 continue
             number_list = number_lists[number_list_index]
-            number_list = abjad.datastructuretools.CyclicTuple(number_list)
+            number_list = abjad.CyclicTuple(number_list)
             for i, logical_tie in enumerate(values):
                 number = number_list[i]
                 for note in logical_tie:

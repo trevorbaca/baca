@@ -26,14 +26,12 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
 
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select.stages(1)),
-            ...     [
-            ...         baca.pitches('E4 F4'),
-            ...         baca.make_even_run_rhythm_specifier(),
-            ...         baca.tools.TransitionSpecifier(
-            ...             start_markup=baca.markup.ord_(),
-            ...             stop_markup=baca.markup.pont(),
-            ...             ),
-            ...         ],
+            ...     baca.pitches('E4 F4'),
+            ...     baca.make_even_run_rhythm_specifier(),
+            ...     baca.tools.TransitionSpecifier(
+            ...         start_markup=baca.markup.ord_(),
+            ...         stop_markup=baca.markup.pont(),
+            ...         ),
             ...     )
 
         ::

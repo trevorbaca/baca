@@ -202,6 +202,11 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
     ### PRIVATE METHODS ###
 
+    def _get_priority(self):
+        if self.priority is None:
+            return Left
+        return self.priority
+
     def _get_top_lengths(self, total_length):
         left_length, middle_length, right_length = 0, 0, 0
         left_length = self.left_length or 0
@@ -243,11 +248,6 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
         elif not left_length and not right_length:
             middle_length = total_length
         return left_length, middle_length, right_length
-
-    def _get_priority(self):
-        if self.priority is None:
-            return Left
-        return self.priority
 
     ### PUBLIC PROPERTIES ###
 

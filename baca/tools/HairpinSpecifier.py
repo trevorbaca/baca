@@ -110,7 +110,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
                     raise Exception(message)
             tokens.append(element)
         hairpin_tokens = tokens
-        hairpin_tokens = abjad.datastructuretools.CyclicTuple(hairpin_tokens)
+        hairpin_tokens = abjad.CyclicTuple(hairpin_tokens)
         self._hairpin_tokens = hairpin_tokens
         if include_following_rests is not None:
             include_following_rests = bool(include_following_rests)
@@ -235,7 +235,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
     def _partition_by_enchained_counts(self, leaves, counts):
         assert isinstance(leaves, list), repr(leaves)
-        counts = abjad.datastructuretools.CyclicTuple(counts)
+        counts = abjad.CyclicTuple(counts)
         shards = []
         shard_index = 0
         leaf_start_index = 0

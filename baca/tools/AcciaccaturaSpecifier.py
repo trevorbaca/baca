@@ -29,7 +29,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> stage_tokens = [
+            >>> segments = [
             ...     [0],
             ...     [2, 10],
             ...     [18, 16, 15],
@@ -37,7 +37,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state_manifest = rhythm_maker(stage_tokens)
+            >>> selections, state_manifest = rhythm_maker(segments)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -105,7 +105,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
     __slots__ = (
         '_durations',
         '_lmr_specifier',
-        '_stage_pattern',
+        '_pattern',
         )
 
     ### INITIALIZER ###
@@ -114,7 +114,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
         self,
         durations=None,
         lmr_specifier=None,
-        stage_pattern=None,
+        pattern=None,
         ):
         if durations is not None:
             assert isinstance(durations, list), repr(durations)
@@ -124,35 +124,34 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
             prototype = baca.tools.LMRSpecifier
             assert isinstance(lmr_specifier, prototype)
         self._lmr_specifier = lmr_specifier
-        if stage_pattern is not None:
+        if pattern is not None:
             prototype = (
                 abjad.Pattern,
                 abjad.patterntools.CompoundPattern,
                 )
-            assert isinstance(stage_pattern, prototype), repr(stage_pattern)
-        self._stage_pattern = stage_pattern
+            assert isinstance(pattern, prototype), repr(pattern)
+        self._pattern = pattern
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, stage_token):
-        r'''Calls acciaccatura specifier on `stage_token`.
+    def __call__(self, segment):
+        r'''Calls acciaccatura specifier on `segment`.
 
-        Returns grace container together with new stage token.
+        Returns grace container together with new segment.
         '''
         prototype = (list, abjad.pitchtools.Segment)
-        assert isinstance(stage_token, prototype), repr(stage_token)
-        stage_length = len(stage_token)
+        assert isinstance(segment, prototype), repr(segment)
         lmr_specifier = self._get_lmr_specifier()
-        stage_parts = lmr_specifier(stage_token)
-        stage_parts = [_ for _ in stage_parts if _]
-        stage_token = [_[-1] for _ in stage_parts]
+        segment_parts = lmr_specifier(segment)
+        segment_parts = [_ for _ in segment_parts if _]
+        segment = [_[-1] for _ in segment_parts]
         durations = self._get_durations()
         grace_containers = []
-        for stage_part in stage_parts:
-            if len(stage_part) <= 1:
+        for segment_part in segment_parts:
+            if len(segment_part) <= 1:
                 grace_containers.append(None)
                 continue
-            grace_token = list(stage_part[:-1])
+            grace_token = list(segment_part[:-1])
             grace_leaves = abjad.scoretools.make_leaves(
                 grace_token,
                 durations,
@@ -164,8 +163,8 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
             if 1 < len(grace_container):
                 abjad.attach(abjad.spannertools.Beam(), grace_container[:])
             grace_containers.append(grace_container)
-        assert len(grace_containers) == len(stage_token)
-        return grace_containers, stage_token
+        assert len(grace_containers) == len(segment)
+        return grace_containers, segment
 
     ### PRIVATE METHODS ###
 
@@ -177,8 +176,8 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
             return self.lmr_specifier
         return baca.tools.LMRSpecifier()
 
-    def _get_stage_pattern(self):
-        return self.stage_pattern or abjad.select_all()
+    def _get_pattern(self):
+        return self.pattern or abjad.select_all()
 
     ### PUBLIC PROPERTIES ###
 
@@ -204,7 +203,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> stage_tokens = [
+                >>> segments = [
                 ...     [0],
                 ...     [2, 10],
                 ...     [18, 16, 15],
@@ -212,7 +211,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 ...     [2, 10, 18, 16, 15],
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -291,7 +290,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> stage_tokens = [
+                >>> segments = [
                 ...     [0],
                 ...     [2, 10],
                 ...     [18, 16, 15],
@@ -299,7 +298,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 ...     [2, 10, 18, 16, 15],
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -372,7 +371,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            As many acciaccaturas as possible per stage:
+            As many acciaccaturas as possible per segment:
 
             ::
 
@@ -388,7 +387,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> stage_tokens = [
+                >>> segments = [
                 ...     [0],
                 ...     [2, 10],
                 ...     [18, 16, 15],
@@ -396,7 +395,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 ...     [2, 10, 18, 16, 15],
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -457,7 +456,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            At most two acciaccaturas at the beginning of every stage:
+            At most two acciaccaturas at the beginning of every segment:
 
             ::
 
@@ -479,7 +478,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> stage_tokens = [
+                >>> segments = [
                 ...     [0],
                 ...     [2, 10],
                 ...     [18, 16, 15],
@@ -487,7 +486,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 ...     [2, 10, 18, 16, 15],
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -548,7 +547,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            At most two acciaccaturas at the end of every stage:
+            At most two acciaccaturas at the end of every segment:
 
             ::
 
@@ -570,7 +569,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> stage_tokens = [
+                >>> segments = [
                 ...     [0],
                 ...     [2, 10],
                 ...     [18, 16, 15],
@@ -578,7 +577,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 ...     [2, 10, 18, 16, 15],
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -639,8 +638,8 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            At most two acciaccaturas at the beginning of every stage and then
-            at most two acciaccaturas at the end of every stage:
+            At most two acciaccaturas at the beginning of every segment and
+            then at most two acciaccaturas at the end of every segment:
 
             ::
 
@@ -663,7 +662,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> stage_tokens = [
+                >>> segments = [
                 ...     [0],
                 ...     [2, 10],
                 ...     [18, 16, 15],
@@ -671,7 +670,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 ...     [2, 10, 18, 16, 15],
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -736,7 +735,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            As many acciaccaturas as possible in the middle of every stage:
+            As many acciaccaturas as possible in the middle of every segment:
 
             ::
 
@@ -756,7 +755,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> stage_tokens = [
+                >>> segments = [
                 ...     [0],
                 ...     [2, 10],
                 ...     [18, 16, 15],
@@ -764,7 +763,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 ...     [2, 10, 18, 16, 15],
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -830,12 +829,12 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
         return self._lmr_specifier
 
     @property
-    def stage_pattern(self):
-        r'''Gets stage pattern.
+    def pattern(self):
+        r'''Gets pattern.
 
         ..  container:: example
 
-            Applies to all stages by default:
+            Applies to all segments by default:
 
             ::
 
@@ -851,7 +850,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> stage_tokens = [
+                >>> segments = [
                 ...     [0],
                 ...     [2, 10],
                 ...     [18, 16, 15],
@@ -859,7 +858,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 ...     [2, 10, 18, 16, 15],
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -920,14 +919,14 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            Applies to last stage:
+            Applies to last segment:
 
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
                 ...     acciaccatura_specifiers=[
                 ...         baca.tools.AcciaccaturaSpecifier(
-                ...             stage_pattern=abjad.select_last(),
+                ...             pattern=abjad.select_last(),
                 ...             ),
                 ...         ],
                 ...     talea=abjad.rhythmmakertools.Talea(
@@ -938,7 +937,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> stage_tokens = [
+                >>> segments = [
                 ...     [0],
                 ...     [2, 10],
                 ...     [18, 16, 15],
@@ -946,7 +945,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 ...     [2, 10, 18, 16, 15],
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -999,14 +998,14 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            Applies to every other stage:
+            Applies to every other segment:
 
             ::
 
                 >>> rhythm_maker = baca.tools.FigureRhythmMaker(
                 ...     acciaccatura_specifiers=[
                 ...         baca.tools.AcciaccaturaSpecifier(
-                ...             stage_pattern=abjad.select_every([1], period=2),
+                ...             pattern=abjad.select_every([1], period=2),
                 ...             ),
                 ...         ],
                 ...     talea=abjad.rhythmmakertools.Talea(
@@ -1017,7 +1016,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> stage_tokens = [
+                >>> segments = [
                 ...     [0],
                 ...     [2, 10],
                 ...     [18, 16, 15],
@@ -1025,7 +1024,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 ...     [2, 10, 18, 16, 15],
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(stage_tokens)
+                >>> selections, state_manifest = rhythm_maker(segments)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -1086,4 +1085,4 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         Returns pattern or none.
         '''
-        return self._stage_pattern
+        return self._pattern
