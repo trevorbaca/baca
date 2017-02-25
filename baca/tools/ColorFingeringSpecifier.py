@@ -25,9 +25,9 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select.stages(1)),
+            ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('E4', allow_repeat_pitches=True),
-            ...     baca.make_messiaen_note_rhythm_specifier(),
+            ...     baca.messiaen_note_rhythm_specifier(),
             ...     baca.tools.ColorFingeringSpecifier(
             ...         number_lists=([0, 1, 2, 1],),
             ...         ),
@@ -218,9 +218,9 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select.stages(1)),
+                ...     ('vn', baca.select_stages(1)),
                 ...     baca.pitches('C4 D4 E4 F4'),
-                ...     baca.make_messiaen_note_rhythm_specifier(),
+                ...     baca.messiaen_note_rhythm_specifier(),
                 ...     baca.tools.ColorFingeringSpecifier(
                 ...         number_lists=([0, 1, 2, 1],),
                 ...         ),
@@ -325,12 +325,12 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select.stages(1)),
+                ...     ('vn', baca.select_stages(1)),
                 ...     baca.pitches(
                 ...         'C4 D4 D4 D4 E4 F4 F4',
                 ...         allow_repeat_pitches=True,
                 ...         ),
-                ...     baca.make_even_run_rhythm_specifier(),
+                ...     baca.even_run_rhythm_specifier(),
                 ...     baca.tools.ColorFingeringSpecifier(
                 ...         by_pitch_run=True,
                 ...         number_lists=([1, 2, 1],),

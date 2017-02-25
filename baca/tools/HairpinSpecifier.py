@@ -145,7 +145,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
         if not logical_ties:
             return
         if not isinstance(logical_ties[0], abjad.selectiontools.LogicalTie):
-            assert isinstance(logical_ties[0], abjad.scoretools.Leaf)
+            assert isinstance(logical_ties[0], abjad.Leaf)
             logical_ties = [
                 abjad.selectiontools.LogicalTie(_) for _ in logical_ties]
         if (self.span == 'contiguous notes and chords'

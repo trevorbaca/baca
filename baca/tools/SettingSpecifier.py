@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import abjad
+import baca
 
 
 # TODO: write examples
@@ -72,20 +73,13 @@ class SettingSpecifier(abjad.abctools.AbjadObject):
                 self.setting_name,
                 self.setting_value,
                 )
-        selector = self._get_selector()
+        selector = self.selector or baca.select_leaves()
         items = selector(argument)
         globals_ = globals()
         globals_.update(abjad.__dict__.copy())
         globals_['SchemeMoment'] = abjad.schemetools.SchemeMoment
         for item in items:
             exec(statement, globals_, locals())
-
-    ### PRIVATE METHODS ###
-
-    def _get_selector(self):
-        if self.selector is None:
-            return abjad.select().by_leaf(flatten=True)
-        return self.selector
 
     ### PUBLIC PROPERTIES ###
 

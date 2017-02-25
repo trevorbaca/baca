@@ -25,9 +25,9 @@ class VoltaSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select.stages(1)),
+            ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('E4', allow_repeat_pitches=True),
-            ...     baca.make_messiaen_note_rhythm_specifier(),
+            ...     baca.messiaen_note_rhythm_specifier(),
             ...     )
 
         ::
@@ -134,7 +134,7 @@ class VoltaSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> volta_specifier[1]
-                MeasureExpression(start_number=16, stop_number=18)
+                MeasureExpression(start=16, stop=18)
 
         Returns measure expression or slice of measure expression.
         '''
@@ -161,8 +161,8 @@ class VoltaSpecifier(abjad.abctools.AbjadObject):
 
                 >>> for item in volta_specifier.items:
                 ...     item
-                MeasureExpression(start_number=2, stop_number=4)
-                MeasureExpression(start_number=16, stop_number=18)
+                MeasureExpression(start=2, stop=4)
+                MeasureExpression(start=16, stop=18)
 
         Defaults to none.
 

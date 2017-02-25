@@ -333,7 +333,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
         '''
         if selections is None:
             return
-        if isinstance(selections, abjad.scoretools.Component):
+        if isinstance(selections, abjad.Component):
             selections = abjad.select(selections)
         pattern = self.pattern or abjad.select_all()
         selections = pattern.get_matching_items(selections)

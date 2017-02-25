@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import abjad
+import baca
 
 
 class DynamicSpecifier(abjad.abctools.AbjadObject):
@@ -56,11 +57,10 @@ class DynamicSpecifier(abjad.abctools.AbjadObject):
         '''
         if self.dynamic is None:
             return
-        #print(argument)
-        selector = self._get_selector()
-        #print(selector)
+        selector = self.selector or baca.select_leaves()
         selections = selector(argument)
-        #print(selections)
+        if selections and not isinstance(selections[0], abjad.Selection):
+            selections = [selections]
         for selection in selections:
             if isinstance(self.dynamic, abjad.spannertools.Hairpin):
                 hairpin = abjad.new(self.dynamic)
@@ -75,15 +75,6 @@ class DynamicSpecifier(abjad.abctools.AbjadObject):
                 message = message.format(self.dynamic)
                 raise Exception(message)
             
-    ### PRIVATE METHODS ###
-
-    def _get_selector(self):
-        if self.selector is None:
-            selector = abjad.selectortools.Selector()
-            selector = selector.by_leaf()
-            return selector
-        return self.selector
-
     ### PUBLIC PROPERTIES ###
 
     @property

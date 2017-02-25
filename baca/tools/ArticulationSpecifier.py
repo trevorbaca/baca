@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import abjad
+import baca
 
 
 class ArticulationSpecifier(abjad.abctools.AbjadObject):
@@ -83,8 +84,8 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select.stages(1)),
-            ...     baca.make_even_run_rhythm_specifier(),
+            ...     ('vn', baca.select_stages(1)),
+            ...     baca.even_run_rhythm_specifier(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.tools.ArticulationSpecifier(
             ...         articulations=['.'],
@@ -202,38 +203,25 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, selection):
-        r'''Calls articulation specifier on `selection`.
+        r'''Calls specifier on `selection`.
 
         Returns none.
         '''
-        tokens = self._get_articulations()
-        if not tokens:
+        articulations = self.articulations or ()
+        articulations = abjad.CyclicTuple(articulations)
+        if not articulations:
             return
-        selector = self._get_selector()
-        #print(selector)
+        tokens = articulations
+        selector = self.selector or baca.select_pitched_logical_tie_heads()
         selection = selector(selection)
-        #print(selections)
         for i, leaf in enumerate(selection):
-            assert isinstance(leaf, abjad.scoretools.Leaf), repr(leaf)
+            assert isinstance(leaf, abjad.Leaf), repr(leaf)
             token = tokens[i]
             articulations = self._token_to_articulations(token)
             for articulation in articulations:
                 abjad.attach(articulation, leaf)
 
     ### PRIVATE METHODS ###
-
-    def _get_articulations(self):
-        articulations = self.articulations or ()
-        articulations = abjad.CyclicTuple(articulations)
-        return articulations
-
-    def _get_selector(self):
-        if self.selector is None:
-            selector = abjad.selectortools.Selector()
-            selector = selector.by_logical_tie(pitched=True, flatten=True)
-            selector = selector.get_item(0, apply_to_each=True)
-            return selector
-        return self.selector
 
     @staticmethod
     def _token_to_articulations(token):

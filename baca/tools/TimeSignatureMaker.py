@@ -97,7 +97,7 @@ class TimeSignatureMaker(abjad.abctools.AbjadObject):
             )
         measures_per_stage = [len(_) for _ in time_signature_groups]
         time_signatures = baca.Sequence(time_signature_groups).flatten(depth=1)
-        fermata_entries = self.stage_specifier.make_fermata_entries()
+        fermata_entries = self.stage_specifier._make_fermata_entries()
         items = self.tempo_specifier.items + fermata_entries
         tempo_specifier = baca.tools.TempoSpecifier(items=items)
         return measures_per_stage, tempo_specifier, time_signatures

@@ -11,34 +11,34 @@ class StageSliceExpression(abjad.expressiontools.Expression):
     __documentation_section__ = 'Segments'
 
     __slots__ = (
-        '_start_number',
-        '_stop_number',
+        '_start',
+        '_stop',
         )
 
     ### INITIALIZER ###
 
     def __init__(
         self,
-        start_number=None,
-        stop_number=None,
+        start=None,
+        stop=None,
         ):
-        self._start_number = start_number
-        self._stop_number = stop_number
+        self._start = start
+        self._stop = stop
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def start_number(self):
-        r'''Gets start number of stage slice expression.
+    def start(self):
+        r'''Gets start.
 
         Returns integer or none.
         '''
-        return self._start_number
+        return self._start
 
     @property
-    def stop_number(self):
-        r'''Gets stop number of stage slice expression.
+    def stop(self):
+        r'''Gets stop.
 
         Returns integer or none.
         '''
-        return self._stop_number
+        return self._stop

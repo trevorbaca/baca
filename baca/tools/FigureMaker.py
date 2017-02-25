@@ -62,8 +62,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
     __slots__ = (
         '_allow_repeat_pitches',
         '_color_unregistered_pitches',
+        '_denominator',
         '_next_figure',
-        '_preferred_denominator',
         '_specifiers',
         '_thread',
         '_voice_names',
@@ -92,7 +92,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
         *specifiers,
         allow_repeat_pitches=None,
         color_unregistered_pitches=None,
-        preferred_denominator=None,
+        denominator=None,
         thread=None,
         voice_names=None
         ):
@@ -102,10 +102,10 @@ class FigureMaker(abjad.abctools.AbjadObject):
         if color_unregistered_pitches is not None:
             color_unregistered_pitches = bool(color_unregistered_pitches)
         self._color_unregistered_pitches = color_unregistered_pitches
+        if denominator is not None:
+            assert abjad.mathtools.is_positive_integer(denominator)
+        self._denominator = denominator
         self._next_figure = 0
-        if preferred_denominator is not None:
-            assert abjad.mathtools.is_positive_integer(preferred_denominator)
-        self._preferred_denominator = preferred_denominator
         self._specifiers = specifiers
         if thread is not None:
             thread = bool(thread)
@@ -133,7 +133,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
         is_incomplete=None,
         is_recollection=None,
         logical_tie_masks=None,
-        preferred_denominator=None,
+        denominator=None,
         state_manifest=None,
         talea_counts=None,
         talea_denominator=None,
@@ -621,7 +621,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
         selection = abjad.select([container])
         time_signature = self._make_time_signature(
             selection,
-            preferred_denominator=preferred_denominator,
+            denominator=denominator,
             )
         selections = {voice_name: selection}
         selections.update(imbricated_selections)
@@ -640,7 +640,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
     @staticmethod
     def _all_are_selections(argument):
-        prototype = abjad.selectiontools.Selection
+        prototype = abjad.Selection
         return all(isinstance(_, prototype) for _ in argument)
 
     def _annotate_deployment(
@@ -948,12 +948,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
             state_manifest[name] = value
         return state_manifest
 
-    def _make_time_signature(self, selection, preferred_denominator=None):
-        if preferred_denominator is None:
-            preferred_denominator = self.preferred_denominator
+    def _make_time_signature(self, selection, denominator=None):
+        if denominator is None:
+            denominator = self.denominator
         duration = selection.get_duration()
-        if preferred_denominator is not None:
-            duration = duration.with_denominator(preferred_denominator)
+        if denominator is not None:
+            duration = duration.with_denominator(denominator)
         time_signature = abjad.indicatortools.TimeSignature(duration)
         return time_signature
 
@@ -1013,12 +1013,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
         return self._color_unregistered_pitches
 
     @property
-    def preferred_denominator(self):
-        r'''Gets preferred denominator.
+    def denominator(self):
+        r'''Gets denominator.
 
         ..  container:: example
 
-            No preferred denominator by default:
+            No denominator by default:
 
             ::
 
@@ -1066,12 +1066,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            Preferred denominator supplied at configuration time:
+            Denominator supplied at configuration time:
 
             ::
 
                 >>> figure_maker = baca.tools.FigureMaker(
-                ...     preferred_denominator=16,
+                ...     denominator=16,
                 ...     )
 
             ::
@@ -1119,7 +1119,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            Preferred denominator supplied at call time:
+            Denominator supplied at call time:
 
             ::
 
@@ -1135,7 +1135,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 >>> contribution = figure_maker(
                 ...     'Voice 1',
                 ...     segments,
-                ...     preferred_denominator=8,
+                ...     denominator=8,
                 ...     )
                 >>> lilypond_file = figure_maker.show(
                 ...     contribution,
@@ -1174,13 +1174,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            Preferred denominator supplied at call time overrides preferred
-            denominator supplied at configuration time:
+            Denominator supplied at call time overrides denominator supplied at
+            configuration time:
 
             ::
 
                 >>> figure_maker = baca.tools.FigureMaker(
-                ...     preferred_denominator=16,
+                ...     denominator=16,
                 ...     )
 
             ::
@@ -1193,7 +1193,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 >>> contribution = figure_maker(
                 ...     'Voice 1',
                 ...     segments,
-                ...     preferred_denominator=8,
+                ...     denominator=8,
                 ...     )
                 >>> lilypond_file = figure_maker.show(
                 ...     contribution,
@@ -1236,7 +1236,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         Returns positive integer or none.
         '''
-        return self._preferred_denominator 
+        return self._denominator 
 
     @property
     def specifiers(self):

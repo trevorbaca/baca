@@ -608,7 +608,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             )
         self._next_segment += 1
         if not segment:
-            return abjad.selectiontools.Selection()
+            return abjad.Selection()
         talea = self._get_talea()
         leaves = []
         specifier = self._get_duration_spelling_specifier()
@@ -675,7 +675,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             affix_skips_instead_of_rests,
             decrease_durations,
             )
-        leaf_selection = abjad.selectiontools.Selection(leaves)
+        leaf_selection = abjad.Selection(leaves)
         if isinstance(time_treatment, int):
             tuplet = self._make_tuplet_with_extra_count(
                 leaf_selection,
@@ -709,7 +709,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 if grace_container is None:
                     continue
                 abjad.attach(grace_container, logical_tie.head)
-        selection = abjad.selectiontools.Selection([tuplet])
+        selection = abjad.Selection([tuplet])
         return selection
 
     def _make_state_manifest(self):

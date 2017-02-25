@@ -3,8 +3,8 @@ import abjad
 import baca
 
 
-class SpannerSpecifier(abjad.abctools.AbjadObject):
-    r'''Spanner specifier.
+class IndicatorSpecifier(abjad.abctools.AbjadObject):
+    r'''Indicator specifier.
 
     ::
 
@@ -18,9 +18,16 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> figure_maker = baca.tools.FigureMaker(
-            ...     baca.tools.SpannerSpecifier(
-            ...         selector=baca.select_tuplets(),
-            ...         spanner=abjad.Slur(),
+            ...     baca.tools.IndicatorSpecifier(
+            ...         indicators=[abjad.Fermata()],
+            ...         ),
+            ...     baca.tools.FigureRhythmSpecifier(
+            ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+            ...             talea=abjad.rhythmmakertools.Talea(
+            ...                 counts=[5, 4, 4, 5, 4, 4, 4],
+            ...                 denominator=32,
+            ...                 ),
+            ...             ),
             ...         ),
             ...     )
 
@@ -39,19 +46,23 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
                     \voiceOne
                     {
                         {
-                            c'16 [ (
-                            d'16
-                            bf'16 ] )
+                            c'8 \fermata ~ [
+                            c'32
+                            d'8 \fermata
+                            bf'8 \fermata ]
                         }
                         {
-                            fs''16 [ (
-                            e''16
-                            ef''16
-                            af''16
-                            g''16 ] )
+                            fs''8 \fermata ~ [
+                            fs''32
+                            e''8 \fermata
+                            ef''8 \fermata
+                            af''8 \fermata ~
+                            af''32
+                            g''8 \fermata ]
                         }
                         {
-                            a'16
+                            a'8 \fermata ~ [
+                            a'32 ]
                         }
                     }
                 }
@@ -60,8 +71,6 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
     ..  container:: example
 
         With segment-maker:
-
-        ..  note:: Teach SegmentMaker about SpannerSpecifier.
 
         ::
 
@@ -76,9 +85,8 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
             ...     ('vn', baca.select_stages(1)),
             ...     baca.even_run_rhythm_specifier(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.tools.SpannerSpecifier(
-            ...         selector=baca.select_tuplets(),
-            ...         spanner=abjad.Slur(),
+            ...     baca.tools.IndicatorSpecifier(
+            ...         indicators=[abjad.Fermata()],
             ...         ),
             ...     )
 
@@ -137,39 +145,32 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
                         \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             {
-                                e'8 [
-                                d''8
-                                f'8
-                                e''8 ]
+                                e'8 \fermata [
+                                d''8 \fermata
+                                f'8 \fermata
+                                e''8 \fermata ]
                             }
                             {
-                                g'8 [
-                                f''8
-                                e'8 ]
+                                g'8 \fermata [
+                                f''8 \fermata
+                                e'8 \fermata ]
                             }
                             {
-                                d''8 [
-                                f'8
-                                e''8
-                                g'8 ]
+                                d''8 \fermata [
+                                f'8 \fermata
+                                e''8 \fermata
+                                g'8 \fermata ]
                             }
                             {
-                                f''8 [
-                                e'8
-                                d''8 ]
+                                f''8 \fermata [
+                                e'8 \fermata
+                                d''8 \fermata ]
                                 \bar "|"
                             }
                         }
                     }
                 >>
             >>
-
-    ..  container:: example
-
-        ::
-
-            >>> baca.tools.SpannerSpecifier()
-            SpannerSpecifier()
 
     '''
 
@@ -178,70 +179,79 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
     __documentation_section__ = 'Specifiers'
 
     __slots__ = (
+        '_indicators',
         '_selector',
-        '_spanner',
         )
 
     ### INITIALIZER ###
 
     def __init__(
         self,
+        indicators=None,
         selector=None,
-        spanner=None,
         ):
+        self._indicators = indicators
         if selector is not None:
             assert isinstance(selector, abjad.selectortools.Selector)
         self._selector = selector
-        if spanner is not None:
-            assert isinstance(spanner, abjad.spannertools.Spanner)
-        self._spanner = spanner
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls specifier on `argument`.
+    def __call__(self, selection):
+        r'''Calls specifier on `selection`.
 
         Returns none.
         '''
-        if not argument:
+        indicators = self.indicators or ()
+        indicators = abjad.CyclicTuple(indicators)
+        if not indicators:
             return
-        if self.spanner is None:
-            return
-        selector = self.selector or baca.select_leaves()
-        selection = selector(argument)
-        #print(format(selector), argument, selection)
-        if not selection:
-            return
-        if isinstance(selection[0], abjad.Selection):
-            selections = selection
-        else:
-            selections = [selection]
-        assert all(isinstance(_, abjad.Selection) for _ in selections)
-        for selection in selections:
-            spanner = abjad.new(self.spanner)
-            leaves = list(abjad.iterate(selection).by_leaf())
-            if len(leaves) <= 1:
+        tokens = indicators
+        selector = self.selector or baca.select_pitched_logical_tie_heads()
+        selection = selector(selection)
+        for i, leaf in enumerate(selection):
+            assert isinstance(leaf, abjad.Leaf), repr(leaf)
+            token = tokens[i]
+            indicators = self._token_to_indicators(token)
+            for indicator in indicators:
+                abjad.attach(indicator, leaf)
+
+    ### PRIVATE METHODS ###
+
+    @staticmethod
+    def _token_to_indicators(token):
+        result = []
+        if not isinstance(token, (tuple, list)):
+            token = [token]
+        for item in token:
+            if item is None:
                 continue
-            if isinstance(spanner, abjad.Tie):
-                for leaf in leaves:
-                    abjad.detach(abjad.Tie, leaf)
-            abjad.attach(spanner, leaves)
-            
+            result.append(item)
+        return result
+
     ### PUBLIC PROPERTIES ###
 
     @property
-    def selector(self):
-        r'''Gets selector.
+    def indicators(self):
+        r'''Gets indicators.
 
         ..  container:: example
 
-            Selects leaves by default:
+            Attaches fermata to head of every pitched logical tie:
 
             ::
 
                 >>> figure_maker = baca.tools.FigureMaker(
-                ...     baca.tools.SpannerSpecifier(
-                ...         spanner=abjad.Slur(),
+                ...     baca.tools.IndicatorSpecifier(
+                ...         indicators=[abjad.Fermata()],
+                ...         ),
+                ...     baca.tools.FigureRhythmSpecifier(
+                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...             talea=abjad.rhythmmakertools.Talea(
+                ...                 counts=[5, 4, 4, 5, 4, 4, 4],
+                ...                 denominator=32,
+                ...                 ),
+                ...             ),
                 ...         ),
                 ...     )
 
@@ -260,19 +270,23 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
                         \voiceOne
                         {
                             {
-                                c'16 [ (
-                                d'16
-                                bf'16 ]
+                                c'8 \fermata ~ [
+                                c'32
+                                d'8 \fermata
+                                bf'8 \fermata ]
                             }
                             {
-                                fs''16 [
-                                e''16
-                                ef''16
-                                af''16
-                                g''16 ]
+                                fs''8 \fermata ~ [
+                                fs''32
+                                e''8 \fermata
+                                ef''8 \fermata
+                                af''8 \fermata ~
+                                af''32
+                                g''8 \fermata ]
                             }
                             {
-                                a'16 )
+                                a'8 \fermata ~ [
+                                a'32 ]
                             }
                         }
                     }
@@ -280,19 +294,31 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            Spanner refuses to span a single leaf:
+            Patterns fermatas:
 
             ::
 
                 >>> figure_maker = baca.tools.FigureMaker(
-                ...     baca.tools.SpannerSpecifier(
-                ...         spanner=abjad.Slur(),
+                ...     baca.tools.IndicatorSpecifier(
+                ...         indicators=[
+                ...             abjad.Fermata(), None, None,
+                ...             abjad.Fermata(), None, None,
+                ...             abjad.Fermata(), None,
+                ...             ],
+                ...         ),
+                ...     baca.tools.FigureRhythmSpecifier(
+                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...             talea=abjad.rhythmmakertools.Talea(
+                ...                 counts=[5, 4, 4, 5, 4, 4, 4],
+                ...                 denominator=32,
+                ...                 ),
+                ...             ),
                 ...         ),
                 ...     )
 
             ::
 
-                >>> segments = [[1]]
+                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> contribution = figure_maker('Voice 1', segments)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -305,86 +331,23 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
                         \voiceOne
                         {
                             {
-                                cs'16
+                                c'8 \fermata ~ [
+                                c'32
+                                d'8
+                                bf'8 ]
                             }
-                        }
-                    }
-                >>
-
-        Defaults to leaves.
-
-        Set to selector or none.
-
-        Returns selector or none.
-        '''
-        return self._selector
-
-    @property
-    def spanner(self):
-        r'''Gets spanner.
-
-        ..  container:: example
-
-            Ties are smart enough to remove existing ties prior to attach:
-
-            ::
-
-                >>> figure_maker = baca.tools.FigureMaker()
-
-            ::
-
-                >>> contribution = figure_maker(
-                ...     'Voice 1',
-                ...     [[14, 14, 14]],
-                ...     talea_counts=[5],
-                ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  doctest::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
                             {
-                                d''4 ~
-                                d''16
-                                d''4 ~
-                                d''16
-                                d''4 ~
-                                d''16
+                                fs''8 \fermata ~ [
+                                fs''32
+                                e''8
+                                ef''8
+                                af''8 \fermata ~
+                                af''32
+                                g''8 ]
                             }
-                        }
-                    }
-                >>
-
-            ::
-
-                >>> contribution = figure_maker(
-                ...     'Voice 1',
-                ...     [[14, 14, 14]],
-                ...     baca.tools.SpannerSpecifier(spanner=abjad.Tie()),
-                ...     talea_counts=[5],
-                ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  doctest::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
                             {
-                                d''4 ~
-                                d''16 ~
-                                d''4 ~
-                                d''16 ~
-                                d''4 ~
-                                d''16
+                                a'8 \fermata ~ [
+                                a'32 ]
                             }
                         }
                     }
@@ -392,8 +355,20 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
         Defaults to none.
 
-        Set to spanner or none.
+        Set to indicators or none.
 
-        Returns spanner or none.
+        Returns indicators or none.
         '''
-        return self._spanner
+        return self._indicators
+
+    @property
+    def selector(self):
+        r'''Gets selector.
+
+        Defaults to none.
+
+        Set to selector or none.
+
+        Returns selector or none.
+        '''
+        return self._selector

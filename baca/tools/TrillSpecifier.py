@@ -12,7 +12,57 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        Trills notes a quarter note in duration or greater:
+        With figure-maker:
+
+        ::
+
+            >>> figure_maker = baca.tools.FigureMaker(
+            ...     baca.tools.TrillSpecifier(
+            ...         minimum_written_duration=abjad.Duration(1, 4),
+            ...         maximum_written_duration=None,
+            ...         ),
+            ...     )
+
+        ::
+
+            >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = figure_maker(
+            ...     'Voice 1',
+            ...     segments,
+            ...     talea_denominator=4,
+            ...     )
+            >>> lilypond_file = figure_maker.show(contribution)
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> f(lilypond_file[abjad.Staff])
+            \new Staff <<
+                \context Voice = "Voice 1" {
+                    \voiceOne
+                    {
+                        {
+                            c'4 \startTrillSpan
+                            d'4 \stopTrillSpan \startTrillSpan
+                            bf'4 \stopTrillSpan \startTrillSpan
+                        }
+                        {
+                            fs''4 \stopTrillSpan \startTrillSpan
+                            e''4 \stopTrillSpan \startTrillSpan
+                            ef''4 \stopTrillSpan \startTrillSpan
+                            af''4 \stopTrillSpan \startTrillSpan
+                            g''4 \stopTrillSpan \startTrillSpan
+                        }
+                        {
+                            a'4 \stopTrillSpan
+                        }
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        With segment-maker:
 
         ::
 
@@ -24,9 +74,9 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select.stages(1)),
+            ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('E4 F4'),
-            ...     baca.make_messiaen_note_rhythm_specifier(),
+            ...     baca.messiaen_note_rhythm_specifier(),
             ...     baca.tools.TrillSpecifier(
             ...         minimum_written_duration=abjad.Duration(1, 4),
             ...         maximum_written_duration=None,
@@ -149,14 +199,12 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, logical_ties):
-        r'''Calls trill specifier.
+    def __call__(self, argument):
+        r'''Calls specifier on `argument`.
 
         Returns none.
         '''
-        if isinstance(logical_ties[0], abjad.scoretools.Leaf):
-            logical_ties = [
-                abjad.selectiontools.LogicalTie(_) for _ in logical_ties]
+        logical_ties = abjad.select(argument).by_logical_tie(pitched=True)
         for logical_tie in logical_ties:
             written_duration = abjad.Duration(0)
             for note in logical_tie:

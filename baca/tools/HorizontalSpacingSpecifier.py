@@ -24,7 +24,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select.stages(1)),
+            ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('E4 F4'),
             ...     baca.tools.RhythmSpecifier(
             ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
@@ -129,7 +129,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select.stages(1)),
+            ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('E4 F4'),
             ...     baca.tools.RhythmSpecifier(
             ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
@@ -244,7 +244,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select.stages(1)),
+            ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('E4 F4'),
             ...     baca.tools.RhythmSpecifier(
             ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
@@ -360,7 +360,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select.stages(1)),
+            ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('E4 F4'),
             ...     baca.tools.RhythmSpecifier(
             ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
@@ -477,7 +477,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select.stages(1)),
+            ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('E4 F4'),
             ...     baca.tools.RhythmSpecifier(
             ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
@@ -592,7 +592,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select.stages(1)),
+            ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('E4 F4'),
             ...     baca.tools.RhythmSpecifier(
             ...         rhythm_maker=abjad.rhythmmakertools.AccelerandoRhythmMaker(

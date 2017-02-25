@@ -179,8 +179,8 @@ class CompoundScope(abjad.abctools.AbjadObject):
         elif class_._is_stage_pair(stage_pairs):
             stage_pairs = [stage_pairs]
         elif isinstance(stage_pairs, baca.tools.StageExpression):
-            #start = stage_pairs.stage_start_number
-            #stop = stage_pairs.stage_stop_number
+            #start = stage_pairs.start
+            #stop = stage_pairs.stop
             #stage_pairs = [(start, stop)]
             pass
         elif isinstance(stage_pairs, list):

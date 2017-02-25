@@ -94,8 +94,8 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select.stages(1)),
-            ...     baca.make_even_run_rhythm_specifier(),
+            ...     ('vn', baca.select_stages(1)),
+            ...     baca.even_run_rhythm_specifier(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.tools.OverrideSpecifier(
             ...         grob_name='beam',

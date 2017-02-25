@@ -13,7 +13,85 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        Specifies transition from ordinario to ponticello:
+        With figure-maker:
+
+        ::
+
+            >>> figure_maker = baca.tools.FigureMaker(
+            ...     baca.tools.TransitionSpecifier(
+            ...         start_markup=baca.markup.ord_(),
+            ...         stop_markup=baca.markup.pont(),
+            ...         ),
+            ...     )
+
+        ::
+
+            >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = figure_maker(
+            ...     'Voice 1',
+            ...     segments,
+            ...     talea_denominator=4,
+            ...     )
+            >>> lilypond_file = figure_maker.show(contribution)
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> f(lilypond_file[abjad.Staff])
+            \new Staff <<
+                \context Voice = "Voice 1" {
+                    \voiceOne
+                    {
+                        {
+                            \once \override TextSpanner.arrow-width = 0.25
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center
+                            \once \override TextSpanner.bound-details.left.text = \markup {
+                                \concat
+                                    {
+                                        \override
+                                            #'(font-name . "Palatino")
+                                            \whiteout
+                                                \upright
+                                                    ord.
+                                        \hspace
+                                            #0.5
+                                    }
+                                }
+                            \once \override TextSpanner.bound-details.right-broken.arrow = ##f
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0
+                            \once \override TextSpanner.bound-details.right.arrow = ##t
+                            \once \override TextSpanner.bound-details.right.padding = 1.75
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center
+                            \once \override TextSpanner.dash-fraction = 0.25
+                            \once \override TextSpanner.dash-period = 1.5
+                            c'4 \startTextSpan
+                            d'4
+                            bf'4
+                        }
+                        {
+                            fs''4
+                            e''4
+                            ef''4
+                            af''4
+                            g''4
+                        }
+                        {
+                            a'4 \stopTextSpan ^ \markup {
+                                \override
+                                    #'(font-name . "Palatino")
+                                    \whiteout
+                                        \upright
+                                            pont.
+                                }
+                        }
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        With segment-maker:
 
         ::
 
@@ -25,9 +103,9 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select.stages(1)),
+            ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('E4 F4'),
-            ...     baca.make_even_run_rhythm_specifier(),
+            ...     baca.even_run_rhythm_specifier(),
             ...     baca.tools.TransitionSpecifier(
             ...         start_markup=baca.markup.ord_(),
             ...         stop_markup=baca.markup.pont(),
@@ -173,17 +251,12 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, components):
-        r'''Calls transition specifier.
+    def __call__(self, argument):
+        r'''Calls specifier on `argument`.
 
         Returns none.
         '''
-        if isinstance(components[0], abjad.selectiontools.LogicalTie):
-            leaves = abjad.iterate(components).by_leaf()
-            leaves = list(leaves)
-        else:
-            assert isinstance(components[0], abjad.scoretools.Leaf)
-            leaves = components
+        leaves = abjad.select(argument).by_leaf()
         start_leaf = leaves[0]
         stop_leaf = leaves[-1]
         if self.start_markup is not None:

@@ -149,7 +149,7 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
             just_after = None
         if remote_voice_name is None:
             return self._current_offset
-        remote_selector = remote_selector or baca.select.leaf(0)
+        remote_selector = remote_selector or baca.select_leaf(0)
         floating_selections = self._floating_selections[remote_voice_name]
         selections = [_.selection for _ in floating_selections]
         result = remote_selector(selections)
@@ -232,7 +232,7 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
                     ),
                 ),
             color_unregistered_pitches=True,
-            preferred_denominator=16,
+            denominator=16,
             )
 
     def _make_voice_dictionary(self):
@@ -279,7 +279,7 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
             selection = self.assemble(voice_name)
             if selection:
                 segment_maker.append_specifiers(
-                    (voice_name, baca.select.stages(1, 1)),
+                    (voice_name, baca.select_stages(1, 1)),
                     baca.tools.RhythmSpecifier(
                         rhythm_maker=selection,
                         ),

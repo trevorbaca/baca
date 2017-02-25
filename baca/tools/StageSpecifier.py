@@ -169,13 +169,9 @@ class StageSpecifier(abjad.abctools.AbjadObject):
         '''
         return len(self.items)
 
-    ### PUBLIC METHODS ###
+    ### PRIVATE METHODS ###
 
-    def make_fermata_entries(self):
-        r'''Makes fermata entries.
-
-        Returns tuple of pairs.
-        '''
+    def _make_fermata_entries(self):
         fermata_entries = []
         for stage_index, item in enumerate(self):
             if isinstance(item, abjad.Fermata):

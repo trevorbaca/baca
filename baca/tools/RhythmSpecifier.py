@@ -264,7 +264,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
     @staticmethod
     def _all_are_selections(argument):
         return all(
-            isinstance(_, abjad.selectiontools.Selection) for _ in argument)
+            isinstance(_, abjad.Selection) for _ in argument)
 
     @staticmethod
     def _annotate_unpitched_notes(argument):
@@ -338,26 +338,26 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
 
     def _get_first_leaf(self, music):
         first_item = music[0]
-        if isinstance(first_item, abjad.selectiontools.Selection):
+        if isinstance(first_item, abjad.Selection):
             first_component = first_item[0]
         else:
             first_component = first_item
         first_leaf = abjad.inspect_(first_component).get_leaf(0)
-        assert isinstance(first_leaf, abjad.scoretools.Leaf), repr(first_leaf)
+        assert isinstance(first_leaf, abjad.Leaf), repr(first_leaf)
         return first_leaf
 
     def _get_last_leaf(self, music):
         last_item = music[-1]
-        if isinstance(last_item, abjad.selectiontools.Selection):
+        if isinstance(last_item, abjad.Selection):
             last_component = last_item[-1]
         else:
             last_component = last_item
-        assert isinstance(last_component, abjad.scoretools.Component)
-        if isinstance(last_component, abjad.scoretools.Leaf):
+        assert isinstance(last_component, abjad.Component)
+        if isinstance(last_component, abjad.Leaf):
             last_leaf = last_component
         else:
             last_leaf = abjad.inspect_(last_component).get_leaf(-1)
-        assert isinstance(last_leaf, abjad.scoretools.Leaf)
+        assert isinstance(last_leaf, abjad.Leaf)
         return last_leaf
 
     def _get_storage_format_specification(self):
@@ -373,7 +373,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
 
     def _make_rhythm(self, time_signatures, start_offset):
         rhythm_maker = self.rhythm_maker or self._default_rhythm_maker
-        if isinstance(rhythm_maker, abjad.selectiontools.Selection):
+        if isinstance(rhythm_maker, abjad.Selection):
             selections = [rhythm_maker]
         elif isinstance(rhythm_maker, abjad.rhythmmakertools.RhythmMaker):
             division_maker = self._get_division_maker()
@@ -422,7 +422,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
         for rhythm_overwrite in self.rhythm_overwrites:
             selector, division_maker, rhythm_maker = rhythm_overwrite
             old_music_selection = selector(dummy_music_voice)
-            prototype = abjad.selectiontools.Selection
+            prototype = abjad.Selection
             #if 1 < len(old_music_selection):
             if True:
                 old_music_selection = abjad.selectiontools.SliceSelection(
@@ -437,7 +437,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
                 dummy_music_voice[start_index:stop_index+1] = \
                     new_music_selection
             #elif len(old_music_selection) == 1:
-            #    prototype = abjad.selectiontools.Selection
+            #    prototype = abjad.Selection
             #    assert isinstance(old_music_selection[0], prototype)
             #    old_music_selection = old_music_selection[0]
             #    old_duration = old_music_selection.get_duration()

@@ -206,9 +206,9 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select.stages(1)),
+            ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('E4'),
-            ...     baca.make_messiaen_note_rhythm_specifier(),
+            ...     baca.messiaen_note_rhythm_specifier(),
             ...     baca.tools.ClusterSpecifier(
             ...         widths=[3, 4],
             ...         ),
@@ -440,9 +440,9 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select.stages(1)),
+                ...     ('vn', baca.select_stages(1)),
                 ...     baca.pitches('E4'),
-                ...     baca.make_messiaen_note_rhythm_specifier(),
+                ...     baca.messiaen_note_rhythm_specifier(),
                 ...     baca.tools.ClusterSpecifier(
                 ...         hide_flat_markup=True,
                 ...         widths=[3],
@@ -581,9 +581,9 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select.stages(1)),
+                ...     ('vn', baca.select_stages(1)),
                 ...     baca.pitches('E4'),
-                ...     baca.make_messiaen_note_rhythm_specifier(),
+                ...     baca.messiaen_note_rhythm_specifier(),
                 ...     baca.tools.ClusterSpecifier(
                 ...         hide_natural_markup=True,
                 ...         widths=[3],
@@ -722,8 +722,8 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select.stages(1)),
-                ...     baca.make_messiaen_note_rhythm_specifier(),
+                ...     ('vn', baca.select_stages(1)),
+                ...     baca.messiaen_note_rhythm_specifier(),
                 ...     baca.pitches('C4 D4 E4 F4'),
                 ...     baca.tools.ClusterSpecifier(
                 ...         widths=[3],
@@ -868,8 +868,8 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select.stages(1)),
-                ...     baca.make_messiaen_note_rhythm_specifier(),
+                ...     ('vn', baca.select_stages(1)),
+                ...     baca.messiaen_note_rhythm_specifier(),
                 ...     baca.pitches('C4 D4 E4 F4'),
                 ...     baca.tools.ClusterSpecifier(
                 ...         start_pitch='G4',
@@ -1025,9 +1025,9 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select.stages(1)),
+                ...     ('vn', baca.select_stages(1)),
                 ...     baca.pitches('E4'),
-                ...     baca.make_messiaen_note_rhythm_specifier(),
+                ...     baca.messiaen_note_rhythm_specifier(),
                 ...     baca.tools.ClusterSpecifier(
                 ...         widths=[0, 1, 2, 3],
                 ...         ),
@@ -1156,8 +1156,8 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select.stages(1)),
-                ...     baca.make_messiaen_note_rhythm_specifier(),
+                ...     ('vn', baca.select_stages(1)),
+                ...     baca.messiaen_note_rhythm_specifier(),
                 ...     baca.pitches('E4'),
                 ...     baca.tools.ClusterSpecifier(
                 ...         widths=[0, 3],
@@ -1272,8 +1272,8 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select.stages(1)),
-                ...     baca.make_messiaen_note_rhythm_specifier(),
+                ...     ('vn', baca.select_stages(1)),
+                ...     baca.messiaen_note_rhythm_specifier(),
                 ...     baca.pitches('E4', allow_repeat_pitches=True),
                 ...     baca.tools.ClusterSpecifier(
                 ...         widths=None,

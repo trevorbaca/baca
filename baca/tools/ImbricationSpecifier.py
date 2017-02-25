@@ -852,25 +852,25 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('v2', baca.select.stages(1)),
+                ...     ('v2', baca.select_stages(1)),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=voice_2_selections[0],
                 ...         ),
                 ...     )
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('v2', baca.select.stages(2)),
+                ...     ('v2', baca.select_stages(2)),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=voice_2_selections[1],
                 ...         ),
                 ...     )
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('v1', baca.select.stages(1)),
+                ...     ('v1', baca.select_stages(1)),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=voice_1_selections[0],
                 ...         ),
                 ...     )
                 >>> specifiers = segment_maker.append_specifiers(
-                ...     ('v1', baca.select.stages(2)),
+                ...     ('v1', baca.select_stages(2)),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=voice_1_selections[1],
                 ...         ),
@@ -1549,7 +1549,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         [2, 18, 16, 15],
                 ...         baca.accents(),
                 ...         baca.beam_everything(),
-                ...         selector=baca.select.pitched_logical_ties(-9),
+                ...         selector=baca.select_pitched_logical_ties(-9),
                 ...         ),
                 ...     )
                 >>> lilypond_file = figure_maker.show(contribution)

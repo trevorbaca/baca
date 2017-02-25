@@ -11,34 +11,34 @@ class StageExpression(abjad.expressiontools.Expression):
     __documentation_section__ = 'Utilities'
 
     __slots__ = (
-        '_stage_start_number',
-        '_stage_stop_number',
+        '_start',
+        '_stop',
         )
 
     ### INITIALIZER ###
 
     def __init__(
         self,
-        stage_start_number=None,
-        stage_stop_number=None,
+        start=None,
+        stop=None,
         ):
-        self._stage_start_number = stage_start_number
-        self._stage_stop_number = stage_stop_number
+        self._start = start
+        self._stop = stop
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def stage_start_number(self):
+    def start(self):
         r'''Gets stage start number.
 
         Returns integer or none.
         '''
-        return self._stage_start_number
+        return self._start
 
     @property
-    def stage_stop_number(self):
+    def stop(self):
         r'''Gets stage stop number.
 
         Returns integer or none.
         '''
-        return self._stage_stop_number
+        return self._stop

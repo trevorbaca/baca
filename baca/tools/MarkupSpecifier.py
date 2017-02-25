@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import abjad
+import baca
 
 
 class MarkupSpecifier(abjad.abctools.AbjadObject):
@@ -12,7 +13,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        Markup specifier selects head of first pitched logical tie by default:
+        Markup specifier selects first pitched leaf by default:
 
         ::
 
@@ -96,31 +97,23 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument):
+    def __call__(self, argument=None):
         r'''Calls specifier on `argument`.
 
         Returns none.
         '''
+        if not argument:
+            return
         if self.markup is None:
             return
-        selector = self._get_selector()
-        #print(selector)
-        selections = selector(argument)
-        #raise Exception(selections)
-        for item in selections:
+        selector = self.selector or baca.select_pitched_leaf(0)
+        selection = selector(argument)
+        if isinstance(selection, abjad.Component):
+            selection = abjad.select(selection)
+        assert all(isinstance(_, abjad.Component) for _ in selection)
+        for component in  selection:
             markup = abjad.new(self.markup)
-            abjad.attach(markup, item)
-
-    ### PRIVATE METHODS ###
-
-    def _get_selector(self):
-        if self.selector is None:
-            selector = abjad.selectortools.Selector()
-            selector = selector.by_logical_tie(pitched=True, flatten=True)
-            selector = selector.get_slice(stop=1, apply_to_each=False)
-            selector = selector.get_item(0, apply_to_each=True)
-            return selector
-        return self.selector
+            abjad.attach(markup, component)
 
     ### PUBLIC PROPERTIES ###
 

@@ -17,93 +17,6 @@ class MarkupLibrary(object):
 
     __documentation_section__ = 'Library'
 
-    ### PUBLIC METHODS ###
-
-    ### factory functions ###
-
-    @staticmethod
-    def make_markup(string, direction=Up, is_new=True, whiteout=True):
-        if not is_new:
-            string = '({})'.format(string)
-        markup = abjad.Markup(string, direction=direction)
-        markup = markup.upright()
-        if whiteout:
-            markup = markup.whiteout()
-        return markup
-
-    @staticmethod
-    def make_markup_lines(strings, direction=Up):
-        assert isinstance(strings, list), repr(strings)
-        lines = []
-        for string in strings:
-            line = abjad.Markup(string).line()
-            lines.append(line)
-        markup = abjad.Markup.column(lines, direction=Up)
-        return markup
-
-    @classmethod
-    def make_markup_lines_specifier(
-        class_,
-        strings,
-        direction=Up,
-        selector=None,
-        ):
-        markup = class_.make_markup_lines(strings, direction=direction)
-        return baca.tools.MarkupSpecifier(
-            markup=markup,
-            selector=selector,
-            )
-
-    @classmethod
-    def make_markup_specifier(
-        class_,
-        string,
-        direction=Up,
-        is_new=True,
-        selector=None,
-        whiteout=True,
-        ):
-        markup = class_.make_markup(
-            string,
-            direction=direction,
-            is_new=is_new,
-            whiteout=whiteout,
-            )
-        return baca.tools.MarkupSpecifier(
-            markup=markup,
-            selector=selector,
-            )
-
-    @staticmethod
-    def make_repeated_markup(markups):
-        return baca.tools.MarkupSpecifier(
-            markup=markups,
-            selector=abjad.select().
-                by_logical_tie(pitched=True).
-                get_item(0, apply_to_each=True),
-            )
-
-    @classmethod
-    def make_two_part_transition_markup(
-        class_,
-        string_1,
-        string_2,
-        first_is_new=True,
-        second_is_new=True,
-        ):
-        if first_is_new:
-            if second_is_new:
-                composite_string = '{} + {}'
-            else:
-                composite_string = '{} (+{})'
-        else:
-            if second_is_new:
-                composite_string = '({}+) {}'
-            else:
-                composite_string = '({} + {})'
-        composite_string = composite_string.format(string_1, string_2)
-        return class_.make_markup(composite_string)
-
     ### PRIVATE FUNCTIONS ###
 
     @staticmethod
@@ -122,148 +35,9 @@ class MarkupLibrary(object):
             markup = markup.hcenter_in(space)
         return markup
 
-    @classmethod
-    def make_instrument_name_markup(class_, string, column=True):
-        r'''Makes instrument name markup.
+    ### PUBLIC METHODS ###
 
-        ::
-
-            >>> import abjad
-            >>> import baca
-
-        ..  container:: example
-
-            Makes instrument name markup in column:
-
-            ::
-
-                >>> markup = baca.markup.make_instrument_name_markup('Eng. horn')
-
-            ::
-
-                >>> show(markup) # doctest: +SKIP
-
-            ..  doctest::
-
-                >>> f(markup)
-                \markup {
-                    \hcenter-in
-                        #16
-                        \center-column
-                            {
-                                Eng.
-                                horn
-                            }
-                    }
-
-        ..  container:: example
-
-            Makes instrument name markup in line:
-
-            ::
-
-                >>> markup = baca.markup.make_instrument_name_markup(
-                ...     'Violin 1',
-                ...     column=False,
-                ...     )
-
-            ::
-
-                >>> show(markup) # doctest: +SKIP
-
-            ..  doctest::
-
-                >>> f(markup)
-                \markup {
-                    \hcenter-in
-                        #16
-                        \line
-                            {
-                                Violin
-                                1
-                            }
-                    }
-        
-        Centers markup horizontally in 16 spaces.
-
-        Returns markup.
-        '''
-        return class_._make_instrument_name_markup(
-            string, 
-            16,
-            column=column,
-            )
-
-    @classmethod
-    def make_short_instrument_name_markup(class_, string, column=True):
-        r'''Makes short instrument name markup.
-
-        ..  container:: example
-
-            Makes short instrument name markup in column:
-
-            ::
-
-                >>> markup = baca.markup.make_short_instrument_name_markup(
-                ...     'Eng. hn.',
-                ...     )
-
-            ::
-
-                >>> show(markup) # doctest: +SKIP
-
-            ..  doctest::
-
-                >>> f(markup)
-                \markup {
-                    \hcenter-in
-                        #10
-                        \center-column
-                            {
-                                Eng.
-                                hn.
-                            }
-                    }
-
-        ..  container:: example
-
-            Makes short instrument name markup in line:
-
-            ::
-
-                >>> markup = baca.markup.make_short_instrument_name_markup(
-                ...     'Vn. 1',
-                ...     column=False,
-                ...     )
-
-            ::
-
-                >>> show(markup) # doctest: +SKIP
-
-            ..  doctest::
-
-                >>> f(markup)
-                \markup {
-                    \hcenter-in
-                        #10
-                        \line
-                            {
-                                Vn.
-                                1
-                            }
-                    }
-        
-        Centers markup horizontally in 10 spaces.
-
-        Returns markup.
-        '''
-        return class_._make_instrument_name_markup(
-            string, 
-            10,
-            column=column,
-            )
-
-    ### library ###
+    ### LIBRARY ###
 
     @classmethod
     def accent_changes_of_direction(class_):
@@ -289,6 +63,49 @@ class MarkupLibrary(object):
     @classmethod
     def attackless(class_):
         return class_.make_markup('attackless')
+
+    @classmethod
+    def boxed(class_, string, whiteout=True):
+        markup = abjad.Markup(string, direction=Up)
+        markup = markup.box().override(('box-padding', 0.5))
+        if whiteout:
+            markup = markup.whiteout()
+        return markup
+
+    @staticmethod
+    def boxed_lines(strings, direction=Up, whiteout=True):
+        assert isinstance(strings, list), repr(strings)
+        lines = []
+        for string in strings:
+            line = abjad.Markup(string).line()
+            lines.append(line)
+        markup = abjad.MarkupList(lines, direction=direction).column()
+        markup = markup.box().override(('box-padding', 0.5))
+        if whiteout:
+            markup = markup.whiteout()
+        return markup
+
+    @staticmethod
+    def boxed_repeat_count(count):
+        string = 'x{}'.format(count)
+        markup = abjad.Markup(string, direction=Up)
+        markup = markup.sans().bold().fontsize(6).upright()
+        markup = markup.box().override(('box-padding', 0.5))
+        return markup
+
+    @staticmethod
+    def boxed_specifier(string, whiteout=True):
+        markup = abjad.Markup(string, direction=Up)
+        markup = markup.box().override(('box-padding', 0.5))
+        if whiteout:
+            markup = markup.whiteout()
+        return baca.tools.MarkupSpecifier(markup=markup)
+
+    @staticmethod
+    def clicks_per_second(lower, upper):
+        string = '{}-{} clicks/sec.'
+        string = string.format(lower, upper)
+        return MarkupLibrary.make_markup(string)
 
     @classmethod
     def col_legno_battuto(class_):
@@ -330,6 +147,18 @@ class MarkupLibrary(object):
     def fluttertongue(class_):
         return class_.make_markup('fluttertongue')
 
+    @staticmethod
+    def fractional_OB(numerator, denominator):
+        string = '{}/{}OB'
+        string = string.format(numerator, denominator)
+        return MarkupLibrary.make_markup(string)
+
+    @classmethod
+    def fractional_scratch(numerator, denominator):
+        string = '{}/{} scratch'
+        string = string.format(numerator, denominator)
+        return class_.make_markup(string)
+
     @classmethod
     def full_bow_strokes(class_):
         return class_.make_markup('full bow strokes')
@@ -341,6 +170,73 @@ class MarkupLibrary(object):
     @classmethod
     def gridato_possibile(class_):
         return class_.make_markup('gridato possibile')
+
+    @classmethod
+    def instrument_name(class_, string, column=True):
+        r'''Makes instrument name markup.
+
+        ..  container:: example
+
+            Makes instrument name markup in column:
+
+            ::
+
+                >>> markup = baca.markup.instrument_name('Eng. horn')
+
+            ::
+
+                >>> show(markup) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(markup)
+                \markup {
+                    \hcenter-in
+                        #16
+                        \center-column
+                            {
+                                Eng.
+                                horn
+                            }
+                    }
+
+        ..  container:: example
+
+            Makes instrument name markup in line:
+
+            ::
+
+                >>> markup = baca.markup.instrument_name(
+                ...     'Violin 1',
+                ...     column=False,
+                ...     )
+
+            ::
+
+                >>> show(markup) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(markup)
+                \markup {
+                    \hcenter-in
+                        #16
+                        \line
+                            {
+                                Violin
+                                1
+                            }
+                    }
+        
+        Centers markup horizontally in 16 spaces.
+
+        Returns markup.
+        '''
+        return class_._make_instrument_name_markup(
+            string, 
+            16,
+            column=column,
+            )
 
     @classmethod
     def kn_rasg(class_, is_new=True):
@@ -362,105 +258,29 @@ class MarkupLibrary(object):
     def leggierissimo_off_string_bowing_on_staccati(class_):
         return class_.make_markup('leggierissimo: off-string bowing on staccati')
 
-    @classmethod
-    def lv_possibile(class_):
-        return class_.make_markup('l.v. possibile')
-
-    @classmethod
-    def make_boxed_markup(class_, string, whiteout=True):
-        markup = abjad.Markup(string, direction=Up)
-        markup = markup.box().override(('box-padding', 0.5))
-        if whiteout:
-            markup = markup.whiteout()
-        return markup
-
     @staticmethod
-    def make_boxed_markup_lines(strings, direction=Up, whiteout=True):
+    def lines(strings, direction=Up):
         assert isinstance(strings, list), repr(strings)
         lines = []
         for string in strings:
             line = abjad.Markup(string).line()
             lines.append(line)
-        markup = abjad.MarkupList(lines, direction=direction).column()
-        markup = markup.box().override(('box-padding', 0.5))
+        markup = abjad.Markup.column(lines, direction=Up)
+        return markup
+
+    @classmethod
+    def lv_possibile(class_):
+        return class_.make_markup('l.v. possibile')
+
+    @staticmethod
+    def make_markup(string, direction=Up, is_new=True, whiteout=True):
+        if not is_new:
+            string = '({})'.format(string)
+        markup = abjad.Markup(string, direction=direction)
+        markup = markup.upright()
         if whiteout:
             markup = markup.whiteout()
         return markup
-
-    @staticmethod
-    def make_boxed_markup_specifier(string, whiteout=True):
-        markup = abjad.Markup(string, direction=Up)
-        markup = markup.box().override(('box-padding', 0.5))
-        if whiteout:
-            markup = markup.whiteout()
-        return baca.tools.MarkupSpecifier(markup=markup)
-
-    @staticmethod
-    def make_boxed_repeat_count(count):
-        string = 'x{}'.format(count)
-        markup = abjad.Markup(string, direction=Up)
-        markup = markup.sans().bold().fontsize(6).upright()
-        markup = markup.box().override(('box-padding', 0.5))
-        return markup
-
-    @staticmethod
-    def make_clicks_per_second(lower, upper):
-        string = '{}-{} clicks/sec.'
-        string = string.format(lower, upper)
-        return MarkupLibrary.make_markup(string)
-
-    @staticmethod
-    def make_fractional_OB(numerator, denominator):
-        string = '{}/{}OB'
-        string = string.format(numerator, denominator)
-        return MarkupLibrary.make_markup(string)
-
-    @classmethod
-    def make_fractional_scratch(numerator, denominator):
-        string = '{}/{} scratch'
-        string = string.format(numerator, denominator)
-        return class_.make_markup(string)
-
-    @staticmethod
-    def make_one_click_every(lower, upper):
-        string = '1 click/{}-{} sec.'
-        string = string.format(lower, upper)
-        return MarkupLibrary.make_markup(string)
-
-    @classmethod
-    def make_pos_ord_fractional_scratch(numerator, denominator):
-        string = 'pos. ord. + {}/{} scratch'
-        string = string.format(numerator, denominator)
-        return class_.make_markup(string)
-
-    @classmethod
-    def make_string_number(n):
-        to_roman_numeral = {
-            1: 'I',
-            2: 'II',
-            3: 'III',
-            4: 'IV',
-            }
-        string_number = to_roman_numeral[n]
-        return class_.make_markup(string_number, direction=Down)
-
-    @classmethod
-    def make_string_numbers(numbers):
-        to_roman_numeral = {
-            1: 'I',
-            2: 'II',
-            3: 'III',
-            4: 'IV',
-            }
-        string_numbers = [to_roman_numeral[_] for _ in numbers]
-        string_numbers = '+'.join(string_numbers)
-        return class_.make_markup(string_numbers, direction=Down)
-
-    @classmethod
-    def make_tasto_fractional_scratch(numerator, denominator):
-        string = 'tasto + {}/{} scratch'
-        string = string.format(numerator, denominator)
-        return class_.make_markup(string)
 
     @classmethod
     def molto_flautando(class_):
@@ -480,7 +300,7 @@ class MarkupLibrary(object):
         first_is_new=True,
         second_is_new=True,
         ):
-        return class_.make_two_part_transition_markup(
+        return class_.two_part_transition(
             'molto pont.',
             'vib. molto',
             first_is_new=first_is_new,
@@ -535,6 +355,12 @@ class MarkupLibrary(object):
     def off_string_bowing_on_staccati(class_):
         return class_.make_markup('off-string bowing on staccati')
 
+    @staticmethod
+    def one_click_every(lower, upper):
+        string = '1 click/{}-{} sec.'
+        string = string.format(lower, upper)
+        return MarkupLibrary.make_markup(string)
+
     @classmethod
     def ord_(class_):
         return class_.make_markup('ord.')
@@ -581,7 +407,7 @@ class MarkupLibrary(object):
         first_is_new=True,
         second_is_new=True,
         ):
-        return class_.make_two_part_transition_markup(
+        return class_.two_part_transition(
             'PO',
             'non vib.',
             first_is_new=first_is_new,
@@ -594,7 +420,7 @@ class MarkupLibrary(object):
         first_is_new=True,
         second_is_new=True,
         ):
-        return class_.make_two_part_transition_markup(
+        return class_.two_part_transition(
             'PO',
             'poco vib.',
             first_is_new=first_is_new,
@@ -631,7 +457,7 @@ class MarkupLibrary(object):
         first_is_new=True,
         second_is_new=True,
         ):
-        return class_.make_two_part_transition_markup(
+        return class_.two_part_transition(
             'poco pont.',
             'non vib.',
             first_is_new=first_is_new,
@@ -644,7 +470,7 @@ class MarkupLibrary(object):
         first_is_new=True,
         second_is_new=True,
         ):
-        return class_.make_two_part_transition_markup(
+        return class_.two_part_transition(
             'poco pont.',
             'sub. non vib.',
             first_is_new=first_is_new,
@@ -657,7 +483,7 @@ class MarkupLibrary(object):
         first_is_new=True,
         second_is_new=True,
         ):
-        return class_.make_two_part_transition_markup(
+        return class_.two_part_transition(
             'poco pont.',
             'sub. vib. mod.',
             first_is_new=first_is_new,
@@ -670,7 +496,7 @@ class MarkupLibrary(object):
         first_is_new=True,
         second_is_new=True,
         ):
-        return class_.make_two_part_transition_markup(
+        return class_.two_part_transition(
             'poco pont.',
             'vib. mod.',
             first_is_new=first_is_new,
@@ -746,6 +572,73 @@ class MarkupLibrary(object):
         return class_.make_markup('senza vib.')
 
     @classmethod
+    def short_instrument_name(class_, string, column=True):
+        r'''Makes short instrument name markup.
+
+        ..  container:: example
+
+            Makes short instrument name markup in column:
+
+            ::
+
+                >>> markup = baca.markup.short_instrument_name('Eng. hn.')
+
+            ::
+
+                >>> show(markup) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(markup)
+                \markup {
+                    \hcenter-in
+                        #10
+                        \center-column
+                            {
+                                Eng.
+                                hn.
+                            }
+                    }
+
+        ..  container:: example
+
+            Makes short instrument name markup in line:
+
+            ::
+
+                >>> markup = baca.markup.short_instrument_name(
+                ...     'Vn. 1',
+                ...     column=False,
+                ...     )
+
+            ::
+
+                >>> show(markup) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(markup)
+                \markup {
+                    \hcenter-in
+                        #10
+                        \line
+                            {
+                                Vn.
+                                1
+                            }
+                    }
+        
+        Centers markup horizontally in 10 spaces.
+
+        Returns markup.
+        '''
+        return class_._make_instrument_name_markup(
+            string, 
+            10,
+            column=column,
+            )
+
+    @classmethod
     def sparse_clicks(class_):
         first_line = abjad.Markup(
             'sparse, individual clicks with extremely slow bow')
@@ -767,8 +660,51 @@ class MarkupLibrary(object):
         return class_.make_markup('spazzolato (1/2 clt)')
 
     @classmethod
+    def specifier(
+        class_,
+        string,
+        direction=Up,
+        is_new=True,
+        selector=None,
+        whiteout=True,
+        ):
+        markup = class_.make_markup(
+            string,
+            direction=direction,
+            is_new=is_new,
+            whiteout=whiteout,
+            )
+        return baca.tools.MarkupSpecifier(
+            markup=markup,
+            selector=selector,
+            )
+
+    @classmethod
     def still(class_, is_new=True):
         return class_.make_markup('still', is_new=is_new)
+
+    @classmethod
+    def string_number(n):
+        to_roman_numeral = {
+            1: 'I',
+            2: 'II',
+            3: 'III',
+            4: 'IV',
+            }
+        string_number = to_roman_numeral[n]
+        return class_.make_markup(string_number, direction=Down)
+
+    @classmethod
+    def string_numbers(numbers):
+        to_roman_numeral = {
+            1: 'I',
+            2: 'II',
+            3: 'III',
+            4: 'IV',
+            }
+        string_numbers = [to_roman_numeral[_] for _ in numbers]
+        string_numbers = '+'.join(string_numbers)
+        return class_.make_markup(string_numbers, direction=Down)
 
     @classmethod
     def subito_non_armonichi_e_non_gridato(class_):
@@ -795,6 +731,12 @@ class MarkupLibrary(object):
         return class_.make_markup('tasto + FB flaut.')
 
     @classmethod
+    def tasto_fractional_scratch(numerator, denominator):
+        string = 'tasto + {}/{} scratch'
+        string = string.format(numerator, denominator)
+        return class_.make_markup(string)
+
+    @classmethod
     def tasto_half_scratch(class_):
         return class_.make_markup('tasto + 1/2 scratch')
 
@@ -812,7 +754,7 @@ class MarkupLibrary(object):
         first_is_new=True,
         second_is_new=True,
         ):
-        return class_.make_two_part_transition_markup(
+        return class_.two_part_transition(
             'tasto',
             'non vib.',
             first_is_new=first_is_new,
@@ -833,7 +775,7 @@ class MarkupLibrary(object):
         first_is_new=True,
         second_is_new=True,
         ):
-        return class_.make_two_part_transition_markup(
+        return class_.two_part_transition(
             'tasto',
             'poco vib.',
             first_is_new=first_is_new,
@@ -881,6 +823,27 @@ class MarkupLibrary(object):
         return class_.make_markup('trem. flaut. tast.')
 
     @classmethod
+    def two_part_transition(
+        class_,
+        string_1,
+        string_2,
+        first_is_new=True,
+        second_is_new=True,
+        ):
+        if first_is_new:
+            if second_is_new:
+                composite_string = '{} + {}'
+            else:
+                composite_string = '{} (+{})'
+        else:
+            if second_is_new:
+                composite_string = '({}+) {}'
+            else:
+                composite_string = '({} + {})'
+        composite_string = composite_string.format(string_1, string_2)
+        return class_.make_markup(composite_string)
+
+    @classmethod
     def vib_moltiss(class_):
         return class_.make_markup('vib. moltiss.')
 
@@ -906,7 +869,7 @@ class MarkupLibrary(object):
         first_is_new=True,
         second_is_new=True,
         ):
-        return class_.make_two_part_transition_markup(
+        return class_.two_part_transition(
             'XFB',
             'pochiss. pont.',
             first_is_new=first_is_new,
@@ -919,7 +882,7 @@ class MarkupLibrary(object):
         first_is_new=True,
         second_is_new=True,
         ):
-        return class_.make_two_part_transition_markup(
+        return class_.two_part_transition(
             'XFB',
             'tasto',
             first_is_new=first_is_new,

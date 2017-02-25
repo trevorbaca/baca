@@ -133,7 +133,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
             ...     time_signatures=time_signatures,
             ...     )
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select.stages(1)),
+            ...     ('vn', baca.select_stages(1)),
             ...     baca.tools.RhythmSpecifier(
             ...         rhythm_maker=selection,
             ...         ),
@@ -278,7 +278,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
             return selections
         tuplets = []
         for selection in selections:
-            if not isinstance(selection, abjad.selectiontools.Selection):
+            if not isinstance(selection, abjad.Selection):
                 message = 'should be selection: {!r}.'
                 message = message.format(selection)
             assert len(selection) == 1, repr(selection)
@@ -291,7 +291,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
             tuplet_selections = [
                 abjad.select(list(_)) for _ in tuplet_selections]
         selections_ = []
-        prototype = abjad.selectiontools.Selection
+        prototype = abjad.Selection
         for index, tuplet_selection in enumerate(tuplet_selections):
             assert isinstance(tuplet_selection, prototype), repr(
                 tuplet_selection)
@@ -303,7 +303,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
                     tuplet_selection,
                     time_treatment,
                     )
-                selection_ = abjad.selectiontools.Selection([nested_tuplet])
+                selection_ = abjad.Selection([nested_tuplet])
                 selections_.append(selection_)
         return selections_
 
@@ -315,7 +315,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
 
     @staticmethod
     def _make_nested_tuplet(tuplet_selection, time_treatment):
-        assert isinstance(tuplet_selection, abjad.selectiontools.Selection)
+        assert isinstance(tuplet_selection, abjad.Selection)
         for tuplet in tuplet_selection:
             assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
         if isinstance(time_treatment, str):

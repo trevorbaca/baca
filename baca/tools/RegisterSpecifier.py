@@ -13,6 +13,54 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
+        With figure-maker:
+
+        ::
+
+            >>> figure_maker = baca.tools.FigureMaker()
+
+        ::
+
+            >>> contribution = figure_maker(
+            ...     'Voice 1',
+            ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
+            ...     baca.tools.RegisterSpecifier(
+            ...         registration=abjad.Registration(
+            ...             [('[A0, C8]', 15)],
+            ...             ),
+            ...         ),
+            ...     )
+            >>> lilypond_file = figure_maker.show(contribution)
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> f(lilypond_file[abjad.Staff])
+            \new Staff <<
+                \context Voice = "Voice 1" {
+                    \voiceOne
+                    {
+                        {
+                            bf''16 [
+                            c'''16
+                            d'''16 ]
+                        }
+                        {
+                            bf''16 [
+                            c'''16
+                            d'''16 ]
+                        }
+                        {
+                            bf''16 [
+                            c'''16
+                            d'''16 ]
+                        }
+                    }
+                }
+            >>
+
+    ..  container:: example
+
         With segment-maker:
 
         ::
@@ -25,9 +73,9 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select.stages(1)),
+            ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4'),
-            ...     baca.make_even_run_rhythm_specifier(),
+            ...     baca.even_run_rhythm_specifier(),
             ...     baca.tools.RegisterSpecifier(
             ...         registration=abjad.Registration(
             ...             [('[A0, C8]', 15)],
@@ -117,54 +165,6 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
                 >>
             >>
 
-    ..  container:: example
-
-        With figure-maker:
-
-        ::
-
-            >>> figure_maker = baca.tools.FigureMaker()
-
-        ::
-
-            >>> contribution = figure_maker(
-            ...     'Voice 1',
-            ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
-            ...     baca.tools.RegisterSpecifier(
-            ...         registration=abjad.Registration(
-            ...             [('[A0, C8]', 15)],
-            ...             ),
-            ...         ),
-            ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
-            >>> show(lilypond_file) # doctest: +SKIP
-
-        ..  doctest::
-
-            >>> f(lilypond_file[abjad.Staff])
-            \new Staff <<
-                \context Voice = "Voice 1" {
-                    \voiceOne
-                    {
-                        {
-                            bf''16 [
-                            c'''16
-                            d'''16 ]
-                        }
-                        {
-                            bf''16 [
-                            c'''16
-                            d'''16 ]
-                        }
-                        {
-                            bf''16 [
-                            c'''16
-                            d'''16 ]
-                        }
-                    }
-                }
-            >>
-
     """
 
     ### CLASS VARIABLES ###
@@ -190,7 +190,44 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls registration specifier on `argument`.
+        r'''Calls specifier on `argument`.
+
+        ..  container:: example
+
+            Works with chords:
+
+            ::
+
+                >>> figure_maker = baca.tools.FigureMaker()
+
+            ::
+
+                >>> contribution = figure_maker(
+                ...     'Voice 1',
+                ...     [[10, 12, 14]],
+                ...     baca.tools.SimultaneitySpecifier(),
+                ...     baca.tools.RegisterSpecifier(
+                ...         registration=abjad.Registration(
+                ...             [('[A0, C8]', -6)],
+                ...             ),
+                ...         ),
+                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            {
+                                <bf c' d'>16
+                            }
+                        }
+                    }
+                >>
 
         Returns none.
         '''
@@ -211,16 +248,24 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
                 pitched=True,
                 with_grace_notes=True,
                 ):
-                for note in logical_tie:
-                    written_pitch = self.registration([note.written_pitch])
-                    self._set_pitch(note, written_pitch)
+                for leaf in logical_tie:
+                    if isinstance(leaf, abjad.Note):
+                        written_pitch = leaf.written_pitch
+                        written_pitch = self.registration([written_pitch])
+                        leaf.written_pitch = written_pitch
+                    elif isinstance(leaf, abjad.Chord):
+                        written_pitches = leaf.written_pitches
+                        written_pitches = self.registration(written_pitches)
+                        leaf.written_pitches = written_pitches
+                    else:
+                        raise TypeError(leaf)
+                    self._mark_as_registered(leaf)
 
     ### PRIVATE METHODS ###
 
     @staticmethod
-    def _set_pitch(note, written_pitch):
-        note.written_pitch = written_pitch
-        abjad.detach('not yet registered', note)
+    def _mark_as_registered(leaf):
+        abjad.detach('not yet registered', leaf)
 
     ### PUBLIC PROPERTIES ###
 

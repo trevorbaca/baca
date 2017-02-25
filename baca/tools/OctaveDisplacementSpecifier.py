@@ -24,9 +24,9 @@ class OctaveDisplacementSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select.stages(1)),
+            ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('G4'),
-            ...     baca.make_even_run_rhythm_specifier(),
+            ...     baca.even_run_rhythm_specifier(),
             ...     baca.tools.OctaveDisplacementSpecifier(
             ...         displacements=[0, 0, 1, 1, 0, 0, -1, -1, 2, 2],
             ...         ),
