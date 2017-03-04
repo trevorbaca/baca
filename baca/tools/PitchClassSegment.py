@@ -305,7 +305,39 @@ class PitchClassSegment(abjad.PitchClassSegment):
             numbers.append(number)
         return type(self)(items=numbers)
 
+    def chord(self):
+        r'''Changes segment to set.
 
+        ..  container:: example
+
+            ::
+
+                >>> segment = baca.pitch_class_segment([-2, -1.5, 6, 7])
+
+            ::
+
+                >>> segment.chord()
+                PitchClassSet([6, 7, 10, 10.5])
+
+            ::
+
+                >>> show(segment.chord()) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = segment.chord().__illustrate__()
+                >>> f(lilypond_file[abjad.Voice])
+                \new Voice {
+                    <fs' g' bf' bqf'>1
+                }
+
+        Returns pitch-class set.
+        '''
+        return baca.PitchClassSet(
+            items=self,
+            item_class=self.item_class,
+            )
+        
     def has_duplicates(self):
         r'''Is true when pitch-class segment has duplicates.
 
@@ -433,6 +465,167 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 return True
             previous_item = item
         return False
+
+    def space_up(self, bass=None, semitones=None, soprano=None):
+        r'''Spaces segment up.
+
+        ..  container:: example
+
+            ::
+
+                >>> segment = baca.pitch_class_segment([10, 11, 5, 6, 7])
+                >>> show(segment) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = segment.__illustrate__()
+                >>> f(lilypond_file[abjad.Voice])
+                \new Voice {
+                    bf'8
+                    b'8
+                    f'8
+                    fs'8
+                    g'8
+                    \bar "|."
+                    \override Score.BarLine.transparent = ##f
+                }
+
+            ::
+
+                >>> segment.space_up(bass=6, soprano=7)
+                PitchSegment([6, 10, 11, 17, 19])
+
+            ::
+
+                >>> segment = segment.space_up(bass=6, soprano=7)
+                >>> show(segment) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = segment.__illustrate__()
+                >>> f(lilypond_file[abjad.Score])
+                \new Score \with {
+                    \override BarLine.stencil = ##f
+                    \override BarNumber.transparent = ##t
+                    \override Rest.transparent = ##t
+                    \override SpanBar.stencil = ##f
+                    \override TimeSignature.stencil = ##f
+                } <<
+                    \new PianoStaff <<
+                        \context Staff = "treble" {
+                            \clef "treble"
+                            fs'1 * 1/8
+                            bf'1 * 1/8
+                            b'1 * 1/8
+                            f''1 * 1/8
+                            g''1 * 1/8
+                        }
+                        \context Staff = "bass" {
+                            \clef "bass"
+                            r1 * 1/8
+                            r1 * 1/8
+                            r1 * 1/8
+                            r1 * 1/8
+                            r1 * 1/8
+                        }
+                    >>
+                >>
+
+        Returns pitch segment.
+        '''
+        specifier = baca.tools.ChordalSpacingSpecifier(
+            bass=bass,
+            direction=Up,
+            minimum_semitones=semitones,
+            soprano=soprano,
+            )
+        segments = specifier([self])
+        assert len(segments) == 1, repr(segments)
+        segment = segments[0]
+        assert isinstance(segment, baca.PitchSegment)
+        return segment
+
+    def space_down(self, bass=None, semitones=None, soprano=None):
+        r'''Spaces segment down.
+
+        ..  container:: example
+
+            ::
+
+                >>> segment = baca.pitch_class_segment([10, 11, 5, 6, 7])
+                >>> show(segment) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = segment.__illustrate__()
+                >>> f(lilypond_file[abjad.Voice])
+                \new Voice {
+                    bf'8
+                    b'8
+                    f'8
+                    fs'8
+                    g'8
+                    \bar "|."
+                    \override Score.BarLine.transparent = ##f
+                }
+
+            ::
+
+                >>> segment.space_down(bass=6, soprano=7)
+                PitchSegment([19, 17, 11, 10, 6])
+
+            ::
+
+                >>> segment = segment.space_down(bass=6, soprano=7)
+                >>> show(segment) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = segment.__illustrate__()
+                >>> f(lilypond_file[abjad.Score])
+                \new Score \with {
+                    \override BarLine.stencil = ##f
+                    \override BarNumber.transparent = ##t
+                    \override Rest.transparent = ##t
+                    \override SpanBar.stencil = ##f
+                    \override TimeSignature.stencil = ##f
+                } <<
+                    \new PianoStaff <<
+                        \context Staff = "treble" {
+                            \clef "treble"
+                            g''1 * 1/8
+                            f''1 * 1/8
+                            b'1 * 1/8
+                            bf'1 * 1/8
+                            fs'1 * 1/8
+                        }
+                        \context Staff = "bass" {
+                            \clef "bass"
+                            r1 * 1/8
+                            r1 * 1/8
+                            r1 * 1/8
+                            r1 * 1/8
+                            r1 * 1/8
+                        }
+                    >>
+                >>
+
+        Returns pitch segment.
+        '''
+        specifier = baca.tools.ChordalSpacingSpecifier(
+            bass=bass,
+            direction=Down,
+            minimum_semitones=semitones,
+            soprano=soprano,
+            )
+        segments = specifier([self])
+        assert len(segments) == 1, repr(segments)
+        segment = segments[0]
+        if not isinstance(segment, baca.PitchSegment):
+            message = 'must be pitch segment: {!r}.'
+            message = message.format(segment)
+            raise TypeError(message)
+        return segment
 
 
 def _pitch_class_segment(items=None, **keywords):

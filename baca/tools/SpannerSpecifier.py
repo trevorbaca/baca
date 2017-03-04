@@ -26,8 +26,8 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = figure_maker('Voice 1', segments)
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = figure_maker('Voice 1', collections)
             >>> lilypond_file = figure_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
@@ -59,20 +59,20 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        With segment-maker:
+        With collection-maker:
 
         ..  note:: Teach SegmentMaker about SpannerSpecifier.
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker(
+            >>> collection_maker = baca.tools.SegmentMaker(
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
         ::
 
-            >>> specifiers = segment_maker.append_specifiers(
+            >>> specifiers = collection_maker.append_specifiers(
             ...     ('vn', baca.select_stages(1)),
             ...     baca.even_run_rhythm_specifier(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -84,8 +84,8 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> result = segment_maker(is_doc_example=True)
-            >>> lilypond_file, segment_metadata = result
+            >>> result = collection_maker(is_doc_example=True)
+            >>> lilypond_file, collection_metadata = result
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -247,8 +247,8 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -292,8 +292,8 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[1]]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> collections = [[1]]
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 

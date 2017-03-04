@@ -28,8 +28,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ::
 
-            >>> segments = [[0, 2, 10, 8]]
-            >>> selections, state_manifest = rhythm_maker(segments)
+            >>> collections = [[0, 2, 10, 8]]
+            >>> selections, state_manifest = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> show(lilypond_file) # doctest: +SKIP
 
@@ -50,8 +50,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ::
 
-            >>> segments = [[18, 16, 15, 20, 19]]
-            >>> selections, state_manifest = rhythm_maker(segments)
+            >>> collections = [[18, 16, 15, 20, 19]]
+            >>> selections, state_manifest = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> show(lilypond_file) # doctest: +SKIP
 
@@ -73,8 +73,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ::
 
-            >>> segments = [[9]]
-            >>> selections, state_manifest = rhythm_maker(segments)
+            >>> collections = [[9]]
+            >>> selections, state_manifest = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> show(lilypond_file) # doctest: +SKIP
 
@@ -92,8 +92,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ::
 
-            >>> segments = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state_manifest = rhythm_maker(segments)
+            >>> collections = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
+            >>> selections, state_manifest = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> show(lilypond_file) # doctest: +SKIP
 
@@ -191,13 +191,13 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
     def __call__(
         self,
-        segments,
+        collections,
         rest_affix_specifier=None,
-        segment_index=None,
+        collection_index=None,
         state_manifest=None,
-        total_segments=None,
+        total_collections=None,
         ):
-        r'''Calls rhythm-maker on `segments`.
+        r'''Calls rhythm-maker on `collections`.
 
         ..  container:: example
 
@@ -214,8 +214,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -264,10 +264,10 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> state_manifest = {'_next_attack': 2}
                 >>> selections, state_manifest = rhythm_maker(
-                ...     segments,
+                ...     collections,
                 ...     state_manifest=state_manifest, 
                 ...     )
                 >>> lilypond_file = rhythm_maker.show(selections)
@@ -308,10 +308,10 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         '''
         self._apply_state_manifest(state_manifest)
         selections = self._make_music(
-            segments,
+            collections,
             rest_affix_specifier=rest_affix_specifier,
-            segment_index=segment_index,
-            total_segments=total_segments,
+            collection_index=collection_index,
+            total_collections=total_collections,
             )
         selections = self._apply_specifiers(selections)
         self._check_well_formedness(selections)
@@ -378,12 +378,12 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         assert sum(durations) == total_duration
         return durations
 
-    def _get_acciaccatura_specifier(self, segment_index, total_segments):
+    def _get_acciaccatura_specifier(self, collection_index, total_collections):
         if not self.acciaccatura_specifiers:
             return
         for acciaccatura_specifier in self.acciaccatura_specifiers:
             pattern = acciaccatura_specifier._get_pattern()
-            if pattern.matches_index(segment_index, total_segments):
+            if pattern.matches_index(collection_index, total_collections):
                 return acciaccatura_specifier
 
     def _get_talea(self):
@@ -538,15 +538,15 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
     def _make_music(
         self,
-        segments,
+        collections,
         rest_affix_specifier=None,
-        segment_index=None,
-        total_segments=None,
+        collection_index=None,
+        total_collections=None,
         ):
-        segment_count = len(segments)
+        segment_count = len(collections)
         selections = []
-        if segment_index is None:
-            for i, segment in enumerate(segments):
+        if collection_index is None:
+            for i, segment in enumerate(collections):
                 if rest_affix_specifier is not None:
                     result = rest_affix_specifier(i, segment_count)
                     rest_prefix, rest_suffix = result
@@ -564,10 +564,10 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                     )
                 selections.append(selection)
         else:
-            assert len(segments) == 1, repr(segments)
-            segment = segments[0]
+            assert len(collections) == 1, repr(collections)
+            segment = collections[0]
             if rest_affix_specifier is not None:
-                result = rest_affix_specifier(segment_index, total_segments)
+                result = rest_affix_specifier(collection_index, total_collections)
                 rest_prefix, rest_suffix = result
                 affix_skips_instead_of_rests = \
                     rest_affix_specifier.skips_instead_of_rests
@@ -601,9 +601,9 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         rest_suffix=None,
         affix_skips_instead_of_rests=None,
         ):
-        segment_index = self._next_segment
+        collection_index = self._next_segment
         acciaccatura_specifier = self._get_acciaccatura_specifier(
-            segment_index,
+            collection_index,
             segment_count,
             )
         self._next_segment += 1
@@ -792,7 +792,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0],
                 ...     [2, 10],
                 ...     [18, 16, 15],
@@ -800,7 +800,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [2, 10, 18, 16, 15],
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -879,7 +879,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [None],
                 ...     [0, None],
                 ...     [2, 10, None],
@@ -888,7 +888,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [2, 10, 18, 16, 15, None],
                 ...     [20, 19, 9, 0, 2, 10, None],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -994,8 +994,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
@@ -1049,8 +1049,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
@@ -1122,8 +1122,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1170,8 +1170,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
@@ -1225,8 +1225,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
@@ -1281,8 +1281,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
@@ -1358,8 +1358,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1405,8 +1405,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1446,8 +1446,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1505,8 +1505,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1556,8 +1556,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1626,8 +1626,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1674,8 +1674,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1742,8 +1742,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1798,8 +1798,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[0, 2]]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> collections = [[0, 2]]
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1856,8 +1856,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[0, 2, 10], [10, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> collections = [[0, 2, 10], [10, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1903,8 +1903,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[0, 2, 10], [10, 16, 16, 19, 19], [19]]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> collections = [[0, 2, 10], [10, 16, 16, 19, 19], [19]]
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1968,8 +1968,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -2016,8 +2016,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -2063,7 +2063,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0],
                 ...     [2, 10],
                 ...     [18, 16, 15],
@@ -2071,7 +2071,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [2, 10, 18, 16, 15],
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).beam.positions = (-5, -5)
@@ -2300,7 +2300,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0],
                 ...     [2, 10],
                 ...     [18, 16, 15],
@@ -2308,7 +2308,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [2, 10, 18, 16, 15],
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).beam.positions = (-5, -5)
@@ -2537,13 +2537,13 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0, 2],
                 ...     [10, 18, 16, 15, 20],
                 ...     [19, 9, 0, 2, 10, 18],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).beam.positions = (-5, -5)
@@ -2738,7 +2738,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
@@ -2746,7 +2746,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [10, 18, 16, 15, 20],
                 ...     [19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).beam.positions = (-5, -5)
@@ -2957,7 +2957,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0],
                 ...     [2, 10],
                 ...     [18, 16, 15],
@@ -2965,7 +2965,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [2, 10, 18, 16, 15],
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).beam.positions = (-6, -6)
@@ -3040,7 +3040,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0],
                 ...     [2, 10],
                 ...     [18, 16, 15],
@@ -3048,7 +3048,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [2, 10, 18, 16, 15],
                 ...     [20, 19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).beam.positions = (-6, -6)
@@ -3120,7 +3120,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
@@ -3128,7 +3128,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...     [10, 18, 16, 15, 20],
                 ...     [19, 9, 0, 2, 10],
                 ...     ]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).beam.positions = (-6, -6)
@@ -3230,8 +3230,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> collections = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
@@ -3287,8 +3287,8 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> segments = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
-                >>> selections, state_manifest = rhythm_maker(segments)
+                >>> collections = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
+                >>> selections, state_manifest = rhythm_maker(collections)
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5

@@ -1039,7 +1039,7 @@ class PitchTree(Tree):
         spanners = self._get_cell_spanners(voice)
         for spanner in spanners:
             leaves = spanner.components
-            pitch_class_set = abjad.PitchClassSet.from_selection(leaves)
+            pitch_class_set = baca.PitchClassSet.from_selection(leaves)
             if not pitch_class_set:
                 continue
             set_class = abjad.SetClass.from_pitch_class_set(

@@ -10,7 +10,13 @@ from baca.tools.Expression import Expression
 from baca.tools.PitchClassSegment import PitchClassSegment
 from baca.tools.PitchClassSegment import \
     _pitch_class_segment as pitch_class_segment
-from baca.tools.SegmentList import SegmentList
+from baca.tools.PitchClassSet import PitchClassSet
+from baca.tools.PitchClassSet import _pitch_class_set as pitch_class_set
+from baca.tools.PitchSegment import PitchSegment
+from baca.tools.PitchSegment import _pitch_segment as pitch_segment
+from baca.tools.PitchSet import PitchSet
+from baca.tools.PitchSet import _pitch_set as pitch_set
+from baca.tools.CollectionList import CollectionList
 from baca.tools.Sequence import Sequence
 from baca.tools.Sequence import _sequence as sequence
 

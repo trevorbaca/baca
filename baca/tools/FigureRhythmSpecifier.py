@@ -48,7 +48,7 @@ class FigureRhythmSpecifier(abjad.abctools.AbjadObject):
 
     def __call__(
         self,
-        segments,
+        collections,
         selections,
         division_masks=None,
         logical_tie_masks=None,
@@ -58,7 +58,7 @@ class FigureRhythmSpecifier(abjad.abctools.AbjadObject):
         thread=None,
         time_treatments=None,
         ):
-        assert len(selections) == len(segments)
+        assert len(selections) == len(collections)
         rhythm_maker = self._get_rhythm_maker(
             division_masks=division_masks,
             logical_tie_masks=logical_tie_masks,
@@ -68,36 +68,49 @@ class FigureRhythmSpecifier(abjad.abctools.AbjadObject):
             )
         length = len(selections)
         pattern = self.pattern or abjad.select_all()
-        prototype = (abjad.pitchtools.Segment, list)
-        as_chords = getattr(segments, 'as_chords', False)
-        segments_, indices = [], []
-        for index, segment in enumerate(segments):
-            assert isinstance(segment, prototype), repr(segment)
-            segment_ = segment
+        prototype = (
+            abjad.pitchtools.Segment,
+            abjad.pitchtools.Set,
+            list,
+            )
+        if collections and isinstance(
+            collections[0],
+            (abjad.pitchtools.Set, set),
+            ):
+            as_chords = True
+        else:
+            as_chords = False
+        collections_, indices = [], []
+        for index, collection in enumerate(collections):
+            assert isinstance(collection, prototype), repr(collection)
+            collection_ = collection
             if as_chords:
-                segment_ = segment[:1]
+                if isinstance(collection_, (abjad.pitchtools.Set, set)):
+                    collection_ = list(sorted(collection_))[:1]
+                else:
+                    collection_ = collection[:1]
             if not pattern.matches_index(index, length):
                 continue
-            segments_.append(segment_)
+            collections_.append(collection_)
             indices.append(index)
         if thread:
             stage_selections, state_manifest = rhythm_maker(
-                segments_,
+                collections_,
                 rest_affix_specifier=rest_affix_specifier,
                 )
         else:
             stage_selections = []
-            total_segments = len(segments_)
-            for segment_index, segment_ in enumerate(segments_):
+            total_collections = len(collections_)
+            for collection_index, collection_ in enumerate(collections_):
                 stage_selections_, stage_manifest = rhythm_maker(
-                    [segment_],
+                    [collection_],
                     rest_affix_specifier=rest_affix_specifier,
-                    segment_index=segment_index,
-                    total_segments=total_segments,
+                    collection_index=collection_index,
+                    total_collections=total_collections,
                     )
                 stage_selections.extend(stage_selections_)
-        triples = zip(indices, stage_selections, segments)
-        for index, stage_selection, segment in triples:
+        triples = zip(indices, stage_selections, collections)
+        for index, stage_selection, collection in triples:
             assert len(stage_selection) == 1, repr(stage_selection)
             if not as_chords:
                 selections[index] = stage_selection
@@ -113,7 +126,7 @@ class FigureRhythmSpecifier(abjad.abctools.AbjadObject):
             for note in logical_tie.leaves:
                 assert isinstance(note, abjad.Note), repr(note)
                 duration = note.written_duration
-                pitches = segment
+                pitches = collection
                 chord = abjad.Chord(pitches, duration)
                 abjad.mutate(note).replace([chord])
             selections[index] = stage_selection

@@ -2091,17 +2091,17 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_lists = [
+                >>> collection_lists = [
                 ...     [[4]],
                 ...     [[6, 2, 3, 5, 9, 8, 0]],
                 ...     [[11]],
                 ...     [[10, 7, 9, 8, 0, 5]],
                 ...     ]
                 >>> figures, time_signatures = [], []
-                >>> for i, segments in enumerate(segment_lists):
+                >>> for i, collections in enumerate(collection_lists):
                 ...     contribution = figure_maker(
                 ...         'Voice 1',
-                ...         segments,
+                ...         collections,
                 ...         figure_name=i,
                 ...         )
                 ...     figures.append(contribution['Voice 1'])
@@ -2236,17 +2236,17 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_lists = [
+                >>> collection_lists = [
                 ...     [[4]],
                 ...     [[6, 2, 3, 5, 9, 8, 0]],
                 ...     [[11]],
                 ...     [[10, 7, 9, 8, 0, 5]],
                 ...     ]
                 >>> figures, time_signatures = [], []
-                >>> for i, segments in enumerate(segment_lists):
+                >>> for i, collections in enumerate(collection_lists):
                 ...     contribution = figure_maker(
                 ...         'Voice 1',
-                ...         segments,
+                ...         collections,
                 ...         figure_name=i,
                 ...         )
                 ...     figures.append(contribution['Voice 1'])
@@ -2578,17 +2578,17 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_lists = [
+                >>> collection_lists = [
                 ...     [[4]],
                 ...     [[-12, 2, 3, 5, 8, 9, 0]],
                 ...     [[11]],
                 ...     [[10, 7, 9, 10, 0, 5]],
                 ...     ]
                 >>> figures, time_signatures = [], []
-                >>> for i, segments in enumerate(segment_lists):
+                >>> for i, collections in enumerate(collection_lists):
                 ...     contribution = figure_maker(
                 ...         'Voice 1',
-                ...         segments,
+                ...         collections,
                 ...         figure_name=i,
                 ...         )
                 ...     figures.append(contribution['Voice 1'])
@@ -2745,17 +2745,17 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_lists = [
+                >>> collection_lists = [
                 ...     [[4]],
                 ...     [[6, 2, 3, 5, 9, 9, 0]],
                 ...     [[11]],
                 ...     [[10, 7, 9, 12, 0, 5]],
                 ...     ]
                 >>> figures, time_signatures = [], []
-                >>> for i, segments in enumerate(segment_lists):
+                >>> for i, collections in enumerate(collection_lists):
                 ...     contribution = figure_maker(
                 ...         'Voice 1',
-                ...         segments,
+                ...         collections,
                 ...         figure_name=i,
                 ...         )
                 ...     figures.append(contribution['Voice 1'])
@@ -4341,15 +4341,15 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_lists = [
+                >>> collection_lists = [
                 ...     [[4]],
                 ...     [[6, 2, 3, 5, 9, 8, 0]],
                 ...     [[11]],
                 ...     [[10, 7, 9, 8, 0, 5]],
                 ...     ]
                 >>> figures, time_signatures = [], []
-                >>> for segments in segment_lists:
-                ...     contribution = figure_maker('Voice 1', segments)
+                >>> for collections in collection_lists:
+                ...     contribution = figure_maker('Voice 1', collections)
                 ...     figures.append(contribution['Voice 1'])
                 ...     time_signatures.append(contribution.time_signature)    
                 ...
@@ -4589,15 +4589,15 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_lists = [
+                >>> collection_lists = [
                 ...     [[4]],
                 ...     [[6, 2, 3, 5, 9, 8, 0]],
                 ...     [[11]],
                 ...     [[10, 7, 9, 8, 0, 5]],
                 ...     ]
                 >>> figures, time_signatures = [], []
-                >>> for segments in segment_lists:
-                ...     contribution = figure_maker('Voice 1', segments)
+                >>> for collections in collection_lists:
+                ...     contribution = figure_maker('Voice 1', collections)
                 ...     figures.append(contribution['Voice 1'])
                 ...     time_signatures.append(contribution.time_signature)    
                 ...

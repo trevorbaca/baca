@@ -229,10 +229,10 @@ class GlissandoSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = figure_maker(
             ...     'Voice 1',
-            ...     segments,
+            ...     collections,
             ...     baca.tools.GlissandoSpecifier(
             ...         pattern=abjad.select_first(),
             ...         ),

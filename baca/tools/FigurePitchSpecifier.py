@@ -30,8 +30,8 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = figure_maker('Voice 1', segments)
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = figure_maker('Voice 1', collections)
             >>> lilypond_file = figure_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
@@ -140,12 +140,12 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, segments=None):
-        r'''Calls specifier on `segments`.
+    def __call__(self, collections=None):
+        r'''Calls specifier on `collections`.
 
         ..  container:: example
 
-            Returns none when `segments` is none:
+            Returns none when `collections` is none:
 
             ::
 
@@ -155,29 +155,29 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
         
-            Returns sequence of numbered pitch segments by default:
+            Returns sequence of numbered pitch collections by default:
 
             ::
 
                 >>> specifier = baca.tools.FigurePitchSpecifier()
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> for segment in specifier(segments):
-                ...     segment
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> for collection in specifier(collections):
+                ...     collection
                 ...
                 PitchSegment([0, 2, 10])
                 PitchSegment([18, 16, 15, 20, 19])
                 PitchSegment([9])
 
-        Returns new segment list.
+        Returns new collection list.
         '''
-        if segments is None:
+        if collections is None:
             return
-        segments = baca.tools.SegmentList(segments=segments)
+        collections = baca.CollectionList(collections=collections)
         if self.to_pitch_classes:
-            segments = segments.to_pitch_classes()
-        segments = self._remove_duplicates_(segments)
-        segments = self._apply_expressions(segments)
-        return segments
+            collections = collections.to_pitch_classes()
+        collections = self._remove_duplicates_(collections)
+        collections = self._apply_expressions(collections)
+        return collections
 
     def __repr__(self):
         r'''Gets interpreter representation of specifier.
@@ -196,27 +196,27 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
     ### PRIVATE METHODS ###
 
-    def _apply_expressions(self, segments):
-        sequence = baca.Sequence(items=segments)
+    def _apply_expressions(self, collections):
+        sequence = baca.Sequence(items=collections)
         for expression in self.expressions or []:
             assert isinstance(expression, abjad.Expression), repr(expression)
             sequence = expression(sequence)
-        return abjad.new(segments, segments=sequence)
+        return abjad.new(collections, collections=sequence)
 
-    def _remove_duplicates_(self, segments):
+    def _remove_duplicates_(self, collections):
         if self.remove_duplicates:
-            segments = segments.remove_duplicates()
+            collections = collections.remove_duplicates()
         if self.remove_duplicate_pitch_classes:
-            segments = segments.remove_duplicate_pitch_classes()
-        return segments
+            collections = collections.remove_duplicate_pitch_classes()
+        return collections
 
-    def _to_pitch_tree(self, segments):
+    def _to_pitch_tree(self, collections):
         item_class = None
         if self.to_pitch_classes:
             item_class = abjad.NumberedPitchClass
         return baca.tools.PitchTree(
             item_class=item_class,
-            items=segments,
+            items=collections,
             )
 
     ### PUBLIC PROPERTIES ###
@@ -242,8 +242,8 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -301,9 +301,9 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
                 >>> specifier = baca.tools.FigurePitchSpecifier(
                 ...     remove_duplicate_pitch_classes=True
                 ...     )
-                >>> segments = [[0, 2, 10], [18, 16, 15, 22, 19], [9]]
-                >>> for segment in specifier(segments):
-                ...     segment
+                >>> collections = [[0, 2, 10], [18, 16, 15, 22, 19], [9]]
+                >>> for collection in specifier(collections):
+                ...     collection
                 ...
                 PitchSegment([0, 2, 10])
                 PitchSegment([18, 16, 15, 19])
@@ -324,9 +324,9 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
                 >>> specifier = baca.tools.FigurePitchSpecifier(
                 ...     remove_duplicates=True
                 ...     )
-                >>> segments = [[0, 2, 10], [18, 16, 15, 10, 19], [9]]
-                >>> for segment in specifier(segments):
-                ...     segment
+                >>> collections = [[0, 2, 10], [18, 16, 15, 10, 19], [9]]
+                >>> for collection in specifier(collections):
+                ...     collection
                 ...
                 PitchSegment([0, 2, 10])
                 PitchSegment([18, 16, 15, 19])
@@ -353,8 +353,8 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -398,8 +398,8 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -436,9 +436,9 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
                 >>> specifier = baca.tools.FigurePitchSpecifier(
                 ...     to_pitch_classes=True,
                 ...     )
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> for segment in specifier(segments):
-                ...     segment
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> for collection in specifier(collections):
+                ...     collection
                 ...
                 PitchClassSegment([0, 2, 10])
                 PitchClassSegment([6, 4, 3, 8, 7])
@@ -451,10 +451,10 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
                 >>> specifier = baca.tools.FigurePitchSpecifier(
                 ...     to_pitch_classes=True,
                 ...     )
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> segments = baca.SegmentList(segments)
-                >>> for segment in specifier(segments):
-                ...     segment
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> collections = baca.CollectionList(collections)
+                >>> for collection in specifier(collections):
+                ...     collection
                 ...
                 PitchClassSegment([0, 2, 10])
                 PitchClassSegment([6, 4, 3, 8, 7])

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 import abjad
 import baca
-import collections
+import collections as collections_module
 
 
-class SegmentList(abjad.abctools.AbjadValueObject):
-    r'''Segment list.
+class CollectionList(abjad.abctools.AbjadValueObject):
+    r'''Collection list.
 
     ::
 
@@ -18,11 +18,11 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> for segment in baca.SegmentList([
+            >>> for collection in baca.CollectionList([
             ...     [12, 14, 18, 17],
             ...     [16, 20, 19],
             ...     ]):
-            ...     segment
+            ...     collection
             ...
             PitchSegment([12, 14, 18, 17])
             PitchSegment([16, 20, 19])
@@ -33,13 +33,13 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> for segment in baca.SegmentList([
+            >>> for collection in baca.CollectionList([
             ...     [12, 14, 18, 17],
             ...     [16, 20, 19],
             ...     ],
             ...     item_class=abjad.NamedPitch,
             ...     ):
-            ...     segment
+            ...     collection
             ...
             PitchSegment("c'' d'' fs'' f''")
             PitchSegment("e'' af'' g''")
@@ -50,13 +50,13 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> for segment in baca.SegmentList([
+            >>> for collection in baca.CollectionList([
             ...     [12, 14, 18, 17],
             ...     [16, 20, 19],
             ...     ],
             ...     item_class=abjad.NumberedPitchClass,
             ...     ):
-            ...     segment
+            ...     collection
             ...
             PitchClassSegment([0, 2, 6, 5])
             PitchClassSegment([4, 8, 7])
@@ -67,13 +67,13 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> for segment in baca.SegmentList([
+            >>> for collection in baca.CollectionList([
             ...     [12, 14, 18, 17],
             ...     [16, 20, 19],
             ...     ],
             ...     item_class=abjad.NamedPitchClass,
             ...     ):
-            ...     segment
+            ...     collection
             ...
             PitchClassSegment("c d fs f")
             PitchClassSegment("e af g")
@@ -84,35 +84,131 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> for segment in baca.SegmentList([
+            >>> for collection in baca.CollectionList([
             ...     [12, 14, 18, 17],
             ...     "ff'' gs'' g''",
             ...     ]):
-            ...     segment
+            ...     collection
             ...
             PitchSegment([12, 14, 18, 17])
             PitchSegment("ff'' gs'' g''")
 
     ..  container:: example
 
-        Initializes from segment list:
+        Initializes numbered pitch sets:
 
         ::
 
-            >>> segments = baca.SegmentList([[12, 13, 14], [15, 16, 17]])
-            >>> baca.SegmentList(segments)
-            SegmentList([<12, 13, 14>, <15, 16, 17>])
+            >>> for collection in baca.CollectionList([
+            ...     set([12, 14, 18, 17]),
+            ...     set([16, 20, 19]),
+            ...     ]):
+            ...     collection
+            ...
+            PitchSet([12, 14, 17, 18])
+            PitchSet([16, 19, 20])
 
     ..  container:: example
 
-        Initializes from list of segment lists:
+        Initializes named pitch sets:
 
         ::
 
-            >>> segment_list_1 = baca.SegmentList([[12, 13, 14]])
-            >>> segment_list_2 = baca.SegmentList([[15, 16, 17]])
-            >>> baca.SegmentList([segment_list_1, segment_list_2])
-            SegmentList([<12, 13, 14>, <15, 16, 17>])
+            >>> for collection in baca.CollectionList([
+            ...     set([12, 14, 18, 17]),
+            ...     set([16, 20, 19]),
+            ...     ],
+            ...     item_class=abjad.NamedPitch,
+            ...     ):
+            ...     collection
+            ...
+            PitchSet(["c''", "d''", "f''", "fs''"])
+            PitchSet(["e''", "g''", "af''"])
+
+    ..  container:: example
+
+        Initializes numbered pitch-class sets:
+
+        ::
+
+            >>> for collection in baca.CollectionList([
+            ...     set([12, 14, 18, 17]),
+            ...     set([16, 20, 19]),
+            ...     ],
+            ...     item_class=abjad.NumberedPitchClass,
+            ...     ):
+            ...     collection
+            ...
+            PitchClassSet([0, 2, 5, 6])
+            PitchClassSet([4, 7, 8])
+
+    ..  container:: example
+
+        Initializes named pitch-class sets:
+
+        ::
+
+            >>> for collection in baca.CollectionList([
+            ...     set([12, 14, 18, 17]),
+            ...     set([16, 20, 19]),
+            ...     ],
+            ...     item_class=abjad.NamedPitchClass,
+            ...     ):
+            ...     collection
+            ...
+            PitchClassSet(['c', 'd', 'f', 'fs'])
+            PitchClassSet(['e', 'g', 'af'])
+
+    ..  container:: example
+
+        Initializes mixed numbered and named pitch segments:
+
+        ::
+
+            >>> for collection in baca.CollectionList([
+            ...     [12, 14, 18, 17],
+            ...     "ff'' gs'' g''",
+            ...     ]):
+            ...     collection
+            ...
+            PitchSegment([12, 14, 18, 17])
+            PitchSegment("ff'' gs'' g''")
+
+    ..  container:: example
+
+        Initializes mixed segments and sets:
+
+        ::
+
+            >>> for collection in baca.CollectionList([
+            ...     set([12, 14, 18, 17]),
+            ...     [16, 20, 19],
+            ...     ]):
+            ...     collection
+            ...
+            PitchSet([12, 14, 17, 18])
+            PitchSegment([16, 20, 19])
+
+    ..  container:: example
+
+        Initializes from collection list:
+
+        ::
+
+            >>> collections = baca.CollectionList([[12, 13, 14], [15, 16, 17]])
+            >>> baca.CollectionList(collections)
+            CollectionList([<12, 13, 14>, <15, 16, 17>])
+
+    ..  container:: example
+
+        Initializes from list of collection lists:
+
+        ::
+
+            >>> collection_list_1 = baca.CollectionList([[12, 13, 14]])
+            >>> collection_list_2 = baca.CollectionList([[15, 16, 17]])
+            >>> baca.CollectionList([collection_list_1, collection_list_2])
+            CollectionList([<12, 13, 14>, <15, 16, 17>])
 
     ..  container:: example
 
@@ -120,8 +216,8 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> baca.SegmentList()
-            SegmentList([])
+            >>> baca.CollectionList()
+            CollectionList([])
 
     '''
 
@@ -130,10 +226,9 @@ class SegmentList(abjad.abctools.AbjadValueObject):
     __documentation_section__ = 'Utilities'
 
     __slots__ = (
-        '_as_chords',
+        '_collections',
         '_expression',
         '_item_class',
-        '_segments',
         )
 
     _item_class_prototype = (
@@ -147,8 +242,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
     def __init__(
         self,
-        segments=None,
-        as_chords=None,
+        collections=None,
         item_class=None,
         ):
         self._expression = None
@@ -158,90 +252,89 @@ class SegmentList(abjad.abctools.AbjadValueObject):
                 message = message.format(item_class)
                 raise TypeError(message)
         self._item_class = item_class
-        segments = self._coerce(segments)
-        segments = segments or []
-        self._segments = tuple(segments)
-        if as_chords is not None:
-            as_chords = bool(as_chords)
-        self._as_chords = as_chords
+        collections = self._coerce(collections)
+        collections = collections or []
+        self._collections = tuple(collections)
 
     ### SPECIAL METHODS ###
 
     def __add__(self, argument):
-        r'''Adds `argument` to segments.
+        r'''Adds `argument` to collections.
 
         ..  container:: example
 
-                >>> segments_1 = baca.SegmentList([[12, 14, 18, 17]])
-                >>> segments_2 = baca.SegmentList([[16, 20, 19]])
-                >>> segments_1 + segments_2
-                SegmentList([<12, 14, 18, 17>, <16, 20, 19>])
+                >>> collections_1 = baca.CollectionList([[12, 14, 18, 17]])
+                >>> collections_2 = baca.CollectionList([[16, 20, 19]])
+                >>> collections_1 + collections_2
+                CollectionList([<12, 14, 18, 17>, <16, 20, 19>])
 
-        Returns new segment list.
+        Returns new collection list.
         '''
-        if not isinstance(argument, collections.Iterable):
-            message = 'must be segment list: {!r}.'
+        if not isinstance(argument, collections_module.Iterable):
+            message = 'must be collection list: {!r}.'
             message = message.format(argument)
             raise TypeError(message)
-        argument_segments = [self._initialize_segment(_) for _ in argument]
-        segments = self.segments + argument_segments
-        return abjad.new(self, segments=segments)
+        argument_collections = [
+            self._initialize_collection(_) for _ in argument
+            ]
+        collections = self.collections + argument_collections
+        return abjad.new(self, collections=collections)
 
     def __eq__(self, argument):
-        r'''Is true when `argument` is a segment list with segments equal to
-        those of this segment list. Otherwise false.
+        r'''Is true when `argument` is a collection list with collections
+        equal to those of this collection list. Otherwise false.
 
         ..  container:: example
 
             ::
 
-                >>> segments_1 = baca.SegmentList([[12, 13, 14], [15, 16, 17]])
-                >>> segments_2 = baca.SegmentList([[12, 13, 14], [15, 16, 17]])
-                >>> segments_3 = baca.SegmentList([[12, 13, 14]])
+                >>> collections_1 = baca.CollectionList([[12, 13, 14], [15, 16, 17]])
+                >>> collections_2 = baca.CollectionList([[12, 13, 14], [15, 16, 17]])
+                >>> collections_3 = baca.CollectionList([[12, 13, 14]])
 
             ::
 
-                >>> segments_1 == segments_1
+                >>> collections_1 == collections_1
                 True
 
             ::
 
-                >>> segments_1 == segments_2
+                >>> collections_1 == collections_2
                 True
 
             ::
 
-                >>> segments_1 == segments_3
+                >>> collections_1 == collections_3
                 False
 
             ::
 
-                >>> segments_2 == segments_1
+                >>> collections_2 == collections_1
                 True
 
             ::
 
-                >>> segments_2 == segments_2
+                >>> collections_2 == collections_2
                 True
 
             ::
 
-                >>> segments_2 == segments_3
+                >>> collections_2 == collections_3
                 False
 
             ::
 
-                >>> segments_3 == segments_1
+                >>> collections_3 == collections_1
                 False
 
             ::
 
-                >>> segments_3 == segments_2
+                >>> collections_3 == collections_2
                 False
 
             ::
 
-                >>> segments_3 == segments_3
+                >>> collections_3 == collections_3
                 True
 
         ..  container:: example
@@ -250,49 +343,49 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments_1 = baca.SegmentList(
-                ...     segments=[[12, 13, 14], [15, 16, 17]],
+                >>> collections_1 = baca.CollectionList(
+                ...     collections=[[12, 13, 14], [15, 16, 17]],
                 ...     item_class=None,
                 ...     )
-                >>> segments_2 = baca.SegmentList(
-                ...     segments=[[12, 13, 14], [15, 16, 17]],
+                >>> collections_2 = baca.CollectionList(
+                ...     collections=[[12, 13, 14], [15, 16, 17]],
                 ...     item_class=abjad.NumberedPitch,
                 ...     )
 
             ::
 
-                >>> segments_1.item_class == segments_2.item_class
+                >>> collections_1.item_class == collections_2.item_class
                 False
 
             ::
 
-                >>> segments_1 == segments_2
+                >>> collections_1 == collections_2
                 True
 
         Returns true or false.
         '''
         if not isinstance(argument, type(self)):
             return False
-        return self.segments == argument.segments
+        return self.collections == argument.collections
 
     def __format__(self, format_specification=''):
-        r'''Gets storage format of segments.
+        r'''Gets storage format of collections.
 
         ..  container:: example
 
             ::
 
-                >>> segments = baca.SegmentList([
+                >>> collections = baca.CollectionList([
                 ...     [12, 14, 18, 17],
                 ...     [16, 20, 19],
                 ...     ])
 
             ::
 
-                >>> f(segments)
-                baca.tools.SegmentList(
-                    segments=[
-                        pitchtools.PitchSegment(
+                >>> f(collections)
+                baca.tools.CollectionList(
+                    collections=[
+                        baca.tools.PitchSegment(
                             (
                                 pitchtools.NumberedPitch(12),
                                 pitchtools.NumberedPitch(14),
@@ -301,7 +394,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
                                 ),
                             item_class=pitchtools.NumberedPitch,
                             ),
-                        pitchtools.PitchSegment(
+                        baca.tools.PitchSegment(
                             (
                                 pitchtools.NumberedPitch(16),
                                 pitchtools.NumberedPitch(20),
@@ -314,82 +407,82 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
         Returns string.
         '''
-        superclass = super(SegmentList, self)
+        superclass = super(CollectionList, self)
         return superclass.__format__()
 
     def __getitem__(self, argument):
-        r'''Gets segment or segment slice identified by `argument`.
+        r'''Gets collection or collection slice identified by `argument`.
 
         ..  container:: example
 
-            Gets segments:
+            Gets collections:
 
             ::
 
-                >>> segments = baca.SegmentList([
+                >>> collections = baca.CollectionList([
                 ...     [12, 14, 18, 17],
                 ...     [16, 20, 19],
                 ...     ])
 
             ::
 
-                >>> segments[0]
+                >>> collections[0]
                 PitchSegment([12, 14, 18, 17])
 
             ::
 
-                >>> segments[-1]
+                >>> collections[-1]
                 PitchSegment([16, 20, 19])
 
         ..  container:: example
 
-            Gets segment lists:
+            Gets collections lists:
 
             ::
 
-                >>> segments = baca.SegmentList([
+                >>> collections = baca.CollectionList([
                 ...     [12, 14, 18, 17],
                 ...     [16, 20, 19],
                 ...     ])
 
             ::
 
-                >>> segments[:1]
-                SegmentList([<12, 14, 18, 17>])
+                >>> collections[:1]
+                CollectionList([<12, 14, 18, 17>])
 
             ::
 
-                >>> segments[-1:]
-                SegmentList([<16, 20, 19>])
+                >>> collections[-1:]
+                CollectionList([<16, 20, 19>])
 
-        Returns segment.
+        Returns collection.
         '''
-        segments = self.segments or []
-        result = segments.__getitem__(argument)
+        collections = self.collections or []
+        result = collections.__getitem__(argument)
         try:
-            return abjad.new(self, segments=result)
+            return abjad.new(self, collections=result)
         except TypeError:
             return result
 
     def __illustrate__(self):
-        r'''Illustrates segments.
+        r'''Illustrates collections.
 
         ..  container:: example
 
             ::
 
-                >>> segments = baca.SegmentList([
+                >>> collections = baca.CollectionList([
                 ...     [12, 14, 18, 17],
                 ...     [16, 20, 19],
                 ...     ])
 
             ::
 
-                >>> show(segments) # doctest: +SKIP
+                >>> show(collections) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> lilypond_file = segments.__illustrate__()
+                >>> lilypond_file = collections.__illustrate__()
                 >>> f(lilypond_file[abjad.Score])
                 \new Score \with {
                     \override BarLine.transparent = ##t
@@ -432,65 +525,70 @@ class SegmentList(abjad.abctools.AbjadValueObject):
         return tree.__illustrate__()
 
     def __len__(self):
-        r'''Gets length of segments.
+        r'''Gets length of collections.
 
         ..  container:: example
 
             ::
 
-                >>> segments = baca.SegmentList([
+                >>> collections = baca.CollectionList([
                 ...     [12, 14, 18, 17],
                 ...     [16, 20, 19],
                 ...     ])
 
             ::
 
-                >>> len(segments)
+                >>> len(collections)
                 2
 
         Returns nonnegative integer.
         '''
-        return len(self.segments)
+        return len(self.collections)
 
     def __repr__(self):
-        r'''Gets interpreter representation of segments.
+        r'''Gets interpreter representation of collections.
 
         ..  container:: example
 
             ::
 
-                >>> baca.SegmentList([
+                >>> baca.CollectionList([
                 ...     [12, 14, 18, 17],
                 ...     [16, 20, 19],
                 ...     ])
-                SegmentList([<12, 14, 18, 17>, <16, 20, 19>])
+                CollectionList([<12, 14, 18, 17>, <16, 20, 19>])
 
         Returns string.
         '''
-        segments = self.segments or []
-        segments = ', '.join([str(_) for _ in segments])
+        collections = self.collections or []
+        collections = ', '.join([str(_) for _ in collections])
         string = '{}([{}])'
-        string = string.format(type(self).__name__, segments)
+        string = string.format(type(self).__name__, collections)
         if self._expression:
             string = '*' + string
         return string
 
     ### PRIVATE METHODS ###
 
-    def _coerce(self, segments):
-        segments_ = []
-        prototype = (abjad.PitchSegment, abjad.PitchClassSegment)
-        for item in segments or []:
+    def _coerce(self, collections):
+        collections_ = []
+        prototype = (
+            abjad.PitchSegment,
+            abjad.PitchSet,
+            abjad.PitchClassSegment,
+            abjad.PitchClassSet,
+            )
+        for item in collections or []:
             if isinstance(item, type(self)):
-                for segment in item:
-                    segment_ = self._initialize_segment(segment)
-                    assert isinstance(segment_, prototype), repr(segment_)
-                    segments_.append(segment_)
+                for collection in item:
+                    collection_ = self._initialize_collection(collection)
+                    assert isinstance(collection_, prototype), repr(collection_)
+                    collections_.append(collection_)
             else:
-                segment_ = self._initialize_segment(item)
-                assert isinstance(segment_, prototype), repr(segment_)
-                segments_.append(segment_)
-        return segments_
+                collection_ = self._initialize_collection(item)
+                assert isinstance(collection_, prototype), repr(collection_)
+                collections_.append(collection_)
+        return collections_
 
     def _get_pitch_class_class(self):
         item_class = self.item_class or abjad.NumberedPitch
@@ -505,15 +603,35 @@ class SegmentList(abjad.abctools.AbjadValueObject):
             message = message.format(item_class)
             raise TypeError(message)
 
-    def _initialize_segment(self, argument):
+    def _initialize_collection(self, argument, prototype=None):
         items = argument
         item_class = self.item_class or abjad.NumberedPitch
-        if isinstance(argument, abjad.pitchtools.Segment):
+        if prototype is not None:
+            return abjad.new(prototype, items=items)
+        elif isinstance(argument, abjad.pitchtools.Segment):
             return argument
+        elif isinstance(argument, abjad.pitchtools.Set):
+            return argument
+        elif isinstance(argument, set):
+            if item_class in (abjad.NumberedPitch, abjad.NamedPitch):
+                return abjad.PitchSet(items=items, item_class=item_class)
+            elif item_class in (
+                abjad.NumberedPitchClass,
+                abjad.NamedPitchClass,
+                ):
+                return baca.PitchClassSet(
+                    items=items,
+                    item_class=item_class,
+                    )
+            else:
+                raise TypeError(item_class)
         elif self.item_class is not None:
             if item_class in (abjad.NumberedPitch, abjad.NamedPitch):
-                return abjad.PitchSegment(items=items, item_class=item_class)
-            elif item_class in (abjad.NumberedPitchClass, abjad.NamedPitchClass):
+                return baca.PitchSegment(items=items, item_class=item_class)
+            elif item_class in (
+                abjad.NumberedPitchClass,
+                abjad.NamedPitchClass,
+                ):
                 return baca.PitchClassSegment(
                     items=items,
                     item_class=item_class,
@@ -522,12 +640,12 @@ class SegmentList(abjad.abctools.AbjadValueObject):
                 raise TypeError(item_class)
         else:
             if isinstance(argument, str):
-                return abjad.PitchSegment(
+                return baca.PitchSegment(
                     items=items,
                     item_class=abjad.NamedPitch,
                     )
-            elif isinstance(argument, collections.Iterable):
-                return abjad.PitchSegment(
+            elif isinstance(argument, collections_module.Iterable):
+                return baca.PitchSegment(
                     items=items,
                     item_class=abjad.NumberedPitch,
                     )
@@ -563,18 +681,8 @@ class SegmentList(abjad.abctools.AbjadValueObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def as_chords(self):
-        r'''Is true when segments interpret as chords.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
-        '''
-        return self._as_chords
-            
-    @property
     def item_class(self):
-        r'''Gets item class of segments in list.
+        r'''Gets item class of collections in list.
 
         Set to class modeling pitch or pitch-class.
 
@@ -583,32 +691,32 @@ class SegmentList(abjad.abctools.AbjadValueObject):
         return self._item_class
 
     @property
-    def segments(self):
-        r'''Gets segments in list.
+    def collections(self):
+        r'''Gets collections in list.
 
         ..  container:: example
 
             ::
 
-                >>> segments = baca.SegmentList([
+                >>> collections = baca.CollectionList([
                 ...     [12, 14, 18, 17],
                 ...     [16, 20, 19],
                 ...     ])
 
             ::
 
-                >>> segments.segments
+                >>> collections.collections
                 [PitchSegment([12, 14, 18, 17]), PitchSegment([16, 20, 19])]
 
         Returns list.
         '''
-        if self._segments:
-            return list(self._segments)
+        if self._collections:
+            return list(self._collections)
 
     ### PUBLIC METHODS ###
 
     def accumulate(self, operands=None):
-        r'''Accumulates `operands` against segments to identity.
+        r'''Accumulates `operands` against collections to identity.
 
         ..  container:: example
 
@@ -616,7 +724,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = baca.SegmentList(
+                >>> collections = baca.CollectionList(
                 ...     [[0, 2, 6, 5], [4, 8, 7]],
                 ...     item_class=abjad.NumberedPitchClass,
                 ...     )
@@ -624,8 +732,8 @@ class SegmentList(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> transposition = baca.pitch_class_segment().transpose(n=3)
-                >>> for segment in segments.accumulate([transposition]):
-                ...     segment
+                >>> for collection in collections.accumulate([transposition]):
+                ...     collection
                 ...
                 PitchClassSegment([0, 2, 6, 5])
                 PitchClassSegment([4, 8, 7])
@@ -642,7 +750,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = baca.SegmentList(
+                >>> collections = baca.CollectionList(
                 ...     [[0, 2, 6, 5], [4, 8, 7]],
                 ...     item_class=abjad.NumberedPitchClass,
                 ...     )
@@ -652,8 +760,8 @@ class SegmentList(abjad.abctools.AbjadValueObject):
                 >>> transposition = baca.pitch_class_segment().transpose(n=3)
                 >>> alpha = baca.pitch_class_segment().alpha()
                 >>> operands = [transposition, alpha]
-                >>> for segment in segments.accumulate(operands):
-                ...     segment
+                >>> for collection in collections.accumulate(operands):
+                ...     collection
                 ...
                 PitchClassSegment([0, 2, 6, 5])
                 PitchClassSegment([4, 8, 7])
@@ -680,31 +788,104 @@ class SegmentList(abjad.abctools.AbjadValueObject):
                 PitchClassSegment([1, 3, 7, 4])
                 PitchClassSegment([5, 9, 6])
 
-        Returns new segment list.
+        Returns new collection list.
         '''
         sequence = baca.Sequence(items=self)
-        segments = []
+        collections = []
         for sequence_ in sequence.accumulate(operands=operands):
-            segments.extend(sequence_)
-        return type(self)(segments=segments)
+            collections.extend(sequence_)
+        return type(self)(collections=collections)
 
-    def cursor(self):
-        r'''Wraps segments in cursor.
+    def chords(self, pattern=None):
+        r'''Turns collections into chords according to `pattern`.
+
+        ..  container:: example
+
+            Without pattern:
+
+            ::
+
+                >>> collections = baca.CollectionList([
+                ...     [12, 14, 18, 17],
+                ...     [16, 20, 19],
+                ...     [12, 14, 18, 17],
+                ...     [16, 20, 19],
+                ...     ])
+
+            ::
+
+                >>> for collection in collections:
+                ...     collection
+                ...
+                PitchSegment([12, 14, 18, 17])
+                PitchSegment([16, 20, 19])
+                PitchSegment([12, 14, 18, 17])
+                PitchSegment([16, 20, 19])
+
+            ::
+
+                >>> for collection in collections.chords():
+                ...     collection
+                ...
+                PitchSet([12, 14, 17, 18])
+                PitchSet([16, 19, 20])
+                PitchSet([12, 14, 17, 18])
+                PitchSet([16, 19, 20])
+
+        ..  container:: example
+
+            With pattern:
+
+            ::
+
+                >>> collections = baca.CollectionList([
+                ...     [12, 14, 18, 17],
+                ...     [16, 20, 19],
+                ...     [12, 14, 18, 17],
+                ...     [16, 20, 19],
+                ...     ])
+
+
+            ::
+
+                >>> pattern = abjad.select_every([1], period=2)
+                >>> for collection in collections.chords(pattern=pattern):
+                ...     collection
+                ...
+                PitchSegment([12, 14, 18, 17])
+                PitchSet([16, 19, 20])
+                PitchSegment([12, 14, 18, 17])
+                PitchSet([16, 19, 20])
+
+        Returns new collection list.
+        '''
+        collections = []
+        length = len(self)
+        pattern = pattern or abjad.select_all()
+        for i, collection in enumerate(self):
+            if pattern.matches_index(i, length):
+                collections.append(collection.chord())
+            else:
+                collections.append(collection)
+        return abjad.new(self, collections=collections)
+
+    def cursor(self, cyclic=None, singletons=None):
+        r'''Wraps collections in cursor.
 
         ..  container:: example
 
             ::
 
-                >>> segments = baca.SegmentList([[5, 12, 14, 18], [16, 17]])
-                >>> cursor = segments.cursor()
+                >>> collections = baca.CollectionList([[5, 12, 14, 18], [16, 17]])
+                >>> cursor = collections.cursor()
 
             ::
 
                 >>> f(cursor)
                 baca.tools.Cursor(
-                    source=baca.tools.SegmentList(
-                        segments=[
-                            pitchtools.PitchSegment(
+                    source=baca.tools.CollectionList(
+                        collections=[
+                            baca.tools.PitchSegment(
                                 (
                                     pitchtools.NumberedPitch(5),
                                     pitchtools.NumberedPitch(12),
@@ -713,7 +894,7 @@ class SegmentList(abjad.abctools.AbjadValueObject):
                                     ),
                                 item_class=pitchtools.NumberedPitch,
                                 ),
-                            pitchtools.PitchSegment(
+                            baca.tools.PitchSegment(
                                 (
                                     pitchtools.NumberedPitch(16),
                                     pitchtools.NumberedPitch(17),
@@ -736,59 +917,62 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
         Returns cursor.
         '''
-        return baca.Cursor(self)
+        return baca.Cursor(self, cyclic=cyclic, singletons=singletons)
 
     def flatten(self):
-        r'''Flattens segments.
+        r'''Flattens collections.
 
         ..  container:: example
 
             ::
 
-                >>> segments = baca.SegmentList(
+                >>> collections = baca.CollectionList(
                 ...     [[5, 12, 14, 18, 17], [16, 17, 19]],
                 ...     )
 
             ::
 
-                >>> str(segments.flatten())
+                >>> str(collections.flatten())
                 '<5, 12, 14, 18, 17, 16, 17, 19>'
 
         ..  container:: example
 
             ::
 
-                >>> segments = baca.SegmentList(
+                >>> collections = baca.CollectionList(
                 ...     [[5, 12, 14, 18, 17], [16, 17, 19]],
                 ...     item_class=abjad.NamedPitch,
                 ...     )
 
             ::
 
-                >>> str(segments.flatten())
+                >>> str(collections.flatten())
                 "<f' c'' d'' fs'' f'' e'' f'' g''>"
 
-        Returns segment.
+        Returns collection.
         '''
         return self.join()[0]
 
     def has_duplicate_pitch_classes(self, level=-1):
-        r'''Is true when segments have duplicate pitch-classes at `level`.
+        r'''Is true when collections have duplicate pitch-classes at `level`.
 
         ..  container:: example
 
             ::
 
-                >>> segments = baca.SegmentList([[4, 5, 7], [15, 16, 17, 19]])
+                >>> collections = baca.CollectionList([
+                ...     [4, 5, 7],
+                ...     [15, 16, 17, 19]
+                ...     ])
 
             ::
 
-                >>> segments.has_duplicate_pitch_classes(level=1)
+                >>> collections.has_duplicate_pitch_classes(level=1)
                 False
 
             ::
 
-                >>> segments.has_duplicate_pitch_classes(level=-1)
+                >>> collections.has_duplicate_pitch_classes(level=-1)
                 True
 
         Set `level` to 1 or -1.
@@ -797,17 +981,17 @@ class SegmentList(abjad.abctools.AbjadValueObject):
         '''
         pitch_class_class = self._get_pitch_class_class()
         if level == 1:
-            for segment in self:
+            for collection in self:
                 known_pitch_classes = []
-                for item in segment:
+                for item in collection:
                     pitch_class = pitch_class_class(item)
                     if pitch_class in known_pitch_classes:
                         return True
                     known_pitch_classes.append(pitch_class)
         elif level == -1:
             known_pitch_classes = []
-            for segment in self:
-                for item in segment:
+            for collection in self:
+                for item in collection:
                     pitch_class = pitch_class_class(item)
                     if pitch_class in known_pitch_classes:
                         return True
@@ -819,69 +1003,73 @@ class SegmentList(abjad.abctools.AbjadValueObject):
         return False
 
     def has_duplicates(self, level=-1):
-        r'''Is true when segments have duplicates at `level`.
+        r'''Is true when collections have duplicates at `level`.
 
         ..  container:: example
 
             ::
 
-                >>> segments = baca.SegmentList([[16, 17], [13], [16, 17]])
+                >>> collections = baca.CollectionList([
+                ...     [16, 17], [13], [16, 17],
+                ...     ])
 
             ::
 
-                >>> segments.has_duplicates(level=0)
+                >>> collections.has_duplicates(level=0)
                 True
 
             ::
 
-                >>> segments.has_duplicates(level=1)
+                >>> collections.has_duplicates(level=1)
                 False
 
             ::
 
-                >>> segments.has_duplicates(level=-1)
-                True
-
-        ..  container:: example
-
-            ::
-
-                >>> segments = baca.SegmentList([[16, 17], [14, 20, 14]])
-
-            ::
-
-                >>> segments.has_duplicates(level=0)
-                False
-
-            ::
-
-                >>> segments.has_duplicates(level=1)
-                True
-
-            ::
-
-                >>> segments.has_duplicates(level=-1)
+                >>> collections.has_duplicates(level=-1)
                 True
 
         ..  container:: example
 
             ::
 
-                >>> segments = baca.SegmentList([[16, 17], [14, 20], [14]])
+                >>> collections = baca.CollectionList([[16, 17], [14, 20, 14]])
 
             ::
 
-                >>> segments.has_duplicates(level=0)
+                >>> collections.has_duplicates(level=0)
                 False
 
             ::
 
-                >>> segments.has_duplicates(level=1)
+                >>> collections.has_duplicates(level=1)
+                True
+
+            ::
+
+                >>> collections.has_duplicates(level=-1)
+                True
+
+        ..  container:: example
+
+            ::
+
+                >>> collections = baca.CollectionList([
+                ...     [16, 17], [14, 20], [14],
+                ...     ])
+
+            ::
+
+                >>> collections.has_duplicates(level=0)
                 False
 
             ::
 
-                >>> segments.has_duplicates(level=-1)
+                >>> collections.has_duplicates(level=1)
+                False
+
+            ::
+
+                >>> collections.has_duplicates(level=-1)
                 True
 
         Set `level` to 0, 1 or -1.
@@ -890,22 +1078,22 @@ class SegmentList(abjad.abctools.AbjadValueObject):
         '''
         if level == 0:
             known_items = []
-            for segment in self:
-                if segment in known_items:
+            for collection in self:
+                if collection in known_items:
                     return True
-                known_items.append(segment)
+                known_items.append(collection)
         elif level == 1:
-            for segment in self:
+            for collection in self:
                 known_items = []
-                for item in segment:
+                for item in collection:
                     if item in known_items:
                         return True
                     known_items.append(item)
         elif level == -1:
             known_items = []
-            for segment in self:
+            for collection in self:
                 items = []
-                for item in segment:
+                for item in collection:
                     if item in known_items:
                         return True
                     known_items.append(item)
@@ -916,20 +1104,20 @@ class SegmentList(abjad.abctools.AbjadValueObject):
         return False
 
     def has_repeat_pitch_classes(self, level=-1):
-        r'''Is true when segments have repeat pitch-classes as `level`.
+        r'''Is true when collections have repeat pitch-classes as `level`.
 
         ..  container:: example
 
-                >>> segments = baca.SegmentList([[4, 5, 4, 5], [17, 18]])
+                >>> collections = baca.CollectionList([[4, 5, 4, 5], [17, 18]])
 
             ::
 
-                >>> segments.has_repeat_pitch_classes(level=1)
+                >>> collections.has_repeat_pitch_classes(level=1)
                 False
 
             ::
 
-                >>> segments.has_repeat_pitch_classes(level=-1)
+                >>> collections.has_repeat_pitch_classes(level=-1)
                 True
 
         Set `level` to 0 or -1.
@@ -938,17 +1126,17 @@ class SegmentList(abjad.abctools.AbjadValueObject):
         '''
         pitch_class_class = self._get_pitch_class_class()
         if level == 1:
-            for segment in self:
+            for collection in self:
                 previous_pitch_class = None
-                for item in segment:
+                for item in collection:
                     pitch_class = pitch_class_class(item)
                     if pitch_class == previous_pitch_class:
                         return True
                     previous_pitch_class = pitch_class
         elif level == -1:
             previous_pitch_class = None
-            for segment in self:
-                for item in segment:
+            for collection in self:
+                for item in collection:
                     pitch_class = pitch_class_class(item)
                     if pitch_class == previous_pitch_class:
                         return True
@@ -960,69 +1148,73 @@ class SegmentList(abjad.abctools.AbjadValueObject):
         return False
 
     def has_repeats(self, level=-1):
-        r'''Is true when segments have repeats at `level`.
+        r'''Is true when collections have repeats at `level`.
 
         ..  container:: example
 
             ::
 
-                >>> segments = baca.SegmentList([[4, 5], [4, 5]])
+                >>> collections = baca.CollectionList([[4, 5], [4, 5]])
 
             ::
 
-                >>> segments.has_repeats(level=0)
+                >>> collections.has_repeats(level=0)
                 True
 
             ::
 
-                >>> segments.has_repeats(level=1)
+                >>> collections.has_repeats(level=1)
                 False
 
             ::
 
-                >>> segments.has_repeats(level=-1)
+                >>> collections.has_repeats(level=-1)
                 False
 
         ..  container:: example
 
             ::
 
-                >>> segments = baca.SegmentList([[4, 5], [18, 18], [4, 5]])
+                >>> collections = baca.CollectionList([
+                ...     [4, 5], [18, 18], [4, 5],
+                ...     ])
 
             ::
 
-                >>> segments.has_repeats(level=0)
+                >>> collections.has_repeats(level=0)
                 False
 
             ::
 
-                >>> segments.has_repeats(level=1)
+                >>> collections.has_repeats(level=1)
                 True
 
             ::
 
-                >>> segments.has_repeats(level=-1)
+                >>> collections.has_repeats(level=-1)
                 True
 
         ..  container:: example
 
             ::
 
-                >>> segments = baca.SegmentList([[4, 5], [5, 18], [4, 5]])
+                >>> collections = baca.CollectionList([
+                ...     [4, 5], [5, 18], [4, 5],
+                ...     ])
 
             ::
 
-                >>> segments.has_repeats(level=0)
+                >>> collections.has_repeats(level=0)
                 False
 
             ::
 
-                >>> segments.has_repeats(level=1)
+                >>> collections.has_repeats(level=1)
                 False
 
             ::
 
-                >>> segments.has_repeats(level=-1)
+                >>> collections.has_repeats(level=-1)
                 True
 
         Set `level` to 0, 1 or -1.
@@ -1030,22 +1222,22 @@ class SegmentList(abjad.abctools.AbjadValueObject):
         Returns true or false.
         '''
         if level == 0:
-            previous_segment = None
-            for segment in self:
-                if segment == previous_segment:
+            previous_collection = None
+            for collection in self:
+                if collection == previous_collection:
                     return True
-                previous_segment = segment
+                previous_collection = collection
         elif level == 1:
-            for segment in self:
+            for collection in self:
                 previous_item = None
-                for item in segment:
+                for item in collection:
                     if item == previous_item:
                         return True
                     previous_item = item
         elif level == -1:
             previous_item = None
-            for segment in self:
-                for item in segment:
+            for collection in self:
+                for item in collection:
                     if item == previous_item:
                         return True
                     previous_item = item
@@ -1056,15 +1248,15 @@ class SegmentList(abjad.abctools.AbjadValueObject):
         return False
 
     def helianthate(self, n=0, m=0):
-        r'''Helianthates segments.
+        r'''Helianthates collections.
         
         ..  container:: example
 
             ::
 
-                >>> segments = baca.SegmentList([[1, 2, 3], [4, 5], [6, 7, 8]])
-                >>> for segment in segments.helianthate(n=-1, m=1):
-                ...     segment
+                >>> collections = baca.CollectionList([[1, 2, 3], [4, 5], [6, 7, 8]])
+                >>> for collection in collections.helianthate(n=-1, m=1):
+                ...     collection
                 ...
                 PitchSegment([1, 2, 3])
                 PitchSegment([4, 5])
@@ -1085,47 +1277,47 @@ class SegmentList(abjad.abctools.AbjadValueObject):
                 PitchSegment([2, 3, 1])
                 PitchSegment([5, 4])
 
-        Returns new segment list.
+        Returns new collection list.
         '''
-        segments = baca.Sequence(items=self)
-        segments = segments.helianthate(n=n, m=m)
-        return abjad.new(self, segments=segments)
+        collections = baca.Sequence(items=self)
+        collections = collections.helianthate(n=n, m=m)
+        return abjad.new(self, collections=collections)
 
     def join(self):
-        r'''Joins segments.
+        r'''Joins collections.
 
         ..  container:: example
 
             ::
 
-                >>> segments = baca.SegmentList([
+                >>> collections = baca.CollectionList([
                 ...     [5, 12, 14, 18, 17],
                 ...     [16, 17, 19],
                 ...     ])
 
             ::
 
-                >>> segments.join()
-                SegmentList([<5, 12, 14, 18, 17, 16, 17, 19>])
+                >>> collections.join()
+                CollectionList([<5, 12, 14, 18, 17, 16, 17, 19>])
 
-        Returns new segment list.
+        Returns new collection list.
         '''
-        segments = []
+        collections = []
         if self:
-            segment = self[0]
-            for segment_ in self[1:]:
-                segment = segment + segment_ 
-            segments.append(segment)
-        return abjad.new(self, segments=segments)
+            collection = self[0]
+            for collection_ in self[1:]:
+                collection = collection + collection_ 
+            collections.append(collection)
+        return abjad.new(self, collections=collections)
 
     def partition(self, argument, cyclic=False, overhang=False):
-        r'''Partitions segments according to `argument`.
+        r'''Partitions collections according to `argument`.
 
         ..  container:: example
 
             ::
 
-                >>> segments = baca.SegmentList([
+                >>> collections = baca.CollectionList([
                 ...     [5, 12, 14, 18, 17],
                 ...     [16, 17, 19],
                 ...     [16, 17, 19],
@@ -1133,17 +1325,17 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments
-                SegmentList([<5, 12, 14, 18, 17>, <16, 17, 19>, <16, 17, 19>])
+                >>> collections
+                CollectionList([<5, 12, 14, 18, 17>, <16, 17, 19>, <16, 17, 19>])
 
             ::
 
-                >>> sequence = segments.partition([1, 2], overhang=Exact)
-                >>> for segments in sequence:
-                ...     segments
+                >>> sequence = collections.partition([1, 2], overhang=Exact)
+                >>> for collections in sequence:
+                ...     collections
                 ...
-                SegmentList([<5, 12, 14, 18, 17>])
-                SegmentList([<16, 17, 19>, <16, 17, 19>])
+                CollectionList([<5, 12, 14, 18, 17>])
+                CollectionList([<16, 17, 19>, <16, 17, 19>])
 
             ::
 
@@ -1161,25 +1353,25 @@ class SegmentList(abjad.abctools.AbjadValueObject):
             cyclic=cyclic,
             overhang=overhang,
             )
-        segment_lists = [abjad.new(self, segments=_) for _ in parts]
-        return baca.Sequence(segment_lists)
+        collection_lists = [abjad.new(self, collections=_) for _ in parts]
+        return baca.Sequence(collection_lists)
 
     def read(self, counts=None, check=None):
-        r'''Reads segments by `counts`.
+        r'''Reads collections by `counts`.
 
         ..  container:: example
 
             ::
 
-                >>> segments = baca.SegmentList([
+                >>> collections = baca.CollectionList([
                 ...     [5, 12, 14, 18, 17],
                 ...     [16, 17, 19],
                 ...     ])
 
             ::
 
-                >>> for segment in segments.read([3, 3, 3, 5, 5, 5]):
-                ...     segment
+                >>> for collection in collections.read([3, 3, 3, 5, 5, 5]):
+                ...     collection
                 ...
                 PitchSegment([5, 12, 14])
                 PitchSegment([18, 17, 16])
@@ -1194,45 +1386,44 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = baca.SegmentList([
+                >>> collections = baca.CollectionList([
                 ...     [5, 12, 14, 18, 17],
                 ...     [16, 17, 19],
                 ...     ])
 
             ::
 
-                >>> len(segments.flatten())
+                >>> len(collections.flatten())
                 8
 
             ::
 
-                >>> segments.read([10, 10, 10], check=Exact)
+                >>> collections.read([10, 10, 10], check=Exact)
                 Traceback (most recent call last):
                     ...
                 ValueError: call reads 30 items; not a multiple of 8 items.
 
-        Returns new segment list.
+        Returns new collection list.
         '''
         if counts in (None, []):
             return abjad.new(self)
         counts = list(counts)
         assert all(isinstance(_, int) for _ in counts), repr(counts)
-        segment = self.join()[0]
-        source = abjad.CyclicTuple(segment)
+        collection = self.join()[0]
+        source = abjad.CyclicTuple(collection)
         i = 0
-        segments = []
+        collections = []
         for count in counts:
             items = source[i:i+count]
-            segment = self._initialize_segment(items)
-            segments.append(segment)
+            collection = self._initialize_collection(items)
+            collections.append(collection)
             i += count
-        result = abjad.new(self, segments=segments)
+        result = abjad.new(self, collections=collections)
         if check is Exact:
             self_item_count = len(self.flatten())
             result_item_count = len(result.flatten())
-            factors = abjad.mathtools.factors(result_item_count)
-            factors.append(result_item_count)
-            if self_item_count not in factors:
+            quotient = result_item_count / self_item_count
+            if quotient != int(quotient):
                 message = 'call reads {} items; not a multiple of {} items.'
                 message = message.format(result_item_count, self_item_count)
                 raise ValueError(message)
@@ -1241,21 +1432,21 @@ class SegmentList(abjad.abctools.AbjadValueObject):
     # TODO: change indices to pattern
     # TODO: add level=-1 keyword
     def remove(self, indices=None, period=None):
-        r'''Removes segments at `indices`.
+        r'''Removes collections at `indices`.
 
         ..  container:: example
 
             ::
 
-                >>> segments = baca.SegmentList([[0, 1], [2, 3], [4], [5, 6]])
-                >>> segments.remove([0, -1])
-                SegmentList([<2, 3>, <4>])
+                >>> collections = baca.CollectionList([[0, 1], [2, 3], [4], [5, 6]])
+                >>> collections.remove([0, -1])
+                CollectionList([<2, 3>, <4>])
 
-        Returns new segment list.
+        Returns new collection list.
         '''
         sequence = baca.Sequence(items=self)
-        segments = sequence.remove(indices=indices, period=period)
-        return abjad.new(self, segments=segments)
+        collections = sequence.remove(indices=indices, period=period)
+        return abjad.new(self, collections=collections)
    
     def remove_duplicate_pitch_classes(self, level=-1):
         r'''Removes duplicate pitch-classes at `level`.
@@ -1264,54 +1455,54 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = baca.SegmentList([[4, 5, 7], [16, 17, 16, 18]])
+                >>> collections = baca.CollectionList([[4, 5, 7], [16, 17, 16, 18]])
 
             ::
 
-                >>> segments.remove_duplicate_pitch_classes(level=1)
-                SegmentList([<4, 5, 7>, <16, 17, 18>])
+                >>> collections.remove_duplicate_pitch_classes(level=1)
+                CollectionList([<4, 5, 7>, <16, 17, 18>])
 
             ::
 
-                >>> segments.remove_duplicate_pitch_classes(level=-1)
-                SegmentList([<4, 5, 7>, <18>])
+                >>> collections.remove_duplicate_pitch_classes(level=-1)
+                CollectionList([<4, 5, 7>, <18>])
 
         Set `level` to 1 or -1.
 
-        Returns new segment list.
+        Returns new collection list.
         '''
         pitch_class_class = self._get_pitch_class_class()
-        segments_ = []
+        collections_ = []
         if level == 1:
-            for segment in self:
+            for collection in self:
                 items, known_pitch_classes = [], []
-                for item in segment:
+                for item in collection:
                     pitch_class = pitch_class_class(item)
                     if pitch_class in known_pitch_classes:
                         continue
                     known_pitch_classes.append(pitch_class)
                     items.append(item)
                 if items:
-                    segment_ = self._initialize_segment(items)
-                    segments_.append(segment_)
+                    collection_ = self._initialize_collection(items)
+                    collections_.append(collection_)
         elif level == -1:
             known_pitch_classes = []
-            for segment in self:
+            for collection in self:
                 items = []
-                for item in segment:
+                for item in collection:
                     pitch_class = pitch_class_class(item)
                     if pitch_class in known_pitch_classes:
                         continue
                     known_pitch_classes.append(pitch_class)
                     items.append(item)
                 if items:
-                    segment_ = self._initialize_segment(items)
-                    segments_.append(segment_)
+                    collection_ = self._initialize_collection(items, collection)
+                    collections_.append(collection_)
         else:
             message = 'level must be 1 or -1: {!r}.'
             message = message.format(level)
             raise ValueError(message)
-        return abjad.new(self, segments=segments_)
+        return abjad.new(self, collections=collections_)
 
     def remove_duplicates(self, level=-1):
         r'''Removes duplicates at `level`.
@@ -1320,65 +1511,65 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = baca.SegmentList(
+                >>> collections = baca.CollectionList(
                 ...     [[16, 17, 16], [13, 14, 16], [16, 17, 16]],
                 ...     )
 
             ::
 
-                >>> segments.remove_duplicates(level=0)
-                SegmentList([<16, 17, 16>, <13, 14, 16>])
+                >>> collections.remove_duplicates(level=0)
+                CollectionList([<16, 17, 16>, <13, 14, 16>])
 
             ::
 
-                >>> segments.remove_duplicates(level=1)
-                SegmentList([<16, 17>, <13, 14, 16>, <16, 17>])
+                >>> collections.remove_duplicates(level=1)
+                CollectionList([<16, 17>, <13, 14, 16>, <16, 17>])
 
             ::
 
-                >>> segments.remove_duplicates(level=-1)
-                SegmentList([<16, 17>, <13, 14>])
+                >>> collections.remove_duplicates(level=-1)
+                CollectionList([<16, 17>, <13, 14>])
 
         Set `level` to 0, 1 or -1.
 
-        Returns new segment list.
+        Returns new collection list.
         '''
-        segments_ = []
+        collections_ = []
         if level == 0:
-            segments_, known_items = [], []
-            for segment in self:
-                if segment in known_items:
+            collections_, known_items = [], []
+            for collection in self:
+                if collection in known_items:
                     continue
-                known_items.append(segment)
-                segments_.append(segment)
+                known_items.append(collection)
+                collections_.append(collection)
         elif level == 1:
-            for segment in self:
+            for collection in self:
                 items, known_items = [], []
-                for item in segment:
+                for item in collection:
                     if item in known_items:
                         continue
                     known_items.append(item)
                     items.append(item)
                 if items:
-                    segment_ = self._initialize_segment(items)
-                    segments_.append(segment_)
+                    collection_ = self._initialize_collection(items)
+                    collections_.append(collection_)
         elif level == -1:
             known_items = []
-            for segment in self:
+            for collection in self:
                 items = []
-                for item in segment:
+                for item in collection:
                     if item in known_items:
                         continue
                     known_items.append(item)
                     items.append(item)
                 if items:
-                    segment_ = self._initialize_segment(items)
-                    segments_.append(segment_)
+                    collection_ = self._initialize_collection(items)
+                    collections_.append(collection_)
         else:
             message = 'level must be 0, 1 or -1: {!r}.'
             message = message.format(level)
             raise ValueError(message)
-        return abjad.new(self, segments=segments_)
+        return abjad.new(self, collections=collections_)
 
     def remove_repeat_pitch_classes(self, level=-1):
         r'''Removes repeat pitch-classes at `level`.
@@ -1387,54 +1578,54 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = baca.SegmentList([[4, 4, 4, 5], [17, 18]])
+                >>> collections = baca.CollectionList([[4, 4, 4, 5], [17, 18]])
 
             ::
 
-                >>> segments.remove_repeat_pitch_classes(level=1)
-                SegmentList([<4, 5>, <17, 18>])
+                >>> collections.remove_repeat_pitch_classes(level=1)
+                CollectionList([<4, 5>, <17, 18>])
 
             ::
 
-                >>> segments.remove_repeat_pitch_classes(level=-1)
-                SegmentList([<4, 5>, <18>])
+                >>> collections.remove_repeat_pitch_classes(level=-1)
+                CollectionList([<4, 5>, <18>])
 
         Set `level` to 1 or -1.
 
-        Returns new segment list.
+        Returns new collection list.
         '''
         pitch_class_class = self._get_pitch_class_class()
-        segments_ = []
+        collections_ = []
         if level == 1:
-            for segment in self:
+            for collection in self:
                 items, previous_pitch_class = [], None
-                for item in segment:
+                for item in collection:
                     pitch_class = pitch_class_class(item)
                     if pitch_class == previous_pitch_class:
                         continue
                     items.append(item)
                     previous_pitch_class = pitch_class
                 if items:
-                    segment_ = self._initialize_segment(items)
-                    segments_.append(segment_)
+                    collection_ = self._initialize_collection(items)
+                    collections_.append(collection_)
         elif level == -1:
             previous_pitch_class = None
-            for segment in self:
+            for collection in self:
                 items = []
-                for item in segment:
+                for item in collection:
                     pitch_class = pitch_class_class(item)
                     if pitch_class == previous_pitch_class:
                         continue
                     items.append(item)
                     previous_pitch_class = pitch_class
                 if items:
-                    segment_ = self._initialize_segment(items)
-                    segments_.append(segment_)
+                    collection_ = self._initialize_collection(items)
+                    collections_.append(collection_)
         else:
             message = 'level must be 1 or -1: {!r}.'
             message = message.format(level)
             raise ValueError(message)
-        return abjad.new(self, segments=segments_)
+        return abjad.new(self, collections=collections_)
 
     def remove_repeats(self, level=-1):
         r'''Removes repeats at `level`.
@@ -1443,74 +1634,75 @@ class SegmentList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = baca.SegmentList([[4, 5], [4, 5], [5, 7, 7]])
+                >>> collections = baca.CollectionList([[4, 5], [4, 5], [5, 7, 7]])
 
             ::
 
-                >>> segments.remove_repeats(level=0)
-                SegmentList([<4, 5>, <5, 7, 7>])
+                >>> collections.remove_repeats(level=0)
+                CollectionList([<4, 5>, <5, 7, 7>])
 
             ::
 
-                >>> segments.remove_repeats(level=1)
-                SegmentList([<4, 5>, <4, 5>, <5, 7>])
+                >>> collections.remove_repeats(level=1)
+                CollectionList([<4, 5>, <4, 5>, <5, 7>])
 
             ::
 
-                >>> segments.remove_repeats(level=-1)
-                SegmentList([<4, 5>, <4, 5>, <7>])
+                >>> collections.remove_repeats(level=-1)
+                CollectionList([<4, 5>, <4, 5>, <7>])
 
         Set `level` to 0, 1 or -1.
 
         Returns true or false.
         '''
-        segments_ = []
+        collections_ = []
         if level == 0:
-            previous_segment = None
-            for segment in self:
-                if segment == previous_segment:
+            previous_collection = None
+            for collection in self:
+                if collection == previous_collection:
                     continue
-                segments_.append(segment)
-                previous_segment = segment
+                collections_.append(collection)
+                previous_collection = collection
         elif level == 1:
-            for segment in self:
+            for collection in self:
                 items, previous_item = [], None
-                for item in segment:
+                for item in collection:
                     if item == previous_item:
                         continue
                     items.append(item)
                     previous_item = item
                 if items:
-                    segment_ = self._initialize_segment(items)
-                    segments_.append(segment_)
+                    collection_ = self._initialize_collection(items)
+                    collections_.append(collection_)
         elif level == -1:
             previous_item = None
-            for segment in self:
+            for collection in self:
                 items = []
-                for item in segment:
+                for item in collection:
                     if item == previous_item:
                         continue
                     items.append(item)
                     previous_item = item
                 if items:
-                    segment_ = self._initialize_segment(items)
-                    segments_.append(segment_)
+                    collection_ = self._initialize_collection(items)
+                    collections_.append(collection_)
         else:
             message = 'level must be 0, 1 or -1: {!r}.'
             message = message.format(level)
             raise ValueError(message)
-        return abjad.new(self, segments=segments_)
+        return abjad.new(self, collections=collections_)
 
     def repeat(self, n=1):
-        r'''Repeats segments.
+        r'''Repeats collections.
 
         ..  container:: example
 
             ::
 
-                >>> segments = baca.SegmentList([[12, 14, 18, 17], [16, 19]])
-                >>> for segment in segments.repeat(n=3):
-                ...     segment
+                >>> collections = baca.CollectionList([[12, 14, 18, 17], [16, 19]])
+                >>> for collection in collections.repeat(n=3):
+                ...     collection
+                ...
                 PitchSegment([12, 14, 18, 17])
                 PitchSegment([16, 19])
                 PitchSegment([12, 14, 18, 17])
@@ -1518,193 +1710,193 @@ class SegmentList(abjad.abctools.AbjadValueObject):
                 PitchSegment([12, 14, 18, 17])
                 PitchSegment([16, 19])
         
-        Returns new segment list.
+        Returns new collection list.
         '''
-        segments = baca.Sequence(items=self)
-        segments = segments.repeat(n=n)
-        segments = segments.flatten(depth=1)
-        return abjad.new(self, segments=segments)
+        collections = baca.Sequence(items=self)
+        collections = collections.repeat(n=n)
+        collections = collections.flatten(depth=1)
+        return abjad.new(self, collections=collections)
 
     # TODO: change indices to pattern
     # TODO: add level=-1 keyword
     def retain(self, indices=None, period=None):
-        r'''Retains segments at `indices`.
+        r'''Retains collections at `indices`.
 
         ..  container:: example
 
             ::
 
-                >>> segments = baca.SegmentList([[0, 1], [2, 3], [4], [5, 6]])
-                >>> segments.retain([0, -1])
-                SegmentList([<0, 1>, <5, 6>])
+                >>> collections = baca.CollectionList([[0, 1], [2, 3], [4], [5, 6]])
+                >>> collections.retain([0, -1])
+                CollectionList([<0, 1>, <5, 6>])
 
         ..  container:: example
 
             ::
 
-                >>> segments = baca.SegmentList(
+                >>> collections = baca.CollectionList(
                 ...     [[0, 1], [2, 3], [4], [5, 6], [7], [8]],
                 ...     )
-                >>> segments.retain([0], period=2)
-                SegmentList([<0, 1>, <4>, <7>])
+                >>> collections.retain([0], period=2)
+                CollectionList([<0, 1>, <4>, <7>])
 
-        Returns new segment list.
+        Returns new collection list.
         '''
         sequence = baca.Sequence(items=self)
-        segments = sequence.retain(indices=indices, period=period)
-        return abjad.new(self, segments=segments)
+        collections = sequence.retain(indices=indices, period=period)
+        return abjad.new(self, collections=collections)
 
     def to_pitch_classes(self):
-        r'''Changes to pitch-class segments.
+        r'''Changes to pitch-class collections.
 
         ..  container:: example
 
-            To numbered pitch-class segments:
+            To numbered pitch-class collections:
 
             ..  container:: example
 
                 ::
 
-                    >>> segments = baca.SegmentList(
+                    >>> collections = baca.CollectionList(
                     ...     [[12, 14, 18, 17], [16, 20, 19]],
                     ...     item_class=abjad.NumberedPitch,
                     ...     )
 
                 ::
 
-                    >>> segments.to_pitch_classes()
-                    SegmentList([PC<0, 2, 6, 5>, PC<4, 8, 7>])
+                    >>> collections.to_pitch_classes()
+                    CollectionList([PC<0, 2, 6, 5>, PC<4, 8, 7>])
 
             ..  container:: example
 
                 ::
 
-                    >>> segments = baca.SegmentList(
+                    >>> collections = baca.CollectionList(
                     ...     [[0, 2, 6, 5], [4, 8, 7]],
                     ...     item_class=abjad.NumberedPitchClass,
                     ...     )
 
                 ::
 
-                    >>> segments.to_pitch_classes()
-                    SegmentList([PC<0, 2, 6, 5>, PC<4, 8, 7>])
+                    >>> collections.to_pitch_classes()
+                    CollectionList([PC<0, 2, 6, 5>, PC<4, 8, 7>])
 
         ..  container:: example
 
-            To named pitch-class segments:
+            To named pitch-class collections:
 
             ..  container:: example
 
                 ::
 
-                    >>> segments = baca.SegmentList(
+                    >>> collections = baca.CollectionList(
                     ...     [[12, 14, 18, 17], [16, 20, 19]],
                     ...     item_class=abjad.NamedPitch,
                     ...     )
 
                 ::
 
-                    >>> segments.to_pitch_classes()
-                    SegmentList([PC<c d fs f>, PC<e af g>])
+                    >>> collections.to_pitch_classes()
+                    CollectionList([PC<c d fs f>, PC<e af g>])
 
             ..  container:: example
 
                 ::
 
-                    >>> segments = baca.SegmentList(
+                    >>> collections = baca.CollectionList(
                     ...     [[0, 2, 6, 5], [4, 8, 7]],
                     ...     item_class=abjad.NamedPitchClass,
                     ...     )
 
                 ::
 
-                    >>> segments.to_pitch_classes()
-                    SegmentList([PC<c d fs f>, PC<e af g>])
+                    >>> collections.to_pitch_classes()
+                    CollectionList([PC<c d fs f>, PC<e af g>])
 
-        Returns new segment list.
+        Returns new collection list.
         '''
         item_class = self._to_pitch_class_item_class(self.item_class)
-        segments_ = []
-        for segment in self:
-            segment_ = segment.to_pitch_classes()
-            segments_.append(segment_)
-        return type(self)(segments=segments_, item_class=item_class)
+        collections_ = []
+        for collection in self:
+            collection_ = collection.to_pitch_classes()
+            collections_.append(collection_)
+        return type(self)(collections=collections_, item_class=item_class)
 
     def to_pitches(self):
-        r'''Changes to pitch segments.
+        r'''Changes to pitch collections.
 
         ..  container:: example
 
-            To numbered pitch segments:
+            To numbered pitch collections:
 
             ..  container:: example
 
                 ::
 
-                    >>> segments = baca.SegmentList(
+                    >>> collections = baca.CollectionList(
                     ...     [[12, 14, 18, 17], [16, 20, 19]],
                     ...     item_class=abjad.NumberedPitch,
                     ...     )
 
                 ::
 
-                    >>> segments.to_pitches()
-                    SegmentList([<12, 14, 18, 17>, <16, 20, 19>])
+                    >>> collections.to_pitches()
+                    CollectionList([<12, 14, 18, 17>, <16, 20, 19>])
 
             ..  container:: example
 
                 ::
 
-                    >>> segments = baca.SegmentList(
+                    >>> collections = baca.CollectionList(
                     ...     [[0, 2, 6, 5], [4, 8, 7]],
                     ...     item_class=abjad.NumberedPitchClass,
                     ...     )
 
                 ::
 
-                    >>> segments.to_pitches()
-                    SegmentList([<0, 2, 6, 5>, <4, 8, 7>])
+                    >>> collections.to_pitches()
+                    CollectionList([<0, 2, 6, 5>, <4, 8, 7>])
 
         ..  container:: example
 
-            To named pitch segments:
+            To named pitch collections:
 
             ..  container:: example
 
                 ::
 
-                    >>> segments = baca.SegmentList(
+                    >>> collections = baca.CollectionList(
                     ...     [[12, 14, 18, 17], [16, 20, 19]],
                     ...     item_class=abjad.NamedPitch,
                     ...     )
 
                 ::
 
-                    >>> segments.to_pitches()
-                    SegmentList([<c'' d'' fs'' f''>, <e'' af'' g''>])
+                    >>> collections.to_pitches()
+                    CollectionList([<c'' d'' fs'' f''>, <e'' af'' g''>])
 
             ..  container:: example
 
                 ::
 
-                    >>> segments = baca.SegmentList(
+                    >>> collections = baca.CollectionList(
                     ...     [[0, 2, 6, 5], [4, 8, 7]],
                     ...     item_class=abjad.NamedPitchClass,
                     ...     )
 
                 ::
 
-                    >>> segments.to_pitches()
-                    SegmentList([<c' d' fs' f'>, <e' af' g'>])
+                    >>> collections.to_pitches()
+                    CollectionList([<c' d' fs' f'>, <e' af' g'>])
 
-        Returns new segment list.
+        Returns new collection list.
         '''
         item_class = self._to_pitch_item_class(self.item_class)
-        segments_ = []
-        for segment in self:
-            segment_ = segment.to_pitches()
-            segments_.append(segment_)
-        return type(self)(segments=segments_, item_class=item_class)
+        collections_ = []
+        for collection in self:
+            collection_ = collection.to_pitches()
+            collections_.append(collection_)
+        return type(self)(collections=collections_, item_class=item_class)
 
 
-collections.Sequence.register(SegmentList)
+collections_module.Sequence.register(CollectionList)

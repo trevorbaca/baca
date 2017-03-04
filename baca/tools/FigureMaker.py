@@ -22,8 +22,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = figure_maker('Voice 1', segments)
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = figure_maker('Voice 1', collections)
             >>> lilypond_file = figure_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
@@ -119,7 +119,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
     def __call__(
         self,
         voice_name,
-        segments,
+        collections,
         *specifiers,
         allow_repeat_pitches=None,
         color_unregistered_pitches=None,
@@ -140,7 +140,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
         thread=None,
         time_treatments=None
         ):
-        r'''Calls figure-maker on `segments` with keywords.
+        r'''Calls figure-maker on `collections` with keywords.
 
         ..  container:: example
 
@@ -152,8 +152,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -193,10 +193,10 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> contribution = figure_maker(
                 ...     'Voice 1',
-                ...     segments,
+                ...     collections,
                 ...     talea_counts=[1, 2],
                 ...     )
                 >>> lilypond_file = figure_maker.show(contribution)
@@ -238,10 +238,10 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> contribution = figure_maker(
                 ...     'Voice 1',
-                ...     segments,
+                ...     collections,
                 ...     talea_denominator=32,
                 ...     )
                 >>> lilypond_file = figure_maker.show(contribution)
@@ -283,10 +283,10 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> contribution = figure_maker(
                 ...     'Voice 1',
-                ...     segments,
+                ...     collections,
                 ...     time_treatments=[1],
                 ...     )
                 >>> lilypond_file = figure_maker.show(contribution)
@@ -330,7 +330,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> contribution = figure_maker(
                 ...     'Voice 1',
                 ...     [abjad.Rest((3, 8)), abjad.Rest((3, 8))],
@@ -559,32 +559,30 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         Returns selection, time signature, state manifest.
         '''
+        if self._is_pitch_input(collections):
+            color_unregistered_pitches = False
         self._validate_voice_name(voice_name)
         self._apply_state_manifest(state_manifest)
         specifiers = list(self.specifiers or []) + list(specifiers)
-        if all(isinstance(_, abjad.Rest) for _ in segments):
-            tuplet = abjad.Tuplet((1, 1), segments)
+        if all(isinstance(_, abjad.Rest) for _ in collections):
+            tuplet = abjad.Tuplet((1, 1), collections)
             selections = [abjad.select(tuplet)]
             specifiers = [
                 _ for _ in specifiers
                 if not isinstance(_, baca.tools.FigureRhythmSpecifier)
                 ]
         else:
-            segments = self._coerce_segments(segments)
-            segments, specifiers = self._apply_figure_pitch_specifiers(
-                segments,
+            collections = self._coerce_collections(collections)
+            collections, specifiers = self._apply_figure_pitch_specifiers(
+                collections,
                 specifiers,
                 )
-            segments, specifiers = self._apply_spacing_specifiers(
-                segments,
-                specifiers,
-                )
-            segments, specifiers = self._apply_simultaneity_specifiers(
-                segments,
+            collections, specifiers = self._apply_spacing_specifiers(
+                collections,
                 specifiers,
                 )
             selections, specifiers = self._apply_rhythm_specifiers(
-                segments,
+                collections,
                 specifiers,
                 division_masks=division_masks,
                 logical_tie_masks=logical_tie_masks,
@@ -608,7 +606,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
             )
         self._apply_remaining_specifiers(selections, specifiers)
         self._label_figure_name_(container, figure_name)
-        self._annotate_segment_list(container, segments)
+        self._annotate_collection_list(container, collections)
         self._annotate_deployment(
             container,
             is_foreshadow=is_foreshadow,
@@ -667,10 +665,10 @@ class FigureMaker(abjad.abctools.AbjadObject):
             abjad.attach(self._repeat_pitch_allowed_string, leaf)
 
     @staticmethod
-    def _annotate_segment_list(container, segments):
+    def _annotate_collection_list(container, collections):
         for leaf in abjad.iterate(container).by_leaf():
-            segments_ = copy.deepcopy(segments)
-            abjad.attach(segments_, leaf)
+            collections_ = copy.deepcopy(collections)
+            abjad.attach(collections_, leaf)
 
     def _apply_cluster_specifiers(self, selections, specifiers):
         assert self._all_are_selections(selections), repr(selections)
@@ -682,16 +680,16 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 specifiers_.append(specifier)
         return specifiers_
 
-    def _apply_figure_pitch_specifiers(self, segments, specifiers):
-        prototype = (baca.tools.SegmentList, list, abjad.Sequence)
-        assert isinstance(segments, prototype), repr(segments)
+    def _apply_figure_pitch_specifiers(self, collections, specifiers):
+        prototype = (baca.CollectionList, list, abjad.Sequence)
+        assert isinstance(collections, prototype), repr(collections)
         specifiers_, unused_specifiers = [], []
         for specifier in specifiers:
             if isinstance(specifier, baca.tools.FigurePitchSpecifier):
-                segments = specifier(segments)
+                collections = specifier(collections)
             else:
                 unused_specifiers.append(specifier)
-        return segments, unused_specifiers
+        return collections, unused_specifiers
 
     def _apply_imbrication_specifiers(self, container, specifiers):
         unused_specifiers = []
@@ -739,7 +737,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
     def _apply_rhythm_specifiers(
         self,
-        segments,
+        collections,
         specifiers,
         division_masks=None,
         logical_tie_masks=None,
@@ -748,7 +746,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
         thread=None,
         time_treatments=None,
         ):
-        selections = len(segments) * [None]
+        selections = len(collections) * [None]
         rhythm_specifiers, rest_affix_specifiers, specifiers_ = [], [], []
         for specifier in specifiers:
             if isinstance(specifier, baca.tools.FigureRhythmSpecifier):
@@ -770,7 +768,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
         thread = thread or self.thread
         for specifier in rhythm_specifiers:
             specifier(
-                segments=segments,
+                collections=collections,
                 selections=selections,
                 division_masks=division_masks,
                 logical_tie_masks=logical_tie_masks,
@@ -782,22 +780,9 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 )
         return selections, specifiers_
 
-    def _apply_simultaneity_specifiers(self, segments, specifiers):
-        specifiers_, unused_specifiers = [], []
-        for specifier in specifiers:
-            if isinstance(specifier, baca.tools.SimultaneitySpecifier):
-                specifiers_.append(specifier)
-            else:
-                unused_specifiers.append(specifier)
-        prototype = (baca.tools.SegmentList, list, abjad.Sequence)
-        for specifier in specifiers_:
-            assert isinstance(segments, prototype), repr(segments)
-            segments = specifier(segments)
-        return segments, unused_specifiers
-
-    def _apply_spacing_specifiers(self, segments, specifiers):
-        prototype = (baca.tools.SegmentList, list, abjad.Sequence)
-        assert isinstance(segments, prototype), repr(segments)
+    def _apply_spacing_specifiers(self, collections, specifiers):
+        prototype = (baca.CollectionList, list, abjad.Sequence)
+        assert isinstance(collections, prototype), repr(collections)
         specifiers_, unused_specifiers = [], []
         prototype = (
             baca.tools.ArpeggiationSpacingSpecifier,
@@ -805,10 +790,10 @@ class FigureMaker(abjad.abctools.AbjadObject):
             )
         for specifier in specifiers:
             if isinstance(specifier, prototype):
-                segments = specifier(segments)
+                collections = specifier(collections)
             else:
                 unused_specifiers.append(specifier)
-        return segments, unused_specifiers
+        return collections, unused_specifiers
 
     def _apply_state_manifest(self, state_manifest=None):
         state_manifest = state_manifest or {}
@@ -827,15 +812,18 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 raise Exception(report)
 
     @staticmethod
-    def _coerce_segments(segments):
+    def _coerce_collections(collections):
+        prototype = (abjad.pitchtools.Segment, abjad.pitchtools.Set)
+        if isinstance(collections, prototype):
+            return baca.CollectionList(collections=[collections])
         item_class = abjad.NumberedPitch
-        for segment in segments:
-            for item in segment:
+        for collection in collections:
+            for item in collection:
                 if isinstance(item, str):
                     item_class = abjad.NamedPitch
                     break
-        return baca.tools.SegmentList(
-            segments=segments,
+        return baca.CollectionList(
+            collections=collections,
             item_class=item_class,
             )
 
@@ -902,6 +890,17 @@ class FigureMaker(abjad.abctools.AbjadObject):
             keyword_argument_names=keyword_argument_names,
             positional_argument_values=positional_argument_values,
             )
+
+    def _is_pitch_input(self, collections):
+        prototype = (abjad.PitchSegment, abjad.PitchSet)
+        if isinstance(collections, prototype):
+            return True
+        try:
+            if isinstance(collections[0], prototype):
+                return True
+        except (IndexError, TypeError):
+            pass
+        return False
 
     @staticmethod
     def _label_figure_name_(container, figure_name):
@@ -1026,12 +1025,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18],
                 ...     [16, 15, 23, 17],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1076,12 +1075,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18],
                 ...     [16, 15, 23, 17],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(
                 ...     contribution,
                 ...     time_signatures=[contribution.time_signature],
@@ -1127,14 +1126,14 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18],
                 ...     [16, 15, 23, 17],
                 ...     [19, 13, 9, 8],
                 ...     ]
                 >>> contribution = figure_maker(
                 ...     'Voice 1',
-                ...     segments,
+                ...     collections,
                 ...     denominator=8,
                 ...     )
                 >>> lilypond_file = figure_maker.show(
@@ -1185,14 +1184,14 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18],
                 ...     [16, 15, 23, 17],
                 ...     [19, 13, 9, 8],
                 ...     ]
                 >>> contribution = figure_maker(
                 ...     'Voice 1',
-                ...     segments,
+                ...     collections,
                 ...     denominator=8,
                 ...     )
                 >>> lilypond_file = figure_maker.show(
@@ -1258,8 +1257,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1309,8 +1308,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1356,8 +1355,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1407,8 +1406,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -1452,12 +1451,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18],
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
@@ -1510,14 +1509,14 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18],
                 ...     [15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
                 >>> contribution = figure_maker(
                 ...     'Voice 1',
-                ...     segments,
+                ...     collections,
                 ...     baca.tools.RestAffixSpecifier(
                 ...         pattern=abjad.Pattern(
                 ...             indices=[0, -1],
@@ -1584,12 +1583,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18],
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
@@ -1650,12 +1649,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18],
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 6
@@ -1705,12 +1704,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18],
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).stem.direction = Down
@@ -1763,12 +1762,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18],
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).stem.direction = Down
@@ -1821,12 +1820,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18],
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).stem.direction = Down
@@ -1879,12 +1878,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18],
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).stem.direction = Down
@@ -1947,12 +1946,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18],
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).stem.direction = Down
@@ -2029,12 +2028,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18],
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).stem.direction = Down
@@ -2084,12 +2083,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18],
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).beam.positions = (-6, -6)
@@ -2161,12 +2160,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18],
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -2215,12 +2214,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18],
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
@@ -2283,7 +2282,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            Nesting specifier augments first two segments one sixteenth:
+            Nesting specifier augments first two collections one sixteenth:
 
             ::
 
@@ -2301,12 +2300,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18],
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
@@ -2395,8 +2394,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -2454,8 +2453,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -2514,8 +2513,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -2575,8 +2574,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -2636,8 +2635,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -2677,11 +2676,11 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
     @property
     def thread(self):
-        r'''Is true when figure-maker threads rhythm-maker over segments.
+        r'''Is true when figure-maker threads rhythm-maker over collections.
 
         ..  container:: example
 
-            Does not thread rhythm-maker over segments:
+            Does not thread rhythm-maker over collections:
 
             ::
 
@@ -2689,10 +2688,10 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> contribution = figure_maker(
                 ...     'Voice 1',
-                ...     segments,
+                ...     collections,
                 ...     talea_counts=[1, 2, 3],
                 ...     )
                 >>> lilypond_file = figure_maker.show(contribution)
@@ -2724,14 +2723,14 @@ class FigureMaker(abjad.abctools.AbjadObject):
                     }
                 >>
 
-            Does thread rhythm-maker over segments:
+            Does thread rhythm-maker over collections:
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> contribution = figure_maker(
                 ...     'Voice 1',
-                ...     segments,
+                ...     collections,
                 ...     talea_counts=[1, 2, 3],
                 ...     thread=True,
                 ...     )

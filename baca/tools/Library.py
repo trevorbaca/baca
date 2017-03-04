@@ -56,10 +56,10 @@ class Library(object):
         local_selector=None,
         ):
         return baca.tools.AnchorSpecifier(
-            just_after=True,
             local_selector=local_selector,
             remote_selector=remote_selector,
             remote_voice_name=remote_voice_name,
+            use_remote_stop_offset=True,
             )
 
     @staticmethod
@@ -126,23 +126,31 @@ class Library(object):
             )
 
     @staticmethod
-    def chord():
-        return baca.tools.SimultaneitySpecifier()
-
-    @staticmethod
-    def chord_spacing_down(bass=None, pattern=None, soprano=None):
+    def chord_spacing_down(
+        bass=None,
+        pattern=None,
+        semitones=None,
+        soprano=None,
+        ):
         return baca.tools.ChordalSpacingSpecifier(
             bass=bass,
             direction=Down,
+            minimum_semitones=semitones,
             pattern=pattern,
             soprano=soprano,
             )
 
     @staticmethod
-    def chord_spacing_up(bass=None, pattern=None, soprano=None):
+    def chord_spacing_up(
+        bass=None,
+        pattern=None,
+        semitones=None,
+        soprano=None,
+        ):
         return baca.tools.ChordalSpacingSpecifier(
             bass=bass,
             direction=Up,
+            minimum_semitones=semitones,
             pattern=pattern,
             soprano=soprano,
             )
@@ -238,6 +246,13 @@ class Library(object):
             attribute_name='style',
             attribute_value="'cross'",
             )
+
+    @staticmethod
+    def cross_staff():
+        return baca.tools.IndicatorSpecifier(
+            indicators=[
+                abjad.LilyPondCommand(r'\crossStaff'),
+                ])
 
     @staticmethod
     def displacement(displacements):
@@ -877,20 +892,20 @@ class Library(object):
             )
 
     @staticmethod
+    def resume_after(remote_voice_name):
+        return baca.tools.AnchorSpecifier(
+            remote_selector=baca.select_leaf(-1),
+            remote_voice_name=remote_voice_name,
+            use_remote_stop_offset=True,
+            )
+
+    @staticmethod
     def right_pedal(selector=None):
         return baca.tools.SpannerSpecifier(
             selector=selector,
             spanner=abjad.spannertools.PianoPedalSpanner(
                 style='bracket',
                 ),
-            )
-
-    @staticmethod
-    def script_direction(direction):
-        return baca.tools.OverrideSpecifier(
-            grob_name='script',
-            attribute_name='direction',
-            attribute_value=str(direction),
             )
 
     @staticmethod
@@ -1082,12 +1097,28 @@ class Library(object):
         return baca.tools.SpannerSpecifier(spanner=abjad.Slur())
 
     @staticmethod
+    def slur_down():
+        return baca.tools.OverrideSpecifier(
+            grob_name='slur',
+            attribute_name='direction',
+            attribute_value=Down,
+            )
+
+    @staticmethod
     def slur_every_tuplet():
         return baca.tools.SpannerSpecifier(
             selector=abjad.select().
                 by_class(abjad.Tuplet, flatten=True).
                 get_slice(apply_to_each=True),
             spanner=abjad.Slur(),
+            )
+
+    @staticmethod
+    def slur_up():
+        return baca.tools.OverrideSpecifier(
+            grob_name='slur',
+            attribute_name='direction',
+            attribute_value=Up,
             )
         
     @staticmethod
@@ -1119,11 +1150,12 @@ class Library(object):
             )
 
     @staticmethod
-    def stem_direction(direction):
+    def stem_color(color, context_name=None):
         return baca.tools.OverrideSpecifier(
+            context_name=context_name,
             grob_name='stem',
-            attribute_name='direction',
-            attribute_value=str(direction),
+            attribute_name='color',
+            attribute_value=repr(color),
             )
 
     @staticmethod
@@ -1222,14 +1254,6 @@ class Library(object):
     def tie(messiaen=False):
         tie = abjad.Tie(use_messiaen_style_ties=messiaen)
         return baca.tools.SpannerSpecifier(spanner=tie)
-
-    @staticmethod
-    def tie_direction(direction):
-        return baca.tools.OverrideSpecifier(
-            grob_name='tie',
-            attribute_name='direction',
-            attribute_value=str(direction),
-            )
 
     @staticmethod
     def tied_repeated_duration_rhythm_specifier(durations):

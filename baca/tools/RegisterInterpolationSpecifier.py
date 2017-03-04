@@ -12,6 +12,125 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
+        With figure-maker.
+        
+        All stages glued together:
+
+        ::
+
+            >>> figure_maker = baca.tools.FigureMaker()
+
+        ::
+
+            >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
+            >>> contribution = figure_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     baca.tools.RegisterInterpolationSpecifier(
+            ...         start_pitch=0,
+            ...         stop_pitch=24,
+            ...         ),
+            ...     )
+            >>> lilypond_file = figure_maker.show(contribution)
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> f(lilypond_file[abjad.Staff])
+            \new Staff <<
+                \context Voice = "Voice 1" {
+                    \voiceOne
+                    {
+                        {
+                            fs'16 [
+                            e'16
+                            ef'16
+                            f'16
+                            a'16
+                            bf'16
+                            c''16
+                            b'16
+                            af'16
+                            g''16
+                            cs''16
+                            d''16 ]
+                        }
+                        {
+                            fs''16 [
+                            e''16
+                            ef''16
+                            f''16
+                            a''16
+                            bf''16
+                            c'''16
+                            b''16
+                            af''16
+                            g'''16
+                            cs'''16
+                            d'''16 ]
+                        }
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        With chords:
+
+        ::
+
+            >>> figure_maker = baca.tools.FigureMaker()
+
+        ::
+
+            >>> collections = [
+            ...     [6, 4], [3, 5], [9, 10], [0, 11], [8, 7], [1, 2],
+            ...     ]
+            >>> collections = [set(_) for _ in collections]
+            >>> contribution = figure_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     baca.tools.RegisterInterpolationSpecifier(
+            ...         start_pitch=0,
+            ...         stop_pitch=24,
+            ...         ),
+            ...     )
+            >>> lilypond_file = figure_maker.show(contribution)
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> f(lilypond_file[abjad.Staff])
+            \new Staff <<
+                \context Voice = "Voice 1" {
+                    \voiceOne
+                    {
+                        {
+                            <e' fs'>16
+                        }
+                        {
+                            <f' ef''>16
+                        }
+                        {
+                            <a' bf'>16
+                        }
+                        {
+                            <c'' b''>16
+                        }
+                        {
+                            <g'' af''>16
+                        }
+                        {
+                            <cs''' d'''>16
+                        }
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        With segment-maker.
+
         Holds register constant:
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
@@ -805,253 +924,6 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
                 >>
             >>
 
-    ..  container:: example
-
-        Figure-maker (first stage only):
-
-        ::
-
-            >>> figure_maker = baca.tools.FigureMaker()
-
-        ::
-
-            >>> segments = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-            >>> contribution = figure_maker(
-            ...     'Voice 1',
-            ...     segments,
-            ...     baca.tools.RegisterInterpolationSpecifier(
-            ...         pattern=abjad.select_first(),
-            ...         start_pitch=0,
-            ...         stop_pitch=24,
-            ...         ),
-            ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
-            >>> show(lilypond_file) # doctest: +SKIP
-
-        ..  doctest::
-
-            >>> f(lilypond_file[abjad.Staff])
-            \new Staff <<
-                \context Voice = "Voice 1" {
-                    \voiceOne
-                    {
-                        {
-                            fs'16 [
-                            e'16
-                            ef''16
-                            f''16
-                            a'16
-                            bf'16
-                            c''16
-                            b''16
-                            af''16
-                            g''16
-                            cs'''16
-                            d'''16 ]
-                        }
-                        {
-                            fs'16 [
-                            e'16
-                            ef'16
-                            f'16
-                            a'16
-                            bf'16
-                            c'16
-                            b'16
-                            af'16
-                            g'16
-                            cs'16
-                            d'16 ]
-                        }
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Figure-maker (last stage only):
-
-        ::
-
-            >>> figure_maker = baca.tools.FigureMaker()
-
-        ::
-
-            >>> segments = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-            >>> contribution = figure_maker(
-            ...     'Voice 1',
-            ...     segments,
-            ...     baca.tools.RegisterInterpolationSpecifier(
-            ...         pattern=abjad.select_last(),
-            ...         start_pitch=0,
-            ...         stop_pitch=24,
-            ...         ),
-            ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
-            >>> show(lilypond_file) # doctest: +SKIP
-
-        ..  doctest::
-
-            >>> f(lilypond_file[abjad.Staff])
-            \new Staff <<
-                \context Voice = "Voice 1" {
-                    \voiceOne
-                    {
-                        {
-                            fs'16 [
-                            e'16
-                            ef'16
-                            f'16
-                            a'16
-                            bf'16
-                            c'16
-                            b'16
-                            af'16
-                            g'16
-                            cs'16
-                            d'16 ]
-                        }
-                        {
-                            fs'16 [
-                            e'16
-                            ef''16
-                            f''16
-                            a'16
-                            bf'16
-                            c''16
-                            b''16
-                            af''16
-                            g''16
-                            cs'''16
-                            d'''16 ]
-                        }
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Figure-maker (each stage registered separately):
-
-        ::
-
-            >>> figure_maker = baca.tools.FigureMaker()
-
-        ::
-
-            >>> segments = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-            >>> contribution = figure_maker(
-            ...     'Voice 1',
-            ...     segments,
-            ...     baca.tools.RegisterInterpolationSpecifier(
-            ...         pattern=abjad.select_all(),
-            ...         start_pitch=0,
-            ...         stop_pitch=24,
-            ...         ),
-            ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
-            >>> show(lilypond_file) # doctest: +SKIP
-
-        ..  doctest::
-
-            >>> f(lilypond_file[abjad.Staff])
-            \new Staff <<
-                \context Voice = "Voice 1" {
-                    \voiceOne
-                    {
-                        {
-                            fs'16 [
-                            e'16
-                            ef''16
-                            f''16
-                            a'16
-                            bf'16
-                            c''16
-                            b''16
-                            af''16
-                            g''16
-                            cs'''16
-                            d'''16 ]
-                        }
-                        {
-                            fs'16 [
-                            e'16
-                            ef''16
-                            f''16
-                            a'16
-                            bf'16
-                            c''16
-                            b''16
-                            af''16
-                            g''16
-                            cs'''16
-                            d'''16 ]
-                        }
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Figure-maker (all stages glued together):
-
-        ::
-
-            >>> figure_maker = baca.tools.FigureMaker()
-
-        ::
-
-            >>> segments = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-            >>> contribution = figure_maker(
-            ...     'Voice 1',
-            ...     segments,
-            ...     baca.tools.RegisterInterpolationSpecifier(
-            ...         start_pitch=0,
-            ...         stop_pitch=24,
-            ...         ),
-            ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
-            >>> show(lilypond_file) # doctest: +SKIP
-
-        ..  doctest::
-
-            >>> f(lilypond_file[abjad.Staff])
-            \new Staff <<
-                \context Voice = "Voice 1" {
-                    \voiceOne
-                    {
-                        {
-                            fs'16 [
-                            e'16
-                            ef'16
-                            f'16
-                            a'16
-                            bf'16
-                            c''16
-                            b'16
-                            af'16
-                            g''16
-                            cs''16
-                            d''16 ]
-                        }
-                        {
-                            fs''16 [
-                            e''16
-                            ef''16
-                            f''16
-                            a''16
-                            bf''16
-                            c'''16
-                            b''16
-                            af''16
-                            g'''16
-                            cs'''16
-                            d'''16 ]
-                        }
-                    }
-                }
-            >>
-
     """
 
     ### CLASS VARIABLES ###
@@ -1104,9 +976,17 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
             length = len(logical_ties)
             for index, logical_tie in enumerate(logical_ties):
                 registration = self._get_registration(index, length)
-                for note in logical_tie:
-                    written_pitch = registration([note.written_pitch])
-                    self._set_pitch(note, written_pitch)
+                #for note in logical_tie:
+                for leaf in logical_tie:
+                    if isinstance(leaf, abjad.Note):
+                        written_pitch = registration([leaf.written_pitch])
+                        leaf.written_pitch = written_pitch
+                    elif isinstance(leaf, abjad.Chord):
+                        written_pitches = registration(leaf.written_pitches)
+                        leaf.written_pitches = written_pitches
+                    else:
+                        raise TypeError(leaf)
+                    abjad.detach('not yet registered', leaf)
 
     ### PRIVATE METHODS ###
 
@@ -1122,23 +1002,204 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
         registration.append(('[A0, C8]', current_pitch))
         return registration
     
-    @staticmethod
-    def _set_pitch(note, written_pitch):
-        note.written_pitch = written_pitch
-        abjad.detach('not yet registered', note)
-
     ### PUBLIC PROPERTIES ###
 
     @property
     def pattern(self):
-        r'''Gets pattern.
+        r"""Gets pattern.
+
+        ..  container:: example
+
+            Figure-maker (first stage only):
+
+            ::
+
+                >>> figure_maker = baca.tools.FigureMaker()
+
+            ::
+
+                >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
+                >>> contribution = figure_maker(
+                ...     'Voice 1',
+                ...     collections,
+                ...     baca.tools.RegisterInterpolationSpecifier(
+                ...         pattern=abjad.select_first(),
+                ...         start_pitch=0,
+                ...         stop_pitch=24,
+                ...         ),
+                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            {
+                                fs'16 [
+                                e'16
+                                ef''16
+                                f''16
+                                a'16
+                                bf'16
+                                c''16
+                                b''16
+                                af''16
+                                g''16
+                                cs'''16
+                                d'''16 ]
+                            }
+                            {
+                                fs'16 [
+                                e'16
+                                ef'16
+                                f'16
+                                a'16
+                                bf'16
+                                c'16
+                                b'16
+                                af'16
+                                g'16
+                                cs'16
+                                d'16 ]
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Figure-maker (last stage only):
+
+            ::
+
+                >>> figure_maker = baca.tools.FigureMaker()
+
+            ::
+
+                >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
+                >>> contribution = figure_maker(
+                ...     'Voice 1',
+                ...     collections,
+                ...     baca.tools.RegisterInterpolationSpecifier(
+                ...         pattern=abjad.select_last(),
+                ...         start_pitch=0,
+                ...         stop_pitch=24,
+                ...         ),
+                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            {
+                                fs'16 [
+                                e'16
+                                ef'16
+                                f'16
+                                a'16
+                                bf'16
+                                c'16
+                                b'16
+                                af'16
+                                g'16
+                                cs'16
+                                d'16 ]
+                            }
+                            {
+                                fs'16 [
+                                e'16
+                                ef''16
+                                f''16
+                                a'16
+                                bf'16
+                                c''16
+                                b''16
+                                af''16
+                                g''16
+                                cs'''16
+                                d'''16 ]
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Figure-maker (each stage registered separately):
+
+            ::
+
+                >>> figure_maker = baca.tools.FigureMaker()
+
+            ::
+
+                >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
+                >>> contribution = figure_maker(
+                ...     'Voice 1',
+                ...     collections,
+                ...     baca.tools.RegisterInterpolationSpecifier(
+                ...         pattern=abjad.select_all(),
+                ...         start_pitch=0,
+                ...         stop_pitch=24,
+                ...         ),
+                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            {
+                                fs'16 [
+                                e'16
+                                ef''16
+                                f''16
+                                a'16
+                                bf'16
+                                c''16
+                                b''16
+                                af''16
+                                g''16
+                                cs'''16
+                                d'''16 ]
+                            }
+                            {
+                                fs'16 [
+                                e'16
+                                ef''16
+                                f''16
+                                a'16
+                                bf'16
+                                c''16
+                                b''16
+                                af''16
+                                g''16
+                                cs'''16
+                                d'''16 ]
+                            }
+                        }
+                    }
+                >>
 
         Set to pattern or none.
 
         Defaults to none.
 
         Returns pattern or none.
-        '''
+        """
         return self._pattern
 
     @property

@@ -28,12 +28,12 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segments = [
+            >>> collections = [
             ...     [0, 2, 10, 18],
             ...     [16, 15, 23],
             ...     [19, 13, 9, 8],
             ...     ]
-            >>> contribution = figure_maker('Voice 1', segments)
+            >>> contribution = figure_maker('Voice 1', collections)
             >>> lilypond_file = figure_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).beam.positions = (-5.5, -5.5)

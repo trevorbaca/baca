@@ -11,11 +11,11 @@ class ExpressionGallery(object):
 
     ..  container:: example expression
 
-        Transposes segments:
+        Transposes collections:
 
         ::
 
-            >>> segments = [
+            >>> collections = [
             ...     abjad.PitchClassSegment([0, 1, 2, 3]),
             ...     abjad.PitchClassSegment([6, 7, 8, 9]),
             ...     ]
@@ -30,8 +30,8 @@ class ExpressionGallery(object):
 
         ::
 
-            >>> for segment in expression(segments):
-            ...     segment
+            >>> for collection in expression(collections):
+            ...     collection
             ...
             PitchClassSegment([3, 4, 5, 6])
             PitchClassSegment([9, 10, 11, 0])
@@ -72,7 +72,7 @@ class ExpressionGallery(object):
 
         ::
 
-            >>> segments = [
+            >>> collections = [
             ...     abjad.PitchClassSegment([0, 1, 2, 3]),
             ...     abjad.PitchClassSegment([6, 7, 8, 9]),
             ...     ]
@@ -88,7 +88,7 @@ class ExpressionGallery(object):
 
         ::
 
-            >>> expression(segments)
+            >>> expression(collections)
             Sequence([PitchClassSegment([3, 4, 5, 6, 9, 10, 11, 0])])
 
         ::
@@ -132,7 +132,7 @@ class ExpressionGallery(object):
 
         ::
 
-            >>> segments = [
+            >>> collections = [
             ...     abjad.PitchClassSegment([0, 1, 2, 3]),
             ...     abjad.PitchClassSegment([6, 7, 8, 9]),
             ...     ]
@@ -148,8 +148,8 @@ class ExpressionGallery(object):
 
         ::
 
-            >>> for segment in expression(segments):
-            ...     segment
+            >>> for collection in expression(collections):
+            ...     collection
             ...
             NumberedPitchClass(3)
             NumberedPitchClass(4)
@@ -201,7 +201,7 @@ class ExpressionGallery(object):
 
         ::
 
-            >>> segments = [
+            >>> collections = [
             ...     abjad.PitchClassSegment([0, 1, 2, 3]),
             ...     abjad.PitchClassSegment([6, 7, 8, 9]),
             ...     ]
@@ -215,8 +215,8 @@ class ExpressionGallery(object):
 
         ::
 
-            >>> for segment in expression(segments):
-            ...     segment
+            >>> for collection in expression(collections):
+            ...     collection
             ...
             PitchClassSegment([3, 4, 5])
             PitchClassSegment([6, 9, 10])
@@ -275,7 +275,7 @@ class ExpressionGallery(object):
 
         ::
 
-            >>> segments = [
+            >>> collections = [
             ...     abjad.PitchClassSegment([0, 1, 2, 3]),
             ...     abjad.PitchClassSegment([6, 7, 8, 9]),
             ...     ]
@@ -290,8 +290,8 @@ class ExpressionGallery(object):
 
         ::
 
-            >>> for segment in expression(segments):
-            ...     segment
+            >>> for collection in expression(collections):
+            ...     collection
             ...
             PitchClassSegment([3, 4, 5])
             PitchClassSegment([6, 9, 10])

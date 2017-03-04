@@ -33,8 +33,8 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = figure_maker('Voice 1', segments)
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = figure_maker('Voice 1', collections)
             >>> lilypond_file = figure_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
@@ -156,8 +156,8 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -216,8 +216,8 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', segments)
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker('Voice 1', collections)
                 >>> lilypond_file = figure_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 

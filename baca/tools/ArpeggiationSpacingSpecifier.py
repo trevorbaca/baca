@@ -17,7 +17,7 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
 
             >>> specifier = baca.tools.ArpeggiationSpacingSpecifier()
             >>> specifier([[6, 0, 4, 5, 8]])
-            SegmentList([<6, 12, 16, 17, 20>])
+            CollectionList([<6, 12, 16, 17, 20>])
 
     ..  container:: example
 
@@ -25,7 +25,7 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
 
             >>> specifier = baca.tools.ArpeggiationSpacingSpecifier()
             >>> specifier([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-            SegmentList([<0, 2, 10>, <6, 16, 27, 32, 43>, <9>])
+            CollectionList([<0, 2, 10>, <6, 16, 27, 32, 43>, <9>])
 
     ..  container:: example
 
@@ -59,8 +59,8 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, segments=None):
-        r'''Calls specifier on `segments`.
+    def __call__(self, collections=None):
+        r'''Calls specifier on `collections`.
 
         ..  container:: example
 
@@ -78,18 +78,18 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 >>> specifier() is None
                 True
 
-        Returns pitch segment or none.
+        Returns collection list or none.
         '''
-        if segments is None:
+        if collections is None:
             return
-        if segments == []:
-            return abjad.PitchSegment(item_class=abjad.NumberedPitch)
-        if not isinstance(segments, baca.SegmentList):
-            segments = baca.SegmentList(segments)
-        pitch_class_segments = segments.to_pitch_classes()
+        if collections == []:
+            return baca.PitchSegment(item_class=abjad.NumberedPitch)
+        if not isinstance(collections, baca.CollectionList):
+            collections = baca.CollectionList(collections)
+        pitch_class_segments = collections.to_pitch_classes()
         pattern = self.pattern or abjad.patterntools.select_all()
-        segments_ = []
-        total_length = len(segments)
+        collections_ = []
+        total_length = len(collections)
         class_ = baca.tools.ChordalSpacingSpecifier
         direction = self.direction or Up
         for i in range(total_length):
@@ -104,11 +104,11 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
                     pitches = class_._to_tightly_spaced_pitches_descending(
                         pitch_classes,
                         )
-                segment_ = abjad.PitchSegment(pitches)
-                segments_.append(segment_)
+                segment_ = baca.PitchSegment(pitches)
+                collections_.append(segment_)
             else:
-                segments_.append(segments[i])
-        return baca.SegmentList(segments_)
+                collections_.append(collections[i])
+        return baca.CollectionList(collections_)
 
     ### PUBLIC PROPERTIES ###
 
@@ -124,10 +124,10 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> contribution = figure_maker(
                 ...     'Voice 1',
-                ...     segments,
+                ...     collections,
                 ...     baca.tools.ArpeggiationSpacingSpecifier(
                 ...         direction=Up,
                 ...         ),
@@ -170,10 +170,10 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> contribution = figure_maker(
                 ...     'Voice 1',
-                ...     segments,
+                ...     collections,
                 ...     baca.tools.ArpeggiationSpacingSpecifier(
                 ...         direction=Down,
                 ...         ),

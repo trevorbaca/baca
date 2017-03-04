@@ -22,10 +22,10 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = figure_maker(
             ...     'Voice 1',
-            ...     segments,
+            ...     collections,
             ...     baca.tools.RestAffixSpecifier(
             ...         prefix=[2],
             ...         suffix=[3],
@@ -82,10 +82,10 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = figure_maker(
             ...     'Voice 1',
-            ...     segments,
+            ...     collections,
             ...     baca.tools.RestAffixSpecifier(
             ...         prefix=[2],
             ...         suffix=[3],
@@ -190,19 +190,19 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, segment_index, total_segments):
-        r'''Calls specifier on `segment_index` and `total_segments`.
+    def __call__(self, segment_index, total_collections):
+        r'''Calls specifier on `segment_index` and `total_collections`.
 
         Returns prefix, suffix pair.
         '''
         if self.pattern is None:
-            if segment_index == 0 and segment_index == total_segments - 1:
+            if segment_index == 0 and segment_index == total_collections - 1:
                 return self.prefix, self.suffix
             if segment_index == 0:
                 return self.prefix, None
-            if segment_index == total_segments - 1:
+            if segment_index == total_collections - 1:
                 return None, self.suffix
-        elif self.pattern.matches_index(segment_index, total_segments):
+        elif self.pattern.matches_index(segment_index, total_collections):
             return self.prefix, self.suffix
         return None, None
 
@@ -222,10 +222,10 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> contribution = figure_maker(
                 ...     'Voice 1',
-                ...     segments,
+                ...     collections,
                 ...     baca.tools.RestAffixSpecifier(
                 ...         prefix=[1],
                 ...         suffix=[2],
@@ -276,10 +276,10 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = [[18, 16, 15, 20, 19]]
+                >>> collections = [[18, 16, 15, 20, 19]]
                 >>> contribution = figure_maker(
                 ...     'Voice 1',
-                ...     segments,
+                ...     collections,
                 ...     baca.tools.RestAffixSpecifier(
                 ...         prefix=[1],
                 ...         suffix=[2],
@@ -320,10 +320,10 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> contribution = figure_maker(
                 ...     'Voice 1',
-                ...     segments,
+                ...     collections,
                 ...     baca.tools.RestAffixSpecifier(
                 ...         pattern=abjad.Pattern(indices=[0, -1]),
                 ...         prefix=[1],
@@ -377,10 +377,10 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> contribution = figure_maker(
                 ...     'Voice 1',
-                ...     segments,
+                ...     collections,
                 ...     baca.tools.RestAffixSpecifier(
                 ...         pattern=abjad.patterntools.select_all(),
                 ...         prefix=[1],
@@ -446,10 +446,10 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> contribution = figure_maker(
                 ...     'Voice 1',
-                ...     segments,
+                ...     collections,
                 ...     baca.tools.RestAffixSpecifier(prefix=[3]),
                 ...     )
                 >>> lilypond_file = figure_maker.show(contribution)
@@ -514,10 +514,10 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> contribution = figure_maker(
                 ...     'Voice 1',
-                ...     segments,
+                ...     collections,
                 ...     baca.tools.RestAffixSpecifier(suffix=[3]),
                 ...     )
                 >>> lilypond_file = figure_maker.show(contribution)

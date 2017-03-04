@@ -38,19 +38,19 @@ class Sequence(abjad.Sequence):
 
     ..  container:: example
 
-        Initializes from segment:
+        Initializes from collection:
 
         ..  container:: example
 
             ::
 
                 >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-                >>> segment = abjad.PitchClassSegment(items=items)
-                >>> show(segment) # doctest: +SKIP
+                >>> collection = abjad.PitchClassSegment(items=items)
+                >>> show(collection) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> lilypond_file = segment.__illustrate__()
+                >>> lilypond_file = collection.__illustrate__()
                 >>> f(lilypond_file[abjad.Voice])
                 \new Voice {
                     bf'8
@@ -67,7 +67,7 @@ class Sequence(abjad.Sequence):
 
             ::
 
-                >>> baca.sequence(items=segment)
+                >>> baca.sequence(items=collection)
                 Sequence([NumberedPitchClass(10), NumberedPitchClass(10.5), NumberedPitchClass(6), NumberedPitchClass(7), NumberedPitchClass(10.5), NumberedPitchClass(7)])
 
         ..  container:: example expression
@@ -78,20 +78,20 @@ class Sequence(abjad.Sequence):
 
             ::
             
-                >>> expression(items=segment)
+                >>> expression(items=collection)
                 Sequence([NumberedPitchClass(10), NumberedPitchClass(10.5), NumberedPitchClass(6), NumberedPitchClass(7), NumberedPitchClass(10.5), NumberedPitchClass(7)])
 
     ..  container:: example
 
-        Maps transposition to multiple segments:
+        Maps transposition to multiple collections:
 
         ..  container:: example
 
             ::
 
                 >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-                >>> segment = abjad.PitchClassSegment(items=items)
-                >>> segments = [
+                >>> collection = abjad.PitchClassSegment(items=items)
+                >>> collections = [
                 ...     abjad.PitchClassSegment(items=[-2, -1.5, 6]),
                 ...     abjad.PitchClassSegment(items=[7, -1.5, 7]),
                 ...     ]
@@ -104,19 +104,19 @@ class Sequence(abjad.Sequence):
 
             ::
 
-                >>> sequence = baca.Sequence(segments)
+                >>> sequence = baca.Sequence(collections)
                 >>> sequence = sequence.map(expression)
                 >>> sequence.join()
                 Sequence([PitchClassSegment([11, 11.5, 7, 8, 11.5, 8])])
 
             ::
 
-                >>> segment = sequence.join()[0]
-                >>> show(segment) # doctest: +SKIP
+                >>> collection = sequence.join()[0]
+                >>> show(collection) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> lilypond_file = segment.__illustrate__()
+                >>> lilypond_file = collection.__illustrate__()
                 >>> f(lilypond_file[abjad.Voice])
                 \new Voice {
                     b'8
@@ -133,7 +133,7 @@ class Sequence(abjad.Sequence):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     baca.PitchClassSegment(items=[-2, -1.5, 6]),
                 ...     baca.PitchClassSegment(items=[7, -1.5, 7]),
                 ...     ]
@@ -149,7 +149,7 @@ class Sequence(abjad.Sequence):
 
             ::
 
-                >>> expression(segments)
+                >>> expression(collections)
                 Sequence([PitchClassSegment([11, 11.5, 7, 8, 11.5, 8])])
 
             ::
@@ -159,13 +159,13 @@ class Sequence(abjad.Sequence):
 
             ::
 
-                >>> segment = expression(segments)[0]
+                >>> collection = expression(collections)[0]
                 >>> markup = expression.get_markup()
-                >>> show(segment, figure_name=markup) # doctest: +SKIP
+                >>> show(collection, figure_name=markup) # doctest: +SKIP
 
             ..  doctest::
 
-                >>> lilypond_file = segment.__illustrate__(
+                >>> lilypond_file = collection.__illustrate__(
                 ...     figure_name=markup,
                 ...     )
                 >>> f(lilypond_file[abjad.Voice])
@@ -289,14 +289,14 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> segment_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                    >>> segment_2 = baca.PitchClassSegment([4, 5])
-                    >>> baca.Sequence(items=[segment_1, segment_2])
+                    >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
+                    >>> collection_2 = baca.PitchClassSegment([4, 5])
+                    >>> baca.Sequence(items=[collection_1, collection_2])
                     Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
                 ::
 
-                    >>> sequence = baca.Sequence(items=[segment_1, segment_2])
+                    >>> sequence = baca.Sequence(items=[collection_1, collection_2])
                     >>> for item in sequence.accumulate():
                     ...     item
                     ...
@@ -306,8 +306,8 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> segment_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                    >>> segment_2 = baca.PitchClassSegment([4, 5])
+                    >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
+                    >>> collection_2 = baca.PitchClassSegment([4, 5])
 
                 ::
 
@@ -315,7 +315,7 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> for item in expression([segment_1, segment_2]):
+                    >>> for item in expression([collection_1, collection_2]):
                     ...     item
                     ... 
                     Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
@@ -354,9 +354,9 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> segment_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                    >>> segment_2 = baca.PitchClassSegment([4, 5])
-                    >>> baca.Sequence(items=[segment_1, segment_2])
+                    >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
+                    >>> collection_2 = baca.PitchClassSegment([4, 5])
+                    >>> baca.Sequence(items=[collection_1, collection_2])
                     Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
                 ::
@@ -365,7 +365,7 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> sequence = baca.Sequence(items=[segment_1, segment_2])
+                    >>> sequence = baca.Sequence(items=[collection_1, collection_2])
                     >>> for item in sequence.accumulate([alpha]):
                     ...     item
                     ...
@@ -376,8 +376,8 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> segment_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                    >>> segment_2 = baca.PitchClassSegment([4, 5])
+                    >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
+                    >>> collection_2 = baca.PitchClassSegment([4, 5])
 
                 ::
 
@@ -386,7 +386,7 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> for sequence in expression([segment_1, segment_2]):
+                    >>> for sequence in expression([collection_1, collection_2]):
                     ...     sequence
                     ...
                     Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
@@ -431,9 +431,9 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> segment_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                    >>> segment_2 = baca.PitchClassSegment([4, 5])
-                    >>> baca.Sequence(items=[segment_1, segment_2])
+                    >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
+                    >>> collection_2 = baca.PitchClassSegment([4, 5])
+                    >>> baca.Sequence(items=[collection_1, collection_2])
                     Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
                 ::
@@ -444,7 +444,7 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> sequence = baca.Sequence(items=[segment_1, segment_2])
+                    >>> sequence = baca.Sequence(items=[collection_1, collection_2])
                     >>> for item in sequence.accumulate([transposition]):
                     ...     item
                     ...
@@ -457,8 +457,8 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> segment_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                    >>> segment_2 = baca.PitchClassSegment([4, 5])
+                    >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
+                    >>> collection_2 = baca.PitchClassSegment([4, 5])
 
                 ::
 
@@ -469,7 +469,7 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> for sequence in expression([segment_1, segment_2]):
+                    >>> for sequence in expression([collection_1, collection_2]):
                     ...     sequence
                     ...
                     Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
@@ -518,9 +518,9 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> segment_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                    >>> segment_2 = baca.PitchClassSegment([4, 5])
-                    >>> baca.Sequence(items=[segment_1, segment_2])
+                    >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
+                    >>> collection_2 = baca.PitchClassSegment([4, 5])
+                    >>> baca.Sequence(items=[collection_1, collection_2])
                     Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
                 ::
@@ -534,7 +534,7 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> sequence = baca.Sequence(items=[segment_1, segment_2])
+                    >>> sequence = baca.Sequence(items=[collection_1, collection_2])
                     >>> for item in sequence.accumulate([alpha, transposition]):
                     ...     item
                     ...
@@ -555,8 +555,8 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> segment_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                    >>> segment_2 = baca.PitchClassSegment([4, 5])
+                    >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
+                    >>> collection_2 = baca.PitchClassSegment([4, 5])
 
                 ::
 
@@ -568,7 +568,7 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> for sequence in expression([segment_1, segment_2]):
+                    >>> for sequence in expression([collection_1, collection_2]):
                     ...     sequence
                     ...
                     Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
@@ -631,9 +631,9 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> segment_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                    >>> segment_2 = baca.PitchClassSegment([4, 5])
-                    >>> baca.Sequence(items=[segment_1, segment_2])
+                    >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
+                    >>> collection_2 = baca.PitchClassSegment([4, 5])
+                    >>> baca.Sequence(items=[collection_1, collection_2])
                     Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
                 ::
@@ -645,7 +645,7 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> sequence = baca.Sequence(items=[segment_1, segment_2])
+                    >>> sequence = baca.Sequence(items=[collection_1, collection_2])
                     >>> for item in sequence.accumulate([permutation]):
                     ...     item
                     ...
@@ -674,8 +674,8 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> segment_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                    >>> segment_2 = baca.PitchClassSegment([4, 5])
+                    >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
+                    >>> collection_2 = baca.PitchClassSegment([4, 5])
 
                 ::
 
@@ -687,7 +687,7 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> for sequence in expression([segment_1, segment_2]):
+                    >>> for sequence in expression([collection_1, collection_2]):
                     ...     sequence
                     ... 
                     Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
@@ -751,9 +751,9 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> segment_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                    >>> segment_2 = baca.PitchClassSegment([4, 5])
-                    >>> baca.Sequence(items=[segment_1, segment_2])
+                    >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
+                    >>> collection_2 = baca.PitchClassSegment([4, 5])
+                    >>> baca.Sequence(items=[collection_1, collection_2])
                     Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
                 ::
@@ -768,7 +768,7 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> sequence = baca.Sequence(items=[segment_1, segment_2])
+                    >>> sequence = baca.Sequence(items=[collection_1, collection_2])
                     >>> for item in sequence.accumulate(
                     ...     [permutation, transposition],
                     ...     ):
@@ -795,8 +795,8 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> segment_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                    >>> segment_2 = baca.PitchClassSegment([4, 5])
+                    >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
+                    >>> collection_2 = baca.PitchClassSegment([4, 5])
 
                 ::
 
@@ -809,7 +809,7 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> for sequence in expression([segment_1, segment_2]):
+                    >>> for sequence in expression([collection_1, collection_2]):
                     ...     sequence
                     ...
                     Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
@@ -945,15 +945,15 @@ class Sequence(abjad.Sequence):
 
         ..  container:: example
 
-            Iterates segments boustrophedon:
+            Iterates collections boustrophedon:
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     baca.PitchClassSegment([1, 2, 3]),
                 ...     baca.PitchClassSegment([4, 5, 6]),
                 ...     ]
-                >>> sequence = baca.Sequence(segments)
+                >>> sequence = baca.Sequence(collections)
 
             ::
 
@@ -962,16 +962,16 @@ class Sequence(abjad.Sequence):
 
             ::
 
-                >>> for segment in sequence.boustrophedon(count=1):
-                ...     segment
+                >>> for collection in sequence.boustrophedon(count=1):
+                ...     collection
                 ...
                 PitchClassSegment([1, 2, 3])
                 PitchClassSegment([4, 5, 6])
 
             ::
 
-                >>> for segment in sequence.boustrophedon(count=2):
-                ...     segment
+                >>> for collection in sequence.boustrophedon(count=2):
+                ...     collection
                 ... 
                 PitchClassSegment([1, 2, 3])
                 PitchClassSegment([4, 5, 6])
@@ -980,8 +980,8 @@ class Sequence(abjad.Sequence):
 
             ::
 
-                >>> for segment in sequence.boustrophedon(count=3):
-                ...     segment
+                >>> for collection in sequence.boustrophedon(count=3):
+                ...     collection
                 ... 
                 PitchClassSegment([1, 2, 3])
                 PitchClassSegment([4, 5, 6])
@@ -996,8 +996,8 @@ class Sequence(abjad.Sequence):
 
             ::
 
-                >>> segment = baca.PitchClassSegment([1, 2, 3])
-                >>> sequence = baca.Sequence([segment, 4, 5])
+                >>> collection = baca.PitchClassSegment([1, 2, 3])
+                >>> sequence = baca.Sequence([collection, 4, 5])
                 >>> for item in sequence.boustrophedon(count=3):
                 ...     item
                 ... 
@@ -1014,7 +1014,7 @@ class Sequence(abjad.Sequence):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     baca.PitchClassSegment([1, 2, 3]),
                 ...     baca.PitchClassSegment([4, 5, 6]),
                 ...     ]
@@ -1026,8 +1026,8 @@ class Sequence(abjad.Sequence):
 
             ::
 
-                >>> for segment in expression(segments):
-                ...     segment
+                >>> for collection in expression(collections):
+                ...     collection
                 ... 
                 PitchClassSegment([1, 2, 3])
                 PitchClassSegment([4, 5, 6])
@@ -1237,7 +1237,7 @@ class Sequence(abjad.Sequence):
 
         ..  container:: example
 
-            Helianthates list of segments:
+            Helianthates list of collections:
 
             ..  container:: example
 
@@ -1248,8 +1248,8 @@ class Sequence(abjad.Sequence):
                     >>> L = baca.PitchClassSegment(items=[7, 9, 11])
                     >>> sequence = baca.sequence([J, K, L])
                     >>> sequence = sequence.helianthate(n=-1, m=1)
-                    >>> for segment in sequence:
-                    ...     segment
+                    >>> for collection in sequence:
+                    ...     collection
                     ...
                     PitchClassSegment([0, 2, 4])
                     PitchClassSegment([5, 6])
@@ -1285,8 +1285,8 @@ class Sequence(abjad.Sequence):
 
                 ::
 
-                    >>> for segment in expression([J, K, L]):
-                    ...     segment
+                    >>> for collection in expression([J, K, L]):
+                    ...     collection
                     ...
                     PitchClassSegment([0, 2, 4])
                     PitchClassSegment([5, 6])

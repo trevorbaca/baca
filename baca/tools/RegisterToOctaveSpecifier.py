@@ -22,12 +22,11 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
 
             >>> contribution = figure_maker(
             ...     'Voice 1',
-            ...     [[0, 14, 28]],
+            ...     [set([0, 14, 28])],
             ...     baca.tools.RegisterToOctaveSpecifier(
             ...         anchor=Bottom,
             ...         octave_number=4,
             ...         ),
-            ...     baca.tools.SimultaneitySpecifier(), 
             ...     )
             >>> lilypond_file = figure_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
@@ -50,12 +49,11 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
 
             >>> contribution = figure_maker(
             ...     'Voice 1',
-            ...     [[0, 14, 28]],
+            ...     [set([0, 14, 28])],
             ...     baca.tools.RegisterToOctaveSpecifier(
             ...         anchor=Center,
             ...         octave_number=4,
             ...         ),
-            ...     baca.tools.SimultaneitySpecifier(), 
             ...     )
             >>> lilypond_file = figure_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
@@ -78,12 +76,11 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
 
             >>> contribution = figure_maker(
             ...     'Voice 1',
-            ...     [[0, 14, 28]],
+            ...     [set([0, 14, 28])],
             ...     baca.tools.RegisterToOctaveSpecifier(
             ...         anchor=Top,
             ...         octave_number=4,
             ...         ),
-            ...     baca.tools.SimultaneitySpecifier(), 
             ...     )
             >>> lilypond_file = figure_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP

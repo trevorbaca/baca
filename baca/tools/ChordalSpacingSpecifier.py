@@ -20,7 +20,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
             ...     soprano=7,
             ...     )
             >>> specifier([[-6, -3, -5, -1, -7]])
-            SegmentList([<6, 9, 11, 17, 19>])
+            CollectionList([<6, 9, 11, 17, 19>])
 
     ..  container:: example
 
@@ -32,7 +32,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
             ...     soprano=7,
             ...     )
             >>> specifier([[-6, -3, -5, -1, -7]])
-            SegmentList([<19, 17, 11, 9, 6>])
+            CollectionList([<19, 17, 11, 9, 6>])
 
     ..  container:: example
 
@@ -44,7 +44,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
             ...     soprano=7,
             ...     )
             >>> specifier([[-6, -3, -5, -1, -7]])
-            SegmentList([<31, 30, 29, 21, 11>])
+            CollectionList([<31, 30, 29, 21, 11>])
 
     ..  container:: example
 
@@ -52,32 +52,32 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
 
             >>> specifier = baca.tools.ChordalSpacingSpecifier()
             >>> specifier([[0, 1, 2]])
-            SegmentList([<0, 1, 2>])
+            CollectionList([<0, 1, 2>])
 
         ::
 
             >>> specifier([[0, 2, 1]])
-            SegmentList([<0, 1, 2>])
+            CollectionList([<0, 1, 2>])
 
         ::
 
             >>> specifier([[1, 0, 2]])
-            SegmentList([<1, 2, 12>])
+            CollectionList([<1, 2, 12>])
 
         ::
 
             >>> specifier([[1, 2, 0]])
-            SegmentList([<1, 2, 12>])
+            CollectionList([<1, 2, 12>])
 
         ::
 
             >>> specifier([[2, 0, 1]])
-            SegmentList([<2, 12, 13>])
+            CollectionList([<2, 12, 13>])
 
         ::
 
             >>> specifier([[2, 1, 0]])
-            SegmentList([<2, 12, 13>])
+            CollectionList([<2, 12, 13>])
 
     '''
 
@@ -88,6 +88,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
     __slots__ = (
         '_bass',
         '_direction',
+        '_minimum_semitones',
         '_pattern',
         '_soprano',
         )
@@ -100,6 +101,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
         self,
         bass=None,
         direction=None,
+        minimum_semitones=None,
         pattern=None,
         soprano=None,
         ):
@@ -107,6 +109,10 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
         if direction is not None:
             assert direction in (Up, Down)
         self._direction = direction
+        if minimum_semitones is not None:
+            assert isinstance(minimum_semitones, int)
+            assert 1 <= minimum_semitones
+        self._minimum_semitones = minimum_semitones
         if pattern is not None:
             assert isinstance(pattern, abjad.Pattern)
         self._pattern = pattern
@@ -114,8 +120,8 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, segments=None):
-        r'''Calls specifier on `segments`.
+    def __call__(self, collections=None):
+        r'''Calls specifier on `collections`.
 
         ..  container:: example
 
@@ -133,120 +139,129 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 >>> specifier() is None
                 True
 
-        Returns pitch segment or none.
+        Returns pitch collection or none.
         '''
-        if segments is None:
+        if collections is None:
             return
-        if segments == []:
-            return abjad.PitchSegment(item_class=abjad.NumberedPitch)
-        if not isinstance(segments, baca.SegmentList):
-            segments = baca.SegmentList(segments)
-        pitch_class_segments = segments.to_pitch_classes()
+        if collections == []:
+            return baca.PitchSegment(item_class=abjad.NumberedPitch)
+        if not isinstance(collections, baca.CollectionList):
+            collections = baca.CollectionList(collections)
+        pitch_class_segments = collections.to_pitch_classes()
         pattern = self.pattern or abjad.patterntools.select_all()
-        segments_ = []
-        total_length = len(segments)
+        collections_ = []
+        total_length = len(collections)
         for i in range(total_length):
             if not pattern.matches_index(i, total_length):
-                segments_.append(segments[i])
+                collections_.append(collections[i])
             else:
-                pitch_classes = list(pitch_class_segments[i])
-                bass, soprano = None, None
-                if self.bass is not None:
-                    bass = abjad.NumberedPitchClass(self.bass)
-                    if bass not in pitch_classes:
-                        message = 'bass pitch-class {} not found in {}.'
-                        message = message.format(bass, pitch_classes)
-                        raise ValueError(message)
-                if self.soprano is not None:
-                    soprano = abjad.NumberedPitchClass(self.soprano)
-                    if soprano not in pitch_classes:
-                        message = 'soprano pitch-class {} not found in {}.'
-                        message = message.format(soprano, pitch_classes)
-                        raise ValueError(message)
-                inner = []
-                for pitch_class in pitch_classes:
-                    if pitch_class not in (bass, soprano):
-                        inner.append(pitch_class)
-                pitch_classes = []
-                pitches = []
-                direction = self.direction or Up
-                if direction is Up:
-                    if bass is not None:
-                        pitch_classes.append(bass)
-                    elif inner:
-                        pitch_classes.append(inner.pop(0))
-                    elif soprano:
-                        pitch_classes.append(soprano)
-                        soprano = None
-                    start = pitch_classes[0]
-                    inner = self._sort_pitch_classes_ascending(start, inner)
-                    pitch_classes.extend(inner)
-                    if soprano:
-                        pitch_classes.append(soprano)
-                    pitches = self._to_tightly_spaced_pitches_ascending(pitch_classes)
-                else:
-                    if soprano is not None:
-                        pitch_classes.append(soprano)
-                    elif inner:
-                        pitch_classes.append(inner.pop(0))
-                    elif bass:
-                        pitch_classes.append(bass)
-                        bass = None
-                    start = pitch_classes[0]
-                    inner = self._sort_pitch_classes_descending(start, inner)
-                    pitch_classes.extend(inner)
-                    if bass:
-                        pitch_classes.append(bass)
-                    pitches = self._to_tightly_spaced_pitches_descending(pitch_classes)
-                segment_ = abjad.PitchSegment(pitches)
-                segments_.append(segment_)
-        return baca.SegmentList(segments_)
+                pitch_class_segment = pitch_class_segments[i]
+                segment_ = self._space_segment(pitch_class_segment)
+                collections_.append(segment_)
+        return baca.CollectionList(collections_)
 
     ### PRIVATE METHODS ###
 
-    @staticmethod
-    def _sort_pitch_classes_ascending(start, pitch_classes):
-        pitch_classes = pitch_classes[:]
-        pitch_classes_ = []
-        for i in range(12):
-            candidate = start + i
+    def _space_segment(self, pitch_class_segment):
+        original_input = pitch_class_segment
+        pitch_classes = list(pitch_class_segment)
+        bass, soprano = None, None
+        if self.bass is not None:
+            bass = abjad.NumberedPitchClass(self.bass)
+            if bass not in pitch_classes:
+                message = 'bass pitch-class {} not found in {}.'
+                message = message.format(bass, pitch_classes)
+                raise ValueError(message)
+        if self.soprano is not None:
+            soprano = abjad.NumberedPitchClass(self.soprano)
+            if soprano not in pitch_classes:
+                message = 'soprano pitch-class {} not found in {}.'
+                message = message.format(soprano, pitch_classes)
+                raise ValueError(message)
+        inner = []
+        for pitch_class in pitch_classes:
+            if pitch_class not in (bass, soprano):
+                inner.append(pitch_class)
+        pitch_classes = []
+        pitches = []
+        direction = self.direction or Up
+        if direction is Up:
+            if bass is not None:
+                pitch_classes.append(bass)
+            elif inner:
+                pitch_classes.append(inner.pop(0))
+            elif soprano:
+                pitch_classes.append(soprano)
+                soprano = None
+            start = pitch_classes[0]
+            inner = self._sort_pitch_classes_ascending(start, inner)
+            pitch_classes.extend(inner)
+            if soprano:
+                pitch_classes.append(soprano)
+            pitches = self._to_tightly_spaced_pitches_ascending(pitch_classes)
+        else:
+            if soprano is not None:
+                pitch_classes.append(soprano)
+            elif inner:
+                pitch_classes.append(inner.pop(0))
+            elif bass:
+                pitch_classes.append(bass)
+                bass = None
+            start = pitch_classes[0]
+            inner = self._sort_pitch_classes_descending(start, inner)
+            pitch_classes.extend(inner)
+            if bass:
+                pitch_classes.append(bass)
+            pitches = self._to_tightly_spaced_pitches_descending(pitch_classes)
+        if isinstance(original_input, abjad.pitchtools.Set):
+            return baca.PitchSet(pitches)
+        else:
+            return baca.PitchSegment(pitches)
+
+    def _sort_pitch_classes_ascending(self, start, pitch_classes):
+        pitch_classes, pitch_classes_, iterations = pitch_classes[:], [], 0
+        if self.minimum_semitones is not None:
+            candidate = start + self.minimum_semitones
+        else:
+            candidate = start + 1
+        while pitch_classes:
             if candidate in pitch_classes:
                 pitch_classes_.append(candidate)
                 pitch_classes.remove(candidate)
-        iterations = 0
-        while pitch_classes:
-            for i in range(12):
-                candidate = pitch_classes[-1] + i
-                if candidate in pitch_classes:
-                    pitch_classes_.append(candidate)
-                    pitch_classes.remove(candidate)
+                if self.minimum_semitones is not None:
+                    candidate += self.minimum_semitones
+            else:
+                candidate += 1
+            if 999 <= iterations:
+                message = 'stuck in while-loop.'
+                raise Exception(message)
             iterations += 1
-            if iterations == 999:
-                message = 'stuck in while-loop'
-                raise ValueError(message)
+        assert not pitch_classes, repr(pitch_classes)
         return pitch_classes_
 
-    @staticmethod
-    def _sort_pitch_classes_descending(start, pitch_classes):
-        pitch_classes = pitch_classes[:]
-        pitch_classes_ = []
-        for i in range(12):
-            candidate = abjad.NumberedPitchClass(start.number - i)
+    def _sort_pitch_classes_descending(self, start, pitch_classes):
+        pitch_classes, pitch_classes_, iterations = pitch_classes[:], [], 0
+        if self.minimum_semitones is not None:
+            candidate = abjad.NumberedPitchClass(
+                start.number - self.minimum_semitones
+                )
+        else:
+            candidate = abjad.NumberedPitchClass(start.number - 1)
+        while pitch_classes:
             if candidate in pitch_classes:
                 pitch_classes_.append(candidate)
                 pitch_classes.remove(candidate)
-        iterations = 0
-        while pitch_classes:
-            for i in range(12):
-                candidate = abjad.NumberedPitchClass(
-                    pitch_classes[-1].number - i)
-                if candidate in pitch_classes:
-                    pitch_classes_.append(candidate)
-                    pitch_classes.remove(candidate)
+                if self.minimum_semitones is not None:
+                    candidate = abjad.NumberedPitchClass(
+                        candidate.number - self.minimum_semitones
+                        )
+            else:
+                candidate = abjad.NumberedPitchClass(candidate.number - 1)
+            if 999 <= iterations:
+                message = 'stuck in while-loop.'
+                raise Exception(message)
             iterations += 1
-            if iterations == 999:
-                message = 'stuck in while-loop'
-                raise ValueError(message)
+        assert not pitch_classes, repr(pitch_classes)
         return pitch_classes_
 
     @staticmethod
@@ -295,10 +310,10 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
                     )
                 assert pitch <= pitches[-1]
                 pitches.append(pitch)
-        segment = abjad.PitchSegment(pitches)
-        while segment[-1].octave.number < 4:
-            segment = segment.transpose(n=12)
-        return segment
+        collection = baca.PitchSegment(pitches)
+        while collection[-1].octave.number < 4:
+            collection = collection.transpose(n=12)
+        return collection
     
     ### PUBLIC PROPERTIES ###
 
@@ -316,7 +331,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 ...     bass=None,
                 ...     )
                 >>> specifier([[-6, -3, -5, -1, -7]])
-                SegmentList([<6, 7, 9, 11, 17>])
+                CollectionList([<6, 7, 9, 11, 17>])
 
             ::
 
@@ -324,7 +339,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 ...     bass=6,
                 ...     )
                 >>> specifier([[-6, -3, -5, -1, -7]])
-                SegmentList([<6, 7, 9, 11, 17>])
+                CollectionList([<6, 7, 9, 11, 17>])
 
             ::
 
@@ -332,7 +347,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 ...     bass=7,
                 ...     )
                 >>> specifier([[-6, -3, -5, -1, -7]])
-                SegmentList([<7, 9, 11, 17, 18>])
+                CollectionList([<7, 9, 11, 17, 18>])
 
             ::
 
@@ -340,7 +355,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 ...     bass=9,
                 ...     )
                 >>> specifier([[-6, -3, -5, -1, -7]])
-                SegmentList([<9, 11, 17, 18, 19>])
+                CollectionList([<9, 11, 17, 18, 19>])
 
             ::
 
@@ -348,7 +363,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 ...     bass=11,
                 ...     )
                 >>> specifier([[-6, -3, -5, -1, -7]])
-                SegmentList([<11, 17, 18, 19, 21>])
+                CollectionList([<11, 17, 18, 19, 21>])
 
             ::
 
@@ -356,7 +371,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 ...     bass=5,
                 ...     )
                 >>> specifier([[-6, -3, -5, -1, -7]])
-                SegmentList([<5, 6, 7, 9, 11>])
+                CollectionList([<5, 6, 7, 9, 11>])
 
         Returns pitch-class or none.
         '''
@@ -377,7 +392,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 ...     soprano=7,
                 ...     )
                 >>> specifier([[-6, -3, -5, -1, -7]])
-                SegmentList([<6, 9, 11, 17, 19>])
+                CollectionList([<6, 9, 11, 17, 19>])
 
             ::
 
@@ -386,7 +401,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 ...     soprano=9,
                 ...     )
                 >>> specifier([[-6, -3, -5, -1, -7]])
-                SegmentList([<6, 7, 11, 17, 21>])
+                CollectionList([<6, 7, 11, 17, 21>])
 
             ::
 
@@ -395,7 +410,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 ...     soprano=11,
                 ...     )
                 >>> specifier([[-6, -3, -5, -1, -7]])
-                SegmentList([<6, 7, 9, 17, 23>])
+                CollectionList([<6, 7, 9, 17, 23>])
 
             ::
 
@@ -404,11 +419,115 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 ...     soprano=5
                 ...     )
                 >>> specifier([[-6, -3, -5, -1, -7]])
-                SegmentList([<6, 7, 9, 11, 17>])
+                CollectionList([<6, 7, 9, 11, 17>])
 
         Returns up, down or none.
         '''
         return self._direction
+
+    @property
+    def minimum_semitones(self):
+        r'''Gets minimum semitones.
+
+        ..  container:: example
+
+            Up-directed spacing with semitone constraints.
+
+            First three examples give the same spacing:
+
+            ::
+
+                >>> specifier = baca.tools.ChordalSpacingSpecifier(
+                ...     bass=6,
+                ...     soprano=7,
+                ...     )
+                >>> specifier([[5, 6, 7, 9, 11]])
+                CollectionList([<6, 9, 11, 17, 19>])
+
+            ::
+
+                >>> specifier = baca.tools.ChordalSpacingSpecifier(
+                ...     bass=6,
+                ...     minimum_semitones=1,
+                ...     soprano=7,
+                ...     )
+                >>> specifier([[5, 6, 7, 9, 11]])
+                CollectionList([<6, 9, 11, 17, 19>])
+
+            ::
+
+                >>> specifier = baca.tools.ChordalSpacingSpecifier(
+                ...     bass=6,
+                ...     minimum_semitones=2,
+                ...     soprano=7,
+                ...     )
+                >>> specifier([[5, 6, 7, 9, 11]])
+                CollectionList([<6, 9, 11, 17, 19>])
+
+            ::
+
+                >>> specifier = baca.tools.ChordalSpacingSpecifier(
+                ...     bass=6,
+                ...     minimum_semitones=3,
+                ...     soprano=7,
+                ...     )
+                >>> specifier([[5, 6, 7, 9, 11]])
+                CollectionList([<6, 9, 17, 23, 31>])
+
+        ..  container:: example
+
+            Down-directed spacing with semitone constraints.
+
+            First three examples give the same spacing:
+
+            ::
+
+                >>> specifier = baca.tools.ChordalSpacingSpecifier(
+                ...     bass=6,
+                ...     direction=Down,
+                ...     soprano=7,
+                ...     )
+                >>> specifier([[5, 6, 7, 9, 11]])
+                CollectionList([<19, 17, 11, 9, 6>])
+
+            ::
+
+                >>> specifier = baca.tools.ChordalSpacingSpecifier(
+                ...     bass=6,
+                ...     direction=Down,
+                ...     minimum_semitones=1,
+                ...     soprano=7,
+                ...     )
+                >>> specifier([[5, 6, 7, 9, 11]])
+                CollectionList([<19, 17, 11, 9, 6>])
+
+            ::
+
+                >>> specifier = baca.tools.ChordalSpacingSpecifier(
+                ...     bass=6,
+                ...     direction=Down,
+                ...     minimum_semitones=2,
+                ...     soprano=7,
+                ...     )
+                >>> specifier([[5, 6, 7, 9, 11]])
+                CollectionList([<19, 17, 11, 9, 6>])
+
+            ::
+
+                >>> specifier = baca.tools.ChordalSpacingSpecifier(
+                ...     bass=6,
+                ...     direction=Down,
+                ...     minimum_semitones=3,
+                ...     soprano=7,
+                ...     )
+                >>> specifier([[5, 6, 7, 9, 11]])
+                CollectionList([<31, 23, 17, 9, 6>])
+
+        Set to positive integer or none.
+
+        Returns positive integer or none.
+        '''
+        return self._minimum_semitones
 
     @property
     def pattern(self):
@@ -435,7 +554,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 ...     soprano=None,
                 ...     )
                 >>> specifier([[-6, -3, -5, -1, -7]])
-                SegmentList([<18, 17, 11, 9, 7>])
+                CollectionList([<18, 17, 11, 9, 7>])
 
             ::
 
@@ -444,7 +563,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 ...     soprano=6,
                 ...     )
                 >>> specifier([[-6, -3, -5, -1, -7]])
-                SegmentList([<18, 17, 11, 9, 7>])
+                CollectionList([<18, 17, 11, 9, 7>])
 
             ::
 
@@ -453,7 +572,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 ...     soprano=5,
                 ...     )
                 >>> specifier([[-6, -3, -5, -1, -7]])
-                SegmentList([<17, 11, 9, 7, 6>])
+                CollectionList([<17, 11, 9, 7, 6>])
 
             ::
 
@@ -462,7 +581,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 ...     soprano=11,
                 ...     )
                 >>> specifier([[-6, -3, -5, -1, -7]])
-                SegmentList([<11, 9, 7, 6, 5>])
+                CollectionList([<11, 9, 7, 6, 5>])
 
             ::
 
@@ -471,7 +590,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 ...     soprano=9,
                 ...     )
                 >>> specifier([[-6, -3, -5, -1, -7]])
-                SegmentList([<21, 19, 18, 17, 11>])
+                CollectionList([<21, 19, 18, 17, 11>])
 
             ::
 
@@ -480,7 +599,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 ...     soprano=7,
                 ...     )
                 >>> specifier([[-6, -3, -5, -1, -7]])
-                SegmentList([<19, 18, 17, 11, 9>])
+                CollectionList([<19, 18, 17, 11, 9>])
 
         Returns pitch-class or none.
         '''

@@ -141,12 +141,13 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
         if figure_contribution.anchor is not None:
             remote_voice_name = figure_contribution.anchor.remote_voice_name
             remote_selector = figure_contribution.anchor.remote_selector
-            just_after = figure_contribution.anchor.just_after
+            use_remote_stop_offset = \
+                figure_contribution.anchor.use_remote_stop_offset
             anchored = True
         else:
             remote_voice_name = None
             remote_selector = None
-            just_after = None
+            use_remote_stop_offset = None
         if remote_voice_name is None:
             return self._current_offset
         remote_selector = remote_selector or baca.select_leaf(0)
@@ -159,11 +160,11 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
             first_selected_leaf,
             floating_selections,
             )
-        if just_after:
-            remote_anchor_start_offset = timespan.stop_offset
+        if use_remote_stop_offset:
+            remote_anchor_offset = timespan.stop_offset
         else:
-            remote_anchor_start_offset = timespan.start_offset
-        local_anchor_start_offset = abjad.Offset(0)
+            remote_anchor_offset = timespan.start_offset
+        local_anchor_offset = abjad.Offset(0)
         if figure_contribution.anchor is not None:
             local_selector = figure_contribution.anchor.local_selector
         else:
@@ -175,8 +176,8 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
             dummy_container = abjad.Container(selection)
             timespan = abjad.inspect_(first_selected_leaf).get_timespan()
             del(dummy_container[:])
-            local_anchor_start_offset = timespan.start_offset
-        start_offset = remote_anchor_start_offset - local_anchor_start_offset
+            local_anchor_offset = timespan.start_offset
+        start_offset = remote_anchor_offset - local_anchor_offset
         return start_offset
 
     @staticmethod

@@ -24,10 +24,10 @@ class AnchorSpecifier(abjad.abctools.AbjadValueObject):
     __documentation_section__ = 'Specifiers'
 
     __slots__ = (
-        '_just_after',
         '_local_selector',
         '_remote_selector',
         '_remote_voice_name',
+        '_use_remote_stop_offset',
         )
 
     _publish_storage_format = True
@@ -36,14 +36,11 @@ class AnchorSpecifier(abjad.abctools.AbjadValueObject):
 
     def __init__(
         self,
-        just_after=None,
         local_selector=None,
         remote_selector=None,
         remote_voice_name=None,
+        use_remote_stop_offset=None,
         ):
-        if just_after is not None:
-            just_after = bool(just_after)
-        self._just_after = just_after
         if (local_selector is not None and
             not isinstance(local_selector, abjad.Selector)):
             message = 'must be selector: {!r}.'
@@ -62,16 +59,11 @@ class AnchorSpecifier(abjad.abctools.AbjadValueObject):
             message = message.format(remote_voice_name)
             raise TypeError(message)
         self._remote_voice_name = remote_voice_name
+        if use_remote_stop_offset is not None:
+            use_remote_stop_offset = bool(use_remote_stop_offset)
+        self._use_remote_stop_offset = use_remote_stop_offset
 
     ### PUBLIC PROPERTIES ###
-
-    @property
-    def just_after(self):
-        r'''Is true when contribution anchors just after remote selection.
-
-        Returns true, false or none.
-        '''
-        return self._just_after
 
     @property
     def local_selector(self):
@@ -98,3 +90,17 @@ class AnchorSpecifier(abjad.abctools.AbjadValueObject):
         Returns strings or none.
         '''
         return self._remote_voice_name
+
+    @property
+    def use_remote_stop_offset(self):
+        r'''Is true when contribution anchors to remote selection stop offset.
+
+        Otherwise anchors to remote selection start offset.
+
+        Set to true, false or none.
+
+        Defaults to none.
+
+        Returns true, false or none.
+        '''
+        return self._use_remote_stop_offset

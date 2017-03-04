@@ -204,8 +204,7 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
 
                 >>> contribution = figure_maker(
                 ...     'Voice 1',
-                ...     [[10, 12, 14]],
-                ...     baca.tools.SimultaneitySpecifier(),
+                ...     [set([10, 12, 14])],
                 ...     baca.tools.RegisterSpecifier(
                 ...         registration=abjad.Registration(
                 ...             [('[A0, C8]', -6)],

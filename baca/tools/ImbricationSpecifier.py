@@ -34,16 +34,16 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segments = [
+            >>> collections = [
             ...     [0, 2, 10, 18, 16],
             ...     [15, 20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     ]
             >>> contribution = figure_maker(
             ...     'Voice 2',
-            ...     segments,
+            ...     collections,
             ...     baca.tools.ImbricationSpecifier(
-            ...         segment=[2, 19, 9, 18, 16],
+            ...         collection=[2, 19, 9, 18, 16],
             ...         voice_name='Voice 1',
             ...         ),
             ...     )
@@ -172,14 +172,14 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segments = [
+            >>> collections = [
             ...     [0, 2, 10, 18, 16],
             ...     [15, 20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     ]
             >>> contribution = figure_maker(
             ...     'Voice 2',
-            ...     segments,
+            ...     collections,
             ...     baca.tools.ImbricationSpecifier(
             ...         'Voice 1',
             ...         [2, 19, 9],
@@ -365,14 +365,14 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segments = [
+            >>> collections = [
             ...     [0, 2, 10, 18, 16],
             ...     [15, 20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     ]
             >>> contribution = figure_maker(
             ...     'Voice 2',
-            ...     segments,
+            ...     collections,
             ...     baca.tools.ImbricationSpecifier(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
@@ -507,9 +507,9 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
     __slots__ = (
         '_allow_unused_pitches',
+        '_collection',
         '_extend_beam',
         '_hocket',
-        '_segment',
         '_selector',
         '_specifiers',
         '_truncate_ties',
@@ -523,7 +523,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
     def __init__(
         self,
         voice_name=None,
-        segment=None,
+        collection=None,
         *specifiers,
         allow_unused_pitches=None,
         extend_beam=None,
@@ -534,7 +534,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
         if voice_name is not None:
             assert isinstance(voice_name, str), repr(voice_name)
         self._voice_name = voice_name
-        self._segment = segment
+        self._collection = collection
         self._specifiers = specifiers
         if allow_unused_pitches is not None:
             allow_unused_pitches = bool(allow_unused_pitches)
@@ -579,8 +579,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> segment = [
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> collection = [
                 ...     abjad.NumberedPitchClass(10),
                 ...     abjad.NumberedPitchClass(6),
                 ...     abjad.NumberedPitchClass(4),
@@ -588,10 +588,10 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> contribution = figure_maker(
                 ...     'Voice 2',
-                ...     segments,
+                ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
-                ...         segment,
+                ...         collection,
                 ...         baca.accents(),
                 ...         baca.beam_everything(),
                 ...         ),
@@ -684,7 +684,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
                 ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
                 ...     ]
@@ -696,7 +696,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     ]
                 >>> contribution = figure_maker(
                 ...     'Voice 2',
-                ...     segments,
+                ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         imbricated_pitches,
@@ -1015,9 +1015,9 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
         container = copy.deepcopy(container)
         abjad.override(container).tuplet_bracket.stencil = False
         abjad.override(container).tuplet_number.stencil = False
-        segment = baca.sequence(self.segment).flatten()
+        collection = baca.sequence(self.collection).flatten()
         cursor = baca.tools.Cursor(
-            segment,
+            collection,
             singletons=True,
             suppress_exception=True,
             )
@@ -1162,13 +1162,13 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     ]
                 >>> contribution = figure_maker(
                 ...     'Voice 2',
-                ...     segments,
+                ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
@@ -1288,13 +1288,13 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     ]
                 >>> result = figure_maker(
                 ...     'Voice 2',
-                ...     segments,
+                ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
@@ -1364,14 +1364,14 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
                 ...     ]
                 >>> contribution = figure_maker(
                 ...     'Voice 2',
-                ...     segments,
+                ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
@@ -1500,12 +1500,12 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
         return self._hocket
 
     @property
-    def segment(self):
-        r'''Gets segment.
+    def collection(self):
+        r'''Gets collection.
 
-        Returns pitch or pitch-class segment.
+        Returns pitch or pitch-class collection.
         '''
-        return self._segment
+        return self._collection
         
     @property
     def selector(self):
@@ -1537,13 +1537,13 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
                 ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
                 ...     ]
                 >>> contribution = figure_maker(
                 ...     'Voice 2',
-                ...     segments,
+                ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         [2, 18, 16, 15],
@@ -1721,14 +1721,14 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
                 ...     ]
                 >>> contribution = figure_maker(
                 ...     'Voice 2',
-                ...     segments,
+                ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
@@ -1862,14 +1862,14 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
                 ...     ]
                 >>> contribution = figure_maker(
                 ...     'Voice 2',
-                ...     segments,
+                ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
@@ -2013,14 +2013,14 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
                 ...     ]
                 >>> contribution = figure_maker(
                 ...     'Voice 2',
-                ...     segments,
+                ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
@@ -2162,14 +2162,14 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [
+                >>> collections = [
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
                 ...     ]
                 >>> contribution = figure_maker(
                 ...     'Voice 2',
-                ...     segments,
+                ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
@@ -2308,10 +2308,10 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> contribution = figure_maker(
                 ...     'Voice 2',
-                ...     segments,
+                ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
                 ...         [2, 10, 18, 19, 9],

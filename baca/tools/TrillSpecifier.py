@@ -25,10 +25,10 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segments = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = figure_maker(
             ...     'Voice 1',
-            ...     segments,
+            ...     collections,
             ...     talea_denominator=4,
             ...     )
             >>> lilypond_file = figure_maker.show(contribution)
@@ -62,18 +62,18 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        With segment-maker:
+        With collection-maker:
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker(
+            >>> collection_maker = baca.tools.SegmentMaker(
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
         ::
 
-            >>> specifiers = segment_maker.append_specifiers(
+            >>> specifiers = collection_maker.append_specifiers(
             ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('E4 F4'),
             ...     baca.messiaen_note_rhythm_specifier(),
@@ -85,8 +85,8 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> result = segment_maker(is_doc_example=True)
-            >>> lilypond_file, segment_metadata = result
+            >>> result = collection_maker(is_doc_example=True)
+            >>> lilypond_file, collection_metadata = result
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
