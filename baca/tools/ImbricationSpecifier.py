@@ -18,15 +18,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.tools.FigureMaker(
-            ...     baca.tools.FigureRhythmSpecifier(
-            ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-            ...             talea=abjad.rhythmmakertools.Talea(
-            ...                 counts=[1],
-            ...                 denominator=16,
-            ...                 ),
-            ...             ),
-            ...         ),
+            >>> figure_maker = baca.FigureMaker(
             ...     abjad.rhythmmakertools.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
@@ -43,8 +35,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             ...     'Voice 2',
             ...     collections,
             ...     baca.tools.ImbricationSpecifier(
-            ...         collection=[2, 19, 9, 18, 16],
-            ...         voice_name='Voice 1',
+            ...         'Voice 1',
+            ...         [2, 19, 9, 18, 16],
             ...         ),
             ...     )
             >>> lilypond_file = figure_maker.show(contribution)
@@ -156,15 +148,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.tools.FigureMaker(
-            ...     baca.tools.FigureRhythmSpecifier(
-            ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-            ...             talea=abjad.rhythmmakertools.Talea(
-            ...                 counts=[1],
-            ...                 denominator=16,
-            ...                 ),
-            ...             ),
-            ...         ),
+            >>> figure_maker = baca.FigureMaker(
             ...     abjad.rhythmmakertools.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
@@ -344,7 +328,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.tools.FigureMaker(
+            >>> figure_maker = baca.FigureMaker(
             ...     baca.tools.ArticulationSpecifier(
             ...         articulations=['.'],
             ...     ),
@@ -507,9 +491,9 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
     __slots__ = (
         '_allow_unused_pitches',
-        '_collection',
         '_extend_beam',
         '_hocket',
+        '_segment',
         '_selector',
         '_specifiers',
         '_truncate_ties',
@@ -523,7 +507,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
     def __init__(
         self,
         voice_name=None,
-        collection=None,
+        segment=None,
         *specifiers,
         allow_unused_pitches=None,
         extend_beam=None,
@@ -534,7 +518,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
         if voice_name is not None:
             assert isinstance(voice_name, str), repr(voice_name)
         self._voice_name = voice_name
-        self._collection = collection
+        self._segment = segment
         self._specifiers = specifiers
         if allow_unused_pitches is not None:
             allow_unused_pitches = bool(allow_unused_pitches)
@@ -546,7 +530,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             hocket = bool(hocket)
         self._hocket = hocket
         if selector is not None:
-            if not isinstance(selector, abjad.selectortools.Selector):
+            if not isinstance(selector, abjad.Selector):
                 message = 'must be selector or none: {!r}.'
                 message = message.format(selector)
                 raise TypeError(selector)
@@ -557,7 +541,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, container):
+    def __call__(self, container=None):
         r'''Calls specifier on `container`.
 
         ..  container:: example
@@ -566,7 +550,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -580,7 +564,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> collection = [
+                >>> segment = [
                 ...     abjad.NumberedPitchClass(10),
                 ...     abjad.NumberedPitchClass(6),
                 ...     abjad.NumberedPitchClass(4),
@@ -591,7 +575,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
-                ...         collection,
+                ...         segment,
                 ...         baca.accents(),
                 ...         baca.beam_everything(),
                 ...         ),
@@ -671,16 +655,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[1],
-                ...                 denominator=16,
-                ...                 ),
-                ...             ),
-                ...         ),
-                ...     )
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -688,7 +663,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
                 ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
                 ...     ]
-                >>> imbricated_pitches = [
+                >>> segment = [
                 ...     0,
                 ...     baca.coat(10),
                 ...     baca.coat(18),
@@ -699,7 +674,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
                 ...         'Voice 1',
-                ...         imbricated_pitches,
+                ...         segment,
                 ...         baca.accents(),
                 ...         baca.beam_everything(),
                 ...         ),
@@ -799,7 +774,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             
             Extends beam across figures:
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
@@ -1009,15 +984,264 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                     >>
                 >>
 
+        ..  container:: example
+
+            Works with chords:
+
+            ::
+
+                >>> figure_maker = baca.FigureMaker(
+                ...     abjad.rhythmmakertools.BeamSpecifier(
+                ...         beam_divisions_together=True,
+                ...         ),
+                ...     )
+
+            ::
+
+                >>> collections = [
+                ...     set([0, 2, 10, 18, 16]),
+                ...     [15, 20, 19, 9, 0],
+                ...     [2, 10, 18, 16, 15],
+                ...     ]
+                >>> contribution = figure_maker(
+                ...     'Voice 2',
+                ...     collections,
+                ...     baca.tools.ImbricationSpecifier(
+                ...         'Voice 1',
+                ...         [2, 19, 9, 18, 16],
+                ...         ),
+                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Score])
+                \new Score <<
+                    \new TimeSignatureContext {
+                        {
+                            \time 11/16
+                            s1 * 11/16
+                        }
+                    }
+                    \new Staff <<
+                        \context Voice = "Voice 1" {
+                            \voiceOne
+                            {
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
+                                {
+                                    d'16
+                                }
+                                {
+                                    s16
+                                    s16
+                                    g''16 [
+                                    a'16 ]
+                                    s16
+                                }
+                                {
+                                    s16
+                                    s16
+                                    fs''16 [
+                                    e''16 ]
+                                    s16
+                                }
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
+                            }
+                        }
+                        \context Voice = "Voice 2" {
+                            \voiceTwo
+                            {
+                                {
+                                    \set stemLeftBeamCount = #0
+                                    \set stemRightBeamCount = #2
+                                    <c' d' bf' e'' fs''>16 [
+                                }
+                                {
+                                    \set stemLeftBeamCount = #1
+                                    \set stemRightBeamCount = #2
+                                    ef''16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    af''16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    g''16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    a'16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #1
+                                    c'16
+                                }
+                                {
+                                    \set stemLeftBeamCount = #1
+                                    \set stemRightBeamCount = #2
+                                    d'16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    bf'16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    fs''16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    e''16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #0
+                                    ef''16 ]
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Works with rests:
+
+            ::
+
+                >>> figure_maker = baca.FigureMaker(
+                ...     abjad.rhythmmakertools.BeamSpecifier(
+                ...         beam_divisions_together=True,
+                ...         ),
+                ...     )
+
+            ::
+
+                >>> collections = [
+                ...     [0, 2, 10, 18, 16],
+                ...     [15, 20, 19, 9, 0],
+                ...     [2, 10, 18, 16, 15],
+                ...     ]
+                >>> contribution = figure_maker(
+                ...     'Voice 2',
+                ...     collections,
+                ...     baca.tools.ImbricationSpecifier(
+                ...         'Voice 1',
+                ...         [2, 19, 9, 18, 16],
+                ...         ),
+                ...     baca.rests_around([2], [2]),
+                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Score])
+                \new Score <<
+                    \new TimeSignatureContext {
+                        {
+                            \time 19/16
+                            s1 * 19/16
+                        }
+                    }
+                    \new Staff <<
+                        \context Voice = "Voice 1" {
+                            \voiceOne
+                            {
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
+                                {
+                                    s8
+                                    s16
+                                    d'16
+                                    s16
+                                    s16
+                                    s16
+                                }
+                                {
+                                    s16
+                                    s16
+                                    g''16 [
+                                    a'16 ]
+                                    s16
+                                }
+                                {
+                                    s16
+                                    s16
+                                    fs''16 [
+                                    e''16 ]
+                                    s16
+                                    s8
+                                }
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
+                            }
+                        }
+                        \context Voice = "Voice 2" {
+                            \voiceTwo
+                            {
+                                {
+                                    r8
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    c'16 [
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    d'16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    bf'16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    fs''16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #1
+                                    e''16
+                                }
+                                {
+                                    \set stemLeftBeamCount = #1
+                                    \set stemRightBeamCount = #2
+                                    ef''16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    af''16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    g''16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    a'16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #1
+                                    c'16
+                                }
+                                {
+                                    \set stemLeftBeamCount = #1
+                                    \set stemRightBeamCount = #2
+                                    d'16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    bf'16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    fs''16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    e''16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    ef''16 ]
+                                    r8
+                                }
+                            }
+                        }
+                    >>
+                >>
+
         Returns new container.
         '''
         original_container = container
         container = copy.deepcopy(container)
         abjad.override(container).tuplet_bracket.stencil = False
         abjad.override(container).tuplet_number.stencil = False
-        collection = baca.sequence(self.collection).flatten()
+        segment = baca.sequence(self.segment).flatten()
         cursor = baca.tools.Cursor(
-            collection,
+            segment,
             singletons=True,
             suppress_exception=True,
             )
@@ -1031,40 +1255,46 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             selected_logical_ties = agent.by_logical_tie(pitched=True)
             selected_logical_ties = list(selected_logical_ties)
         agent = abjad.iterate(original_container)
-        original_logical_ties = agent.by_logical_tie(pitched=True)
-        logical_ties = abjad.iterate(container).by_logical_tie(pitched=True)
+        original_logical_ties = agent.by_logical_tie()
+        logical_ties = abjad.iterate(container).by_logical_tie()
         pairs = zip(logical_ties, original_logical_ties)
         for logical_tie, original_logical_tie in pairs:
             if (selected_logical_ties is not None and
                 logical_tie not in selected_logical_ties):
-                for note in logical_tie:
-                    duration = note.written_duration
+                for leaf in logical_tie:
+                    duration = leaf.written_duration
                     skip = abjad.Skip(duration)
-                    abjad.mutate(note).replace([skip])
+                    abjad.mutate(leaf).replace([skip])
+            elif isinstance(logical_tie.head, abjad.Rest):
+                for leaf in logical_tie:
+                    duration = leaf.written_duration
+                    skip = abjad.Skip(duration)
+                    abjad.mutate(leaf).replace([skip])
             elif self._matches_pitch(logical_tie.head, pitch_number):
                 if isinstance(pitch_number, baca.tools.Coat):
-                    for note in logical_tie:
-                        duration = note.written_duration
+                    for leaf in logical_tie:
+                        duration = leaf.written_duration
                         skip = abjad.Skip(duration)
-                        abjad.mutate(note).replace([skip])
+                        abjad.mutate(leaf).replace([skip])
                     pitch_number = cursor.next()
                     continue
+                self._trim_matching_chord(logical_tie, pitch_number)
                 pitch_number = cursor.next()
                 if self.truncate_ties:
-                    for note in logical_tie[1:]:
-                        duration = note.written_duration
+                    for leaf in logical_tie[1:]:
+                        duration = leaf.written_duration
                         skip = abjad.Skip(duration)
-                        abjad.mutate(note).replace([skip])
+                        abjad.mutate(leaf).replace([skip])
                 if self.hocket:
-                    for note in original_logical_tie:
-                        duration = note.written_duration
+                    for leaf in original_logical_tie:
+                        duration = leaf.written_duration
                         skip = abjad.Skip(duration)
-                        abjad.mutate(note).replace([skip])
+                        abjad.mutate(leaf).replace([skip])
             else:
-                for note in logical_tie:
-                    duration = note.written_duration
+                for leaf in logical_tie:
+                    duration = leaf.written_duration
                     skip = abjad.Skip(duration)
-                    abjad.mutate(note).replace([skip])
+                    abjad.mutate(leaf).replace([skip])
         if not self.allow_unused_pitches and not cursor.is_exhausted:
             message = '{!r} used only {} of {} pitches.'
             message = message.format(cursor, cursor.position-1, len(cursor))
@@ -1102,33 +1332,48 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
         return selections
 
     @staticmethod
-    def _matches_pitch(note, pitch_object):
+    def _matches_pitch(pitched_leaf, pitch_object):
         if isinstance(pitch_object, baca.tools.Coat):
             pitch_object = pitch_object.argument
         if pitch_object is None:
             return False
-        elif isinstance(pitch_object, (int, float)):
-            source = note.written_pitch.pitch_number
+        if isinstance(pitched_leaf, abjad.Note):
+            written_pitches = [pitched_leaf.written_pitch]
+        elif isinstance(pitched_leaf, abjad.Chord):
+            written_pitches = pitched_leaf.written_pitches
+        else:
+            raise TypeError(pitched_leaf)
+        if isinstance(pitch_object, (int, float)):
+            source = [_.pitch_number for _ in written_pitches]
         elif isinstance(pitch_object, abjad.NamedPitch):
-            source = note.written_pitch
+            source = written_pitches
         elif isinstance(pitch_object, abjad.NumberedPitch):
-            source = note.written_pitch
-            source = abjad.NumberedPitch(source)
+            source = [abjad.NumberedPitch(_) for _ in written_pitches]
         elif isinstance(pitch_object, abjad.NamedPitchClass):
-            source = note.written_pitch
-            source = abjad.NamedPitchClass(source)
+            source = [abjad.NamedPitchClass(_) for _ in written_pitches]
         elif isinstance(pitch_object, abjad.NumberedPitchClass):
-            source = note.written_pitch
-            source = abjad.NumberedPitchClass(source)
+            source = [abjad.NumberedPitchClass(_) for _ in written_pitches]
         else:
             message = 'unknown pitch object: {!r}.'
             message = message.format(pitch_object)
             raise TypeError(message)
-        if not type(source) is type(pitch_object):
+        if not type(source[0]) is type(pitch_object):
             message = 'type of {!r} must match type of {!r}.'
             message = message.format(source, pitch_object)
             raise TypeError(message)
-        return source == pitch_object
+        return pitch_object in source
+
+    @staticmethod
+    def _trim_matching_chord(logical_tie, pitch_object):
+        if isinstance(logical_tie.head, abjad.Note):
+            return
+        assert isinstance(logical_tie.head, abjad.Chord), repr(logical_tie)
+        if isinstance(pitch_object, abjad.pitchtools.PitchClass):
+            raise NotImplementedError(logical_tie, pitch_object)
+        for chord in logical_tie:
+            duration = chord.written_duration
+            note = abjad.Note(pitch_object, duration)
+            abjad.mutate(chord).replace([note])
 
     ### PUBLIC PROPERTIES ###
 
@@ -1142,18 +1387,10 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['.'],
                 ...     ),
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[1],
-                ...                 denominator=16,
-                ...                 ),
-                ...             ),
-                ...         ),
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         beam_rests=True,
@@ -1268,18 +1505,10 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['.'],
                 ...     ),
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[1],
-                ...                 denominator=16,
-                ...                 ),
-                ...             ),
-                ...         ),
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         beam_rests=True,
@@ -1344,18 +1573,10 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['.'],
                 ...     ),
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[1],
-                ...                 denominator=16,
-                ...                 ),
-                ...             ),
-                ...         ),
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         beam_rests=True,
@@ -1500,12 +1721,12 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
         return self._hocket
 
     @property
-    def collection(self):
-        r'''Gets collection.
+    def segment(self):
+        r'''Gets to-be-imbricated segment.
 
-        Returns pitch or pitch-class collection.
+        Returns pitch or pitch-class segment.
         '''
-        return self._collection
+        return self._segment
         
     @property
     def selector(self):
@@ -1517,18 +1738,10 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['.'],
                 ...     ),
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[1],
-                ...                 denominator=16,
-                ...                 ),
-                ...             ),
-                ...         ),
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         beam_rests=True,
@@ -1705,15 +1918,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[1],
-                ...                 denominator=16,
-                ...                 ),
-                ...             ),
-                ...         ),
+                >>> figure_maker = baca.FigureMaker(
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
@@ -1846,15 +2051,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[1],
-                ...                 denominator=16,
-                ...                 ),
-                ...             ),
-                ...         ),
+                >>> figure_maker = baca.FigureMaker(
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
@@ -1997,15 +2194,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[1],
-                ...                 denominator=16,
-                ...                 ),
-                ...             ),
-                ...         ),
+                >>> figure_maker = baca.FigureMaker(
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
@@ -2146,15 +2335,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[1],
-                ...                 denominator=16,
-                ...                 ),
-                ...             ),
-                ...         ),
+                >>> figure_maker = baca.FigureMaker(
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
@@ -2295,7 +2476,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(

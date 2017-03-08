@@ -17,7 +17,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.tools.FigureMaker(
+            >>> figure_maker = baca.FigureMaker(
             ...     baca.tools.NestingSpecifier(
             ...         time_treatments=['+1/16'],
             ...         ),
@@ -35,16 +35,12 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
             ...     ]
             >>> contribution = figure_maker('Voice 1', collections)
             >>> lilypond_file = figure_maker.show(contribution)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
 
             >>> f(lilypond_file[abjad.Staff])
-            \new Staff \with {
-                \override Beam.positions = #'(-5.5 . -5.5)
-            } <<
+            \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
@@ -99,7 +95,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
         Calltime nesting specifier preserves beam subdivisions and works with
         extend beam:
 
-            >>> figure_maker = baca.tools.FigureMaker(
+            >>> figure_maker = baca.FigureMaker(
             ...     abjad.rhythmmakertools.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
@@ -268,8 +264,91 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, selections):
+    def __call__(self, selections=None):
         r'''Calls nesting specifier on selections.
+
+        ..  container:: example
+
+            With rest affixes: 
+
+            ::
+
+                >>> figure_maker = baca.FigureMaker(
+                ...     baca.tools.NestingSpecifier(time_treatments=['+1/16']),
+                ...     baca.tools.RestAffixSpecifier(
+                ...         prefix=[2],
+                ...         suffix=[3],
+                ...         ),
+                ...     abjad.rhythmmakertools.BeamSpecifier(
+                ...         beam_divisions_together=True,
+                ...         ),
+                ...     )
+
+            ::
+
+                >>> collections = [
+                ...     [0, 2, 10, 18],
+                ...     [16, 15, 23],
+                ...     [19, 13, 9, 8],
+                ...     ]
+                >>> contribution = figure_maker('Voice 1', collections)
+                >>> lilypond_file = figure_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 17/16 {
+                                {
+                                    r8
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    c'16 [
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    d'16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    bf'16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #1
+                                    fs''16
+                                }
+                                {
+                                    \set stemLeftBeamCount = #1
+                                    \set stemRightBeamCount = #2
+                                    e''16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    ef''16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #1
+                                    b''16
+                                }
+                                {
+                                    \set stemLeftBeamCount = #1
+                                    \set stemRightBeamCount = #2
+                                    g''16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    cs''16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    a'16
+                                    \set stemLeftBeamCount = #2
+                                    \set stemRightBeamCount = #2
+                                    af'16 ]
+                                    r8.
+                                }
+                            }
+                        }
+                    }
+                >>
 
         Returns new selections. 
         '''

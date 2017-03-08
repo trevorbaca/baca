@@ -16,7 +16,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.tools.FigureMaker()
+            >>> figure_maker = baca.FigureMaker()
 
         ::
 
@@ -105,7 +105,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.tools.FigureMaker()
+            >>> figure_maker = baca.FigureMaker()
 
         ::
 
@@ -200,7 +200,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.tools.FigureMaker()
+            >>> figure_maker = baca.FigureMaker()
 
         ::
 
@@ -578,7 +578,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -626,7 +626,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 

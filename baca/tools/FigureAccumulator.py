@@ -41,7 +41,7 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, figure_contribution):
+    def __call__(self, figure_contribution=None):
         r'''Calls figure-accumulator on `figure_contribution`.
 
         Raises exception on duplicate figure name.
@@ -220,7 +220,7 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
 
     @staticmethod
     def _make_default_figure_maker():
-        return baca.tools.FigureMaker(
+        return baca.FigureMaker(
             abjad.rhythmmakertools.BeamSpecifier(
                 beam_divisions_together=True,
                 ),

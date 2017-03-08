@@ -37,38 +37,35 @@ class DynamicSpecifier(abjad.abctools.AbjadObject):
         selector=None,
         ):
         if dynamic is not None:
-            prototype = (
-                str,
-                abjad.indicatortools.Dynamic,
-                abjad.spannertools.Hairpin,
-                )
+            prototype = (str, abjad.Dynamic, abjad.Hairpin)
             assert isinstance(dynamic, prototype), repr(dynamic)
         self._dynamic = dynamic
         if selector is not None:
-            assert isinstance(selector, abjad.selectortools.Selector)
+            assert isinstance(selector, abjad.Selector)
         self._selector = selector
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument):
+    def __call__(self, argument=None):
         r'''Calls specifier on `argument`.
 
         Returns none.
         '''
+        if not argument:
+            return
         if self.dynamic is None:
             return
         selector = self.selector or baca.select_leaves()
         selections = selector(argument)
-        if selections and not isinstance(selections[0], abjad.Selection):
-            selections = [selections]
+        selections = baca.FigureMaker._normalize_selections(selections)
         for selection in selections:
-            if isinstance(self.dynamic, abjad.spannertools.Hairpin):
+            if isinstance(self.dynamic, abjad.Hairpin):
                 hairpin = abjad.new(self.dynamic)
                 leaves = list(abjad.iterate(selection).by_leaf())
                 if hairpin._attachment_test_all(leaves):
                     abjad.attach(hairpin, leaves)
-            elif isinstance(self.dynamic, (str, abjad.indicatortools.Dynamic)):
-                dynamic = abjad.indicatortools.Dynamic(self.dynamic)
+            elif isinstance(self.dynamic, (str, abjad.Dynamic)):
+                dynamic = abjad.Dynamic(self.dynamic)
                 abjad.attach(dynamic, selection[0])
             else:
                 message = 'invalid dynamic: {!r}.'

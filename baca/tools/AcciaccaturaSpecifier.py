@@ -134,7 +134,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, collection):
+    def __call__(self, collection=None):
         r'''Calls acciaccatura specifier on `collection`.
 
         Returns grace container together with new collection.
@@ -161,7 +161,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 kind='acciaccatura',
                 )
             if 1 < len(grace_container):
-                abjad.attach(abjad.spannertools.Beam(), grace_container[:])
+                abjad.attach(abjad.Beam(), grace_container[:])
             grace_containers.append(grace_container)
         assert len(grace_containers) == len(collection)
         return grace_containers, collection

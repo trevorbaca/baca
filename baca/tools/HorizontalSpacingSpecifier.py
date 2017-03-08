@@ -778,7 +778,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, segment_maker):
+    def __call__(self, segment_maker=None):
         r'''Calls specifier on `segment_maker`.
 
         Returns none.
@@ -808,7 +808,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
                         duration = self.minimum_width
                 if self.multiplier is not None:
                     duration = duration / self.multiplier
-            command = abjad.indicatortools.LilyPondCommand('newSpacingSection')
+            command = abjad.LilyPondCommand('newSpacingSection')
             abjad.attach(command, skip)
             moment = abjad.schemetools.SchemeMoment(duration)
             abjad.set_(skip).score.proportional_notation_duration = moment

@@ -17,7 +17,7 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.tools.FigureMaker(
+            >>> figure_maker = baca.FigureMaker(
             ...     baca.tools.TransitionSpecifier(
             ...         start_markup=baca.markup.ord_(),
             ...         stop_markup=baca.markup.pont(),
@@ -251,7 +251,7 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument):
+    def __call__(self, argument=None):
         r'''Calls specifier on `argument`.
 
         Returns none.
@@ -269,18 +269,18 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
             stop_markup = copy.copy(self.stop_markup)
             stop_markup = stop_markup.override(('font-name', 'Palatino'))
             abjad.attach(stop_markup, stop_leaf, is_annotation=True)
-        abjad.attach(abjad.spannertools.TextSpanner(), leaves)
+        abjad.attach(abjad.TextSpanner(), leaves)
 
     ### PRIVATE METHODS ###
 
     def _get_arrow(self):
         if self.solid:
-            return abjad.indicatortools.Arrow()
+            return abjad.Arrow()
         return self._make_dashed_arrow()
 
     @staticmethod
     def _make_dashed_arrow():
-        return abjad.indicatortools.Arrow(
+        return abjad.Arrow(
             dash_fraction=0.25,
             dash_period=1.5,
             left_broken_text=False,

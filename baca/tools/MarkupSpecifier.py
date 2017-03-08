@@ -17,7 +17,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.tools.FigureMaker(
+            >>> figure_maker = baca.FigureMaker(
             ...     baca.tools.MarkupSpecifier(
             ...         markup=abjad.Markup('*'),
             ...         ),
@@ -92,7 +92,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
             assert isinstance(markup, abjad.Markup), repr(markup)
         self._markup = markup
         if selector is not None:
-            assert isinstance(selector, abjad.selectortools.Selector)
+            assert isinstance(selector, abjad.Selector)
         self._selector = selector
 
     ### SPECIAL METHODS ###
@@ -102,18 +102,15 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
         Returns none.
         '''
-        if not argument:
-            return
-        if self.markup is None:
+        if not argument or self.markup is None:
             return
         selector = self.selector or baca.select_pitched_leaf(0)
-        selection = selector(argument)
-        if isinstance(selection, abjad.Component):
-            selection = abjad.select(selection)
-        assert all(isinstance(_, abjad.Component) for _ in selection)
-        for component in  selection:
-            markup = abjad.new(self.markup)
-            abjad.attach(markup, component)
+        selections = selector(argument)
+        selections = baca.FigureMaker._normalize_selections(selections)
+        for selection in selections:
+            for component in  selection:
+                markup = abjad.new(self.markup)
+                abjad.attach(markup, component)
 
     ### PUBLIC PROPERTIES ###
 
@@ -140,7 +137,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.MarkupSpecifier(
                 ...         markup=abjad.Markup('*'),
                 ...         ),
@@ -197,7 +194,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.MarkupSpecifier(
                 ...         markup=abjad.Markup('*'),
                 ...         selector=abjad.select().

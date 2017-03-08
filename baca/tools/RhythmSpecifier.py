@@ -201,7 +201,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
         Returns contribution with music payload.
         '''
         for time_signature in time_signatures:
-            prototype = abjad.indicatortools.TimeSignature
+            prototype = abjad.TimeSignature
             assert isinstance(time_signature, prototype), repr(time_signature)
         if start_offset is not None:
             assert isinstance(start_offset, abjad.durationtools.Offset)
@@ -222,7 +222,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
         pitched_prototype = (abjad.Note, abjad.Chord)
         if self.staff_line_count is not None:
             self._set_staff_line_count(first_leaf, self.staff_line_count)
-        elif self.clef == abjad.indicatortools.Clef('percussion'):
+        elif self.clef == abjad.Clef('percussion'):
             self._set_staff_line_count(first_leaf, 1)
         if self.tie_first and isinstance(first_leaf, pitched_prototype):
             abjad.attach('tie to me', first_leaf)
@@ -466,13 +466,13 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
         return contribution
 
     def _set_staff_line_count(self, first_leaf, staff_line_count):
-        command = abjad.indicatortools.LilyPondCommand('stopStaff')
+        command = abjad.LilyPondCommand('stopStaff')
         abjad.attach(command, first_leaf)
         string = "override Staff.StaffSymbol #'line-count = #{}"
         string = string.format(staff_line_count)
-        command = abjad.indicatortools.LilyPondCommand(string)
+        command = abjad.LilyPondCommand(string)
         abjad.attach(command, first_leaf)
-        command = abjad.indicatortools.LilyPondCommand('startStaff')
+        command = abjad.LilyPondCommand('startStaff')
         abjad.attach(command, first_leaf)
 
     ### PUBLIC PROPERTIES ###

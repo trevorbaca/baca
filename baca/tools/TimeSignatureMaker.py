@@ -86,8 +86,8 @@ class TimeSignatureMaker(abjad.abctools.AbjadObject):
         time_signatures = time_signatures.flatten(depth=1)
         items = []
         for item in self.stage_specifier:
-            if isinstance(item, abjad.indicatortools.Fermata):
-                item = abjad.indicatortools.TimeSignature((1, 4))
+            if isinstance(item, abjad.Fermata):
+                item = abjad.TimeSignature((1, 4))
             items.append(item)
         stage_specifier = baca.tools.StageSpecifier(items=items)
         time_signature_groups = self._make_time_signature_groups(
@@ -114,7 +114,7 @@ class TimeSignatureMaker(abjad.abctools.AbjadObject):
         time_signature_lists = []
         index = 0
         for x in stage_specifier:
-            if isinstance(x, abjad.indicatortools.TimeSignature):
+            if isinstance(x, abjad.TimeSignature):
                 time_signature_list = [x]
             elif isinstance(x, (tuple, list)):
                 time_signature_list = list(x)

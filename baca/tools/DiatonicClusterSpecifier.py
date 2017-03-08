@@ -51,7 +51,7 @@ class DiatonicClusterSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument):
+    def __call__(self, argument=None):
         r'''Calls specifier on `argument`.
 
         Returns none.

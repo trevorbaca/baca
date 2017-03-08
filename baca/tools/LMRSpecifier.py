@@ -152,7 +152,7 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, sequence):
+    def __call__(self, sequence=None):
         r'''Calls LMR specifier on `sequence`.
 
         Returns list of subsequences.

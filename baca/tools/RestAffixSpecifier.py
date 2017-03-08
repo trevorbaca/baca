@@ -18,7 +18,7 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> figure_maker = baca.tools.FigureMaker()
+            >>> figure_maker = baca.FigureMaker()
 
         ::
 
@@ -190,19 +190,68 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, segment_index, total_collections):
-        r'''Calls specifier on `segment_index` and `total_collections`.
+    def __call__(self, collection_index=None, total_collections=None):
+        r'''Calls specifier on `collection_index` and `total_collections`.
+
+        ..  container:: example
+
+            With time treatments:
+
+            ::
+
+                >>> figure_maker = baca.FigureMaker()
+
+            ::
+
+                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+                >>> contribution = figure_maker(
+                ...     'Voice 1',
+                ...     collections,
+                ...     baca.tools.RestAffixSpecifier(prefix=[1], suffix=[1]),
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 3/4 {
+                                r16
+                                c'16 [
+                                d'16
+                                bf'16 ]
+                            }
+                            \times 4/5 {
+                                fs''16 [
+                                e''16
+                                ef''16
+                                af''16
+                                g''16 ]
+                            }
+                            {
+                                a'16
+                                r16
+                            }
+                        }
+                    }
+                >>
 
         Returns prefix, suffix pair.
         '''
         if self.pattern is None:
-            if segment_index == 0 and segment_index == total_collections - 1:
+            if collection_index == 0 and collection_index == total_collections - 1:
                 return self.prefix, self.suffix
-            if segment_index == 0:
+            if collection_index == 0:
                 return self.prefix, None
-            if segment_index == total_collections - 1:
+            if collection_index == total_collections - 1:
                 return None, self.suffix
-        elif self.pattern.matches_index(segment_index, total_collections):
+        elif self.pattern.matches_index(collection_index, total_collections):
             return self.prefix, self.suffix
         return None, None
 
@@ -218,7 +267,7 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -272,7 +321,7 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -316,7 +365,7 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -373,7 +422,7 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -442,7 +491,7 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -510,7 +559,7 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 

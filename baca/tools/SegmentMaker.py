@@ -565,7 +565,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             )
 
     def _apply_first_and_last_ties(self, voice):
-        dummy_tie = abjad.spannertools.Tie()
+        dummy_tie = abjad.Tie()
         for current_leaf in abjad.iterate(voice).by_leaf():
             if not dummy_tie._attachment_test(current_leaf):
                 continue
@@ -576,28 +576,28 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     if current_leaf not in previous_logical_tie:
                         current_logical_tie = abjad.inspect_(current_leaf).get_logical_tie()
                         leaves = previous_logical_tie + current_logical_tie
-                        abjad.detach(abjad.spannertools.Tie, previous_leaf)
-                        abjad.detach(abjad.spannertools.Tie, current_leaf)
+                        abjad.detach(abjad.Tie, previous_leaf)
+                        abjad.detach(abjad.Tie, current_leaf)
                         inspector = abjad.inspect_(current_leaf)
                         use_messiaen_style_ties = inspector.has_indicator(
                             'use messiaen style ties')
-                        tie = abjad.spannertools.Tie(
+                        tie = abjad.Tie(
                             use_messiaen_style_ties=use_messiaen_style_ties)
                         abjad.attach(tie, leaves)
                 abjad.detach('tie to me', current_leaf)
             if abjad.inspect_(current_leaf).has_indicator('tie from me'):
                 next_leaf = abjad.inspect_(current_leaf).get_leaf(1)
-                if abjad.spannertools.Tie._attachment_test(next_leaf):
+                if abjad.Tie._attachment_test(next_leaf):
                     current_logical_tie = abjad.inspect_(current_leaf).get_logical_tie()
                     if next_leaf not in current_logical_tie:
                         next_logical_tie = abjad.inspect_(next_leaf).get_logical_tie()
                         leaves = current_logical_tie + next_logical_tie
-                        abjad.detach(abjad.spannertools.Tie, current_leaf)
-                        abjad.detach(abjad.spannertools.Tie, next_leaf)
+                        abjad.detach(abjad.Tie, current_leaf)
+                        abjad.detach(abjad.Tie, next_leaf)
                         inspector = abjad.inspect_(current_leaf)
                         use_messiaen_style_ties = inspector.has_indicator(
                             'use messiaen style ties')
-                        tie = abjad.spannertools.Tie(
+                        tie = abjad.Tie(
                             use_messiaen_style_ties=use_messiaen_style_ties)
                         abjad.attach(tie, leaves)
                 abjad.detach('tie from me', current_leaf)
@@ -651,11 +651,11 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             if not previous_clef_name:
                 continue
             first_leaf = abjad.inspect_(staff).get_leaf(0)
-            prototype = abjad.indicatortools.Clef
+            prototype = abjad.Clef
             clef = abjad.inspect_(first_leaf).get_effective(prototype)
             if clef is not None:
                 continue
-            clef = abjad.indicatortools.Clef(previous_clef_name)
+            clef = abjad.Clef(previous_clef_name)
             abjad.attach(clef, staff)
 
     def _apply_spacing_specifier(self):
@@ -680,7 +680,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 specifier(selection, timespan)
             else:
                 specifier(selection)
-        elif isinstance(specifier, abjad.spannertools.Spanner):
+        elif isinstance(specifier, abjad.Spanner):
             abjad.attach(copy.copy(specifier), selection)
         else:
             abjad.attach(specifier, selection[0])
@@ -696,8 +696,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             return
         context = self._score['Time Signature Context Multimeasure Rests']
         directive_prototype = (
-            abjad.indicatortools.Fermata,
-            abjad.indicatortools.BreathMark,
+            abjad.Fermata,
+            abjad.BreathMark,
             )
         rest_prototype = abjad.MultimeasureRest
         for stage_number, directive in self.tempo_specifier:
@@ -712,7 +712,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             start_skip = start_measure[0]
             assert isinstance(start_skip, rest_prototype), start_skip
             fermata_y_offset = None
-            if isinstance(directive, abjad.indicatortools.Fermata):
+            if isinstance(directive, abjad.Fermata):
                 if directive.command == 'shortfermata':
                     string = 'scripts.ushortfermata'
                     fermata_y_offset = -7
@@ -749,7 +749,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         cached_clefs = self._cached_score_template_start_clefs
         previous_clefs = self._previous_segment_metadata.get(
             'end_clefs_by_staff', abjad.TypedOrderedDict())
-        prototype = abjad.indicatortools.Clef
+        prototype = abjad.Clef
         for staff in abjad.iterate(self._score).by_class(abjad.Staff):
             if abjad.inspect_(staff).has_indicator(prototype):
                 continue
@@ -761,7 +761,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     clef_name = cached_clefs.get(staff.name)
                 # TODO: remove if-clause
                 if clef_name is not None:
-                    clef = abjad.indicatortools.Clef(clef_name)
+                    clef = abjad.Clef(clef_name)
                     abjad.attach(clef, staff)
 
     def _attach_first_segment_default_instruments(self):
@@ -809,7 +809,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             letter_number = ord(rehearsal_letter) - ord('A') + 1
         if letter_number == 0:
             return
-        rehearsal_mark = abjad.indicatortools.RehearsalMark(
+        rehearsal_mark = abjad.RehearsalMark(
             number=letter_number
             )
         voice = self._score['Time Signature Context Skips']
@@ -873,16 +873,16 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         score = self._lilypond_file['Score']
         if not abjad.inspect_(score).is_well_formed():
             inspector = abjad.inspect_(score)
-            string = inspector.tabulate_well_formedness_violations()
-            raise Exception(string)
+            message = inspector.tabulate_well_formedness_violations()
+            raise Exception(message)
         if (self.color_octaves or
             self.color_repeat_pitch_classes or
             self.ignore_repeat_pitch_classes):
             return
         manager = baca.tools.WellformednessManager()
         if not manager.is_well_formed(score):
-            string = manager.tabulate_well_formedness_violations(score)
-            raise Exception(string)
+            message = manager.tabulate_well_formedness_violations(score)
+            raise Exception(message)
 
     def _color_octaves_(self):
         if not self.color_octaves:
@@ -914,11 +914,18 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         markup = abjad.Markup('@', direction=Up)
         abjad.tweak(markup).color = 'red'
         for voice in abjad.iterate(self._score).by_class(abjad.Voice):
-            previous_logical_tie, previous_pitch_class = None, None
+            previous_logical_tie, previous_pitch_classes = None, []
             agent = abjad.iterate(voice)
             for logical_tie in agent.by_logical_tie(pitched=True):
-                pitch_class = logical_tie.head.written_pitch.pitch_class
-                if pitch_class == previous_pitch_class:
+                head = logical_tie.head
+                if isinstance(head, abjad.Note):
+                    written_pitches = [head.written_pitch]
+                elif isinstance(head, abjad.Chord):
+                    written_pitches = head.written_pitches
+                else:
+                    raise TypeError(head)
+                pitch_classes = [_.pitch_class for _ in written_pitches]
+                if set(pitch_classes) & set(previous_pitch_classes):
                     abjad.label(previous_logical_tie).color_leaves('red')
                     for leaf in previous_logical_tie:
                         abjad.attach(markup, leaf)
@@ -926,7 +933,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     for leaf in logical_tie:
                         abjad.attach(markup, leaf)
                 previous_logical_tie = logical_tie
-                previous_pitch_class = pitch_class
+                previous_pitch_classes = pitch_classes
 
     def _color_unpitched_notes(self):
         if self.ignore_unpitched_notes:
@@ -1146,12 +1153,12 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         abjad.detach(abjad.Beam, next_leaf)
         all_leaves = abjad.select(all_leaves)
         assert all_leaves.get_duration() == sum(durations)
-        beam = abjad.spannertools.DuratedComplexBeam(
+        beam = abjad.DuratedComplexBeam(
             beam_rests=True,
             durations=durations,
             )
         abjad.attach(beam, all_leaves)
-            
+
     def _extend_beams(self):
         score = self._score
         leaves = []
@@ -1189,7 +1196,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         staves = abjad.iterate(self._score).by_class(abjad.Staff)
         staves = [_ for _ in staves if _.is_semantic]
         staves.sort(key=lambda x: x.name)
-        prototype = abjad.indicatortools.Clef
+        prototype = abjad.Clef
         for staff in staves:
             last_leaf = abjad.inspect_(staff).get_leaf(-1)
             clef = abjad.inspect_(last_leaf).get_effective(prototype)
@@ -1246,7 +1253,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
     def _get_end_time_signature(self):
         context = self._score['Time Signature Context Skips']
         last_measure = context[-1]
-        prototype = abjad.indicatortools.TimeSignature
+        prototype = abjad.TimeSignature
         time_signature = abjad.inspect_(last_measure).get_effective(prototype)
         if not time_signature:
             return
@@ -1394,7 +1401,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         for leaf in abjad.iterate(self._score).by_leaf():
             start_offset = abjad.inspect_(leaf).get_timespan().start_offset
             if start_offset in self._fermata_start_offsets:
-                spanner = abjad.spannertools.HiddenStaffSpanner()
+                spanner = abjad.HiddenStaffSpanner()
                 abjad.attach(spanner, leaf)
 
     def _hide_instrument_names_(self):
@@ -1411,7 +1418,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         time_signatures_ = list(time_signatures)
         time_signatures_ = []
         for time_signature in time_signatures:
-            time_signature = abjad.indicatortools.TimeSignature(time_signature)
+            time_signature = abjad.TimeSignature(time_signature)
             time_signatures_.append(time_signature)
         time_signatures_ = tuple(time_signatures_)
         if not time_signatures_:
@@ -1511,7 +1518,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             self._apply_specifier_to_selection(specifier, selection, timespan)
         except:
             traceback.print_exc()
-            raise Exception(scoped_specifier)
+            raise Exception(format(scoped_specifier))
         self._handle_mutator(specifier)
 
     def _interpret_scoped_specifiers(self):
@@ -1637,7 +1644,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         measures = []
         time_signatures = time_signatures or self.time_signatures
         for time_signature in time_signatures:
-            time_signature = abjad.indicatortools.TimeSignature(time_signature)
+            time_signature = abjad.TimeSignature(time_signature)
             rest = abjad.MultimeasureRest(abjad.Duration(1))
             multiplier = abjad.Multiplier(time_signature.duration)
             abjad.attach(multiplier, rest)
@@ -1750,7 +1757,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 start_measure)
             start_skip = start_measure[0]
             assert isinstance(start_skip, abjad.Skip), start_skip
-            command = abjad.indicatortools.LilyPondCommand('newSpacingSection')
+            command = abjad.LilyPondCommand('newSpacingSection')
             abjad.attach(command, start_skip)
             moment = abjad.schemetools.SchemeMoment(duration)
             abjad.set_(start_skip).score.proportional_notation_duration = moment
@@ -1781,7 +1788,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 raise NotImplementedError(message)
             volta_measures = measures[measure_start_number:measure_stop_number]
             container = abjad.Container(volta_measures)
-            command = abjad.indicatortools.Repeat()
+            command = abjad.Repeat()
             abjad.attach(command, container)
 
     def _move_instruments_from_notes_back_to_rests(self):
@@ -1871,13 +1878,13 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
     def _remove_score_template_start_clefs(self):
         dictionary = abjad.TypedOrderedDict()
         self._cached_score_template_start_clefs = dictionary
-        prototype = abjad.indicatortools.Clef
+        prototype = abjad.Clef
         for context in abjad.iterate(self._score).by_class(abjad.scoretools.Context):
             if not abjad.inspect_(context).has_indicator(prototype):
                 continue
             clef = abjad.inspect_(context).get_indicator(prototype)
             self._cached_score_template_start_clefs[context.name] = clef.name
-            abjad.detach(abjad.indicatortools.Clef, context)
+            abjad.detach(abjad.Clef, context)
 
     def _remove_score_template_start_instruments(self):
         dictionary = abjad.TypedOrderedDict()
@@ -1931,7 +1938,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
     def _shorten_long_repeat_ties(self):
         leaves = abjad.iterate(self._score).by_leaf()
         for leaf in leaves:
-            ties = abjad.inspect_(leaf).get_spanners(abjad.spannertools.Tie)
+            ties = abjad.inspect_(leaf).get_spanners(abjad.Tie)
             if not ties:
                 continue
             tie = ties.pop()
@@ -1943,7 +1950,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             minimum_duration = abjad.Duration(1, 8)
             if abjad.inspect_(previous_leaf).get_duration() < minimum_duration:
                 string = r"shape #'((2 . 0) (1 . 0) (0.5 . 0) (0 . 0)) RepeatTie"
-                command = abjad.indicatortools.LilyPondCommand(string)
+                command = abjad.LilyPondCommand(string)
                 abjad.attach(command, leaf)
 
     def _stage_number_to_measure_indices(self, stage_number):
@@ -2087,7 +2094,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             Strips figure names by default:
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -2232,7 +2239,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             Allows figure names:
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -2445,7 +2452,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
                 >>> contribution = figure_maker(
                 ...     'Violin Music Voice',
                 ...     [[2, 4, 5, 7, 9, 11]],
@@ -2574,7 +2581,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -2741,7 +2748,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -4323,7 +4330,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             Colors unregistered pitches by default:
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             acciaccatura_specifiers=[
@@ -4571,7 +4578,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             Ignores unregistered pitches:
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             acciaccatura_specifiers=[

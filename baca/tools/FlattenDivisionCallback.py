@@ -22,7 +22,7 @@ class FlattenDivisionCallback(abjad.abctools.AbjadValueObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument):
+    def __call__(self, argument=None):
         r'''Calls flatten division callback on `argument`.
 
         Returns list of divisions or list of division lists.

@@ -137,7 +137,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             )
         tag_string = '.'.join(instrument_tags)
         tag_string = 'tag {}'.format(tag_string)
-        tag_command = abjad.indicatortools.LilyPondCommand(
+        tag_command = abjad.LilyPondCommand(
             tag_string,
             'before',
             )
@@ -155,7 +155,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             )
         violin = abjad.instrumenttools.Violin()
         abjad.attach(violin, violin_music_staff)
-        abjad.attach(abjad.indicatortools.Clef('treble'), violin_music_staff)
+        abjad.attach(abjad.Clef('treble'), violin_music_staff)
         self._attach_tag('violin', violin_music_staff)
 
         viola_music_voice = abjad.scoretools.Voice(
@@ -169,7 +169,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             name='Viola Music Staff',
             )
         abjad.attach(abjad.instrumenttools.Viola(), viola_music_staff)
-        abjad.attach(abjad.indicatortools.Clef('alto'), viola_music_staff)
+        abjad.attach(abjad.Clef('alto'), viola_music_staff)
         self._attach_tag('viola', viola_music_staff)
 
         cello_music_voice = abjad.scoretools.Voice(
@@ -183,7 +183,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             name='Cello Music Staff',
             )
         abjad.attach(abjad.instrumenttools.Cello(), cello_music_staff)
-        abjad.attach(abjad.indicatortools.Clef('bass'), cello_music_staff)
+        abjad.attach(abjad.Clef('bass'), cello_music_staff)
         self._attach_tag('cello', cello_music_staff)
 
         string_section_staff_group = abjad.scoretools.StaffGroup(

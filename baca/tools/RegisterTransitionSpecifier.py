@@ -146,7 +146,7 @@ class RegisterTransitionSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     # TODO: extend SegmentMaker to pass timespan in here
-    def __call__(self, logical_ties, timespan=None):
+    def __call__(self, logical_ties=None, timespan=None):
         r'''Calls registration transition specifier.
 
         Returns none.

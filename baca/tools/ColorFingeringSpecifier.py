@@ -150,7 +150,7 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, logical_ties):
+    def __call__(self, logical_ties=None):
         r'''Calls color fingering specifier.
 
         Returns none.
@@ -165,7 +165,7 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
             for i, logical_tie in enumerate(logical_ties):
                 number = number_list[i]
                 if not number == 0:
-                    fingering = abjad.indicatortools.ColorFingering(number)
+                    fingering = abjad.ColorFingering(number)
                     abjad.attach(fingering, logical_tie.head)
                 self._attach_deposit_annotations(logical_tie.head)
         else:
@@ -183,7 +183,7 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
                 for i, logical_tie in enumerate(values):
                     number = number_list[i]
                     if not number == 0:
-                        fingering = abjad.indicatortools.ColorFingering(number)
+                        fingering = abjad.ColorFingering(number)
                         abjad.attach(fingering, logical_tie.head)
                     self._attach_deposit_annotations(logical_tie.head)
                 number_list_index += 1
@@ -194,7 +194,7 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
         if not self.deposit_annotations:
             return
         for annotation_name in self.deposit_annotations:
-            annotation = abjad.indicatortools.Annotation(annotation_name, True)
+            annotation = abjad.Annotation(annotation_name, True)
             abjad.attach(annotation, note)
 
     ### PUBLIC PROPERTIES ###

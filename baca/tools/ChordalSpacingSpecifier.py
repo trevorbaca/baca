@@ -162,6 +162,52 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
 
     ### PRIVATE METHODS ###
 
+    def _sort_pitch_classes_ascending(self, start, pitch_classes):
+        pitch_classes, pitch_classes_, iterations = pitch_classes[:], [], 0
+        if self.minimum_semitones is not None:
+            candidate = start + self.minimum_semitones
+        else:
+            candidate = start + 1
+        while pitch_classes:
+            if candidate in pitch_classes:
+                pitch_classes_.append(candidate)
+                pitch_classes.remove(candidate)
+                if self.minimum_semitones is not None:
+                    candidate += self.minimum_semitones
+            else:
+                candidate += 1
+            if 999 <= iterations:
+                message = 'stuck in while-loop.'
+                raise Exception(message)
+            iterations += 1
+        assert not pitch_classes, repr(pitch_classes)
+        return pitch_classes_
+
+    def _sort_pitch_classes_descending(self, start, pitch_classes):
+        pitch_classes, pitch_classes_, iterations = pitch_classes[:], [], 0
+        if self.minimum_semitones is not None:
+            candidate = abjad.NumberedPitchClass(
+                start.number - self.minimum_semitones
+                )
+        else:
+            candidate = abjad.NumberedPitchClass(start.number - 1)
+        while pitch_classes:
+            if candidate in pitch_classes:
+                pitch_classes_.append(candidate)
+                pitch_classes.remove(candidate)
+                if self.minimum_semitones is not None:
+                    candidate = abjad.NumberedPitchClass(
+                        candidate.number - self.minimum_semitones
+                        )
+            else:
+                candidate = abjad.NumberedPitchClass(candidate.number - 1)
+            if 999 <= iterations:
+                message = 'stuck in while-loop.'
+                raise Exception(message)
+            iterations += 1
+        assert not pitch_classes, repr(pitch_classes)
+        return pitch_classes_
+
     def _space_segment(self, pitch_class_segment):
         original_input = pitch_class_segment
         pitch_classes = list(pitch_class_segment)
@@ -217,52 +263,6 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
             return baca.PitchSet(pitches)
         else:
             return baca.PitchSegment(pitches)
-
-    def _sort_pitch_classes_ascending(self, start, pitch_classes):
-        pitch_classes, pitch_classes_, iterations = pitch_classes[:], [], 0
-        if self.minimum_semitones is not None:
-            candidate = start + self.minimum_semitones
-        else:
-            candidate = start + 1
-        while pitch_classes:
-            if candidate in pitch_classes:
-                pitch_classes_.append(candidate)
-                pitch_classes.remove(candidate)
-                if self.minimum_semitones is not None:
-                    candidate += self.minimum_semitones
-            else:
-                candidate += 1
-            if 999 <= iterations:
-                message = 'stuck in while-loop.'
-                raise Exception(message)
-            iterations += 1
-        assert not pitch_classes, repr(pitch_classes)
-        return pitch_classes_
-
-    def _sort_pitch_classes_descending(self, start, pitch_classes):
-        pitch_classes, pitch_classes_, iterations = pitch_classes[:], [], 0
-        if self.minimum_semitones is not None:
-            candidate = abjad.NumberedPitchClass(
-                start.number - self.minimum_semitones
-                )
-        else:
-            candidate = abjad.NumberedPitchClass(start.number - 1)
-        while pitch_classes:
-            if candidate in pitch_classes:
-                pitch_classes_.append(candidate)
-                pitch_classes.remove(candidate)
-                if self.minimum_semitones is not None:
-                    candidate = abjad.NumberedPitchClass(
-                        candidate.number - self.minimum_semitones
-                        )
-            else:
-                candidate = abjad.NumberedPitchClass(candidate.number - 1)
-            if 999 <= iterations:
-                message = 'stuck in while-loop.'
-                raise Exception(message)
-            iterations += 1
-        assert not pitch_classes, repr(pitch_classes)
-        return pitch_classes_
 
     @staticmethod
     def _to_tightly_spaced_pitches_ascending(pitch_classes):

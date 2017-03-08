@@ -145,7 +145,7 @@ class MicrotonalDeviationSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, logical_ties):
+    def __call__(self, logical_ties=None):
         r'''Calls microtonal deviation specifier.
 
         Returns none.
@@ -185,7 +185,7 @@ class MicrotonalDeviationSpecifier(abjad.abctools.AbjadObject):
         if not self.deposit_annotations:
             return
         for annotation_name in self.deposit_annotations:
-            annotation = abjad.indicatortools.Annotation(annotation_name, True)
+            annotation = abjad.Annotation(annotation_name, True)
             attach(annotation, note)
 
     ### PUBLIC PROPERTIES ###

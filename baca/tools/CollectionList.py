@@ -681,16 +681,6 @@ class CollectionList(abjad.abctools.AbjadValueObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def item_class(self):
-        r'''Gets item class of collections in list.
-
-        Set to class modeling pitch or pitch-class.
-
-        Returns class or none.
-        '''
-        return self._item_class
-
-    @property
     def collections(self):
         r'''Gets collections in list.
 
@@ -712,6 +702,16 @@ class CollectionList(abjad.abctools.AbjadValueObject):
         '''
         if self._collections:
             return list(self._collections)
+
+    @property
+    def item_class(self):
+        r'''Gets item class of collections in list.
+
+        Set to class modeling pitch or pitch-class.
+
+        Returns class or none.
+        '''
+        return self._item_class
 
     ### PUBLIC METHODS ###
 

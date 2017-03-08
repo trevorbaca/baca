@@ -17,7 +17,7 @@ class IndicatorSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.tools.FigureMaker(
+            >>> figure_maker = baca.FigureMaker(
             ...     baca.tools.IndicatorSpecifier(
             ...         indicators=[abjad.Fermata()],
             ...         ),
@@ -192,29 +192,31 @@ class IndicatorSpecifier(abjad.abctools.AbjadObject):
         ):
         self._indicators = indicators
         if selector is not None:
-            assert isinstance(selector, abjad.selectortools.Selector)
+            assert isinstance(selector, abjad.Selector)
         self._selector = selector
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, selection):
-        r'''Calls specifier on `selection`.
+    def __call__(self, argument=None):
+        r'''Calls specifier on `argument`.
 
         Returns none.
         '''
-        indicators = self.indicators or ()
-        indicators = abjad.CyclicTuple(indicators)
-        if not indicators:
+        if not argument:
             return
-        tokens = indicators
+        if self.indicators is None:
+            return
+        indicators = abjad.CyclicTuple(self.indicators)
         selector = self.selector or baca.select_pitched_logical_tie_heads()
-        selection = selector(selection)
-        for i, leaf in enumerate(selection):
-            assert isinstance(leaf, abjad.Leaf), repr(leaf)
-            token = tokens[i]
-            indicators = self._token_to_indicators(token)
-            for indicator in indicators:
-                abjad.attach(indicator, leaf)
+        selections = selector(argument)
+        selections = baca.FigureMaker._normalize_selections(selections)
+        for selection in selections:
+            leaves = abjad.select(selection).by_leaf()
+            for i, leaf in enumerate(leaves):
+                indicators_ = indicators[i]
+                indicators_ = self._token_to_indicators(indicators_)
+                for indicator_ in indicators_:
+                    abjad.attach(indicator_, leaf)
 
     ### PRIVATE METHODS ###
 
@@ -241,7 +243,7 @@ class IndicatorSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.IndicatorSpecifier(
                 ...         indicators=[abjad.Fermata()],
                 ...         ),
@@ -298,7 +300,7 @@ class IndicatorSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.IndicatorSpecifier(
                 ...         indicators=[
                 ...             abjad.Fermata(), None, None,

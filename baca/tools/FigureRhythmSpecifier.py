@@ -68,27 +68,14 @@ class FigureRhythmSpecifier(abjad.abctools.AbjadObject):
             )
         length = len(selections)
         pattern = self.pattern or abjad.select_all()
-        prototype = (
-            abjad.pitchtools.Segment,
-            abjad.pitchtools.Set,
-            list,
-            )
-        if collections and isinstance(
-            collections[0],
-            (abjad.pitchtools.Set, set),
-            ):
-            as_chords = True
-        else:
-            as_chords = False
+        prototype = (abjad.pitchtools.Segment, abjad.pitchtools.Set, list)
         collections_, indices = [], []
         for index, collection in enumerate(collections):
             assert isinstance(collection, prototype), repr(collection)
-            collection_ = collection
-            if as_chords:
-                if isinstance(collection_, (abjad.pitchtools.Set, set)):
-                    collection_ = list(sorted(collection_))[:1]
-                else:
-                    collection_ = collection[:1]
+            if isinstance(collection, (abjad.pitchtools.Set, set)):
+                collection_ = list(sorted(collection))[:1]
+            else:
+                collection_ = collection
             if not pattern.matches_index(index, length):
                 continue
             collections_.append(collection_)
@@ -112,7 +99,7 @@ class FigureRhythmSpecifier(abjad.abctools.AbjadObject):
         triples = zip(indices, stage_selections, collections)
         for index, stage_selection, collection in triples:
             assert len(stage_selection) == 1, repr(stage_selection)
-            if not as_chords:
+            if not isinstance(collection, (abjad.pitchtools.Set, set)):
                 selections[index] = stage_selection
                 continue
             assert len(stage_selection) == 1, repr(stage_selection)

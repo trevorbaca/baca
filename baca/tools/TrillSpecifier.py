@@ -16,7 +16,7 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.tools.FigureMaker(
+            >>> figure_maker = baca.FigureMaker(
             ...     baca.tools.TrillSpecifier(
             ...         minimum_written_duration=abjad.Duration(1, 4),
             ...         maximum_written_duration=None,
@@ -25,10 +25,9 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = figure_maker(
             ...     'Voice 1',
-            ...     collections,
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     talea_denominator=4,
             ...     )
             >>> lilypond_file = figure_maker.show(contribution)
@@ -199,7 +198,7 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument):
+    def __call__(self, argument=None):
         r'''Calls specifier on `argument`.
 
         Returns none.
@@ -215,7 +214,7 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
             if self.maximum_written_duration is not None:
                 if self.maximum_written_duration <= written_duration:
                     continue
-            spanner = abjad.spannertools.TrillSpanner(
+            spanner = abjad.TrillSpanner(
                 interval=self.interval,
                 is_harmonic=self.is_harmonic,
                 pitch=self.pitch,

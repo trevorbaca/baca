@@ -45,7 +45,7 @@ class SettingSpecifier(abjad.abctools.AbjadObject):
             assert isinstance(context_name, str), repr(context_name)
         self._context_name = context_name
         if selector is not None:
-            assert isinstance(selector, abjad.selectortools.Selector)
+            assert isinstance(selector, abjad.Selector)
         self._selector = selector
         if setting_name is not None:
             assert isinstance(setting_name, str), repr(setting_name)
@@ -54,7 +54,7 @@ class SettingSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument):
+    def __call__(self, argument=None):
         r'''Calls specifier on `argument`.
 
         Returns none.

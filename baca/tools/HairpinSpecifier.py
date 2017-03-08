@@ -104,7 +104,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
         for element in hairpin_tokens:
             if isinstance(element, str):
                 element = tuple(element.split())
-                if not abjad.spannertools.Hairpin._is_hairpin_token(element):
+                if not abjad.Hairpin._is_hairpin_token(element):
                     message = 'must be valid hairpin token: {!r}.'
                     message = message.format(element)
                     raise Exception(message)
@@ -135,7 +135,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, logical_ties):
+    def __call__(self, logical_ties=None):
         r'''Calls hairpin specifier on `logical_ties`.
 
         Passes silently when `logical_ties` is empty.
@@ -192,7 +192,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
                 if start_dynamic == 'niente':
                     message = 'can not attach niente dynamics to components.'
                     raise Exception(message)
-                dynamic = abjad.indicatortools.Dynamic(start_dynamic)
+                dynamic = abjad.Dynamic(start_dynamic)
                 abjad.attach(dynamic, notes[0])
                 continue
             hairpin_token = hairpin_tokens[group_index]
@@ -201,7 +201,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
             if isinstance(hairpin_token, tuple):
                 descriptor = ' '.join([_ for _ in hairpin_token if _])
                 include_rests = bool(self.include_following_rests)
-                hairpin = abjad.spannertools.Hairpin(
+                hairpin = abjad.Hairpin(
                     descriptor=descriptor,
                     include_rests=include_rests,
                     )

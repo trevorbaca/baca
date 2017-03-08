@@ -109,7 +109,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             )
         tag_string = '.'.join(instrument_tags)
         tag_string = 'tag {}'.format(tag_string)
-        tag_command = abjad.indicatortools.LilyPondCommand(
+        tag_command = abjad.LilyPondCommand(
             tag_string,
             'before',
             )
@@ -127,7 +127,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             )
         violin = abjad.instrumenttools.Violin()
         abjad.attach(violin, violin_music_staff)
-        abjad.attach(abjad.indicatortools.Clef('treble'), violin_music_staff)
+        abjad.attach(abjad.Clef('treble'), violin_music_staff)
         self._attach_tag('violin', violin_music_staff)
 
         music_context = abjad.scoretools.Context(

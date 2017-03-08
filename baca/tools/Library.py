@@ -18,11 +18,64 @@ class Library(object):
 
     __documentation_section__ = 'Library'
 
+    __slots__ = (
+        )
+
     ### PUBLIC METHODS ###
 
     @staticmethod
     def accents():
-        return baca.tools.ArticulationSpecifier(articulations=['>'])
+        r'''Accents every pitched head.
+
+        ..  container:: example
+
+            ::
+
+                >>> figure_maker = baca.FigureMaker()
+                >>> contribution = figure_maker(
+                ...     'Voice 1',
+                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.accents(),
+                ...     baca.rests_around([2], [3]),
+                ...     talea_counts=[1, 1, 5],
+                ...     )
+                >>> lilypond_file = figure_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            {
+                                r8
+                                c'16 -\accent [
+                                d'16 -\accent ]
+                                bf'4 -\accent ~
+                                bf'16
+                            }
+                            {
+                                fs''16 -\accent [
+                                e''16 -\accent ]
+                                ef''4 -\accent ~
+                                ef''16 [
+                                af''16 -\accent
+                                g''16 -\accent ]
+                            }
+                            {
+                                a'16 -\accent
+                                r8.
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        return baca.tools.ArticulationSpecifier(
+            articulations=['>'],
+            )
 
     @staticmethod
     def alternate_accented_bow_strokes():
@@ -162,7 +215,7 @@ class Library(object):
 
     @staticmethod
     def clef_spanner(clef='percussion'):
-        return abjad.spannertools.ClefSpanner(clef=clef)
+        return abjad.ClefSpanner(clef=clef)
 
     @staticmethod
     def coat(argument):
@@ -276,18 +329,11 @@ class Library(object):
         return baca.tools.ArticulationSpecifier(articulations=['downbow'])
 
     @staticmethod
-    def dynamic_down():
-        command = abjad.LilyPondCommand('dynamicDown')
-        return baca.wrap_leaves(command)
-
-    @staticmethod
     def dynamic_first_note(dynamic):
         dynamic = abjad.Dynamic(dynamic)
-        prototype = (abjad.Note, abjad.Chord)
-        selector = abjad.select().by_class(prototype=prototype)
         return baca.tools.DynamicSpecifier(
             dynamic=dynamic,
-            selector=selector,
+            selector=baca.select_pitched_leaf(n=0),
             )
 
     @staticmethod
@@ -307,9 +353,22 @@ class Library(object):
             )
 
     @staticmethod
-    def dynamic_up():
-        command = abjad.LilyPondCommand('dynamicUp')
-        return baca.wrap_leaves(command)
+    def dynamics_down():
+        return baca.tools.IndicatorSpecifier(
+            indicators=[
+                abjad.LilyPondCommand('dynamicDown'),
+                ],
+            selector=baca.select_leaf(0),
+            )
+
+    @staticmethod
+    def dynamics_up():
+        return baca.tools.IndicatorSpecifier(
+            indicators=[
+                abjad.LilyPondCommand('dynamicUp'),
+                ],
+            selector=baca.select_leaf(0),
+            )
 
     @staticmethod
     def effort_dynamic(dynamic_name, direction=Down):
@@ -333,7 +392,7 @@ class Library(object):
 
     @staticmethod
     def five_line_staff():
-        return abjad.spannertools.StaffLinesSpanner(lines=5)
+        return abjad.StaffLinesSpanner(lines=5)
 
     @staticmethod
     def fixed_pitches(source):
@@ -344,7 +403,7 @@ class Library(object):
 
     @staticmethod
     def flageolet():
-        return abjad.indicatortools.LilyPondCommand(
+        return abjad.LilyPondCommand(
             'flageolet',
             format_slot='right',
             )
@@ -404,7 +463,7 @@ class Library(object):
         left_text = abjad.Markup('grid. possibile').italic().larger() + abjad.Markup.hspace(1)
         right_text = abjad.Markup.hspace(1) + abjad.Markup('flaut. possibile')
         right_text = right_text.italic().larger()
-        grid_poss_to_flaut_poss = abjad.spannertools.TextSpanner(
+        grid_poss_to_flaut_poss = abjad.TextSpanner(
             overrides = {
                 'text_spanner__bound_details__left__padding': -1,
                 'text_spanner__bound_details__left__stencil_align_dir_y': 0,
@@ -636,7 +695,7 @@ class Library(object):
     def molto_flaut_to_molto_grid():
         left_text = abjad.Markup('molto flautando').italic().larger() + abjad.Markup.hspace(1)
         right_text = abjad.Markup.hspace(1) + abjad.Markup('molto gridato').italic().larger()
-        molto_flaut_to_molto_grid = abjad.spannertools.TextSpanner(
+        molto_flaut_to_molto_grid = abjad.TextSpanner(
             overrides = {
                 'text_spanner__bound_details__left__padding': -1,
                 'text_spanner__bound_details__left__stencil_align_dir_y': 0,
@@ -708,19 +767,19 @@ class Library(object):
 
     @staticmethod
     def one_line_staff():
-        return abjad.spannertools.StaffLinesSpanner(lines=1)
+        return abjad.StaffLinesSpanner(lines=1)
 
     @staticmethod
     def ottava():
-        return abjad.spannertools.OctavationSpanner(start=1, stop=0)
+        return abjad.OctavationSpanner(start=1, stop=0)
 
     @staticmethod
     def ottava_bassa():
-        return abjad.spannertools.OctavationSpanner(start=-1, stop=0)
+        return abjad.OctavationSpanner(start=-1, stop=0)
 
     @staticmethod
     def percussion_staff():
-        return abjad.spannertools.ClefSpanner(clef='percussion')
+        return abjad.ClefSpanner(clef='percussion')
 
     @staticmethod
     def pervasive_trills():
@@ -800,7 +859,7 @@ class Library(object):
             )
 
     @staticmethod
-    def repeat_tie_down():
+    def repeat_ties_down():
         return baca.tools.OverrideSpecifier(
             grob_name='repeat_tie',
             attribute_name='direction',
@@ -808,7 +867,7 @@ class Library(object):
             )
 
     @staticmethod
-    def repeat_tie_up():
+    def repeat_ties_up():
         return baca.tools.OverrideSpecifier(
             grob_name='repeat_tie',
             attribute_name='direction',
@@ -838,14 +897,6 @@ class Library(object):
             )
 
     @staticmethod
-    def rest_down():
-        return baca.tools.OverrideSpecifier(
-            grob_name='rest',
-            attribute_name='direction',
-            attribute_value=Down,
-            )
-
-    @staticmethod
     def rest_position(n):
         return baca.tools.OverrideSpecifier(
             grob_name='rest',
@@ -862,14 +913,6 @@ class Library(object):
             rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
                 division_masks=[mask],
                 ),
-            )
-
-    @staticmethod
-    def rest_up():
-        return baca.tools.OverrideSpecifier(
-            grob_name='rest',
-            attribute_name='direction',
-            attribute_value=Up,
             )
 
     @staticmethod
@@ -892,6 +935,22 @@ class Library(object):
             )
 
     @staticmethod
+    def rests_down():
+        return baca.tools.OverrideSpecifier(
+            grob_name='rest',
+            attribute_name='direction',
+            attribute_value=Down,
+            )
+
+    @staticmethod
+    def rests_up():
+        return baca.tools.OverrideSpecifier(
+            grob_name='rest',
+            attribute_name='direction',
+            attribute_value=Up,
+            )
+
+    @staticmethod
     def resume_after(remote_voice_name):
         return baca.tools.AnchorSpecifier(
             remote_selector=baca.select_leaf(-1),
@@ -903,13 +962,13 @@ class Library(object):
     def right_pedal(selector=None):
         return baca.tools.SpannerSpecifier(
             selector=selector,
-            spanner=abjad.spannertools.PianoPedalSpanner(
+            spanner=abjad.PianoPedalSpanner(
                 style='bracket',
                 ),
             )
 
     @staticmethod
-    def script_down():
+    def scripts_down():
         return baca.tools.OverrideSpecifier(
             grob_name='script',
             attribute_name='direction',
@@ -917,7 +976,7 @@ class Library(object):
             )
 
     @staticmethod
-    def script_up():
+    def scripts_up():
         return baca.tools.OverrideSpecifier(
             grob_name='script',
             attribute_name='direction',
@@ -957,13 +1016,6 @@ class Library(object):
         return selector
 
     @staticmethod
-    def select_pitched_logical_tie_heads():
-        selector = abjad.selectortools.Selector()
-        selector = selector.by_logical_tie(pitched=True, flatten=True)
-        selector = selector.get_item(0, apply_to_each=True)
-        return selector
-
-    @staticmethod
     def select_note(n=0):
         selector = abjad.select()
         selector = selector.by_class(flatten=True, prototype=abjad.Note)
@@ -981,10 +1033,28 @@ class Library(object):
         return selector
 
     @staticmethod
+    def select_pitched_leaves(start=None, stop=None):
+        selector = abjad.select()
+        selector = selector.by_leaf(flatten=True, pitched=True)
+        selector = selector.get_slice(
+            start=start,
+            stop=stop,
+            apply_to_each=False,
+            )
+        return selector
+
+    @staticmethod
     def select_pitched_logical_tie(n=0):
         selector = abjad.select()
         selector = selector.by_logical_tie(flatten=True, pitched=True)
         selector = selector.get_item(n, apply_to_each=False)
+        return selector
+
+    @staticmethod
+    def select_pitched_logical_tie_heads():
+        selector = abjad.Selector()
+        selector = selector.by_logical_tie(pitched=True, flatten=True)
+        selector = selector.get_item(0, apply_to_each=True)
         return selector
 
     @staticmethod
@@ -995,6 +1065,13 @@ class Library(object):
             selector = selector.get_slice(stop=n, apply_to_each=False)
         else:
             selector = selector.get_slice(start=n, apply_to_each=False)
+        return selector
+
+    @staticmethod
+    def select_pitched_runs():
+        selector = abjad.select()
+        selector = selector.by_leaf()
+        selector = selector.by_run(prototype=(abjad.Chord, abjad.Note))
         return selector
 
     @staticmethod
@@ -1097,14 +1174,6 @@ class Library(object):
         return baca.tools.SpannerSpecifier(spanner=abjad.Slur())
 
     @staticmethod
-    def slur_down():
-        return baca.tools.OverrideSpecifier(
-            grob_name='slur',
-            attribute_name='direction',
-            attribute_value=Down,
-            )
-
-    @staticmethod
     def slur_every_tuplet():
         return baca.tools.SpannerSpecifier(
             selector=abjad.select().
@@ -1114,7 +1183,22 @@ class Library(object):
             )
 
     @staticmethod
-    def slur_up():
+    def slur_pitched_runs():
+        return baca.tools.SpannerSpecifier(
+            selector=baca.select_pitched_runs(),
+            spanner=abjad.Slur(),
+            )
+
+    @staticmethod
+    def slurs_down():
+        return baca.tools.OverrideSpecifier(
+            grob_name='slur',
+            attribute_name='direction',
+            attribute_value=Down,
+            )
+
+    @staticmethod
+    def slurs_up():
         return baca.tools.OverrideSpecifier(
             grob_name='slur',
             attribute_name='direction',
@@ -1159,7 +1243,11 @@ class Library(object):
             )
 
     @staticmethod
-    def stem_down():
+    def stem_tremolo():
+        return baca.tools.StemTremoloSpecifier(tremolo_flags=32)
+
+    @staticmethod
+    def stems_down():
         return baca.tools.OverrideSpecifier(
             grob_name='stem',
             attribute_name='direction',
@@ -1167,11 +1255,7 @@ class Library(object):
             )
 
     @staticmethod
-    def stem_tremolo():
-        return baca.tools.StemTremoloSpecifier(tremolo_flags=32)
-
-    @staticmethod
-    def stem_up():
+    def stems_up():
         return baca.tools.OverrideSpecifier(
             grob_name='stem',
             attribute_name='direction',
@@ -1209,14 +1293,6 @@ class Library(object):
             )
 
     @staticmethod
-    def text_script_down():
-        return baca.tools.OverrideSpecifier(
-            grob_name='text_script',
-            attribute_name='direction',
-            attribute_value=Down,
-            )
-
-    @staticmethod
     def text_script_padding(n):
         assert isinstance(n, numbers.Number), repr(n)
         return baca.tools.OverrideSpecifier(
@@ -1235,7 +1311,15 @@ class Library(object):
             )
 
     @staticmethod
-    def text_script_up():
+    def text_scripts_down():
+        return baca.tools.OverrideSpecifier(
+            grob_name='text_script',
+            attribute_name='direction',
+            attribute_value=Down,
+            )
+
+    @staticmethod
+    def text_scripts_up():
         return baca.tools.OverrideSpecifier(
             grob_name='text_script',
             attribute_name='direction',
@@ -1320,14 +1404,6 @@ class Library(object):
             )
 
     @staticmethod
-    def tuplet_bracket_down():
-        return baca.tools.OverrideSpecifier(
-            grob_name='tuplet_bracket',
-            attribute_name='direction',
-            attribute_value=Down,
-            )
-
-    @staticmethod
     def tuplet_bracket_extra_offset(pair):
         return baca.tools.OverrideSpecifier(
             grob_name='tuplet_bracket',
@@ -1344,7 +1420,15 @@ class Library(object):
             )
 
     @staticmethod
-    def tuplet_bracket_up():
+    def tuplet_brackets_down():
+        return baca.tools.OverrideSpecifier(
+            grob_name='tuplet_bracket',
+            attribute_name='direction',
+            attribute_value=Down,
+            )
+
+    @staticmethod
+    def tuplet_brackets_up():
         return baca.tools.OverrideSpecifier(
             grob_name='tuplet_bracket',
             attribute_name='direction',
@@ -1361,7 +1445,7 @@ class Library(object):
 
     @staticmethod
     def two_line_staff():
-        return abjad.spannertools.StaffLinesSpanner(lines=2)
+        return abjad.StaffLinesSpanner(lines=2)
 
     @staticmethod
     def up_arpeggios():

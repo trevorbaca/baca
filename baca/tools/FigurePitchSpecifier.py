@@ -21,7 +21,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
             >>> expression = baca.sequence().map(transposition)
             >>> expression = baca.sequence().accumulate([transposition])
             >>> expression = expression.join()[0]
-            >>> figure_maker = baca.tools.FigureMaker(
+            >>> figure_maker = baca.FigureMaker(
             ...     baca.tools.FigurePitchSpecifier(
             ...         expressions=[expression],
             ...         to_pitch_classes=True,
@@ -233,7 +233,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
                 >>> transposition = baca.pitch_class_segment().transpose(n=3)
                 >>> transposition = baca.sequence().map(transposition)
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.FigurePitchSpecifier(
                 ...         expressions=[transposition],
                 ...         to_pitch_classes=True,
@@ -349,7 +349,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -390,7 +390,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.FigurePitchSpecifier(
                 ...         to_pitch_classes=True,
                 ...         ),

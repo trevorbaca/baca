@@ -16,7 +16,7 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.tools.FigureMaker(
+            >>> figure_maker = baca.FigureMaker(
             ...     baca.tools.ClusterSpecifier(
             ...         widths=[3, 4],
             ...         ),
@@ -375,7 +375,7 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument):
+    def __call__(self, argument=None):
         r'''Calls specifier on `argument`.
 
         Returns none.
@@ -405,7 +405,7 @@ class ClusterSpecifier(abjad.abctools.AbjadObject):
             pitches = self._make_pitches(start_pitch, width)
         chord = abjad.scoretools.Chord(pitches, note.written_duration)
         abjad.mutate(note).replace(chord)
-        indicator = abjad.indicatortools.KeyCluster(
+        indicator = abjad.KeyCluster(
             include_black_keys=not self.hide_flat_markup,
             include_white_keys=not self.hide_natural_markup,
             )

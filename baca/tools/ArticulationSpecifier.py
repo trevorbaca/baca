@@ -19,7 +19,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.tools.FigureMaker(
+            >>> figure_maker = baca.FigureMaker(
             ...     baca.tools.ArticulationSpecifier(
             ...         articulations=['>'],
             ...         ),
@@ -197,29 +197,32 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
             assert all(isinstance(_, prototype) for _ in articulations)
         self._articulations = articulations
         if selector is not None:
-            assert isinstance(selector, abjad.selectortools.Selector)
+            assert isinstance(selector, abjad.Selector)
         self._selector = selector
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, selection):
-        r'''Calls specifier on `selection`.
+    def __call__(self, argument=None):
+        r'''Calls specifier on `argument`.
 
         Returns none.
         '''
-        articulations = self.articulations or ()
-        articulations = abjad.CyclicTuple(articulations)
-        if not articulations:
+        if not argument:
             return
-        tokens = articulations
+        if not self.articulations:
+            return
+        articulations = abjad.CyclicTuple(self.articulations)
         selector = self.selector or baca.select_pitched_logical_tie_heads()
-        selection = selector(selection)
-        for i, leaf in enumerate(selection):
-            assert isinstance(leaf, abjad.Leaf), repr(leaf)
-            token = tokens[i]
-            articulations = self._token_to_articulations(token)
-            for articulation in articulations:
-                abjad.attach(articulation, leaf)
+        selections = selector(argument)
+        selections = baca.FigureMaker._normalize_selections(selections)
+        for selection in selections:
+            leaves = abjad.select(selection).by_leaf()
+            for i, leaf in enumerate(leaves):
+                assert isinstance(leaf, abjad.Leaf), repr(leaf)
+                articulations_ = articulations[i]
+                articulations_ = self._token_to_articulations(articulations_)
+                for articulation_ in articulations_:
+                    abjad.attach(articulation_, leaf)
 
     ### PRIVATE METHODS ###
 
@@ -247,7 +250,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['>'],
                 ...         ),
@@ -304,7 +307,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=[
                 ...             '>', None, None,
@@ -365,7 +368,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=[
                 ...             '>', '.', '.',
@@ -426,7 +429,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=[
                 ...             ('>', '-'), '.', '.',
@@ -487,7 +490,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['f'],
                 ...         ),
@@ -556,7 +559,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['>'],
                 ...         ),

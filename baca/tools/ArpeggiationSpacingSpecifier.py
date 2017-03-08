@@ -120,7 +120,7 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -166,7 +166,7 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 

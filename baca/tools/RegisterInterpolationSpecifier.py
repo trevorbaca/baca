@@ -18,7 +18,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.tools.FigureMaker()
+            >>> figure_maker = baca.FigureMaker()
 
         ::
 
@@ -79,7 +79,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.tools.FigureMaker()
+            >>> figure_maker = baca.FigureMaker()
 
         ::
 
@@ -955,7 +955,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument):
+    def __call__(self, argument=None):
         r'''Calls register interpolation specifier on `argument`.
 
         Returns none.
@@ -1014,7 +1014,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -1076,7 +1076,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -1138,7 +1138,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 

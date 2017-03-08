@@ -202,7 +202,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     # TODO: write comprehensive tests
-    def __call__(self, argument):
+    def __call__(self, argument=None):
         r'''Calls pitch specifier on `argument`.
 
         ..  note:: Write comprehensive tests.

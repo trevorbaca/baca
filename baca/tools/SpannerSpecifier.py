@@ -17,7 +17,7 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.tools.FigureMaker(
+            >>> figure_maker = baca.FigureMaker(
             ...     baca.tools.SpannerSpecifier(
             ...         selector=baca.select_tuplets(),
             ...         spanner=abjad.Slur(),
@@ -178,6 +178,7 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
     __documentation_section__ = 'Specifiers'
 
     __slots__ = (
+        '_annotation',
         '_selector',
         '_spanner',
         )
@@ -190,11 +191,12 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
         spanner=None,
         ):
         if selector is not None:
-            assert isinstance(selector, abjad.selectortools.Selector)
+            assert isinstance(selector, abjad.Selector)
         self._selector = selector
         if spanner is not None:
-            assert isinstance(spanner, abjad.spannertools.Spanner)
+            assert isinstance(spanner, abjad.Spanner)
         self._spanner = spanner
+        self._annotation = None
 
     ### SPECIAL METHODS ###
 
@@ -203,23 +205,14 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
         Returns none.
         '''
-        if not argument:
-            return
-        if self.spanner is None:
+        if not argument or self.spanner is None:
             return
         selector = self.selector or baca.select_leaves()
-        selection = selector(argument)
-        #print(format(selector), argument, selection)
-        if not selection:
-            return
-        if isinstance(selection[0], abjad.Selection):
-            selections = selection
-        else:
-            selections = [selection]
-        assert all(isinstance(_, abjad.Selection) for _ in selections)
+        selections = selector(argument)
+        selections = baca.FigureMaker._normalize_selections(selections)
         for selection in selections:
             spanner = abjad.new(self.spanner)
-            leaves = list(abjad.iterate(selection).by_leaf())
+            leaves = abjad.select(selection).by_leaf()
             if len(leaves) <= 1:
                 continue
             if isinstance(spanner, abjad.Tie):
@@ -239,7 +232,7 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.SpannerSpecifier(
                 ...         spanner=abjad.Slur(),
                 ...         ),
@@ -284,7 +277,7 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.SpannerSpecifier(
                 ...         spanner=abjad.Slur(),
                 ...         ),
@@ -329,7 +322,7 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 

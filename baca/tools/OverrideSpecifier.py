@@ -16,7 +16,7 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.tools.FigureMaker(
+            >>> figure_maker = baca.FigureMaker(
             ...     baca.tools.OverrideSpecifier(
             ...         grob_name='beam',
             ...         attribute_name='positions',
@@ -272,7 +272,7 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument):
+    def __call__(self, argument=None):
         r'''Calls specifier.
 
         Returns none.

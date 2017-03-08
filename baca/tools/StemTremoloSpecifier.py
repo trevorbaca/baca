@@ -138,7 +138,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
             assert isinstance(pattern, prototype), repr(pattern)
         self._pattern = pattern
         if selector is not None:
-            assert isinstance(selector, abjad.selectortools.Selector)
+            assert isinstance(selector, abjad.Selector)
         self._selector = selector
         assert abjad.mathtools.is_nonnegative_integer_power_of_two(
             tremolo_flags)
@@ -146,18 +146,22 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument):
+    def __call__(self, argument=None):
         r'''Calls specifier on `argument`.
 
         Returns none.
         '''
-        selector = self.selector or baca.select_pitched_logical_tie_heads()
-        selection = selector(argument)
         pattern = self.pattern or abjad.select_all()
-        items = pattern.get_matching_items(selection)
-        for item in items:
-            stem_tremolo = abjad.StemTremolo(tremolo_flags=self.tremolo_flags)
-            abjad.attach(stem_tremolo, item)
+        selector = self.selector or baca.select_pitched_logical_tie_heads()
+        selections = selector(argument)
+        selections = baca.FigureMaker._normalize_selections(selections)
+        for selection in selections:
+            items = pattern.get_matching_items(selection)
+            for item in items:
+                stem_tremolo = abjad.StemTremolo(
+                    tremolo_flags=self.tremolo_flags
+                    )
+                abjad.attach(stem_tremolo, item)
 
     ### PUBLIC PROPERTIES ###
 

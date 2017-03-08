@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import abjad
 import baca
+import collections
 import copy
 
 
@@ -18,7 +19,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.tools.FigureMaker()
+            >>> figure_maker = baca.FigureMaker()
 
         ::
 
@@ -148,7 +149,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -189,7 +190,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -234,7 +235,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -279,7 +280,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -326,7 +327,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -363,7 +364,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -557,6 +558,50 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
         ..  note:: Write hide_time_signature calltime examples.
 
+
+        ..  container:: example
+
+            Works with chords:
+
+            ::
+
+                >>> figure_maker = baca.FigureMaker()
+
+            ::
+
+                >>> collections = [
+                ...     set([0, 2, 10]),
+                ...     [18, 16, 15, 20, 19],
+                ...     [9],
+                ...     ]
+                >>> contribution = figure_maker('Voice 1', collections)
+                >>> lilypond_file = figure_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            {
+                                <c' d' bf'>16
+                            }
+                            {
+                                fs''16 [
+                                e''16
+                                ef''16
+                                af''16
+                                g''16 ]
+                            }
+                            {
+                                a'16
+                            }
+                        }
+                    }
+                >>
+
         Returns selection, time signature, state manifest.
         '''
         if self._is_pitch_input(collections):
@@ -641,6 +686,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
         prototype = abjad.Selection
         return all(isinstance(_, prototype) for _ in argument)
 
+    @staticmethod
+    def _annotate_collection_list(container, collections):
+        for leaf in abjad.iterate(container).by_leaf():
+            collections_ = copy.deepcopy(collections)
+            abjad.attach(collections_, leaf)
+
     def _annotate_deployment(
         self,
         argument,
@@ -663,12 +714,6 @@ class FigureMaker(abjad.abctools.AbjadObject):
             return
         for leaf in abjad.iterate(container).by_leaf(pitched=True):
             abjad.attach(self._repeat_pitch_allowed_string, leaf)
-
-    @staticmethod
-    def _annotate_collection_list(container, collections):
-        for leaf in abjad.iterate(container).by_leaf():
-            collections_ = copy.deepcopy(collections)
-            abjad.attach(collections_, leaf)
 
     def _apply_cluster_specifiers(self, selections, specifiers):
         assert self._all_are_selections(selections), repr(selections)
@@ -953,8 +998,27 @@ class FigureMaker(abjad.abctools.AbjadObject):
         duration = selection.get_duration()
         if denominator is not None:
             duration = duration.with_denominator(denominator)
-        time_signature = abjad.indicatortools.TimeSignature(duration)
+        time_signature = abjad.TimeSignature(duration)
         return time_signature
+
+    @staticmethod
+    def _normalize_selections(argument):
+        if not argument:
+            selections = []
+        elif isinstance(argument, abjad.Component):
+            selections = [abjad.select(argument)]
+        elif (isinstance(argument, collections.Iterable) and
+            isinstance(argument[0], abjad.Selection)):
+            selections = list(argument)
+        elif isinstance(argument, abjad.Selection):
+            selections = [argument]
+        else:
+            message = 'unrecognized argument: {!r}.'
+            message = message.format(argument)
+            raise TypeError(message)
+        assert isinstance(selections, list), repr(selections)
+        assert all(isinstance(_, abjad.Selection) for _ in selections)
+        return selections
 
     def _print_state_manifest(self):
         state_manifest = self._make_state_manifest()
@@ -1021,7 +1085,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -1069,7 +1133,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     denominator=16,
                 ...     )
 
@@ -1122,7 +1186,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 
@@ -1178,7 +1242,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     denominator=16,
                 ...     )
 
@@ -1247,7 +1311,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['.'],
                 ...         selector=abjad.select().
@@ -1295,7 +1359,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=[('.', '-')],
                 ...         selector=abjad.select().
@@ -1345,7 +1409,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.RegisterSpecifier(
                 ...         registration=abjad.Registration(
                 ...             [('[A0, C8]', -6)],
@@ -1393,7 +1457,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.RegisterTransitionSpecifier(
                 ...         start_registration=abjad.Registration(
                 ...             [('[A0, C8]', 0)],
@@ -1443,7 +1507,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.DynamicSpecifier(
                 ...         dynamic=abjad.Hairpin('p < f'),
                 ...         ),
@@ -1498,7 +1562,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.DynamicSpecifier(
                 ...         dynamic=abjad.Hairpin('p < f'),
                 ...         selector=abjad.select().
@@ -1566,7 +1630,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.DynamicSpecifier(
                 ...         dynamic=abjad.Hairpin('p < f'),
                 ...         selector=abjad.select().
@@ -1630,7 +1694,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.DynamicSpecifier(
                 ...         dynamic=abjad.Hairpin('p < f'),
                 ...         selector=abjad.select().
@@ -1696,7 +1760,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.SpannerSpecifier(
                 ...         spanner=abjad.Slur(),
                 ...         ),
@@ -1751,7 +1815,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.SpannerSpecifier(
                 ...         selector=abjad.select().
                 ...             by_class(abjad.Tuplet, flatten=True).
@@ -1809,7 +1873,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.SpannerSpecifier(
                 ...         selector=abjad.select().
                 ...             by_class(abjad.Tuplet, flatten=True).
@@ -1867,7 +1931,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.SpannerSpecifier(
                 ...         selector=abjad.select().
                 ...             by_class(abjad.Tuplet, flatten=True).
@@ -1925,7 +1989,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['.'],
                 ...         selector=abjad.select().
@@ -2015,7 +2079,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.SpannerSpecifier(
                 ...         selector=abjad.select().
                 ...             by_class(abjad.Tuplet).
@@ -2075,7 +2139,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
@@ -2152,7 +2216,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_each_division=False,
                 ...         ),
@@ -2203,7 +2267,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.NestingSpecifier(
                 ...         time_treatments=['+1/16'],
                 ...         ),
@@ -2286,7 +2350,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.NestingSpecifier(
                 ...         lmr_specifier=baca.tools.LMRSpecifier(
                 ...             left_length=2,
@@ -2372,7 +2436,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -2431,7 +2495,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -2490,7 +2554,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -2551,7 +2615,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -2612,7 +2676,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker(
+                >>> figure_maker = baca.FigureMaker(
                 ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -2684,7 +2748,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.tools.FigureMaker()
+                >>> figure_maker = baca.FigureMaker()
 
             ::
 

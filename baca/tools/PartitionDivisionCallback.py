@@ -144,7 +144,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, divisions):
+    def __call__(self, divisions=None):
         r'''Calls partition division callback on `divisions`.
 
         ..  container:: example

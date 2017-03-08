@@ -163,12 +163,12 @@ class SwellSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, leaves):
+    def __call__(self, leaves=None):
         r'''Calls swell specifier.
 
         Returns none.
         '''
-        start_hairpin = abjad.spannertools.Hairpin(
+        start_hairpin = abjad.Hairpin(
             self.start_token,
             include_rests=True,
             )
@@ -188,7 +188,7 @@ class SwellSpecifier(abjad.abctools.AbjadObject):
             return
         start_leaves = leaves[:self.start_count]
         abjad.attach(start_hairpin, start_leaves)
-        stop_hairpin = abjad.spannertools.Hairpin(
+        stop_hairpin = abjad.Hairpin(
             self.stop_token,
             include_rests=True,
             )

@@ -963,19 +963,19 @@ class PitchTree(Tree):
             markup = abjad.Markup(keywords.get('subtitle'))
             lilypond_file.header_block.subtitle = markup
         string = 'accidentalStyle dodecaphonic'
-        command = abjad.indicatortools.LilyPondCommand(string)
+        command = abjad.LilyPondCommand(string)
         lilypond_file.layout_block.items.append(command)
         lilypond_file.layout_block.indent = 0
         lilypond_file.layout_block.line_width = 287.5
         lilypond_file.layout_block.ragged_right = True
         string = 'markup-system-spacing.padding = 8'
-        command = abjad.indicatortools.LilyPondCommand(string, prefix='')
+        command = abjad.LilyPondCommand(string, prefix='')
         lilypond_file.paper_block.items.append(command)
         string = 'system-system-spacing.padding = 10'
-        command = abjad.indicatortools.LilyPondCommand(string, prefix='')
+        command = abjad.LilyPondCommand(string, prefix='')
         lilypond_file.paper_block.items.append(command)
         string = 'top-markup-spacing.padding = 4'
-        command = abjad.indicatortools.LilyPondCommand(string, prefix='')
+        command = abjad.LilyPondCommand(string, prefix='')
         lilypond_file.paper_block.items.append(command)
         return lilypond_file
 
@@ -1025,7 +1025,7 @@ class PitchTree(Tree):
         for leaf in abjad.iterate(voice).by_leaf():
             spanners_ = abjad.inspect_(leaf).get_spanners()
             spanners.update(spanners_)
-        class_ = abjad.spannertools.Spanner
+        class_ = abjad.Spanner
         spanners = [_ for _ in spanners if _.__class__ is class_]
         return spanners
 
@@ -1085,12 +1085,12 @@ class PitchTree(Tree):
                     leaves_with_skips.append(leaf)
                     leaf = abjad.inspect_(leaf).get_leaf(n=1)
                 leaves_with_skips.append(leaf)
-                spanner = abjad.spannertools.Spanner()
+                spanner = abjad.Spanner()
                 negative_level = node._get_level(negative=True)
                 abjad.attach(negative_level, spanner)
                 abjad.attach(spanner, leaves_with_skips)
                 if brackets:
-                    bracket = abjad.spannertools.HorizontalBracketSpanner()
+                    bracket = abjad.HorizontalBracketSpanner()
                     abjad.attach(bracket, leaves_with_skips)
                 leaf_list_stack.pop()
         else:

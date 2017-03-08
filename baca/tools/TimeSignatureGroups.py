@@ -61,7 +61,7 @@ class TimeSignatureGroups(abjad.abctools.AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self, groups):
-        prototype = abjad.indicatortools.TimeSignature
+        prototype = abjad.TimeSignature
         for group in groups:
             assert all(isinstance(_, prototype) for _ in group), repr(group)
         self._groups = groups
@@ -140,7 +140,7 @@ class TimeSignatureGroups(abjad.abctools.AbjadObject):
         staff.consists_commands.append('Horizontal_bracket_engraver')
         for group_index, group in enumerate(self.groups):
             measure_group = self._make_measure_group(group)
-            spanner = abjad.spannertools.HorizontalBracketSpanner()
+            spanner = abjad.HorizontalBracketSpanner()
             leaves = list(abjad.iterate(measure_group).by_leaf())
             abjad.attach(spanner, leaves)
             staff.extend(measure_group)
