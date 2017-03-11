@@ -13,11 +13,11 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        With figure-maker:
+        With music-maker:
 
         ::
 
-            >>> figure_maker = baca.FigureMaker(
+            >>> music_maker = baca.MusicMaker(
             ...     baca.tools.TransitionSpecifier(
             ...         start_markup=baca.markup.ord_(),
             ...         stop_markup=baca.markup.pont(),
@@ -27,12 +27,12 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = figure_maker(
+            >>> contribution = music_maker(
             ...     'Voice 1',
             ...     collections,
             ...     talea_denominator=4,
             ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -105,7 +105,7 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = collection_maker.append_specifiers(
             ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('E4 F4'),
-            ...     baca.even_run_rhythm_specifier(),
+            ...     baca.even_runs(),
             ...     baca.tools.TransitionSpecifier(
             ...         start_markup=baca.markup.ord_(),
             ...         stop_markup=baca.markup.pont(),
@@ -229,6 +229,7 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
     __documentation_section__ = 'Specifiers'
 
     __slots__ = (
+        '_selector',
         '_solid',
         '_start_markup',
         '_stop_markup',
@@ -238,11 +239,15 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
 
     def __init__(
         self,
+        selector=None,
         solid=None,
         start_markup=None,
         stop_markup=None,
         ):
         assert start_markup is not None or stop_markup is not None
+        if selector is not None:
+            assert isinstance(selector, abjad.Selector), repr(selector)
+        self._selector = selector
         if solid is not None:
             solid = bool(solid)
         self._solid = solid
@@ -256,6 +261,8 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
 
         Returns none.
         '''
+        if self.selector is not None:
+            argument = self.selector(argument)
         leaves = abjad.select(argument).by_leaf()
         start_leaf = leaves[0]
         stop_leaf = leaves[-1]
@@ -291,6 +298,16 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
             )
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def selector(self):
+        r'''Gets selector.
+
+        Set to selector or none.
+
+        Returns selector or none.
+        '''
+        return self._selector
 
     @property
     def solid(self):

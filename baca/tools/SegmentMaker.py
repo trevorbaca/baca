@@ -106,7 +106,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select_stages(1)),
-            ...     baca.even_run_rhythm_specifier(),
+            ...     baca.even_runs(),
             ...     )
 
         ::
@@ -2094,7 +2094,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             Strips figure names by default:
 
-                >>> figure_maker = baca.FigureMaker()
+                >>> music_maker = baca.MusicMaker()
 
             ::
 
@@ -2106,7 +2106,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 ...     ]
                 >>> figures, time_signatures = [], []
                 >>> for i, collections in enumerate(collection_lists):
-                ...     contribution = figure_maker(
+                ...     contribution = music_maker(
                 ...         'Voice 1',
                 ...         collections,
                 ...         figure_name=i,
@@ -2239,7 +2239,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             Allows figure names:
 
-                >>> figure_maker = baca.FigureMaker()
+                >>> music_maker = baca.MusicMaker()
 
             ::
 
@@ -2251,7 +2251,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 ...     ]
                 >>> figures, time_signatures = [], []
                 >>> for i, collections in enumerate(collection_lists):
-                ...     contribution = figure_maker(
+                ...     contribution = music_maker(
                 ...         'Voice 1',
                 ...         collections,
                 ...         figure_name=i,
@@ -2452,8 +2452,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker()
-                >>> contribution = figure_maker(
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
                 ...     'Violin Music Voice',
                 ...     [[2, 4, 5, 7, 9, 11]],
                 ...     )
@@ -2466,7 +2466,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Cello Music Voice',
                 ...     [[-3, -5, -7, -8, -10, -12]],
                 ...     )
@@ -2581,7 +2581,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker()
+                >>> music_maker = baca.MusicMaker()
 
             ::
 
@@ -2593,7 +2593,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 ...     ]
                 >>> figures, time_signatures = [], []
                 >>> for i, collections in enumerate(collection_lists):
-                ...     contribution = figure_maker(
+                ...     contribution = music_maker(
                 ...         'Voice 1',
                 ...         collections,
                 ...         figure_name=i,
@@ -2748,7 +2748,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker()
+                >>> music_maker = baca.MusicMaker()
 
             ::
 
@@ -2760,7 +2760,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 ...     ]
                 >>> figures, time_signatures = [], []
                 >>> for i, collections in enumerate(collection_lists):
-                ...     contribution = figure_maker(
+                ...     contribution = music_maker(
                 ...         'Voice 1',
                 ...         collections,
                 ...         figure_name=i,
@@ -2959,7 +2959,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     )
 
             ::
@@ -3129,7 +3129,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     )
 
             ::
@@ -3304,7 +3304,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     )
 
             ::
@@ -3475,7 +3475,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     )
 
             ::
@@ -3659,7 +3659,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     )
 
             ::
@@ -3832,7 +3832,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     )
 
             ::
@@ -4056,7 +4056,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     )
 
             ::
@@ -4227,7 +4227,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     )
 
             ::
@@ -4330,7 +4330,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             Colors unregistered pitches by default:
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             acciaccatura_specifiers=[
@@ -4356,7 +4356,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 ...     ]
                 >>> figures, time_signatures = [], []
                 >>> for collections in collection_lists:
-                ...     contribution = figure_maker('Voice 1', collections)
+                ...     contribution = music_maker('Voice 1', collections)
                 ...     figures.append(contribution['Voice 1'])
                 ...     time_signatures.append(contribution.time_signature)    
                 ...
@@ -4578,7 +4578,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             Ignores unregistered pitches:
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             acciaccatura_specifiers=[
@@ -4604,7 +4604,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 ...     ]
                 >>> figures, time_signatures = [], []
                 >>> for collections in collection_lists:
-                ...     contribution = figure_maker('Voice 1', collections)
+                ...     contribution = music_maker('Voice 1', collections)
                 ...     figures.append(contribution['Voice 1'])
                 ...     time_signatures.append(contribution.time_signature)    
                 ...
@@ -4763,7 +4763,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     )
 
             ::
@@ -4952,7 +4952,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     )
 
             ::
@@ -5170,7 +5170,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     )
 
             ::
@@ -5341,7 +5341,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     )
 
             ::
@@ -5519,7 +5519,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     )
 
             ::
@@ -6050,7 +6050,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     )
 
             ::
@@ -6233,7 +6233,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     )
 
             ::
@@ -6426,7 +6426,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     )
 
             ::
@@ -6599,7 +6599,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     )
 
             ::
@@ -6806,7 +6806,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     baca.pitches('E4 F4'),
                 ...     )
 
@@ -6924,7 +6924,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     )
 
             ::
@@ -7097,7 +7097,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     )
 
             ::
@@ -7283,7 +7283,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     abjad.label().with_indices(),
                 ...     )
 

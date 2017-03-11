@@ -75,6 +75,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
         '_minimum_duration',
         '_omit_lone_note_dynamic',
         '_pattern',
+        '_selector',
         '_span',
         )
 
@@ -91,6 +92,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
         minimum_duration=None,
         omit_lone_note_dynamic=None,
         pattern=None,
+        selector=None,
         span='contiguous notes and chords',
         ):
         if enchain_hairpins is not None:
@@ -125,6 +127,9 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
             prototype = (abjad.Pattern, abjad.patterntools.CompoundPattern)
             assert isinstance(pattern, prototype), repr(prototype)
         self._pattern = pattern
+        if selector is not None:
+            assert isinstance(selector, abjad.Selector), repr(selector)
+        self._selector = selector
         strings = (
             'contiguous notes and chords',
             'nontrivial ties',
@@ -135,19 +140,19 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, logical_ties=None):
-        r'''Calls hairpin specifier on `logical_ties`.
-
-        Passes silently when `logical_ties` is empty.
+    def __call__(self, argument=None):
+        r'''Calls specifier on `argument`.
 
         Returns none.
         '''
-        if not logical_ties:
+        if not argument:
             return
-        if not isinstance(logical_ties[0], abjad.selectiontools.LogicalTie):
-            assert isinstance(logical_ties[0], abjad.Leaf)
-            logical_ties = [
-                abjad.selectiontools.LogicalTie(_) for _ in logical_ties]
+        if not self.hairpin_tokens:
+            return
+        if self.selector is not None:
+            argument = self.selector(argument)
+        selector = baca.select_logical_ties().flatten(depth=1)
+        logical_ties = selector(argument)
         if (self.span == 'contiguous notes and chords'
             or isinstance(self.span, (tuple, list))):
             groups = self._group_contiguous_logical_ties(logical_ties)
@@ -735,6 +740,14 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
         Returns pattern or none.
         '''
         return self._pattern
+
+    @property
+    def selector(self):
+        r'''Gets selector.
+
+        Returns selector or none.
+        '''
+        return self._selector
 
     @property
     def span(self):

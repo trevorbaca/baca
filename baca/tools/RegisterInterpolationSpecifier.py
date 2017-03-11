@@ -12,18 +12,18 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        With figure-maker.
+        With music-maker.
         
         All stages glued together:
 
         ::
 
-            >>> figure_maker = baca.FigureMaker()
+            >>> music_maker = baca.MusicMaker()
 
         ::
 
             >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-            >>> contribution = figure_maker(
+            >>> contribution = music_maker(
             ...     'Voice 1',
             ...     collections,
             ...     baca.tools.RegisterInterpolationSpecifier(
@@ -31,7 +31,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
             ...         stop_pitch=24,
             ...         ),
             ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -79,7 +79,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.FigureMaker()
+            >>> music_maker = baca.MusicMaker()
 
         ::
 
@@ -87,7 +87,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
             ...     [6, 4], [3, 5], [9, 10], [0, 11], [8, 7], [1, 2],
             ...     ]
             >>> collections = [set(_) for _ in collections]
-            >>> contribution = figure_maker(
+            >>> contribution = music_maker(
             ...     'Voice 1',
             ...     collections,
             ...     baca.tools.RegisterInterpolationSpecifier(
@@ -95,7 +95,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
             ...         stop_pitch=24,
             ...         ),
             ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -145,7 +145,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches(pitches),
-            ...     baca.even_run_rhythm_specifier(),
+            ...     baca.even_runs(),
             ...     baca.tools.RegisterInterpolationSpecifier(
             ...         start_pitch=12,
             ...         stop_pitch=12,
@@ -304,7 +304,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches(pitches),
-            ...     baca.even_run_rhythm_specifier(),
+            ...     baca.even_runs(),
             ...     baca.tools.RegisterInterpolationSpecifier(
             ...         start_pitch=12,
             ...         stop_pitch=0,
@@ -463,7 +463,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches(pitches),
-            ...     baca.even_run_rhythm_specifier(),
+            ...     baca.even_runs(),
             ...     baca.tools.RegisterInterpolationSpecifier(
             ...         start_pitch=0,
             ...         stop_pitch=12,
@@ -622,7 +622,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches(pitches),
-            ...     baca.even_run_rhythm_specifier(),
+            ...     baca.even_runs(),
             ...     baca.tools.RegisterInterpolationSpecifier(
             ...         start_pitch=12,
             ...         stop_pitch=-12,
@@ -781,7 +781,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches(pitches),
-            ...     baca.even_run_rhythm_specifier(),
+            ...     baca.even_runs(),
             ...     baca.tools.RegisterInterpolationSpecifier(
             ...         start_pitch=-12,
             ...         stop_pitch=12,
@@ -932,6 +932,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
     __slots__ = (
         '_pattern',
+        '_selector',
         '_start_pitch',
         '_stop_pitch',
         )
@@ -941,6 +942,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
     def __init__(
         self,
         pattern=None,
+        selector=None,
         start_pitch=None,
         stop_pitch=None,
         ):
@@ -949,6 +951,9 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
             assert isinstance(pattern, prototype), repr(pattern)
         self._pattern = pattern
         start_pitch = abjad.NumberedPitch(start_pitch)
+        if selector is not None:
+            assert isinstance(selector, abjad.Selector), repr(selector)
+        self._selector = selector
         self._start_pitch = start_pitch
         stop_pitch = abjad.NumberedPitch(stop_pitch)
         self._stop_pitch = stop_pitch
@@ -956,10 +961,14 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls register interpolation specifier on `argument`.
+        r'''Calls specifier on `argument`.
 
         Returns none.
         '''
+        if argument is None:
+            return
+        if self.selector is not None:
+            argument = self.selector(argument)
         if self.pattern is None:
             selections = [argument]
         else:
@@ -976,7 +985,6 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
             length = len(logical_ties)
             for index, logical_tie in enumerate(logical_ties):
                 registration = self._get_registration(index, length)
-                #for note in logical_tie:
                 for leaf in logical_tie:
                     if isinstance(leaf, abjad.Note):
                         written_pitch = registration([leaf.written_pitch])
@@ -1014,12 +1022,12 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker()
+                >>> music_maker = baca.MusicMaker()
 
             ::
 
                 >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
                 ...     baca.tools.RegisterInterpolationSpecifier(
@@ -1028,7 +1036,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
                 ...         stop_pitch=24,
                 ...         ),
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1076,12 +1084,12 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker()
+                >>> music_maker = baca.MusicMaker()
 
             ::
 
                 >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
                 ...     baca.tools.RegisterInterpolationSpecifier(
@@ -1090,7 +1098,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
                 ...         stop_pitch=24,
                 ...         ),
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1138,12 +1146,12 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker()
+                >>> music_maker = baca.MusicMaker()
 
             ::
 
                 >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
                 ...     baca.tools.RegisterInterpolationSpecifier(
@@ -1152,7 +1160,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
                 ...         stop_pitch=24,
                 ...         ),
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1201,6 +1209,14 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
         Returns pattern or none.
         """
         return self._pattern
+
+    @property
+    def selector(self):
+        r'''Gets selector.
+
+        Set to selector or none.
+        '''
+        return self._selector
 
     @property
     def start_pitch(self):

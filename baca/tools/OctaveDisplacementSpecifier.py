@@ -26,7 +26,7 @@ class OctaveDisplacementSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('G4'),
-            ...     baca.even_run_rhythm_specifier(),
+            ...     baca.even_runs(),
             ...     baca.tools.OctaveDisplacementSpecifier(
             ...         displacements=[0, 0, 1, 1, 0, 0, -1, -1, 2, 2],
             ...         ),
@@ -122,16 +122,20 @@ class OctaveDisplacementSpecifier(abjad.abctools.AbjadObject):
 
     __slots__ = (
         '_displacements',
+        '_selector',
         )
 
     ### INITIALIZER ###
 
-    def __init__(self, displacements=None):
+    def __init__(self, displacements=None, selector=None):
         if displacements is not None:
             displacements = tuple(displacements)
             assert self._is_octave_displacement_vector(displacements)
             displacements = abjad.CyclicTuple(displacements)
         self._displacements = displacements
+        if selector is not None:
+            assert isinstance(selector, abjad.Selector), repr(selector)
+        self._selector = selector
 
     ### SPECIAL METHODS ###
 
@@ -142,18 +146,26 @@ class OctaveDisplacementSpecifier(abjad.abctools.AbjadObject):
         '''
         if self.displacements is None:
             return
+        if self.selector is not None:
+            argument = self.selector(argument)
         logical_ties = abjad.iterate(argument).by_logical_tie(
+            pitched=True,
             with_grace_notes=True,
             )
         for i, logical_tie in enumerate(logical_ties):
             assert isinstance(logical_tie, abjad.selectiontools.LogicalTie)
             displacement = self.displacements[i]
             interval = abjad.NumberedInterval(12*displacement)
-            for note in logical_tie:
-                assert isinstance(note, abjad.scoretools.Note), repr(note)
-                written_pitch = note.written_pitch
-                written_pitch += interval
-                note.written_pitch = written_pitch
+            for leaf in logical_tie:
+                if isinstance(leaf, abjad.Note):
+                    written_pitch = leaf.written_pitch
+                    written_pitch += interval
+                    leaf.written_pitch = written_pitch
+                elif isinstance(leaf, abjad.Chord):
+                    written_pitches = [
+                        _ + interval for _ in leaf.written_pitches
+                        ]
+                    leaf.written_pitches = written_pitches
 
     ### PRIVATE METHODS ###
 
@@ -190,3 +202,11 @@ class OctaveDisplacementSpecifier(abjad.abctools.AbjadObject):
         Returns cyclic tuple of integers or none.
         '''
         return self._displacements
+
+    @property
+    def selector(self):
+        r'''Gets selector.
+
+        Returns selector or none.
+        '''
+        return self._selector

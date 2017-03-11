@@ -18,7 +18,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.FigureMaker(
+            >>> music_maker = baca.MusicMaker(
             ...     abjad.rhythmmakertools.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
@@ -31,7 +31,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             ...     [15, 20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     ]
-            >>> contribution = figure_maker(
+            >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
             ...     baca.tools.ImbricationSpecifier(
@@ -39,7 +39,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             ...         [2, 19, 9, 18, 16],
             ...         ),
             ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -148,7 +148,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.FigureMaker(
+            >>> music_maker = baca.MusicMaker(
             ...     abjad.rhythmmakertools.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
@@ -161,7 +161,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             ...     [15, 20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     ]
-            >>> contribution = figure_maker(
+            >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
             ...     baca.tools.ImbricationSpecifier(
@@ -177,7 +177,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             ...         baca.accents(),
             ...         ),
             ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -328,7 +328,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.FigureMaker(
+            >>> music_maker = baca.MusicMaker(
             ...     baca.tools.ArticulationSpecifier(
             ...         articulations=['.'],
             ...     ),
@@ -354,7 +354,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             ...     [15, 20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     ]
-            >>> contribution = figure_maker(
+            >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
             ...     baca.tools.ImbricationSpecifier(
@@ -364,7 +364,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             ...         baca.beam_everything(),
             ...         ),
             ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -550,7 +550,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -570,7 +570,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     abjad.NumberedPitchClass(4),
                 ...     abjad.NumberedPitchClass(3),
                 ...     ]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
@@ -580,7 +580,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         baca.beam_everything(),
                 ...         ),
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -655,7 +655,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker()
+                >>> music_maker = baca.MusicMaker()
 
             ::
 
@@ -669,7 +669,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     baca.coat(18),
                 ...     10, 18,
                 ...     ]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
@@ -679,7 +679,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         baca.beam_everything(),
                 ...         ),
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -774,7 +774,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             
             Extends beam across figures:
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
@@ -785,7 +785,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> voice_1_selections = []
                 >>> voice_2_selections = []
                 >>> time_signatures = []
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     [[0, 2, 10, 18], [16, 15, 23]],
                 ...     baca.tools.ImbricationSpecifier(
@@ -800,7 +800,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> voice_1_selections.append(dictionary['Voice 1'])
                 >>> voice_2_selections.append(dictionary['Voice 2'])
                 >>> time_signatures.append(contribution.time_signature)    
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     [[19, 13, 9, 8]],
                 ...     baca.tools.ImbricationSpecifier(
@@ -990,7 +990,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
@@ -999,11 +999,11 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> collections = [
-                ...     set([0, 2, 10, 18, 16]),
+                ...     {0, 2, 10, 18, 16},
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
                 ...     ]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
@@ -1011,7 +1011,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         [2, 19, 9, 18, 16],
                 ...         ),
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1104,7 +1104,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
@@ -1117,7 +1117,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
                 ...     ]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
@@ -1126,7 +1126,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         ),
                 ...     baca.rests_around([2], [2]),
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1387,7 +1387,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['.'],
                 ...     ),
@@ -1403,7 +1403,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     ]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
@@ -1414,7 +1414,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         allow_unused_pitches=True,
                 ...         ),
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1505,7 +1505,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['.'],
                 ...     ),
@@ -1521,7 +1521,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     [0, 2, 10, 18, 16],
                 ...     [15, 20, 19, 9, 0],
                 ...     ]
-                >>> result = figure_maker(
+                >>> result = music_maker(
                 ...     'Voice 2',
                 ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
@@ -1573,7 +1573,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['.'],
                 ...     ),
@@ -1590,7 +1590,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
                 ...     ]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
@@ -1601,7 +1601,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         hocket=True,
                 ...         ),
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1738,7 +1738,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['.'],
                 ...     ),
@@ -1754,7 +1754,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
                 ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
                 ...     ]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
@@ -1762,10 +1762,10 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         [2, 18, 16, 15],
                 ...         baca.accents(),
                 ...         baca.beam_everything(),
-                ...         selector=baca.select_pitched_logical_ties(-9),
+                ...         selector=baca.select_plts(-9),
                 ...         ),
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1918,7 +1918,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
@@ -1931,7 +1931,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
                 ...     ]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
@@ -1942,7 +1942,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...             ),
                 ...         ),
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -2051,7 +2051,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
@@ -2064,7 +2064,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
                 ...     ]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
@@ -2075,7 +2075,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...             ),
                 ...         ),
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -2194,7 +2194,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
@@ -2207,7 +2207,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
                 ...     ]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
@@ -2216,7 +2216,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         baca.beam_everything(),
                 ...         ),
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -2335,7 +2335,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
@@ -2348,7 +2348,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     [15, 20, 19, 9, 0],
                 ...     [2, 10, 18, 16, 15],
                 ...     ]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
@@ -2359,7 +2359,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...             ),
                 ...         ),
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -2476,7 +2476,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -2490,7 +2490,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
                 ...     baca.tools.ImbricationSpecifier(
@@ -2500,7 +2500,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...         truncate_ties=True,
                 ...         ),
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::

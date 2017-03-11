@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class FigureAccumulator(abjad.abctools.AbjadObject):
+class MusicAccumulator(abjad.abctools.AbjadObject):
     r'''Figure-accumulator.
 
     ::
@@ -21,6 +21,7 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
         '_figure_maker',
         '_figure_names',
         '_floating_selections',
+        '_score_template',
         '_time_signatures',
         '_voice_names',
         )
@@ -28,6 +29,7 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self, score_template):
+        self._score_template = score_template
         voice_names = []
         dummy_score = score_template()
         for voice in abjad.iterate(dummy_score).by_class(abjad.Voice):
@@ -51,9 +53,9 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
             ::
 
                 >>> score_template = baca.tools.StringTrioScoreTemplate()
-                >>> accumulator = baca.tools.FigureAccumulator(score_template)
+                >>> accumulator = baca.tools.MusicAccumulator(score_template)
                 >>> accumulator(
-                ...     accumulator.figure_maker(
+                ...     accumulator.music_maker(
                 ...         'Violin Music Voice',
                 ...         [[0, 1, 2, 3]],
                 ...         figure_name='D',
@@ -63,7 +65,7 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
             ::
 
                 >>> accumulator(
-                ...     accumulator.figure_maker(
+                ...     accumulator.music_maker(
                 ...         'Violin Music Voice',
                 ...         [[4, 5, 6, 7]],
                 ...         figure_name='D',
@@ -220,7 +222,7 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
 
     @staticmethod
     def _make_default_figure_maker():
-        return baca.FigureMaker(
+        return baca.MusicMaker(
             abjad.rhythmmakertools.BeamSpecifier(
                 beam_divisions_together=True,
                 ),
@@ -242,12 +244,20 @@ class FigureAccumulator(abjad.abctools.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def figure_maker(self):
-        r'''Gets default figure-maker.
+    def music_maker(self):
+        r'''Gets default music-maker.
 
-        Returns figure-maker.
+        Returns music-maker.
         '''
         return self._figure_maker
+
+    @property
+    def score_template(self):
+        r'''Gets score template.
+
+        Returns score template.
+        '''
+        return self._score_template
 
     @property
     def time_signatures(self):

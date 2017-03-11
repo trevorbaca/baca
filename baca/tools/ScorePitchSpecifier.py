@@ -27,7 +27,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select_stages(1)),
-            ...     baca.even_run_rhythm_specifier(),
+            ...     baca.even_runs(),
             ...     baca.tools.ScorePitchSpecifier(
             ...         source=[19, 13, 15, 16, 17, 23],
             ...         ),

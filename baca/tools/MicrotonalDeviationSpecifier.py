@@ -28,7 +28,7 @@ class MicrotonalDeviationSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('E4'),
-            ...     baca.even_run_rhythm_specifier(),
+            ...     baca.even_runs(),
             ...     baca.tools.MicrotonalDeviationSpecifier(
             ...         number_lists=([0, 0.5, 0, -0.5],),
             ...         ),

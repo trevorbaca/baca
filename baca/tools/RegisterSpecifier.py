@@ -13,15 +13,12 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        With figure-maker:
+        With music-maker:
 
         ::
 
-            >>> figure_maker = baca.FigureMaker()
-
-        ::
-
-            >>> contribution = figure_maker(
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
             ...     baca.tools.RegisterSpecifier(
@@ -30,7 +27,7 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
             ...             ),
             ...         ),
             ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -75,7 +72,7 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4'),
-            ...     baca.even_run_rhythm_specifier(),
+            ...     baca.even_runs(),
             ...     baca.tools.RegisterSpecifier(
             ...         registration=abjad.Registration(
             ...             [('[A0, C8]', 15)],
@@ -174,11 +171,12 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
     __slots__ = (
         '_pattern',
         '_registration',
+        '_selector',
         )
 
     ### INITIALIZER ###
 
-    def __init__(self, pattern=None, registration=None):
+    def __init__(self, pattern=None, registration=None, selector=None):
         if pattern is not None:
             assert isinstance(pattern, abjad.Pattern), repr(pattern)
         self._pattern = pattern
@@ -186,6 +184,9 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
             prototype = abjad.Registration
             assert isinstance(registration, prototype), repr(registration)
         self._registration = registration
+        if selector is not None:
+            assert isinstance(selector, abjad.Selector), repr(selector)
+        self._selector = selector
 
     ### SPECIAL METHODS ###
 
@@ -198,20 +199,17 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker()
-
-            ::
-
-                >>> contribution = figure_maker(
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
                 ...     'Voice 1',
-                ...     [set([10, 12, 14])],
+                ...     [{10, 12, 14}],
                 ...     baca.tools.RegisterSpecifier(
                 ...         registration=abjad.Registration(
                 ...             [('[A0, C8]', -6)],
                 ...             ),
                 ...         ),
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -232,6 +230,8 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
         '''
         if argument is None:
             return
+        if self.selector is not None:
+            argument = self.selector(argument)
         if isinstance(argument, baca.tools.ScopedSpecifier):
             selections = [argument]
         if isinstance(argument, abjad.Selection):
@@ -258,13 +258,7 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
                         leaf.written_pitches = written_pitches
                     else:
                         raise TypeError(leaf)
-                    self._mark_as_registered(leaf)
-
-    ### PRIVATE METHODS ###
-
-    @staticmethod
-    def _mark_as_registered(leaf):
-        abjad.detach('not yet registered', leaf)
+                    abjad.detach('not yet registered', leaf)
 
     ### PUBLIC PROPERTIES ###
 
@@ -278,11 +272,8 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker()
-
-            ::
-
-                >>> contribution = figure_maker(
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
                 ...     baca.tools.RegisterSpecifier(
@@ -292,7 +283,7 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
                 ...             ),
                 ...         ),
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -327,11 +318,11 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker()
+                >>> music_maker = baca.MusicMaker()
 
             ::
 
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
                 ...     baca.tools.RegisterSpecifier(
@@ -341,7 +332,7 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
                 ...             ),
                 ...         ),
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -400,3 +391,11 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
         Returns registration or none.
         '''
         return self._registration
+
+    @property
+    def selector(self):
+        r'''Gets selector.
+
+        Set to selector or none.
+        '''
+        return self._selector

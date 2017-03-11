@@ -24,7 +24,7 @@ class RegisterTransitionSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('C4 D4 E4 F4'),
-            ...     baca.even_run_rhythm_specifier(),
+            ...     baca.even_runs(),
             ...     baca.tools.RegisterTransitionSpecifier(
             ...         start_registration=abjad.Registration(
             ...             [('[A0, C8]', 0)],

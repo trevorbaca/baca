@@ -17,10 +17,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.FigureMaker(
-            ...     baca.tools.MarkupSpecifier(
-            ...         markup=abjad.Markup('*'),
-            ...         ),
+            >>> music_maker = baca.MusicMaker(
             ...     baca.tools.FigureRhythmSpecifier(
             ...         rhythm_maker=baca.tools.FigureRhythmMaker(
             ...             talea=abjad.rhythmmakertools.Talea(
@@ -33,9 +30,14 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = figure_maker('Voice 1', collections)
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.tools.MarkupSpecifier(
+            ...         markup=abjad.Markup('*'),
+            ...         ),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -79,6 +81,8 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
         '_selector',
         )
 
+    _publish_storage_format = True
+
     ### INITIALIZER ###
 
     def __init__(
@@ -104,9 +108,9 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
         '''
         if not argument or self.markup is None:
             return
-        selector = self.selector or baca.select_pitched_leaf(0)
+        selector = self.selector or baca.select_pitched_head(0)
         selections = selector(argument)
-        selections = baca.FigureMaker._normalize_selections(selections)
+        selections = baca.MusicMaker._normalize_selections(selections)
         for selection in selections:
             for component in  selection:
                 markup = abjad.new(self.markup)
@@ -132,12 +136,11 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            Markup specifier selects head of first pitched logical tie by
-            default:
+            Selects first pitched head:
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.MarkupSpecifier(
                 ...         markup=abjad.Markup('*'),
                 ...         ),
@@ -153,9 +156,11 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -190,17 +195,11 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            Markup specifier selects heads of pitched logical ties:
+            Selects pitched heads:
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
-                ...     baca.tools.MarkupSpecifier(
-                ...         markup=abjad.Markup('*'),
-                ...         selector=abjad.select().
-                ...         by_logical_tie(pitched=True).
-                ...         get_item(0, apply_to_each=True),
-                ...         ),
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -213,9 +212,15 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.tools.MarkupSpecifier(
+                ...         markup=abjad.Markup('*'),
+                ...         selector=baca.select_pitched_heads(),
+                ...         ),
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::

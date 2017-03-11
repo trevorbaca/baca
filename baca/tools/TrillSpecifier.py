@@ -12,11 +12,11 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        With figure-maker:
+        With music-maker:
 
         ::
 
-            >>> figure_maker = baca.FigureMaker(
+            >>> music_maker = baca.MusicMaker(
             ...     baca.tools.TrillSpecifier(
             ...         minimum_written_duration=abjad.Duration(1, 4),
             ...         maximum_written_duration=None,
@@ -25,12 +25,12 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> contribution = figure_maker(
+            >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     talea_denominator=4,
             ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -75,7 +75,7 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = collection_maker.append_specifiers(
             ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('E4 F4'),
-            ...     baca.messiaen_note_rhythm_specifier(),
+            ...     baca.messiaen_notes(),
             ...     baca.tools.TrillSpecifier(
             ...         minimum_written_duration=abjad.Duration(1, 4),
             ...         maximum_written_duration=None,
@@ -155,10 +155,11 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
     __slots__ = (
         '_deposit_annotations',
         '_forbidden_annotations',
-        '_is_harmonic',
+        '_harmonic',
         '_interval',
         '_maximum_written_duration',
         '_minimum_written_duration',
+        '_selector',
         '_pitch',
         )
 
@@ -169,10 +170,11 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
         deposit_annotations=None,
         forbidden_annotations=None,
         interval=None,
-        is_harmonic=None,
+        harmonic=None,
         minimum_written_duration=None,
         maximum_written_duration=None,
         pitch=None,
+        selector=None,
         ):
         if deposit_annotations is not None:
             assert isinstance(deposit_annotations, (tuple, list))
@@ -184,8 +186,8 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
             forbidden_annotations = tuple(forbidden_annotations)
         self._forbidden_annotations = forbidden_annotations
         self._interval = interval
-        assert isinstance(is_harmonic, (bool, type(None)))
-        self._is_harmonic = is_harmonic
+        assert isinstance(harmonic, (bool, type(None)))
+        self._harmonic = harmonic
         if minimum_written_duration is not None:
             minimum_written_duration = abjad.Duration(minimum_written_duration)
         self._minimum_written_duration = minimum_written_duration
@@ -195,6 +197,9 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
         if pitch is not None:
             pitch = abjad.NamedPitch(pitch)
         self._pitch = pitch
+        if selector is not None:
+            assert isinstance(selector, abjad.Selector), repr(selector)
+        self._selector = selector
 
     ### SPECIAL METHODS ###
 
@@ -203,6 +208,8 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
 
         Returns none.
         '''
+        if self.selector is not None:
+            argument = self.selector(argument)
         logical_ties = abjad.select(argument).by_logical_tie(pitched=True)
         for logical_tie in logical_ties:
             written_duration = abjad.Duration(0)
@@ -216,7 +223,7 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
                     continue
             spanner = abjad.TrillSpanner(
                 interval=self.interval,
-                is_harmonic=self.is_harmonic,
+                is_harmonic=self.harmonic,
                 pitch=self.pitch,
                 )
             leaves = []
@@ -263,6 +270,19 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
         return self._forbidden_annotations
 
     @property
+    def harmonic(self):
+        r'''Is true when specifier formats trill pitch note head as a white
+        diamond.
+
+        Defaults to false.
+
+        Set to true or false.
+
+        Returns true or false.
+        '''
+        return self._harmonic
+
+    @property
     def interval(self):
         r'''Gets interval of trill specifier.
 
@@ -273,19 +293,6 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
         Returns interval or none.
         '''
         return self._interval
-
-    @property
-    def is_harmonic(self):
-        r'''Is true when specifier formats trill pitch note head as a white
-        diamond.
-
-        Defaults to false.
-
-        Set to true or false.
-
-        Returns true or false.
-        '''
-        return self._is_harmonic
 
     @property
     def maximum_written_duration(self):
@@ -310,3 +317,11 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
         Set to pitch or none.
         '''
         return self._pitch
+
+    @property
+    def selector(self):
+        r'''Gets selector.
+
+        Set to selector or none.
+        '''
+        return self._selector

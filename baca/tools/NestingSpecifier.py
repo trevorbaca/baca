@@ -17,7 +17,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.FigureMaker(
+            >>> music_maker = baca.MusicMaker(
             ...     baca.tools.NestingSpecifier(
             ...         time_treatments=['+1/16'],
             ...         ),
@@ -33,8 +33,8 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
             ...     [16, 15, 23],
             ...     [19, 13, 9, 8],
             ...     ]
-            >>> contribution = figure_maker('Voice 1', collections)
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -95,7 +95,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
         Calltime nesting specifier preserves beam subdivisions and works with
         extend beam:
 
-            >>> figure_maker = baca.FigureMaker(
+            >>> music_maker = baca.MusicMaker(
             ...     abjad.rhythmmakertools.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
@@ -104,7 +104,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> containers, time_signatures = [], []
-            >>> contribution = figure_maker(
+            >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10, 18], [16, 15, 23]],
             ...     baca.tools.NestingSpecifier(
@@ -114,7 +114,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
             ...     )
             >>> containers.extend(contribution['Voice 1'])
             >>> time_signatures.append(contribution.time_signature)    
-            >>> contribution = figure_maker('Voice 1', [[19, 13, 9, 8]])
+            >>> contribution = music_maker('Voice 1', [[19, 13, 9, 8]])
             >>> containers.extend(contribution['Voice 1'])
             >>> time_signatures.append(contribution.time_signature)    
             >>> selection = abjad.select(containers)
@@ -273,7 +273,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.NestingSpecifier(time_treatments=['+1/16']),
                 ...     baca.tools.RestAffixSpecifier(
                 ...         prefix=[2],
@@ -291,8 +291,8 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::

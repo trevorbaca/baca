@@ -13,13 +13,13 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        With figure-maker:
+        With music-maker:
 
         Selects heads of pitched logical ties by default:
 
         ::
 
-            >>> figure_maker = baca.FigureMaker(
+            >>> music_maker = baca.MusicMaker(
             ...     baca.tools.ArticulationSpecifier(
             ...         articulations=['>'],
             ...         ),
@@ -36,8 +36,8 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = figure_maker('Voice 1', collections)
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -85,7 +85,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select_stages(1)),
-            ...     baca.even_run_rhythm_specifier(),
+            ...     baca.even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.tools.ArticulationSpecifier(
             ...         articulations=['.'],
@@ -212,9 +212,9 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
         if not self.articulations:
             return
         articulations = abjad.CyclicTuple(self.articulations)
-        selector = self.selector or baca.select_pitched_logical_tie_heads()
+        selector = self.selector or baca.select_pitched_heads()
         selections = selector(argument)
-        selections = baca.FigureMaker._normalize_selections(selections)
+        selections = baca.MusicMaker._normalize_selections(selections)
         for selection in selections:
             leaves = abjad.select(selection).by_leaf()
             for i, leaf in enumerate(leaves):
@@ -250,7 +250,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['>'],
                 ...         ),
@@ -267,8 +267,8 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -307,7 +307,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=[
                 ...             '>', None, None,
@@ -328,8 +328,8 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -368,7 +368,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=[
                 ...             '>', '.', '.',
@@ -389,8 +389,8 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -429,7 +429,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=[
                 ...             ('>', '-'), '.', '.',
@@ -450,8 +450,8 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -490,7 +490,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['f'],
                 ...         ),
@@ -507,8 +507,8 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -559,7 +559,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['>'],
                 ...         ),
@@ -576,8 +576,8 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::

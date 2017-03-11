@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import abjad
+import baca
 
 
 class OverrideSpecifier(abjad.abctools.AbjadObject):
@@ -12,11 +13,11 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        With figure-maker:
+        With music-maker:
 
         ::
 
-            >>> figure_maker = baca.FigureMaker(
+            >>> music_maker = baca.MusicMaker(
             ...     baca.tools.OverrideSpecifier(
             ...         grob_name='beam',
             ...         attribute_name='positions',
@@ -32,8 +33,8 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = figure_maker('Voice 1', collections)
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -95,7 +96,7 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
 
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select_stages(1)),
-            ...     baca.even_run_rhythm_specifier(),
+            ...     baca.even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.tools.OverrideSpecifier(
             ...         grob_name='beam',
@@ -239,6 +240,8 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
         '_grob_name',
         '_maximum_settings',
         '_maximum_written_duration',
+        '_revert',
+        '_selector',
         )
 
     ### INITIALIZER ###
@@ -251,6 +254,8 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
         attribute_value=None,
         maximum_written_duration=None,
         maximum_settings=None,
+        revert=None,
+        selector=None,
         ):
         if context_name is not None:
             assert isinstance(context_name, str), repr(context_name)
@@ -269,11 +274,17 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
         if maximum_settings is not None:
             assert isinstance(maximum_settings, dict), maximum_settings
         self._maximum_settings = maximum_settings
+        if revert is not None:
+            revert = bool(revert)
+        self._revert = revert
+        if selector is not None:
+            assert isinstance(selector, abjad.Selector), repr(selector)
+        self._selector = selector
 
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls specifier.
+        r'''Calls specifier on `argument`.
 
         Returns none.
         '''
@@ -297,11 +308,37 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
             attribute_name=attribute_name,
             attribute_value=attribute_value,
             )
-        for leaf in abjad.iterate(argument).by_leaf():
-            if  (self.maximum_written_duration is None or
-                (self.maximum_written_duration is not None and
-                self.maximum_written_duration <= leaf.written_duration)):
-                exec(statement, globals(), locals())
+        manager = abjad.systemtools.LilyPondFormatManager
+        command = manager.make_lilypond_override_string(
+            grob_name,
+            attribute_name,
+            attribute_value,
+            context_name=context_name,
+            is_once=False,
+            )
+        command = command.replace('\\', '')
+        command = abjad.LilyPondCommand(command)
+        revert = manager.make_lilypond_revert_string(
+            grob_name,
+            attribute_name,
+            context_name=context_name,
+            )
+        revert = revert.replace('\\', '')
+        revert = abjad.LilyPondCommand(revert, format_slot='after')
+        selector = self.selector or baca.select_leaves()
+        selections = selector(argument)
+        selections = baca.MusicMaker._normalize_selections(selections)
+        for selection in selections:
+            leaves = abjad.select(selection).by_leaf()
+            if self.revert:
+                abjad.attach(command, leaves[0])
+                abjad.attach(revert, leaves[-1])
+            else:
+                for leaf in leaves:
+                    if  (self.maximum_written_duration is None or
+                        (self.maximum_written_duration is not None and
+                        self.maximum_written_duration <= leaf.written_duration)):
+                        exec(statement, globals(), locals())
 
     ### PUBLIC PROPERTIES ###
 
@@ -364,3 +401,28 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
         Set to duration or none.
         '''
         return self._maximum_written_duration
+
+    @property
+    def revert(self):
+        r'''Is true when specifier uses override / revert pair instead of
+        multiple once commands.
+
+        Set to true, false or none.
+
+        Defaults to none.
+
+        Returns true, false or none.
+        '''
+        return self._revert
+
+    @property
+    def selector(self):
+        r'''Gets selector.
+
+        Set to selector or none.
+
+        Defaults to none.
+
+        Returns selector or none.
+        '''
+        return self._selector

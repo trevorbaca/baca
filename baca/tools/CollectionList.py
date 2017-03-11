@@ -100,8 +100,8 @@ class CollectionList(abjad.abctools.AbjadValueObject):
         ::
 
             >>> for collection in baca.CollectionList([
-            ...     set([12, 14, 18, 17]),
-            ...     set([16, 20, 19]),
+            ...     {12, 14, 18, 17},
+            ...     {16, 20, 19},
             ...     ]):
             ...     collection
             ...
@@ -115,8 +115,8 @@ class CollectionList(abjad.abctools.AbjadValueObject):
         ::
 
             >>> for collection in baca.CollectionList([
-            ...     set([12, 14, 18, 17]),
-            ...     set([16, 20, 19]),
+            ...     {12, 14, 18, 17},
+            ...     {16, 20, 19},
             ...     ],
             ...     item_class=abjad.NamedPitch,
             ...     ):
@@ -132,8 +132,8 @@ class CollectionList(abjad.abctools.AbjadValueObject):
         ::
 
             >>> for collection in baca.CollectionList([
-            ...     set([12, 14, 18, 17]),
-            ...     set([16, 20, 19]),
+            ...     {12, 14, 18, 17},
+            ...     {16, 20, 19},
             ...     ],
             ...     item_class=abjad.NumberedPitchClass,
             ...     ):
@@ -149,8 +149,8 @@ class CollectionList(abjad.abctools.AbjadValueObject):
         ::
 
             >>> for collection in baca.CollectionList([
-            ...     set([12, 14, 18, 17]),
-            ...     set([16, 20, 19]),
+            ...     {12, 14, 18, 17},
+            ...     {16, 20, 19},
             ...     ],
             ...     item_class=abjad.NamedPitchClass,
             ...     ):
@@ -181,7 +181,7 @@ class CollectionList(abjad.abctools.AbjadValueObject):
         ::
 
             >>> for collection in baca.CollectionList([
-            ...     set([12, 14, 18, 17]),
+            ...     {12, 14, 18, 17},
             ...     [16, 20, 19],
             ...     ]):
             ...     collection
@@ -571,23 +571,23 @@ class CollectionList(abjad.abctools.AbjadValueObject):
     ### PRIVATE METHODS ###
 
     def _coerce(self, collections):
-        collections_ = []
         prototype = (
-            abjad.PitchSegment,
-            abjad.PitchSet,
-            abjad.PitchClassSegment,
-            abjad.PitchClassSet,
+            baca.PitchSegment,
+            baca.PitchSet,
+            baca.PitchClassSegment,
+            baca.PitchClassSet,
             )
+        collections_ = []
         for item in collections or []:
             if isinstance(item, type(self)):
                 for collection in item:
                     collection_ = self._initialize_collection(collection)
-                    assert isinstance(collection_, prototype), repr(collection_)
                     collections_.append(collection_)
             else:
                 collection_ = self._initialize_collection(item)
-                assert isinstance(collection_, prototype), repr(collection_)
                 collections_.append(collection_)
+        collections_ = [self._to_baca_collection(_) for _ in collections_]
+        assert all(isinstance(_, prototype) for _ in collections_)
         return collections_
 
     def _get_pitch_class_class(self):
@@ -653,6 +653,53 @@ class CollectionList(abjad.abctools.AbjadValueObject):
                 message = 'must be string or other iterable: {!r}.'
                 message = message.format(argument)
                 raise TypeError(message)
+
+    @staticmethod
+    def _to_baca_collection(collection):
+        abjad_prototype = (
+            abjad.PitchClassSegment,
+            abjad.PitchClassSet,
+            abjad.PitchSegment,
+            abjad.PitchSet,
+            )
+        assert isinstance(collection, abjad_prototype), repr(collection)
+        baca_prototype = (
+            baca.PitchClassSegment,
+            baca.PitchClassSet,
+            baca.PitchSegment,
+            baca.PitchSet,
+            )
+        if isinstance(collection, baca_prototype):
+            pass
+        elif isinstance(collection, abjad.PitchClassSegment):
+            collection = baca.PitchClassSegment(
+                items=collection,
+                item_class=collection.item_class,
+                )
+        elif isinstance(collection, abjad.PitchClassSet):
+            collection = baca.PitchClassSet(
+                items=collection,
+                item_class=collection.item_class,
+                )
+        elif isinstance(collection, abjad.PitchSegment):
+            collection = baca.PitchSegment(
+                items=collection,
+                item_class=collection.item_class,
+                )
+        elif isinstance(collection, abjad.PitchSet):
+            collection = baca.PitchSet(
+                items=collection,
+                item_class=collection.item_class,
+                )
+        elif isinstance(collection, abjad.PitchSet):
+            collection = baca.PitchSet(
+                items=collection,
+                item_class=collection.item_class,
+                )
+        else:
+            raise TypeError(collection)
+        assert isinstance(collection, baca_prototype)
+        return collection
 
     @staticmethod
     def _to_pitch_class_item_class(item_class):

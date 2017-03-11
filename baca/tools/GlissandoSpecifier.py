@@ -25,7 +25,7 @@ class GlissandoSpecifier(abjad.abctools.AbjadObject):
 
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select_stages(1)),
-            ...     baca.even_run_rhythm_specifier(),
+            ...     baca.even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.tools.GlissandoSpecifier(
             ...         pattern=abjad.select_all(),
@@ -131,7 +131,7 @@ class GlissandoSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.even_run_rhythm_specifier(),
+            ...     baca.even_runs(),
             ...     baca.tools.GlissandoSpecifier(
             ...         pattern=pattern,
             ...         ),
@@ -221,23 +221,23 @@ class GlissandoSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        Selects first stage with figure-maker:
+        Selects first stage with music-maker:
 
         ::
 
-            >>> figure_maker = baca.FigureMaker()
+            >>> music_maker = baca.MusicMaker()
 
         ::
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = figure_maker(
+            >>> contribution = music_maker(
             ...     'Voice 1',
             ...     collections,
             ...     baca.tools.GlissandoSpecifier(
             ...         pattern=abjad.select_first(),
             ...         ),
             ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::

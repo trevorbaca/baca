@@ -128,14 +128,6 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
             ::
 
                 >>> specifier = baca.tools.ChordalSpacingSpecifier()
-                >>> specifier([])
-                PitchSegment([])
-
-        ..  container:: example
-
-            ::
-
-                >>> specifier = baca.tools.ChordalSpacingSpecifier()
                 >>> specifier() is None
                 True
 
@@ -143,11 +135,8 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
         '''
         if collections is None:
             return
-        if collections == []:
-            return baca.PitchSegment(item_class=abjad.NumberedPitch)
         if not isinstance(collections, baca.CollectionList):
             collections = baca.CollectionList(collections)
-        pitch_class_segments = collections.to_pitch_classes()
         pattern = self.pattern or abjad.patterntools.select_all()
         collections_ = []
         total_length = len(collections)
@@ -155,9 +144,9 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
             if not pattern.matches_index(i, total_length):
                 collections_.append(collections[i])
             else:
-                pitch_class_segment = pitch_class_segments[i]
-                segment_ = self._space_segment(pitch_class_segment)
-                collections_.append(segment_)
+                collection = collections[i]
+                collection_ = self._space_collection(collection)
+                collections_.append(collection_)
         return baca.CollectionList(collections_)
 
     ### PRIVATE METHODS ###
@@ -208,9 +197,12 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
         assert not pitch_classes, repr(pitch_classes)
         return pitch_classes_
 
-    def _space_segment(self, pitch_class_segment):
-        original_input = pitch_class_segment
-        pitch_classes = list(pitch_class_segment)
+    def _space_collection(self, collection):
+        original_collection = collection
+        if isinstance(collection, abjad.pitchtools.Set):
+            pitch_classes = list(sorted(collection.to_pitch_classes()))
+        else:
+            pitch_classes = list(collection.to_pitch_classes())
         bass, soprano = None, None
         if self.bass is not None:
             bass = abjad.NumberedPitchClass(self.bass)
@@ -259,7 +251,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
             if bass:
                 pitch_classes.append(bass)
             pitches = self._to_tightly_spaced_pitches_descending(pitch_classes)
-        if isinstance(original_input, abjad.pitchtools.Set):
+        if isinstance(original_collection, abjad.pitchtools.Set):
             return baca.PitchSet(pitches)
         else:
             return baca.PitchSegment(pitches)

@@ -57,7 +57,7 @@ class DynamicSpecifier(abjad.abctools.AbjadObject):
             return
         selector = self.selector or baca.select_leaves()
         selections = selector(argument)
-        selections = baca.FigureMaker._normalize_selections(selections)
+        selections = baca.MusicMaker._normalize_selections(selections)
         for selection in selections:
             if isinstance(self.dynamic, abjad.Hairpin):
                 hairpin = abjad.new(self.dynamic)

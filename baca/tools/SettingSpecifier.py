@@ -73,13 +73,15 @@ class SettingSpecifier(abjad.abctools.AbjadObject):
                 self.setting_name,
                 self.setting_value,
                 )
-        selector = self.selector or baca.select_leaves()
-        items = selector(argument)
         globals_ = globals()
         globals_.update(abjad.__dict__.copy())
         globals_['SchemeMoment'] = abjad.schemetools.SchemeMoment
-        for item in items:
-            exec(statement, globals_, locals())
+        selector = self.selector or baca.select_leaf(0)
+        selections = selector(argument)
+        selections = baca.MusicMaker._normalize_selections(selections)
+        for selection in selections:
+            for item in selection:
+                exec(statement, globals_, locals())
 
     ### PUBLIC PROPERTIES ###
 

@@ -5,7 +5,7 @@ import collections
 import copy
 
 
-class FigureMaker(abjad.abctools.AbjadObject):
+class MusicMaker(abjad.abctools.AbjadObject):
     r'''Figure-maker.
 
     ::
@@ -15,17 +15,17 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        Default figure-maker:
+        Default music-maker:
 
         ::
 
-            >>> figure_maker = baca.FigureMaker()
+            >>> music_maker = baca.MusicMaker()
 
         ::
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = figure_maker('Voice 1', collections)
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -141,21 +141,21 @@ class FigureMaker(abjad.abctools.AbjadObject):
         thread=None,
         time_treatments=None
         ):
-        r'''Calls figure-maker on `collections` with keywords.
+        r'''Calls music-maker on `collections` with keywords.
 
         ..  container:: example
 
-            Default figure-maker:
+            Default music-maker:
 
             ::
 
-                >>> figure_maker = baca.FigureMaker()
+                >>> music_maker = baca.MusicMaker()
 
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -190,17 +190,17 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker()
+                >>> music_maker = baca.MusicMaker()
 
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
                 ...     talea_counts=[1, 2],
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -235,17 +235,17 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker()
+                >>> music_maker = baca.MusicMaker()
 
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
                 ...     talea_denominator=32,
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -280,17 +280,17 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker()
+                >>> music_maker = baca.MusicMaker()
 
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
                 ...     time_treatments=[1],
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -327,17 +327,17 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker()
+                >>> music_maker = baca.MusicMaker()
 
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [abjad.Rest((3, 8)), abjad.Rest((3, 8))],
                 ...     baca.nest('+1/8'),
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -364,16 +364,16 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker()
+                >>> music_maker = baca.MusicMaker()
 
             ::
 
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[18, 16, 15, 20, 19]],
                 ...     talea_counts=[2, -1],
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -401,12 +401,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[18, 16, 15, 20, 19]],
                 ...     talea_counts=[2, -1, -1],
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -439,12 +439,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[18, 16, 15, 20, 19]],
                 ...     talea_counts=[-1, 2],
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -472,12 +472,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[18, 16, 15, 20, 19]],
                 ...     talea_counts=[-1, -1, 2],
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -510,12 +510,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[18, 16, 15, 20, 19]],
                 ...     talea_counts=[-1, -1, 2, -2, -2],
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -565,17 +565,17 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker()
+                >>> music_maker = baca.MusicMaker()
 
             ::
 
                 >>> collections = [
-                ...     set([0, 2, 10]),
+                ...     {0, 2, 10},
                 ...     [18, 16, 15, 20, 19],
                 ...     [9],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1053,7 +1053,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
     @property
     def allow_repeat_pitches(self):
-        r'''Is true when figure-maker allows repeat pitches.
+        r'''Is true when music-maker allows repeat pitches.
 
         Defaults to none.
 
@@ -1065,7 +1065,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
     @property
     def color_unregistered_pitches(self):
-        r'''Is true when figure-maker colors unregistered pitches.
+        r'''Is true when music-maker colors unregistered pitches.
 
         Defaults to none.
 
@@ -1085,7 +1085,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker()
+                >>> music_maker = baca.MusicMaker()
 
             ::
 
@@ -1094,8 +1094,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [16, 15, 23, 17],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1133,7 +1133,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     denominator=16,
                 ...     )
 
@@ -1144,8 +1144,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [16, 15, 23, 17],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(
                 ...     contribution,
                 ...     time_signatures=[contribution.time_signature],
                 ...     )
@@ -1186,7 +1186,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker()
+                >>> music_maker = baca.MusicMaker()
 
             ::
 
@@ -1195,12 +1195,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [16, 15, 23, 17],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
                 ...     denominator=8,
                 ...     )
-                >>> lilypond_file = figure_maker.show(
+                >>> lilypond_file = music_maker.show(
                 ...     contribution,
                 ...     time_signatures=[contribution.time_signature],
                 ...     )
@@ -1242,7 +1242,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     denominator=16,
                 ...     )
 
@@ -1253,12 +1253,12 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [16, 15, 23, 17],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
                 ...     denominator=8,
                 ...     )
-                >>> lilypond_file = figure_maker.show(
+                >>> lilypond_file = music_maker.show(
                 ...     contribution,
                 ...     time_signatures=[contribution.time_signature],
                 ...     )
@@ -1311,7 +1311,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['.'],
                 ...         selector=abjad.select().
@@ -1322,8 +1322,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1359,7 +1359,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=[('.', '-')],
                 ...         selector=abjad.select().
@@ -1373,8 +1373,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1409,7 +1409,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.RegisterSpecifier(
                 ...         registration=abjad.Registration(
                 ...             [('[A0, C8]', -6)],
@@ -1420,8 +1420,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1457,7 +1457,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.RegisterTransitionSpecifier(
                 ...         start_registration=abjad.Registration(
                 ...             [('[A0, C8]', 0)],
@@ -1471,8 +1471,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -1507,7 +1507,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.DynamicSpecifier(
                 ...         dynamic=abjad.Hairpin('p < f'),
                 ...         ),
@@ -1520,8 +1520,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1562,7 +1562,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.DynamicSpecifier(
                 ...         dynamic=abjad.Hairpin('p < f'),
                 ...         selector=abjad.select().
@@ -1578,7 +1578,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
                 ...     baca.tools.RestAffixSpecifier(
@@ -1589,7 +1589,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...         prefix=[1],
                 ...         ),
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1630,7 +1630,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.DynamicSpecifier(
                 ...         dynamic=abjad.Hairpin('p < f'),
                 ...         selector=abjad.select().
@@ -1652,8 +1652,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1694,7 +1694,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.DynamicSpecifier(
                 ...         dynamic=abjad.Hairpin('p < f'),
                 ...         selector=abjad.select().
@@ -1718,8 +1718,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 6
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1760,7 +1760,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.SpannerSpecifier(
                 ...         spanner=abjad.Slur(),
                 ...         ),
@@ -1773,8 +1773,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1815,7 +1815,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.SpannerSpecifier(
                 ...         selector=abjad.select().
                 ...             by_class(abjad.Tuplet, flatten=True).
@@ -1831,8 +1831,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1873,7 +1873,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.SpannerSpecifier(
                 ...         selector=abjad.select().
                 ...             by_class(abjad.Tuplet, flatten=True).
@@ -1889,8 +1889,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1931,7 +1931,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.SpannerSpecifier(
                 ...         selector=abjad.select().
                 ...             by_class(abjad.Tuplet, flatten=True).
@@ -1947,8 +1947,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1989,7 +1989,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['.'],
                 ...         selector=abjad.select().
@@ -2015,8 +2015,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -2079,7 +2079,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.SpannerSpecifier(
                 ...         selector=abjad.select().
                 ...             by_class(abjad.Tuplet).
@@ -2097,8 +2097,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -2139,7 +2139,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
@@ -2152,8 +2152,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).beam.positions = (-6, -6)
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -2216,7 +2216,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_each_division=False,
                 ...         ),
@@ -2229,8 +2229,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -2267,7 +2267,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.NestingSpecifier(
                 ...         time_treatments=['+1/16'],
                 ...         ),
@@ -2283,8 +2283,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -2350,7 +2350,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.NestingSpecifier(
                 ...         lmr_specifier=baca.tools.LMRSpecifier(
                 ...             left_length=2,
@@ -2369,8 +2369,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
                 ...     [16, 15, 23],
                 ...     [19, 13, 9, 8],
                 ...     ]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -2436,7 +2436,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -2459,8 +2459,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -2495,7 +2495,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -2518,8 +2518,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -2554,7 +2554,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -2578,8 +2578,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -2615,7 +2615,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -2639,8 +2639,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -2676,7 +2676,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.FigureRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.FigureRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -2700,8 +2700,8 @@ class FigureMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -2740,7 +2740,7 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
     @property
     def thread(self):
-        r'''Is true when figure-maker threads rhythm-maker over collections.
+        r'''Is true when music-maker threads rhythm-maker over collections.
 
         ..  container:: example
 
@@ -2748,17 +2748,17 @@ class FigureMaker(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker()
+                >>> music_maker = baca.MusicMaker()
 
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
                 ...     talea_counts=[1, 2, 3],
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -2792,13 +2792,13 @@ class FigureMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker(
+                >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
                 ...     talea_counts=[1, 2, 3],
                 ...     thread=True,
                 ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import abjad
+import baca
 import copy
 
 
@@ -26,7 +27,7 @@ class SwellSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('E4'),
-            ...     baca.even_run_rhythm_specifier(),
+            ...     baca.even_runs(),
             ...     baca.tools.HairpinSpecifier(
             ...         hairpin_tokens=[
             ...             baca.tools.SwellSpecifier(
@@ -137,6 +138,7 @@ class SwellSpecifier(abjad.abctools.AbjadObject):
     __documentation_section__ = 'Specifiers'
 
     __slots__ = (
+        '_selector',
         '_start_count',
         '_start_token',
         '_stop_count',
@@ -147,11 +149,15 @@ class SwellSpecifier(abjad.abctools.AbjadObject):
 
     def __init__(
         self,
+        selector=None,
         start_count=None,
         start_token=None,
         stop_count=None,
         stop_token=None,
         ):
+        if selector is not None:
+            assert isinstance(selector, abjad.Selector)
+        self._selector = selector
         assert 0 < start_count, repr(start_count)
         assert isinstance(start_token, str), repr(start_token)
         assert 0 < stop_count, repr(stop_count)
@@ -163,37 +169,42 @@ class SwellSpecifier(abjad.abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, leaves=None):
-        r'''Calls swell specifier.
+    def __call__(self, argument=None):
+        r'''Calls specifier on `argument`.
 
         Returns none.
         '''
-        start_hairpin = abjad.Hairpin(
-            self.start_token,
-            include_rests=True,
-            )
-        if len(leaves) < self.minimum_leaf_count:
-            #message = 'specifier requires at least {} leaves: {!r}.'
-            #message = message.format(self.minimum_leaf_count, leaves)
-            #raise Exception(message)
-            if len(leaves) == 0:
+        selector = self.selector or baca.select_pitched_leaves()
+        selections = selector(argument)
+        selections = baca.MusicMaker._normalize_selections(selections)
+        for selection in selections:
+            leaves = abjad.select(selection).by_leaf()
+            start_hairpin = abjad.Hairpin(
+                self.start_token,
+                include_rests=True,
+                )
+            if len(leaves) < self.minimum_leaf_count:
+                #message = 'specifier requires at least {} leaves: {!r}.'
+                #message = message.format(self.minimum_leaf_count, leaves)
+                #raise Exception(message)
+                if len(leaves) == 0:
+                    return
+                prototype = (abjad.scoretools.Note, abjad.scoretools.Chord)
+                for leaf in leaves:
+                    if isinstance(leaf, prototype):
+                        lone_dynamic = start_hairpin.stop_dynamic
+                        lone_dynamic = copy.copy(lone_dynamic)
+                        abjad.attach(lone_dynamic, leaf)
+                        break
                 return
-            prototype = (abjad.scoretools.Note, abjad.scoretools.Chord)
-            for leaf in leaves:
-                if isinstance(leaf, prototype):
-                    lone_dynamic = start_hairpin.stop_dynamic
-                    lone_dynamic = copy.copy(lone_dynamic)
-                    abjad.attach(lone_dynamic, leaf)
-                    break
-            return
-        start_leaves = leaves[:self.start_count]
-        abjad.attach(start_hairpin, start_leaves)
-        stop_hairpin = abjad.Hairpin(
-            self.stop_token,
-            include_rests=True,
-            )
-        stop_leaves = leaves[-self.stop_count:]
-        abjad.attach(stop_hairpin, stop_leaves)
+            start_leaves = leaves[:self.start_count]
+            abjad.attach(start_hairpin, start_leaves)
+            stop_hairpin = abjad.Hairpin(
+                self.stop_token,
+                include_rests=True,
+                )
+            stop_leaves = leaves[-self.stop_count:]
+            abjad.attach(stop_hairpin, stop_leaves)
 
     ### PUBLIC PROPERTIES ###
 
@@ -206,6 +217,14 @@ class SwellSpecifier(abjad.abctools.AbjadObject):
         Returns positive integer.
         '''
         return self.start_count + self.stop_count - 1
+
+    @property
+    def selector(self):
+        r'''Gets selector
+
+        Returns selector or none.
+        '''
+        return self._selector
 
     @property
     def start_count(self):

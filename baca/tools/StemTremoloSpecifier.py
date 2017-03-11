@@ -27,7 +27,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.select_stages(1)),
             ...     baca.pitches('E4 F4'),
-            ...     baca.even_run_rhythm_specifier(),
+            ...     baca.even_runs(),
             ...     baca.tools.StemTremoloSpecifier(),
             ...     )
 
@@ -152,9 +152,9 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
         Returns none.
         '''
         pattern = self.pattern or abjad.select_all()
-        selector = self.selector or baca.select_pitched_logical_tie_heads()
+        selector = self.selector or baca.select_pitched_heads()
         selections = selector(argument)
-        selections = baca.FigureMaker._normalize_selections(selections)
+        selections = baca.MusicMaker._normalize_selections(selections)
         for selection in selections:
             items = pattern.get_matching_items(selection)
             for item in items:
@@ -186,7 +186,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
                 ...     baca.pitches('E4 F4'),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     baca.tools.StemTremoloSpecifier(
                 ...         pattern=pattern,
                 ...         ),
@@ -290,7 +290,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
                 ...     baca.pitches('E4 F4'),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     baca.tools.StemTremoloSpecifier(
                 ...         pattern=abjad.select_every([1], period=2),
                 ...         ),
@@ -404,7 +404,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
                 ...     baca.pitches('E4 F4'),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     baca.tools.StemTremoloSpecifier(),
                 ...     )
 
@@ -506,7 +506,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
                 ...     baca.pitches('E4 F4'),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     baca.tools.StemTremoloSpecifier(
                 ...         selector=abjad.select().
                 ...             by_leaf(flatten=True).
@@ -624,7 +624,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
                 ...     baca.pitches('E4 F4'),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     baca.tools.StemTremoloSpecifier(),
                 ...     )
 
@@ -726,7 +726,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
                 >>> specifiers = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
                 ...     baca.pitches('E4 F4'),
-                ...     baca.even_run_rhythm_specifier(),
+                ...     baca.even_runs(),
                 ...     baca.tools.StemTremoloSpecifier(
                 ...         tremolo_flags=16,
                 ...         ),

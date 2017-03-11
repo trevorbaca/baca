@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import abjad
+import baca
 
 
 class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
@@ -16,19 +17,19 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.FigureMaker()
+            >>> music_maker = baca.MusicMaker()
 
         ::
 
-            >>> contribution = figure_maker(
+            >>> contribution = music_maker(
             ...     'Voice 1',
-            ...     [set([0, 14, 28])],
+            ...     [{0, 14, 28}],
             ...     baca.tools.RegisterToOctaveSpecifier(
             ...         anchor=Bottom,
             ...         octave_number=4,
             ...         ),
             ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -47,15 +48,15 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> contribution = figure_maker(
+            >>> contribution = music_maker(
             ...     'Voice 1',
-            ...     [set([0, 14, 28])],
+            ...     [{0, 14, 28}],
             ...     baca.tools.RegisterToOctaveSpecifier(
             ...         anchor=Center,
             ...         octave_number=4,
             ...         ),
             ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -74,15 +75,15 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> contribution = figure_maker(
+            >>> contribution = music_maker(
             ...     'Voice 1',
-            ...     [set([0, 14, 28])],
+            ...     [{0, 14, 28}],
             ...     baca.tools.RegisterToOctaveSpecifier(
             ...         anchor=Top,
             ...         octave_number=4,
             ...         ),
             ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -105,11 +106,11 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.FigureMaker()
+            >>> music_maker = baca.MusicMaker()
 
         ::
 
-            >>> contribution = figure_maker(
+            >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 14, 28]],
             ...     baca.tools.RegisterToOctaveSpecifier(
@@ -117,7 +118,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             ...         octave_number=4,
             ...         ),
             ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -138,7 +139,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> contribution = figure_maker(
+            >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 14, 28]],
             ...     baca.tools.RegisterToOctaveSpecifier(
@@ -146,7 +147,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             ...         octave_number=4,
             ...         ),
             ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -167,7 +168,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> contribution = figure_maker(
+            >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 14, 28]],
             ...     baca.tools.RegisterToOctaveSpecifier(
@@ -175,7 +176,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             ...         octave_number=4,
             ...         ),
             ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -200,11 +201,11 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> figure_maker = baca.FigureMaker()
+            >>> music_maker = baca.MusicMaker()
 
         ::
 
-            >>> contribution = figure_maker(
+            >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[10, 12, 14]],
             ...     baca.tools.RegisterToOctaveSpecifier(
@@ -212,7 +213,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             ...         octave_number=4,
             ...         ),
             ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -233,7 +234,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> contribution = figure_maker(
+            >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[10, 12, 14]],
             ...     baca.tools.RegisterToOctaveSpecifier(
@@ -241,7 +242,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             ...         octave_number=4,
             ...         ),
             ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -262,7 +263,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> contribution = figure_maker(
+            >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[10, 12, 14]],
             ...     baca.tools.RegisterToOctaveSpecifier(
@@ -270,7 +271,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             ...         octave_number=4,
             ...         ),
             ...     )
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -305,21 +306,26 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
     __slots__ = (
         '_anchor',
         '_octave_number',
-        '_pattern',
+        '_selector',
         )
 
     ### INITIALIZER ###
 
-    def __init__(self, anchor=None, octave_number=None, pattern=None):
+    def __init__(
+        self,
+        anchor=None,
+        octave_number=None,
+        selector=None,
+        ):
         if anchor is not None:
             assert anchor in (Center, Bottom, Top), repr(anchor)
         self._anchor = anchor
         if octave_number is not None:
             assert isinstance(octave_number, int), repr(octave_number)
         self._octave_number = octave_number
-        if pattern is not None:
-            assert isinstance(pattern, abjad.Pattern), repr(pattern)
-        self._pattern = pattern
+        if selector is not None:
+            assert isinstance(selector, abjad.Selector), repr(selector)
+        self._selector = selector
 
     ### SPECIAL METHODS ###
 
@@ -332,14 +338,14 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             return
         if isinstance(selections, abjad.Component):
             selections = abjad.select(selections)
-        pattern = self.pattern or abjad.select_all()
-        selections = pattern.get_matching_items(selections)
+        selector = self.selector or baca.select_plts()
+        selections = selector(selections)
         for selection in selections:
             target_octave_number = self.octave_number or 4
             current_octave_number = self._get_anchor_octave_number(selection)
             octave_adjustment = target_octave_number - current_octave_number
             transposition = abjad.Transposition(12 * octave_adjustment)
-            for leaf in abjad.iterate(selection).by_leaf(pitched=True):
+            for leaf in abjad.select(selection).by_leaf():
                 self._set_pitch(leaf, transposition)
 
     ### PRIVATE METHODS ###
@@ -380,8 +386,6 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
         elif isinstance(leaf, abjad.Chord):
             pitches = [transposition(_) for _ in leaf.written_pitches]
             leaf.written_pitches = pitches
-        else:
-            raise TypeError(leaf)
         abjad.detach('not yet registered', leaf)
 
     ### PUBLIC PROPERTIES ###
@@ -569,107 +573,9 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
         return self._octave_number
 
     @property
-    def pattern(self):
-        r'''Gets pattern.
+    def selector(self):
+        r'''Gets selector.
 
-        ..  container:: example
-
-            First stage only:
-
-            ::
-
-                >>> figure_maker = baca.FigureMaker()
-
-            ::
-
-                >>> contribution = figure_maker(
-                ...     'Voice 1',
-                ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
-                ...     baca.tools.RegisterToOctaveSpecifier(
-                ...         anchor=Bottom,
-                ...         octave_number=3,
-                ...         pattern=abjad.select_first(),
-                ...         ),
-                ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  doctest::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            {
-                                bf16 [
-                                c'16
-                                d'16 ]
-                            }
-                            {
-                                bf'16 [
-                                c''16
-                                d''16 ]
-                            }
-                            {
-                                bf'16 [
-                                c''16
-                                d''16 ]
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Last stage only:
-
-            ::
-
-                >>> figure_maker = baca.FigureMaker()
-
-            ::
-
-                >>> contribution = figure_maker(
-                ...     'Voice 1',
-                ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
-                ...     baca.tools.RegisterToOctaveSpecifier(
-                ...         anchor=Bottom,
-                ...         octave_number=3,
-                ...         pattern=abjad.select_last(),
-                ...         ),
-                ...     )
-                >>> lilypond_file = figure_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  doctest::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            {
-                                bf'16 [
-                                c''16
-                                d''16 ]
-                            }
-                            {
-                                bf'16 [
-                                c''16
-                                d''16 ]
-                            }
-                            {
-                                bf16 [
-                                c'16
-                                d'16 ]
-                            }
-                        }
-                    }
-                >>
-
-        Set to pattern or none.
-
-        Returns pattern or none.
+        Returns selector or none.
         '''
-        return self._pattern
+        return self._selector

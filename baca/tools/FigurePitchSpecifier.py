@@ -21,7 +21,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
             >>> expression = baca.sequence().map(transposition)
             >>> expression = baca.sequence().accumulate([transposition])
             >>> expression = expression.join()[0]
-            >>> figure_maker = baca.FigureMaker(
+            >>> music_maker = baca.MusicMaker(
             ...     baca.tools.FigurePitchSpecifier(
             ...         expressions=[expression],
             ...         to_pitch_classes=True,
@@ -31,8 +31,8 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = figure_maker('Voice 1', collections)
-            >>> lilypond_file = figure_maker.show(contribution)
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
@@ -233,7 +233,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
                 >>> transposition = baca.pitch_class_segment().transpose(n=3)
                 >>> transposition = baca.sequence().map(transposition)
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.FigurePitchSpecifier(
                 ...         expressions=[transposition],
                 ...         to_pitch_classes=True,
@@ -243,8 +243,8 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -349,13 +349,13 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker()
+                >>> music_maker = baca.MusicMaker()
 
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
@@ -390,7 +390,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> figure_maker = baca.FigureMaker(
+                >>> music_maker = baca.MusicMaker(
                 ...     baca.tools.FigurePitchSpecifier(
                 ...         to_pitch_classes=True,
                 ...         ),
@@ -399,8 +399,8 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = figure_maker('Voice 1', collections)
-                >>> lilypond_file = figure_maker.show(contribution)
+                >>> contribution = music_maker('Voice 1', collections)
+                >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  doctest::
