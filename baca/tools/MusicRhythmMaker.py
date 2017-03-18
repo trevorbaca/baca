@@ -5,8 +5,8 @@ import collections
 import math
 
 
-class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
-    r'''Figure rhythm-maker.
+class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
+    r'''Music rhythm-maker.
 
     ::
 
@@ -19,7 +19,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ::
 
-            >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+            >>> rhythm_maker = baca.tools.MusicRhythmMaker(
             ...     talea=abjad.rhythmmakertools.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
@@ -126,7 +126,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Figures'
+    __documentation_section__ = 'Music'
 
     __slots__ = (
         '_acciaccatura_specifiers',
@@ -205,7 +205,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
@@ -255,7 +255,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
@@ -453,7 +453,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> class_ = baca.tools.FigureRhythmMaker
+                >>> class_ = baca.tools.MusicRhythmMaker
                 >>> durations = 4 * [abjad.Duration(1)]
                 >>> result = class_._make_accelerando_multipliers(
                 ...     durations,
@@ -472,7 +472,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> class_ = baca.tools.FigureRhythmMaker
+                >>> class_ = baca.tools.MusicRhythmMaker
                 >>> durations = 4 * [abjad.Duration(1)]
                 >>> result = class_._make_accelerando_multipliers(durations, 1)
                 >>> for multiplier in result: multiplier
@@ -488,7 +488,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> class_ = baca.tools.FigureRhythmMaker
+                >>> class_ = baca.tools.MusicRhythmMaker
                 >>> durations = 4 * [abjad.Duration(1)]
                 >>> result = class_._make_accelerando_multipliers(
                 ...     durations,
@@ -780,7 +780,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
                 ...         baca.tools.AcciaccaturaSpecifier()
                 ...         ],
@@ -865,7 +865,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
                 ...         baca.tools.AcciaccaturaSpecifier(
                 ...             lmr_specifier=baca.tools.LMRSpecifier()
@@ -964,7 +964,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker()
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker()
                 >>> rhythm_maker.acciaccatura_specifiers is None
                 True
 
@@ -984,7 +984,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
@@ -1036,7 +1036,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
@@ -1109,7 +1109,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_each_division=False,
                 ...         ),
@@ -1160,7 +1160,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
@@ -1212,7 +1212,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_rests=True,
                 ...     ),
@@ -1267,7 +1267,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_rests=True,
                 ...         stemlet_length=0.75,
@@ -1329,7 +1329,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker()
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker()
                 >>> rhythm_maker.beam_specifier is None
                 True
 
@@ -1349,7 +1349,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
@@ -1393,7 +1393,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     division_masks=[
                 ...         abjad.silence_every([1], period=2),
                 ...         ],
@@ -1434,7 +1434,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     division_masks=[
                 ...         abjad.sustain_every([1], period=2),
                 ...         ],
@@ -1475,7 +1475,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker()
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker()
                 >>> rhythm_maker.division_masks is None
                 True
 
@@ -1496,7 +1496,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[4, 4, 5],
                 ...         denominator=32,
@@ -1544,7 +1544,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     duration_spelling_specifier=abjad.rhythmmakertools.DurationSpellingSpecifier(
                 ...         decrease_durations_monotonically=False,
                 ...         ),
@@ -1594,7 +1594,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker()
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker()
                 >>> rhythm_maker.duration_spelling_specifier is None
                 True
 
@@ -1614,7 +1614,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     logical_tie_masks=[
                 ...         abjad.silence_every([2], period=3),
                 ...         ],
@@ -1661,7 +1661,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     logical_tie_masks=[
                 ...         abjad.silence_first(),
                 ...         abjad.silence_last(),
@@ -1709,7 +1709,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker()
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker()
                 >>> rhythm_maker.logical_tie_masks is None
                 True
 
@@ -1729,7 +1729,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_rests=True,
                 ...         stemlet_length=1.5,
@@ -1786,7 +1786,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[29],
                 ...         denominator=64,
@@ -1824,7 +1824,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker()
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker()
                 >>> rhythm_maker.talea
                 Talea(counts=[1], denominator=16)
 
@@ -1844,7 +1844,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
@@ -1891,7 +1891,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
                 ...         denominator=16,
@@ -1938,7 +1938,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker()
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker()
                 >>> rhythm_maker.tie_specifier is None
                 True
 
@@ -1958,7 +1958,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     time_treatments=[1],
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
@@ -2006,7 +2006,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     time_treatments=[-1],
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
@@ -2053,7 +2053,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     time_treatments=['accel'],
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1],
@@ -2290,7 +2290,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     time_treatments=['rit'],
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1],
@@ -2527,7 +2527,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     time_treatments=['accel', 'rit'],
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1],
@@ -2728,7 +2728,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     time_treatments=['accel', -2, 'rit'],
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1],
@@ -2947,7 +2947,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     time_treatments=[abjad.Ratio((3, 2))],
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1],
@@ -3027,7 +3027,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     time_treatments=[abjad.Duration(1, 4)],
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1],
@@ -3107,7 +3107,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     time_treatments=[abjad.Duration(1, 4), abjad.Duration(3, 8)],
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
@@ -3197,7 +3197,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker()
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker()
                 >>> rhythm_maker.time_treatments is None
                 True
 
@@ -3220,7 +3220,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[3],
                 ...         denominator=16,
@@ -3274,7 +3274,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[3],
                 ...         denominator=16,
@@ -3331,7 +3331,7 @@ class FigureRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker()
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker()
                 >>> rhythm_maker.tuplet_spelling_specifier is None
                 True
 

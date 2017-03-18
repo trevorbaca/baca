@@ -151,7 +151,7 @@ class HairpinSpecifier(abjad.abctools.AbjadObject):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        selector = baca.select_logical_ties().flatten(depth=1)
+        selector = baca.select_lts().flatten(depth=1)
         logical_ties = selector(argument)
         if (self.span == 'contiguous notes and chords'
             or isinstance(self.span, (tuple, list))):

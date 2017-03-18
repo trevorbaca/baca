@@ -152,7 +152,7 @@ class StemTremoloSpecifier(abjad.abctools.AbjadObject):
         Returns none.
         '''
         pattern = self.pattern or abjad.select_all()
-        selector = self.selector or baca.select_pitched_heads()
+        selector = self.selector or baca.select_plt_heads()
         selections = selector(argument)
         selections = baca.MusicMaker._normalize_selections(selections)
         for selection in selections:

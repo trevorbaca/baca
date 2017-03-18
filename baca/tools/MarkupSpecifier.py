@@ -18,8 +18,8 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.tools.FigureRhythmSpecifier(
-            ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+            ...     baca.tools.MusicRhythmSpecifier(
+            ...         rhythm_maker=baca.tools.MusicRhythmMaker(
             ...             talea=abjad.rhythmmakertools.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],
             ...                 denominator=32,
@@ -108,7 +108,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
         '''
         if not argument or self.markup is None:
             return
-        selector = self.selector or baca.select_pitched_head(0)
+        selector = self.selector or baca.select_plt_head(0)
         selections = selector(argument)
         selections = baca.MusicMaker._normalize_selections(selections)
         for selection in selections:
@@ -144,8 +144,8 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
                 ...     baca.tools.MarkupSpecifier(
                 ...         markup=abjad.Markup('*'),
                 ...         ),
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...     baca.tools.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
                 ...                 denominator=32,
@@ -200,8 +200,8 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...     baca.tools.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
                 ...                 denominator=32,
@@ -217,7 +217,7 @@ class MarkupSpecifier(abjad.abctools.AbjadObject):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.tools.MarkupSpecifier(
                 ...         markup=abjad.Markup('*'),
-                ...         selector=baca.select_pitched_heads(),
+                ...         selector=baca.select_plt_heads(),
                 ...         ),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)

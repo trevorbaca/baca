@@ -1018,7 +1018,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            Figure-maker (first stage only):
+            Music-maker (first stage only):
 
             ::
 
@@ -1080,7 +1080,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            Figure-maker (last stage only):
+            Music-maker (last stage only):
 
             ::
 
@@ -1142,7 +1142,7 @@ class RegisterInterpolationSpecifier(abjad.abctools.AbjadObject):
 
         ..  container:: example
 
-            Figure-maker (each stage registered separately):
+            Music-maker (each stage registered separately):
 
             ::
 

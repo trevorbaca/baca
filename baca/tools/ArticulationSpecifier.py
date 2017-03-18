@@ -23,8 +23,8 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
             ...     baca.tools.ArticulationSpecifier(
             ...         articulations=['>'],
             ...         ),
-            ...     baca.tools.FigureRhythmSpecifier(
-            ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+            ...     baca.tools.MusicRhythmSpecifier(
+            ...         rhythm_maker=baca.tools.MusicRhythmMaker(
             ...             talea=abjad.rhythmmakertools.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],
             ...                 denominator=32,
@@ -212,7 +212,7 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
         if not self.articulations:
             return
         articulations = abjad.CyclicTuple(self.articulations)
-        selector = self.selector or baca.select_pitched_heads()
+        selector = self.selector or baca.select_plt_heads()
         selections = selector(argument)
         selections = baca.MusicMaker._normalize_selections(selections)
         for selection in selections:
@@ -254,8 +254,8 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['>'],
                 ...         ),
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...     baca.tools.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
                 ...                 denominator=32,
@@ -315,8 +315,8 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 ...             '>', None,
                 ...             ],
                 ...         ),
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...     baca.tools.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
                 ...                 denominator=32,
@@ -376,8 +376,8 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 ...             '>', '.',
                 ...             ],
                 ...         ),
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...     baca.tools.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
                 ...                 denominator=32,
@@ -437,8 +437,8 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 ...             ('>', '-'), '.',
                 ...             ],
                 ...         ),
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...     baca.tools.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
                 ...                 denominator=32,
@@ -494,8 +494,8 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['f'],
                 ...         ),
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...     baca.tools.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
                 ...                 denominator=32,
@@ -563,8 +563,8 @@ class ArticulationSpecifier(abjad.abctools.AbjadObject):
                 ...     baca.tools.ArticulationSpecifier(
                 ...         articulations=['>'],
                 ...         ),
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...     baca.tools.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
                 ...                 denominator=32,

@@ -19,7 +19,7 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.tools.SpannerSpecifier(
-            ...         selector=baca.select_leaves_in_tuplets(),
+            ...         selector=baca.select_leaves_in_each_tuplet(),
             ...         spanner=abjad.Slur(),
             ...         ),
             ...     )
@@ -77,7 +77,7 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
             ...     baca.even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.tools.SpannerSpecifier(
-            ...         selector=baca.select_leaves_in_tuplets(),
+            ...         selector=baca.select_leaves_in_each_tuplet(),
             ...         spanner=abjad.Slur(),
             ...         ),
             ...     )

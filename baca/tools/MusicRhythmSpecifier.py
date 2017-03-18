@@ -3,8 +3,8 @@ import abjad
 import baca
 
 
-class FigureRhythmSpecifier(abjad.abctools.AbjadObject):
-    r'''Figure rhythm specifier.
+class MusicRhythmSpecifier(abjad.abctools.AbjadObject):
+    r'''Music rhythm specifier.
 
     ::
 
@@ -15,8 +15,8 @@ class FigureRhythmSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> baca.tools.FigureRhythmSpecifier()
-            FigureRhythmSpecifier()
+            >>> baca.tools.MusicRhythmSpecifier()
+            MusicRhythmSpecifier()
 
     '''
 

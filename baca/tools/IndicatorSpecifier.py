@@ -21,8 +21,8 @@ class IndicatorSpecifier(abjad.abctools.AbjadObject):
             ...     baca.tools.IndicatorSpecifier(
             ...         indicators=[abjad.Fermata()],
             ...         ),
-            ...     baca.tools.FigureRhythmSpecifier(
-            ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+            ...     baca.tools.MusicRhythmSpecifier(
+            ...         rhythm_maker=baca.tools.MusicRhythmMaker(
             ...             talea=abjad.rhythmmakertools.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],
             ...                 denominator=32,
@@ -207,7 +207,7 @@ class IndicatorSpecifier(abjad.abctools.AbjadObject):
         if self.indicators is None:
             return
         indicators = abjad.CyclicTuple(self.indicators)
-        selector = self.selector or baca.select_pitched_heads()
+        selector = self.selector or baca.select_plt_heads()
         selections = selector(argument)
         selections = baca.MusicMaker._normalize_selections(selections)
         for selection in selections:
@@ -247,8 +247,8 @@ class IndicatorSpecifier(abjad.abctools.AbjadObject):
                 ...     baca.tools.IndicatorSpecifier(
                 ...         indicators=[abjad.Fermata()],
                 ...         ),
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...     baca.tools.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
                 ...                 denominator=32,
@@ -308,8 +308,8 @@ class IndicatorSpecifier(abjad.abctools.AbjadObject):
                 ...             abjad.Fermata(), None,
                 ...             ],
                 ...         ),
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...     baca.tools.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
                 ...                 denominator=32,

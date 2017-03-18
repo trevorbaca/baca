@@ -90,7 +90,7 @@ class MarkupLibrary(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.markup(
                 ...         'più mosso',
-                ...         baca.select_pitched_head_in_tuplet(1, 0),
+                ...         baca.select_plt_head_in_tuplet(1, 0),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -148,7 +148,7 @@ class MarkupLibrary(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.markup(
                 ...         '*',
-                ...         baca.select_pitched_heads_in_tuplet(1),
+                ...         baca.select_plt_heads_in_tuplet(1),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),

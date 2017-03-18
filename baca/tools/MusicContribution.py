@@ -3,8 +3,8 @@ import abjad
 import baca
 
 
-class FigureContribution(abjad.abctools.AbjadValueObject):
-    r'''Figure contribution.
+class MusicContribution(abjad.abctools.AbjadValueObject):
+    r'''Music contribution.
 
     ::
 
@@ -15,17 +15,18 @@ class FigureContribution(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> baca.tools.FigureContribution()
-            FigureContribution()
+            >>> baca.tools.MusicContribution()
+            MusicContribution()
 
     '''
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Segments'
+    __documentation_section__ = 'Music'
 
     __slots__ = (
         '_anchor',
+        '_color_selector_result',
         '_figure_name',
         '_hide_time_signature',
         '_selections',
@@ -38,6 +39,7 @@ class FigureContribution(abjad.abctools.AbjadValueObject):
     def __init__(
         self,
         anchor=None,
+        color_selector_result=None,
         figure_name=None,
         hide_time_signature=None,
         selections=None,
@@ -50,6 +52,7 @@ class FigureContribution(abjad.abctools.AbjadValueObject):
             message = message.format(anchor)
             raise TypeError(message)
         self._anchor = anchor
+        self._color_selector_result = color_selector_result
         self._figure_name = figure_name
         if hide_time_signature is not None:
             hide_time_signature = bool(hide_time_signature)
@@ -95,6 +98,14 @@ class FigureContribution(abjad.abctools.AbjadValueObject):
         Returns anchor specifier or none.
         '''
         return self._anchor
+
+    @property
+    def color_selector_result(self):
+        r'''Gets color selector result.
+
+        Returns selector result or none.
+        '''
+        return self._color_selector_result
 
     @property
     def figure_name(self):

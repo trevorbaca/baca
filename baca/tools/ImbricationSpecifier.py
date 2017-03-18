@@ -332,8 +332,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             ...     baca.tools.ArticulationSpecifier(
             ...         articulations=['.'],
             ...     ),
-            ...     baca.tools.FigureRhythmSpecifier(
-            ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+            ...     baca.tools.MusicRhythmSpecifier(
+            ...         rhythm_maker=baca.tools.MusicRhythmMaker(
             ...             talea=abjad.rhythmmakertools.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
@@ -551,8 +551,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...     baca.tools.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
@@ -1315,7 +1315,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
         specifiers = self.specifiers or []
         selections = container[:]
         for specifier in specifiers:
-            if isinstance(specifier, baca.tools.FigureRhythmSpecifier):
+            if isinstance(specifier, baca.tools.MusicRhythmSpecifier):
                 continue
             if isinstance(specifier, baca.tools.RhythmSpecifier):
                 continue
@@ -2477,8 +2477,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...     baca.tools.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5],
                 ...                 denominator=32,

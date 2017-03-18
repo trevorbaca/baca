@@ -20,7 +20,7 @@ class FloatingSelection(abjad.abctools.AbjadValueObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Figures'
+    __documentation_section__ = 'Music'
 
     __slots__ = (
         '_selection',

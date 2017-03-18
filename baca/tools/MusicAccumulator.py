@@ -4,7 +4,7 @@ import baca
 
 
 class MusicAccumulator(abjad.abctools.AbjadObject):
-    r'''Figure-accumulator.
+    r'''Music-accumulator.
 
     ::
 
@@ -14,7 +14,7 @@ class MusicAccumulator(abjad.abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Figures'
+    __documentation_section__ = 'Music'
 
     __slots__ = (
         '_current_offset',
@@ -226,8 +226,8 @@ class MusicAccumulator(abjad.abctools.AbjadObject):
             abjad.rhythmmakertools.BeamSpecifier(
                 beam_divisions_together=True,
                 ),
-            baca.tools.FigureRhythmSpecifier(
-                rhythm_maker=baca.tools.FigureRhythmMaker(
+            baca.tools.MusicRhythmSpecifier(
+                rhythm_maker=baca.tools.MusicRhythmMaker(
                     talea=abjad.rhythmmakertools.Talea(
                         counts=[1],
                         denominator=16,

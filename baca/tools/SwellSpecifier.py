@@ -174,7 +174,7 @@ class SwellSpecifier(abjad.abctools.AbjadObject):
 
         Returns none.
         '''
-        selector = self.selector or baca.select_pitched_leaves()
+        selector = self.selector or baca.select_pls()
         selections = selector(argument)
         selections = baca.MusicMaker._normalize_selections(selections)
         for selection in selections:

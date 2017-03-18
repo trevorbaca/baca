@@ -4331,8 +4331,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             Colors unregistered pitches by default:
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...     baca.tools.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             acciaccatura_specifiers=[
                 ...                 baca.tools.AcciaccaturaSpecifier(),
                 ...                 ],
@@ -4579,8 +4579,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             Ignores unregistered pitches:
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...     baca.tools.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             acciaccatura_specifiers=[
                 ...                 baca.tools.AcciaccaturaSpecifier(),
                 ...                 ],

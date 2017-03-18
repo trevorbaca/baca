@@ -3,8 +3,8 @@ import abjad
 import baca
 
 
-class FigurePitchSpecifier(abjad.abctools.AbjadObject):
-    r'''Figure pitch specifier.
+class MusicPitchSpecifier(abjad.abctools.AbjadObject):
+    r'''Music pitch specifier.
 
     ::
 
@@ -22,7 +22,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
             >>> expression = baca.sequence().accumulate([transposition])
             >>> expression = expression.join()[0]
             >>> music_maker = baca.MusicMaker(
-            ...     baca.tools.FigurePitchSpecifier(
+            ...     baca.tools.MusicPitchSpecifier(
             ...         expressions=[expression],
             ...         to_pitch_classes=True,
             ...         ),
@@ -106,14 +106,11 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
                 }
             >>
 
-    Figure pitch specifiers tell figure-makers what to do with figure tokens.
-
-    Figure-makers interpret figure pitch specifiers prior to other specifiers.
     '''
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Figures'
+    __documentation_section__ = 'Music'
 
     __slots__ = (
         '_expressions',
@@ -149,7 +146,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.FigurePitchSpecifier()
+                >>> specifier = baca.tools.MusicPitchSpecifier()
                 >>> specifier() is None
                 True
 
@@ -159,7 +156,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.FigurePitchSpecifier()
+                >>> specifier = baca.tools.MusicPitchSpecifier()
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> for collection in specifier(collections):
                 ...     collection
@@ -186,12 +183,12 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> baca.tools.FigurePitchSpecifier()
-                FigurePitchSpecifier()
+                >>> baca.tools.MusicPitchSpecifier()
+                MusicPitchSpecifier()
 
         Returns string.
         '''
-        superclass = super(FigurePitchSpecifier, self)
+        superclass = super(MusicPitchSpecifier, self)
         return superclass.__repr__()
 
     ### PRIVATE METHODS ###
@@ -234,7 +231,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
                 >>> transposition = baca.pitch_class_segment().transpose(n=3)
                 >>> transposition = baca.sequence().map(transposition)
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.FigurePitchSpecifier(
+                ...     baca.tools.MusicPitchSpecifier(
                 ...         expressions=[transposition],
                 ...         to_pitch_classes=True,
                 ...         ),
@@ -279,7 +276,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.FigurePitchSpecifier()
+                >>> specifier = baca.tools.MusicPitchSpecifier()
                 >>> specifier.expressions is None
                 True
 
@@ -298,7 +295,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.FigurePitchSpecifier(
+                >>> specifier = baca.tools.MusicPitchSpecifier(
                 ...     remove_duplicate_pitch_classes=True
                 ...     )
                 >>> collections = [[0, 2, 10], [18, 16, 15, 22, 19], [9]]
@@ -321,7 +318,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.FigurePitchSpecifier(
+                >>> specifier = baca.tools.MusicPitchSpecifier(
                 ...     remove_duplicates=True
                 ...     )
                 >>> collections = [[0, 2, 10], [18, 16, 15, 10, 19], [9]]
@@ -391,7 +388,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.FigurePitchSpecifier(
+                ...     baca.tools.MusicPitchSpecifier(
                 ...         to_pitch_classes=True,
                 ...         ),
                 ...     )
@@ -433,7 +430,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
         
             ::
 
-                >>> specifier = baca.tools.FigurePitchSpecifier(
+                >>> specifier = baca.tools.MusicPitchSpecifier(
                 ...     to_pitch_classes=True,
                 ...     )
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -448,7 +445,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
         
             ::
 
-                >>> specifier = baca.tools.FigurePitchSpecifier(
+                >>> specifier = baca.tools.MusicPitchSpecifier(
                 ...     to_pitch_classes=True,
                 ...     )
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -466,7 +463,7 @@ class FigurePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.FigurePitchSpecifier()
+                >>> specifier = baca.tools.MusicPitchSpecifier()
                 >>> specifier.to_pitch_classes is None
                 True
 

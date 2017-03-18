@@ -17,7 +17,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+            >>> rhythm_maker = baca.tools.MusicRhythmMaker(
             ...     acciaccatura_specifiers=[
             ...         baca.tools.AcciaccaturaSpecifier()
             ...         ],
@@ -191,7 +191,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
                 ...         baca.tools.AcciaccaturaSpecifier()
                 ...         ],
@@ -276,7 +276,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
                 ...         baca.tools.AcciaccaturaSpecifier(
                 ...             durations=[(1, 8)],
@@ -375,7 +375,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
                 ...         baca.tools.AcciaccaturaSpecifier()
                 ...         ],
@@ -460,7 +460,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
                 ...         baca.tools.AcciaccaturaSpecifier(
                 ...             lmr_specifier=baca.tools.LMRSpecifier(
@@ -551,7 +551,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
                 ...         baca.tools.AcciaccaturaSpecifier(
                 ...             lmr_specifier=baca.tools.LMRSpecifier(
@@ -643,7 +643,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
                 ...         baca.tools.AcciaccaturaSpecifier(
                 ...             lmr_specifier=baca.tools.LMRSpecifier(
@@ -739,7 +739,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
                 ...         baca.tools.AcciaccaturaSpecifier(
                 ...             lmr_specifier=baca.tools.LMRSpecifier(
@@ -838,7 +838,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
                 ...         baca.tools.AcciaccaturaSpecifier()
                 ...         ],
@@ -923,7 +923,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
                 ...         baca.tools.AcciaccaturaSpecifier(
                 ...             pattern=abjad.select_last(),
@@ -1002,7 +1002,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> rhythm_maker = baca.tools.FigureRhythmMaker(
+                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
                 ...         baca.tools.AcciaccaturaSpecifier(
                 ...             pattern=abjad.select_every([1], period=2),

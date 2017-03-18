@@ -21,8 +21,8 @@ class ColorSpecifier(abjad.abctools.AbjadObject):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.tools.ColorSpecifier(color='red'),
-            ...     baca.tools.FigureRhythmSpecifier(
-            ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+            ...     baca.tools.MusicRhythmSpecifier(
+            ...         rhythm_maker=baca.tools.MusicRhythmMaker(
             ...             talea=abjad.rhythmmakertools.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],
             ...                 denominator=32,
@@ -313,6 +313,7 @@ class ColorSpecifier(abjad.abctools.AbjadObject):
 
     __slots__ = (
         '_color',
+        '_debug',
         '_selector',
         )
 
@@ -321,11 +322,15 @@ class ColorSpecifier(abjad.abctools.AbjadObject):
     def __init__(
         self,
         color=None,
+        debug=None,
         selector=None,
         ):
         if color is not None:
             assert isinstance(color, (list, str)), repr(color)
         self._color = color
+        if debug is not None:
+            debug = bool(debug)
+        self._debug = debug
         if selector is not None:
             assert isinstance(selector, abjad.Selector)
         self._selector = selector
@@ -335,7 +340,7 @@ class ColorSpecifier(abjad.abctools.AbjadObject):
     def __call__(self, argument=None):
         r'''Calls specifier on `argument`.
 
-        Returns none.
+        Returns selector result for SelectorLibrary docs.
         '''
         if not argument:
             return
@@ -348,13 +353,16 @@ class ColorSpecifier(abjad.abctools.AbjadObject):
         else:
             raise TypeError(self.color)
         selector = self.selector or baca.select_leaves()
-        #print(format(selector))
-        #print()
-        selections = selector(argument)
-        #print(selections)
-        selections = baca.MusicMaker._normalize_selections(selections)
-        selections = abjad.select(selections)
-        abjad.label(selections).color_alternating(colors)
+        result = selector(argument)
+        if self.debug:
+            print(format(selector))
+            print('---')
+            print(argument)
+            print('---')
+            print(result)
+            print('---')
+        abjad.label(result).color_alternating(colors)
+        return result
 
     ### PUBLIC PROPERTIES ###
 
@@ -369,6 +377,18 @@ class ColorSpecifier(abjad.abctools.AbjadObject):
         Returns string or none.
         '''
         return self._color
+
+    @property
+    def debug(self):
+        r'''Is true when specifier prints calltime debug messages.
+
+        Defaults to none.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        '''
+        return self._debug
 
     @property
     def selector(self):

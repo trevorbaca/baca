@@ -6,7 +6,7 @@ import copy
 
 
 class MusicMaker(abjad.abctools.AbjadObject):
-    r'''Figure-maker.
+    r'''Music-maker.
 
     ::
 
@@ -58,7 +58,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Figures'
+    __documentation_section__ = 'Music'
 
     __slots__ = (
         '_allow_repeat_pitches',
@@ -614,7 +614,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
             selections = [abjad.select(tuplet)]
             specifiers = [
                 _ for _ in specifiers
-                if not isinstance(_, baca.tools.FigureRhythmSpecifier)
+                if not isinstance(_, baca.tools.MusicRhythmSpecifier)
                 ]
         else:
             collections = self._coerce_collections(collections)
@@ -642,11 +642,16 @@ class MusicMaker(abjad.abctools.AbjadObject):
             container,
             color_unregistered_pitches=color_unregistered_pitches,
             )
+        specifiers = self._apply_tie_specifiers(selections, specifiers)
         specifiers = self._apply_cluster_specifiers(selections, specifiers)
         specifiers = self._apply_nesting_specifiers(selections, specifiers)
         specifiers = self._apply_register_specifiers(selections, specifiers)
         imbricated_selections, specifiers = self._apply_imbrication_specifiers(
             container,
+            specifiers,
+            )
+        specifiers, color_selector_result = self._apply_color_specifiers(
+            selections,
             specifiers,
             )
         self._apply_remaining_specifiers(selections, specifiers)
@@ -670,8 +675,9 @@ class MusicMaker(abjad.abctools.AbjadObject):
         selections.update(imbricated_selections)
         for value in selections.values():
             assert isinstance(value, abjad.Selection), repr(value)
-        return baca.tools.FigureContribution(
+        return baca.tools.MusicContribution(
             anchor=anchor,
+            color_selector_result=color_selector_result,
             figure_name=figure_name,
             hide_time_signature=hide_time_signature,
             selections=selections,
@@ -725,12 +731,23 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 specifiers_.append(specifier)
         return specifiers_
 
+    def _apply_color_specifiers(self, selections, specifiers):
+        assert self._all_are_selections(selections), repr(selections)
+        specifiers_ = []
+        color_selector_result = None
+        for specifier in specifiers:
+            if isinstance(specifier, baca.tools.ColorSpecifier):
+                color_selector_result = specifier(selections)
+            else:
+                specifiers_.append(specifier)
+        return specifiers_, color_selector_result
+
     def _apply_figure_pitch_specifiers(self, collections, specifiers):
         prototype = (baca.CollectionList, list, abjad.Sequence)
         assert isinstance(collections, prototype), repr(collections)
         specifiers_, unused_specifiers = [], []
         for specifier in specifiers:
-            if isinstance(specifier, baca.tools.FigurePitchSpecifier):
+            if isinstance(specifier, baca.tools.MusicPitchSpecifier):
                 collections = specifier(collections)
             else:
                 unused_specifiers.append(specifier)
@@ -794,7 +811,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
         selections = len(collections) * [None]
         rhythm_specifiers, rest_affix_specifiers, specifiers_ = [], [], []
         for specifier in specifiers:
-            if isinstance(specifier, baca.tools.FigureRhythmSpecifier):
+            if isinstance(specifier, baca.tools.MusicRhythmSpecifier):
                 rhythm_specifiers.append(specifier)
             elif isinstance(specifier, baca.tools.RestAffixSpecifier):
                 rest_affix_specifiers.append(specifier)
@@ -846,6 +863,17 @@ class MusicMaker(abjad.abctools.AbjadObject):
         for key in state_manifest:
             value = state_manifest[key]
             setattr(self, key, value)
+
+    def _apply_tie_specifiers(self, selections, specifiers):
+        assert self._all_are_selections(selections), repr(selections)
+        specifiers_ = []
+        for specifier in specifiers:
+            if (isinstance(specifier, baca.tools.SpannerSpecifier) and
+                isinstance(specifier.spanner, abjad.Tie)):
+                specifier(selections)
+            else:
+                specifiers_.append(specifier)
+        return specifiers_
 
     @staticmethod
     def _check_well_formedness(selections):
@@ -981,8 +1009,8 @@ class MusicMaker(abjad.abctools.AbjadObject):
 
     @staticmethod
     def _make_default_rhythm_specifier():
-        return baca.tools.FigureRhythmSpecifier(
-            rhythm_maker=baca.tools.FigureRhythmMaker(),
+        return baca.tools.MusicRhythmSpecifier(
+            rhythm_maker=baca.tools.MusicRhythmMaker(),
             )
 
     def _make_state_manifest(self):
@@ -2437,17 +2465,17 @@ class MusicMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...     baca.tools.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=8,
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     baca.tools.FigureRhythmSpecifier(
+                ...     baca.tools.MusicRhythmSpecifier(
                 ...         pattern=abjad.select_first(),
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
@@ -2496,17 +2524,17 @@ class MusicMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...     baca.tools.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     baca.tools.FigureRhythmSpecifier(
+                ...     baca.tools.MusicRhythmSpecifier(
                 ...         pattern=abjad.Pattern(indices=[0, -1]),
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
@@ -2555,8 +2583,8 @@ class MusicMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...     baca.tools.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
@@ -2564,9 +2592,9 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 ...             time_treatments=[1],
                 ...             ),
                 ...         ),
-                ...     baca.tools.FigureRhythmSpecifier(
+                ...     baca.tools.MusicRhythmSpecifier(
                 ...         pattern=abjad.Pattern(indices=[0, -1]),
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
@@ -2616,17 +2644,17 @@ class MusicMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...     baca.tools.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     baca.tools.FigureRhythmSpecifier(
+                ...     baca.tools.MusicRhythmSpecifier(
                 ...         pattern=abjad.Pattern(indices=[0, -1]),
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
@@ -2677,17 +2705,17 @@ class MusicMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.FigureRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...     baca.tools.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     baca.tools.FigureRhythmSpecifier(
+                ...     baca.tools.MusicRhythmSpecifier(
                 ...         pattern=abjad.Pattern(indices=[0, -1]),
-                ...         rhythm_maker=baca.tools.FigureRhythmMaker(
+                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
@@ -2858,7 +2886,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
 
         Returns LilyPond file.
         '''
-        assert isinstance(figure_contribution, baca.tools.FigureContribution)
+        assert isinstance(figure_contribution, baca.tools.MusicContribution)
         return abjad.rhythmmakertools.make_lilypond_file(
             figure_contribution.selections,
             time_signatures=time_signatures,

@@ -257,7 +257,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
         self._lmr_specifier = lmr_specifier
         if time_treatments is not None:
             assert isinstance(time_treatments, (list, tuple))
-            is_time_treatment = baca.tools.FigureRhythmMaker._is_time_treatment
+            is_time_treatment = baca.tools.MusicRhythmMaker._is_time_treatment
             for time_treatment in time_treatments:
                 assert is_time_treatment(time_treatment), repr(time_treatment)
         self._time_treatments = time_treatments
