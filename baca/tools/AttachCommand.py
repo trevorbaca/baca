@@ -3,8 +3,8 @@ import abjad
 import baca
 
 
-class IndicatorSpecifier(abjad.abctools.AbjadObject):
-    r'''Indicator specifier.
+class AttachCommand(abjad.abctools.AbjadObject):
+    r'''Attach command.
 
     ::
 
@@ -18,8 +18,8 @@ class IndicatorSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.tools.IndicatorSpecifier(
-            ...         indicators=[abjad.Fermata()],
+            ...     baca.tools.AttachCommand(
+            ...         arguments=[abjad.Fermata()],
             ...         ),
             ...     baca.tools.MusicRhythmSpecifier(
             ...         rhythm_maker=baca.tools.MusicRhythmMaker(
@@ -81,12 +81,13 @@ class IndicatorSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
+            >>> specifiers = segment_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.tools.IndicatorSpecifier(
-            ...         indicators=[abjad.Fermata()],
+            ...     baca.tools.AttachCommand(
+            ...         arguments=[abjad.Fermata()],
             ...         ),
             ...     )
 
@@ -176,10 +177,10 @@ class IndicatorSpecifier(abjad.abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
-        '_indicators',
+        '_arguments',
         '_selector',
         )
 
@@ -187,10 +188,10 @@ class IndicatorSpecifier(abjad.abctools.AbjadObject):
 
     def __init__(
         self,
-        indicators=None,
+        arguments=None,
         selector=None,
         ):
-        self._indicators = indicators
+        self._arguments = arguments
         if selector is not None:
             assert isinstance(selector, abjad.Selector)
         self._selector = selector
@@ -204,24 +205,24 @@ class IndicatorSpecifier(abjad.abctools.AbjadObject):
         '''
         if not argument:
             return
-        if self.indicators is None:
+        if self.arguments is None:
             return
-        indicators = abjad.CyclicTuple(self.indicators)
+        arguments = abjad.CyclicTuple(self.arguments)
         selector = self.selector or baca.select_plt_heads()
         selections = selector(argument)
         selections = baca.MusicMaker._normalize_selections(selections)
         for selection in selections:
             leaves = abjad.select(selection).by_leaf()
             for i, leaf in enumerate(leaves):
-                indicators_ = indicators[i]
-                indicators_ = self._token_to_indicators(indicators_)
-                for indicator_ in indicators_:
-                    abjad.attach(indicator_, leaf)
+                arguments_ = arguments[i]
+                arguments_ = self._token_to_arguments(arguments_)
+                for argument_ in arguments_:
+                    abjad.attach(argument_, leaf)
 
     ### PRIVATE METHODS ###
 
     @staticmethod
-    def _token_to_indicators(token):
+    def _token_to_arguments(token):
         result = []
         if not isinstance(token, (tuple, list)):
             token = [token]
@@ -234,8 +235,8 @@ class IndicatorSpecifier(abjad.abctools.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def indicators(self):
-        r'''Gets indicators.
+    def arguments(self):
+        r'''Gets arguments.
 
         ..  container:: example
 
@@ -244,8 +245,8 @@ class IndicatorSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.IndicatorSpecifier(
-                ...         indicators=[abjad.Fermata()],
+                ...     baca.tools.AttachCommand(
+                ...         arguments=[abjad.Fermata()],
                 ...         ),
                 ...     baca.tools.MusicRhythmSpecifier(
                 ...         rhythm_maker=baca.tools.MusicRhythmMaker(
@@ -301,8 +302,8 @@ class IndicatorSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.IndicatorSpecifier(
-                ...         indicators=[
+                ...     baca.tools.AttachCommand(
+                ...         arguments=[
                 ...             abjad.Fermata(), None, None,
                 ...             abjad.Fermata(), None, None,
                 ...             abjad.Fermata(), None,
@@ -357,11 +358,11 @@ class IndicatorSpecifier(abjad.abctools.AbjadObject):
 
         Defaults to none.
 
-        Set to indicators or none.
+        Set to arguments or none.
 
-        Returns indicators or none.
+        Returns arguments or none.
         '''
-        return self._indicators
+        return self._arguments
 
     @property
     def selector(self):

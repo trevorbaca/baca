@@ -4,8 +4,8 @@ import copy
 import itertools
 
 
-class MicrotonalDeviationSpecifier(abjad.abctools.AbjadObject):
-    r'''Microtonal deviation specifier.
+class MicrotonalDeviationCommand(abjad.abctools.AbjadObject):
+    r'''Microtonal deviation command.
 
     ::
 
@@ -25,11 +25,12 @@ class MicrotonalDeviationSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
+            >>> specifiers = segment_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.pitches('E4'),
             ...     baca.even_runs(),
-            ...     baca.tools.MicrotonalDeviationSpecifier(
+            ...     baca.tools.MicrotonalDeviationCommand(
             ...         number_lists=([0, 0.5, 0, -0.5],),
             ...         ),
             ...     )
@@ -120,7 +121,7 @@ class MicrotonalDeviationSpecifier(abjad.abctools.AbjadObject):
 
     ### CLASS VARIABLES ##
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_deposit_annotations',
@@ -146,7 +147,7 @@ class MicrotonalDeviationSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, logical_ties=None):
-        r'''Calls microtonal deviation specifier.
+        r'''Calls command on `logical_ties`.
 
         Returns none.
         '''
@@ -192,7 +193,7 @@ class MicrotonalDeviationSpecifier(abjad.abctools.AbjadObject):
 
     @property
     def deposit_annotations(self):
-        r'''Gets deposit annotations of specifier.
+        r'''Gets deposit annotations of command.
 
         These will be attached to every note affected at call time.
 
@@ -208,7 +209,7 @@ class MicrotonalDeviationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.MicrotonalDeviationSpecifier(
+                >>> command = baca.tools.MicrotonalDeviationCommand(
                 ...     number_lists=(
                 ...         [0, 1, 2, 1],
                 ...         ),
@@ -216,7 +217,7 @@ class MicrotonalDeviationSpecifier(abjad.abctools.AbjadObject):
         
             ::
 
-                >>> specifier.number_lists
+                >>> command.number_lists
                 ([0, 1, 2, 1],)
 
         Set to number lists or none.

@@ -4,8 +4,8 @@ import baca
 
 
 # TODO: write examples
-class SettingSpecifier(abjad.abctools.AbjadObject):
-    r'''Setting specifier.
+class SetCommand(abjad.abctools.AbjadObject):
+    r'''Set command.
 
     ::
 
@@ -16,14 +16,14 @@ class SettingSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> baca.tools.SettingSpecifier()
-            SettingSpecifier()
+            >>> baca.tools.SetCommand()
+            SetCommand()
 
     '''
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_context_name',
@@ -55,7 +55,7 @@ class SettingSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls specifier on `argument`.
+        r'''Calls command on `argument`.
 
         Returns none.
         '''

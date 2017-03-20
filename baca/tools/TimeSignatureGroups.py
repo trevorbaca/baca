@@ -136,7 +136,7 @@ class TimeSignatureGroups(abjad.abctools.AbjadObject):
 
         Returns LilyPond file.
         ''' 
-        staff = abjad.scoretools.Staff()
+        staff = abjad.Staff()
         staff.consists_commands.append('Horizontal_bracket_engraver')
         for group_index, group in enumerate(self.groups):
             measure_group = self._make_measure_group(group)
@@ -157,7 +157,7 @@ class TimeSignatureGroups(abjad.abctools.AbjadObject):
         abjad.override(staff).rest.transparent = True
         abjad.override(staff).text_script.extra_offset = (slide, 0)
         abjad.override(staff).text_script.staff_padding = 4.5
-        score = abjad.scoretools.Score([staff])
+        score = abjad.Score([staff])
         moment = abjad.schemetools.SchemeMoment((1, 8))
         abjad.set_(score).proportional_notation_duration = moment
         lilypond_file = abjad.lilypondfiletools.LilyPondFile.new(score)
@@ -169,11 +169,10 @@ class TimeSignatureGroups(abjad.abctools.AbjadObject):
     def _make_measure_group(self, group):
         measure_group = []
         for time_signature in group:
-            multiplier = abjad.durationtools.Multiplier(
-                time_signature.duration)
-            rest = abjad.scoretools.Rest(abjad.durationtools.Duration(1))
+            multiplier = abjad.Multiplier(time_signature.duration)
+            rest = abjad.Rest(abjad.Duration(1))
             abjad.attach(multiplier, rest)
-            measure = abjad.scoretools.Measure(time_signature, [rest])
+            measure = abjad.Measure(time_signature, [rest])
             measure.always_format_time_signature = True
             measure_group.append(measure)
         return measure_group

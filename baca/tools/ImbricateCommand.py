@@ -4,8 +4,8 @@ import baca
 import copy
 
 
-class ImbricationSpecifier(abjad.abctools.AbjadObject):
-    r'''Imbrication specifier.
+class ImbricateCommand(abjad.abctools.AbjadObject):
+    r'''Imbricate command.
 
     ::
 
@@ -34,7 +34,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
-            ...     baca.tools.ImbricationSpecifier(
+            ...     baca.tools.ImbricateCommand(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
             ...         ),
@@ -164,13 +164,13 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
-            ...     baca.tools.ImbricationSpecifier(
+            ...     baca.tools.ImbricateCommand(
             ...         'Voice 1',
             ...         [2, 19, 9],
             ...         baca.beam_everything(),
             ...         baca.staccati(),
             ...         ),
-            ...     baca.tools.ImbricationSpecifier(
+            ...     baca.tools.ImbricateCommand(
             ...         'Voice 3',
             ...         [16, 10, 18],
             ...         baca.beam_everything(),
@@ -329,9 +329,11 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.tools.ArticulationSpecifier(
-            ...         articulations=['.'],
-            ...     ),
+            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...         beam_divisions_together=True,
+            ...         beam_rests=True,
+            ...         ),
+            ...     baca.staccati(),
             ...     baca.tools.MusicRhythmSpecifier(
             ...         rhythm_maker=baca.tools.MusicRhythmMaker(
             ...             talea=abjad.rhythmmakertools.Talea(
@@ -340,10 +342,6 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             ...                 ),
             ...             time_treatments=[1],
             ...             ),
-            ...         ),
-            ...     abjad.rhythmmakertools.BeamSpecifier(
-            ...         beam_divisions_together=True,
-            ...         beam_rests=True,
             ...         ),
             ...     )
 
@@ -357,7 +355,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
-            ...     baca.tools.ImbricationSpecifier(
+            ...     baca.tools.ImbricateCommand(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
             ...         baca.accents(),
@@ -487,10 +485,11 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_allow_unused_pitches',
+        '_by_pitch_class',
         '_extend_beam',
         '_hocket',
         '_segment',
@@ -510,6 +509,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
         segment=None,
         *specifiers,
         allow_unused_pitches=None,
+        by_pitch_class=None,
         extend_beam=None,
         hocket=None,
         selector=None,
@@ -523,6 +523,9 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
         if allow_unused_pitches is not None:
             allow_unused_pitches = bool(allow_unused_pitches)
         self._allow_unused_pitches = allow_unused_pitches
+        if by_pitch_class is not None:
+            by_pitch_class = bool(by_pitch_class)
+        self._by_pitch_class = by_pitch_class
         if extend_beam is not None:
             extend_beam = bool(extend_beam)
         self._extend_beam = extend_beam
@@ -542,7 +545,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, container=None):
-        r'''Calls specifier on `container`.
+        r'''Calls command on `container`.
 
         ..  container:: example
 
@@ -573,7 +576,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricationSpecifier(
+                ...     baca.tools.ImbricateCommand(
                 ...         'Voice 1',
                 ...         segment,
                 ...         baca.accents(),
@@ -672,7 +675,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricationSpecifier(
+                ...     baca.tools.ImbricateCommand(
                 ...         'Voice 1',
                 ...         segment,
                 ...         baca.accents(),
@@ -788,7 +791,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     [[0, 2, 10, 18], [16, 15, 23]],
-                ...     baca.tools.ImbricationSpecifier(
+                ...     baca.tools.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 10],
                 ...         baca.staccati(),
@@ -803,7 +806,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     [[19, 13, 9, 8]],
-                ...     baca.tools.ImbricationSpecifier(
+                ...     baca.tools.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [13, 9],
                 ...         baca.staccati(),
@@ -821,31 +824,35 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 ...     ignore_repeat_pitch_classes=True,
                 ...     measures_per_stage=[1, 1],
                 ...     score_template=baca.tools.TwoVoiceStaffScoreTemplate(),
-                ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
+                ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('v2', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'v2',
+                ...     baca.select_stages(1),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=voice_2_selections[0],
                 ...         ),
                 ...     )
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('v2', baca.select_stages(2)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'v2',
+                ...     baca.select_stages(2),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=voice_2_selections[1],
                 ...         ),
                 ...     )
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('v1', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'v1',
+                ...     baca.select_stages(1),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=voice_1_selections[0],
                 ...         ),
                 ...     )
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('v1', baca.select_stages(2)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'v1',
+                ...     baca.select_stages(2),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=voice_1_selections[1],
                 ...         ),
@@ -1006,7 +1013,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricationSpecifier(
+                ...     baca.tools.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         ),
@@ -1120,7 +1127,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricationSpecifier(
+                ...     baca.tools.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         ),
@@ -1240,6 +1247,8 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
         abjad.override(container).tuplet_bracket.stencil = False
         abjad.override(container).tuplet_number.stencil = False
         segment = baca.sequence(self.segment).flatten()
+        if self.by_pitch_class:
+            segment = [abjad.NumberedPitchClass(_) for _ in segment]
         cursor = baca.tools.Cursor(
             segment,
             singletons=True,
@@ -1319,11 +1328,11 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 continue
             if isinstance(specifier, baca.tools.RhythmSpecifier):
                 continue
-            if isinstance(specifier, baca.tools.ImbricationSpecifier):
+            if isinstance(specifier, baca.tools.ImbricateCommand):
                 continue
             if isinstance(specifier, abjad.rhythmmakertools.BeamSpecifier):
                 specifier._detach_all_beams(selections)
-            if isinstance(specifier, baca.tools.NestingSpecifier):
+            if isinstance(specifier, baca.tools.NestCommand):
                 nested_selections = specifier(selections)
             else:
                 specifier(selections)
@@ -1388,13 +1397,11 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.ArticulationSpecifier(
-                ...         articulations=['.'],
-                ...     ),
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         beam_rests=True,
                 ...         ),
+                ...     baca.staccati(),
                 ...     )
 
             ::
@@ -1406,7 +1413,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricationSpecifier(
+                ...     baca.tools.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         baca.accents(),
@@ -1506,13 +1513,11 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.ArticulationSpecifier(
-                ...         articulations=['.'],
-                ...     ),
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         beam_rests=True,
                 ...         ),
+                ...     baca.staccati(),
                 ...     )
 
             ::
@@ -1524,7 +1529,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> result = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricationSpecifier(
+                ...     baca.tools.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         baca.accents(),
@@ -1543,7 +1548,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.ImbricationSpecifier()
+                >>> specifier = baca.tools.ImbricateCommand()
                 >>> specifier.allow_unused_pitches is None
                 True
 
@@ -1552,6 +1557,18 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
         Returns true, false or none.
         '''
         return self._allow_unused_pitches
+
+    @property
+    def by_pitch_class(self):
+        r'''Is true when specifier matches on pitch-class rather than pitch.
+
+        Set to true, false or none.
+
+        Defaults to none.
+
+        Returns true, false or none.
+        '''
+        return self._by_pitch_class
 
     @property
     def extend_beam(self):
@@ -1574,13 +1591,11 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.ArticulationSpecifier(
-                ...         articulations=['.'],
-                ...     ),
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         beam_rests=True,
                 ...         ),
+                ...     baca.staccati(),
                 ...     )
 
             ::
@@ -1593,7 +1608,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricationSpecifier(
+                ...     baca.tools.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         baca.accents(),
@@ -1710,7 +1725,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.ImbricationSpecifier()
+                >>> specifier = baca.tools.ImbricateCommand()
                 >>> specifier.hocket is None
                 True
 
@@ -1739,13 +1754,11 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.ArticulationSpecifier(
-                ...         articulations=['.'],
-                ...     ),
                 ...     abjad.rhythmmakertools.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         beam_rests=True,
                 ...         ),
+                ...     baca.staccati(),
                 ...     )
 
             ::
@@ -1757,7 +1770,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricationSpecifier(
+                ...     baca.tools.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 18, 16, 15],
                 ...         baca.accents(),
@@ -1898,7 +1911,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.ImbricationSpecifier()
+                >>> specifier = baca.tools.ImbricateCommand()
                 >>> specifier.selector is None
                 True
 
@@ -1934,7 +1947,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricationSpecifier(
+                ...     baca.tools.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         abjad.rhythmmakertools.BeamSpecifier(
@@ -2067,7 +2080,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricationSpecifier(
+                ...     baca.tools.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         abjad.rhythmmakertools.BeamSpecifier(
@@ -2210,7 +2223,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricationSpecifier(
+                ...     baca.tools.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         baca.beam_everything(),
@@ -2351,7 +2364,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricationSpecifier(
+                ...     baca.tools.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         abjad.rhythmmakertools.BeamSpecifier(
@@ -2493,7 +2506,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricationSpecifier(
+                ...     baca.tools.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 10, 18, 19, 9],
                 ...         baca.beam_everything(),
@@ -2595,7 +2608,7 @@ class ImbricationSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.ImbricationSpecifier()
+                >>> specifier = baca.tools.ImbricateCommand()
                 >>> specifier.truncate_ties is None
                 True
 

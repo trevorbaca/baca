@@ -19,7 +19,7 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
 
             >>> specifier = baca.tools.ScopedSpecifier(
             ...     ('Violin Music Voice', (1, 4)),
-            ...     baca.tools.ScorePitchSpecifier(
+            ...     baca.tools.ScorePitchCommand(
             ...         source=[7, 1, 3, 4, 5, 11],
             ...         ),
             ...     )
@@ -32,7 +32,7 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
                     voice_name='Violin Music Voice',
                     stages=(1, 4),
                     ),
-                specifier=baca.tools.ScorePitchSpecifier(
+                specifier=baca.tools.ScorePitchCommand(
                     source=datastructuretools.CyclicTuple(
                         [
                             pitchtools.NamedPitch("g'"),
@@ -58,7 +58,7 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
             ...         baca.tools.SimpleScope('Violin Music Voice', (1, 4)),
             ...         baca.tools.SimpleScope('Violin Music Voice', (8, 12)),
             ...         ]),
-            ...     baca.tools.ScorePitchSpecifier(
+            ...     baca.tools.ScorePitchCommand(
             ...         source=[7, 1, 3, 4, 5, 11],
             ...         ),
             ...     )
@@ -79,7 +79,7 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
                             ),
                         ),
                     ),
-                specifier=baca.tools.ScorePitchSpecifier(
+                specifier=baca.tools.ScorePitchCommand(
                     source=datastructuretools.CyclicTuple(
                         [
                             pitchtools.NamedPitch("g'"),
@@ -102,7 +102,7 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
 
             >>> specifier = baca.tools.ScopedSpecifier(
             ...     ('Violin Music Voice', (1, 4)),
-            ...     baca.tools.OctaveDisplacementSpecifier(
+            ...     baca.tools.OctaveDisplacementCommand(
             ...         displacements=[0, 0, 0, 0, 1, 1, 1, 1],
             ...         ),
             ...     )
@@ -115,7 +115,7 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
                     voice_name='Violin Music Voice',
                     stages=(1, 4),
                     ),
-                specifier=baca.tools.OctaveDisplacementSpecifier(
+                specifier=baca.tools.OctaveDisplacementCommand(
                     displacements=datastructuretools.CyclicTuple(
                         [0, 0, 0, 0, 1, 1, 1, 1]
                         ),
@@ -161,7 +161,7 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
 
                 >>> specifier = baca.tools.ScopedSpecifier(
                 ...     ('Violin Music Voice', (1, 4)),
-                ...     baca.tools.ScorePitchSpecifier(
+                ...     baca.tools.ScorePitchCommand(
                 ...         source=[7, 1, 3, 4, 5, 11],
                 ...         ),
                 ...     )
@@ -194,7 +194,7 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
 
                 >>> specifier = baca.tools.ScopedSpecifier(
                 ...     ('Violin Music Voice', (1, 4)),
-                ...     baca.tools.ScorePitchSpecifier(
+                ...     baca.tools.ScorePitchCommand(
                 ...         source=[7, 1, 3, 4, 5, 11],
                 ...         ),
                 ...     )
@@ -202,7 +202,7 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> f(specifier.specifier)
-                baca.tools.ScorePitchSpecifier(
+                baca.tools.ScorePitchCommand(
                     source=datastructuretools.CyclicTuple(
                         [
                             pitchtools.NamedPitch("g'"),

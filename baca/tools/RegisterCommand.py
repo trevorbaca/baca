@@ -3,8 +3,8 @@ import abjad
 import baca
 
 
-class RegisterSpecifier(abjad.abctools.AbjadObject):
-    r"""Register specifier.
+class RegisterCommand(abjad.abctools.AbjadObject):
+    r"""Register command.
 
     ::
 
@@ -21,7 +21,7 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
-            ...     baca.tools.RegisterSpecifier(
+            ...     baca.tools.RegisterCommand(
             ...         registration=abjad.Registration(
             ...             [('[A0, C8]', 15)],
             ...             ),
@@ -69,11 +69,12 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
+            >>> specifiers = segment_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.pitches('G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4'),
             ...     baca.even_runs(),
-            ...     baca.tools.RegisterSpecifier(
+            ...     baca.tools.RegisterCommand(
             ...         registration=abjad.Registration(
             ...             [('[A0, C8]', 15)],
             ...             ),
@@ -166,7 +167,7 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_pattern',
@@ -191,7 +192,7 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls specifier on `argument`.
+        r'''Calls command on `argument`.
 
         ..  container:: example
 
@@ -203,7 +204,7 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{10, 12, 14}],
-                ...     baca.tools.RegisterSpecifier(
+                ...     baca.tools.RegisterCommand(
                 ...         registration=abjad.Registration(
                 ...             [('[A0, C8]', -6)],
                 ...             ),
@@ -276,7 +277,7 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
-                ...     baca.tools.RegisterSpecifier(
+                ...     baca.tools.RegisterCommand(
                 ...         pattern=abjad.select_first(),
                 ...         registration=abjad.Registration(
                 ...             [('[A0, C8]', 0)],
@@ -325,7 +326,7 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
-                ...     baca.tools.RegisterSpecifier(
+                ...     baca.tools.RegisterCommand(
                 ...         pattern=abjad.select_last(),
                 ...         registration=abjad.Registration(
                 ...             [('[A0, C8]', 0)],
@@ -375,7 +376,7 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.RegisterSpecifier(
+                >>> command = baca.tools.RegisterCommand(
                 ...     registration=abjad.Registration(
                 ...         [('[A0, C4)', 15), ('[C4, C8)', 27)],
                 ...         ),
@@ -383,7 +384,7 @@ class RegisterSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier.registration
+                >>> command.registration
                 Registration([('[A0, C4)', 15), ('[C4, C8)', 27)])
 
         Set to registration or none.

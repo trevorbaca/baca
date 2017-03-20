@@ -26,8 +26,9 @@ class TempoSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
+            >>> specifiers = segment_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
             ...     baca.even_runs(),
             ...     )

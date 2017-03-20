@@ -2,8 +2,8 @@
 import abjad
 
 
-class OctaveDisplacementSpecifier(abjad.abctools.AbjadObject):
-    r"""Octave displacement specifier.
+class OctaveDisplacementCommand(abjad.abctools.AbjadObject):
+    r"""Octave displacement command.
 
     ::
 
@@ -23,11 +23,12 @@ class OctaveDisplacementSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
+            >>> specifiers = segment_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.pitches('G4'),
             ...     baca.even_runs(),
-            ...     baca.tools.OctaveDisplacementSpecifier(
+            ...     baca.tools.OctaveDisplacementCommand(
             ...         displacements=[0, 0, 1, 1, 0, 0, -1, -1, 2, 2],
             ...         ),
             ...     )
@@ -118,7 +119,7 @@ class OctaveDisplacementSpecifier(abjad.abctools.AbjadObject):
 
     ### CLASS VARIABLES ##
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_displacements',
@@ -140,7 +141,7 @@ class OctaveDisplacementSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls specifier on `argument`.
+        r'''Calls command on `argument`.
 
         Returns none.
         '''
@@ -186,13 +187,13 @@ class OctaveDisplacementSpecifier(abjad.abctools.AbjadObject):
             ::
 
         
-                >>> specifier = baca.tools.OctaveDisplacementSpecifier(
+                >>> command = baca.tools.OctaveDisplacementCommand(
                 ...     displacements=[0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2],
                 ...     )
 
             ::
 
-                >>> specifier.displacements
+                >>> command.displacements
                 CyclicTuple([0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2])
 
         Defaults to none.

@@ -14,121 +14,59 @@ class SwellSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
+        Attaches niente swell to all pitched logical ties:
+
         ::
 
-
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.niente_swell('p'),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
             ...     )
-
-        ::
-
-            >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
-            ...     baca.pitches('E4'),
-            ...     baca.even_runs(),
-            ...     baca.tools.HairpinSpecifier(
-            ...         hairpin_tokens=[
-            ...             baca.tools.SwellSpecifier(
-            ...                 start_count=2,
-            ...                 start_token='niente < p',
-            ...                 stop_count=2,
-            ...                 stop_token='p > niente',
-            ...                 ),
-            ...             ],
-            ...         span=[4, 3],
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker(is_doc_example=True)
-            >>> lilypond_file, segment_metadata = result
+            >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  doctest::
 
-            >>> f(lilypond_file[abjad.Score])
-            \context Score = "Score" <<
-                \tag violin
-                \context TimeSignatureContext = "Time Signature Context" <<
-                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
-                        {
-                            \time 4/8
-                            R1 * 1/2
+            >>> f(lilypond_file[abjad.Staff])
+            \new Staff <<
+                \context Voice = "Voice 1" {
+                    \voiceOne
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5
+                            r8
+                            \once \override Hairpin.circled-tip = ##t
+                            c'16 \< [
+                            d'16 \p ]
+                            bf'4 ~
+                            bf'16
+                            r16
                         }
-                        {
-                            \time 3/8
-                            R1 * 3/8
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            fs''16 [
+                            e''16 ]
+                            ef''4 ~
+                            ef''16
+                            r16
+                            af''16 [
+                            \once \override Hairpin.circled-tip = ##t
+                            g''16 ] \> \p
                         }
-                        {
-                            \time 4/8
-                            R1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            R1 * 3/8
-                        }
-                    }
-                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
-                        {
-                            \time 4/8
-                            s1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            s1 * 3/8
-                        }
-                        {
-                            \time 4/8
-                            s1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            s1 * 3/8
+                        \times 4/5 {
+                            a'16 \!
+                            r4
+                            \revert TupletBracket.staff-padding
                         }
                     }
-                >>
-                \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \clef "treble"
-                        \context ViolinMusicVoice = "Violin Music Voice" {
-                            {
-                                \once \override Hairpin.circled-tip = ##t
-                                e'8 \< [
-                                e'8 \p
-                                \once \override Hairpin.circled-tip = ##t
-                                e'8 \> \p
-                                e'8 \! ]
-                            }
-                            {
-                                \once \override Hairpin.circled-tip = ##t
-                                e'8 \< [
-                                \once \override Hairpin.circled-tip = ##t
-                                e'8 \p \> \p
-                                e'8 \! ]
-                            }
-                            {
-                                \once \override Hairpin.circled-tip = ##t
-                                e'8 \< [
-                                e'8 \p
-                                \once \override Hairpin.circled-tip = ##t
-                                e'8 \> \p
-                                e'8 \! ]
-                            }
-                            {
-                                \once \override Hairpin.circled-tip = ##t
-                                e'8 \< [
-                                \once \override Hairpin.circled-tip = ##t
-                                e'8 \p \> \p
-                                e'8 \! ]
-                                \bar "|"
-                            }
-                        }
-                    }
-                >>
+                }
             >>
 
     '''
@@ -189,7 +127,7 @@ class SwellSpecifier(abjad.abctools.AbjadObject):
                 #raise Exception(message)
                 if len(leaves) == 0:
                     return
-                prototype = (abjad.scoretools.Note, abjad.scoretools.Chord)
+                prototype = (abjad.Note, abjad.Chord)
                 for leaf in leaves:
                     if isinstance(leaf, prototype):
                         lone_dynamic = start_hairpin.stop_dynamic

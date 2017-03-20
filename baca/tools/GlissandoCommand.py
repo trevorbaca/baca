@@ -2,8 +2,8 @@
 import abjad
 
 
-class GlissandoSpecifier(abjad.abctools.AbjadObject):
-    r'''Glissando specifier.
+class GlissandoCommand(abjad.abctools.AbjadObject):
+    r'''Glissando command.
 
     ::
 
@@ -23,11 +23,12 @@ class GlissandoSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
+            >>> specifiers = segment_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.tools.GlissandoSpecifier(
+            ...     baca.tools.GlissandoCommand(
             ...         pattern=abjad.select_all(),
             ...         ),
             ...     )
@@ -128,11 +129,12 @@ class GlissandoSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> pattern = abjad.select_first(1) | abjad.select_last(2)
-            >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
+            >>> specifiers = segment_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.even_runs(),
-            ...     baca.tools.GlissandoSpecifier(
+            ...     baca.tools.GlissandoCommand(
             ...         pattern=pattern,
             ...         ),
             ...     )
@@ -233,7 +235,7 @@ class GlissandoSpecifier(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     collections,
-            ...     baca.tools.GlissandoSpecifier(
+            ...     baca.tools.GlissandoCommand(
             ...         pattern=abjad.select_first(),
             ...         ),
             ...     )
@@ -270,7 +272,7 @@ class GlissandoSpecifier(abjad.abctools.AbjadObject):
 
     ### CLASS VARIABLES ##
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_pattern',
@@ -287,7 +289,7 @@ class GlissandoSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls glissando specifier on `argument`.
+        r'''Calls command on `argument`.
 
         Returns none.
         '''
@@ -313,7 +315,7 @@ class GlissandoSpecifier(abjad.abctools.AbjadObject):
     ### PRIVATE METHODS ###
 
     def _attach_glissando(self , logical_tie):
-        note_or_chord = (abjad.scoretools.Note, abjad.scoretools.Chord)
+        note_or_chord = (abjad.Note, abjad.Chord)
         last_leaf = logical_tie.tail
         if not isinstance(last_leaf, note_or_chord):
             return
@@ -333,14 +335,14 @@ class GlissandoSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.GlissandoSpecifier(
+                >>> command = baca.tools.GlissandoCommand(
                 ...     pattern=abjad.select_first(1) | abjad.select_last(2),
                 ...     )
         
 
             ::
 
-                >>> f(specifier.pattern)
+                >>> f(command.pattern)
                 patterntools.CompoundPattern(
                     (
                         patterntools.Pattern(

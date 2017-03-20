@@ -20,7 +20,7 @@ class MarkupLibrary(object):
     ### SPECIAL METHODS ###
 
     @staticmethod
-    def __call__(markup=None, selector=None):
+    def __call__(markup=None, selector=None, direction=None):
         r'''Attaches markup to pitched head 0.
 
         ..  container:: example
@@ -36,7 +36,7 @@ class MarkupLibrary(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -94,7 +94,7 @@ class MarkupLibrary(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -152,7 +152,7 @@ class MarkupLibrary(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -195,8 +195,11 @@ class MarkupLibrary(object):
                 >>
 
         '''
-        return baca.tools.MarkupSpecifier(
-            markup=markup,
+        if not isinstance(markup, abjad.Markup):
+            markup = abjad.Markup(markup, direction=direction)
+        selector = selector or baca.select_plt_head(n=0)
+        return baca.tools.AttachCommand(
+            arguments=[markup],
             selector=selector,
             )
 
@@ -220,140 +223,210 @@ class MarkupLibrary(object):
 
     ### PUBLIC METHODS ###
 
-    @classmethod
-    def accent_changes_of_direction(class_):
+    @staticmethod
+    def accent_changes_of_direction(selector=None):
         string = 'accent changes of direction noticeably at each attack'
-        return class_.make_markup(string)
+        return MarkupLibrary.make_markup(
+            string,
+            selector=selector,
+            )
 
-    @classmethod
-    def airtone(class_):
-        return class_.make_markup('airtone')
+    @staticmethod
+    def airtone(selector=None):
+        return MarkupLibrary.make_markup(
+            'airtone',
+            selector=selector,
+            )
 
-    @classmethod
-    def allow_bowing_to_convey_accelerando(class_):
-        return class_.make_markup('allow bowing to convey accelerando')
+    @staticmethod
+    def allow_bowing_to_convey_accelerando(selector=None):
+        return MarkupLibrary.make_markup(
+            'allow bowing to convey accelerando',
+            selector=selector,
+            )
 
-    @classmethod
-    def arco(class_):
-        return class_.make_markup('arco')
+    @staticmethod
+    def arco(selector=None):
+        return MarkupLibrary.make_markup(
+            'arco',
+            selector=selector,
+            )
 
-    @classmethod
-    def arco_ordinario(class_):
-        return class_.make_markup('arco ordinario')
+    @staticmethod
+    def arco_ordinario(selector=None):
+        return MarkupLibrary.make_markup(
+            'arco ordinario',
+            selector=selector,
+            )
 
-    @classmethod
-    def attackless(class_):
-        return class_.make_markup('attackless')
+    @staticmethod
+    def attackless(selector=None):
+        return MarkupLibrary.make_markup(
+            'attackless',
+            selector=selector,
+            )
 
-    @classmethod
-    def boxed(class_, string, whiteout=True):
+    @staticmethod
+    def boxed(string, selector=None, whiteout=True):
         markup = abjad.Markup(string, direction=Up)
         markup = markup.box().override(('box-padding', 0.5))
         if whiteout:
             markup = markup.whiteout()
-        return markup
+        return MarkupLibrary()(
+            markup=markup,
+            selector=selector,)
 
     @staticmethod
-    def boxed_lines(strings, direction=Up, whiteout=True):
+    def boxed_lines(strings, direction=Up, selector=None, whiteout=True):
         assert isinstance(strings, list), repr(strings)
-        lines = []
-        for string in strings:
-            line = abjad.Markup(string).line()
-            lines.append(line)
-        markup = abjad.MarkupList(lines, direction=direction).column()
+        markup = abjad.MarkupList(strings).column(direction=direction)
         markup = markup.box().override(('box-padding', 0.5))
         if whiteout:
             markup = markup.whiteout()
-        return markup
+        return MarkupLibrary()(
+            markup=markup,
+            selector=selector,
+            )
 
     @staticmethod
-    def boxed_repeat_count(count):
+    def boxed_repeat_count(count, selector=None):
         string = 'x{}'.format(count)
         markup = abjad.Markup(string, direction=Up)
         markup = markup.sans().bold().fontsize(6).upright()
         markup = markup.box().override(('box-padding', 0.5))
-        return markup
+        return MarkupLibrary()(
+            markup=markup,
+            selector=selector,
+            )
 
     @staticmethod
-    def boxed_specifier(string, whiteout=True):
+    def boxed_specifier(string, selector=None, whiteout=True):
         markup = abjad.Markup(string, direction=Up)
         markup = markup.box().override(('box-padding', 0.5))
         if whiteout:
             markup = markup.whiteout()
-        return baca.tools.MarkupSpecifier(markup=markup)
+        return MarkupLibrary()(
+            markup=markup,
+            selector=selector,
+            )
 
     @staticmethod
-    def clicks_per_second(lower, upper):
+    def clicks_per_second(lower, upper, selector=None):
         string = '{}-{} clicks/sec.'
         string = string.format(lower, upper)
-        return MarkupLibrary.make_markup(string)
-
-    @classmethod
-    def col_legno_battuto(class_):
-        return class_.make_markup('col legno battuto')
-
-    @classmethod
-    def delicatiss(class_):
-        return class_.make_markup('delicatiss.')
-
-    @classmethod
-    def delicatissimo(class_):
-        return class_.make_markup('delicatissimo')
-
-    @classmethod
-    def directly_on_bridge_bow_diagonally(class_):
-        string = 'directly on bridge:'
-        string += ' bow diagonally to produce white noise w/ no pitch',
-        return class_.make_markup(string)
-
-    @classmethod
-    def directly_on_bridge_very_slow_bow(class_):
-        string = 'directly on bridge:'
-        string += ' very slow bow, imperceptible bow changes'
-        return class_.make_markup(string)
-
-    @classmethod
-    def estr_sul_pont(class_):
-        return class_.make_markup('estr. sul pont.')
-
-    @classmethod
-    def FB(class_):
-        return class_.make_markup('FB')
-
-    @classmethod
-    def FB_flaut(class_):
-        return class_.make_markup('FB flaut.')
-
-    @classmethod
-    def fluttertongue(class_):
-        return class_.make_markup('fluttertongue')
+        return MarkupLibrary.make_markup(
+            string,
+            selector=selector,
+            )
 
     @staticmethod
-    def fractional_OB(numerator, denominator):
+    def col_legno_battuto(selector=None):
+        return MarkupLibrary.make_markup(
+            'col legno battuto',
+            selector=selector,
+            )
+
+    @staticmethod
+    def delicatiss(selector=None):
+        return MarkupLibrary.make_markup(
+            'delicatiss.',
+            selector=selector,
+            )
+
+    @staticmethod
+    def delicatissimo(selector=None):
+        return MarkupLibrary.make_markup(
+            'delicatissimo',
+            selector=selector,
+            )
+
+    @staticmethod
+    def directly_on_bridge_bow_diagonally(selector=None):
+        string = 'directly on bridge:'
+        string += ' bow diagonally to produce white noise w/ no pitch',
+        return MarkupLibrary.make_markup(
+            string,
+            selector=selector,
+            )
+
+    @staticmethod
+    def directly_on_bridge_very_slow_bow(selector=None):
+        string = 'directly on bridge:'
+        string += ' very slow bow, imperceptible bow changes'
+        return MarkupLibrary.make_markup(
+            string,
+            selector=selector,
+            )
+
+    @staticmethod
+    def estr_sul_pont(selector=None):
+        return MarkupLibrary.make_markup(
+            'estr. sul pont.',
+            selector=selector,
+            )
+
+    @staticmethod
+    def FB(selector=None):
+        return MarkupLibrary.make_markup(
+            'FB',
+            selector=selector,
+            )
+
+    @staticmethod
+    def FB_flaut(selector=None):
+        return MarkupLibrary.make_markup(
+            'FB flaut.',
+            selector=selector,
+            )
+
+    @staticmethod
+    def fluttertongue(selector=None):
+        return MarkupLibrary.make_markup(
+            'fluttertongue',
+            selector=selector,
+            )
+
+    @staticmethod
+    def fractional_OB(numerator, denominator, selector=None):
         string = '{}/{}OB'
         string = string.format(numerator, denominator)
-        return MarkupLibrary.make_markup(string)
+        return MarkupLibrary.make_markup(
+            string,
+            selector=selector,
+            )
 
-    @classmethod
-    def fractional_scratch(numerator, denominator):
+    @staticmethod
+    def fractional_scratch(numerator, denominator, selector=None):
         string = '{}/{} scratch'
         string = string.format(numerator, denominator)
-        return class_.make_markup(string)
+        return MarkupLibrary.make_markup(
+            string,
+            selector=selector,
+            )
 
-    @classmethod
-    def full_bow_strokes(class_):
-        return class_.make_markup('full bow strokes')
+    @staticmethod
+    def full_bow_strokes(selector=None):
+        return MarkupLibrary.make_markup(
+            'full bow strokes',
+            selector=selector,
+            )
 
-    @classmethod
-    def glissando_lentissimo(class_):
-        return class_.make_markup('glissando lentissimo')
+    @staticmethod
+    def glissando_lentissimo(selector=None):
+        return MarkupLibrary.make_markup(
+            'glissando lentissimo',
+            selector=selector,
+            )
 
-    @classmethod
-    def gridato_possibile(class_):
-        return class_.make_markup('gridato possibile')
+    @staticmethod
+    def gridato_possibile(selector=None):
+        return MarkupLibrary.make_markup(
+            'gridato possibile',
+            selector=selector,
+            )
 
-    @classmethod
-    def instrument_name(class_, string, column=True):
+    @staticmethod
+    def instrument_name(string, column=True, selector=None):
         r'''Makes instrument name markup.
 
         ..  container:: example
@@ -413,347 +486,531 @@ class MarkupLibrary(object):
 
         Returns markup.
         '''
-        return class_._make_instrument_name_markup(
+        return MarkupLibrary._make_instrument_name_markup(
             string, 
             16,
             column=column,
             )
 
-    @classmethod
-    def kn_rasg(class_, is_new=True):
-        return class_.make_markup('kn. rasg.', is_new=is_new)
-
-    @classmethod
-    def knuckle_rasg(class_, is_new=True):
-        return class_.make_markup('knuckle rasg.', is_new=is_new)
-
-    @classmethod
-    def leggieriss(class_):
-        return class_.make_markup('leggieriss.')
-
-    @classmethod
-    def leggierissimo(class_):
-        return class_.make_markup('leggierissimo')
-
-    @classmethod
-    def leggierissimo_off_string_bowing_on_staccati(class_):
-        return class_.make_markup('leggierissimo: off-string bowing on staccati')
+    @staticmethod
+    def kn_rasg(is_new=True, selector=None):
+        return MarkupLibrary.make_markup(
+            'kn. rasg.',
+            is_new=is_new,
+            selector=selector,
+            )
 
     @staticmethod
-    def lines(strings, direction=Up):
+    def knuckle_rasg(is_new=True, selector=None):
+        return MarkupLibrary.make_markup(
+            'knuckle rasg.',
+            is_new=is_new,
+            selector=selector,
+            )
+
+    @staticmethod
+    def leggieriss(selector=None):
+        return MarkupLibrary.make_markup(
+            'leggieriss.',
+            selector=selector,
+            )
+
+    @staticmethod
+    def leggierissimo(selector=None):
+        return MarkupLibrary.make_markup(
+            'leggierissimo',
+            selector=selector,
+            )
+
+    @staticmethod
+    def leggierissimo_off_string_bowing_on_staccati(selector=None):
+        return MarkupLibrary.make_markup(
+            'leggierissimo: off-string bowing on staccati',
+            selector=selector,
+            )
+
+    @staticmethod
+    def lines(strings, direction=Up, selector=None):
         assert isinstance(strings, list), repr(strings)
-        lines = []
-        for string in strings:
-            line = abjad.Markup(string).line()
-            lines.append(line)
-        markup = abjad.Markup.column(lines, direction=Up)
-        return markup
-
-    @classmethod
-    def lv_possibile(class_):
-        return class_.make_markup('l.v. possibile')
+        markup = abjad.MarkupList(strings).column(direction=direction)
+        return MarkupLibrary()(
+            markup=markup,
+            selector=selector,
+            )
 
     @staticmethod
-    def make_markup(string, direction=Up, is_new=True, whiteout=True):
+    def lv_possibile(selector=None):
+        return MarkupLibrary.make_markup(
+            'l.v. possibile',
+            selector=selector,
+            )
+
+    @staticmethod
+    def make_markup(
+        string,
+        direction=Up,
+        is_new=True,
+        selector=None,
+        whiteout=True,
+        ):
         if not is_new:
             string = '({})'.format(string)
         markup = abjad.Markup(string, direction=direction)
         markup = markup.upright()
         if whiteout:
             markup = markup.whiteout()
-        return markup
+        return MarkupLibrary()(markup=markup, selector=selector)
 
-    @classmethod
-    def molto_flautando(class_):
-        return class_.make_markup('molto flautando')
+    @staticmethod
+    def molto_flautando(selector=None):
+        return MarkupLibrary.make_markup(
+            'molto flautando',
+            selector=selector,
+            )
 
-    @classmethod
-    def molto_flautando_e_pont(class_):
-        return class_.make_markup('molto flautando ed estr. sul pont.')
+    @staticmethod
+    def molto_flautando_e_pont(selector=None):
+        return MarkupLibrary.make_markup(
+            'molto flautando ed estr. sul pont.',
+            selector=selector,
+            )
 
-    @classmethod
-    def molto_gridato(class_):
-        return class_.make_markup('molto gridato ed estr. sul pont.')
+    @staticmethod
+    def molto_gridato(selector=None):
+        return MarkupLibrary.make_markup(
+            'molto gridato ed estr. sul pont.',
+            selector=selector,
+            )
 
-    @classmethod
+    @staticmethod
     def molto_pont_plus_vib_molto(
-        class_,
         first_is_new=True,
         second_is_new=True,
+        selector=None,
         ):
-        return class_.two_part_transition(
+        return MarkupLibrary.two_part_transition(
             'molto pont.',
             'vib. molto',
             first_is_new=first_is_new,
             second_is_new=second_is_new,
+            selector=selector,
             )
 
-    @classmethod
-    def MP_XFB_flaut(class_):
-        return class_.make_markup('MP + XFB flaut.')
-
-    @classmethod
-    def nail_rasg(class_, is_new=True):
-        return class_.make_markup('nail rasg.', is_new=is_new)
-
-    @classmethod
-    def nail_rasgueado(class_, is_new=True):
-        return class_.make_markup('nail rasgueado', is_new=is_new)
-
-    @classmethod
-    def non_flautando(class_):
-        return class_.make_markup('non flautando')
-
-    @classmethod
-    def non_flutt(class_):
-        return class_.make_markup('non flutt.')
-
-    @classmethod
-    def non_spazz(class_):
-        return class_.make_markup('non spazz.')
-
-    @classmethod
-    def nut(class_):
-        return class_.make_markup('nut')
-
-    @classmethod
-    def OB(class_):
-        return class_.make_markup('OB')
-
-    @classmethod
-    def OB_no_pitch(class_):
-        return class_.make_markup('OB (no pitch)')
-
-    @classmethod
-    def OB_terminate_abruptly(class_):
-        return class_.make_markup('OB + terminate abruptly')
-
-    @classmethod
-    def OB_terminate_each_note_abruptly(class_):
-        return class_.make_markup('OB + terminate each note abruptly')
-
-    @classmethod
-    def off_string_bowing_on_staccati(class_):
-        return class_.make_markup('off-string bowing on staccati')
+    @staticmethod
+    def MP_XFB_flaut(selector=None):
+        return MarkupLibrary.make_markup(
+            'MP + XFB flaut.',
+            selector=selector,
+            )
 
     @staticmethod
-    def one_click_every(lower, upper):
+    def nail_rasg(is_new=True, selector=None):
+        return MarkupLibrary.make_markup(
+            'nail rasg.',
+            is_new=is_new,
+            selector=selector,
+            )
+
+    @staticmethod
+    def nail_rasgueado(is_new=True, selector=None):
+        return MarkupLibrary.make_markup(
+            'nail rasgueado',
+            is_new=is_new,
+            selector=selector,
+            )
+
+    @staticmethod
+    def non_flautando(selector=None):
+        return MarkupLibrary.make_markup(
+            'non flautando',
+            selector=selector,
+            )
+
+    @staticmethod
+    def non_flutt(selector=None):
+        return MarkupLibrary.make_markup(
+            'non flutt.',
+            selector=selector,
+            )
+
+    @staticmethod
+    def non_spazz(selector=None):
+        return MarkupLibrary.make_markup(
+            'non spazz.',
+            selector=selector,
+            )
+
+    @staticmethod
+    def nut(selector=None):
+        return MarkupLibrary.make_markup(
+            'nut',
+            selector=selector,
+            )
+
+    @staticmethod
+    def OB(selector=None):
+        return MarkupLibrary.make_markup(
+            'OB',
+            selector=selector,
+            )
+
+    @staticmethod
+    def OB_no_pitch(selector=None):
+        return MarkupLibrary.make_markup(
+            'OB (no pitch)',
+            selector=selector,
+            )
+
+    @staticmethod
+    def OB_terminate_abruptly(selector=None):
+        return MarkupLibrary.make_markup(
+            'OB + terminate abruptly',
+            selector=selector,
+            )
+
+    @staticmethod
+    def OB_terminate_each_note_abruptly(selector=None):
+        return MarkupLibrary.make_markup(
+            'OB + terminate each note abruptly',
+            selector=selector,
+            )
+
+    @staticmethod
+    def off_string_bowing_on_staccati(selector=None):
+        return MarkupLibrary.make_markup(
+            'off-string bowing on staccati',
+            selector=selector,
+            )
+
+    @staticmethod
+    def one_click_every(lower, upper, selector=None):
         string = '1 click/{}-{} sec.'
         string = string.format(lower, upper)
-        return MarkupLibrary.make_markup(string)
+        return MarkupLibrary.make_markup(
+            string,
+            selector=selector,
+            )
 
-    @classmethod
-    def ord_(class_):
-        return class_.make_markup('ord.')
+    @staticmethod
+    def ord_(selector=None):
+        return MarkupLibrary.make_markup(
+            'ord.',
+            selector=selector,
+            )
 
-    @classmethod
-    def ord_poco_scratch(class_):
-        return class_.make_markup('ord. + poco scratch')
+    @staticmethod
+    def ord_poco_scratch(selector=None):
+        return MarkupLibrary.make_markup(
+            'ord. + poco scratch',
+            selector=selector,
+            )
 
-    @classmethod
-    def ord_senza_scratch(class_):
-        return class_.make_markup('ord. (senza scratch)')
+    @staticmethod
+    def ord_senza_scratch(selector=None):
+        return MarkupLibrary.make_markup(
+            'ord. (senza scratch)',
+            selector=selector,
+            )
 
-    @classmethod
-    def ordinario(class_):
-        return class_.make_markup('ordinario')
+    @staticmethod
+    def ordinario(selector=None):
+        return MarkupLibrary.make_markup(
+            'ordinario',
+            selector=selector,
+            )
 
-    @classmethod
-    def P_XFB_flaut(class_):
-        return class_.make_markup('P + XFB flaut.')
+    @staticmethod
+    def P_XFB_flaut(selector=None):
+        return MarkupLibrary.make_markup(
+            'P + XFB flaut.',
+            selector=selector,
+            )
 
-    @classmethod
-    def piu_meno_scratch(class_):
-        return class_.make_markup('più meno scratch')
+    @staticmethod
+    def piu_meno_scratch(selector=None):
+        return MarkupLibrary.make_markup(
+            'più meno scratch',
+            selector=selector,
+            )
 
-    @classmethod
-    def pizz(class_):
-        return class_.make_markup('pizz.')
+    @staticmethod
+    def pizz(selector=None):
+        return MarkupLibrary.make_markup(
+            'pizz.',
+            selector=selector,
+            )
 
-    @classmethod
-    def PO(class_):
-        return class_.make_markup('PO')
+    @staticmethod
+    def PO(selector=None):
+        return MarkupLibrary.make_markup(
+            'PO',
+            selector=selector,
+            )
 
-    @classmethod
-    def PO_FB_flaut(class_):
-        return class_.make_markup('PO + FB flaut.')
+    @staticmethod
+    def PO_FB_flaut(selector=None):
+        return MarkupLibrary.make_markup(
+            'PO + FB flaut.',
+            selector=selector,
+            )
 
-    @classmethod
-    def PO_NBS(class_):
-        return class_.make_markup('PO + NBS')
+    @staticmethod
+    def PO_NBS(selector=None):
+        return MarkupLibrary.make_markup(
+            'PO + NBS',
+            selector=selector,
+            )
 
-    @classmethod
+    @staticmethod
     def PO_plus_non_vib(
-        class_,
         first_is_new=True,
         second_is_new=True,
+        selector=None,
         ):
-        return class_.two_part_transition(
+        return MarkupLibrary.two_part_transition(
             'PO',
             'non vib.',
             first_is_new=first_is_new,
             second_is_new=second_is_new,
+            selector=selector,
             )
 
-    @classmethod
+    @staticmethod
     def PO_plus_poco_vib(
-        class_,
         first_is_new=True,
         second_is_new=True,
+        selector=None,
         ):
-        return class_.two_part_transition(
+        return MarkupLibrary.two_part_transition(
             'PO',
             'poco vib.',
             first_is_new=first_is_new,
             second_is_new=second_is_new,
+            selector=selector,
             )
 
-    @classmethod
-    def PO_scratch(class_):
-        return class_.make_markup('PO + scratch')
+    @staticmethod
+    def PO_scratch(selector=None):
+        return MarkupLibrary.make_markup(
+            'PO + scratch',
+            selector=selector,
+            )
 
-    @classmethod
-    def PO_slow_bow(class_):
-        return class_.make_markup('PO + slow bow (poco scratch)')
+    @staticmethod
+    def PO_slow_bow(selector=None):
+        return MarkupLibrary.make_markup(
+            'PO + slow bow (poco scratch)',
+            selector=selector,
+            )
 
-    @classmethod
-    def PO_XFB_flaut(class_):
-        return class_.make_markup('PO + XFB flaut.')
+    @staticmethod
+    def PO_XFB_flaut(selector=None):
+        return MarkupLibrary.make_markup(
+            'PO + XFB flaut.',
+            selector=selector,
+            )
 
-    @classmethod
-    def pochiss_pont(class_, is_new=True):
-        return class_.make_markup('pochiss. pont.', is_new=is_new)
+    @staticmethod
+    def pochiss_pont(is_new=True, selector=None):
+        return MarkupLibrary.make_markup(
+            'pochiss. pont.',
+            is_new=is_new,
+            selector=selector,
+            )
 
-    @classmethod
-    def pochiss_scratch(class_, is_new=True):
-        return class_.make_markup('pochiss. scratch', is_new=is_new)
+    @staticmethod
+    def pochiss_scratch(is_new=True, selector=None):
+        return MarkupLibrary.make_markup(
+            'pochiss. scratch',
+            is_new=is_new,
+            selector=selector,
+            )
 
-    @classmethod
-    def pochiss_vib(class_):
-        return class_.make_markup('pochiss. vib.')
+    @staticmethod
+    def pochiss_vib(selector=None):
+        return MarkupLibrary.make_markup(
+            'pochiss. vib.',
+            selector=selector,
+            )
 
-    @classmethod
+    @staticmethod
     def poco_pont_plus_non_vib(
-        class_,
         first_is_new=True,
         second_is_new=True,
+        selector=None
         ):
-        return class_.two_part_transition(
+        return MarkupLibrary.two_part_transition(
             'poco pont.',
             'non vib.',
             first_is_new=first_is_new,
             second_is_new=second_is_new,
+            selector=selector,
             )
 
-    @classmethod
+    @staticmethod
     def poco_pont_plus_sub_non_vib(
-        class_,
         first_is_new=True,
         second_is_new=True,
+        selector=None,
         ):
-        return class_.two_part_transition(
+        return MarkupLibrary.two_part_transition(
             'poco pont.',
             'sub. non vib.',
             first_is_new=first_is_new,
             second_is_new=second_is_new,
+            selector=selector,
             )
 
-    @classmethod
+    @staticmethod
     def poco_pont_plus_sub_vib_mod(
-        class_,
         first_is_new=True,
         second_is_new=True,
+        selector=None,
         ):
-        return class_.two_part_transition(
+        return MarkupLibrary.two_part_transition(
             'poco pont.',
             'sub. vib. mod.',
             first_is_new=first_is_new,
             second_is_new=second_is_new,
+            selector=selector,
             )
 
-    @classmethod
+    @staticmethod
     def poco_pont_plus_vib_mod(
-        class_,
         first_is_new=True,
         second_is_new=True,
+        selector=None,
         ):
-        return class_.two_part_transition(
+        return MarkupLibrary.two_part_transition(
             'poco pont.',
             'vib. mod.',
             first_is_new=first_is_new,
             second_is_new=second_is_new,
+            selector=selector,
             )
 
-    @classmethod
-    def poco_scratch(class_):
-        return class_.make_markup('poco scratch')
+    @staticmethod
+    def poco_scratch(selector=None):
+        return MarkupLibrary.make_markup(
+            'poco scratch',
+            selector=selector,
+            )
 
-    @classmethod
-    def pont(class_):
-        return class_.make_markup('pont.')
+    @staticmethod
+    def pont(selector=None):
+        return MarkupLibrary.make_markup(
+            'pont.',
+            selector=selector,
+            )
 
-    @classmethod
-    def pont_XFB(class_):
-        return class_.make_markup('pont. + XFB')
+    @staticmethod
+    def pont_XFB(selector=None):
+        return MarkupLibrary.make_markup(
+            'pont. + XFB',
+            selector=selector,
+            )
 
-    @classmethod
-    def pont_XFB_flaut(class_):
-        return class_.make_markup('pont. + XFB flaut.')
+    @staticmethod
+    def pont_XFB_flaut(selector=None):
+        return MarkupLibrary.make_markup(
+            'pont. + XFB flaut.',
+            selector=selector,
+            )
 
-    @classmethod
-    def ponticello(class_, is_new=True):
-        return class_.make_markup('ponticello', is_new=is_new)
+    @staticmethod
+    def ponticello(is_new=True, selector=None):
+        return MarkupLibrary.make_markup(
+            'ponticello',
+            is_new=is_new,
+            selector=selector,
+            )
 
-    @classmethod
-    def pos_ord(class_):
-        return class_.make_markup('pos. ord.')
+    @staticmethod
+    def pos_ord(selector=None):
+        return MarkupLibrary.make_markup(
+            'pos. ord.',
+            selector=selector,
+            )
 
-    @classmethod
-    def pos_ord_poco_scratch(class_):
-        return class_.make_markup('pos. ord. + poco scratch')
+    @staticmethod
+    def pos_ord_poco_scratch(selector=None):
+        return MarkupLibrary.make_markup(
+            'pos. ord. + poco scratch',
+            selector=selector,
+            )
 
-    @classmethod
-    def pos_ord_senza_vib(class_):
-        return class_.make_markup('pos. ord. + senza vib')
+    @staticmethod
+    def pos_ord_senza_vib(selector=None):
+        return MarkupLibrary.make_markup(
+            'pos. ord. + senza vib',
+            selector=selector,
+            )
 
-    @classmethod
-    def pos_ord_vib_poco(class_):
-        return class_.make_markup('pos. ord. + vib. poco')
+    @staticmethod
+    def pos_ord_vib_poco(selector=None):
+        return MarkupLibrary.make_markup(
+            'pos. ord. + vib. poco',
+            selector=selector,
+            )
 
-    @classmethod
-    def pos_ord_XFB(class_):
-        return class_.make_markup('pos. ord. + XFB')
+    @staticmethod
+    def pos_ord_XFB(selector=None):
+        return MarkupLibrary.make_markup(
+            'pos. ord. + XFB',
+            selector=selector,
+            )
 
-    @classmethod
-    def pos_ord_XFB_flaut(class_):
-        return class_.make_markup('pos. ord. + XFB flaut.')
+    @staticmethod
+    def pos_ord_XFB_flaut(selector=None):
+        return MarkupLibrary.make_markup(
+            'pos. ord. + XFB flaut.',
+            selector=selector,
+            )
 
-    @classmethod
-    def pP_XFB_flaut(class_):
-        return class_.make_markup('pP + XFB flaut.')
+    @staticmethod
+    def pP_XFB_flaut(selector=None):
+        return MarkupLibrary.make_markup(
+            'pP + XFB flaut.',
+            selector=selector,
+            )
 
-    @classmethod
-    def pT_XFB_flaut(class_):
-        return class_.make_markup('pT + XFB flaut.')
+    @staticmethod
+    def pT_XFB_flaut(selector=None):
+        return MarkupLibrary.make_markup(
+            'pT + XFB flaut.',
+            selector=selector,
+            )
 
-    @classmethod
-    def remove_staple(class_):
-        return make_boxed_markup('remove staple')
+    @staticmethod
+    def remove_staple(selector=None):
+        return MarkupLibrary.boxed(
+            'remove staple',
+            selector=selector,
+            )
 
-    @classmethod
-    def scratch_moltiss(class_):
-        return class_.make_markup('scratch moltiss.')
+    @staticmethod
+    def scratch_moltiss(selector=None):
+        return MarkupLibrary.make_markup(
+            'scratch moltiss.',
+            selector=selector,
+            )
 
-    @classmethod
-    def senza_scratch(class_):
-        return class_.make_markup('senza scratch')
+    @staticmethod
+    def senza_scratch(selector=None):
+        return MarkupLibrary.make_markup(
+            'senza scratch',
+            selector=selector,
+            )
 
-    @classmethod
-    def senza_vib(class_):
-        return class_.make_markup('senza vib.')
+    @staticmethod
+    def senza_vib(selector=None):
+        return MarkupLibrary.make_markup(
+            'senza vib.',
+            selector=selector,
+            )
 
-    @classmethod
-    def short_instrument_name(class_, string, column=True):
+    @staticmethod
+    def short_instrument_name(string, column=True):
         r'''Makes short instrument name markup.
 
         ..  container:: example
@@ -813,59 +1070,67 @@ class MarkupLibrary(object):
 
         Returns markup.
         '''
-        return class_._make_instrument_name_markup(
+        return MarkupLibrary._make_instrument_name_markup(
             string, 
             10,
             column=column,
             )
 
-    @classmethod
-    def sparse_clicks(class_):
+    @staticmethod
+    def sparse_clicks(selector=None):
         first_line = abjad.Markup(
             'sparse, individual clicks with extremely slow bow')
-        first_line = first_line.line(class_)
-        second_line = abjad.Markup('(1-2/sec. in irregular rhythm)').line(class_)
+        first_line = first_line.line()
+        second_line = abjad.Markup('(1-2/sec. in irregular rhythm)').line()
         markup = abjad.Markup.column([first_line, second_line], direction=Up)
-        return markup
+        return MarkupLibrary()(
+            markup=markup,
+            selector=selector,
+            )
 
-    @classmethod
-    def spazz(class_):
-        return class_.make_markup('spazz.')
+    @staticmethod
+    def spazz(selector=None):
+        return MarkupLibrary.make_markup(
+            'spazz.',
+            selector=selector,
+            )
 
-    @classmethod
-    def spazzolato(class_):
-        return class_.make_markup('spazzolato')
+    @staticmethod
+    def spazzolato(selector=None):
+        return MarkupLibrary.make_markup(
+            'spazzolato',
+            selector=selector,
+            )
 
-    @classmethod
-    def spazzolato_1_2_clt(class_):
-        return class_.make_markup('spazzolato (1/2 clt)')
+    @staticmethod
+    def spazzolato_1_2_clt(selector=None):
+        return MarkupLibrary.make_markup(
+            'spazzolato (1/2 clt)',
+            selector=selector,
+            )
 
-    @classmethod
+    @staticmethod
     def specifier(
-        class_,
         string,
         direction=Up,
         is_new=True,
         selector=None,
         whiteout=True,
         ):
-        markup = class_.make_markup(
+        markup = MarkupLibrary.make_markup(
             string,
             direction=direction,
             is_new=is_new,
             whiteout=whiteout,
             )
-        return baca.tools.MarkupSpecifier(
-            markup=markup,
-            selector=selector,
-            )
+        return MarkupLibrary()(markup=markup)
 
-    @classmethod
-    def still(class_, is_new=True):
-        return class_.make_markup('still', is_new=is_new)
+    @staticmethod
+    def still(is_new=True):
+        return MarkupLibrary.make_markup('still', is_new=is_new)
 
-    @classmethod
-    def string_number(n):
+    @staticmethod
+    def string_number(n, selector=None):
         to_roman_numeral = {
             1: 'I',
             2: 'II',
@@ -873,10 +1138,14 @@ class MarkupLibrary(object):
             4: 'IV',
             }
         string_number = to_roman_numeral[n]
-        return class_.make_markup(string_number, direction=Down)
+        return MarkupLibrary.make_markup(
+            string_number,
+            direction=Down,
+            selector=selector,
+            )
 
-    @classmethod
-    def string_numbers(numbers):
+    @staticmethod
+    def string_numbers(numbers, selector=None):
         to_roman_numeral = {
             1: 'I',
             2: 'II',
@@ -885,131 +1154,206 @@ class MarkupLibrary(object):
             }
         string_numbers = [to_roman_numeral[_] for _ in numbers]
         string_numbers = '+'.join(string_numbers)
-        return class_.make_markup(string_numbers, direction=Down)
+        return MarkupLibrary.make_markup(
+            string_numbers,
+            direction=Down,
+            selector=selector,
+            )
 
-    @classmethod
-    def subito_non_armonichi_e_non_gridato(class_):
-        return class_.make_markup('subito non armonichi e non gridato')
+    @staticmethod
+    def subito_non_armonichi_e_non_gridato(selector=None):
+        return MarkupLibrary.make_markup(
+            'subito non armonichi e non gridato',
+            selector=selector,
+            )
 
-    @classmethod
-    def subito_ordinario(class_):
-        return class_.make_markup('subito ordinario')
+    @staticmethod
+    def subito_ordinario(selector=None):
+        return MarkupLibrary.make_markup(
+            'subito ordinario',
+            selector=selector,
+            )
 
-    @classmethod
-    def tamb_tr(class_, is_new=True):
-        return class_.make_markup('tamb. tr.', is_new=is_new)
+    @staticmethod
+    def tamb_tr(is_new=True, selector=None):
+        return MarkupLibrary.make_markup(
+            'tamb. tr.',
+            is_new=is_new,
+            selector=selector,
+            )
 
-    @classmethod
-    def tasto(class_, is_new=True):
-        return class_.make_markup('tasto', is_new=is_new)
+    @staticmethod
+    def tasto(is_new=True, selector=None):
+        return MarkupLibrary.make_markup(
+            'tasto',
+            is_new=is_new,
+            selector=selector,
+            )
 
-    @classmethod
-    def tasto_FB(class_):
-        return class_.make_markup('tasto + FB')
+    @staticmethod
+    def tasto_FB(selector=None):
+        return MarkupLibrary.make_markup(
+            'tasto + FB',
+            selector=selector,
+            )
 
-    @classmethod
-    def tasto_FB_flaut(class_):
-        return class_.make_markup('tasto + FB flaut.')
+    @staticmethod
+    def tasto_FB_flaut(selector=None):
+        return MarkupLibrary.make_markup(
+            'tasto + FB flaut.',
+            selector=selector,
+            )
 
-    @classmethod
-    def tasto_fractional_scratch(numerator, denominator):
+    @staticmethod
+    def tasto_fractional_scratch(numerator, denominator, selector=None):
         string = 'tasto + {}/{} scratch'
         string = string.format(numerator, denominator)
-        return class_.make_markup(string)
+        return MarkupLibrary.make_markup(
+            string,
+            selector=selector,
+            )
 
-    @classmethod
-    def tasto_half_scratch(class_):
-        return class_.make_markup('tasto + 1/2 scratch')
+    @staticmethod
+    def tasto_half_scratch(selector=None):
+        return MarkupLibrary.make_markup(
+            'tasto + 1/2 scratch',
+            selector=selector,
+            )
 
-    @classmethod
-    def tasto_moltiss(class_):
-        return class_.make_markup('tasto moltiss.')
+    @staticmethod
+    def tasto_moltiss(selector=None):
+        return MarkupLibrary.make_markup(
+            'tasto moltiss.',
+            selector=selector,
+            )
 
-    @classmethod
-    def tasto_NBS(class_):
-        return class_.make_markup('tasto + NBS')
+    @staticmethod
+    def tasto_NBS(selector=None):
+        return MarkupLibrary.make_markup(
+            'tasto + NBS',
+            selector=selector,
+            )
 
-    @classmethod
+    @staticmethod
     def tasto_plus_non_vib(
-        class_,
         first_is_new=True,
         second_is_new=True,
+        selector=None,
         ):
-        return class_.two_part_transition(
+        return MarkupLibrary.two_part_transition(
             'tasto',
             'non vib.',
             first_is_new=first_is_new,
             second_is_new=second_is_new,
+            selector=selector,
             )
 
-    @classmethod
-    def tasto_plus_pochiss_scratch(class_):
-        return class_.make_markup('tasto + pochiss. scratch')
+    @staticmethod
+    def tasto_plus_pochiss_scratch(selector=None):
+        return MarkupLibrary.make_markup(
+            'tasto + pochiss. scratch',
+            selector=selector,
+            )
 
-    @classmethod
-    def tasto_plus_poco_scratch(class_):
-        return class_.make_markup('tasto + poco scratch')
+    @staticmethod
+    def tasto_plus_poco_scratch(selector=None):
+        return MarkupLibrary.make_markup(
+            'tasto + poco scratch',
+            selector=selector,
+            )
 
-    @classmethod
+    @staticmethod
     def tasto_plus_poco_vib(
-        class_,
         first_is_new=True,
         second_is_new=True,
+        selector=None,
         ):
-        return class_.two_part_transition(
+        return MarkupLibrary.two_part_transition(
             'tasto',
             'poco vib.',
             first_is_new=first_is_new,
             second_is_new=second_is_new,
+            selector=selector,
             )
 
-    @classmethod
-    def tasto_plus_scratch_moltiss(class_):
-        return class_.make_markup('tasto + scratch moltiss.')
+    @staticmethod
+    def tasto_plus_scratch_moltiss(selector=None):
+        return MarkupLibrary.make_markup(
+            'tasto + scratch moltiss.',
+            selector=selector,
+            )
 
-    @classmethod
-    def tasto_poss(class_, is_new=True):
-        return class_.make_markup('tasto poss.', is_new=is_new)
+    @staticmethod
+    def tasto_poss(is_new=True, selector=None):
+        return MarkupLibrary.make_markup(
+            'tasto poss.',
+            is_new=is_new,
+            selector=selector,
+            )
 
-    @classmethod
-    def tasto_senza_vib(class_):
-        return class_.make_markup('tasto + senza vib.')
+    @staticmethod
+    def tasto_senza_vib(selector=None):
+        return MarkupLibrary.make_markup(
+            'tasto + senza vib.',
+            selector=selector,
+            )
 
-    @classmethod
-    def tasto_slow_bow(class_):
-        return class_.make_markup('tasto + slow bow (poco scratch)')
+    @staticmethod
+    def tasto_slow_bow(selector=None):
+        return MarkupLibrary.make_markup(
+            'tasto + slow bow (poco scratch)',
+            selector=selector,
+            )
 
-    @classmethod
-    def tasto_XFB(class_):
-        return class_.make_markup('tasto + XFB')
+    @staticmethod
+    def tasto_XFB(selector=None):
+        return MarkupLibrary.make_markup(
+            'tasto + XFB',
+            selector=selector,
+            )
 
-    @classmethod
-    def tasto_XFB_flaut(class_):
-        return class_.make_markup('tasto + XFB flaut.')
+    @staticmethod
+    def tasto_XFB_flaut(selector=None):
+        return MarkupLibrary.make_markup(
+            'tasto + XFB flaut.',
+            selector=selector,
+            )
 
-    @classmethod
-    def terminate_abruptly(class_):
-        return class_.make_markup('terminate abruptly')
+    @staticmethod
+    def terminate_abruptly(selector=None):
+        return MarkupLibrary.make_markup(
+            'terminate abruptly',
+            selector=selector,
+            )
 
-    @classmethod
-    def terminate_each_note_abruptly(class_):
-        return class_.make_markup('terminate each note abruptly')
+    @staticmethod
+    def terminate_each_note_abruptly(selector=None):
+        return MarkupLibrary.make_markup(
+            'terminate each note abruptly',
+            selector=selector,
+            )
 
-    @classmethod
-    def trans(class_):
-        return class_.make_markup('trans.')
+    @staticmethod
+    def trans(selector=None):
+        return MarkupLibrary.make_markup(
+            'trans.',
+            selector=selector,
+            )
 
-    @classmethod
-    def trem_flaut_tast(class_):
-        return class_.make_markup('trem. flaut. tast.')
+    @staticmethod
+    def trem_flaut_tast(selector=None):
+        return MarkupLibrary.make_markup(
+            'trem. flaut. tast.',
+            selector=selector,
+            )
 
-    @classmethod
+    @staticmethod
     def two_part_transition(
-        class_,
         string_1,
         string_2,
         first_is_new=True,
         second_is_new=True,
+        selector=None,
         ):
         if first_is_new:
             if second_is_new:
@@ -1022,82 +1366,126 @@ class MarkupLibrary(object):
             else:
                 composite_string = '({} + {})'
         composite_string = composite_string.format(string_1, string_2)
-        return class_.make_markup(composite_string)
+        return MarkupLibrary.make_markup(
+            composite_string,
+            selector=selector,
+            )
 
-    @classmethod
-    def vib_moltiss(class_):
-        return class_.make_markup('vib. moltiss.')
+    @staticmethod
+    def vib_moltiss(selector=None):
+        return MarkupLibrary.make_markup(
+            'vib. moltiss.',
+            selector=selector,
+            )
 
-    @classmethod
-    def vib_pochiss(class_):
-        return class_.make_markup('vib. pochiss.')
+    @staticmethod
+    def vib_pochiss(selector=None):
+        return MarkupLibrary.make_markup(
+            'vib. pochiss.',
+            selector=selector,
+            )
 
-    @classmethod
-    def vib_poco(class_):
-        return class_.make_markup('vib. poco.')
+    @staticmethod
+    def vib_poco(selector=None):
+        return MarkupLibrary.make_markup(
+            'vib. poco.',
+            selector=selector,
+            )
 
-    @classmethod
-    def XFB(class_):
-        return class_.make_markup('XFB')
+    @staticmethod
+    def XFB(selector=None):
+        return MarkupLibrary.make_markup(
+            'XFB',
+            selector=selector,
+            )
 
-    @classmethod
-    def XFB_flaut(class_):
-        return class_.make_markup('XFB flaut.')
+    @staticmethod
+    def XFB_flaut(selector=None):
+        return MarkupLibrary.make_markup(
+            'XFB flaut.',
+            selector=selector,
+            )
 
-    @classmethod
+    @staticmethod
     def XFB_plus_pochiss_pont(
-        class_,
         first_is_new=True,
         second_is_new=True,
+        selector=None,
         ):
-        return class_.two_part_transition(
+        return MarkupLibrary.two_part_transition(
             'XFB',
             'pochiss. pont.',
             first_is_new=first_is_new,
             second_is_new=second_is_new,
+            selector=selector,
             )
 
-    @classmethod
+    @staticmethod
     def XFB_plus_tasto(
-        class_,
         first_is_new=True,
         second_is_new=True,
+        selector=None,
         ):
-        return class_.two_part_transition(
+        return MarkupLibrary.two_part_transition(
             'XFB',
             'tasto',
             first_is_new=first_is_new,
             second_is_new=second_is_new,
+            selector=selector,
             )
 
-    @classmethod
-    def XFB_sempre(class_):
-        return class_.make_markup('XFB sempre')
+    @staticmethod
+    def XFB_sempre(selector=None):
+        return MarkupLibrary.make_markup(
+            'XFB sempre',
+            selector=selector,
+            )
 
-    @classmethod
-    def XP(class_):
-        return class_.make_markup('XP')
+    @staticmethod
+    def XP(selector=None):
+        return MarkupLibrary.make_markup(
+            'XP',
+            selector=selector,
+            )
 
-    @classmethod
-    def XP_FB(class_):
-        return class_.make_markup('XP + FB')
+    @staticmethod
+    def XP_FB(selector=None):
+        return MarkupLibrary.make_markup(
+            'XP + FB',
+            selector=selector,
+            )
 
-    @classmethod
-    def XP_FB_flaut(class_):
-        return class_.make_markup('XP + FB flaut.')
+    @staticmethod
+    def XP_FB_flaut(selector=None):
+        return MarkupLibrary.make_markup(
+            'XP + FB flaut.',
+            selector=selector,
+            )
 
-    @classmethod
-    def XP_full_bow_strokes(class_):
-        return class_.make_markup('XP + full bow strokes')
+    @staticmethod
+    def XP_full_bow_strokes(selector=None):
+        return MarkupLibrary.make_markup(
+            'XP + full bow strokes',
+            selector=selector,
+            )
 
-    @classmethod
-    def XP_XFB(class_):
-        return class_.make_markup('XP + XFB')
+    @staticmethod
+    def XP_XFB(selector=None):
+        return MarkupLibrary.make_markup(
+            'XP + XFB',
+            selector=selector,
+            )
 
-    @classmethod
-    def XP_XFB_flaut(class_):
-        return class_.make_markup('XP + XFB flaut.')
+    @staticmethod
+    def XP_XFB_flaut(selector=None):
+        return MarkupLibrary.make_markup(
+            'XP + XFB flaut.',
+            selector=selector,
+            )
 
-    @classmethod
-    def XT(class_):
-        return class_.make_markup('XT')
+    @staticmethod
+    def XT(selector=None):
+        return MarkupLibrary.make_markup(
+            'XT',
+            selector=selector,
+            )

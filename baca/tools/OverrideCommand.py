@@ -3,8 +3,8 @@ import abjad
 import baca
 
 
-class OverrideSpecifier(abjad.abctools.AbjadObject):
-    r'''Override specifier.
+class OverrideCommand(abjad.abctools.AbjadObject):
+    r'''Override command.
     
     ::
 
@@ -18,12 +18,12 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.tools.OverrideSpecifier(
+            ...     baca.tools.OverrideCommand(
             ...         grob_name='beam',
             ...         attribute_name='positions',
             ...         attribute_value='(-6, -6)',
             ...         ),
-            ...     baca.tools.OverrideSpecifier(
+            ...     baca.tools.OverrideCommand(
             ...         grob_name='stem',
             ...         attribute_name='direction',
             ...         attribute_value=Down,
@@ -94,19 +94,36 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
-            ...     baca.even_runs(),
+            >>> specifiers = segment_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.tools.OverrideSpecifier(
-            ...         grob_name='beam',
+            ...     baca.tools.OverrideCommand(
             ...         attribute_name='positions',
-            ...         attribute_value='(-6, -6)',
+            ...         attribute_value=(-6, -6),
+            ...         grob_name='beam',
+            ...         revert=True,
             ...         ),
-            ...     baca.tools.OverrideSpecifier(
-            ...         grob_name='stem',
+            ...     baca.tools.OverrideCommand(
+            ...         attribute_name='direction',
+            ...         attribute_value=Up,
+            ...         grob_name='rest',
+            ...         revert=True,
+            ...         selector=baca.select_rests(),
+            ...         ),
+            ...     baca.tools.OverrideCommand(
             ...         attribute_name='direction',
             ...         attribute_value=Down,
+            ...         grob_name='stem',
+            ...         revert=True,
+            ...         ),
+            ...     baca.tools.RhythmSpecifier(
+            ...         rhythm_maker=abjad.rhythmmakertools.TaleaRhythmMaker(
+            ...             talea=abjad.rhythmmakertools.Talea(
+            ...                 counts=[1, 1, 1, -1],
+            ...                 denominator=8,
+            ...                 ),
+            ...             ),
             ...         ),
             ...     )
 
@@ -164,57 +181,27 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
                     \context ViolinMusicStaff = "Violin Music Staff" {
                         \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
-                            {
-                                \once \override Beam.positions = #'(-6 . -6)
-                                \once \override Stem.direction = #down
-                                e'8 [
-                                \once \override Beam.positions = #'(-6 . -6)
-                                \once \override Stem.direction = #down
-                                d''8
-                                \once \override Beam.positions = #'(-6 . -6)
-                                \once \override Stem.direction = #down
-                                f'8
-                                \once \override Beam.positions = #'(-6 . -6)
-                                \once \override Stem.direction = #down
-                                e''8 ]
-                            }
-                            {
-                                \once \override Beam.positions = #'(-6 . -6)
-                                \once \override Stem.direction = #down
-                                g'8 [
-                                \once \override Beam.positions = #'(-6 . -6)
-                                \once \override Stem.direction = #down
-                                f''8
-                                \once \override Beam.positions = #'(-6 . -6)
-                                \once \override Stem.direction = #down
-                                e'8 ]
-                            }
-                            {
-                                \once \override Beam.positions = #'(-6 . -6)
-                                \once \override Stem.direction = #down
-                                d''8 [
-                                \once \override Beam.positions = #'(-6 . -6)
-                                \once \override Stem.direction = #down
-                                f'8
-                                \once \override Beam.positions = #'(-6 . -6)
-                                \once \override Stem.direction = #down
-                                e''8
-                                \once \override Beam.positions = #'(-6 . -6)
-                                \once \override Stem.direction = #down
-                                g'8 ]
-                            }
-                            {
-                                \once \override Beam.positions = #'(-6 . -6)
-                                \once \override Stem.direction = #down
-                                f''8 [
-                                \once \override Beam.positions = #'(-6 . -6)
-                                \once \override Stem.direction = #down
-                                e'8
-                                \once \override Beam.positions = #'(-6 . -6)
-                                \once \override Stem.direction = #down
-                                d''8 ]
-                                \bar "|"
-                            }
+                            \override Beam.positions = #'(-6 . -6)
+                            \override Stem.direction = #down
+                            e'8 [
+                            d''8
+                            f'8 ]
+                            \override Rest.direction = #up
+                            r8
+                            e''8 [
+                            g'8
+                            f''8 ]
+                            r8
+                            e'8 [
+                            d''8
+                            f'8 ]
+                            r8
+                            \revert Rest.direction
+                            e''8 [
+                            g'8 ]
+                            \bar "|"
+                            \revert Beam.positions
+                            \revert Stem.direction
                         }
                     }
                 >>
@@ -224,14 +211,14 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> baca.tools.OverrideSpecifier()
-            OverrideSpecifier()
+            >>> baca.tools.OverrideCommand()
+            OverrideCommand()
 
     '''
 
     ### CLASS ATTRIBUTES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_attribute_name',
@@ -268,8 +255,7 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
         self._attribute_name = attribute_name
         self._attribute_value = attribute_value
         if maximum_written_duration is not None:
-            maximum_written_duration = abjad.durationtools.Duration(
-                maximum_written_duration)
+            maximum_written_duration = abjad.Duration(maximum_written_duration)
         self._maximum_written_duration = maximum_written_duration
         if maximum_settings is not None:
             assert isinstance(maximum_settings, dict), maximum_settings
@@ -284,7 +270,7 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls specifier on `argument`.
+        r'''Calls command on `argument`.
 
         Returns none.
         '''
@@ -327,6 +313,17 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
         revert = abjad.LilyPondCommand(revert, format_slot='after')
         selector = self.selector or baca.select_leaves()
         selections = selector(argument)
+        if False:
+            print(format(self))
+            print()
+            print(format(selector))
+            print()
+            print(argument)
+            print()
+            print(selections)
+            print()
+            print('---')
+            print()
         selections = baca.MusicMaker._normalize_selections(selections)
         for selection in selections:
             leaves = abjad.select(selection).by_leaf()
@@ -382,7 +379,7 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
     @property
     def maximum_settings(self):
         r'''Gets maximum settings for leaves with written duration
-        greater than or equal to maximum written duration of specifier.
+        greater than or equal to maximum written duration of command.
 
         ..  note:: Write examples and tests.
 
@@ -404,7 +401,7 @@ class OverrideSpecifier(abjad.abctools.AbjadObject):
 
     @property
     def revert(self):
-        r'''Is true when specifier uses override / revert pair instead of
+        r'''Is true when command uses override / revert pair instead of
         multiple once commands.
 
         Set to true, false or none.

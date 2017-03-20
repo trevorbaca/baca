@@ -4,8 +4,8 @@ import baca
 import collections
 
 
-class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
-    r'''Rest affix specifier.
+class RestAffixCommand(abjad.abctools.AbjadValueObject):
+    r'''Rest affix command.
 
     ::
 
@@ -26,11 +26,11 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     collections,
-            ...     baca.tools.RestAffixSpecifier(
+            ...     baca.tools.RestAffixCommand(
             ...         prefix=[2],
             ...         suffix=[3],
             ...         ),
-            ...     talea_counts=[1, -1],
+            ...     counts=[1, -1],
             ...     time_treatments=[1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
@@ -86,11 +86,11 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     collections,
-            ...     baca.tools.RestAffixSpecifier(
+            ...     baca.tools.RestAffixCommand(
             ...         prefix=[2],
             ...         suffix=[3],
             ...         ),
-            ...     talea_counts=[-1, 1],
+            ...     counts=[-1, 1],
             ...     time_treatments=[1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
@@ -144,14 +144,14 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> baca.tools.RestAffixSpecifier()
-            RestAffixSpecifier()
+            >>> baca.tools.RestAffixCommand()
+            RestAffixCommand()
 
     '''
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_pattern',
@@ -191,7 +191,7 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, collection_index=None, total_collections=None):
-        r'''Calls specifier on `collection_index` and `total_collections`.
+        r'''Calls command on `collection_index` and `total_collections`.
 
         ..  container:: example
 
@@ -207,7 +207,7 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.tools.RestAffixSpecifier(prefix=[1], suffix=[1]),
+                ...     baca.tools.RestAffixCommand(prefix=[1], suffix=[1]),
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -275,7 +275,7 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.tools.RestAffixSpecifier(
+                ...     baca.tools.RestAffixCommand(
                 ...         prefix=[1],
                 ...         suffix=[2],
                 ...         ),
@@ -329,7 +329,7 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.tools.RestAffixSpecifier(
+                ...     baca.tools.RestAffixCommand(
                 ...         prefix=[1],
                 ...         suffix=[2],
                 ...         ),
@@ -373,7 +373,7 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.tools.RestAffixSpecifier(
+                ...     baca.tools.RestAffixCommand(
                 ...         pattern=abjad.Pattern(indices=[0, -1]),
                 ...         prefix=[1],
                 ...         suffix=[2],
@@ -430,7 +430,7 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.tools.RestAffixSpecifier(
+                ...     baca.tools.RestAffixCommand(
                 ...         pattern=abjad.patterntools.select_all(),
                 ...         prefix=[1],
                 ...         suffix=[2],
@@ -499,7 +499,7 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.tools.RestAffixSpecifier(prefix=[3]),
+                ...     baca.tools.RestAffixCommand(prefix=[3]),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -541,7 +541,7 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
 
     @property
     def skips_instead_of_rests(self):
-        r'''Is true when specifier makes skips instead of rests.
+        r'''Is true when command makes skips instead of rests.
 
         Set to true, false or none.
 
@@ -567,7 +567,7 @@ class RestAffixSpecifier(abjad.abctools.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.tools.RestAffixSpecifier(suffix=[3]),
+                ...     baca.tools.RestAffixCommand(suffix=[3]),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP

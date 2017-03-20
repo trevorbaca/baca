@@ -141,7 +141,7 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 ...     baca.tools.ArpeggiationSpacingSpecifier(
                 ...         direction=Up,
                 ...         ),
-                ...     baca.tools.RegisterToOctaveSpecifier(octave_number=2),
+                ...     baca.tools.RegisterToOctaveCommand(octave_number=2),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -187,7 +187,7 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 ...     baca.tools.ArpeggiationSpacingSpecifier(
                 ...         direction=Down,
                 ...         ),
-                ...     baca.tools.RegisterToOctaveSpecifier(octave_number=2),
+                ...     baca.tools.RegisterToOctaveCommand(octave_number=2),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP

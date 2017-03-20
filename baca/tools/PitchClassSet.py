@@ -93,6 +93,35 @@ class PitchClassSet(abjad.PitchClassSet):
         '''
         return abjad.new(self)
 
+    def to_pitches(self):
+        r'''Makes pitch set.
+
+        ..  container:: example
+
+            ::
+
+                >>> set_ = baca.pitch_class_set([-2, -1.5, 6, 7, -1.5, 7])
+                >>> set_
+                PitchClassSet([6, 7, 10, 10.5])
+
+            ::
+
+                >>> set_.to_pitches()
+                PitchSet([6, 7, 10, 10.5])
+
+        Returns pitch set.
+        '''
+        if self.item_class is abjad.NamedPitchClass:
+            item_class = abjad.NamedPitch
+        elif self.item_class is abjad.NumberedPitchClass:
+            item_class = abjad.NumberedPitch
+        else:
+            raise TypeError(self.item_class)
+        return baca.PitchSet(
+            items=self,
+            item_class=item_class,
+            )
+
 
 def _pitch_class_set(items=None, **keywords):
     if items:

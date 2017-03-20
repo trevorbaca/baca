@@ -417,7 +417,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
     @classmethod
     def _make_accelerando(class_, leaf_selection, accelerando_indicator):
         assert accelerando_indicator in ('accel', 'rit')
-        tuplet = abjad.scoretools.Tuplet((1, 1), leaf_selection)
+        tuplet = abjad.Tuplet((1, 1), leaf_selection)
         if len(tuplet) == 1:
             return tuplet
         total_duration = leaf_selection.get_duration()
@@ -531,7 +531,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         assert len(durations) == len(durations_)
         for duration_, duration in zip(durations_, durations):
             multiplier = duration_ / duration
-            multiplier = abjad.durationtools.Multiplier(multiplier)
+            multiplier = abjad.Multiplier(multiplier)
             multiplier = multiplier.with_denominator(2**10)
             multipliers.append(multiplier)
         return multipliers
@@ -687,21 +687,21 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         elif isinstance(time_treatment, abjad.Ratio):
             numerator, denominator = time_treatment.numbers
             multiplier = abjad.NonreducedFraction((denominator, numerator))
-            tuplet = abjad.scoretools.Tuplet(multiplier, leaf_selection)
-        elif isinstance(time_treatment, abjad.durationtools.Multiplier):
-            tuplet = abjad.scoretools.Tuplet(time_treatment, leaf_selection)
+            tuplet = abjad.Tuplet(multiplier, leaf_selection)
+        elif isinstance(time_treatment, abjad.Multiplier):
+            tuplet = abjad.Tuplet(time_treatment, leaf_selection)
         elif time_treatment.__class__ is abjad.Duration:
             tuplet_duration = time_treatment
             contents_duration = leaf_selection.get_duration()
             multiplier = tuplet_duration / contents_duration
-            tuplet = abjad.scoretools.Tuplet(multiplier, leaf_selection)
+            tuplet = abjad.Tuplet(multiplier, leaf_selection)
             if not tuplet.multiplier.is_proper_tuplet_multiplier:
                 tuplet._fix()
         else:
             message = 'invalid time treatment: {!r}.'
             message = message.format(time_treatment)
             raise Exception(message)
-        assert isinstance(tuplet, abjad.scoretools.Tuplet)
+        assert isinstance(tuplet, abjad.Tuplet)
         if grace_containers is not None:
             logical_ties = abjad.iterate(tuplet).by_logical_tie()
             pairs = zip(grace_containers, logical_ties)
@@ -735,7 +735,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             extra_count %= math.ceil(contents_count / 2.0)
             extra_count *= -1
         new_contents_count = contents_count + extra_count
-        tuplet_multiplier = abjad.durationtools.Multiplier(
+        tuplet_multiplier = abjad.Multiplier(
             new_contents_count,
             contents_count,
             )
@@ -748,15 +748,15 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 new_contents_count,
                 )
             raise Exception(message)
-        tuplet = abjad.scoretools.Tuplet(tuplet_multiplier, leaf_selection)
+        tuplet = abjad.Tuplet(tuplet_multiplier, leaf_selection)
         return tuplet
 
     @staticmethod
     def _normalize_multiplier(multiplier):
         assert 0 < multiplier, repr(multiplier)
-        while multiplier <= abjad.durationtools.Multiplier(1, 2):
+        while multiplier <= abjad.Multiplier(1, 2):
             multiplier *= 2
-        while abjad.durationtools.Multiplier(2) <= multiplier:
+        while abjad.Multiplier(2) <= multiplier:
             multiplier /= 2
         return multiplier
 
@@ -3270,7 +3270,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         ..  container:: example
 
-            Simplifies redudant tuplets:
+            Simplifies redundant tuplets:
 
             ::
 

@@ -22,7 +22,7 @@ class MusicRhythmSpecifier(abjad.abctools.AbjadObject):
 
     ### CLASS ATTRIBUTES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Music'
 
     __slots__ = (
         '_pattern',
@@ -57,6 +57,7 @@ class MusicRhythmSpecifier(abjad.abctools.AbjadObject):
         talea_denominator=None,
         thread=None,
         time_treatments=None,
+        tuplet_denominator=None,
         ):
         assert len(selections) == len(collections)
         rhythm_maker = self._get_rhythm_maker(
@@ -65,6 +66,7 @@ class MusicRhythmSpecifier(abjad.abctools.AbjadObject):
             talea_counts=talea_counts,
             talea_denominator=talea_denominator,
             time_treatments=time_treatments,
+            tuplet_denominator=tuplet_denominator,
             )
         length = len(selections)
         pattern = self.pattern or abjad.select_all()
@@ -126,6 +128,7 @@ class MusicRhythmSpecifier(abjad.abctools.AbjadObject):
         talea_counts=None,
         talea_denominator=None,
         time_treatments=None,
+        tuplet_denominator=None,
         ):
         rhythm_maker = self.rhythm_maker or self._default_rhythm_maker
         keywords = {}
@@ -141,6 +144,18 @@ class MusicRhythmSpecifier(abjad.abctools.AbjadObject):
             keywords['time_treatments'] = time_treatments
         if keywords:
             rhythm_maker = abjad.new(rhythm_maker, **keywords)
+        if tuplet_denominator is not None:
+            specifier = rhythm_maker.tuplet_spelling_specifier
+            if specifier is None:
+                specifier = abjad.rhythmmakertools.TupletSpellingSpecifier()
+            specifier = abjad.new(
+                specifier,
+                preferred_denominator=tuplet_denominator,
+                )
+            rhythm_maker = abjad.new(
+                rhythm_maker,
+                tuplet_spelling_specifier=specifier,
+                )
         return rhythm_maker
 
     ### PUBLIC PROPERTIES ###

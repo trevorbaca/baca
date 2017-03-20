@@ -1,10 +1,25 @@
 # -*- coding: utf-8 -*-
 import abjad
 import baca
+import collections
+import numbers
 
 
 class DivisionSequence(abjad.sequencetools.Sequence):
     r'''Division sequence.
+
+    ::
+
+        >>> import abjad
+        >>> import baca
+
+    ..  container:: example
+
+        ::
+
+            >>> baca.tools.DivisionSequence([(3, 8), (3, 8), (2, 8)])
+            DivisionSequence([Division((3, 8)), Division((3, 8)), Division((2, 8))])
+
     '''
 
     ### CLASS VARIABLES ###
@@ -13,6 +28,22 @@ class DivisionSequence(abjad.sequencetools.Sequence):
 
     __slots__ = (
         )
+
+    ### INITIALIZER ###
+
+    def __init__(self, items=None):
+        items = items or []
+        if not isinstance(items, collections.Iterable):
+            items = [items]
+        items_ = []
+        for item in items:
+            try:
+                item = baca.tools.Division(item)
+            except (TypeError, ValueError):
+                pass
+            items_.append(item)
+        superclass = super(DivisionSequence, self)
+        superclass.__init__(items=items_)
 
     ### PUBLIC METHODS ###
 

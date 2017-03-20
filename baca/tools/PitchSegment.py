@@ -27,36 +27,27 @@ class PitchSegment(abjad.PitchSegment):
             ..  doctest::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.Score])
-                \new Score \with {
-                    \override BarLine.stencil = ##f
-                    \override BarNumber.transparent = ##t
-                    \override Rest.transparent = ##t
-                    \override SpanBar.stencil = ##f
-                    \override TimeSignature.stencil = ##f
-                } <<
-                    \new PianoStaff <<
-                        \context Staff = "treble" {
-                            \clef "treble"
-                            r1 * 1/8
-                            r1 * 1/8
-                            fs'1 * 1/8
-                            g'1 * 1/8
-                            r1 * 1/8
-                            g'1 * 1/8
-                        }
-                        \context Staff = "bass" {
-                            \clef "bass"
-                            bf1 * 1/8
-                            bqf1 * 1/8
-                            r1 * 1/8
-                            r1 * 1/8
-                            bqf1 * 1/8
-                            r1 * 1/8
-                        }
-                    >>
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \context Staff = "treble" {
+                        \clef "treble"
+                        r1 * 1/8
+                        r1 * 1/8
+                        fs'1 * 1/8
+                        g'1 * 1/8
+                        r1 * 1/8
+                        g'1 * 1/8
+                    }
+                    \context Staff = "bass" {
+                        \clef "bass"
+                        bf1 * 1/8
+                        bqf1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        bqf1 * 1/8
+                        r1 * 1/8
+                    }
                 >>
-
 
     '''
 
@@ -84,34 +75,26 @@ class PitchSegment(abjad.PitchSegment):
             ..  doctest::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.Score])
-                \new Score \with {
-                    \override BarLine.stencil = ##f
-                    \override BarNumber.transparent = ##t
-                    \override Rest.transparent = ##t
-                    \override SpanBar.stencil = ##f
-                    \override TimeSignature.stencil = ##f
-                } <<
-                    \new PianoStaff <<
-                        \context Staff = "treble" {
-                            \clef "treble"
-                            r1 * 1/8
-                            r1 * 1/8
-                            fs'1 * 1/8
-                            g'1 * 1/8
-                            r1 * 1/8
-                            g'1 * 1/8
-                        }
-                        \context Staff = "bass" {
-                            \clef "bass"
-                            bf1 * 1/8
-                            bqf1 * 1/8
-                            r1 * 1/8
-                            r1 * 1/8
-                            bqf1 * 1/8
-                            r1 * 1/8
-                        }
-                    >>
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \context Staff = "treble" {
+                        \clef "treble"
+                        r1 * 1/8
+                        r1 * 1/8
+                        fs'1 * 1/8
+                        g'1 * 1/8
+                        r1 * 1/8
+                        g'1 * 1/8
+                    }
+                    \context Staff = "bass" {
+                        \clef "bass"
+                        bf1 * 1/8
+                        bqf1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        bqf1 * 1/8
+                        r1 * 1/8
+                    }
                 >>
 
             ::
@@ -127,39 +110,31 @@ class PitchSegment(abjad.PitchSegment):
             ..  doctest::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.Score])
-                \new Score \with {
-                    \override BarLine.stencil = ##f
-                    \override BarNumber.transparent = ##t
-                    \override Rest.transparent = ##t
-                    \override SpanBar.stencil = ##f
-                    \override TimeSignature.stencil = ##f
-                } <<
-                    \new PianoStaff <<
-                        \context Staff = "treble" {
-                            \clef "treble"
-                            bf'1 * 1/8
-                            bqf'1 * 1/8
-                            fs''1 * 1/8
-                            g''1 * 1/8
-                            bqf'1 * 1/8
-                            g''1 * 1/8
-                        }
-                        \context Staff = "bass" {
-                            \clef "bass"
-                            r1 * 1/8
-                            r1 * 1/8
-                            r1 * 1/8
-                            r1 * 1/8
-                            r1 * 1/8
-                            r1 * 1/8
-                        }
-                    >>
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \context Staff = "treble" {
+                        \clef "treble"
+                        bf'1 * 1/8
+                        bqf'1 * 1/8
+                        fs''1 * 1/8
+                        g''1 * 1/8
+                        bqf'1 * 1/8
+                        g''1 * 1/8
+                    }
+                    \context Staff = "bass" {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
                 >>
 
         Returns new segment.
         '''
-        specifier = baca.tools.RegisterToOctaveSpecifier(
+        specifier = baca.tools.RegisterToOctaveCommand(
             anchor=Bottom,
             octave_number=n,
             )
@@ -168,6 +143,87 @@ class PitchSegment(abjad.PitchSegment):
         segment = PitchSegment.from_selection(selection)
         return abjad.new(self, items=segment)
         
+    def center_to_octave(self, n=4):
+        r'''Octave-transposes segment to center in octave `n`.
+
+        ..  container:: example
+
+            ::
+
+                >>> segment = baca.pitch_segment([-2, -1.5, 6, 7, -1.5, 7])
+                >>> show(segment) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = segment.__illustrate__()
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \context Staff = "treble" {
+                        \clef "treble"
+                        r1 * 1/8
+                        r1 * 1/8
+                        fs'1 * 1/8
+                        g'1 * 1/8
+                        r1 * 1/8
+                        g'1 * 1/8
+                    }
+                    \context Staff = "bass" {
+                        \clef "bass"
+                        bf1 * 1/8
+                        bqf1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        bqf1 * 1/8
+                        r1 * 1/8
+                    }
+                >>
+
+            ::
+
+                >>> segment.center_to_octave(n=3)
+                PitchSegment([-14, -13.5, -6, -5, -13.5, -5])
+
+            ::
+
+                >>> segment = segment.center_to_octave(n=3)
+                >>> show(segment) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = segment.__illustrate__()
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \context Staff = "treble" {
+                        \clef "treble"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
+                    \context Staff = "bass" {
+                        \clef "bass"
+                        bf,1 * 1/8
+                        bqf,1 * 1/8
+                        fs1 * 1/8
+                        g1 * 1/8
+                        bqf,1 * 1/8
+                        g1 * 1/8
+                    }
+                >>
+
+        Returns new segment.
+        '''
+        specifier = baca.tools.RegisterToOctaveCommand(
+            anchor=Center,
+            octave_number=n,
+            )
+        selection = self._to_selection()
+        specifier([selection])
+        segment = PitchSegment.from_selection(selection)
+        return abjad.new(self, items=segment)
+
     def chord(self):
         r'''Changes segment to set.
 
@@ -189,20 +245,18 @@ class PitchSegment(abjad.PitchSegment):
             ..  doctest::
 
                 >>> lilypond_file = segment.chord().__illustrate__()
-                >>> f(lilypond_file[abjad.Score])
-                \new Score <<
-                    \new PianoStaff <<
-                        \new Staff {
-                            \new Voice {
-                                <fs' g'>1
-                            }
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \new Staff {
+                        \new Voice {
+                            <fs' g'>1
                         }
-                        \new Staff {
-                            \new Voice {
-                                <bf bqf>1
-                            }
+                    }
+                    \new Staff {
+                        \new Voice {
+                            <bf bqf>1
                         }
-                    >>
+                    }
                 >>
 
         Returns pitch set.
@@ -225,34 +279,26 @@ class PitchSegment(abjad.PitchSegment):
             ..  doctest::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.Score])
-                \new Score \with {
-                    \override BarLine.stencil = ##f
-                    \override BarNumber.transparent = ##t
-                    \override Rest.transparent = ##t
-                    \override SpanBar.stencil = ##f
-                    \override TimeSignature.stencil = ##f
-                } <<
-                    \new PianoStaff <<
-                        \context Staff = "treble" {
-                            \clef "treble"
-                            r1 * 1/8
-                            r1 * 1/8
-                            fs'1 * 1/8
-                            g'1 * 1/8
-                            r1 * 1/8
-                            g'1 * 1/8
-                        }
-                        \context Staff = "bass" {
-                            \clef "bass"
-                            bf1 * 1/8
-                            bqf1 * 1/8
-                            r1 * 1/8
-                            r1 * 1/8
-                            bqf1 * 1/8
-                            r1 * 1/8
-                        }
-                    >>
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \context Staff = "treble" {
+                        \clef "treble"
+                        r1 * 1/8
+                        r1 * 1/8
+                        fs'1 * 1/8
+                        g'1 * 1/8
+                        r1 * 1/8
+                        g'1 * 1/8
+                    }
+                    \context Staff = "bass" {
+                        \clef "bass"
+                        bf1 * 1/8
+                        bqf1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        bqf1 * 1/8
+                        r1 * 1/8
+                    }
                 >>
 
             ::
@@ -268,39 +314,31 @@ class PitchSegment(abjad.PitchSegment):
             ..  doctest::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.Score])
-                \new Score \with {
-                    \override BarLine.stencil = ##f
-                    \override BarNumber.transparent = ##t
-                    \override Rest.transparent = ##t
-                    \override SpanBar.stencil = ##f
-                    \override TimeSignature.stencil = ##f
-                } <<
-                    \new PianoStaff <<
-                        \context Staff = "treble" {
-                            \clef "treble"
-                            r1 * 1/8
-                            r1 * 1/8
-                            r1 * 1/8
-                            r1 * 1/8
-                            r1 * 1/8
-                            r1 * 1/8
-                        }
-                        \context Staff = "bass" {
-                            \clef "bass"
-                            bf,1 * 1/8
-                            bqf,1 * 1/8
-                            fs1 * 1/8
-                            g1 * 1/8
-                            bqf,1 * 1/8
-                            g1 * 1/8
-                        }
-                    >>
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \context Staff = "treble" {
+                        \clef "treble"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
+                    \context Staff = "bass" {
+                        \clef "bass"
+                        bf,1 * 1/8
+                        bqf,1 * 1/8
+                        fs1 * 1/8
+                        g1 * 1/8
+                        bqf,1 * 1/8
+                        g1 * 1/8
+                    }
                 >>
 
         Returns new segment.
         '''
-        specifier = baca.tools.RegisterToOctaveSpecifier(
+        specifier = baca.tools.RegisterToOctaveCommand(
             anchor=Top,
             octave_number=n,
             )
@@ -308,6 +346,290 @@ class PitchSegment(abjad.PitchSegment):
         specifier([selection])
         segment = PitchSegment.from_selection(selection)
         return abjad.new(self, items=segment)
+
+    def space_down(
+        self,
+        bass=None,
+        semitones=None,
+        soprano=None,
+        ):
+        r'''Spaces pitch segment down.
+
+        ..  container:: example
+
+            ::
+
+                >>> segment = baca.pitch_segment([12, 14, 21, 22])
+                >>> show(segment) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = segment.__illustrate__()
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \context Staff = "treble" {
+                        \clef "treble"
+                        c''1 * 1/8
+                        d''1 * 1/8
+                        a''1 * 1/8
+                        bf''1 * 1/8
+                    }
+                    \context Staff = "bass" {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
+                >>
+
+            ::
+
+                >>> segment.space_down(bass=0)
+                PitchSegment([14, 10, 9, 0])
+
+            ::
+
+                >>> segment = segment.space_down(bass=0)
+                >>> show(segment) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = segment.__illustrate__()
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \context Staff = "treble" {
+                        \clef "treble"
+                        d''1 * 1/8
+                        bf'1 * 1/8
+                        a'1 * 1/8
+                        c'1 * 1/8
+                    }
+                    \context Staff = "bass" {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
+                >>
+
+        ..  container:: example
+
+            With 2 in bass:
+
+            ::
+
+                >>> segment = baca.pitch_segment([12, 14, 21, 22])
+                >>> show(segment) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = segment.__illustrate__()
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \context Staff = "treble" {
+                        \clef "treble"
+                        c''1 * 1/8
+                        d''1 * 1/8
+                        a''1 * 1/8
+                        bf''1 * 1/8
+                    }
+                    \context Staff = "bass" {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
+                >>
+
+            ::
+
+                >>> segment.space_down(bass=2)
+                PitchSegment([12, 10, 9, 2])
+
+            ::
+
+                >>> segment = segment.space_down(bass=2)
+                >>> show(segment) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = segment.__illustrate__()
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \context Staff = "treble" {
+                        \clef "treble"
+                        c''1 * 1/8
+                        bf'1 * 1/8
+                        a'1 * 1/8
+                        d'1 * 1/8
+                    }
+                    \context Staff = "bass" {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
+                >>
+
+        Returns new pitch segment.
+        '''
+        specifier = baca.tools.ChordalSpacingSpecifier(
+            bass=bass,
+            direction=Down,
+            minimum_semitones=semitones,
+            soprano=soprano,
+            )
+        result = specifier([self])
+        assert isinstance(result, baca.CollectionList), repr(result)
+        assert len(result) == 1, repr(result)
+        segment = result[0]
+        return segment
+
+    def space_up(
+        self,
+        bass=None,
+        semitones=None,
+        soprano=None,
+        ):
+        r'''Spaces pitch segment up.
+
+        ..  container:: example
+
+            ::
+
+                >>> segment = baca.pitch_segment([12, 14, 21, 22])
+                >>> show(segment) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = segment.__illustrate__()
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \context Staff = "treble" {
+                        \clef "treble"
+                        c''1 * 1/8
+                        d''1 * 1/8
+                        a''1 * 1/8
+                        bf''1 * 1/8
+                    }
+                    \context Staff = "bass" {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
+                >>
+
+            ::
+
+                >>> segment.space_up(bass=0)
+                PitchSegment([0, 2, 9, 10])
+
+            ::
+
+                >>> segment = segment.space_up(bass=0)
+                >>> show(segment) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = segment.__illustrate__()
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \context Staff = "treble" {
+                        \clef "treble"
+                        c'1 * 1/8
+                        d'1 * 1/8
+                        a'1 * 1/8
+                        bf'1 * 1/8
+                    }
+                    \context Staff = "bass" {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
+                >>
+
+        ..  container:: example
+
+            With 2 in bass:
+
+            ::
+
+                >>> segment = baca.pitch_segment([12, 14, 21, 22])
+                >>> show(segment) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = segment.__illustrate__()
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \context Staff = "treble" {
+                        \clef "treble"
+                        c''1 * 1/8
+                        d''1 * 1/8
+                        a''1 * 1/8
+                        bf''1 * 1/8
+                    }
+                    \context Staff = "bass" {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
+                >>
+
+            ::
+
+                >>> segment.space_up(bass=2)
+                PitchSegment([2, 9, 10, 12])
+
+            ::
+
+                >>> segment = segment.space_up(bass=2)
+                >>> show(segment) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = segment.__illustrate__()
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \context Staff = "treble" {
+                        \clef "treble"
+                        d'1 * 1/8
+                        a'1 * 1/8
+                        bf'1 * 1/8
+                        c''1 * 1/8
+                    }
+                    \context Staff = "bass" {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
+                >>
+
+        Returns new pitch segment.
+        '''
+        specifier = baca.tools.ChordalSpacingSpecifier(
+            bass=bass,
+            direction=Up,
+            minimum_semitones=semitones,
+            soprano=soprano,
+            )
+        result = specifier([self])
+        assert isinstance(result, baca.CollectionList), repr(result)
+        assert len(result) == 1, repr(result)
+        segment = result[0]
+        return segment
 
     def split(self, pitch=0):
         r'''Splits segment at `pitch`.
@@ -323,34 +645,26 @@ class PitchSegment(abjad.PitchSegment):
             ..  doctest::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.Score])
-                \new Score \with {
-                    \override BarLine.stencil = ##f
-                    \override BarNumber.transparent = ##t
-                    \override Rest.transparent = ##t
-                    \override SpanBar.stencil = ##f
-                    \override TimeSignature.stencil = ##f
-                } <<
-                    \new PianoStaff <<
-                        \context Staff = "treble" {
-                            \clef "treble"
-                            r1 * 1/8
-                            r1 * 1/8
-                            fs'1 * 1/8
-                            g'1 * 1/8
-                            r1 * 1/8
-                            g'1 * 1/8
-                        }
-                        \context Staff = "bass" {
-                            \clef "bass"
-                            bf1 * 1/8
-                            bqf1 * 1/8
-                            r1 * 1/8
-                            r1 * 1/8
-                            bqf1 * 1/8
-                            r1 * 1/8
-                        }
-                    >>
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \context Staff = "treble" {
+                        \clef "treble"
+                        r1 * 1/8
+                        r1 * 1/8
+                        fs'1 * 1/8
+                        g'1 * 1/8
+                        r1 * 1/8
+                        g'1 * 1/8
+                    }
+                    \context Staff = "bass" {
+                        \clef "bass"
+                        bf1 * 1/8
+                        bqf1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        bqf1 * 1/8
+                        r1 * 1/8
+                    }
                 >>
 
             ::
@@ -369,28 +683,20 @@ class PitchSegment(abjad.PitchSegment):
             ..  doctest::
 
                 >>> lilypond_file = upper.__illustrate__()
-                >>> f(lilypond_file[abjad.Score])
-                \new Score \with {
-                    \override BarLine.stencil = ##f
-                    \override BarNumber.transparent = ##t
-                    \override Rest.transparent = ##t
-                    \override SpanBar.stencil = ##f
-                    \override TimeSignature.stencil = ##f
-                } <<
-                    \new PianoStaff <<
-                        \context Staff = "treble" {
-                            \clef "treble"
-                            fs'1 * 1/8
-                            g'1 * 1/8
-                            g'1 * 1/8
-                        }
-                        \context Staff = "bass" {
-                            \clef "bass"
-                            r1 * 1/8
-                            r1 * 1/8
-                            r1 * 1/8
-                        }
-                    >>
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \context Staff = "treble" {
+                        \clef "treble"
+                        fs'1 * 1/8
+                        g'1 * 1/8
+                        g'1 * 1/8
+                    }
+                    \context Staff = "bass" {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
                 >>
 
             ::
@@ -405,28 +711,20 @@ class PitchSegment(abjad.PitchSegment):
             ..  doctest::
 
                 >>> lilypond_file = lower.__illustrate__()
-                >>> f(lilypond_file[abjad.Score])
-                \new Score \with {
-                    \override BarLine.stencil = ##f
-                    \override BarNumber.transparent = ##t
-                    \override Rest.transparent = ##t
-                    \override SpanBar.stencil = ##f
-                    \override TimeSignature.stencil = ##f
-                } <<
-                    \new PianoStaff <<
-                        \context Staff = "treble" {
-                            \clef "treble"
-                            r1 * 1/8
-                            r1 * 1/8
-                            r1 * 1/8
-                        }
-                        \context Staff = "bass" {
-                            \clef "bass"
-                            bf1 * 1/8
-                            bqf1 * 1/8
-                            bqf1 * 1/8
-                        }
-                    >>
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \context Staff = "treble" {
+                        \clef "treble"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
+                    \context Staff = "bass" {
+                        \clef "bass"
+                        bf1 * 1/8
+                        bqf1 * 1/8
+                        bqf1 * 1/8
+                    }
                 >>
 
         Returns upper, lower segments.

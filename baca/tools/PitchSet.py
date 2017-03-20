@@ -83,6 +83,258 @@ class PitchSet(abjad.PitchSet):
 
     ### PUBLIC METHODS ###
 
+    def space_down(
+        self,
+        bass=None,
+        semitones=None,
+        soprano=None,
+        ):
+        r'''Spaces pitch set down.
+
+        ..  container:: example
+
+            ::
+
+                >>> set_ = baca.pitch_set([12, 14, 21, 22])
+                >>> show(set_) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = set_.__illustrate__()
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \new Staff {
+                        \new Voice {
+                            <c'' d'' a'' bf''>1
+                        }
+                    }
+                    \new Staff {
+                        \new Voice {
+                            s1
+                        }
+                    }
+                >>
+
+            ::
+
+                >>> set_.space_down(bass=0)
+                PitchSet([0, 9, 10, 14])
+
+            ::
+
+                >>> set_ = set_.space_down(bass=0)
+                >>> show(set_) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = set_.__illustrate__()
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \new Staff {
+                        \new Voice {
+                            <c' a' bf' d''>1
+                        }
+                    }
+                    \new Staff {
+                        \new Voice {
+                            s1
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            With 2 in bass:
+
+            ::
+
+                >>> set_ = baca.pitch_set([12, 14, 21, 22])
+                >>> show(set_) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = set_.__illustrate__()
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \new Staff {
+                        \new Voice {
+                            <c'' d'' a'' bf''>1
+                        }
+                    }
+                    \new Staff {
+                        \new Voice {
+                            s1
+                        }
+                    }
+                >>
+
+            ::
+
+                >>> set_.space_down(bass=2)
+                PitchSet([2, 9, 10, 12])
+
+            ::
+
+                >>> set_ = set_.space_down(bass=2)
+                >>> show(set_) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = set_.__illustrate__()
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \new Staff {
+                        \new Voice {
+                            <d' a' bf' c''>1
+                        }
+                    }
+                    \new Staff {
+                        \new Voice {
+                            s1
+                        }
+                    }
+                >>
+
+        Returns new pitch set.
+        '''
+        specifier = baca.tools.ChordalSpacingSpecifier(
+            bass=bass,
+            direction=Down,
+            minimum_semitones=semitones,
+            soprano=soprano,
+            )
+        result = specifier([self])
+        assert isinstance(result, baca.CollectionList), repr(result)
+        assert len(result) == 1, repr(result)
+        segment = result[0]
+        return segment
+
+    def space_up(
+        self,
+        bass=None,
+        semitones=None,
+        soprano=None,
+        ):
+        r'''Spaces pitch set up.
+
+        ..  container:: example
+
+            ::
+
+                >>> set_ = baca.pitch_set([12, 14, 21, 22])
+                >>> show(set_) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = set_.__illustrate__()
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \new Staff {
+                        \new Voice {
+                            <c'' d'' a'' bf''>1
+                        }
+                    }
+                    \new Staff {
+                        \new Voice {
+                            s1
+                        }
+                    }
+                >>
+
+            ::
+
+                >>> set_.space_up(bass=0)
+                PitchSet([0, 2, 9, 10])
+
+            ::
+
+                >>> set_ = set_.space_up(bass=0)
+                >>> show(set_) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = set_.__illustrate__()
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \new Staff {
+                        \new Voice {
+                            <c' d' a' bf'>1
+                        }
+                    }
+                    \new Staff {
+                        \new Voice {
+                            s1
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            With 2 in bass:
+
+            ::
+
+                >>> set_ = baca.pitch_set([12, 14, 21, 22])
+                >>> show(set_) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = set_.__illustrate__()
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \new Staff {
+                        \new Voice {
+                            <c'' d'' a'' bf''>1
+                        }
+                    }
+                    \new Staff {
+                        \new Voice {
+                            s1
+                        }
+                    }
+                >>
+
+            ::
+
+                >>> set_.space_up(bass=2)
+                PitchSet([2, 9, 10, 12])
+
+            ::
+
+                >>> set_ = set_.space_up(bass=2)
+                >>> show(set_) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = set_.__illustrate__()
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \new Staff {
+                        \new Voice {
+                            <d' a' bf' c''>1
+                        }
+                    }
+                    \new Staff {
+                        \new Voice {
+                            s1
+                        }
+                    }
+                >>
+
+        Returns new pitch segment.
+        '''
+        specifier = baca.tools.ChordalSpacingSpecifier(
+            bass=bass,
+            direction=Up,
+            minimum_semitones=semitones,
+            soprano=soprano,
+            )
+        result = specifier([self])
+        assert isinstance(result, baca.CollectionList), repr(result)
+        assert len(result) == 1, repr(result)
+        segment = result[0]
+        return segment
+
     def to_pitch_classes(self):
         r'''Makes pitch-class set.
 

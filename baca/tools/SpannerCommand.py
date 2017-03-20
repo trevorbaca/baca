@@ -3,8 +3,8 @@ import abjad
 import baca
 
 
-class SpannerSpecifier(abjad.abctools.AbjadObject):
-    r'''Spanner specifier.
+class SpannerCommand(abjad.abctools.AbjadObject):
+    r'''Spanner command.
 
     ::
 
@@ -18,7 +18,7 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.tools.SpannerSpecifier(
+            ...     baca.tools.SpannerCommand(
             ...         selector=baca.select_leaves_in_each_tuplet(),
             ...         spanner=abjad.Slur(),
             ...         ),
@@ -61,7 +61,7 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
         With collection-maker:
 
-        ..  note:: Teach SegmentMaker about SpannerSpecifier.
+        ..  note:: Teach SegmentMaker about SpannerCommand.
 
         ::
 
@@ -72,11 +72,12 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> specifiers = collection_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
+            >>> specifiers = collection_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.tools.SpannerSpecifier(
+            ...     baca.tools.SpannerCommand(
             ...         selector=baca.select_leaves_in_each_tuplet(),
             ...         spanner=abjad.Slur(),
             ...         ),
@@ -168,14 +169,14 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> baca.tools.SpannerSpecifier()
-            SpannerSpecifier()
+            >>> baca.tools.SpannerCommand()
+            SpannerCommand()
 
     '''
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_annotation',
@@ -201,7 +202,7 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls specifier on `argument`.
+        r'''Calls command on `argument`.
 
         Returns none.
         '''
@@ -209,12 +210,13 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
             return
         selector = self.selector or baca.select_leaves()
         selections = selector(argument)
-        #print(format(selector))
-        #print()
-        #print(argument)
-        #print()
-        #print(selections)
-        #print()
+#        if isinstance(self.spanner, abjad.PianoPedalSpanner):
+#            print(format(selector))
+#            print()
+#            print(argument)
+#            print()
+#            print(selections)
+#            print()
         selections = baca.MusicMaker._normalize_selections(selections)
         #print()
         #print(selections)
@@ -241,7 +243,7 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.SpannerSpecifier(
+                ...     baca.tools.SpannerCommand(
                 ...         spanner=abjad.Slur(),
                 ...         ),
                 ...     )
@@ -286,7 +288,7 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.SpannerSpecifier(
+                ...     baca.tools.SpannerCommand(
                 ...         spanner=abjad.Slur(),
                 ...         ),
                 ...     )
@@ -337,7 +339,7 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[14, 14, 14]],
-                ...     talea_counts=[5],
+                ...     counts=[5],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -366,8 +368,8 @@ class SpannerSpecifier(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[14, 14, 14]],
-                ...     baca.tools.SpannerSpecifier(spanner=abjad.Tie()),
-                ...     talea_counts=[5],
+                ...     baca.tools.SpannerCommand(spanner=abjad.Tie()),
+                ...     counts=[5],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP

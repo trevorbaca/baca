@@ -3,8 +3,8 @@ import abjad
 import baca
 
 
-class NestingSpecifier(abjad.abctools.AbjadObject):
-    r'''Nesting specifier.
+class NestCommand(abjad.abctools.AbjadObject):
+    r'''Nest command.
 
     ::
 
@@ -13,12 +13,12 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        Nesting specifier augments one sixteenth:
+        Nest command augments one sixteenth:
 
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.tools.NestingSpecifier(
+            ...     baca.tools.NestCommand(
             ...         time_treatments=['+1/16'],
             ...         ),
             ...     abjad.rhythmmakertools.BeamSpecifier(
@@ -92,7 +92,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        Calltime nesting specifier preserves beam subdivisions and works with
+        Calltime nest command preserves beam subdivisions and works with
         extend beam:
 
             >>> music_maker = baca.MusicMaker(
@@ -107,7 +107,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10, 18], [16, 15, 23]],
-            ...     baca.tools.NestingSpecifier(
+            ...     baca.tools.NestCommand(
             ...         time_treatments=['+1/16'],
             ...         ),
             ...     extend_beam=True,
@@ -123,13 +123,14 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
 
             >>> segment_maker = baca.tools.SegmentMaker(
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
+            ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
             ...         minimum_width=abjad.Duration(1, 24),
             ...         ),
             ...     time_signatures=time_signatures,
             ...     )
-            >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
+            >>> specifiers = segment_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.tools.RhythmSpecifier(
             ...         rhythm_maker=selection,
             ...         ),
@@ -237,7 +238,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_lmr_specifier',
@@ -265,7 +266,7 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, selections=None):
-        r'''Calls nesting specifier on selections.
+        r'''Calls command on `selections`.
 
         ..  container:: example
 
@@ -274,8 +275,8 @@ class NestingSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.NestingSpecifier(time_treatments=['+1/16']),
-                ...     baca.tools.RestAffixSpecifier(
+                ...     baca.tools.NestCommand(time_treatments=['+1/16']),
+                ...     baca.tools.RestAffixCommand(
                 ...         prefix=[2],
                 ...         suffix=[3],
                 ...         ),

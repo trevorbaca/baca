@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 import abjad
+import baca
 import copy
 
 
-class TransitionSpecifier(abjad.abctools.AbjadObject):
-    r'''Transition specifier.
+class TransitionCommand(abjad.abctools.AbjadObject):
+    r'''Transition command.
 
     ::
 
@@ -18,7 +19,7 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.tools.TransitionSpecifier(
+            ...     baca.tools.TransitionCommand(
             ...         start_markup=baca.markup.ord_(),
             ...         stop_markup=baca.markup.pont(),
             ...         ),
@@ -102,11 +103,12 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> specifiers = collection_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
+            >>> specifiers = collection_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
             ...     baca.even_runs(),
-            ...     baca.tools.TransitionSpecifier(
+            ...     baca.tools.TransitionCommand(
             ...         start_markup=baca.markup.ord_(),
             ...         stop_markup=baca.markup.pont(),
             ...         ),
@@ -226,7 +228,7 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_selector',
@@ -257,7 +259,7 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls specifier on `argument`.
+        r'''Calls command on `argument`.
 
         Returns none.
         '''
@@ -266,14 +268,22 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
         leaves = abjad.select(argument).by_leaf()
         start_leaf = leaves[0]
         stop_leaf = leaves[-1]
-        if self.start_markup is not None:
-            start_markup = copy.copy(self.start_markup)
+        start_markup = self.start_markup
+        if isinstance(start_markup, baca.tools.AttachCommand):
+            start_markup = start_markup.arguments[0]
+        if start_markup is not None:
+            assert isinstance(start_markup, abjad.Markup), repr(start_markup)
+            start_markup = copy.copy(start_markup)
             start_markup = start_markup.override(('font-name', 'Palatino'))
             abjad.attach(start_markup, start_leaf, is_annotation=True)
         arrow = self._get_arrow()
         abjad.attach(arrow, start_leaf)
-        if self.stop_markup is not None:
-            stop_markup = copy.copy(self.stop_markup)
+        stop_markup = self.stop_markup
+        if isinstance(stop_markup, baca.tools.AttachCommand):
+            stop_markup = stop_markup.arguments[0]
+        if stop_markup is not None:
+            assert isinstance(stop_markup, abjad.Markup), repr(stop_markup)
+            stop_markup = copy.copy(stop_markup)
             stop_markup = stop_markup.override(('font-name', 'Palatino'))
             abjad.attach(stop_markup, stop_leaf, is_annotation=True)
         abjad.attach(abjad.TextSpanner(), leaves)
@@ -311,10 +321,10 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
 
     @property
     def solid(self):
-        r'''Is true when specifier renders transition as a solid line instead
+        r'''Is true when command renders transition as a solid line instead
         of a dashed line.
 
-        Is false when specifier renders transitions as a dashed line.
+        Is false when command renders transitions as a dashed line.
 
         Defaults to none.
 
@@ -326,7 +336,7 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
 
     @property
     def start_markup(self):
-        r'''Gets start markup of transition specifier.
+        r'''Gets command start markup.
 
         Set to markup.
 
@@ -336,7 +346,7 @@ class TransitionSpecifier(abjad.abctools.AbjadObject):
 
     @property
     def stop_markup(self):
-        r'''Gets stop markup of transition specifier.
+        r'''Gets command stop markup.
 
         Set to markup.
 

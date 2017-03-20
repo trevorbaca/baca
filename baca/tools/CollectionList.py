@@ -464,6 +464,7 @@ class CollectionList(abjad.abctools.AbjadValueObject):
         except TypeError:
             return result
 
+    # TODO: reimplement to show all four types of collection
     def __illustrate__(self):
         r'''Illustrates collections.
 
@@ -841,7 +842,227 @@ class CollectionList(abjad.abctools.AbjadValueObject):
         collections = []
         for sequence_ in sequence.accumulate(operands=operands):
             collections.extend(sequence_)
-        return type(self)(collections=collections)
+        return abjad.new(self, collections=collections)
+
+    def arpeggiate_down(self, pattern=None):
+        r'''Apreggiates collections down according to `pattern`.
+
+        ..  container:: example
+
+            Down-arpeggiates all collections:
+
+            ::
+
+                >>> collections = baca.CollectionList(
+                ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
+                ...     )
+
+            ::
+
+                >>> collections.arpeggiate_down()
+                CollectionList([<29, 24, 14, 6, 5>, <28, 17, 7>, <3, 2, 1, 0>])
+
+        ..  container:: example
+
+            Down-arpeggiates collection -1:
+
+            ::
+
+                >>> collections = baca.CollectionList(
+                ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
+                ...     )
+
+            ::
+
+                >>> collections.arpeggiate_down(pattern=[-1])
+                CollectionList([<5, 12, 14, 18, 17>, <16, 17, 19>, <3, 2, 1, 0>])
+
+        Returns new collection list.
+        '''
+        if isinstance(pattern, list):
+            pattern = abjad.Pattern(indices=pattern)
+        pattern = pattern or abjad.select_all()
+        length = len(self)
+        collections = []
+        for i, collection in enumerate(self):
+            if pattern.matches_index(i, length):
+                if isinstance(collection, abjad.PitchSegment):
+                    collection = collection.to_pitch_classes()
+                    collection = baca.PitchClassSegment(
+                        items=collection,
+                        item_class=collection.item_class,
+                        )
+                collection = collection.arpeggiate_down()
+            collections.append(collection)
+        return abjad.new(self, collections=collections)
+
+    def arpeggiate_up(self, pattern=None):
+        r'''Apreggiates collections up according to `pattern`.
+
+        ..  container:: example
+
+            Up-arpeggiates all collections:
+
+            ::
+
+                >>> collections = baca.CollectionList(
+                ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
+                ...     )
+
+            ::
+
+                >>> collections.arpeggiate_up()
+                CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
+
+        ..  container:: example
+
+            Up-arpeggiates collection -1:
+
+            ::
+
+                >>> collections = baca.CollectionList(
+                ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
+                ...     )
+
+            ::
+
+                >>> collections.arpeggiate_up(pattern=[-1])
+                CollectionList([<5, 12, 14, 18, 17>, <16, 17, 19>, <3, 14, 25, 36>])
+
+        Returns new collection list.
+        '''
+        if isinstance(pattern, list):
+            pattern = abjad.Pattern(indices=pattern)
+        pattern = pattern or abjad.select_all()
+        length = len(self)
+        collections = []
+        for i, collection in enumerate(self):
+            if pattern.matches_index(i, length):
+                if isinstance(collection, abjad.PitchSegment):
+                    collection = collection.to_pitch_classes()
+                    collection = baca.PitchClassSegment(
+                        items=collection,
+                        item_class=collection.item_class,
+                        )
+                collection = collection.arpeggiate_up()
+            collections.append(collection)
+        return abjad.new(self, collections=collections)
+
+    def bass_to_octave(self, n=4, pattern=None):
+        r'''Octave-transposes collections to bass in octave `n`.
+
+        ..  container:: example
+
+            Octave-transposes all collections:
+
+            ::
+
+                >>> collections = baca.CollectionList(
+                ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
+                ...     )
+                >>> collections = collections.arpeggiate_up()
+
+            ::
+
+                >>> collections
+                CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
+
+            ::
+
+                >>> collections.bass_to_octave(n=3)
+                CollectionList([<-7, 0, 2, 6, 17>, <-8, -7, -5>, <-9, 2, 13, 24>])
+
+        ..  container:: example
+
+            Octave-transposes collection -1:
+
+            ::
+
+                >>> collections = baca.CollectionList(
+                ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
+                ...     )
+                >>> collections = collections.arpeggiate_up()
+
+            ::
+
+                >>> collections
+                CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
+
+            ::
+
+                >>> collections.bass_to_octave(n=3, pattern=[-1])
+                CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <-9, 2, 13, 24>])
+
+        Returns new collection list.
+        '''
+        if isinstance(pattern, list):
+            pattern = abjad.Pattern(indices=pattern)
+        pattern = pattern or abjad.select_all()
+        length = len(self)
+        collections = []
+        for i, collection in enumerate(self):
+            if pattern.matches_index(i, length):
+                collection = collection.bass_to_octave(n=n)
+            collections.append(collection)
+        return abjad.new(self, collections=collections)
+
+    def center_to_octave(self, n=4, pattern=None):
+        r'''Octave-transposes collections to center in octave `n`.
+
+        ..  container:: example
+
+            Octave-transposes all collections:
+
+            ::
+
+                >>> collections = baca.CollectionList(
+                ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
+                ...     )
+                >>> collections = collections.arpeggiate_up()
+
+            ::
+
+                >>> collections
+                CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
+
+            ::
+
+                >>> collections.center_to_octave(n=3)
+                CollectionList([<-19, -12, -10, -6, 5>, <-8, -7, -5>, <-21, -10, 1, 12>])
+
+        ..  container:: example
+
+            Octave-transposes collection -1:
+
+            ::
+
+                >>> collections = baca.CollectionList(
+                ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
+                ...     )
+                >>> collections = collections.arpeggiate_up()
+
+            ::
+
+                >>> collections
+                CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
+
+            ::
+
+                >>> collections.center_to_octave(n=3, pattern=[-1])
+                CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <-21, -10, 1, 12>])
+
+        Returns new collection list.
+        '''
+        if isinstance(pattern, list):
+            pattern = abjad.Pattern(indices=pattern)
+        pattern = pattern or abjad.select_all()
+        length = len(self)
+        collections = []
+        for i, collection in enumerate(self):
+            if pattern.matches_index(i, length):
+                collection = collection.center_to_octave(n=n)
+            collections.append(collection)
+        return abjad.new(self, collections=collections)
 
     def chords(self, pattern=None):
         r'''Turns collections into chords according to `pattern`.
@@ -1357,10 +1578,38 @@ class CollectionList(abjad.abctools.AbjadValueObject):
             collections.append(collection)
         return abjad.new(self, collections=collections)
 
-    def partition(self, argument, cyclic=False, overhang=False):
+    def partition(self, argument, cyclic=False, join=False, overhang=False):
         r'''Partitions collections according to `argument`.
 
         ..  container:: example
+
+            Returns sequence:
+
+            ::
+
+                >>> collections = baca.CollectionList([
+                ...     [5, 12, 14, 18, 17],
+                ...     [16, 17, 19],
+                ...     [16, 17, 19],
+                ...     ])
+
+            ::
+
+                >>> sequence = collections.partition([1, 2], overhang=Exact)
+                >>> for collection_list in sequence:
+                ...     collection_list
+                ...
+                CollectionList([<5, 12, 14, 18, 17>])
+                CollectionList([<16, 17, 19>, <16, 17, 19>])
+
+            ::
+
+                >>> isinstance(sequence, baca.Sequence)
+                True
+
+        ..  container:: example
+
+            Joins parts. Returns new collection list:
 
             ::
 
@@ -1377,17 +1626,34 @@ class CollectionList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> sequence = collections.partition([1, 2], overhang=Exact)
-                >>> for collections in sequence:
-                ...     collections
-                ...
-                CollectionList([<5, 12, 14, 18, 17>])
-                CollectionList([<16, 17, 19>, <16, 17, 19>])
+                >>> collections.partition([1, 2], join=True, overhang=Exact)
+                CollectionList([<5, 12, 14, 18, 17>, <16, 17, 19, 16, 17, 19>])
+
+        ..  container:: example
+
+            Repeats, partitions, joins parts. Returns new collection list:
 
             ::
 
-                >>> isinstance(sequence, baca.Sequence)
-                True
+                >>> collections = baca.CollectionList([
+                ...     [5, 12, 14, 18, 17],
+                ...     [16, 17, 19],
+                ...     [16, 17, 19],
+                ...     ])
+
+            ::
+
+                >>> collections = collections.repeat(2)
+                >>> for collection in collections.partition(
+                ...     [2],
+                ...     cyclic=True,
+                ...     join=True,
+                ...     ):
+                ...     collection
+                ...
+                PitchSegment([5, 12, 14, 18, 17, 16, 17, 19])
+                PitchSegment([16, 17, 19, 5, 12, 14, 18, 17])
+                PitchSegment([16, 17, 19, 16, 17, 19])
 
         Returns sequence.
         '''
@@ -1401,7 +1667,12 @@ class CollectionList(abjad.abctools.AbjadValueObject):
             overhang=overhang,
             )
         collection_lists = [abjad.new(self, collections=_) for _ in parts]
-        return baca.Sequence(collection_lists)
+        if join:
+            collections = [_.join()[0] for _ in collection_lists]
+            result = abjad.new(self, collections=collections)
+        else:
+            result = baca.Sequence(collection_lists)
+        return result
 
     def read(self, counts=None, check=None):
         r'''Reads collections by `counts`.
@@ -1793,6 +2064,141 @@ class CollectionList(abjad.abctools.AbjadValueObject):
         collections = sequence.retain(indices=indices, period=period)
         return abjad.new(self, collections=collections)
 
+    def soprano_to_octave(self, n=4, pattern=None):
+        r'''Octave-transposes collections to soprano in octave `n`.
+
+        ..  container:: example
+
+            Octave-transposes all collections:
+
+            ::
+
+                >>> collections = baca.CollectionList(
+                ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
+                ...     )
+                >>> collections = collections.arpeggiate_up()
+
+            ::
+
+                >>> collections
+                CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
+
+            ::
+
+                >>> collections.soprano_to_octave(n=4)
+                CollectionList([<-19, -12, -10, -6, 5>, <4, 5, 7>, <-33, -22, -11, 0>])
+
+        ..  container:: example
+
+            Octave-transposes collection -1:
+
+            ::
+
+                >>> collections = baca.CollectionList(
+                ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
+                ...     )
+                >>> collections = collections.arpeggiate_up()
+
+            ::
+
+                >>> collections
+                CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
+
+            ::
+
+                >>> collections.soprano_to_octave(n=4, pattern=[-1])
+                CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <-33, -22, -11, 0>])
+
+        Returns new collection list.
+        '''
+        if isinstance(pattern, list):
+            pattern = abjad.Pattern(indices=pattern)
+        pattern = pattern or abjad.select_all()
+        length = len(self)
+        collections = []
+        for i, collection in enumerate(self):
+            if pattern.matches_index(i, length):
+                collection = collection.soprano_to_octave(n=n)
+            collections.append(collection)
+        return abjad.new(self, collections=collections)
+
+
+    def space_down(
+        self,
+        bass=None,
+        pattern=None,
+        semitones=None,
+        soprano=None,
+        ):
+        r'''Spaces collections down.
+
+        ..  container:: example
+
+            ::
+
+                >>> collections = baca.CollectionList(
+                ...     [[5, 12, 14, 18, 17], [16, 17, 19]],
+                ...     )
+
+            ::
+
+                >>> collections.space_down(bass=5)
+                CollectionList([<24, 18, 14, 5>, <16, 7, 5>])
+
+        '''
+        if isinstance(pattern, list):
+            pattern = abjad.Pattern(indices=pattern)
+        pattern = pattern or abjad.select_all()
+        length = len(self)
+        collections = []
+        for i, collection in enumerate(self):
+            if pattern.matches_index(i, length):
+                collection = collection.space_down(
+                    bass=bass,
+                    semitones=semitones,
+                    soprano=soprano,
+                    )
+            collections.append(collection)
+        return abjad.new(self, collections=collections)
+
+    def space_up(
+        self,
+        bass=None,
+        pattern=None,
+        semitones=None,
+        soprano=None,
+        ):
+        r'''Spaces collections up.
+
+        ..  container:: example
+
+            ::
+
+                >>> collections = baca.CollectionList(
+                ...     [[5, 12, 14, 18, 17], [16, 17, 19]],
+                ...     )
+
+            ::
+
+                >>> collections.space_up(bass=5)
+                CollectionList([<5, 6, 12, 14>, <5, 7, 16>])
+
+        '''
+        if isinstance(pattern, list):
+            pattern = abjad.Pattern(indices=pattern)
+        pattern = pattern or abjad.select_all()
+        length = len(self)
+        collections = []
+        for i, collection in enumerate(self):
+            if pattern.matches_index(i, length):
+                collection = collection.space_up(
+                    bass=bass,
+                    semitones=semitones,
+                    soprano=soprano,
+                    )
+            collections.append(collection)
+        return abjad.new(self, collections=collections)
+
     def to_pitch_classes(self):
         r'''Changes to pitch-class collections.
 
@@ -1867,7 +2273,7 @@ class CollectionList(abjad.abctools.AbjadValueObject):
         for collection in self:
             collection_ = collection.to_pitch_classes()
             collections_.append(collection_)
-        return type(self)(collections=collections_, item_class=item_class)
+        return abjad.new(self, collections=collections_, item_class=item_class)
 
     def to_pitches(self):
         r'''Changes to pitch collections.
@@ -1943,7 +2349,7 @@ class CollectionList(abjad.abctools.AbjadValueObject):
         for collection in self:
             collection_ = collection.to_pitches()
             collections_.append(collection_)
-        return type(self)(collections=collections_, item_class=item_class)
+        return abjad.new(self, collections=collections_, item_class=item_class)
 
 
 collections_module.Sequence.register(CollectionList)

@@ -78,7 +78,6 @@ class CompoundScope(abjad.abctools.AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self, simple_scopes=None):
-        #import baca
         if simple_scopes is not None:
             assert isinstance(simple_scopes, (tuple, list))
             simple_scopes_ = []
@@ -97,9 +96,15 @@ class CompoundScope(abjad.abctools.AbjadObject):
         if self._timespan_map is None:
             message = 'must construct timespan map first.'
             raise Exception(message)
-        voice = abjad.inspect_(component).get_parentage().get_first(
-            abjad.scoretools.Voice)
-        component_timespan = abjad.inspect_(component).get_timespan()
+        agent = abjad.inspect_(component)
+        voice = agent.get_parentage().get_first(abjad.Voice)
+        if voice is None:
+            voice = agent.get_parentage().get_first(abjad.Context)
+        if voice is None:
+            message = 'can not finding enclosing voice or context: {!r}.'
+            message = message.format(component)
+            raise Exception(message)
+        component_timespan = agent.get_timespan()
         for voice_name, scope_timespan in self._timespan_map:
             if voice_name == voice.name:
                 if component_timespan.starts_during_timespan(scope_timespan):
@@ -110,7 +115,6 @@ class CompoundScope(abjad.abctools.AbjadObject):
 
     @staticmethod
     def _is_stage_pair(argument):
-        #import baca
         if isinstance(argument, baca.tools.StageExpression):
             return True
         if isinstance(argument, tuple):
@@ -122,7 +126,6 @@ class CompoundScope(abjad.abctools.AbjadObject):
 
     @classmethod
     def _to_compound_scope(class_, scope, score_template=None):
-        #import baca
         if isinstance(scope, baca.tools.SimpleScope):
             scope = baca.tools.CompoundScope(scope)
         elif isinstance(scope, baca.tools.CompoundScope):
@@ -157,7 +160,6 @@ class CompoundScope(abjad.abctools.AbjadObject):
 
     @classmethod
     def _to_simple_scopes(class_, scope_token, score_template=None):
-        #import baca
         if not isinstance(scope_token, collections.Sequence):
             message = 'scope token {!r} must be sequence.'
             message = message.format(scope_token)

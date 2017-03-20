@@ -18,5 +18,4 @@ for directory, subdirectories, file_names in os.walk('.'):
             first_line = lines[0]
             if (not first_line.startswith(header_1) and
                 not first_line.startswith(header_2)):
-                print(repr(path))
-                #print(repr(first_line))
+                print(repr(path), repr(first_line))

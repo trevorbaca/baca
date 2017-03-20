@@ -2,8 +2,8 @@
 import abjad
 
 
-class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
-    r'''Spacing specifier.
+class HorizontalSpacingCommand(abjad.abctools.AbjadObject):
+    r'''Horizontal spacing command.
 
     ::
 
@@ -12,7 +12,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        No spacing specifier:
+        No spacing command:
 
         ::
 
@@ -23,8 +23,9 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
+            >>> specifiers = segment_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
             ...     baca.tools.RhythmSpecifier(
             ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
@@ -116,20 +117,21 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
     ..  container:: example
 
-        Null spacing specifier:
+        Null spacing command:
 
         ::
 
             >>> segment_maker = baca.tools.SegmentMaker(
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(),
+            ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(),
             ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
             ...     )
 
         ::
 
-            >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
+            >>> specifiers = segment_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
             ...     baca.tools.RhythmSpecifier(
             ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
@@ -235,7 +237,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
             >>> segment_maker = baca.tools.SegmentMaker(
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
+            ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
             ...         multiplier=abjad.Multiplier(1),
             ...         ),
             ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
@@ -243,8 +245,9 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
+            >>> specifiers = segment_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
             ...     baca.tools.RhythmSpecifier(
             ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
@@ -351,7 +354,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
             >>> segment_maker = baca.tools.SegmentMaker(
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
+            ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
             ...         multiplier=abjad.Multiplier(2),
             ...         ),
             ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
@@ -359,8 +362,9 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
+            >>> specifiers = segment_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
             ...     baca.tools.RhythmSpecifier(
             ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
@@ -467,7 +471,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
             >>> segment_maker = baca.tools.SegmentMaker(
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
+            ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
             ...         multiplier=abjad.Multiplier(2),
             ...         minimum_width=abjad.Duration(1, 8),
             ...         ),
@@ -476,8 +480,9 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
+            >>> specifiers = segment_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
             ...     baca.tools.RhythmSpecifier(
             ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
@@ -583,7 +588,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
             >>> segment_maker = baca.tools.SegmentMaker(
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
+            ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
             ...         minimum_width=abjad.Duration(1, 8),
             ...         ),
             ...     time_signatures=[(4, 8), (3, 8)],
@@ -591,8 +596,9 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
+            >>> specifiers = segment_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
             ...     baca.tools.RhythmSpecifier(
             ...         rhythm_maker=abjad.rhythmmakertools.AccelerandoRhythmMaker(
@@ -745,7 +751,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_fermata_measure_width',
@@ -779,7 +785,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, segment_maker=None):
-        r'''Calls specifier on `segment_maker`.
+        r'''Calls command on `segment_maker`.
 
         Returns none.
         '''
@@ -795,7 +801,7 @@ class HorizontalSpacingSpecifier(abjad.abctools.AbjadObject):
             '_fermata_start_offsets',
             [],
             )
-        skips = abjad.iterate(skip_context).by_leaf(abjad.scoretools.Skip)
+        skips = abjad.iterate(skip_context).by_leaf(abjad.Skip)
         for measure_index, skip in enumerate(skips):
             measure_timespan = abjad.inspect_(skip).get_timespan()
             if (self.fermata_measure_width is not None and

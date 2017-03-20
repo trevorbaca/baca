@@ -694,7 +694,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
         
     def split_by_durations(
         self,
-        compound_meter_multiplier=abjad.durationtools.Multiplier(1),
+        compound_meter_multiplier=abjad.Multiplier(1),
         cyclic=True,
         durations=(),
         pattern_rotation_index=0,

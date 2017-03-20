@@ -2,8 +2,8 @@
 import abjad
 
 
-class AnchorSpecifier(abjad.abctools.AbjadValueObject):
-    r'''Anchor specifier.
+class AnchorCommand(abjad.abctools.AbjadValueObject):
+    r'''Anchor command.
 
     ::
 
@@ -14,16 +14,17 @@ class AnchorSpecifier(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> baca.tools.AnchorSpecifier()
-            AnchorSpecifier()
+            >>> baca.tools.AnchorCommand()
+            AnchorCommand()
 
     '''
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
+        '_figure_name',
         '_local_selector',
         '_remote_selector',
         '_remote_voice_name',
@@ -36,11 +37,15 @@ class AnchorSpecifier(abjad.abctools.AbjadValueObject):
 
     def __init__(
         self,
+        figure_name=None,
         local_selector=None,
         remote_selector=None,
         remote_voice_name=None,
         use_remote_stop_offset=None,
         ):
+        if figure_name is not None:
+            assert isinstance(figure_name, str), repr(figure_name)
+        self._figure_name = figure_name
         if (local_selector is not None and
             not isinstance(local_selector, abjad.Selector)):
             message = 'must be selector: {!r}.'
@@ -64,6 +69,14 @@ class AnchorSpecifier(abjad.abctools.AbjadValueObject):
         self._use_remote_stop_offset = use_remote_stop_offset
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def figure_name(self):
+        r'''Gets figure name.
+
+        Returns strings or none.
+        '''
+        return self._figure_name
 
     @property
     def local_selector(self):

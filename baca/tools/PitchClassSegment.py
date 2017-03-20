@@ -305,6 +305,106 @@ class PitchClassSegment(abjad.PitchClassSegment):
             numbers.append(number)
         return type(self)(items=numbers)
 
+    def arpeggiate_down(self):
+        r"""Arpeggiates pitch-class segment down.
+
+        ..  container:: example
+
+            ::
+
+                >>> segment = baca.pitch_class_segment([6, 0, 4, 5, 8])
+
+            ::
+
+                >>> segment.arpeggiate_down()
+                PitchSegment([42, 36, 28, 17, 8])
+
+            ::
+
+                >>> show(segment.arpeggiate_down()) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = segment.arpeggiate_down().__illustrate__()
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \context Staff = "treble" {
+                        \clef "treble"
+                        fs''''1 * 1/8
+                        c''''1 * 1/8
+                        e'''1 * 1/8
+                        f''1 * 1/8
+                        af'1 * 1/8
+                    }
+                    \context Staff = "bass" {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
+                >>
+
+        Returns pitch segment.
+        """
+        specifier = baca.tools.ArpeggiationSpacingSpecifier(direction=Down)
+        result = specifier([self])
+        assert len(result) == 1
+        segment = result[0]
+        assert isinstance(segment, baca.PitchSegment), repr(segment)
+        return segment
+
+    def arpeggiate_up(self):
+        r'''Arpeggiates pitch-class segment up.
+
+        ..  container:: example
+
+            ::
+
+                >>> segment = baca.pitch_class_segment([6, 0, 4, 5, 8])
+
+            ::
+
+                >>> segment.arpeggiate_up()
+                PitchSegment([6, 12, 16, 17, 20])
+
+            ::
+
+                >>> show(segment.arpeggiate_up()) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> lilypond_file = segment.arpeggiate_up().__illustrate__()
+                >>> f(lilypond_file[abjad.StaffGroup])
+                \new PianoStaff <<
+                    \context Staff = "treble" {
+                        \clef "treble"
+                        fs'1 * 1/8
+                        c''1 * 1/8
+                        e''1 * 1/8
+                        f''1 * 1/8
+                        af''1 * 1/8
+                    }
+                    \context Staff = "bass" {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
+                >>
+
+        Returns pitch segment.
+        '''
+        specifier = baca.tools.ArpeggiationSpacingSpecifier(direction=Up)
+        result = specifier([self])
+        assert len(result) == 1
+        segment = result[0]
+        assert isinstance(segment, baca.PitchSegment), repr(segment)
+        return segment
+
     def chord(self):
         r'''Changes segment to set.
 

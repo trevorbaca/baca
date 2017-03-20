@@ -104,8 +104,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ::
 
-            >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
+            >>> specifiers = segment_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.even_runs(),
             ...     )
 
@@ -299,6 +300,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         '_score',
         '_score_package',
         '_score_template',
+        '_skip_wellformedness_checks',
         '_skips_instead_of_rests',
         '_spacing_map',
         '_spacing_specifier',
@@ -390,6 +392,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         rehearsal_letter=None,
         score_package=None,
         score_template=None,
+        skip_wellformedness_checks=None,
         skips_instead_of_rests=None,
         spacing_map=None,
         spacing_specifier=None,
@@ -420,7 +423,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         self._cached_leaves_without_rests = None
         self._design_checker = design_checker
         self._fermata_start_offsets = []
-        if final_barline not in (None, Exact):
+        if final_barline not in (None, False, Exact):
             assert isinstance(final_barline, str), repr(final_barline)
         self._final_barline = final_barline
         if final_markup is not None:
@@ -459,12 +462,15 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         if score_template is not None:
             assert isinstance(score_template, baca.tools.ScoreTemplate)
         self._score_template = score_template
+        if skip_wellformedness_checks is not None:
+            skip_wellformedness_checks = bool(skip_wellformedness_checks)
+        self._skip_wellformedness_checks = skip_wellformedness_checks
         if skips_instead_of_rests is not None:
             skips_instead_of_rests = bool(skips_instead_of_rests)
         self._skips_instead_of_rests = skips_instead_of_rests
         self._spacing_map = spacing_map
         if spacing_specifier is not None:
-            assert isinstance(spacing_specifier, baca.tools.HorizontalSpacingSpecifier)
+            assert isinstance(spacing_specifier, baca.tools.HorizontalSpacingCommand)
         self._spacing_specifier = spacing_specifier
         if stage_label_base_string is not None:
             assert isinstance(stage_label_base_string, str)
@@ -486,12 +492,19 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         ):
         r'''Calls segment-maker.
 
+        Set `is_test` to true to use an absolute stylesheet path for tests run
+        outside of in-place doctest.
+
         Returns LilyPond file and segment metadata.
         '''
-        self._segment_metadata = segment_metadata or \
-            abjad.TypedOrderedDict()
-        self._previous_segment_metadata = previous_segment_metadata or \
-            abjad.TypedOrderedDict()
+        if segment_metadata:
+            self._segment_metadata = segment_metadata
+        else:
+            self._segment_metadata = abjad.TypedOrderedDict()
+        if previous_segment_metadata:
+            self._previous_segment_metadata = previous_segment_metadata
+        else:
+            self._previous_segment_metadata = abjad.TypedOrderedDict()
         self._make_score()
         self._remove_score_template_start_instruments()
         self._remove_score_template_start_clefs()
@@ -502,7 +515,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         self._populate_time_signature_context()
         self._label_stage_numbers_()
         self._interpret_rhythm_specifiers()
-        #self._hide_fermata_measure_staff_lines()
         self._extend_beams()
         self._interpret_scoped_specifiers()
         self._detach_figure_names()
@@ -513,7 +525,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         self._apply_spacing_specifier()
         self._make_volta_containers()
         self._label_clock_time_()
-        #self._move_instruments_from_notes_back_to_rests()
         self._hide_instrument_names_()
         self._label_instrument_changes()
         self._transpose_instruments()
@@ -522,7 +533,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         self._add_final_markup()
         self._color_unregistered_pitches()
         self._color_unpitched_notes()
-        self._check_well_formedness()
+        self._check_wellformedness()
         self._check_design()
         self._check_range()
         self._color_repeat_pitch_classes_()
@@ -540,6 +551,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
     ### PRIVATE METHODS ###
 
     def _add_final_barline(self):
+        if self.final_barline is False:
+            return
         abbreviation = '|'
         if self._is_last_segment():
             abbreviation = '|.'
@@ -572,9 +585,11 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             if abjad.inspect_(current_leaf).has_indicator('tie to me'):
                 previous_leaf = abjad.inspect_(current_leaf).get_leaf(-1)
                 if dummy_tie._attachment_test(previous_leaf):
-                    previous_logical_tie = abjad.inspect_(previous_leaf).get_logical_tie()
+                    previous_logical_tie = abjad.inspect_(
+                        previous_leaf).get_logical_tie()
                     if current_leaf not in previous_logical_tie:
-                        current_logical_tie = abjad.inspect_(current_leaf).get_logical_tie()
+                        current_logical_tie = abjad.inspect_(
+                            current_leaf).get_logical_tie()
                         leaves = previous_logical_tie + current_logical_tie
                         abjad.detach(abjad.Tie, previous_leaf)
                         abjad.detach(abjad.Tie, current_leaf)
@@ -587,10 +602,12 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 abjad.detach('tie to me', current_leaf)
             if abjad.inspect_(current_leaf).has_indicator('tie from me'):
                 next_leaf = abjad.inspect_(current_leaf).get_leaf(1)
-                if abjad.Tie._attachment_test(next_leaf):
-                    current_logical_tie = abjad.inspect_(current_leaf).get_logical_tie()
+                if dummy_tie._attachment_test(next_leaf):
+                    current_logical_tie = abjad.inspect_(
+                        current_leaf).get_logical_tie()
                     if next_leaf not in current_logical_tie:
-                        next_logical_tie = abjad.inspect_(next_leaf).get_logical_tie()
+                        next_logical_tie = abjad.inspect_(
+                            next_leaf).get_logical_tie()
                         leaves = current_logical_tie + next_logical_tie
                         abjad.detach(abjad.Tie, current_leaf)
                         abjad.detach(abjad.Tie, next_leaf)
@@ -619,7 +636,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             message = message.format(self._get_segment_identifier())
             print(message)
             return
-        for context in abjad.iterate(self._score).by_class(abjad.scoretools.Context):
+        for context in abjad.iterate(self._score).by_class(abjad.Context):
             previous_instrument_name = previous_instruments.get(context.name)
             if not previous_instrument_name:
                 continue
@@ -776,7 +793,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             )
         prototype = abjad.instrumenttools.Instrument
         contexts_with_instrument_names = self._contexts_with_instrument_names
-        for context in abjad.iterate(self._score).by_class(abjad.scoretools.Context):
+        for context in abjad.iterate(self._score).by_class(abjad.Context):
             if context.name not in contexts_with_instrument_names:
                 continue
             if abjad.inspect_(context).has_indicator(prototype):
@@ -869,7 +886,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         else:
             raise NotImplementedError(self.range_checker)
 
-    def _check_well_formedness(self):
+    def _check_wellformedness(self):
+        if self.skip_wellformedness_checks:
+            return
         score = self._lilypond_file['Score']
         if not abjad.inspect_(score).is_well_formed():
             inspector = abjad.inspect_(score)
@@ -969,6 +988,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         scoped_specifier,
         compound_scope,
         include_rests=False,
+        leaves_instead_of_logical_ties=False,
         ):
         timespan_map, timespans = [], []
         for scope in compound_scope.simple_scopes:
@@ -980,24 +1000,27 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             timespans.append(timespan)
         compound_scope._timespan_map = timespan_map
         voice_names = [_[0] for _ in timespan_map]
-        logical_ties = []
+        result = []
         leaves = self._get_cached_leaves(include_rests=include_rests)
-        for note in leaves:
-            if note in compound_scope:
-                logical_tie = abjad.inspect_(note).get_logical_tie()
-                if logical_tie.head is note:
-                    logical_ties.append(logical_tie)
+        for leaf in leaves:
+            if leaf in compound_scope:
+                if leaves_instead_of_logical_ties:
+                    result.append(leaf)
+                else:
+                    logical_tie = abjad.inspect_(leaf).get_logical_tie()
+                    if logical_tie.head is leaf:
+                        result.append(logical_tie)
         start_offset = min(_.start_offset for _ in timespans)
         stop_offset = max(_.stop_offset for _ in timespans)
         timespan = abjad.timespantools.Timespan(start_offset, stop_offset)
-        if not logical_ties:
+        if not result:
             message = 'EMPTY SELECTION: {}'
             message = message.format(format(scoped_specifier))
             if self.allow_empty_selections:
                 print(message)
             else:
                 raise Exception(message)
-        return abjad.select(logical_ties), timespan
+        return abjad.select(result), timespan
 
     def _compound_scope_to_topmost_components(self, compound_scope):
         r'''Use for label expressions.
@@ -1086,6 +1109,15 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     raise Exception(message)
                 leaves.append(next_leaf)
             selection = abjad.select(leaves)
+        elif hasattr(specifier, 'selector'):
+            result = self._compound_scope_to_logical_ties(
+                scoped_specifier,
+                compound_scope,
+                include_rests=True,
+                leaves_instead_of_logical_ties=True,
+                )
+            selection = result[0]
+            #raise Exception(selection)
         else:
             result = self._compound_scope_to_logical_ties(
                 scoped_specifier,
@@ -1160,13 +1192,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         abjad.attach(beam, all_leaves)
 
     def _extend_beams(self):
-        score = self._score
-        leaves = []
-        for leaf in abjad.iterate(score).by_leaf():
+        for leaf in abjad.iterate(self._score).by_leaf():
             if abjad.inspect_(leaf).get_indicator(self._extend_beam_tag):
-                leaves.append(leaf)
-        for leaf in leaves:
-            self._extend_beam(leaf)
+                self._extend_beam(leaf)
         
     def _get_cached_leaves(self, include_rests=False):
         if include_rests:
@@ -1208,7 +1236,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
     def _get_end_instruments(self):
         result = abjad.TypedOrderedDict()
-        contexts = abjad.iterate(self._score).by_class(abjad.scoretools.Context)
+        contexts = abjad.iterate(self._score).by_class(abjad.Context)
         contexts = list(contexts)
         contexts.sort(key=lambda x: x.name)
         prototype = abjad.instrumenttools.Instrument
@@ -1393,7 +1421,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         return contribution
 
     def _handle_mutator(self, specifier):
-        if getattr(specifier, '_mutates_score', False):
+        if (hasattr(specifier, '_mutates_score') and
+            specifier._mutates_score()):
             self._cached_leaves_with_rests = None
             self._cached_leaves_without_rests = None
 
@@ -1430,11 +1459,11 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         start_offsets = abjad.mathtools.cumulative_sums(durations)
         segment_duration = start_offsets[-1]
         start_offsets = start_offsets[:-1]
-        start_offsets = [abjad.durationtools.Offset(_) for _ in start_offsets]
+        start_offsets = [abjad.Offset(_) for _ in start_offsets]
         assert len(start_offsets) == len(self.time_signatures)
         pairs = zip(start_offsets, self.time_signatures)
         result = []
-        previous_stop_offset = abjad.durationtools.Offset(0)
+        previous_stop_offset = abjad.Offset(0)
         for contribution in contributions:
             if contribution.start_offset < previous_stop_offset:
                 raise Exception
@@ -1879,7 +1908,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         dictionary = abjad.TypedOrderedDict()
         self._cached_score_template_start_clefs = dictionary
         prototype = abjad.Clef
-        for context in abjad.iterate(self._score).by_class(abjad.scoretools.Context):
+        for context in abjad.iterate(self._score).by_class(abjad.Context):
             if not abjad.inspect_(context).has_indicator(prototype):
                 continue
             clef = abjad.inspect_(context).get_indicator(prototype)
@@ -1889,7 +1918,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
     def _remove_score_template_start_instruments(self):
         dictionary = abjad.TypedOrderedDict()
         self._cached_score_template_start_instruments = dictionary
-        for context in abjad.iterate(self._score).by_class(abjad.scoretools.Context):
+        for context in abjad.iterate(self._score).by_class(abjad.Context):
             prototype = abjad.instrumenttools.Instrument
             if not abjad.inspect_(context).get_indicator(prototype):
                 continue
@@ -2124,13 +2153,14 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> segment_maker = baca.tools.SegmentMaker(
                 ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-                ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
+                ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=figures,
                 ...         ),
@@ -2270,13 +2300,14 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> segment_maker = baca.tools.SegmentMaker(
                 ...     allow_figure_names=True,
                 ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-                ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
+                ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=figures,
                 ...         ),
@@ -2353,11 +2384,18 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                                         e'16
                                             ^ \markup {
                                                 \fontsize
-                                                    #3
+                                                    #2
                                                     \concat
                                                         {
                                                             [
                                                             0
+                                                            \hspace
+                                                                #1
+                                                            \raise
+                                                                #0.25
+                                                                \fontsize
+                                                                    #-2
+                                                                    (None)
                                                             ]
                                                         }
                                                 }
@@ -2368,11 +2406,18 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                                         fs'16 [
                                             ^ \markup {
                                                 \fontsize
-                                                    #3
+                                                    #2
                                                     \concat
                                                         {
                                                             [
                                                             1
+                                                            \hspace
+                                                                #1
+                                                            \raise
+                                                                #0.25
+                                                                \fontsize
+                                                                    #-2
+                                                                    (None)
                                                             ]
                                                         }
                                                 }
@@ -2389,11 +2434,18 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                                         b'16
                                             ^ \markup {
                                                 \fontsize
-                                                    #3
+                                                    #2
                                                     \concat
                                                         {
                                                             [
                                                             2
+                                                            \hspace
+                                                                #1
+                                                            \raise
+                                                                #0.25
+                                                                \fontsize
+                                                                    #-2
+                                                                    (None)
                                                             ]
                                                         }
                                                 }
@@ -2404,11 +2456,18 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                                         bf'16 [
                                             ^ \markup {
                                                 \fontsize
-                                                    #3
+                                                    #2
                                                     \concat
                                                         {
                                                             [
                                                             3
+                                                            \hspace
+                                                                #1
+                                                            \raise
+                                                                #0.25
+                                                                \fontsize
+                                                                    #-2
+                                                                    (None)
                                                             ]
                                                         }
                                                 }
@@ -2444,7 +2503,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> segment_maker = baca.tools.SegmentMaker(
                 ...     color_octaves=True,
                 ...     score_template=baca.tools.StringTrioScoreTemplate(),
-                ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
+                ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=[abjad.TimeSignature((6, 16))],
@@ -2457,8 +2516,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 ...     'Violin Music Voice',
                 ...     [[2, 4, 5, 7, 9, 11]],
                 ...     )
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=contribution['Violin Music Voice'],
                 ...         ),
@@ -2470,8 +2530,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 ...     'Cello Music Voice',
                 ...     [[-3, -5, -7, -8, -10, -12]],
                 ...     )
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vc', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vc',
+                ...     baca.select_stages(1),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=contribution['Cello Music Voice'],
                 ...         ),
@@ -2614,13 +2675,14 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 ...     color_out_of_range_pitches=True,
                 ...     range_checker=pitch_range,
                 ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-                ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
+                ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=figures,
                 ...         ),
@@ -2779,13 +2841,14 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> segment_maker = baca.tools.SegmentMaker(
                 ...     color_repeat_pitch_classes=True,
                 ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-                ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
+                ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=figures,
                 ...         ),
@@ -2957,8 +3020,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -3127,8 +3191,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -3302,8 +3367,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -3473,8 +3539,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -3657,8 +3724,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -3830,8 +3898,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -4054,8 +4123,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -4225,8 +4295,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -4370,13 +4441,14 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
                 >>> segment_maker = baca.tools.SegmentMaker(
                 ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-                ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
+                ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=figures,
                 ...         ),
@@ -4619,13 +4691,14 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> segment_maker = baca.tools.SegmentMaker(
                 ...     ignore_unregistered_pitches=True,
                 ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-                ...     spacing_specifier=baca.tools.HorizontalSpacingSpecifier(
+                ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.tools.RhythmSpecifier(
                 ...         rhythm_maker=figures,
                 ...         ),
@@ -4761,8 +4834,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -4950,8 +5024,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -5168,8 +5243,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -5339,8 +5415,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -5517,8 +5594,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -5834,6 +5912,14 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         return self._score_template
 
     @property
+    def skip_wellformedness_checks(self):
+        r'''Is true when segment skips wellformedness checks.
+
+        Returns true, false or none.
+        '''
+        return self._skip_wellformedness_checks
+
+    @property
     def skips_instead_of_rests(self):
         r'''Is true when segment fills empty measures with skips.
 
@@ -6048,8 +6134,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -6231,8 +6318,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -6424,8 +6512,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -6597,8 +6686,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -6804,8 +6894,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     baca.pitches('E4 F4'),
                 ...     )
@@ -6922,8 +7013,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -7095,8 +7187,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -7530,6 +7623,241 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 self.scoped_specifiers.append(specifier_)
                 specifiers_.append(specifier_)
         return specifiers_
+
+    def append_commands(self, voice_name, selector, *commands):
+        r'''Appends each `commands` to `voice_name` with `selector`.
+
+        ..  container:: example
+
+            With label specifier:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
+                ...     baca.even_runs(),
+                ...     abjad.label().with_indices(),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Score])
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                        ^ \markup {
+                                            \small
+                                                0
+                                            }
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                        ^ \markup {
+                                            \small
+                                                1
+                                            }
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                        ^ \markup {
+                                            \small
+                                                2
+                                            }
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                        ^ \markup {
+                                            \small
+                                                3
+                                            }
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                        ^ \markup {
+                                            \small
+                                                4
+                                            }
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                        ^ \markup {
+                                            \small
+                                                5
+                                            }
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                        ^ \markup {
+                                            \small
+                                                6
+                                            }
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                        ^ \markup {
+                                            \small
+                                                7
+                                            }
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                        ^ \markup {
+                                            \small
+                                                8
+                                            }
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                        ^ \markup {
+                                            \small
+                                                9
+                                            }
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                        ^ \markup {
+                                            \small
+                                                10
+                                            }
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                        ^ \markup {
+                                            \small
+                                                11
+                                            }
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                        ^ \markup {
+                                            \small
+                                                12
+                                            }
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                        ^ \markup {
+                                            \small
+                                                13
+                                            }
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        Returns scoped specifiers.
+        '''
+        return self.append_specifiers((voice_name, selector), *commands)
 
     def copy_specifier(self, scoped_offset, target_scope, **keywords):
         r'''Copies rhythm specifier.

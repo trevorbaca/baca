@@ -4,8 +4,8 @@ import collections
 
 
 # TODO: write comprehensive tests
-class ScorePitchSpecifier(abjad.abctools.AbjadObject):
-    r'''Pitch specifier.
+class ScorePitchCommand(abjad.abctools.AbjadObject):
+    r'''Score pitch command.
 
     ::
 
@@ -25,10 +25,11 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
+            >>> specifiers = segment_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.even_runs(),
-            ...     baca.tools.ScorePitchSpecifier(
+            ...     baca.tools.ScorePitchCommand(
             ...         source=[19, 13, 15, 16, 17, 23],
             ...         ),
             ...     )
@@ -119,13 +120,12 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_acyclic',
         '_allow_repeat_pitches',
         '_counts',
-        '_mutates_score',
         '_operators',
         '_repetition_intervals',
         '_reverse',
@@ -143,7 +143,6 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
         acyclic=None,
         allow_repeat_pitches=None,
         counts=None,
-        mutates_score=None,
         operators=None,
         repetition_intervals=None,
         reverse=None,
@@ -159,9 +158,6 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
         if counts is not None:
             assert abjad.mathtools.all_are_positive_integers(counts)
         self._counts = counts
-        # because chords sometimes replace notes
-        #self._mutates_score = True
-        self._mutates_score = mutates_score
         if operators is not None:
             operators = tuple(operators)
         self._operators = operators
@@ -203,24 +199,24 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
     # TODO: write comprehensive tests
     def __call__(self, argument=None):
-        r'''Calls pitch specifier on `argument`.
+        r'''Calls command on `argument`.
 
         ..  note:: Write comprehensive tests.
 
         ..  container:: example
 
-            Calls specifier on Abjad container:
+            Calls command on Abjad container:
 
             ::
 
-                >>> specifier = baca.tools.ScorePitchSpecifier(
+                >>> command = baca.tools.ScorePitchCommand(
                 ...     source=[19, 13, 15, 16, 17, 23],
                 ...     )
 
             ::
 
                 >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
-                >>> specifier(staff)
+                >>> command(staff)
                 >>> show(staff) # doctest: +SKIP
 
             ..  doctest::
@@ -320,10 +316,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
                         self._set_pitch(note, pitch)
                     elif isinstance(pitch, abjad.PitchSegment):
                         assert isinstance(pitch, collections.Iterable)
-                        chord = abjad.scoretools.Chord(
-                            pitch,
-                            note.written_duration,
-                            )
+                        chord = abjad.Chord(pitch, note.written_duration)
                         # TODO: check and make sure *overrides* are preserved!
                         abjad.mutate(note).replace(chord)
                     else:
@@ -348,6 +341,12 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
     ### PRIVATE METHODS ###
 
+    def _mutates_score(self):
+        for item in self.source:
+            if isinstance(item, abjad.PitchSegment):
+                return True
+        return False
+
     def _set_pitch(self, leaf, pitch):
         string = 'not yet pitched'
         if abjad.inspect_(leaf).has_indicator(string):
@@ -363,7 +362,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
     @property
     def acyclic(self):
-        r'''Is true when pitch specifier reads pitches once only.
+        r'''Is true when command reads pitches once only.
 
         Defaults to none.
 
@@ -375,7 +374,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
     @property
     def allow_repeat_pitches(self):
-        r'''Is true when specifier allows repeat pitches.
+        r'''Is true when command allows repeat pitches.
 
         Defaults to none.
 
@@ -387,7 +386,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
     @property
     def counts(self):
-        r'''Gets counts of pitch specifier.
+        r'''Gets command counts.
 
         ..  container:: example
 
@@ -395,7 +394,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.ScorePitchSpecifier(
+                >>> command = baca.tools.ScorePitchCommand(
                 ...     counts=[20, 12, 12, 6],
                 ...     operators=[
                 ...         abjad.Inversion(),
@@ -406,7 +405,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier.counts
+                >>> command.counts
                 [20, 12, 12, 6]
 
         Defaults to none.
@@ -418,18 +417,6 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
         return self._counts
 
     @property
-    def mutates_score(self):
-        r'''Gets score mutation flag.
-
-        Set to true, false or none.
-
-        Set to true to cause segment-maker to recache all leaves in score.
-
-        Returns true, false or none.
-        '''
-        return self._mutates_score
-
-    @property
     def operators(self):
         r"""Gets operators.
 
@@ -439,14 +426,14 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.ScorePitchSpecifier(
+                >>> command = baca.tools.ScorePitchCommand(
                 ...     operators=[abjad.Transposition(n=2)],
                 ...     )
 
             ::
 
                 >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
-                >>> specifier(staff)
+                >>> command(staff)
                 >>> show(staff) # doctest: +SKIP
 
             ..  doctest::
@@ -469,7 +456,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.ScorePitchSpecifier(
+                >>> command = baca.tools.ScorePitchCommand(
                 ...     operators=[
                 ...         abjad.Transposition(n=2),
                 ...         ],
@@ -479,7 +466,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
-                >>> specifier(staff)
+                >>> command(staff)
                 >>> show(staff) # doctest: +SKIP
 
             ..  doctest::
@@ -505,7 +492,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
                 >>> operator = abjad.pitchtools.CompoundOperator()
                 >>> operator = operator.transpose(n=2)
                 >>> operator = operator.transpose(n=-12)
-                >>> specifier = baca.tools.ScorePitchSpecifier(
+                >>> command = baca.tools.ScorePitchCommand(
                 ...     operators=[operator],
                 ...     source=[19, 13, 15, 16, 17, 23],
                 ...     )
@@ -513,7 +500,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
-                >>> specifier(staff)
+                >>> command(staff)
                 >>> show(staff) # doctest: +SKIP
 
             ..  doctest::
@@ -540,7 +527,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier.operators
+                >>> command.operators
                 [CompoundOperator(operators=[Transposition(n=2), Transposition(n=-12)])]
 
         """
@@ -558,19 +545,19 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.ScorePitchSpecifier(
+                >>> command = baca.tools.ScorePitchCommand(
                 ...     source=[0, 1, 2, 3],
                 ...     )
 
             ::
 
-                >>> specifier.repetition_intervals is None
+                >>> command.repetition_intervals is None
                 True
 
             ::
 
                 >>> for index in range(12):
-                ...     pitch = specifier.get_pitch(index)
+                ...     pitch = command.get_pitch(index)
                 ...     pitch.pitch_number
                 0
                 1
@@ -591,20 +578,20 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.ScorePitchSpecifier(
+                >>> command = baca.tools.ScorePitchCommand(
                 ...     repetition_intervals=[12],
                 ...     source=[0, 1, 2, 3],
                 ...     )
 
             ::
 
-                >>> specifier.repetition_intervals
+                >>> command.repetition_intervals
                 [12]
 
             ::
 
                 >>> for index in range(12):
-                ...     pitch = specifier.get_pitch(index)
+                ...     pitch = command.get_pitch(index)
                 ...     pitch.pitch_number
                 0
                 1
@@ -625,20 +612,20 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.ScorePitchSpecifier(
+                >>> command = baca.tools.ScorePitchCommand(
                 ...     repetition_intervals=[12, 1],
                 ...     source=[0, 1, 2, 3],
                 ...     )
 
             ::
 
-                >>> specifier.repetition_intervals
+                >>> command.repetition_intervals
                 [12, 1]
 
             ::
 
                 >>> for index in range(12):
-                ...     pitch = specifier.get_pitch(index)
+                ...     pitch = command.get_pitch(index)
                 ...     pitch.pitch_number
                 0
                 1
@@ -663,15 +650,15 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
     @property
     def reverse(self):
-        r'''Is true when pitch specifier reads pitches in reverse.
+        r'''Is true when command reads pitches in reverse.
 
         ..  container:: example
 
-            Reverses pitch specifier:
+            Reverses command:
 
             ::
 
-                >>> specifier = baca.tools.ScorePitchSpecifier(
+                >>> command = baca.tools.ScorePitchCommand(
                 ...     reverse=True,
                 ...     source=[19, 13, 15, 16, 17, 23],
                 ...     start_index=-1,
@@ -679,7 +666,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier.reverse
+                >>> command.reverse
                 True
 
         Defaults to none.
@@ -700,13 +687,13 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.ScorePitchSpecifier(
+                >>> command = baca.tools.ScorePitchCommand(
                 ...     source=[19, 13, 15, 16, 17, 23],
                 ...     )
 
             ::
 
-                >>> for pitch in specifier.source:
+                >>> for pitch in command.source:
                 ...     pitch
                 NamedPitch("g''")
                 NamedPitch("cs''")
@@ -734,7 +721,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.ScorePitchSpecifier(
+                >>> command = baca.tools.ScorePitchCommand(
                 ...     reverse=True,
                 ...     source=[19, 13, 15, 16, 17, 23],
                 ...     start_index=-1,
@@ -742,7 +729,7 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier.start_index
+                >>> command.start_index
                 -1
 
         Defaults to none.
@@ -764,14 +751,15 @@ class ScorePitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
                 
-                >>> specifier = baca.tools.ScorePitchSpecifier(
+                >>> command = baca.tools.ScorePitchCommand(
                 ...     source=[12, 13, 14, 15]
                 ...     )
 
             ::
 
                 >>> for index in range(12):
-                ...     specifier.get_pitch(index)
+                ...     command.get_pitch(index)
+                ...
                 NamedPitch("c''")
                 NamedPitch("cs''")
                 NamedPitch("d''")

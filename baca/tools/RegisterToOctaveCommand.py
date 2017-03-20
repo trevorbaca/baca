@@ -3,8 +3,8 @@ import abjad
 import baca
 
 
-class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
-    r"""Register-to-octave specifier.
+class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
+    r"""Register-to-octave command.
 
     ::
 
@@ -24,7 +24,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 14, 28}],
-            ...     baca.tools.RegisterToOctaveSpecifier(
+            ...     baca.tools.RegisterToOctaveCommand(
             ...         anchor=Bottom,
             ...         octave_number=4,
             ...         ),
@@ -51,7 +51,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 14, 28}],
-            ...     baca.tools.RegisterToOctaveSpecifier(
+            ...     baca.tools.RegisterToOctaveCommand(
             ...         anchor=Center,
             ...         octave_number=4,
             ...         ),
@@ -78,7 +78,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 14, 28}],
-            ...     baca.tools.RegisterToOctaveSpecifier(
+            ...     baca.tools.RegisterToOctaveCommand(
             ...         anchor=Top,
             ...         octave_number=4,
             ...         ),
@@ -113,7 +113,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 14, 28]],
-            ...     baca.tools.RegisterToOctaveSpecifier(
+            ...     baca.tools.RegisterToOctaveCommand(
             ...         anchor=Bottom,
             ...         octave_number=4,
             ...         ),
@@ -142,7 +142,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 14, 28]],
-            ...     baca.tools.RegisterToOctaveSpecifier(
+            ...     baca.tools.RegisterToOctaveCommand(
             ...         anchor=Center,
             ...         octave_number=4,
             ...         ),
@@ -171,7 +171,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 14, 28]],
-            ...     baca.tools.RegisterToOctaveSpecifier(
+            ...     baca.tools.RegisterToOctaveCommand(
             ...         anchor=Top,
             ...         octave_number=4,
             ...         ),
@@ -208,7 +208,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[10, 12, 14]],
-            ...     baca.tools.RegisterToOctaveSpecifier(
+            ...     baca.tools.RegisterToOctaveCommand(
             ...         anchor=Bottom,
             ...         octave_number=4,
             ...         ),
@@ -237,7 +237,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[10, 12, 14]],
-            ...     baca.tools.RegisterToOctaveSpecifier(
+            ...     baca.tools.RegisterToOctaveCommand(
             ...         anchor=Center,
             ...         octave_number=4,
             ...         ),
@@ -266,7 +266,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[10, 12, 14]],
-            ...     baca.tools.RegisterToOctaveSpecifier(
+            ...     baca.tools.RegisterToOctaveCommand(
             ...         anchor=Top,
             ...         octave_number=4,
             ...         ),
@@ -294,14 +294,14 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> baca.tools.RegisterToOctaveSpecifier()
-            RegisterToOctaveSpecifier()
+            >>> baca.tools.RegisterToOctaveCommand()
+            RegisterToOctaveCommand()
 
     """
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_anchor',
@@ -330,7 +330,7 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, selections=None):
-        r'''Calls specifier on `argument`.
+        r'''Calls command on `argument`.
 
         Returns none.
         '''
@@ -401,11 +401,11 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> chord = abjad.Chord("<c, d e'>1")
-                >>> specifier = baca.tools.RegisterToOctaveSpecifier(
+                >>> command = baca.tools.RegisterToOctaveCommand(
                 ...     anchor=Bottom,
                 ...     octave_number=5,
                 ...     )
-                >>> specifier(chord)
+                >>> command(chord)
                 >>> staff = abjad.Staff([chord])
                 >>> show(staff) # doctest: +SKIP
 
@@ -421,11 +421,11 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> chord = abjad.Chord("<c, d e'>1")
-                >>> specifier = baca.tools.RegisterToOctaveSpecifier(
+                >>> command = baca.tools.RegisterToOctaveCommand(
                 ...     anchor=Center,
                 ...     octave_number=5,
                 ...     )
-                >>> specifier(chord)
+                >>> command(chord)
                 >>> staff = abjad.Staff([chord])
                 >>> show(staff) # doctest: +SKIP
 
@@ -441,11 +441,11 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> chord = abjad.Chord("<c, d e'>1")
-                >>> specifier = baca.tools.RegisterToOctaveSpecifier(
+                >>> command = baca.tools.RegisterToOctaveCommand(
                 ...     anchor=Top,
                 ...     octave_number=5,
                 ...     )
-                >>> specifier(chord)
+                >>> command(chord)
                 >>> staff = abjad.Staff([chord])
                 >>> show(staff) # doctest: +SKIP
 
@@ -484,10 +484,10 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> chord = abjad.Chord("<c, d e'>1")
-                >>> specifier = baca.tools.RegisterToOctaveSpecifier(
+                >>> command = baca.tools.RegisterToOctaveCommand(
                 ...     octave_number=1,
                 ...     )
-                >>> specifier(chord)
+                >>> command(chord)
                 >>> staff = abjad.Staff([chord])
                 >>> abjad.attach(abjad.Clef('bass'), staff[0])
                 >>> show(staff) # doctest: +SKIP
@@ -503,10 +503,10 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> chord = abjad.Chord("<c, d e'>1")
-                >>> specifier = baca.tools.RegisterToOctaveSpecifier(
+                >>> command = baca.tools.RegisterToOctaveCommand(
                 ...     octave_number=2,
                 ...     )
-                >>> specifier(chord)
+                >>> command(chord)
                 >>> staff = abjad.Staff([chord])
                 >>> abjad.attach(abjad.Clef('bass'), staff[0])
                 >>> show(staff) # doctest: +SKIP
@@ -522,10 +522,10 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> chord = abjad.Chord("<c, d e'>1")
-                >>> specifier = baca.tools.RegisterToOctaveSpecifier(
+                >>> command = baca.tools.RegisterToOctaveCommand(
                 ...     octave_number=3,
                 ...     )
-                >>> specifier(chord)
+                >>> command(chord)
                 >>> staff = abjad.Staff([chord])
                 >>> abjad.attach(abjad.Clef('bass'), staff[0])
                 >>> show(chord) # doctest: +SKIP
@@ -541,10 +541,10 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> chord = abjad.Chord("<c, d e'>1")
-                >>> specifier = baca.tools.RegisterToOctaveSpecifier(
+                >>> command = baca.tools.RegisterToOctaveCommand(
                 ...     octave_number=4,
                 ...     )
-                >>> specifier(chord)
+                >>> command(chord)
                 >>> show(chord) # doctest: +SKIP
 
             ..  doctest::
@@ -557,10 +557,10 @@ class RegisterToOctaveSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> chord = abjad.Chord("<c, d e'>1")
-                >>> specifier = baca.tools.RegisterToOctaveSpecifier(
+                >>> command = baca.tools.RegisterToOctaveCommand(
                 ...     octave_number=5,
                 ...     )
-                >>> specifier(chord)
+                >>> command(chord)
                 >>> show(chord) # doctest: +SKIP
 
             ..  doctest::

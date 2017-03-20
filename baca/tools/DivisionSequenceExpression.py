@@ -16,7 +16,7 @@ class DivisionSequenceExpression(abjad.Expression):
 
     ..  container:: example
 
-        Inherits from sequence expression:
+        Inherits from sequence expression and coerces input:
 
         ::
 
@@ -27,7 +27,7 @@ class DivisionSequenceExpression(abjad.Expression):
         ::
 
             >>> expression([1, 2, 3, 4, 5])
-            DivisionSequence([3, 4, 5])
+            DivisionSequence([Division((3, 1)), Division((4, 1)), Division((5, 1))])
 
     ..  container:: example
 
@@ -44,8 +44,11 @@ class DivisionSequenceExpression(abjad.Expression):
         ::
 
             >>> divisions = [(4, 4), (6, 4)]
-            >>> expression(divisions)
-            DivisionSequence([DivisionSequence([Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))]), DivisionSequence([Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))])])
+            >>> for item in expression(divisions):
+            ...     item
+            ...
+            DivisionSequence([Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))])
+            DivisionSequence([Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))])
 
     ..  container:: example
 
@@ -63,8 +66,19 @@ class DivisionSequenceExpression(abjad.Expression):
         ::
 
             >>> divisions = [(4, 4), (6, 4)]
-            >>> expression(divisions)
-            DivisionSequence([Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))])
+            >>> for item in expression(divisions):
+            ...     item
+            ...
+            Division((1, 4))
+            Division((1, 4))
+            Division((1, 4))
+            Division((1, 4))
+            Division((1, 4))
+            Division((1, 4))
+            Division((1, 4))
+            Division((1, 4))
+            Division((1, 4))
+            Division((1, 4))
 
     ..  container:: example
 
@@ -82,9 +96,9 @@ class DivisionSequenceExpression(abjad.Expression):
         ::
 
             >>> divisions = [(4, 4), (6, 4)]
-            >>> division_sequence = expression(divisions)
-            >>> for part in division_sequence:
-            ...     part
+            >>> for item in expression(divisions):
+            ...     item
+            ...
             DivisionSequence([Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))])
             DivisionSequence([Division((3, 8)), Division((3, 8)), Division((3, 8)), Division((3, 8))])
 

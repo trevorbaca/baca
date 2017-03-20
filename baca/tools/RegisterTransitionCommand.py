@@ -2,8 +2,8 @@
 import abjad
 
 
-class RegisterTransitionSpecifier(abjad.abctools.AbjadObject):
-    r'''Register transition specifier.
+class RegisterTransitionCommand(abjad.abctools.AbjadObject):
+    r'''Register transition command.
 
     ::
 
@@ -21,11 +21,12 @@ class RegisterTransitionSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
+            >>> specifiers = segment_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.pitches('C4 D4 E4 F4'),
             ...     baca.even_runs(),
-            ...     baca.tools.RegisterTransitionSpecifier(
+            ...     baca.tools.RegisterTransitionCommand(
             ...         start_registration=abjad.Registration(
             ...             [('[A0, C8]', 0)],
             ...             ),
@@ -121,7 +122,7 @@ class RegisterTransitionSpecifier(abjad.abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_start_registration',
@@ -147,7 +148,7 @@ class RegisterTransitionSpecifier(abjad.abctools.AbjadObject):
 
     # TODO: extend SegmentMaker to pass timespan in here
     def __call__(self, logical_ties=None, timespan=None):
-        r'''Calls registration transition specifier.
+        r'''Calls command on `logical_ties`.
 
         Returns none.
         '''

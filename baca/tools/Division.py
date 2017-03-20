@@ -272,7 +272,6 @@ class Division(abjad.NonreducedFraction):
         payload=None,
         start_offset=None,
         ):
-        from abjad.tools import durationtools
         argument = argument or (0, 1)
         if isinstance(argument, str):
             division = eval(argument)
@@ -289,7 +288,7 @@ class Division(abjad.NonreducedFraction):
         self = abjad.NonreducedFraction.__new__(class_, argument)
         self._payload = payload
         if start_offset is not None:
-            start_offset = durationtools.Offset(start_offset)
+            start_offset = abjad.Offset(start_offset)
         self._start_offset = start_offset
         return self
 
@@ -682,8 +681,7 @@ class Division(abjad.NonreducedFraction):
 
         Returns duration.
         '''
-        from abjad.tools import durationtools
-        return durationtools.Duration(self)
+        return abjad.Duration(self)
 
     @property
     def payload(self):

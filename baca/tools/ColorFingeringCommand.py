@@ -3,8 +3,8 @@ import abjad
 import itertools
 
 
-class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
-    r'''Color fingering specifier.
+class ColorFingeringCommand(abjad.abctools.AbjadObject):
+    r'''Color fingering command.
 
     ::
 
@@ -24,11 +24,12 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
+            >>> specifiers = segment_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.pitches('E4', allow_repeat_pitches=True),
             ...     baca.messiaen_notes(),
-            ...     baca.tools.ColorFingeringSpecifier(
+            ...     baca.tools.ColorFingeringCommand(
             ...         number_lists=([0, 1, 2, 1],),
             ...         ),
             ...     )
@@ -122,7 +123,7 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
 
     ### CLASS VARIABLES ##
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_by_pitch_run',
@@ -151,7 +152,7 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, logical_ties=None):
-        r'''Calls color fingering specifier.
+        r'''Calls command on `logical_ties`.
 
         Returns none.
         '''
@@ -217,11 +218,12 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.pitches('C4 D4 E4 F4'),
                 ...     baca.messiaen_notes(),
-                ...     baca.tools.ColorFingeringSpecifier(
+                ...     baca.tools.ColorFingeringCommand(
                 ...         number_lists=([0, 1, 2, 1],),
                 ...         ),
                 ...     )
@@ -324,14 +326,15 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                >>> specifiers = segment_maker.append_commands(
+                ...     'vn',
+                ...     baca.select_stages(1),
                 ...     baca.pitches(
                 ...         'C4 D4 D4 D4 E4 F4 F4',
                 ...         allow_repeat_pitches=True,
                 ...         ),
                 ...     baca.even_runs(),
-                ...     baca.tools.ColorFingeringSpecifier(
+                ...     baca.tools.ColorFingeringCommand(
                 ...         by_pitch_run=True,
                 ...         number_lists=([1, 2, 1],),
                 ...         ),
@@ -525,7 +528,7 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
 
     @property
     def deposit_annotations(self):
-        r'''Gets deposit annotations of specifier.
+        r'''Gets deposit annotations of command.
 
         These will be attached to every note affected at call time.
 
@@ -535,13 +538,13 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
 
     @property
     def number_lists(self):
-        r'''Gets number lists of color fingering specifier.
+        r'''Gets number lists of color fingering command.
 
         ..  container:: example
 
             ::
 
-                >>> specifier = baca.tools.ColorFingeringSpecifier(
+                >>> command = baca.tools.ColorFingeringCommand(
                 ...     number_lists=(
                 ...         [0, 1, 2, 1],
                 ...         ),
@@ -550,7 +553,7 @@ class ColorFingeringSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier.number_lists
+                >>> command.number_lists
                 ([0, 1, 2, 1],)
 
         Set to nested list of nonnegative integers or none.

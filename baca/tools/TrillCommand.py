@@ -2,8 +2,8 @@
 import abjad
 
 
-class TrillSpecifier(abjad.abctools.AbjadObject):
-    r'''Trill specifier.
+class TrillCommand(abjad.abctools.AbjadObject):
+    r'''Trill command.
 
     ::
 
@@ -17,7 +17,7 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.tools.TrillSpecifier(
+            ...     baca.tools.TrillCommand(
             ...         minimum_written_duration=abjad.Duration(1, 4),
             ...         maximum_written_duration=None,
             ...         ),
@@ -72,11 +72,12 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> specifiers = collection_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
+            >>> specifiers = collection_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
             ...     baca.messiaen_notes(),
-            ...     baca.tools.TrillSpecifier(
+            ...     baca.tools.TrillCommand(
             ...         minimum_written_duration=abjad.Duration(1, 4),
             ...         maximum_written_duration=None,
             ...         ),
@@ -150,7 +151,7 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_deposit_annotations',
@@ -204,7 +205,7 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls specifier on `argument`.
+        r'''Calls command on `argument`.
 
         Returns none.
         '''
@@ -271,7 +272,7 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
 
     @property
     def harmonic(self):
-        r'''Is true when specifier formats trill pitch note head as a white
+        r'''Is true when command formats trill pitch note head as a white
         diamond.
 
         Defaults to false.
@@ -284,7 +285,7 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
 
     @property
     def interval(self):
-        r'''Gets interval of trill specifier.
+        r'''Gets interval of trill command.
 
         Defaults to none.
 
@@ -296,7 +297,7 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
 
     @property
     def maximum_written_duration(self):
-        r'''Gets maximum written duration of trill specifier.
+        r'''Gets maximum written duration of trill command.
 
         Set to duration or none.
         '''
@@ -304,7 +305,7 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
 
     @property
     def minimum_written_duration(self):
-        r'''Gets minimum written duration of trill specifier.
+        r'''Gets minimum written duration of trill command.
 
         Set to duration or none.
         '''
@@ -312,7 +313,7 @@ class TrillSpecifier(abjad.abctools.AbjadObject):
 
     @property
     def pitch(self):
-        r'''Gets pitch of trill specifier.
+        r'''Gets pitch of trill command.
 
         Set to pitch or none.
         '''

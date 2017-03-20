@@ -3,8 +3,8 @@ import abjad
 import baca
 
 
-class ColorSpecifier(abjad.abctools.AbjadObject):
-    r'''Color specifier.
+class ColorCommand(abjad.abctools.AbjadObject):
+    r'''Color command.
 
     ::
 
@@ -20,7 +20,7 @@ class ColorSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.tools.ColorSpecifier(color='red'),
+            ...     baca.tools.ColorCommand(color='red'),
             ...     baca.tools.MusicRhythmSpecifier(
             ...         rhythm_maker=baca.tools.MusicRhythmMaker(
             ...             talea=abjad.rhythmmakertools.Talea(
@@ -146,11 +146,12 @@ class ColorSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> specifiers = segment_maker.append_specifiers(
-            ...     ('vn', baca.select_stages(1)),
+            >>> specifiers = segment_maker.append_commands(
+            ...     'vn',
+            ...     baca.select_stages(1),
             ...     baca.even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.tools.ColorSpecifier(color='red'),
+            ...     baca.tools.ColorCommand(color='red'),
             ...     )
 
         ::
@@ -309,11 +310,10 @@ class ColorSpecifier(abjad.abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_color',
-        '_debug',
         '_selector',
         )
 
@@ -322,15 +322,11 @@ class ColorSpecifier(abjad.abctools.AbjadObject):
     def __init__(
         self,
         color=None,
-        debug=None,
         selector=None,
         ):
         if color is not None:
             assert isinstance(color, (list, str)), repr(color)
         self._color = color
-        if debug is not None:
-            debug = bool(debug)
-        self._debug = debug
         if selector is not None:
             assert isinstance(selector, abjad.Selector)
         self._selector = selector
@@ -338,7 +334,7 @@ class ColorSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls specifier on `argument`.
+        r'''Calls command on `argument`.
 
         Returns selector result for SelectorLibrary docs.
         '''
@@ -354,7 +350,7 @@ class ColorSpecifier(abjad.abctools.AbjadObject):
             raise TypeError(self.color)
         selector = self.selector or baca.select_leaves()
         result = selector(argument)
-        if self.debug:
+        if False:
             print(format(selector))
             print('---')
             print(argument)
@@ -377,18 +373,6 @@ class ColorSpecifier(abjad.abctools.AbjadObject):
         Returns string or none.
         '''
         return self._color
-
-    @property
-    def debug(self):
-        r'''Is true when specifier prints calltime debug messages.
-
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
-        '''
-        return self._debug
 
     @property
     def selector(self):

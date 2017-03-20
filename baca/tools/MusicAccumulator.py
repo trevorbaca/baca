@@ -18,9 +18,11 @@ class MusicAccumulator(abjad.abctools.AbjadObject):
 
     __slots__ = (
         '_current_offset',
+        '_figure_index',
         '_figure_maker',
         '_figure_names',
         '_floating_selections',
+        '_score_stop_offset',
         '_score_template',
         '_time_signatures',
         '_voice_names',
@@ -36,15 +38,17 @@ class MusicAccumulator(abjad.abctools.AbjadObject):
             voice_names.append(voice.name)
         self._voice_names = voice_names
         self._current_offset = abjad.Offset(0)
+        self._figure_index = 0
         self._figure_maker = self._make_default_figure_maker()
         self._figure_names = []
         self._floating_selections = self._make_voice_dictionary()
+        self._score_stop_offset = abjad.Offset(0)
         self._time_signatures = []
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, figure_contribution=None):
-        r'''Calls figure-accumulator on `figure_contribution`.
+    def __call__(self, music_contribution=None):
+        r'''Calls figure-accumulator on `music_contribution`.
 
         Raises exception on duplicate figure name.
 
@@ -77,29 +81,30 @@ class MusicAccumulator(abjad.abctools.AbjadObject):
 
         Returns none.
         '''
-        self._cache_figure_name(figure_contribution)
-        self._cache_floating_selection(figure_contribution)
-        self._cache_time_signature(figure_contribution)
+        self._cache_figure_name(music_contribution)
+        self._cache_floating_selection(music_contribution)
+        self._cache_time_signature(music_contribution)
+        self._figure_index += 1
 
     ### PRIVATE METHODS ###
 
-    def _cache_figure_name(self, figure_contribution):
-        if figure_contribution.figure_name is None:
+    def _cache_figure_name(self, music_contribution):
+        if music_contribution.figure_name is None:
             return
-        if figure_contribution.figure_name in self._figure_names:
+        if music_contribution.figure_name in self._figure_names:
             message = 'duplicate figure name: {}.'
-            message = message.format(figure_contribution.figure_name)
+            message = message.format(music_contribution.figure_name)
             raise Exception(message)
-        self._figure_names.append(figure_contribution.figure_name)
+        self._figure_names.append(music_contribution.figure_name)
 
-    def _cache_floating_selection(self, figure_contribution):
-        for voice_name in figure_contribution:
-            selection = figure_contribution[voice_name]
+    def _cache_floating_selection(self, music_contribution):
+        for voice_name in music_contribution:
+            selection = music_contribution[voice_name]
             if not selection:
                 continue
             start_offset = self._get_start_offset(
                 selection,
-                figure_contribution,
+                music_contribution,
                 )
             stop_offset = start_offset + selection.get_duration()
             timespan = abjad.Timespan(start_offset, stop_offset)
@@ -109,13 +114,39 @@ class MusicAccumulator(abjad.abctools.AbjadObject):
                 )
             self._floating_selections[voice_name].append(floating_selection)
         self._current_offset = stop_offset
+        self._score_stop_offset = max(self._score_stop_offset, stop_offset)
 
-    def _cache_time_signature(self, figure_contribution):
-        if figure_contribution.hide_time_signature:
+    def _cache_time_signature(self, music_contribution):
+        if music_contribution.hide_time_signature:
             return
-        if (figure_contribution.anchor is None or
-            figure_contribution.hide_time_signature is False):
-            self.time_signatures.append(figure_contribution.time_signature)
+        if (music_contribution.anchor is None or
+            music_contribution.hide_time_signature is False or
+            (music_contribution.anchor and
+            music_contribution.anchor.remote_voice_name is None)):
+            self.time_signatures.append(music_contribution.time_signature)
+
+    def _get_figure_start_offset(self, figure_name):
+        for voice_name in sorted(self._floating_selections.keys()):
+            for floating_selection in self._floating_selections[voice_name]:
+                leaf_start_offset = floating_selection.timespan.start_offset
+                leaves = abjad.iterate(floating_selection.selection).by_leaf()
+                for leaf in leaves:
+                    markup = abjad.inspect_(leaf).get_indicators(abjad.Markup)
+                    for markup_ in markup:
+                        if (isinstance(markup_._annotation, str) and
+                            markup_._annotation.startswith('figure name: ')):
+                            figure_name_ = markup_._annotation
+                            figure_name_ = figure_name_.replace(
+                                'figure name: ',
+                                '',
+                                )
+                            if figure_name_ == figure_name:
+                                return leaf_start_offset
+                    leaf_duration = abjad.inspect_(leaf).get_duration()
+                    leaf_start_offset += leaf_duration
+        message = 'can not find figure {}.'
+        message = message.format(figure_name)
+        raise Exception(message)
 
     def _get_leaf_timespan(self, leaf, floating_selections):
         found_leaf = False
@@ -138,20 +169,27 @@ class MusicAccumulator(abjad.abctools.AbjadObject):
         leaf_stop_offset = leaf_start_offset + leaf_duration
         return abjad.Timespan(leaf_start_offset, leaf_stop_offset)
 
-    def _get_start_offset(self, selection, figure_contribution):
+    def _get_start_offset(self, selection, music_contribution):
+        if (music_contribution.anchor is not None and
+            music_contribution.anchor.figure_name is not None):
+            figure_name = music_contribution.anchor.figure_name
+            start_offset = self._get_figure_start_offset(figure_name)
+            return start_offset
         anchored = False
-        if figure_contribution.anchor is not None:
-            remote_voice_name = figure_contribution.anchor.remote_voice_name
-            remote_selector = figure_contribution.anchor.remote_selector
+        if music_contribution.anchor is not None:
+            remote_voice_name = music_contribution.anchor.remote_voice_name
+            remote_selector = music_contribution.anchor.remote_selector
             use_remote_stop_offset = \
-                figure_contribution.anchor.use_remote_stop_offset
+                music_contribution.anchor.use_remote_stop_offset
             anchored = True
         else:
             remote_voice_name = None
             remote_selector = None
             use_remote_stop_offset = None
-        if remote_voice_name is None:
+        if not anchored:
             return self._current_offset
+        if anchored and remote_voice_name is None:
+            return self._score_stop_offset
         remote_selector = remote_selector or baca.select_leaf(0)
         floating_selections = self._floating_selections[remote_voice_name]
         selections = [_.selection for _ in floating_selections]
@@ -167,8 +205,8 @@ class MusicAccumulator(abjad.abctools.AbjadObject):
         else:
             remote_anchor_offset = timespan.start_offset
         local_anchor_offset = abjad.Offset(0)
-        if figure_contribution.anchor is not None:
-            local_selector = figure_contribution.anchor.local_selector
+        if music_contribution.anchor is not None:
+            local_selector = music_contribution.anchor.local_selector
         else:
             local_selector = None
         if local_selector is not None:
@@ -289,8 +327,9 @@ class MusicAccumulator(abjad.abctools.AbjadObject):
         for voice_name in sorted(self._floating_selections):
             selection = self.assemble(voice_name)
             if selection:
-                segment_maker.append_specifiers(
-                    (voice_name, baca.select_stages(1, 1)),
+                segment_maker.append_commands(
+                    voice_name,
+                    baca.select_stages(1, 1),
                     baca.tools.RhythmSpecifier(
                         rhythm_maker=selection,
                         ),

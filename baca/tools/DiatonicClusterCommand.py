@@ -2,8 +2,8 @@
 import abjad
 
 
-class DiatonicClusterSpecifier(abjad.abctools.AbjadObject):
-    r'''Diatonic cluster specifier.
+class DiatonicClusterCommand(abjad.abctools.AbjadObject):
+    r'''Diatonic cluster command.
 
     ::
 
@@ -15,10 +15,10 @@ class DiatonicClusterSpecifier(abjad.abctools.AbjadObject):
         ::
 
             >>> staff = abjad.Staff("c' d' e' f'")
-            >>> specifier = baca.tools.DiatonicClusterSpecifier(
+            >>> command = baca.tools.DiatonicClusterCommand(
             ...     cluster_widths=[4, 6],
             ...     )
-            >>> specifier(staff)
+            >>> command(staff)
             >>> show(staff) # doctest: +SKIP
 
         ..  doctest::
@@ -35,7 +35,7 @@ class DiatonicClusterSpecifier(abjad.abctools.AbjadObject):
 
     ### CLASS ATTRIBUTES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_cluster_widths',
@@ -52,7 +52,7 @@ class DiatonicClusterSpecifier(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls specifier on `argument`.
+        r'''Calls command on `argument`.
 
         Returns none.
         '''

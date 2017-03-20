@@ -40,7 +40,7 @@ class LibraryAM(object):
                 ...     baca.accents(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -95,7 +95,7 @@ class LibraryAM(object):
                 ...     baca.accents(baca.select_plt_heads_in_tuplet(n=1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -138,8 +138,9 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.ArticulationSpecifier(
-            articulations=['>'],
+        selector = selector or baca.select_plt_heads()
+        return baca.tools.AttachCommand(
+            arguments=[abjad.Articulation('>')],
             selector=selector,
             )
 
@@ -161,7 +162,7 @@ class LibraryAM(object):
                 ...     baca.alternate_bow_strokes(downbow_first=True),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -216,7 +217,7 @@ class LibraryAM(object):
                 ...     baca.alternate_bow_strokes(downbow_first=False),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(6),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -273,7 +274,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(6),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -317,11 +318,13 @@ class LibraryAM(object):
 
         '''
         if downbow_first:
-            articulations = [['downbow'], ['upbow']]
+            articulations = ['downbow', 'upbow']
         else:
-            articulations = [['upbow'], ['downbow']]
-        return baca.tools.ArticulationSpecifier(
-            articulations=articulations,
+            articulations = ['upbow', 'downbow']
+        articulations = [abjad.Articulation(_) for _ in articulations]
+        selector = selector or baca.select_plt_heads()
+        return baca.tools.AttachCommand(
+            arguments=articulations,
             selector=selector,
             )
 
@@ -329,7 +332,7 @@ class LibraryAM(object):
     def anchor(remote_voice_name, remote_selector=None, local_selector=None):
         r'''Anchors music to start of remote selection.
         '''
-        return baca.tools.AnchorSpecifier(
+        return baca.tools.AnchorCommand(
             local_selector=local_selector,
             remote_selector=remote_selector,
             remote_voice_name=remote_voice_name,
@@ -343,11 +346,19 @@ class LibraryAM(object):
         ):
         r'''Anchors music to stop of remote selection.
         '''
-        return baca.tools.AnchorSpecifier(
+        return baca.tools.AnchorCommand(
             local_selector=local_selector,
             remote_selector=remote_selector,
             remote_voice_name=remote_voice_name,
             use_remote_stop_offset=True,
+            )
+
+    @staticmethod
+    def anchor_to_figure(figure_name):
+        r'''Anchors music to start of figure.
+        '''
+        return baca.tools.AnchorCommand(
+            figure_name=figure_name,
             )
 
     @staticmethod
@@ -367,7 +378,7 @@ class LibraryAM(object):
                 ...     baca.ancora_dynamic('ff'),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -431,7 +442,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -483,312 +494,10 @@ class LibraryAM(object):
         markup = abjad.Markup(dynamic).dynamic()
         markup += abjad.Markup('ancora').upright()
         markup = abjad.new(markup, direction=direction)
-        return baca.tools.MarkupSpecifier(
-            markup=markup,
+        selector = selector or baca.select_plt_head(n=0)
+        return baca.tools.AttachCommand(
+            arguments=[markup],
             selector=selector,
-            )
-
-    @staticmethod
-    def arpeggiate_down(pattern=None):
-        r"""Arpeggiates collections down.
-
-        ..  container:: example
-
-            Arpeggiates all collections down:
-
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.arpeggiate_down(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  doctest::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                c'''16 [
-                                d''16 ]
-                                bf'4 ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~
-                                ef''16
-                                r16
-                                af'16 [
-                                g'16 ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Arpeggiates collection 0 down:
-
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.arpeggiate_down(pattern=abjad.select_first()),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  doctest::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                c'''16 [
-                                d''16 ]
-                                bf'4 ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~
-                                ef''16
-                                r16
-                                af''16 [
-                                g''16 ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        """
-        return baca.tools.ArpeggiationSpacingSpecifier(
-            direction=Down,
-            pattern=pattern,
-            )
-
-    @staticmethod
-    def arpeggiate_up(pattern=None):
-        r"""Arpeggiates collections up.
-
-        ..  container:: example
-
-            Arpeggiates all collections up and then octave-transposes the
-            lowest note of each tuplet to octave 3:
-
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.arpeggiate_up(),
-                ...     baca.bass_to_octave(
-                ...         3,
-                ...         baca.select_leaves_in_each_tuplet(),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(7),
-                ...     talea_counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  doctest::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #7
-                                r8
-                                c16 [
-                                d16 ]
-                                bf4 ~
-                                bf16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs16 [
-                                e'16 ]
-                                ef''4 ~
-                                ef''16
-                                r16
-                                af''16 [
-                                g'''16 ]
-                            }
-                            \times 4/5 {
-                                a16
-                                r4
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Arpeggiates collection 0 up and octave-transposes such that lowest
-            note apepars in octave 3:
-
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.arpeggiate_up(pattern=abjad.select_first()),
-                ...     baca.bass_to_octave(
-                ...         3,
-                ...         baca.select_leaves_in_tuplet(0), 
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  doctest::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                c16 [
-                                d16 ]
-                                bf4 ~
-                                bf16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~
-                                ef''16
-                                r16
-                                af''16 [
-                                g''16 ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Regression: (trivially) up-arpeggiates chord pitch-classes:
-            
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [{0, 2, 10}, [5], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.arpeggiate_up(),
-                ...     talea_counts=[5, -3],
-                ...     talea_denominator=32,
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  doctest::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            {
-                                <c' d' bf'>8 ~ [
-                                <c' d' bf'>32 ]
-                                r16.
-                            }
-                            {
-                                f'8 ~ [
-                                f'32 ]
-                                r16.
-                            }
-                            {
-                                <ef' e' fs'>8 ~ [
-                                <ef' e' fs'>32 ]
-                                r16.
-                            }
-                            {
-                                <g' af'>8 ~ [
-                                <g' af'>32 ]
-                                r16.
-                            }
-                            {
-                                a'8 ~ [
-                                a'32 ]
-                                r16.
-                            }
-                        }
-                    }
-                >>
-
-        """
-        return baca.tools.ArpeggiationSpacingSpecifier(
-            direction=Up,
-            pattern=pattern,
             )
 
     @staticmethod
@@ -806,7 +515,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
                 ...     baca.arpeggios(),
-                ...     talea_counts=[5, -3],
+                ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -859,7 +568,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
                 ...     baca.arpeggios(baca.select_chord_heads(start=-2)),
-                ...     talea_counts=[5, -3],
+                ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -903,8 +612,8 @@ class LibraryAM(object):
 
         """
         selector = selector or baca.select_chord_heads()
-        return baca.tools.ArticulationSpecifier(
-            articulations=['arpeggio'],
+        return baca.tools.AttachCommand(
+            arguments=[abjad.Articulation('arpeggio')],
             selector=selector,
             )
 
@@ -925,7 +634,7 @@ class LibraryAM(object):
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
                 ...     baca.bass_to_octave(3),
                 ...     baca.color('red', baca.select_plts()),
-                ...     talea_counts=[5, -3],
+                ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -1033,7 +742,7 @@ class LibraryAM(object):
                 ...         selector=baca.select_each_plt(),
                 ...         ),
                 ...     baca.color('red', baca.select_each_plt()),
-                ...     talea_counts=[5, -3],
+                ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -1141,7 +850,7 @@ class LibraryAM(object):
                 ...         selector=baca.select_each_plt(start=-2),
                 ...         ),
                 ...     baca.color('red', baca.select_each_plt(start=-2)),
-                ...     talea_counts=[5, -3],
+                ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -1204,7 +913,7 @@ class LibraryAM(object):
                 >>
 
         """
-        return baca.tools.RegisterToOctaveSpecifier(
+        return baca.tools.RegisterToOctaveCommand(
             anchor=Bottom,
             octave_number=n,
             selector=selector,
@@ -1316,7 +1025,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def beam_everything(stemlets=None):
+    def beam_everything(hide_nibs=None, stemlets=None):
         r'''Beams everything.
 
         ..  container:: example
@@ -1445,12 +1154,197 @@ class LibraryAM(object):
                     }
                 >>
 
+        ..  container:: example
+
+            Beams everything without nibs:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.beam_everything(hide_nibs=True),
+                ...     baca.rests_around([2], [2]),
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            {
+                                r8 [
+                                c'16
+                                d'16
+                                bf'16
+                            }
+                            {
+                                fs''16
+                                e''16
+                                ef''16
+                                af''16
+                                g''16
+                            }
+                            {
+                                a'16
+                                r8 ]
+                            }
+                        }
+                    }
+                >>
+
         '''
         return abjad.rhythmmakertools.BeamSpecifier(
             beam_divisions_together=True,
             beam_each_division=True,
             beam_rests=True,
+            hide_nibs=hide_nibs,
             stemlet_length=stemlets,
+            )
+
+    @staticmethod
+    def beam_plt_runs(hide_nibs=None):
+        r'''Beams PLT runs.
+
+        ..  container:: example
+
+            Beams PLT runs:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.beam_plt_runs(),
+                ...     baca.rests_around([2], [2]),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                c'16 [
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                d'16 ]
+                                bf'4 ~
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                bf'16 [ ]
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \set stemLeftBeamCount = #1
+                                \set stemRightBeamCount = #2
+                                fs''16 [
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                e''16 ]
+                                ef''4 ~
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                ef''16 [ ]
+                                r16
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                af''16 [
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #1
+                                g''16
+                            }
+                            \times 2/3 {
+                                \set stemLeftBeamCount = #1
+                                \set stemRightBeamCount = #2
+                                a'16 ]
+                                r8
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Beams PLT runs without nibs:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.beam_plt_runs(hide_nibs=True),
+                ...     baca.rests_around([2], [2]),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 [
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 [
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                g''16
+                            }
+                            \times 2/3 {
+                                a'16 ]
+                                r8
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        return abjad.rhythmmakertools.BeamSpecifier(
+            beam_divisions_together=True,
+            beam_each_division=True,
+            beam_rests=False,
+            hide_nibs=hide_nibs,
             )
 
     @staticmethod
@@ -1556,10 +1450,10 @@ class LibraryAM(object):
 
         '''
         assert isinstance(n, (int, float)), repr(n)
-        return baca.tools.OverrideSpecifier(
-            grob_name='beam',
+        return baca.tools.OverrideCommand(
             attribute_name='positions',
             attribute_value=(n, n),
+            grob_name='beam',
             revert=True,
             selector=selector,
             )
@@ -1581,7 +1475,7 @@ class LibraryAM(object):
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
                 ...     baca.center_to_octave(3),
                 ...     baca.color('red', baca.select_plts()),
-                ...     talea_counts=[5, -3],
+                ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -1689,7 +1583,7 @@ class LibraryAM(object):
                 ...         selector=baca.select_each_plt(),
                 ...         ),
                 ...     baca.color('red', baca.select_each_plt()),
-                ...     talea_counts=[5, -3],
+                ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -1797,7 +1691,7 @@ class LibraryAM(object):
                 ...         selector=baca.select_each_plt(start=-2),
                 ...         ),
                 ...     baca.color('red', baca.select_each_plt(start=-2)),
-                ...     talea_counts=[5, -3],
+                ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -1860,156 +1754,10 @@ class LibraryAM(object):
                 >>
 
         """
-        return baca.tools.RegisterToOctaveSpecifier(
+        return baca.tools.RegisterToOctaveCommand(
             anchor=Center,
             octave_number=n,
             selector=selector,
-            )
-
-    @staticmethod
-    def chord_spacing_down(
-        bass=None,
-        pattern=None,
-        semitones=None,
-        soprano=None,
-        ):
-        r"""Spaces chords down.
-
-        ..  container:: example
-
-            Bass-spaces chords down:
-
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     4 * [{12, 14, 21, 22}],
-                ...     baca.chord_spacing_down(
-                ...         bass=0,
-                ...         pattern=Pattern([0]),
-                ...         ),
-                ...     baca.chord_spacing_down(
-                ...         bass=2,
-                ...         pattern=Pattern([1]),
-                ...         ),
-                ...     baca.chord_spacing_down(
-                ...         bass=9,
-                ...         pattern=Pattern([2]),
-                ...         ),
-                ...     baca.chord_spacing_down(
-                ...         bass=10,
-                ...         pattern=Pattern([3]),
-                ...         ),
-                ...     baca.messiaen_ties(),
-                ...     talea_counts=[4],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  doctest::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            {
-                                <c' a' bf' d''>4
-                            }
-                            {
-                                <d' a' bf' c''>4
-                            }
-                            {
-                                <a' d'' bf'' c'''>4
-                            }
-                            {
-                                <bf' d'' a'' c'''>4
-                            }
-                        }
-                    }
-                >>
-
-        """
-        return baca.tools.ChordalSpacingSpecifier(
-            bass=bass,
-            direction=Down,
-            minimum_semitones=semitones,
-            pattern=pattern,
-            soprano=soprano,
-            )
-
-    @staticmethod
-    def chord_spacing_up(
-        bass=None,
-        pattern=None,
-        semitones=None,
-        soprano=None,
-        ):
-        r"""Spaces chords up.
-
-        ..  container:: example
-
-            Bass-spaces chords up:
-
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     4 * [{12, 14, 21, 22}],
-                ...     baca.chord_spacing_up(
-                ...         bass=0,
-                ...         pattern=Pattern([0]),
-                ...         ),
-                ...     baca.chord_spacing_up(
-                ...         bass=2,
-                ...         pattern=Pattern([1]),
-                ...         ),
-                ...     baca.chord_spacing_up(
-                ...         bass=9,
-                ...         pattern=Pattern([2]),
-                ...         ),
-                ...     baca.chord_spacing_up(
-                ...         bass=10,
-                ...         pattern=Pattern([3]),
-                ...         ),
-                ...     baca.messiaen_ties(),
-                ...     talea_counts=[4],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  doctest::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            {
-                                <c' d' a' bf'>4
-                            }
-                            {
-                                <d' a' bf' c''>4
-                            }
-                            {
-                                <a' bf' c'' d''>4
-                            }
-                            {
-                                <bf' c'' d'' a''>4
-                            }
-                        }
-                    }
-                >>
-
-        """
-        return baca.tools.ChordalSpacingSpecifier(
-            bass=bass,
-            direction=Up,
-            minimum_semitones=semitones,
-            pattern=pattern,
-            soprano=soprano,
             )
 
     @staticmethod
@@ -2029,7 +1777,7 @@ class LibraryAM(object):
                 ...     baca.clef('alto'),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(7),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -2088,7 +1836,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(7),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -2133,8 +1881,8 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_leaf(0)
-        return baca.tools.IndicatorSpecifier(
-            indicators=[abjad.Clef(clef)],
+        return baca.tools.AttachCommand(
+            arguments=[abjad.Clef(clef)],
             selector=selector,
             )
 
@@ -2156,7 +1904,7 @@ class LibraryAM(object):
                 ...     baca.one_line_staff(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(9),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -2223,7 +1971,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(9),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -2272,7 +2020,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.SpannerSpecifier(
+        return baca.tools.SpannerCommand(
             selector=selector,
             spanner=abjad.ClefSpanner(clef=clef),
             )
@@ -2361,7 +2109,7 @@ class LibraryAM(object):
         return baca.tools.Coat(pitch)
 
     @staticmethod
-    def color(color='red', selector=None, debug=None):
+    def color(color='red', selector=None):
         r'''Colors leaves.
 
         ..  container:: example
@@ -2378,7 +2126,7 @@ class LibraryAM(object):
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -2497,7 +2245,7 @@ class LibraryAM(object):
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -2572,9 +2320,8 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.ColorSpecifier(
+        return baca.tools.ColorCommand(
             color=color,
-            debug=debug,
             selector=selector,
             )
 
@@ -2668,7 +2415,7 @@ class LibraryAM(object):
                 ...     baca.cross_note_heads(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -2727,7 +2474,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -2773,10 +2520,10 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_pls()
-        return baca.tools.OverrideSpecifier(
-            grob_name='note_head',
+        return baca.tools.OverrideCommand(
             attribute_name='style',
             attribute_value='cross',
+            grob_name='note_head',
             revert=True,
             selector=selector,
             )
@@ -3023,10 +2770,9 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.IndicatorSpecifier(
-            indicators=[
-                abjad.LilyPondCommand(r'\crossStaff'),
-                ],
+        selector = selector or baca.select_plt_heads()
+        return baca.tools.AttachCommand(
+            arguments=[abjad.LilyPondCommand(r'\crossStaff')],
             selector=selector,
             )
 
@@ -3047,7 +2793,7 @@ class LibraryAM(object):
                 ...     baca.displacements([0, 0, -1, -1, 1, 1]),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -3104,7 +2850,7 @@ class LibraryAM(object):
                 ...     6 * [{0, 2, 3}],
                 ...     baca.displacements([0, 0, -1, -1, 1, 1]),
                 ...     baca.rests_around([2], [4]),
-                ...     talea_counts=[4],
+                ...     counts=[4],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -3156,7 +2902,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -3202,7 +2948,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.OctaveDisplacementSpecifier(
+        return baca.tools.OctaveDisplacementCommand(
             displacements=displacements,
             selector=selector,
             )
@@ -3224,7 +2970,7 @@ class LibraryAM(object):
                 ...     baca.double_tonguing(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -3281,7 +3027,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -3324,8 +3070,9 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.ArticulationSpecifier(
-            articulations=['tongue #2'],
+        selector = selector or baca.select_plt_heads()
+        return baca.tools.AttachCommand(
+            arguments=[abjad.Articulation('tongue #2')],
             selector=selector,
             )
 
@@ -3344,7 +3091,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
                 ...     baca.down_arpeggios(),
-                ...     talea_counts=[5, -3],
+                ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -3402,7 +3149,7 @@ class LibraryAM(object):
                 ...     baca.down_arpeggios(
                 ...         baca.select_chord_heads(start=-2),
                 ...         ),
-                ...     talea_counts=[5, -3],
+                ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -3448,10 +3195,8 @@ class LibraryAM(object):
 
         """ 
         selector = selector or baca.select_chord_heads()
-        return baca.tools.IndicatorSpecifier(
-            indicators=[
-                abjad.Arpeggio(direction=Down),
-                ],
+        return baca.tools.AttachCommand(
+            arguments=[abjad.Arpeggio(direction=Down)],
             selector=selector,
             )
 
@@ -3472,7 +3217,7 @@ class LibraryAM(object):
                 ...     baca.down_bows(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -3529,7 +3274,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -3572,8 +3317,9 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.ArticulationSpecifier(
-            articulations=['downbow'],
+        selector = selector or baca.select_plt_heads()
+        return baca.tools.AttachCommand(
+            arguments=[abjad.Articulation('downbow')],
             selector=selector,
             )
 
@@ -3594,7 +3340,7 @@ class LibraryAM(object):
                 ...     baca.dynamic('f'),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -3652,7 +3398,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -3696,8 +3442,8 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_plt_head(n=0)
-        return baca.tools.DynamicSpecifier(
-            dynamic=abjad.Dynamic(dynamic),
+        return baca.tools.AttachCommand(
+            arguments=[abjad.Dynamic(dynamic)],
             selector=selector,
             )
 
@@ -3722,7 +3468,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -3754,10 +3500,10 @@ class LibraryAM(object):
                                 ef''16
                                 r16
                                 af''16 [
-                                g''16 ]
+                                g''16 \f ]
                             }
                             \times 4/5 {
-                                a'16 \f
+                                a'16 \p
                                 r4
                                 \revert DynamicLineSpanner.staff-padding
                                 \revert TupletBracket.staff-padding
@@ -3786,7 +3532,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -3818,11 +3564,11 @@ class LibraryAM(object):
                                 ef''16
                                 r16
                                 af''16 [
-                                g''16 ]
+                                g''16 \f ]
                                 \revert DynamicLineSpanner.staff-padding
                             }
                             \times 4/5 {
-                                a'16 \f
+                                a'16 \p
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -3831,10 +3577,10 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.OverrideSpecifier(
-            grob_name='dynamic_line_spanner',
+        return baca.tools.OverrideCommand(
             attribute_name='staff_padding',
             attribute_value=str(n),
+            grob_name='dynamic_line_spanner',
             revert=True,
             selector=selector,
             )
@@ -3860,7 +3606,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -3892,10 +3638,10 @@ class LibraryAM(object):
                                 ef''16
                                 r16
                                 af''16 [
-                                g''16 ]
+                                g''16 \f ]
                             }
                             \times 4/5 {
-                                a'16 \f
+                                a'16 \p
                                 r4
                                 \revert DynamicLineSpanner.direction
                                 \revert TupletBracket.staff-padding
@@ -3923,7 +3669,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -3955,11 +3701,11 @@ class LibraryAM(object):
                                 ef''16
                                 r16
                                 af''16 [
-                                g''16 ]
+                                g''16 \f ]
                                 \revert DynamicLineSpanner.direction
                             }
                             \times 4/5 {
-                                a'16 \f
+                                a'16 \p
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -3968,10 +3714,152 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.OverrideSpecifier(
-            grob_name='dynamic_line_spanner',
+        return baca.tools.OverrideCommand(
             attribute_name='direction',
             attribute_value=Up,
+            grob_name='dynamic_line_spanner',
+            revert=True,
+            selector=selector,
+            )
+
+    @staticmethod
+    def dynamic_text_extra_offset(pair, selector=None):
+        r'''Overrides dynamic text extra offset.
+
+        ..  container:: example
+
+            Overrides dynamic text extra offset on PL 0:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.dynamic('p'),
+                ...     baca.dynamic(
+                ...         'f',
+                ...         baca.select_leaf_in_tuplet(1, 0),
+                ...         ),
+                ...     baca.dynamic_text_extra_offset((-3, 0)),
+                ...     baca.rests_around([2], [4]),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                \override DynamicText.extra-offset = #'(-3 . 0)
+                                c'16 \p [
+                                \revert DynamicText.extra-offset
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 \f [
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                g''16 ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Overrides dynamic text extra offset on leaf 0 in tuplet 1:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.dynamic('p'),
+                ...     baca.dynamic(
+                ...         'f',
+                ...         baca.select_leaf_in_tuplet(1, 0),
+                ...         ),
+                ...     baca.dynamic_text_extra_offset(
+                ...         (-3, 0),
+                ...         baca.select_leaf_in_tuplet(1, 0),
+                ...         ),
+                ...     baca.rests_around([2], [4]),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 \p [
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override DynamicText.extra-offset = #'(-3 . 0)
+                                fs''16 \f [
+                                \revert DynamicText.extra-offset
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                g''16 ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        selector = selector or baca.select_pl(n=0)
+        return baca.tools.OverrideCommand(
+            attribute_name='extra_offset',
+            attribute_value=pair,
+            grob_name='dynamic_text',
             revert=True,
             selector=selector,
             )
@@ -3998,7 +3886,7 @@ class LibraryAM(object):
                 ...     baca.dynamics_down(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -4059,7 +3947,7 @@ class LibraryAM(object):
                 ...     baca.dynamics_down(baca.select_leaf_in_tuplet(1, 0)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -4104,10 +3992,8 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_leaf(0)
-        return baca.tools.IndicatorSpecifier(
-            indicators=[
-                abjad.LilyPondCommand('dynamicDown'),
-                ],
+        return baca.tools.AttachCommand(
+            arguments=[abjad.LilyPondCommand('dynamicDown')],
             selector=selector,
             )
 
@@ -4133,7 +4019,7 @@ class LibraryAM(object):
                 ...     baca.dynamics_up(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -4194,7 +4080,7 @@ class LibraryAM(object):
                 ...     baca.dynamics_up(baca.select_leaf_in_tuplet(1, 0)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -4239,10 +4125,8 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_leaf(0)
-        return baca.tools.IndicatorSpecifier(
-            indicators=[
-                abjad.LilyPondCommand('dynamicUp'),
-                ],
+        return baca.tools.AttachCommand(
+            arguments=[abjad.LilyPondCommand('dynamicUp')],
             selector=selector,
             )
 
@@ -4263,7 +4147,7 @@ class LibraryAM(object):
                 ...     baca.effort_dynamic('f'),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -4333,7 +4217,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -4399,10 +4283,8 @@ class LibraryAM(object):
         markup = left_quotes + dynamic_markup + right_quotes
         markup = abjad.new(markup, direction=direction)
         selector = selector or baca.select_plt_head(n=0)
-        return baca.tools.IndicatorSpecifier(
-            indicators=[
-                markup,
-                ],
+        return baca.tools.AttachCommand(
+            arguments=[markup],
             selector=selector,
             )
 
@@ -4412,6 +4294,127 @@ class LibraryAM(object):
         '''
         return baca.tools.RhythmSpecifier(
             rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker()
+            )
+
+    @staticmethod
+    def fermata(selector=None):
+        r'''Attaches fermata to leaf.
+
+        ..  container:: example
+
+            Attaches fermata to first leaf:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.fermata(),
+                ...     baca.rests_around([2], [4]),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8 -\fermata
+                                c'16 [
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 [
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                g''16 ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Attaches fermata to first leaf in tuplet 1:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.fermata(baca.select_plt_head_in_tuplet(1, 0)),
+                ...     baca.rests_around([2], [4]),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 [
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 -\fermata [
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                g''16 ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        selector = selector or baca.select_leaf(n=0)
+        return baca.tools.AttachCommand(
+            arguments=[abjad.Articulation('fermata')],
+            selector=selector,
             )
 
     @staticmethod
@@ -4439,7 +4442,7 @@ class LibraryAM(object):
                 ...     baca.one_line_staff(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(9),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -4494,7 +4497,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.SpannerSpecifier(
+        return baca.tools.SpannerCommand(
             selector=selector,
             spanner=abjad.StaffLinesSpanner(lines=5),
             )
@@ -4503,7 +4506,7 @@ class LibraryAM(object):
     def fixed_pitches(source):
         r'''Sets fixed pitches.
         '''
-        return baca.tools.ScorePitchSpecifier(
+        return baca.tools.ScorePitchCommand(
             acyclic=True,
             source=source,
             )
@@ -4525,7 +4528,7 @@ class LibraryAM(object):
                 ...     baca.flageolets(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -4582,7 +4585,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -4625,8 +4628,9 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.ArticulationSpecifier(
-            articulations=['flageolet'],
+        selector = selector or baca.select_plt_heads()
+        return baca.tools.AttachCommand(
+            arguments=[abjad.Articulation('flageolet')],
             selector=selector,
             )
 
@@ -4647,7 +4651,7 @@ class LibraryAM(object):
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -4699,9 +4703,62 @@ class LibraryAM(object):
     def fuse_compound_quarter_divisions(counts):
         r'''Fuses compound quarter divisions.
 
+        ..  container:: example
+
+            ::
+
+                >>> expression = baca.fuse_compound_quarter_divisions([1])
+
+            ::
+
+                >>> for item in expression([(2, 8), (2, 8), (2, 8)]):
+                ...     item
+                ...
+                Division((1, 4))
+                Division((1, 4))
+                Division((1, 4))
+
+            ::
+
+                >>> for item in expression([(3, 8), (3, 8), (3, 8)]):
+                ...     item
+                ...
+                Division((1, 4))
+                Division((1, 8))
+                Division((1, 4))
+                Division((1, 8))
+                Division((1, 4))
+                Division((1, 8))
+
+        ..  container:: example
+
+            ::
+
+                >>> expression = baca.fuse_compound_quarter_divisions([2])
+
+            ::
+
+                >>> for item in expression([(2, 8), (2, 8), (2, 8)]):
+                ...     item
+                ...
+                Division((2, 4))
+                Division((1, 4))
+
+            ::
+
+                >>> for item in expression([(3, 8), (3, 8), (3, 8)]):
+                ...     item
+                ...
+                Division((3, 8))
+                Division((3, 8))
+                Division((3, 8))
+
         Returns division sequence expression.
         '''
+        if not all(isinstance(_, int) for _ in counts):
+            raise Exception(counts)
         expression = baca.tools.DivisionSequenceExpression()
+        expression = expression.division_sequence()
         expression = expression.split_by_durations(
             compound_meter_multiplier=abjad.Multiplier((3, 2)),
             durations=[abjad.Duration(1, 4)],
@@ -4712,8 +4769,7 @@ class LibraryAM(object):
             cyclic=True,
             overhang=True,
             )
-        expression = expression.map()
-        expression = expression.sum()
+        expression = expression.map(baca.sequence().sum())
         expression = expression.flatten()
         return expression
 
@@ -4755,7 +4811,7 @@ class LibraryAM(object):
                 ...     baca.glissandi(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -4812,7 +4868,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -4855,7 +4911,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.GlissandoSpecifier(
+        return baca.tools.GlissandoCommand(
             pattern=abjad.select_last(1, inverted=True),
             )
 
@@ -4889,12 +4945,10 @@ class LibraryAM(object):
     @staticmethod
     def hairpins(
         hairpins, 
-        enchain_hairpins=None,
-        flare=None,
-        include_following_rests=None,
-        omit_lone_note_dynamic=None,
         selector=None,
-        span='contiguous notes and chords',
+        flare=None,
+        include_rests=None,
+        omit_lone_note_dynamic=None,
         ):
         r'''Attaches hairpins to pitched logical ties.
 
@@ -4911,7 +4965,7 @@ class LibraryAM(object):
                 ...     baca.hairpins(['p < f']),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -4969,7 +5023,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -5027,7 +5081,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -5058,10 +5112,10 @@ class LibraryAM(object):
                                 ef''16
                                 r16
                                 af''16 [
-                                g''16 ]
+                                g''16 \f ]
                             }
                             \times 4/5 {
-                                a'16 \f
+                                a'16 \p
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -5077,14 +5131,13 @@ class LibraryAM(object):
                 hairpin_token = tuple(hairpin_token)
             hairpin_tokens_.append(hairpin_token)
         hairpin_tokens = hairpin_tokens_
-        return baca.tools.HairpinSpecifier(
-            enchain_hairpins=enchain_hairpins,
+        selector = selector or baca.select_leaves_in_trimmed_run()
+        return baca.tools.HairpinCommand(
             flare=flare,
             hairpin_tokens=hairpin_tokens,
-            include_following_rests=include_following_rests,
+            include_rests=include_rests,
             omit_lone_note_dynamic=omit_lone_note_dynamic,
             selector=selector,
-            span=span,
             )
 
     @staticmethod
@@ -5195,6 +5248,7 @@ class LibraryAM(object):
         segment,
         *specifiers,
         allow_unused_pitches=None,
+        by_pitch_class=None,
         extend_beam=None,
         hocket=None,
         selector=None,
@@ -5215,7 +5269,7 @@ class LibraryAM(object):
                 ...     baca.imbricate('Voice 2', [10, 20, 19]),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -5290,11 +5344,12 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.ImbricationSpecifier(
+        return baca.tools.ImbricateCommand(
             voice_name,
             segment,
             *specifiers,
             allow_unused_pitches=allow_unused_pitches,
+            by_pitch_class=by_pitch_class,
             extend_beam=extend_beam,
             hocket=hocket,
             selector=selector,
@@ -5305,7 +5360,7 @@ class LibraryAM(object):
     def infinite_pitches(source, repetition_intervals):
         r'''Sets infinite pitches.
         '''
-        return baca.tools.ScorePitchSpecifier(
+        return baca.tools.ScorePitchCommand(
             repetition_intervals=repetition_intervals,
             source=source,
             )
@@ -5314,7 +5369,7 @@ class LibraryAM(object):
     def invert(axis=None):
         r'''Inverts pitches.
         '''
-        return baca.tools.ScorePitchSpecifier(
+        return baca.tools.ScorePitchCommand(
             operators=[
                 abjad.Inversion(axis=axis),
                 ]
@@ -5348,7 +5403,7 @@ class LibraryAM(object):
                 ...     baca.laissez_vibrer(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -5405,7 +5460,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -5449,8 +5504,255 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_plt_tails()
-        return baca.tools.ArticulationSpecifier(
-            articulations=['laissezVibrer'],
+        return baca.tools.AttachCommand(
+            arguments=[abjad.Articulation('laissezVibrer')],
+            selector=selector,
+            )
+
+    @staticmethod
+    def line_break(selector=None):
+        r'''Attaches line break command after last leaf.
+
+        ..  container:: example
+
+            Attaches line break after last leaf:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.line_break(),
+                ...     baca.rests_around([2], [4]),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 [
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 [
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                g''16 ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \break
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Attaches line break after last leaf in tuplet 1:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.line_break(baca.select_leaf_in_tuplet(1, -1)),
+                ...     baca.rests_around([2], [4]),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 [
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 [
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                g''16 ]
+                                \break
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        selector = selector or baca.select_leaf(-1)
+        command = abjad.LilyPondCommand('break', format_slot='after')
+        return baca.tools.AttachCommand(
+            arguments=[command],
+            selector=selector,
+            )
+
+    @staticmethod
+    def long_fermata(selector=None):
+        r'''Attaches long fermata to leaf.
+
+        ..  container:: example
+
+            Attaches long fermata to first leaf:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.long_fermata(),
+                ...     baca.rests_around([2], [4]),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8 -\longfermata
+                                c'16 [
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 [
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                g''16 ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Attaches long fermata to first leaf in tuplet 1:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.long_fermata(
+                ...         baca.select_plt_head_in_tuplet(1, 0),
+                ...         ),
+                ...     baca.rests_around([2], [4]),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 [
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 -\longfermata [
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                g''16 ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        selector = selector or baca.select_leaf(n=0)
+        return baca.tools.AttachCommand(
+            arguments=[abjad.Articulation('longfermata')],
             selector=selector,
             )
 
@@ -5471,7 +5773,7 @@ class LibraryAM(object):
                 ...     baca.marcati(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -5528,7 +5830,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -5571,8 +5873,9 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.ArticulationSpecifier(
-            articulations=['marcato'],
+        selector = selector or baca.select_plt_heads()
+        return baca.tools.AttachCommand(
+            arguments=[abjad.Articulation('marcato')],
             selector=selector,
             )
 
@@ -5590,26 +5893,12 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def messiaen_tied_notes():
-        r'''Makes tied notes.
-        '''
-        return baca.tools.RhythmSpecifier(
-            rewrite_meter=True,
-            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
-                tie_specifier=abjad.rhythmmakertools.TieSpecifier(
-                    tie_across_divisions=True,
-                    use_messiaen_style_ties=True,
-                    ),
-                ),
-            )
-
-    @staticmethod
-    def messiaen_ties(selector=None):
-        r'''Attaches Messaien ties to isopitched runs.
+    def messiaen_tie_each(selector=None):
+        r'''Attaches Messaien ties to each PLT p-run.
 
         ..  container:: example
 
-            Attaches Messiaen ties to all isopitched runs:
+            Attaches Messiaen ties to each PLT p-run:
 
             ::
 
@@ -5617,10 +5906,10 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.messiaen_ties(),
+                ...     baca.messiaen_tie_each(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -5664,7 +5953,7 @@ class LibraryAM(object):
 
         ..  container:: example
 
-            Attaches Messiaen tie to isopitched run 0:
+            Attaches Messiaen tie to PLT p-run 0:
 
             ::
 
@@ -5672,10 +5961,10 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.messiaen_ties(baca.select_plt_prun()),
+                ...     baca.messiaen_tie_each(baca.select_plt_prun()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
-                ...     talea_counts=[1, 1, 5, -1],
+                ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -5719,9 +6008,23 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_each_plt_prun()
-        return baca.tools.SpannerSpecifier(
+        return baca.tools.SpannerCommand(
             selector=selector,
             spanner=abjad.Tie(use_messiaen_style_ties=True),
+            )
+
+    @staticmethod
+    def messiaen_tied_notes():
+        r'''Makes tied notes.
+        '''
+        return baca.tools.RhythmSpecifier(
+            rewrite_meter=True,
+            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
+                tie_specifier=abjad.rhythmmakertools.TieSpecifier(
+                    tie_across_divisions=True,
+                    use_messiaen_style_ties=True,
+                    ),
+                ),
             )
 
     @staticmethod

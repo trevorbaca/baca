@@ -111,7 +111,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
 
     ### CLASS ATTRIBUTES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Segments'
 
     __slots__ = (
         '_clef', # remove
@@ -204,7 +204,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
             prototype = abjad.TimeSignature
             assert isinstance(time_signature, prototype), repr(time_signature)
         if start_offset is not None:
-            assert isinstance(start_offset, abjad.durationtools.Offset)
+            assert isinstance(start_offset, abjad.Offset)
         music, start_offset = self._make_rhythm(time_signatures, start_offset)
         assert isinstance(music, (tuple, list, abjad.Voice))
         first_leaf = self._get_first_leaf(music)
@@ -268,6 +268,11 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
 
     @staticmethod
     def _annotate_unpitched_notes(argument):
+        rest_prototype = (
+            abjad.MultimeasureRest,
+            abjad.Rest,
+            abjad.Skip,
+            )
         for leaf in abjad.iterate(argument).by_leaf():
             if isinstance(leaf, abjad.Chord):
                 message = 'rhythm-makers produce only notes and rests: {!r}.'
@@ -275,6 +280,8 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
                 raise Exception(message)
             elif isinstance(leaf, abjad.Note):
                 abjad.attach('not yet pitched', leaf)
+            elif isinstance(leaf, rest_prototype):
+                pass
             else:
                 raise TypeError(leaf)
 
@@ -308,8 +315,9 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
         ):
         message = 'can not attach {!r} to {}.'
         message = message.format(instrument, effective_staff_name)
-        allowable_instruments = \
-            materials_package.score_setup[effective_staff_name]
+        allowable_instruments = materials_package.score_setup[
+            effective_staff_name
+            ]
         if not isinstance(instrument, allowable_instruments):
             raise Exception(message)
 
@@ -317,7 +325,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
     def _durations_to_divisions(durations, start_offset):
         divisions = [baca.tools.Division(_) for _ in durations]
         durations = [_.duration for _ in divisions]
-        start_offset = abjad.durationtools.Offset(start_offset)
+        start_offset = abjad.Offset(start_offset)
         durations.insert(0, start_offset)
         start_offsets = abjad.mathtools.cumulative_sums(durations)[1:-1]
         assert len(divisions) == len(start_offsets)

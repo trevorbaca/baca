@@ -47,7 +47,7 @@ class MusicContribution(abjad.abctools.AbjadValueObject):
         time_signature=None,
         ):
         if (anchor is not None and
-            not isinstance(anchor, baca.tools.AnchorSpecifier)):
+            not isinstance(anchor, baca.tools.AnchorCommand)):
             message = 'must be anchor specifier: {!r}.'
             message = message.format(anchor)
             raise TypeError(message)

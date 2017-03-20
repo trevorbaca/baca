@@ -156,7 +156,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 grace_token,
                 durations,
                 )
-            grace_container = abjad.scoretools.GraceContainer(
+            grace_container = abjad.GraceContainer(
                 grace_leaves,
                 kind='acciaccatura',
                 )
