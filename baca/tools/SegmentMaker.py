@@ -1339,9 +1339,10 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             if not isinstance(rhythm_specifier.specifier, prototype):
                 continue
             if rhythm_specifier.scope.voice_name == voice_name:
+                #raise Exception(rhythm_specifier.scope.stages)
                 if rhythm_specifier.scope.stages is not None:
-                    start = rhythm_specifier.scope.stages[0]
-                    stop = rhythm_specifier.scope.stages[-1] + 1
+                    start = rhythm_specifier.scope.stages.start
+                    stop = rhythm_specifier.scope.stages.stop + 1
                 else:
                     raise Exception
                 if stage in range(start, stop):
@@ -7878,7 +7879,10 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         if target_scope is None:
             target_scope = rhythm_specifier.scope
         else:
-            target_scope = baca.tools.SimpleScope(*target_scope)
+            target_scope = baca.tools.SimpleScope(
+                voice_name=_voice_name,
+                stages=(target_scope.start, target_scope.stop),
+                )
         rhythm_specifier = rhythm_specifier.specifier
         new_rhythm_specifier = abjad.new(rhythm_specifier, **keywords)
         new_scoped_specifier = baca.tools.ScopedSpecifier(

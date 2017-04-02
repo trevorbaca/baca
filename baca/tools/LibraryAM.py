@@ -5366,6 +5366,17 @@ class LibraryAM(object):
             )
 
     @staticmethod
+    def instrument(instrument, selector=None):
+        r'''Attaches instrument.
+        '''
+        selector = selector or baca.select_leaf(0)
+        assert isinstance(instrument, abjad.instrumenttools.Instrument)
+        return baca.tools.AttachCommand(
+            arguments=[instrument],
+            selector=selector,
+            )
+
+    @staticmethod
     def invert(axis=None):
         r'''Inverts pitches.
         '''

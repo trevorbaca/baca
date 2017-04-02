@@ -267,6 +267,20 @@ class MarkupLibrary(object):
             )
 
     @staticmethod
+    def bow_on_tailpiece(selector=None):
+        return MarkupLibrary.make_markup(
+            'bow on tailpiece',
+            selector=selector,
+            )
+
+    @staticmethod
+    def bow_on_wooden_mute(selector=None):
+        return MarkupLibrary.make_markup(
+            'bow on wooden mute',
+            selector=selector,
+            )
+
+    @staticmethod
     def boxed(string, selector=None, whiteout=True):
         markup = abjad.Markup(string, direction=Up)
         markup = markup.box().override(('box-padding', 0.5))
@@ -343,7 +357,7 @@ class MarkupLibrary(object):
     @staticmethod
     def directly_on_bridge_bow_diagonally(selector=None):
         string = 'directly on bridge:'
-        string += ' bow diagonally to produce white noise w/ no pitch',
+        string += ' bow diagonally to produce white noise w/ no pitch'
         return MarkupLibrary.make_markup(
             string,
             selector=selector,
@@ -720,6 +734,13 @@ class MarkupLibrary(object):
             )
 
     @staticmethod
+    def overblow(selector=None):
+        return MarkupLibrary.make_markup(
+            'overblow',
+            selector=selector,
+            )
+
+    @staticmethod
     def P_XFB_flaut(selector=None):
         return MarkupLibrary.make_markup(
             'P + XFB flaut.',
@@ -982,6 +1003,20 @@ class MarkupLibrary(object):
             )
 
     @staticmethod
+    def put_reed_back_in(selector=None):
+        return MarkupLibrary.boxed(
+            'put reed back in',
+            selector=selector,
+            )
+
+    @staticmethod
+    def remove_reed(selector=None):
+        return MarkupLibrary.boxed(
+            'remove reed',
+            selector=selector,
+            )
+
+    @staticmethod
     def remove_staple(selector=None):
         return MarkupLibrary.boxed(
             'remove staple',
@@ -1003,9 +1038,23 @@ class MarkupLibrary(object):
             )
 
     @staticmethod
+    def senza_pedale(selector=None):
+        return MarkupLibrary.make_markup(
+            'senza pedale',
+            selector=selector,
+            )
+
+    @staticmethod
     def senza_vib(selector=None):
         return MarkupLibrary.make_markup(
             'senza vib.',
+            selector=selector,
+            )
+
+    @staticmethod
+    def shakers(selector=None):
+        return MarkupLibrary.make_markup(
+            'shakers',
             selector=selector,
             )
 
