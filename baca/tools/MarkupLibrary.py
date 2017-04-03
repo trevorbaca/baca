@@ -288,7 +288,8 @@ class MarkupLibrary(object):
             markup = markup.whiteout()
         return MarkupLibrary()(
             markup=markup,
-            selector=selector,)
+            selector=selector,
+            )
 
     @staticmethod
     def boxed_lines(strings, direction=Up, selector=None, whiteout=True):

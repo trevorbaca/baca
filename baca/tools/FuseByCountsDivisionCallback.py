@@ -67,6 +67,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
             >>> division_lists = division_maker(input_divisions)
             >>> for division_list in division_lists:
             ...     division_list
+            ...
             [Division((3, 16)), Division((3, 16)), Division((1, 8))]
             [Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((1, 16))]
             [Division((3, 16)), Division((3, 16)), Division((1, 8))]
