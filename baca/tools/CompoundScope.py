@@ -106,9 +106,10 @@ class CompoundScope(abjad.abctools.AbjadObject):
             raise Exception(message)
         component_timespan = agent.get_timespan()
         for voice_name, scope_timespan in self._timespan_map:
-            if voice_name == voice.name:
-                if component_timespan.starts_during_timespan(scope_timespan):
-                    return True
+            if voice_name != voice.name:
+                continue
+            if component_timespan.starts_during_timespan(scope_timespan):
+                return True
         return False
 
     ### PRIVATE METHODS ###

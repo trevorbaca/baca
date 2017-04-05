@@ -995,7 +995,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             result = self._get_stage_numbers(scope.stages)
             start_stage, stop_stage = result
             offsets = self._get_offsets(start_stage, stop_stage)
-            timespan = abjad.timespantools.Timespan(*offsets)
+            timespan = abjad.Timespan(*offsets)
             timespan_map.append((scope.voice_name, timespan))
             timespans.append(timespan)
         compound_scope._timespan_map = timespan_map
@@ -1010,9 +1010,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     logical_tie = abjad.inspect_(leaf).get_logical_tie()
                     if logical_tie.head is leaf:
                         result.append(logical_tie)
-        start_offset = min(_.start_offset for _ in timespans)
-        stop_offset = max(_.stop_offset for _ in timespans)
-        timespan = abjad.timespantools.Timespan(start_offset, stop_offset)
         if not result:
             message = 'EMPTY SELECTION: {}'
             message = message.format(format(scoped_specifier))
@@ -1020,6 +1017,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 print(message)
             else:
                 raise Exception(message)
+        start_offset = min(_.start_offset for _ in timespans)
+        stop_offset = max(_.stop_offset for _ in timespans)
+        timespan = abjad.Timespan(start_offset, stop_offset)
         return abjad.select(result), timespan
 
     def _compound_scope_to_topmost_components(self, compound_scope):
@@ -1205,8 +1205,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     abjad.Rest,
                     abjad.Skip,
                     )
-                leaves = list(abjad.iterate(self._score).by_timeline(prototype))
-                self._cached_leaves_with_rests = leaves
+                leaves = abjad.iterate(self._score).by_timeline(prototype)
+                self._cached_leaves_with_rests = list(leaves)
             leaves = self._cached_leaves_with_rests
         else:
             if self._cached_leaves_without_rests is None:
@@ -1214,8 +1214,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     abjad.Note,
                     abjad.Chord,
                     )
-                leaves = list(abjad.iterate(self._score).by_timeline(prototype))
-                self._cached_leaves_without_rests = leaves
+                leaves = abjad.iterate(self._score).by_timeline(prototype)
+                self._cached_leaves_without_rests = list(leaves)
             leaves = self._cached_leaves_without_rests
         return leaves
 

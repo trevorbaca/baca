@@ -677,6 +677,13 @@ class MarkupLibrary(object):
             )
 
     @staticmethod
+    def OB_full_bow_strokes(selector=None):
+        return MarkupLibrary.make_markup(
+            'OB + full bow strokes',
+            selector=selector,
+            )
+
+    @staticmethod
     def OB_terminate_abruptly(selector=None):
         return MarkupLibrary.make_markup(
             'OB + terminate abruptly',
@@ -749,9 +756,9 @@ class MarkupLibrary(object):
             )
 
     @staticmethod
-    def piu_meno_scratch(selector=None):
+    def po_meno_scratch(selector=None):
         return MarkupLibrary.make_markup(
-            'più meno scratch',
+            "po' meno scratch",
             selector=selector,
             )
 
