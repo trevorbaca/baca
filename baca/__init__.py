@@ -16,6 +16,7 @@ from baca.tools.PitchSegment import PitchSegment
 from baca.tools.PitchSegment import _pitch_segment as pitch_segment
 from baca.tools.PitchSet import PitchSet
 from baca.tools.PitchSet import _pitch_set as pitch_set
+from baca.tools.SegmentMaker import SegmentMaker
 from baca.tools.SelectorLibrary import SelectorLibrary
 from baca.tools.Sequence import Sequence
 from baca.tools.Sequence import _sequence as sequence
