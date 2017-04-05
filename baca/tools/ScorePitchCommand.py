@@ -342,7 +342,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
     ### PRIVATE METHODS ###
 
     def _mutates_score(self):
-        for item in self.source:
+        for item in self.source or []:
             if isinstance(item, abjad.PitchSegment):
                 return True
         return False

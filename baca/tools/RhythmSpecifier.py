@@ -211,12 +211,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
         last_leaf = self._get_last_leaf(music)
         prototype = abjad.instrumenttools.Percussion
         if self.instrument is not None:
-            self._attach_instrument(
-                self.instrument, 
-                first_leaf, 
-                effective_staff_name, 
-                scope=Staff,
-                )
+            abjad.attach(self.instrument, first_leaf, scope=abjad.Staff)
         if self.clef is not None:
             abjad.attach(self.clef, first_leaf, scope=abjad.Staff)
         pitched_prototype = (abjad.Note, abjad.Chord)
@@ -285,41 +280,12 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
             else:
                 raise TypeError(leaf)
 
-    def _attach_instrument(
-        self, 
-        instrument, 
-        component, 
-        effective_staff_name, 
-        materials_package,
-        scope=None,
-        ):
-        self._check_instrument(
-            instrument, 
-            effective_staff_name,
-            materials_package,
-            )
-        abjad.attach(instrument, component, scope=scope)
-
     def _attach_untuned_percussion_markup(self, leaf):
         name = self.instrument.instrument_name
         name = name.lower()
         markup = abjad.markuptools.Markup(name, direction=Up)
         markup = markup.box().override(('box-padding', 0.5))
         abjad.attach(markup, leaf)
-
-    def _check_instrument(
-        self, 
-        instrument, 
-        effective_staff_name,
-        materials_package,
-        ):
-        message = 'can not attach {!r} to {}.'
-        message = message.format(instrument, effective_staff_name)
-        allowable_instruments = materials_package.score_setup[
-            effective_staff_name
-            ]
-        if not isinstance(instrument, allowable_instruments):
-            raise Exception(message)
 
     @staticmethod
     def _durations_to_divisions(durations, start_offset):
@@ -425,39 +391,40 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
         dummy_time_signature_voice = abjad.Voice(dummy_measures)
         dummy_music_voice = abjad.Voice()
         dummy_music_voice.extend(selections)
-        dummy_staff = Staff([dummy_time_signature_voice, dummy_music_voice])
+        dummy_staff = abjad.Staff([
+            dummy_time_signature_voice,
+            dummy_music_voice,
+            ])
         dummy_staff.is_simultaneous = True
         for rhythm_overwrite in self.rhythm_overwrites:
             selector, division_maker, rhythm_maker = rhythm_overwrite
-            old_music_selection = selector(dummy_music_voice)
-            prototype = abjad.Selection
-            #if 1 < len(old_music_selection):
+            old_selection = selector(dummy_music_voice)
+            #if 1 < len(old_selection):
             if True:
-                old_music_selection = abjad.selectiontools.SliceSelection(
-                    old_music_selection)
-                result = old_music_selection._get_parent_and_start_stop_indices()
+                old_selection = abjad.select(old_selection)
+                result = old_selection._get_parent_and_start_stop_indices()
                 parent, start_index, stop_index = result
-                old_duration = old_music_selection.get_duration()
+                old_duration = old_selection.get_duration()
                 division_lists = division_maker([old_duration])
                 assert len(division_lists) == 1
                 division_list = division_lists[0]
-                new_music_selection = rhythm_maker(division_list)
-                dummy_music_voice[start_index:stop_index+1] = \
-                    new_music_selection
-            #elif len(old_music_selection) == 1:
-            #    prototype = abjad.Selection
-            #    assert isinstance(old_music_selection[0], prototype)
-            #    old_music_selection = old_music_selection[0]
-            #    old_duration = old_music_selection.get_duration()
+                new_selection = rhythm_maker(division_list)
+                dummy_music_voice[start_index:stop_index+1] = new_selection
+            #elif len(old_selection) == 1:
+            #    assert isinstance(old_selection[0], abjad.Selection)
+            #    old_selection = old_selection[0]
+            #    old_duration = old_selection.get_duration()
             #    division_lists = division_maker([old_duration])
             #    assert len(division_lists) == 1
             #    division_list = division_lists[0]
-            #    new_music_selection = rhythm_maker(division_list)
-            #    old_component = old_music_selection[0]
+            #    new_selection = rhythm_maker(division_list)
+            #    old_component = old_selection[0]
             #    index = dummy_music_voice.index(old_component)
-            #    dummy_music_voice[index:index+1] = new_music_selection
+            #    dummy_music_voice[index:index+1] = new_selection
         music = dummy_music_voice[:]
-        return dummy_music_voice, start_offset
+        #return dummy_music_voice, start_offset
+        selections = [abjad.select(_) for _ in music]
+        return selections, start_offset
 
     def _select_divisions(self, divisions, start_offset):
         if self.division_expression is not None:
