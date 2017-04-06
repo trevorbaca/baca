@@ -7500,6 +7500,270 @@ class LibraryNZ(object):
         return specifier
 
     @staticmethod
+    def ties_down(selector=None):
+        r'''Overrides tie direction on leaves.
+
+        ..  container:: example
+
+            Overrides tie direction on all leaves:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[11, 11, 12], [11, 11, 11], [11]],
+                ...     baca.rests_around([2], [4]),
+                ...     baca.stems_up(),
+                ...     baca.tie_each(),
+                ...     baca.ties_down(),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override Stem.direction = #up
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                \override Tie.direction = #down
+                                b'16 ~ [
+                                b'16 ]
+                                c''4 ~
+                                c''16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 7/8 {
+                                b'16 ~ [
+                                b'16 ~ ]
+                                b'4 ~
+                                b'16
+                                r16
+                            }
+                            \times 4/5 {
+                                b'16
+                                \revert Tie.direction
+                                r4
+                                \revert Stem.direction
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Overrides tie direction on leaves in tuplet 1:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[11, 11, 12], [11, 11, 11], [11]],
+                ...     baca.rests_around([2], [4]),
+                ...     baca.stems_up(),
+                ...     baca.tie_each(),
+                ...     baca.ties_down(baca.select_leaves_in_tuplet(1)),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override Stem.direction = #up
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                b'16 ~ [
+                                b'16 ]
+                                c''4 ~
+                                c''16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 7/8 {
+                                \override Tie.direction = #down
+                                b'16 ~ [
+                                b'16 ~ ]
+                                b'4 ~
+                                b'16
+                                r16
+                                \revert Tie.direction
+                            }
+                            \times 4/5 {
+                                b'16
+                                r4
+                                \revert Stem.direction
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        selector = selector or baca.select_leaves_in_trimmed_run()
+        return baca.tools.OverrideCommand(
+            attribute_name='direction',
+            attribute_value=Down,
+            grob_name='tie',
+            revert=True,
+            selector=selector,
+            )
+
+    @staticmethod
+    def ties_up(selector=None):
+        r'''Overrides tie direction on leaves.
+
+        ..  container:: example
+
+            Overrides tie direction on all leaves:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[11, 11, 12], [11, 11, 11], [11]],
+                ...     baca.rests_around([2], [4]),
+                ...     baca.stems_down(),
+                ...     baca.tie_each(),
+                ...     baca.ties_up(),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override Stem.direction = #down
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                \override Tie.direction = #up
+                                b'16 ~ [
+                                b'16 ]
+                                c''4 ~
+                                c''16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 7/8 {
+                                b'16 ~ [
+                                b'16 ~ ]
+                                b'4 ~
+                                b'16
+                                r16
+                            }
+                            \times 4/5 {
+                                b'16
+                                \revert Tie.direction
+                                r4
+                                \revert Stem.direction
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Overrides tie direction on leaves in tuplet 1:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[11, 11, 12], [11, 11, 11], [11]],
+                ...     baca.rests_around([2], [4]),
+                ...     baca.stems_down(),
+                ...     baca.tie_each(),
+                ...     baca.ties_up(baca.select_leaves_in_tuplet(1)),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override Stem.direction = #down
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                b'16 ~ [
+                                b'16 ]
+                                c''4 ~
+                                c''16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 7/8 {
+                                \override Tie.direction = #up
+                                b'16 ~ [
+                                b'16 ~ ]
+                                b'4 ~
+                                b'16
+                                r16
+                                \revert Tie.direction
+                            }
+                            \times 4/5 {
+                                b'16
+                                r4
+                                \revert Stem.direction
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        selector = selector or baca.select_leaves_in_trimmed_run()
+        return baca.tools.OverrideCommand(
+            attribute_name='direction',
+            attribute_value=Up,
+            grob_name='tie',
+            revert=True,
+            selector=selector,
+            )
+
+    @staticmethod
     def time_signature_extra_offset(pair=None, selector=None):
         r'''Overrides time signature extra offset on leaves.
 
