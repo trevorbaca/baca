@@ -1520,11 +1520,16 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 contribution = self._get_time_signatures(*result)
             else:
                 continue
-            contribution = rhythm_specifier.specifier(
-                effective_staff_name, 
-                start_offset=contribution.start_offset,
-                time_signatures=contribution.payload,
-                )
+            try:
+                contribution = rhythm_specifier.specifier(
+                    effective_staff_name, 
+                    start_offset=contribution.start_offset,
+                    time_signatures=contribution.payload,
+                    )
+            except:
+                message = 'rhythm specifier raises exception: {}'
+                message = message.format(format(rhythm_specifier))
+                raise Exception(message)
             assert contribution.start_offset is not None
             contributions.append(contribution)
         contributions.sort(key=lambda _: _.start_offset)
@@ -1596,7 +1601,10 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 instruments = abjad.inspect_(leaf).get_indicators(prototype)
                 if not instruments:
                     continue
-                assert len(instruments) == 1
+                if not len(instruments) == 1:
+                    message = 'multiple instruments: {!r}.'
+                    message = message.format(instruments)
+                    raise Exception(message)
                 current_instrument = instruments[0]
                 previous_leaf = abjad.inspect_(leaf).get_leaf(-1)
                 if previous_leaf is not None:

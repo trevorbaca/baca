@@ -187,7 +187,7 @@ class MicrotonalDeviationCommand(abjad.abctools.AbjadObject):
             return
         for annotation_name in self.deposit_annotations:
             annotation = abjad.Annotation(annotation_name, True)
-            attach(annotation, note)
+            abjad.attach(annotation, note)
 
     ### PUBLIC PROPERTIES ###
 
