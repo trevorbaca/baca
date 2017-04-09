@@ -6039,14 +6039,12 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def molto_flaut_to_molto_grid():
+    def molto_flaut_to_molto_grid(selector=None):
         r'''Makes color transition spanner.
-
-        Returns text spanner.
         '''
         left_text = abjad.Markup('molto flautando').italic().larger() + abjad.Markup.hspace(1)
         right_text = abjad.Markup.hspace(1) + abjad.Markup('molto gridato').italic().larger()
-        molto_flaut_to_molto_grid = abjad.TextSpanner(
+        spanner = abjad.TextSpanner(
             overrides = {
                 'text_spanner__bound_details__left__padding': -1,
                 'text_spanner__bound_details__left__stencil_align_dir_y': 0,
@@ -6062,6 +6060,10 @@ class LibraryAM(object):
                 'text_spanner__dash_period': 1.5,
             }
         )
+        return baca.tools.SpannerCommand(
+            selector=selector,
+            spanner=spanner
+            )
 
     @staticmethod
     def multimeasure_rests():
