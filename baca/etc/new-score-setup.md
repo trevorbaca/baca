@@ -94,7 +94,7 @@
 
     Decide the name of the score package.
 
-11. Go to www.github.org.
+11. Go to www.github.com.
 
     Click "New Repository".
 
@@ -132,11 +132,11 @@
 
         metadata = abjad.datastructuretools.TypedOrderedDict(
             [
-                ('catalog_number', 'AWN-015'),
+                ('catalog_number', 'AWN-018'),
                 ('composer', 'Bača'),
-                ('forces_tagline', 'for eight players'),
-                ('title', 'Fabergé Investigations'),
-                ('year', 2016),
+                ('forces_tagline', 'for narrator \& string quartet'),
+                ('title', 'Stirrings Still'),
+                ('year', 2017),
                 ]
             )
 
@@ -148,9 +148,9 @@
 
 17. Quit the IDE. Edit `~/.profile` and add score package navigation aliases:
 
-        export FABERGE=$SCORES/faberge
-        alias fabx="clear; cd $FABERGE/faberge"
-        alias fab="fabx; start-abjad-ide fab"
+        export STIRRINGS=$SCORES/stirrings
+        alias stix="clear; cd $STIRRINGS/stirrings"
+        alias sti="stix; start-abjad-ide sti"
 
     Quit and restart the terminal.
 
