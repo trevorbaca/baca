@@ -140,13 +140,17 @@
                 ]
             )
 
-16. Quit the IDE and list score packages.
+16. Change to the outer directory with `(ww)`.
+
+    Copy Git ignore file from existing score.
+
+17. Quit the IDE and list score packages.
 
     Rename newly created score package if necessary.
 
     Change outer directory and inner directory.
 
-17. Quit the IDE. Edit `~/.profile` and add score package navigation aliases:
+18. Quit the IDE. Edit `~/.profile` and add score package navigation aliases:
 
         export STIRRINGS=$SCORES/stirrings
         alias stix="clear; cd $STIRRINGS/stirrings"
@@ -154,7 +158,7 @@
 
     Quit and restart the terminal.
 
-18. Change to score package score directory in all three terminal windows.
+19. Change to score package score directory in all three terminal windows.
 
     Save terminal windows as a group:
 
@@ -166,7 +170,7 @@
 
     Start the IDE at new score.
 
-19. Make etc files:
+20. Make etc files:
 
     Make to-do.md file with `(ee > new > to-do.md)`. 
 
@@ -174,7 +178,7 @@
 
     Commit.
 
-20. Copy an existing score template with (oo > cp).
+21. Copy an existing score template with (oo > cp).
 
     Edit ScoreTemplate.py by hand.
 
@@ -184,7 +188,7 @@
 
     Run (dt).
 
-21. Copy an existing instruments package with (mm > cp).
+22. Copy an existing instruments package with (mm > cp).
 
     Edit instruments/definition.py by hand.
 
@@ -194,7 +198,7 @@
 
     Eventually run (pdfm).
 
-22. Copy an existing tempi package with (mm > cp).
+23. Copy an existing tempi package with (mm > cp).
 
     Edit tempi/definition.py by hand.
 
@@ -204,7 +208,7 @@
 
     Eventually run (pdfm).
 
-23. If required copy an existing time signatures package with (mm > cp).
+24. If required copy an existing time signatures package with (mm > cp).
 
     Edit time_signatures/definition.py by hand.
 
@@ -212,11 +216,11 @@
 
     Eventually run (pdfm).
 
-24. Change to the stylesheets directory with (yy).
+25. Change to the stylesheets directory with (yy).
 
     Leave IDE-generated nonfirst-segment.ily as is.
 
-25. Copy an existing default-instrument-names.ily with (yy > cp).
+26. Copy an existing default-instrument-names.ily with (yy > cp).
 
     Edit default-instrument-names.ily by hand.
 
@@ -230,7 +234,7 @@
 
     (Probably IDE can create default-instrument-names.ily automatically.)
 
-26. Replace IDE-generated stylesheet.ily with existing stylesheet.ily.
+27. Replace IDE-generated stylesheet.ily with existing stylesheet.ily.
 
     Copy existing stylesheet.ily with (yy > cp).
 
@@ -248,14 +252,14 @@
 
     (Eventually create much of stylesheet.ily from ScoreTemplate.py.)
 
-27. If parts will be produced:
+28. If parts will be produced:
 
         Copy existing parts.ily with (yy > cp).
         Edit parts.ily by hand.
 
     Probably no editing will be required.
 
-28. Test and commit:
+29. Test and commit:
 
     Run (dt).
 
@@ -265,9 +269,9 @@
 
     "Defined score template, instruments and stylesheet."
 
-29. Edit stages.txt and define score stages verbally.
+30. Edit stages.txt and define score stages verbally.
 
-30. Create all segments with yet-to-be-implemented (gg > setup).
+31. Create all segments with yet-to-be-implemented (gg > setup).
 
     To define 'name' by hand:
 
@@ -284,7 +288,7 @@
 
     NOTE: change 'segment_introduction' to 'segment__introduction', if needed.
 
-31. Define stub version of first segment.
+32. Define stub version of first segment.
 
     Go to (%introduction).
 
@@ -312,7 +316,7 @@
 
     Check (lpg) to make sure no errors or warnings appear in LilyPong log.
     
-32. Define stub version of nonfirst segment.
+33. Define stub version of nonfirst segment.
 
     Go to (%A).
 
@@ -338,7 +342,7 @@
 
     Check (lpg) to make sure no errors or warnings appear in LilyPong log.
 
-33. Build stub version of score with yet-to-be-implemented (bb > setup).
+34. Build stub version of score with yet-to-be-implemented (bb > setup).
 
     (Until then: 
         !trash assets
@@ -357,7 +361,7 @@
 
     Check footers on pages two and greater; edit (@sty) as necessary.
 
-34. Go to score directory with (ss).
+35. Go to score directory with (ss).
 
     Run (dt).
 
@@ -367,19 +371,19 @@
 
     Quit the IDE.
 
-35. In the terminal, change to baca package with (cdb).
+36. In the terminal, change to baca package with (cdb).
 
     Run 'ajv doctest; py.test -rf'.
 
     Commit changes to baca package.
 
-36. Change to _docs package with (cds > cd _docs).
+37. Change to _docs package with (cds > cd _docs).
 
     Run build_scores_api.py.
 
     Commit changes to _docs package: "Rebuilt docs."
 
-37. Change to the abjad directory.
+38. Change to the abjad directory.
 
     Run "ajv api -M; ajv doctest; py.test -rf".
 
