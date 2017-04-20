@@ -94,43 +94,31 @@
 
     Decide the name of the score package.
 
-11. Use IDE (new) to create the score package.
+11. Use IDE `(new)` to create the score package.
+
     IDE supplies title and year metadata.
 
-    [TODO: include 'composer' metadata automatically score __metadata__py.]
+    [TODO: include 'composer' metadata automatically.]
 
-12. Edit score metadata by hand with (meta).
-    For example:
+12. Add catalog number and forces tag to score metadata by hand with `(meta)`:
 
         metadata = abjad.datastructuretools.TypedOrderedDict(
             [
                 ('catalog_number', 'AWN-015'),
                 ('composer', 'Ba\xc4\x8da'), # TODO: include automatically
                 ('forces_tagline', 'for eight players'),
-                ('paper_dimensions', '17 x 11 in'), # remove
-                ('price', '\\$80 / \\euro 72'), # remove
                 ('title', 'Fabergé Investigations'),
                 ('year', 2016),
                 ]
             )
 
-    [TODO: remove paper dimensions.]
-
-    [TODO: remove price.]
-
-    NOTE: score title will note yet appear in IDE main screen output.
-
-13. Quit the IDE.
-
-    Edit ~/.profile and add score package navigation aliases.
-
-    For example:
+13. Quit the IDE. Edit `~/.profile` and add score package navigation aliases:
 
         export FABERGE=$SCORES/faberge
         alias fabx="clear; cd $FABERGE/faberge"
         alias fab="fabx; start-abjad-ide fab"
 
-    Quit the terminal. Restart the terminal.
+    Quit and restart the terminal.
 
 14. Change to score package score directory in all three terminal windows.
 
