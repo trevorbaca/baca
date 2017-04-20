@@ -2,32 +2,102 @@
 
         Apple menu > App Store ... > Updates
 
-2.  Change to abjad directory:
+2.  Check status:
+
+        pull_all
+
+        (st*)
+
+3.  Run tests under Python 3:
+
+        workon abjad3
+
+    Change to the abjad directory:
+
+        abjad api -M; ajv doctest; py.test -rf; git st
+        
+    Change to the experimental directory:
+
+        abjad api -M; ajv doctest; py.test -rf; git st
+
+    Change to the IDE diretory:
+
+        abjad api -M; ajv doctest; py.test -rf; git st
+
+    Change to the Bača directory:
+
+        make_baca_api.py; ajv doctest; py.test -rf; git st
+
+4.  Run tests under Python 2:
+
+        workon abjad2
+
+    Change to the abjad directory:
+
+        abjad api -M; ajv doctest; py.test -rf; git st
+        
+    Change to the experimental directory:
+
+        abjad api -M; ajv doctest; py.test -rf; git st
+
+    Change to the IDE diretory:
+
+        abjad api -M; ajv doctest; py.test -rf; git st
+
+    Change to the Bača directory:
+
+        make_baca_api.py; ajv doctest; py.test -rf; git st
+
+5.  Change back to Python 3:
+
+        workon abjad3
+
+6.  Update Abjad.
+
+    Change back to the Abjad directory:
 
         pip install -e .
 
-        ajv api -M; ajv doctest; py.test -rf
+        ajv api -M; ajv doctest; py.test -rf; git st
 
     Change to the experimental directory:
 
-        ajv api -X; ajv doctest; py.test -rf
+        ajv api -X; ajv doctest; py.test -rf; git st
 
-    Change to the IDE directory:
+7.  Update the IDE.
+
+    Change back to the IDE directory:
 
         pip install -e .
 
-        ajv api -I; ajv doctest; py.test -rf
+        ajv api -I; ajv doctest; py.test -rf; git st
 
-3.  Decide the title of the score.
+8.  Update Bača.
+
+    Change to Bača directory:
+
+        git pull
+
+        make_baca_api.py; ajv doctest; py.test -rf; git st
+
+9.  Test all scores:
+
+    Start IDE. For every score:
+
+        (gg > pdfm*)
+
+        (tests)
+
+10. Decide the title of the score.
 
     Decide the name of the score package.
 
-4.  Use IDE (new) to create the score package.
+11. Use IDE (new) to create the score package.
     IDE supplies title and year metadata.
 
     [TODO: include 'composer' metadata automatically score __metadata__py.]
 
-5.  Edit score metadata by hand with (meta).
+12. Edit score metadata by hand with (meta).
     For example:
 
         metadata = abjad.datastructuretools.TypedOrderedDict(
@@ -48,7 +118,7 @@
 
     NOTE: score title will note yet appear in IDE main screen output.
 
-6.  Quit the IDE.
+13. Quit the IDE.
 
     Edit ~/.profile and add score package navigation aliases.
 
@@ -60,7 +130,7 @@
 
     Quit the terminal. Restart the terminal.
 
-7.  Change to score package score directory in all three terminal windows.
+14. Change to score package score directory in all three terminal windows.
 
     Save terminal windows as a group.
 
@@ -68,19 +138,19 @@
 
     Restart the terminal.
 
-8.  Start the IDE at new score. For example: "fab".
+15. Start the IDE at new score. For example: "fab".
 
     Create new to-do.txt file with (ee > new > to-do.txt). 
 
-9.  Create new stages.txt file with (ee > new > stages.txt).
+16. Create new stages.txt file with (ee > new > stages.txt).
 
-10. Edit stages.txt and define score stages verbally.
+17. Edit stages.txt and define score stages verbally.
 
     Commit with (ci): "Started new score."
 
     [TODO: does full score title appear in IDE after commit?]
 
-11. TODO: update abjad/.../example_score/tools/ScoreTemplate.py.
+18. TODO: update abjad/.../example_score/tools/ScoreTemplate.py.
 
     Remove 'from abjad import Score, Staff, Voice'.
 
@@ -88,7 +158,7 @@
 
     Use 'import abjad' instead.
 
-12. TODO: update abjad/.../example_score/tools/SegmentMaker.py.
+19. TODO: update abjad/.../example_score/tools/SegmentMaker.py.
 
     Remove 'from abjad.tools import abctools'.
 
@@ -96,7 +166,7 @@
     
     Use 'import abjad' instead.
 
-13. Copy an existing score template with (oo > cp).
+20. Copy an existing score template with (oo > cp).
 
     Edit ScoreTemplate.py by hand.
 
@@ -106,7 +176,7 @@
 
     Run (dt).
 
-14. Copy an existing instruments package with (mm > cp).
+21. Copy an existing instruments package with (mm > cp).
 
     Edit instruments/definition.py by hand.
 
@@ -116,7 +186,7 @@
 
     Eventually run (pdfm).
 
-15. Copy an existing tempi package with (mm > cp).
+22. Copy an existing tempi package with (mm > cp).
 
     Edit tempi/definition.py by hand.
 
@@ -126,7 +196,7 @@
 
     Eventually run (pdfm).
 
-16. If required copy an existing time signatures package with (mm > cp).
+23. If required copy an existing time signatures package with (mm > cp).
 
     Edit time_signatures/definition.py by hand.
 
@@ -134,11 +204,11 @@
 
     Eventually run (pdfm).
 
-17. Change to the stylesheets directory with (yy).
+24. Change to the stylesheets directory with (yy).
 
     Leave IDE-generated nonfirst-segment.ily as is.
 
-18. Copy an existing default-instrument-names.ily with (yy > cp).
+25. Copy an existing default-instrument-names.ily with (yy > cp).
 
     Edit default-instrument-names.ily by hand.
 
@@ -152,7 +222,7 @@
 
     (Probably IDE can create default-instrument-names.ily automatically.)
 
-19. Replace IDE-generated stylesheet.ily with existing stylesheet.ily.
+26. Replace IDE-generated stylesheet.ily with existing stylesheet.ily.
 
     Copy existing stylesheet.ily with (yy > cp).
 
@@ -170,14 +240,14 @@
 
     (Eventually create much of stylesheet.ily from ScoreTemplate.py.)
 
-20. If parts will be produced:
+27. If parts will be produced:
 
         Copy existing parts.ily with (yy > cp).
         Edit parts.ily by hand.
 
     Probably no editing will be required.
 
-19. Copy existing abbreviations file with (mm > cp).
+26. Copy existing abbreviations file with (mm > cp).
 
     Edit __abbreviations__.py by hand.
 
@@ -193,7 +263,7 @@
 
     "Defined score template, instruments and stylesheet."
 
-20. Create all segments with yet-to-be-implemented (gg > setup).
+27. Create all segments with yet-to-be-implemented (gg > setup).
 
     To define 'name' by hand:
 
@@ -210,7 +280,7 @@
 
     NOTE: change 'segment_introduction' to 'segment__introduction', if needed.
 
-22. Define stub version of first segment.
+29. Define stub version of first segment.
 
     Go to (%introduction).
 
@@ -238,7 +308,7 @@
 
     Check (lpg) to make sure no errors or warnings appear in LilyPong log.
     
-23. Define stub version of nonfirst segment.
+30. Define stub version of nonfirst segment.
 
     Go to (%A).
 
@@ -264,7 +334,7 @@
 
     Check (lpg) to make sure no errors or warnings appear in LilyPong log.
 
-24. Build stub version of score with yet-to-be-implemented (bb > setup).
+31. Build stub version of score with yet-to-be-implemented (bb > setup).
 
     (Until then: 
         !trash assets
@@ -283,7 +353,7 @@
 
     Check footers on pages two and greater; edit (@sty) as necessary.
 
-25. Go to score directory with (ss).
+32. Go to score directory with (ss).
 
     Run (dt).
 
@@ -293,19 +363,19 @@
 
     Quit the IDE.
 
-26. In the terminal, change to baca package with (cdb).
+33. In the terminal, change to baca package with (cdb).
 
     Run 'ajv doctest; py.test -rf'.
 
     Commit changes to baca package.
 
-27. Change to _docs package with (cds > cd _docs).
+34. Change to _docs package with (cds > cd _docs).
 
     Run build_scores_api.py.
 
     Commit changes to _docs package: "Rebuilt docs."
 
-28. Change to the abjad directory.
+35. Change to the abjad directory.
 
     Run "ajv api -M; ajv doctest; py.test -rf".
 
