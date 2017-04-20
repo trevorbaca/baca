@@ -8,6 +8,8 @@
 
         (st*)
 
+        (up*)
+
 3.  Run tests under Python 3:
 
         workon abjad3
