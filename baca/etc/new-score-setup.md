@@ -2,7 +2,7 @@
 
         Apple menu > App Store ... > Updates
 
-3.  Check status:
+2.  Check status:
 
         pull_all
 
@@ -162,37 +162,19 @@
 
     Use window group when terminal starts.
 
-    Restart the terminal.
+    Quit and restart the terminal.
 
-19. Start the IDE at new score.
+    Start the IDE at new score.
 
-    Create new to-do.md file with `(ee > new > to-do.md)`. 
+19. Make etc files:
 
-20. Create new stages.md file with `(ee > new > stages.md)`.
+    Make to-do.md file with `(ee > new > to-do.md)`. 
 
-21. Commit with `(ci)`: "Started new score."
+    Make stages.md file with `(ee > new > stages.md)`.
 
-    [TODO: does full score title appear in IDE after commit?]
+    Commit.
 
-22. Edit stages.txt and define score stages verbally.
-
-23. TODO: update abjad/.../example_score/tools/ScoreTemplate.py.
-
-    Remove 'from abjad import Score, Staff, Voice'.
-
-    Remove 'from abjad.tools import abctools'.
-
-    Use 'import abjad' instead.
-
-24. TODO: update abjad/.../example_score/tools/SegmentMaker.py.
-
-    Remove 'from abjad.tools import abctools'.
-
-    Remove 'from abjad.tools import lilypondfiletools'.
-    
-    Use 'import abjad' instead.
-
-25. Copy an existing score template with (oo > cp).
+20. Copy an existing score template with (oo > cp).
 
     Edit ScoreTemplate.py by hand.
 
@@ -202,7 +184,7 @@
 
     Run (dt).
 
-26. Copy an existing instruments package with (mm > cp).
+21. Copy an existing instruments package with (mm > cp).
 
     Edit instruments/definition.py by hand.
 
@@ -212,7 +194,7 @@
 
     Eventually run (pdfm).
 
-27. Copy an existing tempi package with (mm > cp).
+22. Copy an existing tempi package with (mm > cp).
 
     Edit tempi/definition.py by hand.
 
@@ -222,7 +204,7 @@
 
     Eventually run (pdfm).
 
-28. If required copy an existing time signatures package with (mm > cp).
+23. If required copy an existing time signatures package with (mm > cp).
 
     Edit time_signatures/definition.py by hand.
 
@@ -230,11 +212,11 @@
 
     Eventually run (pdfm).
 
-29. Change to the stylesheets directory with (yy).
+24. Change to the stylesheets directory with (yy).
 
     Leave IDE-generated nonfirst-segment.ily as is.
 
-30. Copy an existing default-instrument-names.ily with (yy > cp).
+25. Copy an existing default-instrument-names.ily with (yy > cp).
 
     Edit default-instrument-names.ily by hand.
 
@@ -248,7 +230,7 @@
 
     (Probably IDE can create default-instrument-names.ily automatically.)
 
-31. Replace IDE-generated stylesheet.ily with existing stylesheet.ily.
+26. Replace IDE-generated stylesheet.ily with existing stylesheet.ily.
 
     Copy existing stylesheet.ily with (yy > cp).
 
@@ -266,20 +248,14 @@
 
     (Eventually create much of stylesheet.ily from ScoreTemplate.py.)
 
-32. If parts will be produced:
+27. If parts will be produced:
 
         Copy existing parts.ily with (yy > cp).
         Edit parts.ily by hand.
 
     Probably no editing will be required.
 
-31. Copy existing abbreviations file with (mm > cp).
-
-    Edit __abbreviations__.py by hand.
-
-    Define voices in score order.
-
-    Run (!python __abbreviations__.py).
+28. Test and commit:
 
     Run (dt).
 
@@ -289,7 +265,9 @@
 
     "Defined score template, instruments and stylesheet."
 
-32. Create all segments with yet-to-be-implemented (gg > setup).
+29. Edit stages.txt and define score stages verbally.
+
+30. Create all segments with yet-to-be-implemented (gg > setup).
 
     To define 'name' by hand:
 
@@ -306,7 +284,7 @@
 
     NOTE: change 'segment_introduction' to 'segment__introduction', if needed.
 
-34. Define stub version of first segment.
+31. Define stub version of first segment.
 
     Go to (%introduction).
 
@@ -334,7 +312,7 @@
 
     Check (lpg) to make sure no errors or warnings appear in LilyPong log.
     
-35. Define stub version of nonfirst segment.
+32. Define stub version of nonfirst segment.
 
     Go to (%A).
 
@@ -360,7 +338,7 @@
 
     Check (lpg) to make sure no errors or warnings appear in LilyPong log.
 
-36. Build stub version of score with yet-to-be-implemented (bb > setup).
+33. Build stub version of score with yet-to-be-implemented (bb > setup).
 
     (Until then: 
         !trash assets
@@ -379,7 +357,7 @@
 
     Check footers on pages two and greater; edit (@sty) as necessary.
 
-37. Go to score directory with (ss).
+34. Go to score directory with (ss).
 
     Run (dt).
 
@@ -389,19 +367,19 @@
 
     Quit the IDE.
 
-38. In the terminal, change to baca package with (cdb).
+35. In the terminal, change to baca package with (cdb).
 
     Run 'ajv doctest; py.test -rf'.
 
     Commit changes to baca package.
 
-39. Change to _docs package with (cds > cd _docs).
+36. Change to _docs package with (cds > cd _docs).
 
     Run build_scores_api.py.
 
     Commit changes to _docs package: "Rebuilt docs."
 
-40. Change to the abjad directory.
+37. Change to the abjad directory.
 
     Run "ajv api -M; ajv doctest; py.test -rf".
 
