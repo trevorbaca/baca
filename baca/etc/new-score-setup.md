@@ -1,20 +1,20 @@
 0.  Apply any OS updates with (Apple menu > App Store ... > Updates).
 
-1.  Change to abjad directory.
+1.  Change to abjad directory:
 
-    Run "pip install -e .".
+        Run "pip install -e .".
 
-    Run "ajv api -M; ajv doctest; py.test -rf".
+        Run "ajv api -M; ajv doctest; py.test -rf".
 
-    Change to the experimental directory.
+    Change to the experimental directory:
 
-    Run "ajv api -X; ajv doctest; py.test -rf".
+        Run "ajv api -X; ajv doctest; py.test -rf".
 
-    Change to the IDE directory.
+    Change to the IDE directory:
 
-    Run "pip install -e .".
+        Run "pip install -e .".
 
-    Run "ajv api -I; ajv doctest; py.test -rf".
+        Run "ajv api -I; ajv doctest; py.test -rf".
 
 2.  Decide the title of the score.
     Decide the name of the score package.
