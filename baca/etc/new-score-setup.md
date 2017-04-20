@@ -96,11 +96,7 @@
 
 11. Use IDE `(new)` to create the score package.
 
-    IDE supplies title and year metadata.
-
-    [TODO: include 'composer' metadata automatically.]
-
-12. Add catalog number and forces tag to score metadata by hand with `(meta)`:
+12. Add catalog number and forces tag to score metadata:
 
         metadata = abjad.datastructuretools.TypedOrderedDict(
             [
