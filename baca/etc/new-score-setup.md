@@ -96,12 +96,14 @@
 
 11. Use IDE `(new)` to create the score package.
 
-12. Add catalog number and forces tag to score metadata:
+    IDE includes composer, title and year metadata automatically.
+
+12. Add catalog number and forces tagline metadata with `(meta)`:
 
         metadata = abjad.datastructuretools.TypedOrderedDict(
             [
                 ('catalog_number', 'AWN-015'),
-                ('composer', 'Ba\xc4\x8da'), # TODO: include automatically
+                ('composer', 'Bača'),
                 ('forces_tagline', 'for eight players'),
                 ('title', 'Fabergé Investigations'),
                 ('year', 2016),
