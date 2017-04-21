@@ -150,6 +150,20 @@
 
     Change outer directory and inner directory.
 
+    Change score package __init__.py:
+
+        from stirrings_still import tools
+        from stirrings_still import materials
+        from stirrings_still import segments
+
+    To:
+
+        from stirrings import tools
+        from stirrings import materials
+        from stirrings import segments
+
+    TODO: teach IDE to execute last step automatically.
+
 18. Quit the IDE. Edit `~/.profile` and add score package navigation aliases:
 
         export STIRRINGS=$SCORES/stirrings
