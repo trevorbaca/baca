@@ -5,4 +5,4 @@ bača
 
 Trevor Bača's Abjad library.
 
-Requires Abjad and LilyPond.
+Requires Abjad (with Python 3.x) and LilyPond.
