@@ -20,6 +20,7 @@ from baca.tools.SegmentMaker import SegmentMaker
 from baca.tools.SelectorLibrary import SelectorLibrary
 from baca.tools.Sequence import Sequence
 from baca.tools.Sequence import _sequence as sequence
+from baca.tools import *
 
 def _import_static_methods(class_):
     for name in dir(class_):
