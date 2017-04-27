@@ -5,8 +5,7 @@ body='{
 
 # TRAVIS LIMITS TO 10 BUILDS AT A TIME
 for repo in \
-    akasha aklin archipel betoerung cary \
-    desir dornen faberge hijinks huitzil
+    sekka stirrings traiettorie
 do
     curl -s -X POST \
     -H "Content-Type: application/json" \

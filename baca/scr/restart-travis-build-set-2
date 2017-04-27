@@ -5,8 +5,8 @@ body='{
 
 # TRAVIS LIMITS TO 10 BUILDS AT A TIME
 for repo in \
-    imaginaire ins-wasser khamr krummzeit lidercfeny \
-    mraz myrkr recursif sekka traiettorie
+    ikribu imaginaire ins-wasser khamr krummzeit \
+    lidercfeny manifolds mraz myrkr recursif
 do
     curl -s -X POST \
     -H "Content-Type: application/json" \
