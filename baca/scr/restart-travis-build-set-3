@@ -5,7 +5,8 @@ body='{
 
 # TRAVIS LIMITS TO 10 BUILDS AT A TIME
 for repo in \
-    sekka stirrings traiettorie baca scores-directory
+    recursif sekka stirrings traiettorie \
+    baca scores-directory
 do
     curl -s -X POST \
     -H "Content-Type: application/json" \
