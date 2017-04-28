@@ -595,18 +595,18 @@ class Division(abjad.NonreducedFraction):
 
         my_timespan = self._to_timespan()
         expr_timespan = argument._to_timespan()
-        inventory = my_timespan - expr_timespan
+        timespans = my_timespan - expr_timespan
 
         negate_result = False
-        if len(inventory) == 0:
+        if len(timespans) == 0:
             #message = 'subtraction destroys division.'
             #raise Exception(message)
-            inventory = expr_timespan - my_timespan
+            timespans = expr_timespan - my_timespan
             negate_result = True
 
-        assert 0 < len(inventory), repr(inventory)
-        if len(inventory) == 1:
-            result_timespan = inventory[0]
+        assert 0 < len(timespans), repr(timespans)
+        if len(timespans) == 1:
+            result_timespan = timespans[0]
             duration = result_timespan.duration
             nonreduced_fraction = duration.with_denominator(self.denominator)
             pair = nonreduced_fraction.pair

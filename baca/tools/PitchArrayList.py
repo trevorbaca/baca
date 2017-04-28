@@ -2,8 +2,8 @@
 import abjad
 
 
-class PitchArrayInventory(abjad.datastructuretools.TypedList):
-    r'''Pitch array inventory.
+class PitchArrayList(abjad.datastructuretools.TypedList):
+    r'''Pitch array list.
 
     ::
 
@@ -12,7 +12,7 @@ class PitchArrayInventory(abjad.datastructuretools.TypedList):
 
     ..  container:: example
 
-        A pitch array inventory:
+        A pitch array list:
 
         ::
 
@@ -29,12 +29,12 @@ class PitchArrayInventory(abjad.datastructuretools.TypedList):
         ::
 
             >>> arrays = [array_1, array_2]
-            >>> inventory = baca.tools.PitchArrayInventory(arrays)
+            >>> arrays = baca.tools.PitchArrayList(arrays)
 
         ::
 
-            >>> f(inventory)
-            baca.tools.PitchArrayInventory(
+            >>> f(arrays)
+            baca.tools.PitchArrayList(
                 [
                     baca.tools.PitchArray(
                         rows=(
@@ -126,7 +126,7 @@ class PitchArrayInventory(abjad.datastructuretools.TypedList):
     ### PUBLIC METHODS ###
 
     def to_score(self):
-        r'''Makes score from pitch arrays in inventory.
+        r'''Makes score from pitch arrays.
 
         ..  container:: example
 
@@ -145,11 +145,11 @@ class PitchArrayInventory(abjad.datastructuretools.TypedList):
             ::
 
                 >>> arrays = [array_1, array_2]
-                >>> inventory = baca.tools.PitchArrayInventory(arrays)
+                >>> arrays = baca.tools.PitchArrayList(arrays)
 
             ::
 
-                >>> score = inventory.to_score()
+                >>> score = arrays.to_score()
                 >>> show(score) # doctest: +SKIP
 
             ..  doctest::

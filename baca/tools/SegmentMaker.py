@@ -1273,7 +1273,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             if tempo == effective_tempo:
                 break
         else:
-            message = 'can not find {!r} in tempo inventory {!r}.'
+            message = 'can not find {!r} in tempi {!r}.'
             message = message.format(tempo, tempi)
             raise Exception(message)
         return tempo_name
@@ -6999,7 +6999,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         ..  note:: Build example with transposing instrument.
 
         ..  note:: Score package must currently be passed in for transposition
-            to work. Eventually instrument inventory will be passed instead.
+            to work. Eventually instrument list will be passed instead.
 
         Defaults to none.
 

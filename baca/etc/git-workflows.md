@@ -11,15 +11,15 @@ hosted at https://github.com/Abjad/abjad.
 
 CONTENTS:
 
-    * Command inventory
+    * Command index
     * Rebasing on master
     * Single-commit workflow (changes already made)
     * Single-commit workflow (changes not yet made)
     * Setting up a development branch
     * Cherry-picking from development to feature branches
 
-Command inventory
-=================
+Command index
+=============
 
 Git commands used in these workflows:
 
@@ -229,8 +229,8 @@ during this workflow.
         .../build/letter-portrait/music.pdf                 | Bin 39687 -> 39687 bytes
         .../build/letter-portrait/score.pdf                 | Bin 78993 -> 78992 bytes
         .../materials/magic_numbers/illustration.pdf        | Bin 19337 -> 19336 bytes
-        .../pitch_range_inventory/illustration.pdf          | Bin 10592 -> 10592 bytes
-        .../materials/tempo_inventory/illustration.pdf      | Bin 24265 -> 24265 bytes
+        .../pitch_ranges/illustration.pdf          | Bin 10592 -> 10592 bytes
+        .../materials/tempos/illustration.pdf      | Bin 24265 -> 24265 bytes
         .../segments/segment_01/illustration.pdf            | Bin 35806 -> 35806 bytes
         .../segments/segment_02/illustration.pdf            | Bin 34607 -> 34607 bytes
         .../segments/segment_03/illustration.pdf            | Bin 34658 -> 34658 bytes
@@ -392,8 +392,8 @@ during this workflow.
         .../build/letter-portrait/music.pdf                 | Bin 39687 -> 39687 bytes
         .../build/letter-portrait/score.pdf                 | Bin 78993 -> 78992 bytes
         .../materials/magic_numbers/illustration.pdf        | Bin 19337 -> 19336 bytes
-        .../pitch_range_inventory/illustration.pdf          | Bin 10592 -> 10592 bytes
-        .../materials/tempo_inventory/illustration.pdf      | Bin 24265 -> 24265 bytes
+        .../pitch_ranges/illustration.pdf                   | Bin 10592 -> 10592 bytes
+        .../materials/tempos/illustration.pdf               | Bin 24265 -> 24265 bytes
         .../segments/segment_01/illustration.pdf            | Bin 35806 -> 35806 bytes
         .../segments/segment_02/illustration.pdf            | Bin 34607 -> 34607 bytes
         .../segments/segment_03/illustration.pdf            | Bin 34658 -> 34658 bytes
