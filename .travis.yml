@@ -3,13 +3,14 @@ language: python
 python:
     - 3.5
 
-sudo: false
-
 before_install:
-    - export PATH=/home/travis/bin:$PATH
-    - wget -q http://download.linuxaudio.org/lilypond/binaries/linux-64/lilypond-2.19.50-1.linux-64.sh
-    - sh lilypond-2.19.50-1.linux-64.sh --batch
-    - git clone https://github.com/Abjad/abjad.git; cd abjad; git checkout trevor/dev; pip install -e .[development]
+    - LILYPOND_SCRIPT=lilypond-2.19.59-1.linux-64.sh
+    - LILYPOND_URL=http://download.linuxaudio.org/lilypond/binaries/linux-64
+    - LILYPOND_URL=$LILYPOND_URL/$LILYPOND_SCRIPT
+    - wget -q $LILYPOND_URL
+    - sudo sh $LILYPOND_SCRIPT --batch
+    - git clone https://github.com/Abjad/abjad.git;
+    - cd abjad; git checkout trevor/dev; pip install -e .[development]
     - echo `git branch`
     - cd ..
     - pip install --upgrade pip
