@@ -85,3 +85,19 @@ virtual environments afterwards.
 
         (abjad3) ✔ ~/abjad [trevor/dev|✔] 
         13:03 $ 
+
+7.  Use pip to install Bača-specific Python packages:
+
+        (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
+        13:06 $ pip install inflect
+        Collecting inflect
+        Downloading inflect-0.2.5-py2.py3-none-any.whl (58kB)
+            100% |████████████████████████████████| 61kB 1.1MB/s 
+        Installing collected packages: inflect
+        Successfully installed inflect-0.2.5
+
+    No list of these currently exists.
+
+8.  Rebuild Bača API to test:
+
+        make_baca_api.py
