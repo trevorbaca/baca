@@ -63,3 +63,25 @@ virtual environments afterwards.
         (abjad3) ✔ ~/Desktop 
         12:56 $ python --version
         Python 3.5.3
+
+6.  Reinstall Abjad from package root directory in the newly reestablished
+    virtual environment:
+
+        (abjad3) ✔ ~/abjad [trevor/dev|✔] 
+        13:02 $ pip install -e .[development,ipython]
+        Obtaining file:///Users/trevorbaca/abjad
+        Collecting ply (from Abjad==2.20)
+        Requirement already satisfied: six in /Users/trevorbaca/.virtualenvs/abjad3/lib/python3.5/site-packages (from Abjad==2.20)
+        Collecting pytest>=3.0.0 (from Abjad==2.20)
+        Using cached pytest-3.0.7-py2.py3-none-any.whl
+        < ... snip ... >
+        Stored in directory: /Users/trevorbaca/Library/Caches/pip/wheels/d4/01/68/49055c80b9f01ccb49241e73c8019628605064730941d70b56
+        Successfully built PyPDF2 simplegeneric MarkupSafe tornado pandocfilters
+        Installing collected packages: ply, py, pytest, requests, MarkupSafe, Jinja2, pytz, babel, snowballstemmer, alabaster, imagesize, docutils, Pygments, sphinx, sphinx-rtd-theme, PyPDF2, wcwidth, prompt-toolkit, decorator, ipython-genutils, traitlets, ptyprocess, pexpect, appnope, simplegeneric, jedi, pickleshare, ipython, tornado, jupyter-core, python-dateutil, pyzmq, jupyter-client, ipykernel, jupyter-console, mistune, jsonschema, nbformat, entrypoints, webencodings, html5lib, bleach, testpath, pandocfilters, nbconvert, terminado, notebook, widgetsnbextension, ipywidgets, qtconsole, jupyter, Abjad
+        Found existing installation: Abjad 2.20
+            Not uninstalling abjad at /Users/trevorbaca/abjad, outside environment /Users/trevorbaca/.virtualenvs/abjad3/bin/..
+        Running setup.py develop for Abjad
+        Successfully installed Abjad Jinja2-2.9.6 MarkupSafe-1.0 PyPDF2-1.26.0 Pygments-2.2.0 alabaster-0.7.10 appnope-0.1.0 babel-2.4.0 bleach-2.0.0 decorator-4.0.11 docutils-0.13.1 entrypoints-0.2.2 html5lib-0.999999999 imagesize-0.7.1 ipykernel-4.6.1 ipython-6.0.0 ipython-genutils-0.2.0 ipywidgets-6.0.0 jedi-0.10.2 jsonschema-2.6.0 jupyter-1.0.0 jupyter-client-5.0.1 jupyter-console-5.1.0 jupyter-core-4.3.0 mistune-0.7.4 nbconvert-5.1.1 nbformat-4.3.0 notebook-5.0.0 pandocfilters-1.4.1 pexpect-4.2.1 pickleshare-0.7.4 ply-3.10 prompt-toolkit-1.0.14 ptyprocess-0.5.1 py-1.4.33 pytest-3.0.7 python-dateutil-2.6.0 pytz-2017.2 pyzmq-16.0.2 qtconsole-4.3.0 requests-2.13.0 simplegeneric-0.8.1 snowballstemmer-1.2.1 sphinx-1.5.5 sphinx-rtd-theme-0.2.4 terminado-0.6 testpath-0.3 tornado-4.5.1 traitlets-4.3.2 wcwidth-0.1.7 webencodings-0.5.1 widgetsnbextension-2.0.0
+
+        (abjad3) ✔ ~/abjad [trevor/dev|✔] 
+        13:03 $ 
