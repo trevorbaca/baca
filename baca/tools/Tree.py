@@ -421,7 +421,7 @@ class Tree(abjad.abctools.AbjadObject):
 
         Returns Graphviz graph.
         '''
-        graph = abjad.documentationtools.GraphvizGraph(
+        graph = abjad.graphtools.GraphvizGraph(
             attributes={
                 'bgcolor': 'transparent',
                 'truecolor': True,
@@ -430,7 +430,7 @@ class Tree(abjad.abctools.AbjadObject):
             )
         node_mapping = {}
         for node in self._iterate_depth_first():
-            graphviz_node = abjad.documentationtools.GraphvizNode()
+            graphviz_node = abjad.graphtools.GraphvizNode()
             if list(node):
                 graphviz_node.attributes['shape'] = 'circle'
                 graphviz_node.attributes['label'] = ''
@@ -440,7 +440,7 @@ class Tree(abjad.abctools.AbjadObject):
             graph.append(graphviz_node)
             node_mapping[node] = graphviz_node
             if node._parent is not None:
-                abjad.documentationtools.GraphvizEdge().attach(
+                abjad.graphtools.GraphvizEdge().attach(
                     node_mapping[node._parent],
                     node_mapping[node],
                     )
