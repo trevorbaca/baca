@@ -1,3 +1,12 @@
+### Top-level Git ignore file for all Bača score packages.
+###
+### Symlink to this file with ...
+###
+###     ln -s ~/baca/baca/dotfiles/gitignore ~/Scores/my_score/.gitignore
+###
+### ... or equivalent.
+
+# Byte-compiled objects
 *.py[cod]
 .cache
 
