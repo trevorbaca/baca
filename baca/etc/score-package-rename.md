@@ -48,3 +48,21 @@ STEPS:
     13. (tests) to rerun tests.
 
     14. make_baca_api.py to rebuild API.
+
+    15. Edit baca/scr/restart-all-travis-builds.
+
+    16. Resync Travis: 
+        
+        Navigate to https://travis-ci.org/;
+
+        Click on username link in upper right corner;
+
+        Click "Accounts";
+
+        Click "Sync account";
+
+        Return to https://travis-ci.org/ and refresh page;
+
+        Click tab for renamed package;
+
+        Click "Restart build".
