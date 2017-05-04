@@ -1,5 +1,5 @@
-Score repository rename
-=======================
+Score package rename
+====================
 
 OBJECTIVE: rename a (relatively recently created) score package:
 
