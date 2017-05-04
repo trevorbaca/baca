@@ -9,35 +9,42 @@ OBJECTIVE: rename a (relatively recently created) score package:
 
 STEPS:
 
-1.  Navigate to GitHub repository page
-    (eg, https://github.com/trevorbaca/stirrings), click "Settings",
-    enter new name in the "Repository name" textbox and click the "Rename"
-    button.
+    1.  Navigate to GitHub repository page.
 
-2.  Start IDE and use `rename (ren)` at main menu.
+        Example: https://github.com/trevorbaca/stirrings.
+        
+        Click "Settings".
 
-3.  Navigate to renamed score package.
+        Enter new name in the "Repository name" textbox.
+        
+        Click the "Rename" button.
 
-4.  `(ss > meta)` to adjust title metadata (if necessary).
+    2.  Start IDE and use `rename (ren)` at main menu.
 
-5.  `(ww > travis)` to change PACKAGE environment variable.
-    TODO: Teach IDE to handle this step during package rename.
+    3.  Navigate to renamed score package.
 
-6.  `(ww > read)` to change build status Travis paths in README file.
-    TODO: Teach IDE to handle this step during package rename.
+    4.  `(ss > meta)` to adjust title metadata (if necessary).
 
-7.  `(ci)` to commit.
+    5.  `(ww > travis)` to change PACKAGE environment variable.
 
-8.  `(als)` to change score alias.
+        TODO: Teach IDE to handle this step during package rename.
 
-9.  `(vipf)` to change score package environment variable.
+    6.  `(ww > read)` to change build status Travis paths in README file.
 
-10. `(vipf)` to change PYTHONPATH environment variable.
+        TODO: Teach IDE to handle this step during package rename.
 
-11. Quit and restart terminal.
+    7.  `(ci)` to commit.
 
-12. Reestablish window group in terminal (if necessary).
+    8.  `(als)` to change score alias.
 
-13. `(tests)` to rerun tests.
+    9.  `(vipf)` to change score package environment variable.
 
-14. make_baca_api.py to rebuild API.
+    10. `(vipf)` to change PYTHONPATH environment variable.
+
+    11. Quit and restart terminal.
+
+    12. Reestablish window group in terminal (if necessary).
+
+    13. `(tests)` to rerun tests.
+
+    14. make_baca_api.py to rebuild API.
