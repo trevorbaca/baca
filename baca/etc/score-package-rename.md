@@ -33,25 +33,29 @@ STEPS:
 
         TODO: Teach IDE to handle this step during package rename.
 
-    7.  (ci) to commit.
+    7.  (vim .git/config) to change [remove "origin"] url.
 
-    8.  (als) to change score alias.
+        TODO: Teach IDE to handle this step during package rename.
 
-    9.  (vipf) to change score package environment variable.
+    8.  (ci) to commit.
 
-    10. (vipf) to change PYTHONPATH environment variable.
+    9.  (als) to change score alias.
 
-    11. Quit and restart terminal.
+    10. (vipf) to change score package environment variable.
 
-    12. Reestablish window group in terminal (if necessary).
+    11. (vipf) to change PYTHONPATH environment variable.
 
-    13. (tests) to rerun tests.
+    12. Quit and restart terminal.
 
-    14. make_baca_api.py to rebuild API.
+    13. Reestablish window group in terminal (if necessary).
 
-    15. Edit baca/scr/restart-all-travis-builds.
+    14. (tests) to rerun tests.
 
-    16. Resync Travis: 
+    15. make_baca_api.py to rebuild API.
+
+    16. Edit baca/scr/restart-all-travis-builds.
+
+    17. Resync Travis: 
         
         Navigate to https://travis-ci.org/;
 
