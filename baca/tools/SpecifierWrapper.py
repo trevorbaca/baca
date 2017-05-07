@@ -17,7 +17,7 @@ class SpecifierWrapper(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> specifier_wrapper = baca.tools.SpecifierWrapper(
+            >>> specifier_wrapper = baca.SpecifierWrapper(
             ...     specifier=abjad.Dynamic('p'),
             ...     )
 

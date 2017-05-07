@@ -16,7 +16,7 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> lmr_specifier = baca.tools.LMRSpecifier()
+            >>> lmr_specifier = baca.LMRSpecifier()
 
         ::
 
@@ -261,7 +261,7 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> lmr_specifier = baca.tools.LMRSpecifier(
+                >>> lmr_specifier = baca.LMRSpecifier(
                 ...     left_counts=[1],
                 ...     left_cyclic=False,
                 ...     left_length=3,
@@ -346,7 +346,7 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> lmr_specifier = baca.tools.LMRSpecifier(
+                >>> lmr_specifier = baca.LMRSpecifier(
                 ...     left_counts=[1],
                 ...     left_cyclic=True,
                 ...     left_length=3,
@@ -463,7 +463,7 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> lmr_specifier = baca.tools.LMRSpecifier(
+                >>> lmr_specifier = baca.LMRSpecifier(
                 ...     left_length=2,
                 ...     )
 
@@ -572,7 +572,7 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> lmr_specifier = baca.tools.LMRSpecifier(
+                >>> lmr_specifier = baca.LMRSpecifier(
                 ...     middle_counts=[2],
                 ...     middle_cyclic=True,
                 ...     )
@@ -668,7 +668,7 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> lmr_specifier = baca.tools.LMRSpecifier(
+                >>> lmr_specifier = baca.LMRSpecifier(
                 ...     middle_counts=[2],
                 ...     middle_cyclic=True,
                 ...     middle_reversed=True,
@@ -764,7 +764,7 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> lmr_specifier = baca.tools.LMRSpecifier(
+                >>> lmr_specifier = baca.LMRSpecifier(
                 ...     left_length=2,
                 ...     right_length=1,
                 ...     )
@@ -842,7 +842,7 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> lmr_specifier = baca.tools.LMRSpecifier(
+                >>> lmr_specifier = baca.LMRSpecifier(
                 ...     left_length=2,
                 ...     priority=Right,
                 ...     right_length=1,
@@ -959,7 +959,7 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> lmr_specifier = baca.tools.LMRSpecifier(
+                >>> lmr_specifier = baca.LMRSpecifier(
                 ...     right_length=2,
                 ...     )
 
@@ -1030,7 +1030,7 @@ class LMRSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> lmr_specifier = baca.tools.LMRSpecifier(
+                >>> lmr_specifier = baca.LMRSpecifier(
                 ...     left_counts=[1],
                 ...     left_cyclic=False,
                 ...     right_length=2,

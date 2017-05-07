@@ -17,9 +17,9 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> specifier = baca.tools.ScopedSpecifier(
+            >>> specifier = baca.ScopedSpecifier(
             ...     ('Violin Music Voice', (1, 4)),
-            ...     baca.tools.ScorePitchCommand(
+            ...     baca.ScorePitchCommand(
             ...         source=[7, 1, 3, 4, 5, 11],
             ...         ),
             ...     )
@@ -46,19 +46,18 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
                     ),
                 )
 
-
     ..  container:: example
 
         Makes pitch specifier with compound scope:
 
         ::
 
-            >>> specifier = baca.tools.ScopedSpecifier(
-            ...     baca.tools.CompoundScope([
-            ...         baca.tools.SimpleScope('Violin Music Voice', (1, 4)),
-            ...         baca.tools.SimpleScope('Violin Music Voice', (8, 12)),
+            >>> specifier = baca.ScopedSpecifier(
+            ...     baca.CompoundScope([
+            ...         baca.SimpleScope('Violin Music Voice', (1, 4)),
+            ...         baca.SimpleScope('Violin Music Voice', (8, 12)),
             ...         ]),
-            ...     baca.tools.ScorePitchCommand(
+            ...     baca.ScorePitchCommand(
             ...         source=[7, 1, 3, 4, 5, 11],
             ...         ),
             ...     )
@@ -93,16 +92,15 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
                     ),
                 )
 
-
     ..  container:: example
 
         Makes scoped displacement specifier:
 
         ::
 
-            >>> specifier = baca.tools.ScopedSpecifier(
+            >>> specifier = baca.ScopedSpecifier(
             ...     ('Violin Music Voice', (1, 4)),
-            ...     baca.tools.OctaveDisplacementCommand(
+            ...     baca.OctaveDisplacementCommand(
             ...         displacements=[0, 0, 0, 0, 1, 1, 1, 1],
             ...         ),
             ...     )
@@ -139,8 +137,8 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
 
     def __init__(self, scope=None, specifier=None):
         if isinstance(scope, tuple):
-            scope = baca.tools.SimpleScope(*scope)
-        prototype = (baca.tools.SimpleScope, baca.tools.CompoundScope)
+            scope = baca.SimpleScope(*scope)
+        prototype = (baca.SimpleScope, baca.CompoundScope)
         if scope is not None:
             assert isinstance(scope, prototype), repr(scope)
         self._scope = scope
@@ -159,9 +157,9 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.ScopedSpecifier(
+                >>> specifier = baca.ScopedSpecifier(
                 ...     ('Violin Music Voice', (1, 4)),
-                ...     baca.tools.ScorePitchCommand(
+                ...     baca.ScorePitchCommand(
                 ...         source=[7, 1, 3, 4, 5, 11],
                 ...         ),
                 ...     )
@@ -192,9 +190,9 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.ScopedSpecifier(
+                >>> specifier = baca.ScopedSpecifier(
                 ...     ('Violin Music Voice', (1, 4)),
-                ...     baca.tools.ScorePitchCommand(
+                ...     baca.ScorePitchCommand(
                 ...         source=[7, 1, 3, 4, 5, 11],
                 ...         ),
                 ...     )

@@ -18,7 +18,7 @@ class NestCommand(abjad.abctools.AbjadObject):
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.tools.NestCommand(
+            ...     baca.NestCommand(
             ...         time_treatments=['+1/16'],
             ...         ),
             ...     abjad.rhythmmakertools.BeamSpecifier(
@@ -107,7 +107,7 @@ class NestCommand(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10, 18], [16, 15, 23]],
-            ...     baca.tools.NestCommand(
+            ...     baca.NestCommand(
             ...         time_treatments=['+1/16'],
             ...         ),
             ...     extend_beam=True,
@@ -121,9 +121,9 @@ class NestCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     spacing_specifier=baca.HorizontalSpacingCommand(
             ...         minimum_width=abjad.Duration(1, 24),
             ...         ),
             ...     time_signatures=time_signatures,
@@ -131,7 +131,7 @@ class NestCommand(abjad.abctools.AbjadObject):
             >>> specifiers = segment_maker.append_commands(
             ...     'vn',
             ...     baca.select_stages(1),
-            ...     baca.tools.RhythmSpecifier(
+            ...     baca.RhythmSpecifier(
             ...         rhythm_maker=selection,
             ...         ),
             ...     )
@@ -253,12 +253,12 @@ class NestCommand(abjad.abctools.AbjadObject):
         time_treatments=None,
         ):
         if lmr_specifier is not None:
-            prototype = baca.tools.LMRSpecifier
+            prototype = baca.LMRSpecifier
             assert isinstance(lmr_specifier, prototype)
         self._lmr_specifier = lmr_specifier
         if time_treatments is not None:
             assert isinstance(time_treatments, (list, tuple))
-            is_time_treatment = baca.tools.MusicRhythmMaker._is_time_treatment
+            is_time_treatment = baca.MusicRhythmMaker._is_time_treatment
             for time_treatment in time_treatments:
                 assert is_time_treatment(time_treatment), repr(time_treatment)
         self._time_treatments = time_treatments
@@ -275,8 +275,8 @@ class NestCommand(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.NestCommand(time_treatments=['+1/16']),
-                ...     baca.tools.RestAffixCommand(
+                ...     baca.NestCommand(time_treatments=['+1/16']),
+                ...     baca.RestAffixCommand(
                 ...         prefix=[2],
                 ...         suffix=[3],
                 ...         ),

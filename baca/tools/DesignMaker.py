@@ -17,7 +17,7 @@ class DesignMaker(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> baca.tools.DesignMaker()
+            >>> baca.DesignMaker()
             DesignMaker()
 
     '''
@@ -42,7 +42,7 @@ class DesignMaker(abjad.abctools.AbjadObject):
 
         Returns pitch-class tree.
         '''
-        design = baca.tools.PitchTree(items=self._result)
+        design = baca.PitchTree(items=self._result)
         self._check_duplicate_pitch_classes(design)
         return design
 

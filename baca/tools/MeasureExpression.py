@@ -16,7 +16,7 @@ class MeasureExpression(abjad.expressiontools.Expression):
 
         ::
 
-            >>> expression = baca.tools.MeasureExpression(2, 4)
+            >>> expression = baca.MeasureExpression(2, 4)
         
         ::
 

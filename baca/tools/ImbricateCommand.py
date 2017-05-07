@@ -34,7 +34,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
-            ...     baca.tools.ImbricateCommand(
+            ...     baca.ImbricateCommand(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
             ...         ),
@@ -164,13 +164,13 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
-            ...     baca.tools.ImbricateCommand(
+            ...     baca.ImbricateCommand(
             ...         'Voice 1',
             ...         [2, 19, 9],
             ...         baca.beam_everything(),
             ...         baca.staccati(),
             ...         ),
-            ...     baca.tools.ImbricateCommand(
+            ...     baca.ImbricateCommand(
             ...         'Voice 3',
             ...         [16, 10, 18],
             ...         baca.beam_everything(),
@@ -334,8 +334,8 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
             ...         beam_rests=True,
             ...         ),
             ...     baca.staccati(),
-            ...     baca.tools.MusicRhythmSpecifier(
-            ...         rhythm_maker=baca.tools.MusicRhythmMaker(
+            ...     baca.MusicRhythmSpecifier(
+            ...         rhythm_maker=baca.MusicRhythmMaker(
             ...             talea=abjad.rhythmmakertools.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
@@ -355,7 +355,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
-            ...     baca.tools.ImbricateCommand(
+            ...     baca.ImbricateCommand(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
             ...         baca.accents(),
@@ -554,8 +554,8 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.MusicRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
+                ...     baca.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
@@ -576,7 +576,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricateCommand(
+                ...     baca.ImbricateCommand(
                 ...         'Voice 1',
                 ...         segment,
                 ...         baca.accents(),
@@ -675,7 +675,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricateCommand(
+                ...     baca.ImbricateCommand(
                 ...         'Voice 1',
                 ...         segment,
                 ...         baca.accents(),
@@ -791,7 +791,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     [[0, 2, 10, 18], [16, 15, 23]],
-                ...     baca.tools.ImbricateCommand(
+                ...     baca.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 10],
                 ...         baca.staccati(),
@@ -806,7 +806,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     [[19, 13, 9, 8]],
-                ...     baca.tools.ImbricateCommand(
+                ...     baca.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [13, 9],
                 ...         baca.staccati(),
@@ -820,11 +820,11 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
+                >>> segment_maker = baca.SegmentMaker(
                 ...     ignore_repeat_pitch_classes=True,
                 ...     measures_per_stage=[1, 1],
-                ...     score_template=baca.tools.TwoVoiceStaffScoreTemplate(),
-                ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
+                ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
+                ...     spacing_specifier=baca.HorizontalSpacingCommand(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
@@ -832,28 +832,28 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> specifiers = segment_maker.append_commands(
                 ...     'v2',
                 ...     baca.select_stages(1),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.RhythmSpecifier(
                 ...         rhythm_maker=voice_2_selections[0],
                 ...         ),
                 ...     )
                 >>> specifiers = segment_maker.append_commands(
                 ...     'v2',
                 ...     baca.select_stages(2),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.RhythmSpecifier(
                 ...         rhythm_maker=voice_2_selections[1],
                 ...         ),
                 ...     )
                 >>> specifiers = segment_maker.append_commands(
                 ...     'v1',
                 ...     baca.select_stages(1),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.RhythmSpecifier(
                 ...         rhythm_maker=voice_1_selections[0],
                 ...         ),
                 ...     )
                 >>> specifiers = segment_maker.append_commands(
                 ...     'v1',
                 ...     baca.select_stages(2),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.RhythmSpecifier(
                 ...         rhythm_maker=voice_1_selections[1],
                 ...         ),
                 ...     )
@@ -1013,7 +1013,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricateCommand(
+                ...     baca.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         ),
@@ -1127,7 +1127,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricateCommand(
+                ...     baca.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         ),
@@ -1249,7 +1249,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
         segment = baca.sequence(self.segment).flatten()
         if self.by_pitch_class:
             segment = [abjad.NumberedPitchClass(_) for _ in segment]
-        cursor = baca.tools.Cursor(
+        cursor = baca.Cursor(
             segment,
             singletons=True,
             suppress_exception=True,
@@ -1280,7 +1280,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                     skip = abjad.Skip(duration)
                     abjad.mutate(leaf).replace([skip])
             elif self._matches_pitch(logical_tie.head, pitch_number):
-                if isinstance(pitch_number, baca.tools.Coat):
+                if isinstance(pitch_number, baca.Coat):
                     for leaf in logical_tie:
                         duration = leaf.written_duration
                         skip = abjad.Skip(duration)
@@ -1324,15 +1324,15 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
         specifiers = self.specifiers or []
         selections = container[:]
         for specifier in specifiers:
-            if isinstance(specifier, baca.tools.MusicRhythmSpecifier):
+            if isinstance(specifier, baca.MusicRhythmSpecifier):
                 continue
-            if isinstance(specifier, baca.tools.RhythmSpecifier):
+            if isinstance(specifier, baca.RhythmSpecifier):
                 continue
-            if isinstance(specifier, baca.tools.ImbricateCommand):
+            if isinstance(specifier, baca.ImbricateCommand):
                 continue
             if isinstance(specifier, abjad.rhythmmakertools.BeamSpecifier):
                 specifier._detach_all_beams(selections)
-            if isinstance(specifier, baca.tools.NestCommand):
+            if isinstance(specifier, baca.NestCommand):
                 nested_selections = specifier(selections)
             else:
                 specifier(selections)
@@ -1342,7 +1342,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
 
     @staticmethod
     def _matches_pitch(pitched_leaf, pitch_object):
-        if isinstance(pitch_object, baca.tools.Coat):
+        if isinstance(pitch_object, baca.Coat):
             pitch_object = pitch_object.argument
         if pitch_object is None:
             return False
@@ -1413,7 +1413,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricateCommand(
+                ...     baca.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         baca.accents(),
@@ -1529,7 +1529,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> result = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricateCommand(
+                ...     baca.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         baca.accents(),
@@ -1548,7 +1548,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.ImbricateCommand()
+                >>> specifier = baca.ImbricateCommand()
                 >>> specifier.allow_unused_pitches is None
                 True
 
@@ -1608,7 +1608,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricateCommand(
+                ...     baca.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         baca.accents(),
@@ -1725,7 +1725,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.ImbricateCommand()
+                >>> specifier = baca.ImbricateCommand()
                 >>> specifier.hocket is None
                 True
 
@@ -1770,7 +1770,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricateCommand(
+                ...     baca.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 18, 16, 15],
                 ...         baca.accents(),
@@ -1911,7 +1911,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.ImbricateCommand()
+                >>> specifier = baca.ImbricateCommand()
                 >>> specifier.selector is None
                 True
 
@@ -1947,7 +1947,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricateCommand(
+                ...     baca.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         abjad.rhythmmakertools.BeamSpecifier(
@@ -2080,7 +2080,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricateCommand(
+                ...     baca.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         abjad.rhythmmakertools.BeamSpecifier(
@@ -2223,7 +2223,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricateCommand(
+                ...     baca.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         baca.beam_everything(),
@@ -2364,7 +2364,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricateCommand(
+                ...     baca.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         abjad.rhythmmakertools.BeamSpecifier(
@@ -2490,8 +2490,8 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.MusicRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
+                ...     baca.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5],
                 ...                 denominator=32,
@@ -2506,7 +2506,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.tools.ImbricateCommand(
+                ...     baca.ImbricateCommand(
                 ...         'Voice 1',
                 ...         [2, 10, 18, 19, 9],
                 ...         baca.beam_everything(),
@@ -2608,7 +2608,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.ImbricateCommand()
+                >>> specifier = baca.ImbricateCommand()
                 >>> specifier.truncate_ties is None
                 True
 

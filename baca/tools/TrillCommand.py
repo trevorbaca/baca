@@ -17,7 +17,7 @@ class TrillCommand(abjad.abctools.AbjadObject):
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.tools.TrillCommand(
+            ...     baca.TrillCommand(
             ...         minimum_written_duration=abjad.Duration(1, 4),
             ...         maximum_written_duration=None,
             ...         ),
@@ -65,8 +65,8 @@ class TrillCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> collection_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            >>> collection_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -77,7 +77,7 @@ class TrillCommand(abjad.abctools.AbjadObject):
             ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
             ...     baca.messiaen_notes(),
-            ...     baca.tools.TrillCommand(
+            ...     baca.TrillCommand(
             ...         minimum_written_duration=abjad.Duration(1, 4),
             ...         maximum_written_duration=None,
             ...         ),

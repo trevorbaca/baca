@@ -19,7 +19,7 @@ class TransitionCommand(abjad.abctools.AbjadObject):
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.tools.TransitionCommand(
+            ...     baca.TransitionCommand(
             ...         start_markup=baca.markup.ord_(),
             ...         stop_markup=baca.markup.pont(),
             ...         ),
@@ -96,8 +96,8 @@ class TransitionCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> collection_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            >>> collection_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -108,7 +108,7 @@ class TransitionCommand(abjad.abctools.AbjadObject):
             ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
             ...     baca.even_runs(),
-            ...     baca.tools.TransitionCommand(
+            ...     baca.TransitionCommand(
             ...         start_markup=baca.markup.ord_(),
             ...         stop_markup=baca.markup.pont(),
             ...         ),
@@ -269,7 +269,7 @@ class TransitionCommand(abjad.abctools.AbjadObject):
         start_leaf = leaves[0]
         stop_leaf = leaves[-1]
         start_markup = self.start_markup
-        if isinstance(start_markup, baca.tools.AttachCommand):
+        if isinstance(start_markup, baca.AttachCommand):
             start_markup = start_markup.arguments[0]
         if start_markup is not None:
             assert isinstance(start_markup, abjad.Markup), repr(start_markup)
@@ -279,7 +279,7 @@ class TransitionCommand(abjad.abctools.AbjadObject):
         arrow = self._get_arrow()
         abjad.attach(arrow, start_leaf)
         stop_markup = self.stop_markup
-        if isinstance(stop_markup, baca.tools.AttachCommand):
+        if isinstance(stop_markup, baca.AttachCommand):
             stop_markup = stop_markup.arguments[0]
         if stop_markup is not None:
             assert isinstance(stop_markup, abjad.Markup), repr(stop_markup)

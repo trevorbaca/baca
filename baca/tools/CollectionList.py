@@ -522,7 +522,7 @@ class CollectionList(abjad.abctools.AbjadValueObject):
 
         Returns LilyPond file.
         '''
-        tree = baca.tools.PitchTree(list(self))
+        tree = baca.PitchTree(list(self))
         return tree.__illustrate__()
 
     def __len__(self):

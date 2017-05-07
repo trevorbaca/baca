@@ -16,7 +16,7 @@ class SetCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> baca.tools.SetCommand()
+            >>> baca.SetCommand()
             SetCommand()
 
     '''

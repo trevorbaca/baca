@@ -15,7 +15,7 @@ class DiatonicClusterCommand(abjad.abctools.AbjadObject):
         ::
 
             >>> staff = abjad.Staff("c' d' e' f'")
-            >>> command = baca.tools.DiatonicClusterCommand(
+            >>> command = baca.DiatonicClusterCommand(
             ...     cluster_widths=[4, 6],
             ...     )
             >>> command(staff)

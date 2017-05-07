@@ -17,8 +17,8 @@ class ColorFingeringCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -29,7 +29,7 @@ class ColorFingeringCommand(abjad.abctools.AbjadObject):
             ...     baca.select_stages(1),
             ...     baca.pitches('E4', allow_repeat_pitches=True),
             ...     baca.messiaen_notes(),
-            ...     baca.tools.ColorFingeringCommand(
+            ...     baca.ColorFingeringCommand(
             ...         number_lists=([0, 1, 2, 1],),
             ...         ),
             ...     )
@@ -211,8 +211,8 @@ class ColorFingeringCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -223,7 +223,7 @@ class ColorFingeringCommand(abjad.abctools.AbjadObject):
                 ...     baca.select_stages(1),
                 ...     baca.pitches('C4 D4 E4 F4'),
                 ...     baca.messiaen_notes(),
-                ...     baca.tools.ColorFingeringCommand(
+                ...     baca.ColorFingeringCommand(
                 ...         number_lists=([0, 1, 2, 1],),
                 ...         ),
                 ...     )
@@ -319,8 +319,8 @@ class ColorFingeringCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -334,7 +334,7 @@ class ColorFingeringCommand(abjad.abctools.AbjadObject):
                 ...         allow_repeat_pitches=True,
                 ...         ),
                 ...     baca.even_runs(),
-                ...     baca.tools.ColorFingeringCommand(
+                ...     baca.ColorFingeringCommand(
                 ...         by_pitch_run=True,
                 ...         number_lists=([1, 2, 1],),
                 ...         ),
@@ -544,7 +544,7 @@ class ColorFingeringCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> command = baca.tools.ColorFingeringCommand(
+                >>> command = baca.ColorFingeringCommand(
                 ...     number_lists=(
                 ...         [0, 1, 2, 1],
                 ...         ),

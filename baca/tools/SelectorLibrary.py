@@ -8496,7 +8496,7 @@ class SelectorLibrary(object):
         '''
         if stop is None:
             stop = start
-        return baca.tools.StageExpression(
+        return baca.StageExpression(
             start=start, 
             stop=stop,
             )

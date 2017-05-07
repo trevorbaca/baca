@@ -14,7 +14,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> baca.tools.WellformednessManager()
+            >>> baca.WellformednessManager()
             WellformednessManager()
 
     '''
@@ -33,7 +33,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
             ::
 
                 >>> staff = abjad.Staff("c'4 c' d' d'")
-                >>> manager = baca.tools.WellformednessManager()
+                >>> manager = baca.WellformednessManager()
                 >>> manager(staff)
                 [([LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")])], 4, 'check_repeat_pitch_classes')]
 
@@ -67,7 +67,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> manager = baca.tools.WellformednessManager
+                >>> manager = baca.WellformednessManager
                 >>> manager.check_repeat_pitch_classes(staff)
                 ([], 4)
 
@@ -82,7 +82,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> manager = baca.tools.WellformednessManager
+                >>> manager = baca.WellformednessManager
                 >>> manager.check_repeat_pitch_classes(staff)
                 ([LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")])], 4)
 
@@ -97,7 +97,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> manager = baca.tools.WellformednessManager
+                >>> manager = baca.WellformednessManager
                 >>> manager.check_repeat_pitch_classes(staff)
                 ([LogicalTie([Note("e''4")])], 4)
 
@@ -128,7 +128,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> manager = baca.tools.WellformednessManager
+                >>> manager = baca.WellformednessManager
                 >>> manager.check_repeat_pitch_classes(staff)
                 ([LogicalTie([Note("d''4")])], 4)
 
@@ -176,7 +176,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
             ::
 
                 >>> staff = abjad.Staff("c'4 d' e' f'")
-                >>> manager = baca.tools.WellformednessManager()
+                >>> manager = baca.WellformednessManager()
                 >>> manager.is_well_formed(staff)
                 True
                 
@@ -187,7 +187,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
             ::
 
                 >>> staff = abjad.Staff("c'4 c' d' d'")
-                >>> manager = baca.tools.WellformednessManager()
+                >>> manager = baca.WellformednessManager()
                 >>> manager.is_well_formed(staff)
                 False
 
@@ -209,7 +209,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
             ::
 
                 >>> staff = abjad.Staff("c'4 d' e' f'")
-                >>> manager = baca.tools.WellformednessManager()
+                >>> manager = baca.WellformednessManager()
                 >>> string = manager.tabulate_well_formedness_violations(staff)
                 >>> print(string)
                 0 /	4 repeat pitch classes
@@ -221,7 +221,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
             ::
 
                 >>> staff = abjad.Staff("c'4 c' d' d'")
-                >>> manager = baca.tools.WellformednessManager()
+                >>> manager = baca.WellformednessManager()
                 >>> string = manager.tabulate_well_formedness_violations(staff)
                 >>> print(string)
                 2 /	4 repeat pitch classes

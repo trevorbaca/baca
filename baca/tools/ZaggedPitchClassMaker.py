@@ -15,7 +15,7 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> maker = baca.tools.ZaggedPitchClassMaker(
+            >>> maker = baca.ZaggedPitchClassMaker(
             ...     pc_cells=[
             ...         [7, 1, 3, 4, 5, 11],
             ...         [3, 5, 6, 7],
@@ -142,7 +142,7 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
         #    cyclic=True, 
         #    overhang=True,
         #    )
-        material = baca.tools.PitchTree(
+        material = baca.PitchTree(
             items=pc_cells,
             item_class=abjad.NumberedPitchClass,
             )
@@ -189,7 +189,7 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
             ::
 
 
-                >>> maker = baca.tools.ZaggedPitchClassMaker(
+                >>> maker = baca.ZaggedPitchClassMaker(
                 ...     pc_cells=[[0, 1, 2], [3, 4]],
                 ...     division_ratios=None,
                 ...     grouping_counts=None,
@@ -221,7 +221,7 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
             ::
 
 
-                >>> maker = baca.tools.ZaggedPitchClassMaker(
+                >>> maker = baca.ZaggedPitchClassMaker(
                 ...     pc_cells=[[0, 1, 2, 3], [4, 5, 6, 7]],
                 ...     division_ratios=[[(1, 1)]],
                 ...     grouping_counts=None,
@@ -265,7 +265,7 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
             ::
 
 
-                >>> maker = baca.tools.ZaggedPitchClassMaker(
+                >>> maker = baca.ZaggedPitchClassMaker(
                 ...     pc_cells=[[0, 1, 2], [3, 4]],
                 ...     division_ratios=None,
                 ...     grouping_counts=[1, 2],

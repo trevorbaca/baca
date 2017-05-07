@@ -16,7 +16,7 @@ def negate_elements(sequence, absolute=False, indices=None, period=None):
         ::
 
             >>> sequence = [1, 2, 3, 4, 5, -6, -7, -8, -9, -10]
-            >>> baca.tools.negate_elements(sequence)
+            >>> baca.negate_elements(sequence)
             [-1, -2, -3, -4, -5, 6, 7, 8, 9, 10]
 
     ..  container:: example
@@ -26,7 +26,7 @@ def negate_elements(sequence, absolute=False, indices=None, period=None):
         ::
 
             >>> sequence = [1, 2, 3, 4, 5, -6, -7, -8, -9, -10]
-            >>> baca.tools.negate_elements(sequence, indices=[0, 1, 2])
+            >>> baca.negate_elements(sequence, indices=[0, 1, 2])
             [-1, -2, -3, 4, 5, -6, -7, -8, -9, -10]
 
     ..  container:: example
@@ -37,7 +37,7 @@ def negate_elements(sequence, absolute=False, indices=None, period=None):
 
 
             >>> sequence = [1, 2, 3, 4, 5, -6, -7, -8, -9, -10]
-            >>> baca.tools.negate_elements(
+            >>> baca.negate_elements(
             ...     sequence,
             ...     indices=[0, 1, 2],
             ...     period=5,
@@ -51,7 +51,7 @@ def negate_elements(sequence, absolute=False, indices=None, period=None):
         ::
 
             >>> sequence = [1, 2, 3, 4, 5, -6, -7, -8, -9, -10]
-            >>> baca.tools.negate_elements(sequence, absolute=True)
+            >>> baca.negate_elements(sequence, absolute=True)
             [-1, -2, -3, -4, -5, -6, -7, -8, -9, -10]
 
     ..  container:: example
@@ -61,7 +61,7 @@ def negate_elements(sequence, absolute=False, indices=None, period=None):
         ::
 
             >>> sequence = [1, 2, 3, 4, 5, -6, -7, -8, -9, -10]
-            >>> baca.tools.negate_elements(
+            >>> baca.negate_elements(
             ...     sequence,
             ...     absolute=True,
             ...     indices=[0, 1, 2],
@@ -76,7 +76,7 @@ def negate_elements(sequence, absolute=False, indices=None, period=None):
         ::
 
             >>> sequence = [1, 2, 3, 4, 5, -6, -7, -8, -9, -10]
-            >>> baca.tools.negate_elements(
+            >>> baca.negate_elements(
             ...     sequence,
             ...     absolute=True,
             ...     indices=[0, 1, 2],

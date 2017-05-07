@@ -17,7 +17,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> rhythm_specifier = baca.tools.RhythmSpecifier(
+            >>> rhythm_specifier = baca.RhythmSpecifier(
             ...     rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker(),
             ...     )
 
@@ -34,7 +34,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> rhythm_specifier = baca.tools.RhythmSpecifier(
+            >>> rhythm_specifier = baca.RhythmSpecifier(
             ...     division_expression=abjad.sequence().sum().sequence(),
             ...     rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker(),
             ...     )
@@ -227,7 +227,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
             abjad.attach('tie from me', last_leaf)
             if self._use_messiaen_style_ties:
                 abjad.attach('use messiaen style ties', last_leaf)
-        contribution = baca.tools.Contribution(
+        contribution = baca.Contribution(
             payload=music,
             start_offset=start_offset,
             )
@@ -237,7 +237,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
 
     @property
     def _default_division_maker(self):
-        division_maker = baca.tools.DivisionMaker()
+        division_maker = baca.DivisionMaker()
         return division_maker
 
     @property
@@ -289,7 +289,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
 
     @staticmethod
     def _durations_to_divisions(durations, start_offset):
-        divisions = [baca.tools.Division(_) for _ in durations]
+        divisions = [baca.Division(_) for _ in durations]
         durations = [_.duration for _ in divisions]
         start_offset = abjad.Offset(start_offset)
         durations.insert(0, start_offset)
@@ -297,7 +297,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
         assert len(divisions) == len(start_offsets)
         divisions_ = []
         for division, start_offset in zip(divisions, start_offsets):
-            division_ = baca.tools.Division(
+            division_ = baca.Division(
                 division,
                 start_offset=start_offset,
                 )
@@ -434,7 +434,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
                 message = message.format(divisions)
                 raise Exception(message)
         new_start_offset = divisions[0].start_offset
-        contribution = baca.tools.Contribution(
+        contribution = baca.Contribution(
             payload=divisions,
             start_offset=new_start_offset,
             )

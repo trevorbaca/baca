@@ -15,7 +15,7 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> specifier = baca.tools.ArpeggiationSpacingSpecifier()
+            >>> specifier = baca.ArpeggiationSpacingSpecifier()
             >>> specifier([[6, 0, 4, 5, 8]])
             CollectionList([<6, 12, 16, 17, 20>])
 
@@ -23,7 +23,7 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> specifier = baca.tools.ArpeggiationSpacingSpecifier()
+            >>> specifier = baca.ArpeggiationSpacingSpecifier()
             >>> specifier([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
             CollectionList([<0, 2, 10>, <6, 16, 27, 32, 43>, <9>])
 
@@ -31,7 +31,7 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> baca.tools.ArpeggiationSpacingSpecifier()
+            >>> baca.ArpeggiationSpacingSpecifier()
             ArpeggiationSpacingSpecifier()
 
     '''
@@ -70,7 +70,7 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> specifier = baca.tools.ArpeggiationSpacingSpecifier()
+                >>> specifier = baca.ArpeggiationSpacingSpecifier()
                 >>> specifier([])
                 PitchSegment([])
 
@@ -78,7 +78,7 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> specifier = baca.tools.ArpeggiationSpacingSpecifier()
+                >>> specifier = baca.ArpeggiationSpacingSpecifier()
                 >>> specifier() is None
                 True
 
@@ -94,7 +94,7 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
         pattern = self.pattern or abjad.patterntools.select_all()
         collections_ = []
         total_length = len(collections)
-        class_ = baca.tools.ChordalSpacingSpecifier
+        class_ = baca.ChordalSpacingSpecifier
         direction = self.direction or Up
         for i in range(total_length):
             if pattern.matches_index(i, total_length):
@@ -138,10 +138,10 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.tools.ArpeggiationSpacingSpecifier(
+                ...     baca.ArpeggiationSpacingSpecifier(
                 ...         direction=Up,
                 ...         ),
-                ...     baca.tools.RegisterToOctaveCommand(octave_number=2),
+                ...     baca.RegisterToOctaveCommand(octave_number=2),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -184,10 +184,10 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.tools.ArpeggiationSpacingSpecifier(
+                ...     baca.ArpeggiationSpacingSpecifier(
                 ...         direction=Down,
                 ...         ),
-                ...     baca.tools.RegisterToOctaveCommand(octave_number=2),
+                ...     baca.RegisterToOctaveCommand(octave_number=2),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP

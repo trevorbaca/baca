@@ -22,7 +22,7 @@ class MusicPitchSpecifier(abjad.abctools.AbjadObject):
             >>> expression = baca.sequence().accumulate([transposition])
             >>> expression = expression.join()[0]
             >>> music_maker = baca.MusicMaker(
-            ...     baca.tools.MusicPitchSpecifier(
+            ...     baca.MusicPitchSpecifier(
             ...         expressions=[expression],
             ...         to_pitch_classes=True,
             ...         ),
@@ -146,7 +146,7 @@ class MusicPitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.MusicPitchSpecifier()
+                >>> specifier = baca.MusicPitchSpecifier()
                 >>> specifier() is None
                 True
 
@@ -156,7 +156,7 @@ class MusicPitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.MusicPitchSpecifier()
+                >>> specifier = baca.MusicPitchSpecifier()
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> for collection in specifier(collections):
                 ...     collection
@@ -183,7 +183,7 @@ class MusicPitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> baca.tools.MusicPitchSpecifier()
+                >>> baca.MusicPitchSpecifier()
                 MusicPitchSpecifier()
 
         Returns string.
@@ -211,7 +211,7 @@ class MusicPitchSpecifier(abjad.abctools.AbjadObject):
         item_class = None
         if self.to_pitch_classes:
             item_class = abjad.NumberedPitchClass
-        return baca.tools.PitchTree(
+        return baca.PitchTree(
             item_class=item_class,
             items=collections,
             )
@@ -231,7 +231,7 @@ class MusicPitchSpecifier(abjad.abctools.AbjadObject):
                 >>> transposition = baca.pitch_class_segment().transpose(n=3)
                 >>> transposition = baca.sequence().map(transposition)
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.MusicPitchSpecifier(
+                ...     baca.MusicPitchSpecifier(
                 ...         expressions=[transposition],
                 ...         to_pitch_classes=True,
                 ...         ),
@@ -276,7 +276,7 @@ class MusicPitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.MusicPitchSpecifier()
+                >>> specifier = baca.MusicPitchSpecifier()
                 >>> specifier.expressions is None
                 True
 
@@ -295,7 +295,7 @@ class MusicPitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.MusicPitchSpecifier(
+                >>> specifier = baca.MusicPitchSpecifier(
                 ...     remove_duplicate_pitch_classes=True
                 ...     )
                 >>> collections = [[0, 2, 10], [18, 16, 15, 22, 19], [9]]
@@ -318,7 +318,7 @@ class MusicPitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.MusicPitchSpecifier(
+                >>> specifier = baca.MusicPitchSpecifier(
                 ...     remove_duplicates=True
                 ...     )
                 >>> collections = [[0, 2, 10], [18, 16, 15, 10, 19], [9]]
@@ -388,7 +388,7 @@ class MusicPitchSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.MusicPitchSpecifier(
+                ...     baca.MusicPitchSpecifier(
                 ...         to_pitch_classes=True,
                 ...         ),
                 ...     )
@@ -430,7 +430,7 @@ class MusicPitchSpecifier(abjad.abctools.AbjadObject):
         
             ::
 
-                >>> specifier = baca.tools.MusicPitchSpecifier(
+                >>> specifier = baca.MusicPitchSpecifier(
                 ...     to_pitch_classes=True,
                 ...     )
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -445,7 +445,7 @@ class MusicPitchSpecifier(abjad.abctools.AbjadObject):
         
             ::
 
-                >>> specifier = baca.tools.MusicPitchSpecifier(
+                >>> specifier = baca.MusicPitchSpecifier(
                 ...     to_pitch_classes=True,
                 ...     )
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -463,7 +463,7 @@ class MusicPitchSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> specifier = baca.tools.MusicPitchSpecifier()
+                >>> specifier = baca.MusicPitchSpecifier()
                 >>> specifier.to_pitch_classes is None
                 True
 

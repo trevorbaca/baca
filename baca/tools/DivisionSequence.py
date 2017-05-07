@@ -17,7 +17,7 @@ class DivisionSequence(abjad.sequencetools.Sequence):
 
         ::
 
-            >>> baca.tools.DivisionSequence([(3, 8), (3, 8), (2, 8)])
+            >>> baca.DivisionSequence([(3, 8), (3, 8), (2, 8)])
             DivisionSequence([Division((3, 8)), Division((3, 8)), Division((2, 8))])
 
     '''
@@ -38,7 +38,7 @@ class DivisionSequence(abjad.sequencetools.Sequence):
         items_ = []
         for item in items:
             try:
-                item = baca.tools.Division(item)
+                item = baca.Division(item)
             except (TypeError, ValueError):
                 pass
             items_.append(item)
@@ -60,7 +60,7 @@ class DivisionSequence(abjad.sequencetools.Sequence):
 
         Returns new division sequence.
         '''
-        maker = baca.tools.SplitByDurationsDivisionCallback(
+        maker = baca.SplitByDurationsDivisionCallback(
             compound_meter_multiplier=compound_meter_multiplier,
             cyclic=cyclic,
             durations=durations,

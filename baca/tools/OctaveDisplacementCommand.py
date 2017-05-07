@@ -16,8 +16,8 @@ class OctaveDisplacementCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -28,7 +28,7 @@ class OctaveDisplacementCommand(abjad.abctools.AbjadObject):
             ...     baca.select_stages(1),
             ...     baca.pitches('G4'),
             ...     baca.even_runs(),
-            ...     baca.tools.OctaveDisplacementCommand(
+            ...     baca.OctaveDisplacementCommand(
             ...         displacements=[0, 0, 1, 1, 0, 0, -1, -1, 2, 2],
             ...         ),
             ...     )
@@ -187,7 +187,7 @@ class OctaveDisplacementCommand(abjad.abctools.AbjadObject):
             ::
 
         
-                >>> command = baca.tools.OctaveDisplacementCommand(
+                >>> command = baca.OctaveDisplacementCommand(
                 ...     displacements=[0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2],
                 ...     )
 

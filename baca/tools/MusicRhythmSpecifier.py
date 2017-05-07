@@ -15,7 +15,7 @@ class MusicRhythmSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> baca.tools.MusicRhythmSpecifier()
+            >>> baca.MusicRhythmSpecifier()
             MusicRhythmSpecifier()
 
     '''

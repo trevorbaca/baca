@@ -17,7 +17,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> division_maker = baca.tools.DivisionMaker()
+            >>> division_maker = baca.DivisionMaker()
             >>> division_maker = division_maker.fuse_by_counts(
             ...     counts=[2],
             ...     )
@@ -52,7 +52,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> division_maker = baca.tools.DivisionMaker()
+            >>> division_maker = baca.DivisionMaker()
             >>> division_maker = division_maker.fuse_by_counts(
             ...     counts=[2],
             ...     )
@@ -136,7 +136,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
             assert abjad.mathtools.all_are_positive_integers(counts)
             self._counts = counts
         if secondary_division_maker is not None:
-            prototype = (baca.tools.SplitByDurationsDivisionCallback,)
+            prototype = (baca.SplitByDurationsDivisionCallback,)
             assert isinstance(secondary_division_maker, prototype)
         self._secondary_division_maker = secondary_division_maker
 
@@ -151,7 +151,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> division_maker = baca.tools.DivisionMaker()
+                >>> division_maker = baca.DivisionMaker()
                 >>> division_maker = division_maker.fuse_by_counts()
 
             ::
@@ -198,7 +198,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> division_maker = baca.tools.DivisionMaker()
+                >>> division_maker = baca.DivisionMaker()
                 >>> division_maker = division_maker.fuse_by_counts(
                 ...     counts=[2],
                 ...     )
@@ -235,7 +235,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
             
             ::
 
-                >>> division_maker = baca.tools.DivisionMaker()
+                >>> division_maker = baca.DivisionMaker()
                 >>> division_maker = division_maker.fuse_by_counts(
                 ...     counts=[2],
                 ...     )
@@ -284,7 +284,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
             
             ::
 
-                >>> division_maker = baca.tools.DivisionMaker()
+                >>> division_maker = baca.DivisionMaker()
                 >>> division_maker = division_maker.fuse_by_counts(
                 ...     counts=[2],
                 ...     )
@@ -335,7 +335,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> division_maker = baca.tools.DivisionMaker()
+                >>> division_maker = baca.DivisionMaker()
                 >>> division_maker = division_maker.fuse_by_counts(
                 ...     counts=abjad.Infinity,
                 ...     )
@@ -370,7 +370,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> division_maker = baca.tools.DivisionMaker()
+                >>> division_maker = baca.DivisionMaker()
                 >>> division_maker = division_maker.fuse_by_counts(
                 ...     counts=abjad.Infinity,
                 ...     )
@@ -416,7 +416,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> division_maker = baca.tools.DivisionMaker()
+                >>> division_maker = baca.DivisionMaker()
                 >>> division_maker = division_maker.fuse_by_counts(
                 ...     counts=abjad.Infinity,
                 ...     )
@@ -473,14 +473,14 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> callback = baca.tools.FuseByCountsDivisionCallback(
+                >>> callback = baca.FuseByCountsDivisionCallback(
                 ...     counts=abjad.Infinity,
                 ...     )
 
             ::
 
                 >>> divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
-                >>> divisions = [baca.tools.Division(_) for _ in divisions]
+                >>> divisions = [baca.Division(_) for _ in divisions]
                 >>> divisions[0] = abjad.new(
                 ...     divisions[0],
                 ...     start_offset=abjad.Offset(1, 4),
@@ -510,9 +510,9 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
                 overhang=True,
                 )
             divisions = [sum(_) for _ in parts]
-        divisions = [baca.tools.Division(_) for _ in divisions]
+        divisions = [baca.Division(_) for _ in divisions]
         if self.secondary_division_maker is None:
-            divisions, start_offset = baca.tools.DivisionMaker._to_divisions(
+            divisions, start_offset = baca.DivisionMaker._to_divisions(
                 divisions,
                 start_offset,
                 )
@@ -524,9 +524,9 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
             else:
                 division_list = [division]
             division_list = [
-                baca.tools.Division(_) for _ in division_list]
+                baca.Division(_) for _ in division_list]
             division_lists.append(division_list)
-        division_lists, start_offset = baca.tools.DivisionMaker._to_divisions(
+        division_lists, start_offset = baca.DivisionMaker._to_divisions(
             division_lists, 
             start_offset=start_offset,
             )
@@ -543,7 +543,7 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
                 argument = division.duration
             else:
                 argument = division
-            division_ = baca.tools.Division(argument)
+            division_ = baca.Division(argument)
             divisions_.append(division_)
         return divisions_
 

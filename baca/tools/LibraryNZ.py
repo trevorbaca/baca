@@ -145,7 +145,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_plts()
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='style',
             attribute_value='harmonic',
             grob_name='note_head',
@@ -216,7 +216,7 @@ class LibraryNZ(object):
         '''
         if not isinstance(time_treatments, list):
             time_treatments = [time_treatments]
-        return baca.tools.NestCommand(
+        return baca.NestCommand(
             lmr_specifier=None,
             time_treatments=time_treatments,
             )
@@ -347,7 +347,7 @@ class LibraryNZ(object):
         start_token = start_token.format(dynamic)
         stop_token = '{} > niente'
         stop_token = stop_token.format(dynamic)
-        return baca.tools.SwellSpecifier(
+        return baca.SwellSpecifier(
             selector=selector,
             start_count=2,
             start_token=start_token,
@@ -359,7 +359,7 @@ class LibraryNZ(object):
     def notes():
         r'''Makes notes.
         '''
-        return baca.tools.RhythmSpecifier(
+        return baca.RhythmSpecifier(
             rewrite_meter=True,
             rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker()
             )
@@ -498,7 +498,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.SpannerCommand(
+        return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.StaffLinesSpanner(lines=1),
             )
@@ -627,7 +627,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_leaves_in_trimmed_run()
-        return baca.tools.SpannerCommand(
+        return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.OctavationSpanner(start=1, stop=0),
             )
@@ -756,7 +756,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_leaves_in_trimmed_run()
-        return baca.tools.SpannerCommand(
+        return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.OctavationSpanner(start=-1, stop=0),
             )
@@ -894,7 +894,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.SpannerCommand(
+        return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.ClefSpanner(clef='percussion'),
             )
@@ -1014,7 +1014,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.TrillCommand(
+        return baca.TrillCommand(
             minimum_written_duration=None,
             selector=selector,
             )
@@ -1151,7 +1151,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.TrillCommand(
+        return baca.TrillCommand(
             interval=interval,
             minimum_written_duration=None,
             selector=selector,
@@ -1289,7 +1289,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.TrillCommand(
+        return baca.TrillCommand(
             harmonic=harmonic,
             minimum_written_duration=None,
             pitch=pitch,
@@ -1305,7 +1305,7 @@ class LibraryNZ(object):
         ):
         r'''Sets pitches.
         '''
-        return baca.tools.ScorePitchCommand(
+        return baca.ScorePitchCommand(
             allow_repeat_pitches=allow_repeat_pitches,
             operators=operators,
             source=source,
@@ -1446,7 +1446,7 @@ class LibraryNZ(object):
         markup += abjad.Markup('possibile').upright()
         markup = abjad.new(markup, direction=direction)
         selector = selector or baca.select_plt_head(n=0)
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[markup],
             selector=selector,
             )
@@ -1620,7 +1620,7 @@ class LibraryNZ(object):
         assert len(duration) == 2, repr(duration)
         moment = abjad.schemetools.SchemeMoment(duration)
         selector = selector or baca.select_leaf(0)
-        return baca.tools.SetCommand(
+        return baca.SetCommand(
             context_name='score',
             selector=selector,
             setting_name='proportional_notation_duration',
@@ -1926,13 +1926,13 @@ class LibraryNZ(object):
 
         '''
         if stop is None:
-            return baca.tools.RegisterCommand(
+            return baca.RegisterCommand(
                 registration=abjad.Registration(
                     [('[A0, C8]', start)],
                     ),
                 selector=selector,
                 )
-        return baca.tools.RegisterInterpolationCommand(
+        return baca.RegisterInterpolationCommand(
             selector=selector,
             start_pitch=start,
             stop_pitch=stop,
@@ -2057,7 +2057,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_plt_heads()
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.Articulation(dynamic)],
             selector=selector,
             )
@@ -2186,7 +2186,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_leaves_in_trimmed_run()
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=Down,
             grob_name='repeat_tie',
@@ -2318,7 +2318,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_leaves_in_trimmed_run()
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=Up,
             grob_name='repeat_tie',
@@ -2335,7 +2335,7 @@ class LibraryNZ(object):
         elif isinstance(durations, tuple):
             assert len(durations) == 2
             durations = [abjad.Duration(durations)]
-        return baca.tools.RhythmSpecifier(
+        return baca.RhythmSpecifier(
             division_expression=baca.split_by_durations(durations=durations),
             rewrite_meter=True,
             rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
@@ -2469,7 +2469,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_rests()
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='staff_position',
             attribute_value=n,
             grob_name='rest',
@@ -2484,7 +2484,7 @@ class LibraryNZ(object):
         mask = abjad.rhythmmakertools.SilenceMask(
             pattern=abjad.patterntools.select_all(),
             )
-        return baca.tools.RhythmSpecifier(
+        return baca.RhythmSpecifier(
             rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
                 division_masks=[mask],
                 ),
@@ -2546,7 +2546,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.RestAffixCommand(
+        return baca.RestAffixCommand(
             suffix=counts,
             )
 
@@ -2607,7 +2607,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.RestAffixCommand(
+        return baca.RestAffixCommand(
             prefix=prefix,
             suffix=suffix,
             )
@@ -2668,7 +2668,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.RestAffixCommand(
+        return baca.RestAffixCommand(
             prefix=counts,
             )
 
@@ -2796,7 +2796,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_rests()
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=Down,
             grob_name='rest',
@@ -2927,7 +2927,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_rests()
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=Up,
             grob_name='rest',
@@ -2939,13 +2939,13 @@ class LibraryNZ(object):
     def resume():
         r'''Resumes music at next offset across all voices in score.
         '''
-        return baca.tools.AnchorCommand()
+        return baca.AnchorCommand()
 
     @staticmethod
     def resume_after(remote_voice_name):
         r'''Resumes music after remote selection.
         '''
-        return baca.tools.AnchorCommand(
+        return baca.AnchorCommand(
             remote_selector=baca.select_leaf(-1),
             remote_voice_name=remote_voice_name,
             use_remote_stop_offset=True,
@@ -3076,7 +3076,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_leaves()
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='color',
             attribute_value=color,
             grob_name='script',
@@ -3209,7 +3209,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_leaf(n=0)
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='extra_offset',
             attribute_value=pair,
             grob_name='script',
@@ -3338,7 +3338,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=Down,
             grob_name='script',
@@ -3467,7 +3467,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=Up,
             grob_name='script',
@@ -3593,7 +3593,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_leaf(n=0)
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.Articulation('shortfermata')],
             selector=selector,
             )
@@ -3613,7 +3613,7 @@ class LibraryNZ(object):
                 talea_denominator=denominator,
                 ),
             )
-        return baca.tools.RhythmSpecifier(
+        return baca.RhythmSpecifier(
             rhythm_maker=rhythm_maker,
             )
 
@@ -3625,7 +3625,7 @@ class LibraryNZ(object):
         ):
         r'''Makes single tapers.
         '''
-        return baca.tools.RhythmSpecifier(
+        return baca.RhythmSpecifier(
             rhythm_maker=abjad.rhythmmakertools.IncisedRhythmMaker(
                 incise_specifier = abjad.rhythmmakertools.InciseSpecifier(
                     outer_divisions_only=True,
@@ -3698,7 +3698,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.RestAffixCommand(
+        return baca.RestAffixCommand(
             skips_instead_of_rests=True,
             suffix=counts,
             )
@@ -3760,7 +3760,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.RestAffixCommand(
+        return baca.RestAffixCommand(
             prefix=prefix,
             skips_instead_of_rests=True,
             suffix=suffix,
@@ -3822,7 +3822,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.RestAffixCommand(
+        return baca.RestAffixCommand(
             prefix=counts,
             skips_instead_of_rests=True,
             )
@@ -3949,7 +3949,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_leaves_in_trimmed_run()
-        return baca.tools.SpannerCommand(
+        return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.Slur(),
             )
@@ -4075,7 +4075,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.SpannerCommand(
+        return baca.SpannerCommand(
             selector=baca.select_each_plt_run(start=start, stop=stop),
             spanner=abjad.Slur(),
             )
@@ -4201,7 +4201,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.SpannerCommand(
+        return baca.SpannerCommand(
             selector=baca.select_trimmed_run_in_each_tuplet(
                 start=start,
                 stop=stop,
@@ -4330,7 +4330,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=Down,
             grob_name='slur',
@@ -4471,7 +4471,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=Up,
             grob_name='slur',
@@ -4775,7 +4775,7 @@ class LibraryNZ(object):
                 >>
 
         """
-        return baca.tools.RegisterToOctaveCommand(
+        return baca.RegisterToOctaveCommand(
             anchor=Top,
             octave_number=n,
             selector=selector,
@@ -4817,7 +4817,7 @@ class LibraryNZ(object):
                 Division((2, 8))
 
         '''
-        expression = baca.tools.DivisionSequenceExpression()
+        expression = baca.DivisionSequenceExpression()
         expression = expression.division_sequence()
         expression = expression.flatten()
         expression = expression.sum()
@@ -4945,7 +4945,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_plt_heads()
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.Articulation('staccato')],
             selector=selector,
             )
@@ -5066,7 +5066,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_plt_heads()
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.Articulation('staccatissimo')],
             selector=selector,
             )
@@ -5194,7 +5194,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_leaves_in_trimmed_run()
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='color',
             attribute_value=color,
             context_name=context_name,
@@ -5321,7 +5321,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_pls()
-        return baca.tools.StemTremoloCommand(
+        return baca.StemTremoloCommand(
             selector=selector,
             tremolo_flags=32,
             )
@@ -5448,7 +5448,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=Down,
             grob_name='stem',
@@ -5578,7 +5578,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=Up,
             grob_name='stem',
@@ -5648,7 +5648,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='strict_note_spacing',
             attribute_value=False,
             context_name='score',
@@ -5675,7 +5675,7 @@ class LibraryNZ(object):
                 Division((1, 4))
 
         '''
-        expression = baca.tools.DivisionSequenceExpression()
+        expression = baca.DivisionSequenceExpression()
         expression = expression.division_sequence()
         expression = expression.split_by_durations(
             durations=[abjad.Duration(1, 4)]
@@ -6190,7 +6190,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.SpannerCommand(
+        return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.PianoPedalSpanner(
                 style='bracket',
@@ -6331,7 +6331,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='staff_padding',
             attribute_value=n,
             context_name=context,
@@ -6456,7 +6456,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_plt_heads()
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.Articulation('tenuto')],
             selector=selector,
             )
@@ -6594,7 +6594,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='color',
             attribute_value=color,
             grob_name='text_script',
@@ -6736,7 +6736,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='padding',
             attribute_value=n,
             grob_name='text_script',
@@ -6876,7 +6876,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='staff_padding',
             attribute_value=n,
             grob_name='text_script',
@@ -7016,7 +7016,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=Down,
             grob_name='text_script',
@@ -7156,7 +7156,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=Up,
             grob_name='text_script',
@@ -7357,7 +7357,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='staff_padding',
             attribute_value=n,
             grob_name='text_spanner',
@@ -7481,7 +7481,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_each_plt_prun()
-        return baca.tools.SpannerCommand(
+        return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.Tie(),
             )
@@ -7623,7 +7623,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_leaves_in_trimmed_run()
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=Down,
             grob_name='tie',
@@ -7755,7 +7755,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_leaves_in_trimmed_run()
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=Up,
             grob_name='tie',
@@ -7826,7 +7826,7 @@ class LibraryNZ(object):
 
         '''
         assert isinstance(pair, tuple), repr(pair)
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='extra_offset',
             attribute_value=pair,
             context_name='score',
@@ -8025,7 +8025,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.TransitionCommand(
+        return baca.TransitionCommand(
             selector=selector,
             start_markup=start_markup,
             stop_markup=stop_markup,
@@ -8093,7 +8093,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_leaf()
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='transparent',
             attribute_value=True,
             context_name='Score',
@@ -8224,7 +8224,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_rests()
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='transparent',
             attribute_value=True,
             grob_name='rest',
@@ -8294,7 +8294,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_leaf()
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='transparent',
             attribute_value=True,
             context_name='Score',
@@ -8366,7 +8366,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_rests()
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='transparent',
             attribute_value=True,
             context_name='TimeSignatureContext',
@@ -8379,7 +8379,7 @@ class LibraryNZ(object):
     def transpose(n=0):
         r'''Transposes pitches.
         '''
-        return baca.tools.ScorePitchCommand(
+        return baca.ScorePitchCommand(
             operators=[abjad.Transposition(n=n)],
             )
 
@@ -8389,7 +8389,7 @@ class LibraryNZ(object):
         '''
         operator = baca.pitch_class_segment().transpose(n=n)
         expression = baca.sequence().map(operator)
-        return baca.tools.MusicPitchSpecifier(
+        return baca.MusicPitchSpecifier(
             expressions=[expression],
             to_pitch_classes=True,
             )
@@ -8399,7 +8399,7 @@ class LibraryNZ(object):
         r'''Overrides stem tremolo extra offset on leaves.
         '''
         pair = (0, -n)
-        return experimental.tools.baca.tools.OverrideCommand(
+        return experimental.tools.baca.OverrideCommand(
             attribute_name='extra_offset',
             attribute_value=str(pair),
             grob_name='stem_tremolo',
@@ -8528,7 +8528,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.TrillCommand(
+        return baca.TrillCommand(
             forbidden_annotations=['color fingering', 'color microtone'],
             minimum_written_duration=abjad.Duration(1, 4),
             selector=selector,
@@ -8656,7 +8656,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='extra_offset',
             attribute_value=pair,
             grob_name='tuplet_bracket',
@@ -8780,7 +8780,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='staff_padding',
             attribute_value=n,
             grob_name='tuplet_bracket',
@@ -8909,7 +8909,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=Down,
             grob_name='tuplet_bracket',
@@ -9038,7 +9038,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=Up,
             grob_name='tuplet_bracket',
@@ -9168,7 +9168,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='extra_offset',
             attribute_value=pair,
             grob_name='tuplet_number',
@@ -9309,7 +9309,7 @@ class LibraryNZ(object):
                 >>
         
         '''
-        return baca.tools.SpannerCommand(
+        return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.StaffLinesSpanner(lines=2),
             )
@@ -9435,7 +9435,7 @@ class LibraryNZ(object):
 
         """
         selector = selector or baca.select_chord_heads()
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.Arpeggio(direction=Up)],
             selector=selector,
             )
@@ -9558,7 +9558,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_plt_heads()
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.Articulation('upbow')],
             selector=selector,
             )
@@ -9681,7 +9681,7 @@ class LibraryNZ(object):
 
         '''
         selector = selector or baca.select_leaf(n=0)
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.Articulation('verylongfermata')],
             selector=selector,
             )

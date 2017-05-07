@@ -20,9 +20,9 @@ class ColorCommand(abjad.abctools.AbjadObject):
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.tools.ColorCommand(color='red'),
-            ...     baca.tools.MusicRhythmSpecifier(
-            ...         rhythm_maker=baca.tools.MusicRhythmMaker(
+            ...     baca.ColorCommand(color='red'),
+            ...     baca.MusicRhythmSpecifier(
+            ...         rhythm_maker=baca.MusicRhythmMaker(
             ...             talea=abjad.rhythmmakertools.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],
             ...                 denominator=32,
@@ -139,8 +139,8 @@ class ColorCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -151,7 +151,7 @@ class ColorCommand(abjad.abctools.AbjadObject):
             ...     baca.select_stages(1),
             ...     baca.even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.tools.ColorCommand(color='red'),
+            ...     baca.ColorCommand(color='red'),
             ...     )
 
         ::

@@ -26,7 +26,7 @@ class RestAffixCommand(abjad.abctools.AbjadValueObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     collections,
-            ...     baca.tools.RestAffixCommand(
+            ...     baca.RestAffixCommand(
             ...         prefix=[2],
             ...         suffix=[3],
             ...         ),
@@ -86,7 +86,7 @@ class RestAffixCommand(abjad.abctools.AbjadValueObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     collections,
-            ...     baca.tools.RestAffixCommand(
+            ...     baca.RestAffixCommand(
             ...         prefix=[2],
             ...         suffix=[3],
             ...         ),
@@ -144,7 +144,7 @@ class RestAffixCommand(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> baca.tools.RestAffixCommand()
+            >>> baca.RestAffixCommand()
             RestAffixCommand()
 
     '''
@@ -207,7 +207,7 @@ class RestAffixCommand(abjad.abctools.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.tools.RestAffixCommand(prefix=[1], suffix=[1]),
+                ...     baca.RestAffixCommand(prefix=[1], suffix=[1]),
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -275,7 +275,7 @@ class RestAffixCommand(abjad.abctools.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.tools.RestAffixCommand(
+                ...     baca.RestAffixCommand(
                 ...         prefix=[1],
                 ...         suffix=[2],
                 ...         ),
@@ -329,7 +329,7 @@ class RestAffixCommand(abjad.abctools.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.tools.RestAffixCommand(
+                ...     baca.RestAffixCommand(
                 ...         prefix=[1],
                 ...         suffix=[2],
                 ...         ),
@@ -373,7 +373,7 @@ class RestAffixCommand(abjad.abctools.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.tools.RestAffixCommand(
+                ...     baca.RestAffixCommand(
                 ...         pattern=abjad.Pattern(indices=[0, -1]),
                 ...         prefix=[1],
                 ...         suffix=[2],
@@ -430,7 +430,7 @@ class RestAffixCommand(abjad.abctools.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.tools.RestAffixCommand(
+                ...     baca.RestAffixCommand(
                 ...         pattern=abjad.patterntools.select_all(),
                 ...         prefix=[1],
                 ...         suffix=[2],
@@ -499,7 +499,7 @@ class RestAffixCommand(abjad.abctools.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.tools.RestAffixCommand(prefix=[3]),
+                ...     baca.RestAffixCommand(prefix=[3]),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -567,7 +567,7 @@ class RestAffixCommand(abjad.abctools.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.tools.RestAffixCommand(suffix=[3]),
+                ...     baca.RestAffixCommand(suffix=[3]),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP

@@ -18,8 +18,8 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -29,7 +29,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
             ...     'vn',
             ...     baca.select_stages(1),
             ...     baca.even_runs(),
-            ...     baca.tools.ScorePitchCommand(
+            ...     baca.ScorePitchCommand(
             ...         source=[19, 13, 15, 16, 17, 23],
             ...         ),
             ...     )
@@ -209,7 +209,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> command = baca.tools.ScorePitchCommand(
+                >>> command = baca.ScorePitchCommand(
                 ...     source=[19, 13, 15, 16, 17, 23],
                 ...     )
 
@@ -394,7 +394,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> command = baca.tools.ScorePitchCommand(
+                >>> command = baca.ScorePitchCommand(
                 ...     counts=[20, 12, 12, 6],
                 ...     operators=[
                 ...         abjad.Inversion(),
@@ -426,7 +426,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> command = baca.tools.ScorePitchCommand(
+                >>> command = baca.ScorePitchCommand(
                 ...     operators=[abjad.Transposition(n=2)],
                 ...     )
 
@@ -456,7 +456,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> command = baca.tools.ScorePitchCommand(
+                >>> command = baca.ScorePitchCommand(
                 ...     operators=[
                 ...         abjad.Transposition(n=2),
                 ...         ],
@@ -492,7 +492,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
                 >>> operator = abjad.pitchtools.CompoundOperator()
                 >>> operator = operator.transpose(n=2)
                 >>> operator = operator.transpose(n=-12)
-                >>> command = baca.tools.ScorePitchCommand(
+                >>> command = baca.ScorePitchCommand(
                 ...     operators=[operator],
                 ...     source=[19, 13, 15, 16, 17, 23],
                 ...     )
@@ -545,7 +545,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> command = baca.tools.ScorePitchCommand(
+                >>> command = baca.ScorePitchCommand(
                 ...     source=[0, 1, 2, 3],
                 ...     )
 
@@ -578,7 +578,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> command = baca.tools.ScorePitchCommand(
+                >>> command = baca.ScorePitchCommand(
                 ...     repetition_intervals=[12],
                 ...     source=[0, 1, 2, 3],
                 ...     )
@@ -612,7 +612,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> command = baca.tools.ScorePitchCommand(
+                >>> command = baca.ScorePitchCommand(
                 ...     repetition_intervals=[12, 1],
                 ...     source=[0, 1, 2, 3],
                 ...     )
@@ -658,7 +658,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> command = baca.tools.ScorePitchCommand(
+                >>> command = baca.ScorePitchCommand(
                 ...     reverse=True,
                 ...     source=[19, 13, 15, 16, 17, 23],
                 ...     start_index=-1,
@@ -687,7 +687,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> command = baca.tools.ScorePitchCommand(
+                >>> command = baca.ScorePitchCommand(
                 ...     source=[19, 13, 15, 16, 17, 23],
                 ...     )
 
@@ -721,7 +721,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> command = baca.tools.ScorePitchCommand(
+                >>> command = baca.ScorePitchCommand(
                 ...     reverse=True,
                 ...     source=[19, 13, 15, 16, 17, 23],
                 ...     start_index=-1,
@@ -751,7 +751,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
 
             ::
                 
-                >>> command = baca.tools.ScorePitchCommand(
+                >>> command = baca.ScorePitchCommand(
                 ...     source=[12, 13, 14, 15]
                 ...     )
 

@@ -197,7 +197,7 @@ class PitchSet(abjad.PitchSet):
 
         Returns new pitch set.
         '''
-        specifier = baca.tools.ChordalSpacingSpecifier(
+        specifier = baca.ChordalSpacingSpecifier(
             bass=bass,
             direction=Down,
             minimum_semitones=semitones,
@@ -323,7 +323,7 @@ class PitchSet(abjad.PitchSet):
 
         Returns new pitch segment.
         '''
-        specifier = baca.tools.ChordalSpacingSpecifier(
+        specifier = baca.ChordalSpacingSpecifier(
             bass=bass,
             direction=Up,
             minimum_semitones=semitones,

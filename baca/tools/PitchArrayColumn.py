@@ -17,7 +17,7 @@ class PitchArrayColumn(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> array = baca.tools.PitchArray(
+            >>> array = baca.PitchArray(
             ...     [
             ...         [1, (2, 1), (-1.5, 2)],
             ...         [(7, 2), (6, 1), 1],
@@ -141,7 +141,7 @@ class PitchArrayColumn(abjad.abctools.AbjadValueObject):
 
         Returns none.
         '''
-        if not isinstance(cell, baca.tools.PitchArrayCell):
+        if not isinstance(cell, baca.PitchArrayCell):
             message = 'must be cell.'
             raise TypeError(message)
         cell._row_parent = self
@@ -153,7 +153,7 @@ class PitchArrayColumn(abjad.abctools.AbjadValueObject):
         Returns none.
         '''
         if not all(
-            isinstance(cell, baca.tools.PitchArrayCell) for cell in cells
+            isinstance(cell, baca.PitchArrayCell) for cell in cells
             ):
             message = 'must be cells.'
             raise TypeError(message)
@@ -297,7 +297,7 @@ class PitchArrayColumn(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> array = baca.tools.PitchArray([
+                >>> array = baca.PitchArray([
                 ...     [1, (2, 1), (-1.5, 2)],
                 ...     [(7, 2), (6, 1), 1],
                 ...     ])
@@ -367,7 +367,7 @@ class PitchArrayColumn(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> array = baca.tools.PitchArray([
+                >>> array = baca.PitchArray([
                 ...     [1, (2, 1), ([-2, -1.5], 2)],
                 ...     [(7, 2), (6, 1), 1],
                 ...     ])
@@ -405,7 +405,7 @@ class PitchArrayColumn(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> array = baca.tools.PitchArray([
+                >>> array = baca.PitchArray([
                 ...     [1, (2, 1), ([-2, -1.5], 2)],
                 ...     [(7, 2), (6, 1), 1],
                 ...     ])

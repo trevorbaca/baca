@@ -264,7 +264,7 @@ class Sequence(abjad.Sequence):
         subclass_hook=None,
         ):
         import baca
-        callback = baca.tools.Expression._frame_to_callback(
+        callback = baca.Expression._frame_to_callback(
             frame,
             evaluation_template=evaluation_template,
             map_operand=map_operand,

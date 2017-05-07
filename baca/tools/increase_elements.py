@@ -16,7 +16,7 @@ def increase_elements(sequence, addenda, indices=None):
 
         ::
 
-            >>> baca.tools.increase_elements(range(10), [10, -10])
+            >>> baca.increase_elements(range(10), [10, -10])
             [10, -9, 12, -7, 14, -5, 16, -3, 18, -1]
 
 
@@ -26,7 +26,7 @@ def increase_elements(sequence, addenda, indices=None):
 
         ::
 
-            >>> baca.tools.increase_elements(list(range(10)), [10, -10])
+            >>> baca.increase_elements(list(range(10)), [10, -10])
             [10, -9, 12, -7, 14, -5, 16, -3, 18, -1]
 
     ..  container:: example
@@ -35,7 +35,7 @@ def increase_elements(sequence, addenda, indices=None):
 
         ::
 
-            >>> baca.tools.increase_elements(tuple(range(10)), [10, -10])
+            >>> baca.increase_elements(tuple(range(10)), [10, -10])
             [10, -9, 12, -7, 14, -5, 16, -3, 18, -1]
 
     ..  container:: example
@@ -47,14 +47,14 @@ def increase_elements(sequence, addenda, indices=None):
             >>> sequence = [1, 1, 2, 3, 5, 5, 1, 2, 5, 5, 6]
             >>> addenda = [0.5, 0.5]
             >>> indices = [0, 4, 8]
-            >>> baca.tools.increase_elements(sequence, addenda, indices)
+            >>> baca.increase_elements(sequence, addenda, indices)
             [1.5, 1.5, 2, 3, 5.5, 5.5, 1, 2, 5.5, 5.5, 6]
 
     ..  container:: example
 
         ::
 
-            >>> baca.tools.increase_elements(range(10), [2, 0])
+            >>> baca.increase_elements(range(10), [2, 0])
             [2, 1, 4, 3, 6, 5, 8, 7, 10, 9]
 
     ..  container:: example
@@ -63,7 +63,7 @@ def increase_elements(sequence, addenda, indices=None):
 
 
             >>> sequence_1 = [1, 1, 2, 3, 5, 5, 1, 2, 5, 5, 6]
-            >>> baca.tools.increase_elements(
+            >>> baca.increase_elements(
             ...     sequence_1, [0.5, 0.5], indices=[0, 4, 8]
             ...     )
             [1.5, 1.5, 2, 3, 5.5, 5.5, 1, 2, 5.5, 5.5, 6]

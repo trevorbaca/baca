@@ -16,8 +16,8 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
         ::
 
             >>> range_ = abjad.PitchRange('[A0, C8]')
-            >>> constellation_circuit = baca.tools.ConstellationCircuit(
-            ...     baca.tools.ConstellationCircuit.CC1,
+            >>> constellation_circuit = baca.ConstellationCircuit(
+            ...     baca.ConstellationCircuit.CC1,
             ...     range_,
             ...     )
 
@@ -132,7 +132,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
         enumeration = enumerate(self._partitioned_generator_pnls)
         for i, partitioned_generator_pnl in enumeration:
             constellation_number = i + 1
-            constellation = baca.tools.Constellation(
+            constellation = baca.Constellation(
                 self,
                 partitioned_generator_pnl,
                 )
@@ -948,7 +948,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
     def make_constellation_circuit_1(class_):
         r'''Makes constellation circuit 1.
 
-            >>> class_ = baca.tools.ConstellationCircuit
+            >>> class_ = baca.ConstellationCircuit
             >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> for constellation in constellation_circuit:
             ...     constellation

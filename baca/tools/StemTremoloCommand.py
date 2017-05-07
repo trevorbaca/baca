@@ -17,8 +17,8 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -29,7 +29,7 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
             ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
             ...     baca.even_runs(),
-            ...     baca.tools.StemTremoloCommand(),
+            ...     baca.StemTremoloCommand(),
             ...     )
 
         ::
@@ -176,8 +176,8 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -189,7 +189,7 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
                 ...     baca.select_stages(1),
                 ...     baca.pitches('E4 F4'),
                 ...     baca.even_runs(),
-                ...     baca.tools.StemTremoloCommand(
+                ...     baca.StemTremoloCommand(
                 ...         pattern=pattern,
                 ...         ),
                 ...     )
@@ -282,8 +282,8 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -294,7 +294,7 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
                 ...     baca.select_stages(1),
                 ...     baca.pitches('E4 F4'),
                 ...     baca.even_runs(),
-                ...     baca.tools.StemTremoloCommand(
+                ...     baca.StemTremoloCommand(
                 ...         pattern=abjad.select_every([1], period=2),
                 ...         ),
                 ...     )
@@ -397,8 +397,8 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -409,7 +409,7 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
                 ...     baca.select_stages(1),
                 ...     baca.pitches('E4 F4'),
                 ...     baca.even_runs(),
-                ...     baca.tools.StemTremoloCommand(),
+                ...     baca.StemTremoloCommand(),
                 ...     )
 
             ::
@@ -500,8 +500,8 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -512,7 +512,7 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
                 ...     baca.select_stages(1),
                 ...     baca.pitches('E4 F4'),
                 ...     baca.even_runs(),
-                ...     baca.tools.StemTremoloCommand(
+                ...     baca.StemTremoloCommand(
                 ...         selector=abjad.select().
                 ...             by_leaf(flatten=True).
                 ...             get_slice(start=-7, apply_to_each=False),
@@ -619,8 +619,8 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -631,7 +631,7 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
                 ...     baca.select_stages(1),
                 ...     baca.pitches('E4 F4'),
                 ...     baca.even_runs(),
-                ...     baca.tools.StemTremoloCommand(),
+                ...     baca.StemTremoloCommand(),
                 ...     )
 
             ::
@@ -722,8 +722,8 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -734,7 +734,7 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
                 ...     baca.select_stages(1),
                 ...     baca.pitches('E4 F4'),
                 ...     baca.even_runs(),
-                ...     baca.tools.StemTremoloCommand(
+                ...     baca.StemTremoloCommand(
                 ...         tremolo_flags=16,
                 ...         ),
                 ...     )

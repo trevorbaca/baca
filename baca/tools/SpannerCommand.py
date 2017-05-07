@@ -18,7 +18,7 @@ class SpannerCommand(abjad.abctools.AbjadObject):
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.tools.SpannerCommand(
+            ...     baca.SpannerCommand(
             ...         selector=baca.select_leaves_in_each_tuplet(),
             ...         spanner=abjad.Slur(),
             ...         ),
@@ -65,8 +65,8 @@ class SpannerCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> collection_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            >>> collection_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -77,7 +77,7 @@ class SpannerCommand(abjad.abctools.AbjadObject):
             ...     baca.select_stages(1),
             ...     baca.even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.tools.SpannerCommand(
+            ...     baca.SpannerCommand(
             ...         selector=baca.select_leaves_in_each_tuplet(),
             ...         spanner=abjad.Slur(),
             ...         ),
@@ -169,7 +169,7 @@ class SpannerCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> baca.tools.SpannerCommand()
+            >>> baca.SpannerCommand()
             SpannerCommand()
 
     '''
@@ -243,7 +243,7 @@ class SpannerCommand(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.SpannerCommand(
+                ...     baca.SpannerCommand(
                 ...         spanner=abjad.Slur(),
                 ...         ),
                 ...     )
@@ -288,7 +288,7 @@ class SpannerCommand(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.SpannerCommand(
+                ...     baca.SpannerCommand(
                 ...         spanner=abjad.Slur(),
                 ...         ),
                 ...     )
@@ -368,7 +368,7 @@ class SpannerCommand(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[14, 14, 14]],
-                ...     baca.tools.SpannerCommand(spanner=abjad.Tie()),
+                ...     baca.SpannerCommand(spanner=abjad.Tie()),
                 ...     counts=[5],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)

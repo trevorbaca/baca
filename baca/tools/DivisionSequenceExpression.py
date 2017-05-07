@@ -20,7 +20,7 @@ class DivisionSequenceExpression(abjad.Expression):
 
         ::
 
-            >>> expression = baca.tools.DivisionSequenceExpression()
+            >>> expression = baca.DivisionSequenceExpression()
             >>> expression = expression.division_sequence()
             >>> expression = expression[-3:]
 
@@ -35,7 +35,7 @@ class DivisionSequenceExpression(abjad.Expression):
 
         ::
 
-            >>> expression = baca.tools.DivisionSequenceExpression()
+            >>> expression = baca.DivisionSequenceExpression()
             >>> expression = expression.division_sequence()
             >>> expression = expression.split_by_durations(
             ...     durations=[(1, 4)],
@@ -56,7 +56,7 @@ class DivisionSequenceExpression(abjad.Expression):
 
         ::
 
-            >>> expression = baca.tools.DivisionSequenceExpression()
+            >>> expression = baca.DivisionSequenceExpression()
             >>> expression = expression.division_sequence()
             >>> expression = expression.split_by_durations(
             ...     durations=[(1, 4)],
@@ -86,7 +86,7 @@ class DivisionSequenceExpression(abjad.Expression):
 
         ::
 
-            >>> expression = baca.tools.DivisionSequenceExpression()
+            >>> expression = baca.DivisionSequenceExpression()
             >>> expression = expression.division_sequence()
             >>> expression = expression.split_by_durations(
             ...     compound_meter_multiplier=(3, 2),
@@ -109,13 +109,13 @@ class DivisionSequenceExpression(abjad.Expression):
 
         ::
 
-            >>> expression = baca.tools.DivisionSequenceExpression()
+            >>> expression = baca.DivisionSequenceExpression()
             >>> expression = expression.division_sequence()
             >>> expression = expression.split_by_durations(
             ...     compound_meter_multiplier=(3, 2),
             ...     durations=[(1, 4)],
             ...     )
-            >>> expression_2 = baca.tools.DivisionSequenceExpression()
+            >>> expression_2 = baca.DivisionSequenceExpression()
             >>> expression_2 = expression_2.division_sequence()[0]
             >>> expression = expression.map(expression_2)
 
@@ -166,7 +166,7 @@ class DivisionSequenceExpression(abjad.Expression):
 
         Returns expression.
         '''
-        class_ = baca.tools.DivisionSequence
+        class_ = baca.DivisionSequence
         callback = self._make_initializer_callback(
             class_,
             markup_expression=abjad.Expression().markup(),

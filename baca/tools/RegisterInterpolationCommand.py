@@ -26,7 +26,7 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     collections,
-            ...     baca.tools.RegisterInterpolationCommand(
+            ...     baca.RegisterInterpolationCommand(
             ...         start_pitch=0,
             ...         stop_pitch=24,
             ...         ),
@@ -90,7 +90,7 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     collections,
-            ...     baca.tools.RegisterInterpolationCommand(
+            ...     baca.RegisterInterpolationCommand(
             ...         start_pitch=0,
             ...         stop_pitch=24,
             ...         ),
@@ -134,8 +134,8 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
         Holds register constant:
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=time_signatures,
             ...     )
 
@@ -147,7 +147,7 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
             ...     baca.select_stages(1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
-            ...     baca.tools.RegisterInterpolationCommand(
+            ...     baca.RegisterInterpolationCommand(
             ...         start_pitch=12,
             ...         stop_pitch=12,
             ...         ),
@@ -294,8 +294,8 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
         Register interpolates from the octave of C5 to the octave of C4:
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=time_signatures,
             ...     )
 
@@ -307,7 +307,7 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
             ...     baca.select_stages(1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
-            ...     baca.tools.RegisterInterpolationCommand(
+            ...     baca.RegisterInterpolationCommand(
             ...         start_pitch=12,
             ...         stop_pitch=0,
             ...         ),
@@ -454,8 +454,8 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
         Register interpolates from the octave of C4 to the octave of C5:
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=time_signatures,
             ...     )
 
@@ -467,7 +467,7 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
             ...     baca.select_stages(1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
-            ...     baca.tools.RegisterInterpolationCommand(
+            ...     baca.RegisterInterpolationCommand(
             ...         start_pitch=0,
             ...         stop_pitch=12,
             ...         ),
@@ -614,8 +614,8 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
         Register interpolates from the octave of C5 to the octave of C3:
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=time_signatures,
             ...     )
 
@@ -627,7 +627,7 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
             ...     baca.select_stages(1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
-            ...     baca.tools.RegisterInterpolationCommand(
+            ...     baca.RegisterInterpolationCommand(
             ...         start_pitch=12,
             ...         stop_pitch=-12,
             ...         ),
@@ -774,8 +774,8 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
         Register interpolates from the octave of C3 to the octave of C5:
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=time_signatures,
             ...     )
 
@@ -787,7 +787,7 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
             ...     baca.select_stages(1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
-            ...     baca.tools.RegisterInterpolationCommand(
+            ...     baca.RegisterInterpolationCommand(
             ...         start_pitch=-12,
             ...         stop_pitch=12,
             ...         ),
@@ -1035,7 +1035,7 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.tools.RegisterInterpolationCommand(
+                ...     baca.RegisterInterpolationCommand(
                 ...         pattern=abjad.select_first(),
                 ...         start_pitch=0,
                 ...         stop_pitch=24,
@@ -1097,7 +1097,7 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.tools.RegisterInterpolationCommand(
+                ...     baca.RegisterInterpolationCommand(
                 ...         pattern=abjad.select_last(),
                 ...         start_pitch=0,
                 ...         stop_pitch=24,
@@ -1159,7 +1159,7 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.tools.RegisterInterpolationCommand(
+                ...     baca.RegisterInterpolationCommand(
                 ...         pattern=abjad.select_all(),
                 ...         start_pitch=0,
                 ...         stop_pitch=24,

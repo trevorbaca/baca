@@ -19,7 +19,7 @@ class Tree(abjad.abctools.AbjadObject):
         ::
 
             >>> items = [[[0, 1], [2, 3]], [4, 5]]
-            >>> tree = baca.tools.Tree(items=items)
+            >>> tree = baca.Tree(items=items)
 
         ::
 
@@ -100,10 +100,10 @@ class Tree(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> tree_1 = baca.tools.Tree(items=[0, 1])
-            >>> tree_2 = baca.tools.Tree(items=[2, 3])
-            >>> tree_3 = baca.tools.Tree(items=[4, 5])
-            >>> tree = baca.tools.Tree(items=[[tree_1, tree_2], tree_3])
+            >>> tree_1 = baca.Tree(items=[0, 1])
+            >>> tree_2 = baca.Tree(items=[2, 3])
+            >>> tree_3 = baca.Tree(items=[4, 5])
+            >>> tree = baca.Tree(items=[[tree_1, tree_2], tree_3])
 
         ::
 
@@ -194,7 +194,7 @@ class Tree(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.tools.Tree(items=items)
+                >>> tree = baca.Tree(items=items)
 
             ::
 
@@ -232,11 +232,11 @@ class Tree(abjad.abctools.AbjadObject):
             ::
 
                 >>> sequence_1 = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree_1 = baca.tools.Tree(sequence_1)
+                >>> tree_1 = baca.Tree(sequence_1)
                 >>> sequence_2 = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree_2 = baca.tools.Tree(sequence_2)
+                >>> tree_2 = baca.Tree(sequence_2)
                 >>> sequence_3 = [[0, 1], [2, 3], [4, 5], [6, 7]]
-                >>> tree_3 = baca.tools.Tree(sequence_3)
+                >>> tree_3 = baca.Tree(sequence_3)
 
             ::
 
@@ -283,7 +283,7 @@ class Tree(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.tools.Tree(items=items)
+                >>> tree = baca.Tree(items=items)
 
             ::
 
@@ -342,7 +342,7 @@ class Tree(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.tools.Tree(items=items)
+                >>> tree = baca.Tree(items=items)
 
             ::
 
@@ -372,7 +372,7 @@ class Tree(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.tools.Tree(items=items)
+                >>> tree = baca.Tree(items=items)
 
             ::
 
@@ -466,7 +466,7 @@ class Tree(abjad.abctools.AbjadObject):
 #            ::
 #
 #                >>> items = [[[0, 1], [2, 3]], [4, 5]]
-#                >>> tree = baca.tools.Tree(items=items)
+#                >>> tree = baca.Tree(items=items)
 #
 #            ::
 #
@@ -485,7 +485,7 @@ class Tree(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.tools.Tree(items=items)
+                >>> tree = baca.Tree(items=items)
 
             ::
 
@@ -508,7 +508,7 @@ class Tree(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> baca.tools.Tree(items=items)
+                >>> baca.Tree(items=items)
                 Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
 
         ..  container:: example
@@ -517,7 +517,7 @@ class Tree(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> baca.tools.Tree(0)
+                >>> baca.Tree(0)
                 Tree(items=0)
 
         ..  container:: example
@@ -526,7 +526,7 @@ class Tree(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> baca.tools.Tree()
+                >>> baca.Tree()
                 Tree()
 
         Returns string.
@@ -573,7 +573,7 @@ class Tree(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.tools.Tree(items=items)
+                >>> tree = baca.Tree(items=items)
 
             ::
 
@@ -601,7 +601,7 @@ class Tree(abjad.abctools.AbjadObject):
             Gets level:
 
                 >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.tools.Tree(items=items)
+                >>> tree = baca.Tree(items=items)
 
             ::
 
@@ -623,7 +623,7 @@ class Tree(abjad.abctools.AbjadObject):
             Gets negative level:
 
                 >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.tools.Tree(items=items)
+                >>> tree = baca.Tree(items=items)
 
             ::
 
@@ -673,7 +673,7 @@ class Tree(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [[0, 1], [2, 3], [4, 5], [6, 7]]
-                >>> tree = baca.tools.Tree(items=items)
+                >>> tree = baca.Tree(items=items)
 
             Gets all nodes at level 2:
 
@@ -766,7 +766,7 @@ class Tree(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [[0, 1], [2, 3], [4, 5], [6, 7]]
-                >>> tree = baca.tools.Tree(items=items)
+                >>> tree = baca.Tree(items=items)
 
             Gets next 4 nodes at level 2:
 
@@ -828,7 +828,7 @@ class Tree(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [[0, 1], [2, 3], [4, 5], [6, 7]]
-                >>> tree = baca.tools.Tree(items=items)
+                >>> tree = baca.Tree(items=items)
 
             Gets previous 4 nodes at level 2:
 
@@ -967,7 +967,7 @@ class Tree(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.tools.Tree(items=items)
+                >>> tree = baca.Tree(items=items)
                 >>> parentage = tree[1]._get_parentage()
                 >>> for tree in parentage:
                 ...     tree
@@ -979,7 +979,7 @@ class Tree(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.tools.Tree(items=items)
+                >>> tree = baca.Tree(items=items)
                 >>> parentage = tree[1]._get_parentage(include_self=False)
                 >>> for tree in parentage:
                 ...     tree
@@ -1006,7 +1006,7 @@ class Tree(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.tools.Tree(items=items)
+                >>> tree = baca.Tree(items=items)
 
             ::
 
@@ -1035,7 +1035,7 @@ class Tree(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [[0, 1], [2, 3], [4, 5], [6, 7]]
-                >>> tree = baca.tools.Tree(items=items)
+                >>> tree = baca.Tree(items=items)
 
             ::
 
@@ -1118,7 +1118,7 @@ class Tree(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [[0, 1], [2, 3], [4, 5], [6, 7]]
-                >>> tree = baca.tools.Tree(items=items)
+                >>> tree = baca.Tree(items=items)
 
             ::
 
@@ -1187,21 +1187,21 @@ class Tree(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> tree = baca.tools.Tree(items=items)
+                >>> tree = baca.Tree(items=items)
                 >>> tree[0][0]._remove_to_root()
                 >>> tree.get_payload(nested=True)
                 [[1], [2, 3], [4, 5], [6, 7]]
 
             ::
 
-                >>> tree = baca.tools.Tree(items=items)
+                >>> tree = baca.Tree(items=items)
                 >>> tree[0][1]._remove_to_root()
                 >>> tree.get_payload(nested=True)
                 [[2, 3], [4, 5], [6, 7]]
 
             ::
 
-                >>> tree = baca.tools.Tree(items=items)
+                >>> tree = baca.Tree(items=items)
                 >>> tree[1]._remove_to_root()
                 >>> tree.get_payload(nested=True)
                 [[4, 5], [6, 7]]
@@ -1256,7 +1256,7 @@ class Tree(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [[1.1, 2.2], [8.8, 9.9]]
-                >>> tree = baca.tools.Tree(items=items, item_class=int)
+                >>> tree = baca.Tree(items=items, item_class=int)
 
             ::
 
@@ -1291,7 +1291,7 @@ class Tree(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.tools.Tree(items=items)
+                >>> tree = baca.Tree(items=items)
 
             ::
 
@@ -1324,7 +1324,7 @@ class Tree(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.tools.Tree(items=items)
+                >>> tree = baca.Tree(items=items)
 
             ::
 
@@ -1380,7 +1380,7 @@ class Tree(abjad.abctools.AbjadObject):
             ::
 
                 >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.tools.Tree(items=items)
+                >>> tree = baca.Tree(items=items)
                 >>> graph(tree) # doctest: +SKIP
 
             Iterates all levels:

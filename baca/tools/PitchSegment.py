@@ -134,7 +134,7 @@ class PitchSegment(abjad.PitchSegment):
 
         Returns new segment.
         '''
-        specifier = baca.tools.RegisterToOctaveCommand(
+        specifier = baca.RegisterToOctaveCommand(
             anchor=Bottom,
             octave_number=n,
             )
@@ -215,7 +215,7 @@ class PitchSegment(abjad.PitchSegment):
 
         Returns new segment.
         '''
-        specifier = baca.tools.RegisterToOctaveCommand(
+        specifier = baca.RegisterToOctaveCommand(
             anchor=Center,
             octave_number=n,
             )
@@ -338,7 +338,7 @@ class PitchSegment(abjad.PitchSegment):
 
         Returns new segment.
         '''
-        specifier = baca.tools.RegisterToOctaveCommand(
+        specifier = baca.RegisterToOctaveCommand(
             anchor=Top,
             octave_number=n,
             )
@@ -477,7 +477,7 @@ class PitchSegment(abjad.PitchSegment):
 
         Returns new pitch segment.
         '''
-        specifier = baca.tools.ChordalSpacingSpecifier(
+        specifier = baca.ChordalSpacingSpecifier(
             bass=bass,
             direction=Down,
             minimum_semitones=semitones,
@@ -619,7 +619,7 @@ class PitchSegment(abjad.PitchSegment):
 
         Returns new pitch segment.
         '''
-        specifier = baca.tools.ChordalSpacingSpecifier(
+        specifier = baca.ChordalSpacingSpecifier(
             bass=bass,
             direction=Up,
             minimum_semitones=semitones,

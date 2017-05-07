@@ -13,7 +13,7 @@ class FloatingSelection(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> baca.tools.FloatingSelection()
+            >>> baca.FloatingSelection()
             FloatingSelection()
 
     '''

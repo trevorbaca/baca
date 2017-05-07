@@ -19,15 +19,15 @@ class TimeSignatureMaker(abjad.abctools.AbjadObject):
             ...     [(1, 16), (2, 16), (3, 16)],
             ...     [(1, 8), (2, 8), (3, 8)],
             ...     ]
-            >>> stage_specifier = baca.tools.StageSpecifier([
+            >>> stage_specifier = baca.StageSpecifier([
             ...     2,
             ...     2,
             ...     abjad.Fermata('longfermata'),
             ...     ])
-            >>> tempo_specifier = baca.tools.TempoSpecifier([
+            >>> tempo_specifier = baca.TempoSpecifier([
             ...     (1, abjad.Tempo((1, 4), 90)),
             ...     ])
-            >>> maker = baca.tools.TimeSignatureMaker(
+            >>> maker = baca.TimeSignatureMaker(
             ...     time_signatures=time_signatures,
             ...     stage_specifier=stage_specifier,
             ...     tempo_specifier=tempo_specifier,
@@ -89,7 +89,7 @@ class TimeSignatureMaker(abjad.abctools.AbjadObject):
             if isinstance(item, abjad.Fermata):
                 item = abjad.TimeSignature((1, 4))
             items.append(item)
-        stage_specifier = baca.tools.StageSpecifier(items=items)
+        stage_specifier = baca.StageSpecifier(items=items)
         time_signature_groups = self._make_time_signature_groups(
             self.repeat_count,
             stage_specifier,
@@ -99,7 +99,7 @@ class TimeSignatureMaker(abjad.abctools.AbjadObject):
         time_signatures = baca.Sequence(time_signature_groups).flatten(depth=1)
         fermata_entries = self.stage_specifier._make_fermata_entries()
         items = self.tempo_specifier.items + fermata_entries
-        tempo_specifier = baca.tools.TempoSpecifier(items=items)
+        tempo_specifier = baca.TempoSpecifier(items=items)
         return measures_per_stage, tempo_specifier, time_signatures
 
     ### PRIVATE METHODS ###

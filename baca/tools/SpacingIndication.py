@@ -18,7 +18,7 @@ class SpacingIndication(abjad.abctools.AbjadValueObject):
     ::
 
         >>> tempo = abjad.Tempo((1, 8), 44)
-        >>> indication = baca.tools.SpacingIndication(tempo, abjad.Duration(1, 68))
+        >>> indication = baca.SpacingIndication(tempo, abjad.Duration(1, 68))
 
     ::
 
@@ -29,14 +29,14 @@ class SpacingIndication(abjad.abctools.AbjadValueObject):
 
     ::
 
-        >>> baca.tools.SpacingIndication(((1, 8), 44), (1, 68))
+        >>> baca.SpacingIndication(((1, 8), 44), (1, 68))
         SpacingIndication(Tempo(reference_duration=Duration(1, 8), units_per_minute=44), Duration(1, 68))
 
     Initialize from other spacing indication:
 
     ::
 
-        >>> baca.tools.SpacingIndication(indication)
+        >>> baca.SpacingIndication(indication)
         SpacingIndication(Tempo(reference_duration=Duration(1, 8), units_per_minute=44), Duration(1, 68))
 
     Spacing indications are immutable.

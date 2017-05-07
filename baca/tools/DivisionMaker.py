@@ -17,7 +17,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> division_maker = baca.tools.DivisionMaker()
+            >>> division_maker = baca.DivisionMaker()
             >>> division_maker = division_maker.split_by_durations(
             ...     durations=[(1, 4)],
             ...     )
@@ -71,7 +71,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> division_maker = baca.tools.DivisionMaker()
+            >>> division_maker = baca.DivisionMaker()
             >>> division_maker = division_maker.fuse_by_counts(
             ...     counts=abjad.Infinity,
             ...     )
@@ -102,7 +102,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> division_maker = baca.tools.DivisionMaker()
+            >>> division_maker = baca.DivisionMaker()
             >>> division_maker = division_maker.fuse_by_counts(
             ...     counts=abjad.Infinity,
             ...     )
@@ -147,7 +147,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> division_maker = baca.tools.DivisionMaker()
+            >>> division_maker = baca.DivisionMaker()
             >>> division_maker = division_maker.split_by_durations(
             ...     durations=[(3, 8)],
             ...     )
@@ -196,7 +196,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> division_maker = baca.tools.DivisionMaker()
+            >>> division_maker = baca.DivisionMaker()
             >>> division_maker = division_maker.split_by_durations(
             ...     durations=[(3, 8)],
             ...     )
@@ -235,7 +235,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> division_maker = baca.tools.DivisionMaker()
+            >>> division_maker = baca.DivisionMaker()
             >>> division_maker = division_maker.split_by_durations(
             ...     durations=[(3, 8)],
             ...     )
@@ -247,7 +247,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
         ::
 
             >>> divisions = [(7, 8), (3, 8), (5, 8)]
-            >>> divisions = [baca.tools.Division(_) for _ in divisions]
+            >>> divisions = [baca.Division(_) for _ in divisions]
             >>> divisions[0]._start_offset = abjad.Offset(1, 4)
             >>> divisions = division_maker(divisions)
             >>> for division in divisions:
@@ -335,23 +335,23 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
     @staticmethod
     def _to_divisions(argument, start_offset=None):
-        if isinstance(argument, baca.tools.Division):
-            result = baca.tools.Division(argument)
+        if isinstance(argument, baca.Division):
+            result = baca.Division(argument)
             if start_offset is not None:
                 result._start_offset = start_offset
                 start_offset += result.duration
         elif isinstance(argument, abjad.mathtools.NonreducedFraction):
-            result = baca.tools.Division(argument.pair)
+            result = baca.Division(argument.pair)
             if start_offset is not None:
                 result._start_offset = start_offset
                 start_offset += result.duration
         elif hasattr(argument, 'pair'):
-            result = baca.tools.Division(argument.pair)
+            result = baca.Division(argument.pair)
             if start_offset is not None:
                 result._start_offset = start_offset
                 start_offset += result.duration
         elif isinstance(argument, tuple):
-            result = baca.tools.Division(argument)
+            result = baca.Division(argument)
             if start_offset is not None:
                 result._start_offset = start_offset
                 start_offset += result.duration
@@ -380,7 +380,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> division_maker = baca.tools.DivisionMaker()
+                >>> division_maker = baca.DivisionMaker()
 
             ::
 
@@ -393,7 +393,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> division_maker = baca.tools.DivisionMaker()
+                >>> division_maker = baca.DivisionMaker()
                 >>> division_maker = division_maker.split_by_durations(
                 ...     durations=[(1, 4)],
                 ...     )
@@ -421,7 +421,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
         Returns new division-maker.
         '''
-        callback = baca.tools.FlattenDivisionCallback(depth=depth)
+        callback = baca.FlattenDivisionCallback(depth=depth)
         return self._append_callback(callback)
 
     def fuse_by_counts(
@@ -437,7 +437,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
  
             ::
 
-                >>> division_maker = baca.tools.DivisionMaker()
+                >>> division_maker = baca.DivisionMaker()
                 >>> division_maker = division_maker.fuse_by_counts(
                 ...     counts=[2],
                 ...     )
@@ -465,7 +465,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
                 }
 
         '''
-        callback = baca.tools.FuseByCountsDivisionCallback(
+        callback = baca.FuseByCountsDivisionCallback(
             cyclic=cyclic,
             counts=counts,
             )
@@ -486,7 +486,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> division_maker = baca.tools.DivisionMaker()
+                >>> division_maker = baca.DivisionMaker()
                 >>> division_maker = division_maker.partition_by_counts(
                 ...     counts=[2],
                 ...     append_remainder=False,
@@ -507,7 +507,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> division_maker = baca.tools.DivisionMaker()
+                >>> division_maker = baca.DivisionMaker()
                 >>> division_maker = division_maker.partition_by_counts(
                 ...     counts=[2],
                 ...     append_remainder=True,
@@ -527,7 +527,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> division_maker = baca.tools.DivisionMaker()
+                >>> division_maker = baca.DivisionMaker()
                 >>> division_maker = division_maker.partition_by_counts(
                 ...     counts=[2],
                 ...     append_remainder=False,
@@ -548,7 +548,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> division_maker = baca.tools.DivisionMaker()
+                >>> division_maker = baca.DivisionMaker()
                 >>> division_maker = division_maker.partition_by_counts(
                 ...     counts=[2],
                 ...     append_remainder=True,
@@ -573,7 +573,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> division_maker = baca.tools.DivisionMaker()
+                >>> division_maker = baca.DivisionMaker()
                 >>> division_maker = division_maker.partition_by_counts(
                 ...     counts=[2],
                 ...     append_remainder=False,
@@ -598,7 +598,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> division_maker = baca.tools.DivisionMaker()
+                >>> division_maker = baca.DivisionMaker()
                 >>> division_maker = division_maker.partition_by_counts(
                 ...     counts=[2],
                 ...     append_remainder=True,
@@ -622,7 +622,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> division_maker = baca.tools.DivisionMaker()
+                >>> division_maker = baca.DivisionMaker()
                 >>> division_maker = division_maker.partition_by_counts(
                 ...     counts=[2],
                 ...     append_remainder=False,
@@ -647,7 +647,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> division_maker = baca.tools.DivisionMaker()
+                >>> division_maker = baca.DivisionMaker()
                 >>> division_maker = division_maker.partition_by_counts(
                 ...     counts=[2],
                 ...     append_remainder=True,
@@ -673,7 +673,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
         Returns new division-maker.
         '''
-        callback = baca.tools.PartitionDivisionCallback(
+        callback = baca.PartitionDivisionCallback(
             counts=counts,
             fuse_assignable_total_duration=fuse_assignable_total_duration,
             append_remainder=append_remainder,
@@ -709,7 +709,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> division_maker = baca.tools.DivisionMaker()
+                >>> division_maker = baca.DivisionMaker()
                 >>> division_maker = division_maker.split_by_durations(
                 ...     durations=[(1, 4)],
                 ...     )
@@ -762,7 +762,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> division_maker = baca.tools.DivisionMaker()
+                >>> division_maker = baca.DivisionMaker()
                 >>> division_maker = division_maker.split_by_durations(
                 ...     durations=[(1, 4)],
                 ...     remainder=Left,
@@ -812,7 +812,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
         Returns new division-maker.
         '''
-        callback = baca.tools.SplitByDurationsDivisionCallback(
+        callback = baca.SplitByDurationsDivisionCallback(
             compound_meter_multiplier=compound_meter_multiplier,
             cyclic=cyclic,
             durations=durations,
@@ -834,7 +834,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> division_maker = baca.tools.DivisionMaker()
+                >>> division_maker = baca.DivisionMaker()
                 >>> division_maker = division_maker.split_by_rounded_ratios(
                 ...     ratios=[abjad.Ratio([2, 1])],
                 ...     )
@@ -879,7 +879,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> division_maker = baca.tools.DivisionMaker()
+                >>> division_maker = baca.DivisionMaker()
                 >>> division_maker = division_maker.split_by_rounded_ratios(
                 ...     ratios=[
                 ...         abjad.Ratio([2, 1]),
@@ -923,7 +923,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
         Returns new division-maker.
         '''
-        callback = baca.tools.SplitByRoundedRatiosDivisionCallback(
+        callback = baca.SplitByRoundedRatiosDivisionCallback(
             ratios=ratios,
             )
         return self._append_callback(callback)

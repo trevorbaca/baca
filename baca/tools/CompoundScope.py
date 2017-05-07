@@ -18,11 +18,11 @@ class CompoundScope(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> scope = baca.tools.CompoundScope([
-            ...     baca.tools.SimpleScope('Piano Music Voice', (5, 9)),
-            ...     baca.tools.SimpleScope('Clarinet Music Voice', (7, 12)),
-            ...     baca.tools.SimpleScope('Violin Music Voice', (8, 12)),
-            ...     baca.tools.SimpleScope('Oboe Music Voice', (9, 12)),
+            >>> scope = baca.CompoundScope([
+            ...     baca.SimpleScope('Piano Music Voice', (5, 9)),
+            ...     baca.SimpleScope('Clarinet Music Voice', (7, 12)),
+            ...     baca.SimpleScope('Violin Music Voice', (8, 12)),
+            ...     baca.SimpleScope('Oboe Music Voice', (9, 12)),
             ...     ])
 
         ::
@@ -55,7 +55,7 @@ class CompoundScope(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> compound_scope = baca.tools.CompoundScope()
+                >>> compound_scope = baca.CompoundScope()
 
             ::
 
@@ -82,8 +82,8 @@ class CompoundScope(abjad.abctools.AbjadObject):
             assert isinstance(simple_scopes, (tuple, list))
             simple_scopes_ = []
             for simple_scope in simple_scopes:
-                if not isinstance(simple_scope, baca.tools.SimpleScope):
-                    simple_scope = baca.tools.SimpleScope(*simple_scope)
+                if not isinstance(simple_scope, baca.SimpleScope):
+                    simple_scope = baca.SimpleScope(*simple_scope)
                 simple_scopes_.append(simple_scope)
             simple_scopes = simple_scopes_
             simple_scopes = tuple(simple_scopes)
@@ -116,7 +116,7 @@ class CompoundScope(abjad.abctools.AbjadObject):
 
     @staticmethod
     def _is_stage_pair(argument):
-        if isinstance(argument, baca.tools.StageExpression):
+        if isinstance(argument, baca.StageExpression):
             return True
         if isinstance(argument, tuple):
             if len(argument) == 2:
@@ -127,9 +127,9 @@ class CompoundScope(abjad.abctools.AbjadObject):
 
     @classmethod
     def _to_compound_scope(class_, scope, score_template=None):
-        if isinstance(scope, baca.tools.SimpleScope):
-            scope = baca.tools.CompoundScope(scope)
-        elif isinstance(scope, baca.tools.CompoundScope):
+        if isinstance(scope, baca.SimpleScope):
+            scope = baca.CompoundScope(scope)
+        elif isinstance(scope, baca.CompoundScope):
             pass
         # single scope token
         elif isinstance(scope, tuple):
@@ -137,7 +137,7 @@ class CompoundScope(abjad.abctools.AbjadObject):
                 scope,
                 score_template=score_template,
                 )
-            scope = baca.tools.CompoundScope(simple_scopes)
+            scope = baca.CompoundScope(simple_scopes)
         # list of scope tokens
         elif isinstance(scope, list):
             simple_scopes = []
@@ -148,14 +148,14 @@ class CompoundScope(abjad.abctools.AbjadObject):
                     )
                 simple_scopes.extend(result)
             assert all(
-                isinstance(_, baca.tools.SimpleScope) for _ in simple_scopes)
-            scope = baca.tools.CompoundScope(simple_scopes)
+                isinstance(_, baca.SimpleScope) for _ in simple_scopes)
+            scope = baca.CompoundScope(simple_scopes)
         else:
             message = 'must be simple scope, compound scope, scope token,'
             message + ' or list of scope tokens: {!r}.'
             message = message.format(scope)
             raise TypeError(message)
-        assert isinstance(scope, baca.tools.CompoundScope), repr(scope)
+        assert isinstance(scope, baca.CompoundScope), repr(scope)
         compound_scope = scope
         return compound_scope
 
@@ -181,7 +181,7 @@ class CompoundScope(abjad.abctools.AbjadObject):
             stage_pairs = [(stage_pairs, stage_pairs)]
         elif class_._is_stage_pair(stage_pairs):
             stage_pairs = [stage_pairs]
-        elif isinstance(stage_pairs, baca.tools.StageExpression):
+        elif isinstance(stage_pairs, baca.StageExpression):
             #start = stage_pairs.start
             #stop = stage_pairs.stop
             #stage_pairs = [(start, stop)]
@@ -210,7 +210,7 @@ class CompoundScope(abjad.abctools.AbjadObject):
                     voice_name,
                     )
             for stage_pair in stage_pairs:
-                simple_scope = baca.tools.SimpleScope(voice_name, stage_pair)
+                simple_scope = baca.SimpleScope(voice_name, stage_pair)
                 simple_scopes.append(simple_scope)
         return simple_scopes
 

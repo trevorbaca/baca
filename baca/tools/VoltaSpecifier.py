@@ -14,11 +14,11 @@ class VoltaSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     volta_specifier=baca.tools.VoltaSpecifier([
-            ...         baca.tools.MeasureExpression(1, 3),
+            ...     volta_specifier=baca.VoltaSpecifier([
+            ...         baca.MeasureExpression(1, 3),
             ...         ]),
             ...     )
 
@@ -127,9 +127,9 @@ class VoltaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> volta_specifier = baca.tools.VoltaSpecifier([
-                ...     baca.tools.MeasureExpression(2, 4),
-                ...     baca.tools.MeasureExpression(16, 18),
+                >>> volta_specifier = baca.VoltaSpecifier([
+                ...     baca.MeasureExpression(2, 4),
+                ...     baca.MeasureExpression(16, 18),
                 ...     ])
 
             ::
@@ -153,9 +153,9 @@ class VoltaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> volta_specifier = baca.tools.VoltaSpecifier([
-                ...     baca.tools.MeasureExpression(2, 4),
-                ...     baca.tools.MeasureExpression(16, 18),
+                >>> volta_specifier = baca.VoltaSpecifier([
+                ...     baca.MeasureExpression(2, 4),
+                ...     baca.MeasureExpression(16, 18),
                 ...     ])
 
             ::

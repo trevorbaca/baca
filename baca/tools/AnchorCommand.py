@@ -14,7 +14,7 @@ class AnchorCommand(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> baca.tools.AnchorCommand()
+            >>> baca.AnchorCommand()
             AnchorCommand()
 
     '''

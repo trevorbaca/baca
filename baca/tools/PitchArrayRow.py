@@ -18,7 +18,7 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> array = baca.tools.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
             >>> array[0].cells[0].append_pitch(0)
             >>> array[0].cells[1].append_pitch(2)
             >>> array[1].cells[2].append_pitch(4)
@@ -96,7 +96,7 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> array = baca.tools.PitchArray([[1, 2, 1], [2, 1, 1]])
+                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
                 >>> array[0].cells[0].append_pitch(0)
                 >>> array[0].cells[1].append_pitch(2)
                 >>> array[1].cells[2].append_pitch(4)
@@ -208,7 +208,7 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> array = baca.tools.PitchArray([[1, 2, 1], [2, 1, 1]])
+                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
                 >>> array[0].cells[0].append_pitch(0)
                 >>> array[0].cells[1].append_pitch(2)
                 >>> array[1].cells[2].append_pitch(4)
@@ -439,7 +439,7 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> array = baca.tools.PitchArray([[1, 2, 1], [2, 1, 1]])
+                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
                 >>> array[0].cells[0].append_pitch(abjad.NamedPitch(0))
                 >>> array[0].cells[1].append_pitch(abjad.NamedPitch(2))
                 >>> array[0].cells[1].append_pitch(abjad.NamedPitch(4))
@@ -452,9 +452,9 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> cell = baca.tools.PitchArrayCell(width=1)
+                >>> cell = baca.PitchArrayCell(width=1)
                 >>> array[0].append(cell)
-                >>> cell = baca.tools.PitchArrayCell(width=1)
+                >>> cell = baca.PitchArrayCell(width=1)
                 >>> array[1].append(cell)
 
             ::
@@ -465,7 +465,7 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
 
         Returns none.
         '''
-        assert isinstance(cell, baca.tools.PitchArrayCell), repr(cell)
+        assert isinstance(cell, baca.PitchArrayCell), repr(cell)
         cell._parent_row = self
         self._cells.append(cell)
 
@@ -476,7 +476,7 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> array = baca.tools.PitchArray([
+                >>> array = baca.PitchArray([
                 ...     [1, (0, 1), (0, 2)],
                 ...     [(0, 2), (0, 1), 1],
                 ...     ])
@@ -514,7 +514,7 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> array = baca.tools.PitchArray([[1, 2, 1], [2, 1, 1]])
+                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
                 >>> array[0].cells[0].append_pitch(0)
                 >>> array[0].cells[1].append_pitch(2)
                 >>> array[1].cells[2].append_pitch(4)
@@ -563,7 +563,7 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> array = baca.tools.PitchArray([[1, 2, 1], [2, 1, 1]])
+                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
                 >>> array[0].cells[0].append_pitch(0)
                 >>> array[0].cells[1].append_pitch(2)
                 >>> array[1].cells[2].append_pitch(4)
@@ -596,7 +596,7 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> array = baca.tools.PitchArray([[1, 2, 1], [2, 1, 1]])
+                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
                 >>> array[0].cells[0].append_pitch(0)
                 >>> array[0].cells[1].append_pitch(2)
                 >>> array[1].cells[2].append_pitch(4)
@@ -609,9 +609,9 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> cells = [baca.tools.PitchArrayCell(width=_) for _ in [1, 1, 1]]
+                >>> cells = [baca.PitchArrayCell(width=_) for _ in [1, 1, 1]]
                 >>> array[0].extend(cells)
-                >>> cell = baca.tools.PitchArrayCell(width=3)
+                >>> cell = baca.PitchArrayCell(width=3)
                 >>> array[1].append(cell)
 
             ::
@@ -633,7 +633,7 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> array = baca.tools.PitchArray([[1, 2, 1], [2, 1, 1]])
+                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
                 >>> array[0].cells[0].append_pitch(0)
                 >>> array[0].cells[1].append_pitch(2)
                 >>> array[1].cells[2].append_pitch(4)
@@ -683,7 +683,7 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
         pitches = []
         width = 0
         for cell in cells:
-            if not isinstance(cell, baca.tools.PitchArrayCell):
+            if not isinstance(cell, baca.PitchArrayCell):
                 raise TypeError
             if not cell.parent_row is self:
                 message = 'cells must belong to row.'
@@ -716,7 +716,7 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
             raise ValueError(message)
         missing_width = width - self_width
         for i in range(missing_width):
-            cell = baca.tools.PitchArrayCell()
+            cell = baca.PitchArrayCell()
             self.append(cell)
 
     def pop(self, cell_index):
@@ -751,7 +751,7 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> array = baca.tools.PitchArray([
+                >>> array = baca.PitchArray([
                 ...     [1, (2, 1), ([-2, -1.5], 2)],
                 ...     [(7, 2), (6, 1), 1]])
 

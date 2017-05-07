@@ -616,7 +616,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
             selections = [abjad.select(tuplet)]
             specifiers = [
                 _ for _ in specifiers
-                if not isinstance(_, baca.tools.MusicRhythmSpecifier)
+                if not isinstance(_, baca.MusicRhythmSpecifier)
                 ]
         else:
             collections = self._coerce_collections(collections)
@@ -678,7 +678,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
         selections.update(imbricated_selections)
         for value in selections.values():
             assert isinstance(value, abjad.Selection), repr(value)
-        return baca.tools.MusicContribution(
+        return baca.MusicContribution(
             anchor=anchor,
             color_selector_result=color_selector_result,
             figure_name=figure_name,
@@ -728,7 +728,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
         assert self._all_are_selections(selections), repr(selections)
         specifiers_ = []
         for specifier in specifiers:
-            if isinstance(specifier, baca.tools.ClusterCommand):
+            if isinstance(specifier, baca.ClusterCommand):
                 specifier(selections)
             else:
                 specifiers_.append(specifier)
@@ -739,7 +739,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
         specifiers_ = []
         color_selector_result = None
         for specifier in specifiers:
-            if isinstance(specifier, baca.tools.ColorCommand):
+            if isinstance(specifier, baca.ColorCommand):
                 color_selector_result = specifier(selections)
             else:
                 specifiers_.append(specifier)
@@ -750,7 +750,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
         assert isinstance(collections, prototype), repr(collections)
         specifiers_, unused_specifiers = [], []
         for specifier in specifiers:
-            if isinstance(specifier, baca.tools.MusicPitchSpecifier):
+            if isinstance(specifier, baca.MusicPitchSpecifier):
                 collections = specifier(collections)
             else:
                 unused_specifiers.append(specifier)
@@ -760,7 +760,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
         unused_specifiers = []
         imbricated_selections = {}
         for specifier in specifiers:
-            if not isinstance(specifier, baca.tools.ImbricateCommand):
+            if not isinstance(specifier, baca.ImbricateCommand):
                 unused_specifiers.append(specifier)
                 continue
             imbricated_selection = specifier(container)
@@ -771,7 +771,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
         assert self._all_are_selections(selections), repr(selections)
         specifiers_ = []
         for specifier in specifiers:
-            if isinstance(specifier, baca.tools.NestCommand):
+            if isinstance(specifier, baca.NestCommand):
                 specifier(selections)
             else:
                 specifiers_.append(specifier)
@@ -781,10 +781,10 @@ class MusicMaker(abjad.abctools.AbjadObject):
         assert self._all_are_selections(selections), repr(selections)
         specifiers_ = []
         prototype = (
-            baca.tools.RegisterCommand,
-            baca.tools.RegisterInterpolationCommand,
-            baca.tools.RegisterToOctaveCommand,
-            baca.tools.RegisterTransitionCommand,
+            baca.RegisterCommand,
+            baca.RegisterInterpolationCommand,
+            baca.RegisterToOctaveCommand,
+            baca.RegisterTransitionCommand,
             )
         for specifier in specifiers:
             if isinstance(specifier, prototype):
@@ -815,9 +815,9 @@ class MusicMaker(abjad.abctools.AbjadObject):
         selections = len(collections) * [None]
         rhythm_specifiers, rest_affix_specifiers, specifiers_ = [], [], []
         for specifier in specifiers:
-            if isinstance(specifier, baca.tools.MusicRhythmSpecifier):
+            if isinstance(specifier, baca.MusicRhythmSpecifier):
                 rhythm_specifiers.append(specifier)
-            elif isinstance(specifier, baca.tools.RestAffixCommand):
+            elif isinstance(specifier, baca.RestAffixCommand):
                 rest_affix_specifiers.append(specifier)
             else:
                 specifiers_.append(specifier)
@@ -852,8 +852,8 @@ class MusicMaker(abjad.abctools.AbjadObject):
         assert isinstance(collections, prototype), repr(collections)
         specifiers_, unused_specifiers = [], []
         prototype = (
-            baca.tools.ArpeggiationSpacingSpecifier,
-            baca.tools.ChordalSpacingSpecifier,
+            baca.ArpeggiationSpacingSpecifier,
+            baca.ChordalSpacingSpecifier,
             )
         for specifier in specifiers:
             if isinstance(specifier, prototype):
@@ -873,7 +873,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
         assert self._all_are_selections(selections), repr(selections)
         specifiers_ = []
         for specifier in specifiers:
-            if (isinstance(specifier, baca.tools.SpannerCommand) and
+            if (isinstance(specifier, baca.SpannerCommand) and
                 isinstance(specifier.spanner, abjad.Tie)):
                 specifier(selections)
             else:
@@ -945,7 +945,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
     def _get_anchor_specifier(specifiers):
         anchor_specifiers, specifiers_ = [], []
         for specifier in specifiers:
-            if isinstance(specifier, baca.tools.AnchorCommand):
+            if isinstance(specifier, baca.AnchorCommand):
                 anchor_specifiers.append(specifier)
             else:
                 specifiers_.append(specifier)
@@ -1018,8 +1018,8 @@ class MusicMaker(abjad.abctools.AbjadObject):
 
     @staticmethod
     def _make_default_rhythm_specifier():
-        return baca.tools.MusicRhythmSpecifier(
-            rhythm_maker=baca.tools.MusicRhythmMaker(),
+        return baca.MusicRhythmSpecifier(
+            rhythm_maker=baca.MusicRhythmMaker(),
             )
 
     def _make_state_manifest(self):
@@ -1349,7 +1349,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.RegisterCommand(
+                ...     baca.RegisterCommand(
                 ...         registration=abjad.Registration(
                 ...             [('[A0, C8]', -6)],
                 ...             ),
@@ -1397,7 +1397,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.RegisterTransitionCommand(
+                ...     baca.RegisterTransitionCommand(
                 ...         start_registration=abjad.Registration(
                 ...             [('[A0, C8]', 0)],
                 ...             ),
@@ -1507,7 +1507,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 ...         ['p < f'],
                 ...         selector=baca.select_each_plt_run(),
                 ...         ),
-                ...     baca.tools.RestAffixCommand(
+                ...     baca.RestAffixCommand(
                 ...         pattern=abjad.Pattern(
                 ...             indices=[0, -1],
                 ...             inverted=True,
@@ -1665,7 +1665,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.SpannerCommand(
+                ...     baca.SpannerCommand(
                 ...         spanner=abjad.Slur(),
                 ...         ),
                 ...     )
@@ -1720,7 +1720,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.SpannerCommand(
+                ...     baca.SpannerCommand(
                 ...         selector=abjad.select().
                 ...             by_class(abjad.Tuplet, flatten=True).
                 ...             get_slice(apply_to_each=True),
@@ -1778,7 +1778,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.SpannerCommand(
+                ...     baca.SpannerCommand(
                 ...         selector=abjad.select().
                 ...             by_class(abjad.Tuplet, flatten=True).
                 ...             get_slice(stop=2, apply_to_each=True),
@@ -1836,7 +1836,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.SpannerCommand(
+                ...     baca.SpannerCommand(
                 ...         selector=abjad.select().
                 ...             by_class(abjad.Tuplet, flatten=True).
                 ...             get_slice(start=-2, apply_to_each=True),
@@ -2022,7 +2022,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.NestCommand(
+                ...     baca.NestCommand(
                 ...         time_treatments=['+1/16'],
                 ...         ),
                 ...     abjad.rhythmmakertools.BeamSpecifier(
@@ -2105,8 +2105,8 @@ class MusicMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.NestCommand(
-                ...         lmr_specifier=baca.tools.LMRSpecifier(
+                ...     baca.NestCommand(
+                ...         lmr_specifier=baca.LMRSpecifier(
                 ...             left_length=2,
                 ...             ),
                 ...         time_treatments=['+1/16', None],
@@ -2191,17 +2191,17 @@ class MusicMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.MusicRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
+                ...     baca.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=8,
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     baca.tools.MusicRhythmSpecifier(
+                ...     baca.MusicRhythmSpecifier(
                 ...         pattern=abjad.select_first(),
-                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
+                ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
@@ -2250,17 +2250,17 @@ class MusicMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.MusicRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
+                ...     baca.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     baca.tools.MusicRhythmSpecifier(
+                ...     baca.MusicRhythmSpecifier(
                 ...         pattern=abjad.Pattern(indices=[0, -1]),
-                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
+                ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
@@ -2309,8 +2309,8 @@ class MusicMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.MusicRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
+                ...     baca.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
@@ -2318,9 +2318,9 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 ...             time_treatments=[1],
                 ...             ),
                 ...         ),
-                ...     baca.tools.MusicRhythmSpecifier(
+                ...     baca.MusicRhythmSpecifier(
                 ...         pattern=abjad.Pattern(indices=[0, -1]),
-                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
+                ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
@@ -2370,17 +2370,17 @@ class MusicMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.MusicRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
+                ...     baca.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     baca.tools.MusicRhythmSpecifier(
+                ...     baca.MusicRhythmSpecifier(
                 ...         pattern=abjad.Pattern(indices=[0, -1]),
-                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
+                ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
@@ -2431,17 +2431,17 @@ class MusicMaker(abjad.abctools.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.MusicRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
+                ...     baca.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     baca.tools.MusicRhythmSpecifier(
+                ...     baca.MusicRhythmSpecifier(
                 ...         pattern=abjad.Pattern(indices=[0, -1]),
-                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
+                ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
                 ...                 denominator=16,
@@ -2612,7 +2612,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
 
         Returns LilyPond file.
         '''
-        assert isinstance(figure_contribution, baca.tools.MusicContribution)
+        assert isinstance(figure_contribution, baca.MusicContribution)
         return abjad.rhythmmakertools.make_lilypond_file(
             figure_contribution.selections,
             time_signatures=time_signatures,

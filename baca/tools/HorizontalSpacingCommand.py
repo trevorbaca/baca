@@ -16,8 +16,8 @@ class HorizontalSpacingCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
             ...     )
 
@@ -27,7 +27,7 @@ class HorizontalSpacingCommand(abjad.abctools.AbjadObject):
             ...     'vn',
             ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
-            ...     baca.tools.RhythmSpecifier(
+            ...     baca.RhythmSpecifier(
             ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
             ...         ),
             ...     )
@@ -121,9 +121,9 @@ class HorizontalSpacingCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(),
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     spacing_specifier=baca.HorizontalSpacingCommand(),
             ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
             ...     )
 
@@ -133,7 +133,7 @@ class HorizontalSpacingCommand(abjad.abctools.AbjadObject):
             ...     'vn',
             ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
-            ...     baca.tools.RhythmSpecifier(
+            ...     baca.RhythmSpecifier(
             ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
             ...         ),
             ...     )
@@ -235,9 +235,9 @@ class HorizontalSpacingCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     spacing_specifier=baca.HorizontalSpacingCommand(
             ...         multiplier=abjad.Multiplier(1),
             ...         ),
             ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
@@ -249,7 +249,7 @@ class HorizontalSpacingCommand(abjad.abctools.AbjadObject):
             ...     'vn',
             ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
-            ...     baca.tools.RhythmSpecifier(
+            ...     baca.RhythmSpecifier(
             ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
             ...         ),
             ...     )
@@ -352,9 +352,9 @@ class HorizontalSpacingCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     spacing_specifier=baca.HorizontalSpacingCommand(
             ...         multiplier=abjad.Multiplier(2),
             ...         ),
             ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
@@ -366,7 +366,7 @@ class HorizontalSpacingCommand(abjad.abctools.AbjadObject):
             ...     'vn',
             ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
-            ...     baca.tools.RhythmSpecifier(
+            ...     baca.RhythmSpecifier(
             ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
             ...         ),
             ...     )
@@ -469,9 +469,9 @@ class HorizontalSpacingCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     spacing_specifier=baca.HorizontalSpacingCommand(
             ...         multiplier=abjad.Multiplier(2),
             ...         minimum_width=abjad.Duration(1, 8),
             ...         ),
@@ -484,7 +484,7 @@ class HorizontalSpacingCommand(abjad.abctools.AbjadObject):
             ...     'vn',
             ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
-            ...     baca.tools.RhythmSpecifier(
+            ...     baca.RhythmSpecifier(
             ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
             ...         ),
             ...     )
@@ -586,9 +586,9 @@ class HorizontalSpacingCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     spacing_specifier=baca.HorizontalSpacingCommand(
             ...         minimum_width=abjad.Duration(1, 8),
             ...         ),
             ...     time_signatures=[(4, 8), (3, 8)],
@@ -600,7 +600,7 @@ class HorizontalSpacingCommand(abjad.abctools.AbjadObject):
             ...     'vn',
             ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
-            ...     baca.tools.RhythmSpecifier(
+            ...     baca.RhythmSpecifier(
             ...         rhythm_maker=abjad.rhythmmakertools.AccelerandoRhythmMaker(
             ...             beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
             ...             use_feather_beams=True,

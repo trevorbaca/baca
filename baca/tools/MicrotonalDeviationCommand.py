@@ -18,8 +18,8 @@ class MicrotonalDeviationCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -30,7 +30,7 @@ class MicrotonalDeviationCommand(abjad.abctools.AbjadObject):
             ...     baca.select_stages(1),
             ...     baca.pitches('E4'),
             ...     baca.even_runs(),
-            ...     baca.tools.MicrotonalDeviationCommand(
+            ...     baca.MicrotonalDeviationCommand(
             ...         number_lists=([0, 0.5, 0, -0.5],),
             ...         ),
             ...     )
@@ -209,7 +209,7 @@ class MicrotonalDeviationCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> command = baca.tools.MicrotonalDeviationCommand(
+                >>> command = baca.MicrotonalDeviationCommand(
                 ...     number_lists=(
                 ...         [0, 1, 2, 1],
                 ...         ),

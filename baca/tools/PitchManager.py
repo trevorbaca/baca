@@ -53,7 +53,7 @@ class PitchManager(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> transforms = baca.tools.PitchManager.get_matching_transforms(
+                >>> transforms = baca.PitchManager.get_matching_transforms(
                 ...     segment_1,
                 ...     segment_2,
                 ...     inversion=True,
@@ -70,7 +70,7 @@ class PitchManager(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> transforms = baca.tools.PitchManager.get_matching_transforms(
+                >>> transforms = baca.PitchManager.get_matching_transforms(
                 ...     segment_2,
                 ...     segment_1,
                 ...     inversion=True,
@@ -93,7 +93,7 @@ class PitchManager(abjad.abctools.AbjadObject):
             ::
 
                 >>> segment_2 = abjad.PitchClassSegment(items=[0, 1, 2])
-                >>> baca.tools.PitchManager.get_matching_transforms(
+                >>> baca.PitchManager.get_matching_transforms(
                 ...     segment_2,
                 ...     segment_1,
                 ...     inversion=True,
@@ -158,7 +158,7 @@ class PitchManager(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> transforms = baca.tools.PitchManager.get_transforms(J)
+                >>> transforms = baca.PitchManager.get_transforms(J)
 
             ::
 
@@ -172,7 +172,7 @@ class PitchManager(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> transforms = baca.tools.PitchManager.get_transforms(
+                >>> transforms = baca.PitchManager.get_transforms(
                 ...     J,
                 ...     transposition=True,
                 ...     )
@@ -205,7 +205,7 @@ class PitchManager(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> transforms = baca.tools.PitchManager.get_transforms(
+                >>> transforms = baca.PitchManager.get_transforms(
                 ...     J,
                 ...     inversion=True,
                 ...     multiplication=True,
@@ -511,7 +511,7 @@ class PitchManager(abjad.abctools.AbjadObject):
 #        if alpha:
 #            operators_ = operators[:]
 #            for operator in operators:
-#                operator_ = baca.tools.Alpha() + operator
+#                operator_ = baca.Alpha() + operator
 #                operators_.append(operator_)
 #            operators = operators_
         if retrograde:

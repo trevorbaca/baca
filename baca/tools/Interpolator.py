@@ -17,8 +17,8 @@ class Interpolator(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> Interpolator = baca.tools.Interpolator
-            >>> interpolate_linear = baca.tools.Interpolator.interpolate_linear
+            >>> Interpolator = baca.Interpolator
+            >>> interpolate_linear = baca.Interpolator.interpolate_linear
             >>> for count in range(8):
             ...     result = Interpolator.interpolate_linear(-5, 5, count)
             ...     print(count, result)
@@ -49,8 +49,8 @@ class Interpolator(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> Interpolator = baca.tools.Interpolator
-                >>> interpolate_linear = baca.tools.Interpolator.interpolate_linear
+                >>> Interpolator = baca.Interpolator
+                >>> interpolate_linear = baca.Interpolator.interpolate_linear
                 >>> for count in range(8):
                 ...     result = Interpolator.interpolate_linear(-5, 5, count)
                 ...     print(count, result)
@@ -69,8 +69,8 @@ class Interpolator(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> Interpolator = baca.tools.Interpolator
-                >>> interpolate_linear = baca.tools.Interpolator.interpolate_linear
+                >>> Interpolator = baca.Interpolator
+                >>> interpolate_linear = baca.Interpolator.interpolate_linear
                 >>> for count in range(8):
                 ...     result = Interpolator.interpolate_linear(2, 1, count)
                 ...     print(count, result)

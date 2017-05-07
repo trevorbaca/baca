@@ -56,8 +56,8 @@ class MusicAccumulator(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> score_template = baca.tools.StringTrioScoreTemplate()
-                >>> accumulator = baca.tools.MusicAccumulator(score_template)
+                >>> score_template = baca.StringTrioScoreTemplate()
+                >>> accumulator = baca.MusicAccumulator(score_template)
                 >>> accumulator(
                 ...     accumulator.music_maker(
                 ...         'Violin Music Voice',
@@ -108,7 +108,7 @@ class MusicAccumulator(abjad.abctools.AbjadObject):
                 )
             stop_offset = start_offset + selection.get_duration()
             timespan = abjad.Timespan(start_offset, stop_offset)
-            floating_selection = baca.tools.FloatingSelection(
+            floating_selection = baca.FloatingSelection(
                 selection=selection,
                 timespan=timespan,
                 )
@@ -223,7 +223,7 @@ class MusicAccumulator(abjad.abctools.AbjadObject):
     @staticmethod
     def _insert_skips(floating_selections, voice_name):
         for floating_selection in floating_selections:
-            assert isinstance(floating_selection, baca.tools.FloatingSelection)
+            assert isinstance(floating_selection, baca.FloatingSelection)
         floating_selections = list(floating_selections)
         floating_selections.sort(key=lambda _: _.timespan)
         try:
@@ -238,7 +238,7 @@ class MusicAccumulator(abjad.abctools.AbjadObject):
             gaps.append(first_gap)
         selections = floating_selections + list(gaps)
         def sort_function(argument):
-            if isinstance(argument, baca.tools.FloatingSelection):
+            if isinstance(argument, baca.FloatingSelection):
                 return argument.timespan
             elif isinstance(argument, abjad.Timespan):
                 return argument
@@ -247,7 +247,7 @@ class MusicAccumulator(abjad.abctools.AbjadObject):
         selections.sort(key=sort_function)
         fused_selection = []
         for selection in selections:
-            if isinstance(selection, baca.tools.FloatingSelection):
+            if isinstance(selection, baca.FloatingSelection):
                 fused_selection.extend(selection.selection)
             else:
                 assert isinstance(selection, abjad.Timespan)
@@ -264,8 +264,8 @@ class MusicAccumulator(abjad.abctools.AbjadObject):
             abjad.rhythmmakertools.BeamSpecifier(
                 beam_divisions_together=True,
                 ),
-            baca.tools.MusicRhythmSpecifier(
-                rhythm_maker=baca.tools.MusicRhythmMaker(
+            baca.MusicRhythmSpecifier(
+                rhythm_maker=baca.MusicRhythmMaker(
                     talea=abjad.rhythmmakertools.Talea(
                         counts=[1],
                         denominator=16,
@@ -330,7 +330,7 @@ class MusicAccumulator(abjad.abctools.AbjadObject):
                 segment_maker.append_commands(
                     voice_name,
                     baca.select_stages(1, 1),
-                    baca.tools.RhythmSpecifier(
+                    baca.RhythmSpecifier(
                         rhythm_maker=selection,
                         ),
                     )

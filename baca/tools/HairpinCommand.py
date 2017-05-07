@@ -17,7 +17,7 @@ class HairpinCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> command = baca.tools.HairpinCommand(
+            >>> command = baca.HairpinCommand(
             ...     hairpin_tokens=['f > niente', 'niente < f'],
             ...     selector=baca.select_each_plt_run(),
             ...     )
@@ -159,7 +159,7 @@ class HairpinCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> command = baca.tools.HairpinCommand(
+                >>> command = baca.HairpinCommand(
                 ...     hairpin_tokens=['f > p', 'p < f'],
                 ...     selector=baca.select_each_plt_run(),
                 ...     )
@@ -188,7 +188,7 @@ class HairpinCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> command = baca.tools.HairpinCommand(
+                >>> command = baca.HairpinCommand(
                 ...     flare=True,
                 ...     hairpin_tokens=['f > p', 'p < f'],
                 ...     selector=baca.select_each_plt_run(),
@@ -255,7 +255,7 @@ class HairpinCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> command = baca.tools.HairpinCommand(
+                >>> command = baca.HairpinCommand(
                 ...     hairpin_tokens=['ppp < p'],
                 ...     selector=baca.select_each_plt(),
                 ...     )
@@ -285,7 +285,7 @@ class HairpinCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> command = baca.tools.HairpinCommand(
+                >>> command = baca.HairpinCommand(
                 ...     hairpin_tokens=['ppp < p'],
                 ...     omit_lone_note_dynamic=True,
                 ...     selector=baca.select_each_plt(),

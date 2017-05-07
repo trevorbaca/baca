@@ -14,7 +14,7 @@ class Matrix(abjad.abctools.AbjadObject):
 
     ::
 
-        >>> matrix = baca.tools.Matrix([
+        >>> matrix = baca.Matrix([
         ...     [0, 1, 2, 3],
         ...     [10, 11, 12, 13],
         ...     [20, 21, 22, 23],
@@ -44,7 +44,7 @@ class Matrix(abjad.abctools.AbjadObject):
 
     ::
 
-        >>> matrix = baca.tools.Matrix(columns=[
+        >>> matrix = baca.Matrix(columns=[
         ...     [0, 10, 20],
         ...     [1, 11, 21],
         ...     [2, 12, 22],
@@ -162,7 +162,7 @@ class Matrix(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> matrix = baca.tools.Matrix(
+            >>> matrix = baca.Matrix(
             ...     [[0, 1, 2, 3],
             ...     [10, 11, 12, 13],
             ...     [20, 21, 22, 23],
@@ -183,7 +183,7 @@ class Matrix(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> matrix = baca.tools.Matrix(
+            >>> matrix = baca.Matrix(
             ...     [[0, 1, 2, 3],
             ...     [10, 11, 12, 13],
             ...     [20, 21, 22, 23],

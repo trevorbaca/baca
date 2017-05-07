@@ -139,7 +139,7 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_plt_heads()
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.Articulation('>')],
             selector=selector,
             )
@@ -323,7 +323,7 @@ class LibraryAM(object):
             articulations = ['upbow', 'downbow']
         articulations = [abjad.Articulation(_) for _ in articulations]
         selector = selector or baca.select_plt_heads()
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=articulations,
             selector=selector,
             )
@@ -332,7 +332,7 @@ class LibraryAM(object):
     def anchor(remote_voice_name, remote_selector=None, local_selector=None):
         r'''Anchors music to start of remote selection.
         '''
-        return baca.tools.AnchorCommand(
+        return baca.AnchorCommand(
             local_selector=local_selector,
             remote_selector=remote_selector,
             remote_voice_name=remote_voice_name,
@@ -346,7 +346,7 @@ class LibraryAM(object):
         ):
         r'''Anchors music to stop of remote selection.
         '''
-        return baca.tools.AnchorCommand(
+        return baca.AnchorCommand(
             local_selector=local_selector,
             remote_selector=remote_selector,
             remote_voice_name=remote_voice_name,
@@ -357,7 +357,7 @@ class LibraryAM(object):
     def anchor_to_figure(figure_name):
         r'''Anchors music to start of figure.
         '''
-        return baca.tools.AnchorCommand(
+        return baca.AnchorCommand(
             figure_name=figure_name,
             )
 
@@ -495,7 +495,7 @@ class LibraryAM(object):
         markup += abjad.Markup('ancora').upright()
         markup = abjad.new(markup, direction=direction)
         selector = selector or baca.select_plt_head(n=0)
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[markup],
             selector=selector,
             )
@@ -612,7 +612,7 @@ class LibraryAM(object):
 
         """
         selector = selector or baca.select_chord_heads()
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.Articulation('arpeggio')],
             selector=selector,
             )
@@ -913,7 +913,7 @@ class LibraryAM(object):
                 >>
 
         """
-        return baca.tools.RegisterToOctaveCommand(
+        return baca.RegisterToOctaveCommand(
             anchor=Bottom,
             octave_number=n,
             selector=selector,
@@ -1450,7 +1450,7 @@ class LibraryAM(object):
 
         '''
         assert isinstance(n, (int, float)), repr(n)
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='positions',
             attribute_value=(n, n),
             grob_name='beam',
@@ -1754,7 +1754,7 @@ class LibraryAM(object):
                 >>
 
         """
-        return baca.tools.RegisterToOctaveCommand(
+        return baca.RegisterToOctaveCommand(
             anchor=Center,
             octave_number=n,
             selector=selector,
@@ -1881,7 +1881,7 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_leaf(0)
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.Clef(clef)],
             selector=selector,
             )
@@ -2020,7 +2020,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.SpannerCommand(
+        return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.ClefSpanner(clef=clef),
             )
@@ -2106,7 +2106,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.Coat(pitch)
+        return baca.Coat(pitch)
 
     @staticmethod
     def color(color='red', selector=None):
@@ -2320,7 +2320,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.ColorCommand(
+        return baca.ColorCommand(
             color=color,
             selector=selector,
             )
@@ -2331,7 +2331,7 @@ class LibraryAM(object):
 
         Returns division sequence expression.
         '''
-        expression = baca.tools.DivisionSequenceExpression()
+        expression = baca.DivisionSequenceExpression()
         expression = expression.split_by_durations(
             compound_meter_multiplier=abjad.Multiplier((3, 2)),
             durations=[abjad.Duration(1, 4)],
@@ -2520,7 +2520,7 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_pls()
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='style',
             attribute_value='cross',
             grob_name='note_head',
@@ -2538,8 +2538,8 @@ class LibraryAM(object):
 
             ::
 
-                >>> score_template = baca.tools.StringTrioScoreTemplate()
-                >>> accumulator = baca.tools.MusicAccumulator(score_template)
+                >>> score_template = baca.StringTrioScoreTemplate()
+                >>> accumulator = baca.MusicAccumulator(score_template)
                 >>> accumulator(
                 ...     accumulator.music_maker(
                 ...         'Violin Music Voice',
@@ -2566,7 +2566,7 @@ class LibraryAM(object):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
+                >>> segment_maker = baca.SegmentMaker(
                 ...     allow_figure_names=False,
                 ...     ignore_repeat_pitch_classes=True,
                 ...     ignore_unregistered_pitches=True,
@@ -2657,8 +2657,8 @@ class LibraryAM(object):
 
             ::
 
-                >>> score_template = baca.tools.StringTrioScoreTemplate()
-                >>> accumulator = baca.tools.MusicAccumulator(score_template)
+                >>> score_template = baca.StringTrioScoreTemplate()
+                >>> accumulator = baca.MusicAccumulator(score_template)
                 >>> accumulator(
                 ...     accumulator.music_maker(
                 ...         'Violin Music Voice',
@@ -2687,7 +2687,7 @@ class LibraryAM(object):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
+                >>> segment_maker = baca.SegmentMaker(
                 ...     allow_figure_names=False,
                 ...     ignore_repeat_pitch_classes=True,
                 ...     ignore_unregistered_pitches=True,
@@ -2771,7 +2771,7 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_plt_heads()
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.LilyPondCommand(r'\crossStaff')],
             selector=selector,
             )
@@ -2948,7 +2948,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.OctaveDisplacementCommand(
+        return baca.OctaveDisplacementCommand(
             displacements=displacements,
             selector=selector,
             )
@@ -3071,7 +3071,7 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_plt_heads()
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.Articulation('tongue #2')],
             selector=selector,
             )
@@ -3195,7 +3195,7 @@ class LibraryAM(object):
 
         """ 
         selector = selector or baca.select_chord_heads()
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.Arpeggio(direction=Down)],
             selector=selector,
             )
@@ -3318,7 +3318,7 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_plt_heads()
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.Articulation('downbow')],
             selector=selector,
             )
@@ -3442,7 +3442,7 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_plt_head(n=0)
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.Dynamic(dynamic)],
             selector=selector,
             )
@@ -3577,7 +3577,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='staff_padding',
             attribute_value=str(n),
             grob_name='dynamic_line_spanner',
@@ -3714,7 +3714,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=Up,
             grob_name='dynamic_line_spanner',
@@ -3856,7 +3856,7 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_pl(n=0)
-        return baca.tools.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='extra_offset',
             attribute_value=pair,
             grob_name='dynamic_text',
@@ -3992,7 +3992,7 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_leaf(0)
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.LilyPondCommand('dynamicDown')],
             selector=selector,
             )
@@ -4125,7 +4125,7 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_leaf(0)
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.LilyPondCommand('dynamicUp')],
             selector=selector,
             )
@@ -4283,7 +4283,7 @@ class LibraryAM(object):
         markup = left_quotes + dynamic_markup + right_quotes
         markup = abjad.new(markup, direction=direction)
         selector = selector or baca.select_plt_head(n=0)
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[markup],
             selector=selector,
             )
@@ -4292,7 +4292,7 @@ class LibraryAM(object):
     def even_runs():
         r'''Makes even runs.
         '''
-        return baca.tools.RhythmSpecifier(
+        return baca.RhythmSpecifier(
             rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker()
             )
 
@@ -4412,7 +4412,7 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_leaf(n=0)
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.Articulation('fermata')],
             selector=selector,
             )
@@ -4497,7 +4497,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.SpannerCommand(
+        return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.StaffLinesSpanner(lines=5),
             )
@@ -4506,7 +4506,7 @@ class LibraryAM(object):
     def fixed_pitches(source):
         r'''Sets fixed pitches.
         '''
-        return baca.tools.ScorePitchCommand(
+        return baca.ScorePitchCommand(
             acyclic=True,
             source=source,
             )
@@ -4629,7 +4629,7 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_plt_heads()
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.Articulation('flageolet')],
             selector=selector,
             )
@@ -4757,7 +4757,7 @@ class LibraryAM(object):
         '''
         if not all(isinstance(_, int) for _ in counts):
             raise Exception(counts)
-        expression = baca.tools.DivisionSequenceExpression()
+        expression = baca.DivisionSequenceExpression()
         expression = expression.division_sequence()
         expression = expression.split_by_durations(
             compound_meter_multiplier=abjad.Multiplier((3, 2)),
@@ -4781,7 +4781,7 @@ class LibraryAM(object):
             tuplet_ratios = [(1,)]
         else:
             tuplet_ratios = [tuplet_ratio]
-        return baca.tools.RhythmSpecifier(
+        return baca.RhythmSpecifier(
             division_expression=abjad.sequence()
                 .sum()
                 .sequence()
@@ -4911,7 +4911,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.GlissandoCommand(
+        return baca.GlissandoCommand(
             pattern=abjad.select_last(1, inverted=True),
             )
 
@@ -5132,7 +5132,7 @@ class LibraryAM(object):
             hairpin_tokens_.append(hairpin_token)
         hairpin_tokens = hairpin_tokens_
         selector = selector or baca.select_leaves_in_trimmed_run()
-        return baca.tools.HairpinCommand(
+        return baca.HairpinCommand(
             flare=flare,
             hairpin_tokens=hairpin_tokens,
             include_rests=include_rests,
@@ -5344,7 +5344,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.tools.ImbricateCommand(
+        return baca.ImbricateCommand(
             voice_name,
             segment,
             *specifiers,
@@ -5360,7 +5360,7 @@ class LibraryAM(object):
     def infinite_pitches(source, repetition_intervals):
         r'''Sets infinite pitches.
         '''
-        return baca.tools.ScorePitchCommand(
+        return baca.ScorePitchCommand(
             repetition_intervals=repetition_intervals,
             source=source,
             )
@@ -5371,7 +5371,7 @@ class LibraryAM(object):
         '''
         selector = selector or baca.select_leaf(0)
         assert isinstance(instrument, abjad.instrumenttools.Instrument)
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[instrument],
             selector=selector,
             )
@@ -5380,7 +5380,7 @@ class LibraryAM(object):
     def invert(axis=None):
         r'''Inverts pitches.
         '''
-        return baca.tools.ScorePitchCommand(
+        return baca.ScorePitchCommand(
             operators=[
                 abjad.Inversion(axis=axis),
                 ]
@@ -5392,7 +5392,7 @@ class LibraryAM(object):
         '''
         operator = baca.pitch_class_segment().invert(axis=axis)
         expression = baca.sequence().map(operator)
-        return baca.tools.MusicPitchSpecifier(
+        return baca.MusicPitchSpecifier(
             expressions=[expression],
             to_pitch_classes=True,
             )
@@ -5515,7 +5515,7 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_plt_tails()
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.Articulation('laissezVibrer')],
             selector=selector,
             )
@@ -5639,7 +5639,7 @@ class LibraryAM(object):
         '''
         selector = selector or baca.select_leaf(-1)
         command = abjad.LilyPondCommand('break', format_slot='after')
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[command],
             selector=selector,
             )
@@ -5762,7 +5762,7 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_leaf(n=0)
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.Articulation('longfermata')],
             selector=selector,
             )
@@ -5885,7 +5885,7 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_plt_heads()
-        return baca.tools.AttachCommand(
+        return baca.AttachCommand(
             arguments=[abjad.Articulation('marcato')],
             selector=selector,
             )
@@ -5894,7 +5894,7 @@ class LibraryAM(object):
     def messiaen_notes():
         r'''Makes notes.
         '''
-        return baca.tools.RhythmSpecifier(
+        return baca.RhythmSpecifier(
             rewrite_meter=True,
             rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
                 tie_specifier=abjad.rhythmmakertools.TieSpecifier(
@@ -6019,7 +6019,7 @@ class LibraryAM(object):
 
         '''
         selector = selector or baca.select_each_plt_prun()
-        return baca.tools.SpannerCommand(
+        return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.Tie(use_messiaen_style_ties=True),
             )
@@ -6028,7 +6028,7 @@ class LibraryAM(object):
     def messiaen_tied_notes():
         r'''Makes tied notes.
         '''
-        return baca.tools.RhythmSpecifier(
+        return baca.RhythmSpecifier(
             rewrite_meter=True,
             rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
                 tie_specifier=abjad.rhythmmakertools.TieSpecifier(
@@ -6060,7 +6060,7 @@ class LibraryAM(object):
                 'text_spanner__dash_period': 1.5,
             }
         )
-        return baca.tools.SpannerCommand(
+        return baca.SpannerCommand(
             selector=selector,
             spanner=spanner
             )
@@ -6073,7 +6073,7 @@ class LibraryAM(object):
             pattern=abjad.patterntools.select_all(),
             use_multimeasure_rests=True,
             )
-        return baca.tools.RhythmSpecifier(
+        return baca.RhythmSpecifier(
             rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
                 division_masks=[mask],
                 ),

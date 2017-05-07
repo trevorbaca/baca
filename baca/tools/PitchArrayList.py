@@ -16,20 +16,20 @@ class PitchArrayList(abjad.datastructuretools.TypedList):
 
         ::
 
-            >>> array_1 = baca.tools.PitchArray([
+            >>> array_1 = baca.PitchArray([
             ...   [1, (2, 1), ([-2, -1.5], 2)],
             ...   [(7, 2), (6, 1), 1]])
 
         ::
 
-            >>> array_2 = baca.tools.PitchArray([
+            >>> array_2 = baca.PitchArray([
             ...   [1, 1, 1],
             ...   [1, 1, 1]])
 
         ::
 
             >>> arrays = [array_1, array_2]
-            >>> arrays = baca.tools.PitchArrayList(arrays)
+            >>> arrays = baca.PitchArrayList(arrays)
 
         ::
 
@@ -132,20 +132,20 @@ class PitchArrayList(abjad.datastructuretools.TypedList):
 
             ::
 
-                >>> array_1 = baca.tools.PitchArray([
+                >>> array_1 = baca.PitchArray([
                 ...   [1, (2, 1), ([-2, -1.5], 2)],
                 ...   [(7, 2), (6, 1), 1]])
 
             ::
 
-                >>> array_2 = baca.tools.PitchArray([
+                >>> array_2 = baca.PitchArray([
                 ...   [1, 1, 1],
                 ...   [1, 1, 1]])
 
             ::
 
                 >>> arrays = [array_1, array_2]
-                >>> arrays = baca.tools.PitchArrayList(arrays)
+                >>> arrays = baca.PitchArrayList(arrays)
 
             ::
 

@@ -24,7 +24,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 14, 28}],
-            ...     baca.tools.RegisterToOctaveCommand(
+            ...     baca.RegisterToOctaveCommand(
             ...         anchor=Bottom,
             ...         octave_number=4,
             ...         ),
@@ -51,7 +51,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 14, 28}],
-            ...     baca.tools.RegisterToOctaveCommand(
+            ...     baca.RegisterToOctaveCommand(
             ...         anchor=Center,
             ...         octave_number=4,
             ...         ),
@@ -78,7 +78,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 14, 28}],
-            ...     baca.tools.RegisterToOctaveCommand(
+            ...     baca.RegisterToOctaveCommand(
             ...         anchor=Top,
             ...         octave_number=4,
             ...         ),
@@ -113,7 +113,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 14, 28]],
-            ...     baca.tools.RegisterToOctaveCommand(
+            ...     baca.RegisterToOctaveCommand(
             ...         anchor=Bottom,
             ...         octave_number=4,
             ...         ),
@@ -142,7 +142,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 14, 28]],
-            ...     baca.tools.RegisterToOctaveCommand(
+            ...     baca.RegisterToOctaveCommand(
             ...         anchor=Center,
             ...         octave_number=4,
             ...         ),
@@ -171,7 +171,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 14, 28]],
-            ...     baca.tools.RegisterToOctaveCommand(
+            ...     baca.RegisterToOctaveCommand(
             ...         anchor=Top,
             ...         octave_number=4,
             ...         ),
@@ -208,7 +208,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[10, 12, 14]],
-            ...     baca.tools.RegisterToOctaveCommand(
+            ...     baca.RegisterToOctaveCommand(
             ...         anchor=Bottom,
             ...         octave_number=4,
             ...         ),
@@ -237,7 +237,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[10, 12, 14]],
-            ...     baca.tools.RegisterToOctaveCommand(
+            ...     baca.RegisterToOctaveCommand(
             ...         anchor=Center,
             ...         octave_number=4,
             ...         ),
@@ -266,7 +266,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[10, 12, 14]],
-            ...     baca.tools.RegisterToOctaveCommand(
+            ...     baca.RegisterToOctaveCommand(
             ...         anchor=Top,
             ...         octave_number=4,
             ...         ),
@@ -294,7 +294,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> baca.tools.RegisterToOctaveCommand()
+            >>> baca.RegisterToOctaveCommand()
             RegisterToOctaveCommand()
 
     """
@@ -401,7 +401,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             ::
 
                 >>> chord = abjad.Chord("<c, d e'>1")
-                >>> command = baca.tools.RegisterToOctaveCommand(
+                >>> command = baca.RegisterToOctaveCommand(
                 ...     anchor=Bottom,
                 ...     octave_number=5,
                 ...     )
@@ -421,7 +421,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             ::
 
                 >>> chord = abjad.Chord("<c, d e'>1")
-                >>> command = baca.tools.RegisterToOctaveCommand(
+                >>> command = baca.RegisterToOctaveCommand(
                 ...     anchor=Center,
                 ...     octave_number=5,
                 ...     )
@@ -441,7 +441,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             ::
 
                 >>> chord = abjad.Chord("<c, d e'>1")
-                >>> command = baca.tools.RegisterToOctaveCommand(
+                >>> command = baca.RegisterToOctaveCommand(
                 ...     anchor=Top,
                 ...     octave_number=5,
                 ...     )
@@ -484,7 +484,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             ::
 
                 >>> chord = abjad.Chord("<c, d e'>1")
-                >>> command = baca.tools.RegisterToOctaveCommand(
+                >>> command = baca.RegisterToOctaveCommand(
                 ...     octave_number=1,
                 ...     )
                 >>> command(chord)
@@ -503,7 +503,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             ::
 
                 >>> chord = abjad.Chord("<c, d e'>1")
-                >>> command = baca.tools.RegisterToOctaveCommand(
+                >>> command = baca.RegisterToOctaveCommand(
                 ...     octave_number=2,
                 ...     )
                 >>> command(chord)
@@ -522,7 +522,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             ::
 
                 >>> chord = abjad.Chord("<c, d e'>1")
-                >>> command = baca.tools.RegisterToOctaveCommand(
+                >>> command = baca.RegisterToOctaveCommand(
                 ...     octave_number=3,
                 ...     )
                 >>> command(chord)
@@ -541,7 +541,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             ::
 
                 >>> chord = abjad.Chord("<c, d e'>1")
-                >>> command = baca.tools.RegisterToOctaveCommand(
+                >>> command = baca.RegisterToOctaveCommand(
                 ...     octave_number=4,
                 ...     )
                 >>> command(chord)
@@ -557,7 +557,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             ::
 
                 >>> chord = abjad.Chord("<c, d e'>1")
-                >>> command = baca.tools.RegisterToOctaveCommand(
+                >>> command = baca.RegisterToOctaveCommand(
                 ...     octave_number=5,
                 ...     )
                 >>> command(chord)

@@ -17,9 +17,9 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> rhythm_maker = baca.tools.MusicRhythmMaker(
+            >>> rhythm_maker = baca.MusicRhythmMaker(
             ...     acciaccatura_specifiers=[
-            ...         baca.tools.AcciaccaturaSpecifier()
+            ...         baca.AcciaccaturaSpecifier()
             ...         ],
             ...     talea=abjad.rhythmmakertools.Talea(
             ...         counts=[1],
@@ -121,7 +121,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
             durations = [abjad.Duration(_) for _ in durations]
         self._durations = durations
         if lmr_specifier is not None:
-            prototype = baca.tools.LMRSpecifier
+            prototype = baca.LMRSpecifier
             assert isinstance(lmr_specifier, prototype)
         self._lmr_specifier = lmr_specifier
         if pattern is not None:
@@ -174,7 +174,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
     def _get_lmr_specifier(self):
         if self.lmr_specifier is not None:
             return self.lmr_specifier
-        return baca.tools.LMRSpecifier()
+        return baca.LMRSpecifier()
 
     def _get_pattern(self):
         return self.pattern or abjad.select_all()
@@ -191,9 +191,9 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
+                >>> rhythm_maker = baca.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
-                ...         baca.tools.AcciaccaturaSpecifier()
+                ...         baca.AcciaccaturaSpecifier()
                 ...         ],
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1],
@@ -276,9 +276,9 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
+                >>> rhythm_maker = baca.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
-                ...         baca.tools.AcciaccaturaSpecifier(
+                ...         baca.AcciaccaturaSpecifier(
                 ...             durations=[(1, 8)],
                 ...             ),
                 ...         ],
@@ -375,9 +375,9 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
+                >>> rhythm_maker = baca.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
-                ...         baca.tools.AcciaccaturaSpecifier()
+                ...         baca.AcciaccaturaSpecifier()
                 ...         ],
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1],
@@ -460,10 +460,10 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
+                >>> rhythm_maker = baca.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
-                ...         baca.tools.AcciaccaturaSpecifier(
-                ...             lmr_specifier=baca.tools.LMRSpecifier(
+                ...         baca.AcciaccaturaSpecifier(
+                ...             lmr_specifier=baca.LMRSpecifier(
                 ...                 left_length=3,
                 ...                 right_counts=[1],
                 ...                 right_cyclic=True,
@@ -551,10 +551,10 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
+                >>> rhythm_maker = baca.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
-                ...         baca.tools.AcciaccaturaSpecifier(
-                ...             lmr_specifier=baca.tools.LMRSpecifier(
+                ...         baca.AcciaccaturaSpecifier(
+                ...             lmr_specifier=baca.LMRSpecifier(
                 ...                 right_length=3,
                 ...                 left_counts=[1],
                 ...                 left_cyclic=True,
@@ -643,10 +643,10 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
+                >>> rhythm_maker = baca.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
-                ...         baca.tools.AcciaccaturaSpecifier(
-                ...             lmr_specifier=baca.tools.LMRSpecifier(
+                ...         baca.AcciaccaturaSpecifier(
+                ...             lmr_specifier=baca.LMRSpecifier(
                 ...                 left_length=3,
                 ...                 middle_counts=[1],
                 ...                 middle_cyclic=True,
@@ -739,10 +739,10 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
+                >>> rhythm_maker = baca.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
-                ...         baca.tools.AcciaccaturaSpecifier(
-                ...             lmr_specifier=baca.tools.LMRSpecifier(
+                ...         baca.AcciaccaturaSpecifier(
+                ...             lmr_specifier=baca.LMRSpecifier(
                 ...                 left_length=1,
                 ...                 ),
                 ...             ),
@@ -838,9 +838,9 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
+                >>> rhythm_maker = baca.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
-                ...         baca.tools.AcciaccaturaSpecifier()
+                ...         baca.AcciaccaturaSpecifier()
                 ...         ],
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1],
@@ -923,9 +923,9 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
+                >>> rhythm_maker = baca.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
-                ...         baca.tools.AcciaccaturaSpecifier(
+                ...         baca.AcciaccaturaSpecifier(
                 ...             pattern=abjad.select_last(),
                 ...             ),
                 ...         ],
@@ -1002,9 +1002,9 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> rhythm_maker = baca.tools.MusicRhythmMaker(
+                >>> rhythm_maker = baca.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
-                ...         baca.tools.AcciaccaturaSpecifier(
+                ...         baca.AcciaccaturaSpecifier(
                 ...             pattern=abjad.select_every([1], period=2),
                 ...             ),
                 ...         ],

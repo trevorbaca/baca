@@ -21,7 +21,7 @@ class TimeSignatureGroups(abjad.abctools.AbjadObject):
             >>> group_2 = [(5, 8), (5, 16), (5, 16), (5, 16)]
             >>> group_2 = [abjad.TimeSignature(_) for _ in group_2]
             >>> groups = [group_1, group_2]
-            >>> groups = baca.tools.TimeSignatureGroups(groups)
+            >>> groups = baca.TimeSignatureGroups(groups)
 
         ::
 

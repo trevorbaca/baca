@@ -19,7 +19,7 @@ class PitchTree(Tree):
         ::
 
             >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
-            >>> tree = baca.tools.PitchTree(items=items)
+            >>> tree = baca.PitchTree(items=items)
             >>> show(tree) # doctest: +SKIP
 
         ..  doctest::
@@ -79,7 +79,7 @@ class PitchTree(Tree):
             ...     ['A4', 'G4', 'Ab4', 'B4', 'A4', 'C#4'],
             ...     ['C4', 'D4', 'Eb4', 'F4'],
             ...     ]
-            >>> tree = baca.tools.PitchTree(
+            >>> tree = baca.PitchTree(
             ...     items=items,
             ...     item_class=abjad.NamedPitch,
             ...     )
@@ -138,7 +138,7 @@ class PitchTree(Tree):
         ::
 
             >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
-            >>> tree = baca.tools.PitchTree(
+            >>> tree = baca.PitchTree(
             ...     items=items,
             ...     item_class=abjad.NumberedPitchClass,
             ...     )
@@ -201,7 +201,7 @@ class PitchTree(Tree):
             ...     ['A4', 'G4', 'Ab4', 'B4', 'A4', 'C#4'],
             ...     ['C4', 'D4', 'Eb4', 'F4'],
             ...     ]
-            >>> tree = baca.tools.PitchTree(
+            >>> tree = baca.PitchTree(
             ...     items=items,
             ...     item_class=abjad.NamedPitchClass,
             ...     )
@@ -260,11 +260,11 @@ class PitchTree(Tree):
         ::
 
             >>> items = [
-            ...     baca.tools.PitchTree([4, 6, 10]),
-            ...     baca.tools.PitchTree([9, 7, 8, 11, 9, 1]),
-            ...     baca.tools.PitchTree([0, 2, 3, 5]),
+            ...     baca.PitchTree([4, 6, 10]),
+            ...     baca.PitchTree([9, 7, 8, 11, 9, 1]),
+            ...     baca.PitchTree([0, 2, 3, 5]),
             ...     ]
-            >>> tree = baca.tools.PitchTree(items=items)
+            >>> tree = baca.PitchTree(items=items)
             >>> lilypond_file = tree.__illustrate__(
             ...     cell_indices=False,
             ...     )
@@ -327,7 +327,7 @@ class PitchTree(Tree):
             ...     abjad.PitchClassSegment([0, 2, 3, 5]),
             ...     ]
             >>> items = [segment.rotate(n=1) for segment in items]
-            >>> tree = baca.tools.PitchTree(items=items)
+            >>> tree = baca.PitchTree(items=items)
             >>> show(tree, cell_indices=False) # doctest: +SKIP
 
         ..  doctest::
@@ -389,7 +389,7 @@ class PitchTree(Tree):
             >>> segment_2 = segment_2.transpose(n=1)
             >>> segment_3 = segment_3.transpose(n=1)
             >>> items = [[segment_1, segment_2], segment_3]
-            >>> tree = baca.tools.PitchTree(items=items)
+            >>> tree = baca.PitchTree(items=items)
             >>> graph(tree) # doctest: +SKIP
 
         ..  doctest::
@@ -539,7 +539,7 @@ class PitchTree(Tree):
             ::
 
                 >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
-                >>> tree = baca.tools.PitchTree(items=items)
+                >>> tree = baca.PitchTree(items=items)
 
             ::
 
@@ -611,7 +611,7 @@ class PitchTree(Tree):
             ::
 
                 >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
-                >>> tree = baca.tools.PitchTree(
+                >>> tree = baca.PitchTree(
                 ...     items=items,
                 ...     item_class=abjad.NamedPitch,
                 ...     )
@@ -704,7 +704,7 @@ class PitchTree(Tree):
             ::
 
                 >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
-                >>> tree = baca.tools.PitchTree(items=items)
+                >>> tree = baca.PitchTree(items=items)
                 >>> lilypond_file = tree.__illustrate__()
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -760,7 +760,7 @@ class PitchTree(Tree):
             ::
 
                 >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
-                >>> tree = baca.tools.PitchTree(items=items)
+                >>> tree = baca.PitchTree(items=items)
                 >>> lilypond_file = tree.__illustrate__(
                 ...     cell_indices=Down,
                 ...     set_classes=True,
@@ -852,7 +852,7 @@ class PitchTree(Tree):
                 >>> segment_2 = segment_2.transpose(n=1)
                 >>> segment_3 = segment_3.transpose(n=1)
                 >>> items = [[segment_1, segment_2], segment_3]
-                >>> tree = baca.tools.PitchTree(items=items)
+                >>> tree = baca.PitchTree(items=items)
                 >>> lilypond_file = tree.__illustrate__(
                 ...     cell_indices=Down,
                 ...     )
@@ -1130,7 +1130,7 @@ class PitchTree(Tree):
             Has repeats:
 
                 >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [1, 2, 2, 4]]
-                >>> tree = baca.tools.PitchTree(items=items)
+                >>> tree = baca.PitchTree(items=items)
                 >>> show(tree) # doctest: +SKIP
 
             ::
@@ -1219,7 +1219,7 @@ class PitchTree(Tree):
             Doesn't have repeats:
 
                 >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
-                >>> tree = baca.tools.PitchTree(items=items)
+                >>> tree = baca.PitchTree(items=items)
                 >>> show(tree) # doctest: +SKIP
 
             ::
@@ -1291,7 +1291,7 @@ class PitchTree(Tree):
             ::
 
                 >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
-                >>> tree = baca.tools.PitchTree(items=items)
+                >>> tree = baca.PitchTree(items=items)
                 >>> show(tree) # doctest: +SKIP
 
             ..  doctest::
@@ -1511,7 +1511,7 @@ class PitchTree(Tree):
 
             ::
 
-                >>> isinstance(inversion, baca.tools.PitchTree)
+                >>> isinstance(inversion, baca.PitchTree)
                 True
 
         """
@@ -1531,7 +1531,7 @@ class PitchTree(Tree):
             ::
 
                 >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
-                >>> tree = baca.tools.PitchTree(items=items)
+                >>> tree = baca.PitchTree(items=items)
                 >>> show(tree) # doctest: +SKIP
 
             ..  doctest::
@@ -1641,7 +1641,7 @@ class PitchTree(Tree):
 
             ::
 
-                >>> isinstance(retrograde, baca.tools.PitchTree)
+                >>> isinstance(retrograde, baca.PitchTree)
                 True
 
         """
@@ -1660,7 +1660,7 @@ class PitchTree(Tree):
             ::
 
                 >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
-                >>> tree = baca.tools.PitchTree(items=items)
+                >>> tree = baca.PitchTree(items=items)
                 >>> show(tree) # doctest: +SKIP
 
             ..  doctest::
@@ -1880,7 +1880,7 @@ class PitchTree(Tree):
 
             ::
 
-                >>> isinstance(rotation, baca.tools.PitchTree)
+                >>> isinstance(rotation, baca.PitchTree)
                 True
 
         """
@@ -1900,7 +1900,7 @@ class PitchTree(Tree):
             ::
 
                 >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
-                >>> tree = baca.tools.PitchTree(items=items)
+                >>> tree = baca.PitchTree(items=items)
                 >>> show(tree) # doctest: +SKIP
 
             ..  doctest::
@@ -2120,7 +2120,7 @@ class PitchTree(Tree):
 
             ::
 
-                >>> isinstance(transposition, baca.tools.PitchTree)
+                >>> isinstance(transposition, baca.PitchTree)
                 True
 
         """

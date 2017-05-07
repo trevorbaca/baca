@@ -17,7 +17,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> division_maker = baca.tools.DivisionMaker()
+            >>> division_maker = baca.DivisionMaker()
             >>> division_maker = division_maker.split_by_durations(
             ...     compound_meter_multiplier=(3, 2),
             ...     durations=[(1, 4)],
@@ -42,7 +42,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> callback = baca.tools.PartitionDivisionCallback(
+            >>> callback = baca.PartitionDivisionCallback(
             ...     counts=[2],
             ...     append_remainder=False,
             ...     remainder_direction=Right,
@@ -60,7 +60,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> callback = baca.tools.PartitionDivisionCallback(
+            >>> callback = baca.PartitionDivisionCallback(
             ...     counts=[2],
             ...     append_remainder=True,
             ...     remainder_direction=Right,
@@ -80,7 +80,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> callback = baca.tools.PartitionDivisionCallback(
+            >>> callback = baca.PartitionDivisionCallback(
             ...     counts=[2],
             ...     append_remainder=False,
             ...     remainder_direction=Left,
@@ -98,7 +98,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
         ::
 
-            >>> callback = baca.tools.PartitionDivisionCallback(
+            >>> callback = baca.PartitionDivisionCallback(
             ...     counts=[2],
             ...     append_remainder=True,
             ...     remainder_direction=Left,
@@ -153,7 +153,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> callback = baca.tools.PartitionDivisionCallback(
+                >>> callback = baca.PartitionDivisionCallback(
                 ...     counts=[2],
                 ...     )
                 >>> division = 6 * [(1, 4)]
@@ -172,7 +172,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> callback = baca.tools.PartitionDivisionCallback(
+                >>> callback = baca.PartitionDivisionCallback(
                 ...     counts=[3],
                 ...     )
                 >>> division = 6 * [(1, 4)]
@@ -191,8 +191,8 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> callback = baca.tools.PartitionDivisionCallback(counts=[3])
-                >>> divisions = 6 * [baca.tools.Division((1, 4))]
+                >>> callback = baca.PartitionDivisionCallback(counts=[3])
+                >>> divisions = 6 * [baca.Division((1, 4))]
                 >>> divisions[0]._start_offset = abjad.Offset(1, 4)
 
             ::
@@ -220,7 +220,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
         Returns list of division lists.
         '''
         grouped_divisions = []
-        divisions, start_offset = baca.tools.DivisionMaker._to_divisions(
+        divisions, start_offset = baca.DivisionMaker._to_divisions(
             divisions)
         if divisions and isinstance(divisions[0], list):
             start_offset = divisions[0][0].start_offset
@@ -234,7 +234,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
             grouped_division = \
                 self._beat_list_to_grouped_beat_list(divisions)
             result = grouped_division
-        result, start_offset = baca.tools.DivisionMaker._to_divisions(
+        result, start_offset = baca.DivisionMaker._to_divisions(
             result,
             start_offset=start_offset,
             )
@@ -247,7 +247,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> callback = baca.tools.PartitionDivisionCallback()
+                >>> callback = baca.PartitionDivisionCallback()
                 >>> f(callback)
                 baca.tools.PartitionDivisionCallback(
                     fuse_assignable_total_duration=False,
@@ -269,7 +269,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> baca.tools.PartitionDivisionCallback()
+                >>> baca.PartitionDivisionCallback()
                 PartitionDivisionCallback(fuse_assignable_total_duration=False, append_remainder=False, remainder_direction=Right)
 
         Returns string.
@@ -283,16 +283,16 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
         beat_list_ = []
         for beat in beat_list:
             if hasattr(beat, 'duration'):
-                beat = baca.tools.Division(beat.duration)
+                beat = baca.Division(beat.duration)
             else:
-                beat = baca.tools.Division(beat)
+                beat = baca.Division(beat)
             beat_list_.append(beat)
         beat_list = beat_list_
         total_duration = sum(beat_list)
         total_duration = abjad.Duration(total_duration)
         if (total_duration.is_assignable and 
             self.fuse_assignable_total_duration):
-            return [[baca.tools.Division(total_duration)]]
+            return [[baca.Division(total_duration)]]
         if self.counts is None:
             beat_group = list(beat_list)
             grouped_beat_list = [beat_group]
@@ -348,7 +348,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> callback = baca.tools.PartitionDivisionCallback(
+                >>> callback = baca.PartitionDivisionCallback(
                 ...     counts=[2],
                 ...     append_remainder=False,
                 ...     remainder_direction=Right,
@@ -421,7 +421,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> callback = baca.tools.PartitionDivisionCallback(
+                >>> callback = baca.PartitionDivisionCallback(
                 ...     counts=[2],
                 ...     append_remainder=True,
                 ...     remainder_direction=Right,
@@ -503,7 +503,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> callback = baca.tools.PartitionDivisionCallback(
+                >>> callback = baca.PartitionDivisionCallback(
                 ...     counts=None,
                 ...     )
                 >>> beat_list = 6 * [(1, 4)]
@@ -519,7 +519,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> callback = baca.tools.PartitionDivisionCallback(
+                >>> callback = baca.PartitionDivisionCallback(
                 ...     counts=[2],
                 ...     )
                 >>> beat_list = 6 * [(1, 4)]
@@ -538,7 +538,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> callback = baca.tools.PartitionDivisionCallback(
+                >>> callback = baca.PartitionDivisionCallback(
                 ...     counts=[3],
                 ...     )
                 >>> beat_list = 6 * [(1, 4)]
@@ -568,7 +568,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> callback = baca.tools.PartitionDivisionCallback(
+                >>> callback = baca.PartitionDivisionCallback(
                 ...     counts=[2],
                 ...     fuse_assignable_total_duration=False,
                 ...     )
@@ -639,7 +639,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> callback = baca.tools.PartitionDivisionCallback(
+                >>> callback = baca.PartitionDivisionCallback(
                 ...     counts=[2],
                 ...     fuse_assignable_total_duration=True,
                 ...     )
@@ -713,7 +713,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> callback = baca.tools.PartitionDivisionCallback(
+                >>> callback = baca.PartitionDivisionCallback(
                 ...     counts=[2],
                 ...     remainder_direction=Right,
                 ...     )
@@ -772,7 +772,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> callback = baca.tools.PartitionDivisionCallback(
+                >>> callback = baca.PartitionDivisionCallback(
                 ...     counts=[2],
                 ...     remainder_direction=Left,
                 ...     )

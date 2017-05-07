@@ -22,8 +22,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -97,8 +97,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -460,7 +460,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         self._initialize_time_signatures(time_signatures)
         self._score_package = score_package
         if score_template is not None:
-            assert isinstance(score_template, baca.tools.ScoreTemplate)
+            assert isinstance(score_template, baca.ScoreTemplate)
         self._score_template = score_template
         if skip_wellformedness_checks is not None:
             skip_wellformedness_checks = bool(skip_wellformedness_checks)
@@ -470,7 +470,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         self._skips_instead_of_rests = skips_instead_of_rests
         self._spacing_map = spacing_map
         if spacing_specifier is not None:
-            assert isinstance(spacing_specifier, baca.tools.HorizontalSpacingCommand)
+            assert isinstance(spacing_specifier, baca.HorizontalSpacingCommand)
         self._spacing_specifier = spacing_specifier
         if stage_label_base_string is not None:
             assert isinstance(stage_label_base_string, str)
@@ -898,7 +898,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             self.color_repeat_pitch_classes or
             self.ignore_repeat_pitch_classes):
             return
-        manager = baca.tools.WellformednessManager()
+        manager = baca.WellformednessManager()
         if not manager.is_well_formed(score):
             message = manager.tabulate_well_formedness_violations(score)
             raise Exception(message)
@@ -1334,14 +1334,14 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
     def _get_rhythm_specifier(self, voice_name, stage):
         rhythm_specifier = []
-        prototype = baca.tools.RhythmSpecifier
+        prototype = baca.RhythmSpecifier
         for rhythm_specifier in self.scoped_specifiers:
             if not isinstance(rhythm_specifier.specifier, prototype):
                 continue
             if rhythm_specifier.scope.voice_name == voice_name:
                 #raise Exception(rhythm_specifier.scope.stages)
                 stages = rhythm_specifier.scope.stages
-                if isinstance(stages, baca.tools.StageExpression):
+                if isinstance(stages, baca.StageExpression):
                     start = rhythm_specifier.scope.stages.start
                     stop = rhythm_specifier.scope.stages.stop + 1
                 elif isinstance(stages, tuple):
@@ -1357,7 +1357,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
     def _get_rhythm_specifiers_for_voice(self, voice_name):
         rhythm_specifiers = []
-        prototype = baca.tools.RhythmSpecifier
+        prototype = baca.RhythmSpecifier
         for scoped_specifier in self.scoped_specifiers:
             if not isinstance(scoped_specifier.specifier, prototype):
                 continue
@@ -1376,7 +1376,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         return self._segment_metadata.get('segment_number', 1)
 
     def _get_stage_numbers(self, argument):
-        if isinstance(argument, baca.tools.StageExpression):
+        if isinstance(argument, baca.StageExpression):
             start = argument.start
             stop = argument.stop
         elif isinstance(argument, tuple):
@@ -1419,7 +1419,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             stages = stages[start_index:stop_index]
             time_signatures = baca.Sequence(stages).flatten()
         start_offset, stop_offset = self._get_offsets(start_stage, stop_stage)
-        contribution = baca.tools.Contribution(
+        contribution = baca.Contribution(
             payload=time_signatures,
             start_offset=start_offset
             )
@@ -1514,7 +1514,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         effective_staff_name = effective_staff.context_name
         contributions = []
         for rhythm_specifier in rhythm_specifiers:
-            assert isinstance(rhythm_specifier, baca.tools.ScopedSpecifier)
+            assert isinstance(rhythm_specifier, baca.ScopedSpecifier)
             if rhythm_specifier.scope.stages is not None:
                 result = self._get_stage_numbers(rhythm_specifier.scope.stages)
                 contribution = self._get_time_signatures(*result)
@@ -1545,7 +1545,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         assert not isinstance(scoped_specifier.specifier, (list, tuple))
         result = self._unwrap_scoped_specifier(scoped_specifier)
         compound_scope, specifier_wrapper, specifier = result
-        if isinstance(specifier, baca.tools.RhythmSpecifier):
+        if isinstance(specifier, baca.RhythmSpecifier):
             return
         selection, timespan = self._evaluate_selector(
             scoped_specifier,
@@ -1812,10 +1812,10 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         for measure in measures:
             assert isinstance(measure, abjad.Measure), repr(measure)
         for expression in self.volta_specifier:
-            if isinstance(expression, baca.tools.MeasureExpression):
+            if isinstance(expression, baca.MeasureExpression):
                 measure_start_number = expression.start
                 measure_stop_number = expression.stop
-            elif isinstance(expression, baca.tools.StageSliceExpression):
+            elif isinstance(expression, baca.StageSliceExpression):
                 start = expression.start
                 stop = expression.stop
                 pair = self._stage_number_to_measure_indices(start)
@@ -1942,7 +1942,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             abjad.detach(abjad.instrumenttools.Instrument, context)
         
     def _scope_to_leaves(self, scope):
-        if not isinstance(scope, baca.tools.SimpleScope):
+        if not isinstance(scope, baca.SimpleScope):
             message = 'not yet implemented for {!r}.'
             message = message.format(scope)
             raise TypeError(message)
@@ -2020,7 +2020,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         return len(stage_numbers) == len(set(stage_numbers))
 
     def _timespan_to_time_signatures(self, timespan):
-        if isinstance(timespan, baca.tools.StageExpression):
+        if isinstance(timespan, baca.StageExpression):
             stage_expression = timespan
             contribution = self._get_time_signatures(
                 stage_expression.start,
@@ -2055,11 +2055,11 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     leaf.written_pitch = written_pitch_number
 
     def _unpack_scopes(self, scopes, score_template=None):
-        scope_prototype = (baca.tools.SimpleScope, baca.tools.CompoundScope)
+        scope_prototype = (baca.SimpleScope, baca.CompoundScope)
         if isinstance(scopes, scope_prototype):
             scopes = [scopes]
         elif isinstance(scopes, tuple):
-            scopes = baca.tools.CompoundScope._to_simple_scopes(
+            scopes = baca.CompoundScope._to_simple_scopes(
                 scopes,
                 score_template=score_template,
                 )
@@ -2069,7 +2069,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 if isinstance(scope, scope_prototype):
                     scopes___.append(scope)
                 elif isinstance(scope, tuple):
-                    scopes_ = baca.tools.CompoundScope._to_simple_scopes(
+                    scopes_ = baca.CompoundScope._to_simple_scopes(
                         scope,
                         score_template=score_template,
                         )
@@ -2091,12 +2091,12 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
     def _unwrap_scoped_specifier(self, scoped_specifier):
         specifier_wrapper = None
         specifier = scoped_specifier.specifier
-        if isinstance(specifier, baca.tools.SpecifierWrapper):
+        if isinstance(specifier, baca.SpecifierWrapper):
             specifier_wrapper = specifier
             specifier = specifier_wrapper.specifier
-        if isinstance(scoped_specifier.scope, baca.tools.SimpleScope):
+        if isinstance(scoped_specifier.scope, baca.SimpleScope):
             simple_scope = scoped_specifier.scope
-            compound_scope = baca.tools.CompoundScope([simple_scope])
+            compound_scope = baca.CompoundScope([simple_scope])
         else:
             compound_scope = scoped_specifier.scope
         return compound_scope, specifier_wrapper, specifier
@@ -2164,9 +2164,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-                ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
+                ...     spacing_specifier=baca.HorizontalSpacingCommand(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
@@ -2174,7 +2174,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> specifiers = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.RhythmSpecifier(
                 ...         rhythm_maker=figures,
                 ...         ),
                 ...     )
@@ -2310,10 +2310,10 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
+                >>> segment_maker = baca.SegmentMaker(
                 ...     allow_figure_names=True,
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-                ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
+                ...     spacing_specifier=baca.HorizontalSpacingCommand(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
@@ -2321,7 +2321,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> specifiers = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.RhythmSpecifier(
                 ...         rhythm_maker=figures,
                 ...         ),
                 ...     )
@@ -2513,10 +2513,10 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
+                >>> segment_maker = baca.SegmentMaker(
                 ...     color_octaves=True,
-                ...     score_template=baca.tools.StringTrioScoreTemplate(),
-                ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
+                ...     score_template=baca.StringTrioScoreTemplate(),
+                ...     spacing_specifier=baca.HorizontalSpacingCommand(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=[abjad.TimeSignature((6, 16))],
@@ -2532,7 +2532,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> specifiers = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.RhythmSpecifier(
                 ...         rhythm_maker=contribution['Violin Music Voice'],
                 ...         ),
                 ...     )
@@ -2546,7 +2546,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> specifiers = segment_maker.append_commands(
                 ...     'vc',
                 ...     baca.select_stages(1),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.RhythmSpecifier(
                 ...         rhythm_maker=contribution['Cello Music Voice'],
                 ...         ),
                 ...     )
@@ -2684,11 +2684,11 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             ::
 
                 >>> pitch_range = abjad.instrumenttools.Violin().pitch_range
-                >>> segment_maker = baca.tools.SegmentMaker(
+                >>> segment_maker = baca.SegmentMaker(
                 ...     color_out_of_range_pitches=True,
                 ...     range_checker=pitch_range,
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-                ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
+                ...     spacing_specifier=baca.HorizontalSpacingCommand(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
@@ -2696,7 +2696,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> specifiers = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.RhythmSpecifier(
                 ...         rhythm_maker=figures,
                 ...         ),
                 ...     )
@@ -2851,10 +2851,10 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
+                >>> segment_maker = baca.SegmentMaker(
                 ...     color_repeat_pitch_classes=True,
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-                ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
+                ...     spacing_specifier=baca.HorizontalSpacingCommand(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
@@ -2862,7 +2862,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> specifiers = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.RhythmSpecifier(
                 ...         rhythm_maker=figures,
                 ...         ),
                 ...     )
@@ -3026,8 +3026,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -3197,8 +3197,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -3372,9 +3372,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
+                >>> segment_maker = baca.SegmentMaker(
                 ...     final_barline='||',
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -3544,9 +3544,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
+                >>> segment_maker = baca.SegmentMaker(
                 ...     final_barline='||',
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -3730,8 +3730,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -3901,11 +3901,11 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
+                >>> segment_maker = baca.SegmentMaker(
                 ...     final_barline='|.',
                 ...     final_markup=abjad.Markup('Madison, WI'),
                 ...     final_markup_extra_offset=(-9, -2),
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -4129,8 +4129,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -4300,9 +4300,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
+                >>> segment_maker = baca.SegmentMaker(
                 ...     ignore_unpitched_notes=True,
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -4415,10 +4415,10 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             Colors unregistered pitches by default:
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.MusicRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
+                ...     baca.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             acciaccatura_specifiers=[
-                ...                 baca.tools.AcciaccaturaSpecifier(),
+                ...                 baca.AcciaccaturaSpecifier(),
                 ...                 ],
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
@@ -4452,9 +4452,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-                ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
+                ...     spacing_specifier=baca.HorizontalSpacingCommand(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
@@ -4462,7 +4462,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> specifiers = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.RhythmSpecifier(
                 ...         rhythm_maker=figures,
                 ...         ),
                 ...     )
@@ -4664,10 +4664,10 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             Ignores unregistered pitches:
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.tools.MusicRhythmSpecifier(
-                ...         rhythm_maker=baca.tools.MusicRhythmMaker(
+                ...     baca.MusicRhythmSpecifier(
+                ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             acciaccatura_specifiers=[
-                ...                 baca.tools.AcciaccaturaSpecifier(),
+                ...                 baca.AcciaccaturaSpecifier(),
                 ...                 ],
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
@@ -4701,10 +4701,10 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
+                >>> segment_maker = baca.SegmentMaker(
                 ...     ignore_unregistered_pitches=True,
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-                ...     spacing_specifier=baca.tools.HorizontalSpacingCommand(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
+                ...     spacing_specifier=baca.HorizontalSpacingCommand(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
@@ -4712,7 +4712,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> specifiers = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
-                ...     baca.tools.RhythmSpecifier(
+                ...     baca.RhythmSpecifier(
                 ...         rhythm_maker=figures,
                 ...         ),
                 ...     )
@@ -4837,9 +4837,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-                ...     tempo_specifier=baca.tools.TempoSpecifier([
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
+                ...     tempo_specifier=baca.TempoSpecifier([
                 ...         (1, abjad.Tempo((1, 8), 90)),
                 ...         ]),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -5026,10 +5026,10 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
+                >>> segment_maker = baca.SegmentMaker(
                 ...     label_clock_time=True,
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-                ...     tempo_specifier=baca.tools.TempoSpecifier([
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
+                ...     tempo_specifier=baca.TempoSpecifier([
                 ...         (1, abjad.Tempo((1, 8), 90)),
                 ...         ]),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -5249,8 +5249,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -5420,9 +5420,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
+                >>> segment_maker = baca.SegmentMaker(
                 ...     label_stages=True,
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -5599,9 +5599,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
+                >>> segment_maker = baca.SegmentMaker(
                 ...     label_stages=True,
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -5894,7 +5894,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker()
+                >>> segment_maker = baca.SegmentMaker()
 
             ::
 
@@ -5907,8 +5907,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     )
 
             ::
@@ -5944,8 +5944,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -6019,8 +6019,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     skips_instead_of_rests=True,
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
@@ -6139,9 +6139,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
+                >>> segment_maker = baca.SegmentMaker(
                 ...     label_stages=True,
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -6322,9 +6322,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
+                >>> segment_maker = baca.SegmentMaker(
                 ...     label_stages=True,
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     stage_label_base_string='intermezzo',
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
@@ -6518,8 +6518,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -6689,9 +6689,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-                ...     tempo_specifier=baca.tools.TempoSpecifier([
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
+                ...     tempo_specifier=baca.TempoSpecifier([
                 ...         (1, abjad.Tempo((1, 8), 90)),
                 ...         ]),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -6900,8 +6900,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -7019,8 +7019,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -7190,11 +7190,11 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-                ...     volta_specifier=baca.tools.VoltaSpecifier([
-                ...         baca.tools.MeasureExpression(1, 2),
+                ...     volta_specifier=baca.VoltaSpecifier([
+                ...         baca.MeasureExpression(1, 2),
                 ...         ]),
                 ...     )
 
@@ -7380,8 +7380,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -7629,7 +7629,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 specifier = abjad.new(specifier, **keywords)
                 if default_scope is not None:
                     specifier._default_scope = default_scope
-                specifier_ = baca.tools.ScopedSpecifier(
+                specifier_ = baca.ScopedSpecifier(
                     scope=scope,
                     specifier=specifier,
                     )
@@ -7646,8 +7646,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -7884,19 +7884,19 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         _voice_name, _stage = scoped_offset
         rhythm_specifier = self._get_rhythm_specifier(_voice_name, _stage)
         rhythm_specifier = copy.deepcopy(rhythm_specifier)
-        assert isinstance(rhythm_specifier, baca.tools.ScopedSpecifier)
+        assert isinstance(rhythm_specifier, baca.ScopedSpecifier)
         if target_scope is None:
             target_scope = rhythm_specifier.scope
-        elif isinstance(target_scope, baca.tools.SimpleScope):
+        elif isinstance(target_scope, baca.SimpleScope):
             pass
         else:
-            target_scope = baca.tools.SimpleScope(
+            target_scope = baca.SimpleScope(
                 voice_name=_voice_name,
                 stages=(target_scope.start, target_scope.stop),
                 )
         rhythm_specifier = rhythm_specifier.specifier
         new_rhythm_specifier = abjad.new(rhythm_specifier, **keywords)
-        new_scoped_specifier = baca.tools.ScopedSpecifier(
+        new_scoped_specifier = baca.ScopedSpecifier(
             target_scope,
             new_rhythm_specifier,
             )

@@ -21,7 +21,7 @@ class RegisterCommand(abjad.abctools.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
-            ...     baca.tools.RegisterCommand(
+            ...     baca.RegisterCommand(
             ...         registration=abjad.Registration(
             ...             [('[A0, C8]', 15)],
             ...             ),
@@ -62,8 +62,8 @@ class RegisterCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -74,7 +74,7 @@ class RegisterCommand(abjad.abctools.AbjadObject):
             ...     baca.select_stages(1),
             ...     baca.pitches('G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4'),
             ...     baca.even_runs(),
-            ...     baca.tools.RegisterCommand(
+            ...     baca.RegisterCommand(
             ...         registration=abjad.Registration(
             ...             [('[A0, C8]', 15)],
             ...             ),
@@ -204,7 +204,7 @@ class RegisterCommand(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{10, 12, 14}],
-                ...     baca.tools.RegisterCommand(
+                ...     baca.RegisterCommand(
                 ...         registration=abjad.Registration(
                 ...             [('[A0, C8]', -6)],
                 ...             ),
@@ -233,7 +233,7 @@ class RegisterCommand(abjad.abctools.AbjadObject):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        if isinstance(argument, baca.tools.ScopedSpecifier):
+        if isinstance(argument, baca.ScopedSpecifier):
             selections = [argument]
         if isinstance(argument, abjad.Selection):
             selections = [argument]
@@ -277,7 +277,7 @@ class RegisterCommand(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
-                ...     baca.tools.RegisterCommand(
+                ...     baca.RegisterCommand(
                 ...         pattern=abjad.select_first(),
                 ...         registration=abjad.Registration(
                 ...             [('[A0, C8]', 0)],
@@ -326,7 +326,7 @@ class RegisterCommand(abjad.abctools.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
-                ...     baca.tools.RegisterCommand(
+                ...     baca.RegisterCommand(
                 ...         pattern=abjad.select_last(),
                 ...         registration=abjad.Registration(
                 ...             [('[A0, C8]', 0)],
@@ -376,7 +376,7 @@ class RegisterCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> command = baca.tools.RegisterCommand(
+                >>> command = baca.RegisterCommand(
                 ...     registration=abjad.Registration(
                 ...         [('[A0, C4)', 15), ('[C4, C8)', 27)],
                 ...         ),

@@ -26,7 +26,7 @@ class Constellation(abjad.abctools.AbjadObject):
             ...     [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]],
             ...     ]
             >>> range_ = abjad.PitchRange('[A0, C8]')
-            >>> constellation_circuit = baca.tools.ConstellationCircuit(
+            >>> constellation_circuit = baca.ConstellationCircuit(
             ...     cells,
             ...     range_,
             ...     )

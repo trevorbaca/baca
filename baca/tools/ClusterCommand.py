@@ -17,7 +17,7 @@ class ClusterCommand(abjad.abctools.AbjadObject):
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.tools.ClusterCommand(
+            ...     baca.ClusterCommand(
             ...         widths=[3, 4],
             ...         ),
             ...     )
@@ -198,8 +198,8 @@ class ClusterCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -210,7 +210,7 @@ class ClusterCommand(abjad.abctools.AbjadObject):
             ...     baca.select_stages(1),
             ...     baca.pitches('E4'),
             ...     baca.messiaen_notes(),
-            ...     baca.tools.ClusterCommand(
+            ...     baca.ClusterCommand(
             ...         widths=[3, 4],
             ...         ),
             ...     )
@@ -434,8 +434,8 @@ class ClusterCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -446,7 +446,7 @@ class ClusterCommand(abjad.abctools.AbjadObject):
                 ...     baca.select_stages(1),
                 ...     baca.pitches('E4'),
                 ...     baca.messiaen_notes(),
-                ...     baca.tools.ClusterCommand(
+                ...     baca.ClusterCommand(
                 ...         hide_flat_markup=True,
                 ...         widths=[3],
                 ...         ),
@@ -576,8 +576,8 @@ class ClusterCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -588,7 +588,7 @@ class ClusterCommand(abjad.abctools.AbjadObject):
                 ...     baca.select_stages(1),
                 ...     baca.pitches('E4'),
                 ...     baca.messiaen_notes(),
-                ...     baca.tools.ClusterCommand(
+                ...     baca.ClusterCommand(
                 ...         hide_natural_markup=True,
                 ...         widths=[3],
                 ...         ),
@@ -718,8 +718,8 @@ class ClusterCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -730,7 +730,7 @@ class ClusterCommand(abjad.abctools.AbjadObject):
                 ...     baca.select_stages(1),
                 ...     baca.messiaen_notes(),
                 ...     baca.pitches('C4 D4 E4 F4'),
-                ...     baca.tools.ClusterCommand(
+                ...     baca.ClusterCommand(
                 ...         widths=[3],
                 ...         ),
                 ...     )
@@ -865,8 +865,8 @@ class ClusterCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -877,7 +877,7 @@ class ClusterCommand(abjad.abctools.AbjadObject):
                 ...     baca.select_stages(1),
                 ...     baca.messiaen_notes(),
                 ...     baca.pitches('C4 D4 E4 F4'),
-                ...     baca.tools.ClusterCommand(
+                ...     baca.ClusterCommand(
                 ...         start_pitch='G4',
                 ...         widths=[3],
                 ...         ),
@@ -1023,8 +1023,8 @@ class ClusterCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -1035,7 +1035,7 @@ class ClusterCommand(abjad.abctools.AbjadObject):
                 ...     baca.select_stages(1),
                 ...     baca.pitches('E4'),
                 ...     baca.messiaen_notes(),
-                ...     baca.tools.ClusterCommand(
+                ...     baca.ClusterCommand(
                 ...         widths=[0, 1, 2, 3],
                 ...         ),
                 ...     )
@@ -1155,8 +1155,8 @@ class ClusterCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -1167,7 +1167,7 @@ class ClusterCommand(abjad.abctools.AbjadObject):
                 ...     baca.select_stages(1),
                 ...     baca.messiaen_notes(),
                 ...     baca.pitches('E4'),
-                ...     baca.tools.ClusterCommand(
+                ...     baca.ClusterCommand(
                 ...         widths=[0, 3],
                 ...         ),
                 ...     )
@@ -1272,8 +1272,8 @@ class ClusterCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> segment_maker = baca.tools.SegmentMaker(
-                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
 
@@ -1284,7 +1284,7 @@ class ClusterCommand(abjad.abctools.AbjadObject):
                 ...     baca.select_stages(1),
                 ...     baca.messiaen_notes(),
                 ...     baca.pitches('E4', allow_repeat_pitches=True),
-                ...     baca.tools.ClusterCommand(
+                ...     baca.ClusterCommand(
                 ...         widths=None,
                 ...         ),
                 ...     )

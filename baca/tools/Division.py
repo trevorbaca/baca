@@ -16,7 +16,7 @@ class Division(abjad.NonreducedFraction):
 
         ::
 
-            >>> division = baca.tools.Division(
+            >>> division = baca.Division(
             ...     (3, 8),
             ...     payload=abjad.rhythmmakertools.NoteRhythmMaker(),
             ...     start_offset=abjad.Offset((5, 4)),
@@ -37,7 +37,7 @@ class Division(abjad.NonreducedFraction):
 
         ::
 
-            >>> division = baca.tools.Division(
+            >>> division = baca.Division(
             ...     (3, 8),
             ...     start_offset=abjad.Offset((5, 4)),
             ...     )
@@ -56,7 +56,7 @@ class Division(abjad.NonreducedFraction):
 
         ::
 
-            >>> division = baca.tools.Division((3, 8))
+            >>> division = baca.Division((3, 8))
 
         ::
 
@@ -71,12 +71,12 @@ class Division(abjad.NonreducedFraction):
 
         ::
 
-            >>> division = baca.tools.Division(
+            >>> division = baca.Division(
             ...     (3, 8),
             ...     payload=abjad.rhythmmakertools.NoteRhythmMaker(),
             ...     start_offset=abjad.Offset((5, 4)),
             ...     )
-            >>> new_division = baca.tools.Division(division)
+            >>> new_division = baca.Division(division)
 
         ::
 
@@ -94,12 +94,12 @@ class Division(abjad.NonreducedFraction):
         ::
 
             >>> fraction = abjad.NonreducedFraction((6, 4))
-            >>> division = baca.tools.Division(
+            >>> division = baca.Division(
             ...     fraction,
             ...     payload=abjad.rhythmmakertools.NoteRhythmMaker(),
             ...     start_offset=abjad.Offset((5, 4)),
             ...     )
-            >>> new_division = baca.tools.Division(division)
+            >>> new_division = baca.Division(division)
 
         ::
 
@@ -116,7 +116,7 @@ class Division(abjad.NonreducedFraction):
 
         ::
 
-            >>> division = baca.tools.Division()
+            >>> division = baca.Division()
 
         ::
 
@@ -135,7 +135,7 @@ class Division(abjad.NonreducedFraction):
             >>> start_offsets = abjad.mathtools.cumulative_sums(durations)[:-1]
             >>> divisions = []
             >>> for duration, start_offset in zip(durations, start_offsets):
-            ...     division = baca.tools.Division(
+            ...     division = baca.Division(
             ...         duration,
             ...         start_offset=start_offset,
             ...         )
@@ -193,7 +193,7 @@ class Division(abjad.NonreducedFraction):
             >>> start_offsets = abjad.mathtools.cumulative_sums(durations)[:-1]
             >>> divisions = []
             >>> for duration, start_offset in zip(durations, start_offsets):
-            ...     division = baca.tools.Division(
+            ...     division = baca.Division(
             ...         duration,
             ...         start_offset=start_offset,
             ...         )
@@ -303,8 +303,8 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> division_1 = baca.tools.Division((2, 4))
-                >>> division_2 = baca.tools.Division((4, 4))
+                >>> division_1 = baca.Division((2, 4))
+                >>> division_2 = baca.Division((4, 4))
                 >>> division_1 + division_2
                 Division((6, 4))
 
@@ -314,11 +314,11 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> division_1 = baca.tools.Division(
+                >>> division_1 = baca.Division(
                 ...     (2, 4),
                 ...     start_offset=abjad.Offset(1),
                 ...     )
-                >>> division_2 = baca.tools.Division((4, 4))
+                >>> division_2 = baca.Division((4, 4))
                 >>> division_1 + division_2
                 Division((6, 4), start_offset=Offset(1, 1))
 
@@ -328,11 +328,11 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> division_1 = baca.tools.Division(
+                >>> division_1 = baca.Division(
                 ...     (2, 4),
                 ...     start_offset=abjad.Offset(1),
                 ...     )
-                >>> division_2 = baca.tools.Division(
+                >>> division_2 = baca.Division(
                 ...     (4, 4),
                 ...     start_offset=abjad.Offset((3, 2)),
                 ...     )
@@ -345,11 +345,11 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> division_1 = baca.tools.Division(
+                >>> division_1 = baca.Division(
                 ...     (2, 4),
                 ...     start_offset=abjad.Offset(1),
                 ...     )
-                >>> division_2 = baca.tools.Division(
+                >>> division_2 = baca.Division(
                 ...     (4, 4),
                 ...     start_offset=abjad.Offset(10),
                 ...     )
@@ -362,11 +362,11 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> division_1 = baca.tools.Division(
+                >>> division_1 = baca.Division(
                 ...     (2, 4),
                 ...     start_offset=abjad.Offset(1),
                 ...     )
-                >>> division_2 = baca.tools.Division(
+                >>> division_2 = baca.Division(
                 ...     (4, 4),
                 ...     start_offset=abjad.Offset(1),
                 ...     )
@@ -379,11 +379,11 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> division_1 = baca.tools.Division(
+                >>> division_1 = baca.Division(
                 ...     (2, 4),
                 ...     start_offset=abjad.Offset(1),
                 ...     )
-                >>> division_2 = baca.tools.Division(
+                >>> division_2 = baca.Division(
                 ...     (4, 4),
                 ...     start_offset=abjad.Offset((5, 4)),
                 ...     )
@@ -460,8 +460,8 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> division_1 = baca.tools.Division((6, 2))
-                >>> division_2 = baca.tools.Division((4, 2))
+                >>> division_1 = baca.Division((6, 2))
+                >>> division_2 = baca.Division((4, 2))
 
             ::
 
@@ -479,11 +479,11 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> division_1 = baca.tools.Division(
+                >>> division_1 = baca.Division(
                 ...     (4, 1),
                 ...     start_offset=abjad.Offset(10),
                 ...     )
-                >>> division_2 = baca.tools.Division(
+                >>> division_2 = baca.Division(
                 ...     (2, 1),
                 ...     start_offset=abjad.Offset(10),
                 ...     )
@@ -504,11 +504,11 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> division_1 = baca.tools.Division(
+                >>> division_1 = baca.Division(
                 ...     (4, 1),
                 ...     start_offset=abjad.Offset(10),
                 ...     )
-                >>> division_2 = baca.tools.Division(
+                >>> division_2 = baca.Division(
                 ...     (4, 1),
                 ...     start_offset=abjad.Offset(12),
                 ...     )
@@ -529,11 +529,11 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> division_1 = baca.tools.Division(
+                >>> division_1 = baca.Division(
                 ...     (6, 2),
                 ...     start_offset=abjad.Offset(0),
                 ...     )
-                >>> division_2 = baca.tools.Division(
+                >>> division_2 = baca.Division(
                 ...     (4, 2),
                 ...     start_offset=abjad.Offset(20),
                 ...     )
@@ -555,11 +555,11 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> division_1 = baca.tools.Division(
+                >>> division_1 = baca.Division(
                 ...     (6, 4),
                 ...     start_offset=abjad.Offset(5),
                 ...     )
-                >>> division_2 = baca.tools.Division((2, 4))
+                >>> division_2 = baca.Division((2, 4))
 
             ::
 
@@ -659,7 +659,7 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> division = baca.tools.Division((3, 8))
+                >>> division = baca.Division((3, 8))
 
             ::
 
@@ -672,7 +672,7 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> division = baca.tools.Division((6, 4))
+                >>> division = baca.Division((6, 4))
 
             ::
 
@@ -693,7 +693,7 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> division = baca.tools.Division(
+                >>> division = baca.Division(
                 ...     (3, 8),
                 ...     payload=abjad.rhythmmakertools.NoteRhythmMaker(),
                 ...     start_offset=abjad.Offset((5, 4)),
@@ -710,7 +710,7 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> division = baca.tools.Division(
+                >>> division = baca.Division(
                 ...     (3, 8),
                 ...     start_offset=abjad.Offset((5, 4)),
                 ...     )
@@ -738,7 +738,7 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> division = baca.tools.Division(
+                >>> division = baca.Division(
                 ...     (3, 8),
                 ...     start_offset=abjad.Offset((5, 4)),
                 ...     )
@@ -754,7 +754,7 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> division = baca.tools.Division((3, 8))
+                >>> division = baca.Division((3, 8))
 
             ::
 
@@ -779,7 +779,7 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> division = baca.tools.Division(
+                >>> division = baca.Division(
                 ...     (3, 8),
                 ...     start_offset=abjad.Offset((5, 4)),
                 ...     )
@@ -795,7 +795,7 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> division = baca.tools.Division((3, 8))
+                >>> division = baca.Division((3, 8))
 
             ::
 

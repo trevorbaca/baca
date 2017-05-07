@@ -15,7 +15,7 @@ class SimpleScope(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> scope = baca.tools.SimpleScope(
+            >>> scope = baca.SimpleScope(
             ...     voice_name='Violin Music Voice',
             ...     stages=(1, 9),
             ...     )
@@ -51,7 +51,7 @@ class SimpleScope(abjad.abctools.AbjadObject):
         if voice_name is not None:
             assert isinstance(voice_name, str), repr(voice_name)
         self._voice_name = voice_name
-        if isinstance(stages, baca.tools.StageExpression):
+        if isinstance(stages, baca.StageExpression):
             #stages = (stages.start, stages.stop)
             pass
         elif isinstance(stages, int):

@@ -14,8 +14,8 @@ class RegisterTransitionCommand(abjad.abctools.AbjadObject):
 
         Transitions from the octave of C4 to the octave of C5:
 
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -26,7 +26,7 @@ class RegisterTransitionCommand(abjad.abctools.AbjadObject):
             ...     baca.select_stages(1),
             ...     baca.pitches('C4 D4 E4 F4'),
             ...     baca.even_runs(),
-            ...     baca.tools.RegisterTransitionCommand(
+            ...     baca.RegisterTransitionCommand(
             ...         start_registration=abjad.Registration(
             ...             [('[A0, C8]', 0)],
             ...             ),

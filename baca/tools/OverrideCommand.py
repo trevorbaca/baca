@@ -18,12 +18,12 @@ class OverrideCommand(abjad.abctools.AbjadObject):
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.tools.OverrideCommand(
+            ...     baca.OverrideCommand(
             ...         grob_name='beam',
             ...         attribute_name='positions',
             ...         attribute_value='(-6, -6)',
             ...         ),
-            ...     baca.tools.OverrideCommand(
+            ...     baca.OverrideCommand(
             ...         grob_name='stem',
             ...         attribute_name='direction',
             ...         attribute_value=Down,
@@ -87,8 +87,8 @@ class OverrideCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker(
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -98,26 +98,26 @@ class OverrideCommand(abjad.abctools.AbjadObject):
             ...     'vn',
             ...     baca.select_stages(1),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.tools.OverrideCommand(
+            ...     baca.OverrideCommand(
             ...         attribute_name='positions',
             ...         attribute_value=(-6, -6),
             ...         grob_name='beam',
             ...         revert=True,
             ...         ),
-            ...     baca.tools.OverrideCommand(
+            ...     baca.OverrideCommand(
             ...         attribute_name='direction',
             ...         attribute_value=Up,
             ...         grob_name='rest',
             ...         revert=True,
             ...         selector=baca.select_rests(),
             ...         ),
-            ...     baca.tools.OverrideCommand(
+            ...     baca.OverrideCommand(
             ...         attribute_name='direction',
             ...         attribute_value=Down,
             ...         grob_name='stem',
             ...         revert=True,
             ...         ),
-            ...     baca.tools.RhythmSpecifier(
+            ...     baca.RhythmSpecifier(
             ...         rhythm_maker=abjad.rhythmmakertools.TaleaRhythmMaker(
             ...             talea=abjad.rhythmmakertools.Talea(
             ...                 counts=[1, 1, 1, -1],
@@ -211,7 +211,7 @@ class OverrideCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> baca.tools.OverrideCommand()
+            >>> baca.OverrideCommand()
             OverrideCommand()
 
     '''

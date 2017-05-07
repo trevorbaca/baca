@@ -18,7 +18,7 @@ class Cursor(abjad.abctools.AbjadObject):
         ::
 
             >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-            >>> cursor = baca.tools.Cursor(source=source, cyclic=True)
+            >>> cursor = baca.Cursor(source=source, cyclic=True)
 
         ::
 
@@ -42,7 +42,7 @@ class Cursor(abjad.abctools.AbjadObject):
         ::
 
             >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-            >>> cursor = baca.tools.Cursor(source=source, cyclic=True)
+            >>> cursor = baca.Cursor(source=source, cyclic=True)
 
         ::
 
@@ -122,7 +122,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(source=source, cyclic=True)
+                >>> cursor = baca.Cursor(source=source, cyclic=True)
 
             ::
 
@@ -162,7 +162,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(source=source)
+                >>> cursor = baca.Cursor(source=source)
                 >>> for item in cursor:
                 ...     item
                 ...
@@ -178,7 +178,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(source=source, cyclic=True)
+                >>> cursor = baca.Cursor(source=source, cyclic=True)
                 >>> for item in cursor:
                 ...     item
                 ...
@@ -199,7 +199,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(source=source)
+                >>> cursor = baca.Cursor(source=source)
                 >>> len(cursor)
                 4
 
@@ -234,7 +234,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(source=source)
+                >>> cursor = baca.Cursor(source=source)
                 >>> cursor.is_exhausted
                 False
 
@@ -279,7 +279,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(source=source, cyclic=True)
+                >>> cursor = baca.Cursor(source=source, cyclic=True)
 
             ::
 
@@ -300,7 +300,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(
+                >>> cursor = baca.Cursor(
                 ...     source=source,
                 ...     cyclic=True,
                 ...     position=None,
@@ -329,7 +329,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(
+                >>> cursor = baca.Cursor(
                 ...     source=source,
                 ...     cyclic=True,
                 ...     position=0,
@@ -354,7 +354,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(
+                >>> cursor = baca.Cursor(
                 ...     source=source,
                 ...     cyclic=True,
                 ...     position=0,
@@ -383,7 +383,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(
+                >>> cursor = baca.Cursor(
                 ...     source=source,
                 ...     cyclic=True,
                 ...     position=-1,
@@ -408,7 +408,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(
+                >>> cursor = baca.Cursor(
                 ...     source=source,
                 ...     cyclic=True,
                 ...     position=-1,
@@ -446,7 +446,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(
+                >>> cursor = baca.Cursor(
                 ...     source=source,
                 ...     suppress_exception=True,
                 ...     )
@@ -488,7 +488,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(
+                >>> cursor = baca.Cursor(
                 ...     source=source,
                 ...     singletons=True,
                 ...     suppress_exception=True,
@@ -538,7 +538,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(source=source)
+                >>> cursor = baca.Cursor(source=source)
 
             ::
 
@@ -552,7 +552,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(source=source, cyclic=True)
+                >>> cursor = baca.Cursor(source=source, cyclic=True)
 
             ::
 
@@ -575,7 +575,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(source=source)
+                >>> cursor = baca.Cursor(source=source)
                 >>> cursor.is_exhausted
                 False
 
@@ -620,7 +620,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(
+                >>> cursor = baca.Cursor(
                 ...     source=source,
                 ...     suppress_exception=True,
                 ...     )
@@ -673,7 +673,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> number_lists = [[13, 13.5, 11], [-2, 2, 1.5]]
-                >>> cursor = baca.tools.Cursor.from_pitch_class_segments(
+                >>> cursor = baca.Cursor.from_pitch_class_segments(
                 ...     number_lists,
                 ...     )
 
@@ -727,7 +727,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(source=source, cyclic=True)
+                >>> cursor = baca.Cursor(source=source, cyclic=True)
 
             ::
 
@@ -751,7 +751,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(source=source, cyclic=True)
+                >>> cursor = baca.Cursor(source=source, cyclic=True)
 
             ::
 
@@ -771,7 +771,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(source=source, cyclic=True)
+                >>> cursor = baca.Cursor(source=source, cyclic=True)
 
             ::
 
@@ -791,7 +791,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(source=source, cyclic=True)
+                >>> cursor = baca.Cursor(source=source, cyclic=True)
 
             ::
 
@@ -815,7 +815,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(source=source, cyclic=True)
+                >>> cursor = baca.Cursor(source=source, cyclic=True)
 
             ::
 
@@ -839,7 +839,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(source=source)
+                >>> cursor = baca.Cursor(source=source)
 
             ::
 
@@ -894,7 +894,7 @@ class Cursor(abjad.abctools.AbjadObject):
             ::
 
                 >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.tools.Cursor(source=source)
+                >>> cursor = baca.Cursor(source=source)
 
             ::
 

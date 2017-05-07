@@ -14,10 +14,10 @@ class TempoSpecifier(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker(
+            >>> segment_maker = baca.SegmentMaker(
             ...     measures_per_stage=[2, 2],
-            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-            ...     tempo_specifier=baca.tools.TempoSpecifier([
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     tempo_specifier=baca.TempoSpecifier([
             ...         (1, abjad.Tempo((1, 4), 90)),
             ...         (2, abjad.Tempo((1, 4), 72)),
             ...         ]),
@@ -163,7 +163,7 @@ class TempoSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> tempo_specifier = baca.tools.TempoSpecifier([
+                >>> tempo_specifier = baca.TempoSpecifier([
                 ...     (1, abjad.Tempo((1, 4), 90)),
                 ...     (1, abjad.Accelerando()),
                 ...     (4, abjad.Tempo((1, 4), 120)),
@@ -190,7 +190,7 @@ class TempoSpecifier(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> tempo_specifier = baca.tools.TempoSpecifier([
+                >>> tempo_specifier = baca.TempoSpecifier([
                 ...     (1, abjad.Tempo((1, 4), 90)),
                 ...     (1, abjad.Accelerando()),
                 ...     (4, abjad.Tempo((1, 4), 120)),

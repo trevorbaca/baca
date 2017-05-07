@@ -17,7 +17,7 @@ def iterate_sequence_boustrophedon(iterable, duplicates=False):
         ::
 
             >>> iterable = [1, 2, 3, 4, 5]
-            >>> generator = baca.tools.iterate_sequence_boustrophedon(
+            >>> generator = baca.iterate_sequence_boustrophedon(
             ...     iterable, duplicates=False)
             >>> list(generator)
             [1, 2, 3, 4, 5, 4, 3, 2]
@@ -30,7 +30,7 @@ def iterate_sequence_boustrophedon(iterable, duplicates=False):
         ::
 
             >>> iterable = [1, 2, 3, 4, 5]
-            >>> generator = baca.tools.iterate_sequence_boustrophedon(
+            >>> generator = baca.iterate_sequence_boustrophedon(
             ...     iterable, duplicates=True)
             >>> list(generator)
             [1, 2, 3, 4, 5, 5, 4, 3, 2, 1]

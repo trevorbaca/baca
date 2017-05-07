@@ -15,7 +15,7 @@ def overwrite_elements(sequence, pairs):
         ::
 
             >>> pairs = [(0, 3), (5, 3)]
-            >>> baca.tools.overwrite_elements(range(10), pairs)
+            >>> baca.overwrite_elements(range(10), pairs)
             [0, 0, 0, 3, 4, 5, 5, 5, 8, 9]
 
         Returns list.
@@ -27,7 +27,7 @@ def overwrite_elements(sequence, pairs):
         ::
 
             >>> pairs = [(0, 3), (5, 3)]
-            >>> baca.tools.overwrite_elements(list(range(10)), pairs)
+            >>> baca.overwrite_elements(list(range(10)), pairs)
             [0, 0, 0, 3, 4, 5, 5, 5, 8, 9]
 
         Returns new list.
@@ -39,7 +39,7 @@ def overwrite_elements(sequence, pairs):
         ::
 
             >>> pairs = [(0, 3), (5, 3)]
-            >>> baca.tools.overwrite_elements(tuple(range(10)), pairs)
+            >>> baca.overwrite_elements(tuple(range(10)), pairs)
             [0, 0, 0, 3, 4, 5, 5, 5, 8, 9]
 
         Returns list.
@@ -50,7 +50,7 @@ def overwrite_elements(sequence, pairs):
 
         ::
 
-            >>> baca.tools.overwrite_elements(range(10), [(0, 99)])
+            >>> baca.overwrite_elements(range(10), [(0, 99)])
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
     Set `pairs` to a list of ``(anchor_index, length)`` pairs.
