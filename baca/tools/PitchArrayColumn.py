@@ -40,7 +40,7 @@ class PitchArrayColumn(abjad.abctools.AbjadValueObject):
                         ),
                     baca.tools.PitchArrayCell(
                         pitches=[
-                            pitchtools.NamedPitch("g'"),
+                            abjad.NamedPitch("g'"),
                             ],
                         width=2,
                         ),

@@ -45,14 +45,14 @@ class PitchArrayList(abjad.datastructuretools.TypedList):
                                         ),
                                     baca.tools.PitchArrayCell(
                                         pitches=[
-                                            pitchtools.NamedPitch("d'"),
+                                            abjad.NamedPitch("d'"),
                                             ],
                                         width=1,
                                         ),
                                     baca.tools.PitchArrayCell(
                                         pitches=[
-                                            pitchtools.NamedPitch('bf'),
-                                            pitchtools.NamedPitch('bqf'),
+                                            abjad.NamedPitch('bf'),
+                                            abjad.NamedPitch('bqf'),
                                             ],
                                         width=2,
                                         ),
@@ -62,13 +62,13 @@ class PitchArrayList(abjad.datastructuretools.TypedList):
                                 cells=(
                                     baca.tools.PitchArrayCell(
                                         pitches=[
-                                            pitchtools.NamedPitch("g'"),
+                                            abjad.NamedPitch("g'"),
                                             ],
                                         width=2,
                                         ),
                                     baca.tools.PitchArrayCell(
                                         pitches=[
-                                            pitchtools.NamedPitch("fs'"),
+                                            abjad.NamedPitch("fs'"),
                                             ],
                                         width=1,
                                         ),

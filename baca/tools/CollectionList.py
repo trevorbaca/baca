@@ -387,20 +387,20 @@ class CollectionList(abjad.abctools.AbjadValueObject):
                     collections=[
                         baca.tools.PitchSegment(
                             (
-                                pitchtools.NumberedPitch(12),
-                                pitchtools.NumberedPitch(14),
-                                pitchtools.NumberedPitch(18),
-                                pitchtools.NumberedPitch(17),
+                                abjad.NumberedPitch(12),
+                                abjad.NumberedPitch(14),
+                                abjad.NumberedPitch(18),
+                                abjad.NumberedPitch(17),
                                 ),
-                            item_class=pitchtools.NumberedPitch,
+                            item_class=abjad.NumberedPitch,
                             ),
                         baca.tools.PitchSegment(
                             (
-                                pitchtools.NumberedPitch(16),
-                                pitchtools.NumberedPitch(20),
-                                pitchtools.NumberedPitch(19),
+                                abjad.NumberedPitch(16),
+                                abjad.NumberedPitch(20),
+                                abjad.NumberedPitch(19),
                                 ),
-                            item_class=pitchtools.NumberedPitch,
+                            item_class=abjad.NumberedPitch,
                             ),
                         ],
                     )
@@ -1155,19 +1155,19 @@ class CollectionList(abjad.abctools.AbjadValueObject):
                         collections=[
                             baca.tools.PitchSegment(
                                 (
-                                    pitchtools.NumberedPitch(5),
-                                    pitchtools.NumberedPitch(12),
-                                    pitchtools.NumberedPitch(14),
-                                    pitchtools.NumberedPitch(18),
+                                    abjad.NumberedPitch(5),
+                                    abjad.NumberedPitch(12),
+                                    abjad.NumberedPitch(14),
+                                    abjad.NumberedPitch(18),
                                     ),
-                                item_class=pitchtools.NumberedPitch,
+                                item_class=abjad.NumberedPitch,
                                 ),
                             baca.tools.PitchSegment(
                                 (
-                                    pitchtools.NumberedPitch(16),
-                                    pitchtools.NumberedPitch(17),
+                                    abjad.NumberedPitch(16),
+                                    abjad.NumberedPitch(17),
                                     ),
-                                item_class=pitchtools.NumberedPitch,
+                                item_class=abjad.NumberedPitch,
                                 ),
                             ],
                         ),

@@ -681,23 +681,23 @@ class Cursor(abjad.abctools.AbjadObject):
 
                 >>> f(cursor)
                 baca.tools.Cursor(
-                    source=datastructuretools.CyclicTuple(
+                    source=abjad.CyclicTuple(
                         [
-                            pitchtools.PitchClassSegment(
+                            abjad.PitchClassSegment(
                                 (
-                                    pitchtools.NumberedPitchClass(1),
-                                    pitchtools.NumberedPitchClass(1.5),
-                                    pitchtools.NumberedPitchClass(11),
+                                    abjad.NumberedPitchClass(1),
+                                    abjad.NumberedPitchClass(1.5),
+                                    abjad.NumberedPitchClass(11),
                                     ),
-                                item_class=pitchtools.NumberedPitchClass,
+                                item_class=abjad.NumberedPitchClass,
                                 ),
-                            pitchtools.PitchClassSegment(
+                            abjad.PitchClassSegment(
                                 (
-                                    pitchtools.NumberedPitchClass(10),
-                                    pitchtools.NumberedPitchClass(2),
-                                    pitchtools.NumberedPitchClass(1.5),
+                                    abjad.NumberedPitchClass(10),
+                                    abjad.NumberedPitchClass(2),
+                                    abjad.NumberedPitchClass(1.5),
                                     ),
-                                item_class=pitchtools.NumberedPitchClass,
+                                item_class=abjad.NumberedPitchClass,
                                 ),
                             ]
                         ),

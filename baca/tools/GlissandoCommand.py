@@ -343,12 +343,12 @@ class GlissandoCommand(abjad.abctools.AbjadObject):
             ::
 
                 >>> f(command.pattern)
-                patterntools.CompoundPattern(
+                abjad.CompoundPattern(
                     (
-                        patterntools.Pattern(
+                        abjad.Pattern(
                             indices=[0],
                             ),
-                        patterntools.Pattern(
+                        abjad.Pattern(
                             indices=[-2, -1],
                             ),
                         ),

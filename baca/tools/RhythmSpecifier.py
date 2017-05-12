@@ -43,66 +43,66 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
 
             >>> f(rhythm_specifier)
             baca.tools.RhythmSpecifier(
-                division_expression=expressiontools.Expression(
+                division_expression=abjad.Expression(
                     callbacks=[
-                        expressiontools.Expression(
+                        abjad.Expression(
                             evaluation_template='abjad.sequencetools.Sequence',
                             is_initializer=True,
-                            markup_expression=expressiontools.Expression(
+                            markup_expression=abjad.Expression(
                                 callbacks=[
-                                    expressiontools.Expression(
+                                    abjad.Expression(
                                         evaluation_template='abjad.markuptools.Markup',
                                         is_initializer=True,
                                         ),
                                     ],
-                                proxy_class=markuptools.Markup,
+                                proxy_class=abjad.Markup,
                                 ),
                             string_template='{}',
                             ),
-                        expressiontools.Expression(
+                        abjad.Expression(
                             evaluation_template='{}.sum()',
-                            markup_expression=expressiontools.Expression(
+                            markup_expression=abjad.Expression(
                                 callbacks=[
-                                    expressiontools.Expression(
+                                    abjad.Expression(
                                         evaluation_template='[{}]',
                                         ),
-                                    expressiontools.Expression(
+                                    abjad.Expression(
                                         evaluation_template='abjad.markuptools.MarkupList',
                                         is_initializer=True,
                                         ),
-                                    expressiontools.Expression(
+                                    abjad.Expression(
                                         evaluation_template="{}.insert(i=0, item='sum(')",
                                         force_return=True,
                                         ),
-                                    expressiontools.Expression(
+                                    abjad.Expression(
                                         evaluation_template="{}.append(item=')')",
                                         force_return=True,
                                         ),
-                                    expressiontools.Expression(
+                                    abjad.Expression(
                                         evaluation_template='{}.concat()',
                                         ),
                                     ],
                                 has_parentheses=True,
-                                proxy_class=markuptools.MarkupList,
+                                proxy_class=abjad.MarkupList,
                                 ),
                             string_template='sum({})',
                             ),
-                        expressiontools.Expression(
+                        abjad.Expression(
                             evaluation_template='abjad.sequencetools.Sequence',
                             is_initializer=True,
-                            markup_expression=expressiontools.Expression(
+                            markup_expression=abjad.Expression(
                                 callbacks=[
-                                    expressiontools.Expression(
+                                    abjad.Expression(
                                         evaluation_template='abjad.markuptools.Markup',
                                         is_initializer=True,
                                         ),
                                     ],
-                                proxy_class=markuptools.Markup,
+                                proxy_class=abjad.Markup,
                                 ),
                             string_template='{}',
                             ),
                         ],
-                    proxy_class=sequencetools.Sequence,
+                    proxy_class=abjad.Sequence,
                     ),
                 rhythm_maker=rhythmmakertools.NoteRhythmMaker(),
                 )

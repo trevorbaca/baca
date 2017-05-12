@@ -33,13 +33,13 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
                 cells=(
                     baca.tools.PitchArrayCell(
                         pitches=[
-                            pitchtools.NamedPitch("c'"),
+                            abjad.NamedPitch("c'"),
                             ],
                         width=1,
                         ),
                     baca.tools.PitchArrayCell(
                         pitches=[
-                            pitchtools.NamedPitch("d'"),
+                            abjad.NamedPitch("d'"),
                             ],
                         width=2,
                         ),

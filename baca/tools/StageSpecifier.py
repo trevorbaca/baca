@@ -31,7 +31,7 @@ class StageSpecifier(abjad.abctools.AbjadObject):
                     4,
                     4,
                     4,
-                    indicatortools.TimeSignature((1, 4)),
+                    abjad.TimeSignature((1, 4)),
                     4,
                     ),
                 )
@@ -58,8 +58,8 @@ class StageSpecifier(abjad.abctools.AbjadObject):
                     4,
                     4,
                     [
-                        indicatortools.TimeSignature((5, 4)),
-                        indicatortools.TimeSignature((5, 4)),
+                        abjad.TimeSignature((5, 4)),
+                        abjad.TimeSignature((5, 4)),
                         ],
                     4,
                     ),

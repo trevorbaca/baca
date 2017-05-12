@@ -33,14 +33,14 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
                     stages=(1, 4),
                     ),
                 specifier=baca.tools.ScorePitchCommand(
-                    source=datastructuretools.CyclicTuple(
+                    source=abjad.CyclicTuple(
                         [
-                            pitchtools.NamedPitch("g'"),
-                            pitchtools.NamedPitch("cs'"),
-                            pitchtools.NamedPitch("ef'"),
-                            pitchtools.NamedPitch("e'"),
-                            pitchtools.NamedPitch("f'"),
-                            pitchtools.NamedPitch("b'"),
+                            abjad.NamedPitch("g'"),
+                            abjad.NamedPitch("cs'"),
+                            abjad.NamedPitch("ef'"),
+                            abjad.NamedPitch("e'"),
+                            abjad.NamedPitch("f'"),
+                            abjad.NamedPitch("b'"),
                             ]
                         ),
                     ),
@@ -79,14 +79,14 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
                         ),
                     ),
                 specifier=baca.tools.ScorePitchCommand(
-                    source=datastructuretools.CyclicTuple(
+                    source=abjad.CyclicTuple(
                         [
-                            pitchtools.NamedPitch("g'"),
-                            pitchtools.NamedPitch("cs'"),
-                            pitchtools.NamedPitch("ef'"),
-                            pitchtools.NamedPitch("e'"),
-                            pitchtools.NamedPitch("f'"),
-                            pitchtools.NamedPitch("b'"),
+                            abjad.NamedPitch("g'"),
+                            abjad.NamedPitch("cs'"),
+                            abjad.NamedPitch("ef'"),
+                            abjad.NamedPitch("e'"),
+                            abjad.NamedPitch("f'"),
+                            abjad.NamedPitch("b'"),
                             ]
                         ),
                     ),
@@ -114,7 +114,7 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
                     stages=(1, 4),
                     ),
                 specifier=baca.tools.OctaveDisplacementCommand(
-                    displacements=datastructuretools.CyclicTuple(
+                    displacements=abjad.CyclicTuple(
                         [0, 0, 0, 0, 1, 1, 1, 1]
                         ),
                     ),
@@ -201,14 +201,14 @@ class ScopedSpecifier(abjad.abctools.AbjadObject):
 
                 >>> f(specifier.specifier)
                 baca.tools.ScorePitchCommand(
-                    source=datastructuretools.CyclicTuple(
+                    source=abjad.CyclicTuple(
                         [
-                            pitchtools.NamedPitch("g'"),
-                            pitchtools.NamedPitch("cs'"),
-                            pitchtools.NamedPitch("ef'"),
-                            pitchtools.NamedPitch("e'"),
-                            pitchtools.NamedPitch("f'"),
-                            pitchtools.NamedPitch("b'"),
+                            abjad.NamedPitch("g'"),
+                            abjad.NamedPitch("cs'"),
+                            abjad.NamedPitch("ef'"),
+                            abjad.NamedPitch("e'"),
+                            abjad.NamedPitch("f'"),
+                            abjad.NamedPitch("b'"),
                             ]
                         ),
                     )

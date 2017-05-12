@@ -28,7 +28,7 @@ class Division(abjad.NonreducedFraction):
             baca.tools.Division(
                 (3, 8),
                 payload=rhythmmakertools.NoteRhythmMaker(),
-                start_offset=durationtools.Offset(5, 4),
+                start_offset=abjad.Offset(5, 4),
                 )
 
     ..  container:: example
@@ -47,7 +47,7 @@ class Division(abjad.NonreducedFraction):
             >>> f(division)
             baca.tools.Division(
                 (3, 8),
-                start_offset=durationtools.Offset(5, 4),
+                start_offset=abjad.Offset(5, 4),
                 )
 
     ..  container:: example
@@ -84,7 +84,7 @@ class Division(abjad.NonreducedFraction):
             baca.tools.Division(
                 (3, 8),
                 payload=rhythmmakertools.NoteRhythmMaker(),
-                start_offset=durationtools.Offset(5, 4),
+                start_offset=abjad.Offset(5, 4),
                 )
 
     ..  container:: example
@@ -107,7 +107,7 @@ class Division(abjad.NonreducedFraction):
             baca.tools.Division(
                 (6, 4),
                 payload=rhythmmakertools.NoteRhythmMaker(),
-                start_offset=durationtools.Offset(5, 4),
+                start_offset=abjad.Offset(5, 4),
                 )
 
     ..  container:: example

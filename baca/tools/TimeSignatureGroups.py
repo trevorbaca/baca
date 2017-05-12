@@ -29,15 +29,15 @@ class TimeSignatureGroups(abjad.abctools.AbjadObject):
             baca.tools.TimeSignatureGroups(
                 [
                     [
-                        indicatortools.TimeSignature((3, 8)),
-                        indicatortools.TimeSignature((3, 16)),
-                        indicatortools.TimeSignature((3, 16)),
+                        abjad.TimeSignature((3, 8)),
+                        abjad.TimeSignature((3, 16)),
+                        abjad.TimeSignature((3, 16)),
                         ],
                     [
-                        indicatortools.TimeSignature((5, 8)),
-                        indicatortools.TimeSignature((5, 16)),
-                        indicatortools.TimeSignature((5, 16)),
-                        indicatortools.TimeSignature((5, 16)),
+                        abjad.TimeSignature((5, 8)),
+                        abjad.TimeSignature((5, 16)),
+                        abjad.TimeSignature((5, 16)),
+                        abjad.TimeSignature((5, 16)),
                         ],
                     ]
                 )
