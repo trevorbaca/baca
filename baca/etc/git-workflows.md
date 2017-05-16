@@ -718,34 +718,33 @@ you'll create specifically for this purpose.
         (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
         12:14 $ git lg
 
-    Note hash suffixes to use in the next step.
+    Note hash suffixes for use in the next step.
 
-6. Switch back to master (IMPORTANT):
+6. IMPORTANT: switch back to master:
 
         (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
         12:06 $ git checkout master
         Switched to branch 'master'
         Your branch is up-to-date with 'origin/master'.
 
-    Why is it so important to switch back to master? Because the branch
-    creation that happens in the following step will be based on the status of
-    the current branch. And we will want to create a feature branch *based on
-    master* (and not based on your development branch).
+    The branch creation that happens in the following step will be based on the
+    status of the current branch: we will want to create a feature branch
+    *based on master* and not based on your development branch.
 
-7. Create a feature branch using Git's checkout command:
+7. Create a feature branch:
 
         (abjad3) ✔ ~/abjad/abjad [master|✔] 
         12:18 $ git checkout -b trevor-pitchtools-cleanup
         Switched to a new branch 'trevor-pitchtools-cleanup'
 
-    Optionally you can run tests on your feature branch now just to make sure
-    everything is ok before populating your feature branch:
+    You can optionally run tests to make sure everything is ok before
+    populating your feature branch:
 
         (abjad3) ✔ ~/abjad/abjad [trevor/update-score-metadata-file L|✔] 
         14:47 $ ajv doctest tools/pitchtools
         ...
     
-8. Populate your feature branch with cherry-picked commits:
+8. Populate your feature branch:
 
         (abjad3) ✔ ~/abjad/abjad [trevor/update-score-metadata-file L|✔] 
         10:24 $ git cherry-pick c96a20c
@@ -813,7 +812,7 @@ you'll create specifically for this purpose.
         14:21 $ git branch -d trevor/update-score-metadata-file
         Deleted branch trevor/update-score-metadata-file (was b4240a0).
 
-14. Check out your development branch again. Interactively rebase on master:
+14. Check out your development branch again:
 
         (abjad3) ✔ ~/abjad/abjad [master|✔] 
         10:36 $ git checkout trevor/dev
@@ -821,12 +820,14 @@ you'll create specifically for this purpose.
         Your branch is up-to-date with 'origin/trevor/dev'.
 
 15. Git says that your development branch is up-to-date with origin.
-    But you still need to rebase-force-push against master to remove the
+    But you still need to interactively rebase against master to remove the
     cherry-picked commit from your development branch:
 
         (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
         10:36 $ git rebase -i master
         Successfully rebased and updated refs/heads/trevor/dev.
+
+16. Force-push:
 
         (abjad3) ✔ ~/abjad/abjad [trevor/dev ↓·3↑·4|✔] 
         10:36 $ git push --force
