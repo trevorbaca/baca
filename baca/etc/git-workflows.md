@@ -813,5 +813,28 @@ you'll create specifically for this purpose.
         14:21 $ git branch -d trevor/update-score-metadata-file
         Deleted branch trevor/update-score-metadata-file (was b4240a0).
 
-I think that's it. That is, I don't think it's necessary to check out your
-development branch and interactively rebase on master.
+14. Check out your development branch again. Interactively rebase on master:
+
+        (abjad3) ✔ ~/abjad/abjad [master|✔] 
+        10:36 $ git checkout trevor/dev
+        Switched to branch 'trevor/dev'
+        Your branch is up-to-date with 'origin/trevor/dev'.
+
+15. Git says that your development branch is up-to-date with origin.
+    But you still need to rebase-force-push against master to remove the
+    cherry-picked commit from your development branch:
+
+        (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
+        10:36 $ git rebase -i master
+        Successfully rebased and updated refs/heads/trevor/dev.
+
+        (abjad3) ✔ ~/abjad/abjad [trevor/dev ↓·3↑·4|✔] 
+        10:36 $ git push --force
+        Counting objects: 192, done.
+        Delta compression using up to 4 threads.
+        Compressing objects: 100% (192/192), done.
+        Writing objects: 100% (192/192), 36.20 KiB | 0 bytes/s, done.
+        Total 192 (delta 184), reused 0 (delta 0)
+        remote: Resolving deltas: 100% (184/184), completed with 148 local objects.
+        To https://github.com/Abjad/abjad.git
+        + e86802e...c8b28da trevor/dev -> trevor/dev (forced update)
