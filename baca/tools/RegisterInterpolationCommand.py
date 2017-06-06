@@ -942,6 +942,8 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
         '_stop_pitch',
         )
 
+    _publish_storage_format = True
+
     ### INITIALIZER ###
 
     def __init__(

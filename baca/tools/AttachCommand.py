@@ -184,6 +184,8 @@ class AttachCommand(abjad.abctools.AbjadObject):
         '_selector',
         )
 
+    _publish_storage_format = True
+
     ### INITIALIZER ###
 
     def __init__(
