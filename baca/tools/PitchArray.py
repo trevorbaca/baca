@@ -279,6 +279,18 @@ class PitchArray(abjad.abctools.AbjadObject):
         offsets.sort()
         return list(abjad.mathtools.difference_series(offsets))
 
+    @staticmethod
+    def _make_multiplied_quarter_notes(durations):
+        notes = []
+        written_duration = abjad.Duration(1, 4)
+        for duration in durations:
+            multiplier = duration / written_duration
+            note = abjad.Note(0, written_duration)
+            abjad.attach(multiplier, note)
+            notes.append(note)
+        notes = abjad.Selection(notes)
+        return notes
+
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -697,12 +709,11 @@ class PitchArray(abjad.abctools.AbjadObject):
 
         Returns pitch array.
         '''
-        time_intervals = class_._get_leaf_offsets(score)
-        array_width = len(time_intervals)
+        offsets = class_._get_leaf_offsets(score)
+        array_width = len(offsets)
         array_depth = len(score)
         pitch_array = class_.from_counts(array_depth, array_width)
-        items = abjad.scoretools.make_multiplied_quarter_notes(
-            [0], time_intervals)
+        items = class_._make_multiplied_quarter_notes(offsets)
         for leaf_iterable, pitch_array_row in zip(score, pitch_array.rows):
             durations = []
             leaves = abjad.iterate(leaf_iterable).by_leaf()
