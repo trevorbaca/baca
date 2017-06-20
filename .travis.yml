@@ -10,7 +10,7 @@ before_install:
     - LILYPOND_URL=http://download.linuxaudio.org/lilypond/binaries/linux-64
     - LILYPOND_URL=$LILYPOND_URL/$LILYPOND_SCRIPT
     - wget -q $LILYPOND_URL
-    - sudo sh $LILYPOND_SCRIPT --batch
+    - sh $LILYPOND_SCRIPT --batch
     - git clone https://github.com/Abjad/abjad.git;
     - cd abjad; git checkout trevor/dev; pip install -e .[development]
     - echo `git branch`
