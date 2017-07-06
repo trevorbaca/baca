@@ -39,7 +39,7 @@ class MusicRhythmSpecifier(abjad.abctools.AbjadObject):
         rhythm_maker=None,
         ):
         if pattern is not None:
-            prototype = (abjad.patterntools.CompoundPattern, abjad.Pattern)
+            prototype = (abjad.CompoundPattern, abjad.Pattern)
             assert isinstance(pattern, prototype), repr(pattern)
         self._pattern = pattern
         self._rhythm_maker = rhythm_maker
@@ -69,7 +69,7 @@ class MusicRhythmSpecifier(abjad.abctools.AbjadObject):
             tuplet_denominator=tuplet_denominator,
             )
         length = len(selections)
-        pattern = self.pattern or abjad.select_all()
+        pattern = self.pattern or abjad.index_all()
         prototype = (abjad.pitchtools.Segment, abjad.pitchtools.Set, list)
         collections_, indices = [], []
         for index, collection in enumerate(collections):

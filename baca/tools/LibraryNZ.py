@@ -2482,7 +2482,7 @@ class LibraryNZ(object):
         r'''Makes rests.
         '''
         mask = abjad.rhythmmakertools.SilenceMask(
-            pattern=abjad.patterntools.select_all(),
+            pattern=abjad.index_all(),
             )
         return baca.RhythmSpecifier(
             rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(

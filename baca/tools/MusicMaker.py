@@ -2200,7 +2200,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 ...             ),
                 ...         ),
                 ...     baca.MusicRhythmSpecifier(
-                ...         pattern=abjad.select_first(),
+                ...         pattern=abjad.index_first(),
                 ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],

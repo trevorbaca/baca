@@ -4912,7 +4912,7 @@ class LibraryAM(object):
 
         '''
         return baca.GlissandoCommand(
-            pattern=abjad.select_last(1, inverted=True),
+            pattern=abjad.index_last(1, inverted=True),
             )
 
     @staticmethod
@@ -6070,7 +6070,7 @@ class LibraryAM(object):
         r'''Makes multimeasure rests.
         '''
         mask = abjad.rhythmmakertools.SilenceMask(
-            pattern=abjad.patterntools.select_all(),
+            pattern=abjad.index_all(),
             use_multimeasure_rests=True,
             )
         return baca.RhythmSpecifier(

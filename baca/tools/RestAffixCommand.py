@@ -171,7 +171,7 @@ class RestAffixCommand(abjad.abctools.AbjadValueObject):
         skips_instead_of_rests=None,
         suffix=None,
         ):
-        prototype = (abjad.Pattern, abjad.patterntools.CompoundPattern)
+        prototype = (abjad.Pattern, abjad.CompoundPattern)
         if (pattern is not None and
             not isinstance(pattern, prototype)):
             message = 'must be pattern or none: {!r}.'
@@ -431,7 +431,7 @@ class RestAffixCommand(abjad.abctools.AbjadValueObject):
                 ...     'Voice 1',
                 ...     collections,
                 ...     baca.RestAffixCommand(
-                ...         pattern=abjad.patterntools.select_all(),
+                ...         pattern=abjad.index_all(),
                 ...         prefix=[1],
                 ...         suffix=[2],
                 ...         ),

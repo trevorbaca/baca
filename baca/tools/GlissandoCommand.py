@@ -29,7 +29,7 @@ class GlissandoCommand(abjad.abctools.AbjadObject):
             ...     baca.even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.GlissandoCommand(
-            ...         pattern=abjad.select_all(),
+            ...         pattern=abjad.index_all(),
             ...         ),
             ...     )
 
@@ -128,7 +128,7 @@ class GlissandoCommand(abjad.abctools.AbjadObject):
 
         ::
 
-            >>> pattern = abjad.select_first(1) | abjad.select_last(2)
+            >>> pattern = abjad.index_first(1) | abjad.index_last(2)
             >>> specifiers = segment_maker.append_commands(
             ...     'vn',
             ...     baca.select_stages(1),
@@ -236,7 +236,7 @@ class GlissandoCommand(abjad.abctools.AbjadObject):
             ...     'Voice 1',
             ...     collections,
             ...     baca.GlissandoCommand(
-            ...         pattern=abjad.select_first(),
+            ...         pattern=abjad.index_first(),
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
@@ -281,7 +281,7 @@ class GlissandoCommand(abjad.abctools.AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self, pattern=None):
-        prototype = (abjad.Pattern, abjad.patterntools.CompoundPattern)
+        prototype = (abjad.Pattern, abjad.CompoundPattern)
         if not pattern is None:
             assert isinstance(pattern, prototype), repr(pattern)
         self._pattern = pattern
@@ -295,7 +295,7 @@ class GlissandoCommand(abjad.abctools.AbjadObject):
         '''
         if argument is None:
             return
-        pattern = self.pattern or abjad.select_all()
+        pattern = self.pattern or abjad.index_all()
         if isinstance(argument, list):
             selections = argument
             assert isinstance(selections[0], abjad.Selection), repr(argument) 
@@ -336,7 +336,7 @@ class GlissandoCommand(abjad.abctools.AbjadObject):
             ::
 
                 >>> command = baca.GlissandoCommand(
-                ...     pattern=abjad.select_first(1) | abjad.select_last(2),
+                ...     pattern=abjad.index_first(1) | abjad.index_last(2),
                 ...     )
         
 

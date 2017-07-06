@@ -241,7 +241,7 @@ class RegisterCommand(abjad.abctools.AbjadObject):
             assert isinstance(argument, list), repr(argument)
             assert isinstance(argument[0], abjad.Selection), repr(argument)
             selections = argument
-        pattern = self.pattern or abjad.select_all()
+        pattern = self.pattern or abjad.index_all()
         selections = pattern.get_matching_items(selections)
         for selection in selections:
             for logical_tie in abjad.iterate(selection).by_logical_tie(
@@ -278,7 +278,7 @@ class RegisterCommand(abjad.abctools.AbjadObject):
                 ...     'Voice 1',
                 ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
                 ...     baca.RegisterCommand(
-                ...         pattern=abjad.select_first(),
+                ...         pattern=abjad.index_first(),
                 ...         registration=abjad.Registration(
                 ...             [('[A0, C8]', 0)],
                 ...             ),
@@ -327,7 +327,7 @@ class RegisterCommand(abjad.abctools.AbjadObject):
                 ...     'Voice 1',
                 ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
                 ...     baca.RegisterCommand(
-                ...         pattern=abjad.select_last(),
+                ...         pattern=abjad.index_last(),
                 ...         registration=abjad.Registration(
                 ...             [('[A0, C8]', 0)],
                 ...             ),

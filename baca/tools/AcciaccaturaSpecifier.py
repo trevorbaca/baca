@@ -127,7 +127,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
         if pattern is not None:
             prototype = (
                 abjad.Pattern,
-                abjad.patterntools.CompoundPattern,
+                abjad.CompoundPattern,
                 )
             assert isinstance(pattern, prototype), repr(pattern)
         self._pattern = pattern
@@ -177,7 +177,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
         return baca.LMRSpecifier()
 
     def _get_pattern(self):
-        return self.pattern or abjad.select_all()
+        return self.pattern or abjad.index_all()
 
     ### PUBLIC PROPERTIES ###
 
@@ -926,7 +926,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 >>> rhythm_maker = baca.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
                 ...         baca.AcciaccaturaSpecifier(
-                ...             pattern=abjad.select_last(),
+                ...             pattern=abjad.index_last(),
                 ...             ),
                 ...         ],
                 ...     talea=abjad.rhythmmakertools.Talea(
@@ -1005,7 +1005,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
                 >>> rhythm_maker = baca.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
                 ...         baca.AcciaccaturaSpecifier(
-                ...             pattern=abjad.select_every([1], period=2),
+                ...             pattern=abjad.index_every([1], period=2),
                 ...             ),
                 ...         ],
                 ...     talea=abjad.rhythmmakertools.Talea(

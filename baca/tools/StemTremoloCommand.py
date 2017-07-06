@@ -135,7 +135,7 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
         tremolo_flags=32,
         ):
         if pattern is not None:
-            prototype = (abjad.Pattern, abjad.patterntools.CompoundPattern)
+            prototype = (abjad.Pattern, abjad.CompoundPattern)
             assert isinstance(pattern, prototype), repr(pattern)
         self._pattern = pattern
         if selector is not None:
@@ -152,7 +152,7 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
 
         Returns none.
         '''
-        pattern = self.pattern or abjad.select_all()
+        pattern = self.pattern or abjad.index_all()
         selector = self.selector or baca.select_plt_heads()
         selections = selector(argument)
         selections = baca.MusicMaker._normalize_selections(selections)
@@ -183,7 +183,7 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> pattern = abjad.select_first() | abjad.select_last()
+                >>> pattern = abjad.index_first() | abjad.index_last()
                 >>> specifiers = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
@@ -295,7 +295,7 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
                 ...     baca.pitches('E4 F4'),
                 ...     baca.even_runs(),
                 ...     baca.StemTremoloCommand(
-                ...         pattern=abjad.select_every([1], period=2),
+                ...         pattern=abjad.index_every([1], period=2),
                 ...         ),
                 ...     )
 

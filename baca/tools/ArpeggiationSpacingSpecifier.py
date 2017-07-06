@@ -91,7 +91,7 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
         if not isinstance(collections, baca.CollectionList):
             collections = baca.CollectionList(collections)
         pitch_class_collections = collections.to_pitch_classes()
-        pattern = self.pattern or abjad.patterntools.select_all()
+        pattern = self.pattern or abjad.index_all()
         collections_ = []
         total_length = len(collections)
         class_ = baca.ChordalSpacingSpecifier

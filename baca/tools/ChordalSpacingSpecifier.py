@@ -137,7 +137,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
             return
         if not isinstance(collections, baca.CollectionList):
             collections = baca.CollectionList(collections)
-        pattern = self.pattern or abjad.patterntools.select_all()
+        pattern = self.pattern or abjad.index_all()
         collections_ = []
         total_length = len(collections)
         for i in range(total_length):

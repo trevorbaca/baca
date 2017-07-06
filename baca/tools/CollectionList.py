@@ -881,7 +881,7 @@ class CollectionList(abjad.abctools.AbjadValueObject):
         '''
         if isinstance(pattern, list):
             pattern = abjad.Pattern(indices=pattern)
-        pattern = pattern or abjad.select_all()
+        pattern = pattern or abjad.index_all()
         length = len(self)
         collections = []
         for i, collection in enumerate(self):
@@ -933,7 +933,7 @@ class CollectionList(abjad.abctools.AbjadValueObject):
         '''
         if isinstance(pattern, list):
             pattern = abjad.Pattern(indices=pattern)
-        pattern = pattern or abjad.select_all()
+        pattern = pattern or abjad.index_all()
         length = len(self)
         collections = []
         for i, collection in enumerate(self):
@@ -997,7 +997,7 @@ class CollectionList(abjad.abctools.AbjadValueObject):
         '''
         if isinstance(pattern, list):
             pattern = abjad.Pattern(indices=pattern)
-        pattern = pattern or abjad.select_all()
+        pattern = pattern or abjad.index_all()
         length = len(self)
         collections = []
         for i, collection in enumerate(self):
@@ -1055,7 +1055,7 @@ class CollectionList(abjad.abctools.AbjadValueObject):
         '''
         if isinstance(pattern, list):
             pattern = abjad.Pattern(indices=pattern)
-        pattern = pattern or abjad.select_all()
+        pattern = pattern or abjad.index_all()
         length = len(self)
         collections = []
         for i, collection in enumerate(self):
@@ -1116,7 +1116,7 @@ class CollectionList(abjad.abctools.AbjadValueObject):
 
             ::
 
-                >>> pattern = abjad.select_every([1], period=2)
+                >>> pattern = abjad.index_every([1], period=2)
                 >>> for collection in collections.chords(pattern=pattern):
                 ...     collection
                 ...
@@ -1129,7 +1129,7 @@ class CollectionList(abjad.abctools.AbjadValueObject):
         '''
         collections = []
         length = len(self)
-        pattern = pattern or abjad.select_all()
+        pattern = pattern or abjad.index_all()
         for i, collection in enumerate(self):
             if pattern.matches_index(i, length):
                 collections.append(collection.chord())
@@ -2113,7 +2113,7 @@ class CollectionList(abjad.abctools.AbjadValueObject):
         '''
         if isinstance(pattern, list):
             pattern = abjad.Pattern(indices=pattern)
-        pattern = pattern or abjad.select_all()
+        pattern = pattern or abjad.index_all()
         length = len(self)
         collections = []
         for i, collection in enumerate(self):
@@ -2148,7 +2148,7 @@ class CollectionList(abjad.abctools.AbjadValueObject):
         '''
         if isinstance(pattern, list):
             pattern = abjad.Pattern(indices=pattern)
-        pattern = pattern or abjad.select_all()
+        pattern = pattern or abjad.index_all()
         length = len(self)
         collections = []
         for i, collection in enumerate(self):
@@ -2186,7 +2186,7 @@ class CollectionList(abjad.abctools.AbjadValueObject):
         '''
         if isinstance(pattern, list):
             pattern = abjad.Pattern(indices=pattern)
-        pattern = pattern or abjad.select_all()
+        pattern = pattern or abjad.index_all()
         length = len(self)
         collections = []
         for i, collection in enumerate(self):

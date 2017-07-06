@@ -954,7 +954,7 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
         stop_pitch=None,
         ):
         if pattern is not None:
-            prototype = (abjad.Pattern, abjad.patterntools.CompoundPattern)
+            prototype = (abjad.Pattern, abjad.CompoundPattern)
             assert isinstance(pattern, prototype), repr(pattern)
         self._pattern = pattern
         start_pitch = abjad.NumberedPitch(start_pitch)
@@ -1038,7 +1038,7 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
                 ...     'Voice 1',
                 ...     collections,
                 ...     baca.RegisterInterpolationCommand(
-                ...         pattern=abjad.select_first(),
+                ...         pattern=abjad.index_first(),
                 ...         start_pitch=0,
                 ...         stop_pitch=24,
                 ...         ),
@@ -1100,7 +1100,7 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
                 ...     'Voice 1',
                 ...     collections,
                 ...     baca.RegisterInterpolationCommand(
-                ...         pattern=abjad.select_last(),
+                ...         pattern=abjad.index_last(),
                 ...         start_pitch=0,
                 ...         stop_pitch=24,
                 ...         ),
@@ -1162,7 +1162,7 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
                 ...     'Voice 1',
                 ...     collections,
                 ...     baca.RegisterInterpolationCommand(
-                ...         pattern=abjad.select_all(),
+                ...         pattern=abjad.index_all(),
                 ...         start_pitch=0,
                 ...         stop_pitch=24,
                 ...         ),
