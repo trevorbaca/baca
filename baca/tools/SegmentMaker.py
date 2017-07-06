@@ -1222,7 +1222,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
     def _get_end_clefs(self):
         result = abjad.TypedOrderedDict()
         staves = abjad.iterate(self._score).by_class(abjad.Staff)
-        staves = [_ for _ in staves if _.is_semantic]
+        #staves = [_ for _ in staves if _.is_semantic]
         staves.sort(key=lambda x: x.name)
         prototype = abjad.Clef
         for staff in staves:
