@@ -143,7 +143,7 @@ class Constellation(abjad.abctools.AbjadObject):
     def _color_map(self):
         pitches = self._partitioned_generator_pitch_numbers
         colors = ['red', 'blue', 'green']
-        return abjad.pitchtools.NumberedPitchClassColorMap(pitches, colors)
+        return abjad.pitchtools.ColorMap(pitches, colors)
 
     @property
     def _colored_generator(self):
