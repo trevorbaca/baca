@@ -926,7 +926,7 @@ class PitchTree(Tree):
             markup_direction=markup_direction,
             )
         assert leaf_list_stack == [], repr(leaf_list_stack)
-        first_leaf = abjad.inspect_(voice).get_leaf(n=0)
+        first_leaf = abjad.inspect(voice).get_leaf(n=0)
         abjad.attach(abjad.TimeSignature((1, 8)), first_leaf)
         self._color_repeats(color_repeats, voice)
         self._attach_cell_indices(cell_indices, voice)
@@ -986,7 +986,7 @@ class PitchTree(Tree):
             return
         cell_spanners = self._get_cell_spanners(voice)
         cell_spanners.sort(
-            key=lambda x: abjad.inspect_(x).get_timespan().start_offset
+            key=lambda x: abjad.inspect(x).get_timespan().start_offset
             )
         if cell_indices is True:
             direction = Up
@@ -994,7 +994,7 @@ class PitchTree(Tree):
             direction = cell_indices
         cell_index = 0
         for cell_spanner in cell_spanners:
-            negative_level = abjad.inspect_(cell_spanner).get_indicator(int)
+            negative_level = abjad.inspect(cell_spanner).get_indicator(int)
             if negative_level != -2:
                 continue
             markup = abjad.Markup(cell_index, direction=direction)
@@ -1023,7 +1023,7 @@ class PitchTree(Tree):
     def _get_cell_spanners(self, voice):
         spanners = set()
         for leaf in abjad.iterate(voice).by_leaf():
-            spanners_ = abjad.inspect_(leaf).get_spanners()
+            spanners_ = abjad.inspect(leaf).get_spanners()
             spanners.update(spanners_)
         class_ = abjad.Spanner
         spanners = [_ for _ in spanners if _.__class__ is class_]
@@ -1083,7 +1083,7 @@ class PitchTree(Tree):
                 leaf = first_note
                 while leaf is not last_note:
                     leaves_with_skips.append(leaf)
-                    leaf = abjad.inspect_(leaf).get_leaf(n=1)
+                    leaf = abjad.inspect(leaf).get_leaf(n=1)
                 leaves_with_skips.append(leaf)
                 spanner = abjad.Spanner()
                 negative_level = node._get_level(negative=True)

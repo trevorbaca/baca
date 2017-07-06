@@ -319,7 +319,7 @@ class GlissandoCommand(abjad.abctools.AbjadObject):
         last_leaf = logical_tie.tail
         if not isinstance(last_leaf, note_or_chord):
             return
-        next_leaf = abjad.inspect_(last_leaf).get_leaf(1)
+        next_leaf = abjad.inspect(last_leaf).get_leaf(1)
         if not isinstance(next_leaf, note_or_chord):
             return
         leaves = [last_leaf, next_leaf]

@@ -237,7 +237,7 @@ class TrillCommand(abjad.abctools.AbjadObject):
                     break
             if skip_spanner:
                 continue
-            next_leaf = abjad.inspect_(leaves[-1]).get_leaf(1)
+            next_leaf = abjad.inspect(leaves[-1]).get_leaf(1)
             if next_leaf is not None:
                 leaves.append(next_leaf)
             if 1 < len(leaves):
@@ -247,7 +247,7 @@ class TrillCommand(abjad.abctools.AbjadObject):
         if self.forbidden_annotations is None:
             return False
         for forbidden_annotation in self.forbidden_annotations:
-            if abjad.inspect_(leaf).get_annotation(forbidden_annotation):
+            if abjad.inspect(leaf).get_annotation(forbidden_annotation):
                 return True
         return False
 

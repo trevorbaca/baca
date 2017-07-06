@@ -349,7 +349,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
 
     def _set_pitch(self, leaf, pitch):
         string = 'not yet pitched'
-        if abjad.inspect_(leaf).has_indicator(string):
+        if abjad.inspect(leaf).has_indicator(string):
             abjad.detach(string, leaf)
         if isinstance(leaf, abjad.Note):
             leaf.written_pitch = pitch

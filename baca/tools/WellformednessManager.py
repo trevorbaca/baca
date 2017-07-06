@@ -143,24 +143,24 @@ class WellformednessManager(abjad.abctools.AbjadObject):
             )
         notes = list(notes)
         notes.sort(
-            key=lambda _: abjad.inspect_(_.head).get_timespan().start_offset)
+            key=lambda _: abjad.inspect(_.head).get_timespan().start_offset)
         for leaf_1, leaf_2 in abjad.Sequence(notes).nwise():
             if not isinstance(leaf_1.head, abjad.Note):
                 continue
             if not isinstance(leaf_2.head, abjad.Note):
                 continue
             total += 1
-            if abjad.inspect_(leaf_1.head).has_indicator(not_yet_pitched_string):
+            if abjad.inspect(leaf_1.head).has_indicator(not_yet_pitched_string):
                 continue
-            if abjad.inspect_(leaf_2.head).has_indicator(not_yet_pitched_string):
+            if abjad.inspect(leaf_2.head).has_indicator(not_yet_pitched_string):
                 continue
             pitch_class_1 = leaf_1.head.written_pitch.named_pitch_class
             pitch_class_2 = leaf_2.head.written_pitch.named_pitch_class
             if not pitch_class_1 == pitch_class_2:
                 continue
             string = 'repeat pitch allowed'
-            if (abjad.inspect_(leaf_1.head).has_indicator(string) and
-                abjad.inspect_(leaf_2.head).has_indicator(string)):
+            if (abjad.inspect(leaf_1.head).has_indicator(string) and
+                abjad.inspect(leaf_2.head).has_indicator(string)):
                 continue
             violators.append(leaf_2)
         total += 1

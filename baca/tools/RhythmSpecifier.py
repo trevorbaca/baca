@@ -316,7 +316,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
             first_component = first_item[0]
         else:
             first_component = first_item
-        first_leaf = abjad.inspect_(first_component).get_leaf(0)
+        first_leaf = abjad.inspect(first_component).get_leaf(0)
         assert isinstance(first_leaf, abjad.Leaf), repr(first_leaf)
         return first_leaf
 
@@ -330,7 +330,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
         if isinstance(last_component, abjad.Leaf):
             last_leaf = last_component
         else:
-            last_leaf = abjad.inspect_(last_component).get_leaf(-1)
+            last_leaf = abjad.inspect(last_component).get_leaf(-1)
         assert isinstance(last_leaf, abjad.Leaf)
         return last_leaf
 

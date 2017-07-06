@@ -421,7 +421,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         if len(tuplet) == 1:
             return tuplet
         total_duration = leaf_selection.get_duration()
-        durations = [abjad.inspect_(_).get_duration() for _ in leaf_selection]
+        durations = [abjad.inspect(_).get_duration() for _ in leaf_selection]
         if accelerando_indicator == 'accel':
             exponent = 0.625 
         elif accelerando_indicator == 'rit':
@@ -436,7 +436,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         elif rhythm_maker_class._is_ritardando(leaf_selection):
             abjad.override(leaf_selection[0]).beam.grow_direction = Left
         tuplet.force_times_command = True
-        duration = abjad.inspect_(tuplet).get_duration()
+        duration = abjad.inspect(tuplet).get_duration()
         duration = abjad.Duration(duration)
         markup = duration.to_score_markup()
         markup = markup.scale((0.75, 0.75))

@@ -131,7 +131,7 @@ class MusicAccumulator(abjad.abctools.AbjadObject):
                 leaf_start_offset = floating_selection.timespan.start_offset
                 leaves = abjad.iterate(floating_selection.selection).by_leaf()
                 for leaf in leaves:
-                    markup = abjad.inspect_(leaf).get_indicators(abjad.Markup)
+                    markup = abjad.inspect(leaf).get_indicators(abjad.Markup)
                     for markup_ in markup:
                         if (isinstance(markup_._annotation, str) and
                             markup_._annotation.startswith('figure name: ')):
@@ -142,7 +142,7 @@ class MusicAccumulator(abjad.abctools.AbjadObject):
                                 )
                             if figure_name_ == figure_name:
                                 return leaf_start_offset
-                    leaf_duration = abjad.inspect_(leaf).get_duration()
+                    leaf_duration = abjad.inspect(leaf).get_duration()
                     leaf_start_offset += leaf_duration
         message = 'can not find figure {}.'
         message = message.format(figure_name)
@@ -153,7 +153,7 @@ class MusicAccumulator(abjad.abctools.AbjadObject):
         for floating_selection in floating_selections:
             leaf_start_offset = abjad.Offset(0)
             for leaf_ in abjad.iterate(floating_selection.selection).by_leaf():
-                leaf_duration = abjad.inspect_(leaf_).get_duration()
+                leaf_duration = abjad.inspect(leaf_).get_duration()
                 if leaf_ is leaf:
                     found_leaf = True
                     break
@@ -214,7 +214,7 @@ class MusicAccumulator(abjad.abctools.AbjadObject):
             selected_leaves = list(abjad.iterate(result).by_leaf())
             first_selected_leaf = selected_leaves[0]
             dummy_container = abjad.Container(selection)
-            timespan = abjad.inspect_(first_selected_leaf).get_timespan()
+            timespan = abjad.inspect(first_selected_leaf).get_timespan()
             del(dummy_container[:])
             local_anchor_offset = timespan.start_offset
         start_offset = remote_anchor_offset - local_anchor_offset

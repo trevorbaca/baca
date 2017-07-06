@@ -96,7 +96,7 @@ class CompoundScope(abjad.abctools.AbjadObject):
         if self._timespan_map is None:
             message = 'must construct timespan map first.'
             raise Exception(message)
-        agent = abjad.inspect_(component)
+        agent = abjad.inspect(component)
         voice = agent.get_parentage().get_first(abjad.Voice)
         if voice is None:
             voice = agent.get_parentage().get_first(abjad.Context)

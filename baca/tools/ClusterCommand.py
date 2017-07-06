@@ -385,7 +385,7 @@ class ClusterCommand(abjad.abctools.AbjadObject):
         logical_ties = abjad.iterate(argument).by_logical_tie()
         logical_ties = list(logical_ties)
         first_note = logical_ties[0].head
-        root = abjad.inspect_(first_note).get_parentage().root
+        root = abjad.inspect(first_note).get_parentage().root
         with abjad.systemtools.ForbidUpdate(component=root):
             for index, logical_tie in enumerate(logical_ties):
                 width = widths[index]
