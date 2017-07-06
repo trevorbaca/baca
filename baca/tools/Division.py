@@ -822,7 +822,7 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> generator = Duration.yield_durations()
+                >>> generator = baca.Division.yield_durations()
                 >>> for n in range(16):
                 ...     next(generator)
                 ...
@@ -850,7 +850,7 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> generator = Duration.yield_durations(unique=True)
+                >>> generator = baca.Division.yield_durations(unique=True)
                 >>> for n in range(16):
                 ...     next(generator)
                 ...
@@ -873,10 +873,10 @@ class Division(abjad.NonreducedFraction):
 
         Returns generator.
         '''
-        generator = mathtools.yield_nonreduced_fractions()
+        generator = abjad.mathtools.yield_nonreduced_fractions()
         while True:
             integer_pair = next(generator)
-            duration = Duration(integer_pair)
+            duration = abjad.Duration(integer_pair)
             if not unique:
                 yield duration
             elif duration.pair == integer_pair:
@@ -895,17 +895,22 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> pairs = Duration(1, 8).yield_equivalent_durations()
+                >>> pairs = baca.Division(1, 8).yield_equivalent_durations()
                 >>> for pair in pairs: pair
                 ...
-                (Multiplier(1, 1), Duration(1, 8))
-                (Multiplier(2, 3), Duration(3, 16))
-                (Multiplier(4, 3), Duration(3, 32))
-                (Multiplier(4, 7), Duration(7, 32))
-                (Multiplier(8, 7), Duration(7, 64))
-                (Multiplier(8, 15), Duration(15, 64))
-                (Multiplier(16, 15), Duration(15, 128))
-                (Multiplier(16, 31), Duration(31, 128))
+                (Multiplier(1, 1), Duration(1, 1))
+                (Multiplier(2, 3), Duration(3, 2))
+                (Multiplier(4, 3), Duration(3, 4))
+                (Multiplier(4, 7), Duration(7, 4))
+                (Multiplier(8, 7), Duration(7, 8))
+                (Multiplier(8, 15), Duration(15, 8))
+                (Multiplier(16, 15), Duration(15, 16))
+                (Multiplier(16, 31), Duration(31, 16))
+                (Multiplier(32, 31), Duration(31, 32))
+                (Multiplier(32, 63), Duration(63, 32))
+                (Multiplier(64, 63), Duration(63, 64))
+                (Multiplier(64, 127), Duration(127, 64))
+                (Multiplier(128, 127), Duration(127, 128))
 
         ..  container:: example
 
@@ -913,16 +918,22 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> pairs = Duration(1, 12).yield_equivalent_durations()
+                >>> pairs = baca.Division(1, 12).yield_equivalent_durations()
                 >>> for pair in pairs: pair
                 ...
-                (Multiplier(2, 3), Duration(1, 8))
-                (Multiplier(4, 3), Duration(1, 16))
-                (Multiplier(8, 9), Duration(3, 32))
-                (Multiplier(16, 9), Duration(3, 64))
-                (Multiplier(16, 21), Duration(7, 64))
-                (Multiplier(32, 21), Duration(7, 128))
-                (Multiplier(32, 45), Duration(15, 128))
+                (Multiplier(1, 1), Duration(1, 1))
+                (Multiplier(2, 3), Duration(3, 2))
+                (Multiplier(4, 3), Duration(3, 4))
+                (Multiplier(4, 7), Duration(7, 4))
+                (Multiplier(8, 7), Duration(7, 8))
+                (Multiplier(8, 15), Duration(15, 8))
+                (Multiplier(16, 15), Duration(15, 16))
+                (Multiplier(16, 31), Duration(31, 16))
+                (Multiplier(32, 31), Duration(31, 32))
+                (Multiplier(32, 63), Duration(63, 32))
+                (Multiplier(64, 63), Duration(63, 64))
+                (Multiplier(64, 127), Duration(127, 64))
+                (Multiplier(128, 127), Duration(127, 128))
 
         ..  container:: example
 
@@ -930,25 +941,33 @@ class Division(abjad.NonreducedFraction):
 
             ::
 
-                >>> pairs = Duration(5, 48).yield_equivalent_durations()
+                >>> pairs = baca.Division(5, 48).yield_equivalent_durations()
                 >>> for pair in pairs: pair
                 ...
-                (Multiplier(5, 6), Duration(1, 8))
-                (Multiplier(5, 3), Duration(1, 16))
-                (Multiplier(5, 9), Duration(3, 16))
-                (Multiplier(10, 9), Duration(3, 32))
-                (Multiplier(20, 21), Duration(7, 64))
-                (Multiplier(40, 21), Duration(7, 128))
-                (Multiplier(8, 9), Duration(15, 128))
+                (Multiplier(5, 3), Duration(3, 1))
+                (Multiplier(5, 4), Duration(4, 1))
+                (Multiplier(5, 6), Duration(6, 1))
+                (Multiplier(5, 7), Duration(7, 1))
+                (Multiplier(5, 8), Duration(8, 1))
+                (Multiplier(10, 7), Duration(7, 2))
+                (Multiplier(2, 3), Duration(15, 2))
+                (Multiplier(4, 3), Duration(15, 4))
+                (Multiplier(20, 31), Duration(31, 4))
+                (Multiplier(40, 31), Duration(31, 8))
+                (Multiplier(40, 63), Duration(63, 8))
+                (Multiplier(80, 63), Duration(63, 16))
+                (Multiplier(80, 127), Duration(127, 16))
+                (Multiplier(160, 127), Duration(127, 32))
 
         Defaults `minimum_written_duration` to ``1/128``.
 
         Returns generator.
         '''
+        duration = abjad.Duration(self)
         if minimum_written_duration is None:
-            minimum_written_duration = type(self)(1, 128)
+            minimum_written_duration = type(duration)(1, 128)
         else:
-            minimum_written_duration = type(self)(minimum_written_duration)
+            minimum_written_duration = type(duration)(minimum_written_duration)
         generator = type(self).yield_durations(unique=True)
         pairs = []
         while True:
@@ -958,7 +977,7 @@ class Division(abjad.NonreducedFraction):
             if written_duration < minimum_written_duration:
                 pairs = tuple(pairs)
                 return pairs
-            prolation = self / written_duration
+            prolation = duration / written_duration
             if prolation.is_proper_tuplet_multiplier:
                 pair = (prolation, written_duration)
                 pairs.append(pair)

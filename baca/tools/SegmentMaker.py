@@ -1223,6 +1223,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         result = abjad.TypedOrderedDict()
         staves = abjad.iterate(self._score).by_class(abjad.Staff)
         #staves = [_ for _ in staves if _.is_semantic]
+        staves = list(staves)
         staves.sort(key=lambda x: x.name)
         prototype = abjad.Clef
         for staff in staves:
