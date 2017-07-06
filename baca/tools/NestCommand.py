@@ -401,10 +401,8 @@ class NestCommand(abjad.abctools.AbjadObject):
         if isinstance(time_treatment, str):
             addendum = abjad.Duration(time_treatment)
             duration = tuplet_selection.get_duration() + addendum
-            tuplet = abjad.scoretools.FixedDurationTuplet(
-                duration,
-                tuplet_selection,
-                )
+            tuplet = abjad.scoretools.FixedDurationTuplet(duration, [])
+            abjad.mutate(tuplet_selection).wrap(tuplet)
         elif time_treatment.__class__ is abjad.Multiplier:
             tuplet = abjad.Tuplet(time_treatment, tuplet_selection)
         elif time_treatment.__class__ is abjad.Duration:
