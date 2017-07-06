@@ -2388,8 +2388,8 @@ class LibraryAM(object):
         for cell in cells:
             transpositions = range.list_octave_transpositions(cell)
             transposition_list.append(transpositions)
-        enumeration = abjad.sequencetools.Enumeration(transposition_list)
-        result = enumeration.yield_outer_product()
+        enumerator = abjad.Enumerator(transposition_list)
+        result = enumerator.yield_outer_product()
         result = list(result)
         if flatten:
             for i, part in enumerate(result):
