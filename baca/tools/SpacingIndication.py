@@ -17,27 +17,27 @@ class SpacingIndication(abjad.abctools.AbjadValueObject):
 
     ::
 
-        >>> tempo = abjad.Tempo((1, 8), 44)
+        >>> tempo = abjad.MetronomeMark((1, 8), 44)
         >>> indication = baca.SpacingIndication(tempo, abjad.Duration(1, 68))
 
     ::
 
         >>> indication
-        SpacingIndication(Tempo(reference_duration=Duration(1, 8), units_per_minute=44), Duration(1, 68))
+        SpacingIndication(MetronomeMark(reference_duration=Duration(1, 8), units_per_minute=44), Duration(1, 68))
 
     Initialize from constants:
 
     ::
 
         >>> baca.SpacingIndication(((1, 8), 44), (1, 68))
-        SpacingIndication(Tempo(reference_duration=Duration(1, 8), units_per_minute=44), Duration(1, 68))
+        SpacingIndication(MetronomeMark(reference_duration=Duration(1, 8), units_per_minute=44), Duration(1, 68))
 
     Initialize from other spacing indication:
 
     ::
 
         >>> baca.SpacingIndication(indication)
-        SpacingIndication(Tempo(reference_duration=Duration(1, 8), units_per_minute=44), Duration(1, 68))
+        SpacingIndication(MetronomeMark(reference_duration=Duration(1, 8), units_per_minute=44), Duration(1, 68))
 
     Spacing indications are immutable.
     '''
@@ -61,14 +61,14 @@ class SpacingIndication(abjad.abctools.AbjadValueObject):
         elif len(args) == 2:
             tempo = args[0]
             if isinstance(tempo, tuple):
-                tempo = abjad.Tempo(*tempo)
+                tempo = abjad.MetronomeMark(*tempo)
             tempo_indication = tempo
             proportional_notation_duration = abjad.Duration(args[1])
             self._tempo_indication = tempo_indication
             self._proportional_notation_duration = \
                 proportional_notation_duration
         elif len(args) == 0:
-            tempo = abjad.Tempo()
+            tempo = abjad.MetronomeMark()
             proportional_notation_duration = abjad.Duration(1, 68)
             self._tempo_indication = tempo
             self._proportional_notation_duration = \
@@ -134,7 +134,7 @@ class SpacingIndication(abjad.abctools.AbjadValueObject):
 
     @property
     def tempo_indication(self):
-        r'''Tempo of spacing indication.
+        r'''MetronomeMark of spacing indication.
 
         Returns tempo.
         '''

@@ -25,7 +25,7 @@ class TimeSignatureMaker(abjad.abctools.AbjadObject):
             ...     abjad.Fermata('longfermata'),
             ...     ])
             >>> tempo_specifier = baca.TempoSpecifier([
-            ...     (1, abjad.Tempo((1, 4), 90)),
+            ...     (1, abjad.MetronomeMark((1, 4), 90)),
             ...     ])
             >>> maker = baca.TimeSignatureMaker(
             ...     time_signatures=time_signatures,

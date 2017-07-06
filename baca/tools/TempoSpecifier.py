@@ -3,7 +3,7 @@ import abjad
 
 
 class TempoSpecifier(abjad.abctools.AbjadObject):
-    r'''Tempo specifier.
+    r'''MetronomeMark specifier.
 
     ::
 
@@ -18,8 +18,8 @@ class TempoSpecifier(abjad.abctools.AbjadObject):
             ...     measures_per_stage=[2, 2],
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     tempo_specifier=baca.TempoSpecifier([
-            ...         (1, abjad.Tempo((1, 4), 90)),
-            ...         (2, abjad.Tempo((1, 4), 72)),
+            ...         (1, abjad.MetronomeMark((1, 4), 90)),
+            ...         (2, abjad.MetronomeMark((1, 4), 72)),
             ...         ]),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
@@ -164,9 +164,9 @@ class TempoSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> tempo_specifier = baca.TempoSpecifier([
-                ...     (1, abjad.Tempo((1, 4), 90)),
+                ...     (1, abjad.MetronomeMark((1, 4), 90)),
                 ...     (1, abjad.Accelerando()),
-                ...     (4, abjad.Tempo((1, 4), 120)),
+                ...     (4, abjad.MetronomeMark((1, 4), 120)),
                 ...     ])
 
             ::
@@ -191,18 +191,18 @@ class TempoSpecifier(abjad.abctools.AbjadObject):
             ::
 
                 >>> tempo_specifier = baca.TempoSpecifier([
-                ...     (1, abjad.Tempo((1, 4), 90)),
+                ...     (1, abjad.MetronomeMark((1, 4), 90)),
                 ...     (1, abjad.Accelerando()),
-                ...     (4, abjad.Tempo((1, 4), 120)),
+                ...     (4, abjad.MetronomeMark((1, 4), 120)),
                 ...     ])
 
             ::
 
                 >>> for item in tempo_specifier.items:
                 ...     item
-                (1, Tempo(reference_duration=Duration(1, 4), units_per_minute=90))
+                (1, MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=90))
                 (1, Accelerando())
-                (4, Tempo(reference_duration=Duration(1, 4), units_per_minute=120))
+                (4, MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=120))
 
         Defaults to none.
 

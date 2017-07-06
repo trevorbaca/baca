@@ -837,12 +837,12 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         if not self.tempo_specifier:
             return
         context = self._score['Time Signature Context Skips']
-        # TODO: adjust TempoSpanner to make this possible:
-        #abjad.attach(abjad.TempoSpanner(), context)
+        # TODO: adjust MetronomeMarkSpanner to make this possible:
+        #abjad.attach(abjad.MetronomeMarkSpanner(), context)
         skips = list(abjad.iterate(context).by_leaf())
         left_broken_text = abjad.Markup().null()
         left_broken_text._direction = None
-        tempo_spanner = abjad.TempoSpanner(
+        tempo_spanner = abjad.MetronomeMarkSpanner(
             left_broken_padding=0,
             left_broken_text=left_broken_text,
             start_with_parenthesized_tempo=False,
@@ -859,7 +859,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             prototype = (abjad.Skip, 
                 abjad.MultimeasureRest)
             assert isinstance(start_skip, prototype), start_skip
-            # TODO: adjust TempoSpanner to make measure attachment work
+            # TODO: adjust MetronomeMarkSpanner to make measure attachment work
             abjad.attach(directive, start_skip, is_annotation=True)
 
     def _check_design(self):
@@ -1262,7 +1262,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
     def _get_end_tempo_name(self):
         context = self._score['Time Signature Context Skips']
         last_leaf = abjad.inspect_(context).get_leaf(-1)
-        prototype = abjad.Tempo
+        prototype = abjad.MetronomeMark
         effective_tempo = abjad.inspect_(last_leaf).get_effective(prototype)
         if not effective_tempo:
             return
@@ -1876,7 +1876,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         is_trending = False
         for i, leaf in enumerate(leaves):
             duration = abjad.inspect_(leaf).get_duration()
-            tempi = abjad.inspect_(leaf).get_indicators(abjad.Tempo)
+            tempi = abjad.inspect_(leaf).get_indicators(abjad.MetronomeMark)
             if tempi:
                 current_tempo = tempi[0]
                 for measure_summary in measure_summaries[tempo_index:]:
@@ -4840,7 +4840,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> segment_maker = baca.SegmentMaker(
                 ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     tempo_specifier=baca.TempoSpecifier([
-                ...         (1, abjad.Tempo((1, 8), 90)),
+                ...         (1, abjad.MetronomeMark((1, 8), 90)),
                 ...         ]),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
@@ -5030,7 +5030,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 ...     label_clock_time=True,
                 ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     tempo_specifier=baca.TempoSpecifier([
-                ...         (1, abjad.Tempo((1, 8), 90)),
+                ...         (1, abjad.MetronomeMark((1, 8), 90)),
                 ...         ]),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
@@ -6692,7 +6692,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> segment_maker = baca.SegmentMaker(
                 ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     tempo_specifier=baca.TempoSpecifier([
-                ...         (1, abjad.Tempo((1, 8), 90)),
+                ...         (1, abjad.MetronomeMark((1, 8), 90)),
                 ...         ]),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
                 ...     )
