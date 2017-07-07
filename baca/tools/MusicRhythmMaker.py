@@ -1301,8 +1301,8 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                             \override Staff.Stem.stemlet-length = #0.75
                             r16 [
                             d'16
-                            bf'8 ]
                             \revert Staff.Stem.stemlet-length
+                            bf'8 ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/6 {
@@ -1311,14 +1311,14 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                             e''16
                             ef''8
                             af''16
-                            r16 ]
                             \revert Staff.Stem.stemlet-length
+                            r16 ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 3/2 {
+                            \revert Staff.Stem.stemlet-length
                             \override Staff.Stem.stemlet-length = #0.75
                             a'8
-                            \revert Staff.Stem.stemlet-length
                         }
                     }
                 }
@@ -1758,8 +1758,8 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                             c'8. [
                             r16
                             d'8
-                            bf'8 ]
                             \revert Staff.Stem.stemlet-length
+                            bf'8 ]
                         }
                         {
                             \override Staff.Stem.stemlet-length = #1.5
@@ -1769,13 +1769,13 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                             ef''8
                             af''8.
                             r16
-                            g''8 ]
                             \revert Staff.Stem.stemlet-length
+                            g''8 ]
                         }
                         {
+                            \revert Staff.Stem.stemlet-length
                             \override Staff.Stem.stemlet-length = #1.5
                             a'8
-                            \revert Staff.Stem.stemlet-length
                         }
                     }
                 }

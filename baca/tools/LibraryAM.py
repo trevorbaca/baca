@@ -995,8 +995,8 @@ class LibraryAM(object):
                                 r8 [
                                 c'16
                                 d'16
-                                bf'16 ]
                                 \revert Staff.Stem.stemlet-length
+                                bf'16 ]
                             }
                             {
                                 \override Staff.Stem.stemlet-length = #2
@@ -1004,14 +1004,14 @@ class LibraryAM(object):
                                 e''16
                                 ef''16
                                 af''16
-                                g''16 ]
                                 \revert Staff.Stem.stemlet-length
+                                g''16 ]
                             }
                             {
                                 \override Staff.Stem.stemlet-length = #2
                                 a'16 [
-                                r8 ]
                                 \revert Staff.Stem.stemlet-length
+                                r8 ]
                             }
                         }
                     }
@@ -1147,8 +1147,8 @@ class LibraryAM(object):
                                 \set stemLeftBeamCount = #1
                                 \set stemRightBeamCount = #2
                                 a'16
-                                r8 ]
                                 \revert Staff.Stem.stemlet-length
+                                r8 ]
                             }
                         }
                     }

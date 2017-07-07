@@ -1830,7 +1830,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 message = message.format(expression)
                 raise NotImplementedError(message)
             volta_measures = measures[measure_start_number:measure_stop_number]
-            container = abjad.Container(volta_measures)
+            #container = abjad.Container(volta_measures)
+            container = abjad.Container()
+            abjad.mutate(volta_measures).wrap(container)
             command = abjad.Repeat()
             abjad.attach(command, container)
 
