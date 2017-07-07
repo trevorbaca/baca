@@ -195,7 +195,7 @@ class ColorFingeringCommand(abjad.abctools.AbjadObject):
         if not self.deposit_annotations:
             return
         for annotation_name in self.deposit_annotations:
-            annotation = abjad.Annotation(annotation_name, True)
+            annotation = {annotation_name: True}
             abjad.attach(annotation, note)
 
     ### PUBLIC PROPERTIES ###

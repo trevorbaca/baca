@@ -247,7 +247,7 @@ class TrillCommand(abjad.abctools.AbjadObject):
         if self.forbidden_annotations is None:
             return False
         for forbidden_annotation in self.forbidden_annotations:
-            if abjad.inspect(leaf).get_annotation(forbidden_annotation):
+            if abjad.inspect(leaf).has_indicator(forbidden_annotation):
                 return True
         return False
 
