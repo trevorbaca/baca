@@ -400,16 +400,18 @@ class NestCommand(abjad.abctools.AbjadObject):
             assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
         if isinstance(time_treatment, str):
             addendum = abjad.Duration(time_treatment)
-            duration = tuplet_selection.get_duration() + addendum
-            tuplet = abjad.scoretools.FixedDurationTuplet(duration, [])
+            contents_duration = tuplet_selection.get_duration()
+            target_duration = contents_duration + addendum
+            multiplier = target_duration / contents_duration
+            tuplet = abjad.Tuplet(multiplier, [])
             abjad.mutate(tuplet_selection).wrap(tuplet)
         elif time_treatment.__class__ is abjad.Multiplier:
             tuplet = abjad.Tuplet(time_treatment, tuplet_selection)
         elif time_treatment.__class__ is abjad.Duration:
-            tuplet = abjad.scoretools.FixedDurationTuplet(
-                time_treatment,
-                tuplet_selection,
-                )
+            target_duration = time_treatment
+            contents_duration = tuplet_selection.get_duration()
+            multiplier = target_duration / contents_duration
+            tuplet = abjad.Tuplet(multiplier, tuplet_selection)
         else:
             message = 'invalid time treatment: {!r}.'
             message = message.format(time_treatment)
