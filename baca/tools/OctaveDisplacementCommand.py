@@ -39,7 +39,7 @@ class OctaveDisplacementCommand(abjad.abctools.AbjadObject):
             >>> lilypond_file, segment_metadata = result
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<

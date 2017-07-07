@@ -607,7 +607,7 @@ class PitchArray(abjad.abctools.AbjadObject):
                 >>> tuplet = abjad.Tuplet((2, 3), "c'8 d'8 e'8")
                 >>> score.append(abjad.Staff(2 * tuplet))
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(score)
                 \new Score <<
@@ -663,7 +663,7 @@ class PitchArray(abjad.abctools.AbjadObject):
                 >>> tuplet = abjad.Tuplet((2, 3), "c'8 d'8 e'8")
                 >>> score.append(abjad.Staff(2 * tuplet))
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(score)
                 \new Score <<
@@ -901,7 +901,7 @@ class PitchArray(abjad.abctools.AbjadObject):
                 >>> staff = abjad.Staff(measures)
                 >>> show(staff) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(staff)
                 \new Staff {

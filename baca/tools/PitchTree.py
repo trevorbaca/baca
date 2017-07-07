@@ -22,7 +22,7 @@ class PitchTree(Tree):
             >>> tree = baca.PitchTree(items=items)
             >>> show(tree) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
             >>> f(lilypond_file[abjad.Score])
@@ -85,7 +85,7 @@ class PitchTree(Tree):
             ...     )
             >>> show(tree) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
             >>> f(lilypond_file[abjad.Score])
@@ -144,7 +144,7 @@ class PitchTree(Tree):
             ...     )
             >>> show(tree) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
             >>> f(lilypond_file[abjad.Score])
@@ -207,7 +207,7 @@ class PitchTree(Tree):
             ...     )
             >>> show(tree) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
             >>> f(lilypond_file[abjad.Score])
@@ -270,7 +270,7 @@ class PitchTree(Tree):
             ...     )
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Score])
             \new Score \with {
@@ -330,7 +330,7 @@ class PitchTree(Tree):
             >>> tree = baca.PitchTree(items=items)
             >>> show(tree, cell_indices=False) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> lilypond_file = tree.__illustrate__(cell_indices=False)
             >>> f(lilypond_file[abjad.Score])
@@ -392,7 +392,7 @@ class PitchTree(Tree):
             >>> tree = baca.PitchTree(items=items)
             >>> graph(tree) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> graph_ = tree.__graph__()
             >>> f(graph_)
@@ -458,7 +458,7 @@ class PitchTree(Tree):
 
             >>> show(tree, cell_indices=False) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> lilypond_file = tree.__illustrate__(cell_indices=False)
             >>> f(lilypond_file[abjad.Score])
@@ -545,7 +545,7 @@ class PitchTree(Tree):
 
                 >>> graph(tree) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> tree_graph = tree.__graph__()
                 >>> f(tree_graph)
@@ -620,7 +620,7 @@ class PitchTree(Tree):
 
                 >>> graph(tree) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> tree_graph = tree.__graph__()
                 >>> f(tree_graph)
@@ -708,7 +708,7 @@ class PitchTree(Tree):
                 >>> lilypond_file = tree.__illustrate__()
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score \with {
@@ -767,7 +767,7 @@ class PitchTree(Tree):
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score \with {
@@ -858,7 +858,7 @@ class PitchTree(Tree):
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score \with {
@@ -1138,7 +1138,7 @@ class PitchTree(Tree):
                 >>> tree.has_repeats()
                 True
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
                 >>> f(lilypond_file[abjad.Score])
@@ -1227,7 +1227,7 @@ class PitchTree(Tree):
                 >>> tree.has_repeats()
                 False
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
                 >>> f(lilypond_file[abjad.Score])
@@ -1294,7 +1294,7 @@ class PitchTree(Tree):
                 >>> tree = baca.PitchTree(items=items)
                 >>> show(tree) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
                 >>> f(lilypond_file[abjad.Score])
@@ -1349,7 +1349,7 @@ class PitchTree(Tree):
                 >>> inversion = tree.invert()
                 >>> show(inversion) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = inversion.__illustrate__()
                 >>> f(lilypond_file[abjad.Score])
@@ -1404,7 +1404,7 @@ class PitchTree(Tree):
                 >>> inversion = tree.invert(axis=0)
                 >>> show(inversion) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = inversion.__illustrate__()
                 >>> f(lilypond_file[abjad.Score])
@@ -1459,7 +1459,7 @@ class PitchTree(Tree):
                 >>> inversion = tree.invert(axis=13)
                 >>> show(inversion) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = inversion.__illustrate__()
                 >>> f(lilypond_file[abjad.Score])
@@ -1534,7 +1534,7 @@ class PitchTree(Tree):
                 >>> tree = baca.PitchTree(items=items)
                 >>> show(tree) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
                 >>> f(lilypond_file[abjad.Score])
@@ -1589,7 +1589,7 @@ class PitchTree(Tree):
                 >>> retrograde = tree.retrograde()
                 >>> show(retrograde) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = retrograde.__illustrate__()
                 >>> f(lilypond_file[abjad.Score])
@@ -1663,7 +1663,7 @@ class PitchTree(Tree):
                 >>> tree = baca.PitchTree(items=items)
                 >>> show(tree) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
                 >>> f(lilypond_file[abjad.Score])
@@ -1718,7 +1718,7 @@ class PitchTree(Tree):
                 >>> rotation = tree.rotate(n=1)
                 >>> show(rotation) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = rotation.__illustrate__()
                 >>> f(lilypond_file[abjad.Score])
@@ -1773,7 +1773,7 @@ class PitchTree(Tree):
                 >>> rotation = tree.rotate(n=-1)
                 >>> show(rotation) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = rotation.__illustrate__()
                 >>> f(lilypond_file[abjad.Score])
@@ -1828,7 +1828,7 @@ class PitchTree(Tree):
                 >>> rotation = tree.rotate(n=0)
                 >>> show(rotation) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = rotation.__illustrate__()
                 >>> f(lilypond_file[abjad.Score])
@@ -1903,7 +1903,7 @@ class PitchTree(Tree):
                 >>> tree = baca.PitchTree(items=items)
                 >>> show(tree) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
                 >>> f(lilypond_file[abjad.Score])
@@ -1958,7 +1958,7 @@ class PitchTree(Tree):
                 >>> transposition = tree.transpose(n=13)
                 >>> show(transposition) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = transposition.__illustrate__()
                 >>> f(lilypond_file[abjad.Score])
@@ -2013,7 +2013,7 @@ class PitchTree(Tree):
                 >>> transposition = tree.transpose(n=-13)
                 >>> show(transposition) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = transposition.__illustrate__()
                 >>> f(lilypond_file[abjad.Score])
@@ -2068,7 +2068,7 @@ class PitchTree(Tree):
                 >>> transposition = tree.transpose(n=0)
                 >>> show(transposition) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = transposition.__illustrate__()
                 >>> f(lilypond_file[abjad.Score])

@@ -26,7 +26,7 @@ class HairpinCommand(abjad.abctools.AbjadObject):
             >>> command(staff)
             >>> show(staff) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(staff)
             \new Staff {
@@ -168,7 +168,7 @@ class HairpinCommand(abjad.abctools.AbjadObject):
                 >>> command(staff)
                 >>> show(staff) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(staff)
                 \new Staff {
@@ -198,7 +198,7 @@ class HairpinCommand(abjad.abctools.AbjadObject):
                 >>> command(staff)
                 >>> show(staff) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(staff)
                 \new Staff {
@@ -264,7 +264,7 @@ class HairpinCommand(abjad.abctools.AbjadObject):
                 >>> command(staff)
                 >>> show(staff) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(staff)
                 \new Staff {
@@ -295,7 +295,7 @@ class HairpinCommand(abjad.abctools.AbjadObject):
                 >>> command(staff)
                 >>> show(staff) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(staff)
                 \new Staff {

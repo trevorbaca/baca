@@ -32,7 +32,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Staff])
             \new Staff <<
@@ -59,7 +59,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Staff])
             \new Staff <<
@@ -86,7 +86,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Staff])
             \new Staff <<
@@ -121,7 +121,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Staff])
             \new Staff <<
@@ -150,7 +150,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Staff])
             \new Staff <<
@@ -179,7 +179,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Staff])
             \new Staff <<
@@ -216,7 +216,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Staff])
             \new Staff <<
@@ -245,7 +245,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Staff])
             \new Staff <<
@@ -274,7 +274,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Staff])
             \new Staff <<
@@ -409,7 +409,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
                 >>> staff = abjad.Staff([chord])
                 >>> show(staff) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(chord)
                 <c'' d''' e''''>1
@@ -429,7 +429,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
                 >>> staff = abjad.Staff([chord])
                 >>> show(staff) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(chord)
                 <c' d'' e'''>1
@@ -449,7 +449,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
                 >>> staff = abjad.Staff([chord])
                 >>> show(staff) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(chord)
                 <c d' e''>1
@@ -473,7 +473,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
                 >>> abjad.attach(abjad.Clef('bass'), staff[0])
                 >>> show(staff) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(chord)
                 \clef "bass"
@@ -492,7 +492,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
                 >>> abjad.attach(abjad.Clef('bass'), staff[0])
                 >>> show(staff) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(chord)
                 \clef "bass"
@@ -511,7 +511,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
                 >>> abjad.attach(abjad.Clef('bass'), staff[0])
                 >>> show(staff) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(chord)
                 \clef "bass"
@@ -530,7 +530,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
                 >>> abjad.attach(abjad.Clef('bass'), staff[0])
                 >>> show(chord) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(chord)
                 \clef "bass"
@@ -547,7 +547,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
                 >>> command(chord)
                 >>> show(chord) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(chord)
                 <c' d'' e'''>1
@@ -563,7 +563,7 @@ class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
                 >>> command(chord)
                 >>> show(chord) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(chord)
                 <c'' d''' e''''>1

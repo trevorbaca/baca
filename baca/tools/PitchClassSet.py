@@ -24,7 +24,7 @@ class PitchClassSet(abjad.PitchClassSet):
                 >>> set_ = baca.pitch_class_set(items=items)
                 >>> show(set_) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = set_.__illustrate__()
                 >>> f(lilypond_file[abjad.Voice])

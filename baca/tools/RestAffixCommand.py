@@ -38,7 +38,7 @@ class RestAffixCommand(abjad.abctools.AbjadValueObject):
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 4
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Staff])
             \new Staff \with {
@@ -98,7 +98,7 @@ class RestAffixCommand(abjad.abctools.AbjadValueObject):
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 4
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Staff])
             \new Staff \with {
@@ -213,7 +213,7 @@ class RestAffixCommand(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -284,7 +284,7 @@ class RestAffixCommand(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -338,7 +338,7 @@ class RestAffixCommand(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -383,7 +383,7 @@ class RestAffixCommand(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -440,7 +440,7 @@ class RestAffixCommand(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -504,7 +504,7 @@ class RestAffixCommand(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -572,7 +572,7 @@ class RestAffixCommand(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<

@@ -37,7 +37,7 @@ class NestCommand(abjad.abctools.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Staff])
             \new Staff <<
@@ -144,7 +144,7 @@ class NestCommand(abjad.abctools.AbjadObject):
             >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
@@ -296,7 +296,7 @@ class NestCommand(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<

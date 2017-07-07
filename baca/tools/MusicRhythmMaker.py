@@ -33,7 +33,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Staff])
             \new Staff {
@@ -55,7 +55,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Staff])
             \new Staff {
@@ -78,7 +78,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Staff])
             \new Staff {
@@ -97,7 +97,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Staff])
             \new Staff {
@@ -219,7 +219,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
@@ -273,7 +273,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
@@ -807,7 +807,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
@@ -895,7 +895,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
@@ -1001,7 +1001,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -1056,7 +1056,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -1127,7 +1127,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
@@ -1177,7 +1177,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -1232,7 +1232,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -1288,7 +1288,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -1363,7 +1363,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
@@ -1410,7 +1410,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
@@ -1451,7 +1451,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
@@ -1510,7 +1510,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
@@ -1561,7 +1561,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
@@ -1631,7 +1631,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
@@ -1679,7 +1679,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
@@ -1747,7 +1747,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
@@ -1803,7 +1803,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
@@ -1861,7 +1861,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
@@ -1908,7 +1908,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
@@ -1973,7 +1973,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
@@ -2021,7 +2021,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff {
@@ -2078,7 +2078,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -2315,7 +2315,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -2550,7 +2550,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -2753,7 +2753,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -2972,7 +2972,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -3055,7 +3055,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -3135,7 +3135,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -3237,7 +3237,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -3294,7 +3294,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {

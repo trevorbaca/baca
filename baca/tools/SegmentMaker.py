@@ -33,7 +33,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             >>> lilypond_file, segment_metadata = result
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
@@ -116,7 +116,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             >>> lilypond_file, segment_metadata = result
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
@@ -2188,7 +2188,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -2337,7 +2337,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> abjad.override(score).text_script.staff_padding = 3
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" \with {
@@ -2560,7 +2560,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -2710,7 +2710,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -2876,7 +2876,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -3048,7 +3048,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -3223,7 +3223,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -3395,7 +3395,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -3571,7 +3571,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -3752,7 +3752,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -3926,7 +3926,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -4151,7 +4151,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -4323,7 +4323,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -4479,7 +4479,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" \with {
@@ -4729,7 +4729,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" \with {
@@ -4862,7 +4862,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -5052,7 +5052,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -5271,7 +5271,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -5443,7 +5443,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -5626,7 +5626,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -5958,7 +5958,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -6034,7 +6034,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -6166,7 +6166,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -6350,7 +6350,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -6540,7 +6540,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -6714,7 +6714,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -6923,7 +6923,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -7041,7 +7041,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -7215,7 +7215,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -7402,7 +7402,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -7669,7 +7669,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 >>> lilypond_file, segment_metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<

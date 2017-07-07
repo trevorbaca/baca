@@ -152,7 +152,7 @@ class PitchArrayList(abjad.datastructuretools.TypedList):
                 >>> score = arrays.to_score()
                 >>> show(score) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(score)
                 \new Score <<

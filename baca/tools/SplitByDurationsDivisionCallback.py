@@ -40,7 +40,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
             >>> lilypond_file = division_maker.show(music, time_signatures)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Staff])
             \new RhythmicStaff {
@@ -94,7 +94,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
             >>> lilypond_file = division_maker.show(music, time_signatures)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Staff])
             \new RhythmicStaff {
@@ -205,7 +205,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = division_maker.show(music, time_signatures)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
@@ -244,7 +244,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = division_maker.show(music, time_signatures)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
@@ -289,7 +289,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = division_maker.show(music, time_signatures)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
@@ -331,7 +331,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = division_maker.show(music, time_signatures)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
@@ -557,7 +557,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = division_maker.show(music, time_signatures)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
@@ -605,7 +605,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = division_maker.show(music, time_signatures)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
@@ -667,7 +667,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = division_maker.show(music, time_signatures)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
@@ -721,7 +721,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = division_maker.show(music, time_signatures)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
@@ -780,7 +780,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = division_maker.show(music, time_signatures)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
@@ -824,7 +824,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = division_maker.show(music, time_signatures)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
@@ -890,7 +890,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = division_maker.show(music, time_signatures)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
@@ -944,7 +944,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = division_maker.show(music, time_signatures)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
@@ -998,7 +998,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = division_maker.show(music, time_signatures)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
@@ -1060,7 +1060,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = division_maker.show(music, time_signatures)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
@@ -1099,7 +1099,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = division_maker.show(music, time_signatures)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
@@ -1142,7 +1142,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = division_maker.show(music, time_signatures)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
@@ -1183,7 +1183,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = division_maker.show(music, time_signatures)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
@@ -1237,7 +1237,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = division_maker.show(music, time_signatures)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
@@ -1277,7 +1277,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = division_maker.show(music, time_signatures)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
@@ -1318,7 +1318,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = division_maker.show(music, time_signatures)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
@@ -1360,7 +1360,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
                 >>> lilypond_file = division_maker.show(music, time_signatures)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {

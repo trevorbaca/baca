@@ -42,7 +42,7 @@ class MarkupLibrary(object):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -100,7 +100,7 @@ class MarkupLibrary(object):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -158,7 +158,7 @@ class MarkupLibrary(object):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -456,7 +456,7 @@ class MarkupLibrary(object):
 
                 >>> show(markup) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(markup)
                 \markup {
@@ -484,7 +484,7 @@ class MarkupLibrary(object):
 
                 >>> show(markup) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(markup)
                 \markup {
@@ -1082,7 +1082,7 @@ class MarkupLibrary(object):
 
                 >>> show(markup) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(markup)
                 \markup {
@@ -1110,7 +1110,7 @@ class MarkupLibrary(object):
 
                 >>> show(markup) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(markup)
                 \markup {

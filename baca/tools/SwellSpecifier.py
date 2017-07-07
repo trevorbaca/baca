@@ -31,7 +31,7 @@ class SwellSpecifier(abjad.abctools.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Staff])
             \new Staff <<

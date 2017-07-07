@@ -21,7 +21,7 @@ class DiatonicClusterCommand(abjad.abctools.AbjadObject):
             >>> command(staff)
             >>> show(staff) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(staff)
             \new Staff {

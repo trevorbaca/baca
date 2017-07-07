@@ -75,7 +75,7 @@ class TimeSignatureGroups(abjad.abctools.AbjadObject):
 
             >>> show(groups) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> lilypond_file = groups.__illustrate__()
             >>> f(lilypond_file[abjad.Score])

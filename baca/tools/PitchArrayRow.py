@@ -766,7 +766,7 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
                 >>> measure = array.rows[0].to_measure()
                 >>> show(measure) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(measure)
                 {

@@ -265,7 +265,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
                 >>> lilypond_file = constellation_circuit.illustrate_colored_generator_chords()
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score \with {
@@ -515,7 +515,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
                 >>> lilypond_file = constellation_circuit.illustrate_colored_generator_chords_and_pivot_chords()
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score \with {
@@ -783,7 +783,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
                 >>> lilypond_file = constellation_circuit.illustrate_generator_chords()
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score \with {
@@ -834,7 +834,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
                 >>> lilypond_file = constellation_circuit.illustrate_generator_chords_and_pivot_chords()
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score \with {
@@ -903,7 +903,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
                 >>> lilypond_file = constellation_circuit.illustrate_pivot_chords()
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score \with {

@@ -23,7 +23,7 @@ class PitchSet(abjad.PitchSet):
                 >>> set_ = baca.pitch_set([-2, -1.5, 6, 7, -1.5, 7])
                 >>> show(set_) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = set_.__illustrate__()
                 >>> f(lilypond_file[abjad.Score])
@@ -98,7 +98,7 @@ class PitchSet(abjad.PitchSet):
                 >>> set_ = baca.pitch_set([12, 14, 21, 22])
                 >>> show(set_) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = set_.__illustrate__()
                 >>> f(lilypond_file[abjad.StaffGroup])
@@ -125,7 +125,7 @@ class PitchSet(abjad.PitchSet):
                 >>> set_ = set_.space_down(bass=0)
                 >>> show(set_) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = set_.__illustrate__()
                 >>> f(lilypond_file[abjad.StaffGroup])
@@ -151,7 +151,7 @@ class PitchSet(abjad.PitchSet):
                 >>> set_ = baca.pitch_set([12, 14, 21, 22])
                 >>> show(set_) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = set_.__illustrate__()
                 >>> f(lilypond_file[abjad.StaffGroup])
@@ -178,7 +178,7 @@ class PitchSet(abjad.PitchSet):
                 >>> set_ = set_.space_down(bass=2)
                 >>> show(set_) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = set_.__illustrate__()
                 >>> f(lilypond_file[abjad.StaffGroup])
@@ -224,7 +224,7 @@ class PitchSet(abjad.PitchSet):
                 >>> set_ = baca.pitch_set([12, 14, 21, 22])
                 >>> show(set_) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = set_.__illustrate__()
                 >>> f(lilypond_file[abjad.StaffGroup])
@@ -251,7 +251,7 @@ class PitchSet(abjad.PitchSet):
                 >>> set_ = set_.space_up(bass=0)
                 >>> show(set_) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = set_.__illustrate__()
                 >>> f(lilypond_file[abjad.StaffGroup])
@@ -277,7 +277,7 @@ class PitchSet(abjad.PitchSet):
                 >>> set_ = baca.pitch_set([12, 14, 21, 22])
                 >>> show(set_) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = set_.__illustrate__()
                 >>> f(lilypond_file[abjad.StaffGroup])
@@ -304,7 +304,7 @@ class PitchSet(abjad.PitchSet):
                 >>> set_ = set_.space_up(bass=2)
                 >>> show(set_) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = set_.__illustrate__()
                 >>> f(lilypond_file[abjad.StaffGroup])

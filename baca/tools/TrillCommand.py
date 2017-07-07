@@ -33,7 +33,7 @@ class TrillCommand(abjad.abctools.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Staff])
             \new Staff <<
@@ -89,7 +89,7 @@ class TrillCommand(abjad.abctools.AbjadObject):
             >>> lilypond_file, collection_metadata = result
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<

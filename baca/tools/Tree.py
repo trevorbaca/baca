@@ -109,7 +109,7 @@ class Tree(abjad.abctools.AbjadObject):
 
             >>> graph(tree) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> graph_ = tree.__graph__()
             >>> f(graph_)

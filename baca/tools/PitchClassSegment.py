@@ -24,7 +24,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> segment = baca.pitch_class_segment(items=items)
                 >>> show(segment) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
                 >>> f(lilypond_file[abjad.Voice])
@@ -47,7 +47,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> segment = expression(items=[-2, -1.5, 6, 7, -1.5, 7])
                 >>> show(segment) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
                 >>> f(lilypond_file[abjad.Voice])
@@ -136,7 +136,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     >>> segment = J.alpha()
                     >>> show(segment) # doctest: +SKIP
 
-                ..  doctest::
+                ..  docs::
 
                     >>> lilypond_file = segment.__illustrate__()
                     >>> f(lilypond_file[abjad.Voice])
@@ -165,7 +165,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     >>> segment = expression([-2, -1.5, 6, 7, -1.5, 7])
                     >>> show(segment) # doctest: +SKIP
 
-                ..  doctest::
+                ..  docs::
 
                     >>> lilypond_file = segment.__illustrate__()
                     >>> f(lilypond_file[abjad.Voice])
@@ -196,7 +196,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     >>> segment = J.alpha().alpha()
                     >>> show(segment) # doctest: +SKIP
 
-                ..  doctest::
+                ..  docs::
 
                     >>> lilypond_file = segment.__illustrate__()
                     >>> f(lilypond_file[abjad.Voice])
@@ -240,7 +240,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     >>> markup = expression.get_markup()
                     >>> show(segment, figure_name=markup) # doctest: +SKIP
 
-                ..  doctest::
+                ..  docs::
 
                     >>> lilypond_file = segment.__illustrate__(
                     ...     figure_name=markup,
@@ -323,7 +323,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> show(segment.arpeggiate_down()) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = segment.arpeggiate_down().__illustrate__()
                 >>> f(lilypond_file[abjad.StaffGroup])
@@ -373,7 +373,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> show(segment.arpeggiate_up()) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = segment.arpeggiate_up().__illustrate__()
                 >>> f(lilypond_file[abjad.StaffGroup])
@@ -423,7 +423,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> show(segment.chord()) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = segment.chord().__illustrate__()
                 >>> f(lilypond_file[abjad.Voice])
@@ -449,7 +449,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> segment = baca.pitch_class_segment(items=items)
                 >>> show(segment) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
                 >>> f(lilypond_file[abjad.Voice])
@@ -475,7 +475,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> segment = baca.pitch_class_segment(items=items)
                 >>> show(segment) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
                 >>> f(lilypond_file[abjad.Voice])
@@ -510,7 +510,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> segment = baca.pitch_class_segment(items=items)
                 >>> show(segment) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
                 >>> f(lilypond_file[abjad.Voice])
@@ -538,7 +538,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> segment = baca.pitch_class_segment(items=items)
                 >>> show(segment) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
                 >>> f(lilypond_file[abjad.Voice])
@@ -576,7 +576,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> segment = baca.pitch_class_segment([10, 11, 5, 6, 7])
                 >>> show(segment) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
                 >>> f(lilypond_file[abjad.Voice])
@@ -600,7 +600,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> segment = segment.space_down(bass=6, soprano=7)
                 >>> show(segment) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
                 >>> f(lilypond_file[abjad.Score])
@@ -658,7 +658,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> segment = baca.pitch_class_segment([10, 11, 5, 6, 7])
                 >>> show(segment) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
                 >>> f(lilypond_file[abjad.Voice])
@@ -682,7 +682,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> segment = segment.space_up(bass=6, soprano=7)
                 >>> show(segment) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
                 >>> f(lilypond_file[abjad.Score])

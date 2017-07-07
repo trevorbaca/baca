@@ -46,7 +46,7 @@ class ExpressionGallery(object):
             >>> markup = expression.get_markup()
             >>> show(markup) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(markup)
             \markup {
@@ -101,7 +101,7 @@ class ExpressionGallery(object):
             >>> markup = expression.get_markup()
             >>> show(markup) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(markup)
             \markup {
@@ -170,7 +170,7 @@ class ExpressionGallery(object):
             >>> markup = expression.get_markup()
             >>> show(markup) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(markup)
             \markup {
@@ -232,7 +232,7 @@ class ExpressionGallery(object):
             >>> markup = expression.get_markup()
             >>> show(markup) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(markup)
             \markup {
@@ -310,7 +310,7 @@ class ExpressionGallery(object):
             >>> markup = expression.get_markup()
             >>> show(markup) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(markup)
             \markup {

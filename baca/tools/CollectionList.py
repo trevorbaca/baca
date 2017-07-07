@@ -481,7 +481,7 @@ class CollectionList(abjad.abctools.AbjadValueObject):
 
                 >>> show(collections) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = collections.__illustrate__()
                 >>> f(lilypond_file[abjad.Score])

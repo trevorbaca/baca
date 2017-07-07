@@ -112,7 +112,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
                 >>> staff = abjad.Staff([voice_1, voice_2])
                 >>> show(staff) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(staff)
                 \new Staff {

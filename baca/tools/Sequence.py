@@ -48,7 +48,7 @@ class Sequence(abjad.Sequence):
                 >>> collection = abjad.PitchClassSegment(items=items)
                 >>> show(collection) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = collection.__illustrate__()
                 >>> f(lilypond_file[abjad.Voice])
@@ -114,7 +114,7 @@ class Sequence(abjad.Sequence):
                 >>> collection = sequence.join()[0]
                 >>> show(collection) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = collection.__illustrate__()
                 >>> f(lilypond_file[abjad.Voice])
@@ -163,7 +163,7 @@ class Sequence(abjad.Sequence):
                 >>> markup = expression.get_markup()
                 >>> show(collection, figure_name=markup) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> lilypond_file = collection.__illustrate__(
                 ...     figure_name=markup,
@@ -330,7 +330,7 @@ class Sequence(abjad.Sequence):
                     >>> markup = expression.get_markup()
                     >>> show(markup) # doctest: +SKIP
 
-                ..  doctest::
+                ..  docs::
 
                     >>> f(markup)
                     \markup {
@@ -402,7 +402,7 @@ class Sequence(abjad.Sequence):
                     >>> markup = expression.get_markup()
                     >>> show(markup) # doctest: +SKIP
 
-                ..  doctest::
+                ..  docs::
 
                     >>> f(markup)
                     \markup {
@@ -487,7 +487,7 @@ class Sequence(abjad.Sequence):
                     >>> markup = expression.get_markup()
                     >>> show(markup) # doctest: +SKIP
 
-                ..  doctest::
+                ..  docs::
 
                     >>> f(markup)
                     \markup {
@@ -594,7 +594,7 @@ class Sequence(abjad.Sequence):
                     >>> markup = expression.get_markup()
                     >>> show(markup) # doctest: +SKIP
 
-                ..  doctest::
+                ..  docs::
 
                     >>> f(markup)
                     \markup {
@@ -721,7 +721,7 @@ class Sequence(abjad.Sequence):
                     >>> markup = expression.get_markup()
                     >>> show(markup) # doctest: +SKIP
 
-                ..  doctest::
+                ..  docs::
 
                     >>> f(markup)
                     \markup {
@@ -839,7 +839,7 @@ class Sequence(abjad.Sequence):
                     >>> markup = expression.get_markup()
                     >>> show(markup) # doctest: +SKIP
 
-                ..  doctest::
+                ..  docs::
 
                     >>> f(markup)
                     \markup {
@@ -1046,7 +1046,7 @@ class Sequence(abjad.Sequence):
                 >>> markup = expression.get_markup()
                 >>> show(markup) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(markup)
                 \markup {
@@ -1418,7 +1418,7 @@ class Sequence(abjad.Sequence):
                     >>> markup = expression.get_markup()
                     >>> show(markup) # doctest: +SKIP
 
-                ..  doctest::
+                ..  docs::
 
                     >>> f(markup)
                     \markup {
@@ -1479,7 +1479,7 @@ class Sequence(abjad.Sequence):
                     >>> markup = expression.get_markup()
                     >>> show(markup) # doctest: +SKIP
 
-                ..  doctest::
+                ..  docs::
 
                     >>> f(markup)
                     \markup {
@@ -1524,7 +1524,7 @@ class Sequence(abjad.Sequence):
                     >>> markup = expression.get_markup()
                     >>> show(markup) # doctest: +SKIP
 
-                ..  doctest::
+                ..  docs::
 
                     >>> f(markup)
                     \markup {
@@ -1599,7 +1599,7 @@ class Sequence(abjad.Sequence):
                     >>> markup = expression.get_markup()
                     >>> show(markup) # doctest: +SKIP
 
-                ..  doctest::
+                ..  docs::
 
                     >>> f(markup)
                     \markup {
@@ -1674,7 +1674,7 @@ class Sequence(abjad.Sequence):
                     >>> markup = expression.get_markup()
                     >>> show(markup) # doctest: +SKIP
 
-                ..  doctest::
+                ..  docs::
 
                     >>> f(markup)
                     \markup {

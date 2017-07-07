@@ -77,7 +77,7 @@ class Expression(abjad.Expression):
                     >>> markup = expression.get_markup()
                     >>> show(segment, figure_name=markup) # doctest: +SKIP
 
-                ..  doctest::
+                ..  docs::
 
                     >>> lilypond_file = segment.__illustrate__(
                     ...     figure_name=markup,

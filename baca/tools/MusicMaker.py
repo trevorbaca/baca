@@ -28,7 +28,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Staff])
             \new Staff <<
@@ -160,7 +160,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -205,7 +205,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -250,7 +250,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -295,7 +295,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -342,7 +342,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -378,7 +378,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -411,7 +411,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -449,7 +449,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -482,7 +482,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -520,7 +520,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -580,7 +580,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -1135,7 +1135,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -1188,7 +1188,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -1243,7 +1243,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -1301,7 +1301,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -1363,7 +1363,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -1414,7 +1414,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -1463,7 +1463,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -1520,7 +1520,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -1574,7 +1574,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -1628,7 +1628,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 6
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -1683,7 +1683,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -1741,7 +1741,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -1799,7 +1799,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -1857,7 +1857,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> abjad.override(staff).stem.direction = Down
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -1912,7 +1912,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> abjad.override(staff).beam.positions = (-6, -6)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -1987,7 +1987,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -2043,7 +2043,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -2129,7 +2129,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff \with {
@@ -2217,7 +2217,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -2276,7 +2276,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -2336,7 +2336,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -2397,7 +2397,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -2458,7 +2458,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -2515,7 +2515,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
@@ -2555,7 +2555,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<

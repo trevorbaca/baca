@@ -42,7 +42,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Score])
             \new Score <<
@@ -180,7 +180,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Score])
             \new Score <<
@@ -365,7 +365,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
 
-        ..  doctest::
+        ..  docs::
 
             >>> f(lilypond_file[abjad.Score])
             \new Score <<
@@ -586,7 +586,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
@@ -685,7 +685,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
@@ -867,7 +867,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> show(lilypond_file) # doctest: +SKIP
 
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
@@ -1021,7 +1021,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
@@ -1136,7 +1136,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
@@ -1424,7 +1424,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
@@ -1619,7 +1619,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
@@ -1781,7 +1781,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
@@ -1958,7 +1958,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
@@ -2091,7 +2091,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
@@ -2232,7 +2232,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
@@ -2375,7 +2375,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
@@ -2516,7 +2516,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  doctest::
+            ..  docs::
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
