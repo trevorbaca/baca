@@ -137,7 +137,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
     def __call__(self, collection=None):
         r'''Calls acciaccatura specifier on `collection`.
 
-        Returns grace container together with new collection.
+        Returns acciaccatura container together with new collection.
         '''
         prototype = (list, abjad.pitchtools.Segment)
         assert isinstance(collection, prototype), repr(collection)
@@ -146,25 +146,22 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
         segment_parts = [_ for _ in segment_parts if _]
         collection = [_[-1] for _ in segment_parts]
         durations = self._get_durations()
-        grace_containers = []
+        acciaccatura_containers = []
         for segment_part in segment_parts:
             if len(segment_part) <= 1:
-                grace_containers.append(None)
+                acciaccatura_containers.append(None)
                 continue
             grace_token = list(segment_part[:-1])
             grace_leaves = abjad.scoretools.make_leaves(
                 grace_token,
                 durations,
                 )
-            grace_container = abjad.GraceContainer(
-                grace_leaves,
-                kind='acciaccatura',
-                )
-            if 1 < len(grace_container):
-                abjad.attach(abjad.Beam(), grace_container[:])
-            grace_containers.append(grace_container)
-        assert len(grace_containers) == len(collection)
-        return grace_containers, collection
+            acciaccatura_container = abjad.AcciaccaturaContainer(grace_leaves)
+            if 1 < len(acciaccatura_container):
+                abjad.attach(abjad.Beam(), acciaccatura_container[:])
+            acciaccatura_containers.append(acciaccatura_container)
+        assert len(acciaccatura_containers) == len(collection)
+        return acciaccatura_containers, collection
 
     ### PRIVATE METHODS ###
 
