@@ -61,14 +61,14 @@ class SetCommand(abjad.abctools.AbjadObject):
         '''
         # TODO: use named string format fields
         if self.context_name is not None:
-            statement = 'abjad.set_(item).{}.{} = {!r}'
+            statement = 'abjad.setting(item).{}.{} = {!r}'
             statement = statement.format(
                 self.context_name,
                 self.setting_name,
                 self.setting_value,
                 )
         else:
-            statement = 'abjad.set_(item).{} = {!r}'
+            statement = 'abjad.setting(item).{} = {!r}'
             statement = statement.format(
                 self.setting_name,
                 self.setting_value,

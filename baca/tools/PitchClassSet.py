@@ -21,12 +21,12 @@ class PitchClassSet(abjad.PitchClassSet):
             ::
 
                 >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-                >>> set_ = baca.pitch_class_set(items=items)
-                >>> show(set_) # doctest: +SKIP
+                >>> setting = baca.pitch_class_set(items=items)
+                >>> show(setting) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = set_.__illustrate__()
+                >>> lilypond_file = setting.__illustrate__()
                 >>> f(lilypond_file[abjad.Voice])
                 \new Voice {
                     <fs' g' bf' bqf'>1
@@ -80,13 +80,13 @@ class PitchClassSet(abjad.PitchClassSet):
 
             ::
 
-                >>> set_ = baca.pitch_class_set([-2, -1.5, 6, 7, -1.5, 7])
-                >>> set_
+                >>> setting = baca.pitch_class_set([-2, -1.5, 6, 7, -1.5, 7])
+                >>> setting
                 PitchClassSet([6, 7, 10, 10.5])
 
             ::
 
-                >>> set_.to_pitch_classes()
+                >>> setting.to_pitch_classes()
                 PitchClassSet([6, 7, 10, 10.5])
 
         Returns new pitch-class set.
@@ -100,13 +100,13 @@ class PitchClassSet(abjad.PitchClassSet):
 
             ::
 
-                >>> set_ = baca.pitch_class_set([-2, -1.5, 6, 7, -1.5, 7])
-                >>> set_
+                >>> setting = baca.pitch_class_set([-2, -1.5, 6, 7, -1.5, 7])
+                >>> setting
                 PitchClassSet([6, 7, 10, 10.5])
 
             ::
 
-                >>> set_.to_pitches()
+                >>> setting.to_pitches()
                 PitchSet([6, 7, 10, 10.5])
 
         Returns pitch set.

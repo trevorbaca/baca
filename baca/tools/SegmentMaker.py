@@ -1772,7 +1772,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         score = self.score_template()
         first_bar_number = self._segment_metadata.get('first_bar_number')
         if first_bar_number is not None:
-            abjad.set_(score).current_bar_number = first_bar_number
+            abjad.setting(score).current_bar_number = first_bar_number
         self._score = score
 
     def _make_skip_filled_measures(self, time_signatures=None):
@@ -1803,7 +1803,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             command = abjad.LilyPondCommand('newSpacingSection')
             abjad.attach(command, start_skip)
             moment = abjad.schemetools.SchemeMoment(duration)
-            abjad.set_(start_skip).score.proportional_notation_duration = moment
+            abjad.setting(start_skip).score.proportional_notation_duration = moment
 
     def _make_volta_containers(self):
         if not self.volta_specifier:

@@ -817,7 +817,7 @@ class HorizontalSpacingCommand(abjad.abctools.AbjadObject):
             command = abjad.LilyPondCommand('newSpacingSection')
             abjad.attach(command, skip)
             moment = abjad.schemetools.SchemeMoment(duration)
-            abjad.set_(skip).score.proportional_notation_duration = moment
+            abjad.setting(skip).score.proportional_notation_duration = moment
 
     ### PRIVATE METHODS ###
 

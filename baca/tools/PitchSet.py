@@ -20,12 +20,12 @@ class PitchSet(abjad.PitchSet):
 
             ::
 
-                >>> set_ = baca.pitch_set([-2, -1.5, 6, 7, -1.5, 7])
-                >>> show(set_) # doctest: +SKIP
+                >>> setting = baca.pitch_set([-2, -1.5, 6, 7, -1.5, 7])
+                >>> show(setting) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = set_.__illustrate__()
+                >>> lilypond_file = setting.__illustrate__()
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new PianoStaff <<
@@ -95,12 +95,12 @@ class PitchSet(abjad.PitchSet):
 
             ::
 
-                >>> set_ = baca.pitch_set([12, 14, 21, 22])
-                >>> show(set_) # doctest: +SKIP
+                >>> setting = baca.pitch_set([12, 14, 21, 22])
+                >>> show(setting) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = set_.__illustrate__()
+                >>> lilypond_file = setting.__illustrate__()
                 >>> f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \new Staff {
@@ -117,17 +117,17 @@ class PitchSet(abjad.PitchSet):
 
             ::
 
-                >>> set_.space_down(bass=0)
+                >>> setting.space_down(bass=0)
                 PitchSet([0, 9, 10, 14])
 
             ::
 
-                >>> set_ = set_.space_down(bass=0)
-                >>> show(set_) # doctest: +SKIP
+                >>> setting = setting.space_down(bass=0)
+                >>> show(setting) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = set_.__illustrate__()
+                >>> lilypond_file = setting.__illustrate__()
                 >>> f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \new Staff {
@@ -148,12 +148,12 @@ class PitchSet(abjad.PitchSet):
 
             ::
 
-                >>> set_ = baca.pitch_set([12, 14, 21, 22])
-                >>> show(set_) # doctest: +SKIP
+                >>> setting = baca.pitch_set([12, 14, 21, 22])
+                >>> show(setting) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = set_.__illustrate__()
+                >>> lilypond_file = setting.__illustrate__()
                 >>> f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \new Staff {
@@ -170,17 +170,17 @@ class PitchSet(abjad.PitchSet):
 
             ::
 
-                >>> set_.space_down(bass=2)
+                >>> setting.space_down(bass=2)
                 PitchSet([2, 9, 10, 12])
 
             ::
 
-                >>> set_ = set_.space_down(bass=2)
-                >>> show(set_) # doctest: +SKIP
+                >>> setting = setting.space_down(bass=2)
+                >>> show(setting) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = set_.__illustrate__()
+                >>> lilypond_file = setting.__illustrate__()
                 >>> f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \new Staff {
@@ -221,12 +221,12 @@ class PitchSet(abjad.PitchSet):
 
             ::
 
-                >>> set_ = baca.pitch_set([12, 14, 21, 22])
-                >>> show(set_) # doctest: +SKIP
+                >>> setting = baca.pitch_set([12, 14, 21, 22])
+                >>> show(setting) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = set_.__illustrate__()
+                >>> lilypond_file = setting.__illustrate__()
                 >>> f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \new Staff {
@@ -243,17 +243,17 @@ class PitchSet(abjad.PitchSet):
 
             ::
 
-                >>> set_.space_up(bass=0)
+                >>> setting.space_up(bass=0)
                 PitchSet([0, 2, 9, 10])
 
             ::
 
-                >>> set_ = set_.space_up(bass=0)
-                >>> show(set_) # doctest: +SKIP
+                >>> setting = setting.space_up(bass=0)
+                >>> show(setting) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = set_.__illustrate__()
+                >>> lilypond_file = setting.__illustrate__()
                 >>> f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \new Staff {
@@ -274,12 +274,12 @@ class PitchSet(abjad.PitchSet):
 
             ::
 
-                >>> set_ = baca.pitch_set([12, 14, 21, 22])
-                >>> show(set_) # doctest: +SKIP
+                >>> setting = baca.pitch_set([12, 14, 21, 22])
+                >>> show(setting) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = set_.__illustrate__()
+                >>> lilypond_file = setting.__illustrate__()
                 >>> f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \new Staff {
@@ -296,17 +296,17 @@ class PitchSet(abjad.PitchSet):
 
             ::
 
-                >>> set_.space_up(bass=2)
+                >>> setting.space_up(bass=2)
                 PitchSet([2, 9, 10, 12])
 
             ::
 
-                >>> set_ = set_.space_up(bass=2)
-                >>> show(set_) # doctest: +SKIP
+                >>> setting = setting.space_up(bass=2)
+                >>> show(setting) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = set_.__illustrate__()
+                >>> lilypond_file = setting.__illustrate__()
                 >>> f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \new Staff {
@@ -342,13 +342,13 @@ class PitchSet(abjad.PitchSet):
 
             ::
 
-                >>> set_ = baca.pitch_set([-2, -1.5, 6, 19, -1.5, 21])
-                >>> set_
+                >>> setting = baca.pitch_set([-2, -1.5, 6, 19, -1.5, 21])
+                >>> setting
                 PitchSet([-2, -1.5, 6, 19, 21])
 
             ::
 
-                >>> set_.to_pitch_classes()
+                >>> setting.to_pitch_classes()
                 PitchClassSet([6, 7, 9, 10, 10.5])
 
         Returns new pitch-class set.
