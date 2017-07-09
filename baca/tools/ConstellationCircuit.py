@@ -150,7 +150,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
             )
         lilypond_file.layout_block.indent = 0
         lilypond_file.layout_block.ragged_right = True
-        vector = abjad.schemetools.make_spacing_vector(0, 0, 12, 0)
+        vector = abjad.SpacingVector(0, 0, 12, 0)
         lilypond_file.paper_block.system_system_spacing = vector
         lilypond_file.paper_block.top_margin = 24
         return lilypond_file
