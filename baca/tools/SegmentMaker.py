@@ -1777,7 +1777,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
 
     def _make_skip_filled_measures(self, time_signatures=None):
         time_signatures = time_signatures or self.time_signatures
-        measures = abjad.scoretools.make_spacer_skip_measures(time_signatures)
+        maker = abjad.MeasureMaker()
+        measures = maker(time_signatures)
         return measures
         
     def _make_skips(self, time_signatures=None):
