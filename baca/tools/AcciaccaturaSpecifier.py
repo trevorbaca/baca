@@ -147,15 +147,13 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
         collection = [_[-1] for _ in segment_parts]
         durations = self._get_durations()
         acciaccatura_containers = []
+        maker = abjad.LeafMaker()
         for segment_part in segment_parts:
             if len(segment_part) <= 1:
                 acciaccatura_containers.append(None)
                 continue
             grace_token = list(segment_part[:-1])
-            grace_leaves = abjad.scoretools.make_leaves(
-                grace_token,
-                durations,
-                )
+            grace_leaves = maker(grace_token, durations)
             acciaccatura_container = abjad.AcciaccaturaContainer(grace_leaves)
             if 1 < len(acciaccatura_container):
                 abjad.attach(abjad.Beam(), acciaccatura_container[:])

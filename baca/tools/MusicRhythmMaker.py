@@ -331,21 +331,19 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         ):
         if rest_prefix:
             durations = [(_, talea.denominator) for _ in rest_prefix]
-            leaves_ = abjad.scoretools.make_leaves(
-                [None],
-                durations,
+            maker = abjad.LeafMaker(
                 decrease_durations_monotonically=decrease_durations,
                 skips_instead_of_rests=affix_skips_instead_of_rests,
                 )
+            leaves_ = maker([None], durations)
             leaves[0:0] = leaves_
         if rest_suffix:
             durations = [(_, talea.denominator) for _ in rest_suffix]
-            leaves_ = abjad.scoretools.make_leaves(
-                [None],
-                durations,
+            maker = abjad.LeafMaker(
                 decrease_durations_monotonically=decrease_durations,
                 skips_instead_of_rests=affix_skips_instead_of_rests,
                 )
+            leaves_ = maker([None], durations)
             leaves.extend(leaves_)
         return leaves
 
@@ -629,11 +627,10 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             while talea[count] < 0:
                 self._next_attack += 1
                 duration = -talea[count]
-                leaves_ = abjad.scoretools.make_leaves(
-                    [None],
-                    [duration],
+                maker = abjad.LeafMaker(
                     decrease_durations_monotonically=decrease_durations,
                     )
+                leaves_ = maker([None], [duration])
                 leaves.extend(leaves_)
                 count = self._next_attack
             self._next_attack += 1
@@ -649,22 +646,20 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 if pitch_expression[-1] == 'skip':
                     skips_instead_of_rests = True
                 pitch_expression = None
-            leaves_ = abjad.scoretools.make_leaves(
-                [pitch_expression],
-                [duration],
+            maker = abjad.LeafMaker(
                 decrease_durations_monotonically=decrease_durations,
                 skips_instead_of_rests=skips_instead_of_rests,
                 )
+            leaves_ = maker([pitch_expression], [duration])
             leaves.extend(leaves_)
             count = self._next_attack
             while talea[count] < 0 and not count % len(talea) == 0:
                 self._next_attack += 1
                 duration = -talea[count]
-                leaves_ = abjad.scoretools.make_leaves(
-                    [None],
-                    [duration],
+                maker = abjad.LeafMaker(
                     decrease_durations_monotonically=decrease_durations,
                     )
+                leaves_ = maker([None], [duration])
                 leaves.extend(leaves_)
                 count = self._next_attack
         leaves = self._add_rest_affixes(

@@ -328,7 +328,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> lilypond_file = segment.arpeggiate_down().__illustrate__()
                 >>> f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
-                    \context Staff = "treble" {
+                    \context Staff = "Treble Staff" {
                         \clef "treble"
                         fs''''1 * 1/8
                         c''''1 * 1/8
@@ -336,7 +336,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                         f''1 * 1/8
                         af'1 * 1/8
                     }
-                    \context Staff = "bass" {
+                    \context Staff = "Bass Staff" {
                         \clef "bass"
                         r1 * 1/8
                         r1 * 1/8
@@ -378,7 +378,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> lilypond_file = segment.arpeggiate_up().__illustrate__()
                 >>> f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
-                    \context Staff = "treble" {
+                    \context Staff = "Treble Staff" {
                         \clef "treble"
                         fs'1 * 1/8
                         c''1 * 1/8
@@ -386,7 +386,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                         f''1 * 1/8
                         af''1 * 1/8
                     }
-                    \context Staff = "bass" {
+                    \context Staff = "Bass Staff" {
                         \clef "bass"
                         r1 * 1/8
                         r1 * 1/8
@@ -612,7 +612,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     \override TimeSignature.stencil = ##f
                 } <<
                     \new PianoStaff <<
-                        \context Staff = "treble" {
+                        \context Staff = "Treble Staff" {
                             \clef "treble"
                             g''1 * 1/8
                             f''1 * 1/8
@@ -620,7 +620,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                             bf'1 * 1/8
                             fs'1 * 1/8
                         }
-                        \context Staff = "bass" {
+                        \context Staff = "Bass Staff" {
                             \clef "bass"
                             r1 * 1/8
                             r1 * 1/8
@@ -694,7 +694,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     \override TimeSignature.stencil = ##f
                 } <<
                     \new PianoStaff <<
-                        \context Staff = "treble" {
+                        \context Staff = "Treble Staff" {
                             \clef "treble"
                             fs'1 * 1/8
                             bf'1 * 1/8
@@ -702,7 +702,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                             f''1 * 1/8
                             g''1 * 1/8
                         }
-                        \context Staff = "bass" {
+                        \context Staff = "Bass Staff" {
                             \clef "bass"
                             r1 * 1/8
                             r1 * 1/8

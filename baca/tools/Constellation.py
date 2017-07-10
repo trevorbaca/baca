@@ -202,8 +202,7 @@ class Constellation(abjad.abctools.AbjadObject):
         abjad.attach(markup, chord)
 
     def _make_lilypond_file_and_score_from_chords(self, chords):
-        score, treble, bass = \
-            scoretools.make_piano_sketch_score_from_leaves(chords)
+        score, treble, bass = abjad.Score.make_piano_score(leaves=chords, sketch=True)
         score.override.text_script.staff_padding = 10
         score.set.proportional_notation_duration = \
             abjad.schemetools.SchemeMoment(1, 30)

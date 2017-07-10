@@ -778,10 +778,10 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
 
         Returns measure.
         '''
-        from abjad.tools import scoretools
+        import abjad
         pair = (self.width, cell_duration_denominator)
         time_signature = abjad.TimeSignature(pair)
-        measure = scoretools.Measure(time_signature, [])
+        measure = abjad.Measure(time_signature, [])
         basic_cell_duration = abjad.Duration(1, cell_duration_denominator)
         measure_pitches, measure_durations = [], []
         for cell in self.cells:
@@ -794,7 +794,8 @@ class PitchArrayRow(abjad.abctools.AbjadObject):
                 measure_pitches.append(cell_pitches)
             measure_duration = cell.width * basic_cell_duration
             measure_durations.append(measure_duration)
-        leaves = scoretools.make_leaves(measure_pitches, measure_durations)
+        maker = abjad.LeafMaker()
+        leaves = maker(measure_pitches, measure_durations)
         measure.extend(leaves)
         return measure
 

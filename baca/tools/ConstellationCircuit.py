@@ -139,7 +139,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
             self._constellations.append(constellation)
 
     def _illustrate_chords(self, chords):
-        result = abjad.scoretools.make_piano_sketch_score_from_leaves(chords)
+        result = abjad.Score.make_piano_score(leaves=chords, sketch=True)
         score, treble, bass = result
         abjad.override(score).text_script.staff_padding = 10
         moment = abjad.schemetools.SchemeMoment(1, 30)
@@ -277,7 +277,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
                     proportionalNotationDuration = #(ly:make-moment 1 30)
                 } <<
                     \new PianoStaff <<
-                        \context Staff = "treble" {
+                        \context Staff = "Treble Staff" {
                             \clef "treble"
                             <
                                 \tweak color #red
@@ -456,7 +456,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
                                 cs''''
                             >4
                         }
-                        \context Staff = "bass" {
+                        \context Staff = "Bass Staff" {
                             \clef "bass"
                             <
                                 \tweak color #red
@@ -527,7 +527,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
                     proportionalNotationDuration = #(ly:make-moment 1 30)
                 } <<
                     \new PianoStaff <<
-                        \context Staff = "treble" {
+                        \context Staff = "Treble Staff" {
                             \clef "treble"
                             <
                                 \tweak color #red
@@ -714,7 +714,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
                             >4
                             <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
                         }
-                        \context Staff = "bass" {
+                        \context Staff = "Bass Staff" {
                             \clef "bass"
                             <
                                 \tweak color #red
@@ -795,7 +795,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
                     proportionalNotationDuration = #(ly:make-moment 1 30)
                 } <<
                     \new PianoStaff <<
-                        \context Staff = "treble" {
+                        \context Staff = "Treble Staff" {
                             \clef "treble"
                             <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
                             <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
@@ -806,7 +806,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
                             <b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4
                             <b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4
                         }
-                        \context Staff = "bass" {
+                        \context Staff = "Bass Staff" {
                             \clef "bass"
                             <c d bf>4
                             <c d bf>4
@@ -846,7 +846,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
                     proportionalNotationDuration = #(ly:make-moment 1 30)
                 } <<
                     \new PianoStaff <<
-                        \context Staff = "treble" {
+                        \context Staff = "Treble Staff" {
                             \clef "treble"
                             <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
                             <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
@@ -865,7 +865,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
                             <b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4
                             <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
                         }
-                        \context Staff = "bass" {
+                        \context Staff = "Bass Staff" {
                             \clef "bass"
                             <c d bf>4
                             <c d bf>4
@@ -915,7 +915,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
                     proportionalNotationDuration = #(ly:make-moment 1 30)
                 } <<
                     \new PianoStaff <<
-                        \context Staff = "treble" {
+                        \context Staff = "Treble Staff" {
                             \clef "treble"
                             <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
                             <b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4
@@ -926,7 +926,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
                             <b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4
                             <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
                         }
-                        \context Staff = "bass" {
+                        \context Staff = "Bass Staff" {
                             \clef "bass"
                             <c d bf>4
                             e4
