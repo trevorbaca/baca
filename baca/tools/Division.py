@@ -873,7 +873,7 @@ class Division(abjad.NonreducedFraction):
 
         Returns generator.
         '''
-        generator = abjad.mathtools.yield_nonreduced_fractions()
+        generator = Division.yield_nonreduced_fractions()
         while True:
             integer_pair = next(generator)
             duration = abjad.Duration(integer_pair)

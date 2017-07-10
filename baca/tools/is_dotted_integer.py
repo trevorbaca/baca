@@ -7,6 +7,10 @@ def is_dotted_integer(argument):
     '''Is true when `argument` is equivalent to a positive integer and
     can be written with zero or more dots. Otherwise false.
 
+    ::
+
+        >>> import baca
+
     ..  container:: example
 
         ::
