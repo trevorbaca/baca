@@ -1916,7 +1916,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             duration_ /= 1000
             total_duration += duration_
         total_duration = int(round(total_duration))
-        identifier = abjad.stringtools.pluralize('second', total_duration)
+        identifier = abjad.Strin('second').pluralize(total_duration)
         message = 'segment duration {} {} ...'
         message = message.format(total_duration, identifier)
         print(message)
@@ -2004,7 +2004,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             stage_number = self.stage_count
         if self.stage_count < stage_number:
             message = 'segment has only {} {} (not {}).'
-            unit = abjad.stringtools.pluralize('stage', self.stage_count)
+            unit = abjad.String('stage').pluralize(self.stage_count)
             message = message.format(self.stage_count, unit, stage_number)
             raise Exception(message)
         measure_indices = abjad.mathtools.cumulative_sums(
