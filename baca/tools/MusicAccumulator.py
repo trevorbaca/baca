@@ -341,7 +341,7 @@ class MusicAccumulator(abjad.abctools.AbjadObject):
 
         Returns LilyPond file.
         '''
-        return abjad.rhythmmakertools.make_lilypond_file(
+        return abjad.LilyPondFile.rhythm(
             contribution,
             divisions=time_signatures,
             pitched_staff=True,

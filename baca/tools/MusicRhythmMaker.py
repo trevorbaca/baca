@@ -3344,7 +3344,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         Returns LilyPond file.
         '''
-        return abjad.rhythmmakertools.make_lilypond_file(
+        return abjad.LilyPondFile.rhythm(
             selections,
             time_signatures=time_signatures,
             )

@@ -687,7 +687,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
 
         Returns LilyPond file.
         '''
-        return abjad.rhythmmakertools.make_lilypond_file(
+        return abjad.LilyPondFile.rhythm(
             music,
             divisions=divisions,
             )

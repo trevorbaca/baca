@@ -2613,7 +2613,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
         Returns LilyPond file.
         '''
         assert isinstance(figure_contribution, baca.MusicContribution)
-        return abjad.rhythmmakertools.make_lilypond_file(
+        return abjad.LilyPondFile.rhythm(
             figure_contribution.selections,
             time_signatures=time_signatures,
             attach_lilypond_voice_commands=True,
