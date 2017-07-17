@@ -85,7 +85,6 @@ class GlissandoCommand(abjad.abctools.AbjadObject):
                 \context MusicContext = "Music Context" <<
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
-                        \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             {
                                 e'8 \glissando [
@@ -191,7 +190,6 @@ class GlissandoCommand(abjad.abctools.AbjadObject):
                 \context MusicContext = "Music Context" <<
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
-                        \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             {
                                 e'8 \glissando [

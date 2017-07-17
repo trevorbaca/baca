@@ -267,7 +267,6 @@ class ClusterCommand(abjad.abctools.AbjadObject):
                 \context MusicContext = "Music Context" <<
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
-                        \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
@@ -504,7 +503,6 @@ class ClusterCommand(abjad.abctools.AbjadObject):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -646,7 +644,6 @@ class ClusterCommand(abjad.abctools.AbjadObject):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -787,7 +784,6 @@ class ClusterCommand(abjad.abctools.AbjadObject):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -935,7 +931,6 @@ class ClusterCommand(abjad.abctools.AbjadObject):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -1092,7 +1087,6 @@ class ClusterCommand(abjad.abctools.AbjadObject):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 e'2
                                 \once \override Accidental.stencil = ##f
@@ -1224,7 +1218,6 @@ class ClusterCommand(abjad.abctools.AbjadObject):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 e'2
                                 \once \override Accidental.stencil = ##f
@@ -1341,7 +1334,6 @@ class ClusterCommand(abjad.abctools.AbjadObject):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 e'2
                                 e'4.

@@ -237,7 +237,6 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
                 \context MusicContext = "Music Context" <<
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
-                        \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             {
                                 fs''8 [
@@ -397,7 +396,6 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
                 \context MusicContext = "Music Context" <<
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
-                        \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             {
                                 fs''8 [
@@ -557,7 +555,6 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
                 \context MusicContext = "Music Context" <<
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
-                        \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             {
                                 fs'8 [
@@ -717,7 +714,6 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
                 \context MusicContext = "Music Context" <<
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
-                        \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             {
                                 fs''8 [
@@ -877,7 +873,6 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
                 \context MusicContext = "Music Context" <<
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
-                        \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             {
                                 fs8 [

@@ -72,7 +72,6 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                 \context MusicContext = "Music Context" <<
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
-                        \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             R1 * 1/2
                             R1 * 3/8
@@ -125,9 +124,9 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             context_name='ViolinMusicStaff',
             name='Violin Music Staff',
             )
-        violin = abjad.instrumenttools.Violin()
-        abjad.attach(violin, violin_music_staff)
-        abjad.attach(abjad.Clef('treble'), violin_music_staff)
+        #violin = abjad.instrumenttools.Violin()
+        #abjad.attach(violin, violin_music_staff)
+        #abjad.attach(abjad.Clef('treble'), violin_music_staff)
         self._attach_tag('violin', violin_music_staff)
 
         music_context = abjad.Context(

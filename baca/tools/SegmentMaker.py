@@ -79,7 +79,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 \context MusicContext = "Music Context" <<
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
-                        \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             R1 * 1/2
                             R1 * 3/8
@@ -162,7 +161,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 \context MusicContext = "Music Context" <<
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
-                        \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             {
                                 \once \override Beam.color = #blue
@@ -1642,7 +1640,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             markup = markup.with_color('blue')
             markup = markup.fontsize(-3)
             start_measure = context[start_measure_index]
-            abjad.attach(markup, start_measure)
+            leaf = abjad.inspect(start_measure).get_leaf(0)
+            abjad.attach(markup, leaf)
 
     def _make_instrument_change_markup(self, instrument):
         string = 'to {}'.format(instrument.instrument_name)
@@ -2243,7 +2242,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     {
@@ -2394,7 +2392,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     {
@@ -2585,7 +2582,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                         \context StringSectionStaffGroup = "String Section Staff Group" <<
                             \tag violin
                             \context ViolinMusicStaff = "Violin Music Staff" {
-                                \clef "treble"
                                 \context ViolinMusicVoice = "Violin Music Voice" {
                                     {
                                         {
@@ -2609,7 +2605,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                             }
                             \tag viola
                             \context ViolaMusicStaff = "Viola Music Staff" {
-                                \clef "alto"
                                 \context ViolaMusicVoice = "Viola Music Voice" {
                                     R1 * 3/8
                                     \bar "|"
@@ -2617,7 +2612,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                             }
                             \tag cello
                             \context CelloMusicStaff = "Cello Music Staff" {
-                                \clef "bass"
                                 \context CelloMusicVoice = "Cello Music Voice" {
                                     {
                                         {
@@ -2765,7 +2759,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     {
@@ -2931,7 +2924,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     {
@@ -3095,7 +3087,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
@@ -3270,7 +3261,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
@@ -3442,7 +3432,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
@@ -3618,7 +3607,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
@@ -3799,7 +3787,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
@@ -3973,7 +3960,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
@@ -4198,7 +4184,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
@@ -4370,7 +4355,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     c'8 [
@@ -4530,7 +4514,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     {
@@ -4780,7 +4763,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     {
@@ -4924,7 +4906,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
@@ -5135,7 +5116,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
@@ -5318,7 +5298,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
@@ -5497,7 +5476,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
@@ -5680,7 +5658,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
@@ -6005,7 +5982,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 R1 * 1/2
                                 R1 * 3/8
@@ -6081,7 +6057,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 s1 * 1/2
                                 s1 * 3/8
@@ -6220,7 +6195,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
@@ -6404,7 +6378,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
@@ -6587,7 +6560,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
@@ -6776,7 +6748,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
@@ -6970,7 +6941,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     e'8 [
@@ -7088,7 +7058,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
@@ -7265,7 +7234,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
@@ -7449,7 +7417,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
@@ -7716,7 +7683,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     \once \override Beam.color = #blue

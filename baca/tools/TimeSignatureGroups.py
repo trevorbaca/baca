@@ -147,7 +147,8 @@ class TimeSignatureGroups(abjad.abctools.AbjadObject):
             markup = abjad.markuptools.Markup(group_index, direction=Up)
             markup = markup.smaller()
             markup = markup.circle()
-            abjad.attach(markup, measure_group[0])
+            leaf = abjad.inspect(measure_group[0]).get_leaf(0)
+            abjad.attach(markup, leaf)
         slide = -4
         abjad.override(staff).clef.stencil = False
         abjad.override(staff).horizontal_bracket.bracket_flare = (0, 0)

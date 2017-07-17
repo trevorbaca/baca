@@ -166,7 +166,6 @@ class TransitionCommand(abjad.abctools.AbjadObject):
                 \context MusicContext = "Music Context" <<
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
-                        \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             {
                                 \once \override TextSpanner.arrow-width = 0.25

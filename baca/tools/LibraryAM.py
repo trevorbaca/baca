@@ -2600,7 +2600,6 @@ class LibraryAM(object):
                         \context StringSectionStaffGroup = "String Section Staff Group" <<
                             \tag violin
                             \context ViolinMusicStaff = "Violin Music Staff" {
-                                \clef "treble"
                                 \context ViolinMusicVoice = "Violin Music Voice" {
                                     {
                                         {
@@ -2618,7 +2617,6 @@ class LibraryAM(object):
                             }
                             \tag viola
                             \context ViolaMusicStaff = "Viola Music Staff" {
-                                \clef "alto"
                                 \context ViolaMusicVoice = "Viola Music Voice" {
                                     {
                                         {
@@ -2641,7 +2639,6 @@ class LibraryAM(object):
                             }
                             \tag cello
                             \context CelloMusicStaff = "Cello Music Staff" {
-                                \clef "bass"
                                 \context CelloMusicVoice = "Cello Music Voice" {
                                     R1 * 5/8
                                     \bar "|"
@@ -2721,7 +2718,6 @@ class LibraryAM(object):
                         \context StringSectionStaffGroup = "String Section Staff Group" <<
                             \tag violin
                             \context ViolinMusicStaff = "Violin Music Staff" {
-                                \clef "treble"
                                 \context ViolinMusicVoice = "Violin Music Voice" {
                                     {
                                         {
@@ -2739,7 +2735,6 @@ class LibraryAM(object):
                             }
                             \tag viola
                             \context ViolaMusicStaff = "Viola Music Staff" {
-                                \clef "alto"
                                 \context ViolaMusicVoice = "Viola Music Voice" {
                                     {
                                         {
@@ -2759,7 +2754,6 @@ class LibraryAM(object):
                             }
                             \tag cello
                             \context CelloMusicStaff = "Cello Music Staff" {
-                                \clef "bass"
                                 \context CelloMusicVoice = "Cello Music Voice" {
                                     R1 * 5/8
                                     \bar "|"

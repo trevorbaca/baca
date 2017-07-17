@@ -142,7 +142,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
         result = abjad.Score.make_piano_score(leaves=chords, sketch=True)
         score, treble, bass = result
         abjad.override(score).text_script.staff_padding = 10
-        moment = abjad.schemetools.SchemeMoment(1, 30)
+        moment = abjad.SchemeMoment((1, 30))
         abjad.setting(score).proportional_notation_duration = moment
         lilypond_file = abjad.lilypondfiletools.LilyPondFile.new(
             score,

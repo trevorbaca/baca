@@ -86,7 +86,6 @@ class ColorFingeringCommand(abjad.abctools.AbjadObject):
                 \context MusicContext = "Music Context" <<
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
-                        \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             e'2
                             e'4.
@@ -280,7 +279,6 @@ class ColorFingeringCommand(abjad.abctools.AbjadObject):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 c'2
                                 d'4.
@@ -392,7 +390,6 @@ class ColorFingeringCommand(abjad.abctools.AbjadObject):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     c'8 [

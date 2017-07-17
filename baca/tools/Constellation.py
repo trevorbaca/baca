@@ -202,21 +202,23 @@ class Constellation(abjad.abctools.AbjadObject):
         abjad.attach(markup, chord)
 
     def _make_lilypond_file_and_score_from_chords(self, chords):
-        score, treble, bass = abjad.Score.make_piano_score(leaves=chords, sketch=True)
+        score, treble, bass = abjad.Score.make_piano_score(
+            leaves=chords,
+            sketch=True,
+            )
         score.override.text_script.staff_padding = 10
-        score.set.proportional_notation_duration = \
-            abjad.schemetools.SchemeMoment(1, 30)
+        score.set.proportional_notation_duration = abjad.SchemeMoment((1, 30))
         lilypond_file = abjad.lilypondfiletools.LilyPondFile.new(score)
         lilypond_file.default_paper_size = 'letter', 'landscape'
         lilypond_file.global_staff_size = 18
         lilypond_file.layout_block.indent = 0
         lilypond_file.layout_block.ragged_right = True
         lilypond_file.paper_block.system_system_spacing = \
-            abjad.schemetools.SchemeVector(
-            abjad.schemetools.SchemePair('basic_distance', 0),
-            abjad.schemetools.SchemePair('minimum_distance', 0),
-            abjad.schemetools.SchemePair('padding', 12),
-            abjad.schemetools.SchemePair('stretchability', 0))
+            abjad.SchemeVector(
+            abjad.SchemePair('basic_distance', 0),
+            abjad.SchemePair('minimum_distance', 0),
+            abjad.SchemePair('padding', 12),
+            abjad.SchemePair('stretchability', 0))
         lilypond_file.paper_block.top_margin = 24
         return lilypond_file, score
 

@@ -180,7 +180,6 @@ class NestCommand(abjad.abctools.AbjadObject):
                     \context ViolinMusicStaff = "Violin Music Staff" \with {
                         \override Beam.positions = #'(-5.5 . -5.5)
                     } {
-                        \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             {
                                 \tweak text #tuplet-number::calc-fraction-text

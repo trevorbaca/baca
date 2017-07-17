@@ -73,7 +73,6 @@ class StringTrioScoreTemplate(ScoreTemplate):
                     \context StringSectionStaffGroup = "String Section Staff Group" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 R1 * 1/2
                                 R1 * 3/8
@@ -84,7 +83,6 @@ class StringTrioScoreTemplate(ScoreTemplate):
                         }
                         \tag viola
                         \context ViolaMusicStaff = "Viola Music Staff" {
-                            \clef "alto"
                             \context ViolaMusicVoice = "Viola Music Voice" {
                                 R1 * 1/2
                                 R1 * 3/8
@@ -95,7 +93,6 @@ class StringTrioScoreTemplate(ScoreTemplate):
                         }
                         \tag cello
                         \context CelloMusicStaff = "Cello Music Staff" {
-                            \clef "bass"
                             \context CelloMusicVoice = "Cello Music Voice" {
                                 R1 * 1/2
                                 R1 * 3/8
@@ -154,8 +151,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
             name='Violin Music Staff',
             )
         violin = abjad.instrumenttools.Violin()
-        abjad.attach(violin, violin_music_staff)
-        abjad.attach(abjad.Clef('treble'), violin_music_staff)
+        #abjad.attach(violin, violin_music_staff)
+        #abjad.attach(abjad.Clef('treble'), violin_music_staff)
         self._attach_tag('violin', violin_music_staff)
 
         viola_music_voice = abjad.Voice(
@@ -168,8 +165,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
             context_name='ViolaMusicStaff',
             name='Viola Music Staff',
             )
-        abjad.attach(abjad.instrumenttools.Viola(), viola_music_staff)
-        abjad.attach(abjad.Clef('alto'), viola_music_staff)
+        #abjad.attach(abjad.instrumenttools.Viola(), viola_music_staff)
+        #abjad.attach(abjad.Clef('alto'), viola_music_staff)
         self._attach_tag('viola', viola_music_staff)
 
         cello_music_voice = abjad.Voice(
@@ -182,8 +179,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
             context_name='CelloMusicStaff',
             name='Cello Music Staff',
             )
-        abjad.attach(abjad.instrumenttools.Cello(), cello_music_staff)
-        abjad.attach(abjad.Clef('bass'), cello_music_staff)
+        #abjad.attach(abjad.instrumenttools.Cello(), cello_music_staff)
+        #abjad.attach(abjad.Clef('bass'), cello_music_staff)
         self._attach_tag('cello', cello_music_staff)
 
         string_section_staff_group = abjad.StaffGroup(

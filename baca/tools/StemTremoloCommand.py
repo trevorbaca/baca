@@ -84,7 +84,6 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
                 \context MusicContext = "Music Context" <<
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
-                        \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             {
                                 e'8 :32 [
@@ -246,7 +245,6 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     e'8 :32 [
@@ -351,7 +349,6 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     e'8 [
@@ -464,7 +461,6 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     e'8 :32 [
@@ -571,7 +567,6 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     e'8 [
@@ -686,7 +681,6 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     e'8 :32 [
@@ -791,7 +785,6 @@ class StemTremoloCommand(abjad.abctools.AbjadObject):
                     \context MusicContext = "Music Context" <<
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
-                            \clef "treble"
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     e'8 :16 [
