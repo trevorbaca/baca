@@ -989,8 +989,8 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
                 registration = self._get_registration(index, length)
                 for leaf in logical_tie:
                     if isinstance(leaf, abjad.Note):
-                        written_pitch = registration([leaf.written_pitch])
-                        leaf.written_pitch = written_pitch
+                        written_pitches = registration([leaf.written_pitch])
+                        leaf.written_pitch = written_pitches[0]
                     elif isinstance(leaf, abjad.Chord):
                         written_pitches = registration(leaf.written_pitches)
                         leaf.written_pitches = written_pitches

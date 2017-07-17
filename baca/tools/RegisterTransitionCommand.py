@@ -162,8 +162,8 @@ class RegisterTransitionCommand(abjad.abctools.AbjadObject):
                 timespan,
                 )
             for note in logical_tie:
-                written_pitch = registration([note.written_pitch])
-                self._set_pitch(note, written_pitch)
+                written_pitches = registration([note.written_pitch])
+                self._set_pitch(note, written_pitches[0])
 
     ### PRIVATE METHODS ###
 
@@ -180,8 +180,8 @@ class RegisterTransitionCommand(abjad.abctools.AbjadObject):
                 timespan,
                 )
             for note in logical_tie:
-                written_pitch = registration([note.written_pitch])
-                note.written_pitch = written_pitch
+                written_pitches = registration([note.written_pitch])
+                note.written_pitch = written_pitches[0]
             duration = logical_tie.get_duration()
             current_start_offset += duration
 

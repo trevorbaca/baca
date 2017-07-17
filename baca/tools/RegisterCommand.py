@@ -250,8 +250,8 @@ class RegisterCommand(abjad.abctools.AbjadObject):
                 for leaf in logical_tie:
                     if isinstance(leaf, abjad.Note):
                         written_pitch = leaf.written_pitch
-                        written_pitch = self.registration([written_pitch])
-                        leaf.written_pitch = written_pitch
+                        written_pitches = self.registration([written_pitch])
+                        leaf.written_pitch = written_pitches[0]
                     elif isinstance(leaf, abjad.Chord):
                         written_pitches = leaf.written_pitches
                         written_pitches = self.registration(written_pitches)
