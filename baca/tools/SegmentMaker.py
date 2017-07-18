@@ -2052,8 +2052,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     instrument.transpose_from_sounding_pitch_to_written_pitch(
                         leaf)
                 except KeyError:
-                    sounding_pitch_number = leaf.written_pitch.pitch_number
-                    i = instrument.sounding_pitch_of_written_middle_c.pitch_number
+                    sounding_pitch_number = leaf.written_pitch.number
+                    i = instrument.sounding_pitch_of_written_middle_c.number
                     written_pitch_number = sounding_pitch_number - i
                     leaf.written_pitch = written_pitch_number
 

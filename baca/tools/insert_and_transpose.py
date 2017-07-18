@@ -22,9 +22,9 @@ def insert_and_transpose(notes, subrun_tokens):
         >>> t = []
         >>> for x in notes:
         ...   try:
-        ...        t.append(x.written_pitch.pitch_number)
+        ...        t.append(x.written_pitch.number)
         ...   except AttributeError:
-        ...        t.append([y.written_pitch.pitch_number for y in x])
+        ...        t.append([y.written_pitch.number for y in x])
 
     ::
 
@@ -101,8 +101,8 @@ def _get_intervals_in_subrun(subrun_source):
     for first, second in abjad.Sequence(subrun_source).nwise():
         first_pitch = abjad.NamedPitch.from_pitch_carrier(first)
         second_pitch = abjad.NamedPitch.from_pitch_carrier(second)
-        interval = abjad.NumberedPitch(second_pitch).pitch_number - \
-            abjad.NumberedPitch(first_pitch).pitch_number
+        interval = abjad.NumberedPitch(second_pitch).number - \
+            abjad.NumberedPitch(first_pitch).number
         result.append(interval + result[-1])
     result.pop(0)
     return result
@@ -123,7 +123,7 @@ def _make_index_length_pairs(subrun_token):
 def _make_new_notes(anchor_pitch, anchor_written_duration, subrun_intervals):
     new_notes = []
     for subrun_interval in subrun_intervals:
-        new_pc = (abjad.NumberedPitch(anchor_pitch).pitch_number +
+        new_pc = (abjad.NumberedPitch(anchor_pitch).number +
             subrun_interval) % 12
         new_note = abjad.Note(new_pc, anchor_written_duration)
         new_notes.append(new_note)

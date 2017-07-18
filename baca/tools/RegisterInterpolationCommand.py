@@ -1001,8 +1001,8 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
     ### PRIVATE METHODS ###
 
     def _get_registration(self, logical_tie_index, logical_tie_count):
-        start_pitch = self.start_pitch.pitch_number
-        stop_pitch = self.stop_pitch.pitch_number
+        start_pitch = self.start_pitch.number
+        stop_pitch = self.stop_pitch.number
         compass = stop_pitch - start_pitch
         fraction = abjad.Fraction(logical_tie_index, logical_tie_count)
         addendum = fraction * compass

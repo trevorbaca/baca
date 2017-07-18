@@ -59,13 +59,13 @@ class DiatonicClusterCommand(abjad.abctools.AbjadObject):
         for i, note in enumerate(
             abjad.iterate(argument).by_class(abjad.Note)):
             cluster_width = self.cluster_widths[i]
-            start = note.written_pitch.diatonic_pitch_number
+            start = note.written_pitch._get_diatonic_pitch_number()
             diatonic_numbers = range(start, start + cluster_width)
+            class_ = abjad.PitchClass
+            dictionary = \
+                class_._diatonic_pitch_class_number_to_pitch_class_number
             chromatic_numbers = [
-                (12 * (x // 7)) +
-                abjad.pitchtools.PitchClass._diatonic_pitch_class_number_to_pitch_class_number[
-                    x % 7]
-                for x in diatonic_numbers
+                (12 * (x // 7)) + dictionary[x % 7] for x in diatonic_numbers
                 ]
             chord_pitches = [abjad.NamedPitch(_) for _ in chromatic_numbers]
             chord = abjad.Chord(note)

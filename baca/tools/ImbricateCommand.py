@@ -1353,7 +1353,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
         else:
             raise TypeError(pitched_leaf)
         if isinstance(pitch_object, (int, float)):
-            source = [_.pitch_number for _ in written_pitches]
+            source = [_.number for _ in written_pitches]
         elif isinstance(pitch_object, abjad.NamedPitch):
             source = written_pitches
         elif isinstance(pitch_object, abjad.NumberedPitch):

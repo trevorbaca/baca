@@ -325,7 +325,7 @@ class PitchArrayColumn(abjad.abctools.AbjadValueObject):
             for lower_pitch in lower_pitches:
                 upper_pitches = upper.pitches or ()
                 for upper_pitch in upper_pitches:
-                    if upper_pitch.numbered_pitch < lower_pitch.numbered_pitch:
+                    if upper_pitch < lower_pitch:
                         return True
         return False
 

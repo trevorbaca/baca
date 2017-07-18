@@ -288,7 +288,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             return self._update_expression(inspect.currentframe())
         numbers = []
         for pc in self:
-            pc = abs(float(pc))
+            pc = abs(float(pc.number))
             is_integer = True
             if not abjad.mathtools.is_integer_equivalent_number(pc):
                 is_integer = False

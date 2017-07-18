@@ -286,7 +286,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
                         :repetition_count]
                     repetition_interval = sum(repetition_intervals)
                     if isinstance(repetition_interval, int):
-                        pitch_number = pitch_expression.pitch_number
+                        pitch_number = pitch_expression.number
                         pitch_number += repetition_interval
                         pitch_expression = type(pitch_expression)(pitch_number)
                     else:
@@ -333,7 +333,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
                 for note in logical_tie:
                     for operator_ in self.operators:
                         written_pitch = note.written_pitch
-                        pitch_expression = written_pitch.numbered_pitch_class
+                        pitch_expression = written_pitch.pitch_class
                         pitch_expression = operator_(pitch_expression)
                         written_pitch = abjad.NamedPitch(pitch_expression)
                         self._set_pitch(note, written_pitch)
@@ -557,7 +557,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
 
                 >>> for index in range(12):
                 ...     pitch = command.get_pitch(index)
-                ...     pitch.pitch_number
+                ...     pitch.number
                 0
                 1
                 2
@@ -591,7 +591,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
 
                 >>> for index in range(12):
                 ...     pitch = command.get_pitch(index)
-                ...     pitch.pitch_number
+                ...     pitch.number
                 0
                 1
                 2
@@ -625,7 +625,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
 
                 >>> for index in range(12):
                 ...     pitch = command.get_pitch(index)
-                ...     pitch.pitch_number
+                ...     pitch.number
                 0
                 1
                 2
@@ -791,7 +791,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
             repetition_intervals = repetition_intervals[:repetition_count]
             repetition_interval = sum(repetition_intervals)
             if isinstance(repetition_interval, int):
-                pitch_number = pitch_expression.pitch_number
+                pitch_number = pitch_expression.number
                 pitch_number += repetition_interval
                 pitch_expression = type(pitch_expression)(pitch_number)
             else:

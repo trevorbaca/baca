@@ -136,7 +136,7 @@ class WellformednessManager(abjad.abctools.AbjadObject):
         '''
         violators = []
         total = 0
-        not_yet_pitched_string = 'not yet pitched'
+        not_yet_string = 'not yet pitched'
         notes = abjad.iterate(argument).by_logical_tie(
             pitched=True,
             with_grace_notes=True,
@@ -150,12 +150,12 @@ class WellformednessManager(abjad.abctools.AbjadObject):
             if not isinstance(leaf_2.head, abjad.Note):
                 continue
             total += 1
-            if abjad.inspect(leaf_1.head).has_indicator(not_yet_pitched_string):
+            if abjad.inspect(leaf_1.head).has_indicator(not_yet_string):
                 continue
-            if abjad.inspect(leaf_2.head).has_indicator(not_yet_pitched_string):
+            if abjad.inspect(leaf_2.head).has_indicator(not_yet_string):
                 continue
-            pitch_class_1 = leaf_1.head.written_pitch.named_pitch_class
-            pitch_class_2 = leaf_2.head.written_pitch.named_pitch_class
+            pitch_class_1 = leaf_1.head.written_pitch.pitch_class
+            pitch_class_2 = leaf_2.head.written_pitch.pitch_class
             if not pitch_class_1 == pitch_class_2:
                 continue
             string = 'repeat pitch allowed'

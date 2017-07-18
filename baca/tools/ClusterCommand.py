@@ -413,7 +413,7 @@ class ClusterCommand(abjad.abctools.AbjadObject):
         pitches = [start_pitch]
         for i in range(width-1):
             pitch = pitches[-1] + abjad.NamedInterval('M3')
-            pitch = abjad.NamedPitch(pitch.diatonic_pitch_name)
+            pitch = abjad.NamedPitch(pitch._get_diatonic_pitch_name())
             assert pitch.accidental.name == 'natural'
             pitches.append(pitch)
         return pitches

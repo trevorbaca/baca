@@ -361,7 +361,7 @@ class Constellation(abjad.abctools.AbjadObject):
         Returns positive integer.
         '''
         chord = abjad.Chord(chord, (1, 4))
-        pitch_numbers = [_.pitch_number for _ in chord.written_pitches]
+        pitch_numbers = [_.number for _ in chord.written_pitches]
         pitch_numbers = baca.Sequence(items=pitch_numbers)
         for i, pitch_number_list in enumerate(self):
             if pitch_number_list == pitch_numbers:
