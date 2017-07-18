@@ -622,7 +622,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         for pitch_expression in segment:
             prototype = abjad.NumberedPitchClass
             if isinstance(pitch_expression, prototype):
-                pitch_expression = pitch_expression.pitch_class_number
+                pitch_expression = pitch_expression.number
             count = self._next_attack
             while talea[count] < 0:
                 self._next_attack += 1
