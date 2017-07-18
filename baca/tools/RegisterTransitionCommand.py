@@ -207,8 +207,8 @@ class RegisterTransitionCommand(abjad.abctools.AbjadObject):
             upper_range_pitch = start_pitch.interpolate(stop_pitch, fraction)
             range_string = '[{}, {})'
             range_string = range_string.format(
-                lower_range_pitch.pitch_class_octave_label,
-                upper_range_pitch.pitch_class_octave_label,
+                lower_range_pitch.get_name(locale='us'),
+                upper_range_pitch.get_name(locale='us'),
                 )
             start_pitch = start_component.target_octave_start_pitch
             start_pitch = abjad.NumberedPitch(start_pitch)

@@ -260,22 +260,16 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
     def _to_tightly_spaced_pitches_ascending(pitch_classes):
         pitches = []
         pitch_class = pitch_classes[0]
-        pitch = abjad.NumberedPitch.from_pitch_class_octave(pitch_class, 4)
+        pitch = abjad.NumberedPitch((pitch_class, 4))
         pitches.append(pitch)
         for pitch_class in pitch_classes[1:]:
             candidate_octave = pitches[-1].octave.number
-            candidate = abjad.NumberedPitch.from_pitch_class_octave(
-                pitch_class,
-                candidate_octave,
-                )
+            candidate = abjad.NumberedPitch((pitch_class, candidate_octave))
             if pitches[-1] <= candidate:
                 pitches.append(candidate)
             else:
                 octave = candidate_octave + 1
-                pitch = abjad.NumberedPitch.from_pitch_class_octave(
-                    pitch_class,
-                    octave,
-                    )
+                pitch = abjad.NumberedPitch((pitch_class, octave))
                 assert pitches[-1] <= pitch
                 pitches.append(pitch)
         return pitches
@@ -284,22 +278,16 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
     def _to_tightly_spaced_pitches_descending(pitch_classes):
         pitches = []
         pitch_class = pitch_classes[0]
-        pitch = abjad.NumberedPitch.from_pitch_class_octave(pitch_class, 4)
+        pitch = abjad.NumberedPitch((pitch_class, 4))
         pitches.append(pitch)
         for pitch_class in pitch_classes[1:]:
             candidate_octave = pitches[-1].octave.number
-            candidate = abjad.NumberedPitch.from_pitch_class_octave(
-                pitch_class,
-                candidate_octave,
-                )
+            candidate = abjad.NumberedPitch((pitch_class, candidate_octave))
             if candidate <= pitches[-1]:
                 pitches.append(candidate)
             else:
                 octave = candidate_octave - 1
-                pitch = abjad.NumberedPitch.from_pitch_class_octave(
-                    pitch_class,
-                    octave,
-                    )
+                pitch = abjad.NumberedPitch((pitch_class, octave))
                 assert pitch <= pitches[-1]
                 pitches.append(pitch)
         collection = baca.PitchSegment(pitches)
