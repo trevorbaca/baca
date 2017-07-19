@@ -46,7 +46,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
                 division_expression=abjad.Expression(
                     callbacks=[
                         abjad.Expression(
-                            evaluation_template='abjad.sequencetools.Sequence',
+                            evaluation_template='abjad.datastructuretools.Sequence',
                             is_initializer=True,
                             markup_expression=abjad.Expression(
                                 callbacks=[
@@ -88,7 +88,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
                             string_template='sum({})',
                             ),
                         abjad.Expression(
-                            evaluation_template='abjad.sequencetools.Sequence',
+                            evaluation_template='abjad.datastructuretools.Sequence',
                             is_initializer=True,
                             markup_expression=abjad.Expression(
                                 callbacks=[
@@ -429,7 +429,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
     def _select_divisions(self, divisions, start_offset):
         if self.division_expression is not None:
             divisions = self.division_expression(divisions)
-            if not isinstance(divisions, abjad.sequencetools.Sequence):
+            if not isinstance(divisions, abjad.Sequence):
                 message = 'must be division sequence: {!r}.'
                 message = message.format(divisions)
                 raise Exception(message)

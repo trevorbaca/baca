@@ -355,7 +355,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
             if start_offset is not None:
                 result._start_offset = start_offset
                 start_offset += result.duration
-        elif isinstance(argument, (list, abjad.sequencetools.Sequence)):
+        elif isinstance(argument, (list, abjad.Sequence)):
             result = []
             for element in argument:
                 new_element, start_offset = DivisionMaker._to_divisions(

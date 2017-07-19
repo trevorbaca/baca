@@ -5,7 +5,7 @@ import collections
 import numbers
 
 
-class DivisionSequence(abjad.sequencetools.Sequence):
+class DivisionSequence(abjad.Sequence):
     r'''Division sequence.
 
     ::

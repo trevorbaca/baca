@@ -136,7 +136,7 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
             overhang=True,
             )
         # this block was uncommented during krummzeit
-        #pc_cells = [abjad.sequencetools.join_subsequences(x) for x in pc_cells]
+        #pc_cells = [abjad.join_subsequences(x) for x in pc_cells]
         #pc_cells = baca.Sequence(pc_cells).partition_by_counts(
         #    grouping_counts, 
         #    cyclic=True, 
