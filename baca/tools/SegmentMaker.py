@@ -653,7 +653,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 raise Exception(message)
             copied_previous_instrument = abjad.new(previous_instrument)
             copied_previous_instrument._default_scope = context.context_name
-            abjad.attach(copied_previous_instrument, context)
+            #abjad.attach(copied_previous_instrument, context)
+            leaf = abjad.inspect(context).get_leaf(0)
+            abjad.attach(copied_previous_instrument, leaf)
         key = 'end_clefs_by_staff'
         previous_clefs = self._previous_segment_metadata.get(key)
         if not previous_clefs:
@@ -671,7 +673,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             if clef is not None:
                 continue
             clef = abjad.Clef(previous_clef_name)
-            abjad.attach(clef, staff)
+            #abjad.attach(clef, staff)
+            leaf = abjad.inspect(staff).get_leaf(0)
+            abjad.attach(clef, leaf)
 
     def _apply_spacing_specifier(self):
         start_time = time.time()
@@ -2049,8 +2053,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     continue
                 assert isinstance(instrument, prototype), repr(instrument)
                 try:
-                    instrument.transpose_from_sounding_pitch_to_written_pitch(
-                        leaf)
+                    instrument.transpose_from_sounding_pitch(leaf)
                 except KeyError:
                     sounding_pitch_number = leaf.written_pitch.number
                     i = instrument.sounding_pitch_of_written_middle_c.number
