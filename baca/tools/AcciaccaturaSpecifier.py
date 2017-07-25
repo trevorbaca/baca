@@ -125,11 +125,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
             assert isinstance(lmr_specifier, prototype)
         self._lmr_specifier = lmr_specifier
         if pattern is not None:
-            prototype = (
-                abjad.Pattern,
-                abjad.CompoundPattern,
-                )
-            assert isinstance(pattern, prototype), repr(pattern)
+            assert isinstance(pattern, abjad.Pattern), repr(pattern)
         self._pattern = pattern
 
     ### SPECIAL METHODS ###

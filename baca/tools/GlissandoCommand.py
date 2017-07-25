@@ -279,9 +279,8 @@ class GlissandoCommand(abjad.abctools.AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self, pattern=None):
-        prototype = (abjad.Pattern, abjad.CompoundPattern)
         if not pattern is None:
-            assert isinstance(pattern, prototype), repr(pattern)
+            assert isinstance(pattern, abjad.Pattern), repr(pattern)
         self._pattern = pattern
 
     ### SPECIAL METHODS ###
@@ -293,7 +292,9 @@ class GlissandoCommand(abjad.abctools.AbjadObject):
         '''
         if argument is None:
             return
-        pattern = self.pattern or abjad.index_all()
+        pattern = self.pattern
+        if pattern is None:
+            pattern = abjad.index_all()
         if isinstance(argument, list):
             selections = argument
             assert isinstance(selections[0], abjad.Selection), repr(argument) 
@@ -341,8 +342,9 @@ class GlissandoCommand(abjad.abctools.AbjadObject):
             ::
 
                 >>> f(command.pattern)
-                abjad.CompoundPattern(
-                    (
+                abjad.Pattern(
+                    operator='or',
+                    patterns=(
                         abjad.Pattern(
                             indices=[0],
                             ),
@@ -350,7 +352,6 @@ class GlissandoCommand(abjad.abctools.AbjadObject):
                             indices=[-2, -1],
                             ),
                         ),
-                    operator='or',
                     )
 
         Set to pattern or none.

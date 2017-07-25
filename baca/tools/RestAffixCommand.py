@@ -171,9 +171,8 @@ class RestAffixCommand(abjad.abctools.AbjadValueObject):
         skips_instead_of_rests=None,
         suffix=None,
         ):
-        prototype = (abjad.Pattern, abjad.CompoundPattern)
         if (pattern is not None and
-            not isinstance(pattern, prototype)):
+            not isinstance(pattern, abjad.Pattern)):
             message = 'must be pattern or none: {!r}.'
             message = message.format(pattern)
             raise TypeError(message)

@@ -39,8 +39,7 @@ class MusicRhythmSpecifier(abjad.abctools.AbjadObject):
         rhythm_maker=None,
         ):
         if pattern is not None:
-            prototype = (abjad.CompoundPattern, abjad.Pattern)
-            assert isinstance(pattern, prototype), repr(pattern)
+            assert isinstance(pattern, abjad.Pattern), repr(pattern)
         self._pattern = pattern
         self._rhythm_maker = rhythm_maker
 

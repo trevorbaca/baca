@@ -949,8 +949,7 @@ class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
         stop_pitch=None,
         ):
         if pattern is not None:
-            prototype = (abjad.Pattern, abjad.CompoundPattern)
-            assert isinstance(pattern, prototype), repr(pattern)
+            assert isinstance(pattern, abjad.Pattern), repr(pattern)
         self._pattern = pattern
         start_pitch = abjad.NumberedPitch(start_pitch)
         if selector is not None:
