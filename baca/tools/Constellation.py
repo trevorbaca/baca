@@ -300,7 +300,7 @@ class Constellation(abjad.abctools.AbjadObject):
 
                 >>> constellation = constellation_circuit[0]
                 >>> constellation.pitch_range
-                PitchRange(range_string='[A0, C8]')
+                PitchRange('[A0, C8]')
 
         '''
         return self._circuit.pitch_range

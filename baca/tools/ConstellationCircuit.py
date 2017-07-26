@@ -192,7 +192,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
             ::
 
                 >>> constellation_circuit.pitch_range
-                PitchRange(range_string='[A0, C8]')
+                PitchRange('[A0, C8]')
 
         Returns pitch range.
         '''
