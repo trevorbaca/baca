@@ -46,12 +46,12 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
                 division_expression=abjad.Expression(
                     callbacks=[
                         abjad.Expression(
-                            evaluation_template='abjad.datastructuretools.Sequence',
+                            evaluation_template='abjad.Sequence',
                             is_initializer=True,
                             markup_expression=abjad.Expression(
                                 callbacks=[
                                     abjad.Expression(
-                                        evaluation_template='abjad.markuptools.Markup',
+                                        evaluation_template='abjad.Markup',
                                         is_initializer=True,
                                         ),
                                     ],
@@ -67,22 +67,22 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
                                         evaluation_template='[{}]',
                                         ),
                                     abjad.Expression(
-                                        evaluation_template='abjad.markuptools.MarkupList',
+                                        evaluation_template='abjad.MarkupList',
                                         is_initializer=True,
                                         ),
                                     abjad.Expression(
                                         evaluation_template="{}.insert(i=0, item='sum(')",
                                         force_return=True,
-                                        qualified_method_name='insert',
+                                        qualified_method_name='abjad.MarkupList.insert',
                                         ),
                                     abjad.Expression(
                                         evaluation_template="{}.append(item=')')",
                                         force_return=True,
-                                        qualified_method_name='append',
+                                        qualified_method_name='abjad.MarkupList.append',
                                         ),
                                     abjad.Expression(
                                         evaluation_template='{}.concat()',
-                                        qualified_method_name='concat',
+                                        qualified_method_name='abjad.MarkupList.concat',
                                         ),
                                     ],
                                 has_parentheses=True,
@@ -92,12 +92,12 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
                             string_template='sum({})',
                             ),
                         abjad.Expression(
-                            evaluation_template='abjad.datastructuretools.Sequence',
+                            evaluation_template='abjad.Sequence',
                             is_initializer=True,
                             markup_expression=abjad.Expression(
                                 callbacks=[
                                     abjad.Expression(
-                                        evaluation_template='abjad.markuptools.Markup',
+                                        evaluation_template='abjad.Markup',
                                         is_initializer=True,
                                         ),
                                     ],
