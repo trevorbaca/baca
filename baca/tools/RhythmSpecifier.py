@@ -88,7 +88,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
                                 has_parentheses=True,
                                 proxy_class=abjad.MarkupList,
                                 ),
-                            qualified_method_name='sum',
+                            qualified_method_name='abjad.Sequence.sum',
                             string_template='sum({})',
                             ),
                         abjad.Expression(
