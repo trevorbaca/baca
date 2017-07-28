@@ -321,7 +321,7 @@ class GlissandoCommand(abjad.abctools.AbjadObject):
         next_leaf = abjad.inspect(last_leaf).get_leaf(1)
         if not isinstance(next_leaf, note_or_chord):
             return
-        leaves = [last_leaf, next_leaf]
+        leaves = abjad.select([last_leaf, next_leaf])
         abjad.attach(abjad.Glissando(), leaves)
 
     ### PUBLIC PROPERTIES ###

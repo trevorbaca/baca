@@ -240,6 +240,7 @@ class TrillCommand(abjad.abctools.AbjadObject):
             if next_leaf is not None:
                 leaves.append(next_leaf)
             if 1 < len(leaves):
+                leaves = abjad.select(leaves)
                 abjad.attach(spanner, leaves)
 
     def _has_forbidden_annotation(self, leaf):

@@ -265,6 +265,8 @@ class TransitionCommand(abjad.abctools.AbjadObject):
         if self.selector is not None:
             argument = self.selector(argument)
         leaves = abjad.select(argument).by_leaf()
+        spanner = abjad.TextSpanner()
+        abjad.attach(spanner, leaves)
         start_leaf = leaves[0]
         stop_leaf = leaves[-1]
         start_markup = self.start_markup
@@ -274,9 +276,9 @@ class TransitionCommand(abjad.abctools.AbjadObject):
             assert isinstance(start_markup, abjad.Markup), repr(start_markup)
             start_markup = copy.copy(start_markup)
             start_markup = start_markup.override(('font-name', 'Palatino'))
-            abjad.attach(start_markup, start_leaf, is_annotation=True)
+            spanner.attach(start_markup, start_leaf)
         arrow = self._get_arrow()
-        abjad.attach(arrow, start_leaf)
+        spanner.attach(arrow, start_leaf)
         stop_markup = self.stop_markup
         if isinstance(stop_markup, baca.AttachCommand):
             stop_markup = stop_markup.arguments[0]
@@ -284,19 +286,18 @@ class TransitionCommand(abjad.abctools.AbjadObject):
             assert isinstance(stop_markup, abjad.Markup), repr(stop_markup)
             stop_markup = copy.copy(stop_markup)
             stop_markup = stop_markup.override(('font-name', 'Palatino'))
-            abjad.attach(stop_markup, stop_leaf, is_annotation=True)
-        abjad.attach(abjad.TextSpanner(), leaves)
+            spanner.attach(stop_markup, stop_leaf)
 
     ### PRIVATE METHODS ###
 
     def _get_arrow(self):
         if self.solid:
-            return abjad.Arrow()
+            return abjad.ArrowLineSegment()
         return self._make_dashed_arrow()
 
     @staticmethod
     def _make_dashed_arrow():
-        return abjad.Arrow(
+        return abjad.ArrowLineSegment(
             dash_fraction=0.25,
             dash_period=1.5,
             left_broken_text=False,

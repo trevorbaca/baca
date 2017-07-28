@@ -73,18 +73,22 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
                                     abjad.Expression(
                                         evaluation_template="{}.insert(i=0, item='sum(')",
                                         force_return=True,
+                                        qualified_method_name='insert',
                                         ),
                                     abjad.Expression(
                                         evaluation_template="{}.append(item=')')",
                                         force_return=True,
+                                        qualified_method_name='append',
                                         ),
                                     abjad.Expression(
                                         evaluation_template='{}.concat()',
+                                        qualified_method_name='concat',
                                         ),
                                     ],
                                 has_parentheses=True,
                                 proxy_class=abjad.MarkupList,
                                 ),
+                            qualified_method_name='sum',
                             string_template='sum({})',
                             ),
                         abjad.Expression(

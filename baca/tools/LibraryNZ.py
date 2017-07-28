@@ -397,10 +397,10 @@ class LibraryNZ(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \clef "percussion"
                                 \stopStaff
                                 \once \override Staff.StaffSymbol.line-count = 1
                                 \startStaff
+                                \clef "percussion"
                                 \override TupletBracket.staff-padding = #9
                                 r8
                                 c'16 [
@@ -422,9 +422,9 @@ class LibraryNZ(object):
                             \times 4/5 {
                                 a'16
                                 r4
+                                \revert TupletBracket.staff-padding
                                 \stopStaff
                                 \startStaff
-                                \revert TupletBracket.staff-padding
                             }
                         }
                     }
@@ -474,10 +474,10 @@ class LibraryNZ(object):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \clef "percussion"
                                 \stopStaff
                                 \once \override Staff.StaffSymbol.line-count = 1
                                 \startStaff
+                                \clef "percussion"
                                 fs''16 [
                                 e''16 ]
                                 ef''4 ~
@@ -794,10 +794,10 @@ class LibraryNZ(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \clef "percussion"
                                 \stopStaff
                                 \once \override Staff.StaffSymbol.line-count = 1
                                 \startStaff
+                                \clef "percussion"
                                 \override TupletBracket.staff-padding = #9
                                 r8
                                 c'16 [
@@ -819,9 +819,9 @@ class LibraryNZ(object):
                             \times 4/5 {
                                 a'16
                                 r4
+                                \revert TupletBracket.staff-padding
                                 \stopStaff
                                 \startStaff
-                                \revert TupletBracket.staff-padding
                             }
                         }
                     }
@@ -870,10 +870,10 @@ class LibraryNZ(object):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \clef "percussion"
                                 \stopStaff
                                 \once \override Staff.StaffSymbol.line-count = 1
                                 \startStaff
+                                \clef "percussion"
                                 fs''16 [
                                 e''16 ]
                                 ef''4 ~
@@ -9209,10 +9209,10 @@ class LibraryNZ(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \clef "percussion"
                                 \stopStaff
                                 \once \override Staff.StaffSymbol.line-count = 2
                                 \startStaff
+                                \clef "percussion"
                                 \override TupletBracket.staff-padding = #9
                                 r8
                                 c'16 [
@@ -9234,9 +9234,9 @@ class LibraryNZ(object):
                             \times 4/5 {
                                 a'16
                                 r4
+                                \revert TupletBracket.staff-padding
                                 \stopStaff
                                 \startStaff
-                                \revert TupletBracket.staff-padding
                             }
                         }
                     }
@@ -9285,10 +9285,10 @@ class LibraryNZ(object):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \clef "percussion"
                                 \stopStaff
                                 \once \override Staff.StaffSymbol.line-count = 2
                                 \startStaff
+                                \clef "percussion"
                                 fs''16 [
                                 e''16 ]
                                 ef''4 ~

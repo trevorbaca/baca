@@ -1088,6 +1088,7 @@ class PitchTree(Tree):
                 spanner = abjad.Spanner()
                 negative_level = node._get_level(negative=True)
                 abjad.attach(negative_level, spanner)
+                leaves_with_skips = abjad.select(leaves_with_skips)
                 abjad.attach(spanner, leaves_with_skips)
                 if brackets:
                     bracket = abjad.HorizontalBracketSpanner()

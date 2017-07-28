@@ -25,9 +25,7 @@ class SpecifierWrapper(abjad.abctools.AbjadObject):
             
             >>> f(specifier_wrapper)
             baca.tools.SpecifierWrapper(
-                specifier=abjad.Dynamic(
-                    name='p',
-                    ),
+                specifier=abjad.Dynamic('p'),
                 )
 
     '''

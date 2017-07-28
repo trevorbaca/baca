@@ -841,28 +841,25 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         context = self._score['Time Signature Context Skips']
         # TODO: adjust MetronomeMarkSpanner to make this possible:
         #abjad.attach(abjad.MetronomeMarkSpanner(), context)
-        skips = list(abjad.iterate(context).by_leaf())
+        skips = abjad.select(context).by_leaf(abjad.Skip)
         left_broken_text = abjad.Markup().null()
         left_broken_text._direction = None
-        tempo_spanner = abjad.MetronomeMarkSpanner(
+        spanner = abjad.MetronomeMarkSpanner(
             left_broken_padding=0,
             left_broken_text=left_broken_text,
             start_with_parenthesized_tempo=False,
             )
-        abjad.attach(tempo_spanner, skips)
+        abjad.attach(spanner, skips)
         for stage_number, directive in self.tempo_specifier:
             self._assert_valid_stage_number(stage_number)
             result = self._stage_number_to_measure_indices(stage_number)
             start_measure_index, stop_measure_index = result
             start_measure = context[start_measure_index]
-            assert isinstance(start_measure, abjad.Measure), repr(
-                start_measure)
+            assert isinstance(start_measure, abjad.Measure)
             start_skip = start_measure[0]
-            prototype = (abjad.Skip, 
-                abjad.MultimeasureRest)
+            prototype = (abjad.Skip, abjad.MultimeasureRest)
             assert isinstance(start_skip, prototype), start_skip
-            # TODO: adjust MetronomeMarkSpanner to make measure attachment work
-            abjad.attach(directive, start_skip, is_annotation=True)
+            spanner.attach(directive, start_skip)
 
     def _check_design(self):
         if self.design_checker is None:
