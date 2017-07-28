@@ -213,6 +213,28 @@ class Sequence(abjad.Sequence):
     ### PRIVATE METHODS ###
 
     @staticmethod
+    def _make_accumulate_markup(markup, operands=None, count=Identity):
+        import abjad
+        markup_list = abjad.MarkupList()
+        operands = operands or [Identity]
+        operand_markups = []
+        for operand in operands:
+            if hasattr(operand, 'get_markup'):
+                operand_markup = operand.get_markup(name='X')
+            else:
+                operand_markup = str(operand)
+            operand_markups.append(operand_markup)
+        operand_markup = abjad.MarkupList(operand_markups).concat()
+        markup_list.append(operand_markup)
+        infix = 'Φ'
+        if count is not Identity:
+            infix += '/' + str(count)
+        markup_list.append(infix)
+        markup_list.append(markup)
+        markup = markup_list.line()
+        return markup
+
+    @staticmethod
     def _make_accumulate_markup_expression(operands=None, count=Identity):
         markup_expression = baca.Expression()
         markup_expression = markup_expression.wrap_in_list()
@@ -276,6 +298,7 @@ class Sequence(abjad.Sequence):
 
     @abjad.expressiontools.Signature(
         markup_expression_callback='_make_accumulate_markup_expression',
+        markup_maker_callback='_make_accumulate_markup',
         string_template_callback='_make_accumulate_string_template',
         )
     def accumulate(self, operands=None, count=Identity):
