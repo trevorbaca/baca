@@ -372,7 +372,6 @@ def _pitch_set(items=None, **keywords):
     expression = baca.Expression(name=name)
     callback = expression._make_initializer_callback(
         PitchSet,
-        markup_expression=abjad.Expression().markup(),
         module_names=['baca'],
         string_template='{}',
         **keywords

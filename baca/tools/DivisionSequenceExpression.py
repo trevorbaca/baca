@@ -169,7 +169,6 @@ class DivisionSequenceExpression(abjad.Expression):
         class_ = baca.DivisionSequence
         callback = self._make_initializer_callback(
             class_,
-            markup_expression=abjad.Expression().markup(),
             module_names=['baca'],
             string_template='{}',
             )

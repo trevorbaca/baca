@@ -235,28 +235,6 @@ class Sequence(abjad.Sequence):
         return markup
 
     @staticmethod
-    def _make_accumulate_markup_expression(operands=None, count=Identity):
-        markup_expression = baca.Expression()
-        markup_expression = markup_expression.wrap_in_list()
-        markup_expression = markup_expression.markup_list()
-        infix = 'Φ'
-        if count is not Identity:
-            infix += '/' + str(count)
-        markup_expression = markup_expression.insert(0, infix)
-        operands = operands or [Identity]
-        operand_markups = []
-        for operand in operands:
-            if hasattr(operand, 'get_markup'):
-                operand_markup = operand.get_markup(name='X')
-            else:
-                operand_markup = str(operand)
-            operand_markups.append(operand_markup)
-        operand_markup = abjad.MarkupList(operand_markups).concat()
-        markup_expression = markup_expression.insert(0, operand_markup)
-        markup_expression = markup_expression.line()
-        return markup_expression
-
-    @staticmethod
     def _make_accumulate_string_template(operands=None, count=Identity):
         operands = operands or [Identity]
         operand_strings = []
@@ -297,7 +275,6 @@ class Sequence(abjad.Sequence):
     ### PUBLIC METHODS ###
 
     @abjad.expressiontools.Signature(
-        markup_expression_callback='_make_accumulate_markup_expression',
         markup_maker_callback='_make_accumulate_markup',
         string_template_callback='_make_accumulate_string_template',
         )
@@ -1752,7 +1729,6 @@ def _sequence(items=None, **keywords):
     expression = baca.Expression(name=name)
     callback = expression._make_initializer_callback(
         Sequence,
-        markup_expression=baca.Expression().markup(),
         module_names=['baca'],
         string_template='{}',
         **keywords

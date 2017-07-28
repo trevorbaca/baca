@@ -735,7 +735,6 @@ def _pitch_class_segment(items=None, **keywords):
     expression = baca.Expression(name=name)
     callback = expression._make_initializer_callback(
         PitchClassSegment,
-        markup_expression=abjad.Expression().markup(),
         module_names=['baca'],
         string_template='{}',
         **keywords

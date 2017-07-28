@@ -90,7 +90,6 @@ class Expression(abjad.Expression):
         class_ = baca.PitchClassSegment
         callback = self._make_initializer_callback(
             class_,
-            markup_expression=type(self)().markup(),
             module_names=['baca'],
             string_template='{}',
             **keywords
