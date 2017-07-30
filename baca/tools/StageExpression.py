@@ -2,7 +2,7 @@
 import abjad
 
 
-class StageExpression(abjad.expressiontools.Expression):
+class StageExpression(abjad.Expression):
     r'''Stage expression.
     '''
 

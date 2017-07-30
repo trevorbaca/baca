@@ -274,7 +274,7 @@ class Sequence(abjad.Sequence):
 
     ### PUBLIC METHODS ###
 
-    @abjad.expressiontools.Signature(
+    @abjad.Signature(
         markup_maker_callback='_make_accumulate_markup',
         string_template_callback='_make_accumulate_string_template',
         )
@@ -907,7 +907,7 @@ class Sequence(abjad.Sequence):
                     items.append(sequence)
         return type(self)(items=items)
 
-    @abjad.expressiontools.Signature(
+    @abjad.Signature(
         method_name='β',
         is_operator=True,
         superscript='count',
@@ -1167,7 +1167,7 @@ class Sequence(abjad.Sequence):
         '''
         return len(self) // self.get_degree_of_rotational_symmetry()
 
-    @abjad.expressiontools.Signature(method_name='H')
+    @abjad.Signature(method_name='H')
     def helianthate(self, n=0, m=0):
         r'''Helianthates sequence.
 
@@ -1363,7 +1363,7 @@ class Sequence(abjad.Sequence):
                 raise Exception(message)
         return type(self)(items=result)
 
-    @abjad.expressiontools.Signature(
+    @abjad.Signature(
         is_operator=True,
         method_name='P',
         subscript='counts',
@@ -1443,7 +1443,7 @@ class Sequence(abjad.Sequence):
             overhang=True,
             )
 
-    @abjad.expressiontools.Signature()
+    @abjad.Signature()
     def reveal(self, count=None):
         r'''Reveals contents of sequence.
 

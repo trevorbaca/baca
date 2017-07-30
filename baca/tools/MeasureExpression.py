@@ -2,7 +2,7 @@
 import abjad
 
 
-class MeasureExpression(abjad.expressiontools.Expression):
+class MeasureExpression(abjad.Expression):
     r'''Measure expression.
 
     ::

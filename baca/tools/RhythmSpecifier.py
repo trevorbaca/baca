@@ -121,7 +121,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
             raise Exception(message)
         self._division_maker = division_maker
         if division_expression is not None:
-            prototype = abjad.expressiontools.Expression
+            prototype = abjad.Expression
             assert isinstance(division_expression, prototype), repr(
                 division_expression)
         self._division_expression = division_expression
