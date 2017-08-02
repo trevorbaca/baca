@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class MusicContribution(abjad.abctools.AbjadValueObject):
+class MusicContribution(abjad.AbjadValueObject):
     r'''Music contribution.
 
     ::

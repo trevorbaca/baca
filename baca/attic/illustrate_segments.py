@@ -34,7 +34,7 @@ def illustrate_segment(segment_path):
         )
     if os.path.exists(local_boilerplate_path):
         os.remove(local_boilerplate_path)
-    with abjad.systemtools.FilesystemState(
+    with abjad.FilesystemState(
         keep=[illustration_ly_path, illustration_pdf_path],
         remove=[local_boilerplate_path],
         ):
@@ -53,7 +53,7 @@ def illustrate_segment(segment_path):
         assert not os.path.exists(illustration_candidate_ly_path)
         assert not os.path.exists(illustration_candidate_pdf_path)
         command = 'python {}'.format(local_boilerplate_path)
-        exit_status = abjad.systemtools.IOManager.spawn_subprocess(command)
+        exit_status = abjad.IOManager.spawn_subprocess(command)
         assert exit_status == 0
         assert os.path.exists(illustration_candidate_ly_path)
         assert os.path.exists(illustration_candidate_pdf_path)
@@ -83,7 +83,7 @@ if __name__ == '__main__':
             )
         if not os.path.isfile(definition_file):
             continue
-        with abjad.systemtools.Timer() as timer:
+        with abjad.Timer() as timer:
             message = 'Illustrating {} ... '
             message = message.format(definition_file)
             print(message)

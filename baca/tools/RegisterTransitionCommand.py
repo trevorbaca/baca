@@ -2,7 +2,7 @@
 import abjad
 
 
-class RegisterTransitionCommand(abjad.abctools.AbjadObject):
+class RegisterTransitionCommand(abjad.AbjadObject):
     r'''Register transition command.
 
     ::
@@ -153,7 +153,7 @@ class RegisterTransitionCommand(abjad.abctools.AbjadObject):
         '''
         if timespan is None:
             return self._apply_outside_score(logical_ties)
-        if not isinstance(logical_ties[0], abjad.selectiontools.LogicalTie):
+        if not isinstance(logical_ties[0], abjad.LogicalTie):
             logical_ties = abjad.iterate(logical_ties).by_logical_tie()
         for logical_tie in logical_ties:
             offset = logical_tie.get_timespan().start_offset
@@ -168,11 +168,11 @@ class RegisterTransitionCommand(abjad.abctools.AbjadObject):
     ### PRIVATE METHODS ###
 
     def _apply_outside_score(self, logical_ties):
-        if not isinstance(logical_ties[0], abjad.selectiontools.LogicalTie):
+        if not isinstance(logical_ties[0], abjad.LogicalTie):
             logical_ties = list(abjad.iterate(logical_ties).by_logical_tie())
         durations = [_.get_duration() for _ in logical_ties]
         duration = sum(durations)
-        timespan = abjad.timespantools.Timespan(0, duration)
+        timespan = abjad.Timespan(0, duration)
         current_start_offset = 0
         for logical_tie in logical_ties:
             registration = self._make_interpolated_registration(
@@ -217,7 +217,7 @@ class RegisterTransitionCommand(abjad.abctools.AbjadObject):
                 stop_pitch,
                 fraction,
                 )
-            component = abjad.pitchtools.RegistrationComponent(
+            component = abjad.RegistrationComponent(
                 source_pitch_range=range_string,
                 target_octave_start_pitch=target_octave_start_pitch,
                 )

@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class RegisterCommand(abjad.abctools.AbjadObject):
+class RegisterCommand(abjad.AbjadObject):
     r"""Register command.
 
     ::

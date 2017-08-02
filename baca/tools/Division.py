@@ -625,7 +625,7 @@ class Division(abjad.NonreducedFraction):
         return type(self)(pair, start_offset=self.start_offset)
 
     def _get_format_specification(self):
-        return abjad.systemtools.FormatSpecification(
+        return abjad.FormatSpecification(
             client=self,
             repr_is_indented=False,
             storage_format_args_values=[self.pair],
@@ -636,13 +636,13 @@ class Division(abjad.NonreducedFraction):
             )
 
     def _to_timespan(self):
-        from abjad.tools import timespantools
+        import abjad
         if self.start_offset is None:
             message = 'division must have start offset: {!r}.'
             message = message.format(self)
             raise Exception(message)
         stop_offset = self.start_offset + self
-        return timespantools.Timespan(
+        return abjad.Timespan(
             start_offset=self.start_offset,
             stop_offset=stop_offset,
             )

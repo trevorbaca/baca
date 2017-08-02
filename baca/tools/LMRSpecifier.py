@@ -2,7 +2,7 @@
 import abjad
 
 
-class LMRSpecifier(abjad.abctools.AbjadObject):
+class LMRSpecifier(abjad.AbjadObject):
     r'''Left-middle-right specifier.
 
     ::

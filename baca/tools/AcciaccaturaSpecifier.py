@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
+class AcciaccaturaSpecifier(abjad.AbjadObject):
     r'''Acciaccatura specifier.
 
     ::
@@ -135,7 +135,7 @@ class AcciaccaturaSpecifier(abjad.abctools.AbjadObject):
 
         Returns acciaccatura container together with new collection.
         '''
-        prototype = (list, abjad.pitchtools.Segment)
+        prototype = (list, abjad.Segment)
         assert isinstance(collection, prototype), repr(collection)
         lmr_specifier = self._get_lmr_specifier()
         segment_parts = lmr_specifier(collection)

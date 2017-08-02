@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class PitchArrayColumn(abjad.abctools.AbjadValueObject):
+class PitchArrayColumn(abjad.AbjadValueObject):
     '''Pitch array column.
 
     ::

@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class MusicPitchSpecifier(abjad.abctools.AbjadObject):
+class MusicPitchSpecifier(abjad.AbjadObject):
     r'''Music pitch specifier.
 
     ::

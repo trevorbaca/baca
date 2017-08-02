@@ -4,7 +4,7 @@ import baca
 import copy
 
 
-class TransitionCommand(abjad.abctools.AbjadObject):
+class TransitionCommand(abjad.AbjadObject):
     r'''Transition command.
 
     ::

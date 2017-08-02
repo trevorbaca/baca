@@ -2,7 +2,7 @@
 import abjad
 
 
-class Counter(abjad.abctools.AbjadObject):
+class Counter(abjad.AbjadObject):
     r'''Counter.
 
     ::

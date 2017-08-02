@@ -3,7 +3,7 @@ import abjad
 import collections
 
 
-class Cursor(abjad.abctools.AbjadObject):
+class Cursor(abjad.AbjadObject):
     r'''Cursor.
 
     ::

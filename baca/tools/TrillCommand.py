@@ -2,7 +2,7 @@
 import abjad
 
 
-class TrillCommand(abjad.abctools.AbjadObject):
+class TrillCommand(abjad.AbjadObject):
     r'''Trill command.
 
     ::

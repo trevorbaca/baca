@@ -1618,7 +1618,7 @@ class LibraryNZ(object):
         '''
         assert isinstance(duration, tuple), repr(duration)
         assert len(duration) == 2, repr(duration)
-        moment = abjad.schemetools.SchemeMoment(duration)
+        moment = abjad.SchemeMoment(duration)
         selector = selector or baca.select_leaf(0)
         return baca.SetCommand(
             context_name='score',

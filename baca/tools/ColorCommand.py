@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class ColorCommand(abjad.abctools.AbjadObject):
+class ColorCommand(abjad.AbjadObject):
     r'''Color command.
 
     ::

@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class OverrideCommand(abjad.abctools.AbjadObject):
+class OverrideCommand(abjad.AbjadObject):
     r'''Override command.
     
     ::
@@ -293,7 +293,7 @@ class OverrideCommand(abjad.abctools.AbjadObject):
             attribute_name=attribute_name,
             attribute_value=attribute_value,
             )
-        manager = abjad.systemtools.LilyPondFormatManager
+        manager = abjad.LilyPondFormatManager
         command = manager.make_lilypond_override_string(
             grob_name,
             attribute_name,

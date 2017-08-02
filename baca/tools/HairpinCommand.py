@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class HairpinCommand(abjad.abctools.AbjadObject):
+class HairpinCommand(abjad.AbjadObject):
     r'''Hairpin command.
 
     ::
@@ -144,7 +144,7 @@ class HairpinCommand(abjad.abctools.AbjadObject):
                 hairpin_token(leaves)
             if self.flare:
                 assert isinstance(leaves[0], abjad.Note), repr(leaves[0])
-                stencil = abjad.schemetools.Scheme('flared-hairpin')
+                stencil = abjad.Scheme('flared-hairpin')
                 abjad.override(leaves[0]).hairpin.stencil = stencil
 
     ### PUBLIC PROPERTIES ###

@@ -2,7 +2,7 @@
 import abjad
 
 
-class AnchorCommand(abjad.abctools.AbjadValueObject):
+class AnchorCommand(abjad.AbjadValueObject):
     r'''Anchor command.
 
     ::

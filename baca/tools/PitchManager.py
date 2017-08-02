@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class PitchManager(abjad.abctools.AbjadObject):
+class PitchManager(abjad.AbjadObject):
     r'''Pitch manager.
 
     ::
@@ -476,17 +476,17 @@ class PitchManager(abjad.abctools.AbjadObject):
         operators = []
         if transposition:
             for n in range(12):
-                operator = abjad.pitchtools.CompoundOperator()
+                operator = abjad.CompoundOperator()
                 operator = operator.transpose(n=n)
                 operators.append(operator)
         else:
-            operator = abjad.pitchtools.CompoundOperator()
+            operator = abjad.CompoundOperator()
             operator = operator.transpose()
             operators.append(operator)
         if inversion:
             operators_ = operators[:]
             for operator in operators:
-                operator_ = abjad.pitchtools.CompoundOperator()
+                operator_ = abjad.CompoundOperator()
                 operator_ = operator_.invert()
                 foo = list(operator_._operators)
                 foo.extend(operator.operators)

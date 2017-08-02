@@ -2,7 +2,7 @@
 import abjad
 
 
-class WellformednessManager(abjad.abctools.AbjadObject):
+class WellformednessManager(abjad.AbjadObject):
     r'''Wellformedness manager.
 
     ::

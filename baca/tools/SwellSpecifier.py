@@ -4,7 +4,7 @@ import baca
 import copy
 
 
-class SwellSpecifier(abjad.abctools.AbjadObject):
+class SwellSpecifier(abjad.AbjadObject):
     r'''Swell specifier.
 
     ::

@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class StemTremoloCommand(abjad.abctools.AbjadObject):
+class StemTremoloCommand(abjad.AbjadObject):
     r'''Stem tremolo command.
 
     ::

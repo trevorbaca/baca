@@ -2,7 +2,7 @@
 import abjad
 
 
-class SpacingIndication(abjad.abctools.AbjadValueObject):
+class SpacingIndication(abjad.AbjadValueObject):
     r'''Spacing indication token.
 
     ::
@@ -102,7 +102,7 @@ class SpacingIndication(abjad.abctools.AbjadValueObject):
     ### PRIVATE METHODS ###
 
     def _get_format_specification(self):
-        return abjad.systemtools.FormatSpecification(
+        return abjad.FormatSpecification(
             client=self,
             repr_is_indented=False,
             storage_format_args_values=[

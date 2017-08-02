@@ -2,7 +2,7 @@
 import abjad
 
 
-class TimeSignatureGroups(abjad.abctools.AbjadObject):
+class TimeSignatureGroups(abjad.AbjadObject):
     r'''Time signature groups.
 
     ::
@@ -144,7 +144,7 @@ class TimeSignatureGroups(abjad.abctools.AbjadObject):
             leaves = abjad.select(measure_group).by_leaf()
             abjad.attach(spanner, leaves)
             staff.extend(measure_group)
-            markup = abjad.markuptools.Markup(group_index, direction=Up)
+            markup = abjad.Markup(group_index, direction=Up)
             markup = markup.smaller()
             markup = markup.circle()
             leaf = abjad.inspect(measure_group[0]).get_leaf(0)
@@ -159,10 +159,10 @@ class TimeSignatureGroups(abjad.abctools.AbjadObject):
         abjad.override(staff).text_script.extra_offset = (slide, 0)
         abjad.override(staff).text_script.staff_padding = 4.5
         score = abjad.Score([staff])
-        moment = abjad.schemetools.SchemeMoment((1, 8))
+        moment = abjad.SchemeMoment((1, 8))
         abjad.setting(score).proportional_notation_duration = moment
-        lilypond_file = abjad.lilypondfiletools.LilyPondFile.new(score)
-        lilypond_file.header_block.tagline = abjad.markuptools.Markup.null()
+        lilypond_file = abjad.LilyPondFile.new(score)
+        lilypond_file.header_block.tagline = abjad.Markup.null()
         return lilypond_file
 
     ### PRIVATE METHODS ###

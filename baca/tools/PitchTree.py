@@ -944,9 +944,9 @@ class PitchTree(Tree):
         command = abjad.LilyPondCommand(string, format_slot='after')
         last_leaf = abjad.select().by_leaf()(score)[-1][-1]
         abjad.attach(command, last_leaf)
-        moment = abjad.schemetools.SchemeMoment((1, 16))
+        moment = abjad.SchemeMoment((1, 16))
         abjad.setting(score).proportional_notation_duration = moment
-        lilypond_file = abjad.lilypondfiletools.LilyPondFile.new(
+        lilypond_file = abjad.LilyPondFile.new(
             global_staff_size=global_staff_size,
             music=score,
             )
@@ -1048,8 +1048,8 @@ class PitchTree(Tree):
                 transposition_only=True,
                 )
             string = str(set_class)
-            command = abjad.markuptools.MarkupCommand('line', [string])
-            label = abjad.markuptools.Markup(command, direction=Up)
+            command = abjad.MarkupCommand('line', [string])
+            label = abjad.Markup(command, direction=Up)
             if label is not None:
                 label = label.small()
                 first_leaf = leaves[0]

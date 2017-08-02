@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class RhythmSpecifier(abjad.abctools.AbjadObject):
+class RhythmSpecifier(abjad.AbjadObject):
     r'''Rhythm specifier.
 
     ::
@@ -242,7 +242,7 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
     def _attach_untuned_percussion_markup(self, leaf):
         name = self.instrument.instrument_name
         name = name.lower()
-        markup = abjad.markuptools.Markup(name, direction=Up)
+        markup = abjad.Markup(name, direction=Up)
         markup = markup.box().override(('box-padding', 0.5))
         abjad.attach(markup, leaf)
 
@@ -294,12 +294,12 @@ class RhythmSpecifier(abjad.abctools.AbjadObject):
         return last_leaf
 
     def _get_storage_format_specification(self):
-        agent = abjad.systemtools.StorageFormatAgent(self)
+        agent = abjad.StorageFormatAgent(self)
         keyword_argument_names = agent.signature_keyword_names
         if not self.rhythm_overwrites:
             keyword_argument_names = list(keyword_argument_names)
             keyword_argument_names.remove('rhythm_overwrites')
-        return abjad.systemtools.StorageFormatSpecification(
+        return abjad.StorageFormatSpecification(
             self,
             keyword_argument_names=keyword_argument_names,
             )

@@ -3,7 +3,7 @@ import abjad
 import numbers
 
 
-class PitchArrayCell(abjad.abctools.AbjadObject):
+class PitchArrayCell(abjad.AbjadObject):
     '''Pitch array cell.
 
     ::

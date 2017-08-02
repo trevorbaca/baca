@@ -1028,7 +1028,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             result = self._get_stage_numbers(scope.stages)
             start_stage, stop_stage = result
             offsets = self._get_offsets(start_stage, stop_stage)
-            timespan = abjad.timespantools.Timespan(*offsets)
+            timespan = abjad.Timespan(*offsets)
             timespan_map.append((scope.voice_name, timespan))
             timespans.append(timespan)
         compound_scope._timespan_map = timespan_map
@@ -1039,7 +1039,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 continue
             result = abjad.iterate(voice).by_topmost_logical_ties_and_components()
             for argument in result:
-                if isinstance(argument, abjad.selectiontools.LogicalTie):
+                if isinstance(argument, abjad.LogicalTie):
                     component = argument.head
                 else:
                     component = argument
@@ -1047,7 +1047,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     topmost_components.append(argument)
         start_offset = min(_.start_offset for _ in timespans)
         stop_offset = max(_.stop_offset for _ in timespans)
-        timespan = abjad.timespantools.Timespan(start_offset, stop_offset)
+        timespan = abjad.Timespan(start_offset, stop_offset)
         return abjad.select(topmost_components), timespan
 
     def _contributions_do_not_overlap(self, contributions):
@@ -1667,7 +1667,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             is_doc_example=is_doc_example,
             is_test=is_test,
             )
-        lilypond_file = abjad.lilypondfiletools.LilyPondFile.new(
+        lilypond_file = abjad.LilyPondFile.new(
             music=self._score,
             date_time_token=False,
             includes=includes,
@@ -1804,7 +1804,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             assert isinstance(start_skip, abjad.Skip), start_skip
             command = abjad.LilyPondCommand('newSpacingSection')
             abjad.attach(command, start_skip)
-            moment = abjad.schemetools.SchemeMoment(duration)
+            moment = abjad.SchemeMoment(duration)
             abjad.setting(start_skip).score.proportional_notation_duration = moment
 
     def _make_volta_containers(self):
@@ -1954,7 +1954,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         result = self._get_stage_numbers(scope.stages)
         start_stage, stop_stage = result
         offsets = self._get_offsets(start_stage, stop_stage)
-        stages_timespan = abjad.timespantools.Timespan(*offsets)
+        stages_timespan = abjad.Timespan(*offsets)
         voice = self._score[scope.voice_name]
         leaves = []
         for leaf in abjad.iterate(voice).by_leaf():
@@ -1966,17 +1966,17 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         return abjad.select(leaves )
 
     def _selection_to_timespan(self, selection):
-            if isinstance(selection[0], abjad.selectiontools.LogicalTie):
+            if isinstance(selection[0], abjad.LogicalTie):
                 first = selection[0].head
             else:
                 first = selection[0]
-            if isinstance(selection[-1], abjad.selectiontools.LogicalTie):
+            if isinstance(selection[-1], abjad.LogicalTie):
                 last = selection[-1][-1]
             else:
                 last = selection[-1]
             start_offset = abjad.inspect(first).get_timespan().start_offset
             stop_offset = abjad.inspect(last).get_timespan().stop_offset
-            timespan = abjad.timespantools.Timespan(
+            timespan = abjad.Timespan(
                 start_offset=start_offset,
                 stop_offset=stop_offset,
                 )

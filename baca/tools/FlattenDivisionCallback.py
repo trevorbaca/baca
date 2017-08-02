@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class FlattenDivisionCallback(abjad.abctools.AbjadValueObject):
+class FlattenDivisionCallback(abjad.AbjadValueObject):
     r'''Flatten division callback.
     '''
 

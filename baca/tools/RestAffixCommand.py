@@ -4,7 +4,7 @@ import baca
 import collections
 
 
-class RestAffixCommand(abjad.abctools.AbjadValueObject):
+class RestAffixCommand(abjad.AbjadValueObject):
     r'''Rest affix command.
 
     ::

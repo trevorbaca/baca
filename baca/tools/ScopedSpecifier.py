@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class ScopedSpecifier(abjad.abctools.AbjadObject):
+class ScopedSpecifier(abjad.AbjadObject):
     r'''Scoped specifier.
 
     ::

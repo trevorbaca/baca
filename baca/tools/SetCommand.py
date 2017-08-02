@@ -4,7 +4,7 @@ import baca
 
 
 # TODO: write examples
-class SetCommand(abjad.abctools.AbjadObject):
+class SetCommand(abjad.AbjadObject):
     r'''Set command.
 
     ::
@@ -75,7 +75,7 @@ class SetCommand(abjad.abctools.AbjadObject):
                 )
         globals_ = globals()
         globals_.update(abjad.__dict__.copy())
-        globals_['SchemeMoment'] = abjad.schemetools.SchemeMoment
+        globals_['SchemeMoment'] = abjad.SchemeMoment
         selector = self.selector or baca.select_leaf(0)
         selections = selector(argument)
         selections = baca.MusicMaker._normalize_selections(selections)

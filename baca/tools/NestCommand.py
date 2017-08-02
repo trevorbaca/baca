@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class NestCommand(abjad.abctools.AbjadObject):
+class NestCommand(abjad.AbjadObject):
     r'''Nest command.
 
     ::

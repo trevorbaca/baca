@@ -2,7 +2,7 @@
 import abjad
 
 
-class Matrix(abjad.abctools.AbjadObject):
+class Matrix(abjad.AbjadObject):
     '''A matrix.
 
     ::

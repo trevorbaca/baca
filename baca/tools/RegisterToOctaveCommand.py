@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class RegisterToOctaveCommand(abjad.abctools.AbjadObject):
+class RegisterToOctaveCommand(abjad.AbjadObject):
     r"""Register-to-octave command.
 
     ::

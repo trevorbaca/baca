@@ -4,7 +4,7 @@ import baca
 import copy
 
 
-class ImbricateCommand(abjad.abctools.AbjadObject):
+class ImbricateCommand(abjad.AbjadObject):
     r'''Imbricate command.
 
     ::
@@ -1377,7 +1377,7 @@ class ImbricateCommand(abjad.abctools.AbjadObject):
         if isinstance(logical_tie.head, abjad.Note):
             return
         assert isinstance(logical_tie.head, abjad.Chord), repr(logical_tie)
-        if isinstance(pitch_object, abjad.pitchtools.PitchClass):
+        if isinstance(pitch_object, abjad.PitchClass):
             raise NotImplementedError(logical_tie, pitch_object)
         for chord in logical_tie:
             duration = chord.written_duration

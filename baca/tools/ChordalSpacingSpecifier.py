@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
+class ChordalSpacingSpecifier(abjad.AbjadValueObject):
     r'''Chordal spacing specifier.
 
     ::
@@ -199,7 +199,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
 
     def _space_collection(self, collection):
         original_collection = collection
-        if isinstance(collection, abjad.pitchtools.Set):
+        if isinstance(collection, abjad.Set):
             pitch_classes = list(sorted(collection.to_pitch_classes()))
         else:
             pitch_classes = list(collection.to_pitch_classes())
@@ -251,7 +251,7 @@ class ChordalSpacingSpecifier(abjad.abctools.AbjadValueObject):
             if bass:
                 pitch_classes.append(bass)
             pitches = self._to_tightly_spaced_pitches_descending(pitch_classes)
-        if isinstance(original_collection, abjad.pitchtools.Set):
+        if isinstance(original_collection, abjad.Set):
             return baca.PitchSet(pitches)
         else:
             return baca.PitchSegment(pitches)

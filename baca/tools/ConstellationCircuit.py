@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class ConstellationCircuit(abjad.abctools.AbjadObject):
+class ConstellationCircuit(abjad.AbjadObject):
     r'''Constellation circuit.
 
     ::
@@ -144,7 +144,7 @@ class ConstellationCircuit(abjad.abctools.AbjadObject):
         abjad.override(score).text_script.staff_padding = 10
         moment = abjad.SchemeMoment((1, 30))
         abjad.setting(score).proportional_notation_duration = moment
-        lilypond_file = abjad.lilypondfiletools.LilyPondFile.new(
+        lilypond_file = abjad.LilyPondFile.new(
             score,
             global_staff_size=18,
             )

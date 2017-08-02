@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class DivisionMaker(abjad.abctools.AbjadValueObject):
+class DivisionMaker(abjad.AbjadValueObject):
     r'''Division-maker.
 
     ::
@@ -340,7 +340,7 @@ class DivisionMaker(abjad.abctools.AbjadValueObject):
             if start_offset is not None:
                 result._start_offset = start_offset
                 start_offset += result.duration
-        elif isinstance(argument, abjad.mathtools.NonreducedFraction):
+        elif isinstance(argument, abjad.NonreducedFraction):
             result = baca.Division(argument.pair)
             if start_offset is not None:
                 result._start_offset = start_offset

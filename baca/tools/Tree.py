@@ -4,7 +4,7 @@ import collections
 import copy
 
 
-class Tree(abjad.abctools.AbjadObject):
+class Tree(abjad.AbjadObject):
     r'''Tree.
 
     ::

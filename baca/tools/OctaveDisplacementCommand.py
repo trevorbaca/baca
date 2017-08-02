@@ -2,7 +2,7 @@
 import abjad
 
 
-class OctaveDisplacementCommand(abjad.abctools.AbjadObject):
+class OctaveDisplacementCommand(abjad.AbjadObject):
     r"""Octave displacement command.
 
     ::
@@ -153,7 +153,7 @@ class OctaveDisplacementCommand(abjad.abctools.AbjadObject):
             with_grace_notes=True,
             )
         for i, logical_tie in enumerate(logical_ties):
-            assert isinstance(logical_tie, abjad.selectiontools.LogicalTie)
+            assert isinstance(logical_tie, abjad.LogicalTie)
             displacement = self.displacements[i]
             interval = abjad.NumberedInterval(12*displacement)
             for leaf in logical_tie:

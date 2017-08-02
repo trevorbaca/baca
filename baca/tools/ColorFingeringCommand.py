@@ -3,7 +3,7 @@ import abjad
 import itertools
 
 
-class ColorFingeringCommand(abjad.abctools.AbjadObject):
+class ColorFingeringCommand(abjad.AbjadObject):
     r'''Color fingering command.
 
     ::

@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class SplitByRoundedRatiosDivisionCallback(abjad.abctools.AbjadValueObject):
+class SplitByRoundedRatiosDivisionCallback(abjad.AbjadValueObject):
     r'''Split-by-rounded-ratios division callback.
 
     ::

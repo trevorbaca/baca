@@ -3,7 +3,7 @@ import abc
 import abjad
 
 
-class ScoreTemplate(abjad.abctools.AbjadValueObject):
+class ScoreTemplate(abjad.AbjadValueObject):
     r'''Score template
     '''
 

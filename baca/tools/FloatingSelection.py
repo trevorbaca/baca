@@ -2,7 +2,7 @@
 import abjad
 
 
-class FloatingSelection(abjad.abctools.AbjadValueObject):
+class FloatingSelection(abjad.AbjadValueObject):
     r'''Floating selection.
 
     ::

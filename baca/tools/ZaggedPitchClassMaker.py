@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
+class ZaggedPitchClassMaker(abjad.AbjadObject):
     r'''Zagged pitch-class maker.
 
     ::
@@ -108,7 +108,7 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
             -1, 
             1,
             )
-        prototype = (tuple, abjad.mathtools.Ratio)
+        prototype = (tuple, abjad.Ratio)
         if self.division_ratios is None:
             division_ratios = [[1]]
         elif all(isinstance(_, prototype) for _ in self.division_ratios):
@@ -120,7 +120,7 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
                 1,
                 )
             division_ratios = baca.Sequence(division_ratios).flatten(depth=1)
-        division_ratios = [abjad.mathtools.Ratio(_) for _ in division_ratios]
+        division_ratios = [abjad.Ratio(_) for _ in division_ratios]
         division_ratios = abjad.CyclicTuple(division_ratios)
         pc_cells_copy = pc_cells[:]
         pc_cells = []
@@ -155,13 +155,13 @@ class ZaggedPitchClassMaker(abjad.abctools.AbjadObject):
 
         Returns boolean.
         '''
-        agent = abjad.systemtools.StorageFormatAgent(self)
+        agent = abjad.StorageFormatAgent(self)
         return agent.compare(argument)
 
     def __hash__(self):
         r'''Hashes zagged pitch-class maker.
         '''
-        agent = abjad.systemtools.StorageFormatAgent(self)
+        agent = abjad.StorageFormatAgent(self)
         return hash(agent.hash_values)
 
     ### PRIVATE PROPERTIES ###

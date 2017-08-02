@@ -2,7 +2,7 @@
 import abjad
 
 
-class GlissandoCommand(abjad.abctools.AbjadObject):
+class GlissandoCommand(abjad.AbjadObject):
     r'''Glissando command.
 
     ::

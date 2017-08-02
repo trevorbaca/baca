@@ -5,7 +5,7 @@ import collections
 import copy
 
 
-class MusicMaker(abjad.abctools.AbjadObject):
+class MusicMaker(abjad.AbjadObject):
     r'''Music-maker.
 
     ::
@@ -891,7 +891,7 @@ class MusicMaker(abjad.abctools.AbjadObject):
 
     @staticmethod
     def _coerce_collections(collections):
-        prototype = (abjad.pitchtools.Segment, abjad.pitchtools.Set)
+        prototype = (abjad.Segment, abjad.Set)
         if isinstance(collections, prototype):
             return baca.CollectionList(collections=[collections])
         item_class = abjad.NumberedPitch
@@ -960,10 +960,10 @@ class MusicMaker(abjad.abctools.AbjadObject):
         return anchor_specifier, specifiers_
 
     def _get_storage_format_specification(self):
-        agent = abjad.systemtools.StorageFormatAgent(self)
+        agent = abjad.StorageFormatAgent(self)
         keyword_argument_names = agent.signature_keyword_names
         positional_argument_values = self.specifiers
-        return abjad.systemtools.StorageFormatSpecification(
+        return abjad.StorageFormatSpecification(
             self,
             keyword_argument_names=keyword_argument_names,
             positional_argument_values=positional_argument_values,

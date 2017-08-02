@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class DesignMaker(abjad.abctools.AbjadObject):
+class DesignMaker(abjad.AbjadObject):
     r'''Design-maker.
 
     ::

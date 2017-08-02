@@ -2,7 +2,7 @@
 import abjad
 
 
-class PitchArrayList(abjad.datastructuretools.TypedList):
+class PitchArrayList(abjad.TypedList):
     r'''Pitch array list.
 
     ::

@@ -4,7 +4,7 @@ import baca
 import collections as collections_module
 
 
-class CollectionList(abjad.abctools.AbjadValueObject):
+class CollectionList(abjad.AbjadValueObject):
     r'''Collection list.
 
     ::
@@ -609,9 +609,9 @@ class CollectionList(abjad.abctools.AbjadValueObject):
         item_class = self.item_class or abjad.NumberedPitch
         if prototype is not None:
             return abjad.new(prototype, items=items)
-        elif isinstance(argument, abjad.pitchtools.Segment):
+        elif isinstance(argument, abjad.Segment):
             return argument
-        elif isinstance(argument, abjad.pitchtools.Set):
+        elif isinstance(argument, abjad.Set):
             return argument
         elif isinstance(argument, set):
             if item_class in (abjad.NumberedPitch, abjad.NamedPitch):

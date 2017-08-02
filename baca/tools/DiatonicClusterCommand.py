@@ -2,7 +2,7 @@
 import abjad
 
 
-class DiatonicClusterCommand(abjad.abctools.AbjadObject):
+class DiatonicClusterCommand(abjad.AbjadObject):
     r'''Diatonic cluster command.
 
     ::

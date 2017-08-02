@@ -4,7 +4,7 @@ import collections
 
 
 # TODO: write comprehensive tests
-class ScorePitchCommand(abjad.abctools.AbjadObject):
+class ScorePitchCommand(abjad.AbjadObject):
     r'''Score pitch command.
 
     ::
@@ -170,10 +170,10 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
             isinstance(source[0], abjad.NamedPitch)):
             self._use_exact_spelling = True
         elif (isinstance(source, collections.Iterable) and 
-            isinstance(source[0], abjad.pitchtools.Segment)):
+            isinstance(source[0], abjad.Segment)):
             self._use_exact_spelling = True
         elif (isinstance(source, collections.Iterable) and 
-            isinstance(source[0], abjad.pitchtools.Set)):
+            isinstance(source[0], abjad.Set)):
             self._use_exact_spelling = True
         else:
             self._use_exact_spelling = False
@@ -238,12 +238,12 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
             message = '{!r} has no input.'
             message = message.format(self)
             raise Exception(message)
-        if isinstance(argument[0], abjad.selectiontools.LogicalTie):
+        if isinstance(argument[0], abjad.LogicalTie):
             logical_ties = argument
         else:
             logical_ties = list(abjad.iterate(argument).by_logical_tie())
         for logical_tie in logical_ties:
-            assert isinstance(logical_tie, abjad.selectiontools.LogicalTie)
+            assert isinstance(logical_tie, abjad.LogicalTie)
         counts = self.counts or [1]
         counts = abjad.CyclicTuple(counts)
         start_index = self.start_index
@@ -296,7 +296,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
                 if self.operators:
                     for operator_ in self.operators:
                         pitch_expression = operator_(pitch_expression)
-                if isinstance(pitch_expression, abjad.pitchtools.Pitch):
+                if isinstance(pitch_expression, abjad.Pitch):
                     if self._use_exact_spelling:
                         pitch = pitch_expression
                         assert isinstance(pitch, abjad.NamedPitch)
@@ -304,14 +304,14 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
                         pitch_expression = abjad.NumberedPitch(
                             pitch_expression)
                         pitch = abjad.NamedPitch(pitch_expression)
-                elif isinstance(pitch_expression, abjad.pitchtools.Segment):
+                elif isinstance(pitch_expression, abjad.Segment):
                     pitch = pitch_expression
                 else:
                     message = 'must be pitch or pitch segment: {!r}.'
                     message = message.format(pitch_expression)
                     raise Exception(message)
                 for note in logical_tie:
-                    if isinstance(pitch, abjad.pitchtools.Pitch):
+                    if isinstance(pitch, abjad.Pitch):
                         self._set_pitch(note, pitch)
                     elif isinstance(pitch, abjad.PitchSegment):
                         assert isinstance(pitch, collections.Iterable)
@@ -488,7 +488,7 @@ class ScorePitchCommand(abjad.abctools.AbjadObject):
 
             ::
 
-                >>> operator = abjad.pitchtools.CompoundOperator()
+                >>> operator = abjad.CompoundOperator()
                 >>> operator = operator.transpose(n=2)
                 >>> operator = operator.transpose(n=-12)
                 >>> command = baca.ScorePitchCommand(

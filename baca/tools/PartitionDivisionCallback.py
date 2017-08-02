@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
+class PartitionDivisionCallback(abjad.AbjadValueObject):
     r'''Partition division callback.
 
     ::
@@ -257,7 +257,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
         Returns string.
         '''
-        return abjad.abctools.AbjadValueObject.__format__(
+        return abjad.AbjadValueObject.__format__(
             self,
             format_specification=format_specification,
             )
@@ -274,7 +274,7 @@ class PartitionDivisionCallback(abjad.abctools.AbjadValueObject):
 
         Returns string.
         '''
-        return abjad.abctools.AbjadValueObject.__repr__(self)
+        return abjad.AbjadValueObject.__repr__(self)
 
     ### PRIVATE METHODS ###
 

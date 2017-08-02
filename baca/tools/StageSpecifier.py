@@ -2,7 +2,7 @@
 import abjad
 
 
-class StageSpecifier(abjad.abctools.AbjadObject):
+class StageSpecifier(abjad.AbjadObject):
     r'''Stage specifier.
 
     ::

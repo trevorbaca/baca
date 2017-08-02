@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class MusicAccumulator(abjad.abctools.AbjadObject):
+class MusicAccumulator(abjad.AbjadObject):
     r'''Music-accumulator.
 
     ::
@@ -231,7 +231,7 @@ class MusicAccumulator(abjad.abctools.AbjadObject):
         except:
             raise Exception(floating_selections, voice_name)
         timespans = [_.timespan for _ in floating_selections]
-        timespans = abjad.timespantools.TimespanList(timespans)
+        timespans = abjad.TimespanList(timespans)
         gaps = ~timespans
         if 0 < first_start_offset:
             first_gap = abjad.Timespan(0, first_start_offset)

@@ -2,7 +2,7 @@
 import abjad
 
 
-class VoltaSpecifier(abjad.abctools.AbjadObject):
+class VoltaSpecifier(abjad.AbjadObject):
     r'''Volta specifier.
 
     ::

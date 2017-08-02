@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
+class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
     r'''Fuse-by-counts division callback.
 
     ::
@@ -548,14 +548,14 @@ class FuseByCountsDivisionCallback(abjad.abctools.AbjadValueObject):
         return divisions_
 
     def _get_storage_format_specification(self):
-        agent = abjad.systemtools.StorageFormatAgent(self)
+        agent = abjad.StorageFormatAgent(self)
         keyword_argument_names = agent.signature_keyword_names
         keyword_argument_names = list(keyword_argument_names)
         if self.cyclic == True:
             keyword_argument_names.remove('cyclic')
         if not self.counts:
             keyword_argument_names.remove('counts')
-        return abjad.systemtools.StorageFormatSpecification(
+        return abjad.StorageFormatSpecification(
             self,
             keyword_argument_names=keyword_argument_names,
             )

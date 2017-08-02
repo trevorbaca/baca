@@ -2,7 +2,7 @@
 import abjad
 
 
-class Contribution(abjad.abctools.AbjadValueObject):
+class Contribution(abjad.AbjadValueObject):
     r'''Contribution.
     '''
 

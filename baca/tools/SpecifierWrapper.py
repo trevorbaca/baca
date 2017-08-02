@@ -2,7 +2,7 @@
 import abjad
 
 
-class SpecifierWrapper(abjad.abctools.AbjadObject):
+class SpecifierWrapper(abjad.AbjadObject):
     r'''Specifier wrapper.
 
     ::

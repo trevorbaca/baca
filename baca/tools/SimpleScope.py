@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class SimpleScope(abjad.abctools.AbjadObject):
+class SimpleScope(abjad.AbjadObject):
     r'''SimpleScope.
 
     ::

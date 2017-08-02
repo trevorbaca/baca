@@ -4,7 +4,7 @@ import baca
 import copy
 
 
-class PitchArrayRow(abjad.abctools.AbjadObject):
+class PitchArrayRow(abjad.AbjadObject):
     r'''Pitch array row.
 
     ::

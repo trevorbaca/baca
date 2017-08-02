@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class MusicRhythmSpecifier(abjad.abctools.AbjadObject):
+class MusicRhythmSpecifier(abjad.AbjadObject):
     r'''Music rhythm specifier.
 
     ::
@@ -69,11 +69,11 @@ class MusicRhythmSpecifier(abjad.abctools.AbjadObject):
             )
         length = len(selections)
         pattern = self.pattern or abjad.index_all()
-        prototype = (abjad.pitchtools.Segment, abjad.pitchtools.Set, list)
+        prototype = (abjad.Segment, abjad.Set, list)
         collections_, indices = [], []
         for index, collection in enumerate(collections):
             assert isinstance(collection, prototype), repr(collection)
-            if isinstance(collection, (abjad.pitchtools.Set, set)):
+            if isinstance(collection, (abjad.Set, set)):
                 collection_ = list(sorted(collection))[:1]
             else:
                 collection_ = collection
@@ -100,7 +100,7 @@ class MusicRhythmSpecifier(abjad.abctools.AbjadObject):
         triples = zip(indices, stage_selections, collections)
         for index, stage_selection, collection in triples:
             assert len(stage_selection) == 1, repr(stage_selection)
-            if not isinstance(collection, (abjad.pitchtools.Set, set)):
+            if not isinstance(collection, (abjad.Set, set)):
                 selections[index] = stage_selection
                 continue
             assert len(stage_selection) == 1, repr(stage_selection)

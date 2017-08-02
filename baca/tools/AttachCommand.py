@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class AttachCommand(abjad.abctools.AbjadObject):
+class AttachCommand(abjad.AbjadObject):
     r'''Attach command.
 
     ::

@@ -4,7 +4,7 @@ import copy
 import itertools
 
 
-class MicrotonalDeviationCommand(abjad.abctools.AbjadObject):
+class MicrotonalDeviationCommand(abjad.AbjadObject):
     r'''Microtonal deviation command.
 
     ::

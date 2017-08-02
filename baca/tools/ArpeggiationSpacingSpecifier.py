@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
+class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
     r'''Arpeggiation spacing specifier.
 
     ::
@@ -99,7 +99,7 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
         for i in range(total_length):
             if pattern.matches_index(i, total_length):
                 pitch_class_collection = pitch_class_collections[i]
-                if isinstance(pitch_class_collection, abjad.pitchtools.Set):
+                if isinstance(pitch_class_collection, abjad.Set):
                     pitch_classes = list(sorted(pitch_class_collection))
                 else:
                     pitch_classes = list(pitch_class_collection)
@@ -111,7 +111,7 @@ class ArpeggiationSpacingSpecifier(abjad.abctools.AbjadValueObject):
                     pitches = class_._to_tightly_spaced_pitches_descending(
                         pitch_classes,
                         )
-                if isinstance(pitch_class_collection, abjad.pitchtools.Set):
+                if isinstance(pitch_class_collection, abjad.Set):
                     collection_ = baca.PitchSet(items=pitches)
                 else:
                     collection_ = baca.PitchSegment(items=pitches)

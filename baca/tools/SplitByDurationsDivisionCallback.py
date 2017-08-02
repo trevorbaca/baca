@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
+class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
     r'''Split-by-durations division callback.
 
     ::
@@ -435,7 +435,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
         for i, division in enumerate(divisions):
             input_division = baca.Division(division)
             input_duration = abjad.Duration(input_division)
-            input_meter = abjad.metertools.Meter(input_division)
+            input_meter = abjad.Meter(input_division)
             assert 0 < input_division, repr(input_division)
             if not self.durations:
                 division_list = [input_division]
@@ -506,7 +506,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
     ### PRIVATE METHODS ###
 
     def _get_storage_format_specification(self):
-        agent = abjad.systemtools.StorageFormatAgent(self)
+        agent = abjad.StorageFormatAgent(self)
         keyword_argument_names = agent.signature_keyword_names
         keyword_argument_names = list(keyword_argument_names)
         if self.cyclic == True:
@@ -517,7 +517,7 @@ class SplitByDurationsDivisionCallback(abjad.abctools.AbjadValueObject):
             keyword_argument_names.remove('remainder')
         if self.pattern_rotation_index == 0:
             keyword_argument_names.remove('pattern_rotation_index')
-        return abjad.systemtools.StorageFormatSpecification(
+        return abjad.StorageFormatSpecification(
             self,
             keyword_argument_names=keyword_argument_names,
             )

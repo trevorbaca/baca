@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class Constellation(abjad.abctools.AbjadObject):
+class Constellation(abjad.AbjadObject):
     r'''Constellation.
 
     ::
@@ -143,7 +143,7 @@ class Constellation(abjad.abctools.AbjadObject):
     def _color_map(self):
         pitches = self._partitioned_generator_pitch_numbers
         colors = ['red', 'blue', 'green']
-        return abjad.pitchtools.ColorMap(colors, pitches)
+        return abjad.ColorMap(colors, pitches)
 
     @property
     def _colored_generator(self):
@@ -208,7 +208,7 @@ class Constellation(abjad.abctools.AbjadObject):
             )
         score.override.text_script.staff_padding = 10
         score.set.proportional_notation_duration = abjad.SchemeMoment((1, 30))
-        lilypond_file = abjad.lilypondfiletools.LilyPondFile.new(score)
+        lilypond_file = abjad.LilyPondFile.new(score)
         lilypond_file.default_paper_size = 'letter', 'landscape'
         lilypond_file.global_staff_size = 18
         lilypond_file.layout_block.indent = 0
@@ -386,8 +386,7 @@ class Constellation(abjad.abctools.AbjadObject):
     def make_labeled_colored_chords(self):
         result = self.make_labeled_chords()
         for chord in result:
-            labeltools.color_chord_note_heads_by_pitch_class_color_map(
-            chord, self._color_map)
+            abjad.label(chord).color_note_heads(self._color_map) 
         return result
 
     def show_colored_generator_chord(self):

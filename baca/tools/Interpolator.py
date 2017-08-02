@@ -3,7 +3,7 @@ import abjad
 import fractions
 
 
-class Interpolator(abjad.abctools.AbjadObject):
+class Interpolator(abjad.AbjadObject):
     r'''Interpolator.
     
     ::

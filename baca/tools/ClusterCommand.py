@@ -2,7 +2,7 @@
 import abjad
 
 
-class ClusterCommand(abjad.abctools.AbjadObject):
+class ClusterCommand(abjad.AbjadObject):
     r"""Cluster command.
 
     ::
@@ -385,7 +385,7 @@ class ClusterCommand(abjad.abctools.AbjadObject):
         logical_ties = list(logical_ties)
         first_note = logical_ties[0].head
         root = abjad.inspect(first_note).get_parentage().root
-        with abjad.systemtools.ForbidUpdate(component=root):
+        with abjad.ForbidUpdate(component=root):
             for index, logical_tie in enumerate(logical_ties):
                 width = widths[index]
                 for note in logical_tie:

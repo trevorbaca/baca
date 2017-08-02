@@ -2,7 +2,7 @@
 import abjad
 
 
-class RegisterInterpolationCommand(abjad.abctools.AbjadObject):
+class RegisterInterpolationCommand(abjad.AbjadObject):
     r"""Register interpolation command.
 
     ::

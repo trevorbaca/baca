@@ -4,7 +4,7 @@ import baca
 import collections
 
 
-class CompoundScope(abjad.abctools.AbjadObject):
+class CompoundScope(abjad.AbjadObject):
     r'''Compound scope.
 
     ::

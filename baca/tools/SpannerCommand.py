@@ -3,7 +3,7 @@ import abjad
 import baca
 
 
-class SpannerCommand(abjad.abctools.AbjadObject):
+class SpannerCommand(abjad.AbjadObject):
     r'''Spanner command.
 
     ::

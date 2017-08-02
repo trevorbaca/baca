@@ -2,7 +2,7 @@
 import abjad
 
 
-class TempoSpecifier(abjad.abctools.AbjadObject):
+class TempoSpecifier(abjad.AbjadObject):
     r'''MetronomeMark specifier.
 
     ::
