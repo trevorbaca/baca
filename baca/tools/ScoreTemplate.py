@@ -3,7 +3,7 @@ import abc
 import abjad
 
 
-class ScoreTemplate(abjad.AbjadValueObject):
+class ScoreTemplate(abjad.ScoreTemplate):
     r'''Score template
     '''
 
@@ -17,15 +17,15 @@ class ScoreTemplate(abjad.AbjadValueObject):
     voice_colors = {
         }
 
-    ### SPECIAL METHODS ###
-
-    @abc.abstractmethod
-    def __call__(self):
-        r'''Calls score template.
-
-        Returns score.
-        '''
-        pass
+#    ### SPECIAL METHODS ###
+#
+#    @abc.abstractmethod
+#    def __call__(self):
+#        r'''Calls score template.
+#
+#        Returns score.
+#        '''
+#        pass
 
     ### PRIVATE METHODS ###
 

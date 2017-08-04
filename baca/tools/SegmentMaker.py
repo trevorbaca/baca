@@ -8,7 +8,7 @@ import time
 import traceback
 
 
-class SegmentMaker(experimental.makertools.SegmentMaker):
+class SegmentMaker(experimental.SegmentMaker):
     r'''Segment-maker.
 
     ::
@@ -504,8 +504,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         else:
             self._previous_segment_metadata = abjad.TypedOrderedDict()
         self._make_score()
-        self._remove_score_template_start_instruments()
-        self._remove_score_template_start_clefs()
+        #self._remove_score_template_start_instruments()
+        #self._remove_score_template_start_clefs()
         self._make_lilypond_file(
             is_doc_example=is_doc_example,
             is_test=is_test,
@@ -517,8 +517,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         self._interpret_scoped_specifiers()
         self._detach_figure_names()
         self._shorten_long_repeat_ties()
-        self._attach_first_segment_default_instruments()
-        self._attach_first_segment_default_clefs()
+        #self._attach_first_segment_default_instruments()
+        #self._attach_first_segment_default_clefs()
+        self._attach_score_template_defaults()
         self._apply_previous_segment_end_settings()
         self._apply_spacing_specifier()
         self._make_volta_containers()
@@ -541,10 +542,6 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         return self._lilypond_file, self._segment_metadata
 
     ### PRIVATE PROPERTIES ###
-
-    @property
-    def _contexts_with_instrument_names(self):
-        return list(self._cached_score_template_start_instruments.keys())
 
     ### PRIVATE METHODS ###
 
@@ -762,6 +759,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             start_offset = abjad.inspect(start_skip).get_timespan().start_offset
             self._fermata_start_offsets.append(start_offset)
 
+    # TODO: hopefully this can be removed
     def _attach_first_segment_default_clefs(self):
         if not self._is_first_segment():
             return
@@ -783,6 +781,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                     clef = abjad.Clef(clef_name)
                     abjad.attach(clef, staff)
 
+    # TODO: hopefully this can be removed
     def _attach_first_segment_default_instruments(self):
         if not self._is_first_segment():
             return
@@ -794,7 +793,8 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             abjad.TypedOrderedDict(),
             )
         prototype = abjad.instrumenttools.Instrument
-        contexts_with_instrument_names = self._contexts_with_instrument_names
+        contexts_with_instrument_names = \
+            self._get_contexts_with_instrument_names()
         for context in abjad.iterate(self._score).by_class(abjad.Context):
             if context.name not in contexts_with_instrument_names:
                 continue
@@ -834,6 +834,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         voice = self._score['Time Signature Context Skips']
         first_leaf = abjad.inspect(voice).get_leaf(0)
         abjad.attach(rehearsal_mark, first_leaf)
+
+    def _attach_score_template_defaults(self):
+        self.score_template.attach_defaults(self._score)
 
     def _attach_tempo_indicators(self):
         if not self.tempo_specifier:
@@ -1216,6 +1219,9 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
                 self._cached_leaves_without_rests = list(leaves)
             leaves = self._cached_leaves_without_rests
         return leaves
+
+    def _get_contexts_with_instrument_names(self):
+        return list(self._cached_score_template_start_instruments.keys())
 
     def _get_end_clefs(self):
         result = abjad.TypedOrderedDict()
@@ -1922,6 +1928,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
         message = message.format(total_duration, identifier)
         print(message)
 
+    # TODO: hopefully can be removed
     def _remove_score_template_start_clefs(self):
         dictionary = abjad.TypedOrderedDict()
         self._cached_score_template_start_clefs = dictionary
@@ -1933,6 +1940,7 @@ class SegmentMaker(experimental.makertools.SegmentMaker):
             self._cached_score_template_start_clefs[context.name] = clef.name
             abjad.detach(abjad.Clef, context)
 
+    # TODO: hopefully can be removed
     def _remove_score_template_start_instruments(self):
         dictionary = abjad.TypedOrderedDict()
         self._cached_score_template_start_instruments = dictionary
