@@ -1226,13 +1226,11 @@ class SegmentMaker(experimental.SegmentMaker):
     def _get_end_clefs(self):
         result = abjad.TypedOrderedDict()
         staves = abjad.iterate(self._score).by_class(abjad.Staff)
-        #staves = [_ for _ in staves if _.is_semantic]
         staves = list(staves)
         staves.sort(key=lambda x: x.name)
-        prototype = abjad.Clef
         for staff in staves:
             last_leaf = abjad.inspect(staff).get_leaf(-1)
-            clef = abjad.inspect(last_leaf).get_effective(prototype)
+            clef = abjad.inspect(last_leaf).get_effective(abjad.Clef)
             if clef:
                 result[staff.name] = clef.name
             else:
@@ -1244,14 +1242,15 @@ class SegmentMaker(experimental.SegmentMaker):
         contexts = abjad.iterate(self._score).by_class(abjad.Context)
         contexts = list(contexts)
         contexts.sort(key=lambda x: x.name)
-        prototype = abjad.Instrument
         for context in contexts:
-            if not abjad.inspect(context).has_indicator(prototype):
+            if not abjad.inspect(context).get_annotation('default_instrument'):
                 continue
-            last_leaf = abjad.inspect(context).get_leaf(-1)
-            instrument = abjad.inspect(last_leaf).get_effective(prototype)
+            leaf = abjad.inspect(context).get_leaf(-1)
+            instrument = abjad.inspect(leaf).get_effective(abjad.Instrument)
             if instrument is None:
-                continue
+                message = 'can not find {} end-instrument.'
+                message = message.format(context.name)
+                print(message)
             result[context.name] = instrument.instrument_name
         return result
 
