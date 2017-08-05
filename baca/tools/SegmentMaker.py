@@ -636,7 +636,7 @@ class SegmentMaker(experimental.SegmentMaker):
             if not previous_instrument_name:
                 continue
             first_leaf = abjad.inspect(context).get_leaf(0)
-            prototype = abjad.instrumenttools.Instrument
+            prototype = abjad.Instrument
             instrument = abjad.inspect(first_leaf).get_effective(prototype)
             if instrument is not None:
                 continue
@@ -792,7 +792,7 @@ class SegmentMaker(experimental.SegmentMaker):
             'end_instruments_by_context',
             abjad.TypedOrderedDict(),
             )
-        prototype = abjad.instrumenttools.Instrument
+        prototype = abjad.Instrument
         contexts_with_instrument_names = \
             self._get_contexts_with_instrument_names()
         for context in abjad.iterate(self._score).by_class(abjad.Context):
@@ -891,10 +891,10 @@ class SegmentMaker(experimental.SegmentMaker):
         if self.skip_wellformedness_checks:
             return
         score = self._lilypond_file['Score']
-        if not abjad.inspect(score).is_well_formed():
-            inspector = abjad.inspect(score)
-            message = inspector.tabulate_well_formedness_violations()
-            raise Exception(message)
+#        if not abjad.inspect(score).is_well_formed():
+#            inspector = abjad.inspect(score)
+#            message = inspector.tabulate_well_formedness_violations()
+#            raise Exception(message)
         if (self.color_octaves or
             self.color_repeat_pitch_classes or
             self.ignore_repeat_pitch_classes):
@@ -1244,7 +1244,7 @@ class SegmentMaker(experimental.SegmentMaker):
         contexts = abjad.iterate(self._score).by_class(abjad.Context)
         contexts = list(contexts)
         contexts.sort(key=lambda x: x.name)
-        prototype = abjad.instrumenttools.Instrument
+        prototype = abjad.Instrument
         for context in contexts:
             if not abjad.inspect(context).has_indicator(prototype):
                 continue
@@ -1447,7 +1447,7 @@ class SegmentMaker(experimental.SegmentMaker):
         if not self.hide_instrument_names:
             return
         classes = (abjad.Staff, abjad.StaffGroup)
-        prototype = abjad.instrumenttools.Instrument
+        prototype = abjad.Instrument
         for staff in abjad.iterate(self._score).by_class(classes):
             if abjad.inspect(staff).get_indicator(prototype):
                 abjad.detach(prototype, staff)
@@ -1601,7 +1601,7 @@ class SegmentMaker(experimental.SegmentMaker):
         abjad.label(skips).with_start_offsets(clock_time=True, font_size=-2)
 
     def _label_instrument_changes(self):
-        prototype = abjad.instrumenttools.Instrument
+        prototype = abjad.Instrument
         for staff in abjad.iterate(self._score).by_class(abjad.Staff):
             leaves = abjad.iterate(staff).by_leaf()
             for leaf_index, leaf in enumerate(leaves):
@@ -1845,7 +1845,7 @@ class SegmentMaker(experimental.SegmentMaker):
             abjad.attach(command, container)
 
     def _move_instruments_from_notes_back_to_rests(self):
-        prototype = abjad.instrumenttools.Instrument
+        prototype = abjad.Instrument
         rest_prototype = (abjad.Rest, 
             abjad.MultimeasureRest)
         for leaf in abjad.iterate(self._score).by_leaf():
@@ -1945,14 +1945,14 @@ class SegmentMaker(experimental.SegmentMaker):
         dictionary = abjad.TypedOrderedDict()
         self._cached_score_template_start_instruments = dictionary
         for context in abjad.iterate(self._score).by_class(abjad.Context):
-            prototype = abjad.instrumenttools.Instrument
+            prototype = abjad.Instrument
             if not abjad.inspect(context).get_indicator(prototype):
                 continue
             instrument = abjad.inspect(context).get_indicator(prototype)
             instrument_name = instrument.instrument_name
             self._cached_score_template_start_instruments[context.name] = \
                 instrument_name
-            abjad.detach(abjad.instrumenttools.Instrument, context)
+            abjad.detach(abjad.Instrument, context)
         
     def _scope_to_leaves(self, scope):
         if not isinstance(scope, baca.SimpleScope):
@@ -2047,14 +2047,11 @@ class SegmentMaker(experimental.SegmentMaker):
     def _transpose_instruments(self):
         if not self.transpose_score:
             return
-        pitched_prototype = (abjad.Note, abjad.Chord)
         for voice in abjad.iterate(self._score).by_class(abjad.Voice):
-            for leaf in abjad.iterate(voice).by_leaf(with_grace_notes=True):
-                if not isinstance(leaf, pitched_prototype):
-                    continue
-                inspector = abjad.inspect(leaf)
-                prototype = abjad.instrumenttools.Instrument
-                instrument = inspector.get_effective(prototype)
+            for leaf in abjad.iterate(voice).by_leaf(
+                pitched=True, with_grace_notes=True):
+                prototype = abjad.Instrument
+                instrument = abjad.inspect(leaf).get_effective(prototype)
                 if instrument is None:
                     continue
                 assert isinstance(instrument, prototype), repr(instrument)
@@ -7606,7 +7603,7 @@ class SegmentMaker(experimental.SegmentMaker):
                     message = message.format(scope)
                     raise Exception(message)
                 default_scope = None
-                if isinstance(specifier, abjad.instrumenttools.Instrument):
+                if isinstance(specifier, abjad.Instrument):
                     default_scope = specifier._default_scope
                 specifier = abjad.new(specifier, **keywords)
                 if default_scope is not None:

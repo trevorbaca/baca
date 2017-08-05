@@ -5364,7 +5364,7 @@ class LibraryAM(object):
         r'''Attaches instrument.
         '''
         selector = selector or baca.select_leaf(0)
-        assert isinstance(instrument, abjad.instrumenttools.Instrument)
+        assert isinstance(instrument, abjad.Instrument)
         return baca.AttachCommand(
             arguments=[instrument],
             selector=selector,
