@@ -287,6 +287,7 @@ class SegmentMaker(experimental.SegmentMaker):
         '_ignore_repeat_pitch_classes',
         '_ignore_unpitched_notes',
         '_ignore_unregistered_pitches',
+        '_instruments',
         '_label_clock_time',
         '_label_stage_numbers',
         '_measures_per_stage',
@@ -381,6 +382,7 @@ class SegmentMaker(experimental.SegmentMaker):
         ignore_repeat_pitch_classes=None,
         ignore_unpitched_notes=None,
         ignore_unregistered_pitches=None,
+        instruments=None,
         label_clock_time=None,
         label_stages=None,
         measures_per_stage=None,
@@ -445,6 +447,9 @@ class SegmentMaker(experimental.SegmentMaker):
         self._ignore_unregistered_pitches = ignore_unregistered_pitches
         if label_clock_time is not None:
             label_clock_time = bool(label_clock_time)
+        if instruments is not None:
+            assert isinstance(instruments, abjad.TypedOrderedDict)
+        self._instruments = instruments
         self._label_clock_time = label_clock_time
         if label_stages is not None:
             label_stages = bool(label_stages)
@@ -1322,7 +1327,8 @@ class SegmentMaker(experimental.SegmentMaker):
             'end_instruments_by_context')
         if not previous_instruments:
             return
-        instrument = previous_instruments.get(staff_name)
+        instrument_name = previous_instruments.get(staff_name)
+        instrument = self.instruments.get(instrument_name)
         return instrument
 
     def _get_rehearsal_letter(self):
@@ -1595,8 +1601,6 @@ class SegmentMaker(experimental.SegmentMaker):
                 continue
             skips.append(skip)
         skips = abjad.select(skips)
-#        for skip in skips:
-#            print(repr(skip), abjad.inspect(skip).get_indicators())
         abjad.label(skips).with_start_offsets(clock_time=True, font_size=-2)
 
     def _label_instrument_changes(self):
@@ -1604,18 +1608,14 @@ class SegmentMaker(experimental.SegmentMaker):
         for staff in abjad.iterate(self._score).by_class(abjad.Staff):
             leaves = abjad.iterate(staff).by_leaf()
             for leaf_index, leaf in enumerate(leaves):
-                instruments = abjad.inspect(leaf).get_indicators(prototype)
-                if not instruments:
+                instrument = abjad.inspect(leaf).get_indicator(prototype)
+                if not instrument:
                     continue
-                if not len(instruments) == 1:
-                    message = 'multiple instruments: {!r}.'
-                    message = message.format(instruments)
-                    raise Exception(message)
-                current_instrument = instruments[0]
+                current_instrument = instrument
                 previous_leaf = abjad.inspect(leaf).get_leaf(-1)
                 if previous_leaf is not None:
                     agent = abjad.inspect(previous_leaf)
-                    result = agent.get_effective(prototype)
+                    result = agent.get_effective(abjad.Instrument)
                     previous_instrument = result
                 elif (leaf_index == 0 and 
                     1 < self._get_segment_number()):
@@ -4817,6 +4817,14 @@ class SegmentMaker(experimental.SegmentMaker):
         Returns true, false or none.
         '''
         return self._ignore_unregistered_pitches
+
+    @property
+    def instruments(self):
+        r'''Gets instrument list.
+
+        Returns typed ordered dictionary or none.
+        '''
+        return self._instruments
 
     @property
     def label_clock_time(self):
