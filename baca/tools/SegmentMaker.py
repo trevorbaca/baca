@@ -298,7 +298,6 @@ class SegmentMaker(experimental.SegmentMaker):
         '_rehearsal_letter',
         '_scoped_specifiers',
         '_score',
-        '_score_package',
         '_score_template',
         '_skip_wellformedness_checks',
         '_skips_instead_of_rests',
@@ -392,7 +391,6 @@ class SegmentMaker(experimental.SegmentMaker):
         print_timings=None,
         range_checker=None,
         rehearsal_letter=None,
-        score_package=None,
         score_template=None,
         skip_wellformedness_checks=None,
         skips_instead_of_rests=None,
@@ -466,7 +464,6 @@ class SegmentMaker(experimental.SegmentMaker):
         self._rehearsal_letter = rehearsal_letter
         self._scoped_specifiers = []
         self._initialize_time_signatures(time_signatures)
-        self._score_package = score_package
         if score_template is not None:
             assert isinstance(score_template, baca.ScoreTemplate)
         self._score_template = score_template
@@ -1189,19 +1186,17 @@ class SegmentMaker(experimental.SegmentMaker):
 
     def _get_end_tempo_name(self):
         context = self._score['Time Signature Context Skips']
-        last_leaf = abjad.inspect(context).get_leaf(-1)
+        leaf = abjad.inspect(context).get_leaf(-1)
         prototype = abjad.MetronomeMark
-        effective_tempo = abjad.inspect(last_leaf).get_effective(prototype)
+        effective_tempo = abjad.inspect(leaf).get_effective(prototype)
         if not effective_tempo:
             return
-        if self.score_package is None:
-            return
-        tempi = self.score_package.materials.tempi
+        tempi = self.metronome_marks
         for tempo_name, tempo in tempi.items():
             if tempo == effective_tempo:
                 break
         else:
-            message = 'can not find {!r} in tempi {!r}.'
+            message = 'can not find {!r} in metronome marks {!r}.'
             message = message.format(tempo, tempi)
             raise Exception(message)
         return tempo_name
@@ -1648,8 +1643,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 abjad.attach(start_tempo, first_leaf, scope=Score)
             if rhythm_specifier.stop_tempo is not None:
                 stop_tempo = abjad.new(rhythm_specifier.stop_tempo)
-                last_leaf = abjad.inspect(context).get_leaf(-1)
-                abjad.attach(stop_tempo, last_leaf, scope=Score)
+                leaf = abjad.inspect(context).get_leaf(-1)
+                abjad.attach(stop_tempo, leaf, scope=Score)
 
     def _make_music_for_voice_old(self, voice):
         assert not len(voice), repr(voice)
@@ -5804,21 +5799,6 @@ class SegmentMaker(experimental.SegmentMaker):
         Returns list of scoped specifiers.
         '''
         return self._scoped_specifiers
-
-    # TODO: remove
-    @property
-    def score_package(self):
-        r'''Gets score package.
-
-        ..  note:: Deprecated.
-
-        Defaults to none.
-
-        Set to score package or none.
-
-        Returns score package or none.
-        '''
-        return self._score_package
 
     @property
     def score_template(self):
