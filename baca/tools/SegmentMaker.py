@@ -522,9 +522,7 @@ class SegmentMaker(experimental.SegmentMaker):
         self._interpret_scoped_specifiers()
         self._detach_figure_names()
         self._shorten_long_repeat_ties()
-        #self._attach_first_segment_default_instruments()
-        #self._attach_first_segment_default_clefs()
-        self._attach_score_template_defaults()
+        self._attach_first_segment_score_template_defaults()
         self._apply_previous_segment_end_settings()
         self._apply_spacing_specifier()
         self._make_volta_containers()
@@ -622,62 +620,33 @@ class SegmentMaker(experimental.SegmentMaker):
     def _apply_previous_segment_end_settings(self):
         if self._is_first_segment():
             return
-        if self.score_package is None:
-            return
         if not self._previous_segment_metadata:
             message = 'can not find previous metadata before segment {}.'
             message = message.format(self._get_segment_identifier())
             print(message)
             return
-        key = 'end_instruments_by_context'
-        previous_instruments = self._previous_segment_metadata.get(key)
-        if not previous_instruments:
-            message = 'can not find previous instruments before segment {}.'
-            message = message.format(self._get_segment_identifier())
-            print(message)
-            return
         for context in abjad.iterate(self._score).by_class(abjad.Context):
-            previous_instrument_name = previous_instruments.get(context.name)
-            if not previous_instrument_name:
+            previous_instrument = self._get_previous_instrument(context.name)
+            if not previous_instrument:
                 continue
-            first_leaf = abjad.inspect(context).get_leaf(0)
-            prototype = abjad.Instrument
-            instrument = abjad.inspect(first_leaf).get_effective(prototype)
+            leaf = abjad.inspect(context).get_leaf(0)
+            instrument = abjad.inspect(leaf).get_effective(abjad.Instrument)
             if instrument is not None:
                 continue
-            previous_instrument = self._get_instrument_by_name(
-                previous_instrument_name, 
-                self.score_package.materials,
-                )
-            if previous_instrument is None:
-                message = 'can not previous instrument for {}.'
-                message = message.format(context.name)
-                raise Exception(message)
             copied_previous_instrument = abjad.new(previous_instrument)
             copied_previous_instrument._default_scope = context.context_name
-            #abjad.attach(copied_previous_instrument, context)
             leaf = abjad.inspect(context).get_leaf(0)
             abjad.attach(copied_previous_instrument, leaf)
-        key = 'end_clefs_by_staff'
-        previous_clefs = self._previous_segment_metadata.get(key)
-        if not previous_clefs:
-            message = 'can not find previous clefs before segment {}.'
-            message = message.format(self._get_segment_identifier())
-            print(message)
-            return
-        for staff in abjad.iterate(self._score).by_class(abjad.Staff):
-            previous_clef_name = previous_clefs.get(staff.name)
-            if not previous_clef_name:
+        for context in abjad.iterate(self._score).by_class(abjad.Context):
+            previous_clef = self._get_previous_clef(context.name)
+            if previous_clef is None:
                 continue
-            first_leaf = abjad.inspect(staff).get_leaf(0)
-            prototype = abjad.Clef
-            clef = abjad.inspect(first_leaf).get_effective(prototype)
+            leaf = abjad.inspect(context).get_leaf(0)
+            clef = abjad.inspect(leaf).get_effective(abjad.Clef)
             if clef is not None:
                 continue
-            clef = abjad.Clef(previous_clef_name)
-            #abjad.attach(clef, staff)
-            leaf = abjad.inspect(staff).get_leaf(0)
-            abjad.attach(clef, leaf)
+            leaf = abjad.inspect(context).get_leaf(0)
+            abjad.attach(previous_clef, leaf)
 
     def _apply_spacing_specifier(self):
         start_time = time.time()
@@ -764,61 +733,9 @@ class SegmentMaker(experimental.SegmentMaker):
             start_offset = abjad.inspect(start_skip).get_timespan().start_offset
             self._fermata_start_offsets.append(start_offset)
 
-    # TODO: hopefully this can be removed
-    def _attach_first_segment_default_clefs(self):
-        if not self._is_first_segment():
-            return
-        cached_clefs = self._cached_score_template_start_clefs
-        previous_clefs = self._previous_segment_metadata.get(
-            'end_clefs_by_staff', abjad.TypedOrderedDict())
-        prototype = abjad.Clef
-        for staff in abjad.iterate(self._score).by_class(abjad.Staff):
-            if abjad.inspect(staff).has_indicator(prototype):
-                continue
-            first_leaf = abjad.inspect(staff).get_leaf(0)
-            if (first_leaf is None or
-                not abjad.inspect(first_leaf).has_indicator(prototype)):
-                clef_name = previous_clefs.get(staff.name)
-                if clef_name is None:
-                    clef_name = cached_clefs.get(staff.name)
-                # TODO: remove if-clause
-                if clef_name is not None:
-                    clef = abjad.Clef(clef_name)
-                    abjad.attach(clef, staff)
-
-    # TODO: hopefully this can be removed
-    def _attach_first_segment_default_instruments(self):
-        if not self._is_first_segment():
-            return
-        if self.score_package is None:
-            return
-        cached_instruments = self._cached_score_template_start_instruments
-        previous_instruments = self._previous_segment_metadata.get(
-            'end_instruments_by_context',
-            abjad.TypedOrderedDict(),
-            )
-        prototype = abjad.Instrument
-        contexts_with_instrument_names = \
-            self._get_contexts_with_instrument_names()
-        for context in abjad.iterate(self._score).by_class(abjad.Context):
-            if context.name not in contexts_with_instrument_names:
-                continue
-            if abjad.inspect(context).has_indicator(prototype):
-                continue
-            first_leaf = abjad.inspect(context).get_leaf(0)
-            if (first_leaf is not None and 
-                abjad.inspect(first_leaf).has_indicator(prototype)):
-                continue
-            if (first_leaf is None or
-                not abjad.inspect(first_leaf).has_indicator(prototype)):
-                instrument_name = previous_instruments.get(context.name)
-                if instrument_name is None:
-                    instrument_name = cached_instruments.get(context.name)
-                instrument = self.score_package.materials.instruments[
-                    instrument_name]
-                instrument = copy.deepcopy(instrument)
-                instrument._default_scope = context.context_name
-                abjad.attach(instrument, context)
+    def _attach_first_segment_score_template_defaults(self):
+        if self._is_first_segment():
+            self.score_template.attach_defaults(self._score)
 
     def _attach_rehearsal_mark(self):
         if self.rehearsal_letter == '':
@@ -837,11 +754,8 @@ class SegmentMaker(experimental.SegmentMaker):
             number=letter_number
             )
         voice = self._score['Time Signature Context Skips']
-        first_leaf = abjad.inspect(voice).get_leaf(0)
-        abjad.attach(rehearsal_mark, first_leaf)
-
-    def _attach_score_template_defaults(self):
-        self.score_template.attach_defaults(self._score)
+        leaf = abjad.inspect(voice).get_leaf(0)
+        abjad.attach(rehearsal_mark, leaf)
 
     def _attach_tempo_indicators(self):
         if not self.tempo_specifier:
@@ -1297,12 +1211,6 @@ class SegmentMaker(experimental.SegmentMaker):
         string = str(time_signature)
         return string
 
-    def _get_instrument_by_name(self, instrument_name, material_package):
-        instruments = material_package.instruments
-        for instrument_name_, instrument in instruments.items():
-            if instrument_name_ == instrument_name:
-                return instrument
-
     def _get_name(self):
         return self._segment_metadata.get('name')
 
@@ -1320,14 +1228,24 @@ class SegmentMaker(experimental.SegmentMaker):
         stop_offset = abjad.inspect(stop_measure).get_timespan().stop_offset
         return start_offset, stop_offset
 
-    def _get_previous_instrument(self, staff_name):
+    def _get_previous_clef(self, context_name):
         if not self._previous_segment_metadata:
             return
-        previous_instruments = self._previous_segment_metadata.get(
-            'end_instruments_by_context')
+        string = 'end_clefs_by_context'
+        previous_clefs = self._previous_segment_metadata.get(string)
+        if not previous_clefs:
+            return
+        clef_name = previous_clefs.get(context_name)
+        return abjad.Clef(clef_name)
+
+    def _get_previous_instrument(self, context_name):
+        if not self._previous_segment_metadata:
+            return
+        string = 'end_instruments_by_context'
+        previous_instruments = self._previous_segment_metadata.get(string)
         if not previous_instruments:
             return
-        instrument_name = previous_instruments.get(staff_name)
+        instrument_name = previous_instruments.get(context_name)
         instrument = self.instruments.get(instrument_name)
         return instrument
 
