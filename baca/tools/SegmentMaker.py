@@ -1192,6 +1192,8 @@ class SegmentMaker(experimental.SegmentMaker):
         if not effective_tempo:
             return
         tempi = self.metronome_marks
+        if not tempi:
+            return
         for tempo_name, tempo in tempi.items():
             if tempo == effective_tempo:
                 break
