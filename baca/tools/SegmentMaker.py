@@ -291,6 +291,7 @@ class SegmentMaker(experimental.SegmentMaker):
         '_label_clock_time',
         '_label_stage_numbers',
         '_measures_per_stage',
+        '_metronome_marks',
         '_print_segment_duration',
         '_print_timings',
         '_range_checker',
@@ -386,6 +387,7 @@ class SegmentMaker(experimental.SegmentMaker):
         label_clock_time=None,
         label_stages=None,
         measures_per_stage=None,
+        metronome_marks=None,
         print_segment_duration=None,
         print_timings=None,
         range_checker=None,
@@ -455,6 +457,9 @@ class SegmentMaker(experimental.SegmentMaker):
             label_stages = bool(label_stages)
         self._label_stage_numbers = label_stages
         self._measures_per_stage = measures_per_stage
+        if metronome_marks is not None:
+            assert isinstance(metronome_marks, abjad.TypedOrderedDict)
+        self._metronome_marks = metronome_marks
         self._print_segment_duration = print_segment_duration
         self._print_timings = print_timings
         self._range_checker = range_checker
@@ -1248,6 +1253,15 @@ class SegmentMaker(experimental.SegmentMaker):
         instrument_name = previous_instruments.get(context_name)
         instrument = self.instruments.get(instrument_name)
         return instrument
+
+    def _get_previous_metronome_mark(self):
+        if not self._previous_segment_metadata:
+            return
+        name = self._previous_segment_metadata.get('end_tempo')
+        if not name:
+            return
+        metronome_mark = self.metronome_marks.get(name)
+        return metronome_mark
 
     def _get_rehearsal_letter(self):
         if self.rehearsal_letter:
@@ -5720,6 +5734,14 @@ class SegmentMaker(experimental.SegmentMaker):
         if self._measures_per_stage is None:
             return [len(self.time_signatures)]
         return self._measures_per_stage
+
+    @property
+    def metronome_marks(self):
+        r'''Gets metronome marks.
+
+        Returns typed ordered dictionary or none.
+        '''
+        return self._metronome_marks
 
     @property
     def print_segment_duration(self):
