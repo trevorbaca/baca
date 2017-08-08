@@ -513,8 +513,6 @@ class SegmentMaker(experimental.SegmentMaker):
             self._previous_segment_metadata = abjad.TypedOrderedDict()
         self._is_doc_example = is_doc_example
         self._make_score()
-        #self._remove_score_template_start_instruments()
-        #self._remove_score_template_start_clefs()
         self._make_lilypond_file(
             is_doc_example=is_doc_example,
             is_test=is_test,
@@ -526,8 +524,8 @@ class SegmentMaker(experimental.SegmentMaker):
         self._interpret_scoped_specifiers()
         self._detach_figure_names()
         self._shorten_long_repeat_ties()
-        self._attach_first_segment_score_template_defaults()
         self._apply_previous_segment_end_settings()
+        self._attach_first_segment_score_template_defaults()
         self._apply_spacing_specifier()
         self._make_volta_containers()
         self._label_clock_time_()
@@ -651,6 +649,12 @@ class SegmentMaker(experimental.SegmentMaker):
                 continue
             leaf = abjad.inspect(context).get_leaf(0)
             abjad.attach(previous_clef, leaf)
+        context = self._score['Time Signature Context Skips']
+        leaf = abjad.inspect(context).get_leaf(0)
+        mark = abjad.inspect(leaf).get_effective(abjad.MetronomeMark)
+        if mark is None:
+            previous_mark = self._get_previous_metronome_mark()
+            abjad.attach(previous_mark, leaf)
 
     def _apply_spacing_specifier(self):
         start_time = time.time()
@@ -1178,17 +1182,16 @@ class SegmentMaker(experimental.SegmentMaker):
         return result
 
     def _get_end_settings(self):
-        end_settings = {}
+        result = {}
         if self._is_doc_example:
-            return end_settings
-        end_settings['end_clefs_by_staff'] = self._get_end_clefs()
-        end_settings['end_instruments_by_context'] = \
-            self._get_end_instruments()
-        end_settings['end_tempo'] = self._get_end_tempo_name()
-        end_settings['end_time_signature'] = self._get_end_time_signature()
-        return end_settings
+            return result
+        result['end_clefs_by_staff'] = self._get_end_clefs()
+        result['end_instruments_by_context'] = self._get_end_instruments()
+        result['end_tempo'] = self._get_end_metronome_mark()
+        result['end_time_signature'] = self._get_end_time_signature()
+        return result
 
-    def _get_end_tempo_name(self):
+    def _get_end_metronome_mark(self):
         context = self._score['Time Signature Context Skips']
         leaf = abjad.inspect(context).get_leaf(-1)
         mark = abjad.inspect(leaf).get_effective(abjad.MetronomeMark)
@@ -1859,32 +1862,6 @@ class SegmentMaker(experimental.SegmentMaker):
         message = message.format(total_duration, identifier)
         print(message)
 
-    # TODO: hopefully can be removed
-    def _remove_score_template_start_clefs(self):
-        dictionary = abjad.TypedOrderedDict()
-        self._cached_score_template_start_clefs = dictionary
-        prototype = abjad.Clef
-        for context in abjad.iterate(self._score).by_class(abjad.Context):
-            if not abjad.inspect(context).has_indicator(prototype):
-                continue
-            clef = abjad.inspect(context).get_indicator(prototype)
-            self._cached_score_template_start_clefs[context.name] = clef.name
-            abjad.detach(abjad.Clef, context)
-
-    # TODO: hopefully can be removed
-    def _remove_score_template_start_instruments(self):
-        dictionary = abjad.TypedOrderedDict()
-        self._cached_score_template_start_instruments = dictionary
-        for context in abjad.iterate(self._score).by_class(abjad.Context):
-            prototype = abjad.Instrument
-            if not abjad.inspect(context).get_indicator(prototype):
-                continue
-            instrument = abjad.inspect(context).get_indicator(prototype)
-            instrument_name = instrument.instrument_name
-            self._cached_score_template_start_instruments[context.name] = \
-                instrument_name
-            abjad.detach(abjad.Instrument, context)
-        
     def _scope_to_leaves(self, scope):
         if not isinstance(scope, baca.SimpleScope):
             message = 'not yet implemented for {!r}.'
