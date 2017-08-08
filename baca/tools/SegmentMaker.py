@@ -288,6 +288,7 @@ class SegmentMaker(experimental.SegmentMaker):
         '_ignore_unpitched_notes',
         '_ignore_unregistered_pitches',
         '_instruments',
+        '_is_doc_example',
         '_label_clock_time',
         '_label_stage_numbers',
         '_measures_per_stage',
@@ -510,6 +511,7 @@ class SegmentMaker(experimental.SegmentMaker):
             self._previous_segment_metadata = previous_segment_metadata
         else:
             self._previous_segment_metadata = abjad.TypedOrderedDict()
+        self._is_doc_example = is_doc_example
         self._make_score()
         #self._remove_score_template_start_instruments()
         #self._remove_score_template_start_clefs()
@@ -1177,6 +1179,8 @@ class SegmentMaker(experimental.SegmentMaker):
 
     def _get_end_settings(self):
         end_settings = {}
+        if self._is_doc_example:
+            return end_settings
         end_settings['end_clefs_by_staff'] = self._get_end_clefs()
         end_settings['end_instruments_by_context'] = \
             self._get_end_instruments()
@@ -1187,21 +1191,20 @@ class SegmentMaker(experimental.SegmentMaker):
     def _get_end_tempo_name(self):
         context = self._score['Time Signature Context Skips']
         leaf = abjad.inspect(context).get_leaf(-1)
-        prototype = abjad.MetronomeMark
-        effective_tempo = abjad.inspect(leaf).get_effective(prototype)
-        if not effective_tempo:
+        mark = abjad.inspect(leaf).get_effective(abjad.MetronomeMark)
+        if not mark:
             return
-        tempi = self.metronome_marks
-        if not tempi:
-            return
-        for tempo_name, tempo in tempi.items():
-            if tempo == effective_tempo:
+        if not self.metronome_marks:
+            message = 'please define metronome mark manifest.'
+            raise Exception(message)
+        for name, mark_ in self.metronome_marks.items():
+            if mark_ == mark:
                 break
         else:
             message = 'can not find {!r} in metronome marks {!r}.'
-            message = message.format(tempo, tempi)
+            message = message.format(mark, self.metronome_marks)
             raise Exception(message)
-        return tempo_name
+        return name
 
     def _get_end_time_signature(self):
         context = self._score['Time Signature Context Skips']
