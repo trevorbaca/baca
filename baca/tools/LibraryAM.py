@@ -2583,14 +2583,14 @@ class LibraryAM(object):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin.viola.cello
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 5/8
                                 R1 * 5/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 s1 * 5/8
                             }
@@ -2701,14 +2701,14 @@ class LibraryAM(object):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin.viola.cello
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 5/8
                                 R1 * 5/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 s1 * 5/8
                             }

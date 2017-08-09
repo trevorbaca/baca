@@ -38,8 +38,8 @@ class SegmentMaker(experimental.SegmentMaker):
             >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
-                \context TimeSignatureContext = "Time Signature Context" <<
-                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                \context GlobalContext = "Global Context" <<
+                    \context GlobalRests = "Global Rests" {
                         {
                             \time 4/8
                             R1 * 1/2
@@ -57,7 +57,7 @@ class SegmentMaker(experimental.SegmentMaker):
                             R1 * 3/8
                         }
                     }
-                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                    \context GlobalSkips = "Global Skips" {
                         {
                             \time 4/8
                             s1 * 1/2
@@ -120,8 +120,8 @@ class SegmentMaker(experimental.SegmentMaker):
             >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
-                \context TimeSignatureContext = "Time Signature Context" <<
-                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                \context GlobalContext = "Global Context" <<
+                    \context GlobalRests = "Global Rests" {
                         {
                             \time 4/8
                             R1 * 1/2
@@ -139,7 +139,7 @@ class SegmentMaker(experimental.SegmentMaker):
                             R1 * 3/8
                         }
                     }
-                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                    \context GlobalSkips = "Global Skips" {
                         {
                             \time 4/8
                             s1 * 1/2
@@ -643,7 +643,7 @@ class SegmentMaker(experimental.SegmentMaker):
                 continue
             leaf = abjad.inspect(context).get_leaf(0)
             abjad.attach(previous_clef, leaf)
-        context = self._score['Time Signature Context Skips']
+        context = self._score['Global Skips']
         leaf = abjad.inspect(context).get_leaf(0)
         mark = abjad.inspect(leaf).get_effective(abjad.MetronomeMark)
         if mark is None:
@@ -686,7 +686,7 @@ class SegmentMaker(experimental.SegmentMaker):
     def _attach_fermatas(self):
         if not self.tempo_specifier:
             return
-        context = self._score['Time Signature Context Multimeasure Rests']
+        context = self._score['Global Rests']
         directive_prototype = (
             abjad.Fermata,
             abjad.BreathMark,
@@ -755,14 +755,14 @@ class SegmentMaker(experimental.SegmentMaker):
         rehearsal_mark = abjad.RehearsalMark(
             number=letter_number
             )
-        voice = self._score['Time Signature Context Skips']
+        voice = self._score['Global Skips']
         leaf = abjad.inspect(voice).get_leaf(0)
         abjad.attach(rehearsal_mark, leaf)
 
     def _attach_tempo_indicators(self):
         if not self.tempo_specifier:
             return
-        context = self._score['Time Signature Context Skips']
+        context = self._score['Global Skips']
         skips = abjad.select(context).by_leaf(abjad.Skip)
         left_broken_text = abjad.Markup().null()
         left_broken_text._direction = None
@@ -1186,7 +1186,7 @@ class SegmentMaker(experimental.SegmentMaker):
         return result
 
     def _get_end_metronome_mark(self):
-        context = self._score['Time Signature Context Skips']
+        context = self._score['Global Skips']
         leaf = abjad.inspect(context).get_leaf(-1)
         mark = abjad.inspect(leaf).get_effective(abjad.MetronomeMark)
         if not mark:
@@ -1204,7 +1204,7 @@ class SegmentMaker(experimental.SegmentMaker):
         return name
 
     def _get_end_time_signature(self):
-        context = self._score['Time Signature Context Skips']
+        context = self._score['Global Skips']
         last_measure = context[-1]
         prototype = abjad.TimeSignature
         time_signature = abjad.inspect(last_measure).get_effective(prototype)
@@ -1217,7 +1217,7 @@ class SegmentMaker(experimental.SegmentMaker):
         return self._metadata.get('name')
 
     def _get_offsets(self, start_stage, stop_stage):
-        context = self._score['Time Signature Context Skips']
+        context = self._score['Global Skips']
         result = self._stage_number_to_measure_indices(start_stage)
         start_measure_index, stop_measure_index = result
         start_measure = context[start_measure_index]
@@ -1522,7 +1522,7 @@ class SegmentMaker(experimental.SegmentMaker):
     def _label_clock_time_(self):
         if not self.label_clock_time:
             return
-        skip_context = self._score['Time Signature Context Skips']
+        skip_context = self._score['Global Skips']
         skips = []
         for skip in abjad.iterate(skip_context).by_leaf(abjad.Skip):
             start_offset = abjad.inspect(skip).get_timespan().start_offset
@@ -1560,7 +1560,7 @@ class SegmentMaker(experimental.SegmentMaker):
     def _label_stage_numbers_(self):
         if not self.label_stages:
             return
-        context = self._score['Time Signature Context Skips']
+        context = self._score['Global Skips']
         for stage_index in range(self.stage_count):
             stage_number = stage_index + 1
             result = self._stage_number_to_measure_indices(stage_number)
@@ -1635,7 +1635,7 @@ class SegmentMaker(experimental.SegmentMaker):
         return measures
 
     def _make_music_for_time_signature_context(self):
-        voice_name = 'Time Signature Context Skips'
+        voice_name = 'Global Skips'
         context = self._score[voice_name]
         rhythm_specifiers = self._get_rhythm_specifiers_for_voice(voice_name)
         for rhythm_specifier in rhythm_specifiers:
@@ -1725,7 +1725,7 @@ class SegmentMaker(experimental.SegmentMaker):
     def _make_spacing_regions(self):
         if not self.spacing_map:
             return
-        context = self._score['Time Signature Context Skips']
+        context = self._score['Global Skips']
         skips = list(abjad.iterate(context).by_leaf())
         for stage_number, duration in self.spacing_map:
             self._assert_valid_stage_number(stage_number)
@@ -1744,7 +1744,7 @@ class SegmentMaker(experimental.SegmentMaker):
     def _make_volta_containers(self):
         if not self.volta_specifier:
             return
-        context = self._score['Time Signature Context Skips']
+        context = self._score['Global Skips']
         measures = context[:]
         for measure in measures:
             assert isinstance(measure, abjad.Measure), repr(measure)
@@ -1797,17 +1797,17 @@ class SegmentMaker(experimental.SegmentMaker):
                     break
         
     def _populate_time_signature_context(self):
-        context = self._score['Time Signature Context Skips']
+        context = self._score['Global Skips']
         measures = self._make_skip_filled_measures()
         context.extend(measures)
-        context = self._score['Time Signature Context Multimeasure Rests']
+        context = self._score['Global Rests']
         measures = self._make_multimeasure_rest_filled_measures()
         context.extend(measures)
 
     def _print_segment_duration_(self):
         if not self.print_segment_duration:
             return
-        context = self._score['Time Signature Context Skips']
+        context = self._score['Global Skips']
         current_tempo = None
         leaves = abjad.iterate(context).by_leaf()
         measure_summaries = []
@@ -2101,8 +2101,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 1/16
                                 R1 * 1/16
@@ -2120,7 +2120,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 1/16
                                 \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
@@ -2251,8 +2251,8 @@ class SegmentMaker(experimental.SegmentMaker):
                     \override TextScript.staff-padding = #3
                 } <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 1/16
                                 R1 * 1/16
@@ -2270,7 +2270,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 1/16
                                 \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
@@ -2471,14 +2471,14 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin.viola.cello
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 6/16
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                                 \newSpacingSection
@@ -2618,8 +2618,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 1/16
                                 R1 * 1/16
@@ -2637,7 +2637,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 1/16
                                 \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
@@ -2783,8 +2783,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 1/16
                                 R1 * 1/16
@@ -2802,7 +2802,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 1/16
                                 \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
@@ -2954,8 +2954,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -2973,7 +2973,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2
@@ -3128,8 +3128,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -3147,7 +3147,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2
@@ -3299,8 +3299,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -3318,7 +3318,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2
@@ -3474,8 +3474,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -3493,7 +3493,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2
@@ -3654,8 +3654,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -3673,7 +3673,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2
@@ -3827,8 +3827,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -3846,7 +3846,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2
@@ -4051,8 +4051,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -4070,7 +4070,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2
@@ -4222,8 +4222,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -4241,7 +4241,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2
@@ -4380,8 +4380,8 @@ class SegmentMaker(experimental.SegmentMaker):
                     \override SpacingSpanner.strict-note-spacing = ##f
                 } <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 3/16
                                 R1 * 3/16
@@ -4396,7 +4396,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/16
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                                 \newSpacingSection
@@ -4629,8 +4629,8 @@ class SegmentMaker(experimental.SegmentMaker):
                     \override SpacingSpanner.strict-note-spacing = ##f
                 } <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 3/16
                                 R1 * 3/16
@@ -4645,7 +4645,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/16
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                                 \newSpacingSection
@@ -4766,8 +4766,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -4785,7 +4785,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2 ^ \markup {
@@ -4957,8 +4957,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score]) # doctest: +SKIP
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -4976,7 +4976,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2
@@ -5175,8 +5175,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -5194,7 +5194,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2
@@ -5346,8 +5346,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -5365,7 +5365,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2
@@ -5528,8 +5528,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -5547,7 +5547,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2
@@ -5852,8 +5852,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -5871,7 +5871,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2
@@ -5927,8 +5927,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -5946,7 +5946,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2
@@ -6058,8 +6058,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -6077,7 +6077,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2
@@ -6241,8 +6241,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -6260,7 +6260,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2
@@ -6430,8 +6430,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -6449,7 +6449,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2
@@ -6603,8 +6603,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -6622,7 +6622,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2 ^ \markup {
@@ -6811,8 +6811,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -6830,7 +6830,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2
@@ -6928,8 +6928,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -6947,7 +6947,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2
@@ -7101,8 +7101,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -7120,7 +7120,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2
@@ -7287,8 +7287,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -7306,7 +7306,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2
@@ -7553,8 +7553,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -7572,7 +7572,7 @@ class SegmentMaker(experimental.SegmentMaker):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2

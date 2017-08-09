@@ -46,7 +46,7 @@ class ImbricateCommand(abjad.AbjadObject):
 
             >>> f(lilypond_file[abjad.Score])
             \new Score <<
-                \new TimeSignatureContext {
+                \new GlobalContext {
                     {
                         \time 15/16
                         s1 * 15/16
@@ -184,7 +184,7 @@ class ImbricateCommand(abjad.AbjadObject):
 
             >>> f(lilypond_file[abjad.Score])
             \new Score <<
-                \new TimeSignatureContext {
+                \new GlobalContext {
                     {
                         \time 15/16
                         s1 * 15/16
@@ -369,7 +369,7 @@ class ImbricateCommand(abjad.AbjadObject):
 
             >>> f(lilypond_file[abjad.Score])
             \new Score <<
-                \new TimeSignatureContext {
+                \new GlobalContext {
                     {
                         \time 9/8
                         s1 * 9/8
@@ -590,7 +590,7 @@ class ImbricateCommand(abjad.AbjadObject):
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
-                    \new TimeSignatureContext {
+                    \new GlobalContext {
                         {
                             \time 27/16
                             s1 * 27/16
@@ -689,7 +689,7 @@ class ImbricateCommand(abjad.AbjadObject):
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
-                    \new TimeSignatureContext {
+                    \new GlobalContext {
                         {
                             \time 9/8
                             s1 * 9/8
@@ -871,8 +871,8 @@ class ImbricateCommand(abjad.AbjadObject):
 
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 7/16
                                 R1 * 7/16
@@ -882,7 +882,7 @@ class ImbricateCommand(abjad.AbjadObject):
                                 R1 * 1/4
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 7/16
                                 \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
@@ -1025,7 +1025,7 @@ class ImbricateCommand(abjad.AbjadObject):
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
-                    \new TimeSignatureContext {
+                    \new GlobalContext {
                         {
                             \time 11/16
                             s1 * 11/16
@@ -1140,7 +1140,7 @@ class ImbricateCommand(abjad.AbjadObject):
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
-                    \new TimeSignatureContext {
+                    \new GlobalContext {
                         {
                             \time 19/16
                             s1 * 19/16
@@ -1428,7 +1428,7 @@ class ImbricateCommand(abjad.AbjadObject):
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
-                    \new TimeSignatureContext {
+                    \new GlobalContext {
                         {
                             \time 5/8
                             s1 * 5/8
@@ -1623,7 +1623,7 @@ class ImbricateCommand(abjad.AbjadObject):
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
-                    \new TimeSignatureContext {
+                    \new GlobalContext {
                         {
                             \time 15/16
                             s1 * 15/16
@@ -1785,7 +1785,7 @@ class ImbricateCommand(abjad.AbjadObject):
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
-                    \new TimeSignatureContext {
+                    \new GlobalContext {
                         {
                             \time 9/8
                             s1 * 9/8
@@ -1962,7 +1962,7 @@ class ImbricateCommand(abjad.AbjadObject):
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
-                    \new TimeSignatureContext {
+                    \new GlobalContext {
                         {
                             \time 15/16
                             s1 * 15/16
@@ -2095,7 +2095,7 @@ class ImbricateCommand(abjad.AbjadObject):
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
-                    \new TimeSignatureContext {
+                    \new GlobalContext {
                         {
                             \time 15/16
                             s1 * 15/16
@@ -2236,7 +2236,7 @@ class ImbricateCommand(abjad.AbjadObject):
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
-                    \new TimeSignatureContext {
+                    \new GlobalContext {
                         {
                             \time 15/16
                             s1 * 15/16
@@ -2379,7 +2379,7 @@ class ImbricateCommand(abjad.AbjadObject):
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
-                    \new TimeSignatureContext {
+                    \new GlobalContext {
                         {
                             \time 15/16
                             s1 * 15/16
@@ -2520,7 +2520,7 @@ class ImbricateCommand(abjad.AbjadObject):
 
                 >>> f(lilypond_file[abjad.Score])
                 \new Score <<
-                    \new TimeSignatureContext {
+                    \new GlobalContext {
                         {
                             \time 45/32
                             s1 * 45/32

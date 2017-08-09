@@ -45,8 +45,8 @@ class ColorFingeringCommand(abjad.AbjadObject):
             >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
-                \context TimeSignatureContext = "Time Signature Context" <<
-                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                \context GlobalContext = "Global Context" <<
+                    \context GlobalRests = "Global Rests" {
                         {
                             \time 4/8
                             R1 * 1/2
@@ -64,7 +64,7 @@ class ColorFingeringCommand(abjad.AbjadObject):
                             R1 * 3/8
                         }
                     }
-                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                    \context GlobalSkips = "Global Skips" {
                         {
                             \time 4/8
                             s1 * 1/2
@@ -238,8 +238,8 @@ class ColorFingeringCommand(abjad.AbjadObject):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -257,7 +257,7 @@ class ColorFingeringCommand(abjad.AbjadObject):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2
@@ -349,8 +349,8 @@ class ColorFingeringCommand(abjad.AbjadObject):
                 >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
-                    \context TimeSignatureContext = "Time Signature Context" <<
-                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
                             {
                                 \time 4/8
                                 R1 * 1/2
@@ -368,7 +368,7 @@ class ColorFingeringCommand(abjad.AbjadObject):
                                 R1 * 3/8
                             }
                         }
-                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
                                 s1 * 1/2

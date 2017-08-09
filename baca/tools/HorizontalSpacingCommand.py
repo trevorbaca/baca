@@ -43,8 +43,8 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
             >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
-                \context TimeSignatureContext = "Time Signature Context" <<
-                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                \context GlobalContext = "Global Context" <<
+                    \context GlobalRests = "Global Rests" {
                         {
                             \time 8/16
                             R1 * 1/2
@@ -62,7 +62,7 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
                             R1 * 1/2
                         }
                     }
-                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                    \context GlobalSkips = "Global Skips" {
                         {
                             \time 8/16
                             s1 * 1/2
@@ -148,8 +148,8 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
             >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
-                \context TimeSignatureContext = "Time Signature Context" <<
-                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                \context GlobalContext = "Global Context" <<
+                    \context GlobalRests = "Global Rests" {
                         {
                             \time 8/16
                             R1 * 1/2
@@ -167,7 +167,7 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
                             R1 * 1/2
                         }
                     }
-                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                    \context GlobalSkips = "Global Skips" {
                         {
                             \time 8/16
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
@@ -263,8 +263,8 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
             >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
-                \context TimeSignatureContext = "Time Signature Context" <<
-                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                \context GlobalContext = "Global Context" <<
+                    \context GlobalRests = "Global Rests" {
                         {
                             \time 8/16
                             R1 * 1/2
@@ -282,7 +282,7 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
                             R1 * 1/2
                         }
                     }
-                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                    \context GlobalSkips = "Global Skips" {
                         {
                             \time 8/16
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
@@ -379,8 +379,8 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
             >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
-                \context TimeSignatureContext = "Time Signature Context" <<
-                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                \context GlobalContext = "Global Context" <<
+                    \context GlobalRests = "Global Rests" {
                         {
                             \time 8/16
                             R1 * 1/2
@@ -398,7 +398,7 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
                             R1 * 1/2
                         }
                     }
-                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                    \context GlobalSkips = "Global Skips" {
                         {
                             \time 8/16
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)
@@ -496,8 +496,8 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
             >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
-                \context TimeSignatureContext = "Time Signature Context" <<
-                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                \context GlobalContext = "Global Context" <<
+                    \context GlobalRests = "Global Rests" {
                         {
                             \time 8/16
                             R1 * 1/2
@@ -515,7 +515,7 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
                             R1 * 1/2
                         }
                     }
-                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                    \context GlobalSkips = "Global Skips" {
                         {
                             \time 8/16
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)
@@ -623,8 +623,8 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
             >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
-                \context TimeSignatureContext = "Time Signature Context" <<
-                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                \context GlobalContext = "Global Context" <<
+                    \context GlobalRests = "Global Rests" {
                         {
                             \time 4/8
                             R1 * 1/2
@@ -634,7 +634,7 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
                             R1 * 3/8
                         }
                     }
-                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                    \context GlobalSkips = "Global Skips" {
                         {
                             \time 4/8
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
@@ -784,7 +784,7 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
         Returns none.
         '''
         score = segment_maker._score
-        skip_context = score['Time Signature Context Skips']
+        skip_context = score['Global Skips']
         leaves = abjad.iterate(score).by_leaf()
         minimum_durations_by_measure = self._get_minimum_durations_by_measure(
             skip_context,

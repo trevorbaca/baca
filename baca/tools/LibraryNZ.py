@@ -8335,7 +8335,7 @@ class LibraryNZ(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TimeSignatureContext.TimeSignature.transparent = ##t
+                                \override GlobalContext.TimeSignature.transparent = ##t
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16 [
@@ -8357,7 +8357,7 @@ class LibraryNZ(object):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TimeSignatureContext.TimeSignature.transparent
+                                \revert GlobalContext.TimeSignature.transparent
                                 \revert TupletBracket.staff-padding
                             }
                         }
@@ -8369,7 +8369,7 @@ class LibraryNZ(object):
         return baca.OverrideCommand(
             attribute_name='transparent',
             attribute_value=True,
-            context_name='TimeSignatureContext',
+            context_name='GlobalContext',
             grob_name='time_signature',
             revert=True,
             selector=selector,

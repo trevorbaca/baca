@@ -149,8 +149,8 @@ class NestCommand(abjad.AbjadObject):
             >>> f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
-                \context TimeSignatureContext = "Time Signature Context" <<
-                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                \context GlobalContext = "Global Context" <<
+                    \context GlobalRests = "Global Rests" {
                         {
                             \time 1/2
                             R1 * 1/2
@@ -160,7 +160,7 @@ class NestCommand(abjad.AbjadObject):
                             R1 * 1/4
                         }
                     }
-                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                    \context GlobalSkips = "Global Skips" {
                         {
                             \time 1/2
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
