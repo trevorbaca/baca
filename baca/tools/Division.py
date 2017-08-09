@@ -581,29 +581,24 @@ class Division(abjad.NonreducedFraction):
         '''
         if not isinstance(argument, type(self)):
             argument = type(self)(argument, start_offset=self.start_offset)
-
         self_has_start_offset = bool(self.start_offset is not None)
         expr_has_start_offset = bool(argument.start_offset is not None)
         if not self_has_start_offset == expr_has_start_offset:
             message = 'both divisions must have (or not have) start offsets.'
             raise Exception(message)
-
         if self.start_offset is argument.start_offset is None:
             superclass = super(Division, self)
             difference = superclass.__sub__(argument)
             return self._from_pair(difference)
-
         my_timespan = self._to_timespan()
         expr_timespan = argument._to_timespan()
         timespans = my_timespan - expr_timespan
-
         negate_result = False
         if len(timespans) == 0:
             #message = 'subtraction destroys division.'
             #raise Exception(message)
             timespans = expr_timespan - my_timespan
             negate_result = True
-
         assert 0 < len(timespans), repr(timespans)
         if len(timespans) == 1:
             result_timespan = timespans[0]

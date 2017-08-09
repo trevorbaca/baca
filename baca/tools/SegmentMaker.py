@@ -1961,7 +1961,7 @@ class SegmentMaker(experimental.SegmentMaker):
                     instrument.transpose_from_sounding_pitch(leaf)
                 except KeyError:
                     sounding_pitch_number = leaf.written_pitch.number
-                    i = instrument.sounding_pitch_of_written_middle_c.number
+                    i = instrument.middle_c_sounding_pitch.number
                     written_pitch_number = sounding_pitch_number - i
                     leaf.written_pitch = written_pitch_number
 
