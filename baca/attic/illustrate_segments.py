@@ -42,7 +42,7 @@ def illustrate_segment(segment_path):
         ide.tools.idetools.AbjadIDE._replace_in_file(
             local_boilerplate_path,
             '{previous_segment_metadata_import_statement}',
-            'previous_segment_metadata = None',
+            'previous_metadata = None',
             )
         ide.tools.idetools.AbjadIDE._replace_in_file(
             local_boilerplate_path,

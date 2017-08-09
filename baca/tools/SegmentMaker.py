@@ -30,7 +30,7 @@ class SegmentMaker(experimental.SegmentMaker):
         ::
 
             >>> result = segment_maker(is_doc_example=True)
-            >>> lilypond_file, segment_metadata = result
+            >>> lilypond_file, metadata = result
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -112,7 +112,7 @@ class SegmentMaker(experimental.SegmentMaker):
         ::
 
             >>> result = segment_maker(is_doc_example=True)
-            >>> lilypond_file, segment_metadata = result
+            >>> lilypond_file, metadata = result
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -493,8 +493,8 @@ class SegmentMaker(experimental.SegmentMaker):
         self, 
         is_doc_example=None,
         is_test=None,
-        segment_metadata=None,
-        previous_segment_metadata=None,
+        metadata=None,
+        previous_metadata=None,
         ):
         r'''Calls segment-maker.
 
@@ -503,12 +503,12 @@ class SegmentMaker(experimental.SegmentMaker):
 
         Returns LilyPond file and segment metadata.
         '''
-        if segment_metadata:
-            self._segment_metadata = segment_metadata
+        if metadata:
+            self._segment_metadata = metadata
         else:
             self._segment_metadata = abjad.TypedOrderedDict()
-        if previous_segment_metadata:
-            self._previous_segment_metadata = previous_segment_metadata
+        if previous_metadata:
+            self._previous_segment_metadata = previous_metadata
         else:
             self._previous_segment_metadata = abjad.TypedOrderedDict()
         self._is_doc_example = is_doc_example
@@ -2024,8 +2024,8 @@ class SegmentMaker(experimental.SegmentMaker):
         self._segment_metadata.update(end_settings)
         class_ = type(self._segment_metadata)
         items = sorted(self._segment_metadata.items())
-        segment_metadata = class_(items)
-        self._segment_metadata = segment_metadata
+        metadata = class_(items)
+        self._segment_metadata = metadata
 
     ### PUBLIC PROPERTIES ###
 
@@ -2099,7 +2099,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -2245,7 +2245,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).text_script.staff_padding = 3
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -2469,7 +2469,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -2616,7 +2616,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -2781,7 +2781,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -2952,7 +2952,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3121,12 +3121,12 @@ class SegmentMaker(experimental.SegmentMaker):
 
             ::
 
-                >>> segment_metadata = {'segment_count': 1}
+                >>> metadata = {'segment_count': 1}
                 >>> result = segment_maker(
                 ...     is_doc_example=True,
-                ...     segment_metadata=segment_metadata,
+                ...     metadata=metadata,
                 ...     )
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3297,7 +3297,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3467,12 +3467,12 @@ class SegmentMaker(experimental.SegmentMaker):
 
             ::
 
-                >>> segment_metadata = {'segment_count': 1}
+                >>> metadata = {'segment_count': 1}
                 >>> result = segment_maker(
                 ...     is_doc_example=True,
-                ...     segment_metadata=segment_metadata,
+                ...     metadata=metadata,
                 ...     )
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3652,7 +3652,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3825,7 +3825,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4049,7 +4049,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4220,7 +4220,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4372,7 +4372,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
                 >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
@@ -4621,7 +4621,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
                 >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
@@ -4764,7 +4764,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4953,7 +4953,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True) # doctest: +SKIP
-                >>> lilypond_file, segment_metadata = result # doctest: +SKIP
+                >>> lilypond_file, metadata = result # doctest: +SKIP
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  todo:: MAKE THIS WORK AGAIN.
@@ -5173,7 +5173,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5344,7 +5344,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5521,12 +5521,12 @@ class SegmentMaker(experimental.SegmentMaker):
 
             ::
 
-                >>> segment_metadata = {'name': 'K'}
+                >>> metadata = {'name': 'K'}
                 >>> result = segment_maker(
                 ...     is_doc_example=True,
-                ...     segment_metadata=segment_metadata,
+                ...     metadata=metadata,
                 ...     )
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5850,7 +5850,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5925,7 +5925,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6051,12 +6051,12 @@ class SegmentMaker(experimental.SegmentMaker):
 
             ::
 
-                >>> segment_metadata = {'name': 'K'}
+                >>> metadata = {'name': 'K'}
                 >>> result = segment_maker(
                 ...     is_doc_example=True,
-                ...     segment_metadata=segment_metadata,
+                ...     metadata=metadata,
                 ...     )
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6234,12 +6234,12 @@ class SegmentMaker(experimental.SegmentMaker):
 
             ::
 
-                >>> segment_metadata = {'name': 'K'}
+                >>> metadata = {'name': 'K'}
                 >>> result = segment_maker(
                 ...     is_doc_example=True,
-                ...     segment_metadata=segment_metadata,
+                ...     metadata=metadata,
                 ...     )
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6428,7 +6428,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6601,7 +6601,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6809,7 +6809,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6926,7 +6926,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -7099,7 +7099,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -7285,7 +7285,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -7551,7 +7551,7 @@ class SegmentMaker(experimental.SegmentMaker):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
             ..  docs::

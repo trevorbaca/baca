@@ -157,7 +157,7 @@ class ColorCommand(abjad.AbjadObject):
         ::
 
             >>> result = segment_maker(is_doc_example=True)
-            >>> lilypond_file, segment_metadata = result
+            >>> lilypond_file, metadata = result
             >>> show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

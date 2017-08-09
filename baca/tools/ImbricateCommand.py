@@ -861,7 +861,7 @@ class ImbricateCommand(abjad.AbjadObject):
             ::
 
                 >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, segment_metadata = result
+                >>> lilypond_file, metadata = result
                 >>> voice = lilypond_file['Music Voice 2']
                 >>> abjad.override(voice).beam.positions = (-5, -5)
                 >>> show(lilypond_file) # doctest: +SKIP
