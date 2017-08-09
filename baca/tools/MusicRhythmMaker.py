@@ -332,7 +332,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         if rest_prefix:
             durations = [(_, talea.denominator) for _ in rest_prefix]
             maker = abjad.LeafMaker(
-                decrease_durations_monotonically=decrease_durations,
+                decrease_monotonic=decrease_durations,
                 skips_instead_of_rests=affix_skips_instead_of_rests,
                 )
             leaves_ = maker([None], durations)
@@ -340,7 +340,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         if rest_suffix:
             durations = [(_, talea.denominator) for _ in rest_suffix]
             maker = abjad.LeafMaker(
-                decrease_durations_monotonically=decrease_durations,
+                decrease_monotonic=decrease_durations,
                 skips_instead_of_rests=affix_skips_instead_of_rests,
                 )
             leaves_ = maker([None], durations)
@@ -610,7 +610,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         talea = self._get_talea()
         leaves = []
         specifier = self._get_duration_spelling_specifier()
-        decrease_durations = specifier.decrease_durations_monotonically
+        decrease_durations = specifier.decrease_monotonic
         current_selection = self._next_segment - 1
         time_treatment = self._get_time_treatments()[current_selection]
         if time_treatment is None:
@@ -628,7 +628,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 self._next_attack += 1
                 duration = -talea[count]
                 maker = abjad.LeafMaker(
-                    decrease_durations_monotonically=decrease_durations,
+                    decrease_monotonic=decrease_durations,
                     )
                 leaves_ = maker([None], [duration])
                 leaves.extend(leaves_)
@@ -647,7 +647,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                     skips_instead_of_rests = True
                 pitch_expression = None
             maker = abjad.LeafMaker(
-                decrease_durations_monotonically=decrease_durations,
+                decrease_monotonic=decrease_durations,
                 skips_instead_of_rests=skips_instead_of_rests,
                 )
             leaves_ = maker([pitch_expression], [duration])
@@ -657,7 +657,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 self._next_attack += 1
                 duration = -talea[count]
                 maker = abjad.LeafMaker(
-                    decrease_durations_monotonically=decrease_durations,
+                    decrease_monotonic=decrease_durations,
                     )
                 leaves_ = maker([None], [duration])
                 leaves.extend(leaves_)
@@ -1541,7 +1541,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> rhythm_maker = baca.MusicRhythmMaker(
                 ...     duration_spelling_specifier=abjad.rhythmmakertools.DurationSpellingSpecifier(
-                ...         decrease_durations_monotonically=False,
+                ...         decrease_monotonic=False,
                 ...         ),
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[4, 4, 5],
