@@ -503,14 +503,8 @@ class SegmentMaker(experimental.SegmentMaker):
 
         Returns LilyPond file and segment metadata.
         '''
-        if metadata:
-            self._segment_metadata = metadata
-        else:
-            self._segment_metadata = abjad.TypedOrderedDict()
-        if previous_metadata:
-            self._previous_segment_metadata = previous_metadata
-        else:
-            self._previous_segment_metadata = abjad.TypedOrderedDict()
+        self._metadata = metadata or abjad.TypedOrderedDict()
+        self._previous_metadata = previous_metadata or abjad.TypedOrderedDict()
         self._is_doc_example = is_doc_example
         self._make_score()
         self._make_lilypond_file(
@@ -542,9 +536,9 @@ class SegmentMaker(experimental.SegmentMaker):
         self._check_range()
         self._color_repeat_pitch_classes_()
         self._color_octaves_()
-        self._update_segment_metadata()
+        self._update_metadata()
         self._print_segment_duration_()
-        return self._lilypond_file, self._segment_metadata
+        return self._lilypond_file, self._metadata
 
     ### PRIVATE PROPERTIES ###
 
@@ -622,7 +616,7 @@ class SegmentMaker(experimental.SegmentMaker):
     def _apply_previous_segment_end_settings(self):
         if self._is_first_segment():
             return
-        if not self._previous_segment_metadata:
+        if not self._previous_metadata:
             message = 'can not find previous metadata before segment {}.'
             message = message.format(self._get_segment_identifier())
             print(message)
@@ -1220,7 +1214,7 @@ class SegmentMaker(experimental.SegmentMaker):
         return string
 
     def _get_name(self):
-        return self._segment_metadata.get('name')
+        return self._metadata.get('name')
 
     def _get_offsets(self, start_stage, stop_stage):
         context = self._score['Time Signature Context Skips']
@@ -1237,20 +1231,20 @@ class SegmentMaker(experimental.SegmentMaker):
         return start_offset, stop_offset
 
     def _get_previous_clef(self, context_name):
-        if not self._previous_segment_metadata:
+        if not self._previous_metadata:
             return
         string = 'end_clefs_by_context'
-        previous_clefs = self._previous_segment_metadata.get(string)
+        previous_clefs = self._previous_metadata.get(string)
         if not previous_clefs:
             return
         clef_name = previous_clefs.get(context_name)
         return abjad.Clef(clef_name)
 
     def _get_previous_instrument(self, context_name):
-        if not self._previous_segment_metadata:
+        if not self._previous_metadata:
             return
         string = 'end_instruments_by_context'
-        previous_instruments = self._previous_segment_metadata.get(string)
+        previous_instruments = self._previous_metadata.get(string)
         if not previous_instruments:
             return
         instrument_name = previous_instruments.get(context_name)
@@ -1258,9 +1252,9 @@ class SegmentMaker(experimental.SegmentMaker):
         return instrument
 
     def _get_previous_metronome_mark(self):
-        if not self._previous_segment_metadata:
+        if not self._previous_metadata:
             return
-        name = self._previous_segment_metadata.get('end_tempo')
+        name = self._previous_metadata.get('end_tempo')
         if not name:
             return
         metronome_mark = self.metronome_marks.get(name)
@@ -1311,14 +1305,14 @@ class SegmentMaker(experimental.SegmentMaker):
         return rhythm_specifiers
 
     def _get_segment_identifier(self):
-        segment_name = self._segment_metadata.get('segment_name')
+        segment_name = self._metadata.get('segment_name')
         if segment_name is not None:
             return segment_name
         segment_number = self._get_segment_number()
         return segment_number
 
     def _get_segment_number(self):
-        return self._segment_metadata.get('segment_number', 1)
+        return self._metadata.get('segment_number', 1)
 
     def _get_stage_numbers(self, argument):
         if isinstance(argument, baca.StageExpression):
@@ -1522,7 +1516,7 @@ class SegmentMaker(experimental.SegmentMaker):
 
     def _is_last_segment(self):
         segment_number = self._get_segment_number()
-        segment_count = self._segment_metadata.get('segment_count')
+        segment_count = self._metadata.get('segment_count')
         return segment_number == segment_count
 
     def _label_clock_time_(self):
@@ -1711,7 +1705,7 @@ class SegmentMaker(experimental.SegmentMaker):
 
     def _make_score(self):
         score = self.score_template()
-        first_bar_number = self._segment_metadata.get('first_bar_number')
+        first_bar_number = self._metadata.get('first_bar_number')
         if first_bar_number is not None:
             abjad.setting(score).current_bar_number = first_bar_number
         self._score = score
@@ -2018,14 +2012,14 @@ class SegmentMaker(experimental.SegmentMaker):
             compound_scope = scoped_specifier.scope
         return compound_scope, specifier_wrapper, specifier
 
-    def _update_segment_metadata(self):
-        self._segment_metadata['measure_count'] = self.measure_count
+    def _update_metadata(self):
+        self._metadata['measure_count'] = self.measure_count
         end_settings = self._get_end_settings()
-        self._segment_metadata.update(end_settings)
-        class_ = type(self._segment_metadata)
-        items = sorted(self._segment_metadata.items())
+        self._metadata.update(end_settings)
+        class_ = type(self._metadata)
+        items = sorted(self._metadata.items())
         metadata = class_(items)
-        self._segment_metadata = metadata
+        self._metadata = metadata
 
     ### PUBLIC PROPERTIES ###
 
