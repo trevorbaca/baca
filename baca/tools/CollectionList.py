@@ -1517,7 +1517,7 @@ class CollectionList(abjad.AbjadValueObject):
 
     def helianthate(self, n=0, m=0):
         r'''Helianthates collections.
-        
+
         ..  container:: example
 
             ::
@@ -1574,7 +1574,7 @@ class CollectionList(abjad.AbjadValueObject):
         if self:
             collection = self[0]
             for collection_ in self[1:]:
-                collection = collection + collection_ 
+                collection = collection + collection_
             collections.append(collection)
         return abjad.new(self, collections=collections)
 
@@ -1732,7 +1732,8 @@ class CollectionList(abjad.AbjadValueObject):
         i = 0
         collections = []
         for count in counts:
-            items = source[i:i+count]
+            stop = i + count
+            items = source[i:stop]
             collection = self._initialize_collection(items)
             collections.append(collection)
             i += count
@@ -1765,7 +1766,7 @@ class CollectionList(abjad.AbjadValueObject):
         sequence = baca.Sequence(items=self)
         collections = sequence.remove(indices=indices, period=period)
         return abjad.new(self, collections=collections)
-   
+
     def remove_duplicate_pitch_classes(self, level=-1):
         r'''Removes duplicate pitch-classes at `level`.
 
@@ -2027,7 +2028,7 @@ class CollectionList(abjad.AbjadValueObject):
                 PitchSegment([16, 19])
                 PitchSegment([12, 14, 18, 17])
                 PitchSegment([16, 19])
-        
+
         Returns new collection list.
         '''
         collections = baca.Sequence(items=self)
@@ -2121,7 +2122,6 @@ class CollectionList(abjad.AbjadValueObject):
                 collection = collection.soprano_to_octave(n=n)
             collections.append(collection)
         return abjad.new(self, collections=collections)
-
 
     def space_down(
         self,

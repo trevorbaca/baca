@@ -287,7 +287,8 @@ class PitchArrayRow(abjad.AbjadObject):
             right = ', '.join(
                 [x._format_row_column_repr_string for x in self.cells[-2:]])
             number_in_middle = len_self - 4
-            middle = ', ... [%s] ..., '% number_in_middle
+            middle = ', ... [{}] ..., '
+            middle = middle.format(number_in_middle)
             return left + middle + right
 
     @property
@@ -546,9 +547,10 @@ class PitchArrayRow(abjad.AbjadObject):
         cells = self[argument]
         new_cells = []
         for cell in cells:
-            if not cell in new_cells:
+            if cell not in new_cells:
                 trim = [
-                    x for x in cell.column_indices if x not in column_indices]
+                    x for x in cell.column_indices if x not in column_indices
+                    ]
                 new_width = cell.width - len(trim)
                 new_cell = copy.copy(cell)
                 new_cell._width = new_width
@@ -685,7 +687,7 @@ class PitchArrayRow(abjad.AbjadObject):
         for cell in cells:
             if not isinstance(cell, baca.PitchArrayCell):
                 raise TypeError
-            if not cell.parent_row is self:
+            if cell.parent_row is not self:
                 message = 'cells must belong to row.'
                 raise ValueError(message)
             column_indices.extend(cell.column_indices)

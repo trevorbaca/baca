@@ -13,7 +13,7 @@ class RegisterInterpolationCommand(abjad.AbjadObject):
     ..  container:: example
 
         With music-maker.
-        
+
         All stages glued together:
 
         ::
@@ -1010,7 +1010,7 @@ class RegisterInterpolationCommand(abjad.AbjadObject):
         registration = abjad.Registration()
         registration.append(('[A0, C8]', current_pitch))
         return registration
-    
+
     ### PUBLIC PROPERTIES ###
 
     @property

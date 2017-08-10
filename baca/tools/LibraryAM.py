@@ -1461,7 +1461,7 @@ class LibraryAM(object):
     @staticmethod
     def center_to_octave(n=4, selector=None):
         r"""Octave-transposes music.
-        
+
         ..  container:: example
 
             Octave-transposes music such that the centroid of the entire
@@ -3187,7 +3187,7 @@ class LibraryAM(object):
                     }
                 >>
 
-        """ 
+        """
         selector = selector or baca.select_chord_heads()
         return baca.AttachCommand(
             arguments=[abjad.Arpeggio(direction=Down)],
@@ -4414,7 +4414,7 @@ class LibraryAM(object):
     @staticmethod
     def five_line_staff(selector=None):
         r'''Attaches five-line staff spanner to leaves.
-        
+
         ..  container:: example
 
             Attaches five-line staff to leaves in tuplet 1:
@@ -4778,8 +4778,7 @@ class LibraryAM(object):
         return baca.RhythmSpecifier(
             division_expression=abjad.sequence()
                 .sum()
-                .sequence()
-                ,
+                .sequence(),
             rhythm_maker=abjad.rhythmmakertools.TupletRhythmMaker(
                 tie_specifier=abjad.rhythmmakertools.TieSpecifier(
                     use_messiaen_style_ties=True,
@@ -4912,7 +4911,7 @@ class LibraryAM(object):
     @staticmethod
     def grid_poss_to_flaut_poss():
         r'''Makes color transition spanner.
-        
+
         Returns text spanner.
         '''
         left_text = abjad.Markup('grid. possibile').italic().larger()
@@ -4920,7 +4919,7 @@ class LibraryAM(object):
         right_text = abjad.Markup.hspace(1) + abjad.Markup('flaut. possibile')
         right_text = right_text.italic().larger()
         grid_poss_to_flaut_poss = abjad.TextSpanner(
-            overrides = {
+            overrides={
                 'text_spanner__bound_details__left__padding': -1,
                 'text_spanner__bound_details__left__stencil_align_dir_y': 0,
                 'text_spanner__bound_details__left__text': left_text,
@@ -4938,7 +4937,7 @@ class LibraryAM(object):
 
     @staticmethod
     def hairpins(
-        hairpins, 
+        hairpins,
         selector=None,
         flare=None,
         include_rests=None,
@@ -6039,7 +6038,7 @@ class LibraryAM(object):
         left_text = abjad.Markup('molto flautando').italic().larger() + abjad.Markup.hspace(1)
         right_text = abjad.Markup.hspace(1) + abjad.Markup('molto gridato').italic().larger()
         spanner = abjad.TextSpanner(
-            overrides = {
+            overrides={
                 'text_spanner__bound_details__left__padding': -1,
                 'text_spanner__bound_details__left__stencil_align_dir_y': 0,
                 'text_spanner__bound_details__left__text': left_text,

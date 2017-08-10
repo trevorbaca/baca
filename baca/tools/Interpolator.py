@@ -5,7 +5,7 @@ import fractions
 
 class Interpolator(abjad.AbjadObject):
     r'''Interpolator.
-    
+
     ::
 
         >>> import abjad
@@ -93,7 +93,9 @@ class Interpolator(abjad.AbjadObject):
         result = []
         step = 0
         if 1 < count:
-            step = fractions.Fraction(stop-start, count-1)
+            numerator = stop - start
+            denominator = count - 1
+            step = fractions.Fraction(numerator, denominator)
         for i in range(count):
             addend = i * step
             number = start + addend

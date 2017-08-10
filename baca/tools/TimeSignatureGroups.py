@@ -135,7 +135,7 @@ class TimeSignatureGroups(abjad.AbjadObject):
             >>
 
         Returns LilyPond file.
-        ''' 
+        '''
         staff = abjad.Staff()
         staff.consists_commands.append('Horizontal_bracket_engraver')
         for group_index, group in enumerate(self.groups):

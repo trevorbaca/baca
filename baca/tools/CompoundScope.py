@@ -13,7 +13,7 @@ class CompoundScope(abjad.AbjadObject):
         >>> import baca
 
     ..  container:: example
-    
+
         Makes four-part compound scope:
 
         ::

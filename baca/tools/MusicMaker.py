@@ -230,7 +230,7 @@ class MusicMaker(abjad.AbjadObject):
                         }
                     }
                 >>
-                
+
         ..  container:: example
 
             Calltime denominator:
@@ -766,7 +766,7 @@ class MusicMaker(abjad.AbjadObject):
             imbricated_selection = specifier(container)
             imbricated_selections.update(imbricated_selection)
         return imbricated_selections, unused_specifiers
-        
+
     def _apply_nesting_specifiers(self, selections, specifiers):
         assert self._all_are_selections(selections), repr(selections)
         specifiers_ = []
@@ -927,9 +927,10 @@ class MusicMaker(abjad.AbjadObject):
         half_length = int(length / 2)
         for index in range(half_length):
             first_selection = selections[index]
-            second_selection = selections[index+half_length]
-            first_format = format(first_selection, 'lilypond') 
-            second_format = format(second_selection, 'lilypond') 
+            index_ = index + half_length
+            second_selection = selections[index_]
+            first_format = format(first_selection, 'lilypond')
+            second_format = format(second_selection, 'lilypond')
             if not first_format == second_format:
                 return False
         return True
@@ -1076,7 +1077,7 @@ class MusicMaker(abjad.AbjadObject):
         else:
             raise TypeError(item_class)
 
-    def _validate_voice_name(self, voice_name): 
+    def _validate_voice_name(self, voice_name):
         if not isinstance(voice_name, str):
             message = 'voice name must be string: {!r}.'
             message = message.format(voice_name)
@@ -1336,7 +1337,7 @@ class MusicMaker(abjad.AbjadObject):
 
         Returns positive integer or none.
         '''
-        return self._denominator 
+        return self._denominator
 
     @property
     def specifiers(self):

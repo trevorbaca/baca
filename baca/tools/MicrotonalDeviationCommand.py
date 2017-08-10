@@ -213,7 +213,7 @@ class MicrotonalDeviationCommand(abjad.AbjadObject):
                 ...         [0, 1, 2, 1],
                 ...         ),
                 ...     )
-        
+
             ::
 
                 >>> command.number_lists

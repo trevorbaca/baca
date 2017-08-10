@@ -179,7 +179,7 @@ class WellformednessManager(abjad.AbjadObject):
                 >>> manager = baca.WellformednessManager()
                 >>> manager.is_well_formed(staff)
                 True
-                
+
         ..  container:: example
 
             Repeat pitches are not well-formed:

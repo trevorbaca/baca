@@ -191,7 +191,7 @@ class Constellation(abjad.AbjadObject):
 
     def _constellate_partitioned_generator_pitch_numbers(self):
         self._pitch_number_lists = baca.constellate(
-            self._partitioned_generator_pitch_numbers, 
+            self._partitioned_generator_pitch_numbers,
             self.pitch_range,
             )
 
@@ -213,12 +213,12 @@ class Constellation(abjad.AbjadObject):
         lilypond_file.global_staff_size = 18
         lilypond_file.layout_block.indent = 0
         lilypond_file.layout_block.ragged_right = True
-        lilypond_file.paper_block.system_system_spacing = \
-            abjad.SchemeVector(
+        lilypond_file.paper_block.system_system_spacing = abjad.SchemeVector(
             abjad.SchemePair('basic_distance', 0),
             abjad.SchemePair('minimum_distance', 0),
             abjad.SchemePair('padding', 12),
-            abjad.SchemePair('stretchability', 0))
+            abjad.SchemePair('stretchability', 0),
+            )
         lilypond_file.paper_block.top_margin = 24
         return lilypond_file, score
 
@@ -348,7 +348,7 @@ class Constellation(abjad.AbjadObject):
 
     def get_number_of_chord(self, chord):
         r'''Gets number of chord.
-        
+
         ..  container:: example
 
             ::
@@ -386,7 +386,7 @@ class Constellation(abjad.AbjadObject):
     def make_labeled_colored_chords(self):
         result = self.make_labeled_chords()
         for chord in result:
-            abjad.label(chord).color_note_heads(self._color_map) 
+            abjad.label(chord).color_note_heads(self._color_map)
         return result
 
     def show_colored_generator_chord(self):

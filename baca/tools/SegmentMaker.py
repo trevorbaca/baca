@@ -322,7 +322,7 @@ class SegmentMaker(experimental.SegmentMaker):
         '_stylesheets',
         'string-trio-stylesheet.ily',
         )
-        
+
     _absolute_two_voice_staff_stylesheet_path = os.path.join(
         '/',
         'Users',
@@ -490,7 +490,7 @@ class SegmentMaker(experimental.SegmentMaker):
     ### SPECIAL METHODS ###
 
     def __call__(
-        self, 
+        self,
         is_doc_example=None,
         is_test=None,
         metadata=None,
@@ -553,7 +553,7 @@ class SegmentMaker(experimental.SegmentMaker):
         if isinstance(self.final_barline, str):
             abbreviation = self.final_barline
         self._score.add_final_bar_line(
-            abbreviation=abbreviation, 
+            abbreviation=abbreviation,
             to_each_voice=True,
             )
         if self.final_barline is Exact:
@@ -906,7 +906,7 @@ class SegmentMaker(experimental.SegmentMaker):
                 abjad.override(note).stem.color = color
 
     def _compound_scope_to_logical_ties(
-        self, 
+        self,
         scoped_specifier,
         compound_scope,
         include_rests=False,
@@ -1117,7 +1117,7 @@ class SegmentMaker(experimental.SegmentMaker):
         for leaf in abjad.iterate(self._score).by_leaf():
             if abjad.inspect(leaf).get_indicator(self._extend_beam_tag):
                 self._extend_beam(leaf)
-        
+
     def _get_cached_leaves(self, include_rests=False):
         if include_rests:
             if self._cached_leaves_with_rests is None:
@@ -1447,7 +1447,7 @@ class SegmentMaker(experimental.SegmentMaker):
                 measures = self._make_skips()
             else:
                 measures = self._make_rests()
-            voice.extend(measures) 
+            voice.extend(measures)
             return
         effective_staff = abjad.inspect(voice).get_effective_staff()
         effective_staff_name = effective_staff.context_name
@@ -1461,7 +1461,7 @@ class SegmentMaker(experimental.SegmentMaker):
                 continue
             try:
                 contribution = rhythm_specifier.specifier(
-                    effective_staff_name, 
+                    effective_staff_name,
                     start_offset=contribution.start_offset,
                     time_signatures=contribution.payload,
                     )
@@ -1546,7 +1546,7 @@ class SegmentMaker(experimental.SegmentMaker):
                     agent = abjad.inspect(previous_leaf)
                     result = agent.get_effective(abjad.Instrument)
                     previous_instrument = result
-                elif (leaf_index == 0 and 
+                elif (leaf_index == 0 and
                     1 < self._get_segment_number()):
                     instrument = self._get_previous_instrument(staff.name)
                     previous_instrument = instrument
@@ -1617,7 +1617,7 @@ class SegmentMaker(experimental.SegmentMaker):
                 if getattr(item, 'name', None) in block_names:
                     lilypond_file.items.remove(item)
         self._lilypond_file = lilypond_file
-            
+
     def _make_multimeasure_rest_filled_measures(self, time_signatures=None):
         measures = []
         time_signatures = time_signatures or self.time_signatures
@@ -1655,7 +1655,7 @@ class SegmentMaker(experimental.SegmentMaker):
         assert self._stages_do_not_overlap(rhythm_specifiers)
         if not rhythm_specifiers:
             measures = self._make_rests()
-            voice.extend(measures) 
+            voice.extend(measures)
             return
         effective_staff = abjad.inspect(voice).get_effective_staff()
         effective_staff_name = effective_staff.context_name
@@ -1676,7 +1676,7 @@ class SegmentMaker(experimental.SegmentMaker):
                 voice.extend(measures)
             contribution = self._get_time_signatures(*rhytm_specifier.stages)
             contribution = rhythm_specifier(
-                effective_staff_name, 
+                effective_staff_name,
                 start_offset=contribution.start_offset,
                 time_signatures=contribution.payload,
                 )
@@ -1715,7 +1715,7 @@ class SegmentMaker(experimental.SegmentMaker):
         maker = abjad.MeasureMaker()
         measures = maker(time_signatures)
         return measures
-        
+
     def _make_skips(self, time_signatures=None):
         time_signatures = time_signatures or self.time_signatures
         rhythm_maker = abjad.rhythmmakertools.SkipRhythmMaker()
@@ -1759,7 +1759,8 @@ class SegmentMaker(experimental.SegmentMaker):
                 measure_start_number, _ = pair
                 #pair = self._stage_number_to_measure_indices(stop)
                 #measure_stop_number, _ = pair
-                pair = self._stage_number_to_measure_indices(stop-1)
+                stop -= 1
+                pair = self._stage_number_to_measure_indices(stop)
                 measure_stop_number = pair[-1] + 1
             else:
                 message = 'implement evaluation for {!r} expressions.'
@@ -1774,8 +1775,7 @@ class SegmentMaker(experimental.SegmentMaker):
 
     def _move_instruments_from_notes_back_to_rests(self):
         prototype = abjad.Instrument
-        rest_prototype = (abjad.Rest, 
-            abjad.MultimeasureRest)
+        rest_prototype = (abjad.Rest, abjad.MultimeasureRest)
         for leaf in abjad.iterate(self._score).by_leaf():
             instruments = abjad.inspect(leaf).get_indicators(prototype)
             if not instruments:
@@ -1795,7 +1795,7 @@ class SegmentMaker(experimental.SegmentMaker):
                     new_instrument = copy.deepcopy(instrument)
                     abjad.attach(new_instrument, current_leaf)
                     break
-        
+
     def _populate_time_signature_context(self):
         context = self._score['Global Skips']
         measures = self._make_skip_filled_measures()
@@ -1829,10 +1829,10 @@ class SegmentMaker(experimental.SegmentMaker):
                 is_trending = True
             next_tempo = None
             measure_summary = [
-                duration, 
-                current_tempo, 
+                duration,
+                current_tempo,
                 is_trending,
-                next_tempo, 
+                next_tempo,
                 ]
             measure_summaries.append(measure_summary)
         total_duration = abjad.Duration(0)
@@ -1873,7 +1873,7 @@ class SegmentMaker(experimental.SegmentMaker):
                 leaves.append(leaf)
             elif leaves:
                 break
-        return abjad.select(leaves )
+        return abjad.select(leaves)
 
     def _selection_to_timespan(self, selection):
             if isinstance(selection[0], abjad.LogicalTie):
@@ -1920,7 +1920,8 @@ class SegmentMaker(experimental.SegmentMaker):
             raise Exception(message)
         measure_indices = abjad.mathtools.cumulative_sums(
             self.measures_per_stage)
-        start_measure_index = measure_indices[stage_number-1]
+        stop = stage_number - 1
+        start_measure_index = measure_indices[stop]
         stop_measure_index = measure_indices[stage_number] - 1
         return start_measure_index, stop_measure_index
 
@@ -1930,7 +1931,8 @@ class SegmentMaker(experimental.SegmentMaker):
             if scoped_specifier.stages is None:
                 continue
             start_stage, stop_stage = scoped_specifier.stages
-            stage_numbers_ = range(start_stage, stop_stage+1)
+            stop_stage += 1
+            stage_numbers_ = range(start_stage, stop_stage)
             stage_numbers.extend(stage_numbers_)
         return len(stage_numbers) == len(set(stage_numbers))
 
@@ -2065,7 +2067,7 @@ class SegmentMaker(experimental.SegmentMaker):
                 ...         figure_name=i,
                 ...         )
                 ...     figures.append(contribution['Voice 1'])
-                ...     time_signatures.append(contribution.time_signature)    
+                ...     time_signatures.append(contribution.time_signature)
                 ...
                 >>> figures_ = []
                 >>> for figure in figures:
@@ -2210,7 +2212,7 @@ class SegmentMaker(experimental.SegmentMaker):
                 ...         figure_name=i,
                 ...         )
                 ...     figures.append(contribution['Voice 1'])
-                ...     time_signatures.append(contribution.time_signature)    
+                ...     time_signatures.append(contribution.time_signature)
                 ...
                 >>> figures_ = []
                 >>> for figure in figures:
@@ -2579,7 +2581,7 @@ class SegmentMaker(experimental.SegmentMaker):
                 ...         figure_name=i,
                 ...         )
                 ...     figures.append(contribution['Voice 1'])
-                ...     time_signatures.append(contribution.time_signature)    
+                ...     time_signatures.append(contribution.time_signature)
                 ...
                 >>> figures_ = []
                 >>> for figure in figures:
@@ -2746,7 +2748,7 @@ class SegmentMaker(experimental.SegmentMaker):
                 ...         figure_name=i,
                 ...         )
                 ...     figures.append(contribution['Voice 1'])
-                ...     time_signatures.append(contribution.time_signature)    
+                ...     time_signatures.append(contribution.time_signature)
                 ...
                 >>> figures_ = []
                 >>> for figure in figures:
@@ -3623,7 +3625,7 @@ class SegmentMaker(experimental.SegmentMaker):
     @property
     def final_markup(self):
         r'''Gets final markup.
-    
+
         ..  container:: example
 
             No final markup by default:
@@ -4014,7 +4016,7 @@ class SegmentMaker(experimental.SegmentMaker):
         Returns true, false or none.
         '''
         return self._ignore_repeat_pitch_classes
-    
+
     @property
     def ignore_unpitched_notes(self):
         r'''Is true when segment ignores unpitched notes.
@@ -4338,7 +4340,7 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> for collections in collection_lists:
                 ...     contribution = music_maker('Voice 1', collections)
                 ...     figures.append(contribution['Voice 1'])
-                ...     time_signatures.append(contribution.time_signature)    
+                ...     time_signatures.append(contribution.time_signature)
                 ...
                 >>> figures_ = []
                 >>> for figure in figures:
@@ -4586,7 +4588,7 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>> for collections in collection_lists:
                 ...     contribution = music_maker('Voice 1', collections)
                 ...     figures.append(contribution['Voice 1'])
-                ...     time_signatures.append(contribution.time_signature)    
+                ...     time_signatures.append(contribution.time_signature)
                 ...
                 >>> figures_ = []
                 >>> for figure in figures:
@@ -4920,7 +4922,7 @@ class SegmentMaker(experimental.SegmentMaker):
                         }
                     >>
                 >>
-                
+
         ..  container:: example
 
             Does label clock time:
@@ -5717,7 +5719,7 @@ class SegmentMaker(experimental.SegmentMaker):
     @property
     def print_segment_duration(self):
         r'''Is true when segment prints duration in seconds.
-        
+
         Output prints to terminal.
 
         Defaults to none.
@@ -7755,9 +7757,9 @@ class SegmentMaker(experimental.SegmentMaker):
 
     def copy_specifier(self, scoped_offset, target_scope, **keywords):
         r'''Copies rhythm specifier.
-        
+
         Gets rhythm specifier defined at `scoped_offset`.
-        
+
         Makes new rhythm specifier with `target_scope` and optional `keywords`.
 
         Returns rhythm specifier.

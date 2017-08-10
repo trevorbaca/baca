@@ -9,7 +9,7 @@ def partition_integer_into_halves(n, bigger=Left, even='allowed'):
     ::
 
         >>> import baca
-    
+
     Writes positive integer `n` as the pair ``t = (left, right)`` such that
     ``n == left + right``.
 

@@ -136,7 +136,7 @@ class DivisionSequenceExpression(abjad.Expression):
 
     __slots__ = (
         )
-    
+
     _publish_storage_format = True
 
     ### SPECIAL METHODS ###
@@ -176,10 +176,10 @@ class DivisionSequenceExpression(abjad.Expression):
         return abjad.new(expression, proxy_class=class_)
 
     def split_by_durations(
-        self, 
+        self,
         compound_meter_multiplier=None,
         cyclic=True,
-        durations=(), 
+        durations=(),
         pattern_rotation_index=0,
         remainder=Right,
         remainder_fuse_threshold=None,

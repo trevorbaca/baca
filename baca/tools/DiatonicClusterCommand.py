@@ -39,7 +39,7 @@ class DiatonicClusterCommand(abjad.AbjadObject):
 
     __slots__ = (
         '_cluster_widths',
-        ) 
+        )
 
     ### INITIALIZER ###
 

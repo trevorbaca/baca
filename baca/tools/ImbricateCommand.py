@@ -774,7 +774,7 @@ class ImbricateCommand(abjad.AbjadObject):
         ..  container:: example
 
             Segment-maker allows for beam extension.
-            
+
             Extends beam across figures:
 
                 >>> music_maker = baca.MusicMaker(
@@ -802,7 +802,7 @@ class ImbricateCommand(abjad.AbjadObject):
                 >>> dictionary = contribution.selections
                 >>> voice_1_selections.append(dictionary['Voice 1'])
                 >>> voice_2_selections.append(dictionary['Voice 2'])
-                >>> time_signatures.append(contribution.time_signature)    
+                >>> time_signatures.append(contribution.time_signature)
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     [[19, 13, 9, 8]],
@@ -816,7 +816,7 @@ class ImbricateCommand(abjad.AbjadObject):
                 >>> dictionary = contribution.selections
                 >>> voice_1_selections.append(dictionary['Voice 1'])
                 >>> voice_2_selections.append(dictionary['Voice 2'])
-                >>> time_signatures.append(contribution.time_signature)    
+                >>> time_signatures.append(contribution.time_signature)
 
             ::
 
@@ -1306,7 +1306,8 @@ class ImbricateCommand(abjad.AbjadObject):
                     abjad.mutate(leaf).replace([skip])
         if not self.allow_unused_pitches and not cursor.is_exhausted:
             message = '{!r} used only {} of {} pitches.'
-            message = message.format(cursor, cursor.position-1, len(cursor))
+            current = cursor.position - 1
+            message = message.format(cursor, current, len(cursor))
             raise Exception(message)
         self._apply_specifiers(container)
         if self.extend_beam:
@@ -1742,7 +1743,7 @@ class ImbricateCommand(abjad.AbjadObject):
         Returns pitch or pitch-class segment.
         '''
         return self._segment
-        
+
     @property
     def selector(self):
         r'''Gets selector.

@@ -77,7 +77,7 @@ class Sequence(abjad.Sequence):
                 >>> expression = baca.sequence()
 
             ::
-            
+
                 >>> expression(items=collection)
                 Sequence([NumberedPitchClass(10), NumberedPitchClass(10.5), NumberedPitchClass(6), NumberedPitchClass(7), NumberedPitchClass(10.5), NumberedPitchClass(7)])
 
@@ -317,7 +317,7 @@ class Sequence(abjad.Sequence):
 
                     >>> for item in expression([collection_1, collection_2]):
                     ...     item
-                    ... 
+                    ...
                     Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
                 ::
@@ -689,7 +689,7 @@ class Sequence(abjad.Sequence):
 
                     >>> for sequence in expression([collection_1, collection_2]):
                     ...     sequence
-                    ... 
+                    ...
                     Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
                     Sequence([PitchClassSegment([10, 0, 2, 6]), PitchClassSegment([8, 7])])
                     Sequence([PitchClassSegment([4, 10, 2, 5]), PitchClassSegment([1, 3])])
@@ -900,7 +900,7 @@ class Sequence(abjad.Sequence):
                 message = message.format(items[0], items[-1])
                 raise Exception(message)
         else:
-            for i in range(count-1):
+            for i in range(count - 1):
                 sequence = items[-1]
                 for operand in operands:
                     sequence = sequence.map(operand)
@@ -916,7 +916,7 @@ class Sequence(abjad.Sequence):
         r'''Iterates sequence boustrophedon.
 
         ..  container:: example
-            
+
             Iterates atoms boustrophedon:
 
             ::
@@ -932,7 +932,7 @@ class Sequence(abjad.Sequence):
 
                 >>> sequence.boustrophedon(count=1)
                 Sequence([1, 2, 3, 4, 5])
-            
+
             ::
 
                 >>> sequence.boustrophedon(count=2)
@@ -972,7 +972,7 @@ class Sequence(abjad.Sequence):
 
                 >>> for collection in sequence.boustrophedon(count=2):
                 ...     collection
-                ... 
+                ...
                 PitchClassSegment([1, 2, 3])
                 PitchClassSegment([4, 5, 6])
                 PitchClassSegment([5, 4])
@@ -982,7 +982,7 @@ class Sequence(abjad.Sequence):
 
                 >>> for collection in sequence.boustrophedon(count=3):
                 ...     collection
-                ... 
+                ...
                 PitchClassSegment([1, 2, 3])
                 PitchClassSegment([4, 5, 6])
                 PitchClassSegment([5, 4])
@@ -1000,7 +1000,7 @@ class Sequence(abjad.Sequence):
                 >>> sequence = baca.Sequence([collection, 4, 5])
                 >>> for item in sequence.boustrophedon(count=3):
                 ...     item
-                ... 
+                ...
                 PitchClassSegment([1, 2, 3])
                 4
                 5
@@ -1028,7 +1028,7 @@ class Sequence(abjad.Sequence):
 
                 >>> for collection in expression(collections):
                 ...     collection
-                ... 
+                ...
                 PitchClassSegment([1, 2, 3])
                 PitchClassSegment([4, 5, 6])
                 PitchClassSegment([5, 4])

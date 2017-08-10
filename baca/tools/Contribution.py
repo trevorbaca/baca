@@ -26,7 +26,7 @@ class Contribution(abjad.AbjadValueObject):
     @property
     def payload(self):
         r'''Gets payload of contribution.
-        
+
         Returns selection or voice.
         '''
         return self._payload

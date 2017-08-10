@@ -1458,7 +1458,7 @@ class LibraryNZ(object):
         ..  container:: example
 
             Sets proportional notation duration on leaf 0:
-            
+
             ::
 
                 >>> music_maker = baca.MusicMaker()
@@ -1562,7 +1562,7 @@ class LibraryNZ(object):
                         }
                     }
                 >>
-            
+
             ::
 
                 >>> music_maker = baca.MusicMaker()
@@ -3627,7 +3627,7 @@ class LibraryNZ(object):
         '''
         return baca.RhythmSpecifier(
             rhythm_maker=abjad.rhythmmakertools.IncisedRhythmMaker(
-                incise_specifier = abjad.rhythmmakertools.InciseSpecifier(
+                incise_specifier=abjad.rhythmmakertools.InciseSpecifier(
                     outer_divisions_only=True,
                     prefix_talea=start_talea,
                     prefix_counts=[len(start_talea)],
@@ -3826,7 +3826,7 @@ class LibraryNZ(object):
             prefix=counts,
             skips_instead_of_rests=True,
             )
-        
+
     @staticmethod
     def slur(selector=None):
         r'''Slurs trimmed leaves.
@@ -4478,11 +4478,11 @@ class LibraryNZ(object):
             revert=True,
             selector=selector,
             )
-        
+
     @staticmethod
     def soprano_to_octave(n=4, selector=None):
         r"""Octave-transposes music.
-        
+
         ..  container:: example
 
             Octave-transposes music such that the highest note in the entire
@@ -6836,7 +6836,7 @@ class LibraryNZ(object):
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
-                
+
             ..  docs::
 
                 >>> f(lilypond_file[abjad.Staff])
@@ -9045,7 +9045,7 @@ class LibraryNZ(object):
             revert=True,
             selector=selector,
             )
-            
+
     @staticmethod
     def tuplet_number_extra_offset(pair=None, selector=None):
         r'''Overrides tuplet number extra offset on leaves.
@@ -9307,7 +9307,7 @@ class LibraryNZ(object):
                         }
                     }
                 >>
-        
+
         '''
         return baca.SpannerCommand(
             selector=selector,

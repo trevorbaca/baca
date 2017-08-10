@@ -496,13 +496,13 @@ class MarkupLibrary(object):
                                 1
                             }
                     }
-        
+
         Centers markup horizontally in 16 spaces.
 
         Returns markup.
         '''
         return MarkupLibrary._make_instrument_name_markup(
-            string, 
+            string,
             16,
             column=column,
             )
@@ -1122,13 +1122,13 @@ class MarkupLibrary(object):
                                 1
                             }
                     }
-        
+
         Centers markup horizontally in 10 spaces.
 
         Returns markup.
         '''
         return MarkupLibrary._make_instrument_name_markup(
-            string, 
+            string,
             10,
             column=column,
             )

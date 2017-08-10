@@ -166,13 +166,13 @@ class ScorePitchCommand(abjad.AbjadObject):
         self._reverse = reverse
         if isinstance(source, str):
             self._use_exact_spelling = True
-        elif (isinstance(source, collections.Iterable) and 
+        elif (isinstance(source, collections.Iterable) and
             isinstance(source[0], abjad.NamedPitch)):
             self._use_exact_spelling = True
-        elif (isinstance(source, collections.Iterable) and 
+        elif (isinstance(source, collections.Iterable) and
             isinstance(source[0], abjad.Segment)):
             self._use_exact_spelling = True
-        elif (isinstance(source, collections.Iterable) and 
+        elif (isinstance(source, collections.Iterable) and
             isinstance(source[0], abjad.Set)):
             self._use_exact_spelling = True
         else:
@@ -180,7 +180,7 @@ class ScorePitchCommand(abjad.AbjadObject):
         if source is not None:
             if isinstance(source, str):
                 source = source.split()
-            source_  = []
+            source_ = []
             for element in source:
                 try:
                     element = abjad.NamedPitch(element)
@@ -255,8 +255,8 @@ class ScorePitchCommand(abjad.AbjadObject):
             if self.acyclic and source_length < logical_tie_count:
                 message = 'only {} pitches for {} logical ties: {!r} and {!r}.'
                 message = message.format(
-                    source_length, 
-                    logical_tie_count, 
+                    source_length,
+                    logical_tie_count,
                     self,
                     logical_ties,
                     )
@@ -356,7 +356,7 @@ class ScorePitchCommand(abjad.AbjadObject):
             raise NotImplementedError
         if self.allow_repeat_pitches:
             abjad.attach('repeat pitch allowed', leaf)
-            
+
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -709,7 +709,6 @@ class ScorePitchCommand(abjad.AbjadObject):
         '''
         return self._source
 
-
     @property
     def start_index(self):
         r'''Gets start index.
@@ -749,7 +748,7 @@ class ScorePitchCommand(abjad.AbjadObject):
             Gets pitches:
 
             ::
-                
+
                 >>> command = baca.ScorePitchCommand(
                 ...     source=[12, 13, 14, 15]
                 ...     )

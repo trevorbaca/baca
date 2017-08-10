@@ -12,7 +12,7 @@ class RegisterToOctaveCommand(abjad.AbjadObject):
         >>> import baca
 
     ..  container:: example
-        
+
         Chords:
 
         ::

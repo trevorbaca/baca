@@ -181,7 +181,7 @@ class HairpinCommand(abjad.AbjadObject):
                     d'4 \f
                     r4
                 }
-                
+
         ..  container:: example
 
             Does flare hairpins:

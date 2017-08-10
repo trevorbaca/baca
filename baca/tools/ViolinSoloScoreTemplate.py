@@ -115,18 +115,26 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
         abjad.attach(tag_command, time_signature_context)
 
         violin_music_voice = abjad.Voice(
-            [], 
+            [],
             context_name='ViolinMusicVoice',
             name=self.voice_abbreviations['vn'],
             )
         violin_music_staff = abjad.Staff(
-            [violin_music_voice], 
+            [violin_music_voice],
             context_name='ViolinMusicStaff',
             name='Violin Music Staff',
             )
-        #violin = abjad.instrumenttools.Violin()
-        #abjad.attach(violin, violin_music_staff)
-        #abjad.attach(abjad.Clef('treble'), violin_music_staff)
+        violin = abjad.instrumenttools.Violin()
+#        abjad.annotate(
+#            violin_music_staff,
+#            'default_instrument',
+#            violin,
+#            )
+#        abjad.annotate(
+#            violin_music_staff,
+#            'default_clef',
+#            abjad.Clef('treble'),
+#            )
         self._attach_tag('violin', violin_music_staff)
 
         music_context = abjad.Context(
@@ -138,8 +146,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             name='Music Context',
             )
 
-        score = abjad.Score(
-            [
+        score = abjad.Score([
             time_signature_context,
             music_context,
             ],

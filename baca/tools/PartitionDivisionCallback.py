@@ -290,7 +290,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
         beat_list = beat_list_
         total_duration = sum(beat_list)
         total_duration = abjad.Duration(total_duration)
-        if (total_duration.is_assignable and 
+        if (total_duration.is_assignable and
             self.fuse_assignable_total_duration):
             return [[baca.Division(total_duration)]]
         if self.counts is None:

@@ -31,7 +31,7 @@ def insert_and_transpose(notes, subrun_tokens):
         >>> t
         [0, [5, 7], 2, [4, 0, 6, 11], 7, 9, 5, [10, 6, 8], 11, [7], 4]
 
-    Set `subrun_tokens` to a list of zero or more ``(index, length_list)`` 
+    Set `subrun_tokens` to a list of zero or more ``(index, length_list)``
     pairs.
 
     For each ``(index, length_list)`` pair in *subrun_tokens* the function will
@@ -123,8 +123,9 @@ def _make_index_length_pairs(subrun_token):
 def _make_new_notes(anchor_pitch, anchor_written_duration, subrun_intervals):
     new_notes = []
     for subrun_interval in subrun_intervals:
-        new_pc = (abjad.NumberedPitch(anchor_pitch).number +
-            subrun_interval) % 12
+        new_pc = abjad.NumberedPitch(anchor_pitch).number
+        new_pc += subrun_interval
+        new_pc %= 12
         new_note = abjad.Note(new_pc, anchor_written_duration)
         new_notes.append(new_note)
     return new_notes

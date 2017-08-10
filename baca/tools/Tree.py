@@ -85,7 +85,7 @@ class Tree(abjad.AbjadObject):
                 )
 
         ::
-        
+
             >>> tree[1][0].get_payload(nested=True)
             4
 
@@ -551,7 +551,7 @@ class Tree(abjad.AbjadObject):
         for leaf in result.iterate(level=-1):
             assert not len(leaf), repr(leaf)
             pitch = leaf._items
-            pitch = operator(pitch) 
+            pitch = operator(pitch)
             leaf._set_leaf_item(pitch)
         return result
 
@@ -685,7 +685,7 @@ class Tree(abjad.AbjadObject):
             Gets all nodes at level -1:
 
             ::
-            
+
                 >>> tree[0][0]._get_next_n_nodes_at_level(None, -1)
                 [Tree(items=1), Tree(items=2), Tree(items=3), Tree(items=4), Tree(items=5), Tree(items=6), Tree(items=7)]
 
@@ -776,7 +776,8 @@ class Tree(abjad.AbjadObject):
                 ...     4, 2,
                 ...     nodes_must_be_complete=True,
                 ...     ):
-                ...     node 
+                ...     node
+                ...
                 Tree(items=1)
                 Tree(items=2)
                 Tree(items=3)

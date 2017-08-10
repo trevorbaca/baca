@@ -155,7 +155,7 @@ class OctaveDisplacementCommand(abjad.AbjadObject):
         for i, logical_tie in enumerate(logical_ties):
             assert isinstance(logical_tie, abjad.LogicalTie)
             displacement = self.displacements[i]
-            interval = abjad.NumberedInterval(12*displacement)
+            interval = abjad.NumberedInterval(12 * displacement)
             for leaf in logical_tie:
                 if isinstance(leaf, abjad.Note):
                     written_pitch = leaf.written_pitch
@@ -185,7 +185,6 @@ class OctaveDisplacementCommand(abjad.AbjadObject):
 
             ::
 
-        
                 >>> command = baca.OctaveDisplacementCommand(
                 ...     displacements=[0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2],
                 ...     )

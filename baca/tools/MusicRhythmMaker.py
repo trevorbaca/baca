@@ -268,7 +268,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 >>> state_manifest = {'_next_attack': 2}
                 >>> selections, state_manifest = rhythm_maker(
                 ...     collections,
-                ...     state_manifest=state_manifest, 
+                ...     state_manifest=state_manifest,
                 ...     )
                 >>> lilypond_file = rhythm_maker.show(selections)
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -421,7 +421,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         total_duration = leaf_selection.get_duration()
         durations = [abjad.inspect(_).get_duration() for _ in leaf_selection]
         if accelerando_indicator == 'accel':
-            exponent = 0.625 
+            exponent = 0.625
         elif accelerando_indicator == 'rit':
             exponent = 1.625
         multipliers = class_._make_accelerando_multipliers(durations, exponent)
@@ -498,7 +498,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 NonreducedFraction(848, 1024)
                 NonreducedFraction(651, 1024)
                 NonreducedFraction(549, 1024)
-                            
+
         Set exponent greater than 1 for ritardando.
 
         Set exponent less than 1 for accelerando.
@@ -586,7 +586,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         specifier = self._get_duration_spelling_specifier()
         if specifier.rewrite_meter:
             selections = specifier._rewrite_meter_(
-                selections, 
+                selections,
                 input_divisions,
                 )
         return selections
@@ -635,7 +635,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 count = self._next_attack
             self._next_attack += 1
             duration = talea[count]
-            assert 0 <  duration, repr(duration)
+            assert 0 < duration, repr(duration)
             skips_instead_of_rests = False
             if (isinstance(pitch_expression, tuple) and
                 len(pitch_expression) == 2 and
@@ -3197,7 +3197,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 True
 
         Set to time treatments or none.
-        
+
         Time treatments defined equal to integers; positive multipliers;
         positive durations; and the strings ``'accel'`` and ``'rit'``.
 

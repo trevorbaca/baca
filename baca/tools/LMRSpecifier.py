@@ -452,7 +452,7 @@ class LMRSpecifier(abjad.AbjadObject):
         Returns true, false or none.
         '''
         return self._left_cyclic
-        
+
     @property
     def left_length(self):
         r'''Gets left length.
@@ -948,7 +948,7 @@ class LMRSpecifier(abjad.AbjadObject):
         Returns true, false or none.
         '''
         return self._right_cyclic
-        
+
     @property
     def right_length(self):
         r'''Gets right length.

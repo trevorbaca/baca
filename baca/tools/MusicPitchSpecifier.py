@@ -151,7 +151,7 @@ class MusicPitchSpecifier(abjad.AbjadObject):
                 True
 
         ..  container:: example
-        
+
             Returns sequence of numbered pitch collections by default:
 
             ::
@@ -427,7 +427,7 @@ class MusicPitchSpecifier(abjad.AbjadObject):
                 >>
 
         ..  container:: example
-        
+
             ::
 
                 >>> specifier = baca.MusicPitchSpecifier(
@@ -442,7 +442,7 @@ class MusicPitchSpecifier(abjad.AbjadObject):
                 PitchClassSegment([9])
 
         ..  container:: example
-        
+
             ::
 
                 >>> specifier = baca.MusicPitchSpecifier(

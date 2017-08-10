@@ -68,7 +68,7 @@ class TimeSignatureMaker(abjad.AbjadObject):
         stage_specifier=None,
         tempo_specifier=None,
         ):
-        self._time_signatures = time_signatures 
+        self._time_signatures = time_signatures
         self._rotation = rotation
         self._stage_specifier = stage_specifier
         self._tempo_map = tempo_specifier
@@ -119,7 +119,8 @@ class TimeSignatureMaker(abjad.AbjadObject):
             elif isinstance(x, (tuple, list)):
                 time_signature_list = list(x)
             else:
-                time_signature_list = time_signatures[index:index+x]
+                stop = index + x
+                time_signature_list = time_signatures[index:stop]
                 time_signature_list = list(time_signature_list)
                 index += x
             time_signature_lists.append(time_signature_list)

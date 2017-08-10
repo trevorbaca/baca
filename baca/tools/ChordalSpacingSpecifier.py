@@ -294,7 +294,7 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
         while collection[-1].octave.number < 4:
             collection = collection.transpose(n=12)
         return collection
-    
+
     ### PUBLIC PROPERTIES ###
 
     @property

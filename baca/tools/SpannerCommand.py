@@ -228,7 +228,7 @@ class SpannerCommand(abjad.AbjadObject):
                 for leaf in leaves:
                     abjad.detach(abjad.Tie, leaf)
             abjad.attach(spanner, leaves)
-            
+
     ### PUBLIC PROPERTIES ###
 
     @property

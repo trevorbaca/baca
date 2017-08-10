@@ -143,7 +143,7 @@ class PitchSegment(abjad.PitchSegment):
         specifier([selection])
         segment = PitchSegment.from_selection(selection)
         return abjad.new(self, items=segment)
-        
+
     def center_to_octave(self, n=4):
         r'''Octave-transposes segment to center in octave `n`.
 

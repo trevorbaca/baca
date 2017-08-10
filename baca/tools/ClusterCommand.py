@@ -411,7 +411,7 @@ class ClusterCommand(abjad.AbjadObject):
 
     def _make_pitches(self, start_pitch, width):
         pitches = [start_pitch]
-        for i in range(width-1):
+        for i in range(width - 1):
             pitch = pitches[-1] + abjad.NamedInterval('M3')
             pitch = abjad.NamedPitch(pitch._get_diatonic_pitch_name())
             assert pitch.accidental.name == 'natural'
@@ -1007,7 +1007,7 @@ class ClusterCommand(abjad.AbjadObject):
         Returns named pitch or none.
         '''
         return self._start_pitch
-        
+
     @property
     def widths(self):
         r'''Gets widths.

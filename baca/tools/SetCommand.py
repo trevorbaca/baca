@@ -35,7 +35,7 @@ class SetCommand(abjad.AbjadObject):
     ### INITIALIZER ###
 
     def __init__(
-        self, 
+        self,
         context_name=None,
         selector=None,
         setting_name=None,

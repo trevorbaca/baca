@@ -13,7 +13,7 @@ class Counter(abjad.AbjadObject):
     ..  container:: example
 
         Initializes to zero and increments by 1:
-        
+
             >>> counter = baca.Counter(start=0)
             >>> counter.start, counter.current
             (0, 0)
@@ -32,7 +32,7 @@ class Counter(abjad.AbjadObject):
     ..  container:: example
 
         Initializes to zero and increments by 2:
-        
+
             >>> counter = baca.Counter(start=0)
             >>> counter.start, counter.current
             (0, 0)
@@ -51,7 +51,7 @@ class Counter(abjad.AbjadObject):
     ..  container:: example
 
         Initializes to 10 and increments by different values:
-        
+
             >>> counter = baca.Counter(start=10)
             >>> counter.start, counter.current
             (10, 10)

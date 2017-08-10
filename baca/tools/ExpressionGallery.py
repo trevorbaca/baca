@@ -354,7 +354,7 @@ class ExpressionGallery(object):
                 }
 
     '''
-    
+
     ### CLASS VARIABLES ###
 
     __documentation_section__ = 'Galleries'

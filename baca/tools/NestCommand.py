@@ -113,10 +113,10 @@ class NestCommand(abjad.AbjadObject):
             ...     extend_beam=True,
             ...     )
             >>> containers.extend(contribution['Voice 1'])
-            >>> time_signatures.append(contribution.time_signature)    
+            >>> time_signatures.append(contribution.time_signature)
             >>> contribution = music_maker('Voice 1', [[19, 13, 9, 8]])
             >>> containers.extend(contribution['Voice 1'])
-            >>> time_signatures.append(contribution.time_signature)    
+            >>> time_signatures.append(contribution.time_signature)
             >>> selection = abjad.select(containers)
 
         ::
@@ -269,7 +269,7 @@ class NestCommand(abjad.AbjadObject):
 
         ..  container:: example
 
-            With rest affixes: 
+            With rest affixes:
 
             ::
 
@@ -350,7 +350,7 @@ class NestCommand(abjad.AbjadObject):
                     }
                 >>
 
-        Returns new selections. 
+        Returns new selections.
         '''
         time_treatments = self._get_time_treatments()
         if time_treatments is None:

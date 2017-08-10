@@ -73,27 +73,33 @@ class RhythmSpecifier(abjad.AbjadObject):
     __documentation_section__ = 'Segments'
 
     __slots__ = (
-        '_clef', # remove
+        # remove
+        '_clef',
         '_division_maker',
         '_division_expression',
-        '_hide_untuned_percussion_markup', # remove
-        '_instrument', # remove
+        # remove
+        '_hide_untuned_percussion_markup',
+        # remove
+        '_instrument',
         '_reference_meters',
         '_rewrite_meter',
         '_rhythm_maker',
         '_rhythm_overwrites',
         '_split_at_measure_boundaries',
-        '_staff_line_count', # remove
+        # remove
+        '_staff_line_count',
         '_stages',
-        '_start_tempo', # remove
-        '_stop_tempo', # remove
+        # remove
+        '_start_tempo',
+        # remove
+        '_stop_tempo',
         '_tie_first',
         '_tie_last',
         )
 
     _publish_storage_format = True
 
-    ### INITIALIZER ###    
+    ### INITIALIZER ###
 
     def __init__(
         self,
@@ -150,8 +156,8 @@ class RhythmSpecifier(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(
-        self, 
-        effective_staff_name, 
+        self,
+        effective_staff_name,
         start_offset=None,
         time_signatures=None,
         ):
@@ -201,7 +207,7 @@ class RhythmSpecifier(abjad.AbjadObject):
 
     @property
     def _default_rhythm_maker(self):
-        mask = abjad.silence_all(use_multimeasure_rests=True) 
+        mask = abjad.silence_all(use_multimeasure_rests=True)
         multimeasure_rests = abjad.rhythmmakertools.NoteRhythmMaker(
             division_masks=[mask],
             )
@@ -263,7 +269,7 @@ class RhythmSpecifier(abjad.AbjadObject):
             divisions_.append(division_)
         assert not any(_.start_offset is None for _ in divisions_)
         return divisions_
-        
+
     def _get_division_maker(self):
         if self.division_maker is not None:
             return self.division_maker
@@ -329,7 +335,7 @@ class RhythmSpecifier(abjad.AbjadObject):
         if self.split_at_measure_boundaries:
             specifier = abjad.rhythmmakertools.DurationSpellingSpecifier
             selections = specifier._split_at_measure_boundaries(
-                selections, 
+                selections,
                 time_signatures,
                 use_messiaen_style_ties=self._use_messiaen_style_ties,
                 )
@@ -337,7 +343,7 @@ class RhythmSpecifier(abjad.AbjadObject):
         if self.rewrite_meter:
             specifier = abjad.rhythmmakertools.DurationSpellingSpecifier
             selections = specifier._rewrite_meter_(
-                selections, 
+                selections,
                 time_signatures,
                 reference_meters=self._reference_meters,
                 rewrite_tuplets=False,
@@ -368,7 +374,8 @@ class RhythmSpecifier(abjad.AbjadObject):
                 assert len(division_lists) == 1
                 division_list = division_lists[0]
                 new_selection = rhythm_maker(division_list)
-                dummy_music_voice[start_index:stop_index+1] = new_selection
+                stop = stop_index + 1
+                dummy_music_voice[start_index:stop] = new_selection
             #elif len(old_selection) == 1:
             #    assert isinstance(old_selection[0], abjad.Selection)
             #    old_selection = old_selection[0]

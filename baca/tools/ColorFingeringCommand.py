@@ -117,7 +117,7 @@ class ColorFingeringCommand(abjad.AbjadObject):
                     }
                 >>
             >>
-            
+
     '''
 
     ### CLASS VARIABLES ##
@@ -546,7 +546,6 @@ class ColorFingeringCommand(abjad.AbjadObject):
                 ...         [0, 1, 2, 1],
                 ...         ),
                 ...     )
-        
 
             ::
 

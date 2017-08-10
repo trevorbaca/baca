@@ -141,54 +141,78 @@ class StringTrioScoreTemplate(ScoreTemplate):
         abjad.attach(tag_command, time_signature_context)
 
         violin_music_voice = abjad.Voice(
-            [], 
+            [],
             context_name='ViolinMusicVoice',
             name=self.voice_abbreviations['vn'],
             )
         violin_music_staff = abjad.Staff(
-            [violin_music_voice], 
+            [violin_music_voice],
             context_name='ViolinMusicStaff',
             name='Violin Music Staff',
             )
         violin = abjad.instrumenttools.Violin()
-        #abjad.attach(violin, violin_music_staff)
-        #abjad.attach(abjad.Clef('treble'), violin_music_staff)
+#        abjad.annotate(
+#            violin_music_staff,
+#            'default_instrument',
+#            violin,
+#            )
+#        abjad.annotate(
+#            violin_music_staff,
+#            'default_clef',
+#            abjad.Clef('treble'),
+#            )
         self._attach_tag('violin', violin_music_staff)
 
         viola_music_voice = abjad.Voice(
-            [], 
+            [],
             context_name='ViolaMusicVoice',
             name=self.voice_abbreviations['va'],
             )
         viola_music_staff = abjad.Staff(
-            [viola_music_voice], 
+            [viola_music_voice],
             context_name='ViolaMusicStaff',
             name='Viola Music Staff',
             )
-        #abjad.attach(abjad.instrumenttools.Viola(), viola_music_staff)
-        #abjad.attach(abjad.Clef('alto'), viola_music_staff)
+#        abjad.annotate(
+#            viola_music_staff,
+#            'default_instrument',
+#            abjad.instrumenttools.Viola(),
+#            )
+#        abjad.annotate(
+#            viola_music_staff,
+#            'default_clef',
+#            abjad.Clef('alto'),
+#            )
         self._attach_tag('viola', viola_music_staff)
 
         cello_music_voice = abjad.Voice(
-            [], 
+            [],
             context_name='CelloMusicVoice',
             name=self.voice_abbreviations['vc'],
             )
         cello_music_staff = abjad.Staff(
-            [cello_music_voice], 
+            [cello_music_voice],
             context_name='CelloMusicStaff',
             name='Cello Music Staff',
             )
-        #abjad.attach(abjad.instrumenttools.Cello(), cello_music_staff)
-        #abjad.attach(abjad.Clef('bass'), cello_music_staff)
+#        abjad.annotate(
+#            cello_music_staff,
+#            'default_instrument',
+#            abjad.instrumenttools.Cello(),
+#            )
+#        abjad.annotate(
+#            cello_music_staff,
+#            'default_clef',
+#            abjad.Clef('bass'),
+#            )
         self._attach_tag('cello', cello_music_staff)
 
         string_section_staff_group = abjad.StaffGroup(
             [
-                violin_music_staff, 
-                viola_music_staff, 
+                violin_music_staff,
+                viola_music_staff,
                 cello_music_staff,
-                ], 
+                ],
             context_name='StringSectionStaffGroup',
             name='String Section Staff Group',
             )
@@ -202,8 +226,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             name='Music Context',
             )
 
-        score = abjad.Score(
-            [
+        score = abjad.Score([
             time_signature_context,
             music_context,
             ],

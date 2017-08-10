@@ -768,7 +768,7 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
         self._fermata_measure_width = fermata_measure_width
         if minimum_width is not None:
             minimum_width = abjad.Duration(minimum_width)
-        self._minimum_width = minimum_width    
+        self._minimum_width = minimum_width
         if multiplier is not None:
             multiplier = abjad.Multiplier(multiplier)
         self._multiplier = multiplier

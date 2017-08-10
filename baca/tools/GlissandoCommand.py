@@ -279,7 +279,7 @@ class GlissandoCommand(abjad.AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self, pattern=None):
-        if not pattern is None:
+        if pattern is not None:
             assert isinstance(pattern, abjad.Pattern), repr(pattern)
         self._pattern = pattern
 
@@ -297,7 +297,7 @@ class GlissandoCommand(abjad.AbjadObject):
             pattern = abjad.index_all()
         if isinstance(argument, list):
             selections = argument
-            assert isinstance(selections[0], abjad.Selection), repr(argument) 
+            assert isinstance(selections[0], abjad.Selection), repr(argument)
             selections = pattern.get_matching_items(selections)
             for selection in selections:
                 logical_ties = abjad.iterate(selection).by_logical_tie(
@@ -313,7 +313,7 @@ class GlissandoCommand(abjad.AbjadObject):
 
     ### PRIVATE METHODS ###
 
-    def _attach_glissando(self , logical_tie):
+    def _attach_glissando(self, logical_tie):
         note_or_chord = (abjad.Note, abjad.Chord)
         last_leaf = logical_tie.tail
         if not isinstance(last_leaf, note_or_chord):
@@ -337,7 +337,6 @@ class GlissandoCommand(abjad.AbjadObject):
                 >>> command = baca.GlissandoCommand(
                 ...     pattern=abjad.index_first(1) | abjad.index_last(2),
                 ...     )
-        
 
             ::
 

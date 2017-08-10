@@ -5,7 +5,6 @@ import baca
 
 class OverrideCommand(abjad.AbjadObject):
     r'''Override command.
-    
     ::
 
         >>> import abjad
@@ -233,9 +232,9 @@ class OverrideCommand(abjad.AbjadObject):
     ### INITIALIZER ###
 
     def __init__(
-        self, 
+        self,
         context_name=None,
-        grob_name=None, 
+        grob_name=None,
         attribute_name=None,
         attribute_value=None,
         maximum_written_duration=None,
@@ -331,7 +330,7 @@ class OverrideCommand(abjad.AbjadObject):
                 abjad.attach(revert, leaves[-1])
             else:
                 for leaf in leaves:
-                    if  (self.maximum_written_duration is None or
+                    if (self.maximum_written_duration is None or
                         (self.maximum_written_duration is not None and
                         self.maximum_written_duration <= leaf.written_duration)):
                         exec(statement, globals(), locals())

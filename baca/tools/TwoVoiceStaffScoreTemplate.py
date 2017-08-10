@@ -110,33 +110,33 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
         time_signature_context = self._make_time_signature_context()
 
         music_voice_1 = abjad.Voice(
-            [], 
+            [],
             context_name='MusicVoiceOne',
             name=self.voice_abbreviations['v1'],
             )
         music_voice_2 = abjad.Voice(
-            [], 
+            [],
             context_name='MusicVoiceTwo',
             name=self.voice_abbreviations['v2'],
             )
-        music_staff = abjad.Staff(
-            [music_voice_1, music_voice_2], 
+        music_staff = abjad.Staff([
+            music_voice_1,
+            music_voice_2,
+            ],
             context_name='MusicStaff',
             is_simultaneous=True,
             name='Music Staff',
             )
 
-        music_context = abjad.Context(
-            [
-                music_staff,
+        music_context = abjad.Context([
+            music_staff,
             ],
             context_name='MusicContext',
             is_simultaneous=True,
             name='Music Context',
             )
 
-        score = abjad.Score(
-            [
+        score = abjad.Score([
             time_signature_context,
             music_context,
             ],

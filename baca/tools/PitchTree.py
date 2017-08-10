@@ -505,7 +505,7 @@ class PitchTree(Tree):
             >>
 
     '''
-    
+
     ### CLASS VARIABLES ###
 
     __documentation_section__ = 'Utilities'
@@ -678,12 +678,12 @@ class PitchTree(Tree):
                     node_12 -> node_15;
                     node_12 -> node_16;
                 }
-     
+
         Returns Graphviz graph.
         '''
         superclass = super(PitchTree, self)
         return superclass.__graph__(**keywords)
-        
+
     def __illustrate__(
         self,
         after_cell_spacing=True,
@@ -955,7 +955,7 @@ class PitchTree(Tree):
         abjad.override(score).spacing_spanner.uniform_stretching = True
         abjad.override(score).text_script.X_extent = False
         if 'title' in keywords:
-            title = keywords.get('title') 
+            title = keywords.get('title')
             if not isinstance(title, abjad.Markup):
                 title = abjad.Markup(title)
             lilypond_file.header_block.title = title
@@ -1003,7 +1003,7 @@ class PitchTree(Tree):
             first_leaf = cell_spanner.components[0]
             abjad.attach(markup, first_leaf)
             cell_index += 1
-            
+
     def _color_repeats(self, color_repeats, voice):
         if not color_repeats:
             return

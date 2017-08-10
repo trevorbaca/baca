@@ -179,7 +179,7 @@ class PitchArrayCell(abjad.AbjadObject):
 
 
         Initializes with pitches:
-    
+
         ::
 
             >>> pitches = [abjad.NamedPitch(_) for _ in [0, 2, 4]]
@@ -187,7 +187,7 @@ class PitchArrayCell(abjad.AbjadObject):
             PitchArrayCell(pitches=[NamedPitch("c'"), NamedPitch("d'"), NamedPitch("e'")], width=1)
 
         Initializes with pitch number and width:
-        
+
         ::
 
             >>> baca.PitchArrayCell(pitches=0, width=2)
@@ -623,7 +623,7 @@ class PitchArrayCell(abjad.AbjadObject):
                 >>> for row in array:
                 ...     for cell in row.cells[:-1]:
                 ...         cell, cell.next
-                ... 
+                ...
                 (PitchArrayCell(width=1), PitchArrayCell(width=2))
                 (PitchArrayCell(width=2), PitchArrayCell(width=1))
                 (PitchArrayCell(width=2), PitchArrayCell(width=1))
@@ -710,7 +710,7 @@ class PitchArrayCell(abjad.AbjadObject):
                 >>> for row in array:
                 ...     for cell in row.cells[1:]:
                 ...         cell, cell.previous
-                ... 
+                ...
                 (PitchArrayCell(width=2), PitchArrayCell(width=1))
                 (PitchArrayCell(width=1), PitchArrayCell(width=2))
                 (PitchArrayCell(width=1), PitchArrayCell(width=2))

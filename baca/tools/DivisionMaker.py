@@ -272,10 +272,10 @@ class DivisionMaker(abjad.AbjadValueObject):
                 c'4
             }
 
-    Division-makers object-model a sequence of partially evaluated functions 
+    Division-makers object-model a sequence of partially evaluated functions
     taken together in functional composition.
 
-    Usage follows the two-step configure-once / call-repeatedly pattern shown 
+    Usage follows the two-step configure-once / call-repeatedly pattern shown
     here.
     '''
 
@@ -434,7 +434,7 @@ class DivisionMaker(abjad.AbjadValueObject):
         ..  container:: example
 
             Fuses every two divisions together:
- 
+
             ::
 
                 >>> division_maker = baca.DivisionMaker()
@@ -691,7 +691,7 @@ class DivisionMaker(abjad.AbjadValueObject):
             music,
             divisions=divisions,
             )
-        
+
     def split_by_durations(
         self,
         compound_meter_multiplier=abjad.Multiplier(1),

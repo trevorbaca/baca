@@ -99,7 +99,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
             }
 
     Object model of a partially evaluated function that accepts a (possibly
-    empty) list of divisions as input and returns a (possibly empty) nested 
+    empty) list of divisions as input and returns a (possibly empty) nested
     list of divisions as output.
 
     Treats input as time signatures. Glues input together into hypermeasures
@@ -232,7 +232,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
             ``3/16`` durations.
 
             Remainders to the right:
-            
+
             ::
 
                 >>> division_maker = baca.DivisionMaker()
@@ -281,7 +281,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
                 }
 
             Remainders to the left:
-            
+
             ::
 
                 >>> division_maker = baca.DivisionMaker()
@@ -527,7 +527,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
                 baca.Division(_) for _ in division_list]
             division_lists.append(division_list)
         division_lists, start_offset = baca.DivisionMaker._to_divisions(
-            division_lists, 
+            division_lists,
             start_offset=start_offset,
             )
         return division_lists
@@ -551,7 +551,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
         agent = abjad.StorageFormatAgent(self)
         keyword_argument_names = agent.signature_keyword_names
         keyword_argument_names = list(keyword_argument_names)
-        if self.cyclic == True:
+        if bool(self.cyclic):
             keyword_argument_names.remove('cyclic')
         if not self.counts:
             keyword_argument_names.remove('counts')
@@ -574,8 +574,8 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
     @property
     def cyclic(self):
-        r'''Is true when hypermeasure division-maker treats measure 
-        counts cyclically. Otherwise false.
+        r'''Is true when hypermeasure division-maker treats measure counts
+        cyclically. Otherwise false.
 
         Set to true or false.
         '''

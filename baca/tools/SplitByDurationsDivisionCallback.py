@@ -119,7 +119,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             }
 
     Object model of a partially evaluated function that accepts a (possibly
-    empty) list of divisions as input and returns a (possibly empty) nested 
+    empty) list of divisions as input and returns a (possibly empty) nested
     list of divisions as output. Output structured one output list per input
     division.
 
@@ -232,7 +232,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
                 >>> time_signatures = [(7, 8)]
                 >>> division_lists = division_maker(time_signatures)
                 >>> for division_list in division_lists:
-                ...     division_list 
+                ...     division_list
                 ...
                 [Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 8))]
 
@@ -509,7 +509,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
         agent = abjad.StorageFormatAgent(self)
         keyword_argument_names = agent.signature_keyword_names
         keyword_argument_names = list(keyword_argument_names)
-        if self.cyclic == True:
+        if bool(self.cyclic):
             keyword_argument_names.remove('cyclic')
         if not self.durations:
             keyword_argument_names.remove('durations')
@@ -632,9 +632,9 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
     @property
     def cyclic(self):
-        r'''Is true when division-maker reads durations cyclically for each input
-        division.
-        
+        r'''Is true when division-maker reads durations cyclically for each
+        input division.
+
         Is false when division-maker reads durations only once per input
         division.
 

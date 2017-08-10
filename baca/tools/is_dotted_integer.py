@@ -17,7 +17,7 @@ def is_dotted_integer(argument):
 
             >>> for argument in range(16):
             ...     print('%s\t%s' % (argument, baca.tools.is_dotted_integer(argument)))
-            ... 
+            ...
             0         False
             1         False
             2         False

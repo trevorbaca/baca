@@ -43,6 +43,7 @@ def yield_all_partitions_of_integer(n):
         yield partition
         partition = _next_integer_partition(partition)
 
+
 def _next_integer_partition(integer_partition):
     _validate_input(integer_partition)
     left_half, right_half = _split_into_left_and_right_halves(
@@ -57,6 +58,7 @@ def _next_integer_partition(integer_partition):
     result = new_left_half + new_right_half
     result = tuple(result)
     return result
+
 
 def _split_into_left_and_right_halves(integer_partition):
     r'''Splits not-1s (left half) from 1s (right half).
@@ -79,6 +81,7 @@ def _split_into_left_and_right_halves(integer_partition):
             right_half.append(part)
     return left_half, right_half
 
+
 def _validate_input(integer_partition):
     r'''Ensures monotonically decreasing iterable of positive integers.
 
@@ -97,6 +100,7 @@ def _validate_input(integer_partition):
             if not current <= previous:
                 message = 'parts must decrease monotonically.'
                 raise ValueError(message)
+
 
 def _rewrite(n, m):
     r'''Write positive integer n as the sum of many m in a row, followed

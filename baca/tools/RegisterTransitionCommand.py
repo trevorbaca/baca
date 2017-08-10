@@ -158,7 +158,7 @@ class RegisterTransitionCommand(abjad.AbjadObject):
         for logical_tie in logical_ties:
             offset = logical_tie.get_timespan().start_offset
             registration = self._make_interpolated_registration(
-                offset, 
+                offset,
                 timespan,
                 )
             for note in logical_tie:
@@ -176,7 +176,7 @@ class RegisterTransitionCommand(abjad.AbjadObject):
         current_start_offset = 0
         for logical_tie in logical_ties:
             registration = self._make_interpolated_registration(
-                current_start_offset, 
+                current_start_offset,
                 timespan,
                 )
             for note in logical_tie:
@@ -224,7 +224,7 @@ class RegisterTransitionCommand(abjad.AbjadObject):
             components.append(component)
         registration = abjad.Registration(components)
         return registration
-    
+
     @staticmethod
     def _set_pitch(note, written_pitch):
         note.written_pitch = written_pitch

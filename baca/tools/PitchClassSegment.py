@@ -437,7 +437,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             items=self,
             item_class=self.item_class,
             )
-        
+
     def has_duplicates(self):
         r'''Is true when pitch-class segment has duplicates.
 
@@ -528,7 +528,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             ::
 
                 >>> segment.has_repeats()
-                False                
+                False
 
         ..  container:: example
 
@@ -555,7 +555,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             ::
 
                 >>> segment.has_repeats()
-                True                
+                True
 
         Returns true or false.
         '''

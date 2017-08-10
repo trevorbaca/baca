@@ -104,8 +104,8 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
         Returns pitch-class tree.
         '''
         pc_cells = baca.helianthate(
-            self.pc_cells, 
-            -1, 
+            self.pc_cells,
+            -1,
             1,
             )
         prototype = (tuple, abjad.Ratio)
@@ -115,8 +115,8 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
             division_ratios = self.division_ratios
         elif all(isinstance(_, list) for _ in self.division_ratios):
             division_ratios = baca.helianthate(
-                self.division_ratios, 
-                -1, 
+                self.division_ratios,
+                -1,
                 1,
                 )
             division_ratios = baca.Sequence(division_ratios).flatten(depth=1)
@@ -131,15 +131,15 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
             pc_cells.extend(parts)
         grouping_counts = self.grouping_counts or [1]
         pc_cells = baca.Sequence(pc_cells).partition_by_counts(
-            grouping_counts, 
-            cyclic=True, 
+            grouping_counts,
+            cyclic=True,
             overhang=True,
             )
         # this block was uncommented during krummzeit
         #pc_cells = [abjad.join_subsequences(x) for x in pc_cells]
         #pc_cells = baca.Sequence(pc_cells).partition_by_counts(
-        #    grouping_counts, 
-        #    cyclic=True, 
+        #    grouping_counts,
+        #    cyclic=True,
         #    overhang=True,
         #    )
         material = baca.PitchTree(
@@ -149,7 +149,7 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
         return material
 
     def __eq__(self, argument):
-        r'''Is true when `argument` is a zagged pitch-class with type and 
+        r'''Is true when `argument` is a zagged pitch-class with type and
         public properties equal to those of this zagged pitch-class maker.
         Otherwise false.
 
@@ -163,17 +163,6 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
         '''
         agent = abjad.StorageFormatAgent(self)
         return hash(agent.hash_values)
-
-    ### PRIVATE PROPERTIES ###
-
-    @property
-    def _input_demo_values(self):
-        return [
-        ('pc_cells', [[0, 7, 2, 10], [9, 6, 1, 8], [5, 4, 2, 11, 10, 9]]),
-        ('division_ratios', 
-            [[[1], [1], [1], [1, 1]], [[1], [1], [1], [1, 1, 1], [1, 1, 1]]]),
-        ('grouping_counts', [1, 1, 2, 3]),
-        ]
 
     ### PUBLIC PROPERTIES ###
 

@@ -31,7 +31,7 @@ class MusicRhythmSpecifier(abjad.AbjadObject):
 
     _publish_storage_format = True
 
-    ### INITIALIZER ###    
+    ### INITIALIZER ###
 
     def __init__(
         self,
