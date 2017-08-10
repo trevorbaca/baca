@@ -418,7 +418,6 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         tuplet = abjad.Tuplet((1, 1), leaf_selection)
         if len(tuplet) == 1:
             return tuplet
-        total_duration = leaf_selection.get_duration()
         durations = [abjad.inspect(_).get_duration() for _ in leaf_selection]
         if accelerando_indicator == 'accel':
             exponent = 0.625
@@ -585,10 +584,11 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         selections = self._apply_division_masks(selections)
         specifier = self._get_duration_spelling_specifier()
         if specifier.rewrite_meter:
-            selections = specifier._rewrite_meter_(
-                selections,
-                input_divisions,
-                )
+            #selections = specifier._rewrite_meter_(
+            #    selections,
+            #    input_divisions,
+            #    )
+            raise NotImplementedError()
         return selections
 
     def _make_selection(

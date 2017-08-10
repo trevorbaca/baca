@@ -748,7 +748,7 @@ class MusicMaker(abjad.AbjadObject):
     def _apply_figure_pitch_specifiers(self, collections, specifiers):
         prototype = (baca.CollectionList, list, abjad.Sequence)
         assert isinstance(collections, prototype), repr(collections)
-        specifiers_, unused_specifiers = [], []
+        unused_specifiers = []
         for specifier in specifiers:
             if isinstance(specifier, baca.MusicPitchSpecifier):
                 collections = specifier(collections)
@@ -850,7 +850,7 @@ class MusicMaker(abjad.AbjadObject):
     def _apply_spacing_specifiers(self, collections, specifiers):
         prototype = (baca.CollectionList, list, abjad.Sequence)
         assert isinstance(collections, prototype), repr(collections)
-        specifiers_, unused_specifiers = [], []
+        unused_specifiers = []
         prototype = (
             baca.ArpeggiationSpacingSpecifier,
             baca.ChordalSpacingSpecifier,

@@ -921,7 +921,6 @@ class SegmentMaker(experimental.SegmentMaker):
             timespan_map.append((scope.voice_name, timespan))
             timespans.append(timespan)
         compound_scope._timespan_map = timespan_map
-        voice_names = [_[0] for _ in timespan_map]
         result = []
         leaves = self._get_cached_leaves(include_rests=include_rests)
         for leaf in leaves:
@@ -956,7 +955,6 @@ class SegmentMaker(experimental.SegmentMaker):
             timespan_map.append((scope.voice_name, timespan))
             timespans.append(timespan)
         compound_scope._timespan_map = timespan_map
-        voice_names = [_[0] for _ in timespan_map]
         topmost_components = []
         for voice in abjad.iterate(self._score).by_class(abjad.Voice):
             if 'Context' in voice.__class__.__name__:
@@ -1642,7 +1640,7 @@ class SegmentMaker(experimental.SegmentMaker):
             if rhythm_specifier.start_tempo is not None:
                 start_tempo = abjad.new(rhythm_specifier.start_tempo)
                 first_leaf = abjad.inspect(context).get_leaf(0)
-                abjad.attach(start_tempo, first_leaf, scope=Score)
+                abjad.attach(start_tempo, first_leaf, scope=abjad.Score)
             if rhythm_specifier.stop_tempo is not None:
                 stop_tempo = abjad.new(rhythm_specifier.stop_tempo)
                 leaf = abjad.inspect(context).get_leaf(-1)
@@ -1660,12 +1658,10 @@ class SegmentMaker(experimental.SegmentMaker):
         effective_staff = abjad.inspect(voice).get_effective_staff()
         effective_staff_name = effective_staff.context_name
         next_stage = 1
-        contributions = []
         for rhythm_specifier in rhythm_specifiers:
             if rhythm_specifier.stages is None:
                 continue
             if next_stage < rhythm_specifier.start_stage:
-                start_stage = next_stage
                 stop_stage = rhythm_specifier.start_stage - 1
                 contribution = self._get_time_signatures(
                     start_stage=next_stage,
@@ -1674,7 +1670,7 @@ class SegmentMaker(experimental.SegmentMaker):
                 time_signatures = contribution.payload
                 measures = self._make_rests(time_signatures)
                 voice.extend(measures)
-            contribution = self._get_time_signatures(*rhytm_specifier.stages)
+            contribution = self._get_time_signatures(*rhythm_specifier.stages)
             contribution = rhythm_specifier(
                 effective_staff_name,
                 start_offset=contribution.start_offset,
@@ -1687,15 +1683,12 @@ class SegmentMaker(experimental.SegmentMaker):
                 next_stage,
                 self.stage_count,
                 )
-            time_signature = contribution.payload
+            time_signatures = contribution.payload
             measures = self._make_rests(time_signatures)
             voice.extend(measures)
 
     def _make_rests(self, time_signatures=None):
         time_signatures = time_signatures or self.time_signatures
-        specifier = abjad.rhythmmakertools.DurationSpellingSpecifier(
-            spell_metrically='unassignable',
-            )
         mask = abjad.silence_all(use_multimeasure_rests=True)
         rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker(
             division_masks=[mask],
@@ -1726,7 +1719,6 @@ class SegmentMaker(experimental.SegmentMaker):
         if not self.spacing_map:
             return
         context = self._score['Global Skips']
-        skips = list(abjad.iterate(context).by_leaf())
         for stage_number, duration in self.spacing_map:
             self._assert_valid_stage_number(stage_number)
             result = self._stage_number_to_measure_indices(stage_number)
@@ -1980,7 +1972,7 @@ class SegmentMaker(experimental.SegmentMaker):
             scopes__ = []
             for scope in scopes:
                 if isinstance(scope, scope_prototype):
-                    scopes___.append(scope)
+                    scopes__.append(scope)
                 elif isinstance(scope, tuple):
                     scopes_ = baca.CompoundScope._to_simple_scopes(
                         scope,

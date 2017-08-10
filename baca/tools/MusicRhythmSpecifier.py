@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import abjad
-import baca
 
 
 class MusicRhythmSpecifier(abjad.AbjadObject):

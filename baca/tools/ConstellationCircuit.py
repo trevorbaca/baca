@@ -131,7 +131,6 @@ class ConstellationCircuit(abjad.AbjadObject):
         self._constellations = []
         enumeration = enumerate(self._partitioned_generator_pnls)
         for i, partitioned_generator_pnl in enumeration:
-            constellation_number = i + 1
             constellation = baca.Constellation(
                 self,
                 partitioned_generator_pnl,

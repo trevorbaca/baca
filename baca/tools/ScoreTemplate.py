@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import abc
 import abjad
 
 
@@ -16,16 +15,6 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     voice_colors = {
         }
-
-#    ### SPECIAL METHODS ###
-#
-#    @abc.abstractmethod
-#    def __call__(self):
-#        r'''Calls score template.
-#
-#        Returns score.
-#        '''
-#        pass
 
     ### PRIVATE METHODS ###
 

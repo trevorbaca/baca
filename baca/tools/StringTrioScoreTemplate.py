@@ -150,7 +150,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             context_name='ViolinMusicStaff',
             name='Violin Music Staff',
             )
-        violin = abjad.instrumenttools.Violin()
+#        violin = abjad.instrumenttools.Violin()
 #        abjad.annotate(
 #            violin_music_staff,
 #            'default_instrument',

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import abjad
 import baca
-import numbers
 
 
 class LibraryNZ(object):
@@ -8399,7 +8398,7 @@ class LibraryNZ(object):
         r'''Overrides stem tremolo extra offset on leaves.
         '''
         pair = (0, -n)
-        return experimental.tools.baca.OverrideCommand(
+        return baca.OverrideCommand(
             attribute_name='extra_offset',
             attribute_value=str(pair),
             grob_name='stem_tremolo',

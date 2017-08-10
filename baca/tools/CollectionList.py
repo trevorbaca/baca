@@ -1360,7 +1360,6 @@ class CollectionList(abjad.AbjadValueObject):
         elif level == -1:
             known_items = []
             for collection in self:
-                items = []
                 for item in collection:
                     if item in known_items:
                         return True

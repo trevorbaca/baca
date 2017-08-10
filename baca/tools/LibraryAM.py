@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import abjad
 import baca
-import numbers
 
 
 class LibraryAM(object):
@@ -4918,7 +4917,7 @@ class LibraryAM(object):
         left_text += abjad.Markup.hspace(1)
         right_text = abjad.Markup.hspace(1) + abjad.Markup('flaut. possibile')
         right_text = right_text.italic().larger()
-        grid_poss_to_flaut_poss = abjad.TextSpanner(
+        spanner = abjad.TextSpanner(
             overrides={
                 'text_spanner__bound_details__left__padding': -1,
                 'text_spanner__bound_details__left__stencil_align_dir_y': 0,
@@ -4934,6 +4933,7 @@ class LibraryAM(object):
                 'text_spanner__dash_period': 1.5,
             }
         )
+        return spanner
 
     @staticmethod
     def hairpins(

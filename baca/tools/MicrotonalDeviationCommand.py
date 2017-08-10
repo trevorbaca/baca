@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import abjad
-import copy
 import itertools
 
 

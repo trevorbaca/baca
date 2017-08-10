@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import abjad
 import baca
-import inspect
 
 
 class PitchSegment(abjad.PitchSegment):

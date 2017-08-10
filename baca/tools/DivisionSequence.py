@@ -2,7 +2,6 @@
 import abjad
 import baca
 import collections
-import numbers
 
 
 class DivisionSequence(abjad.Sequence):
