@@ -795,7 +795,7 @@ class PitchTree(Tree):
                                     \small
                                         \line
                                             {
-                                                "SC(3-8){0, 2, 5}"
+                                                "SC(3-9){0, 2, 6}"
                                             }
                                     }
                                 - \tweak staff-padding #7
@@ -824,7 +824,7 @@ class PitchTree(Tree):
                                     \small
                                         \line
                                             {
-                                                "SC(4-18){0, 2, 3, 4}"
+                                                "SC(4-19){0, 2, 3, 5}"
                                             }
                                     }
                                 - \tweak staff-padding #7
