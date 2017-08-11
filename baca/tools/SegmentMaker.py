@@ -1170,7 +1170,7 @@ class SegmentMaker(experimental.SegmentMaker):
                 message = 'can not find {} end-instrument.'
                 message = message.format(context.name)
                 print(message)
-            result[context.name] = instrument.instrument_name
+            result[context.name] = instrument.name
         return result
 
     def _get_end_settings(self):
@@ -1578,7 +1578,7 @@ class SegmentMaker(experimental.SegmentMaker):
             abjad.attach(markup, leaf)
 
     def _make_instrument_change_markup(self, instrument):
-        string = 'to {}'.format(instrument.instrument_name)
+        string = 'to {}'.format(instrument.name)
         markup = abjad.Markup(string, direction=Up)
         markup = markup.box().override(('box-padding', 0.75))
         return markup
