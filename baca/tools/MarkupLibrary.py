@@ -441,7 +441,7 @@ class MarkupLibrary(object):
             )
 
     @staticmethod
-    def instrument_name(string, column=True, selector=None):
+    def instrument(string, column=True, selector=None):
         r'''Makes instrument name markup.
 
         ..  container:: example
@@ -450,7 +450,7 @@ class MarkupLibrary(object):
 
             ::
 
-                >>> markup = baca.markup.instrument_name('Eng. horn')
+                >>> markup = baca.markup.instrument('Eng. horn')
 
             ::
 
@@ -475,7 +475,7 @@ class MarkupLibrary(object):
 
             ::
 
-                >>> markup = baca.markup.instrument_name(
+                >>> markup = baca.markup.instrument(
                 ...     'Violin 1',
                 ...     column=False,
                 ...     )
@@ -1067,7 +1067,7 @@ class MarkupLibrary(object):
             )
 
     @staticmethod
-    def short_instrument_name(string, column=True):
+    def short_instrument(string, column=True):
         r'''Makes short instrument name markup.
 
         ..  container:: example
@@ -1076,7 +1076,7 @@ class MarkupLibrary(object):
 
             ::
 
-                >>> markup = baca.markup.short_instrument_name('Eng. hn.')
+                >>> markup = baca.markup.short_instrument('Eng. hn.')
 
             ::
 
@@ -1101,7 +1101,7 @@ class MarkupLibrary(object):
 
             ::
 
-                >>> markup = baca.markup.short_instrument_name(
+                >>> markup = baca.markup.short_instrument(
                 ...     'Vn. 1',
                 ...     column=False,
                 ...     )
