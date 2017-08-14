@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from baca import tools
 from baca.tools.CollectionList import CollectionList
 from baca.tools.Cursor import Cursor
