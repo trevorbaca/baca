@@ -133,7 +133,7 @@ class LMRSpecifier(abjad.AbjadObject):
             middle_reversed = bool(middle_reversed)
         self._middle_reversed = middle_reversed
         if priority is not None:
-            assert priority in (Left, Right)
+            assert priority in (abjad.Left, abjad.Right)
         self._priority = priority
         if right_counts is not None:
             assert abjad.mathtools.all_are_positive_integers(right_counts)
@@ -160,7 +160,7 @@ class LMRSpecifier(abjad.AbjadObject):
         top_parts = abjad.sequence(sequence).partition_by_counts(
             top_lengths,
             cyclic=False,
-            overhang=Exact,
+            overhang=abjad.Exact,
             )
         parts = []
         left_part, middle_part, right_part = top_parts
@@ -203,7 +203,7 @@ class LMRSpecifier(abjad.AbjadObject):
 
     def _get_priority(self):
         if self.priority is None:
-            return Left
+            return abjad.Left
         return self.priority
 
     def _get_top_lengths(self, total_length):
@@ -212,7 +212,7 @@ class LMRSpecifier(abjad.AbjadObject):
         middle_length = 0
         right_length = self.right_length or 0
         if left_length and right_length:
-            if self._get_priority() is Left:
+            if self._get_priority() == abjad.Left:
                 left_length = self.left_length or 0
                 left_length = min([left_length, total_length])
                 remaining_length = total_length - left_length
@@ -843,7 +843,7 @@ class LMRSpecifier(abjad.AbjadObject):
 
                 >>> lmr_specifier = baca.LMRSpecifier(
                 ...     left_length=2,
-                ...     priority=Right,
+                ...     priority=abjad.Right,
                 ...     right_length=1,
                 ...     )
 

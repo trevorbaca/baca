@@ -212,10 +212,12 @@ class Sequence(abjad.Sequence):
     ### PRIVATE METHODS ###
 
     @staticmethod
-    def _make_accumulate_markup(markup, operands=None, count=Identity):
+    def _make_accumulate_markup(markup, operands=None, count=None):
         import abjad
+        if count is None:
+            count = abjad.Identity
         markup_list = abjad.MarkupList()
-        operands = operands or [Identity]
+        operands = operands or [abjad.Identity]
         operand_markups = []
         for operand in operands:
             if hasattr(operand, 'get_markup'):
@@ -226,7 +228,7 @@ class Sequence(abjad.Sequence):
         operand_markup = abjad.MarkupList(operand_markups).concat()
         markup_list.append(operand_markup)
         infix = 'Φ'
-        if count is not Identity:
+        if count != abjad.Identity:
             infix += '/' + str(count)
         markup_list.append(infix)
         markup_list.append(markup)
@@ -234,8 +236,10 @@ class Sequence(abjad.Sequence):
         return markup
 
     @staticmethod
-    def _make_accumulate_string_template(operands=None, count=Identity):
-        operands = operands or [Identity]
+    def _make_accumulate_string_template(operands=None, count=None):
+        if count is None:
+            count = abjad.Identity
+        operands = operands or [abjad.Identity]
         operand_strings = []
         for operand in operands:
             if hasattr(operand, 'get_string'):
@@ -248,7 +252,7 @@ class Sequence(abjad.Sequence):
         else:
             operands = ', '.join(operand_strings)
             operands = '[' + operands + ']'
-        if count is Identity:
+        if count == abjad.Identity:
             string_template = '{} Φ {{}}'.format(operands)
         else:
             string_template = '{} Φ/{} {{}}'
@@ -277,7 +281,7 @@ class Sequence(abjad.Sequence):
         markup_maker_callback='_make_accumulate_markup',
         string_template_callback='_make_accumulate_string_template',
         )
-    def accumulate(self, operands=None, count=Identity):
+    def accumulate(self, operands=None, count=None):
         r'''Accumulates `operands` calls against sequence to identity.
 
         ..  container:: example
@@ -874,6 +878,8 @@ class Sequence(abjad.Sequence):
 
         Returns sequence of orbit length with `count` set to identity.
         '''
+        if count is None:
+            count = abjad.Identity
         if self._expression:
             return self._update_expression(
                 inspect.currentframe(),
@@ -885,7 +891,7 @@ class Sequence(abjad.Sequence):
         if not isinstance(operands, list):
             operands = [operands]
         items = [self]
-        if count is Identity:
+        if count == abjad.Identity:
             for i in range(1000):
                 sequence = items[-1]
                 for operand in operands:
@@ -1340,6 +1346,7 @@ class Sequence(abjad.Sequence):
         assert isinstance(m, int), repr(m)
         original_n = n
         original_m = m
+
         def _generalized_rotate(argument, n=0):
             if hasattr(argument, 'rotate'):
                 return argument.rotate(n=n)

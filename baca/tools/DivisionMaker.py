@@ -400,7 +400,8 @@ class DivisionMaker(abjad.AbjadValueObject):
             ::
 
                 >>> division_maker.callbacks
-                (SplitByDurationsDivisionCallback(compound_meter_multiplier=Multiplier(1, 1), cyclic=True, durations=(Division((1, 4)),), pattern_rotation_index=0, remainder=Right),)
+                (SplitByDurationsDivisionCallback(compound_meter_multiplier=Multiplier(1,
+                1), cyclic=True, durations=(Division((1, 4)),), pattern_rotation_index=0, remainder=Right),)
 
         Returns tuple of zero or more callbacks.
         '''
@@ -475,7 +476,7 @@ class DivisionMaker(abjad.AbjadValueObject):
         counts=None,
         fuse_assignable_total_duration=False,
         append_remainder=False,
-        remainder_direction=Right,
+        remainder_direction=abjad.Right,
         ):
         r'''Partitions divisions (or division lists) by `counts`.
 
@@ -489,7 +490,7 @@ class DivisionMaker(abjad.AbjadValueObject):
                 >>> division_maker = division_maker.partition_by_counts(
                 ...     counts=[2],
                 ...     append_remainder=False,
-                ...     remainder_direction=Right,
+                ...     remainder_direction=abjad.Right,
                 ...     )
 
             ::
@@ -510,7 +511,7 @@ class DivisionMaker(abjad.AbjadValueObject):
                 >>> division_maker = division_maker.partition_by_counts(
                 ...     counts=[2],
                 ...     append_remainder=True,
-                ...     remainder_direction=Right,
+                ...     remainder_direction=abjad.Right,
                 ...     )
 
             ::
@@ -530,7 +531,7 @@ class DivisionMaker(abjad.AbjadValueObject):
                 >>> division_maker = division_maker.partition_by_counts(
                 ...     counts=[2],
                 ...     append_remainder=False,
-                ...     remainder_direction=Left,
+                ...     remainder_direction=abjad.Left,
                 ...     )
 
             ::
@@ -551,7 +552,7 @@ class DivisionMaker(abjad.AbjadValueObject):
                 >>> division_maker = division_maker.partition_by_counts(
                 ...     counts=[2],
                 ...     append_remainder=True,
-                ...     remainder_direction=Left,
+                ...     remainder_direction=abjad.Left,
                 ...     )
 
             ::
@@ -576,7 +577,7 @@ class DivisionMaker(abjad.AbjadValueObject):
                 >>> division_maker = division_maker.partition_by_counts(
                 ...     counts=[2],
                 ...     append_remainder=False,
-                ...     remainder_direction=Right,
+                ...     remainder_direction=abjad.Right,
                 ...     )
 
             ::
@@ -601,7 +602,7 @@ class DivisionMaker(abjad.AbjadValueObject):
                 >>> division_maker = division_maker.partition_by_counts(
                 ...     counts=[2],
                 ...     append_remainder=True,
-                ...     remainder_direction=Right,
+                ...     remainder_direction=abjad.Right,
                 ...     )
 
             ::
@@ -625,7 +626,7 @@ class DivisionMaker(abjad.AbjadValueObject):
                 >>> division_maker = division_maker.partition_by_counts(
                 ...     counts=[2],
                 ...     append_remainder=False,
-                ...     remainder_direction=Left,
+                ...     remainder_direction=abjad.Left,
                 ...     )
 
             ::
@@ -650,7 +651,7 @@ class DivisionMaker(abjad.AbjadValueObject):
                 >>> division_maker = division_maker.partition_by_counts(
                 ...     counts=[2],
                 ...     append_remainder=True,
-                ...     remainder_direction=Left,
+                ...     remainder_direction=abjad.Left,
                 ...     )
 
             ::
@@ -697,7 +698,7 @@ class DivisionMaker(abjad.AbjadValueObject):
         cyclic=True,
         durations=(),
         pattern_rotation_index=0,
-        remainder=Right,
+        remainder=abjad.Right,
         remainder_fuse_threshold=None,
         ):
         r'''Splits divisions by durations.
@@ -764,7 +765,7 @@ class DivisionMaker(abjad.AbjadValueObject):
                 >>> division_maker = baca.DivisionMaker()
                 >>> division_maker = division_maker.split_by_durations(
                 ...     durations=[(1, 4)],
-                ...     remainder=Left,
+                ...     remainder=abjad.Left,
                 ...     )
 
             ::

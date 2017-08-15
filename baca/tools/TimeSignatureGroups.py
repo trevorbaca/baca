@@ -143,7 +143,7 @@ class TimeSignatureGroups(abjad.AbjadObject):
             leaves = abjad.select(measure_group).by_leaf()
             abjad.attach(spanner, leaves)
             staff.extend(measure_group)
-            markup = abjad.Markup(group_index, direction=Up)
+            markup = abjad.Markup(group_index, direction=abjad.Up)
             markup = markup.smaller()
             markup = markup.circle()
             leaf = abjad.inspect(measure_group[0]).get_leaf(0)
@@ -151,7 +151,7 @@ class TimeSignatureGroups(abjad.AbjadObject):
         slide = -4
         abjad.override(staff).clef.stencil = False
         abjad.override(staff).horizontal_bracket.bracket_flare = (0, 0)
-        abjad.override(staff).horizontal_bracket.direction = Up
+        abjad.override(staff).horizontal_bracket.direction = abjad.Up
         abjad.override(staff).horizontal_bracket.extra_offset = (slide, 0)
         abjad.override(staff).horizontal_bracket.staff_padding = 2.5
         abjad.override(staff).rest.transparent = True

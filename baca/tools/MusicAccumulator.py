@@ -236,6 +236,7 @@ class MusicAccumulator(abjad.AbjadObject):
             first_gap = abjad.Timespan(0, first_start_offset)
             gaps.append(first_gap)
         selections = floating_selections + list(gaps)
+
         def sort_function(argument):
             if isinstance(argument, baca.FloatingSelection):
                 return argument.timespan

@@ -180,7 +180,7 @@ class DivisionSequenceExpression(abjad.Expression):
         cyclic=True,
         durations=(),
         pattern_rotation_index=0,
-        remainder=Right,
+        remainder=abjad.Right,
         remainder_fuse_threshold=None,
         ):
         r'''Makes split-by-durations callback.

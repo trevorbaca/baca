@@ -71,7 +71,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             >>> division_maker = baca.SplitByDurationsDivisionCallback(
             ...     durations=[(1, 4)],
-            ...     remainder=Left,
+            ...     remainder=abjad.Left,
             ...     )
 
         ::
@@ -147,7 +147,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
         cyclic=True,
         durations=(),
         pattern_rotation_index=0,
-        remainder=Right,
+        remainder=abjad.Right,
         remainder_fuse_threshold=None,
         ):
         compound_meter_multiplier = compound_meter_multiplier or 1
@@ -162,7 +162,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             pattern_.append(division)
         durations = tuple(pattern_)
         self._pattern = durations
-        assert remainder in (Left, Right), repr(remainder)
+        assert remainder in (abjad.Left, abjad.Right), repr(remainder)
         self._remainder = remainder
         assert isinstance(pattern_rotation_index, int)
         self._pattern_rotation_index = pattern_rotation_index
@@ -391,7 +391,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
                 ...     )
                 >>> division_maker = division_maker.split_by_durations(
                 ...     durations=[(3, 16)],
-                ...     remainder=Left,
+                ...     remainder=abjad.Left,
                 ...     )
 
             ::
@@ -457,7 +457,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             if self.cyclic:
                 division_list = baca.Sequence(division_list).repeat_to_weight(
                     input_division,
-                    allow_total=Less,
+                    allow_total=abjad.Less,
                     )
                 division_list = list(division_list)
             total_duration = abjad.Duration(sum(division_list))
@@ -470,7 +470,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
                 raise Exception(message)
             remainder = input_division - total_duration
             remainder = baca.Division(remainder)
-            if self.remainder == Left:
+            if self.remainder == abjad.Left:
                 if self.remainder_fuse_threshold is None:
                     division_list.insert(0, remainder)
                 elif remainder <= self.remainder_fuse_threshold:
@@ -479,7 +479,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
                     division_list[0] = fused_value
                 else:
                     division_list.insert(0, remainder)
-            elif self.remainder == Right:
+            elif self.remainder == abjad.Right:
                 if self.remainder_fuse_threshold is None:
                     division_list.append(remainder)
                 elif remainder <= self.remainder_fuse_threshold:
@@ -512,7 +512,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
             keyword_argument_names.remove('cyclic')
         if not self.durations:
             keyword_argument_names.remove('durations')
-        if self.remainder == Right:
+        if self.remainder == abjad.Right:
             keyword_argument_names.remove('remainder')
         if self.pattern_rotation_index == 0:
             keyword_argument_names.remove('pattern_rotation_index')
@@ -1121,7 +1121,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
                 >>> division_maker = baca.SplitByDurationsDivisionCallback(
                 ...     cyclic=False,
                 ...     durations=[(1, 4), (1, 16)],
-                ...     remainder=Left,
+                ...     remainder=abjad.Left,
                 ...     )
 
             ::
@@ -1162,7 +1162,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
                 >>> division_maker = baca.SplitByDurationsDivisionCallback(
                 ...     cyclic=True,
                 ...     durations=[(1, 4), (1, 16)],
-                ...     remainder=Left,
+                ...     remainder=abjad.Left,
                 ...     )
 
             ::
@@ -1296,7 +1296,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
                 >>> division_maker = baca.SplitByDurationsDivisionCallback(
                 ...     cyclic=True,
                 ...     durations=[(1, 4)],
-                ...     remainder=Left,
+                ...     remainder=abjad.Left,
                 ...     remainder_fuse_threshold=None,
                 ...     )
 
@@ -1338,7 +1338,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
                 >>> division_maker = baca.SplitByDurationsDivisionCallback(
                 ...     cyclic=True,
                 ...     durations=[(1, 4)],
-                ...     remainder=Left,
+                ...     remainder=abjad.Left,
                 ...     remainder_fuse_threshold=abjad.Duration(1, 8),
                 ...     )
 

@@ -57,7 +57,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
             ...     )
             >>> division_maker = division_maker.split_by_durations(
             ...     durations=[(3, 16)],
-            ...     remainder=Right,
+            ...     remainder=abjad.Right,
             ...     )
 
         ::
@@ -240,7 +240,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
                 ...     )
                 >>> division_maker = division_maker.split_by_durations(
                 ...     durations=[(3, 16)],
-                ...     remainder=Right,
+                ...     remainder=abjad.Right,
                 ...     )
 
             ::
@@ -289,7 +289,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
                 ...     )
                 >>> division_maker = division_maker.split_by_durations(
                 ...     durations=[(3, 16)],
-                ...     remainder=Left,
+                ...     remainder=abjad.Left,
                 ...     )
 
             ::
@@ -375,7 +375,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
                 ...     )
                 >>> division_maker = division_maker.split_by_durations(
                 ...     durations=[(3, 16)],
-                ...     remainder=Right,
+                ...     remainder=abjad.Right,
                 ...     )
 
             ::
@@ -421,7 +421,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
                 ...     )
                 >>> division_maker = division_maker.split_by_durations(
                 ...     durations=[(3, 16)],
-                ...     remainder=Left,
+                ...     remainder=abjad.Left,
                 ...     )
 
             ::

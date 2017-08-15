@@ -1,8 +1,9 @@
+import abjad
 import math
 
 
 # TODO: replace string-valued even='allowed' with constant-valued keyword
-def partition_integer_into_halves(n, bigger=Left, even='allowed'):
+def partition_integer_into_halves(n, bigger=abjad.Left, even='allowed'):
     r'''Partitions `n` into halves.
 
     ::
@@ -19,12 +20,12 @@ def partition_integer_into_halves(n, bigger=Left, even='allowed'):
 
         ::
 
-            >>> baca.tools.partition_integer_into_halves(7, bigger=Left)
+            >>> baca.tools.partition_integer_into_halves(7, bigger=abjad.Left)
             (4, 3)
 
         ::
 
-            >>> baca.tools.partition_integer_into_halves(7, bigger=Right)
+            >>> baca.tools.partition_integer_into_halves(7, bigger=abjad.Right)
             (3, 4)
 
     ..  container:: example
@@ -35,7 +36,7 @@ def partition_integer_into_halves(n, bigger=Left, even='allowed'):
 
             >>> baca.tools.partition_integer_into_halves(
             ...     8,
-            ...     bigger=Left,
+            ...     bigger=abjad.Left,
             ...     even='disallowed',
             ...     )
             (5, 3)
@@ -44,7 +45,7 @@ def partition_integer_into_halves(n, bigger=Left, even='allowed'):
 
             >>> baca.tools.partition_integer_into_halves(
             ...     8,
-            ...     bigger=Right,
+            ...     bigger=abjad.Right,
             ...     even='disallowed',
             ...     )
             (3, 5)
@@ -61,12 +62,12 @@ def partition_integer_into_halves(n, bigger=Left, even='allowed'):
 
         ::
 
-            >>> baca.tools.partition_integer_into_halves(8, bigger=Left)
+            >>> baca.tools.partition_integer_into_halves(8, bigger=abjad.Left)
             (4, 4)
 
         ::
 
-            >>> baca.tools.partition_integer_into_halves(8, bigger=Right)
+            >>> baca.tools.partition_integer_into_halves(8, bigger=abjad.Right)
             (4, 4)
 
     ..  container:: example
@@ -95,7 +96,7 @@ def partition_integer_into_halves(n, bigger=Left, even='allowed'):
     if (smaller_half == bigger_half) and (even != 'allowed'):
         smaller_half -= 1
         bigger_half += 1
-    if bigger == Left:
+    if bigger == abjad.Left:
         return (bigger_half, smaller_half)
     else:
         return (smaller_half, bigger_half)

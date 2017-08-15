@@ -1010,7 +1010,7 @@ class MusicMaker(abjad.AbjadObject):
             ']',
             ])
         figure_name_markup = figure_name_markup.fontsize(2)
-        figure_name_markup = abjad.Markup(figure_name_markup, direction=Up)
+        figure_name_markup = abjad.Markup(figure_name_markup, direction=abjad.Up)
         annotation = 'figure name: {}'.format(original_figure_name)
         figure_name_markup._annotation = annotation
         leaves = list(abjad.iterate(container).by_leaf())

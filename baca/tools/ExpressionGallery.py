@@ -1,5 +1,3 @@
-
-
 class ExpressionGallery(object):
     r'''Expression gallery.
 

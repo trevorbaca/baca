@@ -24,7 +24,7 @@ class OverrideCommand(abjad.AbjadObject):
             ...     baca.OverrideCommand(
             ...         grob_name='stem',
             ...         attribute_name='direction',
-            ...         attribute_value=Down,
+            ...         attribute_value=abjad.Down,
             ...         ),
             ...     )
 
@@ -104,14 +104,14 @@ class OverrideCommand(abjad.AbjadObject):
             ...         ),
             ...     baca.OverrideCommand(
             ...         attribute_name='direction',
-            ...         attribute_value=Up,
+            ...         attribute_value=abjad.Up,
             ...         grob_name='rest',
             ...         revert=True,
             ...         selector=baca.select_rests(),
             ...         ),
             ...     baca.OverrideCommand(
             ...         attribute_name='direction',
-            ...         attribute_value=Down,
+            ...         attribute_value=abjad.Down,
             ...         grob_name='stem',
             ...         revert=True,
             ...         ),

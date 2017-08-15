@@ -913,12 +913,12 @@ class SelectorLibrary(object):
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
                 ...         ['red', 'blue'],
-                ...         baca.select_each_lt(start=-4, leak=Right),
+                ...         baca.select_each_lt(start=-4, leak=abjad.Right),
                 ...         ),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.sustain_pedal(
-                ...         baca.select_each_lt(start=-4, leak=Right),
+                ...         baca.select_each_lt(start=-4, leak=abjad.Right),
                 ...         ),
                 ...     baca.sustain_pedal_staff_padding(6),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -1000,9 +1000,9 @@ class SelectorLibrary(object):
         selector = baca.select_lts(start=start, stop=stop)
         selector = selector.get_item(n=0)
         selector = selector.select(apply_to_each=True)
-        if leak in (Left, Both):
+        if leak in (abjad.Left, abjad.Both):
             selector = selector.with_previous_leaf()
-        if leak in (Right, Both):
+        if leak in (abjad.Right, abjad.Both):
             selector = selector.with_next_leaf()
         return selector
 
@@ -1244,12 +1244,12 @@ class SelectorLibrary(object):
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
                 ...         ['red', 'blue'],
-                ...         baca.select_each_plt(start=-4, leak=Right),
+                ...         baca.select_each_plt(start=-4, leak=abjad.Right),
                 ...         ),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.sustain_pedal(
-                ...         baca.select_each_plt(start=-4, leak=Right),
+                ...         baca.select_each_plt(start=-4, leak=abjad.Right),
                 ...         ),
                 ...     baca.sustain_pedal_staff_padding(6),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -1344,9 +1344,9 @@ class SelectorLibrary(object):
         selector = baca.select_plts(start=start, stop=stop)
         selector = selector.get_item(n=0)
         selector = selector.select(apply_to_each=True)
-        if leak in (Left, Both):
+        if leak in (abjad.Left, abjad.Both):
             selector = selector.with_previous_leaf()
-        if leak in (Right, Both):
+        if leak in (abjad.Right, abjad.Both):
             selector = selector.with_next_leaf()
         return selector
 
@@ -2688,7 +2688,7 @@ class SelectorLibrary(object):
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
                 ...         ['red', 'blue'],
-                ...         baca.select_leaves(leak=Left, start=-4),
+                ...         baca.select_leaves(leak=abjad.Left, start=-4),
                 ...         ),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
@@ -2769,9 +2769,9 @@ class SelectorLibrary(object):
             stop=stop,
             apply_to_each=True,
             )
-        if leak in (Left, Both):
+        if leak in (abjad.Left, abjad.Both):
             selector = selector.with_previous_leaf()
-        if leak in (Right, Both):
+        if leak in (abjad.Right, abjad.Both):
             selector = selector.with_next_leaf()
         return selector
 
@@ -3021,9 +3021,9 @@ class SelectorLibrary(object):
         selector = baca.select_tuplets(start=start, stop=stop)
         selector = selector.flatten()
         selector = selector.by_leaf()
-        if leak in (Left, Both):
+        if leak in (abjad.Left, abjad.Both):
             selector = selector.with_previous_leaf()
-        if leak in (Right, Both):
+        if leak in (abjad.Right, abjad.Both):
             selector = selector.with_next_leaf()
         selector = selector.get_slice(
             start=start,
@@ -3429,9 +3429,9 @@ class SelectorLibrary(object):
         selector = selector.get_item(n=n)
         selector = selector.select()
         selector = selector.by_leaf()
-        if leak in (Left, Both):
+        if leak in (abjad.Left, abjad.Both):
             selector = selector.with_previous_leaf()
-        if leak in (Right, Both):
+        if leak in (abjad.Right, abjad.Both):
             selector = selector.with_next_leaf()
         return selector
 

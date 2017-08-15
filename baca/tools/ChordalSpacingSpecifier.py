@@ -27,7 +27,7 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
 
             >>> specifier = baca.ChordalSpacingSpecifier(
             ...     bass=6,
-            ...     direction=Down,
+            ...     direction=abjad.Down,
             ...     soprano=7,
             ...     )
             >>> specifier([[-6, -3, -5, -1, -7]])
@@ -39,7 +39,7 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
 
             >>> specifier = baca.ChordalSpacingSpecifier(
             ...     bass=11,
-            ...     direction=Down,
+            ...     direction=abjad.Down,
             ...     soprano=7,
             ...     )
             >>> specifier([[-6, -3, -5, -1, -7]])
@@ -106,7 +106,7 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
         ):
         self._bass = bass
         if direction is not None:
-            assert direction in (Up, Down)
+            assert direction in (abjad.Up, abjad.Down)
         self._direction = direction
         if minimum_semitones is not None:
             assert isinstance(minimum_semitones, int)
@@ -221,8 +221,8 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
                 inner.append(pitch_class)
         pitch_classes = []
         pitches = []
-        direction = self.direction or Up
-        if direction is Up:
+        direction = self.direction or abjad.Up
+        if direction is abjad.Up:
             if bass is not None:
                 pitch_classes.append(bass)
             elif inner:
@@ -463,7 +463,7 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
 
                 >>> specifier = baca.ChordalSpacingSpecifier(
                 ...     bass=6,
-                ...     direction=Down,
+                ...     direction=abjad.Down,
                 ...     soprano=7,
                 ...     )
                 >>> specifier([[5, 6, 7, 9, 11]])
@@ -473,7 +473,7 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
 
                 >>> specifier = baca.ChordalSpacingSpecifier(
                 ...     bass=6,
-                ...     direction=Down,
+                ...     direction=abjad.Down,
                 ...     minimum_semitones=1,
                 ...     soprano=7,
                 ...     )
@@ -484,7 +484,7 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
 
                 >>> specifier = baca.ChordalSpacingSpecifier(
                 ...     bass=6,
-                ...     direction=Down,
+                ...     direction=abjad.Down,
                 ...     minimum_semitones=2,
                 ...     soprano=7,
                 ...     )
@@ -495,7 +495,7 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
 
                 >>> specifier = baca.ChordalSpacingSpecifier(
                 ...     bass=6,
-                ...     direction=Down,
+                ...     direction=abjad.Down,
                 ...     minimum_semitones=3,
                 ...     soprano=7,
                 ...     )
@@ -529,7 +529,7 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
             ::
 
                 >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     direction=Down,
+                ...     direction=abjad.Down,
                 ...     soprano=None,
                 ...     )
                 >>> specifier([[-6, -3, -5, -1, -7]])
@@ -538,7 +538,7 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
             ::
 
                 >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     direction=Down,
+                ...     direction=abjad.Down,
                 ...     soprano=6,
                 ...     )
                 >>> specifier([[-6, -3, -5, -1, -7]])
@@ -547,7 +547,7 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
             ::
 
                 >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     direction=Down,
+                ...     direction=abjad.Down,
                 ...     soprano=5,
                 ...     )
                 >>> specifier([[-6, -3, -5, -1, -7]])
@@ -556,7 +556,7 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
             ::
 
                 >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     direction=Down,
+                ...     direction=abjad.Down,
                 ...     soprano=11,
                 ...     )
                 >>> specifier([[-6, -3, -5, -1, -7]])
@@ -565,7 +565,7 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
             ::
 
                 >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     direction=Down,
+                ...     direction=abjad.Down,
                 ...     soprano=9,
                 ...     )
                 >>> specifier([[-6, -3, -5, -1, -7]])
@@ -574,7 +574,7 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
             ::
 
                 >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     direction=Down,
+                ...     direction=abjad.Down,
                 ...     soprano=7,
                 ...     )
                 >>> specifier([[-6, -3, -5, -1, -7]])

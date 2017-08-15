@@ -51,7 +51,7 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
 
     def __init__(self, direction=None, pattern=None, selector=None):
         if direction is not None:
-            assert direction in (Up, Down), repr(direction)
+            assert direction in (abjad.Up, abjad.Down), repr(direction)
         self._direction = direction
         if pattern is not None:
             assert isinstance(pattern, abjad.Pattern), repr(pattern)
@@ -94,7 +94,7 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
         collections_ = []
         total_length = len(collections)
         class_ = baca.ChordalSpacingSpecifier
-        direction = self.direction or Up
+        direction = self.direction or abjad.Up
         for i in range(total_length):
             if pattern.matches_index(i, total_length):
                 pitch_class_collection = pitch_class_collections[i]
@@ -102,7 +102,7 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
                     pitch_classes = list(sorted(pitch_class_collection))
                 else:
                     pitch_classes = list(pitch_class_collection)
-                if direction is Up:
+                if direction == abjad.Up:
                     pitches = class_._to_tightly_spaced_pitches_ascending(
                         pitch_classes,
                         )
@@ -138,7 +138,7 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
                 ...     'Voice 1',
                 ...     collections,
                 ...     baca.ArpeggiationSpacingSpecifier(
-                ...         direction=Up,
+                ...         direction=abjad.Up,
                 ...         ),
                 ...     baca.RegisterToOctaveCommand(octave_number=2),
                 ...     )
@@ -184,7 +184,7 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
                 ...     'Voice 1',
                 ...     collections,
                 ...     baca.ArpeggiationSpacingSpecifier(
-                ...         direction=Down,
+                ...         direction=abjad.Down,
                 ...         ),
                 ...     baca.RegisterToOctaveCommand(octave_number=2),
                 ...     )

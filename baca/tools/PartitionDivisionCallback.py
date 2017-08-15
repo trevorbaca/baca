@@ -44,7 +44,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
             >>> callback = baca.PartitionDivisionCallback(
             ...     counts=[2],
             ...     append_remainder=False,
-            ...     remainder_direction=Right,
+            ...     remainder_direction=abjad.Right,
             ...     )
             >>> grouped_beat_lists = callback(beat_lists)
             >>> for grouped_beat_list in grouped_beat_lists:
@@ -62,7 +62,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
             >>> callback = baca.PartitionDivisionCallback(
             ...     counts=[2],
             ...     append_remainder=True,
-            ...     remainder_direction=Right,
+            ...     remainder_direction=abjad.Right,
             ...     )
             >>> grouped_beat_lists = callback(beat_lists)
             >>> for grouped_beat_list in grouped_beat_lists:
@@ -82,7 +82,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
             >>> callback = baca.PartitionDivisionCallback(
             ...     counts=[2],
             ...     append_remainder=False,
-            ...     remainder_direction=Left,
+            ...     remainder_direction=abjad.Left,
             ...     )
             >>> grouped_beat_lists = callback(beat_lists)
             >>> for grouped_beat_list in grouped_beat_lists:
@@ -100,7 +100,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
             >>> callback = baca.PartitionDivisionCallback(
             ...     counts=[2],
             ...     append_remainder=True,
-            ...     remainder_direction=Left,
+            ...     remainder_direction=abjad.Left,
             ...     )
             >>> grouped_beat_lists = callback(beat_lists)
             >>> for grouped_beat_list in grouped_beat_lists:
@@ -134,7 +134,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
         counts=None,
         fuse_assignable_total_duration=False,
         append_remainder=False,
-        remainder_direction=Right,
+        remainder_direction=abjad.Right,
         ):
         self._counts = counts
         self._fuse_assignable_total_duration = fuse_assignable_total_duration
@@ -305,7 +305,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
         if beats_included == len(beat_list):
             return grouped_beat_list
         remainder_length = len(beat_list) - beats_included
-        if self.remainder_direction == Left:
+        if self.remainder_direction == abjad.Left:
             grouped_beat_list = baca.Sequence(
                 beat_list[remainder_length:]).partition_by_counts(
                 counts=self.counts,
@@ -350,7 +350,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
                 >>> callback = baca.PartitionDivisionCallback(
                 ...     counts=[2],
                 ...     append_remainder=False,
-                ...     remainder_direction=Right,
+                ...     remainder_direction=abjad.Right,
                 ...     )
 
             ::
@@ -423,7 +423,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
                 >>> callback = baca.PartitionDivisionCallback(
                 ...     counts=[2],
                 ...     append_remainder=True,
-                ...     remainder_direction=Right,
+                ...     remainder_direction=abjad.Right,
                 ...     )
 
             ::
@@ -714,7 +714,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
 
                 >>> callback = baca.PartitionDivisionCallback(
                 ...     counts=[2],
-                ...     remainder_direction=Right,
+                ...     remainder_direction=abjad.Right,
                 ...     )
 
             ::
@@ -773,7 +773,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
 
                 >>> callback = baca.PartitionDivisionCallback(
                 ...     counts=[2],
-                ...     remainder_direction=Left,
+                ...     remainder_direction=abjad.Left,
                 ...     )
 
             ::

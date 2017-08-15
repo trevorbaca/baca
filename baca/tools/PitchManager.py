@@ -523,7 +523,7 @@ class PitchManager(abjad.AbjadObject):
             operators_ = []
             for operator in operators:
                 for n in range(len(segment)):
-                    if rotation is Left:
+                    if rotation is abjad.Left:
                         n *= -1
                     operator_ = operator.rotate(n=n)
                     operators_.append(operator_)

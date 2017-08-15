@@ -24,7 +24,7 @@ class RegisterToOctaveCommand(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [{0, 14, 28}],
             ...     baca.RegisterToOctaveCommand(
-            ...         anchor=Bottom,
+            ...         anchor=abjad.Bottom,
             ...         octave_number=4,
             ...         ),
             ...     )
@@ -51,7 +51,7 @@ class RegisterToOctaveCommand(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [{0, 14, 28}],
             ...     baca.RegisterToOctaveCommand(
-            ...         anchor=Center,
+            ...         anchor=abjad.Center,
             ...         octave_number=4,
             ...         ),
             ...     )
@@ -78,7 +78,7 @@ class RegisterToOctaveCommand(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [{0, 14, 28}],
             ...     baca.RegisterToOctaveCommand(
-            ...         anchor=Top,
+            ...         anchor=abjad.Top,
             ...         octave_number=4,
             ...         ),
             ...     )
@@ -113,7 +113,7 @@ class RegisterToOctaveCommand(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 14, 28]],
             ...     baca.RegisterToOctaveCommand(
-            ...         anchor=Bottom,
+            ...         anchor=abjad.Bottom,
             ...         octave_number=4,
             ...         ),
             ...     )
@@ -142,7 +142,7 @@ class RegisterToOctaveCommand(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 14, 28]],
             ...     baca.RegisterToOctaveCommand(
-            ...         anchor=Center,
+            ...         anchor=abjad.Center,
             ...         octave_number=4,
             ...         ),
             ...     )
@@ -171,7 +171,7 @@ class RegisterToOctaveCommand(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 14, 28]],
             ...     baca.RegisterToOctaveCommand(
-            ...         anchor=Top,
+            ...         anchor=abjad.Top,
             ...         octave_number=4,
             ...         ),
             ...     )
@@ -208,7 +208,7 @@ class RegisterToOctaveCommand(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[10, 12, 14]],
             ...     baca.RegisterToOctaveCommand(
-            ...         anchor=Bottom,
+            ...         anchor=abjad.Bottom,
             ...         octave_number=4,
             ...         ),
             ...     )
@@ -237,7 +237,7 @@ class RegisterToOctaveCommand(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[10, 12, 14]],
             ...     baca.RegisterToOctaveCommand(
-            ...         anchor=Center,
+            ...         anchor=abjad.Center,
             ...         octave_number=4,
             ...         ),
             ...     )
@@ -266,7 +266,7 @@ class RegisterToOctaveCommand(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[10, 12, 14]],
             ...     baca.RegisterToOctaveCommand(
-            ...         anchor=Top,
+            ...         anchor=abjad.Top,
             ...         octave_number=4,
             ...         ),
             ...     )
@@ -317,7 +317,8 @@ class RegisterToOctaveCommand(abjad.AbjadObject):
         selector=None,
         ):
         if anchor is not None:
-            assert anchor in (Center, Bottom, Top), repr(anchor)
+            prototype = (abjad.Center, abjad.Bottom, abjad.Top)
+            assert anchor in prototype, repr(anchor)
         self._anchor = anchor
         if octave_number is not None:
             assert isinstance(octave_number, int), repr(octave_number)
@@ -360,12 +361,12 @@ class RegisterToOctaveCommand(abjad.AbjadObject):
                 raise TypeError(leaf)
         pitches = list(set(pitches))
         pitches.sort()
-        anchor = self.anchor or Bottom
-        if anchor is Bottom:
+        anchor = self.anchor or abjad.Bottom
+        if anchor == abjad.Bottom:
             pitch = pitches[0]
-        elif anchor is Top:
+        elif anchor == abjad.Top:
             pitch = pitches[-1]
-        elif anchor is Center:
+        elif anchor == abjad.Center:
             pitch = self._get_centroid(pitches)
         else:
             raise ValueError(anchor)
@@ -401,7 +402,7 @@ class RegisterToOctaveCommand(abjad.AbjadObject):
 
                 >>> chord = abjad.Chord("<c, d e'>1")
                 >>> command = baca.RegisterToOctaveCommand(
-                ...     anchor=Bottom,
+                ...     anchor=abjad.Bottom,
                 ...     octave_number=5,
                 ...     )
                 >>> command(chord)
@@ -421,7 +422,7 @@ class RegisterToOctaveCommand(abjad.AbjadObject):
 
                 >>> chord = abjad.Chord("<c, d e'>1")
                 >>> command = baca.RegisterToOctaveCommand(
-                ...     anchor=Center,
+                ...     anchor=abjad.Center,
                 ...     octave_number=5,
                 ...     )
                 >>> command(chord)
@@ -441,7 +442,7 @@ class RegisterToOctaveCommand(abjad.AbjadObject):
 
                 >>> chord = abjad.Chord("<c, d e'>1")
                 >>> command = baca.RegisterToOctaveCommand(
-                ...     anchor=Top,
+                ...     anchor=abjad.Top,
                 ...     octave_number=5,
                 ...     )
                 >>> command(chord)

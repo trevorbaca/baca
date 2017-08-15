@@ -690,7 +690,7 @@ class PitchTree(Tree):
         cell_indices=True,
         color_repeats=True,
         global_staff_size=16,
-        markup_direction=Up,
+        markup_direction=abjad.Up,
         set_classes=False,
         **keywords
         ):
@@ -761,7 +761,7 @@ class PitchTree(Tree):
                 >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
                 >>> tree = baca.PitchTree(items=items)
                 >>> lilypond_file = tree.__illustrate__(
-                ...     cell_indices=Down,
+                ...     cell_indices=abjad.Down,
                 ...     set_classes=True,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -853,7 +853,7 @@ class PitchTree(Tree):
                 >>> items = [[segment_1, segment_2], segment_3]
                 >>> tree = baca.PitchTree(items=items)
                 >>> lilypond_file = tree.__illustrate__(
-                ...     cell_indices=Down,
+                ...     cell_indices=abjad.Down,
                 ...     )
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -910,7 +910,7 @@ class PitchTree(Tree):
 
         Returns LilyPond file.
         '''
-        assert cell_indices in (True, False, Up, Down), repr(cell_indices)
+        assert cell_indices in (True, False, abjad.Up, abjad.Down), repr(cell_indices)
         voice = abjad.Voice()
         voice.consists_commands.append('Horizontal_bracket_engraver')
         staff = abjad.Staff([voice])
@@ -988,7 +988,7 @@ class PitchTree(Tree):
             key=lambda x: abjad.inspect(x).get_timespan().start_offset
             )
         if cell_indices is True:
-            direction = Up
+            direction = abjad.Up
         else:
             direction = cell_indices
         cell_index = 0
@@ -997,7 +997,7 @@ class PitchTree(Tree):
             if negative_level != -2:
                 continue
             markup = abjad.Markup(cell_index, direction=direction)
-            if direction is Down:
+            if direction == abjad.Down:
                 abjad.tweak(markup).staff_padding = 7
             first_leaf = cell_spanner.components[0]
             abjad.attach(markup, first_leaf)
@@ -1048,7 +1048,7 @@ class PitchTree(Tree):
                 )
             string = str(set_class)
             command = abjad.MarkupCommand('line', [string])
-            label = abjad.Markup(command, direction=Up)
+            label = abjad.Markup(command, direction=abjad.Up)
             if label is not None:
                 label = label.small()
                 first_leaf = leaves[0]

@@ -428,9 +428,9 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             abjad.attach(multiplier, leaf)
         rhythm_maker_class = abjad.rhythmmakertools.AccelerandoRhythmMaker
         if rhythm_maker_class._is_accelerando(leaf_selection):
-            abjad.override(leaf_selection[0]).beam.grow_direction = Right
+            abjad.override(leaf_selection[0]).beam.grow_direction = abjad.Right
         elif rhythm_maker_class._is_ritardando(leaf_selection):
-            abjad.override(leaf_selection[0]).beam.grow_direction = Left
+            abjad.override(leaf_selection[0]).beam.grow_direction = abjad.Left
         tuplet.force_times_command = True
         duration = abjad.inspect(tuplet).get_duration()
         duration = abjad.Duration(duration)

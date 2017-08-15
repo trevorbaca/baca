@@ -1593,7 +1593,7 @@ class CollectionList(abjad.AbjadValueObject):
 
             ::
 
-                >>> sequence = collections.partition([1, 2], overhang=Exact)
+                >>> sequence = collections.partition([1, 2], overhang=abjad.Exact)
                 >>> for collection_list in sequence:
                 ...     collection_list
                 ...
@@ -1624,7 +1624,7 @@ class CollectionList(abjad.AbjadValueObject):
 
             ::
 
-                >>> collections.partition([1, 2], join=True, overhang=Exact)
+                >>> collections.partition([1, 2], join=True, overhang=abjad.Exact)
                 CollectionList([<5, 12, 14, 18, 17>, <16, 17, 19, 16, 17, 19>])
 
         ..  container:: example
@@ -1714,7 +1714,7 @@ class CollectionList(abjad.AbjadValueObject):
 
             ::
 
-                >>> collections.read([10, 10, 10], check=Exact)
+                >>> collections.read([10, 10, 10], check=abjad.Exact)
                 Traceback (most recent call last):
                     ...
                 ValueError: call reads 30 items; not a multiple of 8 items.
@@ -1736,7 +1736,7 @@ class CollectionList(abjad.AbjadValueObject):
             collections.append(collection)
             i += count
         result = abjad.new(self, collections=collections)
-        if check is Exact:
+        if check == abjad.Exact:
             self_item_count = len(self.flatten())
             result_item_count = len(result.flatten())
             quotient = result_item_count / self_item_count

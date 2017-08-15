@@ -1,5 +1,3 @@
-
-
 class Coat(object):
     r'''Coat.
 

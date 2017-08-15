@@ -360,7 +360,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def ancora_dynamic(dynamic, selector=None, direction=Down):
+    def ancora_dynamic(dynamic, selector=None, direction=abjad.Down):
         r'''Attaches ancora dynamic pitched head 0.
 
         ..  container:: example
@@ -912,7 +912,7 @@ class LibraryAM(object):
 
         """
         return baca.RegisterToOctaveCommand(
-            anchor=Bottom,
+            anchor=abjad.Bottom,
             octave_number=n,
             selector=selector,
             )
@@ -1753,7 +1753,7 @@ class LibraryAM(object):
 
         """
         return baca.RegisterToOctaveCommand(
-            anchor=Center,
+            anchor=abjad.Center,
             octave_number=n,
             selector=selector,
             )
@@ -3188,7 +3188,7 @@ class LibraryAM(object):
         """
         selector = selector or baca.select_chord_heads()
         return baca.AttachCommand(
-            arguments=[abjad.Arpeggio(direction=Down)],
+            arguments=[abjad.Arpeggio(direction=abjad.Down)],
             selector=selector,
             )
 
@@ -3708,7 +3708,7 @@ class LibraryAM(object):
         '''
         return baca.OverrideCommand(
             attribute_name='direction',
-            attribute_value=Up,
+            attribute_value=abjad.Up,
             grob_name='dynamic_line_spanner',
             revert=True,
             selector=selector,
@@ -4123,7 +4123,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def effort_dynamic(dynamic=None, selector=None, direction=Down):
+    def effort_dynamic(dynamic=None, selector=None, direction=abjad.Down):
         r'''Attaches effort dynamic to pitched head 0.
 
         ..  container:: example
@@ -5217,6 +5217,7 @@ class LibraryAM(object):
         assert isinstance(m, int), repr(m)
         original_n = n
         original_m = m
+
         def _generalized_rotate(argument, n=0):
             if hasattr(argument, 'rotate'):
                 return argument.rotate(n=n)

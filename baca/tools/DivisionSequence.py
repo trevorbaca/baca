@@ -51,7 +51,7 @@ class DivisionSequence(abjad.Sequence):
         cyclic=True,
         durations=(),
         pattern_rotation_index=0,
-        remainder=Right,
+        remainder=abjad.Right,
         remainder_fuse_threshold=None,
         ):
         r'''Splits each division in division sequence by `durations`.

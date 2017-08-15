@@ -423,7 +423,7 @@ class SegmentMaker(experimental.SegmentMaker):
         self._cached_leaves_without_rests = None
         self._design_checker = design_checker
         self._fermata_start_offsets = []
-        if final_barline not in (None, False, Exact):
+        if final_barline not in (None, False, abjad.Exact):
             assert isinstance(final_barline, str), repr(final_barline)
         self._final_barline = final_barline
         if final_markup is not None:
@@ -555,7 +555,7 @@ class SegmentMaker(experimental.SegmentMaker):
             abbreviation=abbreviation,
             to_each_voice=True,
             )
-        if self.final_barline is Exact:
+        if self.final_barline == abjad.Exact:
             selection = abjad.select(self._score)
             last_leaf = selection._get_component(abjad.Leaf, -1)
             command = 'override Score.BarLine.transparent = ##f'
@@ -792,7 +792,7 @@ class SegmentMaker(experimental.SegmentMaker):
         if not self.range_checker:
             return
         if isinstance(self.range_checker, abjad.PitchRange):
-            markup = abjad.Markup('*', direction=Up)
+            markup = abjad.Markup('*', direction=abjad.Up)
             abjad.tweak(markup).color = 'red'
             for voice in abjad.iterate(self._score).by_class(abjad.Voice):
                 for leaf in abjad.iterate(voice).by_leaf(pitched=True):
@@ -829,7 +829,7 @@ class SegmentMaker(experimental.SegmentMaker):
             return
         score = self._score
         vertical_moments = abjad.iterate(score).by_vertical_moment()
-        markup = abjad.Markup('OCTAVE', direction=Up)
+        markup = abjad.Markup('OCTAVE', direction=abjad.Up)
         abjad.tweak(markup).color = 'red'
         for vertical_moment in vertical_moments:
             pitches = []
@@ -851,7 +851,7 @@ class SegmentMaker(experimental.SegmentMaker):
     def _color_repeat_pitch_classes_(self):
         if not self.color_repeat_pitch_classes:
             return
-        markup = abjad.Markup('@', direction=Up)
+        markup = abjad.Markup('@', direction=abjad.Up)
         abjad.tweak(markup).color = 'red'
         for voice in abjad.iterate(self._score).by_class(abjad.Voice):
             previous_logical_tie, previous_pitch_classes = None, []
@@ -1578,7 +1578,7 @@ class SegmentMaker(experimental.SegmentMaker):
 
     def _make_instrument_change_markup(self, instrument):
         string = 'to {}'.format(instrument.name)
-        markup = abjad.Markup(string, direction=Up)
+        markup = abjad.Markup(string, direction=abjad.Up)
         markup = markup.box().override(('box-padding', 0.75))
         return markup
 
@@ -1643,7 +1643,7 @@ class SegmentMaker(experimental.SegmentMaker):
             if rhythm_specifier.stop_tempo is not None:
                 stop_tempo = abjad.new(rhythm_specifier.stop_tempo)
                 leaf = abjad.inspect(context).get_leaf(-1)
-                abjad.attach(stop_tempo, leaf, scope=Score)
+                abjad.attach(stop_tempo, leaf, scope=abjad.Score)
 
     def _make_music_for_voice_old(self, voice):
         assert not len(voice), repr(voice)
@@ -1814,9 +1814,9 @@ class SegmentMaker(experimental.SegmentMaker):
                     measure_summary[-1] = current_tempo
                 tempo_index = i
                 is_trending = False
-            if abjad.inspect(leaf).has_indicator(Accelerando):
+            if abjad.inspect(leaf).has_indicator(abjad.Accelerando):
                 is_trending = True
-            if abjad.inspect(leaf).has_indicator(Ritardando):
+            if abjad.inspect(leaf).has_indicator(abjad.Ritardando):
                 is_trending = True
             next_tempo = None
             measure_summary = [
@@ -2912,7 +2912,7 @@ class SegmentMaker(experimental.SegmentMaker):
         return self._design_checker
 
     # TODO: write examples showing Score.BarLine.transparent = ##f
-    #       for mensurstriche final_barline=Exact
+    #       for mensurstriche final_barline=abjad.Exact
     @property
     def final_barline(self):
         r'''Gets final barline.

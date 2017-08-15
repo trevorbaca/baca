@@ -323,7 +323,7 @@ class PitchSet(abjad.PitchSet):
         '''
         specifier = baca.ChordalSpacingSpecifier(
             bass=bass,
-            direction=Up,
+            direction=abjad.Up,
             minimum_semitones=semitones,
             soprano=soprano,
             )

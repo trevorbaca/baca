@@ -1311,7 +1311,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def possibile_dynamic(dynamic, selector=None, direction=Down):
+    def possibile_dynamic(dynamic, selector=None, direction=abjad.Down):
         r'''Attaches possibile dynamic to pitched head 0.
 
         ..  container:: example
@@ -2186,7 +2186,7 @@ class LibraryNZ(object):
         selector = selector or baca.select_leaves_in_trimmed_run()
         return baca.OverrideCommand(
             attribute_name='direction',
-            attribute_value=Down,
+            attribute_value=abjad.Down,
             grob_name='repeat_tie',
             revert=True,
             selector=selector,
@@ -2318,7 +2318,7 @@ class LibraryNZ(object):
         selector = selector or baca.select_leaves_in_trimmed_run()
         return baca.OverrideCommand(
             attribute_name='direction',
-            attribute_value=Up,
+            attribute_value=abjad.Up,
             grob_name='repeat_tie',
             revert=True,
             selector=selector,
@@ -2796,7 +2796,7 @@ class LibraryNZ(object):
         selector = selector or baca.select_rests()
         return baca.OverrideCommand(
             attribute_name='direction',
-            attribute_value=Down,
+            attribute_value=abjad.Down,
             grob_name='rest',
             revert=True,
             )
@@ -2927,7 +2927,7 @@ class LibraryNZ(object):
         selector = selector or baca.select_rests()
         return baca.OverrideCommand(
             attribute_name='direction',
-            attribute_value=Up,
+            attribute_value=abjad.Up,
             grob_name='rest',
             revert=True,
             selector=selector,
@@ -3338,7 +3338,7 @@ class LibraryNZ(object):
         '''
         return baca.OverrideCommand(
             attribute_name='direction',
-            attribute_value=Down,
+            attribute_value=abjad.Down,
             grob_name='script',
             revert=True,
             selector=selector,
@@ -3467,7 +3467,7 @@ class LibraryNZ(object):
         '''
         return baca.OverrideCommand(
             attribute_name='direction',
-            attribute_value=Up,
+            attribute_value=abjad.Up,
             grob_name='script',
             revert=True,
             selector=selector,
@@ -4330,7 +4330,7 @@ class LibraryNZ(object):
         '''
         return baca.OverrideCommand(
             attribute_name='direction',
-            attribute_value=Down,
+            attribute_value=abjad.Down,
             grob_name='slur',
             revert=True,
             selector=selector,
@@ -4471,7 +4471,7 @@ class LibraryNZ(object):
         '''
         return baca.OverrideCommand(
             attribute_name='direction',
-            attribute_value=Up,
+            attribute_value=abjad.Up,
             grob_name='slur',
             revert=True,
             selector=selector,
@@ -4774,7 +4774,7 @@ class LibraryNZ(object):
 
         """
         return baca.RegisterToOctaveCommand(
-            anchor=Top,
+            anchor=abjad.Top,
             octave_number=n,
             selector=selector,
             )
@@ -5448,7 +5448,7 @@ class LibraryNZ(object):
         '''
         return baca.OverrideCommand(
             attribute_name='direction',
-            attribute_value=Down,
+            attribute_value=abjad.Down,
             grob_name='stem',
             revert=True,
             selector=selector,
@@ -5578,7 +5578,7 @@ class LibraryNZ(object):
         '''
         return baca.OverrideCommand(
             attribute_name='direction',
-            attribute_value=Up,
+            attribute_value=abjad.Up,
             grob_name='stem',
             revert=True,
             selector=selector,
@@ -5820,7 +5820,7 @@ class LibraryNZ(object):
                 ...     baca.sustain_pedal(
                 ...         selector=baca.select_leaves_in_tuplet(
                 ...             n=1,
-                ...             leak=Left,
+                ...             leak=abjad.Left,
                 ...             ),
                 ...         ),
                 ...     baca.sustain_pedal_staff_padding(4),
@@ -5884,7 +5884,7 @@ class LibraryNZ(object):
                 ...     baca.sustain_pedal(
                 ...         selector=baca.select_leaves_in_tuplet(
                 ...             n=1,
-                ...             leak=Right,
+                ...             leak=abjad.Right,
                 ...             ),
                 ...         ),
                 ...     baca.sustain_pedal_staff_padding(4),
@@ -5948,7 +5948,7 @@ class LibraryNZ(object):
                 ...     baca.sustain_pedal(
                 ...         selector=baca.select_leaves_in_tuplet(
                 ...             n=1,
-                ...             leak=Both,
+                ...             leak=abjad.Both,
                 ...             ),
                 ...         ),
                 ...     baca.sustain_pedal_staff_padding(4),
@@ -6073,7 +6073,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.sustain_pedal(
-                ...         selector=baca.select_leaves_in_each_tuplet(leak=Left),
+                ...     selector=baca.select_leaves_in_each_tuplet(leak=abjad.Left),
                 ...         ),
                 ...     baca.sustain_pedal_staff_padding(4),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6136,7 +6136,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.sustain_pedal(
-                ...         selector=baca.select_leaves_in_each_tuplet(leak=Right),
+                ...     selector=baca.select_leaves_in_each_tuplet(leak=abjad.Right),
                 ...         ),
                 ...     baca.sustain_pedal_staff_padding(4),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6211,7 +6211,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.sustain_pedal(
-                ...         selector=baca.select_leaves_in_each_tuplet(leak=Right),
+                ...     selector=baca.select_leaves_in_each_tuplet(leak=abjad.Right),
                 ...         ),
                 ...     baca.sustain_pedal_staff_padding(4),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -7016,7 +7016,7 @@ class LibraryNZ(object):
         '''
         return baca.OverrideCommand(
             attribute_name='direction',
-            attribute_value=Down,
+            attribute_value=abjad.Down,
             grob_name='text_script',
             revert=True,
             selector=selector,
@@ -7156,7 +7156,7 @@ class LibraryNZ(object):
         '''
         return baca.OverrideCommand(
             attribute_name='direction',
-            attribute_value=Up,
+            attribute_value=abjad.Up,
             grob_name='text_script',
             revert=True,
             selector=selector,
@@ -7623,7 +7623,7 @@ class LibraryNZ(object):
         selector = selector or baca.select_leaves_in_trimmed_run()
         return baca.OverrideCommand(
             attribute_name='direction',
-            attribute_value=Down,
+            attribute_value=abjad.Down,
             grob_name='tie',
             revert=True,
             selector=selector,
@@ -7755,7 +7755,7 @@ class LibraryNZ(object):
         selector = selector or baca.select_leaves_in_trimmed_run()
         return baca.OverrideCommand(
             attribute_name='direction',
-            attribute_value=Up,
+            attribute_value=abjad.Up,
             grob_name='tie',
             revert=True,
             selector=selector,
@@ -8909,7 +8909,7 @@ class LibraryNZ(object):
         '''
         return baca.OverrideCommand(
             attribute_name='direction',
-            attribute_value=Down,
+            attribute_value=abjad.Down,
             grob_name='tuplet_bracket',
             revert=True,
             selector=selector,
@@ -9038,7 +9038,7 @@ class LibraryNZ(object):
         '''
         return baca.OverrideCommand(
             attribute_name='direction',
-            attribute_value=Up,
+            attribute_value=abjad.Up,
             grob_name='tuplet_bracket',
             revert=True,
             selector=selector,
@@ -9434,7 +9434,7 @@ class LibraryNZ(object):
         """
         selector = selector or baca.select_chord_heads()
         return baca.AttachCommand(
-            arguments=[abjad.Arpeggio(direction=Up)],
+            arguments=[abjad.Arpeggio(direction=abjad.Up)],
             selector=selector,
             )
 

@@ -281,7 +281,7 @@ class MarkupLibrary(object):
 
     @staticmethod
     def boxed(string, selector=None, whiteout=True):
-        markup = abjad.Markup(string, direction=Up)
+        markup = abjad.Markup(string, direction=abjad.Up)
         markup = markup.box().override(('box-padding', 0.5))
         if whiteout:
             markup = markup.whiteout()
@@ -291,7 +291,7 @@ class MarkupLibrary(object):
             )
 
     @staticmethod
-    def boxed_lines(strings, direction=Up, selector=None, whiteout=True):
+    def boxed_lines(strings, direction=abjad.Up, selector=None, whiteout=True):
         assert isinstance(strings, list), repr(strings)
         markup = abjad.MarkupList(strings).column(direction=direction)
         markup = markup.box().override(('box-padding', 0.5))
@@ -305,7 +305,7 @@ class MarkupLibrary(object):
     @staticmethod
     def boxed_repeat_count(count, selector=None):
         string = 'x{}'.format(count)
-        markup = abjad.Markup(string, direction=Up)
+        markup = abjad.Markup(string, direction=abjad.Up)
         markup = markup.sans().bold().fontsize(6).upright()
         markup = markup.box().override(('box-padding', 0.5))
         return MarkupLibrary()(
@@ -315,7 +315,7 @@ class MarkupLibrary(object):
 
     @staticmethod
     def boxed_specifier(string, selector=None, whiteout=True):
-        markup = abjad.Markup(string, direction=Up)
+        markup = abjad.Markup(string, direction=abjad.Up)
         markup = markup.box().override(('box-padding', 0.5))
         if whiteout:
             markup = markup.whiteout()
@@ -544,7 +544,7 @@ class MarkupLibrary(object):
             )
 
     @staticmethod
-    def lines(strings, direction=Up, selector=None):
+    def lines(strings, direction=abjad.Up, selector=None):
         assert isinstance(strings, list), repr(strings)
         markup = abjad.MarkupList(strings).column(direction=direction)
         return MarkupLibrary()(
@@ -562,7 +562,7 @@ class MarkupLibrary(object):
     @staticmethod
     def make_markup(
         string,
-        direction=Up,
+        direction=abjad.Up,
         is_new=True,
         selector=None,
         whiteout=True,
@@ -1138,7 +1138,7 @@ class MarkupLibrary(object):
             'sparse, individual clicks with extremely slow bow')
         first_line = first_line.line()
         second_line = abjad.Markup('(1-2/sec. in irregular rhythm)').line()
-        markup = abjad.Markup.column([first_line, second_line], direction=Up)
+        markup = abjad.Markup.column([first_line, second_line], direction=abjad.Up)
         return MarkupLibrary()(
             markup=markup,
             selector=selector,
@@ -1168,7 +1168,7 @@ class MarkupLibrary(object):
     @staticmethod
     def specifier(
         string,
-        direction=Up,
+        direction=abjad.Up,
         is_new=True,
         selector=None,
         whiteout=True,
