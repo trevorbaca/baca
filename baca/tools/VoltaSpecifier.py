@@ -86,6 +86,9 @@ class VoltaSpecifier(abjad.AbjadObject):
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
                         \context ViolinMusicVoice = "Violin Music Voice" {
+                            \set Staff.instrumentName = \markup { Violin }
+                            \set Staff.shortInstrumentName = \markup { Vn. }
+                            \clef "treble"
                             e'2
                             e'4.
                             e'2

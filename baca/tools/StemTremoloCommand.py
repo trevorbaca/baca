@@ -85,6 +85,9 @@ class StemTremoloCommand(abjad.AbjadObject):
                     \context ViolinMusicStaff = "Violin Music Staff" {
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             {
+                                \set Staff.instrumentName = \markup { Violin }
+                                \set Staff.shortInstrumentName = \markup { Vn. }
+                                \clef "treble"
                                 e'8 :32 [
                                 f'8 :32
                                 e'8 :32
@@ -247,6 +250,9 @@ class StemTremoloCommand(abjad.AbjadObject):
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     e'8 :32 [
                                     f'8
                                     e'8
@@ -351,6 +357,9 @@ class StemTremoloCommand(abjad.AbjadObject):
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     e'8 [
                                     f'8 :32
                                     e'8
@@ -463,6 +472,9 @@ class StemTremoloCommand(abjad.AbjadObject):
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     e'8 :32 [
                                     f'8 :32
                                     e'8 :32
@@ -569,6 +581,9 @@ class StemTremoloCommand(abjad.AbjadObject):
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     e'8 [
                                     f'8
                                     e'8
@@ -683,6 +698,9 @@ class StemTremoloCommand(abjad.AbjadObject):
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     e'8 :32 [
                                     f'8 :32
                                     e'8 :32
@@ -787,6 +805,9 @@ class StemTremoloCommand(abjad.AbjadObject):
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     e'8 :16 [
                                     f'8 :16
                                     e'8 :16

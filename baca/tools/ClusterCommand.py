@@ -274,6 +274,9 @@ class ClusterCommand(abjad.AbjadObject):
                             \once \override NoteHead.text = \markup {
                                 \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
+                            \set Staff.instrumentName = \markup { Violin }
+                            \set Staff.shortInstrumentName = \markup { Vn. }
+                            \clef "treble"
                             <e' g' b'>2
                                 ^ \markup {
                                     \center-align
@@ -510,6 +513,9 @@ class ClusterCommand(abjad.AbjadObject):
                                 \once \override NoteHead.text = \markup {
                                     \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
+                                \set Staff.instrumentName = \markup { Violin }
+                                \set Staff.shortInstrumentName = \markup { Vn. }
+                                \clef "treble"
                                 <e' g' b'>2
                                     ^ \markup {
                                         \center-align
@@ -651,6 +657,9 @@ class ClusterCommand(abjad.AbjadObject):
                                 \once \override NoteHead.text = \markup {
                                     \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
+                                \set Staff.instrumentName = \markup { Violin }
+                                \set Staff.shortInstrumentName = \markup { Vn. }
+                                \clef "treble"
                                 <e' g' b'>2
                                     ^ \markup {
                                         \center-align
@@ -791,6 +800,9 @@ class ClusterCommand(abjad.AbjadObject):
                                 \once \override NoteHead.text = \markup {
                                     \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
+                                \set Staff.instrumentName = \markup { Violin }
+                                \set Staff.shortInstrumentName = \markup { Vn. }
+                                \clef "treble"
                                 <c' e' g'>2
                                     ^ \markup {
                                         \center-align
@@ -938,6 +950,9 @@ class ClusterCommand(abjad.AbjadObject):
                                 \once \override NoteHead.text = \markup {
                                     \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
+                                \set Staff.instrumentName = \markup { Violin }
+                                \set Staff.shortInstrumentName = \markup { Vn. }
+                                \clef "treble"
                                 <g' b' d''>2
                                     ^ \markup {
                                         \center-align
@@ -1087,6 +1102,9 @@ class ClusterCommand(abjad.AbjadObject):
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
+                                \set Staff.instrumentName = \markup { Violin }
+                                \set Staff.shortInstrumentName = \markup { Vn. }
+                                \clef "treble"
                                 e'2
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -1218,6 +1236,9 @@ class ClusterCommand(abjad.AbjadObject):
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
+                                \set Staff.instrumentName = \markup { Violin }
+                                \set Staff.shortInstrumentName = \markup { Vn. }
+                                \clef "treble"
                                 e'2
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -1334,6 +1355,9 @@ class ClusterCommand(abjad.AbjadObject):
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
+                                \set Staff.instrumentName = \markup { Violin }
+                                \set Staff.shortInstrumentName = \markup { Vn. }
+                                \clef "treble"
                                 e'2
                                 e'4.
                                 e'2

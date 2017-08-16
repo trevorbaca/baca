@@ -73,6 +73,9 @@ class StringTrioScoreTemplate(ScoreTemplate):
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
+                                \set Staff.instrumentName = \markup { Violin }
+                                \set Staff.shortInstrumentName = \markup { Vn. }
+                                \clef "treble"
                                 R1 * 1/2
                                 R1 * 3/8
                                 R1 * 1/2
@@ -83,6 +86,9 @@ class StringTrioScoreTemplate(ScoreTemplate):
                         \tag viola
                         \context ViolaMusicStaff = "Viola Music Staff" {
                             \context ViolaMusicVoice = "Viola Music Voice" {
+                                \set Staff.instrumentName = \markup { Viola }
+                                \set Staff.shortInstrumentName = \markup { Va. }
+                                \clef "alto"
                                 R1 * 1/2
                                 R1 * 3/8
                                 R1 * 1/2
@@ -93,6 +99,9 @@ class StringTrioScoreTemplate(ScoreTemplate):
                         \tag cello
                         \context CelloMusicStaff = "Cello Music Staff" {
                             \context CelloMusicVoice = "Cello Music Voice" {
+                                \set Staff.instrumentName = \markup { Cello }
+                                \set Staff.shortInstrumentName = \markup { Vc. }
+                                \clef "bass"
                                 R1 * 1/2
                                 R1 * 3/8
                                 R1 * 1/2
@@ -123,9 +132,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
         Returns score.
         '''
-
         time_signature_context = self._make_time_signature_context()
-
         instrument_tags = (
             'violin',
             'viola',
@@ -139,6 +146,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             )
         abjad.attach(tag_command, time_signature_context)
 
+        # VIOLIN
         violin_music_voice = abjad.Voice(
             [],
             context_name='ViolinMusicVoice',
@@ -149,19 +157,20 @@ class StringTrioScoreTemplate(ScoreTemplate):
             context_name='ViolinMusicStaff',
             name='Violin Music Staff',
             )
-#        violin = abjad.instrumenttools.Violin()
-#        abjad.annotate(
-#            violin_music_staff,
-#            'default_instrument',
-#            violin,
-#            )
-#        abjad.annotate(
-#            violin_music_staff,
-#            'default_clef',
-#            abjad.Clef('treble'),
-#            )
+        violin = abjad.instrumenttools.Violin()
+        abjad.annotate(
+            violin_music_staff,
+            'default_instrument',
+            violin,
+            )
+        abjad.annotate(
+            violin_music_staff,
+            'default_clef',
+            abjad.Clef('treble'),
+            )
         self._attach_tag('violin', violin_music_staff)
 
+        # VIOLA
         viola_music_voice = abjad.Voice(
             [],
             context_name='ViolaMusicVoice',
@@ -172,18 +181,19 @@ class StringTrioScoreTemplate(ScoreTemplate):
             context_name='ViolaMusicStaff',
             name='Viola Music Staff',
             )
-#        abjad.annotate(
-#            viola_music_staff,
-#            'default_instrument',
-#            abjad.instrumenttools.Viola(),
-#            )
-#        abjad.annotate(
-#            viola_music_staff,
-#            'default_clef',
-#            abjad.Clef('alto'),
-#            )
+        abjad.annotate(
+            viola_music_staff,
+            'default_instrument',
+            abjad.instrumenttools.Viola(),
+            )
+        abjad.annotate(
+            viola_music_staff,
+            'default_clef',
+            abjad.Clef('alto'),
+            )
         self._attach_tag('viola', viola_music_staff)
 
+        # CELLO
         cello_music_voice = abjad.Voice(
             [],
             context_name='CelloMusicVoice',
@@ -194,18 +204,19 @@ class StringTrioScoreTemplate(ScoreTemplate):
             context_name='CelloMusicStaff',
             name='Cello Music Staff',
             )
-#        abjad.annotate(
-#            cello_music_staff,
-#            'default_instrument',
-#            abjad.instrumenttools.Cello(),
-#            )
-#        abjad.annotate(
-#            cello_music_staff,
-#            'default_clef',
-#            abjad.Clef('bass'),
-#            )
+        abjad.annotate(
+            cello_music_staff,
+            'default_instrument',
+            abjad.instrumenttools.Cello(),
+            )
+        abjad.annotate(
+            cello_music_staff,
+            'default_clef',
+            abjad.Clef('bass'),
+            )
         self._attach_tag('cello', cello_music_staff)
 
+        # SCORE
         string_section_staff_group = abjad.StaffGroup(
             [
                 violin_music_staff,
@@ -215,21 +226,19 @@ class StringTrioScoreTemplate(ScoreTemplate):
             context_name='StringSectionStaffGroup',
             name='String Section Staff Group',
             )
-
         music_context = abjad.Context(
             [
                 string_section_staff_group,
-            ],
+                ],
             context_name='MusicContext',
             is_simultaneous=True,
             name='Music Context',
             )
-
-        score = abjad.Score([
-            time_signature_context,
-            music_context,
-            ],
+        score = abjad.Score(
+            [
+                time_signature_context,
+                music_context,
+                ],
             name='Score',
             )
-
         return score

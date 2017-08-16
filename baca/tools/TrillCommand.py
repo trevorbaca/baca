@@ -135,6 +135,9 @@ class TrillCommand(abjad.AbjadObject):
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
                         \context ViolinMusicVoice = "Violin Music Voice" {
+                            \set Staff.instrumentName = \markup { Violin }
+                            \set Staff.shortInstrumentName = \markup { Vn. }
+                            \clef "treble"
                             e'2 \startTrillSpan
                             f'4. \stopTrillSpan \startTrillSpan
                             e'2 \stopTrillSpan \startTrillSpan

@@ -89,6 +89,9 @@ class RegisterTransitionCommand(abjad.AbjadObject):
                     \context ViolinMusicStaff = "Violin Music Staff" {
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             {
+                                \set Staff.instrumentName = \markup { Violin }
+                                \set Staff.shortInstrumentName = \markup { Vn. }
+                                \clef "treble"
                                 c'8 [
                                 d'8
                                 e'8

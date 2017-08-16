@@ -72,6 +72,9 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
                         \context ViolinMusicVoice = "Violin Music Voice" {
+                            \set Staff.instrumentName = \markup { Violin }
+                            \set Staff.shortInstrumentName = \markup { Vn. }
+                            \clef "treble"
                             R1 * 1/2
                             R1 * 3/8
                             R1 * 1/2
@@ -99,9 +102,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
 
         Returns score.
         '''
-
         time_signature_context = self._make_time_signature_context()
-
         instrument_tags = (
             'violin',
             )
@@ -112,7 +113,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             'before',
             )
         abjad.attach(tag_command, time_signature_context)
-
+        # VIOLIN
         violin_music_voice = abjad.Voice(
             [],
             context_name='ViolinMusicVoice',
@@ -123,33 +124,32 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             context_name='ViolinMusicStaff',
             name='Violin Music Staff',
             )
-#        violin = abjad.instrumenttools.Violin()
-#        abjad.annotate(
-#            violin_music_staff,
-#            'default_instrument',
-#            violin,
-#            )
-#        abjad.annotate(
-#            violin_music_staff,
-#            'default_clef',
-#            abjad.Clef('treble'),
-#            )
+        violin = abjad.instrumenttools.Violin()
+        abjad.annotate(
+            violin_music_staff,
+            'default_instrument',
+            violin,
+            )
+        abjad.annotate(
+            violin_music_staff,
+            'default_clef',
+            abjad.Clef('treble'),
+            )
         self._attach_tag('violin', violin_music_staff)
-
+        # SCORE
         music_context = abjad.Context(
             [
                 violin_music_staff,
-            ],
+                ],
             context_name='MusicContext',
             is_simultaneous=True,
             name='Music Context',
             )
-
-        score = abjad.Score([
-            time_signature_context,
-            music_context,
-            ],
+        score = abjad.Score(
+            [
+                time_signature_context,
+                music_context,
+                ],
             name='Score',
             )
-
         return score

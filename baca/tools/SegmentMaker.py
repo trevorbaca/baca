@@ -79,6 +79,9 @@ class SegmentMaker(experimental.SegmentMaker):
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
                         \context ViolinMusicVoice = "Violin Music Voice" {
+                            \set Staff.instrumentName = \markup { Violin }
+                            \set Staff.shortInstrumentName = \markup { Vn. }
+                            \clef "treble"
                             R1 * 1/2
                             R1 * 3/8
                             R1 * 1/2
@@ -167,6 +170,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                 \once \override Flag.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
+                                \set Staff.instrumentName = \markup { Violin }
+                                \set Staff.shortInstrumentName = \markup { Vn. }
+                                \clef "treble"
                                 c'8 [
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
@@ -2146,6 +2152,9 @@ class SegmentMaker(experimental.SegmentMaker):
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     {
+                                        \set Staff.instrumentName = \markup { Violin }
+                                        \set Staff.shortInstrumentName = \markup { Vn. }
+                                        \clef "treble"
                                         e'16
                                     }
                                 }
@@ -2296,6 +2305,9 @@ class SegmentMaker(experimental.SegmentMaker):
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     {
+                                        \set Staff.instrumentName = \markup { Violin }
+                                        \set Staff.shortInstrumentName = \markup { Vn. }
+                                        \clef "treble"
                                         e'16
                                             ^ \markup {
                                                 \fontsize
@@ -2486,6 +2498,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                 \context ViolinMusicVoice = "Violin Music Voice" {
                                     {
                                         {
+                                            \set Staff.instrumentName = \markup { Violin }
+                                            \set Staff.shortInstrumentName = \markup { Vn. }
+                                            \clef "treble"
                                             d'16 [
                                             e'16
                                             \once \override Accidental.color = #red
@@ -2507,6 +2522,9 @@ class SegmentMaker(experimental.SegmentMaker):
                             \tag viola
                             \context ViolaMusicStaff = "Viola Music Staff" {
                                 \context ViolaMusicVoice = "Viola Music Voice" {
+                                    \set Staff.instrumentName = \markup { Viola }
+                                    \set Staff.shortInstrumentName = \markup { Va. }
+                                    \clef "alto"
                                     R1 * 3/8
                                     \bar "|"
                                 }
@@ -2516,6 +2534,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                 \context CelloMusicVoice = "Cello Music Voice" {
                                     {
                                         {
+                                            \set Staff.instrumentName = \markup { Cello }
+                                            \set Staff.shortInstrumentName = \markup { Vc. }
+                                            \clef "bass"
                                             a16 [
                                             g16
                                             \once \override Accidental.color = #red
@@ -2663,6 +2684,9 @@ class SegmentMaker(experimental.SegmentMaker):
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     {
+                                        \set Staff.instrumentName = \markup { Violin }
+                                        \set Staff.shortInstrumentName = \markup { Vn. }
+                                        \clef "treble"
                                         e'16
                                     }
                                 }
@@ -2828,6 +2852,9 @@ class SegmentMaker(experimental.SegmentMaker):
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     {
+                                        \set Staff.instrumentName = \markup { Violin }
+                                        \set Staff.shortInstrumentName = \markup { Vn. }
+                                        \clef "treble"
                                         e'16
                                     }
                                 }
@@ -2995,6 +3022,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -3169,6 +3199,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -3340,6 +3373,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -3515,6 +3551,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -3695,6 +3734,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -3868,6 +3910,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -4092,6 +4137,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -4258,6 +4306,9 @@ class SegmentMaker(experimental.SegmentMaker):
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     c'8 [
                                     c'8
                                     c'8
@@ -4424,6 +4475,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                         \once \override Flag.color = #magenta
                                         \once \override NoteHead.color = #magenta
                                         \once \override Stem.color = #magenta
+                                        \set Staff.instrumentName = \markup { Violin }
+                                        \set Staff.shortInstrumentName = \markup { Vn. }
+                                        \clef "treble"
                                         e'8.
                                     }
                                 }
@@ -4667,6 +4721,9 @@ class SegmentMaker(experimental.SegmentMaker):
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     {
+                                        \set Staff.instrumentName = \markup { Violin }
+                                        \set Staff.shortInstrumentName = \markup { Vn. }
+                                        \clef "treble"
                                         e'8.
                                     }
                                 }
@@ -4822,6 +4879,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -4947,7 +5007,7 @@ class SegmentMaker(experimental.SegmentMaker):
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score]) # doctest: +SKIP
+                >>> f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -4972,13 +5032,7 @@ class SegmentMaker(experimental.SegmentMaker):
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
-                                s1 * 1/2
-                                    ^ \markup {
-                                        \fontsize
-                                            #-2
-                                            0'00''
-                                        }
-                                    ^ \markup {
+                                s1 * 1/2 ^ \markup {
                                     \fontsize
                                         #-6
                                         \general-align
@@ -4998,29 +5052,14 @@ class SegmentMaker(experimental.SegmentMaker):
                             {
                                 \time 3/8
                                 s1 * 3/8
-                                    ^ \markup {
-                                        \fontsize
-                                            #-2
-                                            0'02''
-                                        }
                             }
                             {
                                 \time 4/8
                                 s1 * 1/2
-                                    ^ \markup {
-                                        \fontsize
-                                            #-2
-                                            0'04''
-                                        }
                             }
                             {
                                 \time 3/8
                                 s1 * 3/8
-                                    ^ \markup {
-                                        \fontsize
-                                            #-2
-                                            0'07''
-                                        }
                             }
                         }
                     >>
@@ -5034,6 +5073,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -5216,6 +5258,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -5394,6 +5439,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -5576,6 +5624,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -5887,6 +5938,9 @@ class SegmentMaker(experimental.SegmentMaker):
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
+                                \set Staff.instrumentName = \markup { Violin }
+                                \set Staff.shortInstrumentName = \markup { Vn. }
+                                \clef "treble"
                                 R1 * 1/2
                                 R1 * 3/8
                                 R1 * 1/2
@@ -5962,6 +6016,9 @@ class SegmentMaker(experimental.SegmentMaker):
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
+                                \set Staff.instrumentName = \markup { Violin }
+                                \set Staff.shortInstrumentName = \markup { Vn. }
+                                \clef "treble"
                                 s1 * 1/2
                                 s1 * 3/8
                                 s1 * 1/2
@@ -6106,6 +6163,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -6289,6 +6349,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -6471,6 +6534,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -6659,6 +6725,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -6847,6 +6916,9 @@ class SegmentMaker(experimental.SegmentMaker):
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     e'8 [
                                     f'8
                                     e'8
@@ -6875,9 +6947,7 @@ class SegmentMaker(experimental.SegmentMaker):
                 >>
 
         ..  note:: Build example with transposing instrument.
-
-        ..  note:: Score package must currently be passed in for transposition
-            to work. Eventually instrument list will be passed instead.
+            Must pass in instrument manifest.
 
         Defaults to none.
 
@@ -6969,6 +7039,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -7145,6 +7218,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -7328,6 +7404,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     c'8 [
                                         ^ \markup {
                                             \small
@@ -7594,6 +7673,9 @@ class SegmentMaker(experimental.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
+                                    \set Staff.instrumentName = \markup { Violin }
+                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
                                     c'8 [
                                         ^ \markup {
                                             \small

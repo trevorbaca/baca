@@ -212,6 +212,9 @@ class ColorCommand(abjad.AbjadObject):
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
+                                \set Staff.instrumentName = \markup { Violin }
+                                \set Staff.shortInstrumentName = \markup { Vn. }
+                                \clef "treble"
                                 e'8 [
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red

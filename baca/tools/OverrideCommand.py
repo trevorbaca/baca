@@ -178,6 +178,9 @@ class OverrideCommand(abjad.AbjadObject):
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
                         \context ViolinMusicVoice = "Violin Music Voice" {
+                            \set Staff.instrumentName = \markup { Violin }
+                            \set Staff.shortInstrumentName = \markup { Vn. }
+                            \clef "treble"
                             \override Beam.positions = #'(-6 . -6)
                             \override Stem.direction = #down
                             e'8 [
