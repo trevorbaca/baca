@@ -382,9 +382,9 @@ class CollectionList(abjad.AbjadValueObject):
             ::
 
                 >>> f(collections)
-                baca.tools.CollectionList(
+                baca.CollectionList(
                     collections=[
-                        baca.tools.PitchSegment(
+                        baca.PitchSegment(
                             (
                                 abjad.NumberedPitch(12),
                                 abjad.NumberedPitch(14),
@@ -393,7 +393,7 @@ class CollectionList(abjad.AbjadValueObject):
                                 ),
                             item_class=abjad.NumberedPitch,
                             ),
-                        baca.tools.PitchSegment(
+                        baca.PitchSegment(
                             (
                                 abjad.NumberedPitch(16),
                                 abjad.NumberedPitch(20),
@@ -1149,10 +1149,10 @@ class CollectionList(abjad.AbjadValueObject):
             ::
 
                 >>> f(cursor)
-                baca.tools.Cursor(
-                    source=baca.tools.CollectionList(
+                baca.Cursor(
+                    source=baca.CollectionList(
                         collections=[
-                            baca.tools.PitchSegment(
+                            baca.PitchSegment(
                                 (
                                     abjad.NumberedPitch(5),
                                     abjad.NumberedPitch(12),
@@ -1161,7 +1161,7 @@ class CollectionList(abjad.AbjadValueObject):
                                     ),
                                 item_class=abjad.NumberedPitch,
                                 ),
-                            baca.tools.PitchSegment(
+                            baca.PitchSegment(
                                 (
                                     abjad.NumberedPitch(16),
                                     abjad.NumberedPitch(17),

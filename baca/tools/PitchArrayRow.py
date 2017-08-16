@@ -28,21 +28,21 @@ class PitchArrayRow(abjad.AbjadObject):
         ::
 
             >>> f(array[0])
-            baca.tools.PitchArrayRow(
+            baca.PitchArrayRow(
                 cells=(
-                    baca.tools.PitchArrayCell(
+                    baca.PitchArrayCell(
                         pitches=[
                             abjad.NamedPitch("c'"),
                             ],
                         width=1,
                         ),
-                    baca.tools.PitchArrayCell(
+                    baca.PitchArrayCell(
                         pitches=[
                             abjad.NamedPitch("d'"),
                             ],
                         width=2,
                         ),
-                    baca.tools.PitchArrayCell(
+                    baca.PitchArrayCell(
                         width=1,
                         ),
                     ),

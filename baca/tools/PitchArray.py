@@ -24,30 +24,30 @@ class PitchArray(abjad.AbjadObject):
         ::
 
             >>> f(pitch_array)
-            baca.tools.PitchArray(
+            baca.PitchArray(
                 rows=(
-                    baca.tools.PitchArrayRow(
+                    baca.PitchArrayRow(
                         cells=(
-                            baca.tools.PitchArrayCell(
+                            baca.PitchArrayCell(
                                 width=1,
                                 ),
-                            baca.tools.PitchArrayCell(
+                            baca.PitchArrayCell(
                                 width=2,
                                 ),
-                            baca.tools.PitchArrayCell(
+                            baca.PitchArrayCell(
                                 width=1,
                                 ),
                             ),
                         ),
-                    baca.tools.PitchArrayRow(
+                    baca.PitchArrayRow(
                         cells=(
-                            baca.tools.PitchArrayCell(
+                            baca.PitchArrayCell(
                                 width=2,
                                 ),
-                            baca.tools.PitchArrayCell(
+                            baca.PitchArrayCell(
                                 width=1,
                                 ),
-                            baca.tools.PitchArrayCell(
+                            baca.PitchArrayCell(
                                 width=1,
                                 ),
                             ),

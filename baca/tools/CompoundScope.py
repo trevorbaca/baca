@@ -27,21 +27,21 @@ class CompoundScope(abjad.AbjadObject):
         ::
 
             >>> f(scope)
-            baca.tools.CompoundScope(
+            baca.CompoundScope(
                 simple_scopes=(
-                    baca.tools.SimpleScope(
+                    baca.SimpleScope(
                         voice_name='Piano Music Voice',
                         stages=(5, 9),
                         ),
-                    baca.tools.SimpleScope(
+                    baca.SimpleScope(
                         voice_name='Clarinet Music Voice',
                         stages=(7, 12),
                         ),
-                    baca.tools.SimpleScope(
+                    baca.SimpleScope(
                         voice_name='Violin Music Voice',
                         stages=(8, 12),
                         ),
-                    baca.tools.SimpleScope(
+                    baca.SimpleScope(
                         voice_name='Oboe Music Voice',
                         stages=(9, 12),
                         ),
@@ -59,7 +59,7 @@ class CompoundScope(abjad.AbjadObject):
             ::
 
                 >>> f(compound_scope)
-                baca.tools.CompoundScope()
+                baca.CompoundScope()
 
     '''
 

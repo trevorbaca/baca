@@ -22,7 +22,7 @@ class SimpleScope(abjad.AbjadObject):
         ::
 
             >>> f(scope)
-            baca.tools.SimpleScope(
+            baca.SimpleScope(
                 voice_name='Violin Music Voice',
                 stages=(1, 9),
                 )

@@ -679,7 +679,7 @@ class Cursor(abjad.AbjadObject):
             ::
 
                 >>> f(cursor)
-                baca.tools.Cursor(
+                baca.Cursor(
                     source=abjad.CyclicTuple(
                         [
                             abjad.PitchClassSegment(

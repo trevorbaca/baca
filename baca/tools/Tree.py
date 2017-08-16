@@ -46,12 +46,12 @@ class Tree(abjad.AbjadObject):
         ::
 
             >>> f(tree[1])
-            baca.tools.Tree(
+            baca.Tree(
                 items=[
-                    baca.tools.Tree(
+                    baca.Tree(
                         items=4,
                         ),
-                    baca.tools.Tree(
+                    baca.Tree(
                         items=5,
                         ),
                     ],
@@ -79,7 +79,7 @@ class Tree(abjad.AbjadObject):
         ::
 
             >>> f(tree[1][0])
-            baca.tools.Tree(
+            baca.Tree(
                 items=4,
                 )
 
@@ -287,38 +287,38 @@ class Tree(abjad.AbjadObject):
             ::
 
                 >>> f(tree)
-                baca.tools.Tree(
+                baca.Tree(
                     items=[
-                        baca.tools.Tree(
+                        baca.Tree(
                             items=[
-                                baca.tools.Tree(
+                                baca.Tree(
                                     items=[
-                                        baca.tools.Tree(
+                                        baca.Tree(
                                             items=0,
                                             ),
-                                        baca.tools.Tree(
+                                        baca.Tree(
                                             items=1,
                                             ),
                                         ],
                                     ),
-                                baca.tools.Tree(
+                                baca.Tree(
                                     items=[
-                                        baca.tools.Tree(
+                                        baca.Tree(
                                             items=2,
                                             ),
-                                        baca.tools.Tree(
+                                        baca.Tree(
                                             items=3,
                                             ),
                                         ],
                                     ),
                                 ],
                             ),
-                        baca.tools.Tree(
+                        baca.Tree(
                             items=[
-                                baca.tools.Tree(
+                                baca.Tree(
                                     items=4,
                                     ),
-                                baca.tools.Tree(
+                                baca.Tree(
                                     items=5,
                                     ),
                                 ],

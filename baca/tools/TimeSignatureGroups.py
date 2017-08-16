@@ -25,7 +25,7 @@ class TimeSignatureGroups(abjad.AbjadObject):
         ::
 
             >>> f(groups)
-            baca.tools.TimeSignatureGroups(
+            baca.TimeSignatureGroups(
                 [
                     [
                         abjad.TimeSignature((3, 8)),

@@ -9,39 +9,36 @@ class RhythmSpecifier(abjad.AbjadObject):
 
         >>> import abjad
         >>> import baca
+        >>> from abjad import rhythmmakertools
 
     ..  container:: example
-
-        Specifies rhythm:
 
         ::
 
             >>> rhythm_specifier = baca.RhythmSpecifier(
-            ...     rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker(),
+            ...     rhythm_maker=rhythmmakertools.NoteRhythmMaker(),
             ...     )
 
         ::
 
             >>> f(rhythm_specifier)
-            baca.tools.RhythmSpecifier(
-                rhythm_maker=rhythmmakertools.NoteRhythmMaker(),
+            baca.RhythmSpecifier(
+                rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(),
                 )
 
     ..  container:: example
-
-        Specifies rhythm:
 
         ::
 
             >>> rhythm_specifier = baca.RhythmSpecifier(
             ...     division_expression=abjad.sequence().sum().sequence(),
-            ...     rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker(),
+            ...     rhythm_maker=rhythmmakertools.NoteRhythmMaker(),
             ...     )
 
         ::
 
             >>> f(rhythm_specifier)
-            baca.tools.RhythmSpecifier(
+            baca.RhythmSpecifier(
                 division_expression=abjad.Expression(
                     callbacks=[
                         abjad.Expression(
@@ -62,7 +59,7 @@ class RhythmSpecifier(abjad.AbjadObject):
                         ],
                     proxy_class=abjad.Sequence,
                     ),
-                rhythm_maker=rhythmmakertools.NoteRhythmMaker(),
+                rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(),
                 )
 
     '''

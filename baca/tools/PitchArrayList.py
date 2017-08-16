@@ -33,22 +33,22 @@ class PitchArrayList(abjad.TypedList):
         ::
 
             >>> f(arrays)
-            baca.tools.PitchArrayList(
+            baca.PitchArrayList(
                 [
-                    baca.tools.PitchArray(
+                    baca.PitchArray(
                         rows=(
-                            baca.tools.PitchArrayRow(
+                            baca.PitchArrayRow(
                                 cells=(
-                                    baca.tools.PitchArrayCell(
+                                    baca.PitchArrayCell(
                                         width=1,
                                         ),
-                                    baca.tools.PitchArrayCell(
+                                    baca.PitchArrayCell(
                                         pitches=[
                                             abjad.NamedPitch("d'"),
                                             ],
                                         width=1,
                                         ),
-                                    baca.tools.PitchArrayCell(
+                                    baca.PitchArrayCell(
                                         pitches=[
                                             abjad.NamedPitch('bf'),
                                             abjad.NamedPitch('bqf'),
@@ -57,51 +57,51 @@ class PitchArrayList(abjad.TypedList):
                                         ),
                                     ),
                                 ),
-                            baca.tools.PitchArrayRow(
+                            baca.PitchArrayRow(
                                 cells=(
-                                    baca.tools.PitchArrayCell(
+                                    baca.PitchArrayCell(
                                         pitches=[
                                             abjad.NamedPitch("g'"),
                                             ],
                                         width=2,
                                         ),
-                                    baca.tools.PitchArrayCell(
+                                    baca.PitchArrayCell(
                                         pitches=[
                                             abjad.NamedPitch("fs'"),
                                             ],
                                         width=1,
                                         ),
-                                    baca.tools.PitchArrayCell(
+                                    baca.PitchArrayCell(
                                         width=1,
                                         ),
                                     ),
                                 ),
                             ),
                         ),
-                    baca.tools.PitchArray(
+                    baca.PitchArray(
                         rows=(
-                            baca.tools.PitchArrayRow(
+                            baca.PitchArrayRow(
                                 cells=(
-                                    baca.tools.PitchArrayCell(
+                                    baca.PitchArrayCell(
                                         width=1,
                                         ),
-                                    baca.tools.PitchArrayCell(
+                                    baca.PitchArrayCell(
                                         width=1,
                                         ),
-                                    baca.tools.PitchArrayCell(
+                                    baca.PitchArrayCell(
                                         width=1,
                                         ),
                                     ),
                                 ),
-                            baca.tools.PitchArrayRow(
+                            baca.PitchArrayRow(
                                 cells=(
-                                    baca.tools.PitchArrayCell(
+                                    baca.PitchArrayCell(
                                         width=1,
                                         ),
-                                    baca.tools.PitchArrayCell(
+                                    baca.PitchArrayCell(
                                         width=1,
                                         ),
-                                    baca.tools.PitchArrayCell(
+                                    baca.PitchArrayCell(
                                         width=1,
                                         ),
                                     ),

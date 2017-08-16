@@ -25,7 +25,7 @@ class StageSpecifier(abjad.AbjadObject):
         ::
 
             >>> f(specifier)
-            baca.tools.StageSpecifier(
+            baca.StageSpecifier(
                 items=(
                     4,
                     4,
@@ -51,7 +51,7 @@ class StageSpecifier(abjad.AbjadObject):
         ::
 
             >>> f(specifier)
-            baca.tools.StageSpecifier(
+            baca.StageSpecifier(
                 items=(
                     4,
                     4,

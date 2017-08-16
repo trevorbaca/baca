@@ -32,12 +32,12 @@ class PitchArrayColumn(abjad.AbjadValueObject):
         ::
 
             >>> f(array.columns[0])
-            baca.tools.PitchArrayColumn(
+            baca.PitchArrayColumn(
                 cells=(
-                    baca.tools.PitchArrayCell(
+                    baca.PitchArrayCell(
                         width=1,
                         ),
-                    baca.tools.PitchArrayCell(
+                    baca.PitchArrayCell(
                         pitches=[
                             abjad.NamedPitch("g'"),
                             ],

@@ -58,30 +58,30 @@ class PitchArrayCell(abjad.AbjadObject):
         ::
 
             >>> f(cell.parent_array)
-            baca.tools.PitchArray(
+            baca.PitchArray(
                 rows=(
-                    baca.tools.PitchArrayRow(
+                    baca.PitchArrayRow(
                         cells=(
-                            baca.tools.PitchArrayCell(
+                            baca.PitchArrayCell(
                                 width=1,
                                 ),
-                            baca.tools.PitchArrayCell(
+                            baca.PitchArrayCell(
                                 width=2,
                                 ),
-                            baca.tools.PitchArrayCell(
+                            baca.PitchArrayCell(
                                 width=1,
                                 ),
                             ),
                         ),
-                    baca.tools.PitchArrayRow(
+                    baca.PitchArrayRow(
                         cells=(
-                            baca.tools.PitchArrayCell(
+                            baca.PitchArrayCell(
                                 width=2,
                                 ),
-                            baca.tools.PitchArrayCell(
+                            baca.PitchArrayCell(
                                 width=1,
                                 ),
-                            baca.tools.PitchArrayCell(
+                            baca.PitchArrayCell(
                                 width=1,
                                 ),
                             ),
@@ -92,12 +92,12 @@ class PitchArrayCell(abjad.AbjadObject):
         ::
 
             >>> f(cell.parent_column)
-            baca.tools.PitchArrayColumn(
+            baca.PitchArrayColumn(
                 cells=(
-                    baca.tools.PitchArrayCell(
+                    baca.PitchArrayCell(
                         width=2,
                         ),
-                    baca.tools.PitchArrayCell(
+                    baca.PitchArrayCell(
                         width=2,
                         ),
                     ),
@@ -106,15 +106,15 @@ class PitchArrayCell(abjad.AbjadObject):
         ::
 
             >>> f(cell.parent_row)
-            baca.tools.PitchArrayRow(
+            baca.PitchArrayRow(
                 cells=(
-                    baca.tools.PitchArrayCell(
+                    baca.PitchArrayCell(
                         width=1,
                         ),
-                    baca.tools.PitchArrayCell(
+                    baca.PitchArrayCell(
                         width=2,
                         ),
-                    baca.tools.PitchArrayCell(
+                    baca.PitchArrayCell(
                         width=1,
                         ),
                     ),
