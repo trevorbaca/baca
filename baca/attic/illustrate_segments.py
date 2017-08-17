@@ -3,12 +3,12 @@ import abjad
 import ide
 import shutil
 import os
-import subprocess
 
 
 configuration = ide.tools.idetools.AbjadIDEConfiguration()
 boilerplate_path = configuration.abjad_ide_boilerplate_directory
 boilerplate_path = os.path.join(boilerplate_path, '__illustrate_segment__.py')
+
 
 def illustrate_segment(segment_path):
     local_boilerplate_path = os.path.join(

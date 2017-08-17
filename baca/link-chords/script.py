@@ -1,4 +1,4 @@
-
+import abjad
 
 
 #all_ais = []
@@ -57,8 +57,8 @@
 
 #all_ieq_ais = open('all_ieq_ais.py', 'r').read()
 #all_ieq_ais = eval(all_ieq_ais)
-#
-#
+
+
 def is_link_chord(ais):
     for sextuple in abjad.sequence(ais).nwise(n=6):
         pc_set = abjad.PitchClassSet(sextuple)

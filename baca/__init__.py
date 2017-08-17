@@ -21,6 +21,7 @@ from baca.tools.Sequence import Sequence
 from baca.tools.Sequence import _sequence as sequence
 from baca.tools import *
 
+
 def _import_static_methods(class_):
     for name in dir(class_):
         if name.startswith('_'):
@@ -29,8 +30,8 @@ def _import_static_methods(class_):
         statement = statement.format(name, class_.__name__, name)
         exec(statement, globals())
 
+
 _import_static_methods(LibraryAM)
 _import_static_methods(LibraryNZ)
 _import_static_methods(SelectorLibrary)
-
 markup = MarkupLibrary()
