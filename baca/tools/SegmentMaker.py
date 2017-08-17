@@ -1,13 +1,12 @@
 import abjad
 import baca
 import copy
-import experimental
 import os
 import time
 import traceback
 
 
-class SegmentMaker(experimental.SegmentMaker):
+class SegmentMaker(abjad.SegmentMaker):
     r'''Segment-maker.
 
     ::

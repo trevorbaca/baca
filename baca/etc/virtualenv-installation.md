@@ -696,9 +696,10 @@ Abjad directory structure already exists:
 
     (abjad2) ✔ ~/abjad [trevor/dev|✔] 
     11:54 $ ls
-    Abjad.egg-info   MANIFEST.in      experimental     setup.cfg
-    Dockerfile       README.rst       pytest.ini       setup.py
-    LICENSE          abjad            requirements.txt tox.ini
+    Abjad.egg-info   Makefile         pytest.ini       tox.ini
+    Dockerfile       README.rst       requirements.txt
+    LICENSE          abjad            setup.cfg
+    MANIFEST.in      conftest.py      setup.py
 
 Reinstall Abjad (for the benefit of Python 2):
 

@@ -18,13 +18,9 @@
 
         abjad api -M; ajv doctest; py.test -rf; git st
         
-    Change to the experimental directory:
-
-        abjad api -M; ajv doctest; py.test -rf; git st
-
     Change to the IDE diretory:
 
-        abjad api -M; ajv doctest; py.test -rf; git st
+        abjad api -I; ajv doctest; py.test -rf; git st
 
     Change to the Bača directory:
 
@@ -38,13 +34,9 @@
 
         abjad api -M; ajv doctest; py.test -rf; git st
         
-    Change to the experimental directory:
-
-        abjad api -M; ajv doctest; py.test -rf; git st
-
     Change to the IDE diretory:
 
-        abjad api -M; ajv doctest; py.test -rf; git st
+        abjad api -I; ajv doctest; py.test -rf; git st
 
     Change to the Bača directory:
 
@@ -61,10 +53,6 @@
         pip install -e .
 
         ajv api -M; ajv doctest; py.test -rf; git st
-
-    Change to the experimental directory:
-
-        ajv api -X; ajv doctest; py.test -rf; git st
 
 7.  Update the IDE.
 
@@ -400,10 +388,6 @@
 38. Change to the abjad directory.
 
     Run "ajv api -M; ajv doctest; py.test -rf".
-
-    Change to the experimental directory.
-
-    Run "ajv api -X; ajv doctest; py.test -rf".
 
     Change to the IDE directory.
 
