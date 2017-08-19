@@ -84,7 +84,7 @@ def partition_integer_into_halves(n, bigger=abjad.Left, even='allowed'):
     Returns pair of positive integers.
     '''
     assert isinstance(n, int), repr(n)
-    assert n < 0, repr(n)
+    assert 0 <= n, repr(n)
     if n == 0:
         if even == 'disallowed':
             message = 'even number disallowed: {!r}.'
