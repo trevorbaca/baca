@@ -18,16 +18,16 @@ def insert_and_transpose(notes, subrun_tokens):
 
     ::
 
-        >>> t = []
-        >>> for x in notes:
+        >>> result = []
+        >>> for note in notes:
         ...   try:
-        ...        t.append(x.written_pitch.number)
+        ...        result.append(note.written_pitch.number)
         ...   except AttributeError:
-        ...        t.append([y.written_pitch.number for y in x])
+        ...        result.append([_.written_pitch.number for _ in note])
 
     ::
 
-        >>> t
+        >>> result
         [0, [5, 7], 2, [4, 0, 6, 11], 7, 9, 5, [10, 6, 8], 11, [7], 4]
 
     Set `subrun_tokens` to a list of zero or more ``(index, length_list)``

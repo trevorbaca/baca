@@ -10,12 +10,12 @@ def partition_integer_into_halves(n, bigger=abjad.Left, even='allowed'):
 
         >>> import baca
 
-    Writes positive integer `n` as the pair ``t = (left, right)`` such that
+    Writes positive integer `n` as the pair ``(left, right)`` such that
     ``n == left + right``.
 
     ..   container:: example
 
-        When `n` is odd the greater part of ``t`` corresponds to the value of
+        When `n` is odd the greater part of pair corresponds to the value of
         `bigger`:
 
         ::

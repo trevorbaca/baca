@@ -47,6 +47,6 @@ def is_dotted_integer(argument):
         ]
     for non_two_factor in non_two_factors:
         non_two_product *= non_two_factor
-    x = math.log(abs(non_two_product) + 1, 2)
-    result = 1 < abs(non_two_product) and int(x) == x
+    number = math.log(abs(non_two_product) + 1, 2)
+    result = 1 < abs(non_two_product) and int(number) == number
     return result

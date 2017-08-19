@@ -817,7 +817,7 @@ class Division(abjad.NonreducedFraction):
             ::
 
                 >>> generator = baca.Division.yield_durations()
-                >>> for n in range(16):
+                >>> for i in range(16):
                 ...     next(generator)
                 ...
                 Duration(1, 1)
@@ -845,7 +845,7 @@ class Division(abjad.NonreducedFraction):
             ::
 
                 >>> generator = baca.Division.yield_durations(unique=True)
-                >>> for n in range(16):
+                >>> for i in range(16):
                 ...     next(generator)
                 ...
                 Duration(1, 1)
@@ -985,7 +985,7 @@ class Division(abjad.NonreducedFraction):
             ::
 
                 >>> generator = baca.Division.yield_nonreduced_fractions()
-                >>> for n in range(16):
+                >>> for i in range(16):
                 ...     next(generator)
                 ...
                 (1, 1)
@@ -1007,18 +1007,18 @@ class Division(abjad.NonreducedFraction):
 
         Returns generator.
         '''
-        n = 2
+        number = 2
         while True:
-            if n % 2 == 0:
+            if number % 2 == 0:
                 lhs = 1
-                while lhs < n:
-                    rhs = n - lhs
+                while lhs < number:
+                    rhs = number - lhs
                     yield lhs, rhs
                     lhs += 1
             else:
-                lhs = n - 1
+                lhs = number - 1
                 while 0 < lhs:
-                    rhs = n - lhs
+                    rhs = number - lhs
                     yield lhs, rhs
                     lhs -= 1
-            n += 1
+            number += 1
