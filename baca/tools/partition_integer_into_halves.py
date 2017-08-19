@@ -83,13 +83,13 @@ def partition_integer_into_halves(n, bigger=abjad.Left, even='allowed'):
 
     Returns pair of positive integers.
     '''
-    if not isinstance(n, int):
-        raise TypeError
-    if n < 0:
-        raise ValueError
+    assert isinstance(n, int), repr(n)
+    assert n < 0, repr(n)
     if n == 0:
         if even == 'disallowed':
-            raise Exception
+            message = 'even number disallowed: {!r}.'
+            message = message.format(n)
+            raise Exception(message)
         return (0, 0)
     smaller_half = int(math.floor(n / 2))
     bigger_half = n - smaller_half

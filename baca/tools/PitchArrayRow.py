@@ -684,8 +684,7 @@ class PitchArrayRow(abjad.AbjadObject):
         pitches = []
         width = 0
         for cell in cells:
-            if not isinstance(cell, baca.PitchArrayCell):
-                raise TypeError
+            assert isinstance(cell, baca.PitchArrayCell), repr(cell)
             if cell.parent_row is not self:
                 message = 'cells must belong to row.'
                 raise ValueError(message)

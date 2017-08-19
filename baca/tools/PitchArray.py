@@ -555,10 +555,8 @@ class PitchArray(abjad.AbjadObject):
 
         Returns new pitch array.
         '''
-        if not isinstance(upper_left_pair, tuple):
-            raise TypeError
-        if not isinstance(lower_right_pair, tuple):
-            raise TypeError
+        assert isinstance(upper_left_pair, tuple), repr(upper_left_pair)
+        assert isinstance(lower_right_pair, tuple), repr(lower_right_pair)
         start_i, start_j = upper_left_pair
         stop_i, stop_j = lower_right_pair
         if not start_i <= stop_i:

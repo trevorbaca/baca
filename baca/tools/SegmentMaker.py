@@ -1289,7 +1289,9 @@ class SegmentMaker(abjad.SegmentMaker):
                     start = rhythm_specifier.scope.stages[0]
                     stop = rhythm_specifier.scope.stages[-1] + 1
                 else:
-                    raise Exception
+                    message = 'invalid stage specification: {!r}.'
+                    message = message.format(stages)
+                    raise Exception(message)
                 if stage in range(start, stop):
                     return rhythm_specifier
         message = 'no rhythm specifier for {!r} found for stage {}.'
@@ -1412,7 +1414,9 @@ class SegmentMaker(abjad.SegmentMaker):
         previous_stop_offset = abjad.Offset(0)
         for contribution in contributions:
             if contribution.start_offset < previous_stop_offset:
-                raise Exception
+                message = 'overlapping contribution offsets: {!r}.'
+                message = message.format(contribution)
+                raise Exception(message)
             if previous_stop_offset < contribution.start_offset:
                 selection = self._make_intercalated_rests(
                     previous_stop_offset,

@@ -418,7 +418,9 @@ class Division(abjad.NonreducedFraction):
                 division = division.with_denominator(argument.denominator)
             division = type(self)(division, start_offset=start_offset)
         else:
-            raise Exception
+            message = 'invalid start offsets: {!r}.'
+            message = message.format(start_offsets)
+            raise Exception(message)
         return division
 
     def __copy__(self, *args):
