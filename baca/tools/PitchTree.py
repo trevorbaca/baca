@@ -946,6 +946,7 @@ class PitchTree(Tree):
         moment = abjad.SchemeMoment((1, 16))
         abjad.setting(score).proportional_notation_duration = moment
         lilypond_file = abjad.LilyPondFile.new(
+            date_time_token=False,
             global_staff_size=global_staff_size,
             music=score,
             )
