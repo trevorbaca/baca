@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 import os
+import pathlib
 os.system('clear')
 os.system('ajv clean .')
 
@@ -7,12 +8,13 @@ os.system('ajv clean .')
 for directory, subdirectories, file_names in os.walk('.'):
     header_1 = '#! /usr/bin/env python'
     header_2 = '# -*- coding: utf-8 -*-'
+    directory = pathlib.Path(directory)
     for file_name in file_names:
-        path = os.path.join(directory, file_name)
+        path = directory / file_name
         if not path.endswith('.py'):
             continue
-        with open(path, 'r') as file_pointer:
-            lines = file_pointer.readlines() 
+        with path.open('r') as file_pointer:
+            lines = file_pointer.readlines()
             if not lines:
                 continue
             first_line = lines[0]

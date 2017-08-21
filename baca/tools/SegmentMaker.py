@@ -1,7 +1,7 @@
 import abjad
 import baca
 import copy
-import os
+import pathlib
 import time
 import traceback
 
@@ -316,7 +316,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_volta_specifier',
         )
 
-    _absolute_string_trio_stylesheet_path = os.path.join(
+    _absolute_string_trio_stylesheet_path = pathlib.Path(
         '/',
         'Users',
         'trevorbaca',
@@ -327,7 +327,7 @@ class SegmentMaker(abjad.SegmentMaker):
         'string-trio-stylesheet.ily',
         )
 
-    _absolute_two_voice_staff_stylesheet_path = os.path.join(
+    _absolute_two_voice_staff_stylesheet_path = pathlib.Path(
         '/',
         'Users',
         'trevorbaca',
@@ -342,7 +342,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     _publish_storage_format = True
 
-    _relative_string_trio_stylesheet_path = os.path.join(
+    _relative_string_trio_stylesheet_path = pathlib.Path(
         '..',
         '..',
         '..',
@@ -352,7 +352,7 @@ class SegmentMaker(abjad.SegmentMaker):
         'string-trio-stylesheet.ily',
         )
 
-    _relative_two_voice_staff_stylesheet_path = os.path.join(
+    _relative_two_voice_staff_stylesheet_path = pathlib.Path(
         '..',
         '..',
         '..',
@@ -362,11 +362,11 @@ class SegmentMaker(abjad.SegmentMaker):
         'two-voice-staff-stylesheet.ily',
         )
 
-    _score_package_stylesheet_path = os.path.join(
+    _score_package_stylesheet_path = pathlib.Path(
         '..', '..', 'stylesheets', 'stylesheet.ily',
         )
 
-    _score_package_nonfirst_stylesheet_path = os.path.join(
+    _score_package_nonfirst_stylesheet_path = pathlib.Path(
         '..', '..', 'stylesheets', 'nonfirst-segment.ily',
         )
 
