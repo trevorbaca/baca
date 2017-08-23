@@ -681,7 +681,7 @@ steps.
 Cherry-picking (from development to feature branches)
 =====================================================
 
-What to do after you development branch starts to accumulate commits? Every so
+What to do after your development branch starts to accumulate commits? Every so
 often you'll want to collect commits in your development branch and make
 them into a feature that can be added into the Abjad mainline. You do this by
 cherry-picking commits from your development branch into a feature branch that
@@ -734,21 +734,21 @@ you'll create specifically for this purpose.
 7. Create a feature branch:
 
         (abjad3) ✔ ~/abjad/abjad [master|✔] 
-        12:18 $ git checkout -b trevor-pitchtools-cleanup
-        Switched to a new branch 'trevor-pitchtools-cleanup'
+        12:18 $ git checkout -b trevor/pitchtools-cleanup
+        Switched to a new branch 'trevor/pitchtools-cleanup'
 
     You can optionally run tests to make sure everything is ok before
     populating your feature branch:
 
-        (abjad3) ✔ ~/abjad/abjad [trevor/update-score-metadata-file L|✔] 
-        14:47 $ ajv doctest tools/pitchtools
+        (abjad3) ✔ ~/abjad/abjad [trevor/trevor/pitchtools-cleanup L|✔] 
+        14:47 $ ajv doctest tools/pitchtools-cleanup
         ...
     
 8. Populate your feature branch:
 
-        (abjad3) ✔ ~/abjad/abjad [trevor/update-score-metadata-file L|✔] 
+        (abjad3) ✔ ~/abjad/abjad [trevor/pitchtools-cleanup L|✔] 
         10:24 $ git cherry-pick c96a20c
-        [trevor/update-score-metadata-file b4240a0] CONFIG: Updated vimrc and boilerplate score __metadata__.py file.
+        [trevor/pitchtools-cleanup b4240a0] CONFIG: Updated vimrc and boilerplate score __metadata__.py file.
         Date: Sat Oct 22 13:03:14 2016 -0500
         2 files changed, 3 insertions(+), 3 deletions(-)
 
@@ -760,15 +760,15 @@ you'll create specifically for this purpose.
 
 9. Push:
 
-        (abjad3) ✔ ~/abjad/abjad [trevor/update-score-metadata-file L|✔] 
+        (abjad3) ✔ ~/abjad/abjad [trevor/trevor/pitchtools-cleanup L|✔] 
         10:25 $ git push
-        fatal: The current branch trevor/update-score-metadata-file has no upstream branch.
+        fatal: The current branch trevor/trevor/pitchtools-cleanup has no upstream branch.
         To push the current branch and set the remote as upstream, use
 
-            git push --set-upstream origin trevor/update-score-metadata-file
+            git push --set-upstream origin trevor/trevor/pitchtools-cleanup
 
-        (abjad3) ✘-128 ~/abjad/abjad [trevor/update-score-metadata-file L|✔] 
-        10:25 $ git push --set-upstream origin trevor/update-score-metadata-file
+        (abjad3) ✘-128 ~/abjad/abjad [trevor/trevor/pitchtools-cleanup L|✔] 
+        10:25 $ git push --set-upstream origin trevor/trevor/pitchtools-cleanup
         Counting objects: 10, done.
         Delta compression using up to 4 threads.
         Compressing objects: 100% (9/9), done.
@@ -776,8 +776,8 @@ you'll create specifically for this purpose.
         Total 10 (delta 7), reused 0 (delta 0)
         remote: Resolving deltas: 100% (7/7), completed with 7 local objects.
         To https://github.com/Abjad/abjad.git
-        * [new branch]      trevor/update-score-metadata-file -> trevor/update-score-metadata-file
-        Branch trevor/update-score-metadata-file set up to track remote branch trevor/update-score-metadata-file from origin.
+        * [new branch]      trevor/trevor/pitchtools-cleanup -> trevor/trevor/pitchtools-cleanup
+        Branch trevor/trevor/pitchtools-cleanup set up to track remote branch trevor/trevor/pitchtools-cleanup from origin.
 
 10. Visit GitHub at http://github.com/Abjad/abjad:
 
@@ -790,7 +790,7 @@ you'll create specifically for this purpose.
 
 11. Return to the terminal and check out master:
 
-        (abjad3) ✘-128 ~/abjad/abjad [trevor/update-score-metadata-file L|✔] 
+        (abjad3) ✘-128 ~/abjad/abjad [trevor/trevor/pitchtools-cleanup L|✔] 
         14:21 $ git checkout master
         Switched to branch 'master'
         Your branch is behind 'origin/master' by 2 commits, and can be fast-forwarded.
@@ -809,8 +809,8 @@ you'll create specifically for this purpose.
 13. Delete the feature branch:
 
         (abjad3) ✔ ~/abjad/abjad [master|✔] 
-        14:21 $ git branch -d trevor/update-score-metadata-file
-        Deleted branch trevor/update-score-metadata-file (was b4240a0).
+        14:21 $ git branch -d trevor/trevor/pitchtools-cleanup
+        Deleted branch trevor/trevor/pitchtools-cleanup (was b4240a0).
 
 14. Check out your development branch again:
 
