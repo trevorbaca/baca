@@ -37,6 +37,30 @@ virtual environments afterwards.
         12:52 $ python3 --version
         Python 3.5.3
 
+4.5 Note that when upgrading from Python 3.5 to Python 3.6 that Python 3.6 is
+    not yet visible:
+
+        16:09 $ python --version
+        Python 2.7.10
+
+        16:09 $ python3 --version
+        Python 3.5.3
+
+    But Python 3.6 is installed:
+
+        16:09 $ which python3
+        /Library/Frameworks/Python.framework/Versions/3.5/bin/python3
+
+        16:09 $ ls /Library/Frameworks/Python.framework/Versions/
+        3.5 3.6
+
+    The solution was to muck around in ~/.profile.
+
+    Make sure Python 3.6 appears in PATH. Then things look lik this:
+
+        16:15 $ python3 --version
+        Python 3.6.2
+
 5.  Reestablish the abjad3 virtual environment:
 
         (abjad3) ✔ ~/Desktop 
