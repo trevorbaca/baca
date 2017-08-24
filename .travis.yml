@@ -4,6 +4,7 @@ sudo: false
 
 python:
     - 3.5
+    - 3.6
 
 before_install:
     - LILYPOND_SCRIPT=lilypond-2.19.59-1.linux-64.sh
