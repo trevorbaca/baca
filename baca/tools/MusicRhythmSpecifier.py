@@ -142,16 +142,16 @@ class MusicRhythmSpecifier(abjad.AbjadObject):
         if keywords:
             rhythm_maker = abjad.new(rhythm_maker, **keywords)
         if tuplet_denominator is not None:
-            specifier = rhythm_maker.tuplet_spelling_specifier
+            specifier = rhythm_maker.tuplet_specifier
             if specifier is None:
-                specifier = abjad.rhythmmakertools.TupletSpellingSpecifier()
+                specifier = abjad.rhythmmakertools.TupletSpecifier()
             specifier = abjad.new(
                 specifier,
                 preferred_denominator=tuplet_denominator,
                 )
             rhythm_maker = abjad.new(
                 rhythm_maker,
-                tuplet_spelling_specifier=specifier,
+                tuplet_specifier=specifier,
                 )
         return rhythm_maker
 

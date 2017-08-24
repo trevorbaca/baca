@@ -148,21 +148,21 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         acciaccatura_specifiers=None,
         beam_specifier=None,
         division_masks=None,
-        duration_spelling_specifier=None,
+        duration_specifier=None,
         logical_tie_masks=None,
         talea=None,
         tie_specifier=None,
         time_treatments=None,
-        tuplet_spelling_specifier=None,
+        tuplet_specifier=None,
         ):
         abjad.rhythmmakertools.RhythmMaker.__init__(
             self,
             beam_specifier=beam_specifier,
-            duration_spelling_specifier=duration_spelling_specifier,
+            duration_specifier=duration_specifier,
             division_masks=division_masks,
             logical_tie_masks=logical_tie_masks,
             tie_specifier=tie_specifier,
-            tuplet_spelling_specifier=tuplet_spelling_specifier,
+            tuplet_specifier=tuplet_specifier,
             )
         if acciaccatura_specifiers is not None:
             prototype = baca.AcciaccaturaSpecifier
@@ -581,7 +581,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         beam_specifier = self._get_beam_specifier()
         beam_specifier(selections)
         selections = self._apply_division_masks(selections)
-        specifier = self._get_duration_spelling_specifier()
+        specifier = self._get_duration_specifier()
         if specifier.rewrite_meter:
             #selections = specifier._rewrite_meter_(
             #    selections,
@@ -608,7 +608,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             return abjad.Selection()
         talea = self._get_talea()
         leaves = []
-        specifier = self._get_duration_spelling_specifier()
+        specifier = self._get_duration_specifier()
         decrease_durations = specifier.decrease_monotonic
         current_selection = self._next_segment - 1
         time_treatment = self._get_time_treatments()[current_selection]
@@ -1480,8 +1480,8 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         return abjad.rhythmmakertools.RhythmMaker.division_masks.fget(self)
 
     @property
-    def duration_spelling_specifier(self):
-        r'''Gets duration spelling specifier.
+    def duration_specifier(self):
+        r'''Gets duration specifier.
 
         ..  container:: example
 
@@ -1539,7 +1539,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     duration_spelling_specifier=abjad.rhythmmakertools.DurationSpellingSpecifier(
+                ...     duration_specifier=abjad.rhythmmakertools.DurationSpecifier(
                 ...         decrease_monotonic=False,
                 ...         ),
                 ...     talea=abjad.rhythmmakertools.Talea(
@@ -1589,14 +1589,14 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> rhythm_maker = baca.MusicRhythmMaker()
-                >>> rhythm_maker.duration_spelling_specifier is None
+                >>> rhythm_maker.duration_specifier is None
                 True
 
-        Set to duration spelling specifier or none.
+        Set to duration specifier or none.
 
-        Returns duration spelling specifier or none.
+        Returns duration specifier or none.
         '''
-        return abjad.rhythmmakertools.RhythmMaker.duration_spelling_specifier.fget(self)
+        return abjad.rhythmmakertools.RhythmMaker.duration_specifier.fget(self)
 
     @property
     def logical_tie_masks(self):
@@ -3027,7 +3027,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...         counts=[1],
                 ...         denominator=8,
                 ...         ),
-                ...     tuplet_spelling_specifier=abjad.rhythmmakertools.TupletSpellingSpecifier(
+                ...     tuplet_specifier=abjad.rhythmmakertools.TupletSpecifier(
                 ...         preferred_denominator=abjad.Duration(1, 16),
                 ...         ),
                 ...     )
@@ -3107,7 +3107,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...         counts=[1, 1, 2],
                 ...         denominator=8,
                 ...         ),
-                ...     tuplet_spelling_specifier=abjad.rhythmmakertools.TupletSpellingSpecifier(
+                ...     tuplet_specifier=abjad.rhythmmakertools.TupletSpecifier(
                 ...         preferred_denominator=abjad.Duration(1, 16),
                 ...         ),
                 ...     )
@@ -3205,8 +3205,8 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         return self._time_treatments
 
     @property
-    def tuplet_spelling_specifier(self):
-        r'''Gets tuplet spelling specifier.
+    def tuplet_specifier(self):
+        r'''Gets tuplet specifier.
 
         ..  container:: example
 
@@ -3274,7 +3274,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 ...         denominator=16,
                 ...         ),
                 ...     time_treatments=[-2],
-                ...     tuplet_spelling_specifier=abjad.rhythmmakertools.TupletSpellingSpecifier(
+                ...     tuplet_specifier=abjad.rhythmmakertools.TupletSpecifier(
                 ...         simplify_redundant_tuplets=True,
                 ...         ),
                 ...     )
@@ -3326,14 +3326,14 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ::
 
                 >>> rhythm_maker = baca.MusicRhythmMaker()
-                >>> rhythm_maker.tuplet_spelling_specifier is None
+                >>> rhythm_maker.tuplet_specifier is None
                 True
 
-        Set to tuplet spelling specifier or none.
+        Set to tuplet specifier or none.
 
-        Returns tuplet spelling specifier or none.
+        Returns tuplet specifier or none.
         '''
-        return abjad.rhythmmakertools.RhythmMaker.tuplet_spelling_specifier.fget(self)
+        return abjad.rhythmmakertools.RhythmMaker.tuplet_specifier.fget(self)
 
     ### PUBLIC METHODS ###
 

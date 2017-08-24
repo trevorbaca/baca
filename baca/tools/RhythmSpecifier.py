@@ -329,7 +329,7 @@ class RhythmSpecifier(abjad.AbjadObject):
             raise TypeError(message)
         assert self._all_are_selections(selections), repr(selections)
         if self.split_at_measure_boundaries:
-            specifier = abjad.rhythmmakertools.DurationSpellingSpecifier
+            specifier = abjad.rhythmmakertools.DurationSpecifier
             selections = specifier._split_at_measure_boundaries(
                 selections,
                 time_signatures,
@@ -337,7 +337,7 @@ class RhythmSpecifier(abjad.AbjadObject):
                 )
             assert self._all_are_selections(selections), repr(selections)
         if self.rewrite_meter:
-            specifier = abjad.rhythmmakertools.DurationSpellingSpecifier
+            specifier = abjad.rhythmmakertools.DurationSpecifier
             selections = specifier._rewrite_meter_(
                 selections,
                 time_signatures,
