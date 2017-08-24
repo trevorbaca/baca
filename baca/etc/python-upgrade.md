@@ -37,7 +37,7 @@ virtual environments afterwards.
         12:52 $ python3 --version
         Python 3.5.3
 
-4.5 Note that when upgrading from Python 3.5 to Python 3.6 that Python 3.6 is
+5.  Note that when upgrading from Python 3.5 to Python 3.6 that Python 3.6 is
     not yet visible:
 
         16:09 $ python --version
@@ -61,7 +61,7 @@ virtual environments afterwards.
         16:15 $ python3 --version
         Python 3.6.2
 
-5.  Reestablish the abjad3 virtual environment:
+6.  Reestablish the abjad3 virtual environment:
 
         (abjad3) ✔ ~/Desktop 
         12:54 $ trash ~/.virtualenvs/abjad3/
@@ -88,7 +88,7 @@ virtual environments afterwards.
         12:56 $ python --version
         Python 3.5.3
 
-6.  Reinstall Abjad from package root directory in the newly reestablished
+7.  Reinstall Abjad from package root directory in the newly reestablished
     virtual environment:
 
         (abjad3) ✔ ~/abjad [trevor/dev|✔] 
@@ -110,7 +110,7 @@ virtual environments afterwards.
         (abjad3) ✔ ~/abjad [trevor/dev|✔] 
         13:03 $ 
 
-7.  Use pip to install Bača-specific Python packages:
+8.  Use pip to install Bača-specific Python packages:
 
         (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
         13:06 $ pip install inflect
@@ -122,6 +122,6 @@ virtual environments afterwards.
 
     No list of these currently exists.
 
-8.  Rebuild Bača API to test:
+9.  Rebuild Bača API to test:
 
         make_baca_api.py
