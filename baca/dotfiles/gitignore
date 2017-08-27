@@ -57,7 +57,4 @@ nosetests.xml
 __illustrate_segment__.py
 __output_material__.py
 __illustrate_material__.py
-*.candidate.ly
-*.candidate.ps
-*.candidate.pdf
 illustration.pdf
