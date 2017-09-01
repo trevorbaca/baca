@@ -14,11 +14,9 @@ if __name__ == '__main__':
     total = 0
     for extension in ('.log', '.aux', '.synctex.gz'):
         path = pathlib.Path(target_directory, '*' + extension)
-        files_to_remove = glob.glob(path)
+        files_to_remove = glob.glob(str(path))
         if files_to_remove:
             total += len(files_to_remove)
-            os.system('rm ' + path)
+            os.system(f'rm {path}')
     if total:
-        message = '{} files removed ...\n'
-        message = message.format(total)
-        print(message)
+        print(f'{total} files removed ...\n')
