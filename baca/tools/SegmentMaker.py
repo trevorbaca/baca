@@ -498,6 +498,7 @@ class SegmentMaker(abjad.SegmentMaker):
         is_doc_example=None,
         is_test=None,
         metadata=None,
+        midi=None,
         previous_metadata=None,
         ):
         r'''Calls segment-maker.
@@ -514,6 +515,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._make_lilypond_file(
             is_doc_example=is_doc_example,
             is_test=is_test,
+            midi=midi,
             )
         self._populate_time_signature_context()
         self._label_stage_numbers_()
@@ -1602,7 +1604,12 @@ class SegmentMaker(abjad.SegmentMaker):
         selection = abjad.select(skip)
         return selection
 
-    def _make_lilypond_file(self, is_doc_example=None, is_test=None):
+    def _make_lilypond_file(
+        self,
+        is_doc_example=None,
+        is_test=None,
+        midi=None,
+        ):
         includes = self._get_stylesheet_includes(
             is_doc_example=is_doc_example,
             is_test=is_test,
@@ -1617,6 +1624,9 @@ class SegmentMaker(abjad.SegmentMaker):
         for item in lilypond_file.items[:]:
             if getattr(item, 'name', None) in block_names:
                 lilypond_file.items.remove(item)
+        if midi:
+            block = abjad.Block(name='midi')
+            lilypond_file.items.append(block)
         if not is_doc_example:
             block_names = ('header',)
             for item in lilypond_file.items[:]:
@@ -5760,6 +5770,14 @@ class SegmentMaker(abjad.SegmentMaker):
         Returns typed ordered dictionary or none.
         '''
         return self._metronome_marks
+
+    @property
+    def midi(self):
+        r'''Is true when segment-maker outputs MIDI.
+
+        Returns true, false or none.
+        '''
+        return self._midi
 
     @property
     def print_segment_duration(self):
