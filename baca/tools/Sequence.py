@@ -10,7 +10,6 @@ class Sequence(abjad.Sequence):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

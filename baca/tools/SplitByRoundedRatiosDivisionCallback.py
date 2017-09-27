@@ -7,7 +7,6 @@ class SplitByRoundedRatiosDivisionCallback(abjad.AbjadValueObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

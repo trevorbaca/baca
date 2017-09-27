@@ -6,7 +6,6 @@ class VoltaSpecifier(abjad.AbjadObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

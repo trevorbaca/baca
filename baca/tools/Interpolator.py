@@ -7,7 +7,6 @@ class Interpolator(abjad.AbjadObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

@@ -6,7 +6,6 @@ class RegisterTransitionCommand(abjad.AbjadObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

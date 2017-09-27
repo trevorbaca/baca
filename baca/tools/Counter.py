@@ -6,7 +6,6 @@ class Counter(abjad.AbjadObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

@@ -8,7 +8,6 @@ class PitchTree(Tree):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

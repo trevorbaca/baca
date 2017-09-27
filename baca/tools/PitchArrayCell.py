@@ -7,7 +7,6 @@ class PitchArrayCell(abjad.AbjadObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

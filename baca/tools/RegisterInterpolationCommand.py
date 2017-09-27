@@ -6,7 +6,6 @@ class RegisterInterpolationCommand(abjad.AbjadObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

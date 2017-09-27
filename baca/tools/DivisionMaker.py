@@ -7,7 +7,6 @@ class DivisionMaker(abjad.AbjadValueObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

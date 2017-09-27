@@ -7,7 +7,6 @@ class PitchSet(abjad.PitchSet):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

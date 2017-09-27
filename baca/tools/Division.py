@@ -6,7 +6,6 @@ class Division(abjad.NonreducedFraction):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

@@ -7,7 +7,6 @@ class SimpleScope(abjad.AbjadObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

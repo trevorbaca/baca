@@ -7,7 +7,6 @@ class PitchSegment(abjad.PitchSegment):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

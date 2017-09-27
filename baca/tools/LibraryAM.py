@@ -7,7 +7,6 @@ class LibraryAM(object):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     '''

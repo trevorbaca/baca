@@ -6,7 +6,6 @@ class Expression(abjad.Expression):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     '''

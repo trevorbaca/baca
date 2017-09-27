@@ -7,7 +7,6 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

@@ -6,7 +6,6 @@ class MeasureExpression(abjad.Expression):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

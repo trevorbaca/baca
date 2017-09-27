@@ -7,7 +7,6 @@ class DesignMaker(abjad.AbjadObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

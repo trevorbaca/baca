@@ -9,7 +9,6 @@ class MusicMaker(abjad.AbjadObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

@@ -7,7 +7,6 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

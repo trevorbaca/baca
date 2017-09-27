@@ -6,7 +6,6 @@ class LMRSpecifier(abjad.AbjadObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

@@ -7,7 +7,6 @@ class RegisterToOctaveCommand(abjad.AbjadObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

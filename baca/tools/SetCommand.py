@@ -8,7 +8,6 @@ class SetCommand(abjad.AbjadObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

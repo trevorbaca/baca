@@ -7,7 +7,6 @@ class MusicContribution(abjad.AbjadValueObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

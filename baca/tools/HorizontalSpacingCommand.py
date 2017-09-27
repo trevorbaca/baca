@@ -6,7 +6,6 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

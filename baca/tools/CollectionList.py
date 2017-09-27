@@ -8,7 +8,6 @@ class CollectionList(abjad.AbjadValueObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

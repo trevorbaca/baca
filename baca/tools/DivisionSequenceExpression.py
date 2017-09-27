@@ -10,7 +10,6 @@ class DivisionSequenceExpression(abjad.Expression):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

@@ -7,7 +7,6 @@ class RhythmSpecifier(abjad.AbjadObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
         >>> from abjad import rhythmmakertools
 

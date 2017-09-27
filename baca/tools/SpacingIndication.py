@@ -6,7 +6,6 @@ class SpacingIndication(abjad.AbjadValueObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     LilyPond ``Score.proportionalNotationDuration`` will equal

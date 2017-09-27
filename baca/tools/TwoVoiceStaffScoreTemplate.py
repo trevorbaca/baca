@@ -7,7 +7,6 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

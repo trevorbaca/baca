@@ -11,7 +11,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

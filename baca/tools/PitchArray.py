@@ -7,7 +7,6 @@ class PitchArray(abjad.AbjadObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

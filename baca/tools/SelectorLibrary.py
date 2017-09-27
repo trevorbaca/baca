@@ -7,7 +7,6 @@ class SelectorLibrary(object):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     '''

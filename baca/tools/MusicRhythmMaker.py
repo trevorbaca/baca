@@ -9,7 +9,6 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

@@ -6,7 +6,6 @@ class TempoSpecifier(abjad.AbjadObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

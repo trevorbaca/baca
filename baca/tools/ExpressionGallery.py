@@ -3,7 +3,6 @@ class ExpressionGallery(object):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example expression

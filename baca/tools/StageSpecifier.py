@@ -6,7 +6,6 @@ class StageSpecifier(abjad.AbjadObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

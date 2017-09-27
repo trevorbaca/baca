@@ -6,7 +6,6 @@ class OverrideCommand(abjad.AbjadObject):
     r'''Override command.
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

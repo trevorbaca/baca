@@ -3,7 +3,6 @@ class Coat(object):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     '''

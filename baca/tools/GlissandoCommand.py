@@ -6,7 +6,6 @@ class GlissandoCommand(abjad.AbjadObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

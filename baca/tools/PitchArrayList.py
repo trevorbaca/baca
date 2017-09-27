@@ -6,7 +6,6 @@ class PitchArrayList(abjad.TypedList):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

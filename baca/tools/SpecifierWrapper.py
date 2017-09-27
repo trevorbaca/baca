@@ -6,7 +6,6 @@ class SpecifierWrapper(abjad.AbjadObject):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example

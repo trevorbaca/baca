@@ -7,7 +7,6 @@ class LibraryNZ(object):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     '''

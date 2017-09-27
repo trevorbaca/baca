@@ -7,7 +7,6 @@ class MarkupLibrary(object):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     '''

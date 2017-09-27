@@ -8,7 +8,6 @@ class DivisionSequence(abjad.Sequence):
 
     ::
 
-        >>> import abjad
         >>> import baca
 
     ..  container:: example
