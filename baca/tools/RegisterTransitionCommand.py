@@ -1,4 +1,5 @@
 import abjad
+import baca
 
 
 class RegisterTransitionCommand(abjad.AbjadObject):
@@ -25,10 +26,10 @@ class RegisterTransitionCommand(abjad.AbjadObject):
             ...     baca.pitches('C4 D4 E4 F4'),
             ...     baca.even_runs(),
             ...     baca.RegisterTransitionCommand(
-            ...         start_registration=abjad.Registration(
+            ...         start_registration=baca.Registration(
             ...             [('[A0, C8]', 0)],
             ...             ),
-            ...         stop_registration=abjad.Registration(
+            ...         stop_registration=baca.Registration(
             ...             [('[A0, C8]', 12)],
             ...             ),
             ...         ),
@@ -138,9 +139,11 @@ class RegisterTransitionCommand(abjad.AbjadObject):
         start_registration=None,
         stop_registration=None,
         ):
-        assert isinstance(start_registration, abjad.Registration)
-        assert isinstance(stop_registration, abjad.Registration)
-        assert len(start_registration) == len(stop_registration)
+        assert isinstance(start_registration, baca.Registration)
+        assert isinstance(stop_registration, baca.Registration)
+        start_length = len(start_registration.components)
+        stop_length = len(stop_registration.components)
+        assert start_length == stop_length
         self._start_registration = start_registration
         self._stop_registration = stop_registration
 
@@ -192,10 +195,10 @@ class RegisterTransitionCommand(abjad.AbjadObject):
             offset=offset,
             ), repr((timespan, offset))
         fraction = (offset - timespan.start_offset) / timespan.duration
-        assert len(self.start_registration) == len(self.stop_registration)
         components = []
-        start_components = self.start_registration.items
-        stop_components = self.stop_registration.items
+        start_components = self.start_registration.components
+        stop_components = self.stop_registration.components
+        assert len(start_components) == len(stop_components)
         pairs = zip(start_components, stop_components)
         for start_component, stop_component in pairs:
             start_pitch = start_component.source_pitch_range.start_pitch
@@ -218,12 +221,12 @@ class RegisterTransitionCommand(abjad.AbjadObject):
                 stop_pitch,
                 fraction,
                 )
-            component = abjad.RegistrationComponent(
+            component = baca.RegistrationComponent(
                 source_pitch_range=range_string,
                 target_octave_start_pitch=target_octave_start_pitch,
                 )
             components.append(component)
-        registration = abjad.Registration(components)
+        registration = baca.Registration(components)
         return registration
 
     @staticmethod

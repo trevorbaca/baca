@@ -20,7 +20,7 @@ class RegisterCommand(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
             ...     baca.RegisterCommand(
-            ...         registration=abjad.Registration(
+            ...         registration=baca.Registration(
             ...             [('[A0, C8]', 15)],
             ...             ),
             ...         ),
@@ -73,7 +73,7 @@ class RegisterCommand(abjad.AbjadObject):
             ...     baca.pitches('G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4'),
             ...     baca.even_runs(),
             ...     baca.RegisterCommand(
-            ...         registration=abjad.Registration(
+            ...         registration=baca.Registration(
             ...             [('[A0, C8]', 15)],
             ...             ),
             ...         ),
@@ -178,11 +178,12 @@ class RegisterCommand(abjad.AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self, pattern=None, registration=None, selector=None):
+        import baca
         if pattern is not None:
             assert isinstance(pattern, abjad.Pattern), repr(pattern)
         self._pattern = pattern
         if registration is not None:
-            prototype = abjad.Registration
+            prototype = baca.Registration
             assert isinstance(registration, prototype), repr(registration)
         self._registration = registration
         if selector is not None:
@@ -205,7 +206,7 @@ class RegisterCommand(abjad.AbjadObject):
                 ...     'Voice 1',
                 ...     [{10, 12, 14}],
                 ...     baca.RegisterCommand(
-                ...         registration=abjad.Registration(
+                ...         registration=baca.Registration(
                 ...             [('[A0, C8]', -6)],
                 ...             ),
                 ...         ),
@@ -279,7 +280,7 @@ class RegisterCommand(abjad.AbjadObject):
                 ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
                 ...     baca.RegisterCommand(
                 ...         pattern=abjad.index_first(),
-                ...         registration=abjad.Registration(
+                ...         registration=baca.Registration(
                 ...             [('[A0, C8]', 0)],
                 ...             ),
                 ...         ),
@@ -328,7 +329,7 @@ class RegisterCommand(abjad.AbjadObject):
                 ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
                 ...     baca.RegisterCommand(
                 ...         pattern=abjad.index_last(),
-                ...         registration=abjad.Registration(
+                ...         registration=baca.Registration(
                 ...             [('[A0, C8]', 0)],
                 ...             ),
                 ...         ),
@@ -377,15 +378,26 @@ class RegisterCommand(abjad.AbjadObject):
             ::
 
                 >>> command = baca.RegisterCommand(
-                ...     registration=abjad.Registration(
+                ...     registration=baca.Registration(
                 ...         [('[A0, C4)', 15), ('[C4, C8)', 27)],
                 ...         ),
                 ...     )
 
             ::
 
-                >>> command.registration
-                Registration([('[A0, C4)', 15), ('[C4, C8)', 27)])
+                >>> abjad.f(command.registration)
+                baca.Registration(
+                    components=[
+                        baca.RegistrationComponent(
+                            source_pitch_range=abjad.PitchRange('[A0, C4)'),
+                            target_octave_start_pitch=abjad.NumberedPitch(15),
+                            ),
+                        baca.RegistrationComponent(
+                            source_pitch_range=abjad.PitchRange('[C4, C8)'),
+                            target_octave_start_pitch=abjad.NumberedPitch(27),
+                            ),
+                        ],
+                    )
 
         Set to registration or none.
 

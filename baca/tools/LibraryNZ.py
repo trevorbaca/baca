@@ -1924,7 +1924,7 @@ class LibraryNZ(object):
         '''
         if stop is None:
             return baca.RegisterCommand(
-                registration=abjad.Registration(
+                registration=baca.Registration(
                     [('[A0, C8]', start)],
                     ),
                 selector=selector,

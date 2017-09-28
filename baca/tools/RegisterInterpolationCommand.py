@@ -1,4 +1,5 @@
 import abjad
+import baca
 
 
 class RegisterInterpolationCommand(abjad.AbjadObject):
@@ -1020,8 +1021,7 @@ class RegisterInterpolationCommand(abjad.AbjadObject):
         addendum = fraction * compass
         current_pitch = start_pitch + addendum
         current_pitch = int(current_pitch)
-        registration = abjad.Registration()
-        registration.append(('[A0, C8]', current_pitch))
+        registration = baca.Registration([('[A0, C8]', current_pitch)])
         return registration
 
     ### PUBLIC PROPERTIES ###

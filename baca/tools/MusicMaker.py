@@ -1349,7 +1349,7 @@ class MusicMaker(abjad.AbjadObject):
 
                 >>> music_maker = baca.MusicMaker(
                 ...     baca.RegisterCommand(
-                ...         registration=abjad.Registration(
+                ...         registration=baca.Registration(
                 ...             [('[A0, C8]', -6)],
                 ...             ),
                 ...         ),
@@ -1397,10 +1397,10 @@ class MusicMaker(abjad.AbjadObject):
 
                 >>> music_maker = baca.MusicMaker(
                 ...     baca.RegisterTransitionCommand(
-                ...         start_registration=abjad.Registration(
+                ...         start_registration=baca.Registration(
                 ...             [('[A0, C8]', 0)],
                 ...             ),
-                ...         stop_registration=abjad.Registration(
+                ...         stop_registration=baca.Registration(
                 ...             [('[A0, C8]', 12)],
                 ...             ),
                 ...         ),
