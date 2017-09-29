@@ -68,8 +68,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
-                                \set Staff.instrumentName = \markup { Violin }
-                                \set Staff.shortInstrumentName = \markup { Vn. }
+                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 R1 * 1/2
                                 R1 * 3/8
@@ -81,8 +81,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
                         \tag viola
                         \context ViolaMusicStaff = "Viola Music Staff" {
                             \context ViolaMusicVoice = "Viola Music Voice" {
-                                \set Staff.instrumentName = \markup { Viola }
-                                \set Staff.shortInstrumentName = \markup { Va. }
+                                \set ViolaMusicStaff.instrumentName = \markup { Viola }
+                                \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
                                 \clef "alto"
                                 R1 * 1/2
                                 R1 * 3/8
@@ -94,8 +94,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
                         \tag cello
                         \context CelloMusicStaff = "Cello Music Staff" {
                             \context CelloMusicVoice = "Cello Music Voice" {
-                                \set Staff.instrumentName = \markup { Cello }
-                                \set Staff.shortInstrumentName = \markup { Vc. }
+                                \set CelloMusicStaff.instrumentName = \markup { Cello }
+                                \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
                                 \clef "bass"
                                 R1 * 1/2
                                 R1 * 3/8

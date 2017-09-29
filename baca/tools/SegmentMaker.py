@@ -73,8 +73,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
                         \context ViolinMusicVoice = "Violin Music Voice" {
-                            \set Staff.instrumentName = \markup { Violin }
-                            \set Staff.shortInstrumentName = \markup { Vn. }
+                            \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                            \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                             \clef "treble"
                             R1 * 1/2
                             R1 * 3/8
@@ -164,8 +164,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \once \override Flag.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
-                                \set Staff.instrumentName = \markup { Violin }
-                                \set Staff.shortInstrumentName = \markup { Vn. }
+                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 c'8 [
                                 \once \override Beam.color = #blue
@@ -2160,8 +2160,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     {
-                                        \set Staff.instrumentName = \markup { Violin }
-                                        \set Staff.shortInstrumentName = \markup { Vn. }
+                                        \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                        \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                         \clef "treble"
                                         e'16
                                     }
@@ -2313,8 +2313,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     {
-                                        \set Staff.instrumentName = \markup { Violin }
-                                        \set Staff.shortInstrumentName = \markup { Vn. }
+                                        \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                        \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                         \clef "treble"
                                         e'16
                                             ^ \markup {
@@ -2506,8 +2506,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \context ViolinMusicVoice = "Violin Music Voice" {
                                     {
                                         {
-                                            \set Staff.instrumentName = \markup { Violin }
-                                            \set Staff.shortInstrumentName = \markup { Vn. }
+                                            \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                            \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                             \clef "treble"
                                             d'16 [
                                             e'16
@@ -2530,8 +2530,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \tag viola
                             \context ViolaMusicStaff = "Viola Music Staff" {
                                 \context ViolaMusicVoice = "Viola Music Voice" {
-                                    \set Staff.instrumentName = \markup { Viola }
-                                    \set Staff.shortInstrumentName = \markup { Va. }
+                                    \set ViolaMusicStaff.instrumentName = \markup { Viola }
+                                    \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
                                     \clef "alto"
                                     R1 * 3/8
                                     \bar "|"
@@ -2542,8 +2542,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \context CelloMusicVoice = "Cello Music Voice" {
                                     {
                                         {
-                                            \set Staff.instrumentName = \markup { Cello }
-                                            \set Staff.shortInstrumentName = \markup { Vc. }
+                                            \set CelloMusicStaff.instrumentName = \markup { Cello }
+                                            \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
                                             \clef "bass"
                                             a16 [
                                             g16
@@ -2692,8 +2692,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     {
-                                        \set Staff.instrumentName = \markup { Violin }
-                                        \set Staff.shortInstrumentName = \markup { Vn. }
+                                        \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                        \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                         \clef "treble"
                                         e'16
                                     }
@@ -2860,8 +2860,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     {
-                                        \set Staff.instrumentName = \markup { Violin }
-                                        \set Staff.shortInstrumentName = \markup { Vn. }
+                                        \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                        \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                         \clef "treble"
                                         e'16
                                     }
@@ -3030,8 +3030,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -3207,8 +3207,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -3381,8 +3381,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -3559,8 +3559,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -3742,8 +3742,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -3918,8 +3918,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -4145,8 +4145,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -4314,8 +4314,8 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     c'8
@@ -4483,8 +4483,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override Flag.color = #magenta
                                         \once \override NoteHead.color = #magenta
                                         \once \override Stem.color = #magenta
-                                        \set Staff.instrumentName = \markup { Violin }
-                                        \set Staff.shortInstrumentName = \markup { Vn. }
+                                        \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                        \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                         \clef "treble"
                                         e'8.
                                     }
@@ -4729,8 +4729,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
                                     {
-                                        \set Staff.instrumentName = \markup { Violin }
-                                        \set Staff.shortInstrumentName = \markup { Vn. }
+                                        \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                        \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                         \clef "treble"
                                         e'8.
                                     }
@@ -4887,8 +4887,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -5081,8 +5081,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -5266,8 +5266,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -5447,8 +5447,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -5632,8 +5632,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -5954,8 +5954,8 @@ class SegmentMaker(abjad.SegmentMaker):
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
-                                \set Staff.instrumentName = \markup { Violin }
-                                \set Staff.shortInstrumentName = \markup { Vn. }
+                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 R1 * 1/2
                                 R1 * 3/8
@@ -6032,8 +6032,8 @@ class SegmentMaker(abjad.SegmentMaker):
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
-                                \set Staff.instrumentName = \markup { Violin }
-                                \set Staff.shortInstrumentName = \markup { Vn. }
+                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 s1 * 1/2
                                 s1 * 3/8
@@ -6179,8 +6179,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -6365,8 +6365,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -6550,8 +6550,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -6741,8 +6741,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -6932,8 +6932,8 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     e'8 [
                                     f'8
@@ -7055,8 +7055,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -7234,8 +7234,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -7420,8 +7420,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                         ^ \markup {
@@ -7689,8 +7689,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                         ^ \markup {

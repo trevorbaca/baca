@@ -184,8 +184,8 @@ class TransitionCommand(abjad.AbjadObject):
                                 \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center
                                 \once \override TextSpanner.dash-fraction = 0.25
                                 \once \override TextSpanner.dash-period = 1.5
-                                \set Staff.instrumentName = \markup { Violin }
-                                \set Staff.shortInstrumentName = \markup { Vn. }
+                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 e'8 [ \startTextSpan
                                 f'8

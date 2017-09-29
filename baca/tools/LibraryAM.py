@@ -2595,8 +2595,8 @@ class LibraryAM(object):
                                 \context ViolinMusicVoice = "Violin Music Voice" {
                                     {
                                         {
-                                            \set Staff.instrumentName = \markup { Violin }
-                                            \set Staff.shortInstrumentName = \markup { Vn. }
+                                            \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                            \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                             \clef "treble"
                                             \override Stem.direction = #up
                                             a'8
@@ -2615,8 +2615,8 @@ class LibraryAM(object):
                                 \context ViolaMusicVoice = "Viola Music Voice" {
                                     {
                                         {
-                                            \set Staff.instrumentName = \markup { Viola }
-                                            \set Staff.shortInstrumentName = \markup { Va. }
+                                            \set ViolaMusicStaff.instrumentName = \markup { Viola }
+                                            \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
                                             \clef "alto"
                                             \crossStaff
                                             \override Stem.direction = #up
@@ -2638,8 +2638,8 @@ class LibraryAM(object):
                             \tag cello
                             \context CelloMusicStaff = "Cello Music Staff" {
                                 \context CelloMusicVoice = "Cello Music Voice" {
-                                    \set Staff.instrumentName = \markup { Cello }
-                                    \set Staff.shortInstrumentName = \markup { Vc. }
+                                    \set CelloMusicStaff.instrumentName = \markup { Cello }
+                                    \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
                                     \clef "bass"
                                     R1 * 5/8
                                     \bar "|"
@@ -2722,8 +2722,8 @@ class LibraryAM(object):
                                 \context ViolinMusicVoice = "Violin Music Voice" {
                                     {
                                         {
-                                            \set Staff.instrumentName = \markup { Violin }
-                                            \set Staff.shortInstrumentName = \markup { Vn. }
+                                            \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                            \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                             \clef "treble"
                                             \override Stem.direction = #up
                                             a'8
@@ -2742,8 +2742,8 @@ class LibraryAM(object):
                                 \context ViolaMusicVoice = "Viola Music Voice" {
                                     {
                                         {
-                                            \set Staff.instrumentName = \markup { Viola }
-                                            \set Staff.shortInstrumentName = \markup { Va. }
+                                            \set ViolaMusicStaff.instrumentName = \markup { Viola }
+                                            \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
                                             \clef "alto"
                                             \override Stem.direction = #up
                                             c'8
@@ -2762,8 +2762,8 @@ class LibraryAM(object):
                             \tag cello
                             \context CelloMusicStaff = "Cello Music Staff" {
                                 \context CelloMusicVoice = "Cello Music Voice" {
-                                    \set Staff.instrumentName = \markup { Cello }
-                                    \set Staff.shortInstrumentName = \markup { Vc. }
+                                    \set CelloMusicStaff.instrumentName = \markup { Cello }
+                                    \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
                                     \clef "bass"
                                     R1 * 5/8
                                     \bar "|"

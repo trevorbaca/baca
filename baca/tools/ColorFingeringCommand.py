@@ -81,8 +81,8 @@ class ColorFingeringCommand(abjad.AbjadObject):
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
                         \context ViolinMusicVoice = "Violin Music Voice" {
-                            \set Staff.instrumentName = \markup { Violin }
-                            \set Staff.shortInstrumentName = \markup { Vn. }
+                            \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                            \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                             \clef "treble"
                             e'2
                             e'4.
@@ -277,8 +277,8 @@ class ColorFingeringCommand(abjad.AbjadObject):
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
-                                \set Staff.instrumentName = \markup { Violin }
-                                \set Staff.shortInstrumentName = \markup { Vn. }
+                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 c'2
                                 d'4.
@@ -392,8 +392,8 @@ class ColorFingeringCommand(abjad.AbjadObject):
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
                                 {
-                                    \set Staff.instrumentName = \markup { Violin }
-                                    \set Staff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                         ^ \markup {

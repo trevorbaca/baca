@@ -185,8 +185,8 @@ class NestCommand(abjad.AbjadObject):
                                     {
                                         \set stemLeftBeamCount = #0
                                         \set stemRightBeamCount = #2
-                                        \set Staff.instrumentName = \markup { Violin }
-                                        \set Staff.shortInstrumentName = \markup { Vn. }
+                                        \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                        \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                         \clef "treble"
                                         c'16 [
                                         \set stemLeftBeamCount = #2
