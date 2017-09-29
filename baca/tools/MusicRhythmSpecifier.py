@@ -4,10 +4,6 @@ import abjad
 class MusicRhythmSpecifier(abjad.AbjadObject):
     r'''Music rhythm specifier.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         ::

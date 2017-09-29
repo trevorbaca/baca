@@ -5,10 +5,6 @@ import baca
 class AttachCommand(abjad.AbjadObject):
     r'''Attach command.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         With music-maker:

@@ -5,10 +5,6 @@ import itertools
 class MicrotonalDeviationCommand(abjad.AbjadObject):
     r'''Microtonal deviation command.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         With alternating up- and down-quatertones:

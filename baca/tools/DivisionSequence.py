@@ -6,10 +6,6 @@ import collections
 class DivisionSequence(abjad.Sequence):
     r'''Division sequence.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         ::

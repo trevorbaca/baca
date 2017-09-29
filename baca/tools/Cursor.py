@@ -5,10 +5,6 @@ import collections
 class Cursor(abjad.AbjadObject):
     r'''Cursor.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Gets elements one at a time:

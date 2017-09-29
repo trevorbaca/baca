@@ -4,11 +4,6 @@ import baca
 
 class LibraryNZ(object):
     r'''Library N - Z.
-
-    ::
-
-        >>> import baca
-
     '''
 
     ### CLASS VARIABLES ###

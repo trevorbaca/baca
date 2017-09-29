@@ -5,10 +5,6 @@ import baca
 class PitchArrayColumn(abjad.AbjadValueObject):
     '''Pitch array column.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         A pitch array column:

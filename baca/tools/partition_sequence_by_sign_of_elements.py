@@ -7,10 +7,6 @@ def partition_sequence_by_sign_of_elements(sequence, sign=(-1, 0, 1)):
 
     ::
 
-        >>> import baca
-
-    ::
-
         >>> sequence = [0, 0, -1, -1, 2, 3, -5, 1, 2, 5, -5, -6]
 
     ..  container:: example

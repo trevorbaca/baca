@@ -4,10 +4,6 @@ import collections
 def negate_elements(sequence, absolute=False, indices=None, period=None):
     '''Negates `sequence` elements.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Negates all elements:

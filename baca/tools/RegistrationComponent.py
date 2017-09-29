@@ -6,10 +6,6 @@ from abjad.tools.abctools.AbjadValueObject import AbjadValueObject
 class RegistrationComponent(AbjadValueObject):
     '''Registration component.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Initializes a registration component that specifies that all pitches

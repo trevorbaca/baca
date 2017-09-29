@@ -4,10 +4,6 @@ import abjad
 class AnchorCommand(abjad.AbjadValueObject):
     r'''Anchor command.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         ::

@@ -7,10 +7,6 @@ import copy
 class MusicMaker(abjad.AbjadObject):
     r'''Music-maker.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Default music-maker:

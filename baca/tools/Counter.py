@@ -4,10 +4,6 @@ import abjad
 class Counter(abjad.AbjadObject):
     r'''Counter.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Initializes to zero and increments by 1:

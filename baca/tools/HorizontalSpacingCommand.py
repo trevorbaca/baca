@@ -4,10 +4,6 @@ import abjad
 class HorizontalSpacingCommand(abjad.AbjadObject):
     r'''Horizontal spacing command.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         No spacing command:

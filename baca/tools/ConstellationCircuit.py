@@ -5,10 +5,6 @@ import baca
 class ConstellationCircuit(abjad.AbjadObject):
     r'''Constellation circuit.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         ::

@@ -4,11 +4,6 @@ import baca
 
 class MarkupLibrary(object):
     r'''Markup interface.
-
-    ::
-
-        >>> import baca
-
     '''
 
     ### CLASS VARIABLES ###

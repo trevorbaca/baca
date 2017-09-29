@@ -5,10 +5,6 @@ import baca
 class MusicContribution(abjad.AbjadValueObject):
     r'''Music contribution.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         ::

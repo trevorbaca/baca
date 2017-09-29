@@ -9,10 +9,6 @@ import traceback
 class SegmentMaker(abjad.SegmentMaker):
     r'''Segment-maker.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         With empty input:

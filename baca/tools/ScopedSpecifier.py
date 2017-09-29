@@ -5,10 +5,6 @@ import baca
 class ScopedSpecifier(abjad.AbjadObject):
     r'''Scoped specifier.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Makes scoped pitch specifier:

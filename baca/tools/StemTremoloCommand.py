@@ -5,10 +5,6 @@ import baca
 class StemTremoloCommand(abjad.AbjadObject):
     r'''Stem tremolo command.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Selects notes and chords by default:

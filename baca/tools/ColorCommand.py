@@ -5,10 +5,6 @@ import baca
 class ColorCommand(abjad.AbjadObject):
     r'''Color command.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         With music-maker:

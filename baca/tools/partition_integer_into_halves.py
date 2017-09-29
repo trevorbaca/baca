@@ -6,10 +6,6 @@ import math
 def partition_integer_into_halves(n, bigger=abjad.Left, even='allowed'):
     r'''Partitions `n` into halves.
 
-    ::
-
-        >>> import baca
-
     Writes positive integer `n` as the pair ``(left, right)`` such that
     ``n == left + right``.
 

@@ -4,10 +4,6 @@ import abjad
 class MeasureExpression(abjad.Expression):
     r'''Measure expression.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Selects measures from indices 2 to 4:

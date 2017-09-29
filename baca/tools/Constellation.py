@@ -5,10 +5,6 @@ import baca
 class Constellation(abjad.AbjadObject):
     r'''Constellation.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         ::

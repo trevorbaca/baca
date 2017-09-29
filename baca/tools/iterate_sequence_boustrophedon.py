@@ -4,10 +4,6 @@ import collections
 def iterate_sequence_boustrophedon(iterable, duplicates=False):
     '''Iterates `iterable` boustrophedon.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Iterates `iterable` first forward and then backward. Duplicates neither

@@ -5,10 +5,6 @@ import itertools
 class ColorFingeringCommand(abjad.AbjadObject):
     r'''Color fingering command.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Initializes with number lists:

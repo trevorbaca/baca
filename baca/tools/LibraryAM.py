@@ -4,11 +4,6 @@ import baca
 
 class LibraryAM(object):
     r'''Library A - M.
-
-    ::
-
-        >>> import baca
-
     '''
 
     ### CLASS VARIABLES ###

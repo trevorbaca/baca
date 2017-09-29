@@ -4,10 +4,6 @@ import abjad
 class FloatingSelection(abjad.AbjadValueObject):
     r'''Floating selection.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         ::

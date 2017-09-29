@@ -5,10 +5,6 @@ import baca
 class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
     r'''Arpeggiation spacing specifier.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         ::

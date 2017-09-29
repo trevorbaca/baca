@@ -5,10 +5,6 @@ from baca.tools.ScoreTemplate import ScoreTemplate
 class StringTrioScoreTemplate(ScoreTemplate):
     r'''String trio score template.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         ::

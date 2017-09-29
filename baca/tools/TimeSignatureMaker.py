@@ -5,10 +5,6 @@ import baca
 class TimeSignatureMaker(abjad.AbjadObject):
     r'''Time signature maker.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         ::

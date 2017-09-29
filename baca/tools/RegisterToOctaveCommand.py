@@ -5,10 +5,6 @@ import baca
 class RegisterToOctaveCommand(abjad.AbjadObject):
     r"""Register-to-octave command.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Chords:

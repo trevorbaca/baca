@@ -5,10 +5,6 @@ import fractions
 class Interpolator(abjad.AbjadObject):
     r'''Interpolator.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Interpolates linearly from -5 up to 5:

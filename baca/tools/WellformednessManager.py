@@ -4,10 +4,6 @@ import abjad
 class WellformednessManager(abjad.AbjadObject):
     r'''Wellformedness manager.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         ::

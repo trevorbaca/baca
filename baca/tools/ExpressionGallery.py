@@ -1,10 +1,6 @@
 class ExpressionGallery(object):
     r'''Expression gallery.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example expression
 
         Transposes collections:

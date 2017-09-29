@@ -4,10 +4,6 @@ import abjad
 class OctaveDisplacementCommand(abjad.AbjadObject):
     r"""Octave displacement command.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Displaces octaves:

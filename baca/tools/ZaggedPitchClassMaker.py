@@ -5,10 +5,6 @@ import baca
 class ZaggedPitchClassMaker(abjad.AbjadObject):
     r'''Zagged pitch-class maker.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         ::

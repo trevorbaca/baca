@@ -8,10 +8,6 @@ class DivisionSequenceExpression(abjad.Expression):
 
     ..  note:: Reimplement as signatured-decorated DivisionSequence method.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Inherits from sequence expression and coerces input:

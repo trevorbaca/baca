@@ -4,11 +4,6 @@ import baca
 
 class SelectorLibrary(object):
     r'''Selector library.
-
-    ::
-
-        >>> import baca
-
     '''
 
     ### CLASS VARIABLES ###

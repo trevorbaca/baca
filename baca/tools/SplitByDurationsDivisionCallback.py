@@ -5,10 +5,6 @@ import baca
 class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
     r'''Split-by-durations division callback.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Makes quarter-valued divisions with remainder at right:

@@ -4,10 +4,6 @@ import abjad
 class StageSpecifier(abjad.AbjadObject):
     r'''Stage specifier.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Counts with a single explicit time signature mixed in:

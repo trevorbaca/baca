@@ -6,10 +6,6 @@ import collections as collections_module
 class CollectionList(abjad.AbjadValueObject):
     r'''Collection list.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Initializes numbered pitch segments:

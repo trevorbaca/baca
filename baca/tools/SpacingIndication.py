@@ -4,10 +4,6 @@ import abjad
 class SpacingIndication(abjad.AbjadValueObject):
     r'''Spacing indication token.
 
-    ::
-
-        >>> import baca
-
     LilyPond ``Score.proportionalNotationDuration`` will equal
     ``proportional_notation_duration`` when tempo equals ``tempo_indication``.
 

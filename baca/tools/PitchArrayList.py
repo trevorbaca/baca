@@ -4,10 +4,6 @@ import abjad
 class PitchArrayList(abjad.TypedList):
     r'''Pitch array list.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         A pitch array list:

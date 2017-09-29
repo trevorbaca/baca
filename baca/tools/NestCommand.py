@@ -5,9 +5,9 @@ import baca
 class NestCommand(abjad.AbjadObject):
     r'''Nest command.
 
-    ::
-
-        >>> import baca
+    Bar.
+    Foo.
+    Text.
 
     ..  container:: example
 

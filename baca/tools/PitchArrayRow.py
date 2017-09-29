@@ -6,10 +6,6 @@ import copy
 class PitchArrayRow(abjad.AbjadObject):
     r'''Pitch array row.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         A pitch array row:

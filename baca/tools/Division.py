@@ -4,10 +4,6 @@ import abjad
 class Division(abjad.NonreducedFraction):
     r'''Division.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Division with duration, start offset and payload:

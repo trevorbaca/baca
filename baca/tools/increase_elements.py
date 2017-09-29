@@ -5,10 +5,6 @@ import baca
 def increase_elements(sequence, addenda, indices=None):
     '''Increases `sequence` cyclically by `addenda`.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Increases range elements by ``10`` and ``-10`` in alternation:

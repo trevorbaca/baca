@@ -4,10 +4,6 @@ import abjad
 class RegistrationDictionary(abjad.TypedOrderedDict):
     '''Registration dictionary.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Two registrations:

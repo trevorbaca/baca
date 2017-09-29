@@ -3,11 +3,6 @@ import abjad
 
 class PitchManager(abjad.AbjadObject):
     r'''Pitch manager.
-
-    ::
-
-        >>> import baca
-
     '''
 
     ### CLASS VARIABLES ###

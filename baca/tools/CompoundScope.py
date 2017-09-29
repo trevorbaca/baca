@@ -6,10 +6,6 @@ import collections
 class CompoundScope(abjad.AbjadObject):
     r'''Compound scope.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Makes four-part compound scope:

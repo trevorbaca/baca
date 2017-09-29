@@ -5,10 +5,6 @@ import baca
 class PitchSet(abjad.PitchSet):
     r'''Pitch set.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Initializes set:

@@ -4,11 +4,7 @@ import abjad
 class ClusterCommand(abjad.AbjadObject):
     r"""Cluster command.
 
-    ::
-
-        >>> import baca
-
-    ..  container:: example
+    :    ..  container:: example
 
         With music-maker:
 

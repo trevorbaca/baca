@@ -5,10 +5,6 @@ import baca
 class SplitByRoundedRatiosDivisionCallback(abjad.AbjadValueObject):
     r'''Split-by-rounded-ratios division callback.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Makes divisions with ``2:1`` ratios:

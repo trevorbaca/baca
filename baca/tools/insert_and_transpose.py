@@ -7,10 +7,6 @@ def insert_and_transpose(notes, subrun_tokens):
 
     ::
 
-        >>> import baca
-
-    ::
-
         >>> notes = [abjad.Note(_, (1, 4)) for _ in [0, 2, 7, 9, 5, 11, 4]]
         >>> subrun_tokens = [(0, [2, 4]), (4, [3, 1])]
         >>> baca.tools.insert_and_transpose(notes, subrun_tokens)

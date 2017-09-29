@@ -5,10 +5,6 @@ import collections
 class RestAffixCommand(abjad.AbjadValueObject):
     r'''Rest affix command.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Works together with negative-valued talea:

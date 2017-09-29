@@ -6,10 +6,6 @@ import collections
 class ScorePitchCommand(abjad.AbjadObject):
     r'''Score pitch command.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         With pitch numbers:

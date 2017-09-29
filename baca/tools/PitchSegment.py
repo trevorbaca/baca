@@ -5,10 +5,6 @@ import baca
 class PitchSegment(abjad.PitchSegment):
     r'''Pitch segment.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Initializes segment:

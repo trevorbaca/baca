@@ -6,10 +6,6 @@ import copy
 class ImbricateCommand(abjad.AbjadObject):
     r'''Imbricate command.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Defaults:

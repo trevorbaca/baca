@@ -5,10 +5,6 @@ import baca
 class DivisionMaker(abjad.AbjadValueObject):
     r'''Division-maker.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Splits every division by ``1/4`` with remainder at right:

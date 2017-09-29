@@ -5,10 +5,6 @@ from baca.tools.ScoreTemplate import ScoreTemplate
 class TwoVoiceStaffScoreTemplate(ScoreTemplate):
     r'''Two-voice staff score template.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         ::

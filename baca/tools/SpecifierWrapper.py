@@ -4,10 +4,6 @@ import abjad
 class SpecifierWrapper(abjad.AbjadObject):
     r'''Specifier wrapper.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Dynamic placed on first leaf that starts in stage (rather than on first

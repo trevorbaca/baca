@@ -6,10 +6,6 @@ import copy
 class SwellSpecifier(abjad.AbjadObject):
     r'''Swell specifier.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Attaches niente swell to all pitched logical ties:

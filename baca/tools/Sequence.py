@@ -8,10 +8,6 @@ import inspect
 class Sequence(abjad.Sequence):
     r'''Sequence.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Initializes from numbers:

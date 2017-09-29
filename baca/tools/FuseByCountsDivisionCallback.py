@@ -5,10 +5,6 @@ import baca
 class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
     r'''Fuse-by-counts division callback.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Fuses divisions together two at a time:

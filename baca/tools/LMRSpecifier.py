@@ -4,10 +4,6 @@ import abjad
 class LMRSpecifier(abjad.AbjadObject):
     r'''Left-middle-right specifier.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Default LMR specifier:

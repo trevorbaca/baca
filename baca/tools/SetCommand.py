@@ -6,10 +6,6 @@ import baca
 class SetCommand(abjad.AbjadObject):
     r'''Set command.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         ::

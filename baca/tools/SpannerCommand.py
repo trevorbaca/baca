@@ -5,10 +5,6 @@ import baca
 class SpannerCommand(abjad.AbjadObject):
     r'''Spanner command.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         With music-maker:

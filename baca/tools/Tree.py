@@ -6,10 +6,6 @@ import copy
 class Tree(abjad.AbjadObject):
     r'''Tree.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Here's a tree:

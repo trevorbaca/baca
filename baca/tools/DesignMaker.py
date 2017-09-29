@@ -5,10 +5,6 @@ import baca
 class DesignMaker(abjad.AbjadObject):
     r'''Design-maker.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Initializes design-maker:

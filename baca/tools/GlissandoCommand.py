@@ -4,10 +4,6 @@ import abjad
 class GlissandoCommand(abjad.AbjadObject):
     r'''Glissando command.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Selects all logical ties:

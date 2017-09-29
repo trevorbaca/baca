@@ -3,11 +3,6 @@ import abjad
 
 class Expression(abjad.Expression):
     r'''Expression.
-
-    ::
-
-        >>> import baca
-
     '''
 
     ### CLASS VARIABLES ###

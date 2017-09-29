@@ -6,10 +6,6 @@ import copy
 class TransitionCommand(abjad.AbjadObject):
     r'''Transition command.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         With music-maker:

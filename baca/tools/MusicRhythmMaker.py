@@ -7,10 +7,6 @@ import math
 class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
     r'''Music rhythm-maker.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Sixteenths and eighths:

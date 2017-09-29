@@ -6,10 +6,6 @@ def yield_all_partitions_of_integer(n):
 
     ::
 
-        >>> import baca
-
-    ::
-
         >>> for partition in baca.tools.yield_all_partitions_of_integer(7):
         ...     partition
         ...

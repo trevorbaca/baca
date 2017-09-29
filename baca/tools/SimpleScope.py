@@ -5,10 +5,6 @@ import baca
 class SimpleScope(abjad.AbjadObject):
     r'''SimpleScope.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         ::

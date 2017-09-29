@@ -5,10 +5,6 @@ import baca
 class MusicPitchSpecifier(abjad.AbjadObject):
     r'''Music pitch specifier.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Accumulates transposed pitch-classes to identity:

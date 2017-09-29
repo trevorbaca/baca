@@ -5,10 +5,6 @@ import numbers
 class PitchArrayCell(abjad.AbjadObject):
     '''Pitch array cell.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         A pitch array cell:

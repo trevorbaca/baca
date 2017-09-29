@@ -1,10 +1,5 @@
 class Coat(object):
     r'''Coat.
-
-    ::
-
-        >>> import baca
-
     '''
 
     ### CLASS VARIABLES ###

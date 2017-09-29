@@ -5,10 +5,6 @@ import baca
 class RegisterCommand(abjad.AbjadObject):
     r"""Register command.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         With music-maker:

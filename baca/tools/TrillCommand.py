@@ -4,10 +4,6 @@ import abjad
 class TrillCommand(abjad.AbjadObject):
     r'''Trill command.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         With music-maker:

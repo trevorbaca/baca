@@ -5,10 +5,6 @@ import baca
 class RegisterInterpolationCommand(abjad.AbjadObject):
     r"""Register interpolation command.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         With music-maker.

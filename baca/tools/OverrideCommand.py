@@ -4,9 +4,6 @@ import baca
 
 class OverrideCommand(abjad.AbjadObject):
     r'''Override command.
-    ::
-
-        >>> import baca
 
     ..  container:: example
 

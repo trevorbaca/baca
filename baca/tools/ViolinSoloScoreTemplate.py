@@ -5,10 +5,6 @@ from baca.tools.ScoreTemplate import ScoreTemplate
 class ViolinSoloScoreTemplate(ScoreTemplate):
     r'''Violin solo score template.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         ::

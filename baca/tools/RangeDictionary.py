@@ -6,10 +6,6 @@ from abjad.tools.datastructuretools.TypedOrderedDict import TypedOrderedDict
 class RangeDictionary(TypedOrderedDict):
     r"""Range dictionary.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Two ranges:

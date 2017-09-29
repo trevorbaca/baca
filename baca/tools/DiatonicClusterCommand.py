@@ -4,10 +4,6 @@ import abjad
 class DiatonicClusterCommand(abjad.AbjadObject):
     r'''Diatonic cluster command.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         ::

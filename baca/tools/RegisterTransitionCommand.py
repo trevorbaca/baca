@@ -5,10 +5,6 @@ import baca
 class RegisterTransitionCommand(abjad.AbjadObject):
     r'''Register transition command.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Transitions from the octave of C4 to the octave of C5:

@@ -4,11 +4,6 @@ import baca
 
 class MusicAccumulator(abjad.AbjadObject):
     r'''Music-accumulator.
-
-    ::
-
-        >>> import baca
-
     '''
 
     ### CLASS VARIABLES ###

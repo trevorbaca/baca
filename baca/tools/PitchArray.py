@@ -5,10 +5,6 @@ import baca
 class PitchArray(abjad.AbjadObject):
     r'''Pitch array.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         A two-by-three pitch array:

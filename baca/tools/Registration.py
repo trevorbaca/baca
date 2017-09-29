@@ -5,10 +5,6 @@ import copy
 class Registration(abjad.AbjadValueObject):
     '''Registration.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Registration in two parts:

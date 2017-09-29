@@ -5,10 +5,6 @@ import baca
 class AcciaccaturaSpecifier(abjad.AbjadObject):
     r'''Acciaccatura specifier.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Default acciaccatura specifier:

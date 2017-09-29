@@ -4,10 +4,6 @@ import abjad
 class Matrix(abjad.AbjadObject):
     '''A matrix.
 
-    ::
-
-        >>> import baca
-
     Initializes from rows:
 
     ::

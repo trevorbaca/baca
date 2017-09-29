@@ -5,10 +5,6 @@ import baca
 class PartitionDivisionCallback(abjad.AbjadValueObject):
     r'''Partition division callback.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Division lists for examples:

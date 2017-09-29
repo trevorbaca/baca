@@ -5,10 +5,6 @@ import baca
 class HairpinCommand(abjad.AbjadObject):
     r'''Hairpin command.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Attaches hairpin to each PLT run:

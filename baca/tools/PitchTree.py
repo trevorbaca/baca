@@ -6,10 +6,6 @@ from baca.tools.Tree import Tree
 class PitchTree(Tree):
     r'''Pitch tree.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Initializes numbered pitch tree:

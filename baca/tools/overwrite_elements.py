@@ -3,10 +3,6 @@
 def overwrite_elements(sequence, pairs):
     '''Overwrites `sequence` elements at indices according to `pairs`.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Overwrites range elements:

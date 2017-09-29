@@ -4,10 +4,6 @@ import abjad
 class TimeSignatureGroups(abjad.AbjadObject):
     r'''Time signature groups.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         Time signature groups:

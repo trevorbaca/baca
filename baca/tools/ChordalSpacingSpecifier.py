@@ -5,10 +5,6 @@ import baca
 class ChordalSpacingSpecifier(abjad.AbjadValueObject):
     r'''Chordal spacing specifier.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         ::

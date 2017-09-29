@@ -4,10 +4,6 @@ import abjad
 class TempoSpecifier(abjad.AbjadObject):
     r'''MetronomeMark specifier.
 
-    ::
-
-        >>> import baca
-
     ..  container:: example
 
         ::
