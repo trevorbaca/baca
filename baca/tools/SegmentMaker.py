@@ -1180,7 +1180,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return result
         result['end_clefs_by_staff'] = self._get_end_clefs()
         result['end_instruments_by_context'] = self._get_end_instruments()
-        result['end_tempo'] = self._get_end_metronome_mark()
+        result['end_metronome_mark'] = self._get_end_metronome_mark()
         result['end_time_signature'] = self._get_end_time_signature()
         return result
 
@@ -1253,7 +1253,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _get_previous_metronome_mark(self):
         if not self._previous_metadata:
             return
-        name = self._previous_metadata.get('end_tempo')
+        name = self._previous_metadata.get('end_metronome_mark')
         if not name:
             return
         metronome_mark = self.metronome_marks.get(name)
