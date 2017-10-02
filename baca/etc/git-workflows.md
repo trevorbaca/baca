@@ -13,6 +13,7 @@ CONTENTS:
 
     * Command index
     * Rebasing on master
+    * Rebasing current branch against itself
     * Single-commit workflow (changes already made)
     * Single-commit workflow (changes not yet made)
     * Setting up a development branch
@@ -154,6 +155,70 @@ branch? One approach is to rebase your branch on master.
         08:57 $ git st
         On branch trevor/dev
         Your branch is up-to-date with 'origin/trevor/dev'.
+        nothing to commit, working tree clean
+
+
+Rebasing current branch against itself
+======================================
+
+Assume you have a branch (like master) checked out on your local machine. Also
+assume you've made some commits in your branch. How do you compact commits in
+your branch? One approach is to rebase the branch against itself.
+
+1. Find the hash of a previous commit in the output of git lga
+
+        (abjad3) ✔ ~/abjad-ide/ide [master|✔] 
+        08:53 $ git lga
+        * 90d2cb39 (HEAD -> master, origin/master, origin/HEAD) Made all menus multiple.
+        * 783b5d9c Refactored (pdfm), (lym). Closes #245.
+        * 5dbd510f Cleaned up boilerplate. Tag #245.
+        * 19f83115 Cleaned up (cdk) messaging.
+        * f5968faf Cleaned up Red Score. Closes #243.
+        * c25c9268 Cleaned up Blue Score.
+        * af750ba3 Cleaned up Red Score. Tag #243.
+        * 6b5670e4 Taught (^^) about baca namespace.
+        * 4a7e4d38 Integrated dictionaries into test scores.
+        * ec76e320 Renamed test score segments. Tag #243.
+        * 85e6e3b5 Tweaked path.scores.is_external(). Closes #248.
+        * 7a415c49 Removed name-match tildes from tests. Closes #249.
+        * b2c3027c Replaced confirm() with get(). Closes #247.
+        * 428c0eca Compacted smart methods. Closes #244.
+        * 2fa4a92c Compacting smart methods. Tag #244.
+        * 105588a8 Compacting smart methods. Tag #244.
+        * e6a8917f Compacting smart methods. Tag #244.
+        * 1e4b63b8 Compacting smart methods. Tag #244.
+        * d7db568d Compacting smart methods. Tag #244.
+        * ea553456 Compacting smart methods. Tag #244.
+        * 1dcc5178 Updated one test for Travis.
+        * 4eb0dd82 Removed relative aliases. Closes #246.
+
+2. **Interactively** rebase your branch against itself starting from the
+   previous hash:
+
+        (abjad3) ✔ ~/abjad-ide/ide [master|✔] 
+        08:53 $ git rebase -i ea553456
+
+    Follow the steps described here in the previous workflow.
+
+3. Force-push:
+
+        (abjad3) ✔ ~/abjad-ide/ide [master ↓·48↑·52|✔] 
+        08:55 $ git push -f
+        Counting objects: 46, done.
+        Delta compression using up to 4 threads.
+        Compressing objects: 100% (46/46), done.
+        Writing objects: 100% (46/46), 7.58 KiB | 1.08 MiB/s, done.
+        Total 46 (delta 36), reused 0 (delta 0)
+        remote: Resolving deltas: 100% (36/36), completed with 26 local objects.
+        To https://github.com/Abjad/ide.git
+        + eb949389...90d2cb39 master -> master (forced update)
+
+4. Done:
+
+        (abjad3) ✔ ~/abjad-ide/ide [master|✔] 
+        08:57 $ git st
+        On branch master
+        Your branch is up-to-date with 'origin/master'.
         nothing to commit, working tree clean
 
 
