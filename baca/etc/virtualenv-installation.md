@@ -3,201 +3,47 @@ Python 3 installation
 
 OBJECTIVE. Install Python 3. Create a Python 3 virtualenv for Abjad development.
 
-Starting with ...
+First make sure Python 3 is installed on your machine:
 
-    brew install python3
+    $ which python3
+    /Library/Frameworks/Python.framework/Versions/3.6/bin/python3
 
-... which builds things for six or seven minutes and then ends with ...
+    $ python3 --version
+    Python 3.6.2
 
-    <SNIP>
-    ==> ./configure --prefix=/usr/local/Cellar/python3/3.5.1 --enable-ipv6 --dataroo
-    ==> make
-    ==> make install PYTHONAPPSDIR=/usr/local/Cellar/python3/3.5.1
-    ==> make frameworkinstallextras PYTHONAPPSDIR=/usr/local/Cellar/python3/3.5.1/sh
-    ==> Downloading https://pypi.python.org/packages/source/s/setuptools/setuptools-
-    ######################################################################## 100.0%
-    ==> Downloading https://pypi.python.org/packages/source/p/pip/pip-8.0.2.tar.gz
-    ######################################################################## 100.0%
-    ==> Downloading https://pypi.python.org/packages/source/w/wheel/wheel-0.26.0.tar
-    ######################################################################## 100.0%
-    Error: An unexpected error occurred during the `brew link` step
-    The formula built, but is not symlinked into /usr/local
-    Permission denied - /usr/local/Frameworks
-    Error: Permission denied - /usr/local/Frameworks
+    $ ls -al /usr/local/bin/python3
+    lrwxr-xr-x  1 root  wheel  69 Aug 24 16:06 /usr/local/bin/python3 -> ../../../Library/Frameworks/Python.framework/Versions/3.6/bin/python3
 
-... which makes me try ...
+    $ /usr/local/bin/python3 --version
+    Python 3.6.2
 
-    09:13 $ sudo brew install python3
-    Password:
-    Error: Cowardly refusing to 'sudo brew install'
-    You can use brew with sudo, but only if the brew executable is owned by root.
-    However, this is both not recommended and completely unsupported so do so at
-    your own risk.
+Then make sure the virtualenv and virtualenvwrapper packages are installed:
 
-... which apparently isn't the recommended way to go.
+    $ virtualenv --version
+    14.0.6
 
-So Stackoverflow leads me to ...
+    $ which virtualenvwrapper.sh
+    /usr/local/bin/virtualenvwrapper.sh
 
-    http://stackoverflow.com/questions/16432071/how-to-fix-homebrew-permissions
+Upgrade virtualenv if necessary:
 
-... which suggests:
-
-    sudo chown -R "$USER":admin /usr/local
-    sudo chown -R "$USER":admin /Library/Caches/Homebrew
-
-Ownership of /usr/local is currently root:
-
-    09:24 $ ls -l /usr
-    total 0
-    drwxr-xr-x     3 root  wheel    102 Aug 29 21:10 adic
-    drwxr-xr-x  1057 root  wheel  35938 Oct  3 13:35 bin
-    drwxr-xr-x   275 root  wheel   9350 Oct  3 13:40 lib
-    drwxr-xr-x   197 root  wheel   6698 Oct  3 13:35 libexec
-    drwxr-xr-x    19 root  wheel    646 Oct  3 13:40 local
-    drwxr-xr-x   245 root  wheel   8330 Oct  3 13:35 sbin
-    drwxr-xr-x    46 root  wheel   1564 Oct  3 13:35 share
-    drwxr-xr-x     4 root  wheel    136 Sep 13 19:51 standalone
-
-So ...
-
-    09:24 $ sudo chown -R "$USER":admin /usr/local
-    Password:
+    $ sudo pip install --upgrade pip
+    $ sudo -H pip install --upgrade virtualenv
+    Collecting virtualenv
+    Downloading virtualenv-15.1.0-py2.py3-none-any.whl (1.8MB)
+        100% |████████████████████████████████| 1.8MB 738kB/s 
+    Installing collected packages: virtualenv
+    Found existing installation: virtualenv 14.0.6
+        Uninstalling virtualenv-14.0.6:
+        Successfully uninstalled virtualenv-14.0.6
+    Successfully installed virtualenv-15.1.0
     
-... which takes a few seconds to recurse and completes without error.
-
-My /Library/Caches has no Homebrew subdirectory. So I ignore the second step
-recommended at Stackoverflow.
-
-Rebrewing Python 3 gives ...
-
-    09:32 $ brew install python3
-    Warning: python3-3.5.1 already installed, it's just not linked
-    Warning: You are using OS X 10.12.
-    We do not provide support for this pre-release version.
-    You may encounter build failures or other breakages.
-
-... which makes sense because the previous brew probably completed but just
-couldn't link.
-
-So on a hunch I try ...
-
-    09:32 $ brew link python3
-    Linking /usr/local/Cellar/python3/3.5.1... 19 symlinks created
-
-... which completes without error.
-
-Python 3 is now resident on my machine ...
-
-    09:35 $ which python3
-    /usr/local/bin/python3
-
-... and starts correctly:
-
-    09:35 $ python3
-    Python 3.5.1 (default, Oct  6 2016, 09:12:24) 
-    [GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.38)] on darwin
-    Type "help", "copyright", "credits" or "license" for more information.
-
-Importing Abjad fails ...
-
-    09:35 $ python3
-    Python 3.5.1 (default, Oct  6 2016, 09:12:24) 
-    [GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.38)] on darwin
-    Type "help", "copyright", "credits" or "license" for more information.
-    >>> 2 ** 38
-    274877906944
-    >>> import abjad
-    Traceback (most recent call last):
-    File "<stdin>", line 1, in <module>
-    File "/Users/trevorbaca/Documents/abjad/abjad/__init__.py", line 31, in <module>
-        from abjad.tools.systemtools.AbjadConfiguration import AbjadConfiguration
-    File "/Users/trevorbaca/Documents/abjad/abjad/tools/__init__.py", line 2, in <module>
-        import six
-    ImportError: No module named 'six'
-
-... but will have to be debugged later. (Probably just need to "reinstall"
-Abjad under Python 3. Will do later.)
-
-Next up is running the Abjad tests under Python 2.7.10 to make sure that
-Python 3 installation didn't break Abjad under Python 2.7.10.
-
-All Abjad tests continue to pass under Python 2.7.10 after brewing Python 3.
-
-So back to debugging Abjad under Python 3.
-
-Maybe just need to install Abjad under Python 3? Abjad's dependency tree should
-take care of things like the six module.
-
-So that raises the question of how to install Abjad under Python 3.
-
-Don't wanna get conflicting Abjad installs. So trying under a virtualenv:
+Deactivate any active virtual environment:
 
     09:45 $ deactivate
-    ✔ ~/Documents/abjad/abjad [trevor/dev|✔] 
-    09:50 $ virtualenv -p python3 abjad3
-    Running virtualenv with interpreter /usr/local/Cellar/python3
-    Traceback (most recent call last):
-    File "/usr/local/bin/virtualenv", line 11, in <module>
-        sys.exit(main())
-    File "/Library/Python/2.7/site-packages/virtualenv.py", line 667, in main
-        popen = subprocess.Popen([interpreter, file] + sys.argv[1:], env=env)
-    File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 710, in __init__
-        errread, errwrite)
-    File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 1335, in _execute_child
-        raise child_exception
-    OSError: [Errno 13] Permission denied
+    ✔ ~/Desktop
 
-Hmmm ... I'm not so sure about /usr/local/Cellar/python3. Because ...
-
-    09:52 $ which python3
-    /usr/local/bin/python3
-
-... suggests that "my" Python 3 is /usr/local/bin/python3 instead of
-/usr/local/Cellar/python3. Although /usr/local/Cellar/python3 does, in fact,
-exist:
-
-    09:52 $ ls /usr/local/Cellar
-    ack             gdbm            libogg          makedepend      speex
-    bash-completion graphviz        libpng          openssl         sqlite
-    bash-git-prompt imagemagick     libtiff         pkg-config      timidity
-    flac            jpeg            libtool         python3         xz
-    freetype        libao           libvorbis       readline
-
-On a hunch ...
-
-    ✔ ~/Documents/abjad/abjad [trevor/dev|✔] 
-    09:53 $ virtualenv --python=/usr/local/bin/python3 abjad3
-    Running virtualenv with interpreter /usr/local/bin/python3
-    Using base prefix '/usr/local/Cellar/python3/3.5.1/Frameworks/Python.framework/Versions/3.5'
-    New python executable in /Users/trevorbaca/Documents/abjad/abjad/abjad3/bin/python3
-    Also creating executable in /Users/trevorbaca/Documents/abjad/abjad/abjad3/bin/python
-    Installing setuptools, pip, wheel...done.
-
-... which creates the abjad3 virtualenv not in ~/Envs but in
-~/Documents/abjad/abjad! Gargh.
-
-I trash the spurious abjad3 virtualenv.
-
-Maybe used the wrong virtualenv command? Should've used "mkvirtualenv" instead
-of "virtualenv"?
-
-Starting with ...
-
-    ✔ ~/Desktop 
-    10:05 $ mkvirtualenv -p python3 abjad3
-    Running virtualenv with interpreter /usr/local/Cellar/python3
-    Traceback (most recent call last):
-    File "/usr/local/bin/virtualenv", line 11, in <module>
-        sys.exit(main())
-    File "/Library/Python/2.7/site-packages/virtualenv.py", line 667, in main
-        popen = subprocess.Popen([interpreter, file] + sys.argv[1:], env=env)
-    File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 710, in __init__
-        errread, errwrite)
-    File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 1335, in _execute_child
-        raise child_exception
-    OSError: [Errno 13] Permission denied
-
-... and then switching, again, to ...
+Make a Python 3 virtual environment for Abjad:
 
     ✘-1 ~/Desktop 
     10:05 $ mkvirtualenv --python=/usr/local/bin/python3 abjad3
@@ -214,63 +60,7 @@ Starting with ...
     (abjad3) ✔ ~/Desktop 
     10:06 $ 
 
-... which appears to work.
-
-Attempting to import Abjad in the abjad3 virtualenv ...
-
-    (abjad3) ✔ ~/Desktop 
-    10:07 $ python
-    Python 3.5.1 (default, Oct  6 2016, 09:12:24) 
-    [GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.38)] on darwin
-    Type "help", "copyright", "credits" or "license" for more information.
-    >>> import abjad
-    Traceback (most recent call last):
-    File "<stdin>", line 1, in <module>
-    File "/Users/trevorbaca/Documents/abjad/abjad/__init__.py", line 31, in <module>
-        from abjad.tools.systemtools.AbjadConfiguration import AbjadConfiguration
-    File "/Users/trevorbaca/Documents/abjad/abjad/tools/__init__.py", line 2, in <module>
-        import six
-    ImportError: No module named 'six'
-
-... gives the same import error.
-
-Which probably means I just need to install Abjad "fresh" in the abjad3
-virtualenv.
-
-Our install instructions at ...
-
-    https://github.com/Abjad/abjad
-
-... summary like this:
-
-    To recap, a complete development installation of Abjad within a virtual
-    environment requires the following steps:
-
-    * Create and activate a new virtual environment
-    * Clone Abjad somewhere and cd into the root of the cloned repository
-    * Install Abjad and its development / IPython dependencies
-
-Ok, now a challenge. Because I have a clone of the Abjad repository that's been
-sitting around for years:
-
-    (abjad3) ✔ ~/Documents/abjad [trevor/dev|✔] 
-    10:29 $ git st
-    On branch trevor/dev
-    Your branch is up-to-date with 'origin/trevor/dev'.
-    nothing to commit, working directory clean
-
-So do I clone the Abjad repo again? Or will my existing clone work?
-
-Looking at our development install instructions again, I get confused about the
-difference between cloning and installing, steps 2 and 3:
-
-    * Create and activate a new virtual environment
-    * Clone Abjad somewhere and cd into the root of the cloned repository
-    * Install Abjad and its development / IPython dependencies
-
-I'm gonna go with the idea that (perhaps) my years-old clone of the Abjad repo
-is fine for my abjad3 virtualenv. And that all I need to do (hopefully) is
-"install" Abjad in my existing clone. So ...
+Reinstall Abjad under the Python 3 virtual environment:
 
     (abjad3) ✔ ~/Documents/abjad [master|✔] 
     10:32 $ pip install -e .[development,ipython]
@@ -289,9 +79,7 @@ is fine for my abjad3 virtualenv. And that all I need to do (hopefully) is
     Successfully installed Abjad-2.19 Jinja2-2.8 MarkupSafe-0.23 PyPDF2-1.26.0 Pygments-2.1.3 alabaster-0.7.9 appnope-0.1.0 babel-2.3.4 decorator-4.0.10 docutils-0.12 entrypoints-0.2.2 imagesize-0.7.1 ipykernel-4.5.0 ipython-5.1.0 ipython-genutils-0.1.0 ipywidgets-5.2.2 jsonschema-2.5.1 jupyter-1.0.0 jupyter-client-4.4.0 jupyter-console-5.0.0 jupyter-core-4.2.0 mistune-0.7.3 nbconvert-4.2.0 nbformat-4.1.0 notebook-4.2.3 pexpect-4.2.1 pickleshare-0.7.4 ply-3.9 prompt-toolkit-1.0.7 ptyprocess-0.5.1 py-1.4.31 pytest-3.0.3 pytz-2016.7 pyzmq-15.4.0 qtconsole-4.2.1 simplegeneric-0.8.1 six-1.10.0 snowballstemmer-1.2.1 sphinx-1.4.8 sphinx-rtd-theme-0.1.9 terminado-0.6 tornado-4.4.2 traitlets-4.3.1 wcwidth-0.1.7 widgetsnbextension-1.2.6
     (abjad3) ✔ ~/Documents/abjad [master|✔] 
 
-... which does a ton of stuff without error, and appears to work.
-
-Trying Abjad import again:
+Import and test Abjad:
 
     (abjad3) ✔ ~/Documents/abjad [master|✔] 
     10:34 $ python
@@ -301,179 +89,13 @@ Trying Abjad import again:
     >>> import abjad
     >>>
 
-Unbelievable. Works!
-
-And ...
-
     (abjad3) ✔ ~/Documents/abjad [master|✔] 
     10:36 $ abjad
     Abjad 2.19 (development)
     >>> note = Note("c'4")
     >>> show(note)
 
-... WORKS!
-
-What about the tests?
-
-Running ...
-
-    (abjad3) ✔ ~/Documents/abjad/abjad [master|✔] 
-    10:40 $ py.test -rf
-
-... works but shows that four tests fail, at least one or two of which look to
-be IDE-related ...
-
-        @staticmethod
-        def _get_public_function_names_in_module(module_file):
-            r'''Collects and returns all public functions defined in
-                module_file.
-                '''
-            result = []
-            module_file = module_file.replace(os.sep, '.')
-    >       mod = __import__(module_file, fromlist=['*'])
-    E         File "/Users/trevorbaca/Documents/abjad-ide/ide/tools/idetools/AbjadIDE.py", line 575
-    E           except NameError, e:
-    E                           ^
-    E       SyntaxError: invalid syntax
-
-    tools/systemtools/ImportManager.py:25: SyntaxError
-    ============ 4 failed, 10181 passed, 526 skipped in 245.66 seconds =============
-
-... which probably means I need to "reinstall" the IDE in my abjad3 virtualenv,
-similarly to how I "reinstalled" Abjad in my abjad3 virtualenv.
-
-Note, too, that using ajv (to build the API or run the doctests) errors at the
-same line (575) in the IDE:
-
-    10:42 $ ajv doctest
-    Traceback (most recent call last):
-    File "/Users/trevorbaca/Envs/abjad3/bin/ajv", line 11, in <module>
-        load_entry_point('Abjad', 'console_scripts', 'ajv')()
-    File "/Users/trevorbaca/Documents/abjad/abjad/tools/commandlinetools/run_ajv.py", line 11, in run_ajv
-        commandlinetools.AbjDevScript()()
-    File "/Users/trevorbaca/Documents/abjad/abjad/tools/commandlinetools/AbjDevScript.py", line 43, in __call__
-        self._process_args(args)
-    File "/Users/trevorbaca/Documents/abjad/abjad/tools/commandlinetools/AbjDevScript.py", line 116, in _process_args
-        instance(unknown_args)
-    File "/Users/trevorbaca/Documents/abjad/abjad/tools/commandlinetools/CommandlineScript.py", line 72, in __call__
-        self._process_args(args)
-    File "/Users/trevorbaca/Documents/abjad/abjad/tools/commandlinetools/DoctestScript.py", line 97, in _process_args
-        globs = self._get_namespace()
-    File "/Users/trevorbaca/Documents/abjad/abjad/tools/commandlinetools/DoctestScript.py", line 71, in _get_namespace
-        ide_module = importlib.import_module('ide')
-    File "/Users/trevorbaca/Envs/abjad3/lib/python3.5/importlib/__init__.py", line 126, in import_module
-        return _bootstrap._gcd_import(name[level:], package, level)
-    File "<frozen importlib._bootstrap>", line 986, in _gcd_import
-    File "<frozen importlib._bootstrap>", line 969, in _find_and_load
-    File "<frozen importlib._bootstrap>", line 958, in _find_and_load_unlocked
-    File "<frozen importlib._bootstrap>", line 673, in _load_unlocked
-    File "<frozen importlib._bootstrap_external>", line 662, in exec_module
-    File "<frozen importlib._bootstrap>", line 222, in _call_with_frames_removed
-    File "/Users/trevorbaca/Documents/abjad-ide/ide/__init__.py", line 70, in <module>
-        from ide.tools import idetools
-    File "/Users/trevorbaca/Documents/abjad-ide/ide/tools/idetools/__init__.py", line 7, in <module>
-        globals(),
-    File "/Users/trevorbaca/Documents/abjad/abjad/tools/systemtools/ImportManager.py", line 245, in import_structured_package
-        ignored_names=ignored_names,
-    File "/Users/trevorbaca/Documents/abjad/abjad/tools/systemtools/ImportManager.py", line 190, in import_public_names_from_path_into_namespace
-        submodule_name)
-    File "/Users/trevorbaca/Documents/abjad/abjad/tools/systemtools/ImportManager.py", line 25, in _get_public_function_names_in_module
-        mod = __import__(module_file, fromlist=['*'])
-    File "/Users/trevorbaca/Documents/abjad-ide/ide/tools/idetools/AbjadIDE.py", line 575
-        except NameError, e:
-                        ^
-    SyntaxError: invalid syntax
-
-Ok so how to "reinstall" the IDE repo in my abjad3 virtualenv?
-
-A clone of the repo already exists (just like a clone of the Abjad repo already
-existed). So perhaps reinstalling with pip will work for the IDE the same it
-seems to have for Abjad.
-
-Actually, I have drama with the master branching of my existing IDE clone:
-
-    g(abjad3) ✔ ~/Documents/abjad-ide [master|●1] 
-    10:54 $ git st
-    On branch master
-    Your branch is up-to-date with 'origin/master'.
-    Changes not staged for commit:
-    (use "git add/rm <file>..." to update what will be committed)
-    (use "git checkout -- <file>..." to discard changes in working directory)
-
-        deleted:    ide/scores/red_example_score/red_example_score/segments/segment_01/illustration.pdf
-
-    no changes added to commit (use "git add" and/or "git commit -a")
-    (abjad3) ✔ ~/Documents/abjad-ide [master|●1] 
-    10:54 $ git checkout ide/scores/red_example_score/red_example_score/segments/segment_01/illustration.pdf
-    error: unable to read sha1 file of ide/scores/red_example_score/red_example_score/segments/segment_01/illustration.pdf (fb9ef6e54c6a31e9a87a4f8b8070e8cbd48d24f2)
-    (abjad3) ✘-255 ~/Documents/abjad-ide [master|●1] 
-    10:54 $ git checkout ide/scores/red_example_score/red_example_score/segments/segment_01/illustration.pdf
-    error: unable to read sha1 file of ide/scores/red_example_score/red_example_score/segments/segment_01/illustration.pdf (fb9ef6e54c6a31e9a87a4f8b8070e8cbd48d24f2)
-    (abjad3) ✘-255 ~/Documents/abjad-ide [master|●1] 
-    10:54 $ git st
-    On branch master
-    Your branch is up-to-date with 'origin/master'.
-    Changes not staged for commit:
-    (use "git add/rm <file>..." to update what will be committed)
-    (use "git checkout -- <file>..." to discard changes in working directory)
-
-        deleted:    ide/scores/red_example_score/red_example_score/segments/segment_01/illustration.pdf
-
-    no changes added to commit (use "git add" and/or "git commit -a")
-    (abjad3) ✔ ~/Documents/abjad-ide [master|●1] 
-    10:55 $ git reset --hard HEAD
-    error: unable to read sha1 file of ide/scores/red_example_score/red_example_score/segments/segment_01/illustration.pdf (fb9ef6e54c6a31e9a87a4f8b8070e8cbd48d24f2)
-    fatal: Could not reset index file to revision 'HEAD'.
-
-This is frustrating.
-
-Looks like the same problem with macOS 10.12 install I had with all the other
-repos cloned into ~/Documents.
-
-So I have two branches checked out: master and spiel-der-dornen-cleanup. The
-cleanup branch (which is really a development branch) is up to date with
-GitHub's servers. So I feel like just blowing away my IDE repo and recloning.
-Only hesitation would be losing any commits in the cleanup branch. But the
-cleanup branch should be re-checkout-able. So I trash my IDE repo and reclone.
-Which works fine:
-
-    (abjad3) ✔ ~/Documents/abjad-ide [master|✔] 
-    11:06 $ git branch
-    * master
-
-And checking out the cleanup branch works fine:
-
-    (abjad3) ✔ ~/Documents/abjad-ide [master|✔] 
-    11:07 $ git checkout spiel-der-dornen-cleanup
-    Branch spiel-der-dornen-cleanup set up to track remote branch spiel-der-dornen-cleanup from origin.
-    Switched to a new branch 'spiel-der-dornen-cleanup'
-    (abjad3) ✔ ~/Documents/abjad-ide [spiel-der-dornen-cleanup|✔] 
-
-The reclone by itself isn't enough to successfully import the IDE:
-
-    (abjad3) ✔ ~/Desktop 
-    11:08 $ start-abjad-ide 
-    Traceback (most recent call last):
-    File "/Users/trevorbaca/Documents/abjad-ide/ide/scr/start-abjad-ide", line 3, in <module>
-        import ide
-    File "/Users/trevorbaca/Documents/abjad-ide/ide/__init__.py", line 70, in <module>
-        from ide.tools import idetools
-    File "/Users/trevorbaca/Documents/abjad-ide/ide/tools/idetools/__init__.py", line 7, in <module>
-        globals(),
-    File "/Users/trevorbaca/Documents/abjad/abjad/tools/systemtools/ImportManager.py", line 245, in import_structured_package
-        ignored_names=ignored_names,
-    File "/Users/trevorbaca/Documents/abjad/abjad/tools/systemtools/ImportManager.py", line 190, in import_public_names_from_path_into_namespace
-        submodule_name)
-    File "/Users/trevorbaca/Documents/abjad/abjad/tools/systemtools/ImportManager.py", line 25, in _get_public_function_names_in_module
-        mod = __import__(module_file, fromlist=['*'])
-    File "/Users/trevorbaca/Documents/abjad-ide/ide/tools/idetools/AbjadIDE.py", line 575
-        except NameError, e:
-                        ^
-    SyntaxError: invalid syntax
-
-Certainly looks like a straight-up syntax incompability with Python 3.
-
-But before changing the source, an attempt at "reinstallation" with pip:
+Reinstall the IDE under the Python 3 virtual environment:
 
     (abjad3) ✔ ~/Documents/abjad-ide [master|✔] 
     11:14 $ pip install -e .
@@ -500,109 +122,17 @@ But before changing the source, an attempt at "reinstallation" with pip:
     Successfully installed Abjad-IDE-0.0.0
     (abjad3) ✔ ~/Documents/abjad-ide [master|✔] 
 
-... which looks like it did nothing. But which does, in fact, allow the IDE to
-start.
+Start the IDE to test.
 
 All Abjad tests now pass and the API builds.
 
-The IDE starts; the IDE API builds; all IDE doctests pass; but two IDE pytests
-fail because of pytest.skip usage:
+Build the Bača API:
 
-    (abjad3) ✔ ~/Documents/abjad-ide/ide [master|✔] 
-    11:29 $ py.test -rf
-    ============================= test session starts ==============================
-    platform darwin -- Python 3.5.1, pytest-3.0.3, py-1.4.31, pluggy-0.4.0
-    rootdir: /Users/trevorbaca/Documents/abjad-ide, inifile: 
-    collected 268 items / 2 errors 
+    * Calling make_baca_api.py raises an import error because no inflect module.
 
-    ==================================== ERRORS ====================================
-    ____ ERROR collecting ide/tools/idetools/test/test_AbjadIDE_build_score.py _____
-    Using @pytest.skip outside of a test (e.g. as a test function decorator) is not allowed. Use @pytest.mark.skip or @pytest.mark.skipif instead.
-    ____ ERROR collecting ide/tools/idetools/test/test_AbjadIDE_run_doctest.py _____
-    Using @pytest.skip outside of a test (e.g. as a test function decorator) is not allowed. Use @pytest.mark.skip or @pytest.mark.skipif instead.
-    !!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!!
-    =========================== 2 error in 1.41 seconds ============================
-    (abjad3) ✘-2 ~/Documents/abjad-ide/ide [master|✔] 
+    * Calling `pip install inflect` fixes the problem.
 
-So I change pytest.skip() to pytest.mark.skip() in those two files.
-
-This allows the IDE pytests to run.
-
-But 64 tests fail. The 64 failing tests look like they are all the tests that
-touch the filesystem. All raise the same NameError in the IDE IOManager at line
-401. For example:
-
-    __________________________ test_Session_is_example_01 __________________________
-
-        def test_Session_is_example_01():
-            r'''In scores directory.
-            '''
-        
-            lines = [
-                'Abjad IDE - all score directories',
-                '',
-                '   1: __metadata__.py',
-                '   2: Blue Example Score (2013)',
-                '   3: Red Example Score (2013)',
-                '',
-                '      copy (cp)',
-                '      new (new)',
-                '      remove (rm)',
-                '      rename (ren)',
-                '',
-                '>',
-                ]
-        
-            input_ = 'q'
-    >       abjad_ide._start(input_=input_)
-
-    /Users/trevorbaca/Documents/abjad-ide/ide/tools/idetools/test/test_Session_is_example.py:27: 
-    _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-    /Users/trevorbaca/Documents/abjad-ide/ide/tools/idetools/AbjadIDE.py:2018: in _start
-        self._manage_directory(directory)
-    /Users/trevorbaca/Documents/abjad-ide/ide/tools/idetools/AbjadIDE.py:1609: in _manage_directory
-        menu = self._make_main_menu(directory, menu_header)
-    /Users/trevorbaca/Documents/abjad-ide/ide/tools/idetools/AbjadIDE.py:1127: in _make_main_menu
-        paths = self._list_visible_paths(directory)
-    /Users/trevorbaca/Documents/abjad-ide/ide/tools/idetools/AbjadIDE.py:1025: in _list_visible_paths
-        entries = self._filter_by_view(directory, entries)
-    /Users/trevorbaca/Documents/abjad-ide/ide/tools/idetools/AbjadIDE.py:298: in _filter_by_view
-        view = self._read_view(directory)
-    /Users/trevorbaca/Documents/abjad-ide/ide/tools/idetools/AbjadIDE.py:1804: in _read_view
-        view_name = self._get_metadatum(directory, 'view_name')
-    /Users/trevorbaca/Documents/abjad-ide/ide/tools/idetools/AbjadIDE.py:519: in _get_metadatum
-        metadata = self._get_metadata(directory)
-    /Users/trevorbaca/Documents/abjad-ide/ide/tools/idetools/AbjadIDE.py:507: in _get_metadata
-        attribute_names=('metadata',),
-    /Users/trevorbaca/Documents/abjad-ide/ide/tools/idetools/IOManager.py:401: in execute_string
-        exec(string, local_namespace, local_namespace)
-    _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-    >   ???
-    E   NameError: name 'abjad' is not defined
-
-    <string>:5: NameError
-
-IDE IOManager.execute_string(string, ...) is raising the NameError. In each
-case, the line causing the error is just the 'import abjad' at the top of a
-file being reading from the filesystem.
-
-2016-10-11:
-
-Calling make_baca_api.py raises an import error because no inflect module.
-Calling `pip install inflect` fixes the problem.
-Calling make_baca_api.py now works.
-Calling py.test in ~/Documents/baca/baca passes all 56 tests.
-Calling `ajv doctest` in ~/Documents/baca/baca gives 128 failures:
-    2862 passed, 128 failed out of 2990 tests in 112 modules.
-Will back up and fix IDE failures first.
-
-IDE failures now fixed: all tests pass.
-Explanation: not sure how I fixed everything. But it all fixed when I created a
-PR from my spiel-der-dornen-cleanup development branch and merged everything
-from that development branch into master. Took only minimal futzing to do so.
-Didn't transcribe into this file. But now all IDE tests pass under my Python 3
-virutal environment (abjad3).
+    * Calling make_baca_api.py now works.
 
 Python 2 virtual environment installation
 =========================================
