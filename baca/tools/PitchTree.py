@@ -995,7 +995,7 @@ class PitchTree(Tree):
             markup = abjad.Markup(cell_index, direction=direction)
             if direction == abjad.Down:
                 abjad.tweak(markup).staff_padding = 7
-            first_leaf = cell_spanner.components[0]
+            first_leaf = cell_spanner.leaves[0]
             abjad.attach(markup, first_leaf)
             cell_index += 1
 
@@ -1033,7 +1033,7 @@ class PitchTree(Tree):
             return
         spanners = self._get_cell_spanners(voice)
         for spanner in spanners:
-            leaves = spanner.components
+            leaves = spanner.leaves
             pitch_class_set = baca.PitchClassSet.from_selection(leaves)
             if not pitch_class_set:
                 continue

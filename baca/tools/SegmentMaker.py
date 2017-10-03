@@ -1065,12 +1065,12 @@ class SegmentMaker(abjad.SegmentMaker):
         if beam is None:
             return
         all_leaves = []
-        all_leaves.extend(beam.components)
+        all_leaves.extend(beam.leaves)
         durations = []
         if hasattr(beam, 'durations'):
             durations.extend(beam.durations)
         else:
-            duration = abjad.select(beam.components).get_duration()
+            duration = abjad.select(beam.leaves).get_duration()
             durations.append(duration)
         intervening_skips = []
         index = 1
@@ -1097,11 +1097,11 @@ class SegmentMaker(abjad.SegmentMaker):
             duration = abjad.inspect(next_leaf).get_duration()
             durations.append(duration)
         else:
-            all_leaves.extend(beam.components)
+            all_leaves.extend(beam.leaves)
             if hasattr(beam, 'durations'):
                 durations.extend(beam.durations)
             else:
-                duration = abjad.select(beam.components).get_duration()
+                duration = abjad.select(beam.leaves).get_duration()
                 durations.append(duration)
         abjad.detach(abjad.Beam, next_leaf)
         all_leaves = abjad.select(all_leaves)
