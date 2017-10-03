@@ -308,7 +308,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             total_collections=total_collections,
             )
         selections = self._apply_specifiers(selections)
-        self._check_well_formedness(selections)
+        self._check_wellformedness(selections)
         state_manifest = self._make_state_manifest()
         return selections, state_manifest
 

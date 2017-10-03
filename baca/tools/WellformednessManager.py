@@ -193,7 +193,7 @@ class WellformednessManager(abjad.AbjadObject):
                 return False
         return True
 
-    def tabulate_well_formedness_violations(self, argument=None):
+    def tabulate_wellformedness(self, argument=None):
         r'''Tabulates wellformedness violations.
 
         ..  container:: example
@@ -204,7 +204,7 @@ class WellformednessManager(abjad.AbjadObject):
 
                 >>> staff = abjad.Staff("c'4 d' e' f'")
                 >>> manager = baca.WellformednessManager()
-                >>> string = manager.tabulate_well_formedness_violations(staff)
+                >>> string = manager.tabulate_wellformedness(staff)
                 >>> print(string)
                 0 /	4 repeat pitch classes
 
@@ -216,7 +216,7 @@ class WellformednessManager(abjad.AbjadObject):
 
                 >>> staff = abjad.Staff("c'4 c' d' d'")
                 >>> manager = baca.WellformednessManager()
-                >>> string = manager.tabulate_well_formedness_violations(staff)
+                >>> string = manager.tabulate_wellformedness(staff)
                 >>> print(string)
                 2 /	4 repeat pitch classes
 

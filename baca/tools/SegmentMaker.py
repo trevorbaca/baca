@@ -815,7 +815,7 @@ class SegmentMaker(abjad.SegmentMaker):
         score = self._lilypond_file['Score']
 #        if not abjad.inspect(score).is_well_formed():
 #            inspector = abjad.inspect(score)
-#            message = inspector.tabulate_well_formedness_violations()
+#            message = inspector.tabulate_wellformedness()
 #            raise Exception(message)
         if (self.color_octaves or
             self.color_repeat_pitch_classes or
@@ -823,7 +823,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         manager = baca.WellformednessManager()
         if not manager.is_well_formed(score):
-            message = manager.tabulate_well_formedness_violations(score)
+            message = manager.tabulate_wellformedness(score)
             raise Exception(message)
 
     def _color_octaves_(self):

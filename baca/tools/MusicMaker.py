@@ -661,7 +661,7 @@ class MusicMaker(abjad.AbjadObject):
             )
         self._annotate_repeat_pitches(container)
         self._extend_beam_(container, extend_beam)
-        self._check_well_formedness(container)
+        self._check_wellformedness(container)
         state_manifest = self._make_state_manifest()
         selection = abjad.select([container])
         time_signature = self._make_time_signature(
@@ -875,11 +875,11 @@ class MusicMaker(abjad.AbjadObject):
         return specifiers_
 
     @staticmethod
-    def _check_well_formedness(selections):
+    def _check_wellformedness(selections):
         for component in abjad.iterate(selections).by_class():
             inspector = abjad.inspect(component)
             if not inspector.is_well_formed():
-                report = inspector.tabulate_well_formedness_violations()
+                report = inspector.tabulate_wellformedness()
                 report = repr(component) + '\n' + report
                 raise Exception(report)
 
