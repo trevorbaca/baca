@@ -4009,17 +4009,19 @@ class SegmentMaker(abjad.SegmentMaker):
                                         _ \markup {
                                             \whiteout
                                                 \upright
-                                                    \right-column
-                                                        {
-                                                            \line
-                                                                {
-                                                                    "Madison, WI"
-                                                                }
-                                                            \line
-                                                                {
-                                                                    "October 2016"
-                                                                }
-                                                        }
+                                                    \with-color
+                                                        #black
+                                                        \right-column
+                                                            {
+                                                                \line
+                                                                    {
+                                                                        "Madison, WI"
+                                                                    }
+                                                                \line
+                                                                    {
+                                                                        "October 2016"
+                                                                    }
+                                                            }
                                             }
                                     \bar "|."
                                 }
