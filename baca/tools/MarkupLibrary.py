@@ -388,6 +388,21 @@ class MarkupLibrary(object):
             )
 
     @staticmethod
+    def final_markup(places, dates, selector=None):
+        places = r' \hspace #0.75 – \hspace #0.75 '.join(places)
+        places = abjad.Markup(places)
+        places = abjad.Markup.line([places])
+        dates = r' \hspace #0.75 – \hspace #0.75 '.join(dates)
+        dates = abjad.Markup(dates)
+        dates = abjad.Markup.line([dates])
+        markup = abjad.Markup.right_column([places, dates])
+        return MarkupLibrary.make_markup(
+            markup,
+            direction=abjad.Down,
+            selector=selector,
+            )
+
+    @staticmethod
     def fluttertongue(selector=None):
         return MarkupLibrary.make_markup(
             'fluttertongue',
@@ -559,12 +574,14 @@ class MarkupLibrary(object):
         direction=abjad.Up,
         is_new=True,
         selector=None,
+        upright=True,
         whiteout=True,
         ):
         if not is_new:
-            string = '({})'.format(string)
+            string = f'({string})'
         markup = abjad.Markup(string, direction=direction)
-        markup = markup.upright()
+        if upright:
+            markup = markup.upright()
         if whiteout:
             markup = markup.whiteout()
         return MarkupLibrary()(markup=markup, selector=selector)

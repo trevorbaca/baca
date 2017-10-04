@@ -427,7 +427,7 @@ class SegmentMaker(abjad.SegmentMaker):
             assert isinstance(final_barline, str), repr(final_barline)
         self._final_barline = final_barline
         if final_markup is not None:
-            assert isinstance(final_markup, abjad.Markup)
+            assert isinstance(final_markup, (tuple, list))
         self._final_markup = final_markup
         if final_markup_extra_offset is not None:
             assert isinstance(final_markup_extra_offset, tuple)
@@ -541,8 +541,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._print_segment_duration_()
         return self._lilypond_file, self._metadata
 
-    ### PRIVATE PROPERTIES ###
-
     ### PRIVATE METHODS ###
 
     def _add_final_barline(self):
@@ -567,8 +565,9 @@ class SegmentMaker(abjad.SegmentMaker):
     def _add_final_markup(self):
         if self.final_markup is None:
             return
+        command = baca.markup.final_markup(*self.final_markup)
         self._score.add_final_markup(
-            self.final_markup,
+            command.arguments[0],
             extra_offset=self.final_markup_extra_offset,
             )
 
@@ -3845,7 +3844,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> segment_maker = baca.SegmentMaker(
                 ...     final_barline='|.',
-                ...     final_markup=abjad.Markup('Madison, WI'),
+                ...     final_markup=(['Madison, WI'], ['October 2016']),
                 ...     final_markup_extra_offset=(-9, -2),
                 ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -4006,7 +4005,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     \once \override TextScript.extra-offset = #'(-9 . -2)
-                                    c'8 ] - \markup { "Madison, WI" }
+                                    c'8 ]
+                                        _ \markup {
+                                            \whiteout
+                                                \upright
+                                                    \right-column
+                                                        {
+                                                            \line
+                                                                {
+                                                                    "Madison, WI"
+                                                                }
+                                                            \line
+                                                                {
+                                                                    "October 2016"
+                                                                }
+                                                        }
+                                            }
                                     \bar "|."
                                 }
                             }
