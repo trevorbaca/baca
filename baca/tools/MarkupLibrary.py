@@ -396,6 +396,7 @@ class MarkupLibrary(object):
         dates = abjad.Markup(dates)
         dates = abjad.Markup.line([dates])
         markup = abjad.Markup.right_column([places, dates])
+        markup = markup.with_color('black')
         return MarkupLibrary.make_markup(
             markup,
             direction=abjad.Down,
