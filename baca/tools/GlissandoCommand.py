@@ -1,4 +1,5 @@
 import abjad
+import baca
 
 
 class GlissandoCommand(abjad.AbjadObject):
@@ -22,9 +23,7 @@ class GlissandoCommand(abjad.AbjadObject):
             ...     baca.select_stages(1),
             ...     baca.even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.GlissandoCommand(
-            ...         pattern=abjad.index_all(),
-            ...         ),
+            ...     baca.GlissandoCommand()
             ...     )
 
         ::
@@ -113,7 +112,7 @@ class GlissandoCommand(abjad.AbjadObject):
 
     ..  container:: example
 
-        Selects first and last logical ties:
+        Selects first and last pitched logical ties:
 
         ::
 
@@ -124,15 +123,13 @@ class GlissandoCommand(abjad.AbjadObject):
 
         ::
 
-            >>> pattern = abjad.index_first(1) | abjad.index_last(2)
             >>> specifiers = segment_maker.append_commands(
             ...     'vn',
             ...     baca.select_stages(1),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.even_runs(),
-            ...     baca.GlissandoCommand(
-            ...         pattern=pattern,
-            ...         ),
+            ...     baca.GlissandoCommand(baca.select_plts(stop=2)),
+            ...     baca.GlissandoCommand(baca.select_plts(start=-2)),
             ...     )
 
         ::
@@ -233,9 +230,7 @@ class GlissandoCommand(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     collections,
-            ...     baca.GlissandoCommand(
-            ...         pattern=abjad.index_first(),
-            ...         ),
+            ...     baca.GlissandoCommand(baca.select_tuplet(0)),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
@@ -250,7 +245,7 @@ class GlissandoCommand(abjad.AbjadObject):
                         {
                             c'16 \glissando [
                             d'16 \glissando
-                            bf'16 ] \glissando
+                            bf'16 ]
                         }
                         {
                             fs''16 [
@@ -273,15 +268,15 @@ class GlissandoCommand(abjad.AbjadObject):
     __documentation_section__ = 'Commands'
 
     __slots__ = (
-        '_pattern',
+        '_selector',
         )
 
     ### INITIALIZER ###
 
-    def __init__(self, pattern=None):
-        if pattern is not None:
-            assert isinstance(pattern, abjad.Pattern), repr(pattern)
-        self._pattern = pattern
+    def __init__(self, selector=None):
+        if selector is not None:
+            assert isinstance(selector, abjad.Selector)
+        self._selector = selector
 
     ### SPECIAL METHODS ###
 
@@ -292,24 +287,15 @@ class GlissandoCommand(abjad.AbjadObject):
         '''
         if argument is None:
             return
-        pattern = self.pattern
-        if pattern is None:
-            pattern = abjad.index_all()
-        if isinstance(argument, list):
-            selections = argument
-            assert isinstance(selections[0], abjad.Selection), repr(argument)
-            selections = pattern.get_matching_items(selections)
-            for selection in selections:
-                logical_ties = abjad.iterate(selection).by_logical_tie(
-                    pitched=True)
-                for logical_tie in logical_ties:
-                    self._attach_glissando(logical_tie)
-        else:
-            selection = argument
-            assert isinstance(selection, abjad.Selection), repr(selection)
-            logical_ties = pattern.get_matching_items(selection)
-            for logical_tie in logical_ties:
-                self._attach_glissando(logical_tie)
+        if self.selector is not None:
+            argument = self.selector(argument)
+        selector = baca.select_plts()
+        selection = selector(argument)
+        assert len(selection) == 1
+        plts = selection[0]
+        for i, plt in enumerate(plts):
+            if i + 1 < len(plts):
+                self._attach_glissando(plt)
 
     ### PRIVATE METHODS ###
 
@@ -327,34 +313,13 @@ class GlissandoCommand(abjad.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def pattern(self):
-        r'''Gets pattern.
+    def selector(self):
+        r'''Gets selector.
 
-        ..  container:: example
+        Defaults to none.
 
-            ::
+        Set to selector or none.
 
-                >>> command = baca.GlissandoCommand(
-                ...     pattern=abjad.index_first(1) | abjad.index_last(2),
-                ...     )
-
-            ::
-
-                >>> f(command.pattern)
-                abjad.Pattern(
-                    operator='or',
-                    patterns=(
-                        abjad.Pattern(
-                            indices=[0],
-                            ),
-                        abjad.Pattern(
-                            indices=[-2, -1],
-                            ),
-                        ),
-                    )
-
-        Set to pattern or none.
-
-        Returns pattern or none.
+        Returns selector or none.
         '''
-        return self._pattern
+        return self._selector

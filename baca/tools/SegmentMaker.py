@@ -1036,19 +1036,20 @@ class SegmentMaker(abjad.SegmentMaker):
                 include_rests=True,
                 leaves_instead_of_logical_ties=True,
                 )
-            selection = result[0]
-            #raise Exception(selection)
+            assert len(result) == 2, repr(result)
+            selection, timespan = result
+            #selection = result[0]
         else:
             result = self._compound_scope_to_logical_ties(
                 scoped_specifier,
                 compound_scope,
                 )
-            selection = result[0]
-        assert isinstance(selection, abjad.Selection), repr(
-            selection)
+            assert len(result) == 2, repr(result)
+            #selection = result[0]
+            selection, timespan = result
+        assert isinstance(selection, abjad.Selection), repr(selection)
         if not selection:
-            message = 'EMPTY SELECTION: {}'
-            message = message.format(format(scoped_specifier))
+            message = f'EMPTY SELECTION: {format(scoped_specifier)}'
             if self.allow_empty_selections:
                 print(message)
             else:

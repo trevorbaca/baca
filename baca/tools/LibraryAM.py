@@ -4799,11 +4799,11 @@ class LibraryAM(object):
 
     @staticmethod
     def glissandi(selector=None):
-        r'''Attaches glissandi to pitched leaves.
+        r'''Attaches glissandi to pitched logical ties.
 
         ..  container:: example
 
-            Attaches glissandi to all pitched leaves:
+            Attaches glissandi to all pitched logical ties:
 
             ::
 
@@ -4858,7 +4858,7 @@ class LibraryAM(object):
 
         ..  container:: example
 
-            Attaches glissandi to pitched leaves in tuplet 1:
+            Attaches glissandi to pitched logical ties in tuplet 1:
 
             ::
 
@@ -4888,8 +4888,8 @@ class LibraryAM(object):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 \glissando [
-                                d'16 ] \glissando
+                                c'16 [
+                                d'16 ]
                                 bf'4 ~
                                 bf'16
                                 r16
@@ -4902,7 +4902,7 @@ class LibraryAM(object):
                                 ef''16
                                 r16
                                 af''16 \glissando [
-                                g''16 ] \glissando
+                                g''16 ]
                             }
                             \times 4/5 {
                                 a'16
@@ -4914,9 +4914,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.GlissandoCommand(
-            pattern=abjad.index_last(1, inverted=True),
-            )
+        return baca.GlissandoCommand(selector=selector)
 
     @staticmethod
     def grid_poss_to_flaut_poss():
