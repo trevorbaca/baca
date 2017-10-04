@@ -270,6 +270,8 @@ class OverrideCommand(abjad.AbjadObject):
 
         Returns none.
         '''
+        if argument is None:
+            return
         statement = 'abjad.override(leaf)'
         if self.context_name is not None:
             statement += '.{context_name}'

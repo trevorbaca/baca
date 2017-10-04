@@ -118,7 +118,7 @@ class HairpinCommand(abjad.AbjadObject):
                     hairpin_token = self.hairpin_tokens[i]
                     start_dynamic = hairpin_token[0]
                     if start_dynamic == 'niente':
-                        message = 'can not attach niente dynamics to components.'
+                        message = 'can not attach niente dynamics.'
                         raise Exception(message)
                     dynamic = abjad.Dynamic(start_dynamic)
                     abjad.attach(dynamic, leaves[0])

@@ -231,10 +231,8 @@ class ScorePitchCommand(abjad.AbjadObject):
 
         Returns none.
         '''
-        if not argument:
-            message = '{!r} has no input.'
-            message = message.format(self)
-            raise Exception(message)
+        if argument is None:
+            return
         if isinstance(argument[0], abjad.LogicalTie):
             logical_ties = argument
         else:

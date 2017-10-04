@@ -4,7 +4,7 @@ import abjad
 class ClusterCommand(abjad.AbjadObject):
     r"""Cluster command.
 
-    :    ..  container:: example
+    ..  container:: example
 
         With music-maker:
 
@@ -375,6 +375,8 @@ class ClusterCommand(abjad.AbjadObject):
 
         Returns none.
         '''
+        if argument is None:
+            return
         if self.widths is None:
             return
         widths = abjad.CyclicTuple(self.widths)

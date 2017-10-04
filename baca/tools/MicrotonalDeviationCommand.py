@@ -141,15 +141,18 @@ class MicrotonalDeviationCommand(abjad.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, logical_ties=None):
-        r'''Calls command on `logical_ties`.
+    def __call__(self, argument=None):
+        r'''Calls command on `argument`.
 
         Returns none.
         '''
+        if argument is None:
+            return
         if self.number_lists is None:
             return
         number_lists = abjad.CyclicTuple(self.number_lists)
         number_list_index = 0
+        logical_ties = argument
         pairs = itertools.groupby(
             logical_ties,
             lambda _: _.head.written_pitch,

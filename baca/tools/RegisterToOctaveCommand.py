@@ -324,17 +324,17 @@ class RegisterToOctaveCommand(abjad.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, selections=None):
+    def __call__(self, argument=None):
         r'''Calls command on `argument`.
 
         Returns none.
         '''
-        if selections is None:
+        if argument is None:
             return
-        if isinstance(selections, abjad.Component):
-            selections = abjad.select(selections)
+        if isinstance(argument, abjad.Component):
+            argument = abjad.select(argument)
         selector = self.selector or baca.select_plts()
-        selections = selector(selections)
+        selections = selector(argument)
         for selection in selections:
             target_octave_number = self.octave_number or 4
             current_octave_number = self._get_anchor_octave_number(selection)

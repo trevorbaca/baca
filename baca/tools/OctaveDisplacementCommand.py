@@ -141,6 +141,8 @@ class OctaveDisplacementCommand(abjad.AbjadObject):
 
         Returns none.
         '''
+        if argument is None:
+            return
         if self.displacements is None:
             return
         if self.selector is not None:

@@ -53,6 +53,8 @@ class SetCommand(abjad.AbjadObject):
 
         Returns none.
         '''
+        if argument is None:
+            return
         # TODO: use named string format fields
         if self.context_name is not None:
             statement = 'abjad.setting(item).{}.{} = {!r}'

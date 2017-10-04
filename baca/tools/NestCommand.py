@@ -5,10 +5,6 @@ import baca
 class NestCommand(abjad.AbjadObject):
     r'''Nest command.
 
-    Bar.
-    Foo.
-    Text.
-
     ..  container:: example
 
         Nest command augments one sixteenth:
@@ -353,6 +349,8 @@ class NestCommand(abjad.AbjadObject):
 
         Returns new selections.
         '''
+        if selections is None:
+            return
         time_treatments = self._get_time_treatments()
         if time_treatments is None:
             return selections

@@ -50,6 +50,8 @@ class DiatonicClusterCommand(abjad.AbjadObject):
 
         Returns none.
         '''
+        if argument is None:
+            return
         for i, note in enumerate(
             abjad.iterate(argument).by_class(abjad.Note)):
             cluster_width = self.cluster_widths[i]

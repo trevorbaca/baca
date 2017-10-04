@@ -259,6 +259,8 @@ class TransitionCommand(abjad.AbjadObject):
 
         Returns none.
         '''
+        if argument is None:
+            return
         if self.selector is not None:
             argument = self.selector(argument)
         leaves = abjad.select(argument).by_leaf()

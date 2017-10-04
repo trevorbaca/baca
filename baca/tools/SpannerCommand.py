@@ -202,7 +202,9 @@ class SpannerCommand(abjad.AbjadObject):
 
         Returns none.
         '''
-        if not argument or self.spanner is None:
+        if argument is None:
+            return
+        if self.spanner is None:
             return
         selector = self.selector or baca.select_leaves()
         selections = selector(argument)

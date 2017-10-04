@@ -145,12 +145,14 @@ class RegisterTransitionCommand(abjad.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    # TODO: extend SegmentMaker to pass timespan in here
-    def __call__(self, logical_ties=None, timespan=None):
-        r'''Calls command on `logical_ties`.
+    def __call__(self, argument=None, timespan=None):
+        r'''Calls command on `argument`.
 
         Returns none.
         '''
+        if argument is None:
+            return
+        logical_ties = argument
         if timespan is None:
             return self._apply_outside_score(logical_ties)
         if not isinstance(logical_ties[0], abjad.LogicalTie):

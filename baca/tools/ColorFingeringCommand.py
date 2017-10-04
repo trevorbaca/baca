@@ -1,4 +1,5 @@
 import abjad
+import baca
 import itertools
 
 
@@ -125,6 +126,7 @@ class ColorFingeringCommand(abjad.AbjadObject):
         '_by_pitch_run',
         '_deposit_annotations',
         '_number_lists',
+        '_selector',
         )
 
     ### INITIALIZER ###
@@ -134,6 +136,7 @@ class ColorFingeringCommand(abjad.AbjadObject):
         by_pitch_run=None,
         deposit_annotations=None,
         number_lists=None,
+        selector=None,
         ):
         self._by_pitch_run = by_pitch_run
         if deposit_annotations is not None:
@@ -142,16 +145,27 @@ class ColorFingeringCommand(abjad.AbjadObject):
         if number_lists is not None:
             number_lists = tuple(number_lists)
             for number_list in number_lists:
-                assert abjad.mathtools.all_are_nonnegative_integers(number_list)
+                assert abjad.mathtools.all_are_nonnegative_integers(
+                    number_list)
         self._number_lists = number_lists
+        if selector is not None:
+            assert isinstance(selector, abjad.Selector), repr(selector)
+        self._selector = selector
+
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, logical_ties=None):
-        r'''Calls command on `logical_ties`.
+    def __call__(self, argument=None):
+        r'''Calls command on `argument`.
 
         Returns none.
         '''
+        if argument is None:
+            return
+        selector = self.selector or baca.select_plts()
+        selections = selector(argument)
+        assert len(selections) == 1, repr(selections)
+        logical_ties = selections[0]
         if self.number_lists is None:
             return
         number_lists = abjad.CyclicTuple(self.number_lists)
@@ -558,3 +572,15 @@ class ColorFingeringCommand(abjad.AbjadObject):
         Set to nested list of nonnegative integers or none.
         '''
         return self._number_lists
+
+    @property
+    def selector(self):
+        r'''Gets selector.
+
+        Defaults to none.
+
+        Set to selector or none.
+
+        Returns selector or none.
+        '''
+        return self._selector

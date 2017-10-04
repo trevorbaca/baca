@@ -147,6 +147,8 @@ class StemTremoloCommand(abjad.AbjadObject):
 
         Returns none.
         '''
+        if argument is None:
+            return
         pattern = self.pattern
         if pattern is None:
             pattern = abjad.index_all()
