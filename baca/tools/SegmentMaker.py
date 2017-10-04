@@ -1038,14 +1038,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
             assert len(result) == 2, repr(result)
             selection, timespan = result
-            #selection = result[0]
         else:
             result = self._compound_scope_to_logical_ties(
                 scoped_specifier,
                 compound_scope,
                 )
             assert len(result) == 2, repr(result)
-            #selection = result[0]
             selection, timespan = result
         assert isinstance(selection, abjad.Selection), repr(selection)
         if not selection:
@@ -1489,6 +1487,7 @@ class SegmentMaker(abjad.SegmentMaker):
         compound_scope, specifier_wrapper, specifier = result
         if isinstance(specifier, baca.RhythmSpecifier):
             return
+        self._handle_mutator(specifier)
         selection, timespan = self._evaluate_selector(
             scoped_specifier,
             compound_scope,

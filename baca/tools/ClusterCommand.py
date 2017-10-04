@@ -344,7 +344,7 @@ class ClusterCommand(abjad.AbjadObject):
     __slots__ = (
         '_hide_flat_markup',
         '_hide_natural_markup',
-        '_selector',
+        #'_selector',
         '_start_pitch',
         '_widths',
         )
@@ -355,7 +355,7 @@ class ClusterCommand(abjad.AbjadObject):
         self,
         hide_flat_markup=None,
         hide_natural_markup=None,
-        selector=None,
+        #selector=None,
         start_pitch=None,
         widths=None,
         ):
@@ -363,9 +363,9 @@ class ClusterCommand(abjad.AbjadObject):
         self._hide_flat_markup = hide_flat_markup
         assert isinstance(hide_natural_markup, (bool, type(None)))
         self._hide_natural_markup = hide_natural_markup
-        if selector is not None:
-            assert isinstance(selector, abjad.Selector)
-        self._selector = selector
+#        if selector is not None:
+#            assert isinstance(selector, abjad.Selector)
+#        self._selector = selector
         if start_pitch is not None:
             start_pitch = abjad.NamedPitch(start_pitch)
         self._start_pitch = start_pitch
@@ -382,8 +382,8 @@ class ClusterCommand(abjad.AbjadObject):
         '''
         if argument is None:
             return
-        if self.selector is not None:
-            argument = self.selector(argument)
+#        if self.selector is not None:
+#            argument = self.selector(argument)
         if self.widths is None:
             return
         widths = abjad.CyclicTuple(self.widths)
@@ -717,17 +717,23 @@ class ClusterCommand(abjad.AbjadObject):
         '''
         return self._hide_natural_markup
 
-    @property
-    def selector(self):
-        r'''Gets selector.
-
-        Defaults to none.
-
-        Set to selector or none.
-
-        Returns selector or none.
-        '''
-        return self._selector
+    # TODO: there's a weird interaction between
+    #       ClusterCommand._mutates_score() and ClusterCommand.selector
+    #       Rendering Krummzeit [_] causes the error (empty selection)
+    #       to appear.
+    #       Eventually clean up SegmentMaker._evaluate_selector().
+    #       Then see if interaction goes away.
+#    @property
+#    def selector(self):
+#        r'''Gets selector.
+#
+#        Defaults to none.
+#
+#        Set to selector or none.
+#
+#        Returns selector or none.
+#        '''
+#        return self._selector
 
     @property
     def start_pitch(self):
