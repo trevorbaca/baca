@@ -52,6 +52,101 @@ class RegisterCommand(abjad.AbjadObject):
 
     ..  container:: example
 
+        First stage only:
+
+        ::
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
+            ...     baca.RegisterCommand(
+            ...         registration=baca.Registration(
+            ...             [('[A0, C8]', 0)],
+            ...             ),
+            ...         selector=baca.select_tuplet(0),
+            ...         ),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> f(lilypond_file[abjad.Staff])
+            \new Staff <<
+                \context Voice = "Voice 1" {
+                    \voiceOne
+                    {
+                        {
+                            bf'16 [
+                            c'16
+                            d'16 ]
+                        }
+                        {
+                            bf'16 [
+                            c''16
+                            d''16 ]
+                        }
+                        {
+                            bf'16 [
+                            c''16
+                            d''16 ]
+                        }
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Last stage only:
+
+        ::
+
+            >>> music_maker = baca.MusicMaker()
+
+        ::
+
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
+            ...     baca.RegisterCommand(
+            ...         registration=baca.Registration(
+            ...             [('[A0, C8]', 0)],
+            ...             ),
+            ...         selector=baca.select_tuplet(-1),
+            ...         ),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> f(lilypond_file[abjad.Staff])
+            \new Staff <<
+                \context Voice = "Voice 1" {
+                    \voiceOne
+                    {
+                        {
+                            bf'16 [
+                            c''16
+                            d''16 ]
+                        }
+                        {
+                            bf'16 [
+                            c''16
+                            d''16 ]
+                        }
+                        {
+                            bf'16 [
+                            c'16
+                            d'16 ]
+                        }
+                    }
+                }
+            >>
+
+    ..  container:: example
+
         With segment-maker:
 
         ::
@@ -166,18 +261,14 @@ class RegisterCommand(abjad.AbjadObject):
     __documentation_section__ = 'Commands'
 
     __slots__ = (
-        '_pattern',
         '_registration',
         '_selector',
         )
 
     ### INITIALIZER ###
 
-    def __init__(self, pattern=None, registration=None, selector=None):
+    def __init__(self, registration=None, selector=None):
         import baca
-        if pattern is not None:
-            assert isinstance(pattern, abjad.Pattern), repr(pattern)
-        self._pattern = pattern
         if registration is not None:
             prototype = baca.Registration
             assert isinstance(registration, prototype), repr(registration)
@@ -230,16 +321,15 @@ class RegisterCommand(abjad.AbjadObject):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        if isinstance(argument, baca.ScopedSpecifier):
-            selections = [argument]
-        if isinstance(argument, abjad.Selection):
-            selections = [argument]
-        else:
-            assert isinstance(argument, list), repr(argument)
-            assert isinstance(argument[0], abjad.Selection), repr(argument)
-            selections = argument
-        pattern = self.pattern or abjad.index_all()
-        selections = pattern.get_matching_items(selections)
+#        if isinstance(argument, baca.ScopedSpecifier):
+#            selections = [argument]
+#        if isinstance(argument, abjad.Selection):
+#            selections = [argument]
+#        else:
+#            assert isinstance(argument, list), repr(argument)
+#            assert isinstance(argument[0], abjad.Selection), repr(argument)
+#            selections = argument
+        selections = baca.MusicMaker._normalize_selections(argument)
         for selection in selections:
             for logical_tie in abjad.iterate(selection).by_logical_tie(
                 pitched=True,
@@ -259,111 +349,6 @@ class RegisterCommand(abjad.AbjadObject):
                     abjad.detach('not yet registered', leaf)
 
     ### PUBLIC PROPERTIES ###
-
-    @property
-    def pattern(self):
-        r'''Gets pattern.
-
-        ..  container:: example
-
-            First stage only:
-
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
-                ...     baca.RegisterCommand(
-                ...         pattern=abjad.index_first(),
-                ...         registration=baca.Registration(
-                ...             [('[A0, C8]', 0)],
-                ...             ),
-                ...         ),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            {
-                                bf'16 [
-                                c'16
-                                d'16 ]
-                            }
-                            {
-                                bf'16 [
-                                c''16
-                                d''16 ]
-                            }
-                            {
-                                bf'16 [
-                                c''16
-                                d''16 ]
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Last stage only:
-
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
-                ...     baca.RegisterCommand(
-                ...         pattern=abjad.index_last(),
-                ...         registration=baca.Registration(
-                ...             [('[A0, C8]', 0)],
-                ...             ),
-                ...         ),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            {
-                                bf'16 [
-                                c''16
-                                d''16 ]
-                            }
-                            {
-                                bf'16 [
-                                c''16
-                                d''16 ]
-                            }
-                            {
-                                bf'16 [
-                                c'16
-                                d'16 ]
-                            }
-                        }
-                    }
-                >>
-
-        Set to pattern or none.
-
-        Returns pattern or none.
-        '''
-        return self._pattern
 
     @property
     def registration(self):
