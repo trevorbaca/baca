@@ -3,6 +3,7 @@ import baca
 import collections
 import copy
 import inspect
+import itertools
 
 
 class Sequence(abjad.Sequence):
@@ -1166,6 +1167,163 @@ class Sequence(abjad.Sequence):
         Returns positive integer.
         '''
         return len(self) // self.get_degree_of_rotational_symmetry()
+
+    def group_by_sign(self, sign=(-1, 0, 1)):
+        r'''Groups sequence by sign of items.
+
+        ::
+
+            >>> sequence = baca.Sequence(
+            ...     [0, 0, -1, -1, 2, 3, -5, 1, 2, 5, -5, -6],
+            ...     )
+
+        ..  container:: example
+
+            ::
+
+                >>> for item in sequence.group_by_sign():
+                ...     item
+                ...
+                Sequence([0, 0])
+                Sequence([-1, -1])
+                Sequence([2, 3])
+                Sequence([-5])
+                Sequence([1, 2, 5])
+                Sequence([-5, -6])
+
+        ..  container:: example
+
+            ::
+
+                >>> for item in sequence.group_by_sign([-1]):
+                ...     item
+                ...
+                Sequence([0])
+                Sequence([0])
+                Sequence([-1, -1])
+                Sequence([2])
+                Sequence([3])
+                Sequence([-5])
+                Sequence([1])
+                Sequence([2])
+                Sequence([5])
+                Sequence([-5, -6])
+
+        ..  container:: example
+
+            ::
+
+                >>> for item in sequence.group_by_sign([0]):
+                ...     item
+                ...
+                Sequence([0, 0])
+                Sequence([-1])
+                Sequence([-1])
+                Sequence([2])
+                Sequence([3])
+                Sequence([-5])
+                Sequence([1])
+                Sequence([2])
+                Sequence([5])
+                Sequence([-5])
+                Sequence([-6])
+
+        ..  container:: example
+
+            ::
+
+                >>> for item in sequence.group_by_sign([1]):
+                ...     item
+                ...
+                Sequence([0])
+                Sequence([0])
+                Sequence([-1])
+                Sequence([-1])
+                Sequence([2, 3])
+                Sequence([-5])
+                Sequence([1, 2, 5])
+                Sequence([-5])
+                Sequence([-6])
+
+        ..  container:: example
+
+            ::
+
+                >>> for item in sequence.group_by_sign([-1, 0]):
+                ...     item
+                ...
+                Sequence([0, 0])
+                Sequence([-1, -1])
+                Sequence([2])
+                Sequence([3])
+                Sequence([-5])
+                Sequence([1])
+                Sequence([2])
+                Sequence([5])
+                Sequence([-5, -6])
+
+        ..  container:: example
+
+            ::
+
+                >>> for item in sequence.group_by_sign([-1, 1]):
+                ...     item
+                ...
+                Sequence([0])
+                Sequence([0])
+                Sequence([-1, -1])
+                Sequence([2, 3])
+                Sequence([-5])
+                Sequence([1, 2, 5])
+                Sequence([-5, -6])
+
+        ..  container:: example
+
+            ::
+
+                >>> for item in sequence.group_by_sign([0, 1]):
+                ...     item
+                ...
+                Sequence([0, 0])
+                Sequence([-1])
+                Sequence([-1])
+                Sequence([2, 3])
+                Sequence([-5])
+                Sequence([1, 2, 5])
+                Sequence([-5])
+                Sequence([-6])
+
+        ..  container:: example
+
+            ::
+
+                >>> for item in sequence.group_by_sign([-1, 0, 1]):
+                ...     item
+                ...
+                Sequence([0, 0])
+                Sequence([-1, -1])
+                Sequence([2, 3])
+                Sequence([-5])
+                Sequence([1, 2, 5])
+                Sequence([-5, -6])
+
+        Groups negative elements when ``-1`` in `sign`.
+
+        Groups zero-valued elements When ``0`` in `sign`.
+
+        Groups positive elements when ``1`` in `sign`.
+
+        Returns nested sequence.
+        '''
+        items = []
+        pairs = itertools.groupby(self, abjad.mathtools.sign)
+        for current_sign, group in pairs:
+            if current_sign in sign:
+                items.append(type(self)(group))
+            else:
+                for item in group:
+                    items.append(type(self)([item]))
+        return type(self)(items=items)
 
     @abjad.Signature(method_name='H')
     def helianthate(self, n=0, m=0):
