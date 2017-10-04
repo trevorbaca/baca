@@ -272,7 +272,7 @@ class NestCommand(abjad.AbjadObject):
 
                 >>> music_maker = baca.MusicMaker(
                 ...     baca.NestCommand(time_treatments=['+1/16']),
-                ...     baca.RestAffixCommand(
+                ...     baca.RestAffixSpecifier(
                 ...         prefix=[2],
                 ...         suffix=[3],
                 ...         ),

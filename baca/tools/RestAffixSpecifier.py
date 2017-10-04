@@ -2,7 +2,7 @@ import abjad
 import collections
 
 
-class RestAffixCommand(abjad.AbjadValueObject):
+class RestAffixSpecifier(abjad.AbjadValueObject):
     r'''Rest affix command.
 
     ..  container:: example
@@ -19,7 +19,7 @@ class RestAffixCommand(abjad.AbjadValueObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     collections,
-            ...     baca.RestAffixCommand(
+            ...     baca.RestAffixSpecifier(
             ...         prefix=[2],
             ...         suffix=[3],
             ...         ),
@@ -79,7 +79,7 @@ class RestAffixCommand(abjad.AbjadValueObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     collections,
-            ...     baca.RestAffixCommand(
+            ...     baca.RestAffixSpecifier(
             ...         prefix=[2],
             ...         suffix=[3],
             ...         ),
@@ -137,8 +137,8 @@ class RestAffixCommand(abjad.AbjadValueObject):
 
         ::
 
-            >>> baca.RestAffixCommand()
-            RestAffixCommand()
+            >>> baca.RestAffixSpecifier()
+            RestAffixSpecifier()
 
     '''
 
@@ -199,7 +199,7 @@ class RestAffixCommand(abjad.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.RestAffixCommand(prefix=[1], suffix=[1]),
+                ...     baca.RestAffixSpecifier(prefix=[1], suffix=[1]),
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -267,7 +267,7 @@ class RestAffixCommand(abjad.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.RestAffixCommand(
+                ...     baca.RestAffixSpecifier(
                 ...         prefix=[1],
                 ...         suffix=[2],
                 ...         ),
@@ -321,7 +321,7 @@ class RestAffixCommand(abjad.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.RestAffixCommand(
+                ...     baca.RestAffixSpecifier(
                 ...         prefix=[1],
                 ...         suffix=[2],
                 ...         ),
@@ -365,7 +365,7 @@ class RestAffixCommand(abjad.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.RestAffixCommand(
+                ...     baca.RestAffixSpecifier(
                 ...         pattern=abjad.Pattern(indices=[0, -1]),
                 ...         prefix=[1],
                 ...         suffix=[2],
@@ -422,7 +422,7 @@ class RestAffixCommand(abjad.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.RestAffixCommand(
+                ...     baca.RestAffixSpecifier(
                 ...         pattern=abjad.index_all(),
                 ...         prefix=[1],
                 ...         suffix=[2],
@@ -491,7 +491,7 @@ class RestAffixCommand(abjad.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.RestAffixCommand(prefix=[3]),
+                ...     baca.RestAffixSpecifier(prefix=[3]),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -559,7 +559,7 @@ class RestAffixCommand(abjad.AbjadValueObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.RestAffixCommand(suffix=[3]),
+                ...     baca.RestAffixSpecifier(suffix=[3]),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP

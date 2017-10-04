@@ -811,7 +811,7 @@ class MusicMaker(abjad.AbjadObject):
         for specifier in specifiers:
             if isinstance(specifier, baca.MusicRhythmSpecifier):
                 rhythm_specifiers.append(specifier)
-            elif isinstance(specifier, baca.RestAffixCommand):
+            elif isinstance(specifier, baca.RestAffixSpecifier):
                 rest_affix_specifiers.append(specifier)
             else:
                 specifiers_.append(specifier)
@@ -1502,7 +1502,7 @@ class MusicMaker(abjad.AbjadObject):
                 ...         ['p < f'],
                 ...         selector=baca.select_each_plt_run(),
                 ...         ),
-                ...     baca.RestAffixCommand(
+                ...     baca.RestAffixSpecifier(
                 ...         pattern=abjad.Pattern(
                 ...             indices=[0, -1],
                 ...             inverted=True,

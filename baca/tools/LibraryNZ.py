@@ -2538,7 +2538,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.RestAffixCommand(
+        return baca.RestAffixSpecifier(
             suffix=counts,
             )
 
@@ -2599,7 +2599,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.RestAffixCommand(
+        return baca.RestAffixSpecifier(
             prefix=prefix,
             suffix=suffix,
             )
@@ -2660,7 +2660,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.RestAffixCommand(
+        return baca.RestAffixSpecifier(
             prefix=counts,
             )
 
@@ -3690,7 +3690,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.RestAffixCommand(
+        return baca.RestAffixSpecifier(
             skips_instead_of_rests=True,
             suffix=counts,
             )
@@ -3752,7 +3752,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.RestAffixCommand(
+        return baca.RestAffixSpecifier(
             prefix=prefix,
             skips_instead_of_rests=True,
             suffix=suffix,
@@ -3814,7 +3814,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.RestAffixCommand(
+        return baca.RestAffixSpecifier(
             prefix=counts,
             skips_instead_of_rests=True,
             )
