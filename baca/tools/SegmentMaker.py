@@ -998,38 +998,9 @@ class SegmentMaker(abjad.SegmentMaker):
         self,
         scoped_specifier,
         compound_scope,
-        specifier_wrapper,
         specifier,
         ):
-        if specifier_wrapper is not None:
-            leaves = self._scope_to_leaves(scoped_specifier.scope)
-            leaves = list(leaves)
-            if specifier_wrapper.prototype is not None:
-                prototype = specifier_wrapper.prototype
-                leaves = [_ for _ in leaves if isinstance(_, prototype)]
-            start_index = specifier_wrapper.start_index
-            stop_index = specifier_wrapper.stop_index
-            leaves = leaves[start_index:stop_index]
-            if specifier_wrapper.with_previous_leaf:
-                first_leaf = leaves[0]
-                inspector = abjad.inspect(first_leaf)
-                previous_leaf = inspector.get_leaf(-1)
-                if previous_leaf is None:
-                    message = 'previous leaf is none: {!r}.'
-                    message = message.format(scoped_specifier)
-                    raise Exception(message)
-                leaves.insert(0, previous_leaf)
-            if specifier_wrapper.with_next_leaf:
-                last_leaf = leaves[-1]
-                inspector = abjad.inspect(last_leaf)
-                next_leaf = inspector.get_leaf(1)
-                if next_leaf is None:
-                    message = 'next leaf is none: {!r}.'
-                    message = message.format(scoped_specifier)
-                    raise Exception(message)
-                leaves.append(next_leaf)
-            selection = abjad.select(leaves)
-        elif hasattr(specifier, 'selector'):
+        if hasattr(specifier, 'selector'):
             result = self._compound_scope_to_logical_ties(
                 scoped_specifier,
                 compound_scope,
@@ -1484,7 +1455,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _interpret_scoped_specifier(self, scoped_specifier):
         assert not isinstance(scoped_specifier.specifier, (list, tuple))
         result = self._unwrap_scoped_specifier(scoped_specifier)
-        compound_scope, specifier_wrapper, specifier = result
+        compound_scope, specifier = result
         if isinstance(specifier, baca.RhythmCommand):
             return
         classname = type(specifier).__name__
@@ -1495,7 +1466,6 @@ class SegmentMaker(abjad.SegmentMaker):
         selection, timespan = self._evaluate_selector(
             scoped_specifier,
             compound_scope,
-            specifier_wrapper,
             specifier,
             )
         try:
@@ -2010,17 +1980,13 @@ class SegmentMaker(abjad.SegmentMaker):
         return scopes
 
     def _unwrap_scoped_specifier(self, scoped_specifier):
-        specifier_wrapper = None
         specifier = scoped_specifier.specifier
-        if isinstance(specifier, baca.SpecifierWrapper):
-            specifier_wrapper = specifier
-            specifier = specifier_wrapper.specifier
         if isinstance(scoped_specifier.scope, baca.SimpleScope):
             simple_scope = scoped_specifier.scope
             compound_scope = baca.CompoundScope([simple_scope])
         else:
             compound_scope = scoped_specifier.scope
-        return compound_scope, specifier_wrapper, specifier
+        return compound_scope, specifier
 
     def _update_metadata(self):
         self._metadata['measure_count'] = self.measure_count
