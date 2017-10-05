@@ -305,10 +305,10 @@ class SegmentMaker(abjad.SegmentMaker):
         '_spacing_specifier',
         '_stage_label_base_string',
         '_stages',
-        '_tempo_specifier',
+        '_metronome_mark_measure_map',
         '_time_signatures',
         '_transpose_score',
-        '_volta_specifier',
+        '_volta_measure_map',
         )
 
     _absolute_string_trio_stylesheet_path = pathlib.Path(
@@ -397,10 +397,10 @@ class SegmentMaker(abjad.SegmentMaker):
         spacing_map=None,
         spacing_specifier=None,
         stage_label_base_string=None,
-        tempo_specifier=None,
+        metronome_mark_measure_map=None,
         time_signatures=None,
         transpose_score=None,
-        volta_specifier=None,
+        volta_measure_map=None,
         ):
         superclass = super(SegmentMaker, self)
         superclass.__init__()
@@ -480,11 +480,11 @@ class SegmentMaker(abjad.SegmentMaker):
         if stage_label_base_string is not None:
             assert isinstance(stage_label_base_string, str)
         self._stage_label_base_string = stage_label_base_string
-        self._tempo_specifier = tempo_specifier
+        self._metronome_mark_measure_map = metronome_mark_measure_map
         if transpose_score is not None:
             transpose_score = bool(transpose_score)
         self._transpose_score = transpose_score
-        self._volta_specifier = volta_specifier
+        self._volta_measure_map = volta_measure_map
 
     ### SPECIAL METHODS ###
 
@@ -684,7 +684,7 @@ class SegmentMaker(abjad.SegmentMaker):
             raise Exception(message)
 
     def _attach_fermatas(self):
-        if not self.tempo_specifier:
+        if not self.metronome_mark_measure_map:
             return
         context = self._score['Global Rests']
         directive_prototype = (
@@ -692,7 +692,7 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.BreathMark,
             )
         rest_prototype = abjad.MultimeasureRest
-        for stage_number, directive in self.tempo_specifier:
+        for stage_number, directive in self.metronome_mark_measure_map:
             if not isinstance(directive, directive_prototype):
                 continue
             assert 0 < stage_number <= self.stage_count
@@ -760,7 +760,7 @@ class SegmentMaker(abjad.SegmentMaker):
         abjad.attach(rehearsal_mark, leaf)
 
     def _attach_tempo_indicators(self):
-        if not self.tempo_specifier:
+        if not self.metronome_mark_measure_map:
             return
         context = self._score['Global Skips']
         skips = abjad.select(context).by_leaf(abjad.Skip)
@@ -772,7 +772,7 @@ class SegmentMaker(abjad.SegmentMaker):
             start_with_parenthesized_tempo=False,
             )
         abjad.attach(spanner, skips)
-        for stage_number, directive in self.tempo_specifier:
+        for stage_number, directive in self.metronome_mark_measure_map:
             self._assert_valid_stage_number(stage_number)
             result = self._stage_number_to_measure_indices(stage_number)
             start_measure_index, stop_measure_index = result
@@ -1750,14 +1750,14 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.setting(start_skip).score.proportional_notation_duration = moment
 
     def _make_volta_containers(self):
-        if not self.volta_specifier:
+        if not self.volta_measure_map:
             return
         context = self._score['Global Skips']
         measures = context[:]
         for measure in measures:
             assert isinstance(measure, abjad.Measure), repr(measure)
-        for expression in self.volta_specifier:
-            if isinstance(expression, baca.MeasureExpression):
+        for expression in self.volta_measure_map:
+            if isinstance(expression, baca.MeasureSpecifier):
                 measure_start_number = expression.start
                 measure_stop_number = expression.stop
             elif isinstance(expression, baca.StageSliceExpression):
@@ -4819,7 +4819,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> segment_maker = baca.SegmentMaker(
                 ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     tempo_specifier=baca.TempoSpecifier([
+                ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
                 ...         (1, abjad.MetronomeMark((1, 8), 90)),
                 ...         ]),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -5011,7 +5011,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> segment_maker = baca.SegmentMaker(
                 ...     label_clock_time=True,
                 ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     tempo_specifier=baca.TempoSpecifier([
+                ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
                 ...         (1, abjad.MetronomeMark((1, 8), 90)),
                 ...         ]),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -6489,7 +6489,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._stage_label_base_string
 
     @property
-    def tempo_specifier(self):
+    def metronome_mark_measure_map(self):
         r'''Gets tempo specifier.
 
         ..  container:: example
@@ -6673,7 +6673,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> segment_maker = baca.SegmentMaker(
                 ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     tempo_specifier=baca.TempoSpecifier([
+                ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
                 ...         (1, abjad.MetronomeMark((1, 8), 90)),
                 ...         ]),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -6862,7 +6862,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         Returns tempo specifier or none.
         '''
-        return self._tempo_specifier
+        return self._metronome_mark_measure_map
 
     @property
     def time_signatures(self):
@@ -6994,7 +6994,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._transpose_score
 
     @property
-    def volta_specifier(self):
+    def volta_measure_map(self):
         r'''Gets volta specifier.
 
         ..  container:: example
@@ -7179,8 +7179,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> segment_maker = baca.SegmentMaker(
                 ...     score_template=baca.ViolinSoloScoreTemplate(),
                 ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-                ...     volta_specifier=baca.VoltaSpecifier([
-                ...         baca.MeasureExpression(1, 2),
+                ...     volta_measure_map=baca.VoltaMeasureMap([
+                ...         baca.MeasureSpecifier(1, 2),
                 ...         ]),
                 ...     )
 
@@ -7355,7 +7355,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         Returns volta specifier or none.
         '''
-        return self._volta_specifier
+        return self._volta_measure_map
 
     ### PUBLIC METHODS ###
 

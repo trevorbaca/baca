@@ -1,8 +1,8 @@
 import abjad
 
 
-class MeasureExpression(abjad.Expression):
-    r'''Measure expression.
+class MeasureSpecifier(abjad.AbjadValueObject):
+    r'''Measure specifier.
 
     ..  container:: example
 
@@ -10,12 +10,12 @@ class MeasureExpression(abjad.Expression):
 
         ::
 
-            >>> expression = baca.MeasureExpression(2, 4)
+            >>> specifier = baca.MeasureSpecifier(2, 4)
 
         ::
 
-            >>> f(expression)
-            baca.MeasureExpression(
+            >>> f(specifier)
+            baca.MeasureSpecifier(
                 start=2,
                 stop=4,
                 )
@@ -24,12 +24,14 @@ class MeasureExpression(abjad.Expression):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Segments'
+    __documentation_section__ = 'Specifiers'
 
     __slots__ = (
         '_start',
         '_stop',
         )
+
+    _publish_storage_format = True
 
     ### INITIALIZER ###
 

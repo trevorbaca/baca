@@ -67,7 +67,7 @@ class SwellCommand(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_selector',

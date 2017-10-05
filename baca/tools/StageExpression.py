@@ -1,7 +1,7 @@
 import abjad
 
 
-class StageExpression(abjad.Expression):
+class StageExpression(abjad.AbjadValueObject):
     r'''Stage expression.
     '''
 

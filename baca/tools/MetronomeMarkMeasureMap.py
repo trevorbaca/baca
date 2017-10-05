@@ -1,8 +1,8 @@
 import abjad
 
 
-class TempoSpecifier(abjad.AbjadObject):
-    r'''MetronomeMark specifier.
+class MetronomeMarkMeasureMap(abjad.AbjadObject):
+    r'''Metronome mark measure map.
 
     ..  container:: example
 
@@ -11,7 +11,7 @@ class TempoSpecifier(abjad.AbjadObject):
             >>> segment_maker = baca.SegmentMaker(
             ...     measures_per_stage=[2, 2],
             ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     tempo_specifier=baca.TempoSpecifier([
+            ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
             ...         (1, abjad.MetronomeMark((1, 4), 90)),
             ...         (2, abjad.MetronomeMark((1, 4), 72)),
             ...         ]),
@@ -135,7 +135,7 @@ class TempoSpecifier(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Measure Maps'
 
     __slots__ = (
         '_items',
@@ -151,15 +151,13 @@ class TempoSpecifier(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __getitem__(self, argument):
-        r'''Gets pair or pair slice identified by `argument`.
+        r'''Gets `argument`.
 
         ..  container:: example
 
-            Gets pair 1:
-
             ::
 
-                >>> tempo_specifier = baca.TempoSpecifier([
+                >>> marks = baca.MetronomeMarkMeasureMap([
                 ...     (1, abjad.MetronomeMark((1, 4), 90)),
                 ...     (1, abjad.Accelerando()),
                 ...     (4, abjad.MetronomeMark((1, 4), 120)),
@@ -167,10 +165,10 @@ class TempoSpecifier(abjad.AbjadObject):
 
             ::
 
-                >>> tempo_specifier[1]
+                >>> marks[1]
                 (1, Accelerando())
 
-        Returns pair or slice of pairs.
+        Returns item.
         '''
         return self.items.__getitem__(argument)
 
@@ -182,11 +180,9 @@ class TempoSpecifier(abjad.AbjadObject):
 
         ..  container:: example
 
-            Gets items:
-
             ::
 
-                >>> tempo_specifier = baca.TempoSpecifier([
+                >>> marks = baca.MetronomeMarkMeasureMap([
                 ...     (1, abjad.MetronomeMark((1, 4), 90)),
                 ...     (1, abjad.Accelerando()),
                 ...     (4, abjad.MetronomeMark((1, 4), 120)),
@@ -194,7 +190,7 @@ class TempoSpecifier(abjad.AbjadObject):
 
             ::
 
-                >>> for item in tempo_specifier.items:
+                >>> for item in marks.items:
                 ...     item
                 (1, MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=90))
                 (1, Accelerando())

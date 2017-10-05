@@ -1,8 +1,8 @@
 import abjad
 
 
-class VoltaSpecifier(abjad.AbjadObject):
-    r'''Volta specifier.
+class VoltaMeasureMap(abjad.AbjadObject):
+    r'''Volta measure map.
 
     ..  container:: example
 
@@ -11,8 +11,8 @@ class VoltaSpecifier(abjad.AbjadObject):
             >>> segment_maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     volta_specifier=baca.VoltaSpecifier([
-            ...         baca.MeasureExpression(1, 3),
+            ...     volta_measure_map=baca.VoltaMeasureMap([
+            ...         baca.MeasureSpecifier(1, 3),
             ...         ]),
             ...     )
 
@@ -98,7 +98,7 @@ class VoltaSpecifier(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Measure Maps'
 
     __slots__ = (
         '_items',
@@ -114,26 +114,23 @@ class VoltaSpecifier(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __getitem__(self, argument):
-        r'''Gets measure expression or slice of measure expressions
-        identified by `argument`.
+        r'''Gets `argument`.
 
         ..  container:: example
 
-            Gets measure expression:
-
             ::
 
-                >>> volta_specifier = baca.VoltaSpecifier([
-                ...     baca.MeasureExpression(2, 4),
-                ...     baca.MeasureExpression(16, 18),
+                >>> voltas = baca.VoltaMeasureMap([
+                ...     baca.MeasureSpecifier(2, 4),
+                ...     baca.MeasureSpecifier(16, 18),
                 ...     ])
 
             ::
 
-                >>> volta_specifier[1]
-                MeasureExpression(start=16, stop=18)
+                >>> voltas[1]
+                MeasureSpecifier(start=16, stop=18)
 
-        Returns measure expression or slice of measure expression.
+        Returns item.
         '''
         return self.items.__getitem__(argument)
 
@@ -145,26 +142,20 @@ class VoltaSpecifier(abjad.AbjadObject):
 
         ..  container:: example
 
-            Gets items:
-
             ::
 
-                >>> volta_specifier = baca.VoltaSpecifier([
-                ...     baca.MeasureExpression(2, 4),
-                ...     baca.MeasureExpression(16, 18),
+                >>> voltas = baca.VoltaMeasureMap([
+                ...     baca.MeasureSpecifier(2, 4),
+                ...     baca.MeasureSpecifier(16, 18),
                 ...     ])
 
             ::
 
-                >>> for item in volta_specifier.items:
+                >>> for item in voltas.items:
                 ...     item
-                MeasureExpression(start=2, stop=4)
-                MeasureExpression(start=16, stop=18)
+                MeasureSpecifier(start=2, stop=4)
+                MeasureSpecifier(start=16, stop=18)
 
-        Defaults to none.
-
-        Set to tuple or none.
-
-        Returns tuple or none.
+        Returns items.
         '''
         return self._items

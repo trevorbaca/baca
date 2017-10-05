@@ -1,16 +1,14 @@
 import abjad
 
 
-class StageSpecifier(abjad.AbjadObject):
-    r'''Stage specifier.
+class StageMeasureMap(abjad.AbjadObject):
+    r'''Stage measure map.
 
     ..  container:: example
 
-        Counts with a single explicit time signature mixed in:
-
         ::
 
-            >>> specifier = baca.StageSpecifier([
+            >>> stages = baca.StageMeasureMap([
             ...     4,
             ...     4,
             ...     4, abjad.TimeSignature((1, 4)),
@@ -19,8 +17,8 @@ class StageSpecifier(abjad.AbjadObject):
 
         ::
 
-            >>> f(specifier)
-            baca.StageSpecifier(
+            >>> f(stages)
+            baca.StageMeasureMap(
                 items=(
                     4,
                     4,
@@ -32,11 +30,9 @@ class StageSpecifier(abjad.AbjadObject):
 
     ..  container:: example
 
-        Counts with a run of explicit time signatures mixed in:
-
         ::
 
-            >>> specifier = baca.StageSpecifier([
+            >>> stages = baca.StageMeasureMap([
             ...     4,
             ...     4,
             ...     4, [abjad.TimeSignature((5, 4)), abjad.TimeSignature((5, 4))],
@@ -45,8 +41,8 @@ class StageSpecifier(abjad.AbjadObject):
 
         ::
 
-            >>> f(specifier)
-            baca.StageSpecifier(
+            >>> f(stages)
+            baca.StageMeasureMap(
                 items=(
                     4,
                     4,
@@ -63,7 +59,7 @@ class StageSpecifier(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = 'Measure Maps'
 
     __slots__ = (
         '_items',
@@ -81,15 +77,13 @@ class StageSpecifier(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __getitem__(self, argument):
-        r'''Gets stage or stage slice identified by `argument`.
+        r'''Gets `argument`.
 
         ..  container:: example
 
-            Gets items:
-
             ::
 
-                >>> specifier = baca.StageSpecifier([
+                >>> stages = baca.StageMeasureMap([
                 ...     4,
                 ...     4,
                 ...     4, abjad.TimeSignature((1, 4)),
@@ -98,7 +92,7 @@ class StageSpecifier(abjad.AbjadObject):
 
             ::
 
-                >>> specifier[0]
+                >>> stages[0]
                 4
 
         Returns item.
@@ -113,11 +107,9 @@ class StageSpecifier(abjad.AbjadObject):
 
         ..  container:: example
 
-            Gets items:
-
             ::
 
-                >>> specifier = baca.StageSpecifier([
+                >>> stages = baca.StageMeasureMap([
                 ...     4,
                 ...     4,
                 ...     4, abjad.TimeSignature((1, 4)),
@@ -126,14 +118,10 @@ class StageSpecifier(abjad.AbjadObject):
 
             ::
 
-                >>> specifier.items
+                >>> stages.items
                 (4, 4, 4, TimeSignature((1, 4)), 4)
 
-        Defaults to none.
-
-        Set to tuple or none.
-
-        Returns tuple or none.
+        Returns items.
         '''
         return self._items
 
@@ -143,11 +131,9 @@ class StageSpecifier(abjad.AbjadObject):
 
         ..  container:: example
 
-            Gets stage count:
-
             ::
 
-                >>> specifier = baca.StageSpecifier([
+                >>> stages = baca.StageMeasureMap([
                 ...     4,
                 ...     4,
                 ...     4, abjad.TimeSignature((1, 4)),
@@ -156,7 +142,7 @@ class StageSpecifier(abjad.AbjadObject):
 
             ::
 
-                >>> specifier.stage_count
+                >>> stages.stage_count
                 5
 
         Returns nonnegative integer.
