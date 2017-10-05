@@ -6,8 +6,6 @@ class MeasureSpecifier(abjad.AbjadValueObject):
 
     ..  container:: example
 
-        Selects measures from indices 2 to 4:
-
         ::
 
             >>> specifier = baca.MeasureSpecifier(2, 4)

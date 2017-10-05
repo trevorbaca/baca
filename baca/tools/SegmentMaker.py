@@ -1277,7 +1277,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if rhythm_specifier.scope.voice_name == voice_name:
                 #raise Exception(rhythm_specifier.scope.stages)
                 stages = rhythm_specifier.scope.stages
-                if isinstance(stages, baca.StageExpression):
+                if isinstance(stages, baca.StageSpecifier):
                     start = rhythm_specifier.scope.stages.start
                     stop = rhythm_specifier.scope.stages.stop + 1
                 elif isinstance(stages, tuple):
@@ -1314,7 +1314,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._metadata.get('segment_number', 1)
 
     def _get_stage_numbers(self, argument):
-        if isinstance(argument, baca.StageExpression):
+        if isinstance(argument, baca.StageSpecifier):
             start = argument.start
             stop = argument.stop
         elif isinstance(argument, tuple):
@@ -1760,7 +1760,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if isinstance(expression, baca.MeasureSpecifier):
                 measure_start_number = expression.start
                 measure_stop_number = expression.stop
-            elif isinstance(expression, baca.StageSliceExpression):
+            elif isinstance(expression, baca.StageSliceSpecifier):
                 start = expression.start
                 stop = expression.stop
                 pair = self._stage_number_to_measure_indices(start)
@@ -1945,7 +1945,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return len(stage_numbers) == len(set(stage_numbers))
 
     def _timespan_to_time_signatures(self, timespan):
-        if isinstance(timespan, baca.StageExpression):
+        if isinstance(timespan, baca.StageSpecifier):
             stage_expression = timespan
             contribution = self._get_time_signatures(
                 stage_expression.start,

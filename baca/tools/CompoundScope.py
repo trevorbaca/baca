@@ -110,7 +110,7 @@ class CompoundScope(abjad.AbjadObject):
 
     @staticmethod
     def _is_stage_pair(argument):
-        if isinstance(argument, baca.StageExpression):
+        if isinstance(argument, baca.StageSpecifier):
             return True
         if isinstance(argument, tuple):
             if len(argument) == 2:
@@ -175,7 +175,7 @@ class CompoundScope(abjad.AbjadObject):
             stage_pairs = [(stage_pairs, stage_pairs)]
         elif class_._is_stage_pair(stage_pairs):
             stage_pairs = [stage_pairs]
-        elif isinstance(stage_pairs, baca.StageExpression):
+        elif isinstance(stage_pairs, baca.StageSpecifier):
             #start = stage_pairs.start
             #stop = stage_pairs.stop
             #stage_pairs = [(start, stop)]

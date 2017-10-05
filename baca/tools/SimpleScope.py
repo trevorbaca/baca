@@ -45,7 +45,7 @@ class SimpleScope(abjad.AbjadObject):
         if voice_name is not None:
             assert isinstance(voice_name, str), repr(voice_name)
         self._voice_name = voice_name
-        if isinstance(stages, baca.StageExpression):
+        if isinstance(stages, baca.StageSpecifier):
             #stages = (stages.start, stages.stop)
             pass
         elif isinstance(stages, int):

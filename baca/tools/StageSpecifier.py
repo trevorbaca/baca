@@ -1,13 +1,13 @@
 import abjad
 
 
-class StageSliceExpression(abjad.AbjadValueObject):
-    r'''Stage slice expression.
+class StageSpecifier(abjad.AbjadValueObject):
+    r'''Stage specifier.
     '''
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Segments'
+    __documentation_section__ = 'Specifiers'
 
     __slots__ = (
         '_start',
@@ -28,7 +28,7 @@ class StageSliceExpression(abjad.AbjadValueObject):
 
     @property
     def start(self):
-        r'''Gets start.
+        r'''Gets stage start number.
 
         Returns integer or none.
         '''
@@ -36,7 +36,7 @@ class StageSliceExpression(abjad.AbjadValueObject):
 
     @property
     def stop(self):
-        r'''Gets stop.
+        r'''Gets stage stop number.
 
         Returns integer or none.
         '''
