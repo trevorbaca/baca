@@ -47,11 +47,6 @@ class ScoreTemplate(abjad.ScoreTemplate):
         voice_names = []
         for voice in abjad.iterate(score).by_class(abjad.Voice):
             voice_names.append(voice.name)
-        for voice_name in sorted(self.voice_abbreviations.items()):
-            if voice_name not in voice_names:
-                message = 'voice not found in score: {!r}.'
-                message = message.format(voice_name)
-                raise Exception(message)
         for voice_name in sorted(self.voice_colors):
             if voice_name not in voice_names:
                 message = 'voice not found in score: {!r}.'
