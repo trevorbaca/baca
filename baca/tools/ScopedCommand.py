@@ -2,16 +2,16 @@ import abjad
 import baca
 
 
-class ScopedSpecifier(abjad.AbjadObject):
-    r'''Scoped specifier.
+class ScopedCommand(abjad.AbjadObject):
+    r'''Scoped command.
 
     ..  container:: example
 
-        Makes scoped pitch specifier:
+        Scoped pitch command:
 
         ::
 
-            >>> specifier = baca.ScopedSpecifier(
+            >>> command = baca.ScopedCommand(
             ...     ('Violin Music Voice', (1, 4)),
             ...     baca.ScorePitchCommand(
             ...         source=[7, 1, 3, 4, 5, 11],
@@ -20,13 +20,13 @@ class ScopedSpecifier(abjad.AbjadObject):
 
         ::
 
-            >>> f(specifier)
-            baca.ScopedSpecifier(
+            >>> f(command)
+            baca.ScopedCommand(
                 scope=baca.SimpleScope(
                     voice_name='Violin Music Voice',
                     stages=(1, 4),
                     ),
-                specifier=baca.ScorePitchCommand(
+                command=baca.ScorePitchCommand(
                     source=abjad.CyclicTuple(
                         [
                             abjad.NamedPitch("g'"),
@@ -42,11 +42,11 @@ class ScopedSpecifier(abjad.AbjadObject):
 
     ..  container:: example
 
-        Makes pitch specifier with compound scope:
+        Scoped pitch command with compound scope:
 
         ::
 
-            >>> specifier = baca.ScopedSpecifier(
+            >>> command = baca.ScopedCommand(
             ...     baca.CompoundScope([
             ...         baca.SimpleScope('Violin Music Voice', (1, 4)),
             ...         baca.SimpleScope('Violin Music Voice', (8, 12)),
@@ -58,8 +58,8 @@ class ScopedSpecifier(abjad.AbjadObject):
 
         ::
 
-            >>> f(specifier)
-            baca.ScopedSpecifier(
+            >>> f(command)
+            baca.ScopedCommand(
                 scope=baca.CompoundScope(
                     simple_scopes=(
                         baca.SimpleScope(
@@ -72,7 +72,7 @@ class ScopedSpecifier(abjad.AbjadObject):
                             ),
                         ),
                     ),
-                specifier=baca.ScorePitchCommand(
+                command=baca.ScorePitchCommand(
                     source=abjad.CyclicTuple(
                         [
                             abjad.NamedPitch("g'"),
@@ -88,11 +88,11 @@ class ScopedSpecifier(abjad.AbjadObject):
 
     ..  container:: example
 
-        Makes scoped displacement specifier:
+        Scoped displacement command:
 
         ::
 
-            >>> specifier = baca.ScopedSpecifier(
+            >>> command = baca.ScopedCommand(
             ...     ('Violin Music Voice', (1, 4)),
             ...     baca.OctaveDisplacementCommand(
             ...         displacements=[0, 0, 0, 0, 1, 1, 1, 1],
@@ -101,13 +101,13 @@ class ScopedSpecifier(abjad.AbjadObject):
 
         ::
 
-            >>> f(specifier)
-            baca.ScopedSpecifier(
+            >>> f(command)
+            baca.ScopedCommand(
                 scope=baca.SimpleScope(
                     voice_name='Violin Music Voice',
                     stages=(1, 4),
                     ),
-                specifier=baca.OctaveDisplacementCommand(
+                command=baca.OctaveDisplacementCommand(
                     displacements=abjad.CyclicTuple(
                         [0, 0, 0, 0, 1, 1, 1, 1]
                         ),
@@ -121,37 +121,39 @@ class ScopedSpecifier(abjad.AbjadObject):
     __documentation_section__ = 'Segments'
 
     __slots__ = (
+        '_command',
         '_scope',
-        '_specifier',
         )
 
     _publish_storage_format = True
 
     ### INITIALIZER ###
 
-    def __init__(self, scope=None, specifier=None):
+    def __init__(self, scope=None, command=None):
         if isinstance(scope, tuple):
             scope = baca.SimpleScope(*scope)
         prototype = (baca.SimpleScope, baca.CompoundScope)
         if scope is not None:
             assert isinstance(scope, prototype), repr(scope)
         self._scope = scope
-        assert not isinstance(specifier, (tuple, list)), repr(specifier)
-        self._specifier = specifier
+        assert not isinstance(command, (tuple, list)), repr(command)
+        classname = type(command).__name__
+        if (not classname.endswith('Command') and
+            not classname.endswith('Expression')):
+            raise Exception(format(command))
+        self._command = command
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def scope(self):
-        r'''Gets scope.
+    def command(self):
+        r'''Gets command.
 
         ..  container:: example
 
-            Gets scope:
-
             ::
 
-                >>> specifier = baca.ScopedSpecifier(
+                >>> command = baca.ScopedCommand(
                 ...     ('Violin Music Voice', (1, 4)),
                 ...     baca.ScorePitchCommand(
                 ...         source=[7, 1, 3, 4, 5, 11],
@@ -160,40 +162,7 @@ class ScopedSpecifier(abjad.AbjadObject):
 
             ::
 
-                >>> f(specifier.scope)
-                baca.SimpleScope(
-                    voice_name='Violin Music Voice',
-                    stages=(1, 4),
-                    )
-
-        Defaults to none.
-
-        Set to scope or none.
-
-        Returns scope or none.
-        '''
-        return self._scope
-
-    @property
-    def specifier(self):
-        r'''Gets specifier.
-
-        ..  container:: example
-
-            Gets specifier:
-
-            ::
-
-                >>> specifier = baca.ScopedSpecifier(
-                ...     ('Violin Music Voice', (1, 4)),
-                ...     baca.ScorePitchCommand(
-                ...         source=[7, 1, 3, 4, 5, 11],
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> f(specifier.specifier)
+                >>> f(command.command)
                 baca.ScorePitchCommand(
                     source=abjad.CyclicTuple(
                         [
@@ -209,8 +178,41 @@ class ScopedSpecifier(abjad.AbjadObject):
 
         Defaults to none.
 
-        Set to specifier or none.
+        Set to command or none.
 
-        Returns specifier or none.
+        Returns command or none.
         '''
-        return self._specifier
+        return self._command
+
+    @property
+    def scope(self):
+        r'''Gets scope.
+
+        ..  container:: example
+
+            Gets scope:
+
+            ::
+
+                >>> command = baca.ScopedCommand(
+                ...     ('Violin Music Voice', (1, 4)),
+                ...     baca.ScorePitchCommand(
+                ...         source=[7, 1, 3, 4, 5, 11],
+                ...         ),
+                ...     )
+
+            ::
+
+                >>> f(command.scope)
+                baca.SimpleScope(
+                    voice_name='Violin Music Voice',
+                    stages=(1, 4),
+                    )
+
+        Defaults to none.
+
+        Set to scope or none.
+
+        Returns scope or none.
+        '''
+        return self._scope

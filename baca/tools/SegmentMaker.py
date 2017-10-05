@@ -99,7 +99,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ::
 
-            >>> specifiers = segment_maker.append_commands(
+            >>> commands = segment_maker.append_commands(
             ...     'vn',
             ...     baca.select_stages(1),
             ...     baca.even_runs(),
@@ -296,7 +296,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_print_timings',
         '_range_checker',
         '_rehearsal_letter',
-        '_scoped_specifiers',
+        '_scoped_commands',
         '_score',
         '_score_template',
         '_skip_wellformedness_checks',
@@ -462,7 +462,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._print_timings = print_timings
         self._range_checker = range_checker
         self._rehearsal_letter = rehearsal_letter
-        self._scoped_specifiers = []
+        self._scoped_commands = []
         self._initialize_time_signatures(time_signatures)
         if score_template is not None:
             assert isinstance(score_template, baca.ScoreTemplate)
@@ -514,9 +514,9 @@ class SegmentMaker(abjad.SegmentMaker):
             )
         self._populate_time_signature_context()
         self._label_stage_numbers_()
-        self._interpret_rhythm_specifiers()
+        self._interpret_rhythm_commands()
         self._extend_beams()
-        self._interpret_scoped_specifiers()
+        self._interpret_scoped_commands()
         self._detach_figure_names()
         self._shorten_long_repeat_ties()
         self._apply_previous_segment_end_settings()
@@ -658,24 +658,22 @@ class SegmentMaker(abjad.SegmentMaker):
         stop_time = time.time()
         total_time = int(stop_time - start_time)
         if self.print_timings:
-            message = 'total spacing specifier time {} seconds ...'
-            message = message.format(total_time)
-            print(message)
+            print(f'spacing specifier time {total_time} seconds ...')
         if 3 < total_time:
-            message = 'spacing specifier application took {} seconds!'
-            message = message.format(total_time)
-            raise Exception(message)
+            raise Exception(f'spacing specifier time {total_time} seconds!')
 
-    def _apply_specifier_to_selection(self, specifier, selection, timespan):
-        if hasattr(specifier, '__call__'):
+    def _apply_command_to_selection(self, command, selection, timespan):
+        if hasattr(command, '__call__'):
             if timespan:
-                specifier(selection, timespan)
+                command(selection, timespan)
             else:
-                specifier(selection)
-        elif isinstance(specifier, abjad.Spanner):
-            abjad.attach(copy.copy(specifier), selection)
+                command(selection)
+        # TODO: remove this?
+        elif isinstance(command, abjad.Spanner):
+            abjad.attach(copy.copy(command), selection)
+        # TODO: remove this?
         else:
-            abjad.attach(specifier, selection[0])
+            abjad.attach(command, selection[0])
 
     def _assert_valid_stage_number(self, stage_number):
         if not 1 <= stage_number <= self.stage_count:
@@ -907,7 +905,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _compound_scope_to_logical_ties(
         self,
-        scoped_specifier,
+        scoped_command,
         compound_scope,
         include_rests=False,
         leaves_instead_of_logical_ties=False,
@@ -933,7 +931,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         result.append(logical_tie)
         if not result:
             message = 'EMPTY SELECTION: {}'
-            message = message.format(format(scoped_specifier))
+            message = message.format(format(scoped_command))
             if self.allow_empty_selections:
                 print(message)
             else:
@@ -996,13 +994,13 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _evaluate_selector(
         self,
-        scoped_specifier,
+        scoped_command,
         compound_scope,
-        specifier,
+        command,
         ):
-        if hasattr(specifier, 'selector'):
+        if hasattr(command, 'selector'):
             result = self._compound_scope_to_logical_ties(
-                scoped_specifier,
+                scoped_command,
                 compound_scope,
                 include_rests=True,
                 leaves_instead_of_logical_ties=True,
@@ -1011,20 +1009,20 @@ class SegmentMaker(abjad.SegmentMaker):
             selection, timespan = result
         else:
             result = self._compound_scope_to_logical_ties(
-                scoped_specifier,
+                scoped_command,
                 compound_scope,
                 )
             assert len(result) == 2, repr(result)
             selection, timespan = result
         assert isinstance(selection, abjad.Selection), repr(selection)
         if not selection:
-            message = f'EMPTY SELECTION: {format(scoped_specifier)}'
+            message = f'EMPTY SELECTION: {format(scoped_command)}'
             if self.allow_empty_selections:
                 print(message)
             else:
                 raise Exception(message)
         timespan = None
-        if getattr(specifier, '_include_selection_timespan', False):
+        if getattr(command, '_include_selection_timespan', False):
             timespan = self._selection_to_timespan(selection)
         return selection, timespan
 
@@ -1239,40 +1237,35 @@ class SegmentMaker(abjad.SegmentMaker):
         rehearsal_letter = chr(rehearsal_ordinal)
         return rehearsal_letter
 
-    def _get_rhythm_specifier(self, voice_name, stage):
-        rhythm_specifier = []
+    def _get_rhythm_command(self, voice_name, stage):
+        rhythm_command = []
         prototype = baca.RhythmCommand
-        for rhythm_specifier in self.scoped_specifiers:
-            if not isinstance(rhythm_specifier.specifier, prototype):
+        for rhythm_command in self.scoped_commands:
+            if not isinstance(rhythm_command.command, prototype):
                 continue
-            if rhythm_specifier.scope.voice_name == voice_name:
-                #raise Exception(rhythm_specifier.scope.stages)
-                stages = rhythm_specifier.scope.stages
+            if rhythm_command.scope.voice_name == voice_name:
+                stages = rhythm_command.scope.stages
                 if isinstance(stages, baca.StageSpecifier):
-                    start = rhythm_specifier.scope.stages.start
-                    stop = rhythm_specifier.scope.stages.stop + 1
+                    start = rhythm_command.scope.stages.start
+                    stop = rhythm_command.scope.stages.stop + 1
                 elif isinstance(stages, tuple):
-                    start = rhythm_specifier.scope.stages[0]
-                    stop = rhythm_specifier.scope.stages[-1] + 1
+                    start = rhythm_command.scope.stages[0]
+                    stop = rhythm_command.scope.stages[-1] + 1
                 else:
-                    message = 'invalid stage specification: {!r}.'
-                    message = message.format(stages)
-                    raise Exception(message)
+                    raise Exception(f'invalid stage {stages!r}.')
                 if stage in range(start, stop):
-                    return rhythm_specifier
-        message = 'no rhythm specifier for {!r} found for stage {}.'
-        message = message.format(voice_name, stage)
-        raise Exception(message)
+                    return rhythm_command
+        raise Exception(f'no {voice_name!r} rhythm command for stage {stage}.')
 
-    def _get_rhythm_specifiers_for_voice(self, voice_name):
-        rhythm_specifiers = []
+    def _get_rhythm_commands_for_voice(self, voice_name):
+        rhythm_commands = []
         prototype = baca.RhythmCommand
-        for scoped_specifier in self.scoped_specifiers:
-            if not isinstance(scoped_specifier.specifier, prototype):
+        for scoped_command in self.scoped_commands:
+            if not isinstance(scoped_command.command, prototype):
                 continue
-            if scoped_specifier.scope.voice_name == voice_name:
-                rhythm_specifiers.append(scoped_specifier)
-        return rhythm_specifiers
+            if scoped_command.scope.voice_name == voice_name:
+                rhythm_commands.append(scoped_command)
+        return rhythm_commands
 
     def _get_segment_identifier(self):
         segment_name = self._metadata.get('segment_name')
@@ -1334,9 +1327,9 @@ class SegmentMaker(abjad.SegmentMaker):
             )
         return contribution
 
-    def _handle_mutator(self, specifier):
-        if (hasattr(specifier, '_mutates_score') and
-            specifier._mutates_score()):
+    def _handle_mutator(self, command):
+        if (hasattr(command, '_mutates_score') and
+            command._mutates_score()):
             self._cached_leaves_with_rests = None
             self._cached_leaves_without_rests = None
 
@@ -1403,18 +1396,18 @@ class SegmentMaker(abjad.SegmentMaker):
             result.append(selection)
         return result
 
-    def _interpret_rhythm_specifiers(self):
+    def _interpret_rhythm_commands(self):
         self._make_music_for_time_signature_context()
         self._attach_tempo_indicators()
         self._attach_fermatas()
         self._make_spacing_regions()
         for voice in abjad.iterate(self._score).by_class(abjad.Voice):
-            self._interpret_rhythm_specifiers_for_voice(voice)
+            self._interpret_rhythm_commands_for_voice(voice)
 
-    def _interpret_rhythm_specifiers_for_voice(self, voice):
+    def _interpret_rhythm_commands_for_voice(self, voice):
         assert not len(voice), repr(voice)
-        rhythm_specifiers = self._get_rhythm_specifiers_for_voice(voice.name)
-        if not rhythm_specifiers:
+        rhythm_commands = self._get_rhythm_commands_for_voice(voice.name)
+        if not rhythm_commands:
             if self.skips_instead_of_rests:
                 measures = self._make_skips()
             else:
@@ -1424,23 +1417,21 @@ class SegmentMaker(abjad.SegmentMaker):
         effective_staff = abjad.inspect(voice).get_effective_staff()
         effective_staff_name = effective_staff.context_name
         contributions = []
-        for rhythm_specifier in rhythm_specifiers:
-            assert isinstance(rhythm_specifier, baca.ScopedSpecifier)
-            if rhythm_specifier.scope.stages is not None:
-                result = self._get_stage_numbers(rhythm_specifier.scope.stages)
+        for rhythm_command in rhythm_commands:
+            assert isinstance(rhythm_command, baca.ScopedCommand)
+            if rhythm_command.scope.stages is not None:
+                result = self._get_stage_numbers(rhythm_command.scope.stages)
                 contribution = self._get_time_signatures(*result)
             else:
                 continue
             try:
-                contribution = rhythm_specifier.specifier(
+                contribution = rhythm_command.command(
                     effective_staff_name,
                     start_offset=contribution.start_offset,
                     time_signatures=contribution.payload,
                     )
             except:
-                message = 'rhythm specifier raises exception: {}'
-                message = message.format(format(rhythm_specifier))
-                raise Exception(message)
+                raise Exception(format(rhythm_command))
             assert contribution.start_offset is not None
             contributions.append(contribution)
         contributions.sort(key=lambda _: _.start_offset)
@@ -1452,39 +1443,36 @@ class SegmentMaker(abjad.SegmentMaker):
         voice.extend(contributions)
         self._apply_first_and_last_ties(voice)
 
-    def _interpret_scoped_specifier(self, scoped_specifier):
-        assert not isinstance(scoped_specifier.specifier, (list, tuple))
-        result = self._unwrap_scoped_specifier(scoped_specifier)
-        compound_scope, specifier = result
-        if isinstance(specifier, baca.RhythmCommand):
+    def _interpret_scoped_command(self, scoped_command):
+        assert not isinstance(scoped_command.command, (list, tuple))
+        compound_scope, command = self._unwrap_scoped_command(scoped_command)
+        if isinstance(command, baca.RhythmCommand):
             return
-        classname = type(specifier).__name__
+        classname = type(command).__name__
         if (not classname.endswith('Command') and
             not classname.endswith('Expression')):
-            raise Exception(format(specifier))
-        self._handle_mutator(specifier)
+            raise Exception(format(command))
+        self._handle_mutator(command)
         selection, timespan = self._evaluate_selector(
-            scoped_specifier,
+            scoped_command,
             compound_scope,
-            specifier,
+            command,
             )
         try:
-            self._apply_specifier_to_selection(specifier, selection, timespan)
+            self._apply_command_to_selection(command, selection, timespan)
         except:
             traceback.print_exc()
-            raise Exception(format(scoped_specifier))
-        self._handle_mutator(specifier)
+            raise Exception(format(scoped_command))
+        self._handle_mutator(command)
 
-    def _interpret_scoped_specifiers(self):
+    def _interpret_scoped_commands(self):
         start_time = time.time()
-        for scoped_specifier in self.scoped_specifiers:
-            self._interpret_scoped_specifier(scoped_specifier)
+        for scoped_command in self.scoped_commands:
+            self._interpret_scoped_command(scoped_command)
         stop_time = time.time()
         total_time = int(stop_time - start_time)
         if self.print_timings:
-            message = 'total scoped specifier time {} seconds ...'
-            message = message.format(total_time)
-            print(message)
+            print(f'command interpretation {total_time} seconds ...')
 
     def _is_first_segment(self):
         segment_number = self._get_segment_number()
@@ -1621,34 +1609,34 @@ class SegmentMaker(abjad.SegmentMaker):
     def _make_music_for_time_signature_context(self):
         voice_name = 'Global Skips'
         context = self._score[voice_name]
-        rhythm_specifiers = self._get_rhythm_specifiers_for_voice(voice_name)
-        for rhythm_specifier in rhythm_specifiers:
-            if rhythm_specifier.start_tempo is not None:
-                start_tempo = abjad.new(rhythm_specifier.start_tempo)
+        rhythm_commands = self._get_rhythm_commands_for_voice(voice_name)
+        for rhythm_command in rhythm_commands:
+            if rhythm_command.start_tempo is not None:
+                start_tempo = abjad.new(rhythm_command.start_tempo)
                 first_leaf = abjad.inspect(context).get_leaf(0)
                 abjad.attach(start_tempo, first_leaf, scope=abjad.Score)
-            if rhythm_specifier.stop_tempo is not None:
-                stop_tempo = abjad.new(rhythm_specifier.stop_tempo)
+            if rhythm_command.stop_tempo is not None:
+                stop_tempo = abjad.new(rhythm_command.stop_tempo)
                 leaf = abjad.inspect(context).get_leaf(-1)
                 abjad.attach(stop_tempo, leaf, scope=abjad.Score)
 
     def _make_music_for_voice_old(self, voice):
         assert not len(voice), repr(voice)
-        rhythm_specifiers = self._get_rhythm_specifiers_for_voice(voice.name)
-        rhythm_specifiers.sort(key=lambda x: x.stages[0])
-        assert self._stages_do_not_overlap(rhythm_specifiers)
-        if not rhythm_specifiers:
+        rhythm_commands = self._get_rhythm_commands_for_voice(voice.name)
+        rhythm_commands.sort(key=lambda x: x.stages[0])
+        assert self._stages_do_not_overlap(rhythm_commands)
+        if not rhythm_commands:
             measures = self._make_rests()
             voice.extend(measures)
             return
         effective_staff = abjad.inspect(voice).get_effective_staff()
         effective_staff_name = effective_staff.context_name
         next_stage = 1
-        for rhythm_specifier in rhythm_specifiers:
-            if rhythm_specifier.stages is None:
+        for rhythm_command in rhythm_commands:
+            if rhythm_command.stages is None:
                 continue
-            if next_stage < rhythm_specifier.start_stage:
-                stop_stage = rhythm_specifier.start_stage - 1
+            if next_stage < rhythm_command.start_stage:
+                stop_stage = rhythm_command.start_stage - 1
                 contribution = self._get_time_signatures(
                     start_stage=next_stage,
                     stop_stage=stop_stage,
@@ -1656,14 +1644,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 time_signatures = contribution.payload
                 measures = self._make_rests(time_signatures)
                 voice.extend(measures)
-            contribution = self._get_time_signatures(*rhythm_specifier.stages)
-            contribution = rhythm_specifier(
+            contribution = self._get_time_signatures(*rhythm_command.stages)
+            contribution = rhythm_command(
                 effective_staff_name,
                 start_offset=contribution.start_offset,
                 time_signatures=contribution.payload,
                 )
             voice.extend(contribution.payload)
-            next_stage = rhythm_specifier.stop_stage + 1
+            next_stage = rhythm_command.stop_stage + 1
         if next_stage <= self.stage_count:
             contribution = self._get_time_signatures(
                 next_stage,
@@ -1726,26 +1714,21 @@ class SegmentMaker(abjad.SegmentMaker):
         measures = context[:]
         for measure in measures:
             assert isinstance(measure, abjad.Measure), repr(measure)
-        for expression in self.volta_measure_map:
-            if isinstance(expression, baca.MeasureSpecifier):
-                measure_start_number = expression.start
-                measure_stop_number = expression.stop
-            elif isinstance(expression, baca.StageSliceSpecifier):
-                start = expression.start
-                stop = expression.stop
+        for specifier in self.volta_measure_map:
+            if isinstance(specifier, baca.MeasureSpecifier):
+                measure_start_number = specifier.start
+                measure_stop_number = specifier.stop
+            elif isinstance(specifier, baca.StageSliceSpecifier):
+                start = specifier.start
+                stop = specifier.stop
                 pair = self._stage_number_to_measure_indices(start)
                 measure_start_number, _ = pair
-                #pair = self._stage_number_to_measure_indices(stop)
-                #measure_stop_number, _ = pair
                 stop -= 1
                 pair = self._stage_number_to_measure_indices(stop)
                 measure_stop_number = pair[-1] + 1
             else:
-                message = 'implement evaluation for {!r} expressions.'
-                message = message.format(expression)
-                raise NotImplementedError(message)
+                raise TypeError(specifier)
             volta_measures = measures[measure_start_number:measure_stop_number]
-            #container = abjad.Container(volta_measures)
             container = abjad.Container()
             abjad.mutate(volta_measures).wrap(container)
             command = abjad.Repeat()
@@ -1903,12 +1886,12 @@ class SegmentMaker(abjad.SegmentMaker):
         stop_measure_index = measure_indices[stage_number] - 1
         return start_measure_index, stop_measure_index
 
-    def _stages_do_not_overlap(self, scoped_specifiers):
+    def _stages_do_not_overlap(self, scoped_commands):
         stage_numbers = []
-        for scoped_specifier in scoped_specifiers:
-            if scoped_specifier.stages is None:
+        for scoped_command in scoped_commands:
+            if scoped_command.stages is None:
                 continue
-            start_stage, stop_stage = scoped_specifier.stages
+            start_stage, stop_stage = scoped_command.stages
             stop_stage += 1
             stage_numbers_ = range(start_stage, stop_stage)
             stage_numbers.extend(stage_numbers_)
@@ -1979,14 +1962,14 @@ class SegmentMaker(abjad.SegmentMaker):
             scopes)
         return scopes
 
-    def _unwrap_scoped_specifier(self, scoped_specifier):
-        specifier = scoped_specifier.specifier
-        if isinstance(scoped_specifier.scope, baca.SimpleScope):
-            simple_scope = scoped_specifier.scope
+    def _unwrap_scoped_command(self, scoped_command):
+        command = scoped_command.command
+        if isinstance(scoped_command.scope, baca.SimpleScope):
+            simple_scope = scoped_command.scope
             compound_scope = baca.CompoundScope([simple_scope])
         else:
-            compound_scope = scoped_specifier.scope
-        return compound_scope, specifier
+            compound_scope = scoped_command.scope
+        return compound_scope, command
 
     def _update_metadata(self):
         self._metadata['measure_count'] = self.measure_count
@@ -2058,7 +2041,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.RhythmCommand(
@@ -2207,7 +2190,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.RhythmCommand(
@@ -2420,7 +2403,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...     'Violin Music Voice',
                 ...     [[2, 4, 5, 7, 9, 11]],
                 ...     )
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.RhythmCommand(
@@ -2434,7 +2417,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...     'Cello Music Voice',
                 ...     [[-3, -5, -7, -8, -10, -12]],
                 ...     )
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vc',
                 ...     baca.select_stages(1),
                 ...     baca.RhythmCommand(
@@ -2590,7 +2573,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.RhythmCommand(
@@ -2758,7 +2741,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.RhythmCommand(
@@ -2934,7 +2917,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
@@ -3107,7 +3090,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
@@ -3285,7 +3268,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
@@ -3459,7 +3442,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
@@ -3646,7 +3629,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
@@ -3822,7 +3805,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
@@ -4066,7 +4049,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
@@ -4240,7 +4223,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
@@ -4393,7 +4376,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.RhythmCommand(
@@ -4645,7 +4628,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.RhythmCommand(
@@ -4793,7 +4776,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
@@ -4985,7 +4968,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
@@ -5187,7 +5170,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
@@ -5361,7 +5344,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
@@ -5542,7 +5525,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
@@ -5815,12 +5798,12 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._rehearsal_letter
 
     @property
-    def scoped_specifiers(self):
-        r'''Gets scoped specifiers.
+    def scoped_commands(self):
+        r'''Gets scoped commands.
 
-        Returns list of scoped specifiers.
+        Returns list of scoped commands.
         '''
-        return self._scoped_specifiers
+        return self._scoped_commands
 
     @property
     def score_template(self):
@@ -6089,7 +6072,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
@@ -6275,7 +6258,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
@@ -6456,11 +6439,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @property
     def metronome_mark_measure_map(self):
-        r'''Gets tempo specifier.
+        r'''Gets metronome mark measure map.
 
         ..  container:: example
 
-            Without tempo specifier:
+            Without metronome mark measure map:
 
             ::
 
@@ -6471,7 +6454,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
@@ -6633,7 +6616,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            With tempo specifier:
+            With metronome mark measure map:
 
             ::
 
@@ -6647,7 +6630,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
@@ -6824,9 +6807,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
         Defaults to none.
 
-        Set to tempo specifier or none.
+        Set to metornome mark measure map or none.
 
-        Returns tempo specifier or none.
+        Returns metornome mark measure map or none.
         '''
         return self._metronome_mark_measure_map
 
@@ -6857,7 +6840,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
@@ -6961,11 +6944,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @property
     def volta_measure_map(self):
-        r'''Gets volta specifier.
+        r'''Gets volta measure map.
 
         ..  container:: example
 
-            Without volta specifier:
+            Without volta measure map.
 
             ::
 
@@ -6976,7 +6959,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
@@ -7138,7 +7121,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            With volta specifier:
+            With volta measure map:
 
             ::
 
@@ -7152,7 +7135,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
@@ -7317,14 +7300,15 @@ class SegmentMaker(abjad.SegmentMaker):
 
         Defaults to none.
 
-        Set to volta specifier or none.
+        Set to volta measure map or none.
 
-        Returns volta specifier or none.
+        Returns volta measure map or none.
         '''
         return self._volta_measure_map
 
     ### PUBLIC METHODS ###
 
+    # TODO: change to append_commands()
     def append_specifiers(self, scopes, *specifiers, **keywords):
         r'''Appends each specifier in `specifiers` to each scope in `scopes`.
 
@@ -7341,7 +7325,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_specifiers(
+                >>> commands = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
                 ...     baca.even_runs(),
                 ...     abjad.label().with_indices(),
@@ -7557,7 +7541,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        Returns scoped specifiers.
+        Returns scoped commands.
         '''
         if keywords != {}:
             message = 'found specifier keywords: {!r}.'
@@ -7585,11 +7569,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 specifier = abjad.new(specifier, **keywords)
                 if default_scope is not None:
                     specifier._default_scope = default_scope
-                specifier_ = baca.ScopedSpecifier(
+                specifier_ = baca.ScopedCommand(
                     scope=scope,
-                    specifier=specifier,
+                    command=specifier,
                     )
-                self.scoped_specifiers.append(specifier_)
+                self.scoped_commands.append(specifier_)
                 specifiers_.append(specifier_)
         return specifiers_
 
@@ -7598,7 +7582,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            With label specifier:
+            # TODO: change to LabelCommand (with selector)
+
+            With label expression:
 
             ::
 
@@ -7609,7 +7595,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
+                >>> commands = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
@@ -7826,10 +7812,11 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        Returns scoped specifiers.
+        Returns scoped commands.
         '''
         return self.append_specifiers((voice_name, selector), *commands)
 
+    # TODO: change to copy_scoped_command()
     def copy_specifier(self, scoped_offset, target_scope, **keywords):
         r'''Copies rhythm specifier.
 
@@ -7840,11 +7827,11 @@ class SegmentMaker(abjad.SegmentMaker):
         Returns rhythm specifier.
         '''
         _voice_name, _stage = scoped_offset
-        rhythm_specifier = self._get_rhythm_specifier(_voice_name, _stage)
-        rhythm_specifier = copy.deepcopy(rhythm_specifier)
-        assert isinstance(rhythm_specifier, baca.ScopedSpecifier)
+        rhythm_command = self._get_rhythm_command(_voice_name, _stage)
+        rhythm_command = copy.deepcopy(rhythm_command)
+        assert isinstance(rhythm_command, baca.ScopedCommand)
         if target_scope is None:
-            target_scope = rhythm_specifier.scope
+            target_scope = rhythm_command.scope
         elif isinstance(target_scope, baca.SimpleScope):
             pass
         else:
@@ -7852,14 +7839,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 voice_name=_voice_name,
                 stages=(target_scope.start, target_scope.stop),
                 )
-        rhythm_specifier = rhythm_specifier.specifier
-        new_rhythm_specifier = abjad.new(rhythm_specifier, **keywords)
-        new_scoped_specifier = baca.ScopedSpecifier(
+        rhythm_command = rhythm_command.command
+        new_rhythm_command = abjad.new(rhythm_command, **keywords)
+        new_scoped_command = baca.ScopedCommand(
             target_scope,
-            new_rhythm_specifier,
+            new_rhythm_command,
             )
-        self.scoped_specifiers.append(new_scoped_specifier)
-        return new_scoped_specifier
+        self.scoped_commands.append(new_scoped_command)
+        return new_scoped_command
 
     def validate_measure_count(self, measure_count):
         r'''Validates measure count.

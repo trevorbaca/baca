@@ -321,14 +321,6 @@ class RegisterCommand(abjad.AbjadObject):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-#        if isinstance(argument, baca.ScopedSpecifier):
-#            selections = [argument]
-#        if isinstance(argument, abjad.Selection):
-#            selections = [argument]
-#        else:
-#            assert isinstance(argument, list), repr(argument)
-#            assert isinstance(argument[0], abjad.Selection), repr(argument)
-#            selections = argument
         selections = baca.MusicMaker._normalize_selections(argument)
         for selection in selections:
             for logical_tie in abjad.iterate(selection).by_logical_tie(
