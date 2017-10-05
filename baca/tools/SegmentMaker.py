@@ -475,7 +475,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._skips_instead_of_rests = skips_instead_of_rests
         self._spacing_map = spacing_map
         if spacing_specifier is not None:
-            assert isinstance(spacing_specifier, baca.HorizontalSpacingCommand)
+            assert isinstance(spacing_specifier, baca.HorizontalSpacingSpecifier)
         self._spacing_specifier = spacing_specifier
         if stage_label_base_string is not None:
             assert isinstance(stage_label_base_string, str)
@@ -670,9 +670,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 command(selection)
         # TODO: remove this?
         elif isinstance(command, abjad.Spanner):
+            raise Exception(command, 'FOO')
             abjad.attach(copy.copy(command), selection)
         # TODO: remove this?
         else:
+            raise Exception(command, 'BAR')
             abjad.attach(command, selection[0])
 
     def _assert_valid_stage_number(self, stage_number):
@@ -2036,7 +2038,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> segment_maker = baca.SegmentMaker(
                 ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     spacing_specifier=baca.HorizontalSpacingCommand(
+                ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
@@ -2185,7 +2187,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> segment_maker = baca.SegmentMaker(
                 ...     allow_figure_names=True,
                 ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     spacing_specifier=baca.HorizontalSpacingCommand(
+                ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
@@ -2390,7 +2392,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> segment_maker = baca.SegmentMaker(
                 ...     color_octaves=True,
                 ...     score_template=baca.StringTrioScoreTemplate(),
-                ...     spacing_specifier=baca.HorizontalSpacingCommand(
+                ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=[abjad.TimeSignature((6, 16))],
@@ -2568,7 +2570,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...     color_out_of_range_pitches=True,
                 ...     range_checker=pitch_range,
                 ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     spacing_specifier=baca.HorizontalSpacingCommand(
+                ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
@@ -2736,7 +2738,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> segment_maker = baca.SegmentMaker(
                 ...     color_repeat_pitch_classes=True,
                 ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     spacing_specifier=baca.HorizontalSpacingCommand(
+                ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
@@ -4371,7 +4373,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> segment_maker = baca.SegmentMaker(
                 ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     spacing_specifier=baca.HorizontalSpacingCommand(
+                ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,
@@ -4623,7 +4625,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> segment_maker = baca.SegmentMaker(
                 ...     ignore_unregistered_pitches=True,
                 ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     spacing_specifier=baca.HorizontalSpacingCommand(
+                ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,

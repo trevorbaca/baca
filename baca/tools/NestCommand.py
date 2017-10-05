@@ -117,7 +117,7 @@ class NestCommand(abjad.AbjadObject):
 
             >>> segment_maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.HorizontalSpacingCommand(
+            ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
             ...         minimum_width=abjad.Duration(1, 24),
             ...         ),
             ...     time_signatures=time_signatures,

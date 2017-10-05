@@ -818,7 +818,7 @@ class ImbricateCommand(abjad.AbjadObject):
                 ...     ignore_repeat_pitch_classes=True,
                 ...     measures_per_stage=[1, 1],
                 ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
-                ...     spacing_specifier=baca.HorizontalSpacingCommand(
+                ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
                 ...         minimum_width=abjad.Duration(1, 24),
                 ...         ),
                 ...     time_signatures=time_signatures,

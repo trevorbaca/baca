@@ -1,7 +1,7 @@
 import abjad
 
 
-class HorizontalSpacingCommand(abjad.AbjadObject):
+class HorizontalSpacingSpecifier(abjad.AbjadObject):
     r'''Horizontal spacing command.
 
     ..  container:: example
@@ -119,7 +119,7 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
 
             >>> segment_maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.HorizontalSpacingCommand(),
+            ...     spacing_specifier=baca.HorizontalSpacingSpecifier(),
             ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
             ...     )
 
@@ -235,7 +235,7 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
 
             >>> segment_maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.HorizontalSpacingCommand(
+            ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
             ...         multiplier=abjad.Multiplier(1),
             ...         ),
             ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
@@ -354,7 +354,7 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
 
             >>> segment_maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.HorizontalSpacingCommand(
+            ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
             ...         multiplier=abjad.Multiplier(2),
             ...         ),
             ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
@@ -473,7 +473,7 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
 
             >>> segment_maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.HorizontalSpacingCommand(
+            ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
             ...         multiplier=abjad.Multiplier(2),
             ...         minimum_width=abjad.Duration(1, 8),
             ...         ),
@@ -592,7 +592,7 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
 
             >>> segment_maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.HorizontalSpacingCommand(
+            ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
             ...         minimum_width=abjad.Duration(1, 8),
             ...         ),
             ...     time_signatures=[(4, 8), (3, 8)],
