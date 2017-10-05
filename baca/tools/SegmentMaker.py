@@ -617,9 +617,8 @@ class SegmentMaker(abjad.SegmentMaker):
         if self._is_first_segment():
             return
         if not self._previous_metadata:
-            message = 'can not find previous metadata before segment {}.'
-            message = message.format(self._get_segment_identifier())
-            print(message)
+            segment = self._get_segment_identifier()
+            print('can not find previous metadata before {segment}.')
             return
         for context in abjad.iterate(self._score).by_class(abjad.Context):
             previous_instrument = self._get_previous_instrument(context.name)
@@ -664,8 +663,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _assert_valid_stage_number(self, stage_number):
         if not 1 <= stage_number <= self.stage_count:
-            message = 'stage number {} must be between {} and {}.'
-            message = message.format(stage_number, 1, self.stage_count)
+            message = f'must be 1 <= x <= {self.stage_count}: {stage_number}.'
             raise Exception(message)
 
     def _attach_fermatas(self):
@@ -703,9 +701,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     string = 'scripts.uverylongfermata'
                     fermata_y_offset = -7
                 else:
-                    message = 'unknown fermata command: {!r}.'
-                    message = message.format(directive.command)
-                    raise Exception(message)
+                    raise Exception(f'unknown fermata: {directive.command!r}.')
                 directive = abjad.Markup.musicglyph(string)
             else:
                 directive = abjad.new(directive)
@@ -787,9 +783,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             abjad.label(leaf).color_leaves('red')
                             abjad.attach(markup, leaf)
                         else:
-                            message = 'out of range: {!r}.'
-                            message = message.format(leaf)
-                            raise Exception(message)
+                            raise Exception(f'out of range: {leaf!r}.')
         else:
             raise NotImplementedError(self.range_checker)
 
@@ -797,10 +791,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.skip_wellformedness_checks:
             return
         score = self._lilypond_file['Score']
-#        if not abjad.inspect(score).is_well_formed():
-#            inspector = abjad.inspect(score)
-#            message = inspector.tabulate_wellformedness()
-#            raise Exception(message)
         if (self.color_octaves or
             self.color_repeat_pitch_classes or
             self.ignore_repeat_pitch_classes):
@@ -917,8 +907,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     if logical_tie.head is leaf:
                         result.append(logical_tie)
         if not result:
-            message = 'EMPTY SELECTION: {}'
-            message = message.format(format(scoped_command))
+            message = f'EMPTY SELECTION: {format(scoped_command)}'
             if self.allow_empty_selections:
                 print(message)
             else:
@@ -1122,9 +1111,7 @@ class SegmentMaker(abjad.SegmentMaker):
             leaf = abjad.inspect(context).get_leaf(-1)
             instrument = abjad.inspect(leaf).get_effective(abjad.Instrument)
             if instrument is None:
-                message = 'can not find {} end-instrument.'
-                message = message.format(context.name)
-                print(message)
+                print(f'can not find {context.name!r} end-instrument.')
             result[context.name] = instrument.name
         return result
 
@@ -1151,8 +1138,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if mark_ == mark:
                 break
         else:
-            message = 'can not find {!r} in metronome marks {!r}.'
-            message = message.format(mark, self.metronome_marks)
+            message = f'can not find {mark!r} in {self.metronome_marks!r}.'
             raise Exception(message)
         return name
 
@@ -1271,9 +1257,7 @@ class SegmentMaker(abjad.SegmentMaker):
         elif isinstance(argument, tuple):
             start, stop = argument
         else:
-            message = 'must be stage expression or tuple: {!r}.'
-            message = message.format(argument)
-            raise TypeError(message)
+            raise TypeError(f'must be specifier or tuple: {argument!r}.')
         return start, stop
 
     def _get_stylesheet_includes(self, is_doc_example=None, is_test=None):
@@ -1360,9 +1344,7 @@ class SegmentMaker(abjad.SegmentMaker):
         previous_stop_offset = abjad.Offset(0)
         for contribution in contributions:
             if contribution.start_offset < previous_stop_offset:
-                message = 'overlapping contribution offsets: {!r}.'
-                message = message.format(contribution)
-                raise Exception(message)
+                raise Exception('overlapping offsets: {contribution!r}.')
             if previous_stop_offset < contribution.start_offset:
                 selection = self._make_intercalated_rests(
                     previous_stop_offset,
@@ -1423,9 +1405,7 @@ class SegmentMaker(abjad.SegmentMaker):
             contributions.append(contribution)
         contributions.sort(key=lambda _: _.start_offset)
         if not self._contributions_do_not_overlap(contributions):
-            message = '{!r} has overlapping rhythms.'
-            message = message.format(voice.name)
-            raise Exception(message)
+            raise Exception(f'{voice.name!r} has overlapping rhythms.')
         contributions = self._intercalate_rests(contributions)
         voice.extend(contributions)
         self._apply_first_and_last_ties(voice)
@@ -1436,8 +1416,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if isinstance(command, baca.RhythmCommand):
             return
         classname = type(command).__name__
-        if (not classname.endswith('Command') and
-            not classname.endswith('Expression')):
+        if not classname.endswith('Command'):
             raise Exception(format(command))
         self._handle_mutator(command)
         selection, timespan = self._evaluate_selector(
@@ -1523,9 +1502,9 @@ class SegmentMaker(abjad.SegmentMaker):
             base = base or self._get_name()
             base = base or self._get_rehearsal_letter()
             if base not in ('', None):
-                string = '[{}.{}]'.format(base, stage_number)
+                string = f'[{base}.{stage_number}]'
             else:
-                string = '[{}]'.format(stage_number)
+                string = f'[{stage_number}]'
             markup = abjad.Markup(string)
             markup = markup.with_color('blue')
             markup = markup.fontsize(-3)
@@ -1534,7 +1513,7 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.attach(markup, leaf)
 
     def _make_instrument_change_markup(self, instrument):
-        string = 'to {}'.format(instrument.name)
+        string = f'to {instrument.name}'
         markup = abjad.Markup(string, direction=abjad.Up)
         markup = markup.box().override(('box-padding', 0.75))
         return markup
@@ -1802,16 +1781,12 @@ class SegmentMaker(abjad.SegmentMaker):
             duration_ /= 1000
             total_duration += duration_
         total_duration = int(round(total_duration))
-        identifier = abjad.Strin('second').pluralize(total_duration)
-        message = 'segment duration {} {} ...'
-        message = message.format(total_duration, identifier)
-        print(message)
+        counter = abjad.Strin('second').pluralize(total_duration)
+        print(f'segment duration {total_duration} {counter} ...')
 
     def _scope_to_leaves(self, scope):
         if not isinstance(scope, baca.SimpleScope):
-            message = 'not yet implemented for {!r}.'
-            message = message.format(scope)
-            raise TypeError(message)
+            raise TypeError(f'not yet implement for {scope!r}.')
         result = self._get_stage_numbers(scope.stages)
         start_stage, stop_stage = result
         offsets = self._get_offsets(start_stage, stop_stage)
@@ -7318,7 +7293,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> commands = segment_maker.append_specifiers(
                 ...     ('vn', baca.select_stages(1)),
                 ...     baca.even_runs(),
-                ...     abjad.label().with_indices(),
+                ...     baca.label(abjad.label().with_indices()),
                 ...     )
 
             ::
@@ -7589,7 +7564,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...     'vn',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
-                ...     abjad.label().with_indices(),
+                ...     baca.label(abjad.label().with_indices()),
                 ...     )
 
             ::

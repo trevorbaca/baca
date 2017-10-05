@@ -138,8 +138,7 @@ class ScopedCommand(abjad.AbjadObject):
         self._scope = scope
         assert not isinstance(command, (tuple, list)), repr(command)
         classname = type(command).__name__
-        if (not classname.endswith('Command') and
-            not classname.endswith('Expression')):
+        if not classname.endswith('Command'):
             raise Exception(format(command))
         self._command = command
 
