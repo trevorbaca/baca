@@ -662,21 +662,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if 3 < total_time:
             raise Exception(f'spacing specifier time {total_time} seconds!')
 
-    def _apply_command_to_selection(self, command, selection, timespan):
-        if hasattr(command, '__call__'):
-            if timespan:
-                command(selection, timespan)
-            else:
-                command(selection)
-        # TODO: remove this?
-        elif isinstance(command, abjad.Spanner):
-            raise Exception(command, 'FOO')
-            abjad.attach(copy.copy(command), selection)
-        # TODO: remove this?
-        else:
-            raise Exception(command, 'BAR')
-            abjad.attach(command, selection[0])
-
     def _assert_valid_stage_number(self, stage_number):
         if not 1 <= stage_number <= self.stage_count:
             message = 'stage number {} must be between {} and {}.'
@@ -1461,7 +1446,10 @@ class SegmentMaker(abjad.SegmentMaker):
             command,
             )
         try:
-            self._apply_command_to_selection(command, selection, timespan)
+            if timespan:
+                command(selection, timespan)
+            else:
+                command(selection)
         except:
             traceback.print_exc()
             raise Exception(format(scoped_command))

@@ -757,7 +757,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Commands'
+    __documentation_section__ = 'Specifiers'
 
     __slots__ = (
         '_fermata_measure_width',

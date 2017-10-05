@@ -5401,6 +5401,181 @@ class LibraryAM(object):
             )
 
     @staticmethod
+    def label(expression, selector=None):
+        r'''Labels selection with label `expression`.
+
+        ..  container:: example
+
+            Labels pitch names:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.label(abjad.label().with_pitches(locale='us')),
+                ...     baca.rests_around([2], [4]),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 [
+                                    ^ \markup {
+                                        \small
+                                            C4
+                                        }
+                                d'16 ]
+                                    ^ \markup {
+                                        \small
+                                            D4
+                                        }
+                                bf'4 ~
+                                    ^ \markup {
+                                        \small
+                                            Bb4
+                                        }
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 [
+                                    ^ \markup {
+                                        \small
+                                            "F#5"
+                                        }
+                                e''16 ]
+                                    ^ \markup {
+                                        \small
+                                            E5
+                                        }
+                                ef''4 ~
+                                    ^ \markup {
+                                        \small
+                                            Eb5
+                                        }
+                                ef''16
+                                r16
+                                af''16 [
+                                    ^ \markup {
+                                        \small
+                                            Ab5
+                                        }
+                                g''16 ]
+                                    ^ \markup {
+                                        \small
+                                            G5
+                                        }
+                            }
+                            \times 4/5 {
+                                a'16
+                                    ^ \markup {
+                                        \small
+                                            A4
+                                        }
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Labels pitch names in tuplet 1:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.label(
+                ...         expression=abjad.label().with_pitches(locale='us'),
+                ...         selector=baca.select_plt_heads_in_tuplet(n=1),
+                ...         ),
+                ...     baca.rests_around([2], [4]),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 [
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 [
+                                    ^ \markup {
+                                        \small
+                                            "F#5"
+                                        }
+                                e''16 ]
+                                    ^ \markup {
+                                        \small
+                                            E5
+                                        }
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                    ^ \markup {
+                                        \small
+                                            Ab5
+                                        }
+                                g''16 ]
+                                    ^ \markup {
+                                        \small
+                                            G5
+                                        }
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        return baca.LabelCommand(
+            expression=expression,
+            selector=selector,
+            )
+
+    @staticmethod
     def laissez_vibrer(selector=None):
         r'''Attaches laissez vibrer to pitched tails.
 
