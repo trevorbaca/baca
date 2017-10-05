@@ -61,6 +61,8 @@ class RegistrationDictionary(abjad.TypedOrderedDict):
 
     __slots__ = ()
 
+    __documentation_section__ = 'Utilities'
+
     ### PRIVATE METHODS ###
 
     @staticmethod

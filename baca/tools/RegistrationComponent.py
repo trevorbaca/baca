@@ -27,6 +27,8 @@ class RegistrationComponent(AbjadValueObject):
         '_target_octave_start_pitch',
         )
 
+    __documentation_section__ = 'Utilities'
+
     ### INITIALIZER ###
 
     def __init__(

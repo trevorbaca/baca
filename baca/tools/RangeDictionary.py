@@ -72,6 +72,8 @@ class RangeDictionary(TypedOrderedDict):
 
     __slots__ = ()
 
+    __documentation_section__ = 'Utilities'
+
     ### SPECIAL METHODS ###
 
     def __illustrate__(self):

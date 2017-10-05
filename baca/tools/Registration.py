@@ -38,6 +38,8 @@ class Registration(abjad.AbjadValueObject):
         '_components',
         )
 
+    __documentation_section__ = 'Utilities'
+
     _publish_storage_format = True
 
     ### INITIALIZER ###
