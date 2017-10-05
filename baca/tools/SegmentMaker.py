@@ -100,7 +100,7 @@ class SegmentMaker(abjad.SegmentMaker):
         ::
 
             >>> commands = segment_maker.append_commands(
-            ...     'vn',
+            ...     'Violin Music Voice',
             ...     baca.select_stages(1),
             ...     baca.even_runs(),
             ...     )
@@ -1893,38 +1893,27 @@ class SegmentMaker(abjad.SegmentMaker):
                     written_pitch_number = sounding_pitch_number - i
                     leaf.written_pitch = written_pitch_number
 
-    def _unpack_scopes(self, scopes, score_template=None):
-        scope_prototype = (baca.SimpleScope, baca.CompoundScope)
-        if isinstance(scopes, scope_prototype):
+    def _unpack_scopes(self, scopes):
+        prototype = (baca.SimpleScope, baca.CompoundScope)
+        if isinstance(scopes, prototype):
             scopes = [scopes]
         elif isinstance(scopes, tuple):
-            scopes = baca.CompoundScope._to_simple_scopes(
-                scopes,
-                score_template=score_template,
-                )
+            scopes = baca.CompoundScope._to_simple_scopes(scopes)
         elif isinstance(scopes, list):
             scopes__ = []
             for scope in scopes:
-                if isinstance(scope, scope_prototype):
+                if isinstance(scope, prototype):
                     scopes__.append(scope)
                 elif isinstance(scope, tuple):
-                    scopes_ = baca.CompoundScope._to_simple_scopes(
-                        scope,
-                        score_template=score_template,
-                        )
+                    scopes_ = baca.CompoundScope._to_simple_scopes(scope)
                     scopes__.extend(scopes_)
                 else:
-                    message = 'list must contain only scopes and tuples: {!r}.'
-                    message = message.format(scope)
-                    raise TypeError(message)
+                    raise TypeError(f'only scopes and tuples: {scope!r}.')
             scopes = scopes__
         else:
-            message = 'input must be scope, tuple or list: {!r}.'
-            message = message.format(scopes)
-            raise TypeError(message)
+            raise TypeError(f'only scope, tuple or list: {scope!r}.')
         assert isinstance(scopes, list), repr(scopes)
-        assert all(isinstance(_, scope_prototype) for _ in scopes), repr(
-            scopes)
+        assert all(isinstance(_, prototype) for _ in scopes), repr(scopes)
         return scopes
 
     def _unwrap_scoped_command(self, scoped_command):
@@ -2007,7 +1996,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.RhythmCommand(
                 ...         rhythm_maker=figures,
@@ -2156,7 +2145,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.RhythmCommand(
                 ...         rhythm_maker=figures,
@@ -2369,7 +2358,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...     [[2, 4, 5, 7, 9, 11]],
                 ...     )
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.RhythmCommand(
                 ...         rhythm_maker=contribution['Violin Music Voice'],
@@ -2383,7 +2372,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...     [[-3, -5, -7, -8, -10, -12]],
                 ...     )
                 >>> commands = segment_maker.append_commands(
-                ...     'vc',
+                ...     'Cello Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.RhythmCommand(
                 ...         rhythm_maker=contribution['Cello Music Voice'],
@@ -2539,7 +2528,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.RhythmCommand(
                 ...         rhythm_maker=figures,
@@ -2707,7 +2696,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.RhythmCommand(
                 ...         rhythm_maker=figures,
@@ -2883,7 +2872,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
@@ -3056,7 +3045,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
@@ -3234,7 +3223,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
@@ -3408,7 +3397,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
@@ -3595,7 +3584,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
@@ -3771,7 +3760,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
@@ -4015,7 +4004,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
@@ -4189,7 +4178,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
@@ -4342,7 +4331,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.RhythmCommand(
                 ...         rhythm_maker=figures,
@@ -4594,7 +4583,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...     time_signatures=time_signatures,
                 ...     )
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.RhythmCommand(
                 ...         rhythm_maker=figures,
@@ -4742,7 +4731,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
@@ -4934,7 +4923,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
@@ -5136,7 +5125,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
@@ -5310,7 +5299,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
@@ -5491,7 +5480,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
@@ -6038,7 +6027,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
@@ -6224,7 +6213,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
@@ -6420,7 +6409,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
@@ -6596,7 +6585,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
@@ -6806,7 +6795,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     baca.pitches('E4 F4'),
@@ -6925,7 +6914,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
@@ -7101,7 +7090,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     )
@@ -7274,12 +7263,10 @@ class SegmentMaker(abjad.SegmentMaker):
     ### PUBLIC METHODS ###
 
     # TODO: change to append_commands()
-    def append_specifiers(self, scopes, *specifiers, **keywords):
-        r'''Appends each specifier in `specifiers` to each scope in `scopes`.
+    def append_specifiers(self, scopes, *commands):
+        r'''Appends each command in `command` to each scope in `scopes`.
 
         ..  container:: example
-
-            With label expression:
 
             ::
 
@@ -7291,7 +7278,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.append_specifiers(
-                ...     ('vn', baca.select_stages(1)),
+                ...     ('Violin Music Voice', baca.select_stages(1)),
                 ...     baca.even_runs(),
                 ...     baca.label(abjad.label().with_indices()),
                 ...     )
@@ -7508,46 +7495,25 @@ class SegmentMaker(abjad.SegmentMaker):
 
         Returns scoped commands.
         '''
-        if keywords != {}:
-            message = 'found specifier keywords: {!r}.'
-            message = message.format(keywords)
-            raise Exception(message)
-        scopes = self._unpack_scopes(
-            scopes,
-            score_template=self.score_template,
-            )
-        assert isinstance(specifiers, tuple), repr(specifiers)
-        if specifiers and isinstance(specifiers[0], list):
-            message = 'REFACTOR: remove outer list: {!r}.'
-            message = message.format(specifiers)
-            raise Exception(message)
-        specifiers_ = []
+        scopes = self._unpack_scopes(scopes)
+        assert isinstance(commands, tuple), repr(commands)
+        for command in commands:
+            assert type(command).__name__.endswith('Command'), repr(command)
+        scoped_commands = []
         for scope in scopes:
-            for specifier in specifiers:
-                if specifier is None:
-                    message = '{!r} contains none-valued specifier.'
-                    message = message.format(scope)
-                    raise Exception(message)
-                default_scope = None
-                if isinstance(specifier, abjad.Instrument):
-                    default_scope = specifier._default_scope
-                specifier = abjad.new(specifier, **keywords)
-                if default_scope is not None:
-                    specifier._default_scope = default_scope
-                specifier_ = baca.ScopedCommand(
+            for command in commands:
+                scoped_command = baca.ScopedCommand(
                     scope=scope,
-                    command=specifier,
+                    command=command,
                     )
-                self.scoped_commands.append(specifier_)
-                specifiers_.append(specifier_)
-        return specifiers_
+                self.scoped_commands.append(scoped_command)
+                scoped_commands.append(scoped_command)
+        return scoped_commands
 
     def append_commands(self, voice_name, selector, *commands):
-        r'''Appends each `commands` to `voice_name` with `selector`.
+        r'''Appends each command in `commands` to `voice_name` with `selector`.
 
         ..  container:: example
-
-            # TODO: change to LabelCommand (with selector)
 
             With label expression:
 
@@ -7561,7 +7527,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.even_runs(),
                 ...     baca.label(abjad.label().with_indices()),

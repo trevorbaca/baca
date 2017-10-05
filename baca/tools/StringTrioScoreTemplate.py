@@ -114,12 +114,6 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
     __documentation_section__ = 'Utilities'
 
-    voice_abbreviations = {
-        'vn': 'Violin Music Voice',
-        'va': 'Viola Music Voice',
-        'vc': 'Cello Music Voice',
-        }
-
     ### SPECIAL METHODS ###
 
     def __call__(self):
@@ -145,7 +139,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
         violin_music_voice = abjad.Voice(
             [],
             context_name='ViolinMusicVoice',
-            name=self.voice_abbreviations['vn'],
+            name='Violin Music Voice',
             )
         violin_music_staff = abjad.Staff(
             [violin_music_voice],
@@ -169,7 +163,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
         viola_music_voice = abjad.Voice(
             [],
             context_name='ViolaMusicVoice',
-            name=self.voice_abbreviations['va'],
+            name='Viola Music Voice',
             )
         viola_music_staff = abjad.Staff(
             [viola_music_voice],
@@ -192,7 +186,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
         cello_music_voice = abjad.Voice(
             [],
             context_name='CelloMusicVoice',
-            name=self.voice_abbreviations['vc'],
+            name='Cello Music Voice',
             )
         cello_music_staff = abjad.Staff(
             [cello_music_voice],

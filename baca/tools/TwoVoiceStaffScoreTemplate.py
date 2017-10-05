@@ -88,11 +88,6 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
 
     __documentation_section__ = 'Utilities'
 
-    voice_abbreviations = {
-        'v1': 'Music Voice 1',
-        'v2': 'Music Voice 2',
-        }
-
     ### SPECIAL METHODS ###
 
     def __call__(self):
@@ -106,12 +101,12 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
         music_voice_1 = abjad.Voice(
             [],
             context_name='MusicVoiceOne',
-            name=self.voice_abbreviations['v1'],
+            name='Music Voice 1',
             )
         music_voice_2 = abjad.Voice(
             [],
             context_name='MusicVoiceTwo',
-            name=self.voice_abbreviations['v2'],
+            name='Music Voice 2',
             )
         music_staff = abjad.Staff([
             music_voice_1,

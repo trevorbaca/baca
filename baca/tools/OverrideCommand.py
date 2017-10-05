@@ -89,7 +89,7 @@ class OverrideCommand(abjad.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_commands(
-            ...     'vn',
+            ...     'Violin Music Voice',
             ...     baca.select_stages(1),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.OverrideCommand(

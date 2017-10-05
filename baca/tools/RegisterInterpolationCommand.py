@@ -138,7 +138,7 @@ class RegisterInterpolationCommand(abjad.AbjadObject):
 
             >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
             >>> specifiers = segment_maker.append_commands(
-            ...     'vn',
+            ...     'Violin Music Voice',
             ...     baca.select_stages(1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
@@ -300,7 +300,7 @@ class RegisterInterpolationCommand(abjad.AbjadObject):
 
             >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
             >>> specifiers = segment_maker.append_commands(
-            ...     'vn',
+            ...     'Violin Music Voice',
             ...     baca.select_stages(1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
@@ -462,7 +462,7 @@ class RegisterInterpolationCommand(abjad.AbjadObject):
 
             >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
             >>> specifiers = segment_maker.append_commands(
-            ...     'vn',
+            ...     'Violin Music Voice',
             ...     baca.select_stages(1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
@@ -624,7 +624,7 @@ class RegisterInterpolationCommand(abjad.AbjadObject):
 
             >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
             >>> specifiers = segment_maker.append_commands(
-            ...     'vn',
+            ...     'Violin Music Voice',
             ...     baca.select_stages(1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
@@ -786,7 +786,7 @@ class RegisterInterpolationCommand(abjad.AbjadObject):
 
             >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
             >>> specifiers = segment_maker.append_commands(
-            ...     'vn',
+            ...     'Violin Music Voice',
             ...     baca.select_stages(1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),

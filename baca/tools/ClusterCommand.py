@@ -200,7 +200,7 @@ class ClusterCommand(abjad.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_commands(
-            ...     'vn',
+            ...     'Violin Music Voice',
             ...     baca.select_stages(1),
             ...     baca.pitches('E4'),
             ...     baca.messiaen_notes(),
@@ -447,7 +447,7 @@ class ClusterCommand(abjad.AbjadObject):
             ::
 
                 >>> specifiers = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.pitches('E4'),
                 ...     baca.messiaen_notes(),
@@ -591,7 +591,7 @@ class ClusterCommand(abjad.AbjadObject):
             ::
 
                 >>> specifiers = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.pitches('E4'),
                 ...     baca.messiaen_notes(),
@@ -753,7 +753,7 @@ class ClusterCommand(abjad.AbjadObject):
             ::
 
                 >>> specifiers = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.messiaen_notes(),
                 ...     baca.pitches('C4 D4 E4 F4'),
@@ -902,7 +902,7 @@ class ClusterCommand(abjad.AbjadObject):
             ::
 
                 >>> specifiers = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.messiaen_notes(),
                 ...     baca.pitches('C4 D4 E4 F4'),
@@ -1062,7 +1062,7 @@ class ClusterCommand(abjad.AbjadObject):
             ::
 
                 >>> specifiers = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.pitches('E4'),
                 ...     baca.messiaen_notes(),
@@ -1196,7 +1196,7 @@ class ClusterCommand(abjad.AbjadObject):
             ::
 
                 >>> specifiers = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.messiaen_notes(),
                 ...     baca.pitches('E4'),
@@ -1315,7 +1315,7 @@ class ClusterCommand(abjad.AbjadObject):
             ::
 
                 >>> specifiers = segment_maker.append_commands(
-                ...     'vn',
+                ...     'Violin Music Voice',
                 ...     baca.select_stages(1),
                 ...     baca.messiaen_notes(),
                 ...     baca.pitches('E4', allow_repeat_pitches=True),

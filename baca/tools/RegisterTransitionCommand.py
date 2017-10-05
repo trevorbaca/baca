@@ -17,7 +17,7 @@ class RegisterTransitionCommand(abjad.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_commands(
-            ...     'vn',
+            ...     'Violin Music Voice',
             ...     baca.select_stages(1),
             ...     baca.pitches('C4 D4 E4 F4'),
             ...     baca.even_runs(),

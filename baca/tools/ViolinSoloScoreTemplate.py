@@ -86,10 +86,6 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
 
     __documentation_section__ = 'Utilities'
 
-    voice_abbreviations = {
-        'vn': 'Violin Music Voice',
-        }
-
     ### SPECIAL METHODS ###
 
     def __call__(self):
@@ -112,7 +108,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
         violin_music_voice = abjad.Voice(
             [],
             context_name='ViolinMusicVoice',
-            name=self.voice_abbreviations['vn'],
+            name='Violin Music Voice',
             )
         violin_music_staff = abjad.Staff(
             [violin_music_voice],

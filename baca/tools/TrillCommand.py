@@ -67,7 +67,7 @@ class TrillCommand(abjad.AbjadObject):
         ::
 
             >>> specifiers = collection_maker.append_commands(
-            ...     'vn',
+            ...     'Violin Music Voice',
             ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
             ...     baca.messiaen_notes(),

@@ -159,7 +159,7 @@ class RegisterCommand(abjad.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_commands(
-            ...     'vn',
+            ...     'Violin Music Voice',
             ...     baca.select_stages(1),
             ...     baca.pitches('G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4'),
             ...     baca.even_runs(),

@@ -9,9 +9,6 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     __documentation_section__ = 'Utilities'
 
-    voice_abbreviations = {
-        }
-
     voice_colors = {
         }
 

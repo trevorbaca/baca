@@ -19,7 +19,7 @@ class MicrotonalDeviationCommand(abjad.AbjadObject):
         ::
 
             >>> specifiers = segment_maker.append_commands(
-            ...     'vn',
+            ...     'Violin Music Voice',
             ...     baca.select_stages(1),
             ...     baca.pitches('E4'),
             ...     baca.even_runs(),
