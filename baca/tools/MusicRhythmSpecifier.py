@@ -1,15 +1,15 @@
 import abjad
 
 
-class MusicRhythmCommand(abjad.AbjadObject):
+class MusicRhythmSpecifier(abjad.AbjadObject):
     r'''Music rhythm specifier.
 
     ..  container:: example
 
         ::
 
-            >>> baca.MusicRhythmCommand()
-            MusicRhythmCommand()
+            >>> baca.MusicRhythmSpecifier()
+            MusicRhythmSpecifier()
 
     '''
 

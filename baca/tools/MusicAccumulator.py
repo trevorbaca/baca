@@ -259,7 +259,7 @@ class MusicAccumulator(abjad.AbjadObject):
             abjad.rhythmmakertools.BeamSpecifier(
                 beam_divisions_together=True,
                 ),
-            baca.MusicRhythmCommand(
+            baca.MusicRhythmSpecifier(
                 rhythm_maker=baca.MusicRhythmMaker(
                     talea=abjad.rhythmmakertools.Talea(
                         counts=[1],

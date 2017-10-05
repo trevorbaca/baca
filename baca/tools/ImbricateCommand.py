@@ -328,7 +328,7 @@ class ImbricateCommand(abjad.AbjadObject):
             ...         beam_rests=True,
             ...         ),
             ...     baca.staccati(),
-            ...     baca.MusicRhythmCommand(
+            ...     baca.MusicRhythmSpecifier(
             ...         rhythm_maker=baca.MusicRhythmMaker(
             ...             talea=abjad.rhythmmakertools.Talea(
             ...                 counts=[1],
@@ -548,7 +548,7 @@ class ImbricateCommand(abjad.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.MusicRhythmCommand(
+                ...     baca.MusicRhythmSpecifier(
                 ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
@@ -1319,7 +1319,7 @@ class ImbricateCommand(abjad.AbjadObject):
         specifiers = self.specifiers or []
         selections = container[:]
         for specifier in specifiers:
-            if isinstance(specifier, baca.MusicRhythmCommand):
+            if isinstance(specifier, baca.MusicRhythmSpecifier):
                 continue
             if isinstance(specifier, baca.RhythmCommand):
                 continue
@@ -2485,7 +2485,7 @@ class ImbricateCommand(abjad.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.MusicRhythmCommand(
+                ...     baca.MusicRhythmSpecifier(
                 ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5],

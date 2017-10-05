@@ -15,7 +15,7 @@ class AttachCommand(abjad.AbjadObject):
             ...     baca.AttachCommand(
             ...         arguments=[abjad.Fermata()],
             ...         ),
-            ...     baca.MusicRhythmCommand(
+            ...     baca.MusicRhythmSpecifier(
             ...         rhythm_maker=baca.MusicRhythmMaker(
             ...             talea=abjad.rhythmmakertools.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],
@@ -246,7 +246,7 @@ class AttachCommand(abjad.AbjadObject):
                 ...     baca.AttachCommand(
                 ...         arguments=[abjad.Fermata()],
                 ...         ),
-                ...     baca.MusicRhythmCommand(
+                ...     baca.MusicRhythmSpecifier(
                 ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
@@ -307,7 +307,7 @@ class AttachCommand(abjad.AbjadObject):
                 ...             abjad.Fermata(), None,
                 ...             ],
                 ...         ),
-                ...     baca.MusicRhythmCommand(
+                ...     baca.MusicRhythmSpecifier(
                 ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5, 4, 4, 5, 4, 4, 4],
