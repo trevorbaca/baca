@@ -15,7 +15,7 @@ class ColorCommand(abjad.AbjadObject):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.ColorCommand(color='red'),
-            ...     baca.MusicRhythmSpecifier(
+            ...     baca.MusicRhythmCommand(
             ...         rhythm_maker=baca.MusicRhythmMaker(
             ...             talea=abjad.rhythmmakertools.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],

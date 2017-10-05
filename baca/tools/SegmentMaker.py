@@ -1270,7 +1270,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _get_rhythm_specifier(self, voice_name, stage):
         rhythm_specifier = []
-        prototype = baca.RhythmSpecifier
+        prototype = baca.RhythmCommand
         for rhythm_specifier in self.scoped_specifiers:
             if not isinstance(rhythm_specifier.specifier, prototype):
                 continue
@@ -1295,7 +1295,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _get_rhythm_specifiers_for_voice(self, voice_name):
         rhythm_specifiers = []
-        prototype = baca.RhythmSpecifier
+        prototype = baca.RhythmCommand
         for scoped_specifier in self.scoped_specifiers:
             if not isinstance(scoped_specifier.specifier, prototype):
                 continue
@@ -1485,8 +1485,12 @@ class SegmentMaker(abjad.SegmentMaker):
         assert not isinstance(scoped_specifier.specifier, (list, tuple))
         result = self._unwrap_scoped_specifier(scoped_specifier)
         compound_scope, specifier_wrapper, specifier = result
-        if isinstance(specifier, baca.RhythmSpecifier):
+        if isinstance(specifier, baca.RhythmCommand):
             return
+        classname = type(specifier).__name__
+        if (not classname.endswith('Command') and
+            not classname.endswith('Expression')):
+            raise Exception(format(specifier))
         self._handle_mutator(specifier)
         selection, timespan = self._evaluate_selector(
             scoped_specifier,
@@ -2091,7 +2095,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> specifiers = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
-                ...     baca.RhythmSpecifier(
+                ...     baca.RhythmCommand(
                 ...         rhythm_maker=figures,
                 ...         ),
                 ...     )
@@ -2240,7 +2244,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> specifiers = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
-                ...     baca.RhythmSpecifier(
+                ...     baca.RhythmCommand(
                 ...         rhythm_maker=figures,
                 ...         ),
                 ...     )
@@ -2453,7 +2457,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> specifiers = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
-                ...     baca.RhythmSpecifier(
+                ...     baca.RhythmCommand(
                 ...         rhythm_maker=contribution['Violin Music Voice'],
                 ...         ),
                 ...     )
@@ -2467,7 +2471,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> specifiers = segment_maker.append_commands(
                 ...     'vc',
                 ...     baca.select_stages(1),
-                ...     baca.RhythmSpecifier(
+                ...     baca.RhythmCommand(
                 ...         rhythm_maker=contribution['Cello Music Voice'],
                 ...         ),
                 ...     )
@@ -2623,7 +2627,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> specifiers = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
-                ...     baca.RhythmSpecifier(
+                ...     baca.RhythmCommand(
                 ...         rhythm_maker=figures,
                 ...         ),
                 ...     )
@@ -2791,7 +2795,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> specifiers = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
-                ...     baca.RhythmSpecifier(
+                ...     baca.RhythmCommand(
                 ...         rhythm_maker=figures,
                 ...         ),
                 ...     )
@@ -4379,7 +4383,7 @@ class SegmentMaker(abjad.SegmentMaker):
             Colors unregistered pitches by default:
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.MusicRhythmSpecifier(
+                ...     baca.MusicRhythmCommand(
                 ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             acciaccatura_specifiers=[
                 ...                 baca.AcciaccaturaSpecifier(),
@@ -4426,7 +4430,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> specifiers = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
-                ...     baca.RhythmSpecifier(
+                ...     baca.RhythmCommand(
                 ...         rhythm_maker=figures,
                 ...         ),
                 ...     )
@@ -4630,7 +4634,7 @@ class SegmentMaker(abjad.SegmentMaker):
             Ignores unregistered pitches:
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.MusicRhythmSpecifier(
+                ...     baca.MusicRhythmCommand(
                 ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             acciaccatura_specifiers=[
                 ...                 baca.AcciaccaturaSpecifier(),
@@ -4678,7 +4682,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> specifiers = segment_maker.append_commands(
                 ...     'vn',
                 ...     baca.select_stages(1),
-                ...     baca.RhythmSpecifier(
+                ...     baca.RhythmCommand(
                 ...         rhythm_maker=figures,
                 ...         ),
                 ...     )
@@ -7360,7 +7364,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            With label specifier:
+            With label expression:
 
             ::
 

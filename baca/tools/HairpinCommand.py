@@ -133,7 +133,7 @@ class HairpinCommand(abjad.AbjadObject):
                     include_rests=self.include_rests,
                     )
                 abjad.attach(hairpin, leaves)
-            # hook to allow callable custom classes like SwellSpecifier
+            # hook to allow callable custom classes like SwellCommand
             else:
                 hairpin_token(leaves)
             if self.flare:

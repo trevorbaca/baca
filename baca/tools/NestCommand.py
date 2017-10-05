@@ -125,7 +125,7 @@ class NestCommand(abjad.AbjadObject):
             >>> specifiers = segment_maker.append_commands(
             ...     'vn',
             ...     baca.select_stages(1),
-            ...     baca.RhythmSpecifier(
+            ...     baca.RhythmCommand(
             ...         rhythm_maker=selection,
             ...         ),
             ...     )

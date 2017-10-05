@@ -339,7 +339,7 @@ class LibraryNZ(object):
         start_token = start_token.format(dynamic)
         stop_token = '{} > niente'
         stop_token = stop_token.format(dynamic)
-        return baca.SwellSpecifier(
+        return baca.SwellCommand(
             selector=selector,
             start_count=2,
             start_token=start_token,
@@ -351,7 +351,7 @@ class LibraryNZ(object):
     def notes():
         r'''Makes notes.
         '''
-        return baca.RhythmSpecifier(
+        return baca.RhythmCommand(
             rewrite_meter=True,
             rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker()
             )
@@ -2327,7 +2327,7 @@ class LibraryNZ(object):
         elif isinstance(durations, tuple):
             assert len(durations) == 2
             durations = [abjad.Duration(durations)]
-        return baca.RhythmSpecifier(
+        return baca.RhythmCommand(
             division_expression=baca.split_by_durations(durations=durations),
             rewrite_meter=True,
             rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
@@ -2476,7 +2476,7 @@ class LibraryNZ(object):
         mask = abjad.rhythmmakertools.SilenceMask(
             pattern=abjad.index_all(),
             )
-        return baca.RhythmSpecifier(
+        return baca.RhythmCommand(
             rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
                 division_masks=[mask],
                 ),
@@ -3605,7 +3605,7 @@ class LibraryNZ(object):
                 talea_denominator=denominator,
                 ),
             )
-        return baca.RhythmSpecifier(
+        return baca.RhythmCommand(
             rhythm_maker=rhythm_maker,
             )
 
@@ -3617,7 +3617,7 @@ class LibraryNZ(object):
         ):
         r'''Makes single tapers.
         '''
-        return baca.RhythmSpecifier(
+        return baca.RhythmCommand(
             rhythm_maker=abjad.rhythmmakertools.IncisedRhythmMaker(
                 incise_specifier=abjad.rhythmmakertools.InciseSpecifier(
                     outer_divisions_only=True,

@@ -610,7 +610,7 @@ class MusicMaker(abjad.AbjadObject):
             selections = [abjad.select(tuplet)]
             specifiers = [
                 _ for _ in specifiers
-                if not isinstance(_, baca.MusicRhythmSpecifier)
+                if not isinstance(_, baca.MusicRhythmCommand)
                 ]
         else:
             collections = self._coerce_collections(collections)
@@ -809,7 +809,7 @@ class MusicMaker(abjad.AbjadObject):
         selections = len(collections) * [None]
         rhythm_specifiers, rest_affix_specifiers, specifiers_ = [], [], []
         for specifier in specifiers:
-            if isinstance(specifier, baca.MusicRhythmSpecifier):
+            if isinstance(specifier, baca.MusicRhythmCommand):
                 rhythm_specifiers.append(specifier)
             elif isinstance(specifier, baca.RestAffixSpecifier):
                 rest_affix_specifiers.append(specifier)
@@ -1013,7 +1013,7 @@ class MusicMaker(abjad.AbjadObject):
 
     @staticmethod
     def _make_default_rhythm_specifier():
-        return baca.MusicRhythmSpecifier(
+        return baca.MusicRhythmCommand(
             rhythm_maker=baca.MusicRhythmMaker(),
             )
 
@@ -2186,7 +2186,7 @@ class MusicMaker(abjad.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.MusicRhythmSpecifier(
+                ...     baca.MusicRhythmCommand(
                 ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],
@@ -2194,7 +2194,7 @@ class MusicMaker(abjad.AbjadObject):
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     baca.MusicRhythmSpecifier(
+                ...     baca.MusicRhythmCommand(
                 ...         pattern=abjad.index_first(),
                 ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -2245,7 +2245,7 @@ class MusicMaker(abjad.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.MusicRhythmSpecifier(
+                ...     baca.MusicRhythmCommand(
                 ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
@@ -2253,7 +2253,7 @@ class MusicMaker(abjad.AbjadObject):
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     baca.MusicRhythmSpecifier(
+                ...     baca.MusicRhythmCommand(
                 ...         pattern=abjad.Pattern(indices=[0, -1]),
                 ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -2304,7 +2304,7 @@ class MusicMaker(abjad.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.MusicRhythmSpecifier(
+                ...     baca.MusicRhythmCommand(
                 ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
@@ -2313,7 +2313,7 @@ class MusicMaker(abjad.AbjadObject):
                 ...             time_treatments=[1],
                 ...             ),
                 ...         ),
-                ...     baca.MusicRhythmSpecifier(
+                ...     baca.MusicRhythmCommand(
                 ...         pattern=abjad.Pattern(indices=[0, -1]),
                 ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -2365,7 +2365,7 @@ class MusicMaker(abjad.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.MusicRhythmSpecifier(
+                ...     baca.MusicRhythmCommand(
                 ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
@@ -2373,7 +2373,7 @@ class MusicMaker(abjad.AbjadObject):
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     baca.MusicRhythmSpecifier(
+                ...     baca.MusicRhythmCommand(
                 ...         pattern=abjad.Pattern(indices=[0, -1]),
                 ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
@@ -2426,7 +2426,7 @@ class MusicMaker(abjad.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.MusicRhythmSpecifier(
+                ...     baca.MusicRhythmCommand(
                 ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
@@ -2434,7 +2434,7 @@ class MusicMaker(abjad.AbjadObject):
                 ...                 ),
                 ...             ),
                 ...         ),
-                ...     baca.MusicRhythmSpecifier(
+                ...     baca.MusicRhythmCommand(
                 ...         pattern=abjad.Pattern(indices=[0, -1]),
                 ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(

@@ -21,7 +21,7 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
             ...     'vn',
             ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
-            ...     baca.RhythmSpecifier(
+            ...     baca.RhythmCommand(
             ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
             ...         ),
             ...     )
@@ -129,7 +129,7 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
             ...     'vn',
             ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
-            ...     baca.RhythmSpecifier(
+            ...     baca.RhythmCommand(
             ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
             ...         ),
             ...     )
@@ -247,7 +247,7 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
             ...     'vn',
             ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
-            ...     baca.RhythmSpecifier(
+            ...     baca.RhythmCommand(
             ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
             ...         ),
             ...     )
@@ -366,7 +366,7 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
             ...     'vn',
             ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
-            ...     baca.RhythmSpecifier(
+            ...     baca.RhythmCommand(
             ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
             ...         ),
             ...     )
@@ -486,7 +486,7 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
             ...     'vn',
             ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
-            ...     baca.RhythmSpecifier(
+            ...     baca.RhythmCommand(
             ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
             ...         ),
             ...     )
@@ -604,7 +604,7 @@ class HorizontalSpacingCommand(abjad.AbjadObject):
             ...     'vn',
             ...     baca.select_stages(1),
             ...     baca.pitches('E4 F4'),
-            ...     baca.RhythmSpecifier(
+            ...     baca.RhythmCommand(
             ...         rhythm_maker=abjad.rhythmmakertools.AccelerandoRhythmMaker(
             ...             beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
             ...             use_feather_beams=True,

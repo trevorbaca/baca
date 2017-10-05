@@ -328,7 +328,7 @@ class ImbricateCommand(abjad.AbjadObject):
             ...         beam_rests=True,
             ...         ),
             ...     baca.staccati(),
-            ...     baca.MusicRhythmSpecifier(
+            ...     baca.MusicRhythmCommand(
             ...         rhythm_maker=baca.MusicRhythmMaker(
             ...             talea=abjad.rhythmmakertools.Talea(
             ...                 counts=[1],
@@ -548,7 +548,7 @@ class ImbricateCommand(abjad.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.MusicRhythmSpecifier(
+                ...     baca.MusicRhythmCommand(
                 ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[3],
@@ -826,28 +826,28 @@ class ImbricateCommand(abjad.AbjadObject):
                 >>> specifiers = segment_maker.append_commands(
                 ...     'v2',
                 ...     baca.select_stages(1),
-                ...     baca.RhythmSpecifier(
+                ...     baca.RhythmCommand(
                 ...         rhythm_maker=voice_2_selections[0],
                 ...         ),
                 ...     )
                 >>> specifiers = segment_maker.append_commands(
                 ...     'v2',
                 ...     baca.select_stages(2),
-                ...     baca.RhythmSpecifier(
+                ...     baca.RhythmCommand(
                 ...         rhythm_maker=voice_2_selections[1],
                 ...         ),
                 ...     )
                 >>> specifiers = segment_maker.append_commands(
                 ...     'v1',
                 ...     baca.select_stages(1),
-                ...     baca.RhythmSpecifier(
+                ...     baca.RhythmCommand(
                 ...         rhythm_maker=voice_1_selections[0],
                 ...         ),
                 ...     )
                 >>> specifiers = segment_maker.append_commands(
                 ...     'v1',
                 ...     baca.select_stages(2),
-                ...     baca.RhythmSpecifier(
+                ...     baca.RhythmCommand(
                 ...         rhythm_maker=voice_1_selections[1],
                 ...         ),
                 ...     )
@@ -1319,9 +1319,9 @@ class ImbricateCommand(abjad.AbjadObject):
         specifiers = self.specifiers or []
         selections = container[:]
         for specifier in specifiers:
-            if isinstance(specifier, baca.MusicRhythmSpecifier):
+            if isinstance(specifier, baca.MusicRhythmCommand):
                 continue
-            if isinstance(specifier, baca.RhythmSpecifier):
+            if isinstance(specifier, baca.RhythmCommand):
                 continue
             if isinstance(specifier, baca.ImbricateCommand):
                 continue
@@ -2485,7 +2485,7 @@ class ImbricateCommand(abjad.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.MusicRhythmSpecifier(
+                ...     baca.MusicRhythmCommand(
                 ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[5],

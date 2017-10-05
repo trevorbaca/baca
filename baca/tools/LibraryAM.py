@@ -4296,7 +4296,7 @@ class LibraryAM(object):
     def even_runs():
         r'''Makes even runs.
         '''
-        return baca.RhythmSpecifier(
+        return baca.RhythmCommand(
             rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker()
             )
 
@@ -4785,7 +4785,7 @@ class LibraryAM(object):
             tuplet_ratios = [(1,)]
         else:
             tuplet_ratios = [tuplet_ratio]
-        return baca.RhythmSpecifier(
+        return baca.RhythmCommand(
             division_expression=abjad.sequence()
                 .sum()
                 .sequence(),
@@ -5897,7 +5897,7 @@ class LibraryAM(object):
     def messiaen_notes():
         r'''Makes notes.
         '''
-        return baca.RhythmSpecifier(
+        return baca.RhythmCommand(
             rewrite_meter=True,
             rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
                 tie_specifier=abjad.rhythmmakertools.TieSpecifier(
@@ -6031,7 +6031,7 @@ class LibraryAM(object):
     def messiaen_tied_notes():
         r'''Makes tied notes.
         '''
-        return baca.RhythmSpecifier(
+        return baca.RhythmCommand(
             rewrite_meter=True,
             rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
                 tie_specifier=abjad.rhythmmakertools.TieSpecifier(
@@ -6076,7 +6076,7 @@ class LibraryAM(object):
             pattern=abjad.index_all(),
             use_multimeasure_rests=True,
             )
-        return baca.RhythmSpecifier(
+        return baca.RhythmCommand(
             rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
                 division_masks=[mask],
                 ),

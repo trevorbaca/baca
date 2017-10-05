@@ -259,7 +259,7 @@ class MusicAccumulator(abjad.AbjadObject):
             abjad.rhythmmakertools.BeamSpecifier(
                 beam_divisions_together=True,
                 ),
-            baca.MusicRhythmSpecifier(
+            baca.MusicRhythmCommand(
                 rhythm_maker=baca.MusicRhythmMaker(
                     talea=abjad.rhythmmakertools.Talea(
                         counts=[1],
@@ -325,7 +325,7 @@ class MusicAccumulator(abjad.AbjadObject):
                 segment_maker.append_commands(
                     voice_name,
                     baca.select_stages(1, 1),
-                    baca.RhythmSpecifier(
+                    baca.RhythmCommand(
                         rhythm_maker=selection,
                         ),
                     )

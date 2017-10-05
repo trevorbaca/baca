@@ -111,7 +111,7 @@ class OverrideCommand(abjad.AbjadObject):
             ...         grob_name='stem',
             ...         revert=True,
             ...         ),
-            ...     baca.RhythmSpecifier(
+            ...     baca.RhythmCommand(
             ...         rhythm_maker=abjad.rhythmmakertools.TaleaRhythmMaker(
             ...             talea=abjad.rhythmmakertools.Talea(
             ...                 counts=[1, 1, 1, -1],

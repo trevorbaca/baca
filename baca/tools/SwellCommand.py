@@ -3,7 +3,7 @@ import baca
 import copy
 
 
-class SwellSpecifier(abjad.AbjadObject):
+class SwellCommand(abjad.AbjadObject):
     r'''Swell specifier.
 
     ..  container:: example

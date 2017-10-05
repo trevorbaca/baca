@@ -2,8 +2,8 @@ import abjad
 import baca
 
 
-class RhythmSpecifier(abjad.AbjadObject):
-    r'''Rhythm specifier.
+class RhythmCommand(abjad.AbjadObject):
+    r'''Rhythm command.
 
     ::
 
@@ -13,14 +13,14 @@ class RhythmSpecifier(abjad.AbjadObject):
 
         ::
 
-            >>> rhythm_specifier = baca.RhythmSpecifier(
+            >>> command = baca.RhythmCommand(
             ...     rhythm_maker=rhythmmakertools.NoteRhythmMaker(),
             ...     )
 
         ::
 
-            >>> f(rhythm_specifier)
-            baca.RhythmSpecifier(
+            >>> f(command)
+            baca.RhythmCommand(
                 rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(),
                 )
 
@@ -28,15 +28,15 @@ class RhythmSpecifier(abjad.AbjadObject):
 
         ::
 
-            >>> rhythm_specifier = baca.RhythmSpecifier(
+            >>> command = baca.RhythmCommand(
             ...     division_expression=abjad.sequence().sum().sequence(),
             ...     rhythm_maker=rhythmmakertools.NoteRhythmMaker(),
             ...     )
 
         ::
 
-            >>> f(rhythm_specifier)
-            baca.RhythmSpecifier(
+            >>> f(command)
+            baca.RhythmCommand(
                 division_expression=abjad.Expression(
                     callbacks=[
                         abjad.Expression(
@@ -64,29 +64,17 @@ class RhythmSpecifier(abjad.AbjadObject):
 
     ### CLASS ATTRIBUTES ###
 
-    __documentation_section__ = 'Segments'
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
-        # remove
-        '_clef',
         '_division_maker',
         '_division_expression',
-        # remove
-        '_hide_untuned_percussion_markup',
-        # remove
-        '_instrument',
         '_reference_meters',
         '_rewrite_meter',
         '_rhythm_maker',
         '_rhythm_overwrites',
         '_split_at_measure_boundaries',
-        # remove
-        '_staff_line_count',
         '_stages',
-        # remove
-        '_start_tempo',
-        # remove
-        '_stop_tempo',
         '_tie_first',
         '_tie_last',
         )
@@ -97,23 +85,17 @@ class RhythmSpecifier(abjad.AbjadObject):
 
     def __init__(
         self,
-        clef=None,
         division_maker=None,
         division_expression=None,
-        instrument=None,
         reference_meters=None,
         rewrite_meter=None,
         rhythm_maker=None,
         rhythm_overwrites=None,
         split_at_measure_boundaries=None,
-        staff_line_count=None,
         stages=None,
-        start_tempo=None,
-        stop_tempo=None,
         tie_first=None,
         tie_last=None,
         ):
-        self._clef = clef
         if division_expression is not None and division_maker is not None:
             message = 'can not set both division expression and division-maker'
             message += ':\n{} {}.'
@@ -125,8 +107,6 @@ class RhythmSpecifier(abjad.AbjadObject):
             assert isinstance(division_expression, prototype), repr(
                 division_expression)
         self._division_expression = division_expression
-        self._hide_untuned_percussion_markup = False
-        self._instrument = instrument
         self._reference_meters = reference_meters
         if rewrite_meter is not None:
             rewrite_meter = bool(rewrite_meter)
@@ -134,12 +114,9 @@ class RhythmSpecifier(abjad.AbjadObject):
         self._rhythm_maker = rhythm_maker
         self._rhythm_overwrites = rhythm_overwrites
         self._split_at_measure_boundaries = split_at_measure_boundaries
-        self._staff_line_count = staff_line_count
         if isinstance(stages, int):
             stages = (stages, stages)
         self._stages = stages
-        self._start_tempo = start_tempo
-        self._stop_tempo = stop_tempo
         if tie_first is not None:
             tie_first = bool(tie_first)
         self._tie_first = tie_first
@@ -155,7 +132,7 @@ class RhythmSpecifier(abjad.AbjadObject):
         start_offset=None,
         time_signatures=None,
         ):
-        r'''Calls rhythm specifier.
+        r'''Calls command.
 
         Returns contribution with music payload.
         '''
@@ -168,16 +145,7 @@ class RhythmSpecifier(abjad.AbjadObject):
         assert isinstance(music, (tuple, list, abjad.Voice))
         first_leaf = self._get_first_leaf(music)
         last_leaf = self._get_last_leaf(music)
-        prototype = abjad.instrumenttools.Percussion
-        if self.instrument is not None:
-            abjad.attach(self.instrument, first_leaf, scope=abjad.Staff)
-        if self.clef is not None:
-            abjad.attach(self.clef, first_leaf, scope=abjad.Staff)
         pitched_prototype = (abjad.Note, abjad.Chord)
-        if self.staff_line_count is not None:
-            self._set_staff_line_count(first_leaf, self.staff_line_count)
-        elif self.clef == abjad.Clef('percussion'):
-            self._set_staff_line_count(first_leaf, 1)
         if self.tie_first and isinstance(first_leaf, pitched_prototype):
             abjad.attach('tie to me', first_leaf)
             if self._use_messiaen_style_ties:
@@ -238,13 +206,6 @@ class RhythmSpecifier(abjad.AbjadObject):
                 pass
             else:
                 raise TypeError(leaf)
-
-    def _attach_untuned_percussion_markup(self, leaf):
-        name = self.instrument.instrument_name
-        name = name.lower()
-        markup = abjad.Markup(name, direction=abjad.Up)
-        markup = markup.box().override(('box-padding', 0.5))
-        abjad.attach(markup, leaf)
 
     @staticmethod
     def _durations_to_divisions(durations, start_offset):
@@ -400,33 +361,15 @@ class RhythmSpecifier(abjad.AbjadObject):
             )
         return contribution
 
-    def _set_staff_line_count(self, first_leaf, staff_line_count):
-        command = abjad.LilyPondCommand('stopStaff')
-        abjad.attach(command, first_leaf)
-        string = "override Staff.StaffSymbol #'line-count = #{}"
-        string = string.format(staff_line_count)
-        command = abjad.LilyPondCommand(string)
-        abjad.attach(command, first_leaf)
-        command = abjad.LilyPondCommand('startStaff')
-        abjad.attach(command, first_leaf)
-
     ### PUBLIC PROPERTIES ###
 
     @property
-    def clef(self):
-        '''Gets clef.
-
-        Returns clef or none.
-        '''
-        return self._clef
-
-    @property
     def division_expression(self):
-        r'''Gets division callbacks.
+        r'''Gets division expression.
 
-        Set to none or division selector.
+        Set to none or division expresion.
 
-        Returns none or division selector.
+        Returns none or division expression.
         '''
         return self._division_expression
 
@@ -439,16 +382,6 @@ class RhythmSpecifier(abjad.AbjadObject):
         Returns none or division-maker.
         '''
         return self._division_maker
-
-    @property
-    def instrument(self):
-        r'''Gets instrument.
-
-        Set to instrument or none.
-
-        Returns instrument or none.
-        '''
-        return self._instrument
 
     @property
     def reference_meters(self):
@@ -466,7 +399,7 @@ class RhythmSpecifier(abjad.AbjadObject):
 
     @property
     def rewrite_meter(self):
-        r'''Is true when specifier rewrites meter.
+        r'''Is true when command rewrites meter.
 
         Set to true or false.
 
@@ -494,7 +427,7 @@ class RhythmSpecifier(abjad.AbjadObject):
 
     @property
     def split_at_measure_boundaries(self):
-        r'''Is true when specifier splits at measure boundaries.
+        r'''Is true when command splits at measure boundaries.
 
         Set to true, false or none.
 
@@ -503,18 +436,6 @@ class RhythmSpecifier(abjad.AbjadObject):
         Returns true, false or none.
         '''
         return self._split_at_measure_boundaries
-
-    @property
-    def staff_line_count(self):
-        r'''Gets staff line count.
-
-        Returns nonnegative integer or none.
-
-        Xylophone music-maker always returns 5.
-        '''
-        if isinstance(self.instrument, abjad.instrumenttools.Xylophone):
-            return 5
-        return self._staff_line_count
 
     @property
     def stages(self):
@@ -533,16 +454,6 @@ class RhythmSpecifier(abjad.AbjadObject):
         return self.stages[0]
 
     @property
-    def start_tempo(self):
-        r'''Gets start tempo.
-
-        Set to tempo or none.
-
-        Returns tempo or none.
-        '''
-        return self._start_tempo
-
-    @property
     def stop_stage(self):
         r'''Gets stop stage.
 
@@ -551,18 +462,8 @@ class RhythmSpecifier(abjad.AbjadObject):
         return self.stages[-1]
 
     @property
-    def stop_tempo(self):
-        r'''Gets stop tempo.
-
-        Set to tempo or none.
-
-        Returns tempo or none.
-        '''
-        return self._stop_tempo
-
-    @property
     def tie_first(self):
-        r'''Is true when specifier ties into first note or chord.
+        r'''Is true when command ties into first note or chord.
         Otherwise false.
 
         Set to true, false or none.
@@ -573,7 +474,7 @@ class RhythmSpecifier(abjad.AbjadObject):
 
     @property
     def tie_last(self):
-        r'''Is true when specifier ties into last note or chord.
+        r'''Is true when command ties into last note or chord.
         Otherwise false.
 
         Set to true, false or none.
