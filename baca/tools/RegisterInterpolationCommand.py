@@ -978,15 +978,9 @@ class RegisterInterpolationCommand(abjad.AbjadObject):
         '''
         if argument is None:
             return
-        if self.selector is not None:
-            argument = self.selector(argument)
-        if self.pattern is None:
-            selections = [argument]
-        else:
-            assert isinstance(argument, list), repr(argument)
-            assert isinstance(argument[0], abjad.Selection), repr(argument)
-            selections = argument
-            selections = self.pattern.get_matching_items(selections)
+        selector = self.selector or baca.select_leaves()
+        result = selector(argument)
+        selections = baca.MusicMaker._normalize_selections(result)
         for selection in selections:
             logical_ties = abjad.iterate(selection).by_logical_tie(
                 pitched=True,
@@ -1023,209 +1017,197 @@ class RegisterInterpolationCommand(abjad.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def pattern(self):
-        r"""Gets pattern.
-
-        ..  container:: example
-
-            Music-maker (first stage only):
-
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     collections,
-                ...     baca.RegisterInterpolationCommand(
-                ...         pattern=abjad.index_first(),
-                ...         start_pitch=0,
-                ...         stop_pitch=24,
-                ...         ),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            {
-                                fs'16 [
-                                e'16
-                                ef''16
-                                f''16
-                                a'16
-                                bf'16
-                                c''16
-                                b''16
-                                af''16
-                                g''16
-                                cs'''16
-                                d'''16 ]
-                            }
-                            {
-                                fs'16 [
-                                e'16
-                                ef'16
-                                f'16
-                                a'16
-                                bf'16
-                                c'16
-                                b'16
-                                af'16
-                                g'16
-                                cs'16
-                                d'16 ]
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Music-maker (last stage only):
-
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     collections,
-                ...     baca.RegisterInterpolationCommand(
-                ...         pattern=abjad.index_last(),
-                ...         start_pitch=0,
-                ...         stop_pitch=24,
-                ...         ),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            {
-                                fs'16 [
-                                e'16
-                                ef'16
-                                f'16
-                                a'16
-                                bf'16
-                                c'16
-                                b'16
-                                af'16
-                                g'16
-                                cs'16
-                                d'16 ]
-                            }
-                            {
-                                fs'16 [
-                                e'16
-                                ef''16
-                                f''16
-                                a'16
-                                bf'16
-                                c''16
-                                b''16
-                                af''16
-                                g''16
-                                cs'''16
-                                d'''16 ]
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Music-maker (each stage registered separately):
-
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     collections,
-                ...     baca.RegisterInterpolationCommand(
-                ...         pattern=abjad.index_all(),
-                ...         start_pitch=0,
-                ...         stop_pitch=24,
-                ...         ),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            {
-                                fs'16 [
-                                e'16
-                                ef''16
-                                f''16
-                                a'16
-                                bf'16
-                                c''16
-                                b''16
-                                af''16
-                                g''16
-                                cs'''16
-                                d'''16 ]
-                            }
-                            {
-                                fs'16 [
-                                e'16
-                                ef''16
-                                f''16
-                                a'16
-                                bf'16
-                                c''16
-                                b''16
-                                af''16
-                                g''16
-                                cs'''16
-                                d'''16 ]
-                            }
-                        }
-                    }
-                >>
-
-        Set to pattern or none.
-
-        Defaults to none.
-
-        Returns pattern or none.
-        """
-        return self._pattern
-
-    @property
     def selector(self):
-        r'''Gets selector.
+        r"""Gets selector.
+
+        ..  container:: example
+
+            Selects tuplet 0:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+
+            ::
+
+                >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     collections,
+                ...     baca.RegisterInterpolationCommand(
+                ...         selector=baca.select_tuplet(0),
+                ...         start_pitch=0,
+                ...         stop_pitch=24,
+                ...         ),
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            {
+                                fs'16 [
+                                e'16
+                                ef''16
+                                f''16
+                                a'16
+                                bf'16
+                                c''16
+                                b''16
+                                af''16
+                                g''16
+                                cs'''16
+                                d'''16 ]
+                            }
+                            {
+                                fs'16 [
+                                e'16
+                                ef'16
+                                f'16
+                                a'16
+                                bf'16
+                                c'16
+                                b'16
+                                af'16
+                                g'16
+                                cs'16
+                                d'16 ]
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Selects tuplet -1:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+
+            ::
+
+                >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     collections,
+                ...     baca.RegisterInterpolationCommand(
+                ...         selector=baca.select_tuplet(-1),
+                ...         start_pitch=0,
+                ...         stop_pitch=24,
+                ...         ),
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            {
+                                fs'16 [
+                                e'16
+                                ef'16
+                                f'16
+                                a'16
+                                bf'16
+                                c'16
+                                b'16
+                                af'16
+                                g'16
+                                cs'16
+                                d'16 ]
+                            }
+                            {
+                                fs'16 [
+                                e'16
+                                ef''16
+                                f''16
+                                a'16
+                                bf'16
+                                c''16
+                                b''16
+                                af''16
+                                g''16
+                                cs'''16
+                                d'''16 ]
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Selects leaves in each tuplet (selected separately):
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+
+            ::
+
+                >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     collections,
+                ...     baca.RegisterInterpolationCommand(
+                ...         selector=baca.select_leaves_in_each_tuplet(),
+                ...         start_pitch=0,
+                ...         stop_pitch=24,
+                ...         ),
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            {
+                                fs'16 [
+                                e'16
+                                ef''16
+                                f''16
+                                a'16
+                                bf'16
+                                c''16
+                                b''16
+                                af''16
+                                g''16
+                                cs'''16
+                                d'''16 ]
+                            }
+                            {
+                                fs'16 [
+                                e'16
+                                ef''16
+                                f''16
+                                a'16
+                                bf'16
+                                c''16
+                                b''16
+                                af''16
+                                g''16
+                                cs'''16
+                                d'''16 ]
+                            }
+                        }
+                    }
+                >>
 
         Set to selector or none.
-        '''
+        """
         return self._selector
 
     @property
