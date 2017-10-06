@@ -1257,9 +1257,9 @@ class ImbricateCommand(abjad.AbjadObject):
             agent = abjad.iterate(selection)
             selected_logical_ties = agent.by_logical_tie(pitched=True)
             selected_logical_ties = list(selected_logical_ties)
-        agent = abjad.iterate(original_container)
-        original_logical_ties = agent.by_logical_tie()
-        logical_ties = abjad.iterate(container).by_logical_tie()
+        selector = abjad.select(original_container)
+        original_logical_ties = selector.by_logical_tie()
+        logical_ties = abjad.select(container).by_logical_tie()
         pairs = zip(logical_ties, original_logical_ties)
         for logical_tie, original_logical_tie in pairs:
             if (selected_logical_ties is not None and
@@ -1273,6 +1273,8 @@ class ImbricateCommand(abjad.AbjadObject):
                     duration = leaf.written_duration
                     skip = abjad.Skip(duration)
                     abjad.mutate(leaf).replace([skip])
+            elif isinstance(logical_tie.head, abjad.Skip):
+                pass
             elif self._matches_pitch(logical_tie.head, pitch_number):
                 if isinstance(pitch_number, baca.Coat):
                     for leaf in logical_tie:

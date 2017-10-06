@@ -197,7 +197,7 @@ class AttachCommand(abjad.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls specifier on `argument`.
+        r'''Calls command on `argument`.
 
         Returns none.
         '''
@@ -207,8 +207,8 @@ class AttachCommand(abjad.AbjadObject):
             return
         arguments = abjad.CyclicTuple(self.arguments)
         selector = self.selector or baca.select_plt_heads()
-        selections = selector(argument)
-        selections = baca.MusicMaker._normalize_selections(selections)
+        result = selector(argument)
+        selections = baca.MusicMaker._normalize_selections(result)
         for selection in selections:
             leaves = abjad.select(selection).by_leaf()
             for i, leaf in enumerate(leaves):

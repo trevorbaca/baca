@@ -5547,6 +5547,10 @@ class LibraryAM(object):
                                             E5
                                         }
                                 ef''4 ~
+                                    ^ \markup {
+                                        \small
+                                            Eb5
+                                        }
                                 ef''16
                                 r16
                                 af''16 [

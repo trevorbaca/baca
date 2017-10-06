@@ -5541,9 +5541,9 @@ class SelectorLibrary(object):
 
         '''
         selector = baca.select_plts()
-        selector = selector.get_slice(start=start, stop=stop)
-        get = abjad.select().get_item(0)
-        selector = selector.map(get)
+        if start is not None or stop is not None:
+            selector = selector.get_slice(start=start, stop=stop)
+        selector = selector.map(abjad.select()[0])
         selector = selector.flatten()
         return selector
 
@@ -7383,7 +7383,8 @@ class SelectorLibrary(object):
         '''
         selector = abjad.select()
         selector = selector.by_logical_tie(pitched=True)
-        selector = selector.get_slice(start=start, stop=stop)
+        if start is not None or stop is not None:
+            selector = selector.get_slice(start=start, stop=stop)
         return selector
 
     @staticmethod
