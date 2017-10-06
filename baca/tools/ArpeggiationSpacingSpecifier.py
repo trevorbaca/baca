@@ -34,6 +34,7 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
 
     __documentation_section__ = 'Specifiers'
 
+    # TODO: remove selector? selectors are for components
     __slots__ = (
         '_direction',
         '_pattern',

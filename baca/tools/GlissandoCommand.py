@@ -290,9 +290,7 @@ class GlissandoCommand(abjad.AbjadObject):
         if self.selector is not None:
             argument = self.selector(argument)
         selector = baca.select_plts()
-        selection = selector(argument)
-        assert len(selection) == 1
-        plts = selection[0]
+        plts = selector(argument)
         for i, plt in enumerate(plts):
             if i + 1 < len(plts):
                 self._attach_glissando(plt)

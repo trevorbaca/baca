@@ -284,9 +284,7 @@ class StemTremoloCommand(abjad.AbjadObject):
                 ...     baca.pitches('E4 F4'),
                 ...     baca.even_runs(),
                 ...     baca.StemTremoloCommand(
-                ...         selector=abjad.select().
-                ...             by_leaf(flatten=True).
-                ...             get_slice(start=-7, apply_to_each=False),
+                ...         selector=abjad.select().by_leaf(pitched=True)[-7:]
                 ...         ),
                 ...     )
 

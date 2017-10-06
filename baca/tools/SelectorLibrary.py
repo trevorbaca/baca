@@ -396,9 +396,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Chord("<e'' fs''>4"), Chord("<e'' fs''>16"), Chord("<e'' fs''>4")])
 
         ..  container:: example
@@ -471,19 +469,13 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Chord("<e'' fs''>16"), Chord("<e'' fs''>4")])
 
         '''
         selector = abjad.select()
         selector = selector.by_leaf(prototype=abjad.Chord, head=True)
-        selector = selector.get_slice(
-            start=start,
-            stop=stop,
-            apply_to_each=True,
-            )
+        selector = selector.get_slice(start=start, stop=stop)
         return selector
 
     @staticmethod
@@ -570,9 +562,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Chord("<e'' fs''>16"), Chord("<e'' fs''>16"), Chord("<e'' fs''>16")])
 
         ..  container:: example
@@ -650,19 +640,13 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Chord("<e'' fs''>16"), Chord("<e'' fs''>16")])
 
         '''
         selector = abjad.select()
         selector = selector.by_class(prototype=abjad.Chord)
-        selector = selector.get_slice(
-            start=start,
-            stop=stop,
-            apply_to_each=True,
-            )
+        selector = selector.get_slice(start=start, stop=stop)
         return selector
 
     @staticmethod
@@ -985,19 +969,21 @@ class SelectorLibrary(object):
                 >>> for item in contribution.color_selector_result:
                 ...     item
                 ...
-                Selection([LogicalTie([Note("fs''16")]), Note("af''16")])
-                Selection([LogicalTie([Note("af''16")]), Note("a'16")])
-                Selection([LogicalTie([Note("a'16")]), Rest('r4')])
-                Selection([LogicalTie([Rest('r4')])])
+                Selection([Note("fs''16"), Note("af''16")])
+                Selection([Note("af''16"), Note("a'16")])
+                Selection([Note("a'16"), Rest('r4')])
+                Selection([Rest('r4')])
 
         '''
         selector = baca.select_lts(start=start, stop=stop)
-        selector = selector.get_item(n=0)
-        selector = selector.select(apply_to_each=True)
+        selector = selector.map(abjad.select().select())
+        get = None
         if leak in (abjad.Left, abjad.Both):
-            selector = selector.with_previous_leaf()
+            get = abjad.select().with_previous_leaf()
         if leak in (abjad.Right, abjad.Both):
-            selector = selector.with_next_leaf()
+            get = abjad.select().with_next_leaf()
+        if get:
+            selector = selector.map(get)
         return selector
 
     @staticmethod
@@ -1329,19 +1315,21 @@ class SelectorLibrary(object):
                 >>> for item in contribution.color_selector_result:
                 ...     item
                 ...
-                Selection([LogicalTie([Note("e''4"), Note("e''16")]), Rest('r16')])
-                Selection([LogicalTie([Note("fs''16")]), Note("af''16")])
-                Selection([LogicalTie([Note("af''16")]), Note("a'16")])
-                Selection([LogicalTie([Note("a'16")]), Rest('r4')])
+                Selection([Note("e''4"), Note("e''16"), Rest('r16')])
+                Selection([Note("fs''16"), Note("af''16")])
+                Selection([Note("af''16"), Note("a'16")])
+                Selection([Note("a'16"), Rest('r4')])
 
         '''
         selector = baca.select_plts(start=start, stop=stop)
-        selector = selector.get_item(n=0)
-        selector = selector.select(apply_to_each=True)
+        selector = selector.map(abjad.select().select())
+        get = None
         if leak in (abjad.Left, abjad.Both):
-            selector = selector.with_previous_leaf()
+            get = abjad.select().with_previous_leaf()
         if leak in (abjad.Right, abjad.Both):
-            selector = selector.with_next_leaf()
+            get = abjad.select().with_next_leaf()
+        if get:
+            selector = selector.map(get)
         return selector
 
     @staticmethod
@@ -1524,14 +1512,9 @@ class SelectorLibrary(object):
 
         '''
         selector = baca.select_plts()
-        selector = selector.flatten(depth=1)
         selector = selector.group_by_pitch()
         selector = selector.by_length('>', 1)
-        selector = selector.get_slice(
-            start=start,
-            stop=stop,
-            apply_to_each=False,
-            )
+        selector = selector.get_slice(start=start, stop=stop)
         return selector
 
     @staticmethod
@@ -1767,13 +1750,10 @@ class SelectorLibrary(object):
 
         '''
         selector = baca.select_plts()
-        selector = selector.flatten(depth=1)
+        #selector = selector.flatten(depth=1)
         selector = selector.group_by_pitch()
-        selector = selector.get_slice(
-            start=start,
-            stop=stop,
-            apply_to_each=False,
-            )
+        selector = selector.get_slice(start=start, stop=stop)
+        selector = selector.map(abjad.select().select())
         return selector
 
     @staticmethod
@@ -2009,11 +1989,8 @@ class SelectorLibrary(object):
         selector = abjad.select()
         selector = selector.by_logical_tie(pitched=True)
         selector = selector.by_contiguity()
-        selector = selector.get_slice(
-            start=start,
-            stop=stop,
-            apply_to_each=False,
-            )
+        selector = selector.get_slice(start=start, stop=stop)
+        selector = selector.map(abjad.select().select())
         return selector
 
     @staticmethod
@@ -2582,9 +2559,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Rest('r8'), Note("c'16"), Note("c'16"), Note("bf'4"), Note("bf'16"), Rest('r16'), Note("bf'16"), Note("e''16"), Note("e''4"), Note("e''16"), Rest('r16'), Note("fs''16"), Note("af''16"), Note("a'16"), Rest('r4')])
 
         ..  container:: example
@@ -2665,9 +2640,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Note("fs''16"), Note("af''16"), Note("a'16"), Rest('r4')])
 
         ..  container:: example
@@ -2750,23 +2723,25 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Rest('r16'), Note("fs''16"), Note("af''16"), Note("a'16"), Rest('r4')])
 
         '''
         selector = abjad.select()
         selector = selector.by_leaf()
-        selector = selector.get_slice(
-            start=start,
-            stop=stop,
-            apply_to_each=True,
-            )
+        selector = selector.get_slice(start=start, stop=stop)
+
+        #get = None
         if leak in (abjad.Left, abjad.Both):
+            #get = abjad.select().with_previous_leaf()
             selector = selector.with_previous_leaf()
         if leak in (abjad.Right, abjad.Both):
+            #get = abjad.select().with_next_leaf()
             selector = selector.with_next_leaf()
+
+        #if get:
+        #    selector = selector.map(get)
+
         return selector
 
     @staticmethod
@@ -3013,17 +2988,14 @@ class SelectorLibrary(object):
 
         '''
         selector = baca.select_tuplets(start=start, stop=stop)
-        selector = selector.flatten()
-        selector = selector.by_leaf()
+        selector = selector.get_slice(start=start, stop=stop)
+        #selector = selector.flatten()
+        get = abjad.select().by_leaf()
         if leak in (abjad.Left, abjad.Both):
-            selector = selector.with_previous_leaf()
+            get = get.with_previous_leaf()
         if leak in (abjad.Right, abjad.Both):
-            selector = selector.with_next_leaf()
-        selector = selector.get_slice(
-            start=start,
-            stop=stop,
-            apply_to_each=False,
-            )
+            get = get.with_next_leaf()
+        selector = selector.map(get)
         return selector
 
     @staticmethod
@@ -3150,9 +3122,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Note("c'16"), Note("c'16"), Note("bf'4"), Note("bf'16"), Rest('r16'), Note("bf'16"), Note("e''16"), Note("e''4"), Note("e''16"), Rest('r16'), Note("fs''16"), Note("af''16"), Note("a'16")])
 
         ..  container:: example
@@ -3233,9 +3203,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Rest('r16'), Note("fs''16"), Note("af''16"), Note("a'16")])
 
         '''
@@ -3243,11 +3211,7 @@ class SelectorLibrary(object):
         selector = selector.by_leaf(
             trim=(abjad.MultimeasureRest, abjad.Rest, abjad.Skip),
             )
-        selector = selector.get_slice(
-            start=start,
-            stop=stop,
-            apply_to_each=True,
-            )
+        selector = selector.get_slice(start=start, stop=stop)
         return selector
 
     @staticmethod
@@ -3339,9 +3303,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Rest('r8'), Note("c'16"), Note("c'16"), Note("bf'4"), Note("bf'16"), Rest('r16')])
 
         ..  container:: example
@@ -3412,9 +3374,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Note("a'16"), Rest('r4')])
 
         '''
@@ -3578,7 +3538,7 @@ class SelectorLibrary(object):
 
         '''
         selector = baca.select_lts()
-        selector = selector.flatten(depth=1)
+        #selector = selector.flatten(depth=1)
         selector = selector.get_item(n=n)
         return selector
 
@@ -3713,7 +3673,19 @@ class SelectorLibrary(object):
                 >>> for item in contribution.color_selector_result:
                 ...     item
                 ...
-                Selection([LogicalTie([Rest('r8')]), LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("bf'4"), Note("bf'16")]), LogicalTie([Rest('r16')]), LogicalTie([Note("bf'16")]), LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")]), LogicalTie([Rest('r16')]), LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")]), LogicalTie([Rest('r4')])])
+                LogicalTie([Rest('r8')])
+                LogicalTie([Note("c'16")])
+                LogicalTie([Note("c'16")])
+                LogicalTie([Note("bf'4"), Note("bf'16")])
+                LogicalTie([Rest('r16')])
+                LogicalTie([Note("bf'16")])
+                LogicalTie([Note("e''16")])
+                LogicalTie([Note("e''4"), Note("e''16")])
+                LogicalTie([Rest('r16')])
+                LogicalTie([Note("fs''16")])
+                LogicalTie([Note("af''16")])
+                LogicalTie([Note("a'16")])
+                LogicalTie([Rest('r4')])
 
         ..  container:: example
 
@@ -3793,20 +3765,13 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")]), LogicalTie([Rest('r4')])])
 
         '''
         selector = abjad.select()
-        # flatten defaults (unexpectedly) to true!
-        selector = selector.by_logical_tie(flatten=False)
-        selector = selector.get_slice(
-            start=start,
-            stop=stop,
-            apply_to_each=True,
-            )
+        selector = selector.by_logical_tie()
+        selector = selector.get_slice(start=start, stop=stop)
         return selector
 
     @staticmethod
@@ -4077,9 +4042,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Note("c'16"), Note("c'16"), Note("bf'4"), Note("bf'16"), Note("bf'16"), Note("e''16"), Note("e''4"), Note("e''16"), Note("fs''16"), Note("af''16"), Note("a'16")])
 
         ..  container:: example
@@ -4163,19 +4126,13 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Note("e''16"), Note("fs''16"), Note("af''16"), Note("a'16")])
 
         '''
         selector = abjad.select()
         selector = selector.by_class(prototype=abjad.Note)
-        selector = selector.get_slice(
-            start=start,
-            stop=stop,
-            apply_to_each=True,
-            )
+        selector = selector.get_slice(start=start, stop=stop)
         return selector
 
     @staticmethod
@@ -4446,9 +4403,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Note("c'16"), Note("c'16"), Note("bf'4"), Note("bf'16"), Note("bf'16"), Note("e''16"), Note("e''4"), Note("e''16"), Note("fs''16"), Note("af''16"), Note("a'16")])
 
         ..  container:: example
@@ -4532,19 +4487,13 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Note("e''16"), Note("fs''16"), Note("af''16"), Note("a'16")])
 
         '''
         selector = abjad.select()
         selector = selector.by_leaf(pitched=True)
-        selector = selector.get_slice(
-            start=start,
-            stop=stop,
-            apply_to_each=True,
-            )
+        selector = selector.get_slice(start=start, stop=stop)
         return selector
 
     @staticmethod
@@ -4779,8 +4728,8 @@ class SelectorLibrary(object):
 
         '''
         selector = baca.select_tuplets(start=start, stop=stop)
-        selector = selector.flatten()
-        selector = selector.by_leaf(pitched=True)
+        get = selector.by_leaf(pitched=True)
+        selector = selector.map(get)
         return selector
 
     @staticmethod
@@ -4868,9 +4817,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Note("c'16"), Note("c'16"), Note("bf'4"), Note("bf'16")])
 
         ..  container:: example
@@ -4939,16 +4886,12 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Note("a'16")])
 
         '''
         selector = baca.select_tuplets()
-        selector = selector.flatten()
         selector = selector.get_item(n=n)
-        selector = selector.select()
         selector = selector.by_leaf(pitched=True)
         return selector
 
@@ -5101,7 +5044,6 @@ class SelectorLibrary(object):
 
         '''
         selector = baca.select_plts()
-        selector = selector.flatten(depth=1)
         selector = selector.get_item(n=n)
         return selector
 
@@ -5249,7 +5191,6 @@ class SelectorLibrary(object):
 
         '''
         selector = baca.select_plt_heads()
-        selector = selector.get_item(0)
         selector = selector.get_item(n=n)
         return selector
 
@@ -5511,9 +5452,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Note("c'16"), Note("c'16"), Note("bf'4"), Note("bf'16"), Note("e''16"), Note("e''4"), Note("fs''16"), Note("af''16"), Note("a'16")])
 
         ..  container:: example
@@ -5597,21 +5536,15 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Note("e''4"), Note("fs''16"), Note("af''16"), Note("a'16")])
 
         '''
         selector = baca.select_plts()
-        selector = selector.flatten(depth=1)
-        selector = selector.get_slice(
-            start=start,
-            stop=stop,
-            apply_to_each=False,
-            )
-        selector = selector.get_item(n=0, apply_to_each=True)
-        selector = selector.select()
+        selector = selector.get_slice(start=start, stop=stop)
+        get = abjad.select().get_item(0)
+        selector = selector.map(get)
+        selector = selector.flatten()
         return selector
 
     @staticmethod
@@ -5831,8 +5764,8 @@ class SelectorLibrary(object):
 
         '''
         selector = baca.select_tuplets(start=start, stop=stop)
-        selector = selector.flatten()
-        selector = selector.by_leaf(pitched=True, head=True)
+        get = abjad.select().by_leaf(pitched=True, head=True)
+        selector = selector.map(get)
         return selector
 
     @staticmethod
@@ -5915,9 +5848,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Note("c'16"), Note("c'16"), Note("bf'4")])
 
         ..  container:: example
@@ -5986,19 +5917,16 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Note("a'16")])
 
         '''
         selector = baca.select_tuplet(n=n)
         selector = selector.select()
-        # flatten defaults (unexpectedly) to true!
-        selector = selector.by_logical_tie(flatten=False, pitched=True)
-        selector = selector.flatten(depth=1)
-        selector = selector.get_item(n=0, apply_to_each=True)
-        selector = selector.select()
+        selector = selector.by_logical_tie(pitched=True)
+        get = abjad.select().get_item(0)
+        selector = selector.map(get)
+        selector = selector.flatten()
         return selector
 
     @staticmethod
@@ -6076,10 +6004,8 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
-                Selection([Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])])
+                >>> contribution.color_selector_result
+                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
 
         ..  container:: example
 
@@ -6157,15 +6083,12 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
-                Selection([Selection([LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])])
+                >>> contribution.color_selector_result
+                Selection([LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])
 
         '''
         selector = baca.select_each_plt_nprun()
         selector = selector.get_item(n=n)
-        selector = selector.select()
         return selector
 
     @staticmethod
@@ -6243,10 +6166,8 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
-                Selection([Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])])
+                >>> contribution.color_selector_result
+                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
 
         ..  container:: example
 
@@ -6314,15 +6235,12 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
-                Selection([Selection([LogicalTie([Note("a'16")])])])
+                >>> contribution.color_selector_result
+                Selection([LogicalTie([Note("a'16")])])
 
         '''
         selector = baca.select_each_plt_prun()
         selector = selector.get_item(n=n)
-        selector = selector.select()
         return selector
 
     @staticmethod
@@ -6412,8 +6330,9 @@ class SelectorLibrary(object):
 
                 >>> for item in contribution.color_selector_result:
                 ...     item
-                ...
-                Selection([Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("bf'4"), Note("bf'16")])])])
+                LogicalTie([Note("c'16")])
+                LogicalTie([Note("c'16")])
+                LogicalTie([Note("bf'4"), Note("bf'16")])
 
         ..  container:: example
 
@@ -6494,12 +6413,13 @@ class SelectorLibrary(object):
                 >>> for item in contribution.color_selector_result:
                 ...     item
                 ...
-                Selection([Selection([LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")])])])
+                LogicalTie([Note("fs''16")])
+                LogicalTie([Note("af''16")])
+                LogicalTie([Note("a'16")])
 
         '''
         selector = baca.select_each_plt_run()
         selector = selector.get_item(n=n)
-        selector = selector.select()
         return selector
 
     @staticmethod
@@ -6646,7 +6566,6 @@ class SelectorLibrary(object):
 
         '''
         selector = baca.select_plt_tails()
-        selector = selector.get_item(0)
         selector = selector.get_item(n=n)
         return selector
 
@@ -6760,9 +6679,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Note("c'16"), Note("c'16"), Note("bf'16"), Note("bf'16"), Note("e''16"), Note("e''16"), Note("fs''16"), Note("af''16"), Note("a'16")])
 
         ..  container:: example
@@ -6846,21 +6763,14 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Note("e''16"), Note("fs''16"), Note("af''16"), Note("a'16")])
 
         '''
         selector = baca.select_plts()
-        selector = selector.flatten(depth=1)
-        selector = selector.get_slice(
-            start=start,
-            stop=stop,
-            apply_to_each=False,
-            )
-        selector = selector.get_item(n=-1, apply_to_each=True)
-        selector = selector.select()
+        selector = selector.get_slice(start=start, stop=stop)
+        selector = selector.map(abjad.select().last())
+        selector = selector.flatten()
         return selector
 
     @staticmethod
@@ -7080,8 +6990,8 @@ class SelectorLibrary(object):
 
         '''
         selector = baca.select_tuplets(start=start, stop=stop)
-        selector = selector.flatten()
-        selector = selector.by_leaf(pitched=True, tail=True)
+        get = abjad.select().by_leaf(pitched=True, tail=True)
+        selector = selector.map(get)
         return selector
 
     @staticmethod
@@ -7164,9 +7074,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Note("c'16"), Note("c'16"), Note("bf'16")])
 
         ..  container:: example
@@ -7235,19 +7143,15 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Note("a'16")])
 
         '''
         selector = baca.select_tuplet(n=n)
         selector = selector.select()
-        # flatten defaults (unexpectedly) to true!
-        selector = selector.by_logical_tie(flatten=False, pitched=True)
-        selector = selector.flatten(depth=1)
-        selector = selector.get_item(n=-1, apply_to_each=True)
-        selector = selector.select()
+        selector = selector.by_logical_tie(pitched=True)
+        selector = selector.map(abjad.select().last())
+        selector = selector.flatten()
         return selector
 
     @staticmethod
@@ -7372,8 +7276,15 @@ class SelectorLibrary(object):
 
                 >>> for item in contribution.color_selector_result:
                 ...     item
-                ...
-                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("bf'4"), Note("bf'16")]), LogicalTie([Note("bf'16")]), LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")]), LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")])])
+                LogicalTie([Note("c'16")])
+                LogicalTie([Note("c'16")])
+                LogicalTie([Note("bf'4"), Note("bf'16")])
+                LogicalTie([Note("bf'16")])
+                LogicalTie([Note("e''16")])
+                LogicalTie([Note("e''4"), Note("e''16")])
+                LogicalTie([Note("fs''16")])
+                LogicalTie([Note("af''16")])
+                LogicalTie([Note("a'16")])
 
         ..  container:: example
 
@@ -7464,17 +7375,15 @@ class SelectorLibrary(object):
                 >>> for item in contribution.color_selector_result:
                 ...     item
                 ...
-                Selection([LogicalTie([Note("e''4"), Note("e''16")]), LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")])])
+                LogicalTie([Note("e''4"), Note("e''16")])
+                LogicalTie([Note("fs''16")])
+                LogicalTie([Note("af''16")])
+                LogicalTie([Note("a'16")])
 
         '''
         selector = abjad.select()
-        # flatten defaults (unexpectedly) to true!
-        selector = selector.by_logical_tie(flatten=False, pitched=True)
-        selector = selector.get_slice(
-            start=start,
-            stop=stop,
-            apply_to_each=True,
-            )
+        selector = selector.by_logical_tie(pitched=True)
+        selector = selector.get_slice(start=start, stop=stop)
         return selector
 
     @staticmethod
@@ -7693,14 +7602,9 @@ class SelectorLibrary(object):
 
         '''
         selector = baca.select_tuplets()
-        selector = selector.flatten()
-        selector = selector.get_slice(
-            start=start,
-            stop=stop,
-            apply_to_each=False,
-            )
-        # flatten defaults (unexpectedly!) to true
-        selector = selector.by_logical_tie(flatten=False, pitched=True)
+        selector = selector.get_slice(start=start, stop=stop)
+        get = abjad.select().by_logical_tie(pitched=True)
+        selector = selector.map(get)
         return selector
 
     @staticmethod
@@ -7788,7 +7692,8 @@ class SelectorLibrary(object):
                 >>> for item in contribution.color_selector_result:
                 ...     item
                 ...
-                Selection([LogicalTie([Note("c'16"), Note("c'16")]), LogicalTie([Note("bf'4."), Note("bf'16")])])
+                LogicalTie([Note("c'16"), Note("c'16")])
+                LogicalTie([Note("bf'4."), Note("bf'16")])
 
         ..  container:: example
 
@@ -7881,7 +7786,10 @@ class SelectorLibrary(object):
                 >>> for item in contribution.color_selector_result:
                 ...     item
                 ...
-                Selection([LogicalTie([Note("bf'4."), Note("bf'16")]), LogicalTie([Note("e''16"), Note("e''4.")]), LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")])])
+                LogicalTie([Note("bf'4."), Note("bf'16")])
+                LogicalTie([Note("e''16"), Note("e''4.")])
+                LogicalTie([Note("fs''16")])
+                LogicalTie([Note("af''16")])
 
         '''
         selector = baca.select_tuplet(n=n)
@@ -8247,9 +8155,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Rest('r8'), Rest('r16'), Rest('r16'), Rest('r4')])
 
         ..  container:: example
@@ -8317,19 +8223,13 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Rest('r16'), Rest('r4')])
 
         '''
         selector = abjad.select()
         selector = selector.by_class(prototype=abjad.Rest)
-        selector = selector.get_slice(
-            start=start,
-            stop=stop,
-            apply_to_each=True,
-            )
+        selector = selector.get_slice(start=start, stop=stop)
         return selector
 
     @staticmethod
@@ -8401,9 +8301,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Rest('r8'), Rest('r16')])
 
         ..  container:: example
@@ -8469,9 +8367,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Rest('r4')])
 
         '''
@@ -8729,10 +8625,10 @@ class SelectorLibrary(object):
 
         '''
         selector = baca.select_tuplets(start=start, stop=stop)
-        selector = selector.flatten()
-        selector = selector.by_leaf(
+        get = abjad.select().by_leaf(
             trim=(abjad.MultimeasureRest, abjad.Rest, abjad.Skip),
             )
+        selector = selector.map(get)
         return selector
 
     @staticmethod
@@ -8820,9 +8716,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Note("c'16"), Note("c'16"), Note("bf'4"), Note("bf'16")])
 
         ..  container:: example
@@ -8891,9 +8785,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.color_selector_result
                 Selection([Note("a'16")])
 
         '''
@@ -9204,7 +9096,9 @@ class SelectorLibrary(object):
                 >>> for item in contribution.color_selector_result:
                 ...     item
                 ...
-                Selection([Tuplet(Multiplier(9, 10), "r8 c'16 c'16 bf'4 ~ bf'16 r16"), Tuplet(Multiplier(9, 10), "bf'16 e''16 e''4 ~ e''16 r16 fs''16 af''16"), Tuplet(Multiplier(4, 5), "a'16 r4")])
+                Tuplet(Multiplier(9, 10), "r8 c'16 c'16 bf'4 ~ bf'16 r16")
+                Tuplet(Multiplier(9, 10), "bf'16 e''16 e''4 ~ e''16 r16 fs''16 af''16")
+                Tuplet(Multiplier(4, 5), "a'16 r4")
 
         ..  container:: example
 
@@ -9309,16 +9203,11 @@ class SelectorLibrary(object):
                 >>> for item in contribution.color_selector_result:
                 ...     item
                 ...
-                Selection([Tuplet(Multiplier(9, 10), "bf'16 e''16 e''4 ~ e''16 r16 fs''16 af''16"), Tuplet(Multiplier(4, 5), "a'16 r4")])
+                Tuplet(Multiplier(9, 10), "bf'16 e''16 e''4 ~ e''16 r16 fs''16 af''16")
+                Tuplet(Multiplier(4, 5), "a'16 r4")
 
         '''
         selector = abjad.select()
         selector = selector.by_class(prototype=abjad.Tuplet)
-        selector = selector.flatten()
-        selector = selector.get_slice(
-            start=start,
-            stop=stop,
-            apply_to_each=False,
-            )
-        selector = selector.select()
+        selector = selector.get_slice(start=start, stop=stop)
         return selector

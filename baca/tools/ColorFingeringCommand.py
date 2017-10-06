@@ -162,10 +162,10 @@ class ColorFingeringCommand(abjad.AbjadObject):
         '''
         if argument is None:
             return
-        selector = self.selector or baca.select_plts()
-        selections = selector(argument)
-        assert len(selections) == 1, repr(selections)
-        logical_ties = selections[0]
+        if self.selector is not None:
+            argument = self.selector(argument)
+        selector = baca.select_plts()
+        logical_ties = selector(argument)
         if self.number_lists is None:
             return
         number_lists = abjad.CyclicTuple(self.number_lists)

@@ -331,10 +331,11 @@ class RegisterToOctaveCommand(abjad.AbjadObject):
         '''
         if argument is None:
             return
-        if isinstance(argument, abjad.Component):
-            argument = abjad.select(argument)
+        if self.octave_number is None:
+            return
         selector = self.selector or baca.select_plts()
-        selections = selector(argument)
+        result = selector(argument)
+        selections = baca.MusicMaker._normalize_selections(result)
         for selection in selections:
             target_octave_number = self.octave_number or 4
             current_octave_number = self._get_anchor_octave_number(selection)
