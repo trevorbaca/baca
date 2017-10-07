@@ -460,9 +460,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
                 division_lists.append(division_list)
                 continue
             if self.remainder is None:
-                message = 'can not fill {} from {} exactly.'
-                message = message.format(input_division, durations)
-                raise Exception(message)
+                raise Exception(f'bad fill {input_division} from {durations}.')
             remainder = input_division - total_duration
             remainder = baca.Division(remainder)
             if self.remainder == abjad.Left:

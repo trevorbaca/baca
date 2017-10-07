@@ -249,10 +249,9 @@ class Sequence(abjad.Sequence):
             operands = ', '.join(operand_strings)
             operands = '[' + operands + ']'
         if count == abjad.Identity:
-            string_template = '{} Φ {{}}'.format(operands)
+            string_template = f'{operands} Φ {{}}'
         else:
-            string_template = '{} Φ/{} {{}}'
-            string_template = string_template.format(operands, count)
+            string_template = f'{operands} Φ/{count} {{}}'
         return string_template
 
     def _update_expression(
@@ -897,8 +896,8 @@ class Sequence(abjad.Sequence):
                     items.pop(-1)
                     break
             else:
-                message = '1000 iterations without identity: {!r} to {!r}.'
-                message = message.format(items[0], items[-1])
+                message = '1000 iterations without identity:'
+                message += f' {items[0]!r} to {items[-1]!r}.'
                 raise Exception(message)
         else:
             for i in range(count - 1):

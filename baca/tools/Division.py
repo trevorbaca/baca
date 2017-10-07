@@ -413,9 +413,7 @@ class Division(abjad.NonreducedFraction):
                 division = division.with_denominator(argument.denominator)
             division = type(self)(division, start_offset=start_offset)
         else:
-            message = 'invalid start offsets: {!r}.'
-            message = message.format(start_offsets)
-            raise Exception(message)
+            raise Exception(f'invalid start offsets: {start_offsets!r}.')
         return division
 
     def __copy__(self, *args):
@@ -629,9 +627,7 @@ class Division(abjad.NonreducedFraction):
     def _to_timespan(self):
         import abjad
         if self.start_offset is None:
-            message = 'division must have start offset: {!r}.'
-            message = message.format(self)
-            raise Exception(message)
+            raise Exception(f'division must have start offset: {self!r}.')
         stop_offset = self.start_offset + self
         return abjad.Timespan(
             start_offset=self.start_offset,

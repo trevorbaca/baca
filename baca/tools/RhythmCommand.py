@@ -98,8 +98,7 @@ class RhythmCommand(abjad.AbjadObject):
         ):
         if division_expression is not None and division_maker is not None:
             message = 'can not set both division expression and division-maker'
-            message += ':\n{} {}.'
-            message = message.format(division_expression, division_maker)
+            message += f':\n{division_expression} {division_maker}.'
             raise Exception(message)
         self._division_maker = division_maker
         if division_expression is not None:
@@ -197,8 +196,7 @@ class RhythmCommand(abjad.AbjadObject):
             )
         for leaf in abjad.iterate(argument).by_leaf():
             if isinstance(leaf, abjad.Chord):
-                message = 'rhythm-makers produce only notes and rests: {!r}.'
-                message = message.format(leaf)
+                message = f'rhythm-makers make only notes and rests: {leaf!r}.'
                 raise Exception(message)
             elif isinstance(leaf, abjad.Note):
                 abjad.attach('not yet pitched', leaf)
@@ -283,9 +281,7 @@ class RhythmCommand(abjad.AbjadObject):
             selections = rhythm_maker(divisions)
             self._annotate_unpitched_notes(selections)
         else:
-            message = 'must be rhythm-maker or explicit selection: {!r}.'
-            message = message.format(rhythm_maker)
-            raise TypeError(message)
+            raise TypeError(f'rhythm-maker or selection: {rhythm_maker!r}.')
         assert self._all_are_selections(selections), repr(selections)
         if self.split_at_measure_boundaries:
             specifier = abjad.rhythmmakertools.DurationSpecifier
@@ -351,9 +347,7 @@ class RhythmCommand(abjad.AbjadObject):
         if self.division_expression is not None:
             divisions = self.division_expression(divisions)
             if not isinstance(divisions, abjad.Sequence):
-                message = 'must be division sequence: {!r}.'
-                message = message.format(divisions)
-                raise Exception(message)
+                raise Exception(f'division sequence: {divisions!r}.')
         new_start_offset = divisions[0].start_offset
         contribution = baca.Contribution(
             payload=divisions,

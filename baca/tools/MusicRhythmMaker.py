@@ -169,16 +169,12 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         self._state_manifest = collections.OrderedDict()
         talea = talea or abjad.rhythmmakertools.Talea()
         if not isinstance(talea, abjad.rhythmmakertools.Talea):
-            message = 'must be talea: {!r}.'
-            message = message.format(talea)
-            raise TypeError(message)
+            raise TypeError(f'must be talea: {talea!r}.')
         self._talea = talea
         if time_treatments is not None:
             for time_treatment in time_treatments:
                 if not self._is_time_treatment(time_treatment):
-                    message = 'invalid time treatment: {!r}.'
-                    message = message.format(time_treatment)
-                    raise Exception(message)
+                    raise Exception(f'bad time treatment: {time_treatment!r}.')
         self._time_treatments = time_treatments
 
     ### SPECIAL METHODS ###
@@ -687,9 +683,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             if not tuplet.multiplier.is_proper_tuplet_multiplier:
                 tuplet._fix()
         else:
-            message = 'invalid time treatment: {!r}.'
-            message = message.format(time_treatment)
-            raise Exception(message)
+            raise Exception(f'bad time treatment: {time_treatment!r}.')
         assert isinstance(tuplet, abjad.Tuplet)
         if grace_containers is not None:
             logical_ties = abjad.iterate(tuplet).by_logical_tie()
@@ -729,13 +723,8 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             contents_count,
             )
         if not tuplet_multiplier.is_proper_tuplet_multiplier:
-            message = '{!r} gives {} with {} and {}.'
-            message = message.format(
-                leaf_selection,
-                tuplet_multiplier,
-                contents_count,
-                new_contents_count,
-                )
+            message = f'{leaf_selection!r} gives {tuplet_multiplier}'
+            message += ' with {contents_count} and {new_contents_count}.'
             raise Exception(message)
         tuplet = abjad.Tuplet(tuplet_multiplier, leaf_selection)
         return tuplet
@@ -753,8 +742,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         state_manifest = self._make_state_manifest()
         for key in sorted(state_manifest):
             value = state_manifest[key]
-            message = '{}: {}'
-            message = message.format(key, value)
+            message = f'{key}: {value}'
             print(message)
 
     ### PUBLIC PROPERTIES ###

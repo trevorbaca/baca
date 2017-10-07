@@ -637,9 +637,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
         assert len(segments) == 1, repr(segments)
         segment = segments[0]
         if not isinstance(segment, baca.PitchSegment):
-            message = 'must be pitch segment: {!r}.'
-            message = message.format(segment)
-            raise TypeError(message)
+            raise TypeError(f'pitch segment only: {segment!r}.')
         return segment
 
     def space_up(self, bass=None, semitones=None, soprano=None):

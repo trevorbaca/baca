@@ -335,10 +335,8 @@ class LibraryNZ(object):
                 >>
 
         '''
-        start_token = 'niente < {}'
-        start_token = start_token.format(dynamic)
-        stop_token = '{} > niente'
-        stop_token = stop_token.format(dynamic)
+        start_token = f'niente < {dynamic}'
+        stop_token = f'{dynamic} > niente'
         return baca.SwellCommand(
             selector=selector,
             start_count=2,

@@ -120,11 +120,7 @@ class Matrix(abjad.AbjadObject):
 
         Returns string.
         '''
-        return '{}({}x{})'.format(
-            type(self).__name__,
-            self._n_rows,
-            self._n_columns,
-            )
+        return f'{type(self).__name__}({self._n_rows}x{self._n_columns})'
 
     ### PRIVATE METHODS ###
 

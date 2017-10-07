@@ -71,9 +71,7 @@ class HairpinCommand(abjad.AbjadObject):
             if isinstance(element, str):
                 element = tuple(element.split())
                 if not abjad.Hairpin._is_hairpin_token(element):
-                    message = 'must be valid hairpin token: {!r}.'
-                    message = message.format(element)
-                    raise Exception(message)
+                    raise Exception(f'hairpin token only: {element!r}.')
             tokens.append(element)
         hairpin_tokens = tokens
         hairpin_tokens = abjad.CyclicTuple(hairpin_tokens)

@@ -225,10 +225,9 @@ class WellformednessManager(abjad.AbjadObject):
         triples = self(argument)
         strings = []
         for violators, total, check_name in triples:
-            violator_count = len(violators)
-            string = '{} /\t{} {}'
+            count = len(violators)
             check_name = check_name.replace('check_', '')
             check_name = check_name.replace('_', ' ')
-            string = string.format(violator_count, total, check_name)
+            string = f'{count} /\t{total} {check_name}'
             strings.append(string)
         return '\n'.join(strings)

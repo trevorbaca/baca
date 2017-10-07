@@ -166,9 +166,7 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
         ):
         if (pattern is not None and
             not isinstance(pattern, abjad.Pattern)):
-            message = 'must be pattern or none: {!r}.'
-            message = message.format(pattern)
-            raise TypeError(message)
+            raise TypeError(f'pattern or none: {pattern!r}.')
         self._pattern = pattern
         if prefix is not None:
             assert isinstance(prefix, collections.Iterable), repr(prefix)

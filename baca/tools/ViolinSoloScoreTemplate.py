@@ -98,7 +98,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             'violin',
             )
         tag_string = '.'.join(instrument_tags)
-        tag_string = 'tag {}'.format(tag_string)
+        tag_string = f'tag {tag_string}'
         tag_command = abjad.LilyPondCommand(
             tag_string,
             'before',

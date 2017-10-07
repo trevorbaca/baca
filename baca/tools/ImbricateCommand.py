@@ -528,9 +528,7 @@ class ImbricateCommand(abjad.AbjadObject):
         self._hocket = hocket
         if selector is not None:
             if not isinstance(selector, abjad.Selector):
-                message = 'must be selector or none: {!r}.'
-                message = message.format(selector)
-                raise TypeError(selector)
+                raise TypeError(f'selector or none only: {selector!r}.')
         self._selector = selector
         if truncate_ties is not None:
             truncate_ties = bool(truncate_ties)
@@ -1301,9 +1299,8 @@ class ImbricateCommand(abjad.AbjadObject):
                     skip = abjad.Skip(duration)
                     abjad.mutate(leaf).replace([skip])
         if not self.allow_unused_pitches and not cursor.is_exhausted:
-            message = '{!r} used only {} of {} pitches.'
-            current = cursor.position - 1
-            message = message.format(cursor, current, len(cursor))
+            current, total = cursor.position - 1, len(cursor)
+            message = f'{cursor!r} used only {current} of {total} pitches.'
             raise Exception(message)
         self._apply_specifiers(container)
         if self.extend_beam:
@@ -1360,13 +1357,9 @@ class ImbricateCommand(abjad.AbjadObject):
         elif isinstance(pitch_object, abjad.NumberedPitchClass):
             source = [abjad.NumberedPitchClass(_) for _ in written_pitches]
         else:
-            message = 'unknown pitch object: {!r}.'
-            message = message.format(pitch_object)
-            raise TypeError(message)
+            raise TypeError(f'unknown pitch object: {pitch_object!r}.')
         if not type(source[0]) is type(pitch_object):
-            message = 'type of {!r} must match type of {!r}.'
-            message = message.format(source, pitch_object)
-            raise TypeError(message)
+            raise TypeError(f'{source!r} type must match {pitch_object!r}.')
         return pitch_object in source
 
     @staticmethod

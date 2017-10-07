@@ -57,9 +57,7 @@ class DesignMaker(abjad.AbjadObject):
         elif operator == 'alpha':
             segment = segment.alpha()
         else:
-            message = 'unrecognized operator: {!r}.'
-            message = message.format(operator)
-            raise Exception(message)
+            raise Exception(f'unrecognized operator: {operator!r}.')
         return segment
 
     @staticmethod
@@ -67,9 +65,7 @@ class DesignMaker(abjad.AbjadObject):
         leaves = design.get_payload()
         for leaf_1, leaf_2 in abjad.Sequence(leaves).nwise():
             if leaf_1 == leaf_2:
-                message = 'duplicate {!r}.'
-                message = message.format(leaf_1)
-                raise Exception(message)
+                raise Exception(f'duplicate {leaf_1!r}.')
 
     ### PUBLIC METHODS ###
 

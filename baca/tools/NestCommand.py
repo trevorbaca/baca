@@ -357,8 +357,7 @@ class NestCommand(abjad.AbjadObject):
         tuplets = []
         for selection in selections:
             if not isinstance(selection, abjad.Selection):
-                message = 'should be selection: {!r}.'
-                message = message.format(selection)
+                raise Exception(f'should be selection: {selection!r}.')
             assert len(selection) == 1, repr(selection)
             assert isinstance(selection[0], abjad.Tuplet)
             tuplets.append(selection[0])
@@ -415,9 +414,7 @@ class NestCommand(abjad.AbjadObject):
             tuplet = abjad.Tuplet(multiplier, [])
             abjad.mutate(tuplet_selection).wrap(tuplet)
         else:
-            message = 'invalid time treatment: {!r}.'
-            message = message.format(time_treatment)
-            raise Exception(message)
+            raise Exception(f'bad time treatment: {time_treatment!r}.')
         return tuplet
 
     ### PUBLIC PROPERTIES ###

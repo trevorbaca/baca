@@ -242,9 +242,7 @@ class CollectionList(abjad.AbjadValueObject):
         self._expression = None
         if item_class is not None:
             if item_class not in self._item_class_prototype:
-                message = 'must be pitch or pitch-class: {!r}.'
-                message = message.format(item_class)
-                raise TypeError(message)
+                raise TypeError(f'only pitch or pitch-class: {item_class!r}.')
         self._item_class = item_class
         collections = self._coerce(collections)
         collections = collections or []
@@ -265,9 +263,7 @@ class CollectionList(abjad.AbjadValueObject):
         Returns new collection list.
         '''
         if not isinstance(argument, collections_module.Iterable):
-            message = 'must be collection list: {!r}.'
-            message = message.format(argument)
-            raise TypeError(message)
+            raise TypeError(f'must be collection list: {argument!r}.')
         argument_collections = [
             self._initialize_collection(_) for _ in argument
             ]
@@ -557,8 +553,7 @@ class CollectionList(abjad.AbjadValueObject):
         '''
         collections = self.collections or []
         collections = ', '.join([str(_) for _ in collections])
-        string = '{}([{}])'
-        string = string.format(type(self).__name__, collections)
+        string = f'{type(self).__name__}([{collections}])'
         if self._expression:
             string = '*' + string
         return string
@@ -594,9 +589,7 @@ class CollectionList(abjad.AbjadValueObject):
         elif item_class is abjad.NamedPitch:
             return abjad.NamedPitchClass
         else:
-            message = 'must be pitch or pitch-class class: {!r}.'
-            message = message.format(item_class)
-            raise TypeError(message)
+            raise TypeError(f'only pitch or pc class: {item_class!r}.')
 
     def _initialize_collection(self, argument, prototype=None):
         items = argument
@@ -645,9 +638,7 @@ class CollectionList(abjad.AbjadValueObject):
                     item_class=abjad.NumberedPitch,
                     )
             else:
-                message = 'must be string or other iterable: {!r}.'
-                message = message.format(argument)
-                raise TypeError(message)
+                raise TypeError(f'only string or iterable: {argument!r}.')
 
     @staticmethod
     def _to_baca_collection(collection):
@@ -1259,9 +1250,7 @@ class CollectionList(abjad.AbjadValueObject):
                         return True
                     known_pitch_classes.append(pitch_class)
         else:
-            message = 'level must be 1 or -1: {!r}.'
-            message = message.format(level)
-            raise ValueError(message)
+            raise ValueError(f'level must be 1 or -1: {level!r}.')
         return False
 
     def has_duplicates(self, level=-1):
@@ -1359,9 +1348,7 @@ class CollectionList(abjad.AbjadValueObject):
                         return True
                     known_items.append(item)
         else:
-            message = 'level must be 0, 1 or -1: {!r}.'
-            message = message.format(level)
-            raise ValueError(message)
+            raise ValueError(f'level must be 0, 1 or -1: {level!r}.')
         return False
 
     def has_repeat_pitch_classes(self, level=-1):
@@ -1403,9 +1390,7 @@ class CollectionList(abjad.AbjadValueObject):
                         return True
                     previous_pitch_class = pitch_class
         else:
-            message = 'level must be 0 or -1: {!r}.'
-            message = message.format(level)
-            raise ValueError(message)
+            raise ValueError(f'level must be 0 or -1: {level!r}.')
         return False
 
     def has_repeats(self, level=-1):
@@ -1503,9 +1488,7 @@ class CollectionList(abjad.AbjadValueObject):
                         return True
                     previous_item = item
         else:
-            message = 'level must be 0, 1 or -1: {!r}.'
-            message = message.format(level)
-            raise ValueError(message)
+            raise ValueError(f'level must be 0, 1 or -1: {level!r}.')
         return False
 
     def helianthate(self, n=0, m=0):
@@ -1736,8 +1719,8 @@ class CollectionList(abjad.AbjadValueObject):
             result_item_count = len(result.flatten())
             quotient = result_item_count / self_item_count
             if quotient != int(quotient):
-                message = 'call reads {} items; not a multiple of {} items.'
-                message = message.format(result_item_count, self_item_count)
+                message = f'call reads {result_item_count} items;'
+                message += f' not a multiple of {self_item_count} items.'
                 raise ValueError(message)
         return result
 
@@ -1808,12 +1791,11 @@ class CollectionList(abjad.AbjadValueObject):
                     known_pitch_classes.append(pitch_class)
                     items.append(item)
                 if items:
-                    collection_ = self._initialize_collection(items, collection)
+                    collection_ = self._initialize_collection(
+                        items, collection)
                     collections_.append(collection_)
         else:
-            message = 'level must be 1 or -1: {!r}.'
-            message = message.format(level)
-            raise ValueError(message)
+            raise ValueError(f'level must be 1 or -1: {level!r}.')
         return abjad.new(self, collections=collections_)
 
     def remove_duplicates(self, level=-1):
@@ -1878,9 +1860,7 @@ class CollectionList(abjad.AbjadValueObject):
                     collection_ = self._initialize_collection(items)
                     collections_.append(collection_)
         else:
-            message = 'level must be 0, 1 or -1: {!r}.'
-            message = message.format(level)
-            raise ValueError(message)
+            raise ValueError(f'level must be 0, 1 or -1: {level!r}.')
         return abjad.new(self, collections=collections_)
 
     def remove_repeat_pitch_classes(self, level=-1):
@@ -1934,9 +1914,7 @@ class CollectionList(abjad.AbjadValueObject):
                     collection_ = self._initialize_collection(items)
                     collections_.append(collection_)
         else:
-            message = 'level must be 1 or -1: {!r}.'
-            message = message.format(level)
-            raise ValueError(message)
+            raise ValueError(f'level must be 1 or -1: {level!r}.')
         return abjad.new(self, collections=collections_)
 
     def remove_repeats(self, level=-1):
@@ -1999,9 +1977,7 @@ class CollectionList(abjad.AbjadValueObject):
                     collection_ = self._initialize_collection(items)
                     collections_.append(collection_)
         else:
-            message = 'level must be 0, 1 or -1: {!r}.'
-            message = message.format(level)
-            raise ValueError(message)
+            raise ValueError(f'level must be 0, 1 or -1: {level!r}.')
         return abjad.new(self, collections=collections_)
 
     def repeat(self, n=1):

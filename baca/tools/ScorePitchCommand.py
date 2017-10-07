@@ -248,13 +248,9 @@ class ScorePitchCommand(abjad.AbjadObject):
             source_length = len(self.source)
             logical_tie_count = len(logical_ties)
             if self.acyclic and source_length < logical_tie_count:
-                message = 'only {} pitches for {} logical ties: {!r} and {!r}.'
-                message = message.format(
-                    source_length,
-                    logical_tie_count,
-                    self,
-                    logical_ties,
-                    )
+                message = f'only {source_length} pitches'
+                message += f' for {logical_tie_count} logical ties:'
+                message += f' {self!r} and {logical_ties!r}.'
                 raise Exception(message)
             if 0 <= start_index:
                 absolute_start_index = start_index
@@ -302,9 +298,7 @@ class ScorePitchCommand(abjad.AbjadObject):
                 elif isinstance(pitch_expression, abjad.Segment):
                     pitch = pitch_expression
                 else:
-                    message = 'must be pitch or pitch segment: {!r}.'
-                    message = message.format(pitch_expression)
-                    raise Exception(message)
+                    raise Exception(f'pitch or segment: {pitch_expression!r}.')
                 for note in logical_tie:
                     if isinstance(pitch, abjad.Pitch):
                         self._set_pitch(note, pitch)
@@ -314,9 +308,7 @@ class ScorePitchCommand(abjad.AbjadObject):
                         # TODO: check and make sure *overrides* are preserved!
                         abjad.mutate(note).replace(chord)
                     else:
-                        message = 'must be pitch or pitch segment: {!r}.'
-                        message = message.format(pitch)
-                        raise Exception(message)
+                        raise Exception(f'pitch or segment: {pitch!r}.')
                 current_count -= 1
                 if current_count == 0:
                     current_logical_tie_index += 1

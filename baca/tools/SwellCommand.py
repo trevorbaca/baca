@@ -116,8 +116,8 @@ class SwellCommand(abjad.AbjadObject):
                 include_rests=True,
                 )
             if len(leaves) < self.minimum_leaf_count:
-                #message = 'specifier requires at least {} leaves: {!r}.'
-                #message = message.format(self.minimum_leaf_count, leaves)
+                #message = f'need at least {self.minimum_leaf_count} leaves:'
+                #message += f' {leaves!r}.'
                 #raise Exception(message)
                 if len(leaves) == 0:
                     return

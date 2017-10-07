@@ -42,9 +42,7 @@ class MusicContribution(abjad.AbjadValueObject):
         ):
         if (anchor is not None and
             not isinstance(anchor, baca.AnchorCommand)):
-            message = 'must be anchor specifier: {!r}.'
-            message = message.format(anchor)
-            raise TypeError(message)
+            raise TypeError(f'anchor specifier only: {anchor!r}.')
         self._anchor = anchor
         self._color_selector_result = color_selector_result
         self._figure_name = figure_name

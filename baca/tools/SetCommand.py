@@ -55,20 +55,13 @@ class SetCommand(abjad.AbjadObject):
         '''
         if argument is None:
             return
-        # TODO: use named string format fields
+        context = self.context_name
+        setting = self.setting_name
+        value = self.setting_value
         if self.context_name is not None:
-            statement = 'abjad.setting(item).{}.{} = {!r}'
-            statement = statement.format(
-                self.context_name,
-                self.setting_name,
-                self.setting_value,
-                )
+            statement = f'abjad.setting(item).{context}.{setting} = {value!r}'
         else:
-            statement = 'abjad.setting(item).{} = {!r}'
-            statement = statement.format(
-                self.setting_name,
-                self.setting_value,
-                )
+            statement = 'abjad.setting(item).{setting} = {value!r}'
         globals_ = globals()
         globals_.update(abjad.__dict__.copy())
         globals_['SchemeMoment'] = abjad.SchemeMoment

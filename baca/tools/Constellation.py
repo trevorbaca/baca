@@ -127,9 +127,7 @@ class Constellation(abjad.AbjadObject):
 
 
         '''
-        string = '{}({})'
-        string = string.format(type(self).__name__, len(self))
-        return string
+        return f'{type(self).__name__}({len(self)})'
 
     ### PRIVATE PROPERTIES ###
 
@@ -360,9 +358,7 @@ class Constellation(abjad.AbjadObject):
         for i, pitch_number_list in enumerate(self):
             if pitch_number_list == pitch_numbers:
                 return i + 1
-        message = '{} not in {}'
-        message = message.format(chord, self)
-        raise ValueError(message)
+        raise ValueError(f'{chord} not in {self}')
 
     def make_chords(self):
         result = []

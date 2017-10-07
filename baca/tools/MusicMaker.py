@@ -822,8 +822,7 @@ class MusicMaker(abjad.AbjadObject):
         elif len(rest_affix_specifiers) == 1:
             rest_affix_specifier = rest_affix_specifiers[0]
         else:
-            message = 'no more than 1 rest affix specifier allowed: {!r}.'
-            message = message.format(rest_affix_specifiers)
+            message = f'max 1 rest affix specifier: {rest_affix_specifiers!r}.'
             raise Exception(message)
         thread = thread or self.thread
         for specifier in rhythm_specifiers:
@@ -949,9 +948,7 @@ class MusicMaker(abjad.AbjadObject):
         elif len(anchor_specifiers) == 1:
             anchor_specifier = anchor_specifiers[0]
         else:
-            message = 'only one anchor specifier allowed: {!r}.'
-            message = message.format(anchor_specifiers)
-            raise Exception(message)
+            raise Exception(f'max 1 anchor specifier: {anchor_specifiers!r}.')
         return anchor_specifier, specifiers_
 
     def _get_storage_format_specification(self):
@@ -992,10 +989,8 @@ class MusicMaker(abjad.AbjadObject):
                 abjad.Markup(subscript).sub(),
                 ])
         else:
-            message = 'unrecognized figure name: {!r}.'
-            message = message.format(figure_name)
-            raise Exception(figure_name)
-        figure_index = ' ({})'.format(figure_index)
+            raise Exception(f'unrecognized figure name: {figure_name!r}.')
+        figure_index = f' ({figure_index})'
         figure_index = abjad.Markup(figure_index).fontsize(-2).raise_(0.25)
         figure_name_markup = abjad.Markup.concat([
             '[',
@@ -1005,8 +1000,9 @@ class MusicMaker(abjad.AbjadObject):
             ']',
             ])
         figure_name_markup = figure_name_markup.fontsize(2)
-        figure_name_markup = abjad.Markup(figure_name_markup, direction=abjad.Up)
-        annotation = 'figure name: {}'.format(original_figure_name)
+        figure_name_markup = abjad.Markup(
+            figure_name_markup, direction=abjad.Up)
+        annotation = f'figure name: {original_figure_name}'
         figure_name_markup._annotation = annotation
         leaves = list(abjad.iterate(container).by_leaf())
         abjad.attach(figure_name_markup, leaves[0])
@@ -1054,8 +1050,7 @@ class MusicMaker(abjad.AbjadObject):
         state_manifest = self._make_state_manifest()
         for key in sorted(state_manifest):
             value = state_manifest[key]
-            message = '{}: {}'
-            message = message.format(key, value)
+            message = f'{key}: {value}'
             print(message)
 
     @staticmethod
@@ -1071,13 +1066,9 @@ class MusicMaker(abjad.AbjadObject):
 
     def _validate_voice_name(self, voice_name):
         if not isinstance(voice_name, str):
-            message = 'voice name must be string: {!r}.'
-            message = message.format(voice_name)
-            raise TypeError(message)
+            raise TypeError(f'voice name must be string: {voice_name!r}.')
         if self.voice_names and voice_name not in self.voice_names:
-            message = 'unknown voice name: {!r}.'
-            message = message.format(voice_name)
-            raise ValueError(message)
+            raise ValueError(f'unknown voice name: {voice_name!r}.')
 
     ### PUBLIC PROPERTIES ###
 

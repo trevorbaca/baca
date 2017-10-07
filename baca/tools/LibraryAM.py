@@ -2373,9 +2373,7 @@ class LibraryAM(object):
         Returns outer product of octave transpositions of `cells` in `range`.
         '''
         if not isinstance(range, abjad.PitchRange):
-            message = 'must be pitch range: {!r}.'
-            message = message.format(range)
-            raise TypeError(message)
+            raise TypeError(f'pitch range only: {range!r}.')
         transposition_list = []
         for cell in cells:
             transpositions = range.list_octave_transpositions(cell)

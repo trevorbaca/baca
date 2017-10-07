@@ -298,7 +298,7 @@ class MarkupLibrary(object):
 
     @staticmethod
     def boxed_repeat_count(count, selector=None):
-        string = 'x{}'.format(count)
+        string = f'x{count}'
         markup = abjad.Markup(string, direction=abjad.Up)
         markup = markup.sans().bold().fontsize(6).upright()
         markup = markup.box().override(('box-padding', 0.5))
@@ -320,8 +320,7 @@ class MarkupLibrary(object):
 
     @staticmethod
     def clicks_per_second(lower, upper, selector=None):
-        string = '{}-{} clicks/sec.'
-        string = string.format(lower, upper)
+        string = f'{lower}-{upper} clicks/sec.'
         return MarkupLibrary.make_markup(
             string,
             selector=selector,
@@ -412,8 +411,7 @@ class MarkupLibrary(object):
 
     @staticmethod
     def fractional_OB(numerator, denominator, selector=None):
-        string = '{}/{}OB'
-        string = string.format(numerator, denominator)
+        string = f'{numerator}/{denominator}OB'
         return MarkupLibrary.make_markup(
             string,
             selector=selector,
@@ -421,8 +419,7 @@ class MarkupLibrary(object):
 
     @staticmethod
     def fractional_scratch(numerator, denominator, selector=None):
-        string = '{}/{} scratch'
-        string = string.format(numerator, denominator)
+        string = '{numerator}/{denominator} scratch'
         return MarkupLibrary.make_markup(
             string,
             selector=selector,
@@ -717,8 +714,7 @@ class MarkupLibrary(object):
 
     @staticmethod
     def one_click_every(lower, upper, selector=None):
-        string = '1 click/{}-{} sec.'
-        string = string.format(lower, upper)
+        string = '1 click/{lower}-{upper} sec.'
         return MarkupLibrary.make_markup(
             string,
             selector=selector,
@@ -1274,8 +1270,7 @@ class MarkupLibrary(object):
 
     @staticmethod
     def tasto_fractional_scratch(numerator, denominator, selector=None):
-        string = 'tasto + {}/{} scratch'
-        string = string.format(numerator, denominator)
+        string = 'tasto + {numerator}/{denominator} scratch'
         return MarkupLibrary.make_markup(
             string,
             selector=selector,
@@ -1425,15 +1420,14 @@ class MarkupLibrary(object):
         ):
         if first_is_new:
             if second_is_new:
-                composite_string = '{} + {}'
+                composite_string = f'{string_1} + {string_2}'
             else:
-                composite_string = '{} (+{})'
+                composite_string = f'{string_1} (+{string_2})'
         else:
             if second_is_new:
-                composite_string = '({}+) {}'
+                composite_string = f'({string_1}+) {string_2}'
             else:
-                composite_string = '({} + {})'
-        composite_string = composite_string.format(string_1, string_2)
+                composite_string = f'({string_1} + {string_2})'
         return MarkupLibrary.make_markup(
             composite_string,
             selector=selector,

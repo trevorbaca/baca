@@ -42,21 +42,15 @@ class AnchorCommand(abjad.AbjadValueObject):
         self._figure_name = figure_name
         if (local_selector is not None and
             not isinstance(local_selector, abjad.Selector)):
-            message = 'must be selector: {!r}.'
-            message = message.format(local_selector)
-            raise TypeError(message)
+            raise TypeError(f'must be selector: {local_selector!r}.')
         self._local_selector = local_selector
         if (remote_selector is not None and
             not isinstance(remote_selector, abjad.Selector)):
-            message = 'must be selector: {!r}.'
-            message = message.format(remote_selector)
-            raise TypeError(message)
+            raise TypeError(f'must be selector: {remote_selector!r}.')
         self._remote_selector = remote_selector
         if (remote_voice_name is not None and
             not isinstance(remote_voice_name, str)):
-            message = 'voice name must be string: {!r}.'
-            message = message.format(remote_voice_name)
-            raise TypeError(message)
+            raise TypeError(f'must be string: {remote_voice_name!r}.')
         self._remote_voice_name = remote_voice_name
         if use_remote_stop_offset is not None:
             use_remote_stop_offset = bool(use_remote_stop_offset)

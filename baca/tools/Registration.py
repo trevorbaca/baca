@@ -136,9 +136,7 @@ class Registration(abjad.AbjadValueObject):
                 else:
                     raise ValueError(pitch, self)
         else:
-            message = 'pitch {} not in {}.'
-            message = message.format(pitch, self)
-            raise ValueError(message)
+            raise ValueError(f'{pitch!r} not in {self!r}.')
 
     ### PUBLIC PROPERTIES ###
 

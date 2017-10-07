@@ -883,8 +883,7 @@ class Tree(abjad.AbjadObject):
 
         '''
         if not self._is_valid_level(level):
-            message = 'invalid level: {!r}.'.format(level)
-            raise Exception(message)
+            raise Exception(f'invalid level: {level!r}.')
         result = []
         self_is_found = False
         first_node_returned_is_trimmed = False
@@ -942,9 +941,7 @@ class Tree(abjad.AbjadObject):
             if all_nodes_at_level:
                 return result
             else:
-                message = 'not enough nodes at level {}.'
-                message = message.format(level)
-                raise ValueError(message)
+                raise ValueError(f'not enough nodes at level {level!r}.')
 
     def _get_node_at_position(self, position):
         result = self
@@ -1048,9 +1045,7 @@ class Tree(abjad.AbjadObject):
         for i, current_node in enumerate(self):
             if current_node is node:
                 return i
-        message = 'not in tree: {!r}.'
-        message = message.format(node)
-        raise ValueError(message)
+        raise ValueError(f'not in tree: {node!r}.')
 
     def _initialize_internal_nodes(self, items):
         children = []

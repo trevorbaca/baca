@@ -71,7 +71,7 @@ class MusicAccumulator(abjad.AbjadObject):
                 ...     )
                 Traceback (most recent call last):
                     ...
-                Exception: duplicate figure name: D.
+                Exception: duplicate figure name: 'D'.
 
         Returns none.
         '''
@@ -86,9 +86,8 @@ class MusicAccumulator(abjad.AbjadObject):
         if music_contribution.figure_name is None:
             return
         if music_contribution.figure_name in self._figure_names:
-            message = 'duplicate figure name: {}.'
-            message = message.format(music_contribution.figure_name)
-            raise Exception(message)
+            name = music_contribution.figure_name
+            raise Exception(f'duplicate figure name: {name!r}.')
         self._figure_names.append(music_contribution.figure_name)
 
     def _cache_floating_selection(self, music_contribution):
@@ -138,9 +137,7 @@ class MusicAccumulator(abjad.AbjadObject):
                                 return leaf_start_offset
                     leaf_duration = abjad.inspect(leaf).get_duration()
                     leaf_start_offset += leaf_duration
-        message = 'can not find figure {}.'
-        message = message.format(figure_name)
-        raise Exception(message)
+        raise Exception(f'can not find figure {figure_name!r}.')
 
     def _get_leaf_timespan(self, leaf, floating_selections):
         found_leaf = False
@@ -155,9 +152,7 @@ class MusicAccumulator(abjad.AbjadObject):
             if found_leaf:
                 break
         if not found_leaf:
-            message = 'can not find {!r} in floating selections.'
-            message = message.format(leaf)
-            raise Exception(message)
+            raise Exception(f'can not find {leaf!r} in floating selections.')
         selection_start_offset = floating_selection.timespan.start_offset
         leaf_start_offset = selection_start_offset + leaf_start_offset
         leaf_stop_offset = leaf_start_offset + leaf_duration

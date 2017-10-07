@@ -281,8 +281,7 @@ class PitchArrayRow(abjad.AbjadObject):
             right = ', '.join(
                 [x._format_row_column_repr_string for x in self.cells[-2:]])
             number_in_middle = len_self - 4
-            middle = ', ... [{}] ..., '
-            middle = middle.format(number_in_middle)
+            middle = f', ... [{number_in_middle}] ..., '
             return left + middle + right
 
     @property

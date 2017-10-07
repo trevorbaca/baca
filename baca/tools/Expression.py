@@ -27,9 +27,7 @@ class Expression(abjad.Expression):
         try:
             result = eval(statement, globals_)
         except (NameError, SyntaxError, TypeError) as e:
-            message = '{!r} raises {!r}.'
-            message = message.format(statement, e)
-            raise Exception(message)
+            raise Exception(f'{statement!r} raises {e!r}.')
         return result
 
     ### PUBLIC METHODS ###

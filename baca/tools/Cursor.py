@@ -598,14 +598,14 @@ class Cursor(abjad.AbjadObject):
                 >>> cursor.next()
                 Traceback (most recent call last):
                 ...
-                Exception: cursor length only 4.
+                Exception: cursor only 4.
 
             ::
 
                 >>> cursor.next()
                 Traceback (most recent call last):
                 ...
-                Exception: cursor length only 4.
+                Exception: cursor only 4.
 
         ..  container:: example
 
@@ -840,7 +840,7 @@ class Cursor(abjad.AbjadObject):
                 >>> cursor.next(count=99)
                 Traceback (most recent call last):
                 ...
-                Exception: cursor length only 4.
+                Exception: cursor only 4.
 
         Returns tuple.
         '''
@@ -854,9 +854,7 @@ class Cursor(abjad.AbjadObject):
                     result.append(element)
                 except IndexError:
                     if not self.suppress_exception:
-                        message = 'cursor length only {}.'
-                        message = message.format(len(self.source))
-                        raise Exception(message)
+                        raise Exception(f'cursor only {len(self.source)}.')
                 self._position += 1
         elif count < 0:
             for i in range(abs(count)):
@@ -866,18 +864,14 @@ class Cursor(abjad.AbjadObject):
                     result.append(element)
                 except IndexError:
                     if not self.suppress_exception:
-                        message = 'cursor length only {}.'
-                        message = message.format(len(self.source))
-                        raise Exception(message)
+                        raise Exception(f'cursor only {len(self.source)}.')
         if self.singletons:
             if len(result) == 0:
                 result = None
             elif len(result) == 1:
                 result = result[0]
         if exhausted and not self.is_exhausted:
-            message = 'cursor not exhausted: {!r}.'
-            message = message.format(self)
-            raise Exception(message)
+            raise Exception(f'cusor not exhausted: {self!r}.')
         return result
 
     def reset(self):

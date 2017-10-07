@@ -16,7 +16,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     def _attach_tag(self, instrument_tag, context):
         assert isinstance(instrument_tag, str), repr(str)
-        tag_string = 'tag {}'.format(instrument_tag)
+        tag_string = f'tag {instrument_tag}'
         tag_command = abjad.LilyPondCommand(
             tag_string,
             'before',
@@ -49,6 +49,4 @@ class ScoreTemplate(abjad.ScoreTemplate):
             voice_names.append(voice.name)
         for voice_name in sorted(self.voice_colors):
             if voice_name not in voice_names:
-                message = 'voice not found in score: {!r}.'
-                message = message.format(voice_name)
-                raise Exception(message)
+                raise Exception(f'voice not in score: {voice_name!r}.')

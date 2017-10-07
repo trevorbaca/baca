@@ -68,9 +68,7 @@ class SpacingIndication(abjad.AbjadValueObject):
             self._proportional_notation_duration = \
                 proportional_notation_duration
         else:
-            message = 'can not initialize spacing indication from {!r}'
-            message = message.format(args)
-            raise ValueError(message)
+            raise ValueError(f'bad spacing indication args: {args!r}.')
 
     ### SPECIAL METHODS ###
 

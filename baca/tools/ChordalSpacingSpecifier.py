@@ -185,8 +185,7 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
             else:
                 candidate = abjad.NumberedPitchClass(candidate.number - 1)
             if 999 <= iterations:
-                message = 'stuck in while-loop.'
-                raise Exception(message)
+                raise Exception('stuck in while-loop.')
             iterations += 1
         assert not pitch_classes, repr(pitch_classes)
         return pitch_classes_
@@ -201,15 +200,11 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
         if self.bass is not None:
             bass = abjad.NumberedPitchClass(self.bass)
             if bass not in pitch_classes:
-                message = 'bass pitch-class {} not found in {}.'
-                message = message.format(bass, pitch_classes)
-                raise ValueError(message)
+                raise ValueError(f'bass pc {bass} not in {pitch_classes}.')
         if self.soprano is not None:
             soprano = abjad.NumberedPitchClass(self.soprano)
             if soprano not in pitch_classes:
-                message = 'soprano pitch-class {} not found in {}.'
-                message = message.format(soprano, pitch_classes)
-                raise ValueError(message)
+                raise ValueError(f'soprano pc {bass} not in {pitch_classes}.')
         inner = []
         for pitch_class in pitch_classes:
             if pitch_class not in (bass, soprano):

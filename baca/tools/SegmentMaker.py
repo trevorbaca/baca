@@ -1840,9 +1840,10 @@ class SegmentMaker(abjad.SegmentMaker):
         if stage_number is Infinity:
             stage_number = self.stage_count
         if self.stage_count < stage_number:
-            message = 'segment has only {} {} (not {}).'
-            unit = abjad.String('stage').pluralize(self.stage_count)
-            message = message.format(self.stage_count, unit, stage_number)
+            count = self.stage_count
+            counter = abjad.String('stage').pluralize(count)
+            message = f'segment has only {count} {counter}'
+            message += f' (not {stage_number}).'
             raise Exception(message)
         measure_indices = abjad.mathtools.cumulative_sums(
             self.measures_per_stage)
@@ -7781,8 +7782,8 @@ class SegmentMaker(abjad.SegmentMaker):
         Returns none.
         '''
         if not measure_count == self.measure_count:
-            message = 'segment measure count is not {} but {}.'
-            message = message.format(measure_count, self.measure_count)
+            message = f'segment measure count is not {measure_count}'
+            message += f' but {self.measure_count}.'
             raise Exception(message)
 
     def validate_measures_per_stage(self):
@@ -7795,11 +7796,8 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.measures_per_stage is None:
             return
         if not sum(self.measures_per_stage) == self.measure_count:
-            message = 'measures per stage {} do not match measure count {}.'
-            message = message.format(
-                self.measures_per_stage,
-                self.measure_count,
-                )
+            message = f'measures per stage {self.measures_per_stage}'
+            message += f' do not match measure count {self.measure_count}.'
             raise Exception(message)
 
     def validate_stage_count(self, stage_count):
@@ -7810,6 +7808,6 @@ class SegmentMaker(abjad.SegmentMaker):
         Returns none.
         '''
         if not stage_count == self.stage_count:
-            message = 'segment stage count is not {} but {}.'
-            message = message.format(stage_count, self.stage_count)
+            message = f'segment stage count is not {stage_count}'
+            message += f' but {self.stage_count}.'
             raise Exception(message)
