@@ -324,7 +324,7 @@ class LibraryAM(object):
     def anchor(remote_voice_name, remote_selector=None, local_selector=None):
         r'''Anchors music to start of remote selection.
         '''
-        return baca.AnchorCommand(
+        return baca.AnchorSpecifier(
             local_selector=local_selector,
             remote_selector=remote_selector,
             remote_voice_name=remote_voice_name,
@@ -338,7 +338,7 @@ class LibraryAM(object):
         ):
         r'''Anchors music to stop of remote selection.
         '''
-        return baca.AnchorCommand(
+        return baca.AnchorSpecifier(
             local_selector=local_selector,
             remote_selector=remote_selector,
             remote_voice_name=remote_voice_name,
@@ -349,7 +349,7 @@ class LibraryAM(object):
     def anchor_to_figure(figure_name):
         r'''Anchors music to start of figure.
         '''
-        return baca.AnchorCommand(
+        return baca.AnchorSpecifier(
             figure_name=figure_name,
             )
 

@@ -939,7 +939,7 @@ class MusicMaker(abjad.AbjadObject):
     def _get_anchor_specifier(specifiers):
         anchor_specifiers, specifiers_ = [], []
         for specifier in specifiers:
-            if isinstance(specifier, baca.AnchorCommand):
+            if isinstance(specifier, baca.AnchorSpecifier):
                 anchor_specifiers.append(specifier)
             else:
                 specifiers_.append(specifier)

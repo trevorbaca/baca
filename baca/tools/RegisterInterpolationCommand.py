@@ -1,8 +1,9 @@
 import abjad
 import baca
+from .Command import Command
 
 
-class RegisterInterpolationCommand(abjad.AbjadObject):
+class RegisterInterpolationCommand(Command):
     r"""Register interpolation command.
 
     ..  container:: example

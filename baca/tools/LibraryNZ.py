@@ -2929,13 +2929,13 @@ class LibraryNZ(object):
     def resume():
         r'''Resumes music at next offset across all voices in score.
         '''
-        return baca.AnchorCommand()
+        return baca.AnchorSpecifier()
 
     @staticmethod
     def resume_after(remote_voice_name):
         r'''Resumes music after remote selection.
         '''
-        return baca.AnchorCommand(
+        return baca.AnchorSpecifier(
             remote_selector=baca.select_leaf(-1),
             remote_voice_name=remote_voice_name,
             use_remote_stop_offset=True,

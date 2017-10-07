@@ -1,8 +1,9 @@
 import abjad
 import baca
+from .Command import Command
 
 
-class ColorCommand(abjad.AbjadObject):
+class ColorCommand(Command):
     r'''Color command.
 
     ..  container:: example

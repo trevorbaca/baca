@@ -1,7 +1,8 @@
 import abjad
+from .Command import Command
 
 
-class TrillCommand(abjad.AbjadObject):
+class TrillCommand(Command):
     r'''Trill command.
 
     ..  container:: example

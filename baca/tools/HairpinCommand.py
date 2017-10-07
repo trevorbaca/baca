@@ -1,8 +1,9 @@
 import abjad
 import baca
+from .Command import Command
 
 
-class HairpinCommand(abjad.AbjadObject):
+class HairpinCommand(Command):
     r'''Hairpin command.
 
     ..  container:: example

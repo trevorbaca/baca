@@ -1,8 +1,9 @@
 import abjad
 import baca
+from .Command import Command
 
 
-class OverrideCommand(abjad.AbjadObject):
+class OverrideCommand(Command):
     r'''Override command.
 
     ..  container:: example

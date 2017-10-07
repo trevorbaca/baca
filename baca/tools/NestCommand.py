@@ -1,8 +1,9 @@
 import abjad
 import baca
+from .Command import Command
 
 
-class NestCommand(abjad.AbjadObject):
+class NestCommand(Command):
     r'''Nest command.
 
     ..  container:: example

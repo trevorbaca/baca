@@ -1,9 +1,10 @@
 import abjad
 import collections
+from .Command import Command
 
 
 # TODO: write comprehensive tests
-class ScorePitchCommand(abjad.AbjadObject):
+class ScorePitchCommand(Command):
     r'''Score pitch command.
 
     ..  container:: example

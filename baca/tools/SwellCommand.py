@@ -1,9 +1,10 @@
 import abjad
 import baca
 import copy
+from .Command import Command
 
 
-class SwellCommand(abjad.AbjadObject):
+class SwellCommand(Command):
     r'''Swell specifier.
 
     ..  container:: example

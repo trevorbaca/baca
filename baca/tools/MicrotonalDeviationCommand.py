@@ -1,8 +1,9 @@
 import abjad
 import itertools
+from .Command import Command
 
 
-class MicrotonalDeviationCommand(abjad.AbjadObject):
+class MicrotonalDeviationCommand(Command):
     r'''Microtonal deviation command.
 
     ..  container:: example

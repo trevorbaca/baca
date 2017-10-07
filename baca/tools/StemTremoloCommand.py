@@ -1,8 +1,9 @@
 import abjad
 import baca
+from .Command import Command
 
 
-class StemTremoloCommand(abjad.AbjadObject):
+class StemTremoloCommand(Command):
     r'''Stem tremolo command.
 
     ..  container:: example

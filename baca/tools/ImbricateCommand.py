@@ -1,9 +1,10 @@
 import abjad
 import baca
 import copy
+from .Command import Command
 
 
-class ImbricateCommand(abjad.AbjadObject):
+class ImbricateCommand(Command):
     r'''Imbricate command.
 
     ..  container:: example

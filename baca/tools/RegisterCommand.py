@@ -1,8 +1,9 @@
 import abjad
 import baca
+from .Command import Command
 
 
-class RegisterCommand(abjad.AbjadObject):
+class RegisterCommand(Command):
     r"""Register command.
 
     ..  container:: example

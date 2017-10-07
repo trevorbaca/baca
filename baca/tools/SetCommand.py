@@ -1,9 +1,10 @@
 import abjad
 import baca
+from .Command import Command
 
 
 # TODO: write examples
-class SetCommand(abjad.AbjadObject):
+class SetCommand(Command):
     r'''Set command.
 
     ..  container:: example

@@ -1,7 +1,8 @@
 import abjad
+from .Command import Command
 
 
-class ClusterCommand(abjad.AbjadObject):
+class ClusterCommand(Command):
     r"""Cluster command.
 
     ..  container:: example

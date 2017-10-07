@@ -1,9 +1,10 @@
 import abjad
 import baca
 import itertools
+from .Command import Command
 
 
-class ColorFingeringCommand(abjad.AbjadObject):
+class ColorFingeringCommand(Command):
     r'''Color fingering command.
 
     ..  container:: example

@@ -1,9 +1,10 @@
 import abjad
 import baca
 import copy
+from .Command import Command
 
 
-class TransitionCommand(abjad.AbjadObject):
+class TransitionCommand(Command):
     r'''Transition command.
 
     ..  container:: example

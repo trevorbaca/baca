@@ -1,8 +1,9 @@
 import abjad
 import baca
+from .Command import Command
 
 
-class RegisterToOctaveCommand(abjad.AbjadObject):
+class RegisterToOctaveCommand(Command):
     r"""Register-to-octave command.
 
     ..  container:: example

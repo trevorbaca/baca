@@ -1,7 +1,8 @@
 import abjad
+from .Command import Command
 
 
-class OctaveDisplacementCommand(abjad.AbjadObject):
+class OctaveDisplacementCommand(Command):
     r"""Octave displacement command.
 
     ..  container:: example

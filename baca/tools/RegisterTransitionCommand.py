@@ -1,8 +1,9 @@
 import abjad
 import baca
+from .Command import Command
 
 
-class RegisterTransitionCommand(abjad.AbjadObject):
+class RegisterTransitionCommand(Command):
     r'''Register transition command.
 
     ..  container:: example

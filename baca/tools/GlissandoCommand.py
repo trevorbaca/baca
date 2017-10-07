@@ -1,8 +1,9 @@
 import abjad
 import baca
+from .Command import Command
 
 
-class GlissandoCommand(abjad.AbjadObject):
+class GlissandoCommand(Command):
     r'''Glissando command.
 
     ..  container:: example

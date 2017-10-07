@@ -1,8 +1,9 @@
 import abjad
 import baca
+from .Command import Command
 
 
-class AttachCommand(abjad.AbjadObject):
+class AttachCommand(Command):
     r'''Attach command.
 
     ..  container:: example

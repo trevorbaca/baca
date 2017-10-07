@@ -1,7 +1,8 @@
 import abjad
+from .Command import Command
 
 
-class DiatonicClusterCommand(abjad.AbjadObject):
+class DiatonicClusterCommand(Command):
     r'''Diatonic cluster command.
 
     ..  container:: example

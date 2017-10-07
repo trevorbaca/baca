@@ -1,8 +1,9 @@
 import abjad
 import baca
+from .Command import Command
 
 
-class SpannerCommand(abjad.AbjadObject):
+class SpannerCommand(Command):
     r'''Spanner command.
 
     ..  container:: example

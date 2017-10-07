@@ -1,8 +1,9 @@
 import abjad
 import baca
+from .Command import Command
 
 
-class RhythmCommand(abjad.AbjadObject):
+class RhythmCommand(Command):
     r'''Rhythm command.
 
     ::
