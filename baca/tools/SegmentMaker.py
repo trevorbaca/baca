@@ -968,16 +968,15 @@ class SegmentMaker(abjad.SegmentMaker):
                     markup._annotation.startswith('figure name:')):
                     abjad.detach(markup, leaf)
 
-    def _evaluate_selector(
-        self,
-        scoped_command,
-        compound_scope,
-        command,
-        ):
-        if hasattr(command, 'selector'):
+    def _evaluate_scope(self, scoped_command):
+        if isinstance(scoped_command.scope, baca.SimpleScope):
+            scope = baca.CompoundScope([scoped_command.scope])
+        else:
+            scope = scoped_command.scope
+        if hasattr(scoped_command.command, 'selector'):
             result = self._compound_scope_to_logical_ties(
                 scoped_command,
-                compound_scope,
+                scope,
                 include_rests=True,
                 leaves_instead_of_logical_ties=True,
                 )
@@ -986,7 +985,7 @@ class SegmentMaker(abjad.SegmentMaker):
         else:
             result = self._compound_scope_to_logical_ties(
                 scoped_command,
-                compound_scope,
+                scope,
                 )
             assert len(result) == 2, repr(result)
             selection, timespan = result
@@ -998,7 +997,8 @@ class SegmentMaker(abjad.SegmentMaker):
             else:
                 raise Exception(message)
         timespan = None
-        if getattr(command, '_include_selection_timespan', False):
+        if getattr(
+            scoped_command.command, '_include_selection_timespan', False):
             timespan = self._selection_to_timespan(selection)
         return selection, timespan
 
@@ -1411,28 +1411,20 @@ class SegmentMaker(abjad.SegmentMaker):
         self._apply_first_and_last_ties(voice)
 
     def _interpret_scoped_command(self, scoped_command):
-        assert not isinstance(scoped_command.command, (list, tuple))
-        compound_scope, command = self._unwrap_scoped_command(scoped_command)
-        if isinstance(command, baca.RhythmCommand):
+        assert isinstance(scoped_command, baca.ScopedCommand)
+        assert isinstance(scoped_command.command, baca.Command)
+        if isinstance(scoped_command.command, baca.RhythmCommand):
             return
-        classname = type(command).__name__
-        if not classname.endswith('Command'):
-            raise Exception(format(command))
-        self._handle_mutator(command)
-        selection, timespan = self._evaluate_selector(
-            scoped_command,
-            compound_scope,
-            command,
-            )
+        selection, timespan = self._evaluate_scope(scoped_command)
         try:
             if timespan:
-                command(selection, timespan)
+                scoped_command.command(selection, timespan)
             else:
-                command(selection)
+                scoped_command.command(selection)
         except:
             traceback.print_exc()
             raise Exception(format(scoped_command))
-        self._handle_mutator(command)
+        self._handle_mutator(scoped_command.command)
 
     def _interpret_scoped_commands(self):
         start_time = time.time()
@@ -1916,15 +1908,6 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(scopes, list), repr(scopes)
         assert all(isinstance(_, prototype) for _ in scopes), repr(scopes)
         return scopes
-
-    def _unwrap_scoped_command(self, scoped_command):
-        command = scoped_command.command
-        if isinstance(scoped_command.scope, baca.SimpleScope):
-            simple_scope = scoped_command.scope
-            compound_scope = baca.CompoundScope([simple_scope])
-        else:
-            compound_scope = scoped_command.scope
-        return compound_scope, command
 
     def _update_metadata(self):
         self._metadata['measure_count'] = self.measure_count
