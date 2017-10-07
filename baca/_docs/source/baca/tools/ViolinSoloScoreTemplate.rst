@@ -1,0 +1,94 @@
+.. currentmodule:: baca.tools
+
+ViolinSoloScoreTemplate
+=======================
+
+.. autoclass:: ViolinSoloScoreTemplate
+
+Bases
+-----
+
+- :py:class:`baca.tools.ScoreTemplate`
+
+- :py:class:`abjad.tools.templatetools.ScoreTemplate`
+
+- :py:class:`abjad.tools.abctools.AbjadValueObject`
+
+- :py:class:`abjad.tools.abctools.AbjadObject`
+
+- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+
+- :py:class:`builtins.object`
+
+.. only:: html
+
+   Attribute summary
+   -----------------
+
+   .. autosummary::
+
+      ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.attach_defaults
+      ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__call__
+      ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__copy__
+      ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__eq__
+      ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__format__
+      ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__hash__
+      ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__illustrate__
+      ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__ne__
+      ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__repr__
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.attach_defaults
+
+Special methods
+---------------
+
+.. automethod:: baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__call__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__copy__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__eq__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__format__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__hash__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__illustrate__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__ne__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__repr__

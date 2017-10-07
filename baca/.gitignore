@@ -54,3 +54,6 @@ target/
 
 # MacOS
 .DS_Store
+
+# ignore docs build directories
+_docs/build

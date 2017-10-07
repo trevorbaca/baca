@@ -1,0 +1,76 @@
+.. currentmodule:: baca.tools
+
+CompoundScope
+=============
+
+.. autoclass:: CompoundScope
+
+Bases
+-----
+
+- :py:class:`abjad.tools.abctools.AbjadObject`
+
+- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+
+- :py:class:`builtins.object`
+
+.. only:: html
+
+   Attribute summary
+   -----------------
+
+   .. autosummary::
+
+      ~baca.tools.CompoundScope.CompoundScope.from_token
+      ~baca.tools.CompoundScope.CompoundScope.simple_scopes
+      ~baca.tools.CompoundScope.CompoundScope.__contains__
+      ~baca.tools.CompoundScope.CompoundScope.__eq__
+      ~baca.tools.CompoundScope.CompoundScope.__format__
+      ~baca.tools.CompoundScope.CompoundScope.__hash__
+      ~baca.tools.CompoundScope.CompoundScope.__ne__
+      ~baca.tools.CompoundScope.CompoundScope.__repr__
+
+Read-only properties
+--------------------
+
+.. autoattribute:: baca.tools.CompoundScope.CompoundScope.simple_scopes
+
+Class & static methods
+----------------------
+
+.. automethod:: baca.tools.CompoundScope.CompoundScope.from_token
+
+Special methods
+---------------
+
+.. automethod:: baca.tools.CompoundScope.CompoundScope.__contains__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.CompoundScope.CompoundScope.__eq__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.CompoundScope.CompoundScope.__format__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.CompoundScope.CompoundScope.__hash__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.CompoundScope.CompoundScope.__ne__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.CompoundScope.CompoundScope.__repr__

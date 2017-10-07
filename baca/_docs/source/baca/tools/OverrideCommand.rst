@@ -1,0 +1,93 @@
+.. currentmodule:: baca.tools
+
+OverrideCommand
+===============
+
+.. autoclass:: OverrideCommand
+
+Bases
+-----
+
+- :py:class:`baca.tools.Command`
+
+- :py:class:`abjad.tools.abctools.AbjadObject`
+
+- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+
+- :py:class:`builtins.object`
+
+.. only:: html
+
+   Attribute summary
+   -----------------
+
+   .. autosummary::
+
+      ~baca.tools.OverrideCommand.OverrideCommand.attribute_name
+      ~baca.tools.OverrideCommand.OverrideCommand.attribute_value
+      ~baca.tools.OverrideCommand.OverrideCommand.context_name
+      ~baca.tools.OverrideCommand.OverrideCommand.grob_name
+      ~baca.tools.OverrideCommand.OverrideCommand.maximum_settings
+      ~baca.tools.OverrideCommand.OverrideCommand.maximum_written_duration
+      ~baca.tools.OverrideCommand.OverrideCommand.revert
+      ~baca.tools.OverrideCommand.OverrideCommand.selector
+      ~baca.tools.OverrideCommand.OverrideCommand.__call__
+      ~baca.tools.OverrideCommand.OverrideCommand.__eq__
+      ~baca.tools.OverrideCommand.OverrideCommand.__format__
+      ~baca.tools.OverrideCommand.OverrideCommand.__hash__
+      ~baca.tools.OverrideCommand.OverrideCommand.__ne__
+      ~baca.tools.OverrideCommand.OverrideCommand.__repr__
+
+Read-only properties
+--------------------
+
+.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.attribute_name
+
+.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.attribute_value
+
+.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.context_name
+
+.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.grob_name
+
+.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.maximum_settings
+
+.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.maximum_written_duration
+
+.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.revert
+
+.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.selector
+
+Special methods
+---------------
+
+.. automethod:: baca.tools.OverrideCommand.OverrideCommand.__call__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.OverrideCommand.OverrideCommand.__eq__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.OverrideCommand.OverrideCommand.__format__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.OverrideCommand.OverrideCommand.__hash__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.OverrideCommand.OverrideCommand.__ne__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.OverrideCommand.OverrideCommand.__repr__

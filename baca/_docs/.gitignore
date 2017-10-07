@@ -1,0 +1,2 @@
+# exclude all directories in source directory
+!source/**
