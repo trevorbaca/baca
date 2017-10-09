@@ -125,6 +125,14 @@ class TimeSignatureMaker(abjad.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
+    def metronome_mark_measure_map(self):
+        r'''Gets tempo map.
+
+        Returns tempo map.
+        '''
+        return self._tempo_map
+
+    @property
     def repeat_count(self):
         r'''Gets repeat count.
 
@@ -147,14 +155,6 @@ class TimeSignatureMaker(abjad.AbjadObject):
         Returns stage specifier.
         '''
         return self._stage_measure_map
-
-    @property
-    def metronome_mark_measure_map(self):
-        r'''Gets tempo map.
-
-        Returns tempo map.
-        '''
-        return self._tempo_map
 
     @property
     def time_signatures(self):

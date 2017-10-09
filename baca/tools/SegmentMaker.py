@@ -1115,16 +1115,6 @@ class SegmentMaker(abjad.SegmentMaker):
             result[context.name] = instrument.name
         return result
 
-    def _get_end_settings(self):
-        result = {}
-        if self._is_doc_example:
-            return result
-        result['end_clefs_by_staff'] = self._get_end_clefs()
-        result['end_instruments_by_context'] = self._get_end_instruments()
-        result['end_metronome_mark'] = self._get_end_metronome_mark()
-        result['end_time_signature'] = self._get_end_time_signature()
-        return result
-
     def _get_end_metronome_mark(self):
         context = self._score['Global Skips']
         leaf = abjad.inspect(context).get_leaf(-1)
@@ -1141,6 +1131,16 @@ class SegmentMaker(abjad.SegmentMaker):
             message = f'can not find {mark!r} in {self.metronome_marks!r}.'
             raise Exception(message)
         return name
+
+    def _get_end_settings(self):
+        result = {}
+        if self._is_doc_example:
+            return result
+        result['end_clefs_by_staff'] = self._get_end_clefs()
+        result['end_instruments_by_context'] = self._get_end_instruments()
+        result['end_metronome_mark'] = self._get_end_metronome_mark()
+        result['end_time_signature'] = self._get_end_time_signature()
+        return result
 
     def _get_end_time_signature(self):
         context = self._score['Global Skips']
@@ -5666,6 +5666,382 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._measures_per_stage
 
     @property
+    def metronome_mark_measure_map(self):
+        r'''Gets metronome mark measure map.
+
+        ..  container:: example
+
+            Without metronome mark measure map:
+
+            ::
+
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> commands = segment_maker.append_commands(
+                ...     'Violin Music Voice',
+                ...     baca.select_stages(1),
+                ...     baca.even_runs(),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> f(lilypond_file[abjad.Score])
+                \context Score = "Score" <<
+                    \tag violin
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context GlobalSkips = "Global Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            With metronome mark measure map:
+
+            ::
+
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
+                ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
+                ...         (1, abjad.MetronomeMark((1, 8), 90)),
+                ...         ]),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> commands = segment_maker.append_commands(
+                ...     'Violin Music Voice',
+                ...     baca.select_stages(1),
+                ...     baca.even_runs(),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> f(lilypond_file[abjad.Score])
+                \context Score = "Score" <<
+                    \tag violin
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context GlobalSkips = "Global Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2 ^ \markup {
+                                    \fontsize
+                                        #-6
+                                        \general-align
+                                            #Y
+                                            #DOWN
+                                            \note-by-number
+                                                #3
+                                                #0
+                                                #1
+                                    \upright
+                                        {
+                                            =
+                                            90
+                                        }
+                                    }
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        Defaults to none.
+
+        Set to metornome mark measure map or none.
+
+        Returns metornome mark measure map or none.
+        '''
+        return self._metronome_mark_measure_map
+
+    @property
     def metronome_marks(self):
         r'''Gets metronome marks.
 
@@ -6374,382 +6750,6 @@ class SegmentMaker(abjad.SegmentMaker):
         Returns string or none.
         '''
         return self._stage_label_base_string
-
-    @property
-    def metronome_mark_measure_map(self):
-        r'''Gets metronome mark measure map.
-
-        ..  container:: example
-
-            Without metronome mark measure map:
-
-            ::
-
-                >>> segment_maker = baca.SegmentMaker(
-                ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-                ...     )
-
-            ::
-
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
-                ...     baca.even_runs(),
-                ...     )
-
-            ::
-
-                >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Score])
-                \context Score = "Score" <<
-                    \tag violin
-                    \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
-                        \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                        }
-                    >>
-                    \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
-                                {
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                    \clef "treble"
-                                    c'8 [
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                    \bar "|"
-                                }
-                            }
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
-            With metronome mark measure map:
-
-            ::
-
-                >>> segment_maker = baca.SegmentMaker(
-                ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
-                ...         (1, abjad.MetronomeMark((1, 8), 90)),
-                ...         ]),
-                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-                ...     )
-
-            ::
-
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
-                ...     baca.even_runs(),
-                ...     )
-
-            ::
-
-                >>> result = segment_maker(is_doc_example=True)
-                >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Score])
-                \context Score = "Score" <<
-                    \tag violin
-                    \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
-                        \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2 ^ \markup {
-                                    \fontsize
-                                        #-6
-                                        \general-align
-                                            #Y
-                                            #DOWN
-                                            \note-by-number
-                                                #3
-                                                #0
-                                                #1
-                                    \upright
-                                        {
-                                            =
-                                            90
-                                        }
-                                    }
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                        }
-                    >>
-                    \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
-                                {
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                    \clef "treble"
-                                    c'8 [
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                    \bar "|"
-                                }
-                            }
-                        }
-                    >>
-                >>
-
-        Defaults to none.
-
-        Set to metornome mark measure map or none.
-
-        Returns metornome mark measure map or none.
-        '''
-        return self._metronome_mark_measure_map
 
     @property
     def time_signatures(self):

@@ -678,16 +678,16 @@ class MarkupLibrary(object):
             )
 
     @staticmethod
-    def OB_no_pitch(selector=None):
+    def OB_full_bow_strokes(selector=None):
         return MarkupLibrary.make_markup(
-            'OB (no pitch)',
+            'OB + full bow strokes',
             selector=selector,
             )
 
     @staticmethod
-    def OB_full_bow_strokes(selector=None):
+    def OB_no_pitch(selector=None):
         return MarkupLibrary.make_markup(
-            'OB + full bow strokes',
+            'OB (no pitch)',
             selector=selector,
             )
 
@@ -763,13 +763,6 @@ class MarkupLibrary(object):
             )
 
     @staticmethod
-    def po_meno_scratch(selector=None):
-        return MarkupLibrary.make_markup(
-            "po' meno scratch",
-            selector=selector,
-            )
-
-    @staticmethod
     def pizz(selector=None):
         return MarkupLibrary.make_markup(
             'pizz.',
@@ -787,6 +780,13 @@ class MarkupLibrary(object):
     def PO_FB_flaut(selector=None):
         return MarkupLibrary.make_markup(
             'PO + FB flaut.',
+            selector=selector,
+            )
+
+    @staticmethod
+    def po_meno_scratch(selector=None):
+        return MarkupLibrary.make_markup(
+            "po' meno scratch",
             selector=selector,
             )
 
@@ -1046,16 +1046,16 @@ class MarkupLibrary(object):
             )
 
     @staticmethod
-    def senza_scratch(selector=None):
+    def senza_pedale(selector=None):
         return MarkupLibrary.make_markup(
-            'senza scratch',
+            'senza pedale',
             selector=selector,
             )
 
     @staticmethod
-    def senza_pedale(selector=None):
+    def senza_scratch(selector=None):
         return MarkupLibrary.make_markup(
-            'senza pedale',
+            'senza scratch',
             selector=selector,
             )
 
