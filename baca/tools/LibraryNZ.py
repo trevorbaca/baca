@@ -2942,6 +2942,22 @@ class LibraryNZ(object):
             )
 
     @staticmethod
+    def scope(voice, start, stop=None):
+        r'''Scopes `voice` from `start` to `stop`.
+
+        Returns simple scope.
+        '''
+        assert isinstance(start, int), repr(start)
+        if stop is None:
+            stages = baca.StageSpecifier(start, start)
+        else:
+            stages = baca.StageSpecifier(start, stop)
+        return baca.SimpleScope(
+            voice_name=voice,
+            stages=stages,
+            )
+
+    @staticmethod
     def script_color(color='red', selector=None):
         r'''Overrides script color.
 

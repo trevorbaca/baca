@@ -1206,11 +1206,12 @@ class SegmentMaker(abjad.SegmentMaker):
         rehearsal_letter = chr(rehearsal_ordinal)
         return rehearsal_letter
 
-    def _get_rhythm_command(self, voice_name, stage):
+    def _get_rhythm_command(self, source_scope):
+        voice_name = source_scope.voice_name
+        stage = source_scope.stages.start
         rhythm_command = []
-        prototype = baca.RhythmCommand
         for rhythm_command in self.scoped_commands:
-            if not isinstance(rhythm_command.command, prototype):
+            if not isinstance(rhythm_command.command, baca.RhythmCommand):
                 continue
             if rhythm_command.scope.voice_name == voice_name:
                 stages = rhythm_command.scope.stages
@@ -1228,9 +1229,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _get_rhythm_commands_for_voice(self, voice_name):
         rhythm_commands = []
-        prototype = baca.RhythmCommand
         for scoped_command in self.scoped_commands:
-            if not isinstance(scoped_command.command, prototype):
+            if not isinstance(scoped_command.command, baca.RhythmCommand):
                 continue
             if scoped_command.scope.voice_name == voice_name:
                 rhythm_commands.append(scoped_command)
@@ -1571,47 +1571,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 stop_tempo = abjad.new(rhythm_command.stop_tempo)
                 leaf = abjad.inspect(context).get_leaf(-1)
                 abjad.attach(stop_tempo, leaf, scope=abjad.Score)
-
-    def _make_music_for_voice_old(self, voice):
-        assert not len(voice), repr(voice)
-        rhythm_commands = self._get_rhythm_commands_for_voice(voice.name)
-        rhythm_commands.sort(key=lambda x: x.stages[0])
-        assert self._stages_do_not_overlap(rhythm_commands)
-        if not rhythm_commands:
-            measures = self._make_rests()
-            voice.extend(measures)
-            return
-        effective_staff = abjad.inspect(voice).get_effective_staff()
-        effective_staff_name = effective_staff.context_name
-        next_stage = 1
-        for rhythm_command in rhythm_commands:
-            if rhythm_command.stages is None:
-                continue
-            if next_stage < rhythm_command.start_stage:
-                stop_stage = rhythm_command.start_stage - 1
-                contribution = self._get_time_signatures(
-                    start_stage=next_stage,
-                    stop_stage=stop_stage,
-                    )
-                time_signatures = contribution.payload
-                measures = self._make_rests(time_signatures)
-                voice.extend(measures)
-            contribution = self._get_time_signatures(*rhythm_command.stages)
-            contribution = rhythm_command(
-                effective_staff_name,
-                start_offset=contribution.start_offset,
-                time_signatures=contribution.payload,
-                )
-            voice.extend(contribution.payload)
-            next_stage = rhythm_command.stop_stage + 1
-        if next_stage <= self.stage_count:
-            contribution = self._get_time_signatures(
-                next_stage,
-                self.stage_count,
-                )
-            time_signatures = contribution.payload
-            measures = self._make_rests(time_signatures)
-            voice.extend(measures)
 
     def _make_rests(self, time_signatures=None):
         time_signatures = time_signatures or self.time_signatures
@@ -7464,29 +7423,15 @@ class SegmentMaker(abjad.SegmentMaker):
 
         Returns none.
         '''
-        _voice_name, _stage = source_scope
-        rhythm_command = self._get_rhythm_command(_voice_name, _stage)
-        rhythm_command = copy.deepcopy(rhythm_command)
-        assert isinstance(rhythm_command, baca.ScopedCommand)
-        assert isinstance(rhythm_command.command, baca.RhythmCommand), format(
-            rhythm_command)
-        if target_scope is None:
-            target_scope = rhythm_command.scope
-        elif isinstance(target_scope, baca.SimpleScope):
-            pass
-        else:
-            raise Exception(target_scope)
-            target_scope = baca.SimpleScope(
-                voice_name=_voice_name,
-                stages=(target_scope.start, target_scope.stop),
-                )
-        rhythm_command = rhythm_command.command
-        new_rhythm_command = abjad.new(rhythm_command, **keywords)
-        new_scoped_command = baca.ScopedCommand(
-            target_scope,
-            new_rhythm_command,
-            )
-        self.scoped_commands.append(new_scoped_command)
+        assert isinstance(source_scope, baca.SimpleScope)
+        assert isinstance(target_scope, baca.SimpleScope)
+        command = self._get_rhythm_command(source_scope)
+        command = copy.deepcopy(command)
+        assert isinstance(command, baca.ScopedCommand)
+        assert isinstance(command.command, baca.RhythmCommand)
+        command = abjad.new(command.command, **keywords)
+        command = baca.ScopedCommand(target_scope, command)
+        self.scoped_commands.append(command)
 
     def thread_commands(self, scopes, *commands):
         r'''Appends each command in `command` to each scope in `scopes`.
