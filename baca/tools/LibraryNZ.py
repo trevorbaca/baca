@@ -2942,6 +2942,18 @@ class LibraryNZ(object):
             )
 
     @staticmethod
+    def rhythm(selection):
+        r'''Set rhythm to `selection`.
+
+        Return rhythm command.
+        '''
+        assert isinstance(selection, abjad.Selection), repr(selection)
+        assert all(isinstance(_,  abjad.Component) for _ in selection)
+        return baca.RhythmCommand(
+            rhythm_maker=selection,
+            )
+
+    @staticmethod
     def scope(voice, start, stop=None):
         r'''Scopes `voice` from `start` to `stop`.
 
