@@ -7455,25 +7455,27 @@ class SegmentMaker(abjad.SegmentMaker):
         '''
         self.thread_commands((voice_name, selector), *commands)
 
-    # TODO: change to copy_scoped_command()
-    def copy_specifier(self, scoped_offset, target_scope, **keywords):
-        r'''Copies rhythm specifier.
+    def copy_rhythm(self, source_scope, target_scope, **keywords):
+        r'''Copies rhythm.
 
-        Gets rhythm specifier defined at `scoped_offset`.
+        Gets rhythm command defined at `source_scope`.
 
-        Makes new rhythm specifier with `target_scope` and optional `keywords`.
+        Makes new rhythm command with `target_scope` and optional `keywords`.
 
-        Returns rhythm specifier.
+        Returns none.
         '''
-        _voice_name, _stage = scoped_offset
+        _voice_name, _stage = source_scope
         rhythm_command = self._get_rhythm_command(_voice_name, _stage)
         rhythm_command = copy.deepcopy(rhythm_command)
         assert isinstance(rhythm_command, baca.ScopedCommand)
+        assert isinstance(rhythm_command.command, baca.RhythmCommand), format(
+            rhythm_command)
         if target_scope is None:
             target_scope = rhythm_command.scope
         elif isinstance(target_scope, baca.SimpleScope):
             pass
         else:
+            raise Exception(target_scope)
             target_scope = baca.SimpleScope(
                 voice_name=_voice_name,
                 stages=(target_scope.start, target_scope.stop),
@@ -7485,7 +7487,6 @@ class SegmentMaker(abjad.SegmentMaker):
             new_rhythm_command,
             )
         self.scoped_commands.append(new_scoped_command)
-        return new_scoped_command
 
     def thread_commands(self, scopes, *commands):
         r'''Appends each command in `command` to each scope in `scopes`.
