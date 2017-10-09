@@ -21,8 +21,7 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.CompoundScope.CompoundScope.from_token
-      ~baca.tools.CompoundScope.CompoundScope.simple_scopes
+      ~baca.tools.CompoundScope.CompoundScope.scopes
       ~baca.tools.CompoundScope.CompoundScope.__contains__
       ~baca.tools.CompoundScope.CompoundScope.__eq__
       ~baca.tools.CompoundScope.CompoundScope.__format__
@@ -33,12 +32,7 @@ Bases
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.CompoundScope.CompoundScope.simple_scopes
-
-Class & static methods
-----------------------
-
-.. automethod:: baca.tools.CompoundScope.CompoundScope.from_token
+.. autoattribute:: baca.tools.CompoundScope.CompoundScope.scopes
 
 Special methods
 ---------------

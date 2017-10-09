@@ -2318,6 +2318,14 @@ class LibraryAM(object):
             )
 
     @staticmethod
+    def compound(scopes):
+        r'''Makes compound scope.
+
+        Returns compound scope.
+        '''
+        return baca.CompoundScope(scopes=scopes)
+
+    @staticmethod
     def compound_quarter_divisions():
         r'''Makes compound quarter divisions.
 

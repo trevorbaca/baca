@@ -888,7 +888,7 @@ class SegmentMaker(abjad.SegmentMaker):
         leaves_instead_of_logical_ties=False,
         ):
         timespan_map, timespans = [], []
-        for scope in compound_scope.simple_scopes:
+        for scope in compound_scope.scopes:
             result = self._get_stage_numbers(scope.stages)
             start_stage, stop_stage = result
             offsets = self._get_offsets(start_stage, stop_stage)
@@ -921,7 +921,7 @@ class SegmentMaker(abjad.SegmentMaker):
         r'''Use for label expressions.
         '''
         timespan_map, timespans = [], []
-        for scope in compound_scope.simple_scopes:
+        for scope in compound_scope.scopes:
             result = self._get_stage_numbers(scope.stages)
             start_stage, stop_stage = result
             offsets = self._get_offsets(start_stage, stop_stage)
@@ -1818,29 +1818,6 @@ class SegmentMaker(abjad.SegmentMaker):
                     i = instrument.middle_c_sounding_pitch.number
                     written_pitch_number = sounding_pitch_number - i
                     leaf.written_pitch = written_pitch_number
-
-    def _unpack_scopes(self, scopes):
-        prototype = (baca.SimpleScope, baca.CompoundScope)
-        if isinstance(scopes, prototype):
-            scopes = [scopes]
-        elif isinstance(scopes, tuple):
-            scopes = baca.CompoundScope._to_simple_scopes(scopes)
-        elif isinstance(scopes, list):
-            scopes__ = []
-            for scope in scopes:
-                if isinstance(scope, prototype):
-                    scopes__.append(scope)
-                elif isinstance(scope, tuple):
-                    scopes_ = baca.CompoundScope._to_simple_scopes(scope)
-                    scopes__.extend(scopes_)
-                else:
-                    raise TypeError(f'only scopes and tuples: {scope!r}.')
-            scopes = scopes__
-        else:
-            raise TypeError(f'only scope, tuple or list: {scope!r}.')
-        assert isinstance(scopes, list), repr(scopes)
-        assert all(isinstance(_, prototype) for _ in scopes), repr(scopes)
-        return scopes
 
     def _update_metadata(self):
         self._metadata['measure_count'] = self.measure_count
@@ -7441,7 +7418,7 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(command, baca.CommandWrapper)
         assert isinstance(command.command, baca.RhythmCommand)
         command = abjad.new(command.command, **keywords)
-        command = baca.CommandWrapper(target, command)
+        command = baca.CommandWrapper(command, target)
         self.scoped_commands.append(command)
 
     def thread_commands(self, scopes, *commands):
@@ -7677,14 +7654,32 @@ class SegmentMaker(abjad.SegmentMaker):
         Returns none.
         '''
         assert isinstance(commands, tuple), repr(commands)
-        for command in commands:
-            assert type(command).__name__.endswith('Command'), repr(command)
-        scopes = self._unpack_scopes(scopes)
+        assert all(isinstance(_, baca.Command) for _ in commands)
+        prototype = (baca.SimpleScope, baca.CompoundScope)
+        if isinstance(scopes, prototype):
+            scopes = [scopes]
+        elif isinstance(scopes, tuple):
+            scopes = baca.CompoundScope._to_simple_scopes(scopes)
+        elif isinstance(scopes, list):
+            scopes__ = []
+            for scope in scopes:
+                if isinstance(scope, prototype):
+                    scopes__.append(scope)
+                elif isinstance(scope, tuple):
+                    scopes_ = baca.CompoundScope._to_simple_scopes(scope)
+                    scopes__.extend(scopes_)
+                else:
+                    raise TypeError(f'only scopes and tuples: {scope!r}.')
+            scopes = scopes__
+        else:
+            raise TypeError(f'only scope, tuple or list: {scope!r}.')
+        assert isinstance(scopes, list), repr(scopes)
+        assert all(isinstance(_, prototype) for _ in scopes), repr(scopes)
         for scope in scopes:
             for command in commands:
                 scoped_command = baca.CommandWrapper(
-                    scope=scope,
                     command=command,
+                    scope=scope,
                     )
                 self.scoped_commands.append(scoped_command)
 

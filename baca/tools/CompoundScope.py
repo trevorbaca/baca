@@ -10,33 +10,45 @@ class CompoundScope(abjad.AbjadObject):
 
         ::
 
-            >>> scope = baca.CompoundScope([
-            ...     baca.SimpleScope('Piano Music Voice', (5, 9)),
-            ...     baca.SimpleScope('Clarinet Music Voice', (7, 12)),
-            ...     baca.SimpleScope('Violin Music Voice', (8, 12)),
-            ...     baca.SimpleScope('Oboe Music Voice', (9, 12)),
+            >>> scope = baca.compound([
+            ...     baca.scope('Piano Music Voice', 5, 9),
+            ...     baca.scope('Clarinet Music Voice', 7, 12),
+            ...     baca.scope('Violin Music Voice', 8, 12),
+            ...     baca.scope('Oboe Music Voice', 9, 12),
             ...     ])
 
         ::
 
             >>> f(scope)
             baca.CompoundScope(
-                simple_scopes=(
+                scopes=(
                     baca.SimpleScope(
                         voice_name='Piano Music Voice',
-                        stages=(5, 9),
+                        stages=baca.StageSpecifier(
+                            start=5,
+                            stop=9,
+                            ),
                         ),
                     baca.SimpleScope(
                         voice_name='Clarinet Music Voice',
-                        stages=(7, 12),
+                        stages=baca.StageSpecifier(
+                            start=7,
+                            stop=12,
+                            ),
                         ),
                     baca.SimpleScope(
                         voice_name='Violin Music Voice',
-                        stages=(8, 12),
+                        stages=baca.StageSpecifier(
+                            start=8,
+                            stop=12,
+                            ),
                         ),
                     baca.SimpleScope(
                         voice_name='Oboe Music Voice',
-                        stages=(9, 12),
+                        stages=baca.StageSpecifier(
+                            start=9,
+                            stop=12,
+                            ),
                         ),
                     ),
                 )
@@ -55,7 +67,7 @@ class CompoundScope(abjad.AbjadObject):
     __documentation_section__ = 'Utilities'
 
     __slots__ = (
-        '_simple_scopes',
+        '_scopes',
         '_timespan_map',
         )
 
@@ -63,17 +75,17 @@ class CompoundScope(abjad.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, simple_scopes=None):
-        if simple_scopes is not None:
-            assert isinstance(simple_scopes, (tuple, list))
-            simple_scopes_ = []
-            for simple_scope in simple_scopes:
-                if not isinstance(simple_scope, baca.SimpleScope):
-                    simple_scope = baca.SimpleScope(*simple_scope)
-                simple_scopes_.append(simple_scope)
-            simple_scopes = simple_scopes_
-            simple_scopes = tuple(simple_scopes)
-        self._simple_scopes = simple_scopes
+    def __init__(self, scopes=None):
+        if scopes is not None:
+            assert isinstance(scopes, (tuple, list))
+            scopes_ = []
+            for scope in scopes:
+                if not isinstance(scope, baca.SimpleScope):
+                    scope = baca.SimpleScope(*scope)
+                scopes_.append(scope)
+            scopes = scopes_
+            scopes = tuple(scopes)
+        self._scopes = scopes
         self._timespan_map = None
 
     ### SPECIAL METHODS ###
@@ -97,6 +109,7 @@ class CompoundScope(abjad.AbjadObject):
 
     ### PRIVATE METHODS ###
 
+    # TODO: remove
     @staticmethod
     def _is_stage_pair(argument):
         if isinstance(argument, baca.StageSpecifier):
@@ -108,33 +121,7 @@ class CompoundScope(abjad.AbjadObject):
                         return True
         return False
 
-    @classmethod
-    def _to_compound_scope(class_, scope):
-        if isinstance(scope, baca.SimpleScope):
-            scope = baca.CompoundScope(scope)
-        elif isinstance(scope, baca.CompoundScope):
-            pass
-        # single scope token
-        elif isinstance(scope, tuple):
-            simple_scopes = class_._to_simple_scopes(scope)
-            scope = baca.CompoundScope(simple_scopes)
-        # list of scope tokens
-        elif isinstance(scope, list):
-            simple_scopes = []
-            for scope_token in scope:
-                result = class_._to_simple_scopes(scope_token)
-                simple_scopes.extend(result)
-            assert all(
-                isinstance(_, baca.SimpleScope) for _ in simple_scopes)
-            scope = baca.CompoundScope(simple_scopes)
-        else:
-            message = 'must be simple scope, compound scope, scope token,'
-            message + f' or list of scope tokens: {scope!r}.'
-            raise TypeError(message)
-        assert isinstance(scope, baca.CompoundScope), repr(scope)
-        compound_scope = scope
-        return compound_scope
-
+    # TODO: remove
     @classmethod
     def _to_simple_scopes(class_, scope_token):
         if not isinstance(scope_token, collections.Sequence):
@@ -168,29 +155,19 @@ class CompoundScope(abjad.AbjadObject):
         assert isinstance(stage_pairs, list), stage_pairs
         assert all(
             class_._is_stage_pair(_) for _ in stage_pairs), stage_pairs
-        simple_scopes = []
+        scopes = []
         for voice_name in voice_names:
             for stage_pair in stage_pairs:
-                simple_scope = baca.SimpleScope(voice_name, stage_pair)
-                simple_scopes.append(simple_scope)
-        return simple_scopes
+                scope = baca.SimpleScope(voice_name, stage_pair)
+                scopes.append(scope)
+        return scopes
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def simple_scopes(self):
-        r'''Gets simple scopes that comprise compound scope.
+    def scopes(self):
+        r'''Gets scopes.
 
-        Set to simple scopes or none.
+        Returns tuple.
         '''
-        return self._simple_scopes
-
-    ### PUBLIC METHODS ###
-
-    @classmethod
-    def from_token(class_, token):
-        r'''Makes compound scope from `token`.
-
-        Returns compound scope.
-        '''
-        return class_._to_compound_scope(token)
+        return self._scopes

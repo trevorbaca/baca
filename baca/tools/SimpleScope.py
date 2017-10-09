@@ -3,7 +3,7 @@ import baca
 
 
 class SimpleScope(abjad.AbjadObject):
-    r'''SimpleScope.
+    r'''Simple scope.
 
     ..  container:: example
 
@@ -19,7 +19,10 @@ class SimpleScope(abjad.AbjadObject):
             >>> f(scope)
             baca.SimpleScope(
                 voice_name='Violin Music Voice',
-                stages=(1, 9),
+                stages=baca.StageSpecifier(
+                    start=1,
+                    stop=9,
+                    ),
                 )
 
     '''
@@ -48,23 +51,28 @@ class SimpleScope(abjad.AbjadObject):
         if isinstance(stages, baca.StageSpecifier):
             pass
         elif isinstance(stages, int):
-            stages = (stages, stages)
+            stages = baca.StageSpecifier(stages, stages)
+        elif isinstance(stages, tuple):
+            assert len(stages) == 2, repr(stages)
+            stages = baca.StageSpecifier(*stages)
+        else:
+            raise TypeError(stages)
         self._stages = stages
 
     ### PUBLIC PROPERTIES ###
 
     @property
     def stages(self):
-        r'''Gets stages of scope.
+        r'''Gets stages.
 
-        Set to one or two positive integers or to stage expression none.
+        Returns stage expression.
         '''
         return self._stages
 
     @property
     def voice_name(self):
-        r'''Gets voice name of scope.
+        r'''Gets voice name.
 
-        Set to string or none.
+        Returns string.
         '''
         return self._voice_name

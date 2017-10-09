@@ -7,71 +7,62 @@ class CommandWrapper(abjad.AbjadObject):
 
     ..  container:: example
 
-        Scoped pitch command:
+        Wrapped pitch command:
 
         ::
 
             >>> command = baca.CommandWrapper(
-            ...     ('Violin Music Voice', (1, 4)),
             ...     baca.ScorePitchCommand(
             ...         source=[7, 1, 3, 4, 5, 11],
             ...         ),
+            ...     baca.scope('Violin Music Voice', 1, 4),
             ...     )
 
         ::
 
             >>> f(command)
             baca.CommandWrapper(
+                command=baca.ScorePitchCommand(
+                    source=abjad.CyclicTuple(
+                        [
+                            abjad.NamedPitch("g'"),
+                            abjad.NamedPitch("cs'"),
+                            abjad.NamedPitch("ef'"),
+                            abjad.NamedPitch("e'"),
+                            abjad.NamedPitch("f'"),
+                            abjad.NamedPitch("b'"),
+                            ]
+                        ),
+                    ),
                 scope=baca.SimpleScope(
                     voice_name='Violin Music Voice',
-                    stages=(1, 4),
-                    ),
-                command=baca.ScorePitchCommand(
-                    source=abjad.CyclicTuple(
-                        [
-                            abjad.NamedPitch("g'"),
-                            abjad.NamedPitch("cs'"),
-                            abjad.NamedPitch("ef'"),
-                            abjad.NamedPitch("e'"),
-                            abjad.NamedPitch("f'"),
-                            abjad.NamedPitch("b'"),
-                            ]
+                    stages=baca.StageSpecifier(
+                        start=1,
+                        stop=4,
                         ),
                     ),
                 )
 
     ..  container:: example
 
-        Scoped pitch command with compound scope:
+        Pitch command wrapped with compound scope:
 
         ::
 
             >>> command = baca.CommandWrapper(
-            ...     baca.CompoundScope([
-            ...         baca.SimpleScope('Violin Music Voice', (1, 4)),
-            ...         baca.SimpleScope('Violin Music Voice', (8, 12)),
-            ...         ]),
             ...     baca.ScorePitchCommand(
             ...         source=[7, 1, 3, 4, 5, 11],
             ...         ),
+            ...     baca.compound([
+            ...         baca.scope('Violin Music Voice', 1, 4),
+            ...         baca.scope('Violin Music Voice', 8, 12),
+            ...         ]),
             ...     )
 
         ::
 
             >>> f(command)
             baca.CommandWrapper(
-                scope=baca.CompoundScope(
-                    simple_scopes=(
-                        baca.SimpleScope(
-                            voice_name='Violin Music Voice',
-                            stages=(1, 4),
-                            ),
-                        baca.SimpleScope(
-                            voice_name='Violin Music Voice',
-                            stages=(8, 12),
-                            ),
-                        ),
-                    ),
                 command=baca.ScorePitchCommand(
                     source=abjad.CyclicTuple(
                         [
@@ -84,32 +75,53 @@ class CommandWrapper(abjad.AbjadObject):
                             ]
                         ),
                     ),
+                scope=baca.CompoundScope(
+                    scopes=(
+                        baca.SimpleScope(
+                            voice_name='Violin Music Voice',
+                            stages=baca.StageSpecifier(
+                                start=1,
+                                stop=4,
+                                ),
+                            ),
+                        baca.SimpleScope(
+                            voice_name='Violin Music Voice',
+                            stages=baca.StageSpecifier(
+                                start=8,
+                                stop=12,
+                                ),
+                            ),
+                        ),
+                    ),
                 )
 
     ..  container:: example
 
-        Scoped displacement command:
+        Wrapped displacement command:
 
         ::
 
             >>> command = baca.CommandWrapper(
-            ...     ('Violin Music Voice', (1, 4)),
             ...     baca.OctaveDisplacementCommand(
             ...         displacements=[0, 0, 0, 0, 1, 1, 1, 1],
             ...         ),
+            ...     baca.scope('Violin Music Voice', 1, 4),
             ...     )
 
         ::
 
             >>> f(command)
             baca.CommandWrapper(
-                scope=baca.SimpleScope(
-                    voice_name='Violin Music Voice',
-                    stages=(1, 4),
-                    ),
                 command=baca.OctaveDisplacementCommand(
                     displacements=abjad.CyclicTuple(
                         [0, 0, 0, 0, 1, 1, 1, 1]
+                        ),
+                    ),
+                scope=baca.SimpleScope(
+                    voice_name='Violin Music Voice',
+                    stages=baca.StageSpecifier(
+                        start=1,
+                        stop=4,
                         ),
                     ),
                 )
@@ -129,7 +141,7 @@ class CommandWrapper(abjad.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, scope=None, command=None):
+    def __init__(self, command=None, scope=None):
         if isinstance(scope, tuple):
             scope = baca.SimpleScope(*scope)
         prototype = (baca.SimpleScope, baca.CompoundScope)
@@ -153,10 +165,10 @@ class CommandWrapper(abjad.AbjadObject):
             ::
 
                 >>> command = baca.CommandWrapper(
-                ...     ('Violin Music Voice', (1, 4)),
                 ...     baca.ScorePitchCommand(
                 ...         source=[7, 1, 3, 4, 5, 11],
                 ...         ),
+                ...     baca.scope('Violin Music Voice', 1, 4),
                 ...     )
 
             ::
@@ -194,10 +206,10 @@ class CommandWrapper(abjad.AbjadObject):
             ::
 
                 >>> command = baca.CommandWrapper(
-                ...     ('Violin Music Voice', (1, 4)),
                 ...     baca.ScorePitchCommand(
                 ...         source=[7, 1, 3, 4, 5, 11],
                 ...         ),
+                ...     baca.scope('Violin Music Voice', 1, 4),
                 ...     )
 
             ::
@@ -205,7 +217,10 @@ class CommandWrapper(abjad.AbjadObject):
                 >>> f(command.scope)
                 baca.SimpleScope(
                     voice_name='Violin Music Voice',
-                    stages=(1, 4),
+                    stages=baca.StageSpecifier(
+                        start=1,
+                        stop=4,
+                        ),
                     )
 
         Defaults to none.

@@ -34,6 +34,7 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.clef_spanner
       ~baca.tools.LibraryAM.LibraryAM.coat
       ~baca.tools.LibraryAM.LibraryAM.color
+      ~baca.tools.LibraryAM.LibraryAM.compound
       ~baca.tools.LibraryAM.LibraryAM.compound_quarter_divisions
       ~baca.tools.LibraryAM.LibraryAM.constellate
       ~baca.tools.LibraryAM.LibraryAM.cross_note_heads
@@ -113,6 +114,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAM.LibraryAM.coat
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.color
+
+.. automethod:: baca.tools.LibraryAM.LibraryAM.compound
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.compound_quarter_divisions
 
