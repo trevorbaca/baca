@@ -2958,6 +2958,25 @@ class LibraryNZ(object):
             )
 
     @staticmethod
+    def scopes(voices, stages):
+        r'''Scopes crossproduct of `voices` against `stages`.
+
+        Returns list of scopes.
+        '''
+        assert isinstance(voices, list), repr(voices)
+        assert isinstance(stages, list), repr(stages)
+        scopes = []
+        for voice in voices:
+            for item in stages:
+                if isinstance(item, int):
+                    scope = baca.scope(voice, item)
+                else:
+                    assert isinstance(item, tuple), repr(item)
+                    scope = baca.scope(voice, *item)
+                scopes.append(scope)
+        return scopes
+
+    @staticmethod
     def script_color(color='red', selector=None):
         r'''Overrides script color.
 

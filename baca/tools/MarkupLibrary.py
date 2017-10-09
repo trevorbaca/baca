@@ -1270,7 +1270,7 @@ class MarkupLibrary(object):
 
     @staticmethod
     def tasto_fractional_scratch(numerator, denominator, selector=None):
-        string = 'tasto + {numerator}/{denominator} scratch'
+        string = f'tasto + {numerator}/{denominator} scratch'
         return MarkupLibrary.make_markup(
             string,
             selector=selector,
