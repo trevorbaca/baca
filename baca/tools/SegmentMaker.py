@@ -1206,9 +1206,9 @@ class SegmentMaker(abjad.SegmentMaker):
         rehearsal_letter = chr(rehearsal_ordinal)
         return rehearsal_letter
 
-    def _get_rhythm_command(self, source_scope):
-        voice_name = source_scope.voice_name
-        stage = source_scope.stages.start
+    def _get_rhythm_command(self, source):
+        voice_name = source.voice_name
+        stage = source.stages.start
         rhythm_command = []
         for rhythm_command in self.scoped_commands:
             if not isinstance(rhythm_command.command, baca.RhythmCommand):
@@ -7414,23 +7414,34 @@ class SegmentMaker(abjad.SegmentMaker):
         '''
         self.thread_commands((voice_name, selector), *commands)
 
-    def copy_rhythm(self, source_scope, target_scope, **keywords):
+    def copy_rhythm(self, source, target, **keywords):
         r'''Copies rhythm.
 
-        Gets rhythm command defined at `source_scope`.
+        Gets rhythm command defined at `source` scope start.
 
-        Makes new rhythm command with `target_scope` and optional `keywords`.
+        Makes new rhythm command for `target` scope with optional `keywords`.
 
         Returns none.
         '''
-        assert isinstance(source_scope, baca.SimpleScope)
-        assert isinstance(target_scope, baca.SimpleScope)
-        command = self._get_rhythm_command(source_scope)
-        command = copy.deepcopy(command)
+        assert isinstance(source, baca.SimpleScope)
+        assert isinstance(target, baca.SimpleScope)
+        for command in self.scoped_commands:
+            if not isinstance(command.command, baca.RhythmCommand):
+                continue
+            if command.scope.voice_name != source.voice_name:
+                continue
+            assert isinstance(command.scope.stages, baca.StageSpecifier)
+            start = command.scope.stages.start
+            stop = command.scope.stages.stop + 1
+            stages = range(start, stop)
+            if source.stages.start in stages:
+                break
+        else:
+            raise Exception(f'no {voice_name!r} rhythm command for {stage}.')
         assert isinstance(command, baca.ScopedCommand)
         assert isinstance(command.command, baca.RhythmCommand)
         command = abjad.new(command.command, **keywords)
-        command = baca.ScopedCommand(target_scope, command)
+        command = baca.ScopedCommand(target, command)
         self.scoped_commands.append(command)
 
     def thread_commands(self, scopes, *commands):
