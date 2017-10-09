@@ -2,7 +2,7 @@ import abjad
 import baca
 
 
-class ScopedCommand(abjad.AbjadObject):
+class CommandWrapper(abjad.AbjadObject):
     r'''Scoped command.
 
     ..  container:: example
@@ -11,7 +11,7 @@ class ScopedCommand(abjad.AbjadObject):
 
         ::
 
-            >>> command = baca.ScopedCommand(
+            >>> command = baca.CommandWrapper(
             ...     ('Violin Music Voice', (1, 4)),
             ...     baca.ScorePitchCommand(
             ...         source=[7, 1, 3, 4, 5, 11],
@@ -21,7 +21,7 @@ class ScopedCommand(abjad.AbjadObject):
         ::
 
             >>> f(command)
-            baca.ScopedCommand(
+            baca.CommandWrapper(
                 scope=baca.SimpleScope(
                     voice_name='Violin Music Voice',
                     stages=(1, 4),
@@ -46,7 +46,7 @@ class ScopedCommand(abjad.AbjadObject):
 
         ::
 
-            >>> command = baca.ScopedCommand(
+            >>> command = baca.CommandWrapper(
             ...     baca.CompoundScope([
             ...         baca.SimpleScope('Violin Music Voice', (1, 4)),
             ...         baca.SimpleScope('Violin Music Voice', (8, 12)),
@@ -59,7 +59,7 @@ class ScopedCommand(abjad.AbjadObject):
         ::
 
             >>> f(command)
-            baca.ScopedCommand(
+            baca.CommandWrapper(
                 scope=baca.CompoundScope(
                     simple_scopes=(
                         baca.SimpleScope(
@@ -92,7 +92,7 @@ class ScopedCommand(abjad.AbjadObject):
 
         ::
 
-            >>> command = baca.ScopedCommand(
+            >>> command = baca.CommandWrapper(
             ...     ('Violin Music Voice', (1, 4)),
             ...     baca.OctaveDisplacementCommand(
             ...         displacements=[0, 0, 0, 0, 1, 1, 1, 1],
@@ -102,7 +102,7 @@ class ScopedCommand(abjad.AbjadObject):
         ::
 
             >>> f(command)
-            baca.ScopedCommand(
+            baca.CommandWrapper(
                 scope=baca.SimpleScope(
                     voice_name='Violin Music Voice',
                     stages=(1, 4),
@@ -118,7 +118,7 @@ class ScopedCommand(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Segments'
+    __documentation_section__ = 'Utilities'
 
     __slots__ = (
         '_command',
@@ -152,7 +152,7 @@ class ScopedCommand(abjad.AbjadObject):
 
             ::
 
-                >>> command = baca.ScopedCommand(
+                >>> command = baca.CommandWrapper(
                 ...     ('Violin Music Voice', (1, 4)),
                 ...     baca.ScorePitchCommand(
                 ...         source=[7, 1, 3, 4, 5, 11],
@@ -193,7 +193,7 @@ class ScopedCommand(abjad.AbjadObject):
 
             ::
 
-                >>> command = baca.ScopedCommand(
+                >>> command = baca.CommandWrapper(
                 ...     ('Violin Music Voice', (1, 4)),
                 ...     baca.ScorePitchCommand(
                 ...         source=[7, 1, 3, 4, 5, 11],

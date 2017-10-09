@@ -265,7 +265,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     ### CLASS ATTRIBUTES ###
 
-    __documentation_section__ = 'Segments'
+    __documentation_section__ = 'Music'
 
     __slots__ = (
         '_allow_empty_selectors',
@@ -1288,7 +1288,7 @@ class SegmentMaker(abjad.SegmentMaker):
             stages = stages[start_index:stop_index]
             time_signatures = baca.Sequence(stages).flatten()
         start_offset, stop_offset = self._get_offsets(start_stage, stop_stage)
-        contribution = baca.Contribution(
+        contribution = baca.SegmentContribution(
             payload=time_signatures,
             start_offset=start_offset
             )
@@ -1364,7 +1364,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _interpret_commands(self):
         start_time = time.time()
         for scoped_command in self.scoped_commands:
-            assert isinstance(scoped_command, baca.ScopedCommand)
+            assert isinstance(scoped_command, baca.CommandWrapper)
             assert isinstance(scoped_command.command, baca.Command)
             if isinstance(scoped_command.command, baca.RhythmCommand):
                 continue
@@ -1403,7 +1403,7 @@ class SegmentMaker(abjad.SegmentMaker):
         effective_staff_name = effective_staff.context_name
         contributions = []
         for rhythm_command in rhythm_commands:
-            assert isinstance(rhythm_command, baca.ScopedCommand)
+            assert isinstance(rhythm_command, baca.CommandWrapper)
             if rhythm_command.scope.stages is not None:
                 result = self._get_stage_numbers(rhythm_command.scope.stages)
                 contribution = self._get_time_signatures(*result)
@@ -7438,10 +7438,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 break
         else:
             raise Exception(f'no {voice_name!r} rhythm command for {stage}.')
-        assert isinstance(command, baca.ScopedCommand)
+        assert isinstance(command, baca.CommandWrapper)
         assert isinstance(command.command, baca.RhythmCommand)
         command = abjad.new(command.command, **keywords)
-        command = baca.ScopedCommand(target, command)
+        command = baca.CommandWrapper(target, command)
         self.scoped_commands.append(command)
 
     def thread_commands(self, scopes, *commands):
@@ -7682,7 +7682,7 @@ class SegmentMaker(abjad.SegmentMaker):
         scopes = self._unpack_scopes(scopes)
         for scope in scopes:
             for command in commands:
-                scoped_command = baca.ScopedCommand(
+                scoped_command = baca.CommandWrapper(
                     scope=scope,
                     command=command,
                     )

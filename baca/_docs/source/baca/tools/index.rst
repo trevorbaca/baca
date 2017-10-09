@@ -137,25 +137,6 @@ Library
 
 --------
 
-Measure Maps
-------------
-
-.. toctree::
-   :hidden:
-
-   MetronomeMarkMeasureMap
-   StageMeasureMap
-   VoltaMeasureMap
-
-.. autosummary::
-   :nosignatures:
-
-   MetronomeMarkMeasureMap
-   StageMeasureMap
-   VoltaMeasureMap
-
---------
-
 Music
 -----
 
@@ -169,6 +150,8 @@ Music
    MusicPitchSpecifier
    MusicRhythmMaker
    MusicRhythmSpecifier
+   SegmentContribution
+   SegmentMaker
 
 .. autosummary::
    :nosignatures:
@@ -180,29 +163,8 @@ Music
    MusicPitchSpecifier
    MusicRhythmMaker
    MusicRhythmSpecifier
-
---------
-
-Segments
---------
-
-.. toctree::
-   :hidden:
-
-   CompoundScope
-   Contribution
-   ScopedCommand
+   SegmentContribution
    SegmentMaker
-   SimpleScope
-
-.. autosummary::
-   :nosignatures:
-
-   CompoundScope
-   Contribution
-   ScopedCommand
-   SegmentMaker
-   SimpleScope
 
 --------
 
@@ -247,6 +209,8 @@ Utilities
 
    Coat
    CollectionList
+   CommandWrapper
+   CompoundScope
    Constellation
    ConstellationCircuit
    Counter
@@ -255,6 +219,7 @@ Utilities
    Division
    Interpolator
    Matrix
+   MetronomeMarkMeasureMap
    PitchArray
    PitchArrayCell
    PitchArrayColumn
@@ -272,13 +237,16 @@ Utilities
    RegistrationDictionary
    ScoreTemplate
    Sequence
+   SimpleScope
    SpacingIndication
+   StageMeasureMap
    StringTrioScoreTemplate
    TimeSignatureGroups
    TimeSignatureMaker
    Tree
    TwoVoiceStaffScoreTemplate
    ViolinSoloScoreTemplate
+   VoltaMeasureMap
    WellformednessManager
    ZaggedPitchClassMaker
 
@@ -287,6 +255,8 @@ Utilities
 
    Coat
    CollectionList
+   CommandWrapper
+   CompoundScope
    Constellation
    ConstellationCircuit
    Counter
@@ -295,6 +265,7 @@ Utilities
    Division
    Interpolator
    Matrix
+   MetronomeMarkMeasureMap
    PitchArray
    PitchArrayCell
    PitchArrayColumn
@@ -312,12 +283,15 @@ Utilities
    RegistrationDictionary
    ScoreTemplate
    Sequence
+   SimpleScope
    SpacingIndication
+   StageMeasureMap
    StringTrioScoreTemplate
    TimeSignatureGroups
    TimeSignatureMaker
    Tree
    TwoVoiceStaffScoreTemplate
    ViolinSoloScoreTemplate
+   VoltaMeasureMap
    WellformednessManager
    ZaggedPitchClassMaker

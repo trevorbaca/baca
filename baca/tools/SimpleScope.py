@@ -26,7 +26,7 @@ class SimpleScope(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Segments'
+    __documentation_section__ = 'Utilities'
 
     __slots__ = (
         '_voice_name',

@@ -1,13 +1,13 @@
 import abjad
 
 
-class Contribution(abjad.AbjadValueObject):
-    r'''Contribution.
+class SegmentContribution(abjad.AbjadValueObject):
+    r'''Segment contribution.
     '''
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Segments'
+    __documentation_section__ = 'Music'
 
     __slots__ = (
         '_payload',
@@ -24,7 +24,7 @@ class Contribution(abjad.AbjadValueObject):
 
     @property
     def payload(self):
-        r'''Gets payload of contribution.
+        r'''Gets payload.
 
         Returns selection or voice.
         '''
@@ -32,7 +32,7 @@ class Contribution(abjad.AbjadValueObject):
 
     @property
     def start_offset(self):
-        r'''Gets start offset of contribution.
+        r'''Gets start offset.
 
         Returns offset.
         '''

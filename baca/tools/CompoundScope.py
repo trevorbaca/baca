@@ -52,7 +52,7 @@ class CompoundScope(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Segments'
+    __documentation_section__ = 'Utilities'
 
     __slots__ = (
         '_simple_scopes',

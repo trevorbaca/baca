@@ -29,7 +29,7 @@ Bases
       ~baca.tools.SegmentMaker.SegmentMaker.color_octaves
       ~baca.tools.SegmentMaker.SegmentMaker.color_out_of_range_pitches
       ~baca.tools.SegmentMaker.SegmentMaker.color_repeat_pitch_classes
-      ~baca.tools.SegmentMaker.SegmentMaker.copy_specifier
+      ~baca.tools.SegmentMaker.SegmentMaker.copy_rhythm
       ~baca.tools.SegmentMaker.SegmentMaker.design_checker
       ~baca.tools.SegmentMaker.SegmentMaker.final_barline
       ~baca.tools.SegmentMaker.SegmentMaker.final_markup
@@ -153,7 +153,7 @@ Methods
 
 .. automethod:: baca.tools.SegmentMaker.SegmentMaker.append_commands
 
-.. automethod:: baca.tools.SegmentMaker.SegmentMaker.copy_specifier
+.. automethod:: baca.tools.SegmentMaker.SegmentMaker.copy_rhythm
 
 .. automethod:: baca.tools.SegmentMaker.SegmentMaker.thread_commands
 

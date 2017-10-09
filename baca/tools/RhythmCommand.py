@@ -154,7 +154,7 @@ class RhythmCommand(Command):
             abjad.attach('tie from me', last_leaf)
             if self._use_messiaen_style_ties:
                 abjad.attach('use messiaen style ties', last_leaf)
-        contribution = baca.Contribution(
+        contribution = baca.SegmentContribution(
             payload=music,
             start_offset=start_offset,
             )
@@ -350,7 +350,7 @@ class RhythmCommand(Command):
             if not isinstance(divisions, abjad.Sequence):
                 raise Exception(f'division sequence: {divisions!r}.')
         new_start_offset = divisions[0].start_offset
-        contribution = baca.Contribution(
+        contribution = baca.SegmentContribution(
             payload=divisions,
             start_offset=new_start_offset,
             )

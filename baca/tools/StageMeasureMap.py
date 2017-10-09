@@ -59,7 +59,7 @@ class StageMeasureMap(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Measure Maps'
+    __documentation_section__ = 'Utilities'
 
     __slots__ = (
         '_items',
