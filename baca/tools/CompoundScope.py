@@ -133,7 +133,7 @@ class CompoundScope(abjad.AbjadObject):
             voice_names = [voice_names]
         if (not isinstance(voice_names, collections.Sequence) or
             not all(isinstance(_, str) for _ in voice_names)):
-            raise Exception(f'{voice_name!r} must be sequence of strings.')
+            raise Exception(f'{voice_names!r} must be sequence of strings.')
         if isinstance(stage_pairs, int):
             stage_pairs = [(stage_pairs, stage_pairs)]
         elif class_._is_stage_pair(stage_pairs):

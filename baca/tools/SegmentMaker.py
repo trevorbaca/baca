@@ -7389,7 +7389,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         Returns none.
         '''
-        self.thread_commands((voice_name, selector), *commands)
+        self.scope((voice_name, selector), *commands)
 
     def copy_rhythm(self, source, target, **keywords):
         r'''Copies rhythm.
@@ -7421,7 +7421,7 @@ class SegmentMaker(abjad.SegmentMaker):
         command = baca.CommandWrapper(command, target)
         self.scoped_commands.append(command)
 
-    def thread_commands(self, scopes, *commands):
+    def scope(self, scopes, *commands):
         r'''Appends each command in `command` to each scope in `scopes`.
 
         ..  container:: example
@@ -7435,7 +7435,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> commands = segment_maker.thread_commands(
+                >>> commands = segment_maker.scope(
                 ...     ('Violin Music Voice', baca.select_stages(1)),
                 ...     baca.even_runs(),
                 ...     baca.label(abjad.label().with_indices()),

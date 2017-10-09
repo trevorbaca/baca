@@ -419,7 +419,7 @@ class MarkupLibrary(object):
 
     @staticmethod
     def fractional_scratch(numerator, denominator, selector=None):
-        string = '{numerator}/{denominator} scratch'
+        string = f'{numerator}/{denominator} scratch'
         return MarkupLibrary.make_markup(
             string,
             selector=selector,
@@ -714,7 +714,7 @@ class MarkupLibrary(object):
 
     @staticmethod
     def one_click_every(lower, upper, selector=None):
-        string = '1 click/{lower}-{upper} sec.'
+        string = f'1 click/{lower}-{upper} sec.'
         return MarkupLibrary.make_markup(
             string,
             selector=selector,
@@ -1146,7 +1146,8 @@ class MarkupLibrary(object):
             'sparse, individual clicks with extremely slow bow')
         first_line = first_line.line()
         second_line = abjad.Markup('(1-2/sec. in irregular rhythm)').line()
-        markup = abjad.Markup.column([first_line, second_line], direction=abjad.Up)
+        markup = abjad.Markup.column(
+            [first_line, second_line], direction=abjad.Up)
         return MarkupLibrary()(
             markup=markup,
             selector=selector,
