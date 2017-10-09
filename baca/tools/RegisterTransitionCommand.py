@@ -127,8 +127,6 @@ class RegisterTransitionCommand(Command):
         '_stop_registration',
         )
 
-    _include_selection_timespan = True
-
     ### INITIALIZER ###
 
     def __init__(
@@ -146,16 +144,21 @@ class RegisterTransitionCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None, timespan=None):
+    def __call__(self, argument=None):
         r'''Calls command on `argument`.
 
         Returns none.
         '''
         if argument is None:
             return
+        leaves = abjad.select(argument).by_leaf()
+        start_offset = abjad.inspect(leaves[0]).get_timespan().start_offset
+        stop_offset = abjad.inspect(leaves[-1]).get_timespan().stop_offset
+        timespan = abjad.Timespan(
+            start_offset=start_offset,
+            stop_offset=stop_offset,
+            )
         logical_ties = argument
-        if timespan is None:
-            return self._apply_outside_score(logical_ties)
         if not isinstance(logical_ties[0], abjad.LogicalTie):
             logical_ties = abjad.iterate(logical_ties).by_logical_tie()
         for logical_tie in logical_ties:

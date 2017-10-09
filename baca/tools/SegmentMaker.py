@@ -516,7 +516,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._label_stage_numbers_()
         self._interpret_rhythm_commands()
         self._extend_beams()
-        self._interpret_scoped_commands()
+        self._interpret_commands()
         self._detach_figure_names()
         self._shorten_long_repeat_ties()
         self._apply_previous_segment_end_settings()
@@ -996,11 +996,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 print(message)
             else:
                 raise Exception(message)
-        timespan = None
-        if getattr(
-            scoped_command.command, '_include_selection_timespan', False):
-            timespan = self._selection_to_timespan(selection)
-        return selection, timespan
+        return selection
 
     @staticmethod
     def _extend_beam(leaf):
@@ -1298,9 +1294,9 @@ class SegmentMaker(abjad.SegmentMaker):
             )
         return contribution
 
-    def _handle_mutator(self, command):
-        if (hasattr(command, '_mutates_score') and
-            command._mutates_score()):
+    def _handle_mutator(self, scoped_command):
+        if (hasattr(scoped_command.command, '_mutates_score') and
+            scoped_command.command._mutates_score()):
             self._cached_leaves_with_rests = None
             self._cached_leaves_without_rests = None
 
@@ -1365,6 +1361,26 @@ class SegmentMaker(abjad.SegmentMaker):
             result.append(selection)
         return result
 
+    def _interpret_commands(self):
+        start_time = time.time()
+        for scoped_command in self.scoped_commands:
+            assert isinstance(scoped_command, baca.ScopedCommand)
+            assert isinstance(scoped_command.command, baca.Command)
+            if isinstance(scoped_command.command, baca.RhythmCommand):
+                continue
+            selection = self._evaluate_scope(scoped_command)
+            try:
+                scoped_command.command(selection)
+            except:
+                traceback.print_exc()
+                raise Exception(format(scoped_command))
+            self._handle_mutator(scoped_command)
+        stop_time = time.time()
+        count = int(stop_time - start_time)
+        counter = abjad.String('second').pluralize(count)
+        if self.print_timings:
+            print(f'command interpretation {count} {counter} ...')
+
     def _interpret_rhythm_commands(self):
         self._make_music_for_time_signature_context()
         self._attach_tempo_indicators()
@@ -1409,31 +1425,6 @@ class SegmentMaker(abjad.SegmentMaker):
         contributions = self._intercalate_rests(contributions)
         voice.extend(contributions)
         self._apply_first_and_last_ties(voice)
-
-    def _interpret_scoped_command(self, scoped_command):
-        assert isinstance(scoped_command, baca.ScopedCommand)
-        assert isinstance(scoped_command.command, baca.Command)
-        if isinstance(scoped_command.command, baca.RhythmCommand):
-            return
-        selection, timespan = self._evaluate_scope(scoped_command)
-        try:
-            if timespan:
-                scoped_command.command(selection, timespan)
-            else:
-                scoped_command.command(selection)
-        except:
-            traceback.print_exc()
-            raise Exception(format(scoped_command))
-        self._handle_mutator(scoped_command.command)
-
-    def _interpret_scoped_commands(self):
-        start_time = time.time()
-        for scoped_command in self.scoped_commands:
-            self._interpret_scoped_command(scoped_command)
-        stop_time = time.time()
-        total_time = int(stop_time - start_time)
-        if self.print_timings:
-            print(f'command interpretation {total_time} seconds ...')
 
     def _is_first_segment(self):
         segment_number = self._get_segment_number()
@@ -1778,7 +1769,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _scope_to_leaves(self, scope):
         if not isinstance(scope, baca.SimpleScope):
-            raise TypeError(f'not yet implement for {scope!r}.')
+            raise TypeError(f'not yet implemented for {scope!r}.')
         result = self._get_stage_numbers(scope.stages)
         start_stage, stop_stage = result
         offsets = self._get_offsets(start_stage, stop_stage)
@@ -1792,23 +1783,6 @@ class SegmentMaker(abjad.SegmentMaker):
             elif leaves:
                 break
         return abjad.select(leaves)
-
-    def _selection_to_timespan(self, selection):
-            if isinstance(selection[0], abjad.LogicalTie):
-                first = selection[0].head
-            else:
-                first = selection[0]
-            if isinstance(selection[-1], abjad.LogicalTie):
-                last = selection[-1][-1]
-            else:
-                last = selection[-1]
-            start_offset = abjad.inspect(first).get_timespan().start_offset
-            stop_offset = abjad.inspect(last).get_timespan().stop_offset
-            timespan = abjad.Timespan(
-                start_offset=start_offset,
-                stop_offset=stop_offset,
-                )
-            return timespan
 
     def _shorten_long_repeat_ties(self):
         leaves = abjad.iterate(self._score).by_leaf()
