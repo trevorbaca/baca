@@ -1764,6 +1764,8 @@ class SegmentMaker(abjad.SegmentMaker):
     def _stage_number_to_measure_indices(self, stage_number):
         if stage_number is Infinity:
             stage_number = self.stage_count
+        elif stage_number == Infinity:
+            stage_number = self.stage_count
         if self.stage_count < stage_number:
             count = self.stage_count
             counter = abjad.String('stage').pluralize(count)
