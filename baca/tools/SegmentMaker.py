@@ -7660,7 +7660,7 @@ class SegmentMaker(abjad.SegmentMaker):
             scopes = [scopes]
         elif isinstance(scopes, tuple):
             scopes = baca.CompoundScope._to_simple_scopes(scopes)
-        elif isinstance(scopes, list):
+        elif isinstance(scopes, (list, abjad.Sequence)):
             scopes__ = []
             for scope in scopes:
                 if isinstance(scope, prototype):
