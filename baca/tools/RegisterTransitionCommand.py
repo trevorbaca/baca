@@ -157,16 +157,10 @@ class RegisterTransitionCommand(Command):
             start_offset=start_offset,
             stop_offset=stop_offset,
             )
-        logical_ties = argument
-        if not isinstance(logical_ties[0], abjad.LogicalTie):
-            logical_ties = abjad.iterate(logical_ties).by_logical_tie()
-        for logical_tie in logical_ties:
-            offset = logical_tie.get_timespan().start_offset
-            registration = self._make_interpolated_registration(
-                offset,
-                timespan,
-                )
-            for note in logical_tie:
+        for lt in abjad.iterate(leaves).by_logical_tie(pitched=True):
+            offset = lt.get_timespan().start_offset
+            registration = self._make_registration(offset, timespan)
+            for note in lt:
                 written_pitches = registration([note.written_pitch])
                 self._set_pitch(note, written_pitches[0])
 
@@ -190,7 +184,7 @@ class RegisterTransitionCommand(Command):
             duration = logical_tie.get_duration()
             current_start_offset += duration
 
-    def _make_interpolated_registration(self, offset, timespan):
+    def _make_registration(self, offset, timespan):
         assert abjad.timespantools.offset_happens_during_timespan(
             timespan=timespan,
             offset=offset,
