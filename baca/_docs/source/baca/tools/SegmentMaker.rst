@@ -49,7 +49,7 @@ Bases
       ~baca.tools.SegmentMaker.SegmentMaker.print_timings
       ~baca.tools.SegmentMaker.SegmentMaker.range_checker
       ~baca.tools.SegmentMaker.SegmentMaker.rehearsal_letter
-      ~baca.tools.SegmentMaker.SegmentMaker.scope
+      ~baca.tools.SegmentMaker.SegmentMaker.run
       ~baca.tools.SegmentMaker.SegmentMaker.scoped_commands
       ~baca.tools.SegmentMaker.SegmentMaker.score_template
       ~baca.tools.SegmentMaker.SegmentMaker.skip_wellformedness_checks
@@ -152,7 +152,7 @@ Methods
 
 .. automethod:: baca.tools.SegmentMaker.SegmentMaker.copy_rhythm
 
-.. automethod:: baca.tools.SegmentMaker.SegmentMaker.scope
+.. automethod:: baca.tools.SegmentMaker.SegmentMaker.run
 
 .. automethod:: baca.tools.SegmentMaker.SegmentMaker.validate_measure_count
 

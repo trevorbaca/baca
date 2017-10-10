@@ -123,7 +123,7 @@ class NestCommand(Command):
             ...         ),
             ...     time_signatures=time_signatures,
             ...     )
-            >>> specifiers = segment_maker.scope(
+            >>> specifiers = segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=selection,

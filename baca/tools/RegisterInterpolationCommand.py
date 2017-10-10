@@ -138,7 +138,7 @@ class RegisterInterpolationCommand(Command):
         ::
 
             >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-            >>> specifiers = segment_maker.scope(
+            >>> specifiers = segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
@@ -299,7 +299,7 @@ class RegisterInterpolationCommand(Command):
         ::
 
             >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-            >>> specifiers = segment_maker.scope(
+            >>> specifiers = segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
@@ -460,7 +460,7 @@ class RegisterInterpolationCommand(Command):
         ::
 
             >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-            >>> specifiers = segment_maker.scope(
+            >>> specifiers = segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
@@ -621,7 +621,7 @@ class RegisterInterpolationCommand(Command):
         ::
 
             >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-            >>> specifiers = segment_maker.scope(
+            >>> specifiers = segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
@@ -782,7 +782,7 @@ class RegisterInterpolationCommand(Command):
         ::
 
             >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-            >>> specifiers = segment_maker.scope(
+            >>> specifiers = segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),

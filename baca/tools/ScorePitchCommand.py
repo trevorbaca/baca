@@ -20,7 +20,7 @@ class ScorePitchCommand(Command):
 
         ::
 
-            >>> specifiers = segment_maker.scope(
+            >>> specifiers = segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.even_runs(),
             ...     baca.ScorePitchCommand(

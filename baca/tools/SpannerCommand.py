@@ -67,7 +67,7 @@ class SpannerCommand(Command):
 
         ::
 
-            >>> specifiers = segment_maker.scope(
+            >>> specifiers = segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),

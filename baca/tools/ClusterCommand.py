@@ -200,7 +200,7 @@ class ClusterCommand(Command):
 
         ::
 
-            >>> specifiers = segment_maker.scope(
+            >>> specifiers = segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4'),
             ...     baca.messiaen_notes(),
@@ -446,7 +446,7 @@ class ClusterCommand(Command):
 
             ::
 
-                >>> specifiers = segment_maker.scope(
+                >>> specifiers = segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.pitches('E4'),
                 ...     baca.messiaen_notes(),
@@ -589,7 +589,7 @@ class ClusterCommand(Command):
 
             ::
 
-                >>> specifiers = segment_maker.scope(
+                >>> specifiers = segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.pitches('E4'),
                 ...     baca.messiaen_notes(),
@@ -750,7 +750,7 @@ class ClusterCommand(Command):
 
             ::
 
-                >>> specifiers = segment_maker.scope(
+                >>> specifiers = segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.messiaen_notes(),
                 ...     baca.pitches('C4 D4 E4 F4'),
@@ -898,7 +898,7 @@ class ClusterCommand(Command):
 
             ::
 
-                >>> specifiers = segment_maker.scope(
+                >>> specifiers = segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.messiaen_notes(),
                 ...     baca.pitches('C4 D4 E4 F4'),
@@ -1057,7 +1057,7 @@ class ClusterCommand(Command):
 
             ::
 
-                >>> specifiers = segment_maker.scope(
+                >>> specifiers = segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.pitches('E4'),
                 ...     baca.messiaen_notes(),
@@ -1190,7 +1190,7 @@ class ClusterCommand(Command):
 
             ::
 
-                >>> specifiers = segment_maker.scope(
+                >>> specifiers = segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.messiaen_notes(),
                 ...     baca.pitches('E4'),
@@ -1308,7 +1308,7 @@ class ClusterCommand(Command):
 
             ::
 
-                >>> specifiers = segment_maker.scope(
+                >>> specifiers = segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.messiaen_notes(),
                 ...     baca.pitches('E4', allow_repeat_pitches=True),
