@@ -1,6 +1,5 @@
 import abjad
 import baca
-import copy
 import pathlib
 import time
 import traceback
@@ -1072,35 +1071,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 abjad.override(note).note_head.color = color
                 abjad.override(note).stem.color = color
 
-    def _compound_scope_to_topmost_components(self, compound_scope):
-        r'''Use for label expressions.
-        '''
-        timespan_map, timespans = [], []
-        for scope in compound_scope.scopes:
-            result = self._get_stage_numbers(scope.stages)
-            start_stage, stop_stage = result
-            offsets = self._get_offsets(start_stage, stop_stage)
-            timespan = abjad.Timespan(*offsets)
-            timespan_map.append((scope.voice_name, timespan))
-            timespans.append(timespan)
-        compound_scope._timespan_map = timespan_map
-        topmost_components = []
-        for voice in abjad.iterate(self._score).by_class(abjad.Voice):
-            if 'Context' in voice.__class__.__name__:
-                continue
-            result = abjad.iterate(voice).by_topmost_logical_ties_and_components()
-            for argument in result:
-                if isinstance(argument, abjad.LogicalTie):
-                    component = argument.head
-                else:
-                    component = argument
-                if component in compound_scope:
-                    topmost_components.append(argument)
-        start_offset = min(_.start_offset for _ in timespans)
-        stop_offset = max(_.stop_offset for _ in timespans)
-        timespan = abjad.Timespan(start_offset, stop_offset)
-        return abjad.select(topmost_components), timespan
-
     def _contributions_do_not_overlap(self, contributions):
         previous_stop_offset = 0
         for contribution in contributions:
@@ -1220,9 +1190,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._cached_leaves_without_rests = list(leaves)
             leaves = self._cached_leaves_without_rests
         return leaves
-
-    def _get_contexts_with_instrument_names(self):
-        return list(self._cached_score_template_start_instruments.keys())
 
     def _get_end_clefs(self):
         result = abjad.TypedOrderedDict()
@@ -1348,27 +1315,6 @@ class SegmentMaker(abjad.SegmentMaker):
         rehearsal_letter = chr(rehearsal_ordinal)
         return rehearsal_letter
 
-    def _get_rhythm_command(self, source):
-        voice_name = source.voice_name
-        stage = source.stages.start
-        rhythm_command = []
-        for rhythm_command in self.command:
-            if not isinstance(rhythm_command.command, baca.RhythmCommand):
-                continue
-            if rhythm_command.scope.voice_name == voice_name:
-                stages = rhythm_command.scope.stages
-                if isinstance(stages, baca.StageSpecifier):
-                    start = rhythm_command.scope.stages.start
-                    stop = rhythm_command.scope.stages.stop + 1
-                elif isinstance(stages, tuple):
-                    start = rhythm_command.scope.stages[0]
-                    stop = rhythm_command.scope.stages[-1] + 1
-                else:
-                    raise Exception(f'invalid stage {stages!r}.')
-                if stage in range(start, stop):
-                    return rhythm_command
-        raise Exception(f'no {voice_name!r} rhythm command for stage {stage}.')
-
     def _get_rhythm_commands_for_voice(self, voice_name):
         rhythm_commands = []
         for command in self.commands:
@@ -1441,13 +1387,6 @@ class SegmentMaker(abjad.SegmentMaker):
             command.command._mutates_score()):
             self._cached_leaves_with_rests = None
             self._cached_leaves_without_rests = None
-
-    def _hide_fermata_measure_staff_lines(self):
-        for leaf in abjad.iterate(self._score).by_leaf():
-            start_offset = abjad.inspect(leaf).get_timespan().start_offset
-            if start_offset in self._fermata_start_offsets:
-                spanner = abjad.HiddenStaffSpanner()
-                abjad.attach(spanner, leaf)
 
     def _hide_instrument_names_(self):
         if not self.hide_instrument_names:
@@ -1787,29 +1726,6 @@ class SegmentMaker(abjad.SegmentMaker):
             command = abjad.Repeat()
             abjad.attach(command, container)
 
-    def _move_instruments_from_notes_back_to_rests(self):
-        prototype = abjad.Instrument
-        rest_prototype = (abjad.Rest, abjad.MultimeasureRest)
-        for leaf in abjad.iterate(self._score).by_leaf():
-            instruments = abjad.inspect(leaf).get_indicators(prototype)
-            if not instruments:
-                continue
-            assert len(instruments) == 1
-            instrument = instruments[0]
-            current_leaf = leaf
-            previous_leaf = abjad.inspect(current_leaf).get_leaf(-1)
-            if not isinstance(previous_leaf, rest_prototype):
-                continue
-            while True:
-                current_leaf = previous_leaf
-                previous_leaf = abjad.inspect(current_leaf).get_leaf(-1)
-                if previous_leaf is None:
-                    break
-                if not isinstance(previous_leaf, rest_prototype):
-                    new_instrument = copy.deepcopy(instrument)
-                    abjad.attach(new_instrument, current_leaf)
-                    break
-
     def _populate_time_signature_context(self):
         context = self._score['Global Skips']
         measures = self._make_skip_filled_measures()
@@ -1899,9 +1815,8 @@ class SegmentMaker(abjad.SegmentMaker):
                         result.append(logical_tie)
         return abjad.select(result)
 
+    # TODO: possibly reintegrate
     def _scope_to_leaves(self, scope):
-        if not isinstance(scope, baca.SimpleScope):
-            raise TypeError(f'not yet implemented for {scope!r}.')
         result = self._get_stage_numbers(scope.stages)
         start_stage, stop_stage = result
         offsets = self._get_offsets(start_stage, stop_stage)
@@ -1951,29 +1866,6 @@ class SegmentMaker(abjad.SegmentMaker):
         start_measure_index = measure_indices[stop]
         stop_measure_index = measure_indices[stage_number] - 1
         return start_measure_index, stop_measure_index
-
-    def _stages_do_not_overlap(self, commands):
-        stage_numbers = []
-        for command in commands:
-            if command.stages is None:
-                continue
-            start_stage, stop_stage = command.stages
-            stop_stage += 1
-            stage_numbers_ = range(start_stage, stop_stage)
-            stage_numbers.extend(stage_numbers_)
-        return len(stage_numbers) == len(set(stage_numbers))
-
-    def _timespan_to_time_signatures(self, timespan):
-        if isinstance(timespan, baca.StageSpecifier):
-            stage_expression = timespan
-            contribution = self._get_time_signatures(
-                stage_expression.start,
-                stage_expression.stop,
-                )
-        else:
-            message = 'implement more time signature resolution methods.'
-            raise NotImplementedError(message)
-        return contribution
 
     def _transpose_instruments(self):
         if not self.transpose_score:
