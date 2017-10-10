@@ -25,7 +25,6 @@ Bases
 
       ~baca.tools.SegmentMaker.SegmentMaker.allow_empty_selections
       ~baca.tools.SegmentMaker.SegmentMaker.allow_figure_names
-      ~baca.tools.SegmentMaker.SegmentMaker.append_commands
       ~baca.tools.SegmentMaker.SegmentMaker.color_octaves
       ~baca.tools.SegmentMaker.SegmentMaker.color_out_of_range_pitches
       ~baca.tools.SegmentMaker.SegmentMaker.color_repeat_pitch_classes
@@ -150,8 +149,6 @@ Read-only properties
 
 Methods
 -------
-
-.. automethod:: baca.tools.SegmentMaker.SegmentMaker.append_commands
 
 .. automethod:: baca.tools.SegmentMaker.SegmentMaker.copy_rhythm
 
