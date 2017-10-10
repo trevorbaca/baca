@@ -87,7 +87,7 @@ class AttachCommand(Command):
 
         ::
 
-            >>> result = segment_maker(is_doc_example=True)
+            >>> result = segment_maker.run(is_doc_example=True)
             >>> lilypond_file, metadata = result
             >>> show(lilypond_file) # doctest: +SKIP
 

@@ -2572,7 +2572,7 @@ class LibraryAM(object):
                 ...     time_signatures=accumulator.time_signatures,
                 ...     )
                 >>> accumulator.populate_segment_maker(segment_maker)
-                >>> result = segment_maker(is_doc_example=True)
+                >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 
@@ -2699,7 +2699,7 @@ class LibraryAM(object):
                 ...     time_signatures=accumulator.time_signatures,
                 ...     )
                 >>> accumulator.populate_segment_maker(segment_maker)
-                >>> result = segment_maker(is_doc_example=True)
+                >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
                 >>> show(lilypond_file) # doctest: +SKIP
 

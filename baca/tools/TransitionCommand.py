@@ -91,14 +91,14 @@ class TransitionCommand(Command):
 
         ::
 
-            >>> collection_maker = baca.SegmentMaker(
+            >>> segment_maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
         ::
 
-            >>> specifiers = collection_maker.scope(
+            >>> specifiers = segment_maker.scope(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4 F4'),
             ...     baca.even_runs(),
@@ -110,7 +110,7 @@ class TransitionCommand(Command):
 
         ::
 
-            >>> result = collection_maker(is_doc_example=True)
+            >>> result = segment_maker.run(is_doc_example=True)
             >>> lilypond_file, collection_metadata = result
             >>> show(lilypond_file) # doctest: +SKIP
 
