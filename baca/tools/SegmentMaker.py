@@ -7174,7 +7174,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ::
 
                 >>> commands = segment_maker.scope(
-                ...     ('Violin Music Voice', baca.select_stages(1)),
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.even_runs(),
                 ...     baca.label(abjad.label().with_indices()),
                 ...     )
@@ -7391,35 +7391,18 @@ class SegmentMaker(abjad.SegmentMaker):
 
         Returns none.
         '''
-        assert isinstance(commands, tuple), repr(commands)
-        assert all(isinstance(_, baca.Command) for _ in commands)
-        prototype = (baca.SimpleScope, baca.CompoundScope)
-        if isinstance(scopes, prototype):
+        if isinstance(scopes, (baca.SimpleScope, baca.CompoundScope)):
             scopes = [scopes]
-        elif isinstance(scopes, tuple):
-            scopes = baca.CompoundScope._to_simple_scopes(scopes)
-        elif isinstance(scopes, (list, abjad.Sequence)):
-            scopes__ = []
-            for scope in scopes:
-                if isinstance(scope, prototype):
-                    scopes__.append(scope)
-                elif isinstance(scope, tuple):
-                    scopes_ = baca.CompoundScope._to_simple_scopes(scope)
-                    scopes__.extend(scopes_)
-                else:
-                    raise TypeError(f'only scopes and tuples: {scope!r}.')
-            scopes = scopes__
         else:
-            raise TypeError(f'only scope, tuple or list: {scope!r}.')
-        assert isinstance(scopes, list), repr(scopes)
-        assert all(isinstance(_, prototype) for _ in scopes), repr(scopes)
+            assert all(isinstance(_, prototype) for _ in scopes), repr(scopes)
+        assert all(isinstance(_, baca.Command) for _ in commands)
         for scope in scopes:
             for command in commands:
-                scoped_command = baca.CommandWrapper(
+                command = baca.CommandWrapper(
                     command=command,
                     scope=scope,
                     )
-                self.scoped_commands.append(scoped_command)
+                self.scoped_commands.append(command)
 
     def validate_measure_count(self, measure_count):
         r'''Validates measure count.
