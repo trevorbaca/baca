@@ -1072,43 +1072,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 abjad.override(note).note_head.color = color
                 abjad.override(note).stem.color = color
 
-    def _compound_scope_to_logical_ties(
-        self,
-        command,
-        compound_scope,
-        include_rests=False,
-        leaves_instead_of_logical_ties=False,
-        ):
-        timespan_map, timespans = [], []
-        for scope in compound_scope.scopes:
-            result = self._get_stage_numbers(scope.stages)
-            start_stage, stop_stage = result
-            offsets = self._get_offsets(start_stage, stop_stage)
-            timespan = abjad.Timespan(*offsets)
-            timespan_map.append((scope.voice_name, timespan))
-            timespans.append(timespan)
-        compound_scope._timespan_map = timespan_map
-        result = []
-        leaves = self._get_cached_leaves(include_rests=include_rests)
-        for leaf in leaves:
-            if leaf in compound_scope:
-                if leaves_instead_of_logical_ties:
-                    result.append(leaf)
-                else:
-                    logical_tie = abjad.inspect(leaf).get_logical_tie()
-                    if logical_tie.head is leaf:
-                        result.append(logical_tie)
-        if not result:
-            message = f'EMPTY SELECTION: {format(command)}'
-            if self.allow_empty_selections:
-                print(message)
-            else:
-                raise Exception(message)
-        start_offset = min(_.start_offset for _ in timespans)
-        stop_offset = max(_.stop_offset for _ in timespans)
-        timespan = abjad.Timespan(start_offset, stop_offset)
-        return abjad.select(result), timespan
-
     def _compound_scope_to_topmost_components(self, compound_scope):
         r'''Use for label expressions.
         '''
@@ -1161,24 +1124,14 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.detach(markup, leaf)
 
     def _evaluate_scope(self, command):
-        if isinstance(command.scope, baca.SimpleScope):
-            scope = baca.CompoundScope([command.scope])
-        else:
-            scope = command.scope
         if hasattr(command.command, 'selector'):
-            result = self._compound_scope_to_logical_ties(
+            selection = self._resolve_scope(
                 command,
-                scope,
                 include_rests=True,
                 leaves_instead_of_logical_ties=True,
                 )
-            assert len(result) == 2, repr(result)
-            selection, timespan = result
         else:
-            result = self._compound_scope_to_logical_ties(command, scope)
-            assert len(result) == 2, repr(result)
-            selection, timespan = result
-        assert isinstance(selection, abjad.Selection), repr(selection)
+            selection = self._resolve_scope(command)
         if not selection:
             message = f'EMPTY SELECTION: {format(command)}'
             if self.allow_empty_selections:
@@ -1914,6 +1867,37 @@ class SegmentMaker(abjad.SegmentMaker):
         total_duration = int(round(total_duration))
         counter = abjad.Strin('second').pluralize(total_duration)
         print(f'segment duration {total_duration} {counter} ...')
+
+    def _resolve_scope(
+        self,
+        command,
+        include_rests=False,
+        leaves_instead_of_logical_ties=False,
+        ):
+        timespan_map, timespans = [], []
+        if isinstance(command.scope, baca.SimpleScope):
+            compound_scope = baca.CompoundScope([command.scope])
+        else:
+             compound_scope = command.scope
+        for scope in compound_scope.scopes:
+            result = self._get_stage_numbers(scope.stages)
+            start_stage, stop_stage = result
+            offsets = self._get_offsets(start_stage, stop_stage)
+            timespan = abjad.Timespan(*offsets)
+            timespan_map.append((scope.voice_name, timespan))
+            timespans.append(timespan)
+        compound_scope._timespan_map = timespan_map
+        result = []
+        leaves = self._get_cached_leaves(include_rests=include_rests)
+        for leaf in leaves:
+            if leaf in compound_scope:
+                if leaves_instead_of_logical_ties:
+                    result.append(leaf)
+                else:
+                    logical_tie = abjad.inspect(leaf).get_logical_tie()
+                    if logical_tie.head is leaf:
+                        result.append(logical_tie)
+        return abjad.select(result)
 
     def _scope_to_leaves(self, scope):
         if not isinstance(scope, baca.SimpleScope):
