@@ -269,13 +269,14 @@ class SegmentMaker(abjad.SegmentMaker):
     __slots__ = (
         '_allow_empty_selectors',
         '_allow_figure_names',
-        '_color_octaves',
-        '_color_out_of_range_pitches',
-        '_color_repeat_pitch_classes',
         '_cached_leaves_with_rests',
         '_cached_leaves_without_rests',
         '_cached_score_template_start_clefs',
         '_cached_score_template_start_instruments',
+        '_color_octaves',
+        '_color_out_of_range_pitches',
+        '_color_repeat_pitch_classes',
+        '_commands',
         '_design_checker',
         '_fermata_start_offsets',
         '_final_barline',
@@ -295,7 +296,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_print_timings',
         '_range_checker',
         '_rehearsal_letter',
-        '_scoped_commands',
         '_score',
         '_score_template',
         '_skip_wellformedness_checks',
@@ -420,6 +420,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._color_repeat_pitch_classes = color_repeat_pitch_classes
         self._cached_leaves_with_rests = None
         self._cached_leaves_without_rests = None
+        self._commands = []
         self._design_checker = design_checker
         self._fermata_start_offsets = []
         if final_barline not in (None, False, abjad.Exact):
@@ -461,7 +462,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._print_timings = print_timings
         self._range_checker = range_checker
         self._rehearsal_letter = rehearsal_letter
-        self._scoped_commands = []
         self._initialize_time_signatures(time_signatures)
         if score_template is not None:
             assert isinstance(score_template, baca.ScoreTemplate)
@@ -731,7 +731,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     command=command,
                     scope=scope,
                     )
-                self.scoped_commands.append(command)
+                self.commands.append(command)
 
     ### PRIVATE METHODS ###
 
@@ -1074,7 +1074,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _compound_scope_to_logical_ties(
         self,
-        scoped_command,
+        command,
         compound_scope,
         include_rests=False,
         leaves_instead_of_logical_ties=False,
@@ -1099,7 +1099,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     if logical_tie.head is leaf:
                         result.append(logical_tie)
         if not result:
-            message = f'EMPTY SELECTION: {format(scoped_command)}'
+            message = f'EMPTY SELECTION: {format(command)}'
             if self.allow_empty_selections:
                 print(message)
             else:
@@ -1160,14 +1160,14 @@ class SegmentMaker(abjad.SegmentMaker):
                     markup._annotation.startswith('figure name:')):
                     abjad.detach(markup, leaf)
 
-    def _evaluate_scope(self, scoped_command):
-        if isinstance(scoped_command.scope, baca.SimpleScope):
-            scope = baca.CompoundScope([scoped_command.scope])
+    def _evaluate_scope(self, command):
+        if isinstance(command.scope, baca.SimpleScope):
+            scope = baca.CompoundScope([command.scope])
         else:
-            scope = scoped_command.scope
-        if hasattr(scoped_command.command, 'selector'):
+            scope = command.scope
+        if hasattr(command.command, 'selector'):
             result = self._compound_scope_to_logical_ties(
-                scoped_command,
+                command,
                 scope,
                 include_rests=True,
                 leaves_instead_of_logical_ties=True,
@@ -1175,15 +1175,12 @@ class SegmentMaker(abjad.SegmentMaker):
             assert len(result) == 2, repr(result)
             selection, timespan = result
         else:
-            result = self._compound_scope_to_logical_ties(
-                scoped_command,
-                scope,
-                )
+            result = self._compound_scope_to_logical_ties(command, scope)
             assert len(result) == 2, repr(result)
             selection, timespan = result
         assert isinstance(selection, abjad.Selection), repr(selection)
         if not selection:
-            message = f'EMPTY SELECTION: {format(scoped_command)}'
+            message = f'EMPTY SELECTION: {format(command)}'
             if self.allow_empty_selections:
                 print(message)
             else:
@@ -1402,7 +1399,7 @@ class SegmentMaker(abjad.SegmentMaker):
         voice_name = source.voice_name
         stage = source.stages.start
         rhythm_command = []
-        for rhythm_command in self.scoped_commands:
+        for rhythm_command in self.command:
             if not isinstance(rhythm_command.command, baca.RhythmCommand):
                 continue
             if rhythm_command.scope.voice_name == voice_name:
@@ -1421,11 +1418,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _get_rhythm_commands_for_voice(self, voice_name):
         rhythm_commands = []
-        for scoped_command in self.scoped_commands:
-            if not isinstance(scoped_command.command, baca.RhythmCommand):
+        for command in self.commands:
+            if not isinstance(command.command, baca.RhythmCommand):
                 continue
-            if scoped_command.scope.voice_name == voice_name:
-                rhythm_commands.append(scoped_command)
+            if command.scope.voice_name == voice_name:
+                rhythm_commands.append(command)
         return rhythm_commands
 
     def _get_segment_identifier(self):
@@ -1486,9 +1483,9 @@ class SegmentMaker(abjad.SegmentMaker):
             )
         return contribution
 
-    def _handle_mutator(self, scoped_command):
-        if (hasattr(scoped_command.command, '_mutates_score') and
-            scoped_command.command._mutates_score()):
+    def _handle_mutator(self, command):
+        if (hasattr(command.command, '_mutates_score') and
+            command.command._mutates_score()):
             self._cached_leaves_with_rests = None
             self._cached_leaves_without_rests = None
 
@@ -1555,18 +1552,18 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _interpret_commands(self):
         start_time = time.time()
-        for scoped_command in self.scoped_commands:
-            assert isinstance(scoped_command, baca.CommandWrapper)
-            assert isinstance(scoped_command.command, baca.Command)
-            if isinstance(scoped_command.command, baca.RhythmCommand):
+        for command in self.commands:
+            assert isinstance(command, baca.CommandWrapper)
+            assert isinstance(command.command, baca.Command)
+            if isinstance(command.command, baca.RhythmCommand):
                 continue
-            selection = self._evaluate_scope(scoped_command)
+            selection = self._evaluate_scope(command)
             try:
-                scoped_command.command(selection)
+                command.command(selection)
             except:
                 traceback.print_exc()
-                raise Exception(format(scoped_command))
-            self._handle_mutator(scoped_command)
+                raise Exception(format(command))
+            self._handle_mutator(command)
         stop_time = time.time()
         count = int(stop_time - start_time)
         counter = abjad.String('second').pluralize(count)
@@ -1971,12 +1968,12 @@ class SegmentMaker(abjad.SegmentMaker):
         stop_measure_index = measure_indices[stage_number] - 1
         return start_measure_index, stop_measure_index
 
-    def _stages_do_not_overlap(self, scoped_commands):
+    def _stages_do_not_overlap(self, commands):
         stage_numbers = []
-        for scoped_command in scoped_commands:
-            if scoped_command.stages is None:
+        for command in commands:
+            if command.stages is None:
                 continue
-            start_stage, stop_stage = scoped_command.stages
+            start_stage, stop_stage = command.stages
             stop_stage += 1
             stage_numbers_ = range(start_stage, stop_stage)
             stage_numbers.extend(stage_numbers_)
@@ -2921,6 +2918,14 @@ class SegmentMaker(abjad.SegmentMaker):
         Returns true, false or none.
         '''
         return self._color_repeat_pitch_classes
+
+    @property
+    def commands(self):
+        r'''Gets commands.
+
+        Returns list of commands.
+        '''
+        return self._commands
 
     @property
     def design_checker(self):
@@ -6193,14 +6198,6 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._rehearsal_letter
 
     @property
-    def scoped_commands(self):
-        r'''Gets scoped commands.
-
-        Returns list of scoped commands.
-        '''
-        return self._scoped_commands
-
-    @property
     def score_template(self):
         r'''Gets score template.
 
@@ -7333,7 +7330,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '''
         assert isinstance(source, baca.SimpleScope)
         assert isinstance(target, baca.SimpleScope)
-        for command in self.scoped_commands:
+        for command in self.commands:
             if not isinstance(command.command, baca.RhythmCommand):
                 continue
             if command.scope.voice_name != source.voice_name:
@@ -7350,7 +7347,7 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(command.command, baca.RhythmCommand)
         command = abjad.new(command.command, **keywords)
         command = baca.CommandWrapper(command, target)
-        self.scoped_commands.append(command)
+        self.commands.append(command)
 
     def run(
         self,
