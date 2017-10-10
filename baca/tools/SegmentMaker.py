@@ -7391,7 +7391,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
         Returns none.
         '''
-        if isinstance(scopes, (baca.SimpleScope, baca.CompoundScope)):
+        prototype = (baca.SimpleScope, baca.CompoundScope)
+        if isinstance(scopes, prototype):
             scopes = [scopes]
         else:
             assert all(isinstance(_, prototype) for _ in scopes), repr(scopes)
