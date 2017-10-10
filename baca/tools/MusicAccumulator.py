@@ -317,12 +317,9 @@ class MusicAccumulator(abjad.AbjadObject):
         for voice_name in sorted(self._floating_selections):
             selection = self.assemble(voice_name)
             if selection:
-                segment_maker.append_commands(
-                    voice_name,
-                    baca.select_stages(1, 1),
-                    baca.RhythmCommand(
-                        rhythm_maker=selection,
-                        ),
+                segment_maker.scope(
+                    baca.scope(voice_name, 1),
+                    baca.rhythm(selection)
                     )
 
     @staticmethod

@@ -123,9 +123,8 @@ class NestCommand(Command):
             ...         ),
             ...     time_signatures=time_signatures,
             ...     )
-            >>> specifiers = segment_maker.append_commands(
-            ...     'Violin Music Voice',
-            ...     baca.select_stages(1),
+            >>> specifiers = segment_maker.scope(
+            ...     baca.scope('Violin Music Voice', 1),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=selection,
             ...         ),

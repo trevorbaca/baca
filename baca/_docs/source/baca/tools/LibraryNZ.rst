@@ -45,6 +45,7 @@ Bases
       ~baca.tools.LibraryNZ.LibraryNZ.rests_up
       ~baca.tools.LibraryNZ.LibraryNZ.resume
       ~baca.tools.LibraryNZ.LibraryNZ.resume_after
+      ~baca.tools.LibraryNZ.LibraryNZ.rhythm
       ~baca.tools.LibraryNZ.LibraryNZ.scope
       ~baca.tools.LibraryNZ.LibraryNZ.scopes
       ~baca.tools.LibraryNZ.LibraryNZ.script_color
@@ -163,6 +164,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.resume
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.resume_after
+
+.. automethod:: baca.tools.LibraryNZ.LibraryNZ.rhythm
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.scope
 

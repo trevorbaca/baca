@@ -99,9 +99,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ::
 
-            >>> commands = segment_maker.append_commands(
-            ...     'Violin Music Voice',
-            ...     baca.select_stages(1),
+            >>> commands = segment_maker.scope(
+            ...     baca.scope('Violin Music Voice', 1),
             ...     baca.even_runs(),
             ...     )
 
@@ -1891,9 +1890,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.RhythmCommand(
                 ...         rhythm_maker=figures,
                 ...         ),
@@ -2040,9 +2038,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.RhythmCommand(
                 ...         rhythm_maker=figures,
                 ...         ),
@@ -2253,9 +2250,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...     'Violin Music Voice',
                 ...     [[2, 4, 5, 7, 9, 11]],
                 ...     )
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.RhythmCommand(
                 ...         rhythm_maker=contribution['Violin Music Voice'],
                 ...         ),
@@ -2267,9 +2263,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...     'Cello Music Voice',
                 ...     [[-3, -5, -7, -8, -10, -12]],
                 ...     )
-                >>> commands = segment_maker.append_commands(
-                ...     'Cello Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Cello Music Voice', 1),
                 ...     baca.RhythmCommand(
                 ...         rhythm_maker=contribution['Cello Music Voice'],
                 ...         ),
@@ -2423,9 +2418,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.RhythmCommand(
                 ...         rhythm_maker=figures,
                 ...         ),
@@ -2591,9 +2585,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.RhythmCommand(
                 ...         rhythm_maker=figures,
                 ...         ),
@@ -2767,9 +2760,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -2940,9 +2932,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -3118,9 +3109,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -3292,9 +3282,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -3479,9 +3468,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -3655,9 +3643,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -3899,9 +3886,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -4073,9 +4059,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -4226,9 +4211,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.RhythmCommand(
                 ...         rhythm_maker=figures,
                 ...         ),
@@ -4478,9 +4462,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.RhythmCommand(
                 ...         rhythm_maker=figures,
                 ...         ),
@@ -4626,9 +4609,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -4818,9 +4800,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -5020,9 +5001,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -5194,9 +5174,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -5375,9 +5354,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -5594,9 +5572,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -5770,9 +5747,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -6298,9 +6274,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -6484,9 +6459,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -6690,9 +6664,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.even_runs(),
                 ...     baca.pitches('E4 F4'),
                 ...     )
@@ -6809,9 +6782,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.even_runs(),
                 ...     )
 
@@ -6985,9 +6957,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ::
 
-                >>> commands = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> commands = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.even_runs(),
                 ...     )
 

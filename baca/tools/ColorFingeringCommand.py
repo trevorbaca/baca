@@ -20,9 +20,8 @@ class ColorFingeringCommand(Command):
 
         ::
 
-            >>> specifiers = segment_maker.append_commands(
-            ...     'Violin Music Voice',
-            ...     baca.select_stages(1),
+            >>> specifiers = segment_maker.scope(
+            ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4', allow_repeat_pitches=True),
             ...     baca.messiaen_notes(),
             ...     baca.ColorFingeringCommand(
@@ -229,9 +228,8 @@ class ColorFingeringCommand(Command):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> specifiers = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.pitches('C4 D4 E4 F4'),
                 ...     baca.messiaen_notes(),
                 ...     baca.ColorFingeringCommand(
@@ -339,9 +337,8 @@ class ColorFingeringCommand(Command):
 
             ::
 
-                >>> specifiers = segment_maker.append_commands(
-                ...     'Violin Music Voice',
-                ...     baca.select_stages(1),
+                >>> specifiers = segment_maker.scope(
+                ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.pitches(
                 ...         'C4 D4 D4 D4 E4 F4 F4',
                 ...         allow_repeat_pitches=True,

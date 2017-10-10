@@ -822,30 +822,26 @@ class ImbricateCommand(Command):
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
-                >>> specifiers = segment_maker.append_commands(
-                ...     'Music Voice 2',
-                ...     baca.select_stages(1),
+                >>> specifiers = segment_maker.scope(
+                ...     baca.scope('Music Voice 2', 1),
                 ...     baca.RhythmCommand(
                 ...         rhythm_maker=voice_2_selections[0],
                 ...         ),
                 ...     )
-                >>> specifiers = segment_maker.append_commands(
-                ...     'Music Voice 2',
-                ...     baca.select_stages(2),
+                >>> specifiers = segment_maker.scope(
+                ...     baca.scope('Music Voice 2', 2),
                 ...     baca.RhythmCommand(
                 ...         rhythm_maker=voice_2_selections[1],
                 ...         ),
                 ...     )
-                >>> specifiers = segment_maker.append_commands(
-                ...     'Music Voice 1',
-                ...     baca.select_stages(1),
+                >>> specifiers = segment_maker.scope(
+                ...     baca.scope('Music Voice 1', 1),
                 ...     baca.RhythmCommand(
                 ...         rhythm_maker=voice_1_selections[0],
                 ...         ),
                 ...     )
-                >>> specifiers = segment_maker.append_commands(
-                ...     'Music Voice 1',
-                ...     baca.select_stages(2),
+                >>> specifiers = segment_maker.scope(
+                ...     baca.scope('Music Voice 1', 2),
                 ...     baca.RhythmCommand(
                 ...         rhythm_maker=voice_1_selections[1],
                 ...         ),

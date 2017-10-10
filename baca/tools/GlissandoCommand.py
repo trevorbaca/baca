@@ -19,9 +19,8 @@ class GlissandoCommand(Command):
 
         ::
 
-            >>> specifiers = segment_maker.append_commands(
-            ...     'Violin Music Voice',
-            ...     baca.select_stages(1),
+            >>> specifiers = segment_maker.scope(
+            ...     baca.scope('Violin Music Voice', 1),
             ...     baca.even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.GlissandoCommand()
@@ -124,9 +123,8 @@ class GlissandoCommand(Command):
 
         ::
 
-            >>> specifiers = segment_maker.append_commands(
-            ...     'Violin Music Voice',
-            ...     baca.select_stages(1),
+            >>> specifiers = segment_maker.scope(
+            ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.even_runs(),
             ...     baca.GlissandoCommand(baca.select_plts(stop=2)),

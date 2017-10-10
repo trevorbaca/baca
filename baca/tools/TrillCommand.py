@@ -67,9 +67,8 @@ class TrillCommand(Command):
 
         ::
 
-            >>> specifiers = collection_maker.append_commands(
-            ...     'Violin Music Voice',
-            ...     baca.select_stages(1),
+            >>> specifiers = collection_maker.scope(
+            ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4 F4'),
             ...     baca.messiaen_notes(),
             ...     baca.TrillCommand(
