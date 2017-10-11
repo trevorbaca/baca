@@ -1,5 +1,6 @@
 import abjad
 import collections
+import functools
 from .Command import Command
 
 
@@ -233,13 +234,16 @@ class ScorePitchCommand(Command):
         '''
         if argument is None:
             return
-        leaves = abjad.select(argument).by_leaf()
-        leaves_timespan = leaves.get_timespan()
-        lts = abjad.select(leaves).by_logical_tie(pitched=True)
-        lts = [
-            _ for _ in lts
-            if _.get_timespan().starts_during_timespan(leaves_timespan)
-            ]
+        leaves = []
+        for leaf in abjad.select(argument).by_leaf(pitched=True):
+            if abjad.inspect(leaf).get_logical_tie().head is leaf:
+                leaves.append(leaf)
+        leaves = self._sort_by_timeline(leaves)
+        lts = []
+        for leaf in leaves:
+            lt = abjad.inspect(leaf).get_logical_tie()
+            if lt.head is leaf:
+                lts.append(lt)
         counts = self.counts or [1]
         counts = abjad.CyclicTuple(counts)
         start_index = self.start_index
@@ -344,6 +348,27 @@ class ScorePitchCommand(Command):
             raise NotImplementedError
         if self.allow_repeat_pitches:
             abjad.attach('repeat pitch allowed', leaf)
+
+    @staticmethod
+    def _sort_by_timeline(leaves):
+        assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
+        def compare(leaf_1, leaf_2):
+            start_offset_1 = abjad.inspect(leaf_1).get_timespan().start_offset
+            start_offset_2 = abjad.inspect(leaf_2).get_timespan().start_offset
+            if start_offset_1 < start_offset_2:
+                return -1
+            if start_offset_2 < start_offset_1:
+                return 1
+            index_1 = abjad.inspect(leaf_1).get_parentage().score_index
+            index_2 = abjad.inspect(leaf_2).get_parentage().score_index
+            if index_1 < index_2:
+                return -1
+            if index_2 < index_1:
+                return 1
+            return 0
+        leaves = list(leaves)
+        leaves.sort(key=functools.cmp_to_key(compare))
+        return abjad.select(leaves)
 
     ### PUBLIC PROPERTIES ###
 

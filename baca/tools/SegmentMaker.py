@@ -269,7 +269,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_allow_empty_selectors',
         '_allow_figure_names',
         '_cached_leaves',
-        '_cached_leaves_by_timeline',
         '_cached_score_template_start_clefs',
         '_cached_score_template_start_instruments',
         '_color_octaves',
@@ -418,7 +417,6 @@ class SegmentMaker(abjad.SegmentMaker):
             color_repeat_pitch_classes = bool(color_repeat_pitch_classes)
         self._color_repeat_pitch_classes = color_repeat_pitch_classes
         self._cached_leaves = None
-        self._cached_leaves_by_timeline = None
         self._design_checker = design_checker
         self._fermata_start_offsets = []
         if final_barline not in (None, False, abjad.Exact):
@@ -1347,7 +1345,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if (hasattr(command.command, '_mutates_score') and
             command.command._mutates_score()):
             self._cached_leaves = None
-            self._cached_leaves_by_timeline = None
 
     def _hide_instrument_names_(self):
         if not self.hide_instrument_names:
@@ -1759,18 +1756,11 @@ class SegmentMaker(abjad.SegmentMaker):
             timespan = abjad.Timespan(*offsets)
             timespan_map.append((scope.voice_name, timespan))
             timespans.append(timespan)
-        result = []
-        if isinstance(wrapper.command, baca.ScorePitchCommand):
-            if self._cached_leaves_by_timeline is None:
-                leaves = abjad.select(self._score).by_timeline()
-                self._cached_leaves_by_timeline = leaves
-            leaves = self._cached_leaves_by_timeline
-        else:
-            if self._cached_leaves is None:
-                leaves = abjad.select(self._score).by_timeline()
-                self._cached_leaves = leaves
-            leaves = self._cached_leaves
-        for leaf in leaves:
+        if self._cached_leaves is None:
+            leaves = abjad.select(self._score).by_leaf()
+            self._cached_leaves = leaves
+        leaves = []
+        for leaf in self._cached_leaves:
             agent = abjad.inspect(leaf)
             context = agent.get_parentage().get_first(abjad.Context)
             if context is None:
@@ -1780,9 +1770,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 if name != context.name:
                     continue
                 if leaf_timespan.starts_during_timespan(scope_timespan):
-                    result.append(leaf)
+                    leaves.append(leaf)
                     break
-        selection = abjad.select(result)
+        selection = abjad.select(leaves)
         if not selection:
             message = f'EMPTY SELECTION: {format(wrapper)}'
             if self.allow_empty_selections:
