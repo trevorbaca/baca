@@ -111,7 +111,7 @@ class OverrideCommand(Command):
             ...         grob_name='stem',
             ...         revert=True,
             ...         ),
-            ...     baca.RhythmCommand(
+            ...     baca.RhythmBuilder(
             ...         rhythm_maker=abjad.rhythmmakertools.TaleaRhythmMaker(
             ...             talea=abjad.rhythmmakertools.Talea(
             ...                 counts=[1, 1, 1, -1],
@@ -213,8 +213,6 @@ class OverrideCommand(Command):
     '''
 
     ### CLASS ATTRIBUTES ###
-
-    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_attribute_name',

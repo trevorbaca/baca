@@ -18,8 +18,6 @@ class SetCommand(Command):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Commands'
-
     __slots__ = (
         '_context_name',
         '_selector',

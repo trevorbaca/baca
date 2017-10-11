@@ -41,8 +41,6 @@ class HairpinCommand(Command):
 
     ### CLASS ATTRIBUTES ###
 
-    __documentation_section__ = 'Commands'
-
     __slots__ = (
         '_flare',
         '_hairpin_tokens',

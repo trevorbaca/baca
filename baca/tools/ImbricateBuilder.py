@@ -1,11 +1,11 @@
 import abjad
 import baca
 import copy
-from .Command import Command
+from .Builder import Builder
 
 
-class ImbricateCommand(Command):
-    r'''Imbricate command.
+class ImbricateBuilder(Builder):
+    r'''Imbricate builder.
 
     ..  container:: example
 
@@ -29,7 +29,7 @@ class ImbricateCommand(Command):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
-            ...     baca.ImbricateCommand(
+            ...     baca.ImbricateBuilder(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
             ...         ),
@@ -159,13 +159,13 @@ class ImbricateCommand(Command):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
-            ...     baca.ImbricateCommand(
+            ...     baca.ImbricateBuilder(
             ...         'Voice 1',
             ...         [2, 19, 9],
             ...         baca.beam_everything(),
             ...         baca.staccati(),
             ...         ),
-            ...     baca.ImbricateCommand(
+            ...     baca.ImbricateBuilder(
             ...         'Voice 3',
             ...         [16, 10, 18],
             ...         baca.beam_everything(),
@@ -350,7 +350,7 @@ class ImbricateCommand(Command):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
-            ...     baca.ImbricateCommand(
+            ...     baca.ImbricateBuilder(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
             ...         baca.accents(),
@@ -480,8 +480,6 @@ class ImbricateCommand(Command):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Commands'
-
     __slots__ = (
         '_allow_unused_pitches',
         '_by_pitch_class',
@@ -538,7 +536,7 @@ class ImbricateCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, container=None):
-        r'''Calls command on `container`.
+        r'''Calls builder on `container`.
 
         ..  container:: example
 
@@ -569,7 +567,7 @@ class ImbricateCommand(Command):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.ImbricateCommand(
+                ...     baca.ImbricateBuilder(
                 ...         'Voice 1',
                 ...         segment,
                 ...         baca.accents(),
@@ -668,7 +666,7 @@ class ImbricateCommand(Command):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.ImbricateCommand(
+                ...     baca.ImbricateBuilder(
                 ...         'Voice 1',
                 ...         segment,
                 ...         baca.accents(),
@@ -784,7 +782,7 @@ class ImbricateCommand(Command):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     [[0, 2, 10, 18], [16, 15, 23]],
-                ...     baca.ImbricateCommand(
+                ...     baca.ImbricateBuilder(
                 ...         'Voice 1',
                 ...         [2, 10],
                 ...         baca.staccati(),
@@ -799,7 +797,7 @@ class ImbricateCommand(Command):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     [[19, 13, 9, 8]],
-                ...     baca.ImbricateCommand(
+                ...     baca.ImbricateBuilder(
                 ...         'Voice 1',
                 ...         [13, 9],
                 ...         baca.staccati(),
@@ -824,25 +822,25 @@ class ImbricateCommand(Command):
                 ...     )
                 >>> specifiers = segment_maker(
                 ...     baca.scope('Music Voice 2', 1),
-                ...     baca.RhythmCommand(
+                ...     baca.RhythmBuilder(
                 ...         rhythm_maker=voice_2_selections[0],
                 ...         ),
                 ...     )
                 >>> specifiers = segment_maker(
                 ...     baca.scope('Music Voice 2', 2),
-                ...     baca.RhythmCommand(
+                ...     baca.RhythmBuilder(
                 ...         rhythm_maker=voice_2_selections[1],
                 ...         ),
                 ...     )
                 >>> specifiers = segment_maker(
                 ...     baca.scope('Music Voice 1', 1),
-                ...     baca.RhythmCommand(
+                ...     baca.RhythmBuilder(
                 ...         rhythm_maker=voice_1_selections[0],
                 ...         ),
                 ...     )
                 >>> specifiers = segment_maker(
                 ...     baca.scope('Music Voice 1', 2),
-                ...     baca.RhythmCommand(
+                ...     baca.RhythmBuilder(
                 ...         rhythm_maker=voice_1_selections[1],
                 ...         ),
                 ...     )
@@ -1002,7 +1000,7 @@ class ImbricateCommand(Command):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.ImbricateCommand(
+                ...     baca.ImbricateBuilder(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         ),
@@ -1116,7 +1114,7 @@ class ImbricateCommand(Command):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.ImbricateCommand(
+                ...     baca.ImbricateBuilder(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         ),
@@ -1317,13 +1315,13 @@ class ImbricateCommand(Command):
         for specifier in specifiers:
             if isinstance(specifier, baca.MusicRhythmSpecifier):
                 continue
-            if isinstance(specifier, baca.RhythmCommand):
+            if isinstance(specifier, baca.RhythmBuilder):
                 continue
-            if isinstance(specifier, baca.ImbricateCommand):
+            if isinstance(specifier, baca.ImbricateBuilder):
                 continue
             if isinstance(specifier, abjad.rhythmmakertools.BeamSpecifier):
                 specifier._detach_all_beams(selections)
-            if isinstance(specifier, baca.NestCommand):
+            if isinstance(specifier, baca.NestBuilder):
                 nested_selections = specifier(selections)
             else:
                 specifier(selections)
@@ -1400,7 +1398,7 @@ class ImbricateCommand(Command):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.ImbricateCommand(
+                ...     baca.ImbricateBuilder(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         baca.accents(),
@@ -1516,7 +1514,7 @@ class ImbricateCommand(Command):
                 >>> result = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.ImbricateCommand(
+                ...     baca.ImbricateBuilder(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         baca.accents(),
@@ -1535,7 +1533,7 @@ class ImbricateCommand(Command):
 
             ::
 
-                >>> specifier = baca.ImbricateCommand()
+                >>> specifier = baca.ImbricateBuilder()
                 >>> specifier.allow_unused_pitches is None
                 True
 
@@ -1595,7 +1593,7 @@ class ImbricateCommand(Command):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.ImbricateCommand(
+                ...     baca.ImbricateBuilder(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         baca.accents(),
@@ -1712,7 +1710,7 @@ class ImbricateCommand(Command):
 
             ::
 
-                >>> specifier = baca.ImbricateCommand()
+                >>> specifier = baca.ImbricateBuilder()
                 >>> specifier.hocket is None
                 True
 
@@ -1757,7 +1755,7 @@ class ImbricateCommand(Command):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.ImbricateCommand(
+                ...     baca.ImbricateBuilder(
                 ...         'Voice 1',
                 ...         [2, 18, 16, 15],
                 ...         baca.accents(),
@@ -1898,7 +1896,7 @@ class ImbricateCommand(Command):
 
             ::
 
-                >>> specifier = baca.ImbricateCommand()
+                >>> specifier = baca.ImbricateBuilder()
                 >>> specifier.selector is None
                 True
 
@@ -1934,7 +1932,7 @@ class ImbricateCommand(Command):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.ImbricateCommand(
+                ...     baca.ImbricateBuilder(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         abjad.rhythmmakertools.BeamSpecifier(
@@ -2067,7 +2065,7 @@ class ImbricateCommand(Command):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.ImbricateCommand(
+                ...     baca.ImbricateBuilder(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         abjad.rhythmmakertools.BeamSpecifier(
@@ -2210,7 +2208,7 @@ class ImbricateCommand(Command):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.ImbricateCommand(
+                ...     baca.ImbricateBuilder(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         baca.beam_everything(),
@@ -2351,7 +2349,7 @@ class ImbricateCommand(Command):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.ImbricateCommand(
+                ...     baca.ImbricateBuilder(
                 ...         'Voice 1',
                 ...         [2, 19, 9, 18, 16],
                 ...         abjad.rhythmmakertools.BeamSpecifier(
@@ -2493,7 +2491,7 @@ class ImbricateCommand(Command):
                 >>> contribution = music_maker(
                 ...     'Voice 2',
                 ...     collections,
-                ...     baca.ImbricateCommand(
+                ...     baca.ImbricateBuilder(
                 ...         'Voice 1',
                 ...         [2, 10, 18, 19, 9],
                 ...         baca.beam_everything(),
@@ -2595,7 +2593,7 @@ class ImbricateCommand(Command):
 
             ::
 
-                >>> specifier = baca.ImbricateCommand()
+                >>> specifier = baca.ImbricateBuilder()
                 >>> specifier.truncate_ties is None
                 True
 

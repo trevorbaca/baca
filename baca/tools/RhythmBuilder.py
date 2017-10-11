@@ -1,10 +1,10 @@
 import abjad
 import baca
-from .Command import Command
+from .Builder import Builder
 
 
-class RhythmCommand(Command):
-    r'''Rhythm command.
+class RhythmBuilder(Builder):
+    r'''Rhythm builder.
 
     ::
 
@@ -14,14 +14,14 @@ class RhythmCommand(Command):
 
         ::
 
-            >>> command = baca.RhythmCommand(
+            >>> builder = baca.RhythmBuilder(
             ...     rhythm_maker=rhythmmakertools.NoteRhythmMaker(),
             ...     )
 
         ::
 
-            >>> f(command)
-            baca.RhythmCommand(
+            >>> f(builder)
+            baca.RhythmBuilder(
                 rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(),
                 )
 
@@ -29,15 +29,15 @@ class RhythmCommand(Command):
 
         ::
 
-            >>> command = baca.RhythmCommand(
+            >>> builder = baca.RhythmBuilder(
             ...     division_expression=abjad.sequence().sum().sequence(),
             ...     rhythm_maker=rhythmmakertools.NoteRhythmMaker(),
             ...     )
 
         ::
 
-            >>> f(command)
-            baca.RhythmCommand(
+            >>> f(builder)
+            baca.RhythmBuilder(
                 division_expression=abjad.Expression(
                     callbacks=[
                         abjad.Expression(
@@ -64,8 +64,6 @@ class RhythmCommand(Command):
     '''
 
     ### CLASS ATTRIBUTES ###
-
-    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_division_maker',
@@ -132,7 +130,7 @@ class RhythmCommand(Command):
         start_offset=None,
         time_signatures=None,
         ):
-        r'''Calls command.
+        r'''Calls builder.
 
         Returns contribution with music payload.
         '''
@@ -394,7 +392,7 @@ class RhythmCommand(Command):
 
     @property
     def rewrite_meter(self):
-        r'''Is true when command rewrites meter.
+        r'''Is true when builder rewrites meter.
 
         Set to true or false.
 
@@ -422,7 +420,7 @@ class RhythmCommand(Command):
 
     @property
     def split_at_measure_boundaries(self):
-        r'''Is true when command splits at measure boundaries.
+        r'''Is true when builder splits at measure boundaries.
 
         Set to true, false or none.
 
@@ -458,7 +456,7 @@ class RhythmCommand(Command):
 
     @property
     def tie_first(self):
-        r'''Is true when command ties into first note or chord.
+        r'''Is true when builder ties into first note or chord.
         Otherwise false.
 
         Set to true, false or none.
@@ -469,7 +467,7 @@ class RhythmCommand(Command):
 
     @property
     def tie_last(self):
-        r'''Is true when command ties into last note or chord.
+        r'''Is true when builder ties into last note or chord.
         Otherwise false.
 
         Set to true, false or none.

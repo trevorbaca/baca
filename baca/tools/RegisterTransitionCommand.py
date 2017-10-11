@@ -119,8 +119,6 @@ class RegisterTransitionCommand(Command):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Commands'
-
     __slots__ = (
         '_start_registration',
         '_stop_registration',

@@ -116,8 +116,6 @@ class ScorePitchCommand(Command):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Commands'
-
     __slots__ = (
         '_acyclic',
         '_allow_repeat_pitches',

@@ -934,8 +934,6 @@ class RegisterInterpolationCommand(Command):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Commands'
-
     __slots__ = (
         '_pattern',
         '_selector',

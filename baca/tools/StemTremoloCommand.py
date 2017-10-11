@@ -114,8 +114,6 @@ class StemTremoloCommand(Command):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Commands'
-
     __slots__ = (
         '_selector',
         '_tremolo_flags',

@@ -120,8 +120,6 @@ class ColorFingeringCommand(Command):
 
     ### CLASS VARIABLES ##
 
-    __documentation_section__ = 'Commands'
-
     __slots__ = (
         '_by_pitch_run',
         '_deposit_annotations',

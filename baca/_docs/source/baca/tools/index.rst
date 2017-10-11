@@ -5,6 +5,27 @@ baca.tools
 
 --------
 
+Builders
+--------
+
+.. toctree::
+   :hidden:
+
+   Builder
+   ImbricateBuilder
+   NestBuilder
+   RhythmBuilder
+
+.. autosummary::
+   :nosignatures:
+
+   Builder
+   ImbricateBuilder
+   NestBuilder
+   RhythmBuilder
+
+--------
+
 Commands
 --------
 
@@ -19,17 +40,14 @@ Commands
    DiatonicClusterCommand
    GlissandoCommand
    HairpinCommand
-   ImbricateCommand
    LabelCommand
    MicrotonalDeviationCommand
-   NestCommand
    OctaveDisplacementCommand
    OverrideCommand
    RegisterCommand
    RegisterInterpolationCommand
    RegisterToOctaveCommand
    RegisterTransitionCommand
-   RhythmCommand
    ScorePitchCommand
    SetCommand
    SpannerCommand
@@ -49,17 +67,14 @@ Commands
    DiatonicClusterCommand
    GlissandoCommand
    HairpinCommand
-   ImbricateCommand
    LabelCommand
    MicrotonalDeviationCommand
-   NestCommand
    OctaveDisplacementCommand
    OverrideCommand
    RegisterCommand
    RegisterInterpolationCommand
    RegisterToOctaveCommand
    RegisterTransitionCommand
-   RhythmCommand
    ScorePitchCommand
    SetCommand
    SpannerCommand

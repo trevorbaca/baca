@@ -306,8 +306,6 @@ class ColorCommand(Command):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Commands'
-
     __slots__ = (
         '_color',
         '_selector',

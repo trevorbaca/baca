@@ -30,8 +30,6 @@ class DiatonicClusterCommand(Command):
 
     ### CLASS ATTRIBUTES ###
 
-    __documentation_section__ = 'Commands'
-
     __slots__ = (
         '_cluster_widths',
         '_selector',

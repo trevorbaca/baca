@@ -296,8 +296,6 @@ class RegisterToOctaveCommand(Command):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Commands'
-
     __slots__ = (
         '_anchor',
         '_octave_number',

@@ -339,8 +339,6 @@ class ClusterCommand(Command):
 
     ### CLASS VARIABLES ##
 
-    __documentation_section__ = 'Commands'
-
     __slots__ = (
         '_hide_flat_markup',
         '_hide_natural_markup',

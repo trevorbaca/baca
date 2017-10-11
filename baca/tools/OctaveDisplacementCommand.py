@@ -115,8 +115,6 @@ class OctaveDisplacementCommand(Command):
 
     ### CLASS VARIABLES ##
 
-    __documentation_section__ = 'Commands'
-
     __slots__ = (
         '_displacements',
         '_selector',

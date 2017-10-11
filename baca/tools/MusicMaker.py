@@ -754,7 +754,7 @@ class MusicMaker(abjad.AbjadObject):
         unused_specifiers = []
         imbricated_selections = {}
         for specifier in specifiers:
-            if not isinstance(specifier, baca.ImbricateCommand):
+            if not isinstance(specifier, baca.ImbricateBuilder):
                 unused_specifiers.append(specifier)
                 continue
             imbricated_selection = specifier(container)
@@ -765,7 +765,7 @@ class MusicMaker(abjad.AbjadObject):
         assert self._all_are_selections(selections), repr(selections)
         specifiers_ = []
         for specifier in specifiers:
-            if isinstance(specifier, baca.NestCommand):
+            if isinstance(specifier, baca.NestBuilder):
                 specifier(selections)
             else:
                 specifiers_.append(specifier)
@@ -2004,7 +2004,7 @@ class MusicMaker(abjad.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.NestCommand(
+                ...     baca.NestBuilder(
                 ...         time_treatments=['+1/16'],
                 ...         ),
                 ...     abjad.rhythmmakertools.BeamSpecifier(
@@ -2087,7 +2087,7 @@ class MusicMaker(abjad.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.NestCommand(
+                ...     baca.NestBuilder(
                 ...         lmr_specifier=baca.LMRSpecifier(
                 ...             left_length=2,
                 ...             ),

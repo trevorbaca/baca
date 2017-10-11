@@ -142,16 +142,13 @@ class CommandWrapper(abjad.AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self, command=None, scope=None):
-        if isinstance(scope, tuple):
-            scope = baca.SimpleScope(*scope)
-        prototype = (baca.SimpleScope, baca.CompoundScope)
         if scope is not None:
-            assert isinstance(scope, prototype), repr(scope)
+            prototype = (baca.SimpleScope, baca.CompoundScope)
+            assert isinstance(scope, prototype), format(scope)
         self._scope = scope
-        assert not isinstance(command, (tuple, list)), repr(command)
-        classname = type(command).__name__
-        if not classname.endswith('Command'):
-            raise Exception(format(command))
+        if command is not None:
+            prototype = (baca.Builder, baca.Command)
+            assert isinstance(command, prototype), format(command)
         self._command = command
 
     ### PUBLIC PROPERTIES ###

@@ -147,8 +147,6 @@ class TrillCommand(Command):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Commands'
-
     __slots__ = (
         '_deposit_annotations',
         '_forbidden_annotations',

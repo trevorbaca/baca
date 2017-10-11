@@ -208,7 +208,7 @@ class LibraryNZ(object):
         '''
         if not isinstance(time_treatments, list):
             time_treatments = [time_treatments]
-        return baca.NestCommand(
+        return baca.NestBuilder(
             lmr_specifier=None,
             time_treatments=time_treatments,
             )
@@ -349,7 +349,7 @@ class LibraryNZ(object):
     def notes():
         r'''Makes notes.
         '''
-        return baca.RhythmCommand(
+        return baca.RhythmBuilder(
             rewrite_meter=True,
             rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker()
             )
@@ -2325,7 +2325,7 @@ class LibraryNZ(object):
         elif isinstance(durations, tuple):
             assert len(durations) == 2
             durations = [abjad.Duration(durations)]
-        return baca.RhythmCommand(
+        return baca.RhythmBuilder(
             division_expression=baca.split_by_durations(durations=durations),
             rewrite_meter=True,
             rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
@@ -2474,7 +2474,7 @@ class LibraryNZ(object):
         mask = abjad.rhythmmakertools.SilenceMask(
             pattern=abjad.index_all(),
             )
-        return baca.RhythmCommand(
+        return baca.RhythmBuilder(
             rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
                 division_masks=[mask],
                 ),
@@ -2949,7 +2949,7 @@ class LibraryNZ(object):
         '''
         assert isinstance(selection, abjad.Selection), repr(selection)
         assert all(isinstance(_,  abjad.Component) for _ in selection)
-        return baca.RhythmCommand(
+        return baca.RhythmBuilder(
             rhythm_maker=selection,
             )
 
@@ -3650,7 +3650,7 @@ class LibraryNZ(object):
                 talea_denominator=denominator,
                 ),
             )
-        return baca.RhythmCommand(
+        return baca.RhythmBuilder(
             rhythm_maker=rhythm_maker,
             )
 
@@ -3662,7 +3662,7 @@ class LibraryNZ(object):
         ):
         r'''Makes single tapers.
         '''
-        return baca.RhythmCommand(
+        return baca.RhythmBuilder(
             rhythm_maker=abjad.rhythmmakertools.IncisedRhythmMaker(
                 incise_specifier=abjad.rhythmmakertools.InciseSpecifier(
                     outer_divisions_only=True,

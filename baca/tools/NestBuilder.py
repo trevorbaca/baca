@@ -1,19 +1,19 @@
 import abjad
 import baca
-from .Command import Command
+from .Builder import Builder
 
 
-class NestCommand(Command):
-    r'''Nest command.
+class NestBuilder(Builder):
+    r'''Nest builder.
 
     ..  container:: example
 
-        Nest command augments one sixteenth:
+        Nest builder augments one sixteenth:
 
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.NestCommand(
+            ...     baca.NestBuilder(
             ...         time_treatments=['+1/16'],
             ...         ),
             ...     abjad.rhythmmakertools.BeamSpecifier(
@@ -87,7 +87,7 @@ class NestCommand(Command):
 
     ..  container:: example
 
-        Calltime nest command preserves beam subdivisions and works with
+        Calltime nest builder preserves beam subdivisions and works with
         extend beam:
 
             >>> music_maker = baca.MusicMaker(
@@ -102,7 +102,7 @@ class NestCommand(Command):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10, 18], [16, 15, 23]],
-            ...     baca.NestCommand(
+            ...     baca.NestBuilder(
             ...         time_treatments=['+1/16'],
             ...         ),
             ...     extend_beam=True,
@@ -125,7 +125,7 @@ class NestCommand(Command):
             ...     )
             >>> specifiers = segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.RhythmCommand(
+            ...     baca.RhythmBuilder(
             ...         rhythm_maker=selection,
             ...         ),
             ...     )
@@ -234,8 +234,6 @@ class NestCommand(Command):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Commands'
-
     __slots__ = (
         '_lmr_specifier',
         '_time_treatments',
@@ -262,7 +260,7 @@ class NestCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, selections=None):
-        r'''Calls command on `selections`.
+        r'''Calls builder on `selections`.
 
         ..  container:: example
 
@@ -271,7 +269,7 @@ class NestCommand(Command):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.NestCommand(time_treatments=['+1/16']),
+                ...     baca.NestBuilder(time_treatments=['+1/16']),
                 ...     baca.RestAffixSpecifier(
                 ...         prefix=[2],
                 ...         suffix=[3],
