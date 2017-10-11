@@ -268,7 +268,7 @@ class SegmentMaker(abjad.SegmentMaker):
     __slots__ = (
         '_allow_empty_selectors',
         '_allow_figure_names',
-        '_cached_leaves',
+        '_cache',
         '_cached_score_template_start_clefs',
         '_cached_score_template_start_instruments',
         '_color_octaves',
@@ -416,7 +416,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if color_repeat_pitch_classes is not None:
             color_repeat_pitch_classes = bool(color_repeat_pitch_classes)
         self._color_repeat_pitch_classes = color_repeat_pitch_classes
-        self._cached_leaves = None
+        self._cache = None
         self._design_checker = design_checker
         self._fermata_start_offsets = []
         if final_barline not in (None, False, abjad.Exact):
@@ -955,6 +955,29 @@ class SegmentMaker(abjad.SegmentMaker):
             #abjad.attach(directive, start_skip)
             spanner.attach(directive, start_skip)
 
+    def _cache_leaves(self):
+        stage_timespans = []
+        for stage_index in range(self.stage_count):
+            stage_number = stage_index + 1
+            stage_offsets = self._get_offsets(stage_number, stage_number)
+            stage_timespan = abjad.Timespan(*stage_offsets)
+            stage_timespans.append(stage_timespan)
+        self._cache = abjad.TypedOrderedDict()
+        contexts = [self._score['Global Skips']]
+        contexts.extend(abjad.select(self._score).by_class(abjad.Voice))
+        for context in contexts:
+            leaves_by_stage_number = abjad.TypedOrderedDict()
+            self._cache[context.name] = leaves_by_stage_number
+            for stage_index in range(self.stage_count):
+                stage_number = stage_index + 1
+                leaves_by_stage_number[stage_number] = []
+            for leaf in abjad.iterate(context).by_leaf():
+                leaf_timespan = abjad.inspect(leaf).get_timespan()
+                for stage_index, stage_timespan in enumerate(stage_timespans):
+                    stage_number = stage_index + 1
+                    if leaf_timespan.starts_during_timespan(stage_timespan):
+                        leaves_by_stage_number[stage_number].append(leaf)
+
     def _check_design(self):
         if self.design_checker is None:
             return
@@ -1344,7 +1367,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _handle_mutator(self, command):
         if (hasattr(command.command, '_mutates_score') and
             command.command._mutates_score()):
-            self._cached_leaves = None
+            self._cache = None
 
     def _hide_instrument_names_(self):
         if not self.hide_instrument_names:
@@ -1692,6 +1715,15 @@ class SegmentMaker(abjad.SegmentMaker):
         measures = self._make_multimeasure_rest_filled_measures()
         context.extend(measures)
 
+    def _print_cache(self):
+        for context_name in self._cache:
+            print(f'CONTEXT {context_name} ...')
+            leaves_by_stage_number = self._cache[context_name]
+            for stage_number in leaves_by_stage_number:
+                print(f'STAGE {stage_number} ...')
+                for leaf in leaves_by_stage_number[stage_number]:
+                    print(leaf)
+
     def _print_segment_duration_(self):
         if not self.print_segment_duration:
             return
@@ -1744,34 +1776,10 @@ class SegmentMaker(abjad.SegmentMaker):
 
     # TODO: refactor as _scope_to_leaf_selections() in plural
     def _scope_to_leaf_selection(self, wrapper):
-        timespan_map, timespans = [], []
-        if isinstance(wrapper.scope, baca.SimpleScope):
-            compound_scope = baca.CompoundScope([wrapper.scope])
-        else:
-             compound_scope = wrapper.scope
-        for scope in compound_scope.scopes:
-            result = self._get_stage_numbers(scope.stages)
-            start_stage, stop_stage = result
-            offsets = self._get_offsets(start_stage, stop_stage)
-            timespan = abjad.Timespan(*offsets)
-            timespan_map.append((scope.voice_name, timespan))
-            timespans.append(timespan)
-        if self._cached_leaves is None:
-            leaves = abjad.select(self._score).by_leaf()
-            self._cached_leaves = leaves
         leaves = []
-        for leaf in self._cached_leaves:
-            agent = abjad.inspect(leaf)
-            context = agent.get_parentage().get_first(abjad.Context)
-            if context is None:
-                raise Exception(f'missing parent context: {leaf!r}.')
-            leaf_timespan = agent.get_timespan()
-            for name, scope_timespan in timespan_map:
-                if name != context.name:
-                    continue
-                if leaf_timespan.starts_during_timespan(scope_timespan):
-                    leaves.append(leaf)
-                    break
+        selections = self._scope_to_leaf_selections(wrapper.scope)
+        for selection in selections:
+            leaves.extend(selection)
         selection = abjad.select(leaves)
         if not selection:
             message = f'EMPTY SELECTION: {format(wrapper)}'
@@ -1781,21 +1789,23 @@ class SegmentMaker(abjad.SegmentMaker):
                 raise Exception(message)
         return selection
 
-    # TODO: possibly reintegrate
-    def _scope_to_leaves(self, scope):
-        result = self._get_stage_numbers(scope.stages)
-        start_stage, stop_stage = result
-        offsets = self._get_offsets(start_stage, stop_stage)
-        stages_timespan = abjad.Timespan(*offsets)
-        voice = self._score[scope.voice_name]
-        leaves = []
-        for leaf in abjad.iterate(voice).by_leaf():
-            leaf_timespan = abjad.inspect(leaf).get_timespan()
-            if leaf_timespan.starts_during_timespan(stages_timespan):
-                leaves.append(leaf)
-            elif leaves:
-                break
-        return abjad.select(leaves)
+    def _scope_to_leaf_selections(self, scope):
+        if self._cache is None:
+            self._cache_leaves()
+        if isinstance(scope, baca.SimpleScope):
+            scopes = [scope]
+        else:
+            assert isinstance(scope, baca.CompoundScope)
+            scopes = list(scope.scopes)
+        leaf_selections = []
+        for scope in scopes:
+            leaves = []
+            leaves_by_stage_number = self._cache[scope.voice_name]
+            start, stop = scope.stages.start, scope.stages.stop + 1
+            for stage_number in range(start, stop):
+                leaves.extend(leaves_by_stage_number[stage_number])
+            leaf_selections.append(abjad.select(leaves))
+        return leaf_selections
 
     def _shorten_long_repeat_ties(self):
         leaves = abjad.iterate(self._score).by_leaf()
