@@ -67,7 +67,7 @@ class SpannerCommand(Command):
 
         ::
 
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -174,7 +174,6 @@ class SpannerCommand(Command):
 
     __slots__ = (
         '_annotation',
-        '_selector',
         '_spanner',
         )
 
@@ -185,9 +184,7 @@ class SpannerCommand(Command):
         selector=None,
         spanner=None,
         ):
-        if selector is not None:
-            assert isinstance(selector, abjad.Selector)
-        self._selector = selector
+        Command.__init__(self, selector=selector)
         if spanner is not None:
             assert isinstance(spanner, abjad.Spanner)
         self._spanner = spanner

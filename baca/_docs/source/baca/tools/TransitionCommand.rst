@@ -37,7 +37,11 @@ Bases
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.TransitionCommand.TransitionCommand.selector
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.TransitionCommand.TransitionCommand.selector
 
 .. autoattribute:: baca.tools.TransitionCommand.TransitionCommand.solid
 

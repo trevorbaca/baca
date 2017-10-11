@@ -200,7 +200,7 @@ class ClusterCommand(Command):
 
         ::
 
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4'),
             ...     baca.messiaen_notes(),
@@ -342,7 +342,6 @@ class ClusterCommand(Command):
     __slots__ = (
         '_hide_flat_markup',
         '_hide_natural_markup',
-        '_selector',
         '_start_pitch',
         '_widths',
         )
@@ -357,13 +356,11 @@ class ClusterCommand(Command):
         start_pitch=None,
         widths=None,
         ):
+        Command.__init__(self, selector=selector)
         assert isinstance(hide_flat_markup, (bool, type(None)))
         self._hide_flat_markup = hide_flat_markup
         assert isinstance(hide_natural_markup, (bool, type(None)))
         self._hide_natural_markup = hide_natural_markup
-        if selector is not None:
-            assert isinstance(selector, abjad.Selector)
-        self._selector = selector
         if start_pitch is not None:
             start_pitch = abjad.NamedPitch(start_pitch)
         self._start_pitch = start_pitch
@@ -450,7 +447,7 @@ class ClusterCommand(Command):
 
             ::
 
-                >>> specifiers = segment_maker(
+                >>> segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.pitches('E4'),
                 ...     baca.messiaen_notes(),
@@ -593,7 +590,7 @@ class ClusterCommand(Command):
 
             ::
 
-                >>> specifiers = segment_maker(
+                >>> segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.pitches('E4'),
                 ...     baca.messiaen_notes(),
@@ -720,18 +717,6 @@ class ClusterCommand(Command):
         return self._hide_natural_markup
 
     @property
-    def selector(self):
-        r'''Gets selector.
-
-        Defaults to none.
-
-        Set to selector or none.
-
-        Returns selector or none.
-        '''
-        return self._selector
-
-    @property
     def start_pitch(self):
         r'''Gets start pitch of cluster.
 
@@ -748,7 +733,7 @@ class ClusterCommand(Command):
 
             ::
 
-                >>> specifiers = segment_maker(
+                >>> segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.messiaen_notes(),
                 ...     baca.pitches('C4 D4 E4 F4'),
@@ -896,7 +881,7 @@ class ClusterCommand(Command):
 
             ::
 
-                >>> specifiers = segment_maker(
+                >>> segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.messiaen_notes(),
                 ...     baca.pitches('C4 D4 E4 F4'),
@@ -1055,7 +1040,7 @@ class ClusterCommand(Command):
 
             ::
 
-                >>> specifiers = segment_maker(
+                >>> segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.pitches('E4'),
                 ...     baca.messiaen_notes(),
@@ -1188,7 +1173,7 @@ class ClusterCommand(Command):
 
             ::
 
-                >>> specifiers = segment_maker(
+                >>> segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.messiaen_notes(),
                 ...     baca.pitches('E4'),
@@ -1306,7 +1291,7 @@ class ClusterCommand(Command):
 
             ::
 
-                >>> specifiers = segment_maker(
+                >>> segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.messiaen_notes(),
                 ...     baca.pitches('E4', allow_repeat_pitches=True),

@@ -19,7 +19,7 @@ class StemTremoloCommand(Command):
 
         ::
 
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4 F4'),
             ...     baca.even_runs(),
@@ -115,7 +115,6 @@ class StemTremoloCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_selector',
         '_tremolo_flags',
         )
 
@@ -126,9 +125,7 @@ class StemTremoloCommand(Command):
         selector=None,
         tremolo_flags=32,
         ):
-        if selector is not None:
-            assert isinstance(selector, abjad.Selector)
-        self._selector = selector
+        Command.__init__(self, selector=selector)
         assert abjad.mathtools.is_nonnegative_integer_power_of_two(
             tremolo_flags)
         self._tremolo_flags = tremolo_flags
@@ -171,7 +168,7 @@ class StemTremoloCommand(Command):
 
             ::
 
-                >>> specifiers = segment_maker(
+                >>> segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.pitches('E4 F4'),
                 ...     baca.even_runs(),
@@ -275,7 +272,7 @@ class StemTremoloCommand(Command):
 
             ::
 
-                >>> specifiers = segment_maker(
+                >>> segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.pitches('E4 F4'),
                 ...     baca.even_runs(),
@@ -393,7 +390,7 @@ class StemTremoloCommand(Command):
 
             ::
 
-                >>> specifiers = segment_maker(
+                >>> segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.pitches('E4 F4'),
                 ...     baca.even_runs(),
@@ -497,7 +494,7 @@ class StemTremoloCommand(Command):
 
             ::
 
-                >>> specifiers = segment_maker(
+                >>> segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.pitches('E4 F4'),
                 ...     baca.even_runs(),

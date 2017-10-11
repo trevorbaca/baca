@@ -17,7 +17,7 @@ class Command(abjad.AbjadObject):
 
     def __init__(self, selector=None):
         if selector is not None:
-            assert isinstance(selector, abjad.Selector), repr(selecto)
+            assert isinstance(selector, abjad.Selector), repr(selector)
         self._selector = selector
 
     ### SPECIAL METHODS ###

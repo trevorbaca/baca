@@ -20,7 +20,7 @@ class ColorFingeringCommand(Command):
 
         ::
 
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4', allow_repeat_pitches=True),
             ...     baca.messiaen_notes(),
@@ -124,7 +124,6 @@ class ColorFingeringCommand(Command):
         '_by_pitch_run',
         '_deposit_annotations',
         '_number_lists',
-        '_selector',
         )
 
     ### INITIALIZER ###
@@ -136,6 +135,7 @@ class ColorFingeringCommand(Command):
         number_lists=None,
         selector=None,
         ):
+        Command.__init__(self, selector=selector)
         self._by_pitch_run = by_pitch_run
         if deposit_annotations is not None:
             deposit_annotations = tuple(deposit_annotations)
@@ -146,10 +146,6 @@ class ColorFingeringCommand(Command):
                 assert abjad.mathtools.all_are_nonnegative_integers(
                     number_list)
         self._number_lists = number_lists
-        if selector is not None:
-            assert isinstance(selector, abjad.Selector), repr(selector)
-        self._selector = selector
-
 
     ### SPECIAL METHODS ###
 
@@ -226,7 +222,7 @@ class ColorFingeringCommand(Command):
 
             ::
 
-                >>> specifiers = segment_maker(
+                >>> segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.pitches('C4 D4 E4 F4'),
                 ...     baca.messiaen_notes(),
@@ -335,7 +331,7 @@ class ColorFingeringCommand(Command):
 
             ::
 
-                >>> specifiers = segment_maker(
+                >>> segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.pitches(
                 ...         'C4 D4 D4 D4 E4 F4 F4',
@@ -568,15 +564,3 @@ class ColorFingeringCommand(Command):
         Set to nested list of nonnegative integers or none.
         '''
         return self._number_lists
-
-    @property
-    def selector(self):
-        r'''Gets selector.
-
-        Defaults to none.
-
-        Set to selector or none.
-
-        Returns selector or none.
-        '''
-        return self._selector

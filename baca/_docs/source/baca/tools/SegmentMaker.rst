@@ -28,7 +28,6 @@ Bases
       ~baca.tools.SegmentMaker.SegmentMaker.color_octaves
       ~baca.tools.SegmentMaker.SegmentMaker.color_out_of_range_pitches
       ~baca.tools.SegmentMaker.SegmentMaker.color_repeat_pitch_classes
-      ~baca.tools.SegmentMaker.SegmentMaker.commands
       ~baca.tools.SegmentMaker.SegmentMaker.copy_rhythm
       ~baca.tools.SegmentMaker.SegmentMaker.design_checker
       ~baca.tools.SegmentMaker.SegmentMaker.final_barline
@@ -64,6 +63,7 @@ Bases
       ~baca.tools.SegmentMaker.SegmentMaker.validate_measures_per_stage
       ~baca.tools.SegmentMaker.SegmentMaker.validate_stage_count
       ~baca.tools.SegmentMaker.SegmentMaker.volta_measure_map
+      ~baca.tools.SegmentMaker.SegmentMaker.wrappers
       ~baca.tools.SegmentMaker.SegmentMaker.__call__
       ~baca.tools.SegmentMaker.SegmentMaker.__eq__
       ~baca.tools.SegmentMaker.SegmentMaker.__format__
@@ -84,8 +84,6 @@ Read-only properties
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.color_out_of_range_pitches
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.color_repeat_pitch_classes
-
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.commands
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.design_checker
 
@@ -146,6 +144,8 @@ Read-only properties
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.transpose_score
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.volta_measure_map
+
+.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.wrappers
 
 Methods
 -------

@@ -39,7 +39,11 @@ Read-only properties
 
 .. autoattribute:: baca.tools.SetCommand.SetCommand.context_name
 
-.. autoattribute:: baca.tools.SetCommand.SetCommand.selector
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.SetCommand.SetCommand.selector
 
 .. autoattribute:: baca.tools.SetCommand.SetCommand.setting_name
 

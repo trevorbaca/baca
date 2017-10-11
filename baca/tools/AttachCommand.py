@@ -76,7 +76,7 @@ class AttachCommand(Command):
 
         ::
 
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -175,7 +175,6 @@ class AttachCommand(Command):
 
     __slots__ = (
         '_arguments',
-        '_selector',
         )
 
     _publish_storage_format = True
@@ -187,10 +186,8 @@ class AttachCommand(Command):
         arguments=None,
         selector=None,
         ):
+        Command.__init__(self, selector=selector)
         self._arguments = arguments
-        if selector is not None:
-            assert isinstance(selector, abjad.Selector)
-        self._selector = selector
 
     ### SPECIAL METHODS ###
 
@@ -359,15 +356,3 @@ class AttachCommand(Command):
         Returns arguments or none.
         '''
         return self._arguments
-
-    @property
-    def selector(self):
-        r'''Gets selector.
-
-        Defaults to none.
-
-        Set to selector or none.
-
-        Returns selector or none.
-        '''
-        return self._selector

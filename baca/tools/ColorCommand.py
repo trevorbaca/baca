@@ -141,7 +141,7 @@ class ColorCommand(Command):
 
         ::
 
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -308,7 +308,6 @@ class ColorCommand(Command):
 
     __slots__ = (
         '_color',
-        '_selector',
         )
 
     ### INITIALIZER ###
@@ -318,12 +317,10 @@ class ColorCommand(Command):
         color=None,
         selector=None,
         ):
+        Command.__init__(self, selector=selector)
         if color is not None:
             assert isinstance(color, (list, str)), repr(color)
         self._color = color
-        if selector is not None:
-            assert isinstance(selector, abjad.Selector)
-        self._selector = selector
 
     ### SPECIAL METHODS ###
 
@@ -367,15 +364,3 @@ class ColorCommand(Command):
         Returns string or none.
         '''
         return self._color
-
-    @property
-    def selector(self):
-        r'''Gets selector.
-
-        Defaults to none.
-
-        Set to selector or none.
-
-        Returns selector or none.
-        '''
-        return self._selector

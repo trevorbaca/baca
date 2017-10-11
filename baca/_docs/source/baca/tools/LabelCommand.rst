@@ -37,7 +37,11 @@ Read-only properties
 
 .. autoattribute:: baca.tools.LabelCommand.LabelCommand.expression
 
-.. autoattribute:: baca.tools.LabelCommand.LabelCommand.selector
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.LabelCommand.LabelCommand.selector
 
 Special methods
 ---------------

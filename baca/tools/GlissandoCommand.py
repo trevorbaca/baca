@@ -19,7 +19,7 @@ class GlissandoCommand(Command):
 
         ::
 
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -123,7 +123,7 @@ class GlissandoCommand(Command):
 
         ::
 
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.even_runs(),
@@ -265,15 +265,7 @@ class GlissandoCommand(Command):
     ### CLASS VARIABLES ##
 
     __slots__ = (
-        '_selector',
         )
-
-    ### INITIALIZER ###
-
-    def __init__(self, selector=None):
-        if selector is not None:
-            assert isinstance(selector, abjad.Selector)
-        self._selector = selector
 
     ### SPECIAL METHODS ###
 
@@ -304,17 +296,3 @@ class GlissandoCommand(Command):
             return
         leaves = abjad.select([last_leaf, next_leaf])
         abjad.attach(abjad.Glissando(), leaves)
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def selector(self):
-        r'''Gets selector.
-
-        Defaults to none.
-
-        Set to selector or none.
-
-        Returns selector or none.
-        '''
-        return self._selector

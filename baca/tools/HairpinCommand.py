@@ -46,7 +46,6 @@ class HairpinCommand(Command):
         '_hairpin_tokens',
         '_include_rests',
         '_omit_lone_note_dynamic',
-        '_selector',
         )
 
     _publish_storage_format = True
@@ -61,6 +60,7 @@ class HairpinCommand(Command):
         omit_lone_note_dynamic=None,
         selector=None,
         ):
+        Command.__init__(self, selector=selector)
         self._flare = flare
         hairpin_tokens = hairpin_tokens or []
         prototype = (list, tuple, abjad.CyclicTuple, abjad.Sequence,)
@@ -81,9 +81,6 @@ class HairpinCommand(Command):
         if omit_lone_note_dynamic is not None:
             omit_lone_note_dynamic = bool(omit_lone_note_dynamic)
         self._omit_lone_note_dynamic = omit_lone_note_dynamic
-        if selector is not None:
-            assert isinstance(selector, abjad.Selector), repr(selector)
-        self._selector = selector
 
     ### SPECIAL METHODS ###
 
@@ -308,11 +305,3 @@ class HairpinCommand(Command):
         Returns true, false or none.
         '''
         return self._omit_lone_note_dynamic
-
-    @property
-    def selector(self):
-        r'''Gets selector.
-
-        Returns selector or none.
-        '''
-        return self._selector

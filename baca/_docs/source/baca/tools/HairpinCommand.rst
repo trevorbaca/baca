@@ -46,7 +46,11 @@ Read-only properties
 
 .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.omit_lone_note_dynamic
 
-.. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.selector
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.selector
 
 Special methods
 ---------------

@@ -55,7 +55,11 @@ Read-only properties
 
 .. autoattribute:: baca.tools.TrillCommand.TrillCommand.pitch
 
-.. autoattribute:: baca.tools.TrillCommand.TrillCommand.selector
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.TrillCommand.TrillCommand.selector
 
 Special methods
 ---------------

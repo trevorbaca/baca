@@ -17,7 +17,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
         ::
 
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4 F4'),
             ...     baca.RhythmBuilder(
@@ -124,7 +124,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
         ::
 
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4 F4'),
             ...     baca.RhythmBuilder(
@@ -241,7 +241,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
         ::
 
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4 F4'),
             ...     baca.RhythmBuilder(
@@ -359,7 +359,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
         ::
 
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4 F4'),
             ...     baca.RhythmBuilder(
@@ -478,7 +478,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
         ::
 
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4 F4'),
             ...     baca.RhythmBuilder(
@@ -595,7 +595,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
         ::
 
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4 F4'),
             ...     baca.RhythmBuilder(

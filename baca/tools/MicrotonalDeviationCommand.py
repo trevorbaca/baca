@@ -19,7 +19,7 @@ class MicrotonalDeviationCommand(Command):
 
         ::
 
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4'),
             ...     baca.even_runs(),
@@ -119,7 +119,6 @@ class MicrotonalDeviationCommand(Command):
     __slots__ = (
         '_deposit_annotations',
         '_number_lists',
-        '_selector',
         )
 
     ### INITIALIZER ###
@@ -130,6 +129,7 @@ class MicrotonalDeviationCommand(Command):
         number_lists=None,
         selector=None,
         ):
+        Command.__init__(self, selector=selector)
         if deposit_annotations is not None:
             deposit_annotations = tuple(deposit_annotations)
         self._deposit_annotations = deposit_annotations
@@ -138,9 +138,6 @@ class MicrotonalDeviationCommand(Command):
             for number_list in number_lists:
                 assert isinstance(number_list, (list, tuple)), number_list
         self._number_lists = number_lists
-        if selector is not None:
-            assert isinstance(selector, abjad.Selector), repr(selector)
-        self._selector = selector
 
     ### SPECIAL METHODS ###
 
@@ -226,15 +223,3 @@ class MicrotonalDeviationCommand(Command):
         Returns tuple of number lists or none.
         '''
         return self._number_lists
-
-    @property
-    def selector(self):
-        r'''Gets selector.
-
-        Set to selector or none.
-
-        Defaults to none.
-
-        Returns selector or none.
-        '''
-        return self._selector

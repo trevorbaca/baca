@@ -34,7 +34,11 @@ Bases
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.GlissandoCommand.GlissandoCommand.selector
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.GlissandoCommand.GlissandoCommand.selector
 
 Special methods
 ---------------

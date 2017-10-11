@@ -138,7 +138,7 @@ class RegisterInterpolationCommand(Command):
         ::
 
             >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
@@ -299,7 +299,7 @@ class RegisterInterpolationCommand(Command):
         ::
 
             >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
@@ -460,7 +460,7 @@ class RegisterInterpolationCommand(Command):
         ::
 
             >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
@@ -621,7 +621,7 @@ class RegisterInterpolationCommand(Command):
         ::
 
             >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
@@ -782,7 +782,7 @@ class RegisterInterpolationCommand(Command):
         ::
 
             >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
@@ -936,7 +936,6 @@ class RegisterInterpolationCommand(Command):
 
     __slots__ = (
         '_pattern',
-        '_selector',
         '_start_pitch',
         '_stop_pitch',
         )
@@ -952,13 +951,11 @@ class RegisterInterpolationCommand(Command):
         start_pitch=None,
         stop_pitch=None,
         ):
+        Command.__init__(self, selector=selector)
         if pattern is not None:
             assert isinstance(pattern, abjad.Pattern), repr(pattern)
         self._pattern = pattern
         start_pitch = abjad.NumberedPitch(start_pitch)
-        if selector is not None:
-            assert isinstance(selector, abjad.Selector), repr(selector)
-        self._selector = selector
         self._start_pitch = start_pitch
         stop_pitch = abjad.NumberedPitch(stop_pitch)
         self._stop_pitch = stop_pitch

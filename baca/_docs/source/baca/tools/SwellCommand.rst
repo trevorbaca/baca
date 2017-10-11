@@ -41,7 +41,11 @@ Read-only properties
 
 .. autoattribute:: baca.tools.SwellCommand.SwellCommand.minimum_leaf_count
 
-.. autoattribute:: baca.tools.SwellCommand.SwellCommand.selector
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.SwellCommand.SwellCommand.selector
 
 .. autoattribute:: baca.tools.SwellCommand.SwellCommand.start_count
 

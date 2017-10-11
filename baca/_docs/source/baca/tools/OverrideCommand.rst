@@ -55,7 +55,11 @@ Read-only properties
 
 .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.revert
 
-.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.selector
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.selector
 
 Special methods
 ---------------

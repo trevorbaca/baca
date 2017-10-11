@@ -98,7 +98,7 @@ class TransitionCommand(Command):
 
         ::
 
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4 F4'),
             ...     baca.even_runs(),
@@ -225,7 +225,6 @@ class TransitionCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_selector',
         '_solid',
         '_start_markup',
         '_stop_markup',
@@ -240,10 +239,8 @@ class TransitionCommand(Command):
         start_markup=None,
         stop_markup=None,
         ):
+        Command.__init__(self, selector=selector)
         assert start_markup is not None or stop_markup is not None
-        if selector is not None:
-            assert isinstance(selector, abjad.Selector), repr(selector)
-        self._selector = selector
         if solid is not None:
             solid = bool(solid)
         self._solid = solid
@@ -305,16 +302,6 @@ class TransitionCommand(Command):
             )
 
     ### PUBLIC PROPERTIES ###
-
-    @property
-    def selector(self):
-        r'''Gets selector.
-
-        Set to selector or none.
-
-        Returns selector or none.
-        '''
-        return self._selector
 
     @property
     def solid(self):

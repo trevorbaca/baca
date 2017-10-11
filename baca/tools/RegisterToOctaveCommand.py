@@ -299,7 +299,6 @@ class RegisterToOctaveCommand(Command):
     __slots__ = (
         '_anchor',
         '_octave_number',
-        '_selector',
         )
 
     ### INITIALIZER ###
@@ -310,6 +309,7 @@ class RegisterToOctaveCommand(Command):
         octave_number=None,
         selector=None,
         ):
+        Command.__init__(self, selector=selector)
         if anchor is not None:
             prototype = (abjad.Center, abjad.Bottom, abjad.Top)
             assert anchor in prototype, repr(anchor)
@@ -317,9 +317,6 @@ class RegisterToOctaveCommand(Command):
         if octave_number is not None:
             assert isinstance(octave_number, int), repr(octave_number)
         self._octave_number = octave_number
-        if selector is not None:
-            assert isinstance(selector, abjad.Selector), repr(selector)
-        self._selector = selector
 
     ### SPECIAL METHODS ###
 
@@ -566,11 +563,3 @@ class RegisterToOctaveCommand(Command):
         Returns integer.
         """
         return self._octave_number
-
-    @property
-    def selector(self):
-        r'''Gets selector.
-
-        Returns selector or none.
-        '''
-        return self._selector

@@ -32,19 +32,16 @@ class DiatonicClusterCommand(Command):
 
     __slots__ = (
         '_cluster_widths',
-        '_selector',
         )
 
     ### INITIALIZER ###
 
     def __init__(self, cluster_widths=None, selector=None):
+        Command.__init__(self, selector=selector)
         if cluster_widths is not None:
             cluster_widths = abjad.CyclicTuple(
                 cluster_widths)
         self._cluster_widths = cluster_widths
-        if selector is not None:
-            assert isinstance(selector, abjad.Selector)
-        self._selector = selector
 
     ### SPECIAL METHODS ###
 
@@ -86,15 +83,3 @@ class DiatonicClusterCommand(Command):
         Returns tuple of positive integers or none.
         '''
         return self._cluster_widths
-
-    @property
-    def selector(self):
-        r'''Gets selector.
-
-        Defaults to none.
-
-        Set to selector or none.
-
-        Returns selector or none.
-        '''
-        return self._selector

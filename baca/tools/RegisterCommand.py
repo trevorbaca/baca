@@ -159,7 +159,7 @@ class RegisterCommand(Command):
 
         ::
 
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4'),
             ...     baca.even_runs(),
@@ -260,20 +260,17 @@ class RegisterCommand(Command):
 
     __slots__ = (
         '_registration',
-        '_selector',
         )
 
     ### INITIALIZER ###
 
     def __init__(self, registration=None, selector=None):
         import baca
+        Command.__init__(self, selector=selector)
         if registration is not None:
             prototype = baca.Registration
             assert isinstance(registration, prototype), repr(registration)
         self._registration = registration
-        if selector is not None:
-            assert isinstance(selector, abjad.Selector), repr(selector)
-        self._selector = selector
 
     ### SPECIAL METHODS ###
 
@@ -375,11 +372,3 @@ class RegisterCommand(Command):
         Returns registration or none.
         '''
         return self._registration
-
-    @property
-    def selector(self):
-        r'''Gets selector.
-
-        Set to selector or none.
-        '''
-        return self._selector

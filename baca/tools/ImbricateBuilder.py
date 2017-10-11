@@ -820,25 +820,25 @@ class ImbricateBuilder(Builder):
                 ...         ),
                 ...     time_signatures=time_signatures,
                 ...     )
-                >>> specifiers = segment_maker(
+                >>> segment_maker(
                 ...     baca.scope('Music Voice 2', 1),
                 ...     baca.RhythmBuilder(
                 ...         rhythm_maker=voice_2_selections[0],
                 ...         ),
                 ...     )
-                >>> specifiers = segment_maker(
+                >>> segment_maker(
                 ...     baca.scope('Music Voice 2', 2),
                 ...     baca.RhythmBuilder(
                 ...         rhythm_maker=voice_2_selections[1],
                 ...         ),
                 ...     )
-                >>> specifiers = segment_maker(
+                >>> segment_maker(
                 ...     baca.scope('Music Voice 1', 1),
                 ...     baca.RhythmBuilder(
                 ...         rhythm_maker=voice_1_selections[0],
                 ...         ),
                 ...     )
-                >>> specifiers = segment_maker(
+                >>> segment_maker(
                 ...     baca.scope('Music Voice 1', 2),
                 ...     baca.RhythmBuilder(
                 ...         rhythm_maker=voice_1_selections[1],

@@ -37,7 +37,11 @@ Read-only properties
 
 .. autoattribute:: baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.cluster_widths
 
-.. autoattribute:: baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.selector
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.selector
 
 Special methods
 ---------------

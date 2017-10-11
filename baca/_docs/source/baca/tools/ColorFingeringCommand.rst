@@ -43,7 +43,11 @@ Read-only properties
 
 .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.number_lists
 
-.. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.selector
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.selector
 
 Special methods
 ---------------

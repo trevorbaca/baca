@@ -69,7 +69,6 @@ class SwellCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_selector',
         '_start_count',
         '_start_token',
         '_stop_count',
@@ -86,9 +85,7 @@ class SwellCommand(Command):
         stop_count=None,
         stop_token=None,
         ):
-        if selector is not None:
-            assert isinstance(selector, abjad.Selector)
-        self._selector = selector
+        Command.__init__(self, selector=selector)
         assert 0 < start_count, repr(start_count)
         assert isinstance(start_token, str), repr(start_token)
         assert 0 < stop_count, repr(stop_count)
@@ -148,14 +145,6 @@ class SwellCommand(Command):
         Returns positive integer.
         '''
         return self.start_count + self.stop_count - 1
-
-    @property
-    def selector(self):
-        r'''Gets selector
-
-        Returns selector or none.
-        '''
-        return self._selector
 
     @property
     def start_count(self):

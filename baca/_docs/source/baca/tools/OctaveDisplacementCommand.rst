@@ -37,7 +37,11 @@ Read-only properties
 
 .. autoattribute:: baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.displacements
 
-.. autoattribute:: baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.selector
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.selector
 
 Special methods
 ---------------

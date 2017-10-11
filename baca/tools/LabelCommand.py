@@ -19,7 +19,7 @@ class LabelCommand(Command):
 
         ::
 
-            >>> commands = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -232,18 +232,15 @@ class LabelCommand(Command):
 
     __slots__ = (
         '_expression',
-        '_selector',
         )
 
     ### INITIALIZER ###
 
     def __init__(self, expression=None, selector=None):
+        Command.__init__(self, selector=selector)
         if expression is not None:
             assert isinstance(expression, abjad.Expression)
         self._expression = expression
-        if selector is not None:
-            assert isinstance(selector, abjad.Selector)
-        self._selector = selector
 
     ### SPECIAL METHODS ###
 
@@ -275,15 +272,3 @@ class LabelCommand(Command):
         Returns label expression or none.
         '''
         return self._expression
-
-    @property
-    def selector(self):
-        r'''Gets selector.
-
-        Defaults to none.
-
-        Set to selector or none.
-
-        Returns selector or none.
-        '''
-        return self._selector

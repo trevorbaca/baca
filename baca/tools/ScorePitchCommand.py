@@ -20,7 +20,7 @@ class ScorePitchCommand(Command):
 
         ::
 
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.even_runs(),
             ...     baca.ScorePitchCommand(
@@ -123,7 +123,6 @@ class ScorePitchCommand(Command):
         '_operators',
         '_repetition_intervals',
         '_reverse',
-        '_selector',
         '_source',
         '_start_index',
         '_use_exact_spelling',
@@ -145,6 +144,7 @@ class ScorePitchCommand(Command):
         source=None,
         start_index=None,
         ):
+        Command.__init__(self, selector=selector)
         if acyclic is not None:
             acyclic = bool(acyclic)
         self._acyclic = acyclic
@@ -174,9 +174,6 @@ class ScorePitchCommand(Command):
             self._use_exact_spelling = True
         else:
             self._use_exact_spelling = False
-        if selector is not None:
-            assert isinstance(selector, abjad.Selector), repr(selector)
-        self._selector = selector
         if source is not None:
             if isinstance(source, str):
                 source = source.split()
@@ -666,18 +663,6 @@ class ScorePitchCommand(Command):
         Returns true, false or none.
         '''
         return self._reverse
-
-    @property
-    def selector(self):
-        r'''Gets selector.
-
-        Set to selector or none.
-
-        Defaults to none.
-
-        Returns selector or none.
-        '''
-        return self._selector
 
     @property
     def source(self):

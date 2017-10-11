@@ -18,7 +18,7 @@ class OctaveDisplacementCommand(Command):
 
         ::
 
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('G4'),
             ...     baca.even_runs(),
@@ -117,20 +117,17 @@ class OctaveDisplacementCommand(Command):
 
     __slots__ = (
         '_displacements',
-        '_selector',
         )
 
     ### INITIALIZER ###
 
     def __init__(self, displacements=None, selector=None):
+        Command.__init__(self, selector=selector)
         if displacements is not None:
             displacements = tuple(displacements)
             assert self._is_octave_displacement_vector(displacements)
             displacements = abjad.CyclicTuple(displacements)
         self._displacements = displacements
-        if selector is not None:
-            assert isinstance(selector, abjad.Selector), repr(selector)
-        self._selector = selector
 
     ### SPECIAL METHODS ###
 
@@ -198,11 +195,3 @@ class OctaveDisplacementCommand(Command):
         Returns cyclic tuple of integers or none.
         '''
         return self._displacements
-
-    @property
-    def selector(self):
-        r'''Gets selector.
-
-        Returns selector or none.
-        '''
-        return self._selector

@@ -123,7 +123,7 @@ class NestBuilder(Builder):
             ...         ),
             ...     time_signatures=time_signatures,
             ...     )
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.RhythmBuilder(
             ...         rhythm_maker=selection,

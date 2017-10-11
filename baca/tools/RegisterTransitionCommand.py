@@ -17,7 +17,7 @@ class RegisterTransitionCommand(Command):
 
         ::
 
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('C4 D4 E4 F4'),
             ...     baca.even_runs(),
@@ -120,7 +120,6 @@ class RegisterTransitionCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_selector',
         '_start_registration',
         '_stop_registration',
         )
@@ -133,9 +132,7 @@ class RegisterTransitionCommand(Command):
         start_registration=None,
         stop_registration=None,
         ):
-        if selector is not None:
-            assert isinstance(selector, abjad.Selector), repr(selector)
-        self._selector = selector
+        Command.__init__(self, selector=selector)
         if start_registration is not None:
             assert isinstance(start_registration, baca.Registration)
         self._start_registration = start_registration
@@ -239,18 +236,6 @@ class RegisterTransitionCommand(Command):
         abjad.detach('not yet registered', note)
 
     ### PUBLIC PROPERTIES ###
-
-    @property
-    def selector(self):
-        r'''Gets selector.
-
-        Set to selector or none.
-
-        Defaults to none.
-
-        Returns selector or none.
-        '''
-        return self._selector
 
     @property
     def start_registration(self):

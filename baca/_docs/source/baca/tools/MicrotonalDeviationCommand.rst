@@ -40,7 +40,11 @@ Read-only properties
 
 .. autoattribute:: baca.tools.MicrotonalDeviationCommand.MicrotonalDeviationCommand.number_lists
 
-.. autoattribute:: baca.tools.MicrotonalDeviationCommand.MicrotonalDeviationCommand.selector
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.MicrotonalDeviationCommand.MicrotonalDeviationCommand.selector
 
 Special methods
 ---------------

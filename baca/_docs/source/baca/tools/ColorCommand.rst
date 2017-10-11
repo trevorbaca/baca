@@ -37,7 +37,11 @@ Read-only properties
 
 .. autoattribute:: baca.tools.ColorCommand.ColorCommand.color
 
-.. autoattribute:: baca.tools.ColorCommand.ColorCommand.selector
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ColorCommand.ColorCommand.selector
 
 Special methods
 ---------------

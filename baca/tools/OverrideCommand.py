@@ -89,7 +89,7 @@ class OverrideCommand(Command):
 
         ::
 
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.OverrideCommand(
@@ -222,7 +222,6 @@ class OverrideCommand(Command):
         '_maximum_settings',
         '_maximum_written_duration',
         '_revert',
-        '_selector',
         )
 
     ### INITIALIZER ###
@@ -238,6 +237,7 @@ class OverrideCommand(Command):
         revert=None,
         selector=None,
         ):
+        Command.__init__(self, selector=selector)
         if context_name is not None:
             assert isinstance(context_name, str), repr(context_name)
         self._context_name = context_name
@@ -257,9 +257,6 @@ class OverrideCommand(Command):
         if revert is not None:
             revert = bool(revert)
         self._revert = revert
-        if selector is not None:
-            assert isinstance(selector, abjad.Selector), repr(selector)
-        self._selector = selector
 
     ### SPECIAL METHODS ###
 
@@ -407,15 +404,3 @@ class OverrideCommand(Command):
         Returns true, false or none.
         '''
         return self._revert
-
-    @property
-    def selector(self):
-        r'''Gets selector.
-
-        Set to selector or none.
-
-        Defaults to none.
-
-        Returns selector or none.
-        '''
-        return self._selector

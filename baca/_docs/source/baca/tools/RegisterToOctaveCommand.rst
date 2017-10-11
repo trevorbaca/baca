@@ -40,7 +40,11 @@ Read-only properties
 
 .. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.octave_number
 
-.. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.selector
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.selector
 
 Special methods
 ---------------

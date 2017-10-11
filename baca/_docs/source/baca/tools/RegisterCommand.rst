@@ -37,7 +37,11 @@ Read-only properties
 
 .. autoattribute:: baca.tools.RegisterCommand.RegisterCommand.registration
 
-.. autoattribute:: baca.tools.RegisterCommand.RegisterCommand.selector
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.RegisterCommand.RegisterCommand.selector
 
 Special methods
 ---------------

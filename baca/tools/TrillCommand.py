@@ -67,7 +67,7 @@ class TrillCommand(Command):
 
         ::
 
-            >>> specifiers = segment_maker(
+            >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4 F4'),
             ...     baca.messiaen_notes(),
@@ -154,7 +154,6 @@ class TrillCommand(Command):
         '_interval',
         '_maximum_written_duration',
         '_minimum_written_duration',
-        '_selector',
         '_pitch',
         )
 
@@ -171,6 +170,7 @@ class TrillCommand(Command):
         pitch=None,
         selector=None,
         ):
+        Command.__init__(self, selector=selector)
         if deposit_annotations is not None:
             assert isinstance(deposit_annotations, (tuple, list))
             deposit_annotations = tuple(deposit_annotations)
@@ -192,9 +192,6 @@ class TrillCommand(Command):
         if pitch is not None:
             pitch = abjad.NamedPitch(pitch)
         self._pitch = pitch
-        if selector is not None:
-            assert isinstance(selector, abjad.Selector), repr(selector)
-        self._selector = selector
 
     ### SPECIAL METHODS ###
 
@@ -315,11 +312,3 @@ class TrillCommand(Command):
         Set to pitch or none.
         '''
         return self._pitch
-
-    @property
-    def selector(self):
-        r'''Gets selector.
-
-        Set to selector or none.
-        '''
-        return self._selector
