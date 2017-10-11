@@ -269,6 +269,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_allow_empty_selectors',
         '_allow_figure_names',
         '_cached_leaves',
+        '_cached_leaves_by_timeline',
         '_cached_score_template_start_clefs',
         '_cached_score_template_start_instruments',
         '_color_octaves',
@@ -417,6 +418,7 @@ class SegmentMaker(abjad.SegmentMaker):
             color_repeat_pitch_classes = bool(color_repeat_pitch_classes)
         self._color_repeat_pitch_classes = color_repeat_pitch_classes
         self._cached_leaves = None
+        self._cached_leaves_by_timeline = None
         self._design_checker = design_checker
         self._fermata_start_offsets = []
         if final_barline not in (None, False, abjad.Exact):
@@ -1092,13 +1094,12 @@ class SegmentMaker(abjad.SegmentMaker):
                     markup._annotation.startswith('figure name:')):
                     abjad.detach(markup, leaf)
 
-    def _evaluate_scope(self, command):
-        assert hasattr(command.command, 'selector')
+    def _evaluate_scope(self, wrapper):
         timespan_map, timespans = [], []
-        if isinstance(command.scope, baca.SimpleScope):
-            compound_scope = baca.CompoundScope([command.scope])
+        if isinstance(wrapper.scope, baca.SimpleScope):
+            compound_scope = baca.CompoundScope([wrapper.scope])
         else:
-             compound_scope = command.scope
+             compound_scope = wrapper.scope
         for scope in compound_scope.scopes:
             result = self._get_stage_numbers(scope.stages)
             start_stage, stop_stage = result
@@ -1108,13 +1109,22 @@ class SegmentMaker(abjad.SegmentMaker):
             timespans.append(timespan)
         compound_scope._timespan_map = timespan_map
         result = []
-        leaves = self._get_cached_leaves()
+        if isinstance(wrapper.command, baca.ScorePitchCommand):
+            if self._cached_leaves_by_timeline is None:
+                leaves = abjad.select(self._score).by_timeline()
+                self._cached_leaves_by_timeline = leaves
+            leaves = self._cached_leaves_by_timeline
+        else:
+            if self._cached_leaves is None:
+                leaves = abjad.select(self._score).by_timeline()
+                self._cached_leaves = leaves
+            leaves = self._cached_leaves
         for leaf in leaves:
             if leaf in compound_scope:
                 result.append(leaf)
         selection = abjad.select(result)
         if not selection:
-            message = f'EMPTY SELECTION: {format(command)}'
+            message = f'EMPTY SELECTION: {format(wrapper)}'
             if self.allow_empty_selections:
                 print(message)
             else:
@@ -1178,20 +1188,6 @@ class SegmentMaker(abjad.SegmentMaker):
         for leaf in abjad.iterate(self._score).by_leaf():
             if abjad.inspect(leaf).get_indicator(self._extend_beam_tag):
                 self._extend_beam(leaf)
-
-    def _get_cached_leaves(self):
-        if self._cached_leaves is None:
-#            prototype = (
-#                abjad.Chord,
-#                abjad.Note,
-#                abjad.Rest,
-#                abjad.Skip,
-#                )
-            #leaves = abjad.select(self._score).by_timeline(prototype)
-            leaves = abjad.select(self._score).by_timeline()
-            self._cached_leaves = leaves
-        leaves = self._cached_leaves
-        return leaves
 
     def _get_end_clefs(self):
         result = abjad.TypedOrderedDict()
@@ -1388,6 +1384,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if (hasattr(command.command, '_mutates_score') and
             command.command._mutates_score()):
             self._cached_leaves = None
+            self._cached_leaves_by_timeline = None
 
     def _hide_instrument_names_(self):
         if not self.hide_instrument_names:
