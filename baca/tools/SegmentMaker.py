@@ -1094,43 +1094,6 @@ class SegmentMaker(abjad.SegmentMaker):
                     markup._annotation.startswith('figure name:')):
                     abjad.detach(markup, leaf)
 
-    def _evaluate_scope(self, wrapper):
-        timespan_map, timespans = [], []
-        if isinstance(wrapper.scope, baca.SimpleScope):
-            compound_scope = baca.CompoundScope([wrapper.scope])
-        else:
-             compound_scope = wrapper.scope
-        for scope in compound_scope.scopes:
-            result = self._get_stage_numbers(scope.stages)
-            start_stage, stop_stage = result
-            offsets = self._get_offsets(start_stage, stop_stage)
-            timespan = abjad.Timespan(*offsets)
-            timespan_map.append((scope.voice_name, timespan))
-            timespans.append(timespan)
-        compound_scope._timespan_map = timespan_map
-        result = []
-        if isinstance(wrapper.command, baca.ScorePitchCommand):
-            if self._cached_leaves_by_timeline is None:
-                leaves = abjad.select(self._score).by_timeline()
-                self._cached_leaves_by_timeline = leaves
-            leaves = self._cached_leaves_by_timeline
-        else:
-            if self._cached_leaves is None:
-                leaves = abjad.select(self._score).by_timeline()
-                self._cached_leaves = leaves
-            leaves = self._cached_leaves
-        for leaf in leaves:
-            if leaf in compound_scope:
-                result.append(leaf)
-        selection = abjad.select(result)
-        if not selection:
-            message = f'EMPTY SELECTION: {format(wrapper)}'
-            if self.allow_empty_selections:
-                print(message)
-            else:
-                raise Exception(message)
-        return selection
-
     @staticmethod
     def _extend_beam(leaf):
         beam = abjad.inspect(leaf).get_spanner(abjad.Beam)
@@ -1447,7 +1410,7 @@ class SegmentMaker(abjad.SegmentMaker):
             assert isinstance(wrapper.command, (baca.Builder, baca.Command))
             if isinstance(wrapper.command, baca.RhythmBuilder):
                 continue
-            selection = self._evaluate_scope(wrapper)
+            selection = self._scope_to_leaf_selection(wrapper)
             try:
                 wrapper.command(selection)
             except:
@@ -1781,6 +1744,52 @@ class SegmentMaker(abjad.SegmentMaker):
         total_duration = int(round(total_duration))
         counter = abjad.Strin('second').pluralize(total_duration)
         print(f'segment duration {total_duration} {counter} ...')
+
+    # TODO: refactor as _scope_to_leaf_selections() in plural
+    def _scope_to_leaf_selection(self, wrapper):
+        timespan_map, timespans = [], []
+        if isinstance(wrapper.scope, baca.SimpleScope):
+            compound_scope = baca.CompoundScope([wrapper.scope])
+        else:
+             compound_scope = wrapper.scope
+        for scope in compound_scope.scopes:
+            result = self._get_stage_numbers(scope.stages)
+            start_stage, stop_stage = result
+            offsets = self._get_offsets(start_stage, stop_stage)
+            timespan = abjad.Timespan(*offsets)
+            timespan_map.append((scope.voice_name, timespan))
+            timespans.append(timespan)
+        result = []
+        if isinstance(wrapper.command, baca.ScorePitchCommand):
+            if self._cached_leaves_by_timeline is None:
+                leaves = abjad.select(self._score).by_timeline()
+                self._cached_leaves_by_timeline = leaves
+            leaves = self._cached_leaves_by_timeline
+        else:
+            if self._cached_leaves is None:
+                leaves = abjad.select(self._score).by_timeline()
+                self._cached_leaves = leaves
+            leaves = self._cached_leaves
+        for leaf in leaves:
+            agent = abjad.inspect(leaf)
+            context = agent.get_parentage().get_first(abjad.Context)
+            if context is None:
+                raise Exception(f'missing parent context: {leaf!r}.')
+            leaf_timespan = agent.get_timespan()
+            for name, scope_timespan in timespan_map:
+                if name != context.name:
+                    continue
+                if leaf_timespan.starts_during_timespan(scope_timespan):
+                    result.append(leaf)
+                    break
+        selection = abjad.select(result)
+        if not selection:
+            message = f'EMPTY SELECTION: {format(wrapper)}'
+            if self.allow_empty_selections:
+                print(message)
+            else:
+                raise Exception(message)
+        return selection
 
     # TODO: possibly reintegrate
     def _scope_to_leaves(self, scope):

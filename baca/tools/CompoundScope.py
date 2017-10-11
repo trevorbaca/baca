@@ -67,7 +67,6 @@ class CompoundScope(abjad.AbjadObject):
 
     __slots__ = (
         '_scopes',
-        '_timespan_map',
         )
 
     _publish_storage_format = True
@@ -85,26 +84,6 @@ class CompoundScope(abjad.AbjadObject):
             scopes = scopes_
             scopes = tuple(scopes)
         self._scopes = scopes
-        self._timespan_map = None
-
-    ### SPECIAL METHODS ###
-
-    def __contains__(self, component):
-        if self._timespan_map is None:
-            raise Exception('must construct timespan map first.')
-        agent = abjad.inspect(component)
-        voice = agent.get_parentage().get_first(abjad.Voice)
-        if voice is None:
-            voice = agent.get_parentage().get_first(abjad.Context)
-        if voice is None:
-            raise Exception(f'missing voice or context: {component!r}.')
-        component_timespan = agent.get_timespan()
-        for voice_name, scope_timespan in self._timespan_map:
-            if voice_name != voice.name:
-                continue
-            if component_timespan.starts_during_timespan(scope_timespan):
-                return True
-        return False
 
     ### PUBLIC PROPERTIES ###
 

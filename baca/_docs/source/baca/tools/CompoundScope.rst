@@ -22,7 +22,6 @@ Bases
    .. autosummary::
 
       ~baca.tools.CompoundScope.CompoundScope.scopes
-      ~baca.tools.CompoundScope.CompoundScope.__contains__
       ~baca.tools.CompoundScope.CompoundScope.__eq__
       ~baca.tools.CompoundScope.CompoundScope.__format__
       ~baca.tools.CompoundScope.CompoundScope.__hash__
@@ -36,8 +35,6 @@ Read-only properties
 
 Special methods
 ---------------
-
-.. automethod:: baca.tools.CompoundScope.CompoundScope.__contains__
 
 .. only:: html
 
