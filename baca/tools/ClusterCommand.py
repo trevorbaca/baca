@@ -388,8 +388,6 @@ class ClusterCommand(Command):
         if self.widths is None:
             return
         widths = abjad.CyclicTuple(self.widths)
-        #logical_ties = abjad.iterate(argument).by_logical_tie()
-        #logical_ties = list(logical_ties)
         lts = abjad.select(leaves).by_logical_tie(pitched=True)
         lts = [
             _ for _ in lts

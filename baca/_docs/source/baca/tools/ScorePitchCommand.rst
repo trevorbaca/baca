@@ -55,11 +55,7 @@ Read-only properties
 
 .. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.reverse
 
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.selector
+.. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.selector
 
 .. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.source
 

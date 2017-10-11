@@ -123,6 +123,7 @@ class ScorePitchCommand(Command):
         '_operators',
         '_repetition_intervals',
         '_reverse',
+        '_selector',
         '_source',
         '_start_index',
         '_use_exact_spelling',
@@ -140,6 +141,7 @@ class ScorePitchCommand(Command):
         operators=None,
         repetition_intervals=None,
         reverse=None,
+        selector=None,
         source=None,
         start_index=None,
         ):
@@ -172,6 +174,9 @@ class ScorePitchCommand(Command):
             self._use_exact_spelling = True
         else:
             self._use_exact_spelling = False
+        if selector is not None:
+            assert isinstance(selector, abjad.Selector), repr(selector)
+        self._selector = selector
         if source is not None:
             if isinstance(source, str):
                 source = source.split()
@@ -231,12 +236,13 @@ class ScorePitchCommand(Command):
         '''
         if argument is None:
             return
-        if isinstance(argument[0], abjad.LogicalTie):
-            logical_ties = argument
-        else:
-            logical_ties = list(abjad.iterate(argument).by_logical_tie())
-        for logical_tie in logical_ties:
-            assert isinstance(logical_tie, abjad.LogicalTie)
+        leaves = abjad.select(argument).by_leaf()
+        leaves_timespan = leaves.get_timespan()
+        lts = abjad.select(leaves).by_logical_tie(pitched=True)
+        lts = [
+            _ for _ in lts
+            if _.get_timespan().starts_during_timespan(leaves_timespan)
+            ]
         counts = self.counts or [1]
         counts = abjad.CyclicTuple(counts)
         start_index = self.start_index
@@ -244,11 +250,11 @@ class ScorePitchCommand(Command):
             start_index = 0
         if self.source:
             source_length = len(self.source)
-            logical_tie_count = len(logical_ties)
+            logical_tie_count = len(lts)
             if self.acyclic and source_length < logical_tie_count:
                 message = f'only {source_length} pitches'
                 message += f' for {logical_tie_count} logical ties:'
-                message += f' {self!r} and {logical_ties!r}.'
+                message += f' {self!r} and {lts!r}.'
                 raise Exception(message)
             if 0 <= start_index:
                 absolute_start_index = start_index
@@ -263,7 +269,7 @@ class ScorePitchCommand(Command):
             current_count = counts[current_count_index]
             current_logical_tie_index = 0
             source_length = len(self.source)
-            for logical_tie in logical_ties:
+            for logical_tie in lts:
                 index = absolute_start_index + current_logical_tie_index
                 pitch_expression = source[index]
                 repetition_count = index // len(self.source)
@@ -314,7 +320,7 @@ class ScorePitchCommand(Command):
                     current_count = counts[current_count_index]
         else:
             assert self.operators, repr(self.operators)
-            for logical_tie in logical_ties:
+            for logical_tie in lts:
                 for note in logical_tie:
                     for operator_ in self.operators:
                         written_pitch = note.written_pitch
@@ -660,6 +666,18 @@ class ScorePitchCommand(Command):
         Returns true, false or none.
         '''
         return self._reverse
+
+    @property
+    def selector(self):
+        r'''Gets selector.
+
+        Set to selector or none.
+
+        Defaults to none.
+
+        Returns selector or none.
+        '''
+        return self._selector
 
     @property
     def source(self):

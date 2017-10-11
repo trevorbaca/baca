@@ -1095,14 +1095,12 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.detach(markup, leaf)
 
     def _evaluate_scope(self, command):
-        if hasattr(command.command, 'selector'):
-            selection = self._resolve_scope(
-                command,
-                include_rests=True,
-                leaves_instead_of_logical_ties=True,
-                )
-        else:
-            selection = self._resolve_scope(command)
+        assert hasattr(command.command, 'selector')
+        selection = self._resolve_scope(command)
+#            command,
+#            include_rests=True,
+#            leaves_instead_of_logical_ties=True,
+#            )
         if not selection:
             message = f'EMPTY SELECTION: {format(command)}'
             if self.allow_empty_selections:
@@ -1788,8 +1786,8 @@ class SegmentMaker(abjad.SegmentMaker):
     def _resolve_scope(
         self,
         command,
-        include_rests=False,
-        leaves_instead_of_logical_ties=False,
+#        include_rests=False,
+#        leaves_instead_of_logical_ties=False,
         ):
         timespan_map, timespans = [], []
         if isinstance(command.scope, baca.SimpleScope):
@@ -1805,15 +1803,17 @@ class SegmentMaker(abjad.SegmentMaker):
             timespans.append(timespan)
         compound_scope._timespan_map = timespan_map
         result = []
-        leaves = self._get_cached_leaves(include_rests=include_rests)
+        #leaves = self._get_cached_leaves(include_rests=include_rests)
+        leaves = self._get_cached_leaves(include_rests=True)
         for leaf in leaves:
             if leaf in compound_scope:
-                if leaves_instead_of_logical_ties:
-                    result.append(leaf)
-                else:
-                    logical_tie = abjad.inspect(leaf).get_logical_tie()
-                    if logical_tie.head is leaf:
-                        result.append(logical_tie)
+                result.append(leaf)
+#                if leaves_instead_of_logical_ties:
+#                    result.append(leaf)
+#                else:
+#                    logical_tie = abjad.inspect(leaf).get_logical_tie()
+#                    if logical_tie.head is leaf:
+#                        result.append(logical_tie)
         return abjad.select(result)
 
     # TODO: possibly reintegrate
