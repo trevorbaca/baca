@@ -342,7 +342,7 @@ class ClusterCommand(Command):
     __slots__ = (
         '_hide_flat_markup',
         '_hide_natural_markup',
-        #'_selector',
+        '_selector',
         '_start_pitch',
         '_widths',
         )
@@ -353,7 +353,7 @@ class ClusterCommand(Command):
         self,
         hide_flat_markup=None,
         hide_natural_markup=None,
-        #selector=None,
+        selector=None,
         start_pitch=None,
         widths=None,
         ):
@@ -361,9 +361,9 @@ class ClusterCommand(Command):
         self._hide_flat_markup = hide_flat_markup
         assert isinstance(hide_natural_markup, (bool, type(None)))
         self._hide_natural_markup = hide_natural_markup
-#        if selector is not None:
-#            assert isinstance(selector, abjad.Selector)
-#        self._selector = selector
+        if selector is not None:
+            assert isinstance(selector, abjad.Selector)
+        self._selector = selector
         if start_pitch is not None:
             start_pitch = abjad.NamedPitch(start_pitch)
         self._start_pitch = start_pitch
@@ -380,19 +380,27 @@ class ClusterCommand(Command):
         '''
         if argument is None:
             return
-#        if self.selector is not None:
-#            argument = self.selector(argument)
+        leaves = abjad.select(argument).by_leaf()
+        if self.selector is not None:
+            result = self.selector(leaves)
+            leaves = abjad.select(result).by_leaf()
+        leaves_timespan = leaves.get_timespan()
         if self.widths is None:
             return
         widths = abjad.CyclicTuple(self.widths)
-        logical_ties = abjad.iterate(argument).by_logical_tie()
-        logical_ties = list(logical_ties)
-        first_note = logical_ties[0].head
+        #logical_ties = abjad.iterate(argument).by_logical_tie()
+        #logical_ties = list(logical_ties)
+        lts = abjad.select(leaves).by_logical_tie(pitched=True)
+        lts = [
+            _ for _ in lts
+            if _.get_timespan().starts_during_timespan(leaves_timespan)
+            ]
+        first_note = lts[0].head
         root = abjad.inspect(first_note).get_parentage().root
         with abjad.ForbidUpdate(component=root):
-            for index, logical_tie in enumerate(logical_ties):
+            for index, lt in enumerate(lts):
                 width = widths[index]
-                for note in logical_tie:
+                for note in lt:
                     self._make_cluster(note, width)
 
     ### PRIVATE METHODS ###
@@ -713,23 +721,17 @@ class ClusterCommand(Command):
         '''
         return self._hide_natural_markup
 
-    # TODO: there's a weird interaction between
-    #       ClusterCommand._mutates_score() and ClusterCommand.selector
-    #       Rendering Krummzeit [_] causes the error (empty selection)
-    #       to appear.
-    #       Eventually clean up SegmentMaker._evaluate_selector().
-    #       Then see if interaction goes away.
-#    @property
-#    def selector(self):
-#        r'''Gets selector.
-#
-#        Defaults to none.
-#
-#        Set to selector or none.
-#
-#        Returns selector or none.
-#        '''
-#        return self._selector
+    @property
+    def selector(self):
+        r'''Gets selector.
+
+        Defaults to none.
+
+        Set to selector or none.
+
+        Returns selector or none.
+        '''
+        return self._selector
 
     @property
     def start_pitch(self):
