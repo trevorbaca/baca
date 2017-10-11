@@ -159,15 +159,16 @@ class RegisterTransitionCommand(Command):
         if self.selector is not None:
             result = self.selector(leaves)
         leaves = abjad.select(leaves).by_leaf()
-        start_offset = abjad.inspect(leaves[0]).get_timespan().start_offset
-        stop_offset = abjad.inspect(leaves[-1]).get_timespan().stop_offset
-        timespan = abjad.Timespan(
-            start_offset=start_offset,
-            stop_offset=stop_offset,
-            )
+        leaves_timespan = leaves.get_timespan()
         for lt in abjad.iterate(leaves).by_logical_tie(pitched=True):
-            offset = lt.get_timespan().start_offset
-            registration = self._make_registration(offset, timespan)
+            lt_timespan = lt.get_timespan()
+            if not lt_timespan.starts_during_timespan(leaves_timespan):
+                continue
+            offset = lt_timespan.start_offset
+            registration = self._make_registration(
+                lt_timespan.start_offset,
+                leaves_timespan,
+                )
             for note in lt:
                 written_pitches = registration([note.written_pitch])
                 self._set_pitch(note, written_pitches[0])
