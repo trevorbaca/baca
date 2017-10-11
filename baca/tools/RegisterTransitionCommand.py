@@ -120,6 +120,7 @@ class RegisterTransitionCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
+        '_selector',
         '_start_registration',
         '_stop_registration',
         )
@@ -128,16 +129,22 @@ class RegisterTransitionCommand(Command):
 
     def __init__(
         self,
+        selector=None,
         start_registration=None,
         stop_registration=None,
         ):
-        assert isinstance(start_registration, baca.Registration)
-        assert isinstance(stop_registration, baca.Registration)
+        if selector is not None:
+            assert isinstance(selector, abjad.Selector), repr(selector)
+        self._selector = selector
+        if start_registration is not None:
+            assert isinstance(start_registration, baca.Registration)
+        self._start_registration = start_registration
+        if stop_registration is not None:
+            assert isinstance(stop_registration, baca.Registration)
+        self._stop_registration = stop_registration
         start_length = len(start_registration.components)
         stop_length = len(stop_registration.components)
-        assert start_length == stop_length
-        self._start_registration = start_registration
-        self._stop_registration = stop_registration
+        assert start_length == stop_length, repr(start_length, stop_length)
 
     ### SPECIAL METHODS ###
 
@@ -149,6 +156,9 @@ class RegisterTransitionCommand(Command):
         if argument is None:
             return
         leaves = abjad.select(argument).by_leaf()
+        if self.selector is not None:
+            result = self.selector(leaves)
+        leaves = abjad.select(leaves).by_leaf()
         start_offset = abjad.inspect(leaves[0]).get_timespan().start_offset
         stop_offset = abjad.inspect(leaves[-1]).get_timespan().stop_offset
         timespan = abjad.Timespan(
@@ -228,6 +238,18 @@ class RegisterTransitionCommand(Command):
         abjad.detach('not yet registered', note)
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def selector(self):
+        r'''Gets selector.
+
+        Set to selector or none.
+
+        Defaults to none.
+
+        Returns selector or none.
+        '''
+        return self._selector
 
     @property
     def start_registration(self):

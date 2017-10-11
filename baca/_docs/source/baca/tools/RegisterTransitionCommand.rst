@@ -36,11 +36,7 @@ Bases
 Read-only properties
 --------------------
 
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.selector
+.. autoattribute:: baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.selector
 
 .. autoattribute:: baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.start_registration
 
