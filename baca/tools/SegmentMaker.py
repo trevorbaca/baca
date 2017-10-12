@@ -1804,7 +1804,7 @@ class SegmentMaker(abjad.SegmentMaker):
             start = scope.stages.start
             if (scope.stages.stop == abjad.Infinity or
                 scope.stages.stop is abjad.Infinity):
-                stop = self.stage_count
+                stop = self.stage_count + 1
             else:
                 stop = scope.stages.stop + 1
             for stage_number in range(start, stop):

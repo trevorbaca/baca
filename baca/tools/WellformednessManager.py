@@ -131,32 +131,32 @@ class WellformednessManager(abjad.AbjadObject):
         violators = []
         total = 0
         not_yet_string = 'not yet pitched'
-        notes = abjad.iterate(argument).by_logical_tie(
+        plts = abjad.iterate(argument).by_logical_tie(
             pitched=True,
             with_grace_notes=True,
             )
-        notes = list(notes)
-        notes.sort(
+        plts = list(plts)
+        plts.sort(
             key=lambda _: abjad.inspect(_.head).get_timespan().start_offset)
-        for leaf_1, leaf_2 in abjad.Sequence(notes).nwise():
-            if not isinstance(leaf_1.head, abjad.Note):
+        for plt_1, plt_2 in abjad.Sequence(plts).nwise():
+            if not isinstance(plt_1.head, abjad.Note):
                 continue
-            if not isinstance(leaf_2.head, abjad.Note):
+            if not isinstance(plt_2.head, abjad.Note):
                 continue
             total += 1
-            if abjad.inspect(leaf_1.head).has_indicator(not_yet_string):
+            if abjad.inspect(plt_1.head).has_indicator(not_yet_string):
                 continue
-            if abjad.inspect(leaf_2.head).has_indicator(not_yet_string):
+            if abjad.inspect(plt_2.head).has_indicator(not_yet_string):
                 continue
-            pitch_class_1 = leaf_1.head.written_pitch.pitch_class
-            pitch_class_2 = leaf_2.head.written_pitch.pitch_class
+            pitch_class_1 = plt_1.head.written_pitch.pitch_class
+            pitch_class_2 = plt_2.head.written_pitch.pitch_class
             if not pitch_class_1 == pitch_class_2:
                 continue
             string = 'repeat pitch allowed'
-            if (abjad.inspect(leaf_1.head).has_indicator(string) and
-                abjad.inspect(leaf_2.head).has_indicator(string)):
+            if (abjad.inspect(plt_1.head).has_indicator(string) and
+                abjad.inspect(plt_2.head).has_indicator(string)):
                 continue
-            violators.append(leaf_2)
+            violators.append(plt_2)
         total += 1
         return violators, total
 
