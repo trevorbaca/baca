@@ -5635,11 +5635,11 @@ class LibraryAM(object):
 
     @staticmethod
     def laissez_vibrer(selector=None):
-        r'''Attaches laissez vibrer to pitched tails.
+        r'''Attaches laissez vibrer to PLT tails.
 
         ..  container:: example
 
-            Attaches laissez vibrer to all pitched tails:
+            Attaches laissez vibrer to all PLT tails:
 
             ::
 
@@ -5656,8 +5656,7 @@ class LibraryAM(object):
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
 
-            ..  docs::
-
+            ..  docs:: 
                 >>> f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
@@ -5702,9 +5701,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.laissez_vibrer(
-                ...         baca.select_plt_tails_in_tuplet(1),
-                ...         ),
+                ...     baca.laissez_vibrer(baca.select_tuplet(1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
