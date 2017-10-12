@@ -27,6 +27,7 @@ Bases
       ~baca.tools.SetCommand.SetCommand.selector
       ~baca.tools.SetCommand.SetCommand.setting_name
       ~baca.tools.SetCommand.SetCommand.setting_value
+      ~baca.tools.SetCommand.SetCommand.target
       ~baca.tools.SetCommand.SetCommand.__call__
       ~baca.tools.SetCommand.SetCommand.__eq__
       ~baca.tools.SetCommand.SetCommand.__format__
@@ -48,6 +49,12 @@ Read-only properties
 .. autoattribute:: baca.tools.SetCommand.SetCommand.setting_name
 
 .. autoattribute:: baca.tools.SetCommand.SetCommand.setting_value
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.SetCommand.SetCommand.target
 
 Special methods
 ---------------

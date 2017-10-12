@@ -25,6 +25,7 @@ Bases
 
       ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.cluster_widths
       ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.selector
+      ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.target
       ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.__call__
       ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.__eq__
       ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.__format__
@@ -42,6 +43,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.selector
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.target
 
 Special methods
 ---------------

@@ -27,6 +27,7 @@ Bases
       ~baca.tools.ClusterCommand.ClusterCommand.hide_natural_markup
       ~baca.tools.ClusterCommand.ClusterCommand.selector
       ~baca.tools.ClusterCommand.ClusterCommand.start_pitch
+      ~baca.tools.ClusterCommand.ClusterCommand.target
       ~baca.tools.ClusterCommand.ClusterCommand.widths
       ~baca.tools.ClusterCommand.ClusterCommand.__call__
       ~baca.tools.ClusterCommand.ClusterCommand.__eq__
@@ -49,6 +50,12 @@ Read-only properties
       .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.selector
 
 .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.start_pitch
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.target
 
 .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.widths
 

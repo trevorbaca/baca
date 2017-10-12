@@ -28,6 +28,7 @@ Bases
       ~baca.tools.HairpinCommand.HairpinCommand.include_rests
       ~baca.tools.HairpinCommand.HairpinCommand.omit_lone_note_dynamic
       ~baca.tools.HairpinCommand.HairpinCommand.selector
+      ~baca.tools.HairpinCommand.HairpinCommand.target
       ~baca.tools.HairpinCommand.HairpinCommand.__call__
       ~baca.tools.HairpinCommand.HairpinCommand.__eq__
       ~baca.tools.HairpinCommand.HairpinCommand.__format__
@@ -51,6 +52,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.selector
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.target
 
 Special methods
 ---------------

@@ -32,8 +32,9 @@ class SetCommand(Command):
         selector=None,
         setting_name=None,
         setting_value=None,
+        target=None,
         ):
-        Command.__init__(self, selector=selector)
+        Command.__init__(self, selector=selector, target=target)
         if context_name is not None:
             assert isinstance(context_name, str), repr(context_name)
         self._context_name = context_name
@@ -51,19 +52,22 @@ class SetCommand(Command):
         '''
         if argument is None:
             return
+        if self.selector is not None:
+            argument = self.selector(argument)
+        selections = baca.MusicMaker._normalize_selections(argument)
+        if self.target is not None:
+            selections = [self.target(_) for _ in selections]
+        selections = baca.MusicMaker._normalize_selections(selections)
         context = self.context_name
         setting = self.setting_name
         value = self.setting_value
         if self.context_name is not None:
             statement = f'abjad.setting(item).{context}.{setting} = {value!r}'
         else:
-            statement = 'abjad.setting(item).{setting} = {value!r}'
+            statement = f'abjad.setting(item).{setting} = {value!r}'
         globals_ = globals()
         globals_.update(abjad.__dict__.copy())
         globals_['SchemeMoment'] = abjad.SchemeMoment
-        selector = self.selector or baca.select_leaf(0)
-        selections = selector(argument)
-        selections = baca.MusicMaker._normalize_selections(selections)
         for selection in selections:
             for item in selection:
                 exec(statement, globals_, locals())

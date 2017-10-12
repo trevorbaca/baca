@@ -136,13 +136,13 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_plts()
         return baca.OverrideCommand(
             attribute_name='style',
             attribute_value='harmonic',
             grob_name='note_head',
             revert=True,
             selector=selector,
+            target=baca.select_plts(),
             )
 
     @staticmethod
@@ -616,10 +616,10 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_leaves_in_trimmed_run()
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.OctavationSpanner(start=1, stop=0),
+            target=baca.select_leaves_in_trimmed_run(),
             )
 
     @staticmethod
@@ -745,10 +745,10 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_leaves_in_trimmed_run()
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.OctavationSpanner(start=-1, stop=0),
+            target=baca.select_leaves_in_trimmed_run(),
             )
 
     @staticmethod
@@ -1435,10 +1435,10 @@ class LibraryNZ(object):
         markup = abjad.Markup(dynamic).dynamic()
         markup += abjad.Markup('possibile').upright()
         markup = abjad.new(markup, direction=direction)
-        selector = selector or baca.select_plt_head(n=0)
         return baca.AttachCommand(
             arguments=[markup],
             selector=selector,
+            target=baca.select_plt_head(),
             )
 
     @staticmethod
@@ -1609,12 +1609,12 @@ class LibraryNZ(object):
         assert isinstance(duration, tuple), repr(duration)
         assert len(duration) == 2, repr(duration)
         moment = abjad.SchemeMoment(duration)
-        selector = selector or baca.select_leaf(0)
         return baca.SetCommand(
             context_name='score',
             selector=selector,
             setting_name='proportional_notation_duration',
             setting_value=moment,
+            target=baca.select_leaf(),
             )
 
     @staticmethod
@@ -2046,10 +2046,10 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_plt_heads()
         return baca.AttachCommand(
             arguments=[abjad.Articulation(dynamic)],
             selector=selector,
+            target=baca.select_plt_heads(),
             )
 
     @staticmethod
@@ -2126,7 +2126,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[11, 11, 12], [11, 11, 11], [11]],
                 ...     baca.messiaen_tie_each(),
-                ...     baca.repeat_ties_down(baca.select_leaves_in_tuplet(1)),
+                ...     baca.repeat_ties_down(baca.select_tuplet(1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_up(),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2161,8 +2161,8 @@ class LibraryNZ(object):
                                 b'16 \repeatTie ]
                                 b'4 \repeatTie
                                 b'16 \repeatTie
-                                r16
                                 \revert RepeatTie.direction
+                                r16
                             }
                             \times 4/5 {
                                 b'16
@@ -2175,13 +2175,13 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_leaves_in_trimmed_run()
         return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=abjad.Down,
             grob_name='repeat_tie',
             revert=True,
             selector=selector,
+            target=baca.select_leaves_in_trimmed_run(),
             )
 
     @staticmethod
@@ -2258,7 +2258,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[11, 11, 12], [11, 11, 11], [11]],
                 ...     baca.messiaen_tie_each(),
-                ...     baca.repeat_ties_up(baca.select_leaves_in_tuplet(1)),
+                ...     baca.repeat_ties_up(baca.select_tuplet(1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_down(),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2293,8 +2293,8 @@ class LibraryNZ(object):
                                 b'16 \repeatTie ]
                                 b'4 \repeatTie
                                 b'16 \repeatTie
-                                r16
                                 \revert RepeatTie.direction
+                                r16
                             }
                             \times 4/5 {
                                 b'16
@@ -2307,13 +2307,13 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_leaves_in_trimmed_run()
         return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=abjad.Up,
             grob_name='repeat_tie',
             revert=True,
             selector=selector,
+            target=baca.select_leaves_in_trimmed_run(),
             )
 
     @staticmethod
@@ -2406,11 +2406,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rest_position(
-                ...         -6,
-                ...         baca.select_leaves_in_tuplet(1)
-                ...         .by_leaf(pitched=False),
-                ...         ),
+                ...     baca.rest_position(-6, baca.select_tuplet(1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -2438,15 +2434,15 @@ class LibraryNZ(object):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Rest.staff-position = #-6
                                 fs''16 [
                                 e''16 ]
                                 ef''4 ~
                                 ef''16
+                                \override Rest.staff-position = #-6
                                 r16
+                                \revert Rest.staff-position
                                 af''16 [
                                 g''16 ]
-                                \revert Rest.staff-position
                             }
                             \times 4/5 {
                                 a'16
@@ -2458,13 +2454,13 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_rests()
         return baca.OverrideCommand(
             attribute_name='staff_position',
             attribute_value=n,
             grob_name='rest',
             revert=True,
             selector=selector,
+            target=baca.select_rests(),
             )
 
     @staticmethod
@@ -2785,12 +2781,12 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_rests()
         return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=abjad.Down,
             grob_name='rest',
             revert=True,
+            target=baca.select_rests(),
             )
 
     @staticmethod
@@ -2864,11 +2860,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_up(
-                ...         baca.select_leaves_in_tuplet(1)
-                ...         .by_leaf(pitched=False)
-                ...         ,
-                ...         ),
+                ...     baca.rests_up(baca.select_tuplet(1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -2896,15 +2888,15 @@ class LibraryNZ(object):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Rest.direction = #up
                                 fs''16 [
                                 e''16 ]
                                 ef''4 ~
                                 ef''16
+                                \override Rest.direction = #up
                                 r16
+                                \revert Rest.direction
                                 af''16 [
                                 g''16 ]
-                                \revert Rest.direction
                             }
                             \times 4/5 {
                                 a'16
@@ -2916,13 +2908,13 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_rests()
         return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=abjad.Up,
             grob_name='rest',
             revert=True,
             selector=selector,
+            target=baca.select_rests(),
             )
 
     @staticmethod
@@ -3112,13 +3104,13 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_leaves()
         return baca.OverrideCommand(
             attribute_name='color',
             attribute_value=color,
             grob_name='script',
             revert=True,
             selector=selector,
+            target=baca.select_leaves(),
             )
 
     @staticmethod
@@ -3245,13 +3237,13 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_leaf(n=0)
         return baca.OverrideCommand(
             attribute_name='extra_offset',
             attribute_value=pair,
             grob_name='script',
             revert=True,
             selector=selector,
+            target=baca.select_leaf(),
             )
 
     @staticmethod
@@ -3629,10 +3621,10 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_leaf(n=0)
         return baca.AttachCommand(
             arguments=[abjad.Articulation('shortfermata')],
             selector=selector,
+            target=baca.select_leaf(),
             )
 
     @staticmethod
@@ -3985,10 +3977,10 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_leaves_in_trimmed_run()
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.Slur(),
+            target=baca.select_leaves_in_trimmed_run(),
             )
 
     @staticmethod
@@ -4981,10 +4973,10 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_plt_heads()
         return baca.AttachCommand(
             arguments=[abjad.Articulation('staccato')],
             selector=selector,
+            target=baca.select_plt_heads(),
             )
 
     @staticmethod
@@ -5056,7 +5048,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.staccatissimi(baca.select_leaves_in_tuplet(1)),
+                ...     baca.staccatissimi(baca.select_tuplet(1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -5087,8 +5079,8 @@ class LibraryNZ(object):
                                 fs''16 -\staccatissimo [
                                 e''16 -\staccatissimo ]
                                 ef''4 -\staccatissimo ~
-                                ef''16 -\staccatissimo
-                                r16 -\staccatissimo
+                                ef''16
+                                r16
                                 af''16 -\staccatissimo [
                                 g''16 -\staccatissimo ]
                             }
@@ -5102,10 +5094,10 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_plt_heads()
         return baca.AttachCommand(
             arguments=[abjad.Articulation('staccatissimo')],
             selector=selector,
+            target=baca.select_plt_heads(),
             )
 
     @staticmethod
@@ -5230,7 +5222,6 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_leaves_in_trimmed_run()
         return baca.OverrideCommand(
             attribute_name='color',
             attribute_value=color,
@@ -5238,6 +5229,7 @@ class LibraryNZ(object):
             grob_name='stem',
             revert=True,
             selector=selector,
+            target=baca.select_leaves_in_trimmed_run(),
             )
 
     @staticmethod
@@ -5357,10 +5349,10 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_pls()
         return baca.StemTremoloCommand(
             selector=selector,
             tremolo_flags=32,
+            target=baca.select_pls(),
             )
 
     @staticmethod
@@ -6492,10 +6484,10 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_plt_heads()
         return baca.AttachCommand(
             arguments=[abjad.Articulation('tenuto')],
             selector=selector,
+            target=baca.select_plt_heads(),
             )
 
     @staticmethod
@@ -7517,10 +7509,10 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_each_plt_prun()
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.Tie(),
+            target=baca.select_each_plt_prun(),
             )
 
     @staticmethod
@@ -7612,7 +7604,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_up(),
                 ...     baca.tie_each(),
-                ...     baca.ties_down(baca.select_leaves_in_tuplet(1)),
+                ...     baca.ties_down(baca.select_tuplet(1)),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -7645,8 +7637,8 @@ class LibraryNZ(object):
                                 b'16 ~ ]
                                 b'4 ~
                                 b'16
-                                r16
                                 \revert Tie.direction
+                                r16
                             }
                             \times 4/5 {
                                 b'16
@@ -7659,22 +7651,22 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_leaves_in_trimmed_run()
         return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=abjad.Down,
             grob_name='tie',
             revert=True,
             selector=selector,
+            target=baca.select_leaves_in_trimmed_run(),
             )
 
     @staticmethod
     def ties_up(selector=None):
-        r'''Overrides tie direction on leaves.
+        r'''Overrides tie direction on leaves in trimmed run.
 
         ..  container:: example
 
-            Overrides tie direction on all leaves:
+            Overrides tie direction on all leaves in trimmed run:
 
             ::
 
@@ -7733,7 +7725,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Overrides tie direction on leaves in tuplet 1:
+            Overrides tie direction on leaves in trimmed run in tuplet 1:
 
             ::
 
@@ -7777,8 +7769,8 @@ class LibraryNZ(object):
                                 b'16 ~ ]
                                 b'4 ~
                                 b'16
-                                r16
                                 \revert Tie.direction
+                                r16
                             }
                             \times 4/5 {
                                 b'16
@@ -7791,13 +7783,13 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_leaves_in_trimmed_run()
         return baca.OverrideCommand(
             attribute_name='direction',
             attribute_value=abjad.Up,
             grob_name='tie',
             revert=True,
             selector=selector,
+            target=baca.select_leaves_in_trimmed_run(),
             )
 
     @staticmethod
@@ -8129,7 +8121,6 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_leaf()
         return baca.OverrideCommand(
             attribute_name='transparent',
             attribute_value=True,
@@ -8137,6 +8128,7 @@ class LibraryNZ(object):
             grob_name='bar_line',
             revert=False,
             selector=selector,
+            target=baca.select_leaf(),
             )
 
     @staticmethod
@@ -8260,13 +8252,13 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_rests()
         return baca.OverrideCommand(
             attribute_name='transparent',
             attribute_value=True,
             grob_name='rest',
             revert=True,
             selector=selector,
+            target=baca.select_rests(),
             )
 
     @staticmethod
@@ -8330,7 +8322,6 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_leaf()
         return baca.OverrideCommand(
             attribute_name='transparent',
             attribute_value=True,
@@ -8338,6 +8329,7 @@ class LibraryNZ(object):
             grob_name='span_bar',
             revert=False,
             selector=selector,
+            target=baca.select_leaf(),
             )
 
     @staticmethod
@@ -8402,7 +8394,6 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_rests()
         return baca.OverrideCommand(
             attribute_name='transparent',
             attribute_value=True,
@@ -8410,6 +8401,7 @@ class LibraryNZ(object):
             grob_name='time_signature',
             revert=True,
             selector=selector,
+            target=baca.select_rests(),
             )
 
     @staticmethod
@@ -9471,10 +9463,10 @@ class LibraryNZ(object):
                 >>
 
         """
-        selector = selector or baca.select_chord_heads()
         return baca.AttachCommand(
             arguments=[abjad.Arpeggio(direction=abjad.Up)],
             selector=selector,
+            target=baca.select_chord_heads(),
             )
 
     @staticmethod
@@ -9594,10 +9586,10 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_plt_heads()
         return baca.AttachCommand(
             arguments=[abjad.Articulation('upbow')],
             selector=selector,
+            target=baca.select_plt_heads(),
             )
 
     @staticmethod
@@ -9717,8 +9709,8 @@ class LibraryNZ(object):
                 >>
 
         '''
-        selector = selector or baca.select_leaf(n=0)
         return baca.AttachCommand(
             arguments=[abjad.Articulation('verylongfermata')],
             selector=selector,
+            target=baca.select_leaf(),
             )

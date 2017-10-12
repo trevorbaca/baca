@@ -175,6 +175,7 @@ class AttachCommand(Command):
 
     __slots__ = (
         '_arguments',
+        '_target',
         )
 
     _publish_storage_format = True
@@ -185,8 +186,9 @@ class AttachCommand(Command):
         self,
         arguments=None,
         selector=None,
+        target='baca.select_plt_heads()',
         ):
-        Command.__init__(self, selector=selector)
+        Command.__init__(self, selector=selector, target=target)
         self._arguments = arguments
 
     ### SPECIAL METHODS ###
@@ -198,12 +200,14 @@ class AttachCommand(Command):
         '''
         if not argument:
             return
+        if self.selector is not None:
+            argument = self.selector(argument)
+        if self.target is not None:
+            argument = self.target(argument)
+        selections = baca.MusicMaker._normalize_selections(argument)
         if self.arguments is None:
             return
         arguments = abjad.CyclicTuple(self.arguments)
-        selector = self.selector or baca.select_plt_heads()
-        result = selector(argument)
-        selections = baca.MusicMaker._normalize_selections(result)
         for selection in selections:
             leaves = abjad.select(selection).by_leaf()
             for i, leaf in enumerate(leaves):
@@ -356,3 +360,15 @@ class AttachCommand(Command):
         Returns arguments or none.
         '''
         return self._arguments
+
+    @property
+    def target(self):
+        r'''Gets target.
+
+        Defaults to PLT heads selector.
+
+        Set to selector or none.
+
+        Returns selector or none.
+        '''
+        return self._target

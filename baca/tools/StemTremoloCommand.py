@@ -123,9 +123,10 @@ class StemTremoloCommand(Command):
     def __init__(
         self,
         selector=None,
+        target='baca.select_pls()',
         tremolo_flags=32,
         ):
-        Command.__init__(self, selector=selector)
+        Command.__init__(self, selector=selector, target=target)
         assert abjad.mathtools.is_nonnegative_integer_power_of_two(
             tremolo_flags)
         self._tremolo_flags = tremolo_flags
@@ -141,6 +142,8 @@ class StemTremoloCommand(Command):
             return
         if self.selector is not None:
             argument = self.selector(argument)
+        if self.target is not None:
+            argument = self.target(argument)
         selections = baca.MusicMaker._normalize_selections(argument)
         for selection in selections:
             for pl in abjad.iterate(selection).by_leaf(pitched=True):

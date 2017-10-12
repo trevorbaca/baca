@@ -208,7 +208,7 @@ class OverrideCommand(Command):
         ::
 
             >>> baca.OverrideCommand()
-            OverrideCommand()
+            OverrideCommand(target=baca.select_leaves())
 
     '''
 
@@ -236,8 +236,9 @@ class OverrideCommand(Command):
         maximum_settings=None,
         revert=None,
         selector=None,
+        target='baca.select_leaves()',
         ):
-        Command.__init__(self, selector=selector)
+        Command.__init__(self, selector=selector, target=target)
         if context_name is not None:
             assert isinstance(context_name, str), repr(context_name)
         self._context_name = context_name
@@ -267,6 +268,22 @@ class OverrideCommand(Command):
         '''
         if argument is None:
             return
+        if self.selector is not None:
+            argument = self.selector(argument)
+        if self.target is not None:
+            argument = self.target(argument)
+        selections = baca.MusicMaker._normalize_selections(argument)
+        if False:
+            print(format(self))
+            print()
+            print(format(selector))
+            print()
+            print(argument)
+            print()
+            print(selections)
+            print()
+            print('---')
+            print()
         statement = 'abjad.override(leaf)'
         if self.context_name is not None:
             statement += '.{context_name}'
@@ -304,20 +321,6 @@ class OverrideCommand(Command):
             )
         revert = revert.replace('\\', '')
         revert = abjad.LilyPondCommand(revert, format_slot='after')
-        selector = self.selector or baca.select_leaves()
-        selections = selector(argument)
-        if False:
-            print(format(self))
-            print()
-            print(format(selector))
-            print()
-            print(argument)
-            print()
-            print(selections)
-            print()
-            print('---')
-            print()
-        selections = baca.MusicMaker._normalize_selections(selections)
         for selection in selections:
             leaves = abjad.select(selection).by_leaf()
             if self.revert:

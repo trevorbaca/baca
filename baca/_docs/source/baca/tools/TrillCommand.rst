@@ -31,6 +31,7 @@ Bases
       ~baca.tools.TrillCommand.TrillCommand.minimum_written_duration
       ~baca.tools.TrillCommand.TrillCommand.pitch
       ~baca.tools.TrillCommand.TrillCommand.selector
+      ~baca.tools.TrillCommand.TrillCommand.target
       ~baca.tools.TrillCommand.TrillCommand.__call__
       ~baca.tools.TrillCommand.TrillCommand.__eq__
       ~baca.tools.TrillCommand.TrillCommand.__format__
@@ -60,6 +61,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.TrillCommand.TrillCommand.selector
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.TrillCommand.TrillCommand.target
 
 Special methods
 ---------------

@@ -26,6 +26,7 @@ Bases
       ~baca.tools.MicrotonalDeviationCommand.MicrotonalDeviationCommand.deposit_annotations
       ~baca.tools.MicrotonalDeviationCommand.MicrotonalDeviationCommand.number_lists
       ~baca.tools.MicrotonalDeviationCommand.MicrotonalDeviationCommand.selector
+      ~baca.tools.MicrotonalDeviationCommand.MicrotonalDeviationCommand.target
       ~baca.tools.MicrotonalDeviationCommand.MicrotonalDeviationCommand.__call__
       ~baca.tools.MicrotonalDeviationCommand.MicrotonalDeviationCommand.__eq__
       ~baca.tools.MicrotonalDeviationCommand.MicrotonalDeviationCommand.__format__
@@ -45,6 +46,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.MicrotonalDeviationCommand.MicrotonalDeviationCommand.selector
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.MicrotonalDeviationCommand.MicrotonalDeviationCommand.target
 
 Special methods
 ---------------

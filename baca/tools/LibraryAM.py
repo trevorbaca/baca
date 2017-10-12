@@ -17,7 +17,19 @@ class LibraryAM(object):
 
     @staticmethod
     def accents(selector=None):
-        r'''Attaches accents to pitched heads.
+        r'''Attaches accents to PLT heads.
+
+        ..  container:: example
+
+            ::
+
+                >>> abjad.f(baca.accents())
+                baca.AttachCommand(
+                    arguments=[
+                        abjad.Articulation('>'),
+                        ],
+                    target=baca.select_plt_heads(),
+                    )
 
         ..  container:: example
 
@@ -130,7 +142,6 @@ class LibraryAM(object):
                 >>
 
         '''
-        selector = selector or baca.select_plt_heads()
         return baca.AttachCommand(
             arguments=[abjad.Articulation('>')],
             selector=selector,
@@ -138,7 +149,20 @@ class LibraryAM(object):
 
     @staticmethod
     def alternate_bow_strokes(downbow_first=True, selector=None):
-        r'''Attaches alternate bow strokes to pitched heads.
+        r'''Attaches alternate bow strokes.
+
+        ..  container:: example
+
+            ::
+
+                >>> abjad.f(baca.alternate_bow_strokes())
+                baca.AttachCommand(
+                    arguments=[
+                        abjad.Articulation('downbow'),
+                        abjad.Articulation('upbow'),
+                        ],
+                    target=baca.select_plt_heads(),
+                    )
 
         ..  container:: example
 
@@ -314,7 +338,6 @@ class LibraryAM(object):
         else:
             articulations = ['upbow', 'downbow']
         articulations = [abjad.Articulation(_) for _ in articulations]
-        selector = selector or baca.select_plt_heads()
         return baca.AttachCommand(
             arguments=articulations,
             selector=selector,
@@ -356,6 +379,30 @@ class LibraryAM(object):
     @staticmethod
     def ancora_dynamic(dynamic, selector=None, direction=abjad.Down):
         r'''Attaches ancora dynamic pitched head 0.
+
+        ..  container::
+
+            ::
+
+                >>> abjad.f(baca.ancora_dynamic('f'))
+                baca.AttachCommand(
+                    arguments=[
+                        abjad.Markup(
+                            contents=[
+                                abjad.MarkupCommand(
+                                    'dynamic',
+                                    'f'
+                                    ),
+                                abjad.MarkupCommand(
+                                    'upright',
+                                    'ancora'
+                                    ),
+                                ],
+                            direction=Down,
+                            ),
+                        ],
+                    target=baca.select_plt_head(),
+                    )
 
         ..  container:: example
 
@@ -486,15 +533,15 @@ class LibraryAM(object):
         markup = abjad.Markup(dynamic).dynamic()
         markup += abjad.Markup('ancora').upright()
         markup = abjad.new(markup, direction=direction)
-        selector = selector or baca.select_plt_head(n=0)
         return baca.AttachCommand(
             arguments=[markup],
             selector=selector,
+            target=baca.select_plt_head(0),
             )
 
     @staticmethod
     def arpeggios(selector=None):
-        r"""Attaches arpeggios to chord heads.
+        r"""Attaches arpeggios.
 
         ..  container:: example
 
@@ -603,10 +650,10 @@ class LibraryAM(object):
                 >>
 
         """
-        selector = selector or baca.select_chord_heads()
         return baca.AttachCommand(
             arguments=[abjad.Articulation('arpeggio')],
             selector=selector,
+            target=baca.select_chord_heads(),
             )
 
     @staticmethod
@@ -1341,7 +1388,7 @@ class LibraryAM(object):
 
     @staticmethod
     def beam_positions(n=None, selector=None):
-        r'''Overrides beam positions on leaves.
+        r'''Overrides beam positions.
 
         ..  container:: example
 
@@ -1872,10 +1919,10 @@ class LibraryAM(object):
                 >>
 
         '''
-        selector = selector or baca.select_leaf(0)
         return baca.AttachCommand(
             arguments=[abjad.Clef(clef)],
             selector=selector,
+            target=baca.select_leaf(),
             )
 
     @staticmethod
@@ -2517,13 +2564,13 @@ class LibraryAM(object):
                 >>
 
         '''
-        selector = selector or baca.select_pls()
         return baca.OverrideCommand(
             attribute_name='style',
             attribute_value='cross',
             grob_name='note_head',
             revert=True,
             selector=selector,
+            target=baca.select_pls(),
             )
 
     @staticmethod
@@ -2780,10 +2827,10 @@ class LibraryAM(object):
                 >>
 
         '''
-        selector = selector or baca.select_plt_heads()
         return baca.AttachCommand(
             arguments=[abjad.LilyPondCommand(r'\crossStaff')],
             selector=selector,
+            target=baca.select_plt_heads(),
             )
 
     @staticmethod
@@ -3080,10 +3127,10 @@ class LibraryAM(object):
                 >>
 
         '''
-        selector = selector or baca.select_plt_heads()
         return baca.AttachCommand(
             arguments=[abjad.Articulation('tongue #2')],
             selector=selector,
+            target=baca.select_plt_heads(),
             )
 
     @staticmethod
@@ -3204,10 +3251,10 @@ class LibraryAM(object):
                 >>
 
         """
-        selector = selector or baca.select_chord_heads()
         return baca.AttachCommand(
             arguments=[abjad.Arpeggio(direction=abjad.Down)],
             selector=selector,
+            target=baca.select_chord_heads(),
             )
 
     @staticmethod
@@ -3327,10 +3374,10 @@ class LibraryAM(object):
                 >>
 
         '''
-        selector = selector or baca.select_plt_heads()
         return baca.AttachCommand(
             arguments=[abjad.Articulation('downbow')],
             selector=selector,
+            target=baca.select_plt_heads(),
             )
 
     @staticmethod
@@ -3451,10 +3498,10 @@ class LibraryAM(object):
                 >>
 
         '''
-        selector = selector or baca.select_plt_head(n=0)
         return baca.AttachCommand(
             arguments=[abjad.Dynamic(dynamic)],
             selector=selector,
+            target=baca.select_plt_head(),
             )
 
     @staticmethod
@@ -3474,7 +3521,7 @@ class LibraryAM(object):
                 ...     baca.dynamic_line_spanner_staff_padding(4),
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
-                ...         selector=baca.select_trimmed_run_in_each_tuplet()
+                ...         target=baca.select_trimmed_run_in_each_tuplet()
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3538,7 +3585,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
-                ...         selector=baca.select_trimmed_run_in_each_tuplet()
+                ...         target=baca.select_trimmed_run_in_each_tuplet()
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3612,7 +3659,7 @@ class LibraryAM(object):
                 ...     baca.dynamic_line_spanner_up(),
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
-                ...         selector=baca.select_trimmed_run_in_each_tuplet()
+                ...         target=baca.select_trimmed_run_in_each_tuplet()
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3675,7 +3722,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
-                ...         selector=baca.select_trimmed_run_in_each_tuplet()
+                ...         target=baca.select_trimmed_run_in_each_tuplet()
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3865,13 +3912,13 @@ class LibraryAM(object):
                 >>
 
         '''
-        selector = selector or baca.select_pl(n=0)
         return baca.OverrideCommand(
             attribute_name='extra_offset',
             attribute_value=pair,
             grob_name='dynamic_text',
             revert=True,
             selector=selector,
+            target=baca.select_pl(),
             )
 
     @staticmethod
@@ -4001,10 +4048,10 @@ class LibraryAM(object):
                 >>
 
         '''
-        selector = selector or baca.select_leaf(0)
         return baca.AttachCommand(
             arguments=[abjad.LilyPondCommand('dynamicDown')],
             selector=selector,
+            target=baca.select_leaf(),
             )
 
     @staticmethod
@@ -4134,10 +4181,10 @@ class LibraryAM(object):
                 >>
 
         '''
-        selector = selector or baca.select_leaf(0)
         return baca.AttachCommand(
             arguments=[abjad.LilyPondCommand('dynamicUp')],
             selector=selector,
+            target=baca.select_leaf(),
             )
 
     @staticmethod
@@ -4292,10 +4339,10 @@ class LibraryAM(object):
         right_quotes = abjad.Markup('”').italic().larger()
         markup = left_quotes + dynamic_markup + right_quotes
         markup = abjad.new(markup, direction=direction)
-        selector = selector or baca.select_plt_head(n=0)
         return baca.AttachCommand(
             arguments=[markup],
             selector=selector,
+            target=baca.select_plt_head(),
             )
 
     @staticmethod
@@ -4421,10 +4468,10 @@ class LibraryAM(object):
                 >>
 
         '''
-        selector = selector or baca.select_leaf(n=0)
         return baca.AttachCommand(
             arguments=[abjad.Articulation('fermata')],
             selector=selector,
+            target=baca.select_leaf(),
             )
 
     @staticmethod
@@ -4638,10 +4685,10 @@ class LibraryAM(object):
                 >>
 
         '''
-        selector = selector or baca.select_plt_heads()
         return baca.AttachCommand(
             arguments=[abjad.Articulation('flageolet')],
             selector=selector,
+            target=baca.select_plt_heads(),
             )
 
     @staticmethod
@@ -4954,6 +5001,7 @@ class LibraryAM(object):
     def hairpins(
         hairpins,
         selector=None,
+        target='baca.select_leaves_in_trimmed_run()',
         flare=None,
         include_rests=None,
         omit_lone_note_dynamic=None,
@@ -5027,7 +5075,7 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
-                ...         selector=baca.select_trimmed_run_in_tuplet(1),
+                ...         target=baca.select_trimmed_run_in_tuplet(1),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5085,7 +5133,7 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
-                ...         selector=baca.select_trimmed_run_in_each_tuplet(),
+                ...         target=baca.select_trimmed_run_in_each_tuplet(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5139,13 +5187,13 @@ class LibraryAM(object):
                 hairpin_token = tuple(hairpin_token)
             hairpin_tokens_.append(hairpin_token)
         hairpin_tokens = hairpin_tokens_
-        selector = selector or baca.select_leaves_in_trimmed_run()
         return baca.HairpinCommand(
             flare=flare,
             hairpin_tokens=hairpin_tokens,
             include_rests=include_rests,
             omit_lone_note_dynamic=omit_lone_note_dynamic,
             selector=selector,
+            target=target,
             )
 
     @staticmethod
@@ -5378,11 +5426,11 @@ class LibraryAM(object):
     def instrument(instrument, selector=None):
         r'''Attaches instrument.
         '''
-        selector = selector or baca.select_leaf(0)
         assert isinstance(instrument, abjad.Instrument)
         return baca.AttachCommand(
             arguments=[instrument],
             selector=selector,
+            target=baca.select_leaf(),
             )
 
     @staticmethod
@@ -5702,10 +5750,10 @@ class LibraryAM(object):
                 >>
 
         '''
-        selector = selector or baca.select_plt_tails()
         return baca.AttachCommand(
             arguments=[abjad.Articulation('laissezVibrer')],
             selector=selector,
+            target=baca.select_plt_tails(),
             )
 
     @staticmethod
@@ -5825,11 +5873,11 @@ class LibraryAM(object):
                 >>
 
         '''
-        selector = selector or baca.select_leaf(-1)
         command = abjad.LilyPondCommand('break', format_slot='after')
         return baca.AttachCommand(
             arguments=[command],
             selector=selector,
+            target=baca.select_leaf(-1),
             )
 
     @staticmethod
@@ -5949,10 +5997,10 @@ class LibraryAM(object):
                 >>
 
         '''
-        selector = selector or baca.select_leaf(n=0)
         return baca.AttachCommand(
             arguments=[abjad.Articulation('longfermata')],
             selector=selector,
+            target=baca.select_leaf(),
             )
 
     @staticmethod
@@ -6072,10 +6120,10 @@ class LibraryAM(object):
                 >>
 
         '''
-        selector = selector or baca.select_plt_heads()
         return baca.AttachCommand(
             arguments=[abjad.Articulation('marcato')],
             selector=selector,
+            target=baca.select_plt_heads(),
             )
 
     @staticmethod
@@ -6206,10 +6254,10 @@ class LibraryAM(object):
                 >>
 
         '''
-        selector = selector or baca.select_each_plt_prun()
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.Tie(use_messiaen_style_ties=True),
+            target=baca.select_each_plt_prun(),
             )
 
     @staticmethod

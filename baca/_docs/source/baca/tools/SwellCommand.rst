@@ -29,6 +29,7 @@ Bases
       ~baca.tools.SwellCommand.SwellCommand.start_token
       ~baca.tools.SwellCommand.SwellCommand.stop_count
       ~baca.tools.SwellCommand.SwellCommand.stop_token
+      ~baca.tools.SwellCommand.SwellCommand.target
       ~baca.tools.SwellCommand.SwellCommand.__call__
       ~baca.tools.SwellCommand.SwellCommand.__eq__
       ~baca.tools.SwellCommand.SwellCommand.__format__
@@ -54,6 +55,12 @@ Read-only properties
 .. autoattribute:: baca.tools.SwellCommand.SwellCommand.stop_count
 
 .. autoattribute:: baca.tools.SwellCommand.SwellCommand.stop_token
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.SwellCommand.SwellCommand.target
 
 Special methods
 ---------------

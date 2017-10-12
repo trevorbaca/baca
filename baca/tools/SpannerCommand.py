@@ -166,7 +166,7 @@ class SpannerCommand(Command):
         ::
 
             >>> baca.SpannerCommand()
-            SpannerCommand()
+            SpannerCommand(target=baca.select_leaves())
 
     '''
 
@@ -183,8 +183,9 @@ class SpannerCommand(Command):
         self,
         selector=None,
         spanner=None,
+        target='baca.select_leaves()',
         ):
-        Command.__init__(self, selector=selector)
+        Command.__init__(self, selector=selector, target=target)
         if spanner is not None:
             assert isinstance(spanner, abjad.Spanner)
         self._spanner = spanner
@@ -199,20 +200,21 @@ class SpannerCommand(Command):
         '''
         if argument is None:
             return
+        if self.selector is not None:
+            argument = self.selector(argument)
+        selections = baca.MusicMaker._normalize_selections(argument)
+        if self.target is not None:
+            selections = [self.target(_) for _ in selections]
+        selections = baca.MusicMaker._normalize_selections(selections)
+        if False:
+            print(format(self.selector))
+            print()
+            print(argument)
+            print()
+            print(selections)
+            print()
         if self.spanner is None:
             return
-        selector = self.selector or baca.select_leaves()
-        selections = selector(argument)
-#        if isinstance(self.spanner, abjad.PianoPedalSpanner):
-#            print(format(selector))
-#            print()
-#            print(argument)
-#            print()
-#            print(selections)
-#            print()
-        selections = baca.MusicMaker._normalize_selections(selections)
-        #print()
-        #print(selections)
         for selection in selections:
             spanner = abjad.new(self.spanner)
             leaves = abjad.select(selection).by_leaf()

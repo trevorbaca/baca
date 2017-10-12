@@ -33,6 +33,7 @@ Bases
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.selector
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.source
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.start_index
+      ~baca.tools.ScorePitchCommand.ScorePitchCommand.target
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.__call__
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.__eq__
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.__format__
@@ -64,6 +65,12 @@ Read-only properties
 .. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.source
 
 .. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.start_index
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.target
 
 Methods
 -------

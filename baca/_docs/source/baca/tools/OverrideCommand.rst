@@ -31,6 +31,7 @@ Bases
       ~baca.tools.OverrideCommand.OverrideCommand.maximum_written_duration
       ~baca.tools.OverrideCommand.OverrideCommand.revert
       ~baca.tools.OverrideCommand.OverrideCommand.selector
+      ~baca.tools.OverrideCommand.OverrideCommand.target
       ~baca.tools.OverrideCommand.OverrideCommand.__call__
       ~baca.tools.OverrideCommand.OverrideCommand.__eq__
       ~baca.tools.OverrideCommand.OverrideCommand.__format__
@@ -60,6 +61,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.selector
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.target
 
 Special methods
 ---------------

@@ -26,6 +26,7 @@ Bases
       ~baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.selector
       ~baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.start_registration
       ~baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.stop_registration
+      ~baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.target
       ~baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.__call__
       ~baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.__eq__
       ~baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.__format__
@@ -45,6 +46,12 @@ Read-only properties
 .. autoattribute:: baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.start_registration
 
 .. autoattribute:: baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.stop_registration
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.target
 
 Special methods
 ---------------

@@ -789,10 +789,12 @@ class MusicMaker(abjad.AbjadObject):
 
     def _apply_remaining_specifiers(self, selections, specifiers):
         assert self._all_are_selections(selections), repr(selections)
+        selection = abjad.select(selections)
         for specifier in specifiers:
             if isinstance(specifier, abjad.rhythmmakertools.BeamSpecifier):
                 specifier._detach_all_beams(selections)
-            specifier(selections)
+            #specifier(selections)
+            specifier(selection)
 
     def _apply_rhythm_specifiers(
         self,
@@ -1037,9 +1039,15 @@ class MusicMaker(abjad.AbjadObject):
             selections = [abjad.select(argument)]
         elif isinstance(argument, abjad.Selection):
             selections = [argument]
+        # TODO: maybe remove this branch in favor of the next?
         elif (isinstance(argument, collections.Iterable) and
             all(type(_).__name__ == 'Selection' for _ in argument)):
             selections = list(argument)
+        elif isinstance(argument, collections.Iterable):
+            selections = []
+            for item in argument:
+                selections_ = MusicMaker._normalize_selections(item)
+                selections.extend(selections_)
         else:
             raise TypeError(f'unrecognized argument: {argument!r}.')
         assert isinstance(selections, list), repr(selections)
@@ -1489,7 +1497,7 @@ class MusicMaker(abjad.AbjadObject):
                 ...     [[0, 2, 10, 18], [15, 23], [19, 13, 9, 8]],
                 ...     baca.hairpins(
                 ...         ['p < f'],
-                ...         selector=baca.select_each_plt_run(),
+                ...         target=baca.select_each_plt_run(),
                 ...         ),
                 ...     baca.RestAffixSpecifier(
                 ...         pattern=abjad.Pattern(
@@ -1546,11 +1554,11 @@ class MusicMaker(abjad.AbjadObject):
                 ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
                 ...     baca.hairpins(
                 ...         ['p < f'],
-                ...         baca.select_leaves_in_tuplet(0),
+                ...         target=baca.select_leaves_in_tuplet(0),
                 ...         ),
                 ...     baca.hairpins(
                 ...         ['f > p'],
-                ...         baca.select_leaves_in_tuplet(-1),
+                ...         target=baca.select_leaves_in_tuplet(-1),
                 ...         ),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -1600,11 +1608,11 @@ class MusicMaker(abjad.AbjadObject):
                 ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
                 ...     baca.hairpins(
                 ...         ['p < f'],
-                ...         baca.select_tuplets(stop=2),
+                ...         target=baca.select_tuplets(stop=2),
                 ...         ),
                 ...     baca.hairpins(
                 ...         ['f > p'],
-                ...         baca.select_tuplets(start=-1),
+                ...         target=baca.select_tuplets(start=-1),
                 ...         ),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)

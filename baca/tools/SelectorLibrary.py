@@ -7482,11 +7482,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 c'16 \repeatTie
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
                                 bf'4.
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -7496,7 +7496,7 @@ class SelectorLibrary(object):
                                 \once \override Dots.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
-                                bf'16 \repeatTie
+                                bf'16
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
@@ -7541,8 +7541,8 @@ class SelectorLibrary(object):
                 >>> for item in contribution.color_selector_result:
                 ...     item
                 ...
-                Selection([LogicalTie([Note("c'16"), Note("c'16")]), LogicalTie([Note("bf'4."), Note("bf'16")])])
-                Selection([LogicalTie([Note("bf'4."), Note("bf'16")]), LogicalTie([Note("e''16"), Note("e''4.")]), LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")])])
+                Selection([LogicalTie([Note("c'16"), Note("c'16")]), LogicalTie([Note("bf'4.")])])
+                Selection([LogicalTie([Note("bf'16")]), LogicalTie([Note("e''16"), Note("e''4.")]), LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")])])
                 Selection([LogicalTie([Note("a'16")])])
 
         ..  container:: example
@@ -7583,11 +7583,6 @@ class SelectorLibrary(object):
                                 r8
                                 c'16
                                 c'16 \repeatTie
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
                                 bf'4.
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -7597,7 +7592,7 @@ class SelectorLibrary(object):
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                bf'16 \repeatTie
+                                bf'16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
@@ -7642,7 +7637,7 @@ class SelectorLibrary(object):
                 >>> for item in contribution.color_selector_result:
                 ...     item
                 ...
-                Selection([LogicalTie([Note("bf'4."), Note("bf'16")]), LogicalTie([Note("e''16"), Note("e''4.")]), LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")])])
+                Selection([LogicalTie([Note("bf'16")]), LogicalTie([Note("e''16"), Note("e''4.")]), LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")])])
                 Selection([LogicalTie([Note("a'16")])])
 
         '''
@@ -7713,12 +7708,7 @@ class SelectorLibrary(object):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
-                                bf'16 \repeatTie
+                                bf'16
                                 e''16
                                 e''4. \repeatTie
                                 fs''16
@@ -7739,7 +7729,7 @@ class SelectorLibrary(object):
                 ...     item
                 ...
                 LogicalTie([Note("c'16"), Note("c'16")])
-                LogicalTie([Note("bf'4."), Note("bf'16")])
+                LogicalTie([Note("bf'4.")])
 
         ..  container:: example
 
@@ -7778,11 +7768,6 @@ class SelectorLibrary(object):
                                 r8
                                 c'16
                                 c'16 \repeatTie
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
                                 bf'4.
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -7792,7 +7777,7 @@ class SelectorLibrary(object):
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                bf'16 \repeatTie
+                                bf'16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
@@ -7832,7 +7817,7 @@ class SelectorLibrary(object):
                 >>> for item in contribution.color_selector_result:
                 ...     item
                 ...
-                LogicalTie([Note("bf'4."), Note("bf'16")])
+                LogicalTie([Note("bf'16")])
                 LogicalTie([Note("e''16"), Note("e''4.")])
                 LogicalTie([Note("fs''16")])
                 LogicalTie([Note("af''16")])

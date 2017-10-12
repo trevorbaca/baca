@@ -14,7 +14,7 @@ class HairpinCommand(Command):
 
             >>> command = baca.HairpinCommand(
             ...     hairpin_tokens=['f > niente', 'niente < f'],
-            ...     selector=baca.select_each_plt_run(),
+            ...     target=baca.select_each_plt_run(),
             ...     )
             >>> string = "c'4 ~ c' ~ c' r4 d'4 ~ d' ~ d' r4"
             >>> staff = abjad.Staff(string)
@@ -59,8 +59,9 @@ class HairpinCommand(Command):
         include_rests=None,
         omit_lone_note_dynamic=None,
         selector=None,
+        target='baca.select_leaves_in_trimmed_run()',
         ):
-        Command.__init__(self, selector=selector)
+        Command.__init__(self, selector=selector, target=target)
         self._flare = flare
         hairpin_tokens = hairpin_tokens or []
         prototype = (list, tuple, abjad.CyclicTuple, abjad.Sequence,)
@@ -91,11 +92,11 @@ class HairpinCommand(Command):
         '''
         if not argument:
             return
-        if not self.hairpin_tokens:
-            return
-        selector = self.selector or baca.select_leaves_in_trimmed_run()
-        selections = selector(argument)
-        selections = baca.MusicMaker._normalize_selections(selections)
+        if self.selector is not None:
+            argument = self.selector(argument)
+        if self.target is not None:
+            argument = self.target(argument)
+        selections = baca.MusicMaker._normalize_selections(argument)
         if False:
             print(format(selector))
             print()
@@ -103,6 +104,8 @@ class HairpinCommand(Command):
             print()
             print(selections)
             print()
+        if not self.hairpin_tokens:
+            return
         for i, selection in enumerate(selections):
             leaves = abjad.select(selection).by_leaf()
             if len(leaves) == 1:
@@ -149,7 +152,7 @@ class HairpinCommand(Command):
 
                 >>> command = baca.HairpinCommand(
                 ...     hairpin_tokens=['f > p', 'p < f'],
-                ...     selector=baca.select_each_plt_run(),
+                ...     target=baca.select_each_plt_run(),
                 ...     )
                 >>> string = "c'4 ~ c' ~ c' r4 d'4 ~ d' ~ d' r4"
                 >>> staff = abjad.Staff(string)
@@ -179,7 +182,7 @@ class HairpinCommand(Command):
                 >>> command = baca.HairpinCommand(
                 ...     flare=True,
                 ...     hairpin_tokens=['f > p', 'p < f'],
-                ...     selector=baca.select_each_plt_run(),
+                ...     target=baca.select_each_plt_run(),
                 ...     )
                 >>> string = "c'4 ~ c' ~ c' r4 d'4 ~ d' ~ d' r4"
                 >>> staff = abjad.Staff(string)
@@ -245,7 +248,7 @@ class HairpinCommand(Command):
 
                 >>> command = baca.HairpinCommand(
                 ...     hairpin_tokens=['ppp < p'],
-                ...     selector=baca.select_each_plt(),
+                ...     target=baca.select_each_plt(),
                 ...     )
                 >>> string = "c'4 ~ c'8 d'8 ~ d'4 r4 e'4 g'4 fs'4 ~ fs'4"
                 >>> staff = abjad.Staff(string)
@@ -276,7 +279,7 @@ class HairpinCommand(Command):
                 >>> command = baca.HairpinCommand(
                 ...     hairpin_tokens=['ppp < p'],
                 ...     omit_lone_note_dynamic=True,
-                ...     selector=baca.select_each_plt(),
+                ...     target=baca.select_each_plt(),
                 ...     )
                 >>> string = "c'4 ~ c'8 d'8 ~ d'4 r4 e'4 g'4 fs'4 ~ fs'4"
                 >>> staff = abjad.Staff(string)
