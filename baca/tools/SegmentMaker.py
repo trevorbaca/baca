@@ -1801,7 +1801,12 @@ class SegmentMaker(abjad.SegmentMaker):
         for scope in scopes:
             leaves = []
             leaves_by_stage_number = self._cache[scope.voice_name]
-            start, stop = scope.stages.start, scope.stages.stop + 1
+            start = scope.stages.start
+            if (scope.stages.stop == abjad.Infinity or
+                scope.stages.stop is abjad.Infinity):
+                stop = self.stage_count
+            else:
+                stop = scope.stages.stop + 1
             for stage_number in range(start, stop):
                 leaves.extend(leaves_by_stage_number[stage_number])
             leaf_selections.append(abjad.select(leaves))
