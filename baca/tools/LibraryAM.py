@@ -8,7 +8,7 @@ class LibraryAM(object):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Library'
+    __documentation_section__ = 'Libraries'
 
     __slots__ = (
         )

@@ -1,5 +1,6 @@
 import abjad
 import baca
+import inspect
 
 
 class SelectorLibrary(object):
@@ -8,10 +9,26 @@ class SelectorLibrary(object):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Library'
+    __documentation_section__ = 'Libraries'
 
     __slots__ = (
         )
+
+    ### PRIVATE METHODS ###
+
+    @staticmethod
+    def _get_template(frame):
+        try:
+            frame_info = inspect.getframeinfo(frame)
+            function_name = frame_info.function
+            arguments = abjad.Expression._wrap_arguments(
+                frame,
+                static_class=SelectorLibrary,
+                )
+            template = f'baca.{function_name}({arguments})'
+        finally:
+            del frame
+        return template
 
     ### PUBLIC METHODS ###
 
@@ -169,7 +186,8 @@ class SelectorLibrary(object):
         selector = baca.select_chords()
         selector = selector.flatten()
         selector = selector.get_item(n=n)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_chord_head(n=0):
@@ -315,7 +333,8 @@ class SelectorLibrary(object):
         selector = baca.select_chord_heads()
         selector = selector.flatten()
         selector = selector.get_item(n=n)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_chord_heads(start=None, stop=None):
@@ -476,7 +495,8 @@ class SelectorLibrary(object):
         selector = abjad.select()
         selector = selector.by_leaf(prototype=abjad.Chord, head=True)
         selector = selector.get_slice(start=start, stop=stop)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_chords(start=None, stop=None):
@@ -647,7 +667,8 @@ class SelectorLibrary(object):
         selector = abjad.select()
         selector = selector.by_class(prototype=abjad.Chord)
         selector = selector.get_slice(start=start, stop=stop)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_each_lt(start=None, stop=None, leak=None):
@@ -984,7 +1005,8 @@ class SelectorLibrary(object):
             get = abjad.select().with_next_leaf()
         if get:
             selector = selector.map(get)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_each_plt(start=None, stop=None, leak=None):
@@ -1330,7 +1352,8 @@ class SelectorLibrary(object):
             get = abjad.select().with_next_leaf()
         if get:
             selector = selector.map(get)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_each_plt_nprun(start=None, stop=None):
@@ -1515,7 +1538,8 @@ class SelectorLibrary(object):
         selector = selector.group_by_pitch()
         selector = selector.by_length('>', 1)
         selector = selector.get_slice(start=start, stop=stop)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_each_plt_prun(start=None, stop=None):
@@ -1750,11 +1774,11 @@ class SelectorLibrary(object):
 
         '''
         selector = baca.select_plts()
-        #selector = selector.flatten(depth=1)
         selector = selector.group_by_pitch()
         selector = selector.get_slice(start=start, stop=stop)
         selector = selector.map(abjad.select().select())
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_each_plt_run(start=None, stop=None):
@@ -1991,7 +2015,8 @@ class SelectorLibrary(object):
         selector = selector.by_contiguity()
         selector = selector.get_slice(start=start, stop=stop)
         selector = selector.map(abjad.select().select())
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_leaf(n=0):
@@ -2136,7 +2161,8 @@ class SelectorLibrary(object):
         selector = baca.select_leaves()
         selector = selector.flatten()
         selector = selector.get_item(n=n)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_leaf_in_trimmed_run(n=0):
@@ -2284,7 +2310,8 @@ class SelectorLibrary(object):
         selector = baca.select_leaves_in_trimmed_run()
         selector = selector.flatten()
         selector = selector.get_item(n=n)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_leaf_in_tuplet(n=0, m=0):
@@ -2429,7 +2456,8 @@ class SelectorLibrary(object):
         selector = baca.select_leaves_in_tuplet(n=n)
         selector = selector.flatten()
         selector = selector.get_item(n=m)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_leaves(leak=None, start=None, stop=None):
@@ -2730,19 +2758,12 @@ class SelectorLibrary(object):
         selector = abjad.select()
         selector = selector.by_leaf()
         selector = selector.get_slice(start=start, stop=stop)
-
-        #get = None
         if leak in (abjad.Left, abjad.Both):
-            #get = abjad.select().with_previous_leaf()
             selector = selector.with_previous_leaf()
         if leak in (abjad.Right, abjad.Both):
-            #get = abjad.select().with_next_leaf()
             selector = selector.with_next_leaf()
-
-        #if get:
-        #    selector = selector.map(get)
-
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_leaves_in_each_tuplet(start=None, stop=None, leak=None):
@@ -2989,14 +3010,14 @@ class SelectorLibrary(object):
         '''
         selector = baca.select_tuplets(start=start, stop=stop)
         selector = selector.get_slice(start=start, stop=stop)
-        #selector = selector.flatten()
         get = abjad.select().by_leaf()
         if leak in (abjad.Left, abjad.Both):
             get = get.with_previous_leaf()
         if leak in (abjad.Right, abjad.Both):
             get = get.with_next_leaf()
         selector = selector.map(get)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_leaves_in_trimmed_run(start=None, stop=None):
@@ -3212,7 +3233,8 @@ class SelectorLibrary(object):
             trim=(abjad.MultimeasureRest, abjad.Rest, abjad.Skip),
             )
         selector = selector.get_slice(start=start, stop=stop)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_leaves_in_tuplet(n=0, leak=None):
@@ -3387,7 +3409,8 @@ class SelectorLibrary(object):
             selector = selector.with_previous_leaf()
         if leak in (abjad.Right, abjad.Both):
             selector = selector.with_next_leaf()
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_lt(n=0):
@@ -3538,9 +3561,9 @@ class SelectorLibrary(object):
 
         '''
         selector = baca.select_lts()
-        #selector = selector.flatten(depth=1)
         selector = selector.get_item(n=n)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_lts(start=None, stop=None):
@@ -3772,7 +3795,8 @@ class SelectorLibrary(object):
         selector = abjad.select()
         selector = selector.by_logical_tie()
         selector = selector.get_slice(start=start, stop=stop)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_note(n=0):
@@ -3920,7 +3944,8 @@ class SelectorLibrary(object):
         selector = baca.select_notes()
         selector = selector.flatten()
         selector = selector.get_item(n=n)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_notes(start=None, stop=None):
@@ -4133,7 +4158,8 @@ class SelectorLibrary(object):
         selector = abjad.select()
         selector = selector.by_class(prototype=abjad.Note)
         selector = selector.get_slice(start=start, stop=stop)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_pl(n=0):
@@ -4281,7 +4307,8 @@ class SelectorLibrary(object):
         selector = baca.select_pls()
         selector = selector.flatten()
         selector = selector.get_item(n=n)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_pls(start=None, stop=None):
@@ -4494,7 +4521,8 @@ class SelectorLibrary(object):
         selector = abjad.select()
         selector = selector.by_leaf(pitched=True)
         selector = selector.get_slice(start=start, stop=stop)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_pls_in_each_tuplet(start=None, stop=None):
@@ -4730,7 +4758,8 @@ class SelectorLibrary(object):
         selector = baca.select_tuplets(start=start, stop=stop)
         get = selector.by_leaf(pitched=True)
         selector = selector.map(get)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_pls_in_tuplet(n=0):
@@ -4893,7 +4922,8 @@ class SelectorLibrary(object):
         selector = baca.select_tuplets()
         selector = selector.get_item(n=n)
         selector = selector.by_leaf(pitched=True)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_plt(n=0):
@@ -5045,7 +5075,8 @@ class SelectorLibrary(object):
         '''
         selector = baca.select_plts()
         selector = selector.get_item(n=n)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_plt_head(n=0):
@@ -5192,7 +5223,8 @@ class SelectorLibrary(object):
         '''
         selector = baca.select_plt_heads()
         selector = selector.get_item(n=n)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_plt_head_in_tuplet(n=0, m=0):
@@ -5340,7 +5372,8 @@ class SelectorLibrary(object):
         selector = baca.select_plt_heads_in_tuplet(n=n)
         selector = selector.flatten()
         selector = selector.get_item(n=m)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_plt_heads(start=None, stop=None):
@@ -5545,7 +5578,8 @@ class SelectorLibrary(object):
             selector = selector.get_slice(start=start, stop=stop)
         selector = selector.map(abjad.select()[0])
         selector = selector.flatten()
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_plt_heads_in_each_tuplet(start=None, stop=None):
@@ -5766,7 +5800,8 @@ class SelectorLibrary(object):
         selector = baca.select_tuplets(start=start, stop=stop)
         get = abjad.select().by_leaf(pitched=True, head=True)
         selector = selector.map(get)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_plt_heads_in_tuplet(n=0):
@@ -5927,7 +5962,8 @@ class SelectorLibrary(object):
         get = abjad.select().get_item(0)
         selector = selector.map(get)
         selector = selector.flatten()
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_plt_nprun(n=0):
@@ -6089,7 +6125,8 @@ class SelectorLibrary(object):
         '''
         selector = baca.select_each_plt_nprun()
         selector = selector.get_item(n=n)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_plt_prun(n=0):
@@ -6241,7 +6278,8 @@ class SelectorLibrary(object):
         '''
         selector = baca.select_each_plt_prun()
         selector = selector.get_item(n=n)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_plt_run(n=0):
@@ -6420,7 +6458,8 @@ class SelectorLibrary(object):
         '''
         selector = baca.select_each_plt_run()
         selector = selector.get_item(n=n)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_plt_tail(n=0):
@@ -6567,7 +6606,8 @@ class SelectorLibrary(object):
         '''
         selector = baca.select_plt_tails()
         selector = selector.get_item(n=n)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_plt_tails(start=None, stop=None):
@@ -6771,7 +6811,8 @@ class SelectorLibrary(object):
         selector = selector.get_slice(start=start, stop=stop)
         selector = selector.map(abjad.select().last())
         selector = selector.flatten()
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_plt_tails_in_each_tuplet(start=None, stop=None):
@@ -6992,7 +7033,8 @@ class SelectorLibrary(object):
         selector = baca.select_tuplets(start=start, stop=stop)
         get = abjad.select().by_leaf(pitched=True, tail=True)
         selector = selector.map(get)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_plt_tails_in_tuplet(n=0):
@@ -7152,7 +7194,8 @@ class SelectorLibrary(object):
         selector = selector.by_logical_tie(pitched=True)
         selector = selector.map(abjad.select().last())
         selector = selector.flatten()
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_plts(start=None, stop=None):
@@ -7385,7 +7428,8 @@ class SelectorLibrary(object):
         selector = selector.by_logical_tie(pitched=True)
         if start is not None or stop is not None:
             selector = selector.get_slice(start=start, stop=stop)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_plts_in_each_tuplet(start=None, stop=None):
@@ -7606,7 +7650,8 @@ class SelectorLibrary(object):
         selector = selector.get_slice(start=start, stop=stop)
         get = abjad.select().by_logical_tie(pitched=True)
         selector = selector.map(get)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_plts_in_tuplet(n=0):
@@ -7797,7 +7842,8 @@ class SelectorLibrary(object):
         selector = selector.select()
         selector = selector.by_logical_tie(pitched=True)
         selector = selector.select()
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_rest(n=0):
@@ -7939,7 +7985,8 @@ class SelectorLibrary(object):
         selector = baca.select_rests()
         selector = selector.flatten()
         selector = selector.get_item(n=n)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_rest_in_tuplet(n=0, m=0):
@@ -8081,7 +8128,8 @@ class SelectorLibrary(object):
         selector = baca.select_rests_in_tuplet(n=n)
         selector = selector.flatten()
         selector = selector.get_item(n=m)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_rests(start=None, stop=None):
@@ -8231,7 +8279,8 @@ class SelectorLibrary(object):
         selector = abjad.select()
         selector = selector.by_class(prototype=abjad.Rest)
         selector = selector.get_slice(start=start, stop=stop)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_rests_in_tuplet(n=0):
@@ -8377,7 +8426,8 @@ class SelectorLibrary(object):
         selector = selector.by_leaf(
             prototype=(abjad.MultimeasureRest, abjad.Rest),
             )
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_stages(start, stop=None):
@@ -8630,7 +8680,8 @@ class SelectorLibrary(object):
             trim=(abjad.MultimeasureRest, abjad.Rest, abjad.Skip),
             )
         selector = selector.map(get)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_trimmed_run_in_tuplet(n=0):
@@ -8795,7 +8846,8 @@ class SelectorLibrary(object):
         selector = selector.by_leaf(
             trim=(abjad.MultimeasureRest, abjad.Rest, abjad.Skip),
             )
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_tuplet(n=0):
@@ -8964,7 +9016,8 @@ class SelectorLibrary(object):
         selector = baca.select_tuplets()
         selector = selector.flatten()
         selector = selector.get_item(n=n)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     @staticmethod
     def select_tuplets(start=None, stop=None):
@@ -9211,4 +9264,5 @@ class SelectorLibrary(object):
         selector = abjad.select()
         selector = selector.by_class(prototype=abjad.Tuplet)
         selector = selector.get_slice(start=start, stop=stop)
-        return selector
+        template = SelectorLibrary._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)

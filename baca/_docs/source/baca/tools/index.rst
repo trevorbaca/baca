@@ -131,8 +131,8 @@ Expressions
 
 --------
 
-Library
--------
+Libraries
+---------
 
 .. toctree::
    :hidden:
