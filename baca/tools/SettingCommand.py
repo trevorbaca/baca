@@ -4,15 +4,15 @@ from .Command import Command
 
 
 # TODO: write examples
-class SetCommand(Command):
+class SettingCommand(Command):
     r'''Set command.
 
     ..  container:: example
 
         ::
 
-            >>> baca.SetCommand()
-            SetCommand()
+            >>> baca.SettingCommand()
+            SettingCommand()
 
     '''
 

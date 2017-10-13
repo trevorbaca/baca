@@ -716,7 +716,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         Returns none.
         '''
-        prototype = (baca.SimpleScope, baca.CompoundScope)
+        prototype = (baca.Scope, baca.CompoundScope)
         if isinstance(scopes, prototype):
             scopes = [scopes]
         else:
@@ -725,7 +725,7 @@ class SegmentMaker(abjad.SegmentMaker):
         assert all(isinstance(_, prototype) for _ in commands)
         for scope in scopes:
             for command in commands:
-                wrapper = baca.CommandWrapper(
+                wrapper = baca.Wrapper(
                     command=command,
                     scope=scope,
                     )
@@ -1426,7 +1426,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _interpret_commands(self):
         start_time = time.time()
         for wrapper in self.wrappers:
-            assert isinstance(wrapper, baca.CommandWrapper)
+            assert isinstance(wrapper, baca.Wrapper)
             assert isinstance(wrapper.command, (baca.Builder, baca.Command))
             if isinstance(wrapper.command, baca.RhythmBuilder):
                 continue
@@ -1465,7 +1465,7 @@ class SegmentMaker(abjad.SegmentMaker):
         effective_staff_name = effective_staff.context_name
         contributions = []
         for rhythm_command in rhythm_commands:
-            assert isinstance(rhythm_command, baca.CommandWrapper)
+            assert isinstance(rhythm_command, baca.Wrapper)
             if rhythm_command.scope.stages is not None:
                 result = self._get_stage_numbers(rhythm_command.scope.stages)
                 contribution = self._get_time_signatures(*result)
@@ -1792,7 +1792,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _scope_to_leaf_selections(self, scope):
         if self._cache is None:
             self._cache_leaves()
-        if isinstance(scope, baca.SimpleScope):
+        if isinstance(scope, baca.Scope):
             scopes = [scope]
         else:
             assert isinstance(scope, baca.CompoundScope)
@@ -7185,8 +7185,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
         Returns none.
         '''
-        assert isinstance(source, baca.SimpleScope)
-        assert isinstance(target, baca.SimpleScope)
+        assert isinstance(source, baca.Scope)
+        assert isinstance(target, baca.Scope)
         for wrapper in self.wrappers:
             if not isinstance(wrapper.command, baca.RhythmBuilder):
                 continue
@@ -7200,10 +7200,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 break
         else:
             raise Exception(f'no {voice_name!r} rhythm command for {stage}.')
-        assert isinstance(wrapper, baca.CommandWrapper)
+        assert isinstance(wrapper, baca.Wrapper)
         assert isinstance(wrapper.command, baca.RhythmBuilder)
         command = abjad.new(wrapper.command, **keywords)
-        wrapper = baca.CommandWrapper(command, target)
+        wrapper = baca.Wrapper(command, target)
         self.wrappers.append(wrapper)
 
     def run(

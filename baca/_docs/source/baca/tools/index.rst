@@ -49,7 +49,7 @@ Commands
    RegisterToOctaveCommand
    RegisterTransitionCommand
    ScorePitchCommand
-   SetCommand
+   SettingCommand
    SpannerCommand
    StemTremoloCommand
    SwellCommand
@@ -76,7 +76,7 @@ Commands
    RegisterToOctaveCommand
    RegisterTransitionCommand
    ScorePitchCommand
-   SetCommand
+   SettingCommand
    SpannerCommand
    StemTremoloCommand
    SwellCommand
@@ -224,7 +224,6 @@ Utilities
 
    Coat
    CollectionList
-   CommandWrapper
    CompoundScope
    Constellation
    ConstellationCircuit
@@ -250,9 +249,9 @@ Utilities
    Registration
    RegistrationComponent
    RegistrationDictionary
+   Scope
    ScoreTemplate
    Sequence
-   SimpleScope
    SpacingIndication
    StageMeasureMap
    StringTrioScoreTemplate
@@ -263,6 +262,7 @@ Utilities
    ViolinSoloScoreTemplate
    VoltaMeasureMap
    WellformednessManager
+   Wrapper
    ZaggedPitchClassMaker
 
 .. autosummary::
@@ -270,7 +270,6 @@ Utilities
 
    Coat
    CollectionList
-   CommandWrapper
    CompoundScope
    Constellation
    ConstellationCircuit
@@ -296,9 +295,9 @@ Utilities
    Registration
    RegistrationComponent
    RegistrationDictionary
+   Scope
    ScoreTemplate
    Sequence
-   SimpleScope
    SpacingIndication
    StageMeasureMap
    StringTrioScoreTemplate
@@ -309,4 +308,5 @@ Utilities
    ViolinSoloScoreTemplate
    VoltaMeasureMap
    WellformednessManager
+   Wrapper
    ZaggedPitchClassMaker

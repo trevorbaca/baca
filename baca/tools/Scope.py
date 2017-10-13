@@ -2,14 +2,14 @@ import abjad
 import baca
 
 
-class SimpleScope(abjad.AbjadObject):
+class Scope(abjad.AbjadObject):
     r'''Simple scope.
 
     ..  container:: example
 
         ::
 
-            >>> scope = baca.SimpleScope(
+            >>> scope = baca.Scope(
             ...     voice_name='Violin Music Voice',
             ...     stages=(1, 9),
             ...     )
@@ -17,7 +17,7 @@ class SimpleScope(abjad.AbjadObject):
         ::
 
             >>> f(scope)
-            baca.SimpleScope(
+            baca.Scope(
                 voice_name='Violin Music Voice',
                 stages=baca.StageSpecifier(
                     start=1,

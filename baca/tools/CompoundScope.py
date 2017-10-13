@@ -21,28 +21,28 @@ class CompoundScope(abjad.AbjadObject):
             >>> f(scope)
             baca.CompoundScope(
                 scopes=(
-                    baca.SimpleScope(
+                    baca.Scope(
                         voice_name='Piano Music Voice',
                         stages=baca.StageSpecifier(
                             start=5,
                             stop=9,
                             ),
                         ),
-                    baca.SimpleScope(
+                    baca.Scope(
                         voice_name='Clarinet Music Voice',
                         stages=baca.StageSpecifier(
                             start=7,
                             stop=12,
                             ),
                         ),
-                    baca.SimpleScope(
+                    baca.Scope(
                         voice_name='Violin Music Voice',
                         stages=baca.StageSpecifier(
                             start=8,
                             stop=12,
                             ),
                         ),
-                    baca.SimpleScope(
+                    baca.Scope(
                         voice_name='Oboe Music Voice',
                         stages=baca.StageSpecifier(
                             start=9,
@@ -78,8 +78,8 @@ class CompoundScope(abjad.AbjadObject):
             assert isinstance(scopes, (tuple, list))
             scopes_ = []
             for scope in scopes:
-                if not isinstance(scope, baca.SimpleScope):
-                    scope = baca.SimpleScope(*scope)
+                if not isinstance(scope, baca.Scope):
+                    scope = baca.Scope(*scope)
                 scopes_.append(scope)
             scopes = scopes_
             scopes = tuple(scopes)

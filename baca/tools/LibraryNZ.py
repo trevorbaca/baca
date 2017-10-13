@@ -1609,7 +1609,7 @@ class LibraryNZ(object):
         assert isinstance(duration, tuple), repr(duration)
         assert len(duration) == 2, repr(duration)
         moment = abjad.SchemeMoment(duration)
-        return baca.SetCommand(
+        return baca.SettingCommand(
             context_name='score',
             selector=selector,
             setting_name='proportional_notation_duration',
@@ -2956,7 +2956,7 @@ class LibraryNZ(object):
             stages = baca.StageSpecifier(start, start)
         else:
             stages = baca.StageSpecifier(start, stop)
-        return baca.SimpleScope(
+        return baca.Scope(
             voice_name=voice,
             stages=stages,
             )
