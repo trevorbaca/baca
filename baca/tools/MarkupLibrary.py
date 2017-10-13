@@ -16,14 +16,14 @@ class MarkupLibrary(object):
     def __call__(
         markup=None,
         selector=None,
-        target='baca.select_plt_head()',
+        target=None,
         direction=None,
         ):
-        r'''Attaches markup to pitched head 0.
+        r'''Attaches markup to PLT head 0.
 
         ..  container:: example
 
-            Attaches markup to pitched head 0:
+            Attaches markup to PLT head 0:
 
             ::
 
@@ -78,7 +78,7 @@ class MarkupLibrary(object):
 
         ..  container:: example
 
-            Attaches markup to pitched head 0 in tuplet 1:
+            Attaches markup to PLT head 0 in tuplet 1:
 
             ::
 
@@ -136,7 +136,7 @@ class MarkupLibrary(object):
 
         ..  container:: example
 
-            Attaches markup to pitched heads in tuplet 1:
+            Attaches markup to PLT heads in tuplet 1:
 
             ::
 
@@ -195,7 +195,7 @@ class MarkupLibrary(object):
         '''
         if not isinstance(markup, abjad.Markup):
             markup = abjad.Markup(markup, direction=direction)
-        #selector = selector or baca.select_plt_head(n=0)
+        target = target or baca.select_plt_head(n=0)
         return baca.AttachCommand(
             arguments=[markup],
             selector=selector,
@@ -280,7 +280,7 @@ class MarkupLibrary(object):
             )
 
     @staticmethod
-    def boxed(string, selector=None, whiteout=True):
+    def boxed(string, selector=None, target=None, whiteout=True):
         markup = abjad.Markup(string, direction=abjad.Up)
         markup = markup.box().override(('box-padding', 0.5))
         if whiteout:
@@ -288,10 +288,17 @@ class MarkupLibrary(object):
         return MarkupLibrary()(
             markup=markup,
             selector=selector,
+            target=target,
             )
 
     @staticmethod
-    def boxed_lines(strings, direction=abjad.Up, selector=None, whiteout=True):
+    def boxed_lines(
+        strings,
+        direction=abjad.Up,
+        selector=None,
+        target=None,
+        whiteout=True,
+        ):
         assert isinstance(strings, list), repr(strings)
         markup = abjad.MarkupList(strings).column(direction=direction)
         markup = markup.box().override(('box-padding', 0.5))
@@ -300,6 +307,7 @@ class MarkupLibrary(object):
         return MarkupLibrary()(
             markup=markup,
             selector=selector,
+            target=target,
             )
 
     @staticmethod
@@ -895,6 +903,7 @@ class MarkupLibrary(object):
         first_is_new=True,
         second_is_new=True,
         selector=None,
+        target='baca.select_pl()',
         ):
         return MarkupLibrary.two_part_transition(
             'poco pont.',
@@ -902,6 +911,7 @@ class MarkupLibrary(object):
             first_is_new=first_is_new,
             second_is_new=second_is_new,
             selector=selector,
+            target=target,
             )
 
     @staticmethod
@@ -1425,6 +1435,7 @@ class MarkupLibrary(object):
         first_is_new=True,
         second_is_new=True,
         selector=None,
+        target='baca.select_pl()',
         ):
         if first_is_new:
             if second_is_new:
@@ -1439,6 +1450,7 @@ class MarkupLibrary(object):
         return MarkupLibrary.make_markup(
             composite_string,
             selector=selector,
+            target=target,
             )
 
     @staticmethod

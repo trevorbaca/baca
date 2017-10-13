@@ -1435,7 +1435,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 wrapper.command(selection)
             except:
                 traceback.print_exc()
-                raise Exception(format(wrapper))
+                raise Exception(f'can not interpret ...\n\n{format(wrapper)}')
             self._handle_mutator(wrapper)
         stop_time = time.time()
         count = int(stop_time - start_time)

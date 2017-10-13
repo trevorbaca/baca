@@ -3381,7 +3381,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def dynamic(dynamic=None, selector=None):
+    def dynamic(dynamic=None, selector=None, target='baca.select_plt_head()'):
         r'''Attaches dynamic to pitched head 0.
 
         ..  container:: example
@@ -3501,7 +3501,7 @@ class LibraryAM(object):
         return baca.AttachCommand(
             arguments=[abjad.Dynamic(dynamic)],
             selector=selector,
-            target=baca.select_plt_head(),
+            target=target,
             )
 
     @staticmethod
