@@ -54,10 +54,10 @@ class SettingCommand(Command):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        selections = baca.MusicMaker._normalize_selections(argument)
+        selections = self._normalize_selections(argument)
         if self.target is not None:
             selections = [self.target(_) for _ in selections]
-        selections = baca.MusicMaker._normalize_selections(selections)
+        selections = self._normalize_selections(selections)
         context = self.context_name
         setting = self.setting_name
         value = self.setting_value

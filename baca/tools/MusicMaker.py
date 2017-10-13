@@ -1,6 +1,5 @@
 import abjad
 import baca
-import collections
 import copy
 
 
@@ -1032,29 +1031,6 @@ class MusicMaker(abjad.AbjadObject):
             duration = duration.with_denominator(denominator)
         time_signature = abjad.TimeSignature(duration)
         return time_signature
-
-    @staticmethod
-    def _normalize_selections(argument):
-        if not argument:
-            selections = []
-        elif isinstance(argument, abjad.Component):
-            selections = [abjad.select(argument)]
-        elif isinstance(argument, abjad.Selection):
-            selections = [argument]
-        # TODO: maybe remove this branch in favor of the next?
-        elif (isinstance(argument, collections.Iterable) and
-            all(type(_).__name__ == 'Selection' for _ in argument)):
-            selections = list(argument)
-        elif isinstance(argument, collections.Iterable):
-            selections = []
-            for item in argument:
-                selections_ = MusicMaker._normalize_selections(item)
-                selections.extend(selections_)
-        else:
-            raise TypeError(f'unrecognized argument: {argument!r}.')
-        assert isinstance(selections, list), repr(selections)
-        assert all(isinstance(_, abjad.Selection) for _ in selections)
-        return selections
 
     def _print_state_manifest(self):
         state_manifest = self._make_state_manifest()

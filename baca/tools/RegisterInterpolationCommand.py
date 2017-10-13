@@ -971,7 +971,7 @@ class RegisterInterpolationCommand(Command):
             return
         selector = self.selector or baca.select_leaves()
         result = selector(argument)
-        selections = baca.MusicMaker._normalize_selections(result)
+        selections = self._normalize_selections(result)
         for selection in selections:
             logical_ties = abjad.iterate(selection).by_logical_tie(
                 pitched=True,

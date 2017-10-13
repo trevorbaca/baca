@@ -202,10 +202,10 @@ class SpannerCommand(Command):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        selections = baca.MusicMaker._normalize_selections(argument)
+        selections = self._normalize_selections(argument)
         if self.target is not None:
             selections = [self.target(_) for _ in selections]
-        selections = baca.MusicMaker._normalize_selections(selections)
+        selections = self._normalize_selections(selections)
         if False:
             print(format(self.selector))
             print()

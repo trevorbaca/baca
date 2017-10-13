@@ -204,7 +204,7 @@ class AttachCommand(Command):
             argument = self.selector(argument)
         if self.target is not None:
             argument = self.target(argument)
-        selections = baca.MusicMaker._normalize_selections(argument)
+        selections = self._normalize_selections(argument)
         if self.arguments is None:
             return
         arguments = abjad.CyclicTuple(self.arguments)

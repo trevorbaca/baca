@@ -96,7 +96,7 @@ class HairpinCommand(Command):
             argument = self.selector(argument)
         if self.target is not None:
             argument = self.target(argument)
-        selections = baca.MusicMaker._normalize_selections(argument)
+        selections = self._normalize_selections(argument)
         if False:
             print(format(selector))
             print()

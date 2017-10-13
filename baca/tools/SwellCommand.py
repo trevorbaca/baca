@@ -104,7 +104,7 @@ class SwellCommand(Command):
         '''
         selector = self.selector or baca.select_pls()
         selections = selector(argument)
-        selections = baca.MusicMaker._normalize_selections(selections)
+        selections = self._normalize_selections(selections)
         for selection in selections:
             leaves = abjad.select(selection).by_leaf()
             start_hairpin = abjad.Hairpin(
