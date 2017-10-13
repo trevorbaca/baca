@@ -2065,6 +2065,21 @@ class LibraryAM(object):
             )
 
     @staticmethod
+    def clusters(
+        start_pitch=None,
+        widths=None,
+        selector=None,
+        target='baca.select_plts()',
+        ):
+        r'''Makes clusters from PLTs.
+        '''
+        return baca.ClusterCommand(
+            selector=selector,
+            start_pitch=start_pitch,
+            widths=widths,
+            )
+
+    @staticmethod
     def coat(pitch):
         r'''Coats `pitch`.
 

@@ -32,6 +32,7 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.center_to_octave
       ~baca.tools.LibraryAM.LibraryAM.clef
       ~baca.tools.LibraryAM.LibraryAM.clef_spanner
+      ~baca.tools.LibraryAM.LibraryAM.clusters
       ~baca.tools.LibraryAM.LibraryAM.coat
       ~baca.tools.LibraryAM.LibraryAM.color
       ~baca.tools.LibraryAM.LibraryAM.compound
@@ -110,6 +111,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAM.LibraryAM.clef
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.clef_spanner
+
+.. automethod:: baca.tools.LibraryAM.LibraryAM.clusters
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.coat
 

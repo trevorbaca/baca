@@ -719,10 +719,12 @@ class MusicMaker(abjad.AbjadObject):
 
     def _apply_cluster_specifiers(self, selections, specifiers):
         assert self._all_are_selections(selections), repr(selections)
+        selection = abjad.select(selections)
         specifiers_ = []
         for specifier in specifiers:
             if isinstance(specifier, baca.ClusterCommand):
-                specifier(selections)
+                #specifier(selections)
+                specifier(selection)
             else:
                 specifiers_.append(specifier)
         return specifiers_

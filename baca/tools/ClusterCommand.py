@@ -187,6 +187,187 @@ class ClusterCommand(Command):
 
     ..  container:: example
 
+        Resets on each tuplet:
+
+        ::
+
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.ClusterCommand(
+            ...         selector=baca.select_leaves_in_each_tuplet(),
+            ...         widths=[3, 4],
+            ...         ),
+            ...     )
+
+        ::
+
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> f(lilypond_file[abjad.Staff])
+            \new Staff <<
+                \context Voice = "Voice 1" {
+                    \voiceOne
+                    {
+                        {
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <c' e' g'>16 [
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <d' f' a' c''>16
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <bf' d'' f''>16 ]
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                        }
+                        {
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <fs'' a'' c'''>16 [
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <e'' g'' b'' d'''>16
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <ef'' g'' b''>16
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <af'' c''' e''' g'''>16
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <g'' b'' d'''>16 ]
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                        }
+                        {
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <a' c'' e''>16
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                        }
+                    }
+                }
+            >>
+
+    ..  container:: example
+
         With segment-maker:
 
         Clusters widths alternating 3 and 4:
@@ -354,9 +535,10 @@ class ClusterCommand(Command):
         hide_natural_markup=None,
         selector=None,
         start_pitch=None,
+        target='baca.select_plts()',
         widths=None,
         ):
-        Command.__init__(self, selector=selector)
+        Command.__init__(self, selector=selector, target=target)
         assert isinstance(hide_flat_markup, (bool, type(None)))
         self._hide_flat_markup = hide_flat_markup
         assert isinstance(hide_natural_markup, (bool, type(None)))
@@ -377,44 +559,40 @@ class ClusterCommand(Command):
         '''
         if argument is None:
             return
-        leaves = abjad.select(argument).by_leaf()
-        if self.selector is not None:
-            result = self.selector(leaves)
-            leaves = abjad.select(result).by_leaf()
-        leaves_timespan = leaves.get_timespan()
+        selections = self._preprocess(argument)
+        if not selections:
+            return
         if self.widths is None:
             return
         widths = abjad.CyclicTuple(self.widths)
-        lts = abjad.select(leaves).by_logical_tie(pitched=True)
-        lts = [
-            _ for _ in lts
-            if _.get_timespan().starts_during_timespan(leaves_timespan)
-            ]
-        first_note = lts[0].head
-        root = abjad.inspect(first_note).get_parentage().root
+        leaf = abjad.inspect(selections[0]).get_leaf()
+        root = abjad.inspect(leaf).get_parentage().root
         with abjad.ForbidUpdate(component=root):
-            for index, lt in enumerate(lts):
-                width = widths[index]
-                for note in lt:
-                    self._make_cluster(note, width)
+            for selection in selections:
+                for i, plt in enumerate(selection):
+                    width = widths[i]
+                    self._make_cluster(plt, width)
 
     ### PRIVATE METHODS ###
 
-    def _make_cluster(self, note, width):
+    def _make_cluster(self, plt, width):
+        assert isinstance(plt, abjad.LogicalTie), repr(plt)
+        assert plt.is_pitched, repr(plt)
         if not width:
             return
         if self.start_pitch is not None:
-            pitches = self._make_pitches(self.start_pitch, width)
+            start_pitch = self.start_pitch
         else:
-            start_pitch = note.written_pitch
-            pitches = self._make_pitches(start_pitch, width)
-        chord = abjad.Chord(pitches, note.written_duration)
-        abjad.mutate(note).replace(chord)
+            start_pitch = plt.head.written_pitch
+        pitches = self._make_pitches(start_pitch, width)
         indicator = abjad.KeyCluster(
             include_black_keys=not self.hide_flat_markup,
             include_white_keys=not self.hide_natural_markup,
             )
-        abjad.attach(indicator, chord)
+        for leaf in plt:
+            chord = abjad.Chord(pitches, leaf.written_duration)
+            abjad.mutate(leaf).replace(chord)
+            abjad.attach(indicator, chord)
 
     def _make_pitches(self, start_pitch, width):
         pitches = [start_pitch]
