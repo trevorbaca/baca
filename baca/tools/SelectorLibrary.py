@@ -4653,8 +4653,7 @@ class SelectorLibrary(object):
 
         ..  container:: example
 
-            Selects PLs in each of the last two tuplets as
-            separate selections:
+            Selects PLs in each of the last two tuplets as separate selections:
 
             ::
 
@@ -7433,11 +7432,11 @@ class SelectorLibrary(object):
 
     @staticmethod
     def select_plts_in_each_tuplet(start=None, stop=None):
-        r'''Selects PLTs in each tuplet.
+        r'''Selects PLTs (starting) in each tuplet.
 
         ..  container:: example
 
-            Selects PLTs in each tuplet as separate selections:
+            Selects PLTs (starting) in each tuplet as separate selections:
 
             ::
 
@@ -7491,12 +7490,12 @@ class SelectorLibrary(object):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
-                                bf'16
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
+                                bf'16 \repeatTie
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
@@ -7541,13 +7540,13 @@ class SelectorLibrary(object):
                 >>> for item in contribution.color_selector_result:
                 ...     item
                 ...
-                Selection([LogicalTie([Note("c'16"), Note("c'16")]), LogicalTie([Note("bf'4.")])])
-                Selection([LogicalTie([Note("bf'16")]), LogicalTie([Note("e''16"), Note("e''4.")]), LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")])])
+                Selection([LogicalTie([Note("c'16"), Note("c'16")]), LogicalTie([Note("bf'4."), Note("bf'16")])])
+                Selection([LogicalTie([Note("e''16"), Note("e''4.")]), LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")])])
                 Selection([LogicalTie([Note("a'16")])])
 
         ..  container:: example
 
-            Selects PLTs in each of the last two tuplets as separate
+            Selects PLTs (starting) in each of the last two tuplets as separate
             selections:
 
             ::
@@ -7561,7 +7560,9 @@ class SelectorLibrary(object):
                 ...         baca.select_plts_in_each_tuplet(start=-2),
                 ...         ),
                 ...     baca.flags(),
-                ...     baca.messiaen_tie_each(),
+                ...     baca.messiaen_tie_each(
+                ...         baca.select_leaves_in_each_tuplet(),
+                ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 6],
@@ -7650,11 +7651,11 @@ class SelectorLibrary(object):
 
     @staticmethod
     def select_plts_in_tuplet(n=0):
-        r'''Selects PLTs in tuplet.
+        r'''Selects PLTs (starting) in tuplet.
 
         ..  container:: example
 
-            Selects PLTs in tuplet 0:
+            Selects PLTs (starting) in tuplet 0:
 
             ::
 
@@ -7667,7 +7668,9 @@ class SelectorLibrary(object):
                 ...         baca.select_plts_in_tuplet(),
                 ...         ),
                 ...     baca.flags(),
-                ...     baca.messiaen_tie_each(),
+                ...     baca.messiaen_tie_each(
+                ...         baca.select_leaves_in_each_tuplet()
+                ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 6],
@@ -7733,7 +7736,7 @@ class SelectorLibrary(object):
 
         ..  container:: example
 
-            Selects PLTs in tuplet 1:
+            Selects PLTs (starting) in tuplet 1:
 
             ::
 
@@ -7746,7 +7749,9 @@ class SelectorLibrary(object):
                 ...         baca.select_plts_in_tuplet(n=1),
                 ...         ),
                 ...     baca.flags(),
-                ...     baca.messiaen_tie_each(),
+                ...     baca.messiaen_tie_each(
+                ...         baca.select_leaves_in_each_tuplet(),
+                ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 6],

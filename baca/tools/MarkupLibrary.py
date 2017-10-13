@@ -13,7 +13,12 @@ class MarkupLibrary(object):
     ### SPECIAL METHODS ###
 
     @staticmethod
-    def __call__(markup=None, selector=None, direction=None):
+    def __call__(
+        markup=None,
+        selector=None,
+        target='baca.select_plt_head()',
+        direction=None,
+        ):
         r'''Attaches markup to pitched head 0.
 
         ..  container:: example
@@ -141,7 +146,7 @@ class MarkupLibrary(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.markup(
                 ...         '*',
-                ...         baca.select_plt_heads_in_tuplet(1),
+                ...         target=baca.select_plt_heads_in_tuplet(1),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -190,10 +195,11 @@ class MarkupLibrary(object):
         '''
         if not isinstance(markup, abjad.Markup):
             markup = abjad.Markup(markup, direction=direction)
-        selector = selector or baca.select_plt_head(n=0)
+        #selector = selector or baca.select_plt_head(n=0)
         return baca.AttachCommand(
             arguments=[markup],
             selector=selector,
+            target=target,
             )
 
     ### PRIVATE FUNCTIONS ###
@@ -572,6 +578,7 @@ class MarkupLibrary(object):
         direction=abjad.Up,
         is_new=True,
         selector=None,
+        target='baca.select_plt_head()',
         upright=True,
         whiteout=True,
         ):
@@ -582,7 +589,7 @@ class MarkupLibrary(object):
             markup = markup.upright()
         if whiteout:
             markup = markup.whiteout()
-        return MarkupLibrary()(markup=markup, selector=selector)
+        return MarkupLibrary()(markup=markup, selector=selector, target=target)
 
     @staticmethod
     def molto_flautando(selector=None):

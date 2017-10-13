@@ -7519,7 +7519,6 @@ class LibraryNZ(object):
     def tied_repeated_durations(durations):
         r'''Makes tied repeated durations.
         '''
-        #specifier = make_repeated_duration_rhythm_specifier(durations)
         specifier = baca.repeated_durations(durations)
         specifier = abjad.new(
             specifier,

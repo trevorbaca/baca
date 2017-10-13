@@ -26,8 +26,7 @@ def _import_static_methods(class_):
     for name in dir(class_):
         if name.startswith('_'):
             continue
-        statement = '{} = {}.{}'
-        statement = statement.format(name, class_.__name__, name)
+        statement = f'{name} = {class_.__name__}.{name}'
         exec(statement, globals())
 
 
