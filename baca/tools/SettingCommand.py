@@ -52,12 +52,7 @@ class SettingCommand(Command):
         '''
         if argument is None:
             return
-        if self.selector is not None:
-            argument = self.selector(argument)
-        selections = self._to_selection_list(argument)
-        if self.target is not None:
-            selections = [self.target(_) for _ in selections]
-        selections = self._to_selection_list(selections)
+        selections = self._preprocess(argument)
         context = self.context_name
         setting = self.setting_name
         value = self.setting_value
