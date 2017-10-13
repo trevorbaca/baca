@@ -104,7 +104,7 @@ class SwellCommand(Command):
         '''
         selector = self.selector or baca.select_pls()
         selections = selector(argument)
-        selections = self._normalize_selections(selections)
+        selections = self._to_selection_list(selections)
         for selection in selections:
             leaves = abjad.select(selection).by_leaf()
             start_hairpin = abjad.Hairpin(

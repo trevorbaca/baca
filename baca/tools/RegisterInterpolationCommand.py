@@ -971,7 +971,7 @@ class RegisterInterpolationCommand(Command):
             return
         selector = self.selector or baca.select_leaves()
         result = selector(argument)
-        selections = self._normalize_selections(result)
+        selections = self._to_selection_list(result)
         for selection in selections:
             logical_ties = abjad.iterate(selection).by_logical_tie(
                 pitched=True,

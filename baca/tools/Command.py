@@ -41,8 +41,7 @@ class Command(abjad.AbjadObject):
 
     ### PRIVATE METHODS ###
 
-    @staticmethod
-    def _normalize_selections(argument):
+    def _to_selection_list(self, argument):
         if not argument:
             selections = []
         elif isinstance(argument, abjad.Component):
@@ -56,12 +55,22 @@ class Command(abjad.AbjadObject):
         elif isinstance(argument, collections.Iterable):
             selections = []
             for item in argument:
-                selections_ = Command._normalize_selections(item)
+                selections_ = self._to_selection_list(item)
                 selections.extend(selections_)
         else:
             raise TypeError(f'unrecognized argument: {argument!r}.')
         assert isinstance(selections, list), repr(selections)
         assert all(isinstance(_, abjad.Selection) for _ in selections)
+        return selections
+
+    def _preprocess(self, argument):
+        selections = self._to_selection_list(argument)
+        if self.selector is not None:
+            selections = [self.selector(_) for _ in selections]
+            selections = self._to_selection_list(selections)
+        if self.target is not None:
+            selections = [self.target(_) for _ in selections]
+            selections = self._to_selection_list(selections)
         return selections
 
     ### PUBLIC PROPERTIES ###

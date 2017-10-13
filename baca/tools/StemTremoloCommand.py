@@ -144,7 +144,7 @@ class StemTremoloCommand(Command):
             argument = self.selector(argument)
         if self.target is not None:
             argument = self.target(argument)
-        selections = self._normalize_selections(argument)
+        selections = self._to_selection_list(argument)
         for selection in selections:
             for pl in abjad.iterate(selection).by_leaf(pitched=True):
                 stem_tremolo = abjad.StemTremolo(

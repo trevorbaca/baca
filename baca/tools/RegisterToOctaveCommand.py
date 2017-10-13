@@ -331,7 +331,7 @@ class RegisterToOctaveCommand(Command):
             return
         selector = self.selector or baca.select_plts()
         result = selector(argument)
-        selections = self._normalize_selections(result)
+        selections = self._to_selection_list(result)
         for selection in selections:
             target_octave_number = self.octave_number or 4
             current_octave_number = self._get_anchor_octave_number(selection)

@@ -255,7 +255,7 @@ class LabelCommand(Command):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        selections = self._normalize_selections(argument)
+        selections = self._to_selection_list(argument)
         for selection in selections:
             self.expression(selection)
 

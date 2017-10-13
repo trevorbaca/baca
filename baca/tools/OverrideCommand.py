@@ -272,7 +272,7 @@ class OverrideCommand(Command):
             argument = self.selector(argument)
         if self.target is not None:
             argument = self.target(argument)
-        selections = self._normalize_selections(argument)
+        selections = self._to_selection_list(argument)
         if False:
             print(format(self))
             print()

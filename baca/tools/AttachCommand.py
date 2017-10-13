@@ -200,11 +200,7 @@ class AttachCommand(Command):
         '''
         if not argument:
             return
-        if self.selector is not None:
-            argument = self.selector(argument)
-        if self.target is not None:
-            argument = self.target(argument)
-        selections = self._normalize_selections(argument)
+        selections = self._preprocess(argument)
         if self.arguments is None:
             return
         arguments = abjad.CyclicTuple(self.arguments)

@@ -202,10 +202,10 @@ class SpannerCommand(Command):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        selections = self._normalize_selections(argument)
+        selections = self._to_selection_list(argument)
         if self.target is not None:
             selections = [self.target(_) for _ in selections]
-        selections = self._normalize_selections(selections)
+        selections = self._to_selection_list(selections)
         if False:
             print(format(self.selector))
             print()
