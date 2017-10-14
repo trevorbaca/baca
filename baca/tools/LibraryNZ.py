@@ -16,6 +16,17 @@ class LibraryNZ(object):
     ### PUBLIC METHODS ###
 
     @staticmethod
+    def natural_clusters(start_pitch=None, widths=None, selector=None):
+        r'''Makes natural clusters from PLTs.
+        '''
+        return baca.ClusterCommand(
+            hide_flat_markup=True,
+            selector=selector,
+            start_pitch=start_pitch,
+            widths=widths,
+            )
+
+    @staticmethod
     def natural_harmonics(selector=None):
         r'''Overrides note-head style on pitched logical ties.
 

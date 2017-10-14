@@ -17,6 +17,7 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.LibraryNZ.LibraryNZ.natural_clusters
       ~baca.tools.LibraryNZ.LibraryNZ.natural_harmonics
       ~baca.tools.LibraryNZ.LibraryNZ.nest
       ~baca.tools.LibraryNZ.LibraryNZ.niente_swell
@@ -108,6 +109,8 @@ Bases
 
 Class & static methods
 ----------------------
+
+.. automethod:: baca.tools.LibraryNZ.LibraryNZ.natural_clusters
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.natural_harmonics
 

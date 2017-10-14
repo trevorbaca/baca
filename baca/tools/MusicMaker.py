@@ -724,7 +724,7 @@ class MusicMaker(abjad.AbjadObject):
         for specifier in specifiers:
             if isinstance(specifier, baca.ClusterCommand):
                 #specifier(selections)
-                specifier(selection)
+                specifier([selection])
             else:
                 specifiers_.append(specifier)
         return specifiers_

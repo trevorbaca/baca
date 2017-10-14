@@ -1498,6 +1498,16 @@ class LibraryAM(object):
             )
 
     @staticmethod
+    def clusters(start_pitch=None, widths=None, selector=None):
+        r'''Makes clusters from PLTs.
+        '''
+        return baca.ClusterCommand(
+            selector=selector,
+            start_pitch=start_pitch,
+            widths=widths,
+            )
+
+    @staticmethod
     def center_to_octave(n=4, selector=None):
         r"""Octave-transposes music.
 
@@ -2062,21 +2072,6 @@ class LibraryAM(object):
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.ClefSpanner(clef=clef),
-            )
-
-    @staticmethod
-    def clusters(
-        start_pitch=None,
-        widths=None,
-        selector=None,
-        target='baca.select_plts()',
-        ):
-        r'''Makes clusters from PLTs.
-        '''
-        return baca.ClusterCommand(
-            selector=selector,
-            start_pitch=start_pitch,
-            widths=widths,
             )
 
     @staticmethod

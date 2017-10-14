@@ -12,9 +12,7 @@ class ClusterCommand(Command):
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.ClusterCommand(
-            ...         widths=[3, 4],
-            ...         ),
+            ...     baca.clusters(widths=[3, 4]),
             ...     )
 
         ::
@@ -192,8 +190,8 @@ class ClusterCommand(Command):
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.ClusterCommand(
-            ...         selector=baca.select_leaves_in_each_tuplet(),
+            ...     baca.clusters(
+            ...         selector=baca.select_tuplets(),
             ...         widths=[3, 4],
             ...         ),
             ...     )
@@ -370,7 +368,7 @@ class ClusterCommand(Command):
 
         With segment-maker:
 
-        Clusters widths alternating 3 and 4:
+        Cluster widths alternating 3 and 4:
 
         ::
 
@@ -383,11 +381,8 @@ class ClusterCommand(Command):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.pitches('E4'),
+            ...     baca.clusters(start_pitch='E4', widths=[3, 4]),
             ...     baca.messiaen_notes(),
-            ...     baca.ClusterCommand(
-            ...         widths=[3, 4],
-            ...         ),
             ...     )
 
         ::
@@ -522,27 +517,24 @@ class ClusterCommand(Command):
 
     __slots__ = (
         '_hide_flat_markup',
-        '_hide_natural_markup',
         '_start_pitch',
         '_widths',
         )
+
+    _wrap_segment_maker_selection = True
 
     ### INITIALIZER ###
 
     def __init__(
         self,
         hide_flat_markup=None,
-        hide_natural_markup=None,
         selector=None,
         start_pitch=None,
-        target='baca.select_plts()',
         widths=None,
         ):
-        Command.__init__(self, selector=selector, target=target)
+        Command.__init__(self, selector=selector, target='baca.select_plts()')
         assert isinstance(hide_flat_markup, (bool, type(None)))
         self._hide_flat_markup = hide_flat_markup
-        assert isinstance(hide_natural_markup, (bool, type(None)))
-        self._hide_natural_markup = hide_natural_markup
         if start_pitch is not None:
             start_pitch = abjad.NamedPitch(start_pitch)
         self._start_pitch = start_pitch
@@ -559,24 +551,23 @@ class ClusterCommand(Command):
         '''
         if argument is None:
             return
-        selections = self._preprocess(argument)
-        if not selections:
-            return
+        if self.selector is not None:
+            argument = self.selector(argument)
         if self.widths is None:
             return
         widths = abjad.CyclicTuple(self.widths)
-        leaf = abjad.inspect(selections[0]).get_leaf()
+        selector = abjad.select().by_leaf().first()
+        leaf = selector(argument)
         root = abjad.inspect(leaf).get_parentage().root
         with abjad.ForbidUpdate(component=root):
-            for selection in selections:
-                for i, plt in enumerate(selection):
+            for item in argument:
+                for i, plt in enumerate(self.target(item)):
                     width = widths[i]
                     self._make_cluster(plt, width)
 
     ### PRIVATE METHODS ###
 
     def _make_cluster(self, plt, width):
-        assert isinstance(plt, abjad.LogicalTie), repr(plt)
         assert plt.is_pitched, repr(plt)
         if not width:
             return
@@ -587,7 +578,6 @@ class ClusterCommand(Command):
         pitches = self._make_pitches(start_pitch, width)
         indicator = abjad.KeyCluster(
             include_black_keys=not self.hide_flat_markup,
-            include_white_keys=not self.hide_natural_markup,
             )
         for leaf in plt:
             chord = abjad.Chord(pitches, leaf.written_duration)
@@ -629,10 +619,7 @@ class ClusterCommand(Command):
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.pitches('E4'),
                 ...     baca.messiaen_notes(),
-                ...     baca.ClusterCommand(
-                ...         hide_flat_markup=True,
-                ...         widths=[3],
-                ...         ),
+                ...     baca.natural_clusters(widths=[3]),
                 ...     )
 
             ::
@@ -752,149 +739,6 @@ class ClusterCommand(Command):
         return self._hide_flat_markup
 
     @property
-    def hide_natural_markup(self):
-        r'''Is true when cluster hides natural markup.
-
-        ..  container:: example
-
-            Hides natural markup:
-
-            ::
-
-                >>> segment_maker = baca.SegmentMaker(
-                ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-                ...     )
-
-            ::
-
-                >>> segment_maker(
-                ...     baca.scope('Violin Music Voice', 1),
-                ...     baca.pitches('E4'),
-                ...     baca.messiaen_notes(),
-                ...     baca.ClusterCommand(
-                ...         hide_natural_markup=True,
-                ...         widths=[3],
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> result = segment_maker.run(is_doc_example=True)
-                >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Score])
-                \context Score = "Score" <<
-                    \tag violin
-                    \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
-                        \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                        }
-                    >>
-                    \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                \clef "treble"
-                                <e' g' b'>2
-                                    ^ \markup {
-                                        \center-align
-                                            \flat
-                                        }
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <e' g' b'>4.
-                                    ^ \markup {
-                                        \center-align
-                                            \flat
-                                        }
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <e' g' b'>2
-                                    ^ \markup {
-                                        \center-align
-                                            \flat
-                                        }
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <e' g' b'>4.
-                                    ^ \markup {
-                                        \center-align
-                                            \flat
-                                        }
-                                \bar "|"
-                            }
-                        }
-                    >>
-                >>
-
-        Set to true, false or none.
-
-        Returns true, false or none.
-        '''
-        return self._hide_natural_markup
-
-    @property
     def start_pitch(self):
         r'''Gets start pitch of cluster.
 
@@ -915,9 +759,7 @@ class ClusterCommand(Command):
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.messiaen_notes(),
                 ...     baca.pitches('C4 D4 E4 F4'),
-                ...     baca.ClusterCommand(
-                ...         widths=[3],
-                ...         ),
+                ...     baca.clusters(widths=[3]),
                 ...     )
 
             ::
@@ -1062,11 +904,7 @@ class ClusterCommand(Command):
                 >>> segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.messiaen_notes(),
-                ...     baca.pitches('C4 D4 E4 F4'),
-                ...     baca.ClusterCommand(
-                ...         start_pitch='G4',
-                ...         widths=[3],
-                ...         ),
+                ...     baca.clusters(start_pitch='G4', widths=[3]),
                 ...     )
 
             ::
@@ -1202,6 +1040,21 @@ class ClusterCommand(Command):
         return self._start_pitch
 
     @property
+    def target(self):
+        r'''Gets target selector.
+
+        ..  container:: example
+
+            ::
+
+                >>> baca.clusters().target
+                baca.select_plts()
+
+        Returns PLT selector.
+        '''
+        return self._target
+
+    @property
     def widths(self):
         r'''Gets widths.
 
@@ -1220,11 +1073,8 @@ class ClusterCommand(Command):
 
                 >>> segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
-                ...     baca.pitches('E4'),
+                ...     baca.clusters(start_pitch='E4', widths=[1, 2, 3, 4]),
                 ...     baca.messiaen_notes(),
-                ...     baca.ClusterCommand(
-                ...         widths=[0, 1, 2, 3],
-                ...         ),
                 ...     )
 
             ::
@@ -1280,18 +1130,17 @@ class ClusterCommand(Command):
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
+                                \once \override Accidental.stencil = ##f
+                                \once \override AccidentalCautionary.stencil = ##f
+                                \once \override Arpeggio.X-offset = #-2
+                                \once \override NoteHead.stencil = #ly:text-interface::print
+                                \once \override NoteHead.text = \markup {
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                }
                                 \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                 \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
-                                e'2
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <e'>4.
+                                <e'>2
                                     ^ \markup {
                                         \center-align
                                             \concat
@@ -1307,7 +1156,7 @@ class ClusterCommand(Command):
                                 \once \override NoteHead.text = \markup {
                                     \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                <e' g'>2
+                                <e' g'>4.
                                     ^ \markup {
                                         \center-align
                                             \concat
@@ -1323,7 +1172,23 @@ class ClusterCommand(Command):
                                 \once \override NoteHead.text = \markup {
                                     \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                <e' g' b'>4.
+                                <e' g' b'>2
+                                    ^ \markup {
+                                        \center-align
+                                            \concat
+                                                {
+                                                    \natural
+                                                    \flat
+                                                }
+                                        }
+                                \once \override Accidental.stencil = ##f
+                                \once \override AccidentalCautionary.stencil = ##f
+                                \once \override Arpeggio.X-offset = #-2
+                                \once \override NoteHead.stencil = #ly:text-interface::print
+                                \once \override NoteHead.text = \markup {
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                }
+                                <e' g' b' d''>4.
                                     ^ \markup {
                                         \center-align
                                             \concat
@@ -1353,11 +1218,8 @@ class ClusterCommand(Command):
 
                 >>> segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
+                ...     baca.clusters(start_pitch='E4', widths=[1, 3]),
                 ...     baca.messiaen_notes(),
-                ...     baca.pitches('E4'),
-                ...     baca.ClusterCommand(
-                ...         widths=[0, 3],
-                ...         ),
                 ...     )
 
             ::
@@ -1413,10 +1275,25 @@ class ClusterCommand(Command):
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
+                                \once \override Accidental.stencil = ##f
+                                \once \override AccidentalCautionary.stencil = ##f
+                                \once \override Arpeggio.X-offset = #-2
+                                \once \override NoteHead.stencil = #ly:text-interface::print
+                                \once \override NoteHead.text = \markup {
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                }
                                 \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                 \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
-                                e'2
+                                <e'>2
+                                    ^ \markup {
+                                        \center-align
+                                            \concat
+                                                {
+                                                    \natural
+                                                    \flat
+                                                }
+                                        }
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1433,7 +1310,22 @@ class ClusterCommand(Command):
                                                     \flat
                                                 }
                                         }
-                                e'2
+                                \once \override Accidental.stencil = ##f
+                                \once \override AccidentalCautionary.stencil = ##f
+                                \once \override Arpeggio.X-offset = #-2
+                                \once \override NoteHead.stencil = #ly:text-interface::print
+                                \once \override NoteHead.text = \markup {
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                }
+                                <e'>2
+                                    ^ \markup {
+                                        \center-align
+                                            \concat
+                                                {
+                                                    \natural
+                                                    \flat
+                                                }
+                                        }
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1473,9 +1365,7 @@ class ClusterCommand(Command):
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.messiaen_notes(),
                 ...     baca.pitches('E4', allow_repeat_pitches=True),
-                ...     baca.ClusterCommand(
-                ...         widths=None,
-                ...         ),
+                ...     baca.clusters(),
                 ...     )
 
             ::
