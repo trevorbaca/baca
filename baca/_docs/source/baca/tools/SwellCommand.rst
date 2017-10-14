@@ -34,7 +34,6 @@ Bases
       ~baca.tools.SwellCommand.SwellCommand.__eq__
       ~baca.tools.SwellCommand.SwellCommand.__format__
       ~baca.tools.SwellCommand.SwellCommand.__hash__
-      ~baca.tools.SwellCommand.SwellCommand.__ne__
       ~baca.tools.SwellCommand.SwellCommand.__repr__
 
 Read-only properties
@@ -84,12 +83,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.SwellCommand.SwellCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.SwellCommand.SwellCommand.__ne__
 
 .. only:: html
 

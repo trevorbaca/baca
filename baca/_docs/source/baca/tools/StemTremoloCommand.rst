@@ -30,7 +30,6 @@ Bases
       ~baca.tools.StemTremoloCommand.StemTremoloCommand.__eq__
       ~baca.tools.StemTremoloCommand.StemTremoloCommand.__format__
       ~baca.tools.StemTremoloCommand.StemTremoloCommand.__hash__
-      ~baca.tools.StemTremoloCommand.StemTremoloCommand.__ne__
       ~baca.tools.StemTremoloCommand.StemTremoloCommand.__repr__
 
 Read-only properties
@@ -68,12 +67,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.StemTremoloCommand.StemTremoloCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.StemTremoloCommand.StemTremoloCommand.__ne__
 
 .. only:: html
 

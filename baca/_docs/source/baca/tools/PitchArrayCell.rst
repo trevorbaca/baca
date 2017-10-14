@@ -42,7 +42,6 @@ Bases
       ~baca.tools.PitchArrayCell.PitchArrayCell.__eq__
       ~baca.tools.PitchArrayCell.PitchArrayCell.__format__
       ~baca.tools.PitchArrayCell.PitchArrayCell.__hash__
-      ~baca.tools.PitchArrayCell.PitchArrayCell.__ne__
       ~baca.tools.PitchArrayCell.PitchArrayCell.__repr__
       ~baca.tools.PitchArrayCell.PitchArrayCell.__str__
 
@@ -111,12 +110,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.PitchArrayCell.PitchArrayCell.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PitchArrayCell.PitchArrayCell.__ne__
 
 .. only:: html
 

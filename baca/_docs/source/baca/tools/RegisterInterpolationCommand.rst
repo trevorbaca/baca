@@ -31,7 +31,6 @@ Bases
       ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.__eq__
       ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.__format__
       ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.__hash__
-      ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.__ne__
       ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.__repr__
 
 Read-only properties
@@ -71,12 +70,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.__ne__
 
 .. only:: html
 

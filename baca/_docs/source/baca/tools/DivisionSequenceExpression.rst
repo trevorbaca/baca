@@ -67,7 +67,6 @@ Bases
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__getitem__
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__hash__
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__iadd__
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__ne__
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__radd__
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__repr__
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__setitem__
@@ -320,12 +319,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__iadd__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__ne__
 
 .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__radd__
 

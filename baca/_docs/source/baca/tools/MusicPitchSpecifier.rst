@@ -29,7 +29,6 @@ Bases
       ~baca.tools.MusicPitchSpecifier.MusicPitchSpecifier.__eq__
       ~baca.tools.MusicPitchSpecifier.MusicPitchSpecifier.__format__
       ~baca.tools.MusicPitchSpecifier.MusicPitchSpecifier.__hash__
-      ~baca.tools.MusicPitchSpecifier.MusicPitchSpecifier.__ne__
       ~baca.tools.MusicPitchSpecifier.MusicPitchSpecifier.__repr__
 
 Read-only properties
@@ -65,11 +64,5 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.MusicPitchSpecifier.MusicPitchSpecifier.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.MusicPitchSpecifier.MusicPitchSpecifier.__ne__
 
 .. automethod:: baca.tools.MusicPitchSpecifier.MusicPitchSpecifier.__repr__

@@ -30,7 +30,6 @@ Bases
       ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.__eq__
       ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.__format__
       ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.__hash__
-      ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.__ne__
       ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.__repr__
 
 Read-only properties
@@ -72,12 +71,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.__ne__
 
 .. only:: html
 

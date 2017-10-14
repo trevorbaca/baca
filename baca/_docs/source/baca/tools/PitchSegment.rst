@@ -64,7 +64,6 @@ Bases
       ~baca.tools.PitchSegment.PitchSegment.__iter__
       ~baca.tools.PitchSegment.PitchSegment.__len__
       ~baca.tools.PitchSegment.PitchSegment.__mul__
-      ~baca.tools.PitchSegment.PitchSegment.__ne__
       ~baca.tools.PitchSegment.PitchSegment.__radd__
       ~baca.tools.PitchSegment.PitchSegment.__repr__
       ~baca.tools.PitchSegment.PitchSegment.__rmul__
@@ -263,12 +262,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.PitchSegment.PitchSegment.__mul__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PitchSegment.PitchSegment.__ne__
 
 .. only:: html
 

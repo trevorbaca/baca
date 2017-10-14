@@ -31,7 +31,6 @@ Bases
       ~baca.tools.MusicAccumulator.MusicAccumulator.__eq__
       ~baca.tools.MusicAccumulator.MusicAccumulator.__format__
       ~baca.tools.MusicAccumulator.MusicAccumulator.__hash__
-      ~baca.tools.MusicAccumulator.MusicAccumulator.__ne__
       ~baca.tools.MusicAccumulator.MusicAccumulator.__repr__
 
 Read-only properties
@@ -77,12 +76,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.MusicAccumulator.MusicAccumulator.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.MusicAccumulator.MusicAccumulator.__ne__
 
 .. only:: html
 

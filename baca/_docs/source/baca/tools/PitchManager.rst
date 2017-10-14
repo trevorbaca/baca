@@ -26,7 +26,6 @@ Bases
       ~baca.tools.PitchManager.PitchManager.__eq__
       ~baca.tools.PitchManager.PitchManager.__format__
       ~baca.tools.PitchManager.PitchManager.__hash__
-      ~baca.tools.PitchManager.PitchManager.__ne__
       ~baca.tools.PitchManager.PitchManager.__repr__
 
 Class & static methods
@@ -56,12 +55,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.PitchManager.PitchManager.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PitchManager.PitchManager.__ne__
 
 .. only:: html
 

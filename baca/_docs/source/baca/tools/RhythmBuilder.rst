@@ -39,7 +39,6 @@ Bases
       ~baca.tools.RhythmBuilder.RhythmBuilder.__eq__
       ~baca.tools.RhythmBuilder.RhythmBuilder.__format__
       ~baca.tools.RhythmBuilder.RhythmBuilder.__hash__
-      ~baca.tools.RhythmBuilder.RhythmBuilder.__ne__
       ~baca.tools.RhythmBuilder.RhythmBuilder.__repr__
 
 Read-only properties
@@ -91,12 +90,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.RhythmBuilder.RhythmBuilder.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.RhythmBuilder.RhythmBuilder.__ne__
 
 .. only:: html
 

@@ -70,7 +70,6 @@ Bases
       ~baca.tools.Sequence.Sequence.__getitem__
       ~baca.tools.Sequence.Sequence.__hash__
       ~baca.tools.Sequence.Sequence.__len__
-      ~baca.tools.Sequence.Sequence.__ne__
       ~baca.tools.Sequence.Sequence.__radd__
       ~baca.tools.Sequence.Sequence.__repr__
 
@@ -320,12 +319,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Sequence.Sequence.__len__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Sequence.Sequence.__ne__
 
 .. only:: html
 

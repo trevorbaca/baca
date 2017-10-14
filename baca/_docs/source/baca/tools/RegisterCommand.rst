@@ -30,7 +30,6 @@ Bases
       ~baca.tools.RegisterCommand.RegisterCommand.__eq__
       ~baca.tools.RegisterCommand.RegisterCommand.__format__
       ~baca.tools.RegisterCommand.RegisterCommand.__hash__
-      ~baca.tools.RegisterCommand.RegisterCommand.__ne__
       ~baca.tools.RegisterCommand.RegisterCommand.__repr__
 
 Read-only properties
@@ -72,12 +71,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.RegisterCommand.RegisterCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.RegisterCommand.RegisterCommand.__ne__
 
 .. only:: html
 

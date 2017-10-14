@@ -40,7 +40,6 @@ Bases
       ~baca.tools.PitchTree.PitchTree.__hash__
       ~baca.tools.PitchTree.PitchTree.__illustrate__
       ~baca.tools.PitchTree.PitchTree.__len__
-      ~baca.tools.PitchTree.PitchTree.__ne__
       ~baca.tools.PitchTree.PitchTree.__repr__
 
 Read-only properties
@@ -125,12 +124,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.PitchTree.PitchTree.__len__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PitchTree.PitchTree.__ne__
 
 .. only:: html
 

@@ -25,7 +25,6 @@ Bases
       ~baca.tools.CompoundScope.CompoundScope.__eq__
       ~baca.tools.CompoundScope.CompoundScope.__format__
       ~baca.tools.CompoundScope.CompoundScope.__hash__
-      ~baca.tools.CompoundScope.CompoundScope.__ne__
       ~baca.tools.CompoundScope.CompoundScope.__repr__
 
 Read-only properties
@@ -53,12 +52,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.CompoundScope.CompoundScope.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.CompoundScope.CompoundScope.__ne__
 
 .. only:: html
 

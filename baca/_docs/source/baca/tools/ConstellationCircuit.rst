@@ -36,7 +36,6 @@ Bases
       ~baca.tools.ConstellationCircuit.ConstellationCircuit.__getitem__
       ~baca.tools.ConstellationCircuit.ConstellationCircuit.__hash__
       ~baca.tools.ConstellationCircuit.ConstellationCircuit.__len__
-      ~baca.tools.ConstellationCircuit.ConstellationCircuit.__ne__
       ~baca.tools.ConstellationCircuit.ConstellationCircuit.__repr__
 
 Read-only properties
@@ -92,11 +91,5 @@ Special methods
       .. automethod:: baca.tools.ConstellationCircuit.ConstellationCircuit.__hash__
 
 .. automethod:: baca.tools.ConstellationCircuit.ConstellationCircuit.__len__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ConstellationCircuit.ConstellationCircuit.__ne__
 
 .. automethod:: baca.tools.ConstellationCircuit.ConstellationCircuit.__repr__

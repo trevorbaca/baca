@@ -69,7 +69,6 @@ Bases
       ~baca.tools.SegmentMaker.SegmentMaker.__format__
       ~baca.tools.SegmentMaker.SegmentMaker.__hash__
       ~baca.tools.SegmentMaker.SegmentMaker.__illustrate__
-      ~baca.tools.SegmentMaker.SegmentMaker.__ne__
       ~baca.tools.SegmentMaker.SegmentMaker.__repr__
 
 Read-only properties
@@ -188,12 +187,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.SegmentMaker.SegmentMaker.__illustrate__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.SegmentMaker.SegmentMaker.__ne__
 
 .. only:: html
 

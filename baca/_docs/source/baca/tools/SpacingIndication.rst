@@ -30,7 +30,6 @@ Bases
       ~baca.tools.SpacingIndication.SpacingIndication.__eq__
       ~baca.tools.SpacingIndication.SpacingIndication.__format__
       ~baca.tools.SpacingIndication.SpacingIndication.__hash__
-      ~baca.tools.SpacingIndication.SpacingIndication.__ne__
       ~baca.tools.SpacingIndication.SpacingIndication.__repr__
 
 Read-only properties
@@ -60,12 +59,6 @@ Special methods
       .. automethod:: baca.tools.SpacingIndication.SpacingIndication.__format__
 
 .. automethod:: baca.tools.SpacingIndication.SpacingIndication.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.SpacingIndication.SpacingIndication.__ne__
 
 .. only:: html
 

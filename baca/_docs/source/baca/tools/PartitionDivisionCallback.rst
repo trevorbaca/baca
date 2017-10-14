@@ -32,7 +32,6 @@ Bases
       ~baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.__eq__
       ~baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.__format__
       ~baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.__hash__
-      ~baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.__ne__
       ~baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.__repr__
 
 Read-only properties
@@ -70,11 +69,5 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.__ne__
 
 .. automethod:: baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.__repr__

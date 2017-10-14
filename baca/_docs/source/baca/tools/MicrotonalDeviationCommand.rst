@@ -31,7 +31,6 @@ Bases
       ~baca.tools.MicrotonalDeviationCommand.MicrotonalDeviationCommand.__eq__
       ~baca.tools.MicrotonalDeviationCommand.MicrotonalDeviationCommand.__format__
       ~baca.tools.MicrotonalDeviationCommand.MicrotonalDeviationCommand.__hash__
-      ~baca.tools.MicrotonalDeviationCommand.MicrotonalDeviationCommand.__ne__
       ~baca.tools.MicrotonalDeviationCommand.MicrotonalDeviationCommand.__repr__
 
 Read-only properties
@@ -75,12 +74,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.MicrotonalDeviationCommand.MicrotonalDeviationCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.MicrotonalDeviationCommand.MicrotonalDeviationCommand.__ne__
 
 .. only:: html
 

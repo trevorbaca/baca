@@ -27,7 +27,6 @@ Bases
       ~baca.tools.Command.Command.__eq__
       ~baca.tools.Command.Command.__format__
       ~baca.tools.Command.Command.__hash__
-      ~baca.tools.Command.Command.__ne__
       ~baca.tools.Command.Command.__repr__
 
 Read-only properties
@@ -59,12 +58,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Command.Command.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Command.Command.__ne__
 
 .. only:: html
 

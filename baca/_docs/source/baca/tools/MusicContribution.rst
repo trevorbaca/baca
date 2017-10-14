@@ -36,7 +36,6 @@ Bases
       ~baca.tools.MusicContribution.MusicContribution.__getitem__
       ~baca.tools.MusicContribution.MusicContribution.__hash__
       ~baca.tools.MusicContribution.MusicContribution.__iter__
-      ~baca.tools.MusicContribution.MusicContribution.__ne__
       ~baca.tools.MusicContribution.MusicContribution.__repr__
 
 Read-only properties
@@ -86,12 +85,6 @@ Special methods
       .. automethod:: baca.tools.MusicContribution.MusicContribution.__hash__
 
 .. automethod:: baca.tools.MusicContribution.MusicContribution.__iter__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.MusicContribution.MusicContribution.__ne__
 
 .. only:: html
 

@@ -27,7 +27,6 @@ Bases
       ~baca.tools.DesignMaker.DesignMaker.__eq__
       ~baca.tools.DesignMaker.DesignMaker.__format__
       ~baca.tools.DesignMaker.DesignMaker.__hash__
-      ~baca.tools.DesignMaker.DesignMaker.__ne__
       ~baca.tools.DesignMaker.DesignMaker.__repr__
 
 Methods
@@ -59,12 +58,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.DesignMaker.DesignMaker.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.DesignMaker.DesignMaker.__ne__
 
 .. only:: html
 

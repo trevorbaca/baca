@@ -34,7 +34,6 @@ Bases
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__format__
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__hash__
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__illustrate__
-      ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__ne__
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__repr__
 
 Methods
@@ -80,12 +79,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__illustrate__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__ne__
 
 .. only:: html
 

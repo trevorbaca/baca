@@ -32,7 +32,6 @@ Bases
       ~baca.tools.Tree.Tree.__graph__
       ~baca.tools.Tree.Tree.__hash__
       ~baca.tools.Tree.Tree.__len__
-      ~baca.tools.Tree.Tree.__ne__
       ~baca.tools.Tree.Tree.__repr__
 
 Read-only properties
@@ -65,11 +64,5 @@ Special methods
 .. automethod:: baca.tools.Tree.Tree.__hash__
 
 .. automethod:: baca.tools.Tree.Tree.__len__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Tree.Tree.__ne__
 
 .. automethod:: baca.tools.Tree.Tree.__repr__

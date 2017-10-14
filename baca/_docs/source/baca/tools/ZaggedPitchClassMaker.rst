@@ -28,7 +28,6 @@ Bases
       ~baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.__eq__
       ~baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.__format__
       ~baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.__hash__
-      ~baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.__ne__
       ~baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.__repr__
 
 Read-only properties
@@ -54,12 +53,6 @@ Special methods
       .. automethod:: baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.__format__
 
 .. automethod:: baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.__ne__
 
 .. only:: html
 

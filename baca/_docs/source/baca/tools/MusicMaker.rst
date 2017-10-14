@@ -32,7 +32,6 @@ Bases
       ~baca.tools.MusicMaker.MusicMaker.__eq__
       ~baca.tools.MusicMaker.MusicMaker.__format__
       ~baca.tools.MusicMaker.MusicMaker.__hash__
-      ~baca.tools.MusicMaker.MusicMaker.__ne__
       ~baca.tools.MusicMaker.MusicMaker.__repr__
 
 Read-only properties
@@ -77,12 +76,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.MusicMaker.MusicMaker.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.MusicMaker.MusicMaker.__ne__
 
 .. only:: html
 

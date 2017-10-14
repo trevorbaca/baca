@@ -32,7 +32,6 @@ Bases
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.__eq__
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.__format__
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.__hash__
-      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.__ne__
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.__repr__
 
 Read-only properties
@@ -78,12 +77,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.__ne__
 
 .. only:: html
 

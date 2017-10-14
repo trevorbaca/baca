@@ -29,7 +29,6 @@ Bases
       ~baca.tools.FlattenDivisionCallback.FlattenDivisionCallback.__eq__
       ~baca.tools.FlattenDivisionCallback.FlattenDivisionCallback.__format__
       ~baca.tools.FlattenDivisionCallback.FlattenDivisionCallback.__hash__
-      ~baca.tools.FlattenDivisionCallback.FlattenDivisionCallback.__ne__
       ~baca.tools.FlattenDivisionCallback.FlattenDivisionCallback.__repr__
 
 Read-only properties
@@ -65,12 +64,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.FlattenDivisionCallback.FlattenDivisionCallback.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.FlattenDivisionCallback.FlattenDivisionCallback.__ne__
 
 .. only:: html
 

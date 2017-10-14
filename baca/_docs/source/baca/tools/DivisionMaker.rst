@@ -36,7 +36,6 @@ Bases
       ~baca.tools.DivisionMaker.DivisionMaker.__eq__
       ~baca.tools.DivisionMaker.DivisionMaker.__format__
       ~baca.tools.DivisionMaker.DivisionMaker.__hash__
-      ~baca.tools.DivisionMaker.DivisionMaker.__ne__
       ~baca.tools.DivisionMaker.DivisionMaker.__repr__
 
 Read-only properties
@@ -92,12 +91,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.DivisionMaker.DivisionMaker.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.DivisionMaker.DivisionMaker.__ne__
 
 .. only:: html
 

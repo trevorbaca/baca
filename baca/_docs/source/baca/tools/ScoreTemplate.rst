@@ -32,7 +32,6 @@ Bases
       ~baca.tools.ScoreTemplate.ScoreTemplate.__format__
       ~baca.tools.ScoreTemplate.ScoreTemplate.__hash__
       ~baca.tools.ScoreTemplate.ScoreTemplate.__illustrate__
-      ~baca.tools.ScoreTemplate.ScoreTemplate.__ne__
       ~baca.tools.ScoreTemplate.ScoreTemplate.__repr__
 
 Methods
@@ -82,12 +81,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.ScoreTemplate.ScoreTemplate.__illustrate__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ScoreTemplate.ScoreTemplate.__ne__
 
 .. only:: html
 

@@ -27,7 +27,6 @@ Bases
       ~baca.tools.Matrix.Matrix.__format__
       ~baca.tools.Matrix.Matrix.__getitem__
       ~baca.tools.Matrix.Matrix.__hash__
-      ~baca.tools.Matrix.Matrix.__ne__
       ~baca.tools.Matrix.Matrix.__repr__
 
 Read-only properties
@@ -59,11 +58,5 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Matrix.Matrix.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Matrix.Matrix.__ne__
 
 .. automethod:: baca.tools.Matrix.Matrix.__repr__

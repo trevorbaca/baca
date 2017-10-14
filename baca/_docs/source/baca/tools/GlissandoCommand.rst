@@ -29,7 +29,6 @@ Bases
       ~baca.tools.GlissandoCommand.GlissandoCommand.__eq__
       ~baca.tools.GlissandoCommand.GlissandoCommand.__format__
       ~baca.tools.GlissandoCommand.GlissandoCommand.__hash__
-      ~baca.tools.GlissandoCommand.GlissandoCommand.__ne__
       ~baca.tools.GlissandoCommand.GlissandoCommand.__repr__
 
 Read-only properties
@@ -69,12 +68,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.GlissandoCommand.GlissandoCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.GlissandoCommand.GlissandoCommand.__ne__
 
 .. only:: html
 

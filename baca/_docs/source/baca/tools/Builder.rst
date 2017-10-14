@@ -25,7 +25,6 @@ Bases
       ~baca.tools.Builder.Builder.__eq__
       ~baca.tools.Builder.Builder.__format__
       ~baca.tools.Builder.Builder.__hash__
-      ~baca.tools.Builder.Builder.__ne__
       ~baca.tools.Builder.Builder.__repr__
 
 Special methods
@@ -50,12 +49,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Builder.Builder.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Builder.Builder.__ne__
 
 .. only:: html
 

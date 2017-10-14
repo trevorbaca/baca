@@ -47,7 +47,6 @@ Bases
       ~baca.tools.PitchArrayList.PitchArrayList.__iadd__
       ~baca.tools.PitchArrayList.PitchArrayList.__iter__
       ~baca.tools.PitchArrayList.PitchArrayList.__len__
-      ~baca.tools.PitchArrayList.PitchArrayList.__ne__
       ~baca.tools.PitchArrayList.PitchArrayList.__repr__
       ~baca.tools.PitchArrayList.PitchArrayList.__reversed__
       ~baca.tools.PitchArrayList.PitchArrayList.__setitem__
@@ -191,12 +190,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.PitchArrayList.PitchArrayList.__len__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PitchArrayList.PitchArrayList.__ne__
 
 .. only:: html
 

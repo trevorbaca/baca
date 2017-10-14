@@ -33,7 +33,6 @@ Bases
       ~baca.tools.HairpinCommand.HairpinCommand.__eq__
       ~baca.tools.HairpinCommand.HairpinCommand.__format__
       ~baca.tools.HairpinCommand.HairpinCommand.__hash__
-      ~baca.tools.HairpinCommand.HairpinCommand.__ne__
       ~baca.tools.HairpinCommand.HairpinCommand.__repr__
 
 Read-only properties
@@ -81,12 +80,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.HairpinCommand.HairpinCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.HairpinCommand.HairpinCommand.__ne__
 
 .. only:: html
 

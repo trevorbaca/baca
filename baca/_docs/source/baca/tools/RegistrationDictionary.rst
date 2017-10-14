@@ -50,7 +50,6 @@ Bases
       ~baca.tools.RegistrationDictionary.RegistrationDictionary.__le__
       ~baca.tools.RegistrationDictionary.RegistrationDictionary.__len__
       ~baca.tools.RegistrationDictionary.RegistrationDictionary.__lt__
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.__ne__
       ~baca.tools.RegistrationDictionary.RegistrationDictionary.__repr__
       ~baca.tools.RegistrationDictionary.RegistrationDictionary.__reversed__
       ~baca.tools.RegistrationDictionary.RegistrationDictionary.__setitem__
@@ -213,12 +212,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.__lt__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.__ne__
 
 .. only:: html
 

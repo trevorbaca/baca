@@ -29,7 +29,6 @@ Bases
       ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.__eq__
       ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.__format__
       ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.__hash__
-      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.__ne__
       ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.__repr__
 
 Read-only properties
@@ -65,12 +64,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.__ne__
 
 .. only:: html
 

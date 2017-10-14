@@ -32,7 +32,6 @@ Bases
       ~baca.tools.SettingCommand.SettingCommand.__eq__
       ~baca.tools.SettingCommand.SettingCommand.__format__
       ~baca.tools.SettingCommand.SettingCommand.__hash__
-      ~baca.tools.SettingCommand.SettingCommand.__ne__
       ~baca.tools.SettingCommand.SettingCommand.__repr__
 
 Read-only properties
@@ -78,12 +77,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.SettingCommand.SettingCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.SettingCommand.SettingCommand.__ne__
 
 .. only:: html
 

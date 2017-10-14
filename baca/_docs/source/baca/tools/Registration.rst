@@ -29,7 +29,6 @@ Bases
       ~baca.tools.Registration.Registration.__eq__
       ~baca.tools.Registration.Registration.__format__
       ~baca.tools.Registration.Registration.__hash__
-      ~baca.tools.Registration.Registration.__ne__
       ~baca.tools.Registration.Registration.__repr__
 
 Read-only properties
@@ -65,12 +64,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Registration.Registration.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Registration.Registration.__ne__
 
 .. only:: html
 

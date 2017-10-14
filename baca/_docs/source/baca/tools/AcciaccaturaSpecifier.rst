@@ -28,7 +28,6 @@ Bases
       ~baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.__eq__
       ~baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.__format__
       ~baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.__hash__
-      ~baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.__ne__
       ~baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.__repr__
 
 Read-only properties
@@ -62,12 +61,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.__ne__
 
 .. only:: html
 

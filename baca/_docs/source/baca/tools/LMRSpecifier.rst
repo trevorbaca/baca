@@ -37,7 +37,6 @@ Bases
       ~baca.tools.LMRSpecifier.LMRSpecifier.__eq__
       ~baca.tools.LMRSpecifier.LMRSpecifier.__format__
       ~baca.tools.LMRSpecifier.LMRSpecifier.__hash__
-      ~baca.tools.LMRSpecifier.LMRSpecifier.__ne__
       ~baca.tools.LMRSpecifier.LMRSpecifier.__repr__
 
 Read-only properties
@@ -89,12 +88,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.LMRSpecifier.LMRSpecifier.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.LMRSpecifier.LMRSpecifier.__ne__
 
 .. only:: html
 

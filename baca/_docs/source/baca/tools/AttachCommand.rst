@@ -30,7 +30,6 @@ Bases
       ~baca.tools.AttachCommand.AttachCommand.__eq__
       ~baca.tools.AttachCommand.AttachCommand.__format__
       ~baca.tools.AttachCommand.AttachCommand.__hash__
-      ~baca.tools.AttachCommand.AttachCommand.__ne__
       ~baca.tools.AttachCommand.AttachCommand.__repr__
 
 Read-only properties
@@ -68,12 +67,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.AttachCommand.AttachCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.AttachCommand.AttachCommand.__ne__
 
 .. only:: html
 

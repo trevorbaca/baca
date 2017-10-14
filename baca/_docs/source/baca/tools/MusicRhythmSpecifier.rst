@@ -27,7 +27,6 @@ Bases
       ~baca.tools.MusicRhythmSpecifier.MusicRhythmSpecifier.__eq__
       ~baca.tools.MusicRhythmSpecifier.MusicRhythmSpecifier.__format__
       ~baca.tools.MusicRhythmSpecifier.MusicRhythmSpecifier.__hash__
-      ~baca.tools.MusicRhythmSpecifier.MusicRhythmSpecifier.__ne__
       ~baca.tools.MusicRhythmSpecifier.MusicRhythmSpecifier.__repr__
 
 Read-only properties
@@ -59,12 +58,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.MusicRhythmSpecifier.MusicRhythmSpecifier.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.MusicRhythmSpecifier.MusicRhythmSpecifier.__ne__
 
 .. only:: html
 

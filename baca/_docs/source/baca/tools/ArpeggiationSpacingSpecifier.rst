@@ -31,7 +31,6 @@ Bases
       ~baca.tools.ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier.__eq__
       ~baca.tools.ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier.__format__
       ~baca.tools.ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier.__hash__
-      ~baca.tools.ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier.__ne__
       ~baca.tools.ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier.__repr__
 
 Read-only properties
@@ -71,12 +70,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier.__ne__
 
 .. only:: html
 

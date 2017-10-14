@@ -31,7 +31,6 @@ Bases
       ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.__eq__
       ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.__format__
       ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.__hash__
-      ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.__ne__
       ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.__repr__
 
 Read-only properties
@@ -75,12 +74,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.__ne__
 
 .. only:: html
 

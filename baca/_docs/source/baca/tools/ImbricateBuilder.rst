@@ -36,7 +36,6 @@ Bases
       ~baca.tools.ImbricateBuilder.ImbricateBuilder.__eq__
       ~baca.tools.ImbricateBuilder.ImbricateBuilder.__format__
       ~baca.tools.ImbricateBuilder.ImbricateBuilder.__hash__
-      ~baca.tools.ImbricateBuilder.ImbricateBuilder.__ne__
       ~baca.tools.ImbricateBuilder.ImbricateBuilder.__repr__
 
 Read-only properties
@@ -82,12 +81,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.ImbricateBuilder.ImbricateBuilder.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ImbricateBuilder.ImbricateBuilder.__ne__
 
 .. only:: html
 

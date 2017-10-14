@@ -30,7 +30,6 @@ Bases
       ~baca.tools.LabelCommand.LabelCommand.__eq__
       ~baca.tools.LabelCommand.LabelCommand.__format__
       ~baca.tools.LabelCommand.LabelCommand.__hash__
-      ~baca.tools.LabelCommand.LabelCommand.__ne__
       ~baca.tools.LabelCommand.LabelCommand.__repr__
 
 Read-only properties
@@ -72,12 +71,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.LabelCommand.LabelCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.LabelCommand.LabelCommand.__ne__
 
 .. only:: html
 

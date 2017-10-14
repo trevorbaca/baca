@@ -25,7 +25,6 @@ Bases
       ~baca.tools.Interpolator.Interpolator.__eq__
       ~baca.tools.Interpolator.Interpolator.__format__
       ~baca.tools.Interpolator.Interpolator.__hash__
-      ~baca.tools.Interpolator.Interpolator.__ne__
       ~baca.tools.Interpolator.Interpolator.__repr__
 
 Class & static methods
@@ -53,12 +52,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Interpolator.Interpolator.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Interpolator.Interpolator.__ne__
 
 .. only:: html
 

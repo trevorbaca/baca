@@ -30,7 +30,6 @@ Bases
       ~baca.tools.ColorCommand.ColorCommand.__eq__
       ~baca.tools.ColorCommand.ColorCommand.__format__
       ~baca.tools.ColorCommand.ColorCommand.__hash__
-      ~baca.tools.ColorCommand.ColorCommand.__ne__
       ~baca.tools.ColorCommand.ColorCommand.__repr__
 
 Read-only properties
@@ -72,12 +71,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.ColorCommand.ColorCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ColorCommand.ColorCommand.__ne__
 
 .. only:: html
 

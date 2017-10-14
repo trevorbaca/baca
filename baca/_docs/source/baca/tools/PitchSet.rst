@@ -61,7 +61,6 @@ Bases
       ~baca.tools.PitchSet.PitchSet.__le__
       ~baca.tools.PitchSet.PitchSet.__len__
       ~baca.tools.PitchSet.PitchSet.__lt__
-      ~baca.tools.PitchSet.PitchSet.__ne__
       ~baca.tools.PitchSet.PitchSet.__or__
       ~baca.tools.PitchSet.PitchSet.__repr__
       ~baca.tools.PitchSet.PitchSet.__str__
@@ -255,12 +254,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.PitchSet.PitchSet.__lt__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PitchSet.PitchSet.__ne__
 
 .. only:: html
 

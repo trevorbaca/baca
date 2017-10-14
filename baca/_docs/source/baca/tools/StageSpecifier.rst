@@ -29,7 +29,6 @@ Bases
       ~baca.tools.StageSpecifier.StageSpecifier.__eq__
       ~baca.tools.StageSpecifier.StageSpecifier.__format__
       ~baca.tools.StageSpecifier.StageSpecifier.__hash__
-      ~baca.tools.StageSpecifier.StageSpecifier.__ne__
       ~baca.tools.StageSpecifier.StageSpecifier.__repr__
 
 Read-only properties
@@ -65,12 +64,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.StageSpecifier.StageSpecifier.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.StageSpecifier.StageSpecifier.__ne__
 
 .. only:: html
 

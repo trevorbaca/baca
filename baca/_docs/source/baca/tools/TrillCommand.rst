@@ -36,7 +36,6 @@ Bases
       ~baca.tools.TrillCommand.TrillCommand.__eq__
       ~baca.tools.TrillCommand.TrillCommand.__format__
       ~baca.tools.TrillCommand.TrillCommand.__hash__
-      ~baca.tools.TrillCommand.TrillCommand.__ne__
       ~baca.tools.TrillCommand.TrillCommand.__repr__
 
 Read-only properties
@@ -90,12 +89,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.TrillCommand.TrillCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.TrillCommand.TrillCommand.__ne__
 
 .. only:: html
 

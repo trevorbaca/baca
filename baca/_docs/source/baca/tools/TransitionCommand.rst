@@ -32,7 +32,6 @@ Bases
       ~baca.tools.TransitionCommand.TransitionCommand.__eq__
       ~baca.tools.TransitionCommand.TransitionCommand.__format__
       ~baca.tools.TransitionCommand.TransitionCommand.__hash__
-      ~baca.tools.TransitionCommand.TransitionCommand.__ne__
       ~baca.tools.TransitionCommand.TransitionCommand.__repr__
 
 Read-only properties
@@ -78,12 +77,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.TransitionCommand.TransitionCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.TransitionCommand.TransitionCommand.__ne__
 
 .. only:: html
 

@@ -41,7 +41,6 @@ Bases
       ~baca.tools.MusicRhythmMaker.MusicRhythmMaker.__format__
       ~baca.tools.MusicRhythmMaker.MusicRhythmMaker.__hash__
       ~baca.tools.MusicRhythmMaker.MusicRhythmMaker.__illustrate__
-      ~baca.tools.MusicRhythmMaker.MusicRhythmMaker.__ne__
       ~baca.tools.MusicRhythmMaker.MusicRhythmMaker.__repr__
 
 Read-only properties
@@ -104,12 +103,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.MusicRhythmMaker.MusicRhythmMaker.__illustrate__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.MusicRhythmMaker.MusicRhythmMaker.__ne__
 
 .. only:: html
 

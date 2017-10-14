@@ -32,7 +32,6 @@ Bases
       ~baca.tools.ClusterCommand.ClusterCommand.__eq__
       ~baca.tools.ClusterCommand.ClusterCommand.__format__
       ~baca.tools.ClusterCommand.ClusterCommand.__hash__
-      ~baca.tools.ClusterCommand.ClusterCommand.__ne__
       ~baca.tools.ClusterCommand.ClusterCommand.__repr__
 
 Read-only properties
@@ -74,12 +73,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.ClusterCommand.ClusterCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ClusterCommand.ClusterCommand.__ne__
 
 .. only:: html
 

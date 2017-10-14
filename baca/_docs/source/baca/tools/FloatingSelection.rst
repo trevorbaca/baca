@@ -29,7 +29,6 @@ Bases
       ~baca.tools.FloatingSelection.FloatingSelection.__eq__
       ~baca.tools.FloatingSelection.FloatingSelection.__format__
       ~baca.tools.FloatingSelection.FloatingSelection.__hash__
-      ~baca.tools.FloatingSelection.FloatingSelection.__ne__
       ~baca.tools.FloatingSelection.FloatingSelection.__repr__
 
 Read-only properties
@@ -65,12 +64,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.FloatingSelection.FloatingSelection.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.FloatingSelection.FloatingSelection.__ne__
 
 .. only:: html
 

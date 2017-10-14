@@ -63,7 +63,6 @@ Bases
       ~baca.tools.DivisionSequence.DivisionSequence.__getitem__
       ~baca.tools.DivisionSequence.DivisionSequence.__hash__
       ~baca.tools.DivisionSequence.DivisionSequence.__len__
-      ~baca.tools.DivisionSequence.DivisionSequence.__ne__
       ~baca.tools.DivisionSequence.DivisionSequence.__radd__
       ~baca.tools.DivisionSequence.DivisionSequence.__repr__
 
@@ -299,12 +298,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.DivisionSequence.DivisionSequence.__len__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.__ne__
 
 .. only:: html
 

@@ -36,7 +36,6 @@ Bases
       ~baca.tools.Cursor.Cursor.__hash__
       ~baca.tools.Cursor.Cursor.__iter__
       ~baca.tools.Cursor.Cursor.__len__
-      ~baca.tools.Cursor.Cursor.__ne__
       ~baca.tools.Cursor.Cursor.__repr__
 
 Read-only properties
@@ -84,12 +83,6 @@ Special methods
 .. automethod:: baca.tools.Cursor.Cursor.__iter__
 
 .. automethod:: baca.tools.Cursor.Cursor.__len__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Cursor.Cursor.__ne__
 
 .. only:: html
 

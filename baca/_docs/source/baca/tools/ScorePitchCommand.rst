@@ -38,7 +38,6 @@ Bases
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.__eq__
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.__format__
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.__hash__
-      ~baca.tools.ScorePitchCommand.ScorePitchCommand.__ne__
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.__repr__
 
 Read-only properties
@@ -99,12 +98,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.ScorePitchCommand.ScorePitchCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ScorePitchCommand.ScorePitchCommand.__ne__
 
 .. only:: html
 

@@ -29,7 +29,6 @@ Bases
       ~baca.tools.StageSliceSpecifier.StageSliceSpecifier.__eq__
       ~baca.tools.StageSliceSpecifier.StageSliceSpecifier.__format__
       ~baca.tools.StageSliceSpecifier.StageSliceSpecifier.__hash__
-      ~baca.tools.StageSliceSpecifier.StageSliceSpecifier.__ne__
       ~baca.tools.StageSliceSpecifier.StageSliceSpecifier.__repr__
 
 Read-only properties
@@ -65,12 +64,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.StageSliceSpecifier.StageSliceSpecifier.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.StageSliceSpecifier.StageSliceSpecifier.__ne__
 
 .. only:: html
 

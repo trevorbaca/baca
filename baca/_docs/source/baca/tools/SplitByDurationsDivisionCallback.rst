@@ -35,7 +35,6 @@ Bases
       ~baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.__eq__
       ~baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.__format__
       ~baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.__hash__
-      ~baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.__ne__
       ~baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.__repr__
 
 Read-only properties
@@ -86,12 +85,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.__ne__
 
 .. only:: html
 

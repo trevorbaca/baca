@@ -51,7 +51,6 @@ Bases
       ~baca.tools.RangeDictionary.RangeDictionary.__le__
       ~baca.tools.RangeDictionary.RangeDictionary.__len__
       ~baca.tools.RangeDictionary.RangeDictionary.__lt__
-      ~baca.tools.RangeDictionary.RangeDictionary.__ne__
       ~baca.tools.RangeDictionary.RangeDictionary.__repr__
       ~baca.tools.RangeDictionary.RangeDictionary.__reversed__
       ~baca.tools.RangeDictionary.RangeDictionary.__setitem__
@@ -216,12 +215,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.RangeDictionary.RangeDictionary.__lt__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.__ne__
 
 .. only:: html
 

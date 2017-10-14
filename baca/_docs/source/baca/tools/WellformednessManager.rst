@@ -28,7 +28,6 @@ Bases
       ~baca.tools.WellformednessManager.WellformednessManager.__eq__
       ~baca.tools.WellformednessManager.WellformednessManager.__format__
       ~baca.tools.WellformednessManager.WellformednessManager.__hash__
-      ~baca.tools.WellformednessManager.WellformednessManager.__ne__
       ~baca.tools.WellformednessManager.WellformednessManager.__repr__
 
 Methods
@@ -65,12 +64,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.WellformednessManager.WellformednessManager.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.WellformednessManager.WellformednessManager.__ne__
 
 .. only:: html
 

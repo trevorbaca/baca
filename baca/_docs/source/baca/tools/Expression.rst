@@ -66,7 +66,6 @@ Bases
       ~baca.tools.Expression.Expression.__getitem__
       ~baca.tools.Expression.Expression.__hash__
       ~baca.tools.Expression.Expression.__iadd__
-      ~baca.tools.Expression.Expression.__ne__
       ~baca.tools.Expression.Expression.__radd__
       ~baca.tools.Expression.Expression.__repr__
       ~baca.tools.Expression.Expression.__setitem__
@@ -321,12 +320,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Expression.Expression.__iadd__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Expression.Expression.__ne__
 
 .. only:: html
 

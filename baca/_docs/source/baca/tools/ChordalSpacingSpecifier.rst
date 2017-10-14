@@ -33,7 +33,6 @@ Bases
       ~baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.__eq__
       ~baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.__format__
       ~baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.__hash__
-      ~baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.__ne__
       ~baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.__repr__
 
 Read-only properties
@@ -77,12 +76,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.__ne__
 
 .. only:: html
 

@@ -26,7 +26,6 @@ Bases
       ~baca.tools.TimeSignatureGroups.TimeSignatureGroups.__format__
       ~baca.tools.TimeSignatureGroups.TimeSignatureGroups.__hash__
       ~baca.tools.TimeSignatureGroups.TimeSignatureGroups.__illustrate__
-      ~baca.tools.TimeSignatureGroups.TimeSignatureGroups.__ne__
       ~baca.tools.TimeSignatureGroups.TimeSignatureGroups.__repr__
 
 Read-only properties
@@ -56,12 +55,6 @@ Special methods
       .. automethod:: baca.tools.TimeSignatureGroups.TimeSignatureGroups.__hash__
 
 .. automethod:: baca.tools.TimeSignatureGroups.TimeSignatureGroups.__illustrate__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.TimeSignatureGroups.TimeSignatureGroups.__ne__
 
 .. only:: html
 

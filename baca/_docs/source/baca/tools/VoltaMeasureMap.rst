@@ -26,7 +26,6 @@ Bases
       ~baca.tools.VoltaMeasureMap.VoltaMeasureMap.__format__
       ~baca.tools.VoltaMeasureMap.VoltaMeasureMap.__getitem__
       ~baca.tools.VoltaMeasureMap.VoltaMeasureMap.__hash__
-      ~baca.tools.VoltaMeasureMap.VoltaMeasureMap.__ne__
       ~baca.tools.VoltaMeasureMap.VoltaMeasureMap.__repr__
 
 Read-only properties
@@ -56,12 +55,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.VoltaMeasureMap.VoltaMeasureMap.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.VoltaMeasureMap.VoltaMeasureMap.__ne__
 
 .. only:: html
 

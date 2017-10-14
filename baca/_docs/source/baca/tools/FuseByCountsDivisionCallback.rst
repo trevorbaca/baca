@@ -31,7 +31,6 @@ Bases
       ~baca.tools.FuseByCountsDivisionCallback.FuseByCountsDivisionCallback.__eq__
       ~baca.tools.FuseByCountsDivisionCallback.FuseByCountsDivisionCallback.__format__
       ~baca.tools.FuseByCountsDivisionCallback.FuseByCountsDivisionCallback.__hash__
-      ~baca.tools.FuseByCountsDivisionCallback.FuseByCountsDivisionCallback.__ne__
       ~baca.tools.FuseByCountsDivisionCallback.FuseByCountsDivisionCallback.__repr__
 
 Read-only properties
@@ -71,12 +70,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.FuseByCountsDivisionCallback.FuseByCountsDivisionCallback.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.FuseByCountsDivisionCallback.FuseByCountsDivisionCallback.__ne__
 
 .. only:: html
 

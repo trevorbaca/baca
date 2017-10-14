@@ -27,7 +27,6 @@ Bases
       ~baca.tools.StageMeasureMap.StageMeasureMap.__format__
       ~baca.tools.StageMeasureMap.StageMeasureMap.__getitem__
       ~baca.tools.StageMeasureMap.StageMeasureMap.__hash__
-      ~baca.tools.StageMeasureMap.StageMeasureMap.__ne__
       ~baca.tools.StageMeasureMap.StageMeasureMap.__repr__
 
 Read-only properties
@@ -59,12 +58,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.StageMeasureMap.StageMeasureMap.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.StageMeasureMap.StageMeasureMap.__ne__
 
 .. only:: html
 

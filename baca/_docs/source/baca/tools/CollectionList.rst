@@ -60,7 +60,6 @@ Bases
       ~baca.tools.CollectionList.CollectionList.__getitem__
       ~baca.tools.CollectionList.CollectionList.__illustrate__
       ~baca.tools.CollectionList.CollectionList.__len__
-      ~baca.tools.CollectionList.CollectionList.__ne__
       ~baca.tools.CollectionList.CollectionList.__repr__
 
 Read-only properties
@@ -149,11 +148,5 @@ Special methods
 .. automethod:: baca.tools.CollectionList.CollectionList.__illustrate__
 
 .. automethod:: baca.tools.CollectionList.CollectionList.__len__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.CollectionList.CollectionList.__ne__
 
 .. automethod:: baca.tools.CollectionList.CollectionList.__repr__

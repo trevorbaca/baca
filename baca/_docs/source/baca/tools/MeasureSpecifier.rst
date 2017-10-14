@@ -29,7 +29,6 @@ Bases
       ~baca.tools.MeasureSpecifier.MeasureSpecifier.__eq__
       ~baca.tools.MeasureSpecifier.MeasureSpecifier.__format__
       ~baca.tools.MeasureSpecifier.MeasureSpecifier.__hash__
-      ~baca.tools.MeasureSpecifier.MeasureSpecifier.__ne__
       ~baca.tools.MeasureSpecifier.MeasureSpecifier.__repr__
 
 Read-only properties
@@ -65,12 +64,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.MeasureSpecifier.MeasureSpecifier.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.MeasureSpecifier.MeasureSpecifier.__ne__
 
 .. only:: html
 

@@ -34,7 +34,6 @@ Bases
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__format__
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__hash__
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__illustrate__
-      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__ne__
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__repr__
 
 Methods
@@ -80,12 +79,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__illustrate__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__ne__
 
 .. only:: html
 

@@ -29,7 +29,6 @@ Bases
       ~baca.tools.NestBuilder.NestBuilder.__eq__
       ~baca.tools.NestBuilder.NestBuilder.__format__
       ~baca.tools.NestBuilder.NestBuilder.__hash__
-      ~baca.tools.NestBuilder.NestBuilder.__ne__
       ~baca.tools.NestBuilder.NestBuilder.__repr__
 
 Read-only properties
@@ -61,12 +60,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.NestBuilder.NestBuilder.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.NestBuilder.NestBuilder.__ne__
 
 .. only:: html
 

@@ -26,7 +26,6 @@ Bases
       ~baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap.__format__
       ~baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap.__getitem__
       ~baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap.__hash__
-      ~baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap.__ne__
       ~baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap.__repr__
 
 Read-only properties
@@ -56,12 +55,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap.__ne__
 
 .. only:: html
 

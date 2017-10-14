@@ -30,7 +30,6 @@ Bases
       ~baca.tools.SpannerCommand.SpannerCommand.__eq__
       ~baca.tools.SpannerCommand.SpannerCommand.__format__
       ~baca.tools.SpannerCommand.SpannerCommand.__hash__
-      ~baca.tools.SpannerCommand.SpannerCommand.__ne__
       ~baca.tools.SpannerCommand.SpannerCommand.__repr__
 
 Read-only properties
@@ -68,12 +67,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.SpannerCommand.SpannerCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.SpannerCommand.SpannerCommand.__ne__
 
 .. only:: html
 

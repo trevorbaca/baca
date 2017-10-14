@@ -32,7 +32,6 @@ Bases
       ~baca.tools.RestAffixSpecifier.RestAffixSpecifier.__eq__
       ~baca.tools.RestAffixSpecifier.RestAffixSpecifier.__format__
       ~baca.tools.RestAffixSpecifier.RestAffixSpecifier.__hash__
-      ~baca.tools.RestAffixSpecifier.RestAffixSpecifier.__ne__
       ~baca.tools.RestAffixSpecifier.RestAffixSpecifier.__repr__
 
 Read-only properties
@@ -74,12 +73,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.RestAffixSpecifier.RestAffixSpecifier.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.RestAffixSpecifier.RestAffixSpecifier.__ne__
 
 .. only:: html
 

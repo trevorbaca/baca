@@ -30,7 +30,6 @@ Bases
       ~baca.tools.TimeSignatureMaker.TimeSignatureMaker.__eq__
       ~baca.tools.TimeSignatureMaker.TimeSignatureMaker.__format__
       ~baca.tools.TimeSignatureMaker.TimeSignatureMaker.__hash__
-      ~baca.tools.TimeSignatureMaker.TimeSignatureMaker.__ne__
       ~baca.tools.TimeSignatureMaker.TimeSignatureMaker.__repr__
 
 Read-only properties
@@ -68,12 +67,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.TimeSignatureMaker.TimeSignatureMaker.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.TimeSignatureMaker.TimeSignatureMaker.__ne__
 
 .. only:: html
 

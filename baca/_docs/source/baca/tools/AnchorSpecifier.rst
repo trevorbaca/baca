@@ -32,7 +32,6 @@ Bases
       ~baca.tools.AnchorSpecifier.AnchorSpecifier.__eq__
       ~baca.tools.AnchorSpecifier.AnchorSpecifier.__format__
       ~baca.tools.AnchorSpecifier.AnchorSpecifier.__hash__
-      ~baca.tools.AnchorSpecifier.AnchorSpecifier.__ne__
       ~baca.tools.AnchorSpecifier.AnchorSpecifier.__repr__
 
 Read-only properties
@@ -74,12 +73,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.AnchorSpecifier.AnchorSpecifier.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.AnchorSpecifier.AnchorSpecifier.__ne__
 
 .. only:: html
 

@@ -29,7 +29,6 @@ Bases
       ~baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback.__eq__
       ~baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback.__format__
       ~baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback.__hash__
-      ~baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback.__ne__
       ~baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback.__repr__
 
 Read-only properties
@@ -65,12 +64,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback.__ne__
 
 .. only:: html
 

@@ -42,7 +42,6 @@ Bases
       ~baca.tools.Constellation.Constellation.__getitem__
       ~baca.tools.Constellation.Constellation.__hash__
       ~baca.tools.Constellation.Constellation.__len__
-      ~baca.tools.Constellation.Constellation.__ne__
       ~baca.tools.Constellation.Constellation.__repr__
 
 Read-only properties
@@ -107,11 +106,5 @@ Special methods
       .. automethod:: baca.tools.Constellation.Constellation.__hash__
 
 .. automethod:: baca.tools.Constellation.Constellation.__len__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Constellation.Constellation.__ne__
 
 .. automethod:: baca.tools.Constellation.Constellation.__repr__

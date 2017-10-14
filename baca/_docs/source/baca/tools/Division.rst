@@ -76,7 +76,6 @@ Bases
       ~baca.tools.Division.Division.__lt__
       ~baca.tools.Division.Division.__mod__
       ~baca.tools.Division.Division.__mul__
-      ~baca.tools.Division.Division.__ne__
       ~baca.tools.Division.Division.__neg__
       ~baca.tools.Division.Division.__new__
       ~baca.tools.Division.Division.__pos__
@@ -326,12 +325,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Division.Division.__mul__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Division.Division.__ne__
 
 .. only:: html
 

@@ -26,7 +26,6 @@ Bases
       ~baca.tools.Wrapper.Wrapper.__eq__
       ~baca.tools.Wrapper.Wrapper.__format__
       ~baca.tools.Wrapper.Wrapper.__hash__
-      ~baca.tools.Wrapper.Wrapper.__ne__
       ~baca.tools.Wrapper.Wrapper.__repr__
 
 Read-only properties
@@ -56,12 +55,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Wrapper.Wrapper.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Wrapper.Wrapper.__ne__
 
 .. only:: html
 

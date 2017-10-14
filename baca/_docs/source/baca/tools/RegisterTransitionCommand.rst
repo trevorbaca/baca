@@ -31,7 +31,6 @@ Bases
       ~baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.__eq__
       ~baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.__format__
       ~baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.__hash__
-      ~baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.__ne__
       ~baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.__repr__
 
 Read-only properties
@@ -75,12 +74,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.__ne__
 
 .. only:: html
 

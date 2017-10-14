@@ -26,7 +26,6 @@ Bases
       ~baca.tools.Scope.Scope.__eq__
       ~baca.tools.Scope.Scope.__format__
       ~baca.tools.Scope.Scope.__hash__
-      ~baca.tools.Scope.Scope.__ne__
       ~baca.tools.Scope.Scope.__repr__
 
 Read-only properties
@@ -56,12 +55,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Scope.Scope.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Scope.Scope.__ne__
 
 .. only:: html
 

@@ -34,7 +34,6 @@ Bases
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__format__
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__hash__
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__illustrate__
-      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__ne__
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__repr__
 
 Methods
@@ -80,12 +79,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__illustrate__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__ne__
 
 .. only:: html
 

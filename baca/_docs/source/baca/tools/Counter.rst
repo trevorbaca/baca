@@ -27,7 +27,6 @@ Bases
       ~baca.tools.Counter.Counter.__eq__
       ~baca.tools.Counter.Counter.__format__
       ~baca.tools.Counter.Counter.__hash__
-      ~baca.tools.Counter.Counter.__ne__
       ~baca.tools.Counter.Counter.__repr__
 
 Read-only properties
@@ -59,12 +58,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Counter.Counter.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Counter.Counter.__ne__
 
 .. only:: html
 

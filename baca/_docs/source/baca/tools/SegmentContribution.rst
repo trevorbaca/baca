@@ -29,7 +29,6 @@ Bases
       ~baca.tools.SegmentContribution.SegmentContribution.__eq__
       ~baca.tools.SegmentContribution.SegmentContribution.__format__
       ~baca.tools.SegmentContribution.SegmentContribution.__hash__
-      ~baca.tools.SegmentContribution.SegmentContribution.__ne__
       ~baca.tools.SegmentContribution.SegmentContribution.__repr__
 
 Read-only properties
@@ -65,12 +64,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.SegmentContribution.SegmentContribution.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.SegmentContribution.SegmentContribution.__ne__
 
 .. only:: html
 

@@ -36,7 +36,6 @@ Bases
       ~baca.tools.OverrideCommand.OverrideCommand.__eq__
       ~baca.tools.OverrideCommand.OverrideCommand.__format__
       ~baca.tools.OverrideCommand.OverrideCommand.__hash__
-      ~baca.tools.OverrideCommand.OverrideCommand.__ne__
       ~baca.tools.OverrideCommand.OverrideCommand.__repr__
 
 Read-only properties
@@ -90,12 +89,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.OverrideCommand.OverrideCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.OverrideCommand.OverrideCommand.__ne__
 
 .. only:: html
 
