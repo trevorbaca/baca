@@ -238,6 +238,7 @@ class ScorePitchCommand(Command):
         for leaf in abjad.select(argument).by_leaf(pitched=True):
             if abjad.inspect(leaf).get_logical_tie().head is leaf:
                 leaves.append(leaf)
+        leaves = abjad.select(leaves)
         leaves = self._sort_by_timeline(leaves)
         lts = []
         for leaf in leaves:
@@ -351,7 +352,7 @@ class ScorePitchCommand(Command):
 
     @staticmethod
     def _sort_by_timeline(leaves):
-        assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
+        assert leaves.are_leaves(), repr(leaves)
         def compare(leaf_1, leaf_2):
             start_offset_1 = abjad.inspect(leaf_1).get_timespan().start_offset
             start_offset_2 = abjad.inspect(leaf_2).get_timespan().start_offset
