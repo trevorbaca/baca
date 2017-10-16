@@ -15,7 +15,7 @@ class ColorCommand(Command):
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.ColorCommand(color='red'),
+            ...     baca.ColorCommand(),
             ...     baca.MusicRhythmSpecifier(
             ...         rhythm_maker=baca.MusicRhythmMaker(
             ...             talea=abjad.rhythmmakertools.Talea(
@@ -145,7 +145,7 @@ class ColorCommand(Command):
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.ColorCommand(color='red'),
+            ...     baca.ColorCommand(),
             ...     )
 
         ::
@@ -307,20 +307,7 @@ class ColorCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_color',
         )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        color=None,
-        selector=None,
-        ):
-        Command.__init__(self, selector=selector)
-        if color is not None:
-            assert isinstance(color, (list, str)), repr(color)
-        self._color = color
 
     ### SPECIAL METHODS ###
 
@@ -331,14 +318,6 @@ class ColorCommand(Command):
         '''
         if not argument:
             return
-        if not self.color:
-            return
-        if isinstance(self.color, str):
-            colors = [self.color]
-        elif isinstance(self.color, list):
-            colors = self.color
-        else:
-            raise TypeError(self.color)
         selector = self.selector or baca.select_leaves()
         result = selector(argument)
         if False:
@@ -348,19 +327,5 @@ class ColorCommand(Command):
             print('---')
             print(result)
             print('---')
-        abjad.label(result).color_alternating(colors)
+        abjad.label(result).color_selections(selector=self.selector)
         return result
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def color(self):
-        r'''Gets color.
-
-        Defaults to none.
-
-        Set to string or none.
-
-        Returns string or none.
-        '''
-        return self._color

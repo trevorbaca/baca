@@ -46,10 +46,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     3 * [{16, 18}, [0, 2, 10]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_chord(),
-                ...         ),
+                ...     baca.color(baca.select_chord()),
                 ...     baca.rests_around([2], [3]),
                 ...     counts=[1, 5, -1],
                 ...     )
@@ -65,11 +62,11 @@ class SelectorLibrary(object):
                         {
                             {
                                 r8
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 <e'' fs''>16
                             }
                             {
@@ -119,10 +116,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     3 * [{16, 18}, [0, 2, 10]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_chord(n=-1),
-                ...         ),
+                ...     baca.color(baca.select_chord(n=-1)),
                 ...     baca.rests_around([2], [3]),
                 ...     counts=[1, 5, -1],
                 ...     )
@@ -158,11 +152,11 @@ class SelectorLibrary(object):
                                 bf'16
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 <e'' fs''>16
                             }
                             {
@@ -203,10 +197,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{16, 18}, [0, 2], {16, 18}, [4, 5], {16, 18}],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_chord_head(),
-                ...         ),
+                ...     baca.color(baca.select_chord_head()),
                 ...     baca.rests_around([2], [4]),
                 ...     counts=[5, 1, -1],
                 ...     thread=True,
@@ -223,11 +214,11 @@ class SelectorLibrary(object):
                         {
                             {
                                 r8
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 <e'' fs''>4 ~
                                 <e'' fs''>16
                             }
@@ -271,10 +262,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{16, 18}, [0, 2], {16, 18}, [4, 5], {16, 18}],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_chord_head(n=-1),
-                ...         ),
+                ...     baca.color(baca.select_chord_head(n=-1)),
                 ...     baca.rests_around([2], [4]),
                 ...     counts=[5, 1, -1],
                 ...     thread=True,
@@ -311,11 +299,11 @@ class SelectorLibrary(object):
                                 r16
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 <e'' fs''>4 ~
                                 <e'' fs''>16
                                 r4
@@ -350,10 +338,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{16, 18}, [0, 2], {16, 18}, [4, 5], {16, 18}],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_chord_heads(),
-                ...         ),
+                ...     baca.color(baca.select_chord_heads()),
                 ...     baca.rests_around([2], [4]),
                 ...     counts=[5, 1, -1],
                 ...     thread=True,
@@ -428,10 +413,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{16, 18}, [0, 2], {16, 18}, [4, 5], {16, 18}],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_chord_heads(start=-2),
-                ...         ),
+                ...     baca.color(baca.select_chord_heads(start=-2)),
                 ...     baca.rests_around([2], [4]),
                 ...     counts=[5, 1, -1],
                 ...     thread=True,
@@ -512,10 +494,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     3 * [{16, 18}, [0, 2, 10]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_chords(),
-                ...         ),
+                ...     baca.color(baca.select_chords()),
                 ...     baca.rests_around([2], [3]),
                 ...     counts=[1, 5, -1],
                 ...     )
@@ -595,10 +574,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     3 * [{16, 18}, [0, 2, 10]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_chords(start=-2),
-                ...         ),
+                ...     baca.color(baca.select_chords(start=-2)),
                 ...     baca.rests_around([2], [3]),
                 ...     counts=[1, 5, -1],
                 ...     )
@@ -684,10 +660,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_each_lt(),
-                ...         ),
+                ...     baca.color(baca.select_each_lt()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -825,10 +798,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_each_lt(start=-4),
-                ...         ),
+                ...     baca.color(baca.select_each_lt(start=-4)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -911,7 +881,6 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         ['red', 'blue'],
                 ...         baca.select_each_lt(start=-4, leak=abjad.Right),
                 ...         ),
                 ...     baca.flags(),
@@ -1023,7 +992,6 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         ['red', 'blue'],
                 ...         baca.select_each_plt(),
                 ...         ),
                 ...     baca.flags(),
@@ -1152,7 +1120,6 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         ['red', 'blue'],
                 ...         baca.select_each_plt(start=-4),
                 ...         ),
                 ...     baca.flags(),
@@ -1245,7 +1212,6 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         ['red', 'blue'],
                 ...         baca.select_each_plt(start=-4, leak=abjad.Right),
                 ...         ),
                 ...     baca.flags(),
@@ -1370,7 +1336,6 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         ['red', 'blue'],
                 ...         baca.select_each_plt_nprun(),
                 ...         ),
                 ...     baca.flags(),
@@ -1463,7 +1428,6 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         ['red', 'blue'],
                 ...         baca.select_each_plt_nprun(start=-1),
                 ...         ),
                 ...     baca.flags(),
@@ -1556,7 +1520,6 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         ['red', 'blue'],
                 ...         baca.select_each_plt_prun(),
                 ...         ),
                 ...     baca.flags(),
@@ -1684,7 +1647,6 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         ['red', 'blue'],
                 ...         baca.select_each_plt_prun(start=-4),
                 ...         ),
                 ...     baca.flags(),
@@ -1794,10 +1756,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_each_plt_run(),
-                ...         ),
+                ...     baca.color(baca.select_each_plt_run()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -1918,7 +1877,6 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         ['red', 'blue'],
                 ...         baca.select_each_plt_run(start=-2),
                 ...         ),
                 ...     baca.flags(),
@@ -2032,10 +1990,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_leaf(),
-                ...         ),
+                ...     baca.color(baca.select_leaf()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2054,8 +2009,8 @@ class SelectorLibrary(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #green
+                                \once \override Rest.color = #green
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
@@ -2098,10 +2053,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_leaf(-4),
-                ...         ),
+                ...     baca.color(baca.select_leaf(-4)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2135,11 +2087,11 @@ class SelectorLibrary(object):
                                 e''4 ~
                                 e''16
                                 r16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 fs''16
                                 af''16
                             }
@@ -2178,10 +2130,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_leaf_in_trimmed_run(),
-                ...         ),
+                ...     baca.color(baca.select_leaf_in_trimmed_run()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2202,11 +2151,11 @@ class SelectorLibrary(object):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 c'16
                                 c'16
                                 bf'4 ~
@@ -2247,10 +2196,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_leaf_in_trimmed_run(n=-1),
-                ...         ),
+                ...     baca.color(baca.select_leaf_in_trimmed_run(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2288,11 +2234,11 @@ class SelectorLibrary(object):
                                 af''16
                             }
                             \times 4/5 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 a'16
                                 r4
                                 \revert TupletBracket.staff-padding
@@ -2327,10 +2273,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_leaf_in_tuplet(0, 0),
-                ...         ),
+                ...     baca.color(baca.select_leaf_in_tuplet(0, 0)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2349,8 +2292,8 @@ class SelectorLibrary(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #green
+                                \once \override Rest.color = #green
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
@@ -2393,10 +2336,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_leaf_in_tuplet(1, 0),
-                ...         ),
+                ...     baca.color(baca.select_leaf_in_tuplet(1, 0)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2425,11 +2365,11 @@ class SelectorLibrary(object):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 bf'16
                                 e''16
                                 e''4 ~
@@ -2473,10 +2413,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_leaves(),
-                ...         ),
+                ...     baca.color(baca.select_leaves()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2600,10 +2537,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_leaves(start=-4),
-                ...         ),
+                ...     baca.color(baca.select_leaves(start=-4)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2682,7 +2616,6 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         ['red', 'blue'],
                 ...         baca.select_leaves(leak=abjad.Left, start=-4),
                 ...         ),
                 ...     baca.flags(),
@@ -2779,10 +2712,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_leaves_in_each_tuplet(),
-                ...         ),
+                ...     baca.color(baca.select_leaves_in_each_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2912,7 +2842,6 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         ['red', 'blue'],
                 ...         baca.select_leaves_in_each_tuplet(start=-2),
                 ...         ),
                 ...     baca.flags(),
@@ -3033,10 +2962,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_leaves_in_trimmed_run(),
-                ...         ),
+                ...     baca.color(baca.select_leaves_in_trimmed_run()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3157,7 +3083,6 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         ['red', 'blue'],
                 ...         baca.select_leaves_in_trimmed_run(start=-4),
                 ...         ),
                 ...     baca.flags(),
@@ -3250,10 +3175,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_leaves_in_tuplet(),
-                ...         ),
+                ...     baca.color(baca.select_leaves_in_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3338,10 +3260,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_leaves_in_tuplet(n=-1),
-                ...         ),
+                ...     baca.color(baca.select_leaves_in_tuplet(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3426,10 +3345,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_lt(n=3),
-                ...         ),
+                ...     baca.color(baca.select_lt(n=3)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3452,17 +3368,17 @@ class SelectorLibrary(object):
                                 r8
                                 c'16
                                 c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 bf'4 ~
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 bf'16
                                 r16
                             }
@@ -3500,10 +3416,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_lt(n=-4),
-                ...         ),
+                ...     baca.color(baca.select_lt(n=-4)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3537,11 +3450,11 @@ class SelectorLibrary(object):
                                 e''4 ~
                                 e''16
                                 r16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 fs''16
                                 af''16
                             }
@@ -3579,10 +3492,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_lts(),
-                ...         ),
+                ...     baca.color(baca.select_lts()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3720,10 +3630,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_lts(start=-4),
-                ...         ),
+                ...     baca.color(baca.select_lts(start=-4)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3812,10 +3719,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_note(),
-                ...         ),
+                ...     baca.color(baca.select_note()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3836,11 +3740,11 @@ class SelectorLibrary(object):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 c'16
                                 c'16
                                 bf'4 ~
@@ -3881,10 +3785,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_note(n=-1),
-                ...         ),
+                ...     baca.color(baca.select_note(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3922,11 +3823,11 @@ class SelectorLibrary(object):
                                 af''16
                             }
                             \times 4/5 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 a'16
                                 r4
                                 \revert TupletBracket.staff-padding
@@ -3961,10 +3862,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_notes(),
-                ...         ),
+                ...     baca.color(baca.select_notes()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4080,10 +3978,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_notes(start=-4),
-                ...         ),
+                ...     baca.color(baca.select_notes(start=-4)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4175,10 +4070,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_pl(),
-                ...         ),
+                ...     baca.color(baca.select_pl()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4199,11 +4091,11 @@ class SelectorLibrary(object):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 c'16
                                 c'16
                                 bf'4 ~
@@ -4244,10 +4136,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_pl(n=-1),
-                ...         ),
+                ...     baca.color(baca.select_pl(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4285,11 +4174,11 @@ class SelectorLibrary(object):
                                 af''16
                             }
                             \times 4/5 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 a'16
                                 r4
                                 \revert TupletBracket.staff-padding
@@ -4324,10 +4213,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_pls(),
-                ...         ),
+                ...     baca.color(baca.select_pls()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4443,10 +4329,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_pls(start=-4),
-                ...         ),
+                ...     baca.color(baca.select_pls(start=-4)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4538,10 +4421,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_pls_in_each_tuplet(),
-                ...         ),
+                ...     baca.color(baca.select_pls_in_each_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4661,10 +4541,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_pls_in_each_tuplet(start=-2),
-                ...         ),
+                ...     baca.color(baca.select_pls_in_each_tuplet(start=-2)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4774,10 +4651,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_pls_in_tuplet(),
-                ...         ),
+                ...     baca.color(baca.select_pls_in_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4858,10 +4732,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_pls_in_tuplet(n=-1),
-                ...         ),
+                ...     baca.color(baca.select_pls_in_tuplet(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4938,10 +4809,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt(n=2),
-                ...         ),
+                ...     baca.color(baca.select_plt(n=2)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4964,17 +4832,17 @@ class SelectorLibrary(object):
                                 r8
                                 c'16
                                 c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 bf'4 ~
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 bf'16
                                 r16
                             }
@@ -5012,10 +4880,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt(n=-1),
-                ...         ),
+                ...     baca.color(baca.select_plt(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5053,11 +4918,11 @@ class SelectorLibrary(object):
                                 af''16
                             }
                             \times 4/5 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 a'16
                                 r4
                                 \revert TupletBracket.staff-padding
@@ -5091,10 +4956,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt_head(n=2),
-                ...         ),
+                ...     baca.color(baca.select_plt_head(n=2)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5117,11 +4979,11 @@ class SelectorLibrary(object):
                                 r8
                                 c'16
                                 c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 bf'4 ~
                                 bf'16
                                 r16
@@ -5160,10 +5022,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt_head(n=-4),
-                ...         ),
+                ...     baca.color(baca.select_plt_head(n=-4)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5194,11 +5053,11 @@ class SelectorLibrary(object):
                             \times 9/10 {
                                 bf'16
                                 e''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 e''4 ~
                                 e''16
                                 r16
@@ -5239,10 +5098,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt_head_in_tuplet(1, 0),
-                ...         ),
+                ...     baca.color(baca.select_plt_head_in_tuplet(1, 0)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5271,11 +5127,11 @@ class SelectorLibrary(object):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 bf'16
                                 e''16
                                 e''4 ~
@@ -5308,10 +5164,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt_head_in_tuplet(1, -1),
-                ...         ),
+                ...     baca.color(baca.select_plt_head_in_tuplet(1, -1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5346,11 +5199,11 @@ class SelectorLibrary(object):
                                 e''16
                                 r16
                                 fs''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 af''16
                             }
                             \times 4/5 {
@@ -5388,10 +5241,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt_heads(),
-                ...         ),
+                ...     baca.color(baca.select_plt_heads()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5497,10 +5347,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt_heads(start=-4),
-                ...         ),
+                ...     baca.color(baca.select_plt_heads(start=-4)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5594,10 +5441,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt_heads_in_each_tuplet(),
-                ...         ),
+                ...     baca.color(baca.select_plt_heads_in_each_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5709,7 +5553,6 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         ['red', 'blue'],
                 ...         baca.select_plt_heads_in_each_tuplet(start=-2),
                 ...         ),
                 ...     baca.flags(),
@@ -5816,10 +5659,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt_heads_in_tuplet(),
-                ...         ),
+                ...     baca.color(baca.select_plt_heads_in_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5895,10 +5735,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt_heads_in_tuplet(n=-1),
-                ...         ),
+                ...     baca.color(baca.select_plt_heads_in_tuplet(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5978,10 +5815,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt_nprun(),
-                ...         ),
+                ...     baca.color(baca.select_plt_nprun()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6002,17 +5836,17 @@ class SelectorLibrary(object):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 c'16
                                 bf'4 ~
                                 bf'16
@@ -6052,10 +5886,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt_nprun(n=-1),
-                ...         ),
+                ...     baca.color(baca.select_plt_nprun(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6085,23 +5916,23 @@ class SelectorLibrary(object):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 bf'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 e''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 e''4 ~
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 e''16
                                 r16
                                 fs''16
@@ -6141,10 +5972,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt_prun(),
-                ...         ),
+                ...     baca.color(baca.select_plt_prun()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6165,17 +5993,17 @@ class SelectorLibrary(object):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 c'16
                                 bf'4 ~
                                 bf'16
@@ -6215,10 +6043,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt_prun(n=-1),
-                ...         ),
+                ...     baca.color(baca.select_plt_prun(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6256,11 +6081,11 @@ class SelectorLibrary(object):
                                 af''16
                             }
                             \times 4/5 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 a'16
                                 r4
                                 \revert TupletBracket.staff-padding
@@ -6294,10 +6119,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt_run(),
-                ...         ),
+                ...     baca.color(baca.select_plt_run()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6318,29 +6140,29 @@ class SelectorLibrary(object):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 bf'4 ~
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 bf'16
                                 r16
                             }
@@ -6381,10 +6203,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt_run(n=-1),
-                ...         ),
+                ...     baca.color(baca.select_plt_run(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6418,25 +6237,25 @@ class SelectorLibrary(object):
                                 e''4 ~
                                 e''16
                                 r16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 fs''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 af''16
                             }
                             \times 4/5 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 a'16
                                 r4
                                 \revert TupletBracket.staff-padding
@@ -6474,10 +6293,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt_tail(n=2),
-                ...         ),
+                ...     baca.color(baca.select_plt_tail(n=2)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6501,11 +6317,11 @@ class SelectorLibrary(object):
                                 c'16
                                 c'16
                                 bf'4 ~
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 bf'16
                                 r16
                             }
@@ -6543,10 +6359,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt_tail(n=-4),
-                ...         ),
+                ...     baca.color(baca.select_plt_tail(n=-4)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6578,11 +6391,11 @@ class SelectorLibrary(object):
                                 bf'16
                                 e''16
                                 e''4 ~
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 e''16
                                 r16
                                 fs''16
@@ -6622,10 +6435,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt_tails(),
-                ...         ),
+                ...     baca.color(baca.select_plt_tails()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6731,10 +6541,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt_tails(start=-4),
-                ...         ),
+                ...     baca.color(baca.select_plt_tails(start=-4)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6827,10 +6634,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt_tails_in_each_tuplet(),
-                ...         ),
+                ...     baca.color(baca.select_plt_tails_in_each_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6942,7 +6746,6 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         ['red', 'blue'],
                 ...         baca.select_plt_tails_in_each_tuplet(start=-2),
                 ...         ),
                 ...     baca.flags(),
@@ -7049,10 +6852,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt_tails_in_tuplet(),
-                ...         ),
+                ...     baca.color(baca.select_plt_tails_in_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -7128,10 +6928,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plt_tails_in_tuplet(n=-1),
-                ...         ),
+                ...     baca.color(baca.select_plt_tails_in_tuplet(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -7210,10 +7007,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plts(),
-                ...         ),
+                ...     baca.color(baca.select_plts()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -7338,10 +7132,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plts(start=-4),
-                ...         ),
+                ...     baca.color(baca.select_plts(start=-4)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -7444,10 +7235,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plts_in_each_tuplet(),
-                ...         ),
+                ...     baca.color(baca.select_plts_in_each_tuplet()),
                 ...     baca.flags(),
                 ...     baca.messiaen_tie_each(),
                 ...     baca.rests_around([2], [4]),
@@ -7555,10 +7343,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plts_in_each_tuplet(start=-2),
-                ...         ),
+                ...     baca.color(baca.select_plts_in_each_tuplet(start=-2)),
                 ...     baca.flags(),
                 ...     baca.messiaen_tie_each(
                 ...         baca.select_leaves_in_each_tuplet(),
@@ -7663,10 +7448,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plts_in_tuplet(),
-                ...         ),
+                ...     baca.color(baca.select_plts_in_tuplet()),
                 ...     baca.flags(),
                 ...     baca.messiaen_tie_each(
                 ...         baca.select_leaves_in_each_tuplet()
@@ -7744,10 +7526,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_plts_in_tuplet(n=1),
-                ...         ),
+                ...     baca.color(baca.select_plts_in_tuplet(n=1)),
                 ...     baca.flags(),
                 ...     baca.messiaen_tie_each(
                 ...         baca.select_leaves_in_each_tuplet(),
@@ -7849,10 +7628,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_rest(),
-                ...         ),
+                ...     baca.color(baca.select_rest()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -7871,8 +7647,8 @@ class SelectorLibrary(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #green
+                                \once \override Rest.color = #green
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
@@ -7915,10 +7691,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_rest(n=-1),
-                ...         ),
+                ...     baca.color(baca.select_rest(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -7957,8 +7730,8 @@ class SelectorLibrary(object):
                             }
                             \times 4/5 {
                                 a'16
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #green
+                                \once \override Rest.color = #green
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -7992,10 +7765,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_rest_in_tuplet(),
-                ...         ),
+                ...     baca.color(baca.select_rest_in_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -8014,8 +7784,8 @@ class SelectorLibrary(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #green
+                                \once \override Rest.color = #green
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
@@ -8058,10 +7828,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_rest_in_tuplet(1, 0),
-                ...         ),
+                ...     baca.color(baca.select_rest_in_tuplet(1, 0)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -8094,8 +7861,8 @@ class SelectorLibrary(object):
                                 e''16
                                 e''4 ~
                                 e''16
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #green
+                                \once \override Rest.color = #green
                                 r16
                                 fs''16
                                 af''16
@@ -8135,10 +7902,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_rests(),
-                ...         ),
+                ...     baca.color(baca.select_rests()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -8207,10 +7971,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_rests(start=-2),
-                ...         ),
+                ...     baca.color(baca.select_rests(start=-2)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -8286,10 +8047,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_rests_in_tuplet(),
-                ...         ),
+                ...     baca.color(baca.select_rests_in_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -8354,10 +8112,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_rests_in_tuplet(n=-1),
-                ...         ),
+                ...     baca.color(baca.select_rests_in_tuplet(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -8444,10 +8199,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_trimmed_run_in_each_tuplet(),
-                ...         ),
+                ...     baca.color(baca.select_trimmed_run_in_each_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -8571,7 +8323,6 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         ['red', 'blue'],
                 ...         baca.select_trimmed_run_in_each_tuplet(start=-2),
                 ...         ),
                 ...     baca.flags(),
@@ -8687,10 +8438,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_trimmed_run_in_tuplet(),
-                ...         ),
+                ...     baca.color(baca.select_trimmed_run_in_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -8771,10 +8519,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_trimmed_run_in_tuplet(n=-1),
-                ...         ),
+                ...     baca.color(baca.select_trimmed_run_in_tuplet(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -8853,10 +8598,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_tuplet(),
-                ...         ),
+                ...     baca.color(baca.select_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -8875,36 +8617,36 @@ class SelectorLibrary(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #green
+                                \once \override Rest.color = #green
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 bf'4 ~
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 bf'16
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #green
+                                \once \override Rest.color = #green
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -8941,10 +8683,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_tuplet(n=-1),
-                ...         ),
+                ...     baca.color(baca.select_tuplet(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -8982,14 +8721,14 @@ class SelectorLibrary(object):
                                 af''16
                             }
                             \times 4/5 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 a'16
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #green
+                                \once \override Rest.color = #green
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -9023,10 +8762,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_tuplets(),
-                ...         ),
+                ...     baca.color(baca.select_tuplets()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -9154,10 +8890,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         ['red', 'blue'],
-                ...         baca.select_tuplets(start=-2),
-                ...         ),
+                ...     baca.color(baca.select_tuplets(start=-2)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),

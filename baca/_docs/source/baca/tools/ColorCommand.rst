@@ -23,7 +23,6 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.ColorCommand.ColorCommand.color
       ~baca.tools.ColorCommand.ColorCommand.selector
       ~baca.tools.ColorCommand.ColorCommand.target
       ~baca.tools.ColorCommand.ColorCommand.__call__
@@ -34,8 +33,6 @@ Bases
 
 Read-only properties
 --------------------
-
-.. autoattribute:: baca.tools.ColorCommand.ColorCommand.color
 
 .. only:: html
 

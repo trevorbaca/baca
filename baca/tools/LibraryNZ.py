@@ -1697,7 +1697,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.color('red', baca.select_leaves_in_tuplet(1)),
+                ...     baca.color(baca.select_leaves_in_tuplet(1)),
                 ...     baca.register(
                 ...         -6,
                 ...         selector=baca.select_leaves_in_tuplet(1),
@@ -1843,7 +1843,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.color('red', baca.select_leaves_in_tuplet(1)),
+                ...     baca.color(baca.select_leaves_in_tuplet(1)),
                 ...     baca.register(
                 ...         start=-6,
                 ...         stop=10,
@@ -4534,7 +4534,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.color('red', baca.select_plts()),
+                ...     baca.color(baca.select_plts()),
                 ...     baca.soprano_to_octave(3),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
@@ -4643,7 +4643,7 @@ class LibraryNZ(object):
                 ...         n=3,
                 ...         selector=baca.select_each_plt(),
                 ...         ),
-                ...     baca.color('red', baca.select_each_plt()),
+                ...     baca.color(baca.select_each_plt()),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -4673,17 +4673,17 @@ class LibraryNZ(object):
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 f8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 f32 ]
                                 r16.
                             }
@@ -4703,17 +4703,17 @@ class LibraryNZ(object):
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 <g, af>8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 <g, af>32 ]
                                 r16.
                             }
@@ -4751,7 +4751,7 @@ class LibraryNZ(object):
                 ...         3,
                 ...         selector=baca.select_each_plt(start=-2),
                 ...         ),
-                ...     baca.color('red', baca.select_each_plt(start=-2)),
+                ...     baca.color(baca.select_each_plt(start=-2)),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -4796,17 +4796,17 @@ class LibraryNZ(object):
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 a8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 a32 ]
                                 r16.
                             }

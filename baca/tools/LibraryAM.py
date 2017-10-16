@@ -672,7 +672,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
                 ...     baca.bass_to_octave(3),
-                ...     baca.color('red', baca.select_plts()),
+                ...     baca.color(baca.select_plts()),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -780,7 +780,7 @@ class LibraryAM(object):
                 ...         n=3,
                 ...         selector=baca.select_each_plt(),
                 ...         ),
-                ...     baca.color('red', baca.select_each_plt()),
+                ...     baca.color(baca.select_each_plt()),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -810,17 +810,17 @@ class LibraryAM(object):
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 f8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 f32 ]
                                 r16.
                             }
@@ -840,17 +840,17 @@ class LibraryAM(object):
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 <g af'>8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 <g af'>32 ]
                                 r16.
                             }
@@ -888,7 +888,7 @@ class LibraryAM(object):
                 ...         n=3,
                 ...         selector=baca.select_each_plt(start=-2),
                 ...         ),
-                ...     baca.color('red', baca.select_each_plt(start=-2)),
+                ...     baca.color(baca.select_each_plt(start=-2)),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -933,17 +933,17 @@ class LibraryAM(object):
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 a8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 a32 ]
                                 r16.
                             }
@@ -1523,7 +1523,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
                 ...     baca.center_to_octave(3),
-                ...     baca.color('red', baca.select_plts()),
+                ...     baca.color(baca.select_plts()),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -1631,7 +1631,7 @@ class LibraryAM(object):
                 ...         n=3,
                 ...         selector=baca.select_each_plt(),
                 ...         ),
-                ...     baca.color('red', baca.select_each_plt()),
+                ...     baca.color(baca.select_each_plt()),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -1661,17 +1661,17 @@ class LibraryAM(object):
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 f8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 f32 ]
                                 r16.
                             }
@@ -1691,17 +1691,17 @@ class LibraryAM(object):
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 <g, af>8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 <g, af>32 ]
                                 r16.
                             }
@@ -1739,7 +1739,7 @@ class LibraryAM(object):
                 ...         n=3,
                 ...         selector=baca.select_each_plt(start=-2),
                 ...         ),
-                ...     baca.color('red', baca.select_each_plt(start=-2)),
+                ...     baca.color(baca.select_each_plt(start=-2)),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -1784,17 +1784,17 @@ class LibraryAM(object):
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 a8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 a32 ]
                                 r16.
                             }
@@ -2158,7 +2158,7 @@ class LibraryAM(object):
         return baca.Coat(pitch)
 
     @staticmethod
-    def color(color='red', selector=None):
+    def color(selector=None):
         r'''Colors leaves.
 
         ..  container:: example
@@ -2369,10 +2369,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.ColorCommand(
-            color=color,
-            selector=selector,
-            )
+        return baca.ColorCommand(selector=selector)
 
     @staticmethod
     def compound(scopes):
