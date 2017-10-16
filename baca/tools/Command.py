@@ -41,16 +41,6 @@ class Command(abjad.AbjadObject):
 
     ### PRIVATE METHODS ###
 
-    def _preprocess(self, argument):
-        selections = self._to_selection_list(argument)
-        if self.selector is not None:
-            selections = [self.selector(_) for _ in selections]
-            selections = self._to_selection_list(selections)
-        if self.target is not None:
-            selections = [self.target(_) for _ in selections]
-            selections = self._to_selection_list(selections)
-        return selections
-
     def _to_selection_list(self, argument):
         if not argument:
             selections = []

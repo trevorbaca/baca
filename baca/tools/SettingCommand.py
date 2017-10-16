@@ -52,20 +52,20 @@ class SettingCommand(Command):
         '''
         if argument is None:
             return
-        selections = self._preprocess(argument)
+        if self.selector is not None:
+            argument = self.selector(argument)
+        targets = self.normalize(argument)
         context = self.context_name
         setting = self.setting_name
         value = self.setting_value
         if self.context_name is not None:
-            statement = f'abjad.setting(item).{context}.{setting} = {value!r}'
+            string = f'abjad.setting(target).{context}.{setting} = {value!r}'
         else:
-            statement = f'abjad.setting(item).{setting} = {value!r}'
+            string = f'abjad.setting(target).{setting} = {value!r}'
         globals_ = globals()
         globals_.update(abjad.__dict__.copy())
-        globals_['SchemeMoment'] = abjad.SchemeMoment
-        for selection in selections:
-            for item in selection:
-                exec(statement, globals_, locals())
+        for target in targets:
+            exec(string, globals_, locals())
 
     ### PUBLIC PROPERTIES ###
 
