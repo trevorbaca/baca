@@ -24,9 +24,11 @@ Bases
    .. autosummary::
 
       ~baca.tools.MusicContribution.MusicContribution.anchor
+      ~baca.tools.MusicContribution.MusicContribution.color_selector
       ~baca.tools.MusicContribution.MusicContribution.color_selector_result
       ~baca.tools.MusicContribution.MusicContribution.figure_name
       ~baca.tools.MusicContribution.MusicContribution.hide_time_signature
+      ~baca.tools.MusicContribution.MusicContribution.print_color_selector_result
       ~baca.tools.MusicContribution.MusicContribution.selections
       ~baca.tools.MusicContribution.MusicContribution.state_manifest
       ~baca.tools.MusicContribution.MusicContribution.time_signature
@@ -43,6 +45,8 @@ Read-only properties
 
 .. autoattribute:: baca.tools.MusicContribution.MusicContribution.anchor
 
+.. autoattribute:: baca.tools.MusicContribution.MusicContribution.color_selector
+
 .. autoattribute:: baca.tools.MusicContribution.MusicContribution.color_selector_result
 
 .. autoattribute:: baca.tools.MusicContribution.MusicContribution.figure_name
@@ -54,6 +58,11 @@ Read-only properties
 .. autoattribute:: baca.tools.MusicContribution.MusicContribution.state_manifest
 
 .. autoattribute:: baca.tools.MusicContribution.MusicContribution.time_signature
+
+Methods
+-------
+
+.. automethod:: baca.tools.MusicContribution.MusicContribution.print_color_selector_result
 
 Special methods
 ---------------

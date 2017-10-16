@@ -646,10 +646,8 @@ class MusicMaker(abjad.AbjadObject):
             container,
             specifiers,
             )
-        specifiers, color_selector_result = self._apply_color_specifiers(
-            selections,
-            specifiers,
-            )
+        result = self._apply_color_specifiers(selections, specifiers)
+        specifiers, color_selector, color_selector_result = result
         self._apply_remaining_specifiers(selections, specifiers)
         self._label_figure_name_(container, figure_name, figure_index)
         self._annotate_collection_list(container, collections)
@@ -673,6 +671,7 @@ class MusicMaker(abjad.AbjadObject):
             assert isinstance(value, abjad.Selection), repr(value)
         return baca.MusicContribution(
             anchor=anchor,
+            color_selector=color_selector,
             color_selector_result=color_selector_result,
             figure_name=figure_name,
             hide_time_signature=hide_time_signature,
@@ -732,13 +731,14 @@ class MusicMaker(abjad.AbjadObject):
     def _apply_color_specifiers(self, selections, specifiers):
         assert self._all_are_selections(selections), repr(selections)
         specifiers_ = []
-        color_selector_result = None
+        color_selector, color_selector_result = None, None
         for specifier in specifiers:
             if isinstance(specifier, baca.ColorCommand):
+                color_selector = specifier.selector
                 color_selector_result = specifier(selections)
             else:
                 specifiers_.append(specifier)
-        return specifiers_, color_selector_result
+        return specifiers_, color_selector, color_selector_result
 
     def _apply_figure_pitch_specifiers(self, collections, specifiers):
         prototype = (baca.CollectionList, list, abjad.Sequence)

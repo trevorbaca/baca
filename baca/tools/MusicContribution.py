@@ -20,6 +20,7 @@ class MusicContribution(abjad.AbjadValueObject):
 
     __slots__ = (
         '_anchor',
+        '_color_selector',
         '_color_selector_result',
         '_figure_name',
         '_hide_time_signature',
@@ -33,6 +34,7 @@ class MusicContribution(abjad.AbjadValueObject):
     def __init__(
         self,
         anchor=None,
+        color_selector=None,
         color_selector_result=None,
         figure_name=None,
         hide_time_signature=None,
@@ -44,6 +46,7 @@ class MusicContribution(abjad.AbjadValueObject):
             not isinstance(anchor, baca.AnchorSpecifier)):
             raise TypeError(f'anchor specifier only: {anchor!r}.')
         self._anchor = anchor
+        self._color_selector = color_selector
         self._color_selector_result = color_selector_result
         self._figure_name = figure_name
         if hide_time_signature is not None:
@@ -70,7 +73,7 @@ class MusicContribution(abjad.AbjadValueObject):
         for voice_name in self.selections:
             yield voice_name
 
-    ### PUBLIC METHODS ###
+    ### PRIVATE METHODS ###
 
     def _get_duration(self):
         durations = []
@@ -90,6 +93,14 @@ class MusicContribution(abjad.AbjadValueObject):
         Returns anchor specifier or none.
         '''
         return self._anchor
+
+    @property
+    def color_selector(self):
+        r'''Gets color selector.
+
+        Returns selector or none.
+        '''
+        return self._color_selector
 
     @property
     def color_selector_result(self):
@@ -142,3 +153,16 @@ class MusicContribution(abjad.AbjadValueObject):
         Returns time signature or none.
         '''
         return self._time_signature
+
+    ### PUBLIC METHODS ###
+
+    def print_color_selector_result(self):
+        r'''Prints color selector result.
+
+        Returns none.
+        '''
+        if self.color_selector is None:
+            return
+        if self.color_selector_result is None:
+            return
+        self.color_selector.print(self.color_selector_result)

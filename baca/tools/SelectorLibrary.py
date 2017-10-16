@@ -103,7 +103,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Chord("<e'' fs''>16")
 
         ..  container:: example
@@ -173,7 +173,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Chord("<e'' fs''>16")
 
         '''
@@ -249,7 +249,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Chord("<e'' fs''>4")
 
         ..  container:: example
@@ -314,7 +314,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Chord("<e'' fs''>4")
 
         '''
@@ -400,8 +400,10 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Chord("<e'' fs''>4"), Chord("<e'' fs''>16"), Chord("<e'' fs''>4")])
+                >>> contribution.print_color_selector_result()
+                Chord("<e'' fs''>4")
+                Chord("<e'' fs''>16")
+                Chord("<e'' fs''>4")
 
         ..  container:: example
 
@@ -470,8 +472,9 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Chord("<e'' fs''>16"), Chord("<e'' fs''>4")])
+                >>> contribution.print_color_selector_result()
+                Chord("<e'' fs''>16")
+                Chord("<e'' fs''>4")
 
         '''
         selector = abjad.select()
@@ -561,8 +564,10 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Chord("<e'' fs''>16"), Chord("<e'' fs''>16"), Chord("<e'' fs''>16")])
+                >>> contribution.print_color_selector_result()
+                Chord("<e'' fs''>16")
+                Chord("<e'' fs''>16")
+                Chord("<e'' fs''>16")
 
         ..  container:: example
 
@@ -636,8 +641,9 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Chord("<e'' fs''>16"), Chord("<e'' fs''>16")])
+                >>> contribution.print_color_selector_result()
+                Chord("<e'' fs''>16")
+                Chord("<e'' fs''>16")
 
         '''
         selector = abjad.select()
@@ -771,9 +777,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([LogicalTie([Rest('r8')])])
                 Selection([LogicalTie([Note("c'16")])])
                 Selection([LogicalTie([Note("c'16")])])
@@ -863,9 +867,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([LogicalTie([Note("fs''16")])])
                 Selection([LogicalTie([Note("af''16")])])
                 Selection([LogicalTie([Note("a'16")])])
@@ -956,9 +958,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([Note("fs''16"), Note("af''16")])
                 Selection([Note("af''16"), Note("a'16")])
                 Selection([Note("a'16"), Rest('r4')])
@@ -1096,9 +1096,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([LogicalTie([Note("c'16")])])
                 Selection([LogicalTie([Note("c'16")])])
                 Selection([LogicalTie([Note("bf'4"), Note("bf'16")])])
@@ -1194,9 +1192,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([LogicalTie([Note("e''4"), Note("e''16")])])
                 Selection([LogicalTie([Note("fs''16")])])
                 Selection([LogicalTie([Note("af''16")])])
@@ -1300,9 +1296,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([Note("e''4"), Note("e''16"), Rest('r16')])
                 Selection([Note("fs''16"), Note("af''16")])
                 Selection([Note("af''16"), Note("a'16")])
@@ -1410,9 +1404,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
                 Selection([LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])
 
@@ -1492,9 +1484,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])
 
         '''
@@ -1624,9 +1614,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
                 Selection([LogicalTie([Note("bf'4"), Note("bf'16")])])
                 Selection([LogicalTie([Note("bf'16")])])
@@ -1726,9 +1714,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])
                 Selection([LogicalTie([Note("fs''16")])])
                 Selection([LogicalTie([Note("af''16")])])
@@ -1859,9 +1845,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("bf'4"), Note("bf'16")])])
                 Selection([LogicalTie([Note("bf'16")]), LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])
                 Selection([LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")])])
@@ -1961,9 +1945,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([LogicalTie([Note("bf'16")]), LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])
                 Selection([LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")])])
 
@@ -2040,7 +2022,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Rest('r8')
 
         ..  container:: example
@@ -2106,7 +2088,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Note("fs''16")
 
         '''
@@ -2183,7 +2165,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Note("c'16")
 
         ..  container:: example
@@ -2249,7 +2231,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Note("a'16")
 
         '''
@@ -2323,7 +2305,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Rest('r8')
 
         ..  container:: example
@@ -2389,7 +2371,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Note("bf'16")
 
         '''
@@ -2524,8 +2506,22 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Rest('r8'), Note("c'16"), Note("c'16"), Note("bf'4"), Note("bf'16"), Rest('r16'), Note("bf'16"), Note("e''16"), Note("e''4"), Note("e''16"), Rest('r16'), Note("fs''16"), Note("af''16"), Note("a'16"), Rest('r4')])
+                >>> contribution.print_color_selector_result()
+                Rest('r8')
+                Note("c'16")
+                Note("c'16")
+                Note("bf'4")
+                Note("bf'16")
+                Rest('r16')
+                Note("bf'16")
+                Note("e''16")
+                Note("e''4")
+                Note("e''16")
+                Rest('r16')
+                Note("fs''16")
+                Note("af''16")
+                Note("a'16")
+                Rest('r4')
 
         ..  container:: example
 
@@ -2602,8 +2598,11 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Note("fs''16"), Note("af''16"), Note("a'16"), Rest('r4')])
+                >>> contribution.print_color_selector_result()
+                Note("fs''16")
+                Note("af''16")
+                Note("a'16")
+                Rest('r4')
 
         ..  container:: example
 
@@ -2684,8 +2683,12 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Rest('r16'), Note("fs''16"), Note("af''16"), Note("a'16"), Rest('r4')])
+                >>> contribution.print_color_selector_result()
+                Rest('r16')
+                Note("fs''16")
+                Note("af''16")
+                Note("a'16")
+                Rest('r4')
 
         '''
         selector = abjad.select()
@@ -2823,9 +2826,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([Rest('r8'), Note("c'16"), Note("c'16"), Note("bf'4"), Note("bf'16"), Rest('r16')])
                 Selection([Note("bf'16"), Note("e''16"), Note("e''4"), Note("e''16"), Rest('r16'), Note("fs''16"), Note("af''16")])
                 Selection([Note("a'16"), Rest('r4')])
@@ -2930,9 +2931,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([Note("bf'16"), Note("e''16"), Note("e''4"), Note("e''16"), Rest('r16'), Note("fs''16"), Note("af''16")])
                 Selection([Note("a'16"), Rest('r4')])
 
@@ -3069,8 +3068,20 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Note("c'16"), Note("c'16"), Note("bf'4"), Note("bf'16"), Rest('r16'), Note("bf'16"), Note("e''16"), Note("e''4"), Note("e''16"), Rest('r16'), Note("fs''16"), Note("af''16"), Note("a'16")])
+                >>> contribution.print_color_selector_result()
+                Note("c'16")
+                Note("c'16")
+                Note("bf'4")
+                Note("bf'16")
+                Rest('r16')
+                Note("bf'16")
+                Note("e''16")
+                Note("e''4")
+                Note("e''16")
+                Rest('r16')
+                Note("fs''16")
+                Note("af''16")
+                Note("a'16")
 
         ..  container:: example
 
@@ -3149,8 +3160,11 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Rest('r16'), Note("fs''16"), Note("af''16"), Note("a'16")])
+                >>> contribution.print_color_selector_result()
+                Rest('r16')
+                Note("fs''16")
+                Note("af''16")
+                Note("a'16")
 
         '''
         selector = abjad.select()
@@ -3247,8 +3261,13 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Rest('r8'), Note("c'16"), Note("c'16"), Note("bf'4"), Note("bf'16"), Rest('r16')])
+                >>> contribution.print_color_selector_result()
+                Rest('r8')
+                Note("c'16")
+                Note("c'16")
+                Note("bf'4")
+                Note("bf'16")
+                Rest('r16')
 
         ..  container:: example
 
@@ -3315,8 +3334,9 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Note("a'16"), Rest('r4')])
+                >>> contribution.print_color_selector_result()
+                Note("a'16")
+                Rest('r4')
 
         '''
         selector = baca.select_tuplets()
@@ -3403,7 +3423,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 LogicalTie([Note("bf'4"), Note("bf'16")])
 
         ..  container:: example
@@ -3469,7 +3489,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 LogicalTie([Note("fs''16")])
 
         '''
@@ -3603,9 +3623,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 LogicalTie([Rest('r8')])
                 LogicalTie([Note("c'16")])
                 LogicalTie([Note("c'16")])
@@ -3695,8 +3713,11 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")]), LogicalTie([Rest('r4')])])
+                >>> contribution.print_color_selector_result()
+                LogicalTie([Note("fs''16")])
+                LogicalTie([Note("af''16")])
+                LogicalTie([Note("a'16")])
+                LogicalTie([Rest('r4')])
 
         '''
         selector = abjad.select()
@@ -3772,7 +3793,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Note("c'16")
 
         ..  container:: example
@@ -3838,7 +3859,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Note("a'16")
 
         '''
@@ -3965,8 +3986,18 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Note("c'16"), Note("c'16"), Note("bf'4"), Note("bf'16"), Note("bf'16"), Note("e''16"), Note("e''4"), Note("e''16"), Note("fs''16"), Note("af''16"), Note("a'16")])
+                >>> contribution.print_color_selector_result()
+                Note("c'16")
+                Note("c'16")
+                Note("bf'4")
+                Note("bf'16")
+                Note("bf'16")
+                Note("e''16")
+                Note("e''4")
+                Note("e''16")
+                Note("fs''16")
+                Note("af''16")
+                Note("a'16")
 
         ..  container:: example
 
@@ -4046,8 +4077,11 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Note("e''16"), Note("fs''16"), Note("af''16"), Note("a'16")])
+                >>> contribution.print_color_selector_result()
+                Note("e''16")
+                Note("fs''16")
+                Note("af''16")
+                Note("a'16")
 
         '''
         selector = abjad.select()
@@ -4123,7 +4157,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Note("c'16")
 
         ..  container:: example
@@ -4189,7 +4223,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Note("a'16")
 
         '''
@@ -4316,8 +4350,18 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Note("c'16"), Note("c'16"), Note("bf'4"), Note("bf'16"), Note("bf'16"), Note("e''16"), Note("e''4"), Note("e''16"), Note("fs''16"), Note("af''16"), Note("a'16")])
+                >>> contribution.print_color_selector_result()
+                Note("c'16")
+                Note("c'16")
+                Note("bf'4")
+                Note("bf'16")
+                Note("bf'16")
+                Note("e''16")
+                Note("e''4")
+                Note("e''16")
+                Note("fs''16")
+                Note("af''16")
+                Note("a'16")
 
         ..  container:: example
 
@@ -4397,8 +4441,11 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Note("e''16"), Note("fs''16"), Note("af''16"), Note("a'16")])
+                >>> contribution.print_color_selector_result()
+                Note("e''16")
+                Note("fs''16")
+                Note("af''16")
+                Note("a'16")
 
         '''
         selector = abjad.select()
@@ -4524,9 +4571,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([Note("c'16"), Note("c'16"), Note("bf'4"), Note("bf'16")])
                 Selection([Note("bf'16"), Note("e''16"), Note("e''4"), Note("e''16"), Note("fs''16"), Note("af''16")])
                 Selection([Note("a'16")])
@@ -4624,9 +4669,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([Note("bf'16"), Note("e''16"), Note("e''4"), Note("e''16"), Note("fs''16"), Note("af''16")])
                 Selection([Note("a'16")])
 
@@ -4719,8 +4762,11 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Note("c'16"), Note("c'16"), Note("bf'4"), Note("bf'16")])
+                >>> contribution.print_color_selector_result()
+                Note("c'16")
+                Note("c'16")
+                Note("bf'4")
+                Note("bf'16")
 
         ..  container:: example
 
@@ -4785,8 +4831,8 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Note("a'16")])
+                >>> contribution.print_color_selector_result()
+                Note("a'16")
 
         '''
         selector = baca.select_tuplets()
@@ -4867,7 +4913,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 LogicalTie([Note("bf'4"), Note("bf'16")])
 
         ..  container:: example
@@ -4933,7 +4979,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 LogicalTie([Note("a'16")])
 
         '''
@@ -5009,7 +5055,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Note("bf'4")
 
         ..  container:: example
@@ -5075,7 +5121,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Note("e''4")
 
         '''
@@ -5151,7 +5197,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Note("bf'16")
 
         ..  container:: example
@@ -5217,7 +5263,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Note("af''16")
 
         '''
@@ -5334,8 +5380,16 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Note("c'16"), Note("c'16"), Note("bf'4"), Note("bf'16"), Note("e''16"), Note("e''4"), Note("fs''16"), Note("af''16"), Note("a'16")])
+                >>> contribution.print_color_selector_result()
+                Note("c'16")
+                Note("c'16")
+                Note("bf'4")
+                Note("bf'16")
+                Note("e''16")
+                Note("e''4")
+                Note("fs''16")
+                Note("af''16")
+                Note("a'16")
 
         ..  container:: example
 
@@ -5415,8 +5469,11 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Note("e''4"), Note("fs''16"), Note("af''16"), Note("a'16")])
+                >>> contribution.print_color_selector_result()
+                Note("e''4")
+                Note("fs''16")
+                Note("af''16")
+                Note("a'16")
 
         '''
         selector = baca.select_plts()
@@ -5534,9 +5591,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([Note("c'16"), Note("c'16"), Note("bf'4")])
                 Selection([Note("bf'16"), Note("e''16"), Note("e''4"), Note("fs''16"), Note("af''16")])
                 Selection([Note("a'16")])
@@ -5632,9 +5687,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([Note("bf'16"), Note("e''16"), Note("e''4"), Note("fs''16"), Note("af''16")])
                 Selection([Note("a'16")])
 
@@ -5722,8 +5775,10 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Note("c'16"), Note("c'16"), Note("bf'4")])
+                >>> contribution.print_color_selector_result()
+                Note("c'16")
+                Note("c'16")
+                Note("bf'4")
 
         ..  container:: example
 
@@ -5788,8 +5843,8 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Note("a'16")])
+                >>> contribution.print_color_selector_result()
+                Note("a'16")
 
         '''
         selector = baca.select_tuplet(n=n)
@@ -5873,7 +5928,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
 
         ..  container:: example
@@ -5949,7 +6004,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Selection([LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])
 
         '''
@@ -6030,7 +6085,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
 
         ..  container:: example
@@ -6096,7 +6151,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Selection([LogicalTie([Note("a'16")])])
 
         '''
@@ -6187,11 +6242,8 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                LogicalTie([Note("c'16")])
-                LogicalTie([Note("c'16")])
-                LogicalTie([Note("bf'4"), Note("bf'16")])
+                >>> contribution.print_color_selector_result()
+                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("bf'4"), Note("bf'16")])])
 
         ..  container:: example
 
@@ -6266,12 +6318,8 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
-                LogicalTie([Note("fs''16")])
-                LogicalTie([Note("af''16")])
-                LogicalTie([Note("a'16")])
+                >>> contribution.print_color_selector_result()
+                Selection([LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")])])
 
         '''
         selector = baca.select_each_plt_run()
@@ -6346,7 +6394,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Note("bf'16")
 
         ..  container:: example
@@ -6412,7 +6460,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Note("e''16")
 
         '''
@@ -6528,8 +6576,16 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Note("c'16"), Note("c'16"), Note("bf'16"), Note("bf'16"), Note("e''16"), Note("e''16"), Note("fs''16"), Note("af''16"), Note("a'16")])
+                >>> contribution.print_color_selector_result()
+                Note("c'16")
+                Note("c'16")
+                Note("bf'16")
+                Note("bf'16")
+                Note("e''16")
+                Note("e''16")
+                Note("fs''16")
+                Note("af''16")
+                Note("a'16")
 
         ..  container:: example
 
@@ -6609,8 +6665,11 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Note("e''16"), Note("fs''16"), Note("af''16"), Note("a'16")])
+                >>> contribution.print_color_selector_result()
+                Note("e''16")
+                Note("fs''16")
+                Note("af''16")
+                Note("a'16")
 
         '''
         selector = baca.select_plts()
@@ -6727,9 +6786,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([Note("c'16"), Note("c'16"), Note("bf'16")])
                 Selection([Note("bf'16"), Note("e''16"), Note("e''16"), Note("fs''16"), Note("af''16")])
                 Selection([Note("a'16")])
@@ -6825,9 +6882,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([Note("bf'16"), Note("e''16"), Note("e''16"), Note("fs''16"), Note("af''16")])
                 Selection([Note("a'16")])
 
@@ -6915,8 +6970,10 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Note("c'16"), Note("c'16"), Note("bf'16")])
+                >>> contribution.print_color_selector_result()
+                Note("c'16")
+                Note("c'16")
+                Note("bf'16")
 
         ..  container:: example
 
@@ -6981,8 +7038,8 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Note("a'16")])
+                >>> contribution.print_color_selector_result()
+                Note("a'16")
 
         '''
         selector = baca.select_tuplet(n=n)
@@ -7110,8 +7167,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
+                >>> contribution.print_color_selector_result()
                 LogicalTie([Note("c'16")])
                 LogicalTie([Note("c'16")])
                 LogicalTie([Note("bf'4"), Note("bf'16")])
@@ -7205,9 +7261,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 LogicalTie([Note("e''4"), Note("e''16")])
                 LogicalTie([Note("fs''16")])
                 LogicalTie([Note("af''16")])
@@ -7325,9 +7379,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([LogicalTie([Note("c'16"), Note("c'16")]), LogicalTie([Note("bf'4."), Note("bf'16")])])
                 Selection([LogicalTie([Note("e''16"), Note("e''4.")]), LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")])])
                 Selection([LogicalTie([Note("a'16")])])
@@ -7420,9 +7472,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([LogicalTie([Note("bf'16")]), LogicalTie([Note("e''16"), Note("e''4.")]), LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")])])
                 Selection([LogicalTie([Note("a'16")])])
 
@@ -7510,9 +7560,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 LogicalTie([Note("c'16"), Note("c'16")])
                 LogicalTie([Note("bf'4.")])
 
@@ -7598,9 +7646,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 LogicalTie([Note("bf'16")])
                 LogicalTie([Note("e''16"), Note("e''4.")])
                 LogicalTie([Note("fs''16")])
@@ -7678,7 +7724,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Rest('r8')
 
         ..  container:: example
@@ -7741,7 +7787,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Rest('r4')
 
         '''
@@ -7815,7 +7861,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Rest('r8')
 
         ..  container:: example
@@ -7878,7 +7924,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Rest('r16')
 
         '''
@@ -7958,8 +8004,11 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Rest('r8'), Rest('r16'), Rest('r16'), Rest('r4')])
+                >>> contribution.print_color_selector_result()
+                Rest('r8')
+                Rest('r16')
+                Rest('r16')
+                Rest('r4')
 
         ..  container:: example
 
@@ -8023,8 +8072,9 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Rest('r16'), Rest('r4')])
+                >>> contribution.print_color_selector_result()
+                Rest('r16')
+                Rest('r4')
 
         '''
         selector = abjad.select()
@@ -8099,8 +8149,9 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Rest('r8'), Rest('r16')])
+                >>> contribution.print_color_selector_result()
+                Rest('r8')
+                Rest('r16')
 
         ..  container:: example
 
@@ -8162,8 +8213,8 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Rest('r4')])
+                >>> contribution.print_color_selector_result()
+                Rest('r4')
 
         '''
         selector = baca.select_tuplet(n=n)
@@ -8304,9 +8355,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([Note("c'16"), Note("c'16"), Note("bf'4"), Note("bf'16")])
                 Selection([Note("bf'16"), Note("e''16"), Note("e''4"), Note("e''16"), Rest('r16'), Note("fs''16"), Note("af''16")])
                 Selection([Note("a'16")])
@@ -8409,9 +8458,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Selection([Note("bf'16"), Note("e''16"), Note("e''4"), Note("e''16"), Rest('r16'), Note("fs''16"), Note("af''16")])
                 Selection([Note("a'16")])
 
@@ -8506,8 +8553,11 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Note("c'16"), Note("c'16"), Note("bf'4"), Note("bf'16")])
+                >>> contribution.print_color_selector_result()
+                Note("c'16")
+                Note("c'16")
+                Note("bf'4")
+                Note("bf'16")
 
         ..  container:: example
 
@@ -8572,8 +8622,8 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
-                Selection([Note("a'16")])
+                >>> contribution.print_color_selector_result()
+                Note("a'16")
 
         '''
         selector = baca.select_tuplet(n=n)
@@ -8670,7 +8720,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Tuplet(Multiplier(9, 10), "r8 c'16 c'16 bf'4 ~ bf'16 r16")
 
         ..  container:: example
@@ -8738,7 +8788,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> contribution.color_selector_result
+                >>> contribution.print_color_selector_result()
                 Tuplet(Multiplier(4, 5), "a'16 r4")
 
         '''
@@ -8873,9 +8923,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Tuplet(Multiplier(9, 10), "r8 c'16 c'16 bf'4 ~ bf'16 r16")
                 Tuplet(Multiplier(9, 10), "bf'16 e''16 e''4 ~ e''16 r16 fs''16 af''16")
                 Tuplet(Multiplier(4, 5), "a'16 r4")
@@ -8977,9 +9025,7 @@ class SelectorLibrary(object):
 
             ::
 
-                >>> for item in contribution.color_selector_result:
-                ...     item
-                ...
+                >>> contribution.print_color_selector_result()
                 Tuplet(Multiplier(9, 10), "bf'16 e''16 e''4 ~ e''16 r16 fs''16 af''16")
                 Tuplet(Multiplier(4, 5), "a'16 r4")
 
