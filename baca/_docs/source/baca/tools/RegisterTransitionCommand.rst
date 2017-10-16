@@ -23,6 +23,7 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.normalize
       ~baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.selector
       ~baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.start_registration
       ~baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.stop_registration
@@ -51,6 +52,15 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.target
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.RegisterTransitionCommand.RegisterTransitionCommand.normalize
 
 Special methods
 ---------------

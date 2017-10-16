@@ -200,17 +200,18 @@ class AttachCommand(Command):
         '''
         if not argument:
             return
-        selections = self._preprocess(argument)
+        if self.selector is not None:
+            argument = self.selector(argument)
+        targets = self.normalize(argument)
         if self.arguments is None:
             return
         arguments = abjad.CyclicTuple(self.arguments)
-        for selection in selections:
-            leaves = abjad.select(selection).by_leaf()
-            for i, leaf in enumerate(leaves):
-                arguments_ = arguments[i]
-                arguments_ = self._token_to_arguments(arguments_)
-                for argument_ in arguments_:
-                    abjad.attach(argument_, leaf)
+        for i, target in enumerate(targets):
+            assert isinstance(target, abjad.Leaf), repr(target)
+            arguments_ = arguments[i]
+            arguments_ = self._token_to_arguments(arguments_)
+            for argument_ in arguments_:
+                abjad.attach(argument_, target)
 
     ### PRIVATE METHODS ###
 

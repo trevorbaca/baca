@@ -24,6 +24,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.SettingCommand.SettingCommand.context_name
+      ~baca.tools.SettingCommand.SettingCommand.normalize
       ~baca.tools.SettingCommand.SettingCommand.selector
       ~baca.tools.SettingCommand.SettingCommand.setting_name
       ~baca.tools.SettingCommand.SettingCommand.setting_value
@@ -54,6 +55,15 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.SettingCommand.SettingCommand.target
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.SettingCommand.SettingCommand.normalize
 
 Special methods
 ---------------

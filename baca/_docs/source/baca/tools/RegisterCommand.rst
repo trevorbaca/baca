@@ -23,6 +23,7 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.RegisterCommand.RegisterCommand.normalize
       ~baca.tools.RegisterCommand.RegisterCommand.registration
       ~baca.tools.RegisterCommand.RegisterCommand.selector
       ~baca.tools.RegisterCommand.RegisterCommand.target
@@ -48,6 +49,15 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.RegisterCommand.RegisterCommand.target
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.RegisterCommand.RegisterCommand.normalize
 
 Special methods
 ---------------

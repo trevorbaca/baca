@@ -177,9 +177,7 @@ class SelectorLibrary(object):
                 Chord("<e'' fs''>16")
 
         '''
-        selector = baca.select_chords()
-        selector = selector.flatten()
-        selector = selector.get_item(n=n)
+        selector = baca.select_chords()[n]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -318,9 +316,7 @@ class SelectorLibrary(object):
                 Chord("<e'' fs''>4")
 
         '''
-        selector = baca.select_chord_heads()
-        selector = selector.flatten()
-        selector = selector.get_item(n=n)
+        selector = baca.select_chord_heads()[n]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -478,8 +474,9 @@ class SelectorLibrary(object):
 
         '''
         selector = abjad.select()
-        selector = selector.by_leaf(prototype=abjad.Chord, head=True)
-        selector = selector.get_slice(start=start, stop=stop)
+        selector = selector.by_leaf(abjad.Chord, head=True)
+        if start is not None or stop is not None:
+            selector = selector.get_slice(start=start, stop=stop)
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -647,8 +644,9 @@ class SelectorLibrary(object):
 
         '''
         selector = abjad.select()
-        selector = selector.by_class(prototype=abjad.Chord)
-        selector = selector.get_slice(start=start, stop=stop)
+        selector = selector.by_class(abjad.Chord)
+        if start is not None or stop is not None:
+            selector = selector.get_slice(start=start, stop=stop)
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -786,9 +784,7 @@ class SelectorLibrary(object):
                 Note("fs''16")
 
         '''
-        selector = baca.select_leaves()
-        selector = selector.flatten()
-        selector = selector.get_item(n=n)
+        selector = baca.select_leaves()[n]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -929,9 +925,7 @@ class SelectorLibrary(object):
                 Note("a'16")
 
         '''
-        selector = baca.select_leaves_in_trimmed_run()
-        selector = selector.flatten()
-        selector = selector.get_item(n=n)
+        selector = baca.select_leaves_in_trimmed_run()[n]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -1069,9 +1063,7 @@ class SelectorLibrary(object):
                 Note("bf'16")
 
         '''
-        selector = baca.select_leaves_in_tuplet(n=n)
-        selector = selector.flatten()
-        selector = selector.get_item(n=m)
+        selector = baca.select_leaves_in_tuplet(n)[m]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -1387,7 +1379,8 @@ class SelectorLibrary(object):
         '''
         selector = abjad.select()
         selector = selector.by_leaf()
-        selector = selector.get_slice(start=start, stop=stop)
+        if start is not None or stop is not None:
+            selector = selector.get_slice(start=start, stop=stop)
         if leak in (abjad.Left, abjad.Both):
             selector = selector.with_previous_leaf()
         if leak in (abjad.Right, abjad.Both):
@@ -1707,7 +1700,7 @@ class SelectorLibrary(object):
                 Selection([Rest('r4')])
 
         '''
-        selector = baca.select_lts(start=start, stop=stop)
+        selector = baca.select_lts()[start:stop]
         get = abjad.select().by_leaf()
         if leak in (abjad.Left, abjad.Both):
             get = get.with_previous_leaf()
@@ -2042,7 +2035,7 @@ class SelectorLibrary(object):
                 Selection([Note("a'16"), Rest('r4')])
 
         '''
-        selector = baca.select_plts(start=start, stop=stop)
+        selector = baca.select_plts()[start:stop]
         get = abjad.select().by_leaf()
         if leak in (abjad.Left, abjad.Both):
             get = get.with_previous_leaf()
@@ -2286,8 +2279,7 @@ class SelectorLibrary(object):
                 Selection([Note("a'16"), Rest('r4')])
 
         '''
-        selector = baca.select_tuplets(start=start, stop=stop)
-        selector = selector.get_slice(start=start, stop=stop)
+        selector = baca.select_tuplets()[start:stop]
         get = abjad.select().by_leaf()
         if leak in (abjad.Left, abjad.Both):
             get = get.with_previous_leaf()
@@ -2519,7 +2511,8 @@ class SelectorLibrary(object):
         '''
         selector = abjad.select()
         selector = selector.by_leaf(trim=True)
-        selector = selector.get_slice(start=start, stop=stop)
+        if start is not None or stop is not None:
+            selector = selector.get_slice(start=start, stop=stop)
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -2687,10 +2680,7 @@ class SelectorLibrary(object):
                 Rest('r4')
 
         '''
-        selector = baca.select_tuplets()
-        selector = selector.flatten()
-        selector = selector.get_item(n=n)
-        selector = selector.select()
+        selector = baca.select_tuplets()[n]
         selector = selector.by_leaf()
         if leak in (abjad.Left, abjad.Both):
             selector = selector.with_previous_leaf()
@@ -2841,8 +2831,7 @@ class SelectorLibrary(object):
                 LogicalTie([Note("fs''16")])
 
         '''
-        selector = baca.select_lts()
-        selector = selector.get_item(n=n)
+        selector = baca.select_lts()[n]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -3069,8 +3058,7 @@ class SelectorLibrary(object):
 
         '''
         selector = abjad.select()
-        selector = selector.by_logical_tie()
-        selector = selector.get_slice(start=start, stop=stop)
+        selector = selector.by_logical_tie()[start:stop]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -3211,9 +3199,7 @@ class SelectorLibrary(object):
                 Note("a'16")
 
         '''
-        selector = baca.select_notes()
-        selector = selector.flatten()
-        selector = selector.get_item(n=n)
+        selector = baca.select_notes()[n]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -3433,8 +3419,7 @@ class SelectorLibrary(object):
 
         '''
         selector = abjad.select()
-        selector = selector.by_class(prototype=abjad.Note)
-        selector = selector.get_slice(start=start, stop=stop)
+        selector = selector.by_class(abjad.Note)[start:stop]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -3575,9 +3560,7 @@ class SelectorLibrary(object):
                 Note("a'16")
 
         '''
-        selector = baca.select_pls()
-        selector = selector.flatten()
-        selector = selector.get_item(n=n)
+        selector = baca.select_pls()[n]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -3797,8 +3780,7 @@ class SelectorLibrary(object):
 
         '''
         selector = abjad.select()
-        selector = selector.by_leaf(pitched=True)
-        selector = selector.get_slice(start=start, stop=stop)
+        selector = selector.by_leaf(pitched=True)[start:stop]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -4022,9 +4004,8 @@ class SelectorLibrary(object):
                 Selection([Note("a'16")])
 
         '''
-        selector = baca.select_tuplets(start=start, stop=stop)
-        get = selector.by_leaf(pitched=True)
-        selector = selector.map(get)
+        selector = baca.select_tuplets()[start:stop]
+        selector = selector.map(abjad.select().by_leaf(pitched=True))
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -4183,8 +4164,7 @@ class SelectorLibrary(object):
                 Note("a'16")
 
         '''
-        selector = baca.select_tuplets()
-        selector = selector.get_item(n=n)
+        selector = baca.select_tuplets()[n]
         selector = selector.by_leaf(pitched=True)
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
@@ -4331,8 +4311,7 @@ class SelectorLibrary(object):
                 LogicalTie([Note("a'16")])
 
         '''
-        selector = baca.select_plts()
-        selector = selector.get_item(n=n)
+        selector = baca.select_plts()[n]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -4473,8 +4452,7 @@ class SelectorLibrary(object):
                 Note("e''4")
 
         '''
-        selector = baca.select_plt_heads()
-        selector = selector.get_item(n=n)
+        selector = baca.select_plt_heads()[n]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -4615,9 +4593,7 @@ class SelectorLibrary(object):
                 Note("af''16")
 
         '''
-        selector = baca.select_plt_heads_in_tuplet(n=n)
-        selector = selector.flatten()
-        selector = selector.get_item(n=m)
+        selector = baca.select_plt_heads_in_tuplet(n)[m]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -4824,11 +4800,8 @@ class SelectorLibrary(object):
                 Note("a'16")
 
         '''
-        selector = baca.select_plts()
-        if start is not None or stop is not None:
-            selector = selector.get_slice(start=start, stop=stop)
+        selector = baca.select_plts()[start:stop]
         selector = selector.map(abjad.select()[0])
-        selector = selector.flatten()
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -5039,7 +5012,7 @@ class SelectorLibrary(object):
                 Selection([Note("a'16")])
 
         '''
-        selector = baca.select_tuplets(start=start, stop=stop)
+        selector = baca.select_tuplets()[start:stop]
         get = abjad.select().by_leaf(pitched=True, head=True)
         selector = selector.map(get)
         template = SelectorLibrary._get_template(inspect.currentframe())
@@ -5194,12 +5167,9 @@ class SelectorLibrary(object):
                 Note("a'16")
 
         '''
-        selector = baca.select_tuplet(n=n)
-        selector = selector.select()
+        selector = baca.select_tuplet(n)
         selector = selector.by_logical_tie(pitched=True)
-        get = abjad.select().get_item(0)
-        selector = selector.map(get)
-        selector = selector.flatten()
+        selector = selector.map(abjad.select()[0])
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -5355,8 +5325,7 @@ class SelectorLibrary(object):
                 Selection([LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])
 
         '''
-        selector = baca.select_plt_npruns()
-        selector = selector.get_item(n=n)
+        selector = baca.select_plt_npruns()[n]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -5535,7 +5504,7 @@ class SelectorLibrary(object):
         selector = baca.select_plts()
         selector = selector.group_by_pitch()
         selector = selector.by_length('>', 1)
-        selector = selector.get_slice(start=start, stop=stop)
+        selector = selector[start:stop]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -5681,8 +5650,7 @@ class SelectorLibrary(object):
                 Selection([LogicalTie([Note("a'16")])])
 
         '''
-        selector = baca.select_plt_pruns()
-        selector = selector.get_item(n=n)
+        selector = baca.select_plt_pruns()[n]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -5911,8 +5879,7 @@ class SelectorLibrary(object):
         '''
         selector = baca.select_plts()
         selector = selector.group_by_pitch()
-        selector = selector.get_slice(start=start, stop=stop)
-        selector = selector.map(abjad.select().select())
+        selector = selector[start:stop]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -6078,8 +6045,7 @@ class SelectorLibrary(object):
                 Selection([LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")])])
 
         '''
-        selector = baca.select_plt_runs()
-        selector = selector.get_item(n=n)
+        selector = baca.select_plt_runs()[n]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -6308,7 +6274,7 @@ class SelectorLibrary(object):
         selector = abjad.select()
         selector = selector.by_logical_tie(pitched=True)
         selector = selector.by_contiguity()
-        selector = selector.get_slice(start=start, stop=stop)
+        selector = selector[start:stop]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -6449,8 +6415,7 @@ class SelectorLibrary(object):
                 Note("e''16")
 
         '''
-        selector = baca.select_plt_tails()
-        selector = selector.get_item(n=n)
+        selector = baca.select_plt_tails()[n]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -6657,10 +6622,8 @@ class SelectorLibrary(object):
                 Note("a'16")
 
         '''
-        selector = baca.select_plts()
-        selector = selector.get_slice(start=start, stop=stop)
+        selector = baca.select_plts()[start:stop]
         selector = selector.map(abjad.select().last())
-        selector = selector.flatten()
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -6871,7 +6834,7 @@ class SelectorLibrary(object):
                 Selection([Note("a'16")])
 
         '''
-        selector = baca.select_tuplets(start=start, stop=stop)
+        selector = baca.select_tuplets()[start:stop]
         get = abjad.select().by_leaf(pitched=True, tail=True)
         selector = selector.map(get)
         template = SelectorLibrary._get_template(inspect.currentframe())
@@ -7027,10 +6990,8 @@ class SelectorLibrary(object):
 
         '''
         selector = baca.select_tuplet(n=n)
-        selector = selector.select()
         selector = selector.by_logical_tie(pitched=True)
         selector = selector.map(abjad.select().last())
-        selector = selector.flatten()
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -7254,8 +7215,7 @@ class SelectorLibrary(object):
         '''
         selector = abjad.select()
         selector = selector.by_logical_tie(pitched=True)
-        if start is not None or stop is not None:
-            selector = selector.get_slice(start=start, stop=stop)
+        selector = selector[start:stop]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -7460,8 +7420,7 @@ class SelectorLibrary(object):
                 Selection([LogicalTie([Note("a'16")])])
 
         '''
-        selector = baca.select_tuplets()
-        selector = selector.get_slice(start=start, stop=stop)
+        selector = baca.select_tuplets()[start:stop]
         get = abjad.select().by_logical_tie(pitched=True)
         selector = selector.map(get)
         template = SelectorLibrary._get_template(inspect.currentframe())
@@ -7637,9 +7596,7 @@ class SelectorLibrary(object):
 
         '''
         selector = baca.select_tuplet(n=n)
-        selector = selector.select()
         selector = selector.by_logical_tie(pitched=True)
-        selector = selector.select()
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -7774,9 +7731,7 @@ class SelectorLibrary(object):
                 Rest('r4')
 
         '''
-        selector = baca.select_rests()
-        selector = selector.flatten()
-        selector = selector.get_item(n=n)
+        selector = baca.select_rests()[n]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -7911,9 +7866,7 @@ class SelectorLibrary(object):
                 Rest('r16')
 
         '''
-        selector = baca.select_rests_in_tuplet(n=n)
-        selector = selector.flatten()
-        selector = selector.get_item(n=m)
+        selector = baca.select_rests_in_tuplet(n)[m]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -8061,8 +8014,7 @@ class SelectorLibrary(object):
 
         '''
         selector = abjad.select()
-        selector = selector.by_class(prototype=abjad.Rest)
-        selector = selector.get_slice(start=start, stop=stop)
+        selector = selector.by_class(abjad.Rest)[start:stop]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -8200,11 +8152,8 @@ class SelectorLibrary(object):
                 Rest('r4')
 
         '''
-        selector = baca.select_tuplet(n=n)
-        selector = selector.select()
-        selector = selector.by_leaf(
-            prototype=(abjad.MultimeasureRest, abjad.Rest),
-            )
+        selector = baca.select_tuplet(n)
+        selector = selector.by_leaf((abjad.MultimeasureRest, abjad.Rest))
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -8445,11 +8394,8 @@ class SelectorLibrary(object):
                 Selection([Note("a'16")])
 
         '''
-        selector = baca.select_tuplets(start=start, stop=stop)
-        get = abjad.select().by_leaf(
-            trim=(abjad.MultimeasureRest, abjad.Rest, abjad.Skip),
-            )
-        selector = selector.map(get)
+        selector = baca.select_tuplets()[start:stop]
+        selector = selector.map(abjad.select().by_leaf(trim=True))
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -8608,11 +8554,8 @@ class SelectorLibrary(object):
                 Note("a'16")
 
         '''
-        selector = baca.select_tuplet(n=n)
-        selector = selector.select()
-        selector = selector.by_leaf(
-            trim=(abjad.MultimeasureRest, abjad.Rest, abjad.Skip),
-            )
+        selector = baca.select_tuplet(n)
+        selector = selector.by_leaf(trim=True)
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -8774,9 +8717,7 @@ class SelectorLibrary(object):
                 Tuplet(Multiplier(4, 5), "a'16 r4")
 
         '''
-        selector = baca.select_tuplets()
-        selector = selector.flatten()
-        selector = selector.get_item(n=n)
+        selector = baca.select_tuplets()[n]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -9013,7 +8954,6 @@ class SelectorLibrary(object):
 
         '''
         selector = abjad.select()
-        selector = selector.by_class(prototype=abjad.Tuplet)
-        selector = selector.get_slice(start=start, stop=stop)
+        selector = selector.by_class(abjad.Tuplet)[start:stop]
         template = SelectorLibrary._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)

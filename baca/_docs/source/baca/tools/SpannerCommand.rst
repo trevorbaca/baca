@@ -23,6 +23,7 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.SpannerCommand.SpannerCommand.normalize
       ~baca.tools.SpannerCommand.SpannerCommand.selector
       ~baca.tools.SpannerCommand.SpannerCommand.spanner
       ~baca.tools.SpannerCommand.SpannerCommand.target
@@ -44,6 +45,15 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.SpannerCommand.SpannerCommand.target
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.SpannerCommand.SpannerCommand.normalize
 
 Special methods
 ---------------

@@ -24,6 +24,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.cluster_widths
+      ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.normalize
       ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.selector
       ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.target
       ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.__call__
@@ -48,6 +49,15 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.target
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.normalize
 
 Special methods
 ---------------

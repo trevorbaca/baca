@@ -25,6 +25,7 @@ Bases
 
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.by_pitch_run
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.deposit_annotations
+      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.normalize
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.number_lists
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.selector
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.target
@@ -54,6 +55,15 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.target
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.normalize
 
 Special methods
 ---------------

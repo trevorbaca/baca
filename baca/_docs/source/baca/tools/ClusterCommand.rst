@@ -24,6 +24,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.ClusterCommand.ClusterCommand.hide_flat_markup
+      ~baca.tools.ClusterCommand.ClusterCommand.normalize
       ~baca.tools.ClusterCommand.ClusterCommand.selector
       ~baca.tools.ClusterCommand.ClusterCommand.start_pitch
       ~baca.tools.ClusterCommand.ClusterCommand.target
@@ -50,6 +51,15 @@ Read-only properties
 .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.target
 
 .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.widths
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.ClusterCommand.ClusterCommand.normalize
 
 Special methods
 ---------------

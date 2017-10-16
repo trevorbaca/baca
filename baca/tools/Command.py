@@ -98,3 +98,18 @@ class Command(abjad.AbjadObject):
         Returns target or none.
         '''
         return self._target
+
+    ### PUBLIC METHODS ###
+
+    def normalize(self, argument):
+        r'''Normalizes `argument` for iteration.
+        
+        Returns `argument` wrapped in list when target selector returns item.
+
+        Returns `argument` as-is when target selector does not return item.
+        '''
+        import abjad
+        targets = self.target(argument)
+        if isinstance(self.target.callbacks[-1], abjad.ItemSelectorCallback):
+            targets = [targets]
+        return targets

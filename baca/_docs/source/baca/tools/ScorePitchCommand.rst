@@ -27,6 +27,7 @@ Bases
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.allow_repeat_pitches
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.counts
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.get_pitch
+      ~baca.tools.ScorePitchCommand.ScorePitchCommand.normalize
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.operators
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.repetition_intervals
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.reverse
@@ -75,6 +76,12 @@ Methods
 -------
 
 .. automethod:: baca.tools.ScorePitchCommand.ScorePitchCommand.get_pitch
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.ScorePitchCommand.ScorePitchCommand.normalize
 
 Special methods
 ---------------

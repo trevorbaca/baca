@@ -23,6 +23,7 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.TransitionCommand.TransitionCommand.normalize
       ~baca.tools.TransitionCommand.TransitionCommand.selector
       ~baca.tools.TransitionCommand.TransitionCommand.solid
       ~baca.tools.TransitionCommand.TransitionCommand.start_markup
@@ -54,6 +55,15 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.TransitionCommand.TransitionCommand.target
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.TransitionCommand.TransitionCommand.normalize
 
 Special methods
 ---------------
