@@ -21,15 +21,12 @@ Bases
       ~baca.tools.SelectorLibrary.SelectorLibrary.select_chord_head
       ~baca.tools.SelectorLibrary.SelectorLibrary.select_chord_heads
       ~baca.tools.SelectorLibrary.SelectorLibrary.select_chords
-      ~baca.tools.SelectorLibrary.SelectorLibrary.select_each_lt
-      ~baca.tools.SelectorLibrary.SelectorLibrary.select_each_plt
-      ~baca.tools.SelectorLibrary.SelectorLibrary.select_each_plt_nprun
-      ~baca.tools.SelectorLibrary.SelectorLibrary.select_each_plt_prun
-      ~baca.tools.SelectorLibrary.SelectorLibrary.select_each_plt_run
       ~baca.tools.SelectorLibrary.SelectorLibrary.select_leaf
       ~baca.tools.SelectorLibrary.SelectorLibrary.select_leaf_in_trimmed_run
       ~baca.tools.SelectorLibrary.SelectorLibrary.select_leaf_in_tuplet
       ~baca.tools.SelectorLibrary.SelectorLibrary.select_leaves
+      ~baca.tools.SelectorLibrary.SelectorLibrary.select_leaves_in_each_lt
+      ~baca.tools.SelectorLibrary.SelectorLibrary.select_leaves_in_each_plt
       ~baca.tools.SelectorLibrary.SelectorLibrary.select_leaves_in_each_tuplet
       ~baca.tools.SelectorLibrary.SelectorLibrary.select_leaves_in_trimmed_run
       ~baca.tools.SelectorLibrary.SelectorLibrary.select_leaves_in_tuplet
@@ -48,8 +45,11 @@ Bases
       ~baca.tools.SelectorLibrary.SelectorLibrary.select_plt_heads_in_each_tuplet
       ~baca.tools.SelectorLibrary.SelectorLibrary.select_plt_heads_in_tuplet
       ~baca.tools.SelectorLibrary.SelectorLibrary.select_plt_nprun
+      ~baca.tools.SelectorLibrary.SelectorLibrary.select_plt_npruns
       ~baca.tools.SelectorLibrary.SelectorLibrary.select_plt_prun
+      ~baca.tools.SelectorLibrary.SelectorLibrary.select_plt_pruns
       ~baca.tools.SelectorLibrary.SelectorLibrary.select_plt_run
+      ~baca.tools.SelectorLibrary.SelectorLibrary.select_plt_runs
       ~baca.tools.SelectorLibrary.SelectorLibrary.select_plt_tail
       ~baca.tools.SelectorLibrary.SelectorLibrary.select_plt_tails
       ~baca.tools.SelectorLibrary.SelectorLibrary.select_plt_tails_in_each_tuplet
@@ -78,16 +78,6 @@ Class & static methods
 
 .. automethod:: baca.tools.SelectorLibrary.SelectorLibrary.select_chords
 
-.. automethod:: baca.tools.SelectorLibrary.SelectorLibrary.select_each_lt
-
-.. automethod:: baca.tools.SelectorLibrary.SelectorLibrary.select_each_plt
-
-.. automethod:: baca.tools.SelectorLibrary.SelectorLibrary.select_each_plt_nprun
-
-.. automethod:: baca.tools.SelectorLibrary.SelectorLibrary.select_each_plt_prun
-
-.. automethod:: baca.tools.SelectorLibrary.SelectorLibrary.select_each_plt_run
-
 .. automethod:: baca.tools.SelectorLibrary.SelectorLibrary.select_leaf
 
 .. automethod:: baca.tools.SelectorLibrary.SelectorLibrary.select_leaf_in_trimmed_run
@@ -95,6 +85,10 @@ Class & static methods
 .. automethod:: baca.tools.SelectorLibrary.SelectorLibrary.select_leaf_in_tuplet
 
 .. automethod:: baca.tools.SelectorLibrary.SelectorLibrary.select_leaves
+
+.. automethod:: baca.tools.SelectorLibrary.SelectorLibrary.select_leaves_in_each_lt
+
+.. automethod:: baca.tools.SelectorLibrary.SelectorLibrary.select_leaves_in_each_plt
 
 .. automethod:: baca.tools.SelectorLibrary.SelectorLibrary.select_leaves_in_each_tuplet
 
@@ -132,9 +126,15 @@ Class & static methods
 
 .. automethod:: baca.tools.SelectorLibrary.SelectorLibrary.select_plt_nprun
 
+.. automethod:: baca.tools.SelectorLibrary.SelectorLibrary.select_plt_npruns
+
 .. automethod:: baca.tools.SelectorLibrary.SelectorLibrary.select_plt_prun
 
+.. automethod:: baca.tools.SelectorLibrary.SelectorLibrary.select_plt_pruns
+
 .. automethod:: baca.tools.SelectorLibrary.SelectorLibrary.select_plt_run
+
+.. automethod:: baca.tools.SelectorLibrary.SelectorLibrary.select_plt_runs
 
 .. automethod:: baca.tools.SelectorLibrary.SelectorLibrary.select_plt_tail
 

@@ -575,7 +575,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.ottava(baca.select_each_plt_run()),
+                ...     baca.ottava(baca.select_plt_runs()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -704,7 +704,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.ottava_bassa(baca.select_each_plt_run()),
+                ...     baca.ottava_bassa(baca.select_plt_runs()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -4116,7 +4116,7 @@ class LibraryNZ(object):
 
         '''
         return baca.SpannerCommand(
-            selector=baca.select_each_plt_run(start=start, stop=stop),
+            selector=baca.select_plt_runs(start=start, stop=stop),
             spanner=abjad.Slur(),
             )
 
@@ -4641,9 +4641,9 @@ class LibraryNZ(object):
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
                 ...     baca.soprano_to_octave(
                 ...         n=3,
-                ...         selector=baca.select_each_plt(),
+                ...         selector=baca.select_leaves_in_each_plt(),
                 ...         ),
-                ...     baca.color(baca.select_each_plt()),
+                ...     baca.color(baca.select_leaves_in_each_plt()),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -4749,9 +4749,9 @@ class LibraryNZ(object):
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
                 ...     baca.soprano_to_octave(
                 ...         3,
-                ...         selector=baca.select_each_plt(start=-2),
+                ...         selector=baca.select_leaves_in_each_plt(start=-2),
                 ...         ),
-                ...     baca.color(baca.select_each_plt(start=-2)),
+                ...     baca.color(baca.select_leaves_in_each_plt(start=-2)),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -7523,7 +7523,7 @@ class LibraryNZ(object):
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.Tie(),
-            target=baca.select_each_plt_prun(),
+            target=baca.select_plt_pruns(),
             )
 
     @staticmethod

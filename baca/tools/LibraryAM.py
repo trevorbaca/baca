@@ -778,9 +778,9 @@ class LibraryAM(object):
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
                 ...     baca.bass_to_octave(
                 ...         n=3,
-                ...         selector=baca.select_each_plt(),
+                ...         selector=baca.select_leaves_in_each_plt(),
                 ...         ),
-                ...     baca.color(baca.select_each_plt()),
+                ...     baca.color(baca.select_leaves_in_each_plt()),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -886,9 +886,9 @@ class LibraryAM(object):
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
                 ...     baca.bass_to_octave(
                 ...         n=3,
-                ...         selector=baca.select_each_plt(start=-2),
+                ...         selector=baca.select_leaves_in_each_plt(start=-2),
                 ...         ),
-                ...     baca.color(baca.select_each_plt(start=-2)),
+                ...     baca.color(baca.select_leaves_in_each_plt(start=-2)),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -1498,16 +1498,6 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def clusters(start_pitch=None, widths=None, selector=None):
-        r'''Makes clusters from PLTs.
-        '''
-        return baca.ClusterCommand(
-            selector=selector,
-            start_pitch=start_pitch,
-            widths=widths,
-            )
-
-    @staticmethod
     def center_to_octave(n=4, selector=None):
         r"""Octave-transposes music.
 
@@ -1629,9 +1619,9 @@ class LibraryAM(object):
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
                 ...     baca.center_to_octave(
                 ...         n=3,
-                ...         selector=baca.select_each_plt(),
+                ...         selector=baca.select_leaves_in_each_plt(),
                 ...         ),
-                ...     baca.color(baca.select_each_plt()),
+                ...     baca.color(baca.select_leaves_in_each_plt()),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -1737,9 +1727,9 @@ class LibraryAM(object):
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
                 ...     baca.center_to_octave(
                 ...         n=3,
-                ...         selector=baca.select_each_plt(start=-2),
+                ...         selector=baca.select_leaves_in_each_plt(start=-2),
                 ...         ),
-                ...     baca.color(baca.select_each_plt(start=-2)),
+                ...     baca.color(baca.select_leaves_in_each_plt(start=-2)),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -2072,6 +2062,16 @@ class LibraryAM(object):
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.ClefSpanner(clef=clef),
+            )
+
+    @staticmethod
+    def clusters(start_pitch=None, widths=None, selector=None):
+        r'''Makes clusters from PLTs.
+        '''
+        return baca.ClusterCommand(
+            selector=selector,
+            start_pitch=start_pitch,
+            widths=widths,
             )
 
     @staticmethod
@@ -6261,7 +6261,7 @@ class LibraryAM(object):
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.Tie(use_messiaen_style_ties=True),
-            target=baca.select_each_plt_prun(),
+            target=baca.select_plt_pruns(),
             )
 
     @staticmethod

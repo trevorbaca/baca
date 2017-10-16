@@ -1477,7 +1477,7 @@ class MusicMaker(abjad.AbjadObject):
                 ...     [[0, 2, 10, 18], [15, 23], [19, 13, 9, 8]],
                 ...     baca.hairpins(
                 ...         ['p < f'],
-                ...         target=baca.select_each_plt_run(),
+                ...         target=baca.select_plt_runs(),
                 ...         ),
                 ...     baca.RestAffixSpecifier(
                 ...         pattern=abjad.Pattern(
