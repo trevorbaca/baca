@@ -100,6 +100,6 @@ class Command(abjad.AbjadObject):
         '''
         import abjad
         targets = self.target(argument)
-        if isinstance(self.target.callbacks[-1], abjad.ItemSelectorCallback):
+        if isinstance(self.target.callbacks[-1], abjad.GetItemCallback):
             targets = [targets]
         return targets
