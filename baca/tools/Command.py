@@ -99,7 +99,14 @@ class Command(abjad.AbjadObject):
         Returns `argument` as-is when target selector does not return item.
         '''
         import abjad
-        targets = self.target(argument)
-        if isinstance(self.target.callbacks[-1], abjad.GetItemCallback):
-            targets = [targets]
-        return targets
+        if self.target is None:
+            if isinstance(argument, collections.Iterable):
+                return argument
+            else:
+                return [argument]
+        else:
+            targets = self.target(argument)
+            if isinstance(self.target.callbacks[-1], abjad.GetItemCallback):
+                return [targets]
+            else:
+                return targets

@@ -208,7 +208,7 @@ class OverrideCommand(Command):
         ::
 
             >>> baca.OverrideCommand()
-            OverrideCommand(target=baca.select_leaves())
+            OverrideCommand(target=Selector(callbacks=(ByClassCallback(prototype=Leaf), WrapCallback())))
 
     '''
 
@@ -236,7 +236,7 @@ class OverrideCommand(Command):
         maximum_settings=None,
         revert=None,
         selector=None,
-        target='baca.select_leaves()',
+        target='baca.select_leaves().wrap()',
         ):
         Command.__init__(self, selector=selector, target=target)
         if context_name is not None:
@@ -270,9 +270,7 @@ class OverrideCommand(Command):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        if self.target is not None:
-            argument = self.target(argument)
-        selections = self._to_selection_list(argument)
+        targets = self.normalize(argument)
         if False:
             print(format(self))
             print()
@@ -280,7 +278,7 @@ class OverrideCommand(Command):
             print()
             print(argument)
             print()
-            print(selections)
+            print(targets)
             print()
             print('---')
             print()
@@ -321,8 +319,8 @@ class OverrideCommand(Command):
             )
         revert = revert.replace('\\', '')
         revert = abjad.LilyPondCommand(revert, format_slot='after')
-        for selection in selections:
-            leaves = abjad.select(selection).by_leaf()
+        for target in targets:
+            leaves = abjad.select(target).by_leaf()
             if self.revert:
                 abjad.attach(command, leaves[0])
                 abjad.attach(revert, leaves[-1])

@@ -153,7 +153,7 @@ class LibraryNZ(object):
             grob_name='note_head',
             revert=True,
             selector=selector,
-            target=baca.select_plts(),
+            target=baca.select_plts().wrap(),
             )
 
     @staticmethod
@@ -2192,7 +2192,7 @@ class LibraryNZ(object):
             grob_name='repeat_tie',
             revert=True,
             selector=selector,
-            target=baca.select_leaves_in_trimmed_run(),
+            target=baca.select_leaves_in_trimmed_run().wrap(),
             )
 
     @staticmethod
@@ -2324,7 +2324,7 @@ class LibraryNZ(object):
             grob_name='repeat_tie',
             revert=True,
             selector=selector,
-            target=baca.select_leaves_in_trimmed_run(),
+            target=baca.select_leaves_in_trimmed_run().wrap(),
             )
 
     @staticmethod
@@ -2471,7 +2471,7 @@ class LibraryNZ(object):
             grob_name='rest',
             revert=True,
             selector=selector,
-            target=baca.select_rests(),
+            target=baca.select_rests().wrap(),
             )
 
     @staticmethod
@@ -2797,7 +2797,7 @@ class LibraryNZ(object):
             attribute_value=abjad.Down,
             grob_name='rest',
             revert=True,
-            target=baca.select_rests(),
+            target=baca.select_rests().wrap(),
             )
 
     @staticmethod
@@ -2925,7 +2925,7 @@ class LibraryNZ(object):
             grob_name='rest',
             revert=True,
             selector=selector,
-            target=baca.select_rests(),
+            target=baca.select_rests().wrap(),
             )
 
     @staticmethod
@@ -3121,7 +3121,7 @@ class LibraryNZ(object):
             grob_name='script',
             revert=True,
             selector=selector,
-            target=baca.select_leaves(),
+            target=baca.select_leaves().wrap(),
             )
 
     @staticmethod
@@ -4534,8 +4534,8 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.color(baca.select_plts()),
-                ...     baca.soprano_to_octave(3),
+                ...     baca.color(baca.select_plts().wrap()),
+                ...     baca.soprano_to_octave(3, baca.select_plts().wrap()),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -4565,17 +4565,17 @@ class LibraryNZ(object):
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
                                 f,8 ~ [
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
                                 f,32 ]
                                 r16.
                             }
@@ -4595,17 +4595,17 @@ class LibraryNZ(object):
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
                                 <g,, af,>8 ~ [
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
                                 <g,, af,>32 ]
                                 r16.
                             }
@@ -4639,11 +4639,8 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.soprano_to_octave(
-                ...         n=3,
-                ...         selector=baca.select_leaves_in_each_plt(),
-                ...         ),
-                ...     baca.color(baca.select_leaves_in_each_plt()),
+                ...     baca.soprano_to_octave(3, baca.select_plts()),
+                ...     baca.color(baca.select_plts()),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -4747,11 +4744,8 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.soprano_to_octave(
-                ...         3,
-                ...         selector=baca.select_leaves_in_each_plt(start=-2),
-                ...         ),
-                ...     baca.color(baca.select_leaves_in_each_plt(start=-2)),
+                ...     baca.soprano_to_octave(3, baca.select_plts()[-2:]),
+                ...     baca.color(baca.select_plts()[-2:]),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -5240,7 +5234,7 @@ class LibraryNZ(object):
             grob_name='stem',
             revert=True,
             selector=selector,
-            target=baca.select_leaves_in_trimmed_run(),
+            target=baca.select_leaves_in_trimmed_run().wrap(),
             )
 
     @staticmethod
@@ -7667,7 +7661,7 @@ class LibraryNZ(object):
             grob_name='tie',
             revert=True,
             selector=selector,
-            target=baca.select_leaves_in_trimmed_run(),
+            target=baca.select_leaves_in_trimmed_run().wrap(),
             )
 
     @staticmethod
@@ -7799,7 +7793,7 @@ class LibraryNZ(object):
             grob_name='tie',
             revert=True,
             selector=selector,
-            target=baca.select_leaves_in_trimmed_run(),
+            target=baca.select_leaves_in_trimmed_run().wrap(),
             )
 
     @staticmethod
@@ -8268,7 +8262,7 @@ class LibraryNZ(object):
             grob_name='rest',
             revert=True,
             selector=selector,
-            target=baca.select_rests(),
+            target=baca.select_rests().wrap(),
             )
 
     @staticmethod
@@ -8411,7 +8405,7 @@ class LibraryNZ(object):
             grob_name='time_signature',
             revert=True,
             selector=selector,
-            target=baca.select_rests(),
+            target=baca.select_rests().wrap(),
             )
 
     @staticmethod

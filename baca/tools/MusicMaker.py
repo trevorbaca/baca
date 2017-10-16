@@ -781,9 +781,11 @@ class MusicMaker(abjad.AbjadObject):
             baca.RegisterToOctaveCommand,
             baca.RegisterTransitionCommand,
             )
+        selection = abjad.select(selections)
         for specifier in specifiers:
             if isinstance(specifier, prototype):
-                specifier(selections)
+                #specifier(selections)
+                specifier(selection)
             else:
                 specifiers_.append(specifier)
         return specifiers_
