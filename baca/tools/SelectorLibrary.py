@@ -370,11 +370,11 @@ class SelectorLibrary(object):
                                 d'16
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 <e'' fs''>16
                                 r16
                             }
@@ -455,11 +455,11 @@ class SelectorLibrary(object):
                                 r16
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 <e'' fs''>4 ~
                                 <e'' fs''>16
                                 r4
@@ -525,11 +525,11 @@ class SelectorLibrary(object):
                                 bf'16
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 <e'' fs''>16
                             }
                             {
@@ -615,11 +615,11 @@ class SelectorLibrary(object):
                                 bf'16
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 <e'' fs''>16
                             }
                             {
@@ -2436,11 +2436,11 @@ class SelectorLibrary(object):
                                 \once \override Rest.color = #red
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 c'16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -2448,11 +2448,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 bf'4 ~
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -2460,8 +2460,8 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 bf'16
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #blue
+                                \once \override Rest.color = #blue
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -2472,11 +2472,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 bf'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 e''16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -2484,20 +2484,20 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 e''4 ~
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 e''16
                                 \once \override Dots.color = #red
                                 \once \override Rest.color = #red
                                 r16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 fs''16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -2507,11 +2507,11 @@ class SelectorLibrary(object):
                                 af''16
                             }
                             \times 4/5 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 a'16
                                 \once \override Dots.color = #red
                                 \once \override Rest.color = #red
@@ -2577,11 +2577,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 fs''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 af''16
                             }
                             \times 4/5 {
@@ -2591,8 +2591,8 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 a'16
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #blue
+                                \once \override Rest.color = #blue
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -2653,11 +2653,11 @@ class SelectorLibrary(object):
                                 \once \override Dots.color = #red
                                 \once \override Rest.color = #red
                                 r16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 fs''16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -2667,11 +2667,11 @@ class SelectorLibrary(object):
                                 af''16
                             }
                             \times 4/5 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 a'16
                                 \once \override Dots.color = #red
                                 \once \override Rest.color = #red
@@ -2989,11 +2989,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 c'16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -3001,11 +3001,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 bf'4 ~
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 bf'16
                                 \once \override Dots.color = #red
                                 \once \override Rest.color = #red
@@ -3013,11 +3013,11 @@ class SelectorLibrary(object):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 bf'16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -3025,11 +3025,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 e''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 e''4 ~
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -3037,8 +3037,8 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 e''16
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #blue
+                                \once \override Rest.color = #blue
                                 r16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -3046,11 +3046,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 fs''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 af''16
                             }
                             \times 4/5 {
@@ -3120,11 +3120,11 @@ class SelectorLibrary(object):
                                 \once \override Dots.color = #red
                                 \once \override Rest.color = #red
                                 r16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 fs''16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -3134,11 +3134,11 @@ class SelectorLibrary(object):
                                 af''16
                             }
                             \times 4/5 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 a'16
                                 r4
                                 \revert TupletBracket.staff-padding
@@ -3198,11 +3198,11 @@ class SelectorLibrary(object):
                                 \once \override Rest.color = #red
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 c'16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -3210,11 +3210,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 bf'4 ~
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -3222,8 +3222,8 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 bf'16
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #blue
+                                \once \override Rest.color = #blue
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -3304,8 +3304,8 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 a'16
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #blue
+                                \once \override Rest.color = #blue
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -3515,11 +3515,11 @@ class SelectorLibrary(object):
                                 \once \override Rest.color = #red
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 c'16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -3527,17 +3527,17 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 bf'4 ~
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 bf'16
                                 \once \override Dots.color = #red
                                 \once \override Rest.color = #red
@@ -3545,11 +3545,11 @@ class SelectorLibrary(object):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 bf'16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -3557,26 +3557,26 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 e''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 e''4 ~
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 e''16
                                 \once \override Dots.color = #red
                                 \once \override Rest.color = #red
                                 r16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 fs''16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -3586,11 +3586,11 @@ class SelectorLibrary(object):
                                 af''16
                             }
                             \times 4/5 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 a'16
                                 \once \override Dots.color = #red
                                 \once \override Rest.color = #red
@@ -3670,11 +3670,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 fs''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 af''16
                             }
                             \times 4/5 {
@@ -3684,8 +3684,8 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 a'16
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #blue
+                                \once \override Rest.color = #blue
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -3889,11 +3889,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 c'16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -3901,11 +3901,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 bf'4 ~
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 bf'16
                                 r16
                             }
@@ -3917,11 +3917,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 bf'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 e''16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -3929,11 +3929,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 e''4 ~
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 e''16
                                 r16
                                 \once \override Accidental.color = #red
@@ -3942,11 +3942,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 fs''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 af''16
                             }
                             \times 4/5 {
@@ -4017,11 +4017,11 @@ class SelectorLibrary(object):
                                 \once \override Stem.color = #red
                                 e''16
                                 r16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 fs''16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -4031,11 +4031,11 @@ class SelectorLibrary(object):
                                 af''16
                             }
                             \times 4/5 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 a'16
                                 r4
                                 \revert TupletBracket.staff-padding
@@ -4240,11 +4240,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 c'16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -4252,11 +4252,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 bf'4 ~
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 bf'16
                                 r16
                             }
@@ -4268,11 +4268,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 bf'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 e''16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -4280,11 +4280,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 e''4 ~
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 e''16
                                 r16
                                 \once \override Accidental.color = #red
@@ -4293,11 +4293,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 fs''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 af''16
                             }
                             \times 4/5 {
@@ -4368,11 +4368,11 @@ class SelectorLibrary(object):
                                 \once \override Stem.color = #red
                                 e''16
                                 r16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 fs''16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -4382,11 +4382,11 @@ class SelectorLibrary(object):
                                 af''16
                             }
                             \times 4/5 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 a'16
                                 r4
                                 \revert TupletBracket.staff-padding
@@ -4678,11 +4678,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 c'16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -4690,11 +4690,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 bf'4 ~
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 bf'16
                                 r16
                             }
@@ -5268,11 +5268,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 c'16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -5285,11 +5285,11 @@ class SelectorLibrary(object):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 bf'16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -5297,11 +5297,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 e''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 e''4 ~
                                 e''16
                                 r16
@@ -5311,11 +5311,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 fs''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 af''16
                             }
                             \times 4/5 {
@@ -5386,11 +5386,11 @@ class SelectorLibrary(object):
                                 e''4 ~
                                 e''16
                                 r16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 fs''16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -5400,11 +5400,11 @@ class SelectorLibrary(object):
                                 af''16
                             }
                             \times 4/5 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 a'16
                                 r4
                                 \revert TupletBracket.staff-padding
@@ -5686,11 +5686,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 c'16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -6462,11 +6462,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 c'16
                                 bf'4 ~
                                 \once \override Accidental.color = #red
@@ -6479,11 +6479,11 @@ class SelectorLibrary(object):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 bf'16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -6492,11 +6492,11 @@ class SelectorLibrary(object):
                                 \once \override Stem.color = #red
                                 e''16
                                 e''4 ~
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 e''16
                                 r16
                                 \once \override Accidental.color = #red
@@ -6505,11 +6505,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 fs''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 af''16
                             }
                             \times 4/5 {
@@ -6580,11 +6580,11 @@ class SelectorLibrary(object):
                                 \once \override Stem.color = #red
                                 e''16
                                 r16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 fs''16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -6594,11 +6594,11 @@ class SelectorLibrary(object):
                                 af''16
                             }
                             \times 4/5 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 a'16
                                 r4
                                 \revert TupletBracket.staff-padding
@@ -6879,11 +6879,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 c'16
                                 bf'4 ~
                                 \once \override Accidental.color = #red
@@ -7034,11 +7034,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 c'16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -7056,11 +7056,11 @@ class SelectorLibrary(object):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 bf'16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -7068,17 +7068,17 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 e''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 e''4 ~
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 e''16
                                 r16
                                 \once \override Accidental.color = #red
@@ -7087,11 +7087,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 fs''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 af''16
                             }
                             \times 4/5 {
@@ -7176,11 +7176,11 @@ class SelectorLibrary(object):
                                 \once \override Stem.color = #red
                                 e''16
                                 r16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 fs''16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -7190,11 +7190,11 @@ class SelectorLibrary(object):
                                 af''16
                             }
                             \times 4/5 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 a'16
                                 r4
                                 \revert TupletBracket.staff-padding
@@ -7484,11 +7484,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 c'16 \repeatTie
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 bf'4.
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -7562,17 +7562,17 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 bf'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 e''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 e''4. \repeatTie
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -7580,11 +7580,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 fs''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 af''16
                             }
                             \times 4/5 {
@@ -7929,8 +7929,8 @@ class SelectorLibrary(object):
                                 c'16
                                 bf'4 ~
                                 bf'16
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #blue
+                                \once \override Rest.color = #blue
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -7947,8 +7947,8 @@ class SelectorLibrary(object):
                             }
                             \times 4/5 {
                                 a'16
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #blue
+                                \once \override Rest.color = #blue
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -8012,8 +8012,8 @@ class SelectorLibrary(object):
                             }
                             \times 4/5 {
                                 a'16
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #blue
+                                \once \override Rest.color = #blue
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -8074,8 +8074,8 @@ class SelectorLibrary(object):
                                 c'16
                                 bf'4 ~
                                 bf'16
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #blue
+                                \once \override Rest.color = #blue
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -8465,11 +8465,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 c'16
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
@@ -8477,11 +8477,11 @@ class SelectorLibrary(object):
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
                                 bf'4 ~
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 bf'16
                                 r16
                             }
@@ -8815,44 +8815,44 @@ class SelectorLibrary(object):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 bf'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 e''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 e''4 ~
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 e''16
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #blue
+                                \once \override Rest.color = #blue
                                 r16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 fs''16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 af''16
                             }
                             \times 4/5 {
@@ -8960,14 +8960,14 @@ class SelectorLibrary(object):
                                 af''16
                             }
                             \times 4/5 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 a'16
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #blue
+                                \once \override Rest.color = #blue
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
