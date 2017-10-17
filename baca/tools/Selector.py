@@ -3,51 +3,41 @@ import baca
 import inspect
 
 
-#class Selector(abjad.Selector):
-class Selector(object):
-    r'''Selector library.
+class Selector(abjad.Selector):
+    r'''Selector.
 
     ..  container:: example
 
         ::
 
             >>> baca.select()
-            <baca.tools.Selector.Selector ...>
-
-        ::
-
-            >>> baca.select().chord()
-            baca.select().chord()
+            Selector()
 
     '''
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Libraries'
+    __documentation_section__ = 'Utilities'
 
     __slots__ = (
         )
 
     ### PRIVATE METHODS ###
 
-    @staticmethod
-    def _get_template(frame):
+    def _get_template(self, frame):
         try:
             frame_info = inspect.getframeinfo(frame)
             function_name = frame_info.function
-            arguments = abjad.Expression._wrap_arguments(
-                frame,
-                static_class=Selector,
-                )
-            template = f'baca.select().{function_name}({arguments})'
+            arguments = abjad.Expression._wrap_arguments(frame)
+            stem = self.template or 'baca.select()'
+            template = f'{stem}.{function_name}({arguments})'
         finally:
             del frame
         return template
 
     ### PUBLIC METHODS ###
 
-    @staticmethod
-    def chord(n=0):
+    def chord(self, n=0):
         r'''Selects chord.
 
         ..  container:: example
@@ -192,11 +182,10 @@ class Selector(object):
 
         '''
         selector = baca.select().chords()[n]
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def chord_head(n=0):
+    def chord_head(self, n=0):
         r'''Selects chord head.
 
         ..  container:: example
@@ -331,11 +320,10 @@ class Selector(object):
 
         '''
         selector = baca.select().chord_heads()[n]
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def chord_heads():
+    def chord_heads(self):
         r'''Selects chord heads.
 
         ..  container:: example
@@ -416,13 +404,12 @@ class Selector(object):
                 Chord("<e'' fs''>4")
 
         '''
-        selector = abjad.select()
+        selector = baca.select()
         selector = selector.by_leaf(abjad.Chord, head=True)
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def chords():
+    def chords(self):
         r'''Selects chords.
 
         ..  container:: example
@@ -508,13 +495,12 @@ class Selector(object):
                 Chord("<e'' fs''>16")
 
         '''
-        selector = abjad.select()
+        selector = baca.select()
         selector = selector.by_class(abjad.Chord)
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def leaf(n=0):
+    def leaf(self, n=0):
         r'''Selects leaf.
 
         ..  container:: example
@@ -648,11 +634,10 @@ class Selector(object):
 
         '''
         selector = baca.select().leaves()[n]
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def leaf_in_trimmed_run(n=0):
+    def leaf_in_trimmed_run(self, n=0):
         r'''Selects leaf in trimmed run.
 
         ..  container:: example
@@ -789,11 +774,10 @@ class Selector(object):
 
         '''
         selector = baca.select().leaves_in_trimmed_run()[n]
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def leaf_in_tuplet(n=0, m=0):
+    def leaf_in_tuplet(self, n=0, m=0):
         r'''Selects leaf `m` in tuplet `n`.
 
         ..  container:: example
@@ -927,11 +911,10 @@ class Selector(object):
 
         '''
         selector = baca.select().leaves_in_tuplet(n)[m]
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def leaves(leak=None, start=None, stop=None):
+    def leaves(self, leak=None, start=None, stop=None):
         r'''Selects leaves.
 
         ..  container:: example
@@ -1240,7 +1223,7 @@ class Selector(object):
                 Rest('r4')
 
         '''
-        selector = abjad.select()
+        selector = baca.select()
         selector = selector.by_leaf()
         if start is not None or stop is not None:
             selector = selector.get_slice(start=start, stop=stop)
@@ -1248,11 +1231,10 @@ class Selector(object):
             selector = selector.with_previous_leaf()
         if leak in (abjad.Right, abjad.Both):
             selector = selector.with_next_leaf()
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def leaves_in_each_lt(start=None, stop=None, leak=None):
+    def leaves_in_each_lt(self, start=None, stop=None, leak=None):
         r'''Selects leaves in each LT.
 
         ..  container:: example
@@ -1570,11 +1552,10 @@ class Selector(object):
         if leak in (abjad.Right, abjad.Both):
             get = get.with_next_leaf()
         selector = selector.map(get)
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def leaves_in_each_plt(start=None, stop=None, leak=None):
+    def leaves_in_each_plt(self, start=None, stop=None, leak=None):
         r'''Selects leaves in each PLT.
 
         ..  container:: example
@@ -1905,11 +1886,10 @@ class Selector(object):
         if leak in (abjad.Right, abjad.Both):
             get = get.with_next_leaf()
         selector = selector.map(get)
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def leaves_in_each_tuplet(start=None, stop=None, leak=None):
+    def leaves_in_each_tuplet(self, start=None, stop=None, leak=None):
         r'''Selects leaves in each tuplet.
 
         ..  container:: example
@@ -2149,11 +2129,10 @@ class Selector(object):
         if leak in (abjad.Right, abjad.Both):
             get = get.with_next_leaf()
         selector = selector.map(get)
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def leaves_in_trimmed_run():
+    def leaves_in_trimmed_run(self):
         r'''Selects leaves in trimmed run.
 
         ..  container:: example
@@ -2289,13 +2268,12 @@ class Selector(object):
                 Note("a'16")
 
         '''
-        selector = abjad.select()
+        selector = baca.select()
         selector = selector.by_leaf(trim=True)
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def leaves_in_tuplet(n=0, leak=None):
+    def leaves_in_tuplet(self, n=0, leak=None):
         r'''Selects leaves in tuplet.
 
         ..  container:: example
@@ -2464,11 +2442,10 @@ class Selector(object):
             selector = selector.with_previous_leaf()
         if leak in (abjad.Right, abjad.Both):
             selector = selector.with_next_leaf()
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def lt(n=0):
+    def lt(self, n=0):
         r'''Selects LT.
 
         ..  container:: example
@@ -2610,11 +2587,10 @@ class Selector(object):
 
         '''
         selector = baca.select().lts()[n]
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def lts():
+    def lts(self):
         r'''Selects LTs.
 
         ..  container:: example
@@ -2754,13 +2730,12 @@ class Selector(object):
                 LogicalTie([Rest('r4')])
 
         '''
-        selector = abjad.select()
+        selector = baca.select()
         selector = selector.by_logical_tie()
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def note(n=0):
+    def note(self, n=0):
         r'''Selects note.
 
         ..  container:: example
@@ -2897,11 +2872,10 @@ class Selector(object):
 
         '''
         selector = baca.select().notes()[n]
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def notes():
+    def notes(self):
         r'''Selects notes.
 
         ..  container:: example
@@ -3031,13 +3005,12 @@ class Selector(object):
                 Note("a'16")
 
         '''
-        selector = abjad.select()
+        selector = baca.select()
         selector = selector.by_class(abjad.Note)
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def pl(n=0):
+    def pl(self, n=0):
         r'''Selects PL.
 
         ..  container:: example
@@ -3174,11 +3147,10 @@ class Selector(object):
 
         '''
         selector = baca.select().pls()[n]
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def pls():
+    def pls(self):
         r'''Selects PLs.
 
         ..  container:: example
@@ -3308,13 +3280,12 @@ class Selector(object):
                 Note("a'16")
 
         '''
-        selector = abjad.select()
+        selector = baca.select()
         selector = selector.by_leaf(pitched=True)
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def pls_in_each_tuplet(start=None, stop=None):
+    def pls_in_each_tuplet(self, start=None, stop=None):
         r'''Selects PLs in each tuplet.
 
         ..  container:: example
@@ -3535,11 +3506,10 @@ class Selector(object):
         '''
         selector = baca.select().tuplets()[start:stop]
         selector = selector.map(abjad.select().by_leaf(pitched=True))
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def pls_in_tuplet(n=0):
+    def pls_in_tuplet(self, n=0):
         r'''Selects PLs in tuplet.
 
         ..  container:: example
@@ -3695,11 +3665,10 @@ class Selector(object):
         '''
         selector = baca.select().tuplets()[n]
         selector = selector.by_leaf(pitched=True)
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def plt(n=0):
+    def plt(self, n=0):
         r'''Selects PLT.
 
         ..  container:: example
@@ -3841,11 +3810,10 @@ class Selector(object):
 
         '''
         selector = baca.select().plts()[n]
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def plt_head(n=0):
+    def plt_head(self, n=0):
         r'''Selects PLT head.
 
         ..  container:: example
@@ -3982,11 +3950,10 @@ class Selector(object):
 
         '''
         selector = baca.select().plt_heads()[n]
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def plt_head_in_tuplet(n=0, m=0):
+    def plt_head_in_tuplet(self, n=0, m=0):
         r'''Selects PLT head `m` in tuplet `n`.
 
         ..  container:: example
@@ -4123,11 +4090,10 @@ class Selector(object):
 
         '''
         selector = baca.select().plt_heads_in_tuplet(n)[m]
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def plt_heads():
+    def plt_heads(self):
         r'''Selects PLT heads.
 
         ..  container:: example
@@ -4247,11 +4213,10 @@ class Selector(object):
         '''
         selector = baca.select().plts()
         selector = selector.map(abjad.select()[0])
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def plt_heads_in_each_tuplet(start=None, stop=None):
+    def plt_heads_in_each_tuplet(self, start=None, stop=None):
         r'''Selects PLT heads in each tuplet.
 
         ..  container:: example
@@ -4460,11 +4425,10 @@ class Selector(object):
         selector = baca.select().tuplets()[start:stop]
         get = abjad.select().by_leaf(pitched=True, head=True)
         selector = selector.map(get)
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def plt_heads_in_tuplet(n=0):
+    def plt_heads_in_tuplet(self, n=0):
         r'''Selects PLT heads in tuplet.
 
         ..  container:: example
@@ -4615,11 +4579,10 @@ class Selector(object):
         selector = baca.select().tuplet(n)
         selector = selector.by_logical_tie(pitched=True)
         selector = selector.map(abjad.select()[0])
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def plt_nprun(n=0):
+    def plt_nprun(self, n=0):
         r'''Selects PLT np-run.
 
         ..  container:: example
@@ -4771,11 +4734,10 @@ class Selector(object):
 
         '''
         selector = baca.select().plt_npruns()[n]
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def plt_npruns():
+    def plt_npruns(self):
         r'''Selects PLT np-runs.
 
         ..  container:: example
@@ -4872,11 +4834,10 @@ class Selector(object):
         selector = selector.group_by_pitch()
         selector = selector.by_length('>', 1)
         selector = selector
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def plt_prun(n=0):
+    def plt_prun(self, n=0):
         r'''Selects PLT p-run.
 
         ..  container:: example
@@ -5018,11 +4979,10 @@ class Selector(object):
 
         '''
         selector = baca.select().plt_pruns()[n]
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def plt_pruns():
+    def plt_pruns(self):
         r'''Selects PLT p-runs.
 
         ..  container:: example
@@ -5151,11 +5111,10 @@ class Selector(object):
         selector = baca.select().plts()
         selector = selector.group_by_pitch()
         selector = selector
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def plt_run(n=0):
+    def plt_run(self, n=0):
         r'''Selects PLT run.
 
         ..  container:: example
@@ -5317,11 +5276,10 @@ class Selector(object):
 
         '''
         selector = baca.select().plt_runs()[n]
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def plt_runs():
+    def plt_runs(self):
         r'''Selects PLT runs.
 
         ..  container:: example
@@ -5443,15 +5401,14 @@ class Selector(object):
                 Selection([LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")])])
 
         '''
-        selector = abjad.select()
+        selector = baca.select()
         selector = selector.by_logical_tie(pitched=True)
         selector = selector.by_contiguity()
         selector = selector
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def plt_tail(n=0):
+    def plt_tail(self, n=0):
         r'''Selects PLT tail.
 
         ..  container:: example
@@ -5588,11 +5545,10 @@ class Selector(object):
 
         '''
         selector = baca.select().plt_tails()[n]
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def plt_tails():
+    def plt_tails(self):
         r'''Selects PLT tails.
 
         ..  container:: example
@@ -5712,11 +5668,10 @@ class Selector(object):
         '''
         selector = baca.select().plts()
         selector = selector.map(abjad.select().last())
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def plt_tails_in_each_tuplet(start=None, stop=None):
+    def plt_tails_in_each_tuplet(self, start=None, stop=None):
         r'''Selects PLT tails in each tuplet.
 
         ..  container:: example
@@ -5925,11 +5880,10 @@ class Selector(object):
         selector = baca.select().tuplets()[start:stop]
         get = abjad.select().by_leaf(pitched=True, tail=True)
         selector = selector.map(get)
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def plt_tails_in_tuplet(n=0):
+    def plt_tails_in_tuplet(self, n=0):
         r'''Selects PLT tails in tuplet.
 
         ..  container:: example
@@ -6080,11 +6034,10 @@ class Selector(object):
         selector = baca.select().tuplet(n=n)
         selector = selector.by_logical_tie(pitched=True)
         selector = selector.map(abjad.select().last())
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def plts():
+    def plts(self):
         r'''Selects PLTs.
 
         ..  container:: example
@@ -6212,14 +6165,13 @@ class Selector(object):
                 LogicalTie([Note("a'16")])
 
         '''
-        selector = abjad.select()
+        selector = baca.select()
         selector = selector.by_logical_tie(pitched=True)
         selector = selector
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def plts_in_each_tuplet(start=None, stop=None):
+    def plts_in_each_tuplet(self, start=None, stop=None):
         r'''Selects PLTs (starting) in each tuplet.
 
         ..  container:: example
@@ -6422,11 +6374,10 @@ class Selector(object):
         selector = baca.select().tuplets()[start:stop]
         get = abjad.select().by_logical_tie(pitched=True)
         selector = selector.map(get)
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def plts_in_tuplet(n=0):
+    def plts_in_tuplet(self, n=0):
         r'''Selects PLTs (starting) in tuplet.
 
         ..  container:: example
@@ -6596,11 +6547,10 @@ class Selector(object):
         '''
         selector = baca.select().tuplet(n=n)
         selector = selector.by_logical_tie(pitched=True)
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def rest(n=0):
+    def rest(self, n=0):
         r'''Selects rest.
 
         ..  container:: example
@@ -6731,11 +6681,10 @@ class Selector(object):
 
         '''
         selector = baca.select().rests()[n]
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def rest_in_tuplet(n=0, m=0):
+    def rest_in_tuplet(self, n=0, m=0):
         r'''Selects rest `m` in tuplet `n`.
 
         ..  container:: example
@@ -6866,11 +6815,10 @@ class Selector(object):
 
         '''
         selector = baca.select().rests_in_tuplet(n)[m]
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def rests():
+    def rests(self):
         r'''Selects rests.
 
         ..  container:: example
@@ -6946,13 +6894,12 @@ class Selector(object):
                 Rest('r4')
 
         '''
-        selector = abjad.select()
+        selector = baca.select()
         selector = selector.by_class(abjad.Rest)
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def rests_in_tuplet(n=0):
+    def rests_in_tuplet(self, n=0):
         r'''Selects rests in tuplet.
 
         ..  container:: example
@@ -7087,11 +7034,10 @@ class Selector(object):
         '''
         selector = baca.select().tuplet(n)
         selector = selector.by_leaf((abjad.MultimeasureRest, abjad.Rest))
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def stages(start, stop=None):
+    def stages(self, start, stop=None):
         r'''Selects stages.
         '''
         if stop is None:
@@ -7101,8 +7047,7 @@ class Selector(object):
             stop=stop,
             )
 
-    @staticmethod
-    def trimmed_run_in_each_tuplet(start=None, stop=None):
+    def trimmed_run_in_each_tuplet(self, start=None, stop=None):
         r'''Selects trimmed run in each tuplet.
 
         ..  container:: example
@@ -7329,11 +7274,10 @@ class Selector(object):
         '''
         selector = baca.select().tuplets()[start:stop]
         selector = selector.map(abjad.select().by_leaf(trim=True))
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def trimmed_run_in_tuplet(n=0):
+    def trimmed_run_in_tuplet(self, n=0):
         r'''Selects trimmed run in tuplet.
 
         ..  container:: example
@@ -7489,11 +7433,10 @@ class Selector(object):
         '''
         selector = baca.select().tuplet(n)
         selector = selector.by_leaf(trim=True)
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def tuplet(n=0):
+    def tuplet(self, n=0):
         r'''Selects tuplet.
 
         ..  container:: example
@@ -7651,11 +7594,10 @@ class Selector(object):
 
         '''
         selector = baca.select().tuplets()[n]
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
-    @staticmethod
-    def tuplets():
+    def tuplets(self):
         r'''Selects tuplets.
 
         ..  container:: example
@@ -7785,9 +7727,9 @@ class Selector(object):
                 Tuplet(Multiplier(4, 5), "a'16 r4")
 
         '''
-        selector = abjad.select()
+        selector = baca.select()
         selector = selector.by_class(abjad.Tuplet)
-        template = Selector._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
 

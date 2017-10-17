@@ -140,7 +140,6 @@ Libraries
    LibraryAM
    LibraryNZ
    MarkupLibrary
-   Selector
 
 .. autosummary::
    :nosignatures:
@@ -148,7 +147,6 @@ Libraries
    LibraryAM
    LibraryNZ
    MarkupLibrary
-   Selector
 
 --------
 
@@ -251,6 +249,7 @@ Utilities
    RegistrationDictionary
    Scope
    ScoreTemplate
+   Selector
    Sequence
    SpacingIndication
    StageMeasureMap
@@ -297,6 +296,7 @@ Utilities
    RegistrationDictionary
    Scope
    ScoreTemplate
+   Selector
    Sequence
    SpacingIndication
    StageMeasureMap
