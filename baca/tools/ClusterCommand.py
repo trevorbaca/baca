@@ -11,9 +11,7 @@ class ClusterCommand(Command):
 
         ::
 
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.clusters(widths=[3, 4]),
-            ...     )
+            >>> music_maker = baca.MusicMaker(baca.clusters(widths=[3, 4]))
 
         ::
 
@@ -185,13 +183,13 @@ class ClusterCommand(Command):
 
     ..  container:: example
 
-        Resets on each tuplet:
+        In tuplet 1:
 
         ::
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.clusters(
-            ...         selector=baca.select_tuplets(),
+            ...         selector=baca.select_plts_in_tuplet(1),
             ...         widths=[3, 4],
             ...         ),
             ...     )
@@ -211,54 +209,9 @@ class ClusterCommand(Command):
                     \voiceOne
                     {
                         {
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
-                            <c' e' g'>16 [
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
-                            <d' f' a' c''>16
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
-                            <bf' d'' f''>16 ]
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
+                            c'16 [
+                            d'16
+                            bf'16 ]
                         }
                         {
                             \once \override Accidental.stencil = ##f
@@ -343,6 +296,52 @@ class ClusterCommand(Command):
                                     }
                         }
                         {
+                            a'16
+                        }
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        PLT -1:
+
+        ::
+
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.clusters(
+            ...         selector=baca.select_plt(-1),
+            ...         widths=[3, 4],
+            ...         ),
+            ...     )
+
+        ::
+
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> f(lilypond_file[abjad.Staff])
+            \new Staff <<
+                \context Voice = "Voice 1" {
+                    \voiceOne
+                    {
+                        {
+                            c'16 [
+                            d'16
+                            bf'16 ]
+                        }
+                        {
+                            fs''16 [
+                            e''16
+                            ef''16
+                            af''16
+                            g''16 ]
+                        }
+                        {
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -367,8 +366,6 @@ class ClusterCommand(Command):
     ..  container:: example
 
         With segment-maker:
-
-        Cluster widths alternating 3 and 4:
 
         ::
 
@@ -528,11 +525,11 @@ class ClusterCommand(Command):
     def __init__(
         self,
         hide_flat_markup=None,
-        selector=None,
+        selector='baca.select_plts()',
         start_pitch=None,
         widths=None,
         ):
-        Command.__init__(self, selector=selector, target='baca.select_plts()')
+        Command.__init__(self, selector=selector)
         assert isinstance(hide_flat_markup, (bool, type(None)))
         self._hide_flat_markup = hide_flat_markup
         if start_pitch is not None:
@@ -549,26 +546,24 @@ class ClusterCommand(Command):
 
         Returns none.
         '''
-        if argument is None:
+        plts = self._select(argument)
+        if not plts:
             return
-        if self.selector is not None:
-            argument = self.selector(argument)
         if self.widths is None:
             return
         widths = abjad.CyclicTuple(self.widths)
         selector = abjad.select().by_leaf().first()
-        leaf = selector(argument)
+        leaf = selector(plts)
         root = abjad.inspect(leaf).get_parentage().root
         with abjad.ForbidUpdate(component=root):
-            for item in argument:
-                for i, plt in enumerate(self.target(item)):
-                    width = widths[i]
-                    self._make_cluster(plt, width)
+            for i, plt in enumerate(plts):
+                width = widths[i]
+                self._make_cluster(plt, width)
 
     ### PRIVATE METHODS ###
 
     def _make_cluster(self, plt, width):
-        assert plt.is_pitched, repr(plt)
+        assert isinstance(plt, abjad.LogicalTie), repr(plt)
         if not width:
             return
         if self.start_pitch is not None:
@@ -595,6 +590,25 @@ class ClusterCommand(Command):
 
     def _mutates_score(self):
         return True
+
+    def _select(self, argument):
+        if argument is None:
+            return
+        assert self.selector is not None, repr(self)
+        plts = argument
+        if self.selector is not None:
+            plts = self.selector(plts)
+            last = self.selector.callbacks[-1]
+            if isinstance(last, abjad.GetItemCallback):
+                plts = [plts]
+        if not plts:
+            return
+        for plt in plts:
+            if not isinstance(plt, abjad.LogicalTie):
+                raise Exception(f'must be PLTs: {plts!r}')
+            if not plt.is_pitched:
+                raise Exception(f'must be PLTs: {plts!r}')
+        return plts
 
     ### PUBLIC PROPERTIES ###
 
@@ -737,6 +751,21 @@ class ClusterCommand(Command):
         Returns true, false or none.
         '''
         return self._hide_flat_markup
+
+    @property
+    def selector(self):
+        r'''Selects PLTs.
+
+        ..  container:: example
+
+            ::
+
+                >>> baca.clusters().selector
+                baca.select_plts()
+
+        Returns selector.
+        '''
+        return self._selector
 
     @property
     def start_pitch(self):
@@ -1038,21 +1067,6 @@ class ClusterCommand(Command):
         Returns named pitch or none.
         '''
         return self._start_pitch
-
-    @property
-    def target(self):
-        r'''Gets target selector.
-
-        ..  container:: example
-
-            ::
-
-                >>> baca.clusters().target
-                baca.select_plts()
-
-        Returns PLT selector.
-        '''
-        return self._target
 
     @property
     def widths(self):

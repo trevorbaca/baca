@@ -40,15 +40,15 @@ Read-only properties
 
 .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.hide_flat_markup
 
+.. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.selector
+
+.. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.start_pitch
+
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.selector
-
-.. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.start_pitch
-
-.. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.target
+      .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.target
 
 .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.widths
 
