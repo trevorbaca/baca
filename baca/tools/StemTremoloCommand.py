@@ -123,7 +123,7 @@ class StemTremoloCommand(Command):
     def __init__(
         self,
         selector=None,
-        target='baca.select_pls()',
+        target='baca.select().pls()',
         tremolo_flags=32,
         ):
         Command.__init__(self, selector=selector, target=target)

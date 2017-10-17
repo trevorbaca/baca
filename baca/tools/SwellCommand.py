@@ -102,7 +102,7 @@ class SwellCommand(Command):
 
         Returns none.
         '''
-        selector = self.selector or baca.select_pls()
+        selector = self.selector or baca.select().pls()
         selections = selector(argument)
         selections = self._to_selection_list(selections)
         for selection in selections:

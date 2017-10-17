@@ -88,7 +88,7 @@ class MarkupLibrary(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.markup(
                 ...         'più mosso',
-                ...         baca.select_plt_head_in_tuplet(1, 0),
+                ...         baca.select().plt_head_in_tuplet(1, 0),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -146,7 +146,7 @@ class MarkupLibrary(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.markup(
                 ...         '*',
-                ...         target=baca.select_plt_heads_in_tuplet(1),
+                ...         target=baca.select().plt_heads_in_tuplet(1),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -195,7 +195,7 @@ class MarkupLibrary(object):
         '''
         if not isinstance(markup, abjad.Markup):
             markup = abjad.Markup(markup, direction=direction)
-        target = target or baca.select_plt_head(n=0)
+        target = target or baca.select().plt_head(n=0)
         return baca.AttachCommand(
             arguments=[markup],
             selector=selector,
@@ -622,7 +622,7 @@ class MarkupLibrary(object):
         direction=abjad.Up,
         is_new=True,
         selector=None,
-        target='baca.select_plt_head()',
+        target='baca.select().plt_head()',
         upright=True,
         whiteout=True,
         ):
@@ -1582,7 +1582,7 @@ class MarkupLibrary(object):
         selector=None,
         target=None,
         ):
-        target = target or baca.select_pl()
+        target = target or baca.select().pl()
         if first_is_new:
             if second_is_new:
                 composite_string = f'{string_1} + {string_2}'

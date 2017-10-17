@@ -190,7 +190,7 @@ class ClusterCommand(Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.clusters(
             ...         [3, 4],
-            ...         selector=baca.select_plts_in_tuplet(1),
+            ...         selector=baca.select().plts_in_tuplet(1),
             ...         ),
             ...     )
 
@@ -309,7 +309,7 @@ class ClusterCommand(Command):
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.clusters([3, 4], selector=baca.select_plt(-1)),
+            ...     baca.clusters([3, 4], selector=baca.select().plt(-1)),
             ...     )
 
         ::
@@ -520,7 +520,7 @@ class ClusterCommand(Command):
     def __init__(
         self,
         hide_flat_markup=None,
-        selector='baca.select_plts()',
+        selector='baca.select().plts()',
         start_pitch=None,
         widths=None,
         ):
@@ -755,7 +755,7 @@ class ClusterCommand(Command):
             ::
 
                 >>> baca.clusters([3, 4]).selector
-                baca.select_plts()
+                baca.select().plts()
 
         Returns selector.
         '''

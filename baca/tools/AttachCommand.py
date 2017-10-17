@@ -186,7 +186,7 @@ class AttachCommand(Command):
         self,
         arguments=None,
         selector=None,
-        target='baca.select_plt_heads()',
+        target='baca.select().plt_heads()',
         ):
         Command.__init__(self, selector=selector, target=target)
         self._arguments = arguments

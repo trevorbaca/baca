@@ -969,7 +969,7 @@ class RegisterInterpolationCommand(Command):
         '''
         if argument is None:
             return
-        selector = self.selector or baca.select_leaves()
+        selector = self.selector or baca.select().leaves()
         result = selector(argument)
         selections = self._to_selection_list(result)
         for selection in selections:
@@ -1026,7 +1026,7 @@ class RegisterInterpolationCommand(Command):
                 ...     'Voice 1',
                 ...     collections,
                 ...     baca.RegisterInterpolationCommand(
-                ...         selector=baca.select_tuplet(0),
+                ...         selector=baca.select().tuplet(0),
                 ...         start_pitch=0,
                 ...         stop_pitch=24,
                 ...         ),
@@ -1088,7 +1088,7 @@ class RegisterInterpolationCommand(Command):
                 ...     'Voice 1',
                 ...     collections,
                 ...     baca.RegisterInterpolationCommand(
-                ...         selector=baca.select_tuplet(-1),
+                ...         selector=baca.select().tuplet(-1),
                 ...         start_pitch=0,
                 ...         stop_pitch=24,
                 ...         ),
@@ -1150,7 +1150,7 @@ class RegisterInterpolationCommand(Command):
                 ...     'Voice 1',
                 ...     collections,
                 ...     baca.RegisterInterpolationCommand(
-                ...         selector=baca.select_leaves_in_each_tuplet(),
+                ...         selector=baca.select().leaves_in_each_tuplet(),
                 ...         start_pitch=0,
                 ...         stop_pitch=24,
                 ...         ),

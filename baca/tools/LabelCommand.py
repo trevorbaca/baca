@@ -182,7 +182,7 @@ class LabelCommand(Command):
             ...     collections,
             ...     baca.label(
             ...         abjad.label().with_pitches(locale='us'),
-            ...         baca.select_tuplet(0),
+            ...         baca.select().tuplet(0),
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)

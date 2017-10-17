@@ -3,8 +3,22 @@ import baca
 import inspect
 
 
-class SelectorLibrary(object):
+#class Selector(abjad.Selector):
+class Selector(object):
     r'''Selector library.
+
+    ..  container:: example
+
+        ::
+
+            >>> baca.select()
+            <baca.tools.Selector.Selector ...>
+
+        ::
+
+            >>> baca.select().chord()
+            baca.select().chord()
+
     '''
 
     ### CLASS VARIABLES ###
@@ -23,9 +37,9 @@ class SelectorLibrary(object):
             function_name = frame_info.function
             arguments = abjad.Expression._wrap_arguments(
                 frame,
-                static_class=SelectorLibrary,
+                static_class=Selector,
                 )
-            template = f'baca.{function_name}({arguments})'
+            template = f'baca.select().{function_name}({arguments})'
         finally:
             del frame
         return template
@@ -33,7 +47,7 @@ class SelectorLibrary(object):
     ### PUBLIC METHODS ###
 
     @staticmethod
-    def select_chord(n=0):
+    def chord(n=0):
         r'''Selects chord.
 
         ..  container:: example
@@ -46,7 +60,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     3 * [{16, 18}, [0, 2, 10]],
-                ...     baca.color(baca.select_chord()),
+                ...     baca.color(baca.select().chord()),
                 ...     baca.rests_around([2], [3]),
                 ...     counts=[1, 5, -1],
                 ...     )
@@ -116,7 +130,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     3 * [{16, 18}, [0, 2, 10]],
-                ...     baca.color(baca.select_chord(n=-1)),
+                ...     baca.color(baca.select().chord(n=-1)),
                 ...     baca.rests_around([2], [3]),
                 ...     counts=[1, 5, -1],
                 ...     )
@@ -177,12 +191,12 @@ class SelectorLibrary(object):
                 Chord("<e'' fs''>16")
 
         '''
-        selector = baca.select_chords()[n]
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        selector = baca.select().chords()[n]
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_chord_head(n=0):
+    def chord_head(n=0):
         r'''Selects chord head.
 
         ..  container:: example
@@ -195,7 +209,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{16, 18}, [0, 2], {16, 18}, [4, 5], {16, 18}],
-                ...     baca.color(baca.select_chord_head()),
+                ...     baca.color(baca.select().chord_head()),
                 ...     baca.rests_around([2], [4]),
                 ...     counts=[5, 1, -1],
                 ...     thread=True,
@@ -260,7 +274,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{16, 18}, [0, 2], {16, 18}, [4, 5], {16, 18}],
-                ...     baca.color(baca.select_chord_head(n=-1)),
+                ...     baca.color(baca.select().chord_head(n=-1)),
                 ...     baca.rests_around([2], [4]),
                 ...     counts=[5, 1, -1],
                 ...     thread=True,
@@ -316,12 +330,12 @@ class SelectorLibrary(object):
                 Chord("<e'' fs''>4")
 
         '''
-        selector = baca.select_chord_heads()[n]
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        selector = baca.select().chord_heads()[n]
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_chord_heads():
+    def chord_heads():
         r'''Selects chord heads.
 
         ..  container:: example
@@ -334,7 +348,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{16, 18}, [0, 2], {16, 18}, [4, 5], {16, 18}],
-                ...     baca.color(baca.select_chord_heads()),
+                ...     baca.color(baca.select().chord_heads()),
                 ...     baca.rests_around([2], [4]),
                 ...     counts=[5, 1, -1],
                 ...     thread=True,
@@ -404,11 +418,11 @@ class SelectorLibrary(object):
         '''
         selector = abjad.select()
         selector = selector.by_leaf(abjad.Chord, head=True)
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_chords():
+    def chords():
         r'''Selects chords.
 
         ..  container:: example
@@ -421,7 +435,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     3 * [{16, 18}, [0, 2, 10]],
-                ...     baca.color(baca.select_chords()),
+                ...     baca.color(baca.select().chords()),
                 ...     baca.rests_around([2], [3]),
                 ...     counts=[1, 5, -1],
                 ...     )
@@ -496,11 +510,11 @@ class SelectorLibrary(object):
         '''
         selector = abjad.select()
         selector = selector.by_class(abjad.Chord)
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_leaf(n=0):
+    def leaf(n=0):
         r'''Selects leaf.
 
         ..  container:: example
@@ -513,7 +527,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_leaf()),
+                ...     baca.color(baca.select().leaf()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -576,7 +590,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_leaf(-4)),
+                ...     baca.color(baca.select().leaf(-4)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -633,12 +647,12 @@ class SelectorLibrary(object):
                 Note("fs''16")
 
         '''
-        selector = baca.select_leaves()[n]
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        selector = baca.select().leaves()[n]
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_leaf_in_trimmed_run(n=0):
+    def leaf_in_trimmed_run(n=0):
         r'''Selects leaf in trimmed run.
 
         ..  container:: example
@@ -651,7 +665,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_leaf_in_trimmed_run()),
+                ...     baca.color(baca.select().leaf_in_trimmed_run()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -717,7 +731,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_leaf_in_trimmed_run(n=-1)),
+                ...     baca.color(baca.select().leaf_in_trimmed_run(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -774,12 +788,12 @@ class SelectorLibrary(object):
                 Note("a'16")
 
         '''
-        selector = baca.select_leaves_in_trimmed_run()[n]
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        selector = baca.select().leaves_in_trimmed_run()[n]
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_leaf_in_tuplet(n=0, m=0):
+    def leaf_in_tuplet(n=0, m=0):
         r'''Selects leaf `m` in tuplet `n`.
 
         ..  container:: example
@@ -792,7 +806,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_leaf_in_tuplet(0, 0)),
+                ...     baca.color(baca.select().leaf_in_tuplet(0, 0)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -855,7 +869,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_leaf_in_tuplet(1, 0)),
+                ...     baca.color(baca.select().leaf_in_tuplet(1, 0)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -912,12 +926,12 @@ class SelectorLibrary(object):
                 Note("bf'16")
 
         '''
-        selector = baca.select_leaves_in_tuplet(n)[m]
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        selector = baca.select().leaves_in_tuplet(n)[m]
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_leaves(leak=None, start=None, stop=None):
+    def leaves(leak=None, start=None, stop=None):
         r'''Selects leaves.
 
         ..  container:: example
@@ -930,7 +944,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_leaves()),
+                ...     baca.color(baca.select().leaves()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -1068,7 +1082,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_leaves(start=-4)),
+                ...     baca.color(baca.select().leaves(start=-4)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -1150,7 +1164,7 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         baca.select_leaves(leak=abjad.Left, start=-4),
+                ...         baca.select().leaves(leak=abjad.Left, start=-4),
                 ...         ),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
@@ -1234,11 +1248,11 @@ class SelectorLibrary(object):
             selector = selector.with_previous_leaf()
         if leak in (abjad.Right, abjad.Both):
             selector = selector.with_next_leaf()
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_leaves_in_each_lt(start=None, stop=None, leak=None):
+    def leaves_in_each_lt(start=None, stop=None, leak=None):
         r'''Selects leaves in each LT.
 
         ..  container:: example
@@ -1251,7 +1265,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_leaves_in_each_lt()),
+                ...     baca.color(baca.select().leaves_in_each_lt()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -1387,7 +1401,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_leaves_in_each_lt(start=-4)),
+                ...     baca.color(baca.select().leaves_in_each_lt(start=-4)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -1467,12 +1481,12 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         baca.select_leaves_in_each_lt(start=-4, leak=abjad.Right),
+                ...         baca.select().leaves_in_each_lt(start=-4, leak=abjad.Right),
                 ...         ),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.sustain_pedal(
-                ...         baca.select_leaves_in_each_lt(start=-4, leak=abjad.Right),
+                ...         baca.select().leaves_in_each_lt(start=-4, leak=abjad.Right),
                 ...         ),
                 ...     baca.sustain_pedal_staff_padding(6),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -1549,18 +1563,18 @@ class SelectorLibrary(object):
                 Selection([Rest('r4')])
 
         '''
-        selector = baca.select_lts()[start:stop]
+        selector = baca.select().lts()[start:stop]
         get = abjad.select().by_leaf()
         if leak in (abjad.Left, abjad.Both):
             get = get.with_previous_leaf()
         if leak in (abjad.Right, abjad.Both):
             get = get.with_next_leaf()
         selector = selector.map(get)
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_leaves_in_each_plt(start=None, stop=None, leak=None):
+    def leaves_in_each_plt(start=None, stop=None, leak=None):
         r'''Selects leaves in each PLT.
 
         ..  container:: example
@@ -1574,7 +1588,7 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         baca.select_leaves_in_each_plt(),
+                ...         baca.select().leaves_in_each_plt(),
                 ...         ),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
@@ -1700,7 +1714,7 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         baca.select_leaves_in_each_plt(start=-4),
+                ...         baca.select().leaves_in_each_plt(start=-4),
                 ...         ),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
@@ -1789,12 +1803,12 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         baca.select_leaves_in_each_plt(start=-4, leak=abjad.Right),
+                ...         baca.select().leaves_in_each_plt(start=-4, leak=abjad.Right),
                 ...         ),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.sustain_pedal(
-                ...         baca.select_leaves_in_each_plt(start=-4, leak=abjad.Right),
+                ...         baca.select().leaves_in_each_plt(start=-4, leak=abjad.Right),
                 ...         ),
                 ...     baca.sustain_pedal_staff_padding(6),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -1884,18 +1898,18 @@ class SelectorLibrary(object):
                 Selection([Note("a'16"), Rest('r4')])
 
         '''
-        selector = baca.select_plts()[start:stop]
+        selector = baca.select().plts()[start:stop]
         get = abjad.select().by_leaf()
         if leak in (abjad.Left, abjad.Both):
             get = get.with_previous_leaf()
         if leak in (abjad.Right, abjad.Both):
             get = get.with_next_leaf()
         selector = selector.map(get)
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_leaves_in_each_tuplet(start=None, stop=None, leak=None):
+    def leaves_in_each_tuplet(start=None, stop=None, leak=None):
         r'''Selects leaves in each tuplet.
 
         ..  container:: example
@@ -1908,7 +1922,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_leaves_in_each_tuplet()),
+                ...     baca.color(baca.select().leaves_in_each_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2035,7 +2049,7 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         baca.select_leaves_in_each_tuplet(start=-2),
+                ...         baca.select().leaves_in_each_tuplet(start=-2),
                 ...         ),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
@@ -2128,18 +2142,18 @@ class SelectorLibrary(object):
                 Selection([Note("a'16"), Rest('r4')])
 
         '''
-        selector = baca.select_tuplets()[start:stop]
+        selector = baca.select().tuplets()[start:stop]
         get = abjad.select().by_leaf()
         if leak in (abjad.Left, abjad.Both):
             get = get.with_previous_leaf()
         if leak in (abjad.Right, abjad.Both):
             get = get.with_next_leaf()
         selector = selector.map(get)
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_leaves_in_trimmed_run():
+    def leaves_in_trimmed_run():
         r'''Selects leaves in trimmed run.
 
         ..  container:: example
@@ -2152,7 +2166,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_leaves_in_trimmed_run()),
+                ...     baca.color(baca.select().leaves_in_trimmed_run()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2277,11 +2291,11 @@ class SelectorLibrary(object):
         '''
         selector = abjad.select()
         selector = selector.by_leaf(trim=True)
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_leaves_in_tuplet(n=0, leak=None):
+    def leaves_in_tuplet(n=0, leak=None):
         r'''Selects leaves in tuplet.
 
         ..  container:: example
@@ -2294,7 +2308,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_leaves_in_tuplet()),
+                ...     baca.color(baca.select().leaves_in_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2384,7 +2398,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_leaves_in_tuplet(n=-1)),
+                ...     baca.color(baca.select().leaves_in_tuplet(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2444,17 +2458,17 @@ class SelectorLibrary(object):
                 Rest('r4')
 
         '''
-        selector = baca.select_tuplets()[n]
+        selector = baca.select().tuplets()[n]
         selector = selector.by_leaf()
         if leak in (abjad.Left, abjad.Both):
             selector = selector.with_previous_leaf()
         if leak in (abjad.Right, abjad.Both):
             selector = selector.with_next_leaf()
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_lt(n=0):
+    def lt(n=0):
         r'''Selects LT.
 
         ..  container:: example
@@ -2467,7 +2481,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_lt(n=3)),
+                ...     baca.color(baca.select().lt(n=3)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2538,7 +2552,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_lt(n=-4)),
+                ...     baca.color(baca.select().lt(n=-4)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2595,12 +2609,12 @@ class SelectorLibrary(object):
                 LogicalTie([Note("fs''16")])
 
         '''
-        selector = baca.select_lts()[n]
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        selector = baca.select().lts()[n]
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_lts():
+    def lts():
         r'''Selects LTs.
 
         ..  container:: example
@@ -2613,7 +2627,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_lts()),
+                ...     baca.color(baca.select().lts()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2742,11 +2756,11 @@ class SelectorLibrary(object):
         '''
         selector = abjad.select()
         selector = selector.by_logical_tie()
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_note(n=0):
+    def note(n=0):
         r'''Selects note.
 
         ..  container:: example
@@ -2759,7 +2773,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_note()),
+                ...     baca.color(baca.select().note()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2825,7 +2839,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_note(n=-1)),
+                ...     baca.color(baca.select().note(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2882,12 +2896,12 @@ class SelectorLibrary(object):
                 Note("a'16")
 
         '''
-        selector = baca.select_notes()[n]
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        selector = baca.select().notes()[n]
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_notes():
+    def notes():
         r'''Selects notes.
 
         ..  container:: example
@@ -2900,7 +2914,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_notes()),
+                ...     baca.color(baca.select().notes()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3019,11 +3033,11 @@ class SelectorLibrary(object):
         '''
         selector = abjad.select()
         selector = selector.by_class(abjad.Note)
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_pl(n=0):
+    def pl(n=0):
         r'''Selects PL.
 
         ..  container:: example
@@ -3036,7 +3050,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_pl()),
+                ...     baca.color(baca.select().pl()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3102,7 +3116,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_pl(n=-1)),
+                ...     baca.color(baca.select().pl(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3159,12 +3173,12 @@ class SelectorLibrary(object):
                 Note("a'16")
 
         '''
-        selector = baca.select_pls()[n]
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        selector = baca.select().pls()[n]
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_pls():
+    def pls():
         r'''Selects PLs.
 
         ..  container:: example
@@ -3177,7 +3191,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_pls()),
+                ...     baca.color(baca.select().pls()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3296,11 +3310,11 @@ class SelectorLibrary(object):
         '''
         selector = abjad.select()
         selector = selector.by_leaf(pitched=True)
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_pls_in_each_tuplet(start=None, stop=None):
+    def pls_in_each_tuplet(start=None, stop=None):
         r'''Selects PLs in each tuplet.
 
         ..  container:: example
@@ -3313,7 +3327,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_pls_in_each_tuplet()),
+                ...     baca.color(baca.select().pls_in_each_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3431,7 +3445,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_pls_in_each_tuplet(start=-2)),
+                ...     baca.color(baca.select().pls_in_each_tuplet(start=-2)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3519,13 +3533,13 @@ class SelectorLibrary(object):
                 Selection([Note("a'16")])
 
         '''
-        selector = baca.select_tuplets()[start:stop]
+        selector = baca.select().tuplets()[start:stop]
         selector = selector.map(abjad.select().by_leaf(pitched=True))
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_pls_in_tuplet(n=0):
+    def pls_in_tuplet(n=0):
         r'''Selects PLs in tuplet.
 
         ..  container:: example
@@ -3538,7 +3552,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_pls_in_tuplet()),
+                ...     baca.color(baca.select().pls_in_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3622,7 +3636,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_pls_in_tuplet(n=-1)),
+                ...     baca.color(baca.select().pls_in_tuplet(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3679,13 +3693,13 @@ class SelectorLibrary(object):
                 Note("a'16")
 
         '''
-        selector = baca.select_tuplets()[n]
+        selector = baca.select().tuplets()[n]
         selector = selector.by_leaf(pitched=True)
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_plt(n=0):
+    def plt(n=0):
         r'''Selects PLT.
 
         ..  container:: example
@@ -3698,7 +3712,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt(n=2)),
+                ...     baca.color(baca.select().plt(n=2)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3769,7 +3783,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt(n=-1)),
+                ...     baca.color(baca.select().plt(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3826,12 +3840,12 @@ class SelectorLibrary(object):
                 LogicalTie([Note("a'16")])
 
         '''
-        selector = baca.select_plts()[n]
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        selector = baca.select().plts()[n]
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_plt_head(n=0):
+    def plt_head(n=0):
         r'''Selects PLT head.
 
         ..  container:: example
@@ -3844,7 +3858,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt_head(n=2)),
+                ...     baca.color(baca.select().plt_head(n=2)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3910,7 +3924,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt_head(n=-4)),
+                ...     baca.color(baca.select().plt_head(n=-4)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3967,12 +3981,12 @@ class SelectorLibrary(object):
                 Note("e''4")
 
         '''
-        selector = baca.select_plt_heads()[n]
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        selector = baca.select().plt_heads()[n]
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_plt_head_in_tuplet(n=0, m=0):
+    def plt_head_in_tuplet(n=0, m=0):
         r'''Selects PLT head `m` in tuplet `n`.
 
         ..  container:: example
@@ -3985,7 +3999,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt_head_in_tuplet(1, 0)),
+                ...     baca.color(baca.select().plt_head_in_tuplet(1, 0)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4051,7 +4065,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt_head_in_tuplet(1, -1)),
+                ...     baca.color(baca.select().plt_head_in_tuplet(1, -1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4108,12 +4122,12 @@ class SelectorLibrary(object):
                 Note("af''16")
 
         '''
-        selector = baca.select_plt_heads_in_tuplet(n)[m]
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        selector = baca.select().plt_heads_in_tuplet(n)[m]
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_plt_heads():
+    def plt_heads():
         r'''Selects PLT heads.
 
         ..  container:: example
@@ -4126,7 +4140,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt_heads()),
+                ...     baca.color(baca.select().plt_heads()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4231,13 +4245,13 @@ class SelectorLibrary(object):
                 Note("a'16")
 
         '''
-        selector = baca.select_plts()
+        selector = baca.select().plts()
         selector = selector.map(abjad.select()[0])
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_plt_heads_in_each_tuplet(start=None, stop=None):
+    def plt_heads_in_each_tuplet(start=None, stop=None):
         r'''Selects PLT heads in each tuplet.
 
         ..  container:: example
@@ -4250,7 +4264,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt_heads_in_each_tuplet()),
+                ...     baca.color(baca.select().plt_heads_in_each_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4359,7 +4373,7 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         baca.select_plt_heads_in_each_tuplet(start=-2),
+                ...         baca.select().plt_heads_in_each_tuplet(start=-2),
                 ...         ),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
@@ -4443,14 +4457,14 @@ class SelectorLibrary(object):
                 Selection([Note("a'16")])
 
         '''
-        selector = baca.select_tuplets()[start:stop]
+        selector = baca.select().tuplets()[start:stop]
         get = abjad.select().by_leaf(pitched=True, head=True)
         selector = selector.map(get)
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_plt_heads_in_tuplet(n=0):
+    def plt_heads_in_tuplet(n=0):
         r'''Selects PLT heads in tuplet.
 
         ..  container:: example
@@ -4463,7 +4477,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt_heads_in_tuplet()),
+                ...     baca.color(baca.select().plt_heads_in_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4541,7 +4555,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt_heads_in_tuplet(n=-1)),
+                ...     baca.color(baca.select().plt_heads_in_tuplet(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4598,14 +4612,14 @@ class SelectorLibrary(object):
                 Note("a'16")
 
         '''
-        selector = baca.select_tuplet(n)
+        selector = baca.select().tuplet(n)
         selector = selector.by_logical_tie(pitched=True)
         selector = selector.map(abjad.select()[0])
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_plt_nprun(n=0):
+    def plt_nprun(n=0):
         r'''Selects PLT np-run.
 
         ..  container:: example
@@ -4618,7 +4632,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt_nprun()),
+                ...     baca.color(baca.select().plt_nprun()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4689,7 +4703,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt_nprun(n=-1)),
+                ...     baca.color(baca.select().plt_nprun(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4756,12 +4770,12 @@ class SelectorLibrary(object):
                 Selection([LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])
 
         '''
-        selector = baca.select_plt_npruns()[n]
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        selector = baca.select().plt_npruns()[n]
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_plt_npruns():
+    def plt_npruns():
         r'''Selects PLT np-runs.
 
         ..  container:: example
@@ -4775,7 +4789,7 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         baca.select_plt_npruns(),
+                ...         baca.select().plt_npruns(),
                 ...         ),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
@@ -4854,15 +4868,15 @@ class SelectorLibrary(object):
                 Selection([LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])
 
         '''
-        selector = baca.select_plts()
+        selector = baca.select().plts()
         selector = selector.group_by_pitch()
         selector = selector.by_length('>', 1)
         selector = selector
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_plt_prun(n=0):
+    def plt_prun(n=0):
         r'''Selects PLT p-run.
 
         ..  container:: example
@@ -4875,7 +4889,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt_prun()),
+                ...     baca.color(baca.select().plt_prun()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4946,7 +4960,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt_prun(n=-1)),
+                ...     baca.color(baca.select().plt_prun(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5003,12 +5017,12 @@ class SelectorLibrary(object):
                 Selection([LogicalTie([Note("a'16")])])
 
         '''
-        selector = baca.select_plt_pruns()[n]
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        selector = baca.select().plt_pruns()[n]
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_plt_pruns():
+    def plt_pruns():
         r'''Selects PLT p-runs.
 
         ..  container:: example
@@ -5021,7 +5035,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt_pruns()),
+                ...     baca.color(baca.select().plt_pruns()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5134,14 +5148,14 @@ class SelectorLibrary(object):
                 Selection([LogicalTie([Note("a'16")])])
 
         '''
-        selector = baca.select_plts()
+        selector = baca.select().plts()
         selector = selector.group_by_pitch()
         selector = selector
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_plt_run(n=0):
+    def plt_run(n=0):
         r'''Selects PLT run.
 
         ..  container:: example
@@ -5154,7 +5168,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt_run()),
+                ...     baca.color(baca.select().plt_run()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5235,7 +5249,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt_run(n=-1)),
+                ...     baca.color(baca.select().plt_run(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5302,12 +5316,12 @@ class SelectorLibrary(object):
                 Selection([LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")])])
 
         '''
-        selector = baca.select_plt_runs()[n]
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        selector = baca.select().plt_runs()[n]
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_plt_runs():
+    def plt_runs():
         r'''Selects PLT runs.
 
         ..  container:: example
@@ -5320,7 +5334,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt_runs()),
+                ...     baca.color(baca.select().plt_runs()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5433,11 +5447,11 @@ class SelectorLibrary(object):
         selector = selector.by_logical_tie(pitched=True)
         selector = selector.by_contiguity()
         selector = selector
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_plt_tail(n=0):
+    def plt_tail(n=0):
         r'''Selects PLT tail.
 
         ..  container:: example
@@ -5450,7 +5464,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt_tail(n=2)),
+                ...     baca.color(baca.select().plt_tail(n=2)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5516,7 +5530,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt_tail(n=-4)),
+                ...     baca.color(baca.select().plt_tail(n=-4)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5573,12 +5587,12 @@ class SelectorLibrary(object):
                 Note("e''16")
 
         '''
-        selector = baca.select_plt_tails()[n]
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        selector = baca.select().plt_tails()[n]
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_plt_tails():
+    def plt_tails():
         r'''Selects PLT tails.
 
         ..  container:: example
@@ -5591,7 +5605,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt_tails()),
+                ...     baca.color(baca.select().plt_tails()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5696,13 +5710,13 @@ class SelectorLibrary(object):
                 Note("a'16")
 
         '''
-        selector = baca.select_plts()
+        selector = baca.select().plts()
         selector = selector.map(abjad.select().last())
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_plt_tails_in_each_tuplet(start=None, stop=None):
+    def plt_tails_in_each_tuplet(start=None, stop=None):
         r'''Selects PLT tails in each tuplet.
 
         ..  container:: example
@@ -5715,7 +5729,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt_tails_in_each_tuplet()),
+                ...     baca.color(baca.select().plt_tails_in_each_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5824,7 +5838,7 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         baca.select_plt_tails_in_each_tuplet(start=-2),
+                ...         baca.select().plt_tails_in_each_tuplet(start=-2),
                 ...         ),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
@@ -5908,14 +5922,14 @@ class SelectorLibrary(object):
                 Selection([Note("a'16")])
 
         '''
-        selector = baca.select_tuplets()[start:stop]
+        selector = baca.select().tuplets()[start:stop]
         get = abjad.select().by_leaf(pitched=True, tail=True)
         selector = selector.map(get)
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_plt_tails_in_tuplet(n=0):
+    def plt_tails_in_tuplet(n=0):
         r'''Selects PLT tails in tuplet.
 
         ..  container:: example
@@ -5928,7 +5942,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt_tails_in_tuplet()),
+                ...     baca.color(baca.select().plt_tails_in_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6006,7 +6020,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plt_tails_in_tuplet(n=-1)),
+                ...     baca.color(baca.select().plt_tails_in_tuplet(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6063,14 +6077,14 @@ class SelectorLibrary(object):
                 Note("a'16")
 
         '''
-        selector = baca.select_tuplet(n=n)
+        selector = baca.select().tuplet(n=n)
         selector = selector.by_logical_tie(pitched=True)
         selector = selector.map(abjad.select().last())
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_plts():
+    def plts():
         r'''Selects PLTs.
 
         ..  container:: example
@@ -6083,7 +6097,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plts()),
+                ...     baca.color(baca.select().plts()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6201,11 +6215,11 @@ class SelectorLibrary(object):
         selector = abjad.select()
         selector = selector.by_logical_tie(pitched=True)
         selector = selector
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_plts_in_each_tuplet(start=None, stop=None):
+    def plts_in_each_tuplet(start=None, stop=None):
         r'''Selects PLTs (starting) in each tuplet.
 
         ..  container:: example
@@ -6218,7 +6232,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plts_in_each_tuplet()),
+                ...     baca.color(baca.select().plts_in_each_tuplet()),
                 ...     baca.flags(),
                 ...     baca.messiaen_tie_each(),
                 ...     baca.rests_around([2], [4]),
@@ -6323,10 +6337,10 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plts_in_each_tuplet(start=-2)),
+                ...     baca.color(baca.select().plts_in_each_tuplet(start=-2)),
                 ...     baca.flags(),
                 ...     baca.messiaen_tie_each(
-                ...         baca.select_leaves_in_each_tuplet(),
+                ...         baca.select().leaves_in_each_tuplet(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6405,14 +6419,14 @@ class SelectorLibrary(object):
                 [LogicalTie([Note("a'16")])]
 
         '''
-        selector = baca.select_tuplets()[start:stop]
+        selector = baca.select().tuplets()[start:stop]
         get = abjad.select().by_logical_tie(pitched=True)
         selector = selector.map(get)
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_plts_in_tuplet(n=0):
+    def plts_in_tuplet(n=0):
         r'''Selects PLTs (starting) in tuplet.
 
         ..  container:: example
@@ -6425,10 +6439,10 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plts_in_tuplet()),
+                ...     baca.color(baca.select().plts_in_tuplet()),
                 ...     baca.flags(),
                 ...     baca.messiaen_tie_each(
-                ...         baca.select_leaves_in_each_tuplet()
+                ...         baca.select().leaves_in_each_tuplet()
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6501,10 +6515,10 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_plts_in_tuplet(n=1)),
+                ...     baca.color(baca.select().plts_in_tuplet(n=1)),
                 ...     baca.flags(),
                 ...     baca.messiaen_tie_each(
-                ...         baca.select_leaves_in_each_tuplet(),
+                ...         baca.select().leaves_in_each_tuplet(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6580,13 +6594,13 @@ class SelectorLibrary(object):
                 LogicalTie([Note("af''16")])
 
         '''
-        selector = baca.select_tuplet(n=n)
+        selector = baca.select().tuplet(n=n)
         selector = selector.by_logical_tie(pitched=True)
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_rest(n=0):
+    def rest(n=0):
         r'''Selects rest.
 
         ..  container:: example
@@ -6599,7 +6613,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_rest()),
+                ...     baca.color(baca.select().rest()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6662,7 +6676,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_rest(n=-1)),
+                ...     baca.color(baca.select().rest(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6716,12 +6730,12 @@ class SelectorLibrary(object):
                 Rest('r4')
 
         '''
-        selector = baca.select_rests()[n]
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        selector = baca.select().rests()[n]
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_rest_in_tuplet(n=0, m=0):
+    def rest_in_tuplet(n=0, m=0):
         r'''Selects rest `m` in tuplet `n`.
 
         ..  container:: example
@@ -6734,7 +6748,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_rest_in_tuplet()),
+                ...     baca.color(baca.select().rest_in_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6797,7 +6811,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_rest_in_tuplet(1, 0)),
+                ...     baca.color(baca.select().rest_in_tuplet(1, 0)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6851,12 +6865,12 @@ class SelectorLibrary(object):
                 Rest('r16')
 
         '''
-        selector = baca.select_rests_in_tuplet(n)[m]
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        selector = baca.select().rests_in_tuplet(n)[m]
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_rests():
+    def rests():
         r'''Selects rests.
 
         ..  container:: example
@@ -6869,7 +6883,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_rests()),
+                ...     baca.color(baca.select().rests()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6934,11 +6948,11 @@ class SelectorLibrary(object):
         '''
         selector = abjad.select()
         selector = selector.by_class(abjad.Rest)
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_rests_in_tuplet(n=0):
+    def rests_in_tuplet(n=0):
         r'''Selects rests in tuplet.
 
         ..  container:: example
@@ -6951,7 +6965,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_rests_in_tuplet()),
+                ...     baca.color(baca.select().rests_in_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -7017,7 +7031,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_rests_in_tuplet(n=-1)),
+                ...     baca.color(baca.select().rests_in_tuplet(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -7071,13 +7085,13 @@ class SelectorLibrary(object):
                 Rest('r4')
 
         '''
-        selector = baca.select_tuplet(n)
+        selector = baca.select().tuplet(n)
         selector = selector.by_leaf((abjad.MultimeasureRest, abjad.Rest))
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_stages(start, stop=None):
+    def stages(start, stop=None):
         r'''Selects stages.
         '''
         if stop is None:
@@ -7088,7 +7102,7 @@ class SelectorLibrary(object):
             )
 
     @staticmethod
-    def select_trimmed_run_in_each_tuplet(start=None, stop=None):
+    def trimmed_run_in_each_tuplet(start=None, stop=None):
         r'''Selects trimmed run in each tuplet.
 
         ..  container:: example
@@ -7101,7 +7115,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_trimmed_run_in_each_tuplet()),
+                ...     baca.color(baca.select().trimmed_run_in_each_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -7222,7 +7236,7 @@ class SelectorLibrary(object):
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(
-                ...         baca.select_trimmed_run_in_each_tuplet(start=-2),
+                ...         baca.select().trimmed_run_in_each_tuplet(start=-2),
                 ...         ),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
@@ -7313,13 +7327,13 @@ class SelectorLibrary(object):
                 Selection([Note("a'16")])
 
         '''
-        selector = baca.select_tuplets()[start:stop]
+        selector = baca.select().tuplets()[start:stop]
         selector = selector.map(abjad.select().by_leaf(trim=True))
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_trimmed_run_in_tuplet(n=0):
+    def trimmed_run_in_tuplet(n=0):
         r'''Selects trimmed run in tuplet.
 
         ..  container:: example
@@ -7332,7 +7346,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_trimmed_run_in_tuplet()),
+                ...     baca.color(baca.select().trimmed_run_in_tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -7416,7 +7430,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_trimmed_run_in_tuplet(n=-1)),
+                ...     baca.color(baca.select().trimmed_run_in_tuplet(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -7473,13 +7487,13 @@ class SelectorLibrary(object):
                 Note("a'16")
 
         '''
-        selector = baca.select_tuplet(n)
+        selector = baca.select().tuplet(n)
         selector = selector.by_leaf(trim=True)
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_tuplet(n=0):
+    def tuplet(n=0):
         r'''Selects tuplet.
 
         ..  container:: example
@@ -7492,7 +7506,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_tuplet()),
+                ...     baca.color(baca.select().tuplet()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -7577,7 +7591,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_tuplet(n=-1)),
+                ...     baca.color(baca.select().tuplet(n=-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -7636,12 +7650,12 @@ class SelectorLibrary(object):
                 Tuplet(Multiplier(4, 5), "a'16 r4")
 
         '''
-        selector = baca.select_tuplets()[n]
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        selector = baca.select().tuplets()[n]
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
     @staticmethod
-    def select_tuplets():
+    def tuplets():
         r'''Selects tuplets.
 
         ..  container:: example
@@ -7654,7 +7668,7 @@ class SelectorLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select_tuplets()),
+                ...     baca.color(baca.select().tuplets()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -7773,5 +7787,11 @@ class SelectorLibrary(object):
         '''
         selector = abjad.select()
         selector = selector.by_class(abjad.Tuplet)
-        template = SelectorLibrary._get_template(inspect.currentframe())
+        template = Selector._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
+
+
+def _select(argument=None):
+    if argument is None:
+        return baca.Selector()
+    return abjad.Selection(argument)

@@ -103,7 +103,7 @@ class OverrideCommand(Command):
             ...         attribute_value=abjad.Up,
             ...         grob_name='rest',
             ...         revert=True,
-            ...         selector=baca.select_rests(),
+            ...         selector=baca.select().rests(),
             ...         ),
             ...     baca.OverrideCommand(
             ...         attribute_name='direction',
@@ -236,7 +236,7 @@ class OverrideCommand(Command):
         maximum_settings=None,
         revert=None,
         selector=None,
-        target='baca.select_leaves().wrap()',
+        target='baca.select().leaves().wrap()',
         ):
         Command.__init__(self, selector=selector, target=target)
         if context_name is not None:

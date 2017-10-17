@@ -65,7 +65,7 @@ class RegisterCommand(Command):
             ...         registration=baca.Registration(
             ...             [('[A0, C8]', 0)],
             ...             ),
-            ...         selector=baca.select_tuplet(0),
+            ...         selector=baca.select().tuplet(0),
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
@@ -114,7 +114,7 @@ class RegisterCommand(Command):
             ...         registration=baca.Registration(
             ...             [('[A0, C8]', 0)],
             ...             ),
-            ...         selector=baca.select_tuplet(-1),
+            ...         selector=baca.select().tuplet(-1),
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)

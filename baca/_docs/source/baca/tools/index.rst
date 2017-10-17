@@ -140,7 +140,7 @@ Libraries
    LibraryAM
    LibraryNZ
    MarkupLibrary
-   SelectorLibrary
+   Selector
 
 .. autosummary::
    :nosignatures:
@@ -148,7 +148,7 @@ Libraries
    LibraryAM
    LibraryNZ
    MarkupLibrary
-   SelectorLibrary
+   Selector
 
 --------
 

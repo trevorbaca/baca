@@ -16,7 +16,8 @@ from baca.tools.PitchSegment import _pitch_segment as pitch_segment
 from baca.tools.PitchSet import PitchSet
 from baca.tools.PitchSet import _pitch_set as pitch_set
 from baca.tools.SegmentMaker import SegmentMaker
-from baca.tools.SelectorLibrary import SelectorLibrary
+from baca.tools.Selector import Selector
+from baca.tools.Selector import _select as select
 from baca.tools.Sequence import Sequence
 from baca.tools.Sequence import _sequence as sequence
 from baca.tools import *
@@ -32,5 +33,5 @@ def _import_static_methods(class_):
 
 _import_static_methods(LibraryAM)
 _import_static_methods(LibraryNZ)
-_import_static_methods(SelectorLibrary)
+_import_static_methods(Selector)
 markup = MarkupLibrary()

@@ -19,7 +19,7 @@ class LibraryNZ(object):
     def natural_clusters(
         start_pitch=None,
         widths=None,
-        selector='baca.select_plts()',
+        selector='baca.select().plts()',
         ):
         r'''Makes natural clusters.
         '''
@@ -102,7 +102,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.natural_harmonics(
-                ...         baca.select_plts_in_tuplet(1),
+                ...         baca.select().plts_in_tuplet(1),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -157,7 +157,7 @@ class LibraryNZ(object):
             grob_name='note_head',
             revert=True,
             selector=selector,
-            target=baca.select_plts().wrap(),
+            target=baca.select().plts().wrap(),
             )
 
     @staticmethod
@@ -301,7 +301,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.niente_swell(
                 ...         'p',
-                ...         baca.select_pls_in_tuplet(1),
+                ...         baca.select().pls_in_tuplet(1),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -447,10 +447,10 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.clef_spanner(
                 ...         clef='percussion',
-                ...         selector=baca.select_leaves_in_tuplet(1),
+                ...         selector=baca.select().leaves_in_tuplet(1),
                 ...         ),
                 ...     baca.one_line_staff(
-                ...         selector=baca.select_leaves_in_tuplet(1),
+                ...         selector=baca.select().leaves_in_tuplet(1),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(9),
@@ -579,7 +579,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.ottava(baca.select_plt_runs()),
+                ...     baca.ottava(baca.select().plt_runs()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -634,7 +634,7 @@ class LibraryNZ(object):
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.OctavationSpanner(start=1, stop=0),
-            target=baca.select_leaves_in_trimmed_run(),
+            target=baca.select().leaves_in_trimmed_run(),
             )
 
     @staticmethod
@@ -708,7 +708,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.ottava_bassa(baca.select_plt_runs()),
+                ...     baca.ottava_bassa(baca.select().plt_runs()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -763,7 +763,7 @@ class LibraryNZ(object):
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.OctavationSpanner(start=-1, stop=0),
-            target=baca.select_leaves_in_trimmed_run(),
+            target=baca.select().leaves_in_trimmed_run(),
             )
 
     @staticmethod
@@ -843,10 +843,10 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.one_line_staff(
-                ...         baca.select_leaves_in_tuplet(1),
+                ...         baca.select().leaves_in_tuplet(1),
                 ...         ),
                 ...     baca.percussion_staff(
-                ...         baca.select_leaves_in_tuplet(1),
+                ...         baca.select().leaves_in_tuplet(1),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(9),
@@ -972,7 +972,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.pervasive_trills(
-                ...         baca.select_pls_in_tuplet(1),
+                ...         baca.select().pls_in_tuplet(1),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -1104,7 +1104,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.pervasive_trills_at_interval(
                 ...         2,
-                ...         baca.select_pls_in_tuplet(1),
+                ...         baca.select().pls_in_tuplet(1),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -1242,7 +1242,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.pervasive_trills_at_pitch(
                 ...         pitch=1,
-                ...         selector=baca.select_pls_in_tuplet(1),
+                ...         selector=baca.select().pls_in_tuplet(1),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -1394,7 +1394,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.possibile_dynamic(
                 ...         'ff',
-                ...         baca.select_plt_head_in_tuplet(1, 0),
+                ...         baca.select().plt_head_in_tuplet(1, 0),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -1453,7 +1453,7 @@ class LibraryNZ(object):
         return baca.AttachCommand(
             arguments=[markup],
             selector=selector,
-            target=baca.select_plt_head(),
+            target=baca.select().plt_head(),
             )
 
     @staticmethod
@@ -1629,7 +1629,7 @@ class LibraryNZ(object):
             selector=selector,
             setting_name='proportional_notation_duration',
             setting_value=moment,
-            target=baca.select_leaf(),
+            target=baca.select().leaf(),
             )
 
     @staticmethod
@@ -1701,10 +1701,10 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.color(baca.select_leaves_in_tuplet(1)),
+                ...     baca.color(baca.select().leaves_in_tuplet(1)),
                 ...     baca.register(
                 ...         -6,
-                ...         selector=baca.select_leaves_in_tuplet(1),
+                ...         selector=baca.select().leaves_in_tuplet(1),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -1847,11 +1847,11 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.color(baca.select_leaves_in_tuplet(1)),
+                ...     baca.color(baca.select().leaves_in_tuplet(1)),
                 ...     baca.register(
                 ...         start=-6,
                 ...         stop=10,
-                ...         selector=baca.select_leaves_in_tuplet(1),
+                ...         selector=baca.select().leaves_in_tuplet(1),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2014,7 +2014,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.reiterated_dynamic(
                 ...         'f',
-                ...         selector=baca.select_plt_heads_in_tuplet(1),
+                ...         selector=baca.select().plt_heads_in_tuplet(1),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2064,7 +2064,7 @@ class LibraryNZ(object):
         return baca.AttachCommand(
             arguments=[abjad.Articulation(dynamic)],
             selector=selector,
-            target=baca.select_plt_heads(),
+            target=baca.select().plt_heads(),
             )
 
     @staticmethod
@@ -2141,7 +2141,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[11, 11, 12], [11, 11, 11], [11]],
                 ...     baca.messiaen_tie_each(),
-                ...     baca.repeat_ties_down(baca.select_tuplet(1)),
+                ...     baca.repeat_ties_down(baca.select().tuplet(1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_up(),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2196,7 +2196,7 @@ class LibraryNZ(object):
             grob_name='repeat_tie',
             revert=True,
             selector=selector,
-            target=baca.select_leaves_in_trimmed_run().wrap(),
+            target=baca.select().leaves_in_trimmed_run().wrap(),
             )
 
     @staticmethod
@@ -2273,7 +2273,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[11, 11, 12], [11, 11, 11], [11]],
                 ...     baca.messiaen_tie_each(),
-                ...     baca.repeat_ties_up(baca.select_tuplet(1)),
+                ...     baca.repeat_ties_up(baca.select().tuplet(1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_down(),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2328,7 +2328,7 @@ class LibraryNZ(object):
             grob_name='repeat_tie',
             revert=True,
             selector=selector,
-            target=baca.select_leaves_in_trimmed_run().wrap(),
+            target=baca.select().leaves_in_trimmed_run().wrap(),
             )
 
     @staticmethod
@@ -2421,7 +2421,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rest_position(-6, baca.select_tuplet(1)),
+                ...     baca.rest_position(-6, baca.select().tuplet(1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -2475,7 +2475,7 @@ class LibraryNZ(object):
             grob_name='rest',
             revert=True,
             selector=selector,
-            target=baca.select_rests().wrap(),
+            target=baca.select().rests().wrap(),
             )
 
     @staticmethod
@@ -2745,7 +2745,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_down(
-                ...         baca.select_leaves_in_tuplet(1)
+                ...         baca.select().leaves_in_tuplet(1)
                 ...         .by_leaf(pitched=False)
                 ...         ,
                 ...         ),
@@ -2801,7 +2801,7 @@ class LibraryNZ(object):
             attribute_value=abjad.Down,
             grob_name='rest',
             revert=True,
-            target=baca.select_rests().wrap(),
+            target=baca.select().rests().wrap(),
             )
 
     @staticmethod
@@ -2875,7 +2875,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_up(baca.select_tuplet(1)),
+                ...     baca.rests_up(baca.select().tuplet(1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -2929,7 +2929,7 @@ class LibraryNZ(object):
             grob_name='rest',
             revert=True,
             selector=selector,
-            target=baca.select_rests().wrap(),
+            target=baca.select().rests().wrap(),
             )
 
     @staticmethod
@@ -2943,7 +2943,7 @@ class LibraryNZ(object):
         r'''Resumes music after remote selection.
         '''
         return baca.AnchorSpecifier(
-            remote_selector=baca.select_leaf(-1),
+            remote_selector=baca.select().leaf(-1),
             remote_voice_name=remote_voice_name,
             use_remote_stop_offset=True,
             )
@@ -3071,7 +3071,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.script_color(
                 ...         'red',
-                ...         baca.select_leaves_in_tuplet(1),
+                ...         baca.select().leaves_in_tuplet(1),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -3125,7 +3125,7 @@ class LibraryNZ(object):
             grob_name='script',
             revert=True,
             selector=selector,
-            target=baca.select_leaves().wrap(),
+            target=baca.select().leaves().wrap(),
             )
 
     @staticmethod
@@ -3204,7 +3204,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.script_extra_offset(
                 ...         (-1.5, 0),
-                ...         baca.select_leaf_in_tuplet(1, 0),
+                ...         baca.select().leaf_in_tuplet(1, 0),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -3258,7 +3258,7 @@ class LibraryNZ(object):
             grob_name='script',
             revert=True,
             selector=selector,
-            target=baca.select_leaf(),
+            target=baca.select().leaf(),
             )
 
     @staticmethod
@@ -3335,7 +3335,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.accents(),
                 ...     baca.rests_around([2], [4]),
-                ...     baca.scripts_down(baca.select_leaves_in_tuplet(1)),
+                ...     baca.scripts_down(baca.select().leaves_in_tuplet(1)),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -3464,7 +3464,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.accents(),
                 ...     baca.rests_around([2], [4]),
-                ...     baca.scripts_up(baca.select_leaves_in_tuplet(1)),
+                ...     baca.scripts_up(baca.select().leaves_in_tuplet(1)),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -3589,7 +3589,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.short_fermata(
-                ...         baca.select_plt_head_in_tuplet(1, 0),
+                ...         baca.select().plt_head_in_tuplet(1, 0),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3639,7 +3639,7 @@ class LibraryNZ(object):
         return baca.AttachCommand(
             arguments=[abjad.Articulation('shortfermata')],
             selector=selector,
-            target=baca.select_leaf(),
+            target=baca.select().leaf(),
             )
 
     @staticmethod
@@ -3943,7 +3943,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.slur(baca.select_trimmed_run_in_tuplet(1)),
+                ...     baca.slur(baca.select().trimmed_run_in_tuplet(1)),
                 ...     baca.slurs_down(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3995,7 +3995,7 @@ class LibraryNZ(object):
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.Slur(),
-            target=baca.select_leaves_in_trimmed_run(),
+            target=baca.select().leaves_in_trimmed_run(),
             )
 
     @staticmethod
@@ -4120,7 +4120,7 @@ class LibraryNZ(object):
 
         '''
         return baca.SpannerCommand(
-            selector=baca.select_plt_runs()[start:stop],
+            selector=baca.select().plt_runs()[start:stop],
             spanner=abjad.Slur(),
             )
 
@@ -4246,7 +4246,7 @@ class LibraryNZ(object):
 
         '''
         return baca.SpannerCommand(
-            selector=baca.select_trimmed_run_in_each_tuplet(
+            selector=baca.select().trimmed_run_in_each_tuplet(
                 start=start,
                 stop=stop,
                 ),
@@ -4326,7 +4326,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.slur_trimmed_run_in_each_tuplet(),
-                ...     baca.slurs_down(baca.select_leaves_in_tuplet(1)),
+                ...     baca.slurs_down(baca.select().leaves_in_tuplet(1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -4461,7 +4461,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.slur_trimmed_run_in_each_tuplet(),
-                ...     baca.slurs_up(baca.select_leaves_in_tuplet(1)),
+                ...     baca.slurs_up(baca.select().leaves_in_tuplet(1)),
                 ...     baca.stems_down(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4538,8 +4538,8 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.color(baca.select_plts().wrap()),
-                ...     baca.soprano_to_octave(3, baca.select_plts().wrap()),
+                ...     baca.color(baca.select().plts().wrap()),
+                ...     baca.soprano_to_octave(3, baca.select().plts().wrap()),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -4643,8 +4643,8 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.soprano_to_octave(3, baca.select_plts()),
-                ...     baca.color(baca.select_plts()),
+                ...     baca.soprano_to_octave(3, baca.select().plts()),
+                ...     baca.color(baca.select().plts()),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -4748,8 +4748,8 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.soprano_to_octave(3, baca.select_plts()[-2:]),
-                ...     baca.color(baca.select_plts()[-2:]),
+                ...     baca.soprano_to_octave(3, baca.select().plts()[-2:]),
+                ...     baca.color(baca.select().plts()[-2:]),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -4936,7 +4936,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.staccati(baca.select_plt_heads_in_tuplet(1)),
+                ...     baca.staccati(baca.select().plt_heads_in_tuplet(1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -4985,7 +4985,7 @@ class LibraryNZ(object):
         return baca.AttachCommand(
             arguments=[abjad.Articulation('staccato')],
             selector=selector,
-            target=baca.select_plt_heads(),
+            target=baca.select().plt_heads(),
             )
 
     @staticmethod
@@ -5057,7 +5057,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.staccatissimi(baca.select_tuplet(1)),
+                ...     baca.staccatissimi(baca.select().tuplet(1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -5106,7 +5106,7 @@ class LibraryNZ(object):
         return baca.AttachCommand(
             arguments=[abjad.Articulation('staccatissimo')],
             selector=selector,
-            target=baca.select_plt_heads(),
+            target=baca.select().plt_heads(),
             )
 
     @staticmethod
@@ -5182,7 +5182,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.stem_color(
                 ...         color='red',
-                ...         selector=baca.select_trimmed_run_in_tuplet(1),
+                ...         selector=baca.select().trimmed_run_in_tuplet(1),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5238,7 +5238,7 @@ class LibraryNZ(object):
             grob_name='stem',
             revert=True,
             selector=selector,
-            target=baca.select_leaves_in_trimmed_run().wrap(),
+            target=baca.select().leaves_in_trimmed_run().wrap(),
             )
 
     @staticmethod
@@ -5312,7 +5312,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stem_tremolo(
-                ...         baca.select_pls_in_tuplet(n=1),
+                ...         baca.select().pls_in_tuplet(n=1),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -5361,7 +5361,7 @@ class LibraryNZ(object):
         return baca.StemTremoloCommand(
             selector=selector,
             tremolo_flags=32,
-            target=baca.select_pls(),
+            target=baca.select().pls(),
             )
 
     @staticmethod
@@ -5436,7 +5436,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
-                ...     baca.stems_down(baca.select_leaves_in_tuplet(1)),
+                ...     baca.stems_down(baca.select().leaves_in_tuplet(1)),
                 ...     baca.stems_up(),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -5567,7 +5567,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [10]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_down(),
-                ...     baca.stems_up(baca.select_leaves_in_tuplet(n=1)),
+                ...     baca.stems_up(baca.select().leaves_in_tuplet(n=1)),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -5797,7 +5797,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.sustain_pedal(
-                ...         selector=baca.select_leaves_in_tuplet(n=1),
+                ...         selector=baca.select().leaves_in_tuplet(n=1),
                 ...         ),
                 ...     baca.sustain_pedal_staff_padding(4),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5858,7 +5858,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.sustain_pedal(
-                ...         selector=baca.select_leaves_in_tuplet(
+                ...         selector=baca.select().leaves_in_tuplet(
                 ...             n=1,
                 ...             leak=abjad.Left,
                 ...             ),
@@ -5922,7 +5922,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.sustain_pedal(
-                ...         selector=baca.select_leaves_in_tuplet(
+                ...         selector=baca.select().leaves_in_tuplet(
                 ...             n=1,
                 ...             leak=abjad.Right,
                 ...             ),
@@ -5986,7 +5986,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.sustain_pedal(
-                ...         selector=baca.select_leaves_in_tuplet(
+                ...         selector=baca.select().leaves_in_tuplet(
                 ...             n=1,
                 ...             leak=abjad.Both,
                 ...             ),
@@ -6050,7 +6050,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.sustain_pedal(
-                ...         selector=baca.select_leaves_in_each_tuplet(),
+                ...         selector=baca.select().leaves_in_each_tuplet(),
                 ...         ),
                 ...     baca.sustain_pedal_staff_padding(4),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6113,7 +6113,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.sustain_pedal(
-                ...     selector=baca.select_leaves_in_each_tuplet(leak=abjad.Left),
+                ...     selector=baca.select().leaves_in_each_tuplet(leak=abjad.Left),
                 ...         ),
                 ...     baca.sustain_pedal_staff_padding(4),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6176,7 +6176,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.sustain_pedal(
-                ...     selector=baca.select_leaves_in_each_tuplet(leak=abjad.Right),
+                ...     selector=baca.select().leaves_in_each_tuplet(leak=abjad.Right),
                 ...         ),
                 ...     baca.sustain_pedal_staff_padding(4),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6251,7 +6251,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.sustain_pedal(
-                ...     selector=baca.select_leaves_in_each_tuplet(leak=abjad.Right),
+                ...     selector=baca.select().leaves_in_each_tuplet(leak=abjad.Right),
                 ...         ),
                 ...     baca.sustain_pedal_staff_padding(4),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -6314,11 +6314,11 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.sustain_pedal(
-                ...         selector=baca.select_leaves_in_each_tuplet(),
+                ...         selector=baca.select().leaves_in_each_tuplet(),
                 ...         ),
                 ...     baca.sustain_pedal_staff_padding(
                 ...         n=4,
-                ...         selector=baca.select_leaves_in_tuplet(1),
+                ...         selector=baca.select().leaves_in_tuplet(1),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6447,7 +6447,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.tenuti(baca.select_plt_heads_in_tuplet(n=1)),
+                ...     baca.tenuti(baca.select().plt_heads_in_tuplet(n=1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6496,7 +6496,7 @@ class LibraryNZ(object):
         return baca.AttachCommand(
             arguments=[abjad.Articulation('tenuto')],
             selector=selector,
-            target=baca.select_plt_heads(),
+            target=baca.select().plt_heads(),
             )
 
     @staticmethod
@@ -6516,7 +6516,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select_plt_head_in_tuplet(1, 0),
+                ...         baca.select().plt_head_in_tuplet(1, 0),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_color(color='red'),
@@ -6578,12 +6578,12 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select_plt_head_in_tuplet(1, 0),
+                ...         baca.select().plt_head_in_tuplet(1, 0),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_color(
                 ...         color='red',
-                ...         selector=baca.select_leaves_in_tuplet(1),
+                ...         selector=baca.select().leaves_in_tuplet(1),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6658,7 +6658,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select_plt_head_in_tuplet(1, 0),
+                ...         baca.select().plt_head_in_tuplet(1, 0),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_padding(n=4),
@@ -6721,12 +6721,12 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select_plt_head_in_tuplet(1, 0),
+                ...         baca.select().plt_head_in_tuplet(1, 0),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_padding(
                 ...         n=4,
-                ...         selector=baca.select_leaves_in_tuplet(1),
+                ...         selector=baca.select().leaves_in_tuplet(1),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6799,7 +6799,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select_plt_head_in_tuplet(1, 0),
+                ...         baca.select().plt_head_in_tuplet(1, 0),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_staff_padding(n=4),
@@ -6861,12 +6861,12 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select_plt_head_in_tuplet(1, 0),
+                ...         baca.select().plt_head_in_tuplet(1, 0),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_staff_padding(
                 ...         n=4,
-                ...         selector=baca.select_leaves_in_tuplet(1),
+                ...         selector=baca.select().leaves_in_tuplet(1),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6939,7 +6939,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select_plt_head_in_tuplet(1, 0),
+                ...         baca.select().plt_head_in_tuplet(1, 0),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_scripts_down(),
@@ -7002,11 +7002,11 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select_plt_head_in_tuplet(1, 0),
+                ...         baca.select().plt_head_in_tuplet(1, 0),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_scripts_down(
-                ...         selector=baca.select_leaves_in_tuplet(1),
+                ...         selector=baca.select().leaves_in_tuplet(1),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -7079,7 +7079,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select_plt_head_in_tuplet(1, 0),
+                ...         baca.select().plt_head_in_tuplet(1, 0),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_scripts_up(),
@@ -7142,11 +7142,11 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select_plt_head_in_tuplet(1, 0),
+                ...         baca.select().plt_head_in_tuplet(1, 0),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_scripts_up(
-                ...         selector=baca.select_leaves_in_tuplet(1),
+                ...         selector=baca.select().leaves_in_tuplet(1),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -7311,13 +7311,13 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_spanner_staff_padding(
                 ...         n=6,
-                ...         selector=baca.select_trimmed_run_in_tuplet(1),
+                ...         selector=baca.select().trimmed_run_in_tuplet(1),
                 ...         ),
                 ...     baca.text_script_staff_padding(6),
                 ...     baca.transition_spanner(
                 ...         baca.markup.pont(),
                 ...         baca.markup.ord_(),
-                ...         selector=baca.select_trimmed_run_in_tuplet(1),
+                ...         selector=baca.select().trimmed_run_in_tuplet(1),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -7472,7 +7472,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.tie_each(baca.select_plt_prun()),
+                ...     baca.tie_each(baca.select().plt_prun()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -7521,7 +7521,7 @@ class LibraryNZ(object):
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.Tie(),
-            target=baca.select_plt_pruns(),
+            target=baca.select().plt_pruns(),
             )
 
     @staticmethod
@@ -7612,7 +7612,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_up(),
                 ...     baca.tie_each(),
-                ...     baca.ties_down(baca.select_tuplet(1)),
+                ...     baca.ties_down(baca.select().tuplet(1)),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -7665,7 +7665,7 @@ class LibraryNZ(object):
             grob_name='tie',
             revert=True,
             selector=selector,
-            target=baca.select_leaves_in_trimmed_run().wrap(),
+            target=baca.select().leaves_in_trimmed_run().wrap(),
             )
 
     @staticmethod
@@ -7744,7 +7744,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_down(),
                 ...     baca.tie_each(),
-                ...     baca.ties_up(baca.select_leaves_in_tuplet(1)),
+                ...     baca.ties_up(baca.select().leaves_in_tuplet(1)),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -7797,7 +7797,7 @@ class LibraryNZ(object):
             grob_name='tie',
             revert=True,
             selector=selector,
-            target=baca.select_leaves_in_trimmed_run().wrap(),
+            target=baca.select().leaves_in_trimmed_run().wrap(),
             )
 
     @staticmethod
@@ -7984,7 +7984,7 @@ class LibraryNZ(object):
                 ...     baca.transition_spanner(
                 ...         baca.markup.pont(),
                 ...         baca.markup.ord_(),
-                ...         selector=baca.select_trimmed_run_in_tuplet(1),
+                ...         selector=baca.select().trimmed_run_in_tuplet(1),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -8136,7 +8136,7 @@ class LibraryNZ(object):
             grob_name='bar_line',
             revert=False,
             selector=selector,
-            target=baca.select_leaf(),
+            target=baca.select().leaf(),
             )
 
     @staticmethod
@@ -8212,7 +8212,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.transparent_rests(
-                ...         baca.select_rests_in_tuplet(1),
+                ...         baca.select().rests_in_tuplet(1),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -8266,7 +8266,7 @@ class LibraryNZ(object):
             grob_name='rest',
             revert=True,
             selector=selector,
-            target=baca.select_rests().wrap(),
+            target=baca.select().rests().wrap(),
             )
 
     @staticmethod
@@ -8337,7 +8337,7 @@ class LibraryNZ(object):
             grob_name='span_bar',
             revert=False,
             selector=selector,
-            target=baca.select_leaf(),
+            target=baca.select().leaf(),
             )
 
     @staticmethod
@@ -8409,7 +8409,7 @@ class LibraryNZ(object):
             grob_name='time_signature',
             revert=True,
             selector=selector,
-            target=baca.select_rests().wrap(),
+            target=baca.select().rests().wrap(),
             )
 
     @staticmethod
@@ -8519,7 +8519,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.trill_quarter_notes(
-                ...         baca.select_leaves_in_tuplet(1),
+                ...         baca.select().leaves_in_tuplet(1),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -8645,7 +8645,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_extra_offset(
                 ...         (-1, 0),
-                ...         baca.select_leaves_in_tuplet(1),
+                ...         baca.select().leaves_in_tuplet(1),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -8772,7 +8772,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(
                 ...         n=5,
-                ...         selector=baca.select_leaves_in_tuplet(1),
+                ...         selector=baca.select().leaves_in_tuplet(1),
                 ...         ),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -8899,7 +8899,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     baca.tuplet_brackets_down(
-                ...         baca.select_leaves_in_tuplet(1),
+                ...         baca.select().leaves_in_tuplet(1),
                 ...         ),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -9028,7 +9028,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     baca.tuplet_brackets_up(
-                ...         baca.select_leaves_in_tuplet(1),
+                ...         baca.select().leaves_in_tuplet(1),
                 ...         ),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -9158,7 +9158,7 @@ class LibraryNZ(object):
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     baca.tuplet_number_extra_offset(
                 ...         (-1, 0),
-                ...         baca.select_leaves_in_tuplet(1),
+                ...         baca.select().leaves_in_tuplet(1),
                 ...         ),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -9290,12 +9290,12 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.percussion_staff(
-                ...         baca.select_leaves_in_tuplet(1),
+                ...         baca.select().leaves_in_tuplet(1),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(9),
                 ...     baca.two_line_staff(
-                ...         baca.select_leaves_in_tuplet(1),
+                ...         baca.select().leaves_in_tuplet(1),
                 ...         ),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -9423,7 +9423,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.up_arpeggios(baca.select_chord_heads()[-2:]),
+                ...     baca.up_arpeggios(baca.select().chord_heads()[-2:]),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -9472,7 +9472,7 @@ class LibraryNZ(object):
         return baca.AttachCommand(
             arguments=[abjad.Arpeggio(direction=abjad.Up)],
             selector=selector,
-            target=baca.select_chord_heads(),
+            target=baca.select().chord_heads(),
             )
 
     @staticmethod
@@ -9547,7 +9547,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     baca.up_bows(
-                ...         baca.select_plt_heads_in_tuplet(1),
+                ...         baca.select().plt_heads_in_tuplet(1),
                 ...         ),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -9595,7 +9595,7 @@ class LibraryNZ(object):
         return baca.AttachCommand(
             arguments=[abjad.Articulation('upbow')],
             selector=selector,
-            target=baca.select_plt_heads(),
+            target=baca.select().plt_heads(),
             )
 
     @staticmethod
@@ -9668,7 +9668,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.very_long_fermata(
-                ...         baca.select_plt_head_in_tuplet(1, 0),
+                ...         baca.select().plt_head_in_tuplet(1, 0),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -9718,5 +9718,5 @@ class LibraryNZ(object):
         return baca.AttachCommand(
             arguments=[abjad.Articulation('verylongfermata')],
             selector=selector,
-            target=baca.select_leaf(),
+            target=baca.select().leaf(),
             )

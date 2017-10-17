@@ -1479,7 +1479,7 @@ class MusicMaker(abjad.AbjadObject):
                 ...     [[0, 2, 10, 18], [15, 23], [19, 13, 9, 8]],
                 ...     baca.hairpins(
                 ...         ['p < f'],
-                ...         target=baca.select_plt_runs(),
+                ...         target=baca.select().plt_runs(),
                 ...         ),
                 ...     baca.RestAffixSpecifier(
                 ...         pattern=abjad.Pattern(
@@ -1536,11 +1536,11 @@ class MusicMaker(abjad.AbjadObject):
                 ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
                 ...     baca.hairpins(
                 ...         ['p < f'],
-                ...         target=baca.select_leaves_in_tuplet(0),
+                ...         target=baca.select().leaves_in_tuplet(0),
                 ...         ),
                 ...     baca.hairpins(
                 ...         ['f > p'],
-                ...         target=baca.select_leaves_in_tuplet(-1),
+                ...         target=baca.select().leaves_in_tuplet(-1),
                 ...         ),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -1590,11 +1590,11 @@ class MusicMaker(abjad.AbjadObject):
                 ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
                 ...     baca.hairpins(
                 ...         ['p < f'],
-                ...         target=baca.select_tuplets()[:2],
+                ...         target=baca.select().tuplets()[:2],
                 ...         ),
                 ...     baca.hairpins(
                 ...         ['f > p'],
-                ...         target=baca.select_tuplets()[-1:],
+                ...         target=baca.select().tuplets()[-1:],
                 ...         ),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -1695,7 +1695,7 @@ class MusicMaker(abjad.AbjadObject):
 
                 >>> music_maker = baca.MusicMaker(
                 ...     baca.SpannerCommand(
-                ...         selector=baca.select_leaves_in_each_tuplet(),
+                ...         selector=baca.select().leaves_in_each_tuplet(),
                 ...         spanner=abjad.Slur(),
                 ...         ),
                 ...     )
@@ -1749,8 +1749,8 @@ class MusicMaker(abjad.AbjadObject):
 
             ::
 
-                >>> selector = baca.select_tuplets()
-                >>> selector = selector.map(baca.select_leaves()[:2])
+                >>> selector = baca.select().tuplets()
+                >>> selector = selector.map(baca.select().leaves()[:2])
                 >>> music_maker = baca.MusicMaker(
                 ...     baca.SpannerCommand(
                 ...         selector=selector,
@@ -1807,8 +1807,8 @@ class MusicMaker(abjad.AbjadObject):
 
             ::
 
-                >>> selector = baca.select_tuplets()
-                >>> selector = selector.map(baca.select_leaves()[-2:])
+                >>> selector = baca.select().tuplets()
+                >>> selector = selector.map(baca.select().leaves()[-2:])
                 >>> music_maker = baca.MusicMaker(
                 ...     baca.SpannerCommand(
                 ...         selector=selector,

@@ -314,11 +314,11 @@ class ColorCommand(Command):
     def __call__(self, argument=None):
         r'''Calls command on `argument`.
 
-        Returns selector result for SelectorLibrary docs.
+        Returns selector result for Selector docs.
         '''
         if not argument:
             return
-        selector = self.selector or baca.select_leaves()
+        selector = self.selector or baca.select().leaves()
         result = selector(argument)
         if False:
             print(format(selector))

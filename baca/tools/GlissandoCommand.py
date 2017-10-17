@@ -128,8 +128,8 @@ class GlissandoCommand(Command):
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.even_runs(),
-            ...     baca.glissandi(baca.select_plts()[:2].wrap()),
-            ...     baca.glissandi(baca.select_plts()[-2:].wrap()),
+            ...     baca.glissandi(baca.select().plts()[:2].wrap()),
+            ...     baca.glissandi(baca.select().plts()[-2:].wrap()),
             ...     )
 
         ::
@@ -230,7 +230,7 @@ class GlissandoCommand(Command):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     collections,
-            ...     baca.glissandi(baca.select_plts_in_tuplet(0).wrap()),
+            ...     baca.glissandi(baca.select().plts_in_tuplet(0).wrap()),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
@@ -270,7 +270,7 @@ class GlissandoCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, selector='baca.select_plt_runs()'):
+    def __init__(self, selector='baca.select().plt_runs()'):
         Command.__init__(self, selector=selector)
 
     ### SPECIAL METHODS ###
