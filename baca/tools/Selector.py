@@ -181,7 +181,7 @@ class Selector(abjad.Selector):
                 Chord("<e'' fs''>16")
 
         '''
-        selector = baca.select().chords()[n]
+        selector = self.chords()[n]
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -319,7 +319,7 @@ class Selector(abjad.Selector):
                 Chord("<e'' fs''>4")
 
         '''
-        selector = baca.select().chord_heads()[n]
+        selector = self.chord_heads()[n]
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -404,8 +404,7 @@ class Selector(abjad.Selector):
                 Chord("<e'' fs''>4")
 
         '''
-        selector = baca.select()
-        selector = selector.by_leaf(abjad.Chord, head=True)
+        selector = self.by_leaf(abjad.Chord, head=True)
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -495,8 +494,7 @@ class Selector(abjad.Selector):
                 Chord("<e'' fs''>16")
 
         '''
-        selector = baca.select()
-        selector = selector.by_class(abjad.Chord)
+        selector = self.by_class(abjad.Chord)
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -633,7 +631,7 @@ class Selector(abjad.Selector):
                 Note("fs''16")
 
         '''
-        selector = baca.select().leaves()[n]
+        selector = self.leaves()[n]
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -773,7 +771,7 @@ class Selector(abjad.Selector):
                 Note("a'16")
 
         '''
-        selector = baca.select().leaves_in_trimmed_run()[n]
+        selector = self.trimmed_leaves()[n]
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -910,7 +908,7 @@ class Selector(abjad.Selector):
                 Note("bf'16")
 
         '''
-        selector = baca.select().leaves_in_tuplet(n)[m]
+        selector = self.tuplet(n).leaf(m)
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -1223,10 +1221,9 @@ class Selector(abjad.Selector):
                 Rest('r4')
 
         '''
-        selector = baca.select()
-        selector = selector.by_leaf()
+        selector = self.by_leaf()
         if start is not None or stop is not None:
-            selector = selector.get_slice(start=start, stop=stop)
+            selector = selector[start:stop]
         if leak in (abjad.Left, abjad.Both):
             selector = selector.with_previous_leaf()
         if leak in (abjad.Right, abjad.Both):
@@ -1545,8 +1542,8 @@ class Selector(abjad.Selector):
                 Selection([Rest('r4')])
 
         '''
-        selector = baca.select().lts()[start:stop]
-        get = abjad.select().by_leaf()
+        selector = self.lts()[start:stop]
+        get = baca.select().leaves()
         if leak in (abjad.Left, abjad.Both):
             get = get.with_previous_leaf()
         if leak in (abjad.Right, abjad.Both):
@@ -1879,8 +1876,8 @@ class Selector(abjad.Selector):
                 Selection([Note("a'16"), Rest('r4')])
 
         '''
-        selector = baca.select().plts()[start:stop]
-        get = abjad.select().by_leaf()
+        selector = self.plts()[start:stop]
+        get = baca.select().leaves()
         if leak in (abjad.Left, abjad.Both):
             get = get.with_previous_leaf()
         if leak in (abjad.Right, abjad.Both):
@@ -2122,154 +2119,13 @@ class Selector(abjad.Selector):
                 Selection([Note("a'16"), Rest('r4')])
 
         '''
-        selector = baca.select().tuplets()[start:stop]
-        get = abjad.select().by_leaf()
+        selector = self.tuplets()[start:stop]
+        get = baca.select().leaves()
         if leak in (abjad.Left, abjad.Both):
             get = get.with_previous_leaf()
         if leak in (abjad.Right, abjad.Both):
             get = get.with_next_leaf()
         selector = selector.map(get)
-        template = self._get_template(inspect.currentframe())
-        return abjad.new(selector, template=template)
-
-    def leaves_in_trimmed_run(self):
-        r'''Selects leaves in trimmed run.
-
-        ..  container:: example
-
-            Selects leaves in trimmed run:
-
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select().leaves_in_trimmed_run()),
-                ...     baca.flags(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
-                                c'16
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
-                                c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
-                                bf'4 ~
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
-                                bf'16
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
-                                bf'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
-                                e''16
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
-                                e''4 ~
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
-                                e''16
-                                \once \override Dots.color = #blue
-                                \once \override Rest.color = #blue
-                                r16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
-                                fs''16
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
-                                af''16
-                            }
-                            \times 4/5 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-            ::
-
-                >>> contribution.print_color_selector_result()
-                Note("c'16")
-                Note("c'16")
-                Note("bf'4")
-                Note("bf'16")
-                Rest('r16')
-                Note("bf'16")
-                Note("e''16")
-                Note("e''4")
-                Note("e''16")
-                Rest('r16')
-                Note("fs''16")
-                Note("af''16")
-                Note("a'16")
-
-        '''
-        selector = baca.select()
-        selector = selector.by_leaf(trim=True)
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -2436,8 +2292,7 @@ class Selector(abjad.Selector):
                 Rest('r4')
 
         '''
-        selector = baca.select().tuplets()[n]
-        selector = selector.by_leaf()
+        selector = self.tuplet(n).leaves()
         if leak in (abjad.Left, abjad.Both):
             selector = selector.with_previous_leaf()
         if leak in (abjad.Right, abjad.Both):
@@ -2586,7 +2441,7 @@ class Selector(abjad.Selector):
                 LogicalTie([Note("fs''16")])
 
         '''
-        selector = baca.select().lts()[n]
+        selector = self.lts()[n]
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -2730,8 +2585,7 @@ class Selector(abjad.Selector):
                 LogicalTie([Rest('r4')])
 
         '''
-        selector = baca.select()
-        selector = selector.by_logical_tie()
+        selector = self.by_logical_tie()
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -2871,7 +2725,7 @@ class Selector(abjad.Selector):
                 Note("a'16")
 
         '''
-        selector = baca.select().notes()[n]
+        selector = self.notes()[n]
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -3005,8 +2859,7 @@ class Selector(abjad.Selector):
                 Note("a'16")
 
         '''
-        selector = baca.select()
-        selector = selector.by_class(abjad.Note)
+        selector = self.by_class(abjad.Note)
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -3146,7 +2999,7 @@ class Selector(abjad.Selector):
                 Note("a'16")
 
         '''
-        selector = baca.select().pls()[n]
+        selector = self.pls()[n]
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -3280,8 +3133,7 @@ class Selector(abjad.Selector):
                 Note("a'16")
 
         '''
-        selector = baca.select()
-        selector = selector.by_leaf(pitched=True)
+        selector = self.by_leaf(pitched=True)
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -3504,8 +3356,8 @@ class Selector(abjad.Selector):
                 Selection([Note("a'16")])
 
         '''
-        selector = baca.select().tuplets()[start:stop]
-        selector = selector.map(abjad.select().by_leaf(pitched=True))
+        selector = self.tuplets()[start:stop]
+        selector = selector.map(baca.select().pls())
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -3663,8 +3515,7 @@ class Selector(abjad.Selector):
                 Note("a'16")
 
         '''
-        selector = baca.select().tuplets()[n]
-        selector = selector.by_leaf(pitched=True)
+        selector = self.tuplet(n).pls()
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -3809,7 +3660,7 @@ class Selector(abjad.Selector):
                 LogicalTie([Note("a'16")])
 
         '''
-        selector = baca.select().plts()[n]
+        selector = self.plts()[n]
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -3949,7 +3800,7 @@ class Selector(abjad.Selector):
                 Note("e''4")
 
         '''
-        selector = baca.select().plt_heads()[n]
+        selector = self.plt_heads()[n]
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -4089,7 +3940,7 @@ class Selector(abjad.Selector):
                 Note("af''16")
 
         '''
-        selector = baca.select().plt_heads_in_tuplet(n)[m]
+        selector = self.tuplet(n).plt_head(m)
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -4211,8 +4062,7 @@ class Selector(abjad.Selector):
                 Note("a'16")
 
         '''
-        selector = baca.select().plts()
-        selector = selector.map(abjad.select()[0])
+        selector = self.plts().map(baca.select()[0])
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -4323,9 +4173,9 @@ class Selector(abjad.Selector):
             ::
 
                 >>> contribution.print_color_selector_result()
-                Selection([Note("c'16"), Note("c'16"), Note("bf'4")])
-                Selection([Note("bf'16"), Note("e''16"), Note("e''4"), Note("fs''16"), Note("af''16")])
-                Selection([Note("a'16")])
+                [Note("c'16"), Note("c'16"), Note("bf'4")]
+                [Note("bf'16"), Note("e''16"), Note("e''4"), Note("fs''16"), Note("af''16")]
+                [Note("a'16")]
 
         ..  container:: example
 
@@ -4418,13 +4268,12 @@ class Selector(abjad.Selector):
             ::
 
                 >>> contribution.print_color_selector_result()
-                Selection([Note("bf'16"), Note("e''16"), Note("e''4"), Note("fs''16"), Note("af''16")])
-                Selection([Note("a'16")])
+                [Note("bf'16"), Note("e''16"), Note("e''4"), Note("fs''16"), Note("af''16")]
+                [Note("a'16")]
 
         '''
-        selector = baca.select().tuplets()[start:stop]
-        get = abjad.select().by_leaf(pitched=True, head=True)
-        selector = selector.map(get)
+        selector = self.tuplets()[start:stop]
+        selector = selector.map(baca.select().plt_heads())
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -4576,9 +4425,7 @@ class Selector(abjad.Selector):
                 Note("a'16")
 
         '''
-        selector = baca.select().tuplet(n)
-        selector = selector.by_logical_tie(pitched=True)
-        selector = selector.map(abjad.select()[0])
+        selector = self.tuplet(n).plt_heads()
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -4733,7 +4580,7 @@ class Selector(abjad.Selector):
                 Selection([LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])
 
         '''
-        selector = baca.select().plt_npruns()[n]
+        selector = self.plt_npruns()[n]
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -4830,10 +4677,7 @@ class Selector(abjad.Selector):
                 Selection([LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])
 
         '''
-        selector = baca.select().plts()
-        selector = selector.group_by_pitch()
-        selector = selector.by_length('>', 1)
-        selector = selector
+        selector = self.plts().group_by_pitch().by_length('>', 1)
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -4978,7 +4822,7 @@ class Selector(abjad.Selector):
                 Selection([LogicalTie([Note("a'16")])])
 
         '''
-        selector = baca.select().plt_pruns()[n]
+        selector = self.plt_pruns()[n]
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -5108,9 +4952,7 @@ class Selector(abjad.Selector):
                 Selection([LogicalTie([Note("a'16")])])
 
         '''
-        selector = baca.select().plts()
-        selector = selector.group_by_pitch()
-        selector = selector
+        selector = self.plts().group_by_pitch()
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -5275,7 +5117,7 @@ class Selector(abjad.Selector):
                 Selection([LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")])])
 
         '''
-        selector = baca.select().plt_runs()[n]
+        selector = self.plt_runs()[n]
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -5401,10 +5243,7 @@ class Selector(abjad.Selector):
                 Selection([LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")])])
 
         '''
-        selector = baca.select()
-        selector = selector.by_logical_tie(pitched=True)
-        selector = selector.by_contiguity()
-        selector = selector
+        selector = self.plts().by_contiguity()
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -5544,7 +5383,7 @@ class Selector(abjad.Selector):
                 Note("e''16")
 
         '''
-        selector = baca.select().plt_tails()[n]
+        selector = self.plt_tails()[n]
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -5666,8 +5505,7 @@ class Selector(abjad.Selector):
                 Note("a'16")
 
         '''
-        selector = baca.select().plts()
-        selector = selector.map(abjad.select().last())
+        selector = self.plts().map(baca.select().last())
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -5778,9 +5616,9 @@ class Selector(abjad.Selector):
             ::
 
                 >>> contribution.print_color_selector_result()
-                Selection([Note("c'16"), Note("c'16"), Note("bf'16")])
-                Selection([Note("bf'16"), Note("e''16"), Note("e''16"), Note("fs''16"), Note("af''16")])
-                Selection([Note("a'16")])
+                [Note("c'16"), Note("c'16"), Note("bf'16")]
+                [Note("bf'16"), Note("e''16"), Note("e''16"), Note("fs''16"), Note("af''16")]
+                [Note("a'16")]
 
         ..  container:: example
 
@@ -5873,13 +5711,11 @@ class Selector(abjad.Selector):
             ::
 
                 >>> contribution.print_color_selector_result()
-                Selection([Note("bf'16"), Note("e''16"), Note("e''16"), Note("fs''16"), Note("af''16")])
-                Selection([Note("a'16")])
+                [Note("bf'16"), Note("e''16"), Note("e''16"), Note("fs''16"), Note("af''16")]
+                [Note("a'16")]
 
         '''
-        selector = baca.select().tuplets()[start:stop]
-        get = abjad.select().by_leaf(pitched=True, tail=True)
-        selector = selector.map(get)
+        selector = self.tuplets()[start:stop].map(baca.select().plt_tails())
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -6031,9 +5867,7 @@ class Selector(abjad.Selector):
                 Note("a'16")
 
         '''
-        selector = baca.select().tuplet(n=n)
-        selector = selector.by_logical_tie(pitched=True)
-        selector = selector.map(abjad.select().last())
+        selector = self.tuplet(n).plt_tails()
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -6165,9 +5999,7 @@ class Selector(abjad.Selector):
                 LogicalTie([Note("a'16")])
 
         '''
-        selector = baca.select()
-        selector = selector.by_logical_tie(pitched=True)
-        selector = selector
+        selector = self.by_logical_tie(pitched=True)
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -6371,9 +6203,7 @@ class Selector(abjad.Selector):
                 [LogicalTie([Note("a'16")])]
 
         '''
-        selector = baca.select().tuplets()[start:stop]
-        get = abjad.select().by_logical_tie(pitched=True)
-        selector = selector.map(get)
+        selector = self.tuplets()[start:stop].map(baca.select().plts())
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -6545,8 +6375,7 @@ class Selector(abjad.Selector):
                 LogicalTie([Note("af''16")])
 
         '''
-        selector = baca.select().tuplet(n=n)
-        selector = selector.by_logical_tie(pitched=True)
+        selector = self.tuplet(n).plts()
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -6680,7 +6509,7 @@ class Selector(abjad.Selector):
                 Rest('r4')
 
         '''
-        selector = baca.select().rests()[n]
+        selector = self.rests()[n]
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -6814,7 +6643,7 @@ class Selector(abjad.Selector):
                 Rest('r16')
 
         '''
-        selector = baca.select().rests_in_tuplet(n)[m]
+        selector = self.tuplet(n).rest(m)
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -6894,8 +6723,7 @@ class Selector(abjad.Selector):
                 Rest('r4')
 
         '''
-        selector = baca.select()
-        selector = selector.by_class(abjad.Rest)
+        selector = self.by_class((abjad.MultimeasureRest, abjad.Rest))
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -7032,8 +6860,7 @@ class Selector(abjad.Selector):
                 Rest('r4')
 
         '''
-        selector = baca.select().tuplet(n)
-        selector = selector.by_leaf((abjad.MultimeasureRest, abjad.Rest))
+        selector = self.tuplet(n).rests()
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -7046,6 +6873,146 @@ class Selector(abjad.Selector):
             start=start,
             stop=stop,
             )
+
+    def trimmed_leaves(self):
+        r'''Selects trimmed leaves.
+
+        ..  container:: example
+
+            Selects trimmed leaves:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
+                ...     baca.color(baca.select().trimmed_leaves()),
+                ...     baca.flags(),
+                ...     baca.rests_around([2], [4]),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
+                                c'16
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                c'16
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
+                                bf'4 ~
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                bf'16
+                                \once \override Dots.color = #red
+                                \once \override Rest.color = #red
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                bf'16
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
+                                e''16
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                e''4 ~
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
+                                e''16
+                                \once \override Dots.color = #blue
+                                \once \override Rest.color = #blue
+                                r16
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
+                                fs''16
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                af''16
+                            }
+                            \times 4/5 {
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+            ::
+
+                >>> contribution.print_color_selector_result()
+                Note("c'16")
+                Note("c'16")
+                Note("bf'4")
+                Note("bf'16")
+                Rest('r16')
+                Note("bf'16")
+                Note("e''16")
+                Note("e''4")
+                Note("e''16")
+                Rest('r16')
+                Note("fs''16")
+                Note("af''16")
+                Note("a'16")
+
+        '''
+        selector = self.by_leaf(trim=True)
+        template = self._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
 
     def trimmed_run_in_each_tuplet(self, start=None, stop=None):
         r'''Selects trimmed run in each tuplet.
@@ -7272,8 +7239,8 @@ class Selector(abjad.Selector):
                 Selection([Note("a'16")])
 
         '''
-        selector = baca.select().tuplets()[start:stop]
-        selector = selector.map(abjad.select().by_leaf(trim=True))
+        get = baca.select().trimmed_leaves()
+        selector = self.tuplets()[start:stop].map(get)
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -7431,8 +7398,7 @@ class Selector(abjad.Selector):
                 Note("a'16")
 
         '''
-        selector = baca.select().tuplet(n)
-        selector = selector.by_leaf(trim=True)
+        selector = self.tuplet(n).trimmed_leaves()
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -7593,7 +7559,7 @@ class Selector(abjad.Selector):
                 Tuplet(Multiplier(4, 5), "a'16 r4")
 
         '''
-        selector = baca.select().tuplets()[n]
+        selector = self.tuplets()[n]
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -7727,8 +7693,7 @@ class Selector(abjad.Selector):
                 Tuplet(Multiplier(4, 5), "a'16 r4")
 
         '''
-        selector = baca.select()
-        selector = selector.by_class(abjad.Tuplet)
+        selector = self.by_class(abjad.Tuplet)
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 

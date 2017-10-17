@@ -59,7 +59,7 @@ class HairpinCommand(Command):
         include_rests=None,
         omit_lone_note_dynamic=None,
         selector=None,
-        target='baca.select().leaves_in_trimmed_run()',
+        target='baca.select().trimmed_leaves()',
         ):
         Command.__init__(self, selector=selector, target=target)
         self._flare = flare

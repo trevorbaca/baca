@@ -5021,7 +5021,7 @@ class LibraryAM(object):
     def hairpins(
         hairpins,
         selector=None,
-        target='baca.select().leaves_in_trimmed_run()',
+        target='baca.select().trimmed_leaves()',
         flare=None,
         include_rests=None,
         omit_lone_note_dynamic=None,

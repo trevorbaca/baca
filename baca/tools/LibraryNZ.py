@@ -634,7 +634,7 @@ class LibraryNZ(object):
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.OctavationSpanner(start=1, stop=0),
-            target=baca.select().leaves_in_trimmed_run(),
+            target=baca.select().trimmed_leaves(),
             )
 
     @staticmethod
@@ -763,7 +763,7 @@ class LibraryNZ(object):
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.OctavationSpanner(start=-1, stop=0),
-            target=baca.select().leaves_in_trimmed_run(),
+            target=baca.select().trimmed_leaves(),
             )
 
     @staticmethod
@@ -2196,7 +2196,7 @@ class LibraryNZ(object):
             grob_name='repeat_tie',
             revert=True,
             selector=selector,
-            target=baca.select().leaves_in_trimmed_run().wrap(),
+            target=baca.select().trimmed_leaves().wrap(),
             )
 
     @staticmethod
@@ -2328,7 +2328,7 @@ class LibraryNZ(object):
             grob_name='repeat_tie',
             revert=True,
             selector=selector,
-            target=baca.select().leaves_in_trimmed_run().wrap(),
+            target=baca.select().trimmed_leaves().wrap(),
             )
 
     @staticmethod
@@ -3995,7 +3995,7 @@ class LibraryNZ(object):
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.Slur(),
-            target=baca.select().leaves_in_trimmed_run(),
+            target=baca.select().trimmed_leaves(),
             )
 
     @staticmethod
@@ -5238,7 +5238,7 @@ class LibraryNZ(object):
             grob_name='stem',
             revert=True,
             selector=selector,
-            target=baca.select().leaves_in_trimmed_run().wrap(),
+            target=baca.select().trimmed_leaves().wrap(),
             )
 
     @staticmethod
@@ -7665,7 +7665,7 @@ class LibraryNZ(object):
             grob_name='tie',
             revert=True,
             selector=selector,
-            target=baca.select().leaves_in_trimmed_run().wrap(),
+            target=baca.select().trimmed_leaves().wrap(),
             )
 
     @staticmethod
@@ -7797,7 +7797,7 @@ class LibraryNZ(object):
             grob_name='tie',
             revert=True,
             selector=selector,
-            target=baca.select().leaves_in_trimmed_run().wrap(),
+            target=baca.select().trimmed_leaves().wrap(),
             )
 
     @staticmethod
