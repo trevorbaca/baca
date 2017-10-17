@@ -4120,7 +4120,7 @@ class LibraryNZ(object):
 
         '''
         return baca.SpannerCommand(
-            selector=baca.select_plt_runs(start=start, stop=stop),
+            selector=baca.select_plt_runs()[start:stop],
             spanner=abjad.Slur(),
             )
 
@@ -9423,9 +9423,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.up_arpeggios(
-                ...         baca.select_chord_heads(start=-2),
-                ...         ),
+                ...     baca.up_arpeggios(baca.select_chord_heads()[-2:]),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )

@@ -606,7 +606,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.arpeggios(baca.select_chord_heads(start=-2)),
+                ...     baca.arpeggios(baca.select_chord_heads()[-2:]),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -2741,9 +2741,7 @@ class LibraryAM(object):
                 ...         'Viola Music Voice',
                 ...         [[0, 2, 4, 5, 7]],
                 ...         baca.anchor('Violin Music Voice'),
-                ...         baca.cross_staff(
-                ...             selector=baca.select_pls(start=-2),
-                ...             ),
+                ...         baca.cross_staff(selector=baca.select_pls()[-2:]),
                 ...         baca.flags(),
                 ...         baca.stems_up(),
                 ...         figure_name='vn 2',
@@ -2979,7 +2977,7 @@ class LibraryAM(object):
                 ...     3 * [[0, 2, 3]],
                 ...     baca.displacements(
                 ...         [0, 0, -1, -1, 1, 1],
-                ...         baca.select_plts(start=-6),
+                ...         baca.select_plts()[-6:],
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3227,9 +3225,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.down_arpeggios(
-                ...         baca.select_chord_heads(start=-2),
-                ...         ),
+                ...     baca.down_arpeggios(baca.select_chord_heads()[-2:]),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
