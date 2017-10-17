@@ -230,7 +230,7 @@ class GlissandoCommand(Command):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     collections,
-            ...     baca.glissandi(baca.select().plts_in_tuplet(0).wrap()),
+            ...     baca.glissandi(baca.select().tuplet(0).plts().wrap()),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP

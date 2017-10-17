@@ -190,7 +190,7 @@ class ClusterCommand(Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.clusters(
             ...         [3, 4],
-            ...         selector=baca.select().plts_in_tuplet(1),
+            ...         selector=baca.select().tuplet(1).plts(),
             ...         ),
             ...     )
 

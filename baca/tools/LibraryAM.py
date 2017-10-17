@@ -96,7 +96,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.accents(baca.select().plt_heads_in_tuplet(n=1)),
+                ...     baca.accents(baca.select().tuplet(1).plt_heads()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -286,7 +286,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.alternate_bow_strokes(
-                ...         selector=baca.select().plt_heads_in_tuplet(1),
+                ...         selector=baca.select().tuplet(1).plt_heads(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(6),
@@ -477,7 +477,7 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.ancora_dynamic(
                 ...         'ff',
-                ...         baca.select().plt_head_in_tuplet(1, 0),
+                ...         baca.select().tuplet(1).plt_head(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -1449,7 +1449,7 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.beam_positions(
                 ...         n=6,
-                ...         selector=baca.select().leaves_in_tuplet(1),
+                ...         selector=baca.select().tuplet(1).leaves(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     time_treatments=[-1],
@@ -1868,7 +1868,7 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.clef(
                 ...         clef='alto',
-                ...         selector=baca.select().leaf_in_tuplet(1, 0),
+                ...         selector=baca.select().tuplet(1).leaf(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(7),
@@ -2000,10 +2000,10 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.clef_spanner(
                 ...         clef='percussion',
-                ...         selector=baca.select().leaves_in_tuplet(1),
+                ...         selector=baca.select().tuplet(1).leaves(),
                 ...         ),
                 ...     baca.one_line_staff(
-                ...         selector=baca.select().leaves_in_tuplet(1),
+                ...         selector=baca.select().tuplet(1).leaves(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(9),
@@ -2287,7 +2287,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.color(selector=baca.select().leaves_in_tuplet(1)),
+                ...     baca.color(selector=baca.select().tuplet(1).leaves()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2529,9 +2529,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.cross_note_heads(
-                ...         baca.select().pls_in_tuplet(1),
-                ...         ),
+                ...     baca.cross_note_heads(baca.select().tuplet(1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -3102,7 +3100,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.double_tonguing(
-                ...         baca.select().plt_heads_in_tuplet(1),
+                ...         baca.select().tuplet(1).plt_heads(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3347,7 +3345,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.down_bows(
-                ...         baca.select().plt_heads_in_tuplet(1),
+                ...         baca.select().tuplet(1).plt_heads(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3469,10 +3467,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.dynamic(
-                ...         'f',
-                ...         baca.select().plt_head_in_tuplet(1, 0),
-                ...         ),
+                ...     baca.dynamic('f', baca.select().tuplet(1).plt_head()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -3541,7 +3536,7 @@ class LibraryAM(object):
                 ...     baca.dynamic_line_spanner_staff_padding(4),
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
-                ...         target=baca.select().trimmed_run_in_each_tuplet()
+                ...         target=baca.select().trimmed_run_in_each_tuplet(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3601,7 +3596,7 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.dynamic_line_spanner_staff_padding(
                 ...         n=4,
-                ...         selector=baca.select().leaves_in_tuplet(1),
+                ...         selector=baca.select().tuplet(1).leaves(),
                 ...         ),
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
@@ -3738,7 +3733,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.dynamic_line_spanner_up(
-                ...         baca.select().leaves_in_tuplet(1),
+                ...         baca.select().tuplet(1).leaves(),
                 ...         ),
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
@@ -3814,10 +3809,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.dynamic('p'),
-                ...     baca.dynamic(
-                ...         'f',
-                ...         baca.select().leaf_in_tuplet(1, 0),
-                ...         ),
+                ...     baca.dynamic('f', baca.select().tuplet(1).leaf()),
                 ...     baca.dynamic_text_extra_offset((-3, 0)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3876,13 +3868,10 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.dynamic('p'),
-                ...     baca.dynamic(
-                ...         'f',
-                ...         baca.select().leaf_in_tuplet(1, 0),
-                ...         ),
+                ...     baca.dynamic('f', baca.select().tuplet(1).leaf()),
                 ...     baca.dynamic_text_extra_offset(
                 ...         (-3, 0),
-                ...         baca.select().leaf_in_tuplet(1, 0),
+                ...         baca.select().tuplet(1).leaf(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3956,10 +3945,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.dynamic('p'),
-                ...     baca.dynamic(
-                ...         'f',
-                ...         baca.select().plt_head_in_tuplet(1, 0),
-                ...         ),
+                ...     baca.dynamic('f', baca.select().tuplet(1).plt_head()),
                 ...     baca.dynamics_down(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4017,11 +4003,8 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.dynamic('p'),
-                ...     baca.dynamic(
-                ...         'f',
-                ...         baca.select().plt_head_in_tuplet(1, 0),
-                ...         ),
-                ...     baca.dynamics_down(baca.select().leaf_in_tuplet(1, 0)),
+                ...     baca.dynamic('f', baca.select().tuplet(1).plt_head()),
+                ...     baca.dynamics_down(baca.select().tuplet(1).leaf()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -4089,10 +4072,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.dynamic('p'),
-                ...     baca.dynamic(
-                ...         'f',
-                ...         baca.select().plt_head_in_tuplet(1, 0),
-                ...         ),
+                ...     baca.dynamic('f', baca.select().tuplet(1).plt_head()),
                 ...     baca.dynamics_up(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4150,11 +4130,8 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.dynamic('p'),
-                ...     baca.dynamic(
-                ...         'f',
-                ...         baca.select().plt_head_in_tuplet(1, 0),
-                ...         ),
-                ...     baca.dynamics_up(baca.select().leaf_in_tuplet(1, 0)),
+                ...     baca.dynamic('f', baca.select().tuplet(1).plt_head()),
+                ...     baca.dynamics_up(baca.select().tuplet(1).leaf()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -4290,7 +4267,7 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.effort_dynamic(
                 ...         'f',
-                ...         baca.select().plt_head_in_tuplet(1, 0),
+                ...         baca.select().tuplet(1).plt_head(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4442,7 +4419,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.fermata(baca.select().plt_head_in_tuplet(1, 0)),
+                ...     baca.fermata(baca.select().tuplet(1).plt_head()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -4511,10 +4488,10 @@ class LibraryAM(object):
                 ...     baca.clef_spanner(clef='percussion'),
                 ...     baca.clef_spanner(
                 ...         clef='treble',
-                ...         selector=baca.select().leaves_in_tuplet(1),
+                ...         selector=baca.select().tuplet(1).leaves(),
                 ...         ),
                 ...     baca.five_line_staff(
-                ...         selector=baca.select().leaves_in_tuplet(1),
+                ...         selector=baca.select().tuplet(1).leaves(),
                 ...         ),
                 ...     baca.one_line_staff(),
                 ...     baca.rests_around([2], [4]),
@@ -4657,9 +4634,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.flageolets(
-                ...         baca.select().plt_heads_in_tuplet(1),
-                ...         ),
+                ...     baca.flageolets(baca.select().tuplet(1).plt_heads()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -5095,7 +5070,7 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
-                ...         target=baca.select().trimmed_run_in_tuplet(1),
+                ...         target=baca.select().tuplet(1).trimmed_leaves(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5581,7 +5556,7 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.label(
                 ...         expression=abjad.label().with_pitches(locale='us'),
-                ...         selector=baca.select().plt_heads_in_tuplet(n=1),
+                ...         selector=baca.select().tuplet(1).plt_heads(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5843,7 +5818,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.line_break(baca.select().leaf_in_tuplet(1, -1)),
+                ...     baca.line_break(baca.select().tuplet(1).leaf(-1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -5966,9 +5941,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.long_fermata(
-                ...         baca.select().plt_head_in_tuplet(1, 0),
-                ...         ),
+                ...     baca.long_fermata(baca.select().tuplet(1).plt_head()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6089,9 +6062,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.marcati(
-                ...         selector=baca.select().plt_heads_in_tuplet(1),
-                ...         ),
+                ...     baca.marcati(baca.select().tuplet(1).plt_heads()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
