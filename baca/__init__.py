@@ -33,5 +33,4 @@ def _import_static_methods(class_):
 
 _import_static_methods(LibraryAM)
 _import_static_methods(LibraryNZ)
-_import_static_methods(Selector)
 markup = MarkupLibrary()
