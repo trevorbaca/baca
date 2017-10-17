@@ -49,13 +49,10 @@ Bases
       ~baca.tools.Selector.Selector.group_by_pitch
       ~baca.tools.Selector.Selector.last
       ~baca.tools.Selector.Selector.leaf
-      ~baca.tools.Selector.Selector.leaf_in_trimmed_run
-      ~baca.tools.Selector.Selector.leaf_in_tuplet
       ~baca.tools.Selector.Selector.leaves
       ~baca.tools.Selector.Selector.leaves_in_each_lt
       ~baca.tools.Selector.Selector.leaves_in_each_plt
       ~baca.tools.Selector.Selector.leaves_in_each_tuplet
-      ~baca.tools.Selector.Selector.leaves_in_tuplet
       ~baca.tools.Selector.Selector.lt
       ~baca.tools.Selector.Selector.lts
       ~baca.tools.Selector.Selector.map
@@ -68,13 +65,10 @@ Bases
       ~baca.tools.Selector.Selector.pl
       ~baca.tools.Selector.Selector.pls
       ~baca.tools.Selector.Selector.pls_in_each_tuplet
-      ~baca.tools.Selector.Selector.pls_in_tuplet
       ~baca.tools.Selector.Selector.plt
       ~baca.tools.Selector.Selector.plt_head
-      ~baca.tools.Selector.Selector.plt_head_in_tuplet
       ~baca.tools.Selector.Selector.plt_heads
       ~baca.tools.Selector.Selector.plt_heads_in_each_tuplet
-      ~baca.tools.Selector.Selector.plt_heads_in_tuplet
       ~baca.tools.Selector.Selector.plt_nprun
       ~baca.tools.Selector.Selector.plt_npruns
       ~baca.tools.Selector.Selector.plt_prun
@@ -84,21 +78,16 @@ Bases
       ~baca.tools.Selector.Selector.plt_tail
       ~baca.tools.Selector.Selector.plt_tails
       ~baca.tools.Selector.Selector.plt_tails_in_each_tuplet
-      ~baca.tools.Selector.Selector.plt_tails_in_tuplet
       ~baca.tools.Selector.Selector.plts
       ~baca.tools.Selector.Selector.plts_in_each_tuplet
-      ~baca.tools.Selector.Selector.plts_in_tuplet
       ~baca.tools.Selector.Selector.print
       ~baca.tools.Selector.Selector.rest
-      ~baca.tools.Selector.Selector.rest_in_tuplet
       ~baca.tools.Selector.Selector.rests
-      ~baca.tools.Selector.Selector.rests_in_tuplet
       ~baca.tools.Selector.Selector.run_selectors
       ~baca.tools.Selector.Selector.stages
       ~baca.tools.Selector.Selector.template
       ~baca.tools.Selector.Selector.trimmed_leaves
       ~baca.tools.Selector.Selector.trimmed_run_in_each_tuplet
-      ~baca.tools.Selector.Selector.trimmed_run_in_tuplet
       ~baca.tools.Selector.Selector.tuplet
       ~baca.tools.Selector.Selector.tuplets
       ~baca.tools.Selector.Selector.with_next_leaf
@@ -248,10 +237,6 @@ Methods
 
 .. automethod:: baca.tools.Selector.Selector.leaf
 
-.. automethod:: baca.tools.Selector.Selector.leaf_in_trimmed_run
-
-.. automethod:: baca.tools.Selector.Selector.leaf_in_tuplet
-
 .. automethod:: baca.tools.Selector.Selector.leaves
 
 .. automethod:: baca.tools.Selector.Selector.leaves_in_each_lt
@@ -259,8 +244,6 @@ Methods
 .. automethod:: baca.tools.Selector.Selector.leaves_in_each_plt
 
 .. automethod:: baca.tools.Selector.Selector.leaves_in_each_tuplet
-
-.. automethod:: baca.tools.Selector.Selector.leaves_in_tuplet
 
 .. automethod:: baca.tools.Selector.Selector.lt
 
@@ -306,19 +289,13 @@ Methods
 
 .. automethod:: baca.tools.Selector.Selector.pls_in_each_tuplet
 
-.. automethod:: baca.tools.Selector.Selector.pls_in_tuplet
-
 .. automethod:: baca.tools.Selector.Selector.plt
 
 .. automethod:: baca.tools.Selector.Selector.plt_head
 
-.. automethod:: baca.tools.Selector.Selector.plt_head_in_tuplet
-
 .. automethod:: baca.tools.Selector.Selector.plt_heads
 
 .. automethod:: baca.tools.Selector.Selector.plt_heads_in_each_tuplet
-
-.. automethod:: baca.tools.Selector.Selector.plt_heads_in_tuplet
 
 .. automethod:: baca.tools.Selector.Selector.plt_nprun
 
@@ -338,13 +315,9 @@ Methods
 
 .. automethod:: baca.tools.Selector.Selector.plt_tails_in_each_tuplet
 
-.. automethod:: baca.tools.Selector.Selector.plt_tails_in_tuplet
-
 .. automethod:: baca.tools.Selector.Selector.plts
 
 .. automethod:: baca.tools.Selector.Selector.plts_in_each_tuplet
-
-.. automethod:: baca.tools.Selector.Selector.plts_in_tuplet
 
 .. only:: html
 
@@ -354,19 +327,13 @@ Methods
 
 .. automethod:: baca.tools.Selector.Selector.rest
 
-.. automethod:: baca.tools.Selector.Selector.rest_in_tuplet
-
 .. automethod:: baca.tools.Selector.Selector.rests
-
-.. automethod:: baca.tools.Selector.Selector.rests_in_tuplet
 
 .. automethod:: baca.tools.Selector.Selector.stages
 
 .. automethod:: baca.tools.Selector.Selector.trimmed_leaves
 
 .. automethod:: baca.tools.Selector.Selector.trimmed_run_in_each_tuplet
-
-.. automethod:: baca.tools.Selector.Selector.trimmed_run_in_tuplet
 
 .. automethod:: baca.tools.Selector.Selector.tuplet
 
