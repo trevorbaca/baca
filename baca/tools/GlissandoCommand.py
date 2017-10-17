@@ -1,5 +1,6 @@
 import abjad
 import baca
+import collections
 from .Command import Command
 
 
@@ -8,7 +9,7 @@ class GlissandoCommand(Command):
 
     ..  container:: example
 
-        Selects all logical ties:
+        With segment-maker:
 
         ::
 
@@ -23,7 +24,7 @@ class GlissandoCommand(Command):
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.GlissandoCommand()
+            ...     baca.glissandi()
             ...     )
 
         ::
@@ -112,7 +113,7 @@ class GlissandoCommand(Command):
 
     ..  container:: example
 
-        Selects first and last pitched logical ties:
+        First and last PLTs:
 
         ::
 
@@ -127,8 +128,8 @@ class GlissandoCommand(Command):
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.even_runs(),
-            ...     baca.GlissandoCommand(baca.select_plts(stop=2)),
-            ...     baca.GlissandoCommand(baca.select_plts(start=-2)),
+            ...     baca.glissandi(baca.select_plts()[:2].wrap()),
+            ...     baca.glissandi(baca.select_plts()[-2:].wrap()),
             ...     )
 
         ::
@@ -217,7 +218,7 @@ class GlissandoCommand(Command):
 
     ..  container:: example
 
-        Selects first stage with music-maker:
+        With music-maker:
 
         ::
 
@@ -229,7 +230,7 @@ class GlissandoCommand(Command):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     collections,
-            ...     baca.GlissandoCommand(baca.select_tuplet(0)),
+            ...     baca.glissandi(baca.select_plts_in_tuplet(0).wrap()),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
@@ -267,6 +268,11 @@ class GlissandoCommand(Command):
     __slots__ = (
         )
 
+    ### INITIALIZER ###
+
+    def __init__(self, selector='baca.select_plt_runs()'):
+        Command.__init__(self, selector=selector)
+
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
@@ -274,25 +280,26 @@ class GlissandoCommand(Command):
 
         Returns none.
         '''
-        if argument is None:
+        selections = self._select(argument)
+        if not selections:
             return
-        if self.selector is not None:
-            argument = self.selector(argument)
-        selector = baca.select_plts()
-        plts = selector(argument)
-        for i, plt in enumerate(plts):
-            if i + 1 < len(plts):
-                self._attach_glissando(plt)
+        for selection in selections:
+            leaves = abjad.select(selection).by_leaf()
+            if 1 < len(leaves):
+                abjad.attach(abjad.Glissando(), leaves)
 
     ### PRIVATE METHODS ###
 
-    def _attach_glissando(self, logical_tie):
-        note_or_chord = (abjad.Note, abjad.Chord)
-        last_leaf = logical_tie.tail
-        if not isinstance(last_leaf, note_or_chord):
+    def _select(self, argument):
+        if argument is None:
             return
-        next_leaf = abjad.inspect(last_leaf).get_leaf(1)
-        if not isinstance(next_leaf, note_or_chord):
-            return
-        leaves = abjad.select([last_leaf, next_leaf])
-        abjad.attach(abjad.Glissando(), leaves)
+        if self.selector is not None:
+            selections = self.selector(argument)
+            last = self.selector.callbacks[-1]
+            if isinstance(last, abjad.GetItemCallback):
+                selections = [selections]
+        else:
+            selections = argument
+        if not isinstance(selections, collections.Iterable):
+            selections = [selections]
+        return selections

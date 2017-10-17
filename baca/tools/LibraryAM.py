@@ -4875,12 +4875,12 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def glissandi(selector=None):
-        r'''Attaches glissandi to pitched logical ties.
+    def glissandi(selector='baca.select_plt_runs()'):
+        r'''Attaches glissandi to PLT runs.
 
         ..  container:: example
 
-            Attaches glissandi to all pitched logical ties:
+            Attaches glissandi to PLT runs:
 
             ::
 
@@ -4935,17 +4935,17 @@ class LibraryAM(object):
 
         ..  container:: example
 
-            Attaches glissandi to pitched logical ties in tuplet 1:
+            Attaches glissandi to PLT runs in tuplet 1:
 
             ::
 
                 >>> music_maker = baca.MusicMaker()
+                >>> selector = abjad.select().by_class(abjad.Tuplet)[1]
+                >>> selector = selector.by_leaf(pitched=True).by_contiguity()
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.glissandi(
-                ...         selector=baca.select_pls_in_tuplet(1),
-                ...         ),
+                ...     baca.glissandi(selector=selector),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
