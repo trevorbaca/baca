@@ -11,7 +11,7 @@ class ClusterCommand(Command):
 
         ::
 
-            >>> music_maker = baca.MusicMaker(baca.clusters(widths=[3, 4]))
+            >>> music_maker = baca.MusicMaker(baca.clusters([3, 4]))
 
         ::
 
@@ -189,8 +189,8 @@ class ClusterCommand(Command):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.clusters(
+            ...         [3, 4],
             ...         selector=baca.select_plts_in_tuplet(1),
-            ...         widths=[3, 4],
             ...         ),
             ...     )
 
@@ -309,10 +309,7 @@ class ClusterCommand(Command):
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.clusters(
-            ...         selector=baca.select_plt(-1),
-            ...         widths=[3, 4],
-            ...         ),
+            ...     baca.clusters([3, 4], selector=baca.select_plt(-1)),
             ...     )
 
         ::
@@ -378,7 +375,7 @@ class ClusterCommand(Command):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.clusters(start_pitch='E4', widths=[3, 4]),
+            ...     baca.clusters([3, 4], start_pitch='E4'),
             ...     baca.messiaen_notes(),
             ...     )
 
@@ -518,8 +515,6 @@ class ClusterCommand(Command):
         '_widths',
         )
 
-    _wrap_segment_maker_selection = True
-
     ### INITIALIZER ###
 
     def __init__(
@@ -535,8 +530,8 @@ class ClusterCommand(Command):
         if start_pitch is not None:
             start_pitch = abjad.NamedPitch(start_pitch)
         self._start_pitch = start_pitch
-        if widths is not None:
-            assert abjad.mathtools.all_are_nonnegative_integers(widths)
+        assert abjad.mathtools.all_are_nonnegative_integers(widths)
+        widths = abjad.CyclicTuple(widths)
         self._widths = widths
 
     ### SPECIAL METHODS ###
@@ -549,15 +544,14 @@ class ClusterCommand(Command):
         plts = self._select(argument)
         if not plts:
             return
-        if self.widths is None:
+        if not self.widths:
             return
-        widths = abjad.CyclicTuple(self.widths)
         selector = abjad.select().by_leaf().first()
         leaf = selector(plts)
         root = abjad.inspect(leaf).get_parentage().root
         with abjad.ForbidUpdate(component=root):
             for i, plt in enumerate(plts):
-                width = widths[i]
+                width = self.widths[i]
                 self._make_cluster(plt, width)
 
     ### PRIVATE METHODS ###
@@ -760,7 +754,7 @@ class ClusterCommand(Command):
 
             ::
 
-                >>> baca.clusters().selector
+                >>> baca.clusters([3, 4]).selector
                 baca.select_plts()
 
         Returns selector.
@@ -788,7 +782,7 @@ class ClusterCommand(Command):
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.messiaen_notes(),
                 ...     baca.pitches('C4 D4 E4 F4'),
-                ...     baca.clusters(widths=[3]),
+                ...     baca.clusters([3]),
                 ...     )
 
             ::
@@ -933,7 +927,7 @@ class ClusterCommand(Command):
                 >>> segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.messiaen_notes(),
-                ...     baca.clusters(start_pitch='G4', widths=[3]),
+                ...     baca.clusters([3], start_pitch='G4'),
                 ...     )
 
             ::
@@ -1087,7 +1081,7 @@ class ClusterCommand(Command):
 
                 >>> segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
-                ...     baca.clusters(start_pitch='E4', widths=[1, 2, 3, 4]),
+                ...     baca.clusters([1, 2, 3, 4], start_pitch='E4'),
                 ...     baca.messiaen_notes(),
                 ...     )
 
@@ -1232,7 +1226,7 @@ class ClusterCommand(Command):
 
                 >>> segment_maker(
                 ...     baca.scope('Violin Music Voice', 1),
-                ...     baca.clusters(start_pitch='E4', widths=[1, 3]),
+                ...     baca.clusters([1, 3], start_pitch='E4'),
                 ...     baca.messiaen_notes(),
                 ...     )
 
@@ -1379,7 +1373,7 @@ class ClusterCommand(Command):
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.messiaen_notes(),
                 ...     baca.pitches('E4', allow_repeat_pitches=True),
-                ...     baca.clusters(),
+                ...     baca.clusters([]),
                 ...     )
 
             ::

@@ -10,9 +10,7 @@ class DiatonicClusterCommand(Command):
         ::
 
             >>> staff = abjad.Staff("c' d' e' f'")
-            >>> command = baca.DiatonicClusterCommand(
-            ...     cluster_widths=[4, 6],
-            ...     )
+            >>> command = baca.diatonic_clusters([4, 6])
             >>> command(staff)
             >>> show(staff) # doctest: +SKIP
 
@@ -31,17 +29,16 @@ class DiatonicClusterCommand(Command):
     ### CLASS ATTRIBUTES ###
 
     __slots__ = (
-        '_cluster_widths',
+        '_widths',
         )
 
     ### INITIALIZER ###
 
-    def __init__(self, cluster_widths=None, selector=None):
+    def __init__(self, widths, selector='baca.select_plts()'):
         Command.__init__(self, selector=selector)
-        if cluster_widths is not None:
-            cluster_widths = abjad.CyclicTuple(
-                cluster_widths)
-        self._cluster_widths = cluster_widths
+        assert abjad.mathtools.all_are_nonnegative_integers(widths)
+        widths = abjad.CyclicTuple(widths)
+        self._widths = widths
 
     ### SPECIAL METHODS ###
 
@@ -50,36 +47,68 @@ class DiatonicClusterCommand(Command):
 
         Returns none.
         '''
-        if argument is None:
+        plts = self._select(argument)
+        if not plts:
             return
-        if self.selector is not None:
-            argument = self.selector(argument)
-        notes = abjad.select(argument).by_class(abjad.Note)
-        for i, note in enumerate(notes):
-            cluster_width = self.cluster_widths[i]
-            start = note.written_pitch._get_diatonic_pitch_number()
-            diatonic_numbers = range(start, start + cluster_width)
+        for i, plt in enumerate(plts):
+            width = self.widths[i]
+            start = self._get_lowest_diatonic_pitch_number(plt)
+            diatonic_numbers = range(start, start + width)
             class_ = abjad.PitchClass
             dictionary = \
                 class_._diatonic_pitch_class_number_to_pitch_class_number
-            chromatic_numbers = [
+            numbers = [
                 (12 * (x // 7)) + dictionary[x % 7] for x in diatonic_numbers
                 ]
-            chord_pitches = [abjad.NamedPitch(_) for _ in chromatic_numbers]
-            chord = abjad.Chord(note)
-            chord.note_heads[:] = chord_pitches
-            abjad.mutate(note).replace(chord)
+            pitches = [abjad.NamedPitch(_) for _ in numbers]
+            for pl in plt:
+                chord = abjad.Chord(pl)
+                chord.note_heads[:] = pitches
+                abjad.mutate(pl).replace(chord)
+
+    ### PRIVATE METHODS ###
+
+    def _get_lowest_diatonic_pitch_number(self, plt):
+        if isinstance(plt.head, abjad.Note):
+            pitch = plt.head.written_pitch
+        elif isinstance(plt.head, abjad.Chord):
+            pitch = plt.head.written_pitches[0]
+        else:
+            raise TypeError(plt)
+        return pitch._get_diatonic_pitch_number()
+
+    def _mutates_score(self):
+        return True
+
+    def _select(self, argument):
+        if argument is None:
+            return
+        assert self.selector is not None, repr(self)
+        plts = argument
+        if self.selector is not None:
+            plts = self.selector(plts)
+            last = self.selector.callbacks[-1]
+            if isinstance(last, abjad.GetItemCallback):
+                plts = [plts]
+        if not plts:
+            return
+        for plt in plts:
+            if not isinstance(plt, abjad.LogicalTie):
+                raise Exception(f'must be PLTs: {plts!r}')
+            if not plt.is_pitched:
+                raise Exception(f'must be PLTs: {plts!r}')
+        return plts
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def cluster_widths(self):
-        r'''Gets cluster widths.
+    def widths(self):
+        r'''Gets widths.
 
         Defaults to none.
 
         Set to positive integers or none.
 
-        Returns tuple of positive integers or none.
+        Returns positive integers or none.
         '''
-        return self._cluster_widths
+        return self._widths

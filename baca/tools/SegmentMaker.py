@@ -1431,8 +1431,6 @@ class SegmentMaker(abjad.SegmentMaker):
             if isinstance(wrapper.command, baca.RhythmBuilder):
                 continue
             selection = self._scope_to_leaf_selection(wrapper)
-            if getattr(wrapper.command, '_wrap_segment_maker_selection', None):
-                selection = [selection]
             try:
                 wrapper.command(selection)
             except:

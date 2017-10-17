@@ -2062,7 +2062,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def clusters(start_pitch=None, widths=None, selector='baca.select_plts()'):
+    def clusters(widths, start_pitch=None, selector='baca.select_plts()'):
         r'''Makes clusters.
         '''
         return baca.ClusterCommand(
@@ -2846,6 +2846,15 @@ class LibraryAM(object):
             arguments=[abjad.LilyPondCommand(r'\crossStaff')],
             selector=selector,
             target=baca.select_plt_heads(),
+            )
+
+    @staticmethod
+    def diatonic_clusters(widths, selector='baca.select_plts()'):
+        r'''Makes diatonic clusters.
+        '''
+        return baca.DiatonicClusterCommand(
+            selector=selector,
+            widths=widths,
             )
 
     @staticmethod
