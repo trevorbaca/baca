@@ -266,7 +266,7 @@ class SegmentMaker(abjad.SegmentMaker):
     __documentation_section__ = 'Music'
 
     __slots__ = (
-        '_allow_empty_selectors',
+        '_allow_empty_selections',
         '_allow_figure_names',
         '_cache',
         '_cached_score_template_start_clefs',
@@ -403,7 +403,7 @@ class SegmentMaker(abjad.SegmentMaker):
         superclass.__init__()
         if allow_empty_selections is not None:
             allow_empty_selections = bool(allow_empty_selections)
-        self._allow_empty_selectors = allow_empty_selections
+        self._allow_empty_selections = allow_empty_selections
         if allow_figure_names is not None:
             allow_figure_names = bool(allow_figure_names)
         self._allow_figure_names = allow_figure_names
@@ -1890,7 +1890,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         Returns true, false or none.
         '''
-        return self._allow_empty_selectors
+        return self._allow_empty_selections
 
     @property
     def allow_figure_names(self):

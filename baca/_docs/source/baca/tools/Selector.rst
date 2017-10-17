@@ -86,6 +86,7 @@ Bases
       ~baca.tools.Selector.Selector.run_selectors
       ~baca.tools.Selector.Selector.stages
       ~baca.tools.Selector.Selector.template
+      ~baca.tools.Selector.Selector.top
       ~baca.tools.Selector.Selector.trimmed_leaves
       ~baca.tools.Selector.Selector.trimmed_run_in_each_tuplet
       ~baca.tools.Selector.Selector.tuplet
@@ -330,6 +331,8 @@ Methods
 .. automethod:: baca.tools.Selector.Selector.rests
 
 .. automethod:: baca.tools.Selector.Selector.stages
+
+.. automethod:: baca.tools.Selector.Selector.top
 
 .. automethod:: baca.tools.Selector.Selector.trimmed_leaves
 

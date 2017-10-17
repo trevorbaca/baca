@@ -319,7 +319,10 @@ class ColorCommand(Command):
         if not argument:
             return
         selector = self.selector or baca.select().leaves()
-        result = selector(argument)
+        try:
+            result = selector(argument)
+        except IndexError:
+            return
         if False:
             print(format(selector))
             print('---')

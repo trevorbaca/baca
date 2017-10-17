@@ -5381,6 +5381,268 @@ class Selector(abjad.Selector):
             stop=stop,
             )
 
+    def top(self):
+        r'''Selects top-level components.
+
+        ..  container:: example
+
+            Colors nothing because segment-maker passes leaves (not tuplets):
+
+            ::
+
+                >>> segment_maker = baca.SegmentMaker(
+                ...     allow_empty_selections=True,
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> segment_maker(
+                ...     baca.scope('Violin Music Voice', 1),
+                ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+                ...     baca.RhythmBuilder(
+                ...         rhythm_maker=abjad.rhythmmakertools.TaleaRhythmMaker(
+                ...             extra_counts_per_division=[1],
+                ...             talea=abjad.rhythmmakertools.Talea(
+                ...                 counts=[1, 1, 1, -1],
+                ...                 denominator=8,
+                ...                 ),
+                ...             ),
+                ...         ),
+                ...     baca.color(baca.select().tuplet(1)),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker.run(is_doc_example=True)
+                >>> lilypond_file, metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> f(lilypond_file[abjad.Score])
+                \context Score = "Score" <<
+                    \tag violin
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context GlobalSkips = "Global Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                \times 4/5 {
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
+                                    e'8 [
+                                    d''8
+                                    f'8 ]
+                                    r8
+                                    e''8
+                                }
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 3/4 {
+                                    g'8 [
+                                    f''8 ]
+                                    r8
+                                    e'8
+                                }
+                                \times 4/5 {
+                                    d''8 [
+                                    f'8 ]
+                                    r8
+                                    e''8 [
+                                    g'8 ]
+                                }
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 3/4 {
+                                    f''8
+                                    r8
+                                    e'8 [
+                                    d''8 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Accesses tuplets and colors tuplet 1:
+
+            ::
+
+                >>> segment_maker = baca.SegmentMaker(
+                ...     score_template=baca.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> segment_maker(
+                ...     baca.scope('Violin Music Voice', 1),
+                ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+                ...     baca.RhythmBuilder(
+                ...         rhythm_maker=abjad.rhythmmakertools.TaleaRhythmMaker(
+                ...             extra_counts_per_division=[1],
+                ...             talea=abjad.rhythmmakertools.Talea(
+                ...                 counts=[1, 1, 1, -1],
+                ...                 denominator=8,
+                ...                 ),
+                ...             ),
+                ...         ),
+                ...     baca.color(baca.select().top().tuplet(1)),
+                ...     )
+
+            ::
+
+                >>> result = segment_maker.run(is_doc_example=True)
+                >>> lilypond_file, metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> f(lilypond_file[abjad.Score])
+                \context Score = "Score" <<
+                    \tag violin
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context GlobalSkips = "Global Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                \times 4/5 {
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
+                                    e'8 [
+                                    d''8
+                                    f'8 ]
+                                    r8
+                                    e''8
+                                }
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 3/4 {
+                                    \once \override Accidental.color = #green
+                                    \once \override Beam.color = #green
+                                    \once \override Dots.color = #green
+                                    \once \override NoteHead.color = #green
+                                    \once \override Stem.color = #green
+                                    g'8 [
+                                    \once \override Accidental.color = #green
+                                    \once \override Beam.color = #green
+                                    \once \override Dots.color = #green
+                                    \once \override NoteHead.color = #green
+                                    \once \override Stem.color = #green
+                                    f''8 ]
+                                    \once \override Dots.color = #green
+                                    \once \override Rest.color = #green
+                                    r8
+                                    \once \override Accidental.color = #green
+                                    \once \override Beam.color = #green
+                                    \once \override Dots.color = #green
+                                    \once \override NoteHead.color = #green
+                                    \once \override Stem.color = #green
+                                    e'8
+                                }
+                                \times 4/5 {
+                                    d''8 [
+                                    f'8 ]
+                                    r8
+                                    e''8 [
+                                    g'8 ]
+                                }
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 3/4 {
+                                    f''8
+                                    r8
+                                    e'8 [
+                                    d''8 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        '''
+        selector = self._append_callback(abjad.TopCallback())
+        template = self._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
+
     def trimmed_leaves(self):
         r'''Selects trimmed leaves.
 
