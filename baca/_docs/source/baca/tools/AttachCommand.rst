@@ -44,7 +44,11 @@ Read-only properties
 
       .. autoattribute:: baca.tools.AttachCommand.AttachCommand.selector
 
-.. autoattribute:: baca.tools.AttachCommand.AttachCommand.target
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.AttachCommand.AttachCommand.target
 
 Methods
 -------

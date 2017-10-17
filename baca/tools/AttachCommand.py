@@ -175,20 +175,14 @@ class AttachCommand(Command):
 
     __slots__ = (
         '_arguments',
-        '_target',
         )
 
     _publish_storage_format = True
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        arguments=None,
-        selector=None,
-        target='baca.select().plt_heads()',
-        ):
-        Command.__init__(self, selector=selector, target=target)
+    def __init__(self, arguments=None, selector='baca.select().plt_heads()'):
+        Command.__init__(self, selector=selector)
         self._arguments = arguments
 
     ### SPECIAL METHODS ###
@@ -198,20 +192,20 @@ class AttachCommand(Command):
 
         Returns none.
         '''
-        if not argument:
+        selections = self._select(argument)
+        if not selections:
             return
-        if self.selector is not None:
-            argument = self.selector(argument)
-        targets = self.normalize(argument)
         if self.arguments is None:
             return
         arguments = abjad.CyclicTuple(self.arguments)
-        for i, target in enumerate(targets):
-            assert isinstance(target, abjad.Leaf), repr(target)
-            arguments_ = arguments[i]
-            arguments_ = self._token_to_arguments(arguments_)
-            for argument_ in arguments_:
-                abjad.attach(argument_, target)
+        i = 0
+        for selection in selections:
+            for leaf in abjad.iterate(selection).by_leaf():
+                arguments_ = arguments[i]
+                arguments_ = self._token_to_arguments(arguments_)
+                for argument_ in arguments_:
+                    abjad.attach(argument_, leaf)
+                i += 1
 
     ### PRIVATE METHODS ###
 
@@ -357,15 +351,3 @@ class AttachCommand(Command):
         Returns arguments or none.
         '''
         return self._arguments
-
-    @property
-    def target(self):
-        r'''Gets target.
-
-        Defaults to PLT heads selector.
-
-        Set to selector or none.
-
-        Returns selector or none.
-        '''
-        return self._target

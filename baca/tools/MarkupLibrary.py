@@ -88,7 +88,7 @@ class MarkupLibrary(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.markup(
                 ...         'più mosso',
-                ...         baca.select().tuplet(1).plt_head(),
+                ...         target=baca.select().tuplet(1).plt_head(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -198,8 +198,8 @@ class MarkupLibrary(object):
         target = target or baca.select().plt_head(n=0)
         return baca.AttachCommand(
             arguments=[markup],
-            selector=selector,
-            target=target,
+            #selector=selector,
+            selector=target,
             )
 
     ### PRIVATE FUNCTIONS ###

@@ -1307,7 +1307,11 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def possibile_dynamic(dynamic, selector=None, direction=abjad.Down):
+    def possibile_dynamic(
+        dynamic,
+        selector='baca.select().plt_head()',
+        direction=abjad.Down,
+        ):
         r'''Attaches possibile dynamic to pitched head 0.
 
         ..  container:: example
@@ -1442,7 +1446,6 @@ class LibraryNZ(object):
         return baca.AttachCommand(
             arguments=[markup],
             selector=selector,
-            target=baca.select().plt_head(),
             )
 
     @staticmethod
@@ -1933,7 +1936,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def reiterated_dynamic(dynamic=None, selector=None):
+    def reiterated_dynamic(dynamic=None, selector='baca.select().plt_heads()'):
         r'''Attaches `dynamic` to pitched heads.
 
         ..  container:: example
@@ -2053,7 +2056,6 @@ class LibraryNZ(object):
         return baca.AttachCommand(
             arguments=[abjad.Articulation(dynamic)],
             selector=selector,
-            target=baca.select().plt_heads(),
             )
 
     @staticmethod
@@ -3505,7 +3507,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def short_fermata(selector=None):
+    def short_fermata(selector='baca.select().leaf()'):
         r'''Attaches short fermata to leaf.
 
         ..  container:: example
@@ -3624,7 +3626,6 @@ class LibraryNZ(object):
         return baca.AttachCommand(
             arguments=[abjad.Articulation('shortfermata')],
             selector=selector,
-            target=baca.select().leaf(),
             )
 
     @staticmethod
@@ -4853,7 +4854,7 @@ class LibraryNZ(object):
         return expression
 
     @staticmethod
-    def staccati(selector=None):
+    def staccati(selector='baca.select().plt_heads()'):
         r'''Attaches staccati to pitched heads.
 
         ..  container:: example
@@ -4970,11 +4971,10 @@ class LibraryNZ(object):
         return baca.AttachCommand(
             arguments=[abjad.Articulation('staccato')],
             selector=selector,
-            target=baca.select().plt_heads(),
             )
 
     @staticmethod
-    def staccatissimi(selector=None):
+    def staccatissimi(selector='baca.select().plt_heads()'):
         r'''Attaches staccatissimi to pitched heads.
 
         ..  container:: example
@@ -5042,7 +5042,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.staccatissimi(baca.select().tuplet(1)),
+                ...     baca.staccatissimi(baca.select().tuplet(1).plt_heads()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -5091,7 +5091,6 @@ class LibraryNZ(object):
         return baca.AttachCommand(
             arguments=[abjad.Articulation('staccatissimo')],
             selector=selector,
-            target=baca.select().plt_heads(),
             )
 
     @staticmethod
@@ -6359,7 +6358,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def tenuti(selector=None):
+    def tenuti(selector='baca.select().plt_heads()'):
         r'''Attaches tenuti to pitched heads.
 
         ..  container:: example
@@ -6476,7 +6475,6 @@ class LibraryNZ(object):
         return baca.AttachCommand(
             arguments=[abjad.Articulation('tenuto')],
             selector=selector,
-            target=baca.select().plt_heads(),
             )
 
     @staticmethod
@@ -6496,7 +6494,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select().tuplet(1).plt_head(),
+                ...         target=baca.select().tuplet(1).plt_head(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_color(color='red'),
@@ -6558,7 +6556,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select().tuplet(1).plt_head(),
+                ...         target=baca.select().tuplet(1).plt_head(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_color(
@@ -6638,7 +6636,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select().tuplet(1).plt_head(),
+                ...         target=baca.select().tuplet(1).plt_head(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_padding(n=4),
@@ -6701,7 +6699,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select().tuplet(1).plt_head(),
+                ...         target=baca.select().tuplet(1).plt_head(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_padding(
@@ -6779,7 +6777,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select().tuplet(1).plt_head(),
+                ...         target=baca.select().tuplet(1).plt_head(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_staff_padding(n=4),
@@ -6841,7 +6839,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select().tuplet(1).plt_head(),
+                ...         target=baca.select().tuplet(1).plt_head(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_staff_padding(
@@ -6919,7 +6917,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select().tuplet(1).plt_head(),
+                ...         target=baca.select().tuplet(1).plt_head(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_scripts_down(),
@@ -6982,7 +6980,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select().tuplet(1).plt_head(),
+                ...         target=baca.select().tuplet(1).plt_head(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_scripts_down(
@@ -7059,7 +7057,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select().tuplet(1).plt_head(),
+                ...         target=baca.select().tuplet(1).plt_head(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_scripts_up(),
@@ -7122,7 +7120,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select().tuplet(1).plt_head(),
+                ...         target=baca.select().tuplet(1).plt_head(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_scripts_up(
@@ -9332,7 +9330,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def up_arpeggios(selector=None):
+    def up_arpeggios(selector='baca.select().chord_heads()'):
         r"""Attaches up-arpeggios to chord heads.
 
         ..  container:: example
@@ -9452,11 +9450,10 @@ class LibraryNZ(object):
         return baca.AttachCommand(
             arguments=[abjad.Arpeggio(direction=abjad.Up)],
             selector=selector,
-            target=baca.select().chord_heads(),
             )
 
     @staticmethod
-    def up_bows(selector=None):
+    def up_bows(selector='baca.select().plt_heads()'):
         r'''Attaches up-bows to pitched heads.
 
         ..  container:: example
@@ -9575,11 +9572,10 @@ class LibraryNZ(object):
         return baca.AttachCommand(
             arguments=[abjad.Articulation('upbow')],
             selector=selector,
-            target=baca.select().plt_heads(),
             )
 
     @staticmethod
-    def very_long_fermata(selector=None):
+    def very_long_fermata(selector='baca.select().leaf()'):
         r'''Attaches very long fermata to leaf.
 
         ..  container:: example
@@ -9698,5 +9694,4 @@ class LibraryNZ(object):
         return baca.AttachCommand(
             arguments=[abjad.Articulation('verylongfermata')],
             selector=selector,
-            target=baca.select().leaf(),
             )

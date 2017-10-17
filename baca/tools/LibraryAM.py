@@ -16,7 +16,7 @@ class LibraryAM(object):
     ### PUBLIC METHODS ###
 
     @staticmethod
-    def accents(selector=None):
+    def accents(selector='baca.select().plt_heads()'):
         r'''Attaches accents to PLT heads.
 
         ..  container:: example
@@ -28,7 +28,7 @@ class LibraryAM(object):
                     arguments=[
                         abjad.Articulation('>'),
                         ],
-                    target=baca.select().plt_heads(),
+                    selector=baca.select().plt_heads(),
                     )
 
         ..  container:: example
@@ -148,21 +148,11 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def alternate_bow_strokes(downbow_first=True, selector=None):
+    def alternate_bow_strokes(
+        downbow_first=True,
+        selector='baca.select().plt_heads()',
+        ):
         r'''Attaches alternate bow strokes.
-
-        ..  container:: example
-
-            ::
-
-                >>> abjad.f(baca.alternate_bow_strokes())
-                baca.AttachCommand(
-                    arguments=[
-                        abjad.Articulation('downbow'),
-                        abjad.Articulation('upbow'),
-                        ],
-                    target=baca.select().plt_heads(),
-                    )
 
         ..  container:: example
 
@@ -377,7 +367,11 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def ancora_dynamic(dynamic, selector=None, direction=abjad.Down):
+    def ancora_dynamic(
+        dynamic,
+        selector='baca.select().plt_head()',
+        direction=abjad.Down,
+        ):
         r'''Attaches ancora dynamic pitched head 0.
 
         ..  container::
@@ -401,7 +395,7 @@ class LibraryAM(object):
                             direction=Down,
                             ),
                         ],
-                    target=baca.select().plt_head(),
+                    selector=baca.select().plt_head(),
                     )
 
         ..  container:: example
@@ -536,11 +530,10 @@ class LibraryAM(object):
         return baca.AttachCommand(
             arguments=[markup],
             selector=selector,
-            target=baca.select().plt_head(0),
             )
 
     @staticmethod
-    def arpeggios(selector=None):
+    def arpeggios(selector='baca.select().chord_heads()'):
         r"""Attaches arpeggios.
 
         ..  container:: example
@@ -653,7 +646,6 @@ class LibraryAM(object):
         return baca.AttachCommand(
             arguments=[abjad.Articulation('arpeggio')],
             selector=selector,
-            target=baca.select().chord_heads(),
             )
 
     @staticmethod
@@ -1797,7 +1789,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def clef(clef='treble', selector=None):
+    def clef(clef='treble', selector='baca.select().leaf()'):
         r'''Attaches clef to leaf 0.
 
         ..  container:: example
@@ -1919,7 +1911,6 @@ class LibraryAM(object):
         return baca.AttachCommand(
             arguments=[abjad.Clef(clef)],
             selector=selector,
-            target=baca.select().leaf(),
             )
 
     @staticmethod
@@ -2587,7 +2578,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def cross_staff(selector=None):
+    def cross_staff(selector='baca.select().plt_heads()'):
         r'''Attaches cross-staff command to leaves.
 
         ..  container:: example
@@ -2841,7 +2832,6 @@ class LibraryAM(object):
         return baca.AttachCommand(
             arguments=[abjad.LilyPondCommand(r'\crossStaff')],
             selector=selector,
-            target=baca.select().plt_heads(),
             )
 
     @staticmethod
@@ -3031,7 +3021,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def double_tonguing(selector=None):
+    def double_tonguing(selector='baca.select().plt_heads()'):
         r'''Attaches double-staccati to pitched heads.
 
         ..  container:: example
@@ -3150,11 +3140,10 @@ class LibraryAM(object):
         return baca.AttachCommand(
             arguments=[abjad.Articulation('tongue #2')],
             selector=selector,
-            target=baca.select().plt_heads(),
             )
 
     @staticmethod
-    def down_arpeggios(selector=None):
+    def down_arpeggios(selector='baca.select().chord_heads()'):
         r"""Attaches down-arpeggios to chord heads.
 
         ..  container:: example
@@ -3272,11 +3261,10 @@ class LibraryAM(object):
         return baca.AttachCommand(
             arguments=[abjad.Arpeggio(direction=abjad.Down)],
             selector=selector,
-            target=baca.select().chord_heads(),
             )
 
     @staticmethod
-    def down_bows(selector=None):
+    def down_bows(selector='baca.select().plt_heads()'):
         r'''Attaches down-bows to pitched heads.
 
         ..  container:: example
@@ -3395,11 +3383,10 @@ class LibraryAM(object):
         return baca.AttachCommand(
             arguments=[abjad.Articulation('downbow')],
             selector=selector,
-            target=baca.select().plt_heads(),
             )
 
     @staticmethod
-    def dynamic(dynamic=None, selector=None, target='baca.select().plt_head()'):
+    def dynamic(dynamic=None, selector='baca.select().plt_head()'):
         r'''Attaches dynamic to pitched head 0.
 
         ..  container:: example
@@ -3516,7 +3503,6 @@ class LibraryAM(object):
         return baca.AttachCommand(
             arguments=[abjad.Dynamic(dynamic)],
             selector=selector,
-            target=target,
             )
 
     @staticmethod
@@ -3931,7 +3917,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def dynamics_down(selector=None):
+    def dynamics_down(selector='baca.select().leaf()'):
         r'''Attaches dynamic-down command to leaf 0.
 
         ..  container:: example
@@ -4054,11 +4040,10 @@ class LibraryAM(object):
         return baca.AttachCommand(
             arguments=[abjad.LilyPondCommand('dynamicDown')],
             selector=selector,
-            target=baca.select().leaf(),
             )
 
     @staticmethod
-    def dynamics_up(selector=None):
+    def dynamics_up(selector='baca.select().leaf()'):
         r'''Attaches dynamic-up command to leaf 0.
 
         ..  container:: example
@@ -4181,11 +4166,14 @@ class LibraryAM(object):
         return baca.AttachCommand(
             arguments=[abjad.LilyPondCommand('dynamicUp')],
             selector=selector,
-            target=baca.select().leaf(),
             )
 
     @staticmethod
-    def effort_dynamic(dynamic=None, selector=None, direction=abjad.Down):
+    def effort_dynamic(
+        dynamic=None,
+        selector='baca.select().plt_head()',
+        direction=abjad.Down,
+        ):
         r'''Attaches effort dynamic to pitched head 0.
 
         ..  container:: example
@@ -4339,7 +4327,6 @@ class LibraryAM(object):
         return baca.AttachCommand(
             arguments=[markup],
             selector=selector,
-            target=baca.select().plt_head(),
             )
 
     @staticmethod
@@ -4351,7 +4338,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def fermata(selector=None):
+    def fermata(selector='baca.select().leaf()'):
         r'''Attaches fermata to leaf.
 
         ..  container:: example
@@ -4468,7 +4455,6 @@ class LibraryAM(object):
         return baca.AttachCommand(
             arguments=[abjad.Articulation('fermata')],
             selector=selector,
-            target=baca.select().leaf(),
             )
 
     @staticmethod
@@ -4566,7 +4552,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def flageolets(selector=None):
+    def flageolets(selector='baca.select().plt_heads()'):
         r'''Attaches flageolets to pitched heads.
 
         ..  container:: example
@@ -4683,7 +4669,6 @@ class LibraryAM(object):
         return baca.AttachCommand(
             arguments=[abjad.Articulation('flageolet')],
             selector=selector,
-            target=baca.select().plt_heads(),
             )
 
     @staticmethod
@@ -5418,14 +5403,13 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def instrument(instrument, selector=None):
+    def instrument(instrument, selector='baca.select().leaf()'):
         r'''Attaches instrument.
         '''
         assert isinstance(instrument, abjad.Instrument)
         return baca.AttachCommand(
             arguments=[instrument],
             selector=selector,
-            target=baca.select().leaf(),
             )
 
     @staticmethod
@@ -5629,7 +5613,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def laissez_vibrer(selector=None):
+    def laissez_vibrer(selector='baca.select().plt_tails()'):
         r'''Attaches laissez vibrer to PLT tails.
 
         ..  container:: example
@@ -5696,7 +5680,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.laissez_vibrer(baca.select().tuplet(1)),
+                ...     baca.laissez_vibrer(baca.select().tuplet(1).plt_tails()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -5745,11 +5729,10 @@ class LibraryAM(object):
         return baca.AttachCommand(
             arguments=[abjad.Articulation('laissezVibrer')],
             selector=selector,
-            target=baca.select().plt_tails(),
             )
 
     @staticmethod
-    def line_break(selector=None):
+    def line_break(selector='baca.select().leaf(-1)'):
         r'''Attaches line break command after last leaf.
 
         ..  container:: example
@@ -5869,11 +5852,10 @@ class LibraryAM(object):
         return baca.AttachCommand(
             arguments=[command],
             selector=selector,
-            target=baca.select().leaf(-1),
             )
 
     @staticmethod
-    def long_fermata(selector=None):
+    def long_fermata(selector='baca.select().leaf()'):
         r'''Attaches long fermata to leaf.
 
         ..  container:: example
@@ -5990,11 +5972,10 @@ class LibraryAM(object):
         return baca.AttachCommand(
             arguments=[abjad.Articulation('longfermata')],
             selector=selector,
-            target=baca.select().leaf(),
             )
 
     @staticmethod
-    def marcati(selector=None):
+    def marcati(selector='baca.select().plt_heads()'):
         r'''Attaches marcati to pitched heads.
 
         ..  container:: example
@@ -6111,7 +6092,6 @@ class LibraryAM(object):
         return baca.AttachCommand(
             arguments=[abjad.Articulation('marcato')],
             selector=selector,
-            target=baca.select().plt_heads(),
             )
 
     @staticmethod

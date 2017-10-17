@@ -41,6 +41,20 @@ class Command(abjad.AbjadObject):
 
     ### PRIVATE METHODS ###
 
+    def _select(self, argument):
+        if argument is None:
+            return
+        if self.selector is not None:
+            selections = self.selector(argument)
+            last = self.selector.callbacks[-1]
+            if isinstance(last, abjad.GetItemCallback):
+                selections = [selections]
+        else:
+            selections = argument
+        if not isinstance(selections, collections.Iterable):
+            selections = [selections]
+        return selections
+
     def _to_selection_list(self, argument):
         if not argument:
             selections = []
