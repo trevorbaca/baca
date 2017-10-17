@@ -23,10 +23,8 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.by_pitch_run
-      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.deposit_annotations
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.normalize
-      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.number_lists
+      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.numbers
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.selector
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.target
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.__call__
@@ -38,11 +36,7 @@ Bases
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.by_pitch_run
-
-.. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.deposit_annotations
-
-.. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.number_lists
+.. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.numbers
 
 .. only:: html
 

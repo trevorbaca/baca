@@ -2369,6 +2369,17 @@ class LibraryAM(object):
         return baca.ColorCommand(selector=selector)
 
     @staticmethod
+    def color_fingerings(numbers, selector='baca.select_plt_heads()'):
+        r'''Color fingerings.
+
+        Returns color fingering command.
+        '''
+        return baca.ColorFingeringCommand(
+            numbers=numbers,
+            selector=selector,
+            )
+
+    @staticmethod
     def compound(scopes):
         r'''Makes compound scope.
 

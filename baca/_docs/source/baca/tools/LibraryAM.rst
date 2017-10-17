@@ -35,6 +35,7 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.clusters
       ~baca.tools.LibraryAM.LibraryAM.coat
       ~baca.tools.LibraryAM.LibraryAM.color
+      ~baca.tools.LibraryAM.LibraryAM.color_fingerings
       ~baca.tools.LibraryAM.LibraryAM.compound
       ~baca.tools.LibraryAM.LibraryAM.compound_quarter_divisions
       ~baca.tools.LibraryAM.LibraryAM.constellate
@@ -117,6 +118,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAM.LibraryAM.coat
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.color
+
+.. automethod:: baca.tools.LibraryAM.LibraryAM.color_fingerings
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.compound
 
