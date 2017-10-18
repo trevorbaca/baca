@@ -187,14 +187,12 @@ class AttachCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+    def __call__(self, music=None):
+        r'''Calls command on `music`.
 
         Returns none.
         '''
-        selections = self._select(argument)
-        if not selections:
-            return
+        selections = self._select(music)
         if self.arguments is None:
             return
         arguments, i = abjad.CyclicTuple(self.arguments), 0

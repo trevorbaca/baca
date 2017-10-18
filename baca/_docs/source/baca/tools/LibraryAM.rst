@@ -78,6 +78,7 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.messiaen_notes
       ~baca.tools.LibraryAM.LibraryAM.messiaen_tie_each
       ~baca.tools.LibraryAM.LibraryAM.messiaen_tied_notes
+      ~baca.tools.LibraryAM.LibraryAM.microtone_deviation
       ~baca.tools.LibraryAM.LibraryAM.molto_flaut_to_molto_grid
       ~baca.tools.LibraryAM.LibraryAM.multimeasure_rests
 
@@ -205,6 +206,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAM.LibraryAM.messiaen_tie_each
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.messiaen_tied_notes
+
+.. automethod:: baca.tools.LibraryAM.LibraryAM.microtone_deviation
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.molto_flaut_to_molto_grid
 

@@ -1,10 +1,11 @@
 import abjad
-import itertools
+import baca
+import numbers
 from .Command import Command
 
 
-class MicrotonalDeviationCommand(Command):
-    r'''Microtonal deviation command.
+class MicrotoneDeviationCommand(Command):
+    r'''Microtone deviation command.
 
     ..  container:: example
 
@@ -23,9 +24,7 @@ class MicrotonalDeviationCommand(Command):
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4'),
             ...     baca.even_runs(),
-            ...     baca.MicrotonalDeviationCommand(
-            ...         number_lists=([0, 0.5, 0, -0.5],),
-            ...         ),
+            ...     baca.microtone_deviation([[0, 0.5, 0, -0.5]]),
             ...     )
 
         ::
@@ -117,109 +116,78 @@ class MicrotonalDeviationCommand(Command):
     ### CLASS VARIABLES ##
 
     __slots__ = (
-        '_deposit_annotations',
-        '_number_lists',
+        '_deviations',
         )
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        deposit_annotations=None,
-        number_lists=None,
-        selector=None,
-        ):
+    def __init__(self, deviations=None, selector='baca.select().plt_pruns()'):
         Command.__init__(self, selector=selector)
-        if deposit_annotations is not None:
-            deposit_annotations = tuple(deposit_annotations)
-        self._deposit_annotations = deposit_annotations
-        if number_lists is not None:
-            number_lists = tuple(number_lists)
-            for number_list in number_lists:
-                assert isinstance(number_list, (list, tuple)), number_list
-        self._number_lists = number_lists
+        if deviations is not None:
+            if all(isinstance(_, numbers.Number) for _ in deviations):
+                deviations = (list(deviations),)
+            else:
+                deviations = tuple([list(_) for _ in deviations])
+        self._deviations = deviations
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+    def __call__(self, music=None):
+        r'''Calls command on `music`.
 
         Returns none.
         '''
-        if argument is None:
+        selections = self._select(music)
+        if not self.deviations:
             return
-        if self.number_lists is None:
-            return
-        number_lists = abjad.CyclicTuple(self.number_lists)
-        number_list_index = 0
-        logical_ties = abjad.select(argument).by_logical_tie(pitched=True)
-        pairs = itertools.groupby(
-            logical_ties,
-            lambda _: _.head.written_pitch,
-            )
-        for key, values in pairs:
-            values = list(values)
-            if len(values) == 1:
+        lists, i = abjad.CyclicTuple(self.deviations), 0
+        for selection in selections:
+            if len(selection) == 1:
                 continue
-            number_list = number_lists[number_list_index]
-            number_list = abjad.CyclicTuple(number_list)
-            for i, logical_tie in enumerate(values):
-                number = number_list[i]
-                for note in logical_tie:
-                    self._adjust_pitch(note, number)
-                    self._attach_deposit_annotations(note)
-            number_list_index += 1
+            deviations = abjad.CyclicTuple(lists[i])
+            plts = baca.select().plts()(selection)
+            for j, plt in enumerate(plts):
+                deviation = deviations[j]
+                self._adjust_pitch(plt, deviation)
+            i += 1
 
     ### PRIVATE METHODS ###
 
-    def _adjust_pitch(self, note, number):
-        assert number in (0.5, 0, -0.5)
-        if number == 0:
+    def _adjust_pitch(self, plt, deviation):
+        assert deviation in (0.5, 0, -0.5)
+        if deviation == 0:
             return
-        written_pitch = note.written_pitch
-        written_pitch = written_pitch.transpose_staff_position(0, number)
-        note.written_pitch = written_pitch
-
-    def _attach_deposit_annotations(self, note):
-        if not self.deposit_annotations:
-            return
-        for annotation_name in self.deposit_annotations:
-            annotation = {annotation_name: True}
-            abjad.attach(annotation, note)
+        for pl in plt:
+            pitch = pl.written_pitch
+            pitch = pitch.transpose_staff_position(0, deviation)
+            pl.written_pitch = pitch
+            annotation = {'color microtone': True}
+            abjad.attach(annotation, pl)
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def deposit_annotations(self):
-        r'''Gets deposit annotations of command.
-
-        These will be attached to every note affected at call time.
-
-        Set to annotations or none.
-        '''
-        return self._deposit_annotations
-
-    @property
-    def number_lists(self):
-        r'''Gets number lists.
+    def deviations(self):
+        r'''Gets deviations.
 
         ..  container:: example
 
             ::
 
-                >>> command = baca.MicrotonalDeviationCommand(
-                ...     number_lists=(
-                ...         [0, 1, 2, 1],
-                ...         ),
-                ...     )
+                >>> command = baca.microtone_deviation([0, -0.5, 0, 0.5])
+                >>> command.deviations
+                ([0, -0.5, 0, 0.5],)
 
             ::
 
-                >>> command.number_lists
-                ([0, 1, 2, 1],)
+                >>> command = baca.microtone_deviation(
+                ...     [[0, -0.5, 0, 0.5], [0, 0.5, 0, -0.5]],
+                ...     )
+                >>> command.deviations
+                ([0, -0.5, 0, 0.5], [0, 0.5, 0, -0.5])
 
-        Set to number lists or none.
+        Set to one or more lists of +/- 0.5, or none.
 
-        Returns tuple of number lists or none.
+        Returns tuple of one or more lists of +/- 0.5, or none.
         '''
-        return self._number_lists
+        return self._deviations

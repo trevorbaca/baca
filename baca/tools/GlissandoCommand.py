@@ -275,31 +275,13 @@ class GlissandoCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+    def __call__(self, music=None):
+        r'''Calls command on `music`.
 
         Returns none.
         '''
-        selections = self._select(argument)
-        if not selections:
-            return
+        selections = self._select(music)
         for selection in selections:
             leaves = abjad.select(selection).by_leaf()
             if 1 < len(leaves):
                 abjad.attach(abjad.Glissando(), leaves)
-
-    ### PRIVATE METHODS ###
-
-    def _select(self, argument):
-        if argument is None:
-            return
-        if self.selector is not None:
-            selections = self.selector(argument)
-            last = self.selector.callbacks[-1]
-            if isinstance(last, abjad.GetItemCallback):
-                selections = [selections]
-        else:
-            selections = argument
-        if not isinstance(selections, collections.Iterable):
-            selections = [selections]
-        return selections

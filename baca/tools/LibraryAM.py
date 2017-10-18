@@ -6243,6 +6243,15 @@ class LibraryAM(object):
             )
 
     @staticmethod
+    def microtone_deviation(deviations, selector='baca.select().plt_pruns()'):
+        r''''Makes microtone deviation.
+        '''
+        return baca.MicrotoneDeviationCommand(
+            deviations=deviations,
+            selector=selector,
+            )
+
+    @staticmethod
     def molto_flaut_to_molto_grid(selector=None):
         r'''Makes color transition spanner.
         '''

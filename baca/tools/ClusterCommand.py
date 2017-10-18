@@ -537,19 +537,19 @@ class ClusterCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+    def __call__(self, music=None):
+        r'''Calls command on `music`.
 
         Returns none.
         '''
-        selections = self._select(argument)
-        if not selections:
+        selections = self._select(music)
+        plts = baca.select().plts()(selections)
+        if not plts:
             return
         if not self.widths:
             return
         leaf = baca.select().leaf()(selections)
         root = abjad.inspect(leaf).get_parentage().root
-        plts = baca.select().plts()(selections)
         with abjad.ForbidUpdate(component=root):
             for i, plt in enumerate(plts):
                 width = self.widths[i]

@@ -41,7 +41,7 @@ Commands
    GlissandoCommand
    HairpinCommand
    LabelCommand
-   MicrotonalDeviationCommand
+   MicrotoneDeviationCommand
    OctaveDisplacementCommand
    OverrideCommand
    RegisterCommand
@@ -68,7 +68,7 @@ Commands
    GlissandoCommand
    HairpinCommand
    LabelCommand
-   MicrotonalDeviationCommand
+   MicrotoneDeviationCommand
    OctaveDisplacementCommand
    OverrideCommand
    RegisterCommand

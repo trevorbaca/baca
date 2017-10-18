@@ -49,8 +49,6 @@ class DiatonicClusterCommand(Command):
         Returns none.
         '''
         selections = self._select(music)
-        if not selections:
-            return
         plts = baca.select().plts()(selections)
         for i, plt in enumerate(plts):
             width = self.widths[i]

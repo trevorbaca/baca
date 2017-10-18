@@ -131,14 +131,13 @@ class ColorFingeringCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+    def __call__(self, music=None):
+        r'''Calls command on `music`.
 
         Returns none.
         '''
-        pls = self._select(argument)
-        if not pls:
-            return
+        selections = self._select(music)
+        pls = baca.select().pls()(selections)
         if self.numbers is None:
             return
         numbers = abjad.CyclicTuple(self.numbers)
@@ -148,25 +147,6 @@ class ColorFingeringCommand(Command):
                 fingering = abjad.ColorFingering(number)
                 abjad.attach(fingering, pl)
             abjad.attach({'color fingering': True}, pl)
-
-    ### PRIVATE METHODS ###
-
-    def _select(self, argument):
-        if argument is None:
-            return
-        assert self.selector is not None, repr(self)
-        pls = argument
-        if self.selector is not None:
-            pls = self.selector(pls)
-            last = self.selector.callbacks[-1]
-            if isinstance(last, abjad.GetItemCallback):
-                pls = [pls]
-        if not pls:
-            return
-        for pl in pls:
-            if not isinstance(pl, (abjad.Chord, abjad.Note)):
-                raise Exception(f'must be pitched leaves: {pls!r}')
-        return pls
 
     ### PUBLIC PROPERTIES ###
 
