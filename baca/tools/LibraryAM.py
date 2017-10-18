@@ -2352,7 +2352,7 @@ class LibraryAM(object):
         return baca.ColorCommand(selector=selector)
 
     @staticmethod
-    def color_fingerings(numbers, selector='baca.select().phs()'):
+    def color_fingerings(numbers, selector='baca.select().phs().wrap()'):
         r'''Color fingerings.
 
         Returns color fingering command.
