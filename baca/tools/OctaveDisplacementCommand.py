@@ -1,4 +1,5 @@
 import abjad
+import baca
 from .Command import Command
 
 
@@ -22,9 +23,7 @@ class OctaveDisplacementCommand(Command):
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('G4'),
             ...     baca.even_runs(),
-            ...     baca.OctaveDisplacementCommand(
-            ...         displacements=[0, 0, 1, 1, 0, 0, -1, -1, 2, 2],
-            ...         ),
+            ...     baca.displacement([0, 0, 1, 1, 0, 0, -1, -1, 2, 2]),
             ...     )
 
         ::
@@ -121,7 +120,11 @@ class OctaveDisplacementCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, displacements=None, selector=None):
+    def __init__(
+        self,
+        displacements=None,
+        selector='baca.select().plts().wrap()',
+        ):
         Command.__init__(self, selector=selector)
         if displacements is not None:
             displacements = tuple(displacements)
@@ -131,35 +134,33 @@ class OctaveDisplacementCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+    def __call__(self, music=None):
+        r'''Calls command on `music`.
 
         Returns none.
         '''
-        if argument is None:
-            return
+        selections = self._select(music)
         if self.displacements is None:
             return
-        if self.selector is not None:
-            argument = self.selector(argument)
-        logical_ties = abjad.iterate(argument).by_logical_tie(
-            pitched=True,
-            with_grace_notes=True,
-            )
-        for i, logical_tie in enumerate(logical_ties):
-            assert isinstance(logical_tie, abjad.LogicalTie)
-            displacement = self.displacements[i]
-            interval = abjad.NumberedInterval(12 * displacement)
-            for leaf in logical_tie:
-                if isinstance(leaf, abjad.Note):
-                    written_pitch = leaf.written_pitch
-                    written_pitch += interval
-                    leaf.written_pitch = written_pitch
-                elif isinstance(leaf, abjad.Chord):
-                    written_pitches = [
-                        _ + interval for _ in leaf.written_pitches
-                        ]
-                    leaf.written_pitches = written_pitches
+#        logical_ties = abjad.iterate(argument).by_logical_tie(
+#            pitched=True,
+#            with_grace_notes=True,
+#            )
+        for selection in selections:
+            plts = baca.select().plts()(selection)
+            for i, plt in enumerate(plts):
+                displacement = self.displacements[i]
+                interval = abjad.NumberedInterval(12 * displacement)
+                for pl in plt:
+                    if isinstance(pl, abjad.Note):
+                        pitch = pl.written_pitch
+                        pitch += interval
+                        pl.written_pitch = pitch
+                    elif isinstance(pl, abjad.Chord):
+                        pitches = [_ + interval for _ in pl.written_pitches]
+                        pl.written_pitches = pitches
+                    else:
+                        raise TypeError(pl)
 
     ### PRIVATE METHODS ###
 
@@ -179,12 +180,9 @@ class OctaveDisplacementCommand(Command):
 
             ::
 
-                >>> command = baca.OctaveDisplacementCommand(
-                ...     displacements=[0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2],
+                >>> command = baca.displacement(
+                ...     [0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2],
                 ...     )
-
-            ::
-
                 >>> command.displacements
                 CyclicTuple([0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2])
 
@@ -192,6 +190,6 @@ class OctaveDisplacementCommand(Command):
 
         Set to integers or none.
 
-        Returns cyclic tuple of integers or none.
+        Returns cyclic tuple of integers, or none.
         '''
         return self._displacements

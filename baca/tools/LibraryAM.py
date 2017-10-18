@@ -2844,12 +2844,12 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def displacements(displacements, selector=None):
-        r'''Octave-displaces pitched logical ties.
+    def displacement(displacements, selector='baca.select().plts().wrap()'):
+        r'''Octave-displaces PLTs.
 
         ..  container:: example
 
-            Octave-displaces all pitched logical ties:
+            Octave-displaces PLTs:
 
             ::
 
@@ -2857,7 +2857,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     3 * [[0, 2, 3]],
-                ...     baca.displacements([0, 0, -1, -1, 1, 1]),
+                ...     baca.displacement([0, 0, -1, -1, 1, 1]),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -2915,7 +2915,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     6 * [{0, 2, 3}],
-                ...     baca.displacements([0, 0, -1, -1, 1, 1]),
+                ...     baca.displacement([0, 0, -1, -1, 1, 1]),
                 ...     baca.rests_around([2], [4]),
                 ...     counts=[4],
                 ...     )
@@ -2963,9 +2963,9 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     3 * [[0, 2, 3]],
-                ...     baca.displacements(
+                ...     baca.displacement(
                 ...         [0, 0, -1, -1, 1, 1],
-                ...         baca.select().plts()[-6:],
+                ...         baca.select().plts()[-6:].wrap(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5435,7 +5435,7 @@ class LibraryAM(object):
 
     @staticmethod
     def label(expression, selector=None):
-        r'''Labels selection with label `expression`.
+        r'''Labels selections with label `expression`.
 
         ..  container:: example
 

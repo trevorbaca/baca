@@ -244,18 +244,14 @@ class LabelCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+    def __call__(self, music=None):
+        r'''Calls command on `music`.
 
         Returns none.
         '''
+        selections = self._select(music)
         if self.expression is None:
             return
-        if argument is None:
-            return
-        if self.selector is not None:
-            argument = self.selector(argument)
-        selections = self._to_selection_list(argument)
         for selection in selections:
             self.expression(selection)
 
