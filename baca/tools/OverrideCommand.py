@@ -103,7 +103,7 @@ class OverrideCommand(Command):
             ...         attribute_value=abjad.Up,
             ...         grob_name='rest',
             ...         revert=True,
-            ...         selector=baca.select().rests(),
+            ...         selector=baca.select().rests().wrap(),
             ...         ),
             ...     baca.OverrideCommand(
             ...         attribute_name='direction',
@@ -208,7 +208,7 @@ class OverrideCommand(Command):
         ::
 
             >>> baca.OverrideCommand()
-            OverrideCommand(target=baca.select().leaves().wrap())
+            OverrideCommand(selector=baca.select().leaves().wrap())
 
     '''
 
@@ -235,10 +235,9 @@ class OverrideCommand(Command):
         maximum_written_duration=None,
         maximum_settings=None,
         revert=None,
-        selector=None,
-        target='baca.select().leaves().wrap()',
+        selector='baca.select().leaves().wrap()',
         ):
-        Command.__init__(self, selector=selector, target=target)
+        Command.__init__(self, selector=selector)
         if context_name is not None:
             assert isinstance(context_name, str), repr(context_name)
         self._context_name = context_name
@@ -266,19 +265,15 @@ class OverrideCommand(Command):
 
         Returns none.
         '''
-        if argument is None:
-            return
-        if self.selector is not None:
-            argument = self.selector(argument)
-        targets = self.normalize(argument)
+        selections = self._select(argument)
         if False:
             print(format(self))
             print()
-            print(format(selector))
+            print(format(self.selector))
             print()
             print(argument)
             print()
-            print(targets)
+            print(selections)
             print()
             print('---')
             print()
@@ -319,8 +314,8 @@ class OverrideCommand(Command):
             )
         revert = revert.replace('\\', '')
         revert = abjad.LilyPondCommand(revert, format_slot='after')
-        for target in targets:
-            leaves = abjad.select(target).by_leaf()
+        for selection in selections:
+            leaves = abjad.select(selection).by_leaf()
             if self.revert:
                 abjad.attach(command, leaves[0])
                 abjad.attach(revert, leaves[-1])

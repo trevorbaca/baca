@@ -31,12 +31,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def natural_harmonics(selector=None):
-        r'''Overrides note-head style on pitched logical ties.
+    def natural_harmonics(selector='baca.select().plts().wrap()'):
+        r'''Overrides note-head style on PLTs.
 
         ..  container:: example
 
-            Overrides note-head style on all pitched logical ties:
+            Overrides note-head style on all PLTs:
 
             ::
 
@@ -93,7 +93,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Overrides note-head style on pitched logical ties in tuplet 1:
+            Overrides note-head style on PLTs in tuplet 1:
 
             ::
 
@@ -101,7 +101,9 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.natural_harmonics(baca.select().tuplet(1).plts()),
+                ...     baca.natural_harmonics(
+                ...         baca.select().tuplet(1).plts().wrap(),
+                ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -155,7 +157,6 @@ class LibraryNZ(object):
             grob_name='note_head',
             revert=True,
             selector=selector,
-            target=baca.select().plts().wrap(),
             )
 
     @staticmethod
@@ -228,11 +229,11 @@ class LibraryNZ(object):
 
     @staticmethod
     def niente_swell(dynamic, selector=None):
-        r'''Attaches niente swell to pitched logical ties:
+        r'''Attaches niente swell to PLTs:
 
         ..  container:: example
 
-            Attaches niente swell to all pitched logical ties:
+            Attaches niente swell to all PLTs:
 
             ::
 
@@ -289,7 +290,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Attaches niente swell to pitched logical ties in tuplet 1:
+            Attaches niente swell to PLTs in tuplet 1:
 
             ::
 
@@ -954,7 +955,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Attaches pervasive trills to pitched logical ties in tuplet 1:
+            Attaches pervasive trills to PLTs in tuplet 1:
 
             ::
 
@@ -1015,11 +1016,11 @@ class LibraryNZ(object):
 
     @staticmethod
     def pervasive_trills_at_interval(interval, selector=None):
-        r'''Attaches pervasive trills at `interval` to pitched logical ties.
+        r'''Attaches pervasive trills at `interval` to PLTs.
 
         ..  container:: example
 
-            Attaches pervasive trills to all pitched logical ties:
+            Attaches pervasive trills to all PLTs:
 
             ::
 
@@ -1153,11 +1154,11 @@ class LibraryNZ(object):
 
     @staticmethod
     def pervasive_trills_at_pitch(pitch, harmonic=None, selector=None):
-        r'''Attaches pervasive trills at `pitch` to pitched logical ties.
+        r'''Attaches pervasive trills at `pitch` to PLTs.
 
         ..  container:: example
 
-            Attaches pervasive trills to all pitched logical ties:
+            Attaches pervasive trills to all PLTs:
 
             ::
 
@@ -1626,11 +1627,11 @@ class LibraryNZ(object):
 
     @staticmethod
     def register(start, stop=None, selector=None):
-        r'''Octave-transposes pitched logical ties.
+        r'''Octave-transposes PLTs.
 
         ..  container:: example
 
-            Octave-transposes all pitched logical ties to the octave rooted at
+            Octave-transposes all PLTs to the octave rooted at
             -6:
 
             ::
@@ -1684,7 +1685,7 @@ class LibraryNZ(object):
                     }
                 >>
 
-            Octave-transposes pitched logical ties in tuplet 1 to the octave
+            Octave-transposes PLTs in tuplet 1 to the octave
             rooted at -6:
 
             ::
@@ -1776,7 +1777,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Octave-transposes all pitched logical ties to an octave
+            Octave-transposes all PLTs to an octave
             interpolated from -6 to 10:
 
             ::
@@ -1830,7 +1831,7 @@ class LibraryNZ(object):
                     }
                 >>
 
-            Octave-transposes pitched logical ties in tuplet 1 to an octave
+            Octave-transposes PLTs in tuplet 1 to an octave
             interpolated from -6 to 10:
 
             ::
@@ -2059,12 +2060,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def repeat_ties_down(selector=None):
-        r'''Overrides repeat tie direction on leaves.
+    def repeat_ties_down(selector='baca.select().pls().wrap()'):
+        r'''Overrides repeat tie direction.
 
         ..  container:: example
 
-            Overrides repeat tie direction on all leaves:
+            Overrides repeat tie direction on pitched leaves:
 
             ::
 
@@ -2092,10 +2093,10 @@ class LibraryNZ(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Stem.direction = #up
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 \override RepeatTie.direction = #down
+                                \override Stem.direction = #up
                                 b'16 [
                                 b'16 \repeatTie ]
                                 c''4
@@ -2113,8 +2114,8 @@ class LibraryNZ(object):
                             \times 4/5 {
                                 b'16
                                 \revert RepeatTie.direction
-                                r4
                                 \revert Stem.direction
+                                r4
                                 \revert TupletBracket.staff-padding
                             }
                         }
@@ -2132,7 +2133,9 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[11, 11, 12], [11, 11, 11], [11]],
                 ...     baca.messiaen_tie_each(),
-                ...     baca.repeat_ties_down(baca.select().tuplet(1)),
+                ...     baca.repeat_ties_down(
+                ...         baca.select().tuplet(1).pls().wrap()
+                ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_up(),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2151,9 +2154,9 @@ class LibraryNZ(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Stem.direction = #up
                                 \override TupletBracket.staff-padding = #5
                                 r8
+                                \override Stem.direction = #up
                                 b'16 [
                                 b'16 \repeatTie ]
                                 c''4
@@ -2172,8 +2175,8 @@ class LibraryNZ(object):
                             }
                             \times 4/5 {
                                 b'16
-                                r4
                                 \revert Stem.direction
+                                r4
                                 \revert TupletBracket.staff-padding
                             }
                         }
@@ -2187,11 +2190,10 @@ class LibraryNZ(object):
             grob_name='repeat_tie',
             revert=True,
             selector=selector,
-            target=baca.select().trimmed_leaves().wrap(),
             )
 
     @staticmethod
-    def repeat_ties_up(selector=None):
+    def repeat_ties_up(selector='baca.select().pls().wrap()'):
         r'''Overrides repeat tie direction on leaves.
 
         ..  container:: example
@@ -2224,10 +2226,10 @@ class LibraryNZ(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Stem.direction = #down
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 \override RepeatTie.direction = #up
+                                \override Stem.direction = #down
                                 b'16 [
                                 b'16 \repeatTie ]
                                 c''4
@@ -2245,8 +2247,8 @@ class LibraryNZ(object):
                             \times 4/5 {
                                 b'16
                                 \revert RepeatTie.direction
-                                r4
                                 \revert Stem.direction
+                                r4
                                 \revert TupletBracket.staff-padding
                             }
                         }
@@ -2264,7 +2266,9 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[11, 11, 12], [11, 11, 11], [11]],
                 ...     baca.messiaen_tie_each(),
-                ...     baca.repeat_ties_up(baca.select().tuplet(1)),
+                ...     baca.repeat_ties_up(
+                ...         baca.select().tuplet(1).pls().wrap()
+                ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_down(),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2283,9 +2287,9 @@ class LibraryNZ(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Stem.direction = #down
                                 \override TupletBracket.staff-padding = #5
                                 r8
+                                \override Stem.direction = #down
                                 b'16 [
                                 b'16 \repeatTie ]
                                 c''4
@@ -2304,8 +2308,8 @@ class LibraryNZ(object):
                             }
                             \times 4/5 {
                                 b'16
-                                r4
                                 \revert Stem.direction
+                                r4
                                 \revert TupletBracket.staff-padding
                             }
                         }
@@ -2319,7 +2323,6 @@ class LibraryNZ(object):
             grob_name='repeat_tie',
             revert=True,
             selector=selector,
-            target=baca.select().trimmed_leaves().wrap(),
             )
 
     @staticmethod
@@ -2342,7 +2345,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def rest_position(n=None, selector=None):
+    def rest_position(n=None, selector='baca.select().rests().wrap()'):
         r'''Overrides position of rests.
 
         ..  container:: example
@@ -2412,7 +2415,10 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rest_position(-6, baca.select().tuplet(1)),
+                ...     baca.rest_position(
+                ...         -6,
+                ...         baca.select().tuplet(1).rests().wrap(),
+                ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -2466,7 +2472,6 @@ class LibraryNZ(object):
             grob_name='rest',
             revert=True,
             selector=selector,
-            target=baca.select().rests().wrap(),
             )
 
     @staticmethod
@@ -2665,12 +2670,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def rests_down(selector=None):
+    def rests_down(selector='baca.select().rests().wrap()'):
         r'''Overrides direction of rests.
 
         ..  container:: example
 
-            Overrides direction of all rests:
+            Down-overrides direction of rests:
 
             ::
 
@@ -2727,7 +2732,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Overrides direction of rests in tuplet 1:
+            Down-overrides direction of rests in tuplet 1:
 
             ::
 
@@ -2735,7 +2740,9 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_down(baca.select().tuplet(1).rests()),
+                ...     baca.rests_down(
+                ...         baca.select().tuplet(1).rests().wrap(),
+                ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -2753,7 +2760,6 @@ class LibraryNZ(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Rest.direction = #down
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16 [
@@ -2768,14 +2774,15 @@ class LibraryNZ(object):
                                 e''16 ]
                                 ef''4 ~
                                 ef''16
+                                \override Rest.direction = #down
                                 r16
+                                \revert Rest.direction
                                 af''16 [
                                 g''16 ]
                             }
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert Rest.direction
                                 \revert TupletBracket.staff-padding
                             }
                         }
@@ -2788,16 +2795,16 @@ class LibraryNZ(object):
             attribute_value=abjad.Down,
             grob_name='rest',
             revert=True,
-            target=baca.select().rests().wrap(),
+            selector=selector,
             )
 
     @staticmethod
-    def rests_up(selector=None):
+    def rests_up(selector='baca.select().rests().wrap()'):
         r'''Up-overrides direction of rests.
 
         ..  container:: example
 
-            Up-overrides direction of all rests:
+            Up-overrides direction of rests:
 
             ::
 
@@ -2862,7 +2869,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_up(baca.select().tuplet(1)),
+                ...     baca.rests_up(baca.select().tuplet(1).rests().wrap()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -2916,7 +2923,6 @@ class LibraryNZ(object):
             grob_name='rest',
             revert=True,
             selector=selector,
-            target=baca.select().rests().wrap(),
             )
 
     @staticmethod
@@ -2939,7 +2945,7 @@ class LibraryNZ(object):
     def rhythm(selection):
         r'''Set rhythm to `selection`.
 
-        Return rhythm command.
+        Return rhythm builder.
         '''
         assert isinstance(selection, abjad.Selection), repr(selection)
         assert all(isinstance(_,  abjad.Component) for _ in selection)
@@ -2983,7 +2989,7 @@ class LibraryNZ(object):
         return scopes
 
     @staticmethod
-    def script_color(color='red', selector=None):
+    def script_color(color='red', selector='baca.select().leaves().wrap()'):
         r'''Overrides script color.
 
         ..  container:: example
@@ -3058,7 +3064,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.script_color(
                 ...         'red',
-                ...         baca.select().tuplet(1).leaves(),
+                ...         baca.select().tuplet(1).leaves().wrap(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -3112,11 +3118,10 @@ class LibraryNZ(object):
             grob_name='script',
             revert=True,
             selector=selector,
-            target=baca.select().leaves().wrap(),
             )
 
     @staticmethod
-    def script_extra_offset(pair=None, selector=None):
+    def script_extra_offset(pair=None, selector='baca.select().leaf()'):
         r'''Overrides script extra offset.
 
         ..  container:: example
@@ -3245,11 +3250,10 @@ class LibraryNZ(object):
             grob_name='script',
             revert=True,
             selector=selector,
-            target=baca.select().leaf(),
             )
 
     @staticmethod
-    def scripts_down(selector=None):
+    def scripts_down(selector='baca.select().leaves().wrap()'):
         r'''Down-overrides script direction on leaves.
 
         ..  container:: example
@@ -3322,7 +3326,9 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.accents(),
                 ...     baca.rests_around([2], [4]),
-                ...     baca.scripts_down(baca.select().tuplet(1).leaves()),
+                ...     baca.scripts_down(
+                ...         baca.select().tuplet(1).leaves().wrap(),
+                ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -3378,8 +3384,8 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def scripts_up(selector=None):
-        r'''Up-overrides script direction on leaves.
+    def scripts_up(selector='baca.select().leaves().wrap()'):
+        r'''Up-overrides script direction.
 
         ..  container:: example
 
@@ -3451,7 +3457,9 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.accents(),
                 ...     baca.rests_around([2], [4]),
-                ...     baca.scripts_up(baca.select().tuplet(1).leaves()),
+                ...     baca.scripts_up(
+                ...         baca.select().tuplet(1).leaves().wrap(),
+                ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -4240,12 +4248,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def slurs_down(selector=None):
-        r'''Overrides slur direction for leaves.
+    def slurs_down(selector='baca.select().leaves().wrap()'):
+        r'''Overrides slur direction.
 
         ..  container:: example
 
-            Overrides slur direction for all leaves:
+            Overrides slur direction for leaves:
 
             ::
 
@@ -4312,7 +4320,9 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.slur_trimmed_run_in_each_tuplet(),
-                ...     baca.slurs_down(baca.select().tuplet(1).leaves()),
+                ...     baca.slurs_down(
+                ...         baca.select().tuplet(1).leaves().wrap(),
+                ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -4369,12 +4379,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def slurs_up(selector=None):
-        r'''Overrides slur direction for leaves.
+    def slurs_up(selector='baca.select().leaves().wrap()'):
+        r'''Overrides slur direction.
 
         ..  container:: example
 
-            Overrides slur direction for all leaves:
+            Up-overrides slur direction for leaves:
 
             ::
 
@@ -4404,10 +4414,10 @@ class LibraryNZ(object):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override Slur.direction = #up
-                                \override Stem.direction = #down
                                 \override TupletBracket.staff-padding = #5
                                 \override TupletBracket.direction = #down
                                 r8
+                                \override Stem.direction = #down
                                 c'16 [ (
                                 d'16 ]
                                 bf'4 ~
@@ -4426,9 +4436,9 @@ class LibraryNZ(object):
                             }
                             \times 4/5 {
                                 a'16
+                                \revert Stem.direction
                                 r4
                                 \revert Slur.direction
-                                \revert Stem.direction
                                 \revert TupletBracket.staff-padding
                                 \revert TupletBracket.direction
                             }
@@ -4438,7 +4448,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Overrides slur direction all leaves in tuplet 1:
+            Up-overrides slur direction for leaves in tuplet 1:
 
             ::
 
@@ -4447,7 +4457,9 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.slur_trimmed_run_in_each_tuplet(),
-                ...     baca.slurs_up(baca.select().tuplet(1).leaves()),
+                ...     baca.slurs_up(
+                ...         baca.select().tuplet(1).leaves().wrap(),
+                ...         ),
                 ...     baca.stems_down(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4467,10 +4479,10 @@ class LibraryNZ(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Stem.direction = #down
                                 \override TupletBracket.staff-padding = #5
                                 \override TupletBracket.direction = #down
                                 r8
+                                \override Stem.direction = #down
                                 c'16 [ (
                                 d'16 ]
                                 bf'4 ~
@@ -4491,8 +4503,8 @@ class LibraryNZ(object):
                             }
                             \times 4/5 {
                                 a'16
-                                r4
                                 \revert Stem.direction
+                                r4
                                 \revert TupletBracket.staff-padding
                                 \revert TupletBracket.direction
                             }
@@ -4726,7 +4738,7 @@ class LibraryNZ(object):
         ..  container:: example
 
             Octave-transposes music that such that the highest note in each
-            of the last two pitched logical ties appears in octave 3:
+            of the last two PLTs appears in octave 3:
 
             ::
 
@@ -5094,12 +5106,16 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def stem_color(color='red', context_name=None, selector=None):
-        r'''Overrides stem color on trimmed leaves.
+    def stem_color(
+        color='red',
+        context_name=None,
+        selector='baca.select().pls().wrap()',
+        ):
+        r'''Overrides stem color.
 
         ..  container:: example
 
-            Overrides stem color on all trimmed leaves:
+            Overrides stem color on pitched leaves:
 
             ::
 
@@ -5156,7 +5172,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Overrides stem color on trimmed leaves in tuplet 1:
+            Overrides stem color on pitched leaves in tuplet 1:
 
             ::
 
@@ -5166,7 +5182,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.stem_color(
                 ...         color='red',
-                ...         selector=baca.select().tuplet(1).trimmed_leaves(),
+                ...         selector=baca.select().tuplet(1).pls().wrap(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5222,7 +5238,6 @@ class LibraryNZ(object):
             grob_name='stem',
             revert=True,
             selector=selector,
-            target=baca.select().trimmed_leaves().wrap(),
             )
 
     @staticmethod
@@ -5349,12 +5364,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def stems_down(selector=None):
-        r'''Down-overrides stem direction on leaves:
+    def stems_down(selector='baca.select().pls().wrap()'):
+        r'''Down-overrides stem direction.
 
         ..  container:: example
 
-            Down-overrides stem direction on all leaves:
+            Down-overrides stem direction pitched leaves:
 
             ::
 
@@ -5380,9 +5395,9 @@ class LibraryNZ(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Stem.direction = #down
                                 \override TupletBracket.staff-padding = #5
                                 r8
+                                \override Stem.direction = #down
                                 c'16 [
                                 d'16 ]
                                 bf'4 ~
@@ -5401,8 +5416,8 @@ class LibraryNZ(object):
                             }
                             \times 4/5 {
                                 a'16
-                                r4
                                 \revert Stem.direction
+                                r4
                                 \revert TupletBracket.staff-padding
                             }
                         }
@@ -5420,7 +5435,9 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
-                ...     baca.stems_down(baca.select().tuplet(1).leaves()),
+                ...     baca.stems_down(
+                ...         baca.select().tuplet(1).leaves().wrap(),
+                ...         ),
                 ...     baca.stems_up(),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -5438,9 +5455,9 @@ class LibraryNZ(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Stem.direction = #up
                                 \override TupletBracket.staff-padding = #5
                                 r8
+                                \override Stem.direction = #up
                                 c'16 [
                                 d'16 ]
                                 bf'4 ~
@@ -5461,8 +5478,8 @@ class LibraryNZ(object):
                             }
                             \times 4/5 {
                                 a'16
-                                r4
                                 \revert Stem.direction
+                                r4
                                 \revert TupletBracket.staff-padding
                             }
                         }
@@ -5479,12 +5496,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def stems_up(selector=None):
-        r'''Up-overrides stem direction on leaves.
+    def stems_up(selector='baca.select().pls().wrap()'):
+        r'''Up-overrides stem direction.
 
         ..  container:: example
 
-            Overrides stem direction on all leaves:
+            Up-overrides stem direction on pitched leaves:
 
             ::
 
@@ -5510,9 +5527,9 @@ class LibraryNZ(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Stem.direction = #up
                                 \override TupletBracket.staff-padding = #5
                                 r8
+                                \override Stem.direction = #up
                                 c'16 [
                                 d'16 ]
                                 bf'4 ~
@@ -5531,8 +5548,8 @@ class LibraryNZ(object):
                             }
                             \times 4/5 {
                                 a'16
-                                r4
                                 \revert Stem.direction
+                                r4
                                 \revert TupletBracket.staff-padding
                             }
                         }
@@ -5551,7 +5568,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [10]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_down(),
-                ...     baca.stems_up(baca.select().tuplet(1).leaves()),
+                ...     baca.stems_up(baca.select().tuplet(1).leaves().wrap()),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -5568,9 +5585,9 @@ class LibraryNZ(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Stem.direction = #down
                                 \override TupletBracket.staff-padding = #5
                                 r8
+                                \override Stem.direction = #down
                                 c'16 [
                                 d'16 ]
                                 bf'4 ~
@@ -5591,8 +5608,8 @@ class LibraryNZ(object):
                             }
                             \times 4/5 {
                                 bf'16
-                                r4
                                 \revert Stem.direction
+                                r4
                                 \revert TupletBracket.staff-padding
                             }
                         }
@@ -5609,12 +5626,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def strict_note_spacing_off(selector=None):
-        r'''Turns strict note spacing off on first leaf.
+    def strict_note_spacing_off(selector='baca.select().leaves().wrap()'):
+        r'''Turns strict note spacing off.
 
         ..  container:: example
 
-            Turns strict note spacing off on first leaf:
+            Turns strict note spacing off on leaves:
 
             ::
 
@@ -6209,18 +6226,20 @@ class LibraryNZ(object):
         '''
         return baca.SpannerCommand(
             selector=selector,
-            spanner=abjad.PianoPedalSpanner(
-                style='bracket',
-                ),
+            spanner=abjad.PianoPedalSpanner(style='bracket'),
             )
 
     @staticmethod
-    def sustain_pedal_staff_padding(n=None, context='Staff', selector=None):
-        r'''Overrides sustain pedal staff padding on leaves.
+    def sustain_pedal_staff_padding(
+        n=None,
+        context='Staff',
+        selector='baca.select().leaves().wrap()',
+        ):
+        r'''Overrides sustain pedal staff padding.
 
         ..  container:: example
 
-            Overrides sustain pedal staff padding on all leaves:
+            Overrides sustain pedal staff padding on leaves:
 
             ::
 
@@ -6297,7 +6316,7 @@ class LibraryNZ(object):
                 ...         ),
                 ...     baca.sustain_pedal_staff_padding(
                 ...         n=4,
-                ...         selector=baca.select().tuplet(1).leaves(),
+                ...         selector=baca.select().tuplet(1).leaves().wrap(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6478,8 +6497,11 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def text_script_color(color='red', selector=None):
-        r'''Overrides text script color on leaves.
+    def text_script_color(
+        color='red',
+        selector='baca.select().leaves().wrap()',
+        ):
+        r'''Overrides text script color.
 
         ..  container:: example
 
@@ -6497,7 +6519,7 @@ class LibraryNZ(object):
                 ...         target=baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
-                ...     baca.text_script_color(color='red'),
+                ...     baca.text_script_color('red'),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -6560,8 +6582,8 @@ class LibraryNZ(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_color(
-                ...         color='red',
-                ...         selector=baca.select().tuplet(1).leaves(),
+                ...         'red',
+                ...         baca.select().tuplet(1).leaves().wrap(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6619,12 +6641,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def text_script_padding(n=0, selector=None):
-        r'''Overrides text script padding on leaves.
+    def text_script_padding(n=0, selector='baca.select().leaves().wrap()'):
+        r'''Overrides text script padding.
 
         ..  container:: example
 
-            Overrides text script padding on all leaves:
+            Overrides text script padding on leaves:
 
             ::
 
@@ -6639,7 +6661,7 @@ class LibraryNZ(object):
                 ...         target=baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
-                ...     baca.text_script_padding(n=4),
+                ...     baca.text_script_padding(4),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -6703,8 +6725,8 @@ class LibraryNZ(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_padding(
-                ...         n=4,
-                ...         selector=baca.select().tuplet(1).leaves(),
+                ...         4,
+                ...         baca.select().tuplet(1).leaves().wrap(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6761,12 +6783,15 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def text_script_staff_padding(n=0, selector=None):
-        r'''Overrides text script staff padding on leaves.
+    def text_script_staff_padding(
+        n=0,
+        selector='baca.select().leaves().wrap()',
+        ):
+        r'''Overrides text script staff padding.
 
         ..  container:: example
 
-            Overrides text script staff padding on all leaves:
+            Overrides text script staff padding on leaves:
 
             ::
 
@@ -6844,7 +6869,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_staff_padding(
                 ...         n=4,
-                ...         selector=baca.select().tuplet(1).leaves(),
+                ...         selector=baca.select().tuplet(1).leaves().wrap(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6901,12 +6926,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def text_scripts_down(selector=None):
-        r'''Down-overrides text script on leaves.
+    def text_scripts_down(selector='baca.select().leaves().wrap()'):
+        r'''Down-overrides text script.
 
         ..  container:: example
 
-            Down-overrides text script direction on all leaves:
+            Down-overrides text script direction on leaves:
 
             ::
 
@@ -6984,7 +7009,7 @@ class LibraryNZ(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_scripts_down(
-                ...         selector=baca.select().tuplet(1).leaves(),
+                ...         selector=baca.select().tuplet(1).leaves().wrap(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -7041,12 +7066,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def text_scripts_up(selector=None):
-        r'''Up-overrides text script direction on leaves.
+    def text_scripts_up(selector='baca.select().leaves().wrap()'):
+        r'''Up-overrides text script direction.
 
         ..  container:: example
 
-            Up-overrides text script direction on all leaves:
+            Up-overrides text script direction on leaves:
 
             ::
 
@@ -7124,7 +7149,7 @@ class LibraryNZ(object):
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_scripts_up(
-                ...         selector=baca.select().tuplet(1).leaves(),
+                ...         selector=baca.select().tuplet(1).leaves().wrap(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -7181,8 +7206,11 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def text_spanner_staff_padding(n=0, selector=None):
-        r'''Overrides text spanner staff padding on trimmed leaves.
+    def text_spanner_staff_padding(
+        n=0,
+        selector='baca.select().leaves().wrap()',
+        ):
+        r'''Overrides text spanner staff padding.
 
         ..  container:: example
 
@@ -7289,7 +7317,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_spanner_staff_padding(
                 ...         n=6,
-                ...         selector=baca.select().tuplet(1).trimmed_leaves(),
+                ...         selector=baca.select().tuplet(1).pls().wrap(),
                 ...         ),
                 ...     baca.text_script_staff_padding(6),
                 ...     baca.transition_spanner(
@@ -7515,12 +7543,12 @@ class LibraryNZ(object):
         return specifier
 
     @staticmethod
-    def ties_down(selector=None):
-        r'''Overrides tie direction on leaves.
+    def ties_down(selector='baca.select().pls().wrap()'):
+        r'''Overrides tie direction.
 
         ..  container:: example
 
-            Overrides tie direction on all leaves:
+            Overrides tie direction on pitched leaves:
 
             ::
 
@@ -7548,9 +7576,9 @@ class LibraryNZ(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Stem.direction = #up
                                 \override TupletBracket.staff-padding = #5
                                 r8
+                                \override Stem.direction = #up
                                 \override Tie.direction = #down
                                 b'16 ~ [
                                 b'16 ]
@@ -7568,9 +7596,9 @@ class LibraryNZ(object):
                             }
                             \times 4/5 {
                                 b'16
+                                \revert Stem.direction
                                 \revert Tie.direction
                                 r4
-                                \revert Stem.direction
                                 \revert TupletBracket.staff-padding
                             }
                         }
@@ -7579,7 +7607,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Overrides tie direction on leaves in tuplet 1:
+            Overrides tie direction on pitched leaves in tuplet 1:
 
             ::
 
@@ -7590,7 +7618,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_up(),
                 ...     baca.tie_each(),
-                ...     baca.ties_down(baca.select().tuplet(1)),
+                ...     baca.ties_down(baca.select().tuplet(1).pls().wrap()),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -7607,9 +7635,9 @@ class LibraryNZ(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Stem.direction = #up
                                 \override TupletBracket.staff-padding = #5
                                 r8
+                                \override Stem.direction = #up
                                 b'16 ~ [
                                 b'16 ]
                                 c''4 ~
@@ -7628,8 +7656,8 @@ class LibraryNZ(object):
                             }
                             \times 4/5 {
                                 b'16
-                                r4
                                 \revert Stem.direction
+                                r4
                                 \revert TupletBracket.staff-padding
                             }
                         }
@@ -7643,16 +7671,15 @@ class LibraryNZ(object):
             grob_name='tie',
             revert=True,
             selector=selector,
-            target=baca.select().trimmed_leaves().wrap(),
             )
 
     @staticmethod
-    def ties_up(selector=None):
-        r'''Overrides tie direction on leaves in trimmed run.
+    def ties_up(selector='baca.select().pls().wrap()'):
+        r'''Overrides tie direction.
 
         ..  container:: example
 
-            Overrides tie direction on all leaves in trimmed run:
+            Overrides tie direction on pitched leaves:
 
             ::
 
@@ -7680,9 +7707,9 @@ class LibraryNZ(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Stem.direction = #down
                                 \override TupletBracket.staff-padding = #5
                                 r8
+                                \override Stem.direction = #down
                                 \override Tie.direction = #up
                                 b'16 ~ [
                                 b'16 ]
@@ -7700,9 +7727,9 @@ class LibraryNZ(object):
                             }
                             \times 4/5 {
                                 b'16
+                                \revert Stem.direction
                                 \revert Tie.direction
                                 r4
-                                \revert Stem.direction
                                 \revert TupletBracket.staff-padding
                             }
                         }
@@ -7711,7 +7738,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Overrides tie direction on leaves in trimmed run in tuplet 1:
+            Overrides tie direction on pitched leaves in tuplet 1:
 
             ::
 
@@ -7722,7 +7749,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_down(),
                 ...     baca.tie_each(),
-                ...     baca.ties_up(baca.select().tuplet(1).leaves()),
+                ...     baca.ties_up(baca.select().tuplet(1).pls().wrap()),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -7739,9 +7766,9 @@ class LibraryNZ(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Stem.direction = #down
                                 \override TupletBracket.staff-padding = #5
                                 r8
+                                \override Stem.direction = #down
                                 b'16 ~ [
                                 b'16 ]
                                 c''4 ~
@@ -7760,8 +7787,8 @@ class LibraryNZ(object):
                             }
                             \times 4/5 {
                                 b'16
-                                r4
                                 \revert Stem.direction
+                                r4
                                 \revert TupletBracket.staff-padding
                             }
                         }
@@ -7775,16 +7802,18 @@ class LibraryNZ(object):
             grob_name='tie',
             revert=True,
             selector=selector,
-            target=baca.select().trimmed_leaves().wrap(),
             )
 
     @staticmethod
-    def time_signature_extra_offset(pair=None, selector=None):
-        r'''Overrides time signature extra offset on leaves.
+    def time_signature_extra_offset(
+        pair=None,
+        selector='baca.select().leaves().wrap()',
+        ):
+        r'''Overrides time signature extra offset.
 
         ..  container:: example
 
-            Overrides time signature extra offset on all leaves:
+            Overrides time signature extra offset on leaves:
 
             ::
 
@@ -8047,7 +8076,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def transparent_bar_lines(selector=None):
+    def transparent_bar_lines(selector='baca.select().leaf()'):
         r'''Makes bar lines transparent.
 
         ..  container:: example
@@ -8114,16 +8143,15 @@ class LibraryNZ(object):
             grob_name='bar_line',
             revert=False,
             selector=selector,
-            target=baca.select().leaf(),
             )
 
     @staticmethod
-    def transparent_rests(selector=None):
+    def transparent_rests(selector='baca.select().rests().wrap()'):
         r'''Makes rests transparent.
 
         ..  container:: example
 
-            Makes all rests transparent:
+            Makes rests transparent:
 
             ::
 
@@ -8190,7 +8218,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.transparent_rests(
-                ...         baca.select().tuplet(1).rests(),
+                ...         baca.select().tuplet(1).rests().wrap(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -8244,11 +8272,10 @@ class LibraryNZ(object):
             grob_name='rest',
             revert=True,
             selector=selector,
-            target=baca.select().rests().wrap(),
             )
 
     @staticmethod
-    def transparent_span_bars(selector=None):
+    def transparent_span_bars(selector='baca.select().leaf()'):
         r'''Makes span bars transparent.
 
         ..  container:: example
@@ -8315,11 +8342,10 @@ class LibraryNZ(object):
             grob_name='span_bar',
             revert=False,
             selector=selector,
-            target=baca.select().leaf(),
             )
 
     @staticmethod
-    def transparent_time_signatures(selector=None):
+    def transparent_time_signatures(selector='baca.select().rests().wrap()'):
         r'''Makes time signatures transparent.
 
         ..  container:: example
@@ -8387,7 +8413,6 @@ class LibraryNZ(object):
             grob_name='time_signature',
             revert=True,
             selector=selector,
-            target=baca.select().rests().wrap(),
             )
 
     @staticmethod
@@ -8410,7 +8435,11 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def tremolo_down(n, maximum_adjustment=-1.5):
+    def tremolo_down(
+        n,
+        maximum_adjustment=-1.5,
+        selector='baca.select().leaves().wrap()',
+        ):
         r'''Overrides stem tremolo extra offset on leaves.
         '''
         pair = (0, -n)
@@ -8424,6 +8453,7 @@ class LibraryNZ(object):
                 'attribute_name': 'extra_offset',
                 'attribute_value': str((0, maximum_adjustment)),
                 },
+            selector=selector,
             )
 
     @staticmethod
@@ -8550,12 +8580,15 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def tuplet_bracket_extra_offset(pair=None, selector=None):
-        r'''Overrides tuplet bracket extra offset on leaves.
+    def tuplet_bracket_extra_offset(
+        pair=None,
+        selector='baca.select().leaves().wrap()',
+        ):
+        r'''Overrides tuplet bracket extra offset.
 
         ..  container:: example
 
-            Overrides tuplet bracket extra offset on all leaves:
+            Overrides tuplet bracket extra offset on leaves:
 
             ::
 
@@ -8623,7 +8656,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_extra_offset(
                 ...         (-1, 0),
-                ...         baca.select().tuplet(1).leaves(),
+                ...         baca.select().tuplet(1).leaves().wrap(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -8680,12 +8713,15 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def tuplet_bracket_staff_padding(n=None, selector=None):
-        r'''Overrides tuplet bracket staff padding on leaves.
+    def tuplet_bracket_staff_padding(
+        n=None,
+        selector='baca.select().leaves().wrap()',
+        ):
+        r'''Overrides tuplet bracket staff padding.
 
         ..  container:: example
 
-            Overrides tuplet bracket staff padding on all leaves:
+            Overrides tuplet bracket staff padding on leaves:
 
             ::
 
@@ -8750,7 +8786,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(
                 ...         n=5,
-                ...         selector=baca.select().tuplet(1).leaves(),
+                ...         selector=baca.select().tuplet(1).leaves().wrap(),
                 ...         ),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -8804,12 +8840,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def tuplet_brackets_down(selector=None):
-        r'''Overrides tuplet bracket direction on leaves.
+    def tuplet_brackets_down(selector='baca.select().leaves().wrap()'):
+        r'''Overrides tuplet bracket direction.
 
         ..  container:: example
 
-            Overrides tuplet bracket direction on all leaves:
+            Overrides tuplet bracket direction on leaves:
 
             ::
 
@@ -8877,7 +8913,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     baca.tuplet_brackets_down(
-                ...         baca.select().tuplet(1).leaves(),
+                ...         baca.select().tuplet(1).leaves().wrap(),
                 ...         ),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -8933,12 +8969,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def tuplet_brackets_up(selector=None):
-        r'''Overrides tuplet bracket direction on leaves.
+    def tuplet_brackets_up(selector='baca.select().leaves().wrap()'):
+        r'''Overrides tuplet bracket direction.
 
         ..  container:: example
 
-            Override tuplet bracket direction on all leaves:
+            Override tuplet bracket direction on leaves:
 
             ::
 
@@ -9006,7 +9042,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     baca.tuplet_brackets_up(
-                ...         baca.select().tuplet(1).leaves(),
+                ...         baca.select().tuplet(1).leaves().wrap(),
                 ...         ),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -9062,12 +9098,15 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def tuplet_number_extra_offset(pair=None, selector=None):
-        r'''Overrides tuplet number extra offset on leaves.
+    def tuplet_number_extra_offset(
+        pair=None,
+        selector='baca.select().leaves().wrap()',
+        ):
+        r'''Overrides tuplet number extra offset.
 
         ..  container:: example
 
-            Overrides tuplet number extra offset on all leaves:
+            Overrides tuplet number extra offset on leaves:
 
             ::
 
@@ -9136,7 +9175,7 @@ class LibraryNZ(object):
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     baca.tuplet_number_extra_offset(
                 ...         (-1, 0),
-                ...         baca.select().tuplet(1).leaves(),
+                ...         baca.select().tuplet(1).leaves().wrap(),
                 ...         ),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],

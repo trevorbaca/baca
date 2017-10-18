@@ -1367,7 +1367,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def beam_positions(n=None, selector=None):
+    def beam_positions(n=None, selector='baca.select().leaves().wrap()'):
         r'''Overrides beam positions.
 
         ..  container:: example
@@ -1428,8 +1428,8 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.beam_positions(
-                ...         n=6,
-                ...         selector=baca.select().tuplet(1).leaves(),
+                ...         6,
+                ...         baca.select().tuplet(1).leaves().wrap(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     time_treatments=[-1],
@@ -2442,7 +2442,7 @@ class LibraryAM(object):
         return result
 
     @staticmethod
-    def cross_note_heads(selector=None):
+    def cross_note_heads(selector='baca.select().pls().wrap()'):
         r'''Overrides note-head style on pitched leaves.
 
         ..  container:: example
@@ -2512,7 +2512,9 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.cross_note_heads(baca.select().tuplet(1)),
+                ...     baca.cross_note_heads(
+                ...         baca.select().tuplet(1).leaves().wrap(),
+                ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -2566,7 +2568,6 @@ class LibraryAM(object):
             grob_name='note_head',
             revert=True,
             selector=selector,
-            target=baca.select().pls().wrap(),
             )
 
     @staticmethod
@@ -3498,7 +3499,10 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def dynamic_line_spanner_staff_padding(n=None, selector=None):
+    def dynamic_line_spanner_staff_padding(
+        n=None,
+        selector='baca.select().leaves().wrap()',
+        ):
         r'''Overrides dynamic line spanner staff padding on leaves.
 
         ..  container:: example
@@ -3574,7 +3578,7 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.dynamic_line_spanner_staff_padding(
                 ...         n=4,
-                ...         selector=baca.select().tuplet(1).leaves(),
+                ...         selector=baca.select().tuplet(1).leaves().wrap(),
                 ...         ),
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
@@ -3636,7 +3640,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def dynamic_line_spanner_up(selector=None):
+    def dynamic_line_spanner_up(selector='baca.select().leaves().wrap()'):
         r'''Up-overrides dynamic line spanner direction.
 
         ..  container:: example
@@ -3711,7 +3715,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.dynamic_line_spanner_up(
-                ...         baca.select().tuplet(1).leaves(),
+                ...         baca.select().tuplet(1).leaves().wrap(),
                 ...         ),
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
@@ -3773,12 +3777,12 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def dynamic_text_extra_offset(pair, selector=None):
+    def dynamic_text_extra_offset(pair, selector='baca.select().pl()'):
         r'''Overrides dynamic text extra offset.
 
         ..  container:: example
 
-            Overrides dynamic text extra offset on PL 0:
+            Overrides dynamic text extra offset on pitched leaf 0:
 
             ::
 
@@ -3787,7 +3791,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.dynamic('p'),
-                ...     baca.dynamic('f', baca.select().tuplet(1).leaf()),
+                ...     baca.dynamic('f', baca.select().tuplet(1).pl()),
                 ...     baca.dynamic_text_extra_offset((-3, 0)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3905,7 +3909,6 @@ class LibraryAM(object):
             grob_name='dynamic_text',
             revert=True,
             selector=selector,
-            target=baca.select().pl(),
             )
 
     @staticmethod
