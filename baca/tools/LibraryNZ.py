@@ -1309,7 +1309,7 @@ class LibraryNZ(object):
     @staticmethod
     def possibile_dynamic(
         dynamic,
-        selector='baca.select().plt_head()',
+        selector='baca.select().ph()',
         direction=abjad.Down,
         ):
         r'''Attaches possibile dynamic to pitched head 0.
@@ -1387,7 +1387,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.possibile_dynamic(
                 ...         'ff',
-                ...         baca.select().tuplet(1).plt_head(),
+                ...         baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -1936,7 +1936,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def reiterated_dynamic(dynamic=None, selector='baca.select().plt_heads()'):
+    def reiterated_dynamic(dynamic=None, selector='baca.select().phs()'):
         r'''Attaches `dynamic` to pitched heads.
 
         ..  container:: example
@@ -2006,7 +2006,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.reiterated_dynamic(
                 ...         'f',
-                ...         selector=baca.select().tuplet(1).plt_heads(),
+                ...         selector=baca.select().tuplet(1).phs(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3576,7 +3576,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.short_fermata(
-                ...         baca.select().tuplet(1).plt_head(),
+                ...         baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4854,7 +4854,7 @@ class LibraryNZ(object):
         return expression
 
     @staticmethod
-    def staccati(selector='baca.select().plt_heads()'):
+    def staccati(selector='baca.select().phs()'):
         r'''Attaches staccati to pitched heads.
 
         ..  container:: example
@@ -4922,7 +4922,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.staccati(baca.select().tuplet(1).plt_heads()),
+                ...     baca.staccati(baca.select().tuplet(1).phs()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -4974,7 +4974,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def staccatissimi(selector='baca.select().plt_heads()'):
+    def staccatissimi(selector='baca.select().phs()'):
         r'''Attaches staccatissimi to pitched heads.
 
         ..  container:: example
@@ -5042,7 +5042,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.staccatissimi(baca.select().tuplet(1).plt_heads()),
+                ...     baca.staccatissimi(baca.select().tuplet(1).phs()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6358,7 +6358,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def tenuti(selector='baca.select().plt_heads()'):
+    def tenuti(selector='baca.select().phs()'):
         r'''Attaches tenuti to pitched heads.
 
         ..  container:: example
@@ -6426,7 +6426,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.tenuti(baca.select().tuplet(1).plt_heads()),
+                ...     baca.tenuti(baca.select().tuplet(1).phs()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6494,7 +6494,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         target=baca.select().tuplet(1).plt_head(),
+                ...         target=baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_color(color='red'),
@@ -6556,7 +6556,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         target=baca.select().tuplet(1).plt_head(),
+                ...         target=baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_color(
@@ -6636,7 +6636,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         target=baca.select().tuplet(1).plt_head(),
+                ...         target=baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_padding(n=4),
@@ -6699,7 +6699,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         target=baca.select().tuplet(1).plt_head(),
+                ...         target=baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_padding(
@@ -6777,7 +6777,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         target=baca.select().tuplet(1).plt_head(),
+                ...         target=baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_staff_padding(n=4),
@@ -6839,7 +6839,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         target=baca.select().tuplet(1).plt_head(),
+                ...         target=baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_staff_padding(
@@ -6917,7 +6917,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         target=baca.select().tuplet(1).plt_head(),
+                ...         target=baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_scripts_down(),
@@ -6980,7 +6980,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         target=baca.select().tuplet(1).plt_head(),
+                ...         target=baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_scripts_down(
@@ -7057,7 +7057,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         target=baca.select().tuplet(1).plt_head(),
+                ...         target=baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_scripts_up(),
@@ -7120,7 +7120,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         target=baca.select().tuplet(1).plt_head(),
+                ...         target=baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_scripts_up(
@@ -9453,7 +9453,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def up_bows(selector='baca.select().plt_heads()'):
+    def up_bows(selector='baca.select().phs()'):
         r'''Attaches up-bows to pitched heads.
 
         ..  container:: example
@@ -9524,7 +9524,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     baca.up_bows(
-                ...         baca.select().tuplet(1).plt_heads(),
+                ...         baca.select().tuplet(1).phs(),
                 ...         ),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -9644,7 +9644,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.very_long_fermata(
-                ...         baca.select().tuplet(1).plt_head(),
+                ...         baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),

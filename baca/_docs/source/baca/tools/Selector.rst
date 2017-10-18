@@ -42,12 +42,10 @@ Bases
       ~baca.tools.Selector.Selector.chord_heads
       ~baca.tools.Selector.Selector.chords
       ~baca.tools.Selector.Selector.color
-      ~baca.tools.Selector.Selector.first
       ~baca.tools.Selector.Selector.flatten
       ~baca.tools.Selector.Selector.get_item
       ~baca.tools.Selector.Selector.get_slice
       ~baca.tools.Selector.Selector.group_by_pitch
-      ~baca.tools.Selector.Selector.last
       ~baca.tools.Selector.Selector.leaf
       ~baca.tools.Selector.Selector.leaves
       ~baca.tools.Selector.Selector.leaves_in_each_lt
@@ -56,19 +54,17 @@ Bases
       ~baca.tools.Selector.Selector.lt
       ~baca.tools.Selector.Selector.lts
       ~baca.tools.Selector.Selector.map
-      ~baca.tools.Selector.Selector.middle
-      ~baca.tools.Selector.Selector.most
       ~baca.tools.Selector.Selector.note
       ~baca.tools.Selector.Selector.notes
       ~baca.tools.Selector.Selector.partition_by_counts
       ~baca.tools.Selector.Selector.partition_by_ratio
+      ~baca.tools.Selector.Selector.ph
+      ~baca.tools.Selector.Selector.phs
+      ~baca.tools.Selector.Selector.phs_in_each_tuplet
       ~baca.tools.Selector.Selector.pl
       ~baca.tools.Selector.Selector.pls
       ~baca.tools.Selector.Selector.pls_in_each_tuplet
       ~baca.tools.Selector.Selector.plt
-      ~baca.tools.Selector.Selector.plt_head
-      ~baca.tools.Selector.Selector.plt_heads
-      ~baca.tools.Selector.Selector.plt_heads_in_each_tuplet
       ~baca.tools.Selector.Selector.plt_nprun
       ~baca.tools.Selector.Selector.plt_npruns
       ~baca.tools.Selector.Selector.plt_prun
@@ -204,12 +200,6 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selector.Selector.first
-
-.. only:: html
-
-   .. container:: inherited
-
       .. automethod:: baca.tools.Selector.Selector.flatten
 
 .. only:: html
@@ -229,12 +219,6 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Selector.Selector.group_by_pitch
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Selector.Selector.last
 
 .. automethod:: baca.tools.Selector.Selector.leaf
 
@@ -256,18 +240,6 @@ Methods
 
       .. automethod:: baca.tools.Selector.Selector.map
 
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Selector.Selector.middle
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Selector.Selector.most
-
 .. automethod:: baca.tools.Selector.Selector.note
 
 .. automethod:: baca.tools.Selector.Selector.notes
@@ -284,6 +256,12 @@ Methods
 
       .. automethod:: baca.tools.Selector.Selector.partition_by_ratio
 
+.. automethod:: baca.tools.Selector.Selector.ph
+
+.. automethod:: baca.tools.Selector.Selector.phs
+
+.. automethod:: baca.tools.Selector.Selector.phs_in_each_tuplet
+
 .. automethod:: baca.tools.Selector.Selector.pl
 
 .. automethod:: baca.tools.Selector.Selector.pls
@@ -291,12 +269,6 @@ Methods
 .. automethod:: baca.tools.Selector.Selector.pls_in_each_tuplet
 
 .. automethod:: baca.tools.Selector.Selector.plt
-
-.. automethod:: baca.tools.Selector.Selector.plt_head
-
-.. automethod:: baca.tools.Selector.Selector.plt_heads
-
-.. automethod:: baca.tools.Selector.Selector.plt_heads_in_each_tuplet
 
 .. automethod:: baca.tools.Selector.Selector.plt_nprun
 
