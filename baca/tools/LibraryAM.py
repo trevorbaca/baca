@@ -17,19 +17,7 @@ class LibraryAM(object):
 
     @staticmethod
     def accents(selector='baca.select().phs()'):
-        r'''Attaches accents to PLT heads.
-
-        ..  container:: example
-
-            ::
-
-                >>> abjad.f(baca.accents())
-                baca.AttachCommand(
-                    arguments=[
-                        abjad.Articulation('>'),
-                        ],
-                    selector=baca.select().phs(),
-                    )
+        r'''Attaches accents to pitched heads.
 
         ..  container:: example
 
@@ -150,7 +138,7 @@ class LibraryAM(object):
     @staticmethod
     def alternate_bow_strokes(
         downbow_first=True,
-        selector='baca.select().phs()',
+        selector='baca.select().phs().wrap()',
         ):
         r'''Attaches alternate bow strokes.
 
@@ -276,7 +264,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.alternate_bow_strokes(
-                ...         selector=baca.select().tuplet(1).phs(),
+                ...         selector=baca.select().tuplet(1).phs().wrap(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(6),

@@ -181,7 +181,7 @@ class AttachCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, arguments=None, selector='baca.select().phs()'):
+    def __init__(self, arguments=None, selector='baca.select().phs().wrap()'):
         Command.__init__(self, selector=selector)
         self._arguments = arguments
 
@@ -195,14 +195,14 @@ class AttachCommand(Command):
         selections = self._select(music)
         if self.arguments is None:
             return
-        arguments, i = abjad.CyclicTuple(self.arguments), 0
+        arguments = abjad.CyclicTuple(self.arguments)
         for selection in selections:
-            for leaf in abjad.iterate(selection).by_leaf():
+            leaves = abjad.select(selection).by_leaf()
+            for i, leaf in enumerate(leaves):
                 arguments_ = arguments[i]
                 arguments_ = self._token_to_arguments(arguments_)
                 for argument_ in arguments_:
                     abjad.attach(argument_, leaf)
-                i += 1
 
     ### PRIVATE METHODS ###
 
