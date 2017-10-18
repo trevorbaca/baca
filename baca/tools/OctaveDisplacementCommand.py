@@ -142,10 +142,6 @@ class OctaveDisplacementCommand(Command):
         selections = self._select(music)
         if self.displacements is None:
             return
-#        logical_ties = abjad.iterate(argument).by_logical_tie(
-#            pitched=True,
-#            with_grace_notes=True,
-#            )
         for selection in selections:
             plts = baca.select().plts()(selection)
             for i, plt in enumerate(plts):
