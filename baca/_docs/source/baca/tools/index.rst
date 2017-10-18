@@ -47,7 +47,6 @@ Commands
    RegisterCommand
    RegisterInterpolationCommand
    RegisterToOctaveCommand
-   RegisterTransitionCommand
    ScorePitchCommand
    SettingCommand
    SpannerCommand
@@ -74,7 +73,6 @@ Commands
    RegisterCommand
    RegisterInterpolationCommand
    RegisterToOctaveCommand
-   RegisterTransitionCommand
    ScorePitchCommand
    SettingCommand
    SpannerCommand

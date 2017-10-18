@@ -779,7 +779,6 @@ class MusicMaker(abjad.AbjadObject):
             baca.RegisterCommand,
             baca.RegisterInterpolationCommand,
             baca.RegisterToOctaveCommand,
-            baca.RegisterTransitionCommand,
             )
         selection = abjad.select(selections)
         for specifier in specifiers:
@@ -1365,21 +1364,11 @@ class MusicMaker(abjad.AbjadObject):
 
         ..  container:: example
 
-            Register transition specifier transposes from octave of C4 to
-            octave of C5:
+            Ocatve-transposes to a target interpolated from C4 up to C5:
 
             ::
 
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.RegisterTransitionCommand(
-                ...         start_registration=baca.Registration(
-                ...             [('[A0, C8]', 0)],
-                ...             ),
-                ...         stop_registration=baca.Registration(
-                ...             [('[A0, C8]', 12)],
-                ...             ),
-                ...         ),
-                ...     )
+                >>> music_maker = baca.MusicMaker(baca.register(0, 12))
 
             ::
 
