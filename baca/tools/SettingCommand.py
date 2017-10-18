@@ -3,7 +3,6 @@ import baca
 from .Command import Command
 
 
-# TODO: write examples
 class SettingCommand(Command):
     r'''Set command.
 
@@ -32,9 +31,8 @@ class SettingCommand(Command):
         selector=None,
         setting_name=None,
         setting_value=None,
-        target=None,
         ):
-        Command.__init__(self, selector=selector, target=target)
+        Command.__init__(self, selector=selector)
         if context_name is not None:
             assert isinstance(context_name, str), repr(context_name)
         self._context_name = context_name
@@ -45,27 +43,24 @@ class SettingCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+    def __call__(self, music=None):
+        r'''Calls command on `music`.
 
         Returns none.
         '''
-        if argument is None:
-            return
-        if self.selector is not None:
-            argument = self.selector(argument)
-        targets = self.normalize(argument)
-        context = self.context_name
-        setting = self.setting_name
-        value = self.setting_value
-        if self.context_name is not None:
-            string = f'abjad.setting(target).{context}.{setting} = {value!r}'
-        else:
-            string = f'abjad.setting(target).{setting} = {value!r}'
-        globals_ = globals()
-        globals_.update(abjad.__dict__.copy())
-        for target in targets:
-            exec(string, globals_, locals())
+        selections = self._select(music)
+        for selection in selections:
+            context = self.context_name
+            setting = self.setting_name
+            value = self.setting_value
+            if self.context_name is not None:
+                string = f'abjad.setting(leaf).{context}.{setting} = {value!r}'
+            else:
+                string = f'abjad.setting(leaf).{setting} = {value!r}'
+            globals_ = globals()
+            globals_.update(abjad.__dict__.copy())
+            for leaf in abjad.iterate(selection).by_leaf():
+                exec(string, globals_, locals())
 
     ### PUBLIC PROPERTIES ###
 

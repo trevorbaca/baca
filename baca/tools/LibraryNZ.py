@@ -1450,8 +1450,11 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def proportional_notation_duration(duration=None, selector=None):
-        r'''Sets proportional notation duration on leaf 0:
+    def proportional_notation_duration(
+        duration=None,
+        selector='baca.select().leaf()',
+        ):
+        r'''Sets proportional notation duration.
 
         ..  container:: example
 
@@ -1622,7 +1625,6 @@ class LibraryNZ(object):
             selector=selector,
             setting_name='proportional_notation_duration',
             setting_value=moment,
-            target=baca.select().leaf(),
             )
 
     @staticmethod
