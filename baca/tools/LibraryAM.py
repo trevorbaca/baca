@@ -5438,7 +5438,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def label(expression, selector=None):
+    def label(expression, selector='baca.select().leaves().wrap()'):
         r'''Labels selections with label `expression`.
 
         ..  container:: example

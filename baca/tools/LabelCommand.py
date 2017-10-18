@@ -236,7 +236,11 @@ class LabelCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, expression=None, selector=None):
+    def __init__(
+        self,
+        expression=None,
+        selector='baca.select().leaves().wrap()',
+        ):
         Command.__init__(self, selector=selector)
         if expression is not None:
             assert isinstance(expression, abjad.Expression)
