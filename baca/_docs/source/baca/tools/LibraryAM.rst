@@ -42,7 +42,7 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.cross_note_heads
       ~baca.tools.LibraryAM.LibraryAM.cross_staff
       ~baca.tools.LibraryAM.LibraryAM.diatonic_clusters
-      ~baca.tools.LibraryAM.LibraryAM.displacements
+      ~baca.tools.LibraryAM.LibraryAM.displacement
       ~baca.tools.LibraryAM.LibraryAM.double_tonguing
       ~baca.tools.LibraryAM.LibraryAM.down_arpeggios
       ~baca.tools.LibraryAM.LibraryAM.down_bows
@@ -135,7 +135,7 @@ Class & static methods
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.diatonic_clusters
 
-.. automethod:: baca.tools.LibraryAM.LibraryAM.displacements
+.. automethod:: baca.tools.LibraryAM.LibraryAM.displacement
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.double_tonguing
 

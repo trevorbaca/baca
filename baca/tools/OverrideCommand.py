@@ -208,7 +208,7 @@ class OverrideCommand(Command):
         ::
 
             >>> baca.OverrideCommand()
-            OverrideCommand(target=Selector(callbacks=(ByClassCallback(prototype=Leaf), WrapCallback())))
+            OverrideCommand(target=baca.select().leaves().wrap())
 
     '''
 

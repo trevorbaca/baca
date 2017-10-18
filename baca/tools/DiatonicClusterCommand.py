@@ -35,7 +35,7 @@ class DiatonicClusterCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, widths, selector='baca.select().plts()'):
+    def __init__(self, widths, selector='baca.select().plts().wrap()'):
         Command.__init__(self, selector=selector)
         assert abjad.mathtools.all_are_nonnegative_integers(widths)
         widths = abjad.CyclicTuple(widths)
@@ -49,22 +49,21 @@ class DiatonicClusterCommand(Command):
         Returns none.
         '''
         selections = self._select(music)
-        plts = baca.select().plts()(selections)
-        for i, plt in enumerate(plts):
-            width = self.widths[i]
-            start = self._get_lowest_diatonic_pitch_number(plt)
-            diatonic_numbers = range(start, start + width)
-            class_ = abjad.PitchClass
-            dictionary = \
-                class_._diatonic_pitch_class_number_to_pitch_class_number
-            numbers = [
-                (12 * (x // 7)) + dictionary[x % 7] for x in diatonic_numbers
-                ]
-            pitches = [abjad.NamedPitch(_) for _ in numbers]
-            for pl in plt:
-                chord = abjad.Chord(pl)
-                chord.note_heads[:] = pitches
-                abjad.mutate(pl).replace(chord)
+        for selection in selections:
+            plts = baca.select().plts()(selection)
+            for i, plt in enumerate(plts):
+                width = self.widths[i]
+                start = self._get_lowest_diatonic_pitch_number(plt)
+                numbers = range(start, start + width)
+                class_ = abjad.PitchClass
+                change = \
+                    class_._diatonic_pitch_class_number_to_pitch_class_number
+                numbers = [(12 * (x // 7)) + change[x % 7] for x in numbers]
+                pitches = [abjad.NamedPitch(_) for _ in numbers]
+                for pl in plt:
+                    chord = abjad.Chord(pl)
+                    chord.note_heads[:] = pitches
+                    abjad.mutate(pl).replace(chord)
 
     ### PRIVATE METHODS ###
 

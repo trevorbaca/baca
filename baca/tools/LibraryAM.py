@@ -2053,7 +2053,11 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def clusters(widths, start_pitch=None, selector='baca.select().plts()'):
+    def clusters(
+        widths,
+        start_pitch=None,
+        selector='baca.select().plts().wrap()',
+        ):
         r'''Makes clusters.
         '''
         return baca.ClusterCommand(
@@ -2835,7 +2839,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def diatonic_clusters(widths, selector='baca.select().plts()'):
+    def diatonic_clusters(widths, selector='baca.select().plts().wrap()'):
         r'''Makes diatonic clusters.
         '''
         return baca.DiatonicClusterCommand(

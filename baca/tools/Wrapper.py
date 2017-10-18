@@ -102,7 +102,7 @@ class Wrapper(abjad.AbjadObject):
         ::
 
             >>> command = baca.Wrapper(
-            ...     baca.displacements([0, 0, 0, 0, 1, 1, 1, 1]),
+            ...     baca.displacement([0, 0, 0, 0, 1, 1, 1, 1]),
             ...     baca.scope('Violin Music Voice', 1, 4),
             ...     )
 
@@ -114,15 +114,7 @@ class Wrapper(abjad.AbjadObject):
                     displacements=abjad.CyclicTuple(
                         [0, 0, 0, 0, 1, 1, 1, 1]
                         ),
-                    selector=baca.Selector(
-                        callbacks=(
-                            abjad.ByLogicalTieCallback(
-                                pitched=True,
-                                trivial=True,
-                                ),
-                            abjad.WrapCallback(),
-                            ),
-                        ),
+                    selector=baca.select().plts().wrap(),
                     ),
                 scope=baca.Scope(
                     voice_name='Violin Music Voice',

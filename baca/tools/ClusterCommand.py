@@ -191,7 +191,7 @@ class ClusterCommand(Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.clusters(
             ...         [3, 4],
-            ...         selector=baca.select().tuplet(1).plts(),
+            ...         selector=baca.select().tuplet(1).plts().wrap(),
             ...         ),
             ...     )
 
@@ -521,7 +521,7 @@ class ClusterCommand(Command):
     def __init__(
         self,
         hide_flat_markup=None,
-        selector='baca.select().plts()',
+        selector='baca.select().plts().wrap()',
         start_pitch=None,
         widths=None,
         ):
@@ -543,17 +543,18 @@ class ClusterCommand(Command):
         Returns none.
         '''
         selections = self._select(music)
-        plts = baca.select().plts()(selections)
-        if not plts:
+        if not selections:
             return
         if not self.widths:
             return
         leaf = baca.select().leaf()(selections)
         root = abjad.inspect(leaf).get_parentage().root
         with abjad.ForbidUpdate(component=root):
-            for i, plt in enumerate(plts):
-                width = self.widths[i]
-                self._make_cluster(plt, width)
+            for selection in selections:
+                plts = baca.select().plts()(selection)
+                for i, plt in enumerate(plts):
+                    width = self.widths[i]
+                    self._make_cluster(plt, width)
 
     ### PRIVATE METHODS ###
 
@@ -737,7 +738,7 @@ class ClusterCommand(Command):
             ::
 
                 >>> baca.clusters([3, 4]).selector
-                baca.select().plts()
+                baca.select().plts().wrap()
 
         Returns selector.
         '''
