@@ -320,24 +320,20 @@ class RegisterToOctaveCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+    def __call__(self, music=None):
+        r'''Calls command on `music`.
 
         Returns none.
         '''
-        if argument is None:
-            return
+        selections = self._select(music)
         if self.octave_number is None:
             return
-        if self.selector is not None:
-            argument = self.selector(argument)
-        targets = self.normalize(argument)
-        for target in targets:
+        for selection in selections:
             target_octave_number = self.octave_number or 4
-            current_octave_number = self._get_anchor_octave_number(target)
+            current_octave_number = self._get_anchor_octave_number(selection)
             octave_adjustment = target_octave_number - current_octave_number
             transposition = abjad.Transposition(12 * octave_adjustment)
-            for leaf in abjad.select(target).by_leaf():
+            for leaf in abjad.select(selection).by_leaf():
                 self._set_pitch(leaf, transposition)
 
     ### PRIVATE METHODS ###
