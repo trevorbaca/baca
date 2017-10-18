@@ -1902,12 +1902,15 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def clef_spanner(clef='percussion', selector=None):
-        r'''Attaches clef spanner to leaves.
+    def clef_spanner(
+        clef='percussion',
+        selector='baca.select().leaves().wrap()',
+        ):
+        r'''Attaches clef spanner.
 
         ..  container:: example
 
-            Attaches clef spanner and one-line spanner to all leaves:
+            Attaches clef spanner and one-line spanner to leaves:
 
             ::
 
@@ -1979,11 +1982,9 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.clef_spanner(
                 ...         clef='percussion',
-                ...         selector=baca.select().tuplet(1).leaves(),
+                ...         selector=baca.select().tuplet(1),
                 ...         ),
-                ...     baca.one_line_staff(
-                ...         selector=baca.select().tuplet(1).leaves(),
-                ...         ),
+                ...     baca.one_line_staff(selector=baca.select().tuplet(1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(9),
                 ...     counts=[1, 1, 5, -1],
@@ -4453,8 +4454,8 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def five_line_staff(selector=None):
-        r'''Attaches five-line staff spanner to leaves.
+    def five_line_staff(selector='baca.select().leaves().wrap()'):
+        r'''Attaches five-line staff spanner.
 
         ..  container:: example
 
@@ -4467,13 +4468,8 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.clef_spanner(clef='percussion'),
-                ...     baca.clef_spanner(
-                ...         clef='treble',
-                ...         selector=baca.select().tuplet(1).leaves(),
-                ...         ),
-                ...     baca.five_line_staff(
-                ...         selector=baca.select().tuplet(1).leaves(),
-                ...         ),
+                ...     baca.clef_spanner('treble', baca.select().tuplet(1)),
+                ...     baca.five_line_staff(baca.select().tuplet(1)),
                 ...     baca.one_line_staff(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(9),
@@ -6102,13 +6098,14 @@ class LibraryAM(object):
                 ),
             )
 
+    # TODO: change name to self.messaien_ties() in plural
     @staticmethod
-    def messiaen_tie_each(selector=None):
-        r'''Attaches Messaien ties to each PLT p-run.
+    def messiaen_tie_each(selector='baca.select().plt_pruns()'):
+        r'''Attaches Messaien ties.
 
         ..  container:: example
 
-            Attaches Messiaen ties to each PLT p-run:
+            Attaches Messiaen tie to each PLT p-run:
 
             ::
 
@@ -6220,7 +6217,6 @@ class LibraryAM(object):
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.Tie(use_messiaen_style_ties=True),
-            target=baca.select().plt_pruns(),
             )
 
     @staticmethod
@@ -6247,7 +6243,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def molto_flaut_to_molto_grid(selector=None):
+    def molto_flaut_to_molto_grid(selector='baca.select().leaves().wrap()'):
         r'''Makes color transition spanner.
         '''
         left_text = abjad.Markup('molto flautando').italic().larger() + abjad.Markup.hspace(1)

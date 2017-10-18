@@ -166,7 +166,7 @@ class SpannerCommand(Command):
         ::
 
             >>> baca.SpannerCommand()
-            SpannerCommand(target=baca.select().leaves())
+            SpannerCommand(selector=baca.select().leaves().wrap())
 
     '''
 
@@ -181,11 +181,10 @@ class SpannerCommand(Command):
 
     def __init__(
         self,
-        selector=None,
+        selector='baca.select().leaves().wrap()',
         spanner=None,
-        target='baca.select().leaves()',
         ):
-        Command.__init__(self, selector=selector, target=target)
+        Command.__init__(self, selector=selector)
         if spanner is not None:
             assert isinstance(spanner, abjad.Spanner)
         self._spanner = spanner
@@ -193,19 +192,20 @@ class SpannerCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+    def __call__(self, music=None):
+        r'''Calls command on `music`.
 
         Returns none.
         '''
-        if argument is None:
-            return
-        if self.selector is not None:
-            argument = self.selector(argument)
-        selections = self._to_selection_list(argument)
-        if self.target is not None:
-            selections = [self.target(_) for _ in selections]
-        selections = self._to_selection_list(selections)
+#        if argument is None:
+#            return
+#        if self.selector is not None:
+#            argument = self.selector(argument)
+#        selections = self._to_selection_list(argument)
+#        if self.target is not None:
+#            selections = [self.target(_) for _ in selections]
+#        selections = self._to_selection_list(selections)
+        selections = self._select(music)
         if False:
             print(format(self.selector))
             print()
@@ -233,14 +233,12 @@ class SpannerCommand(Command):
 
         ..  container:: example
 
-            Selects leaves by default:
+            Selects wrapped leaves:
 
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.SpannerCommand(
-                ...         spanner=abjad.Slur(),
-                ...         ),
+                ...     baca.SpannerCommand(spanner=abjad.Slur()),
                 ...     )
 
             ::
@@ -283,9 +281,7 @@ class SpannerCommand(Command):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.SpannerCommand(
-                ...         spanner=abjad.Slur(),
-                ...         ),
+                ...     baca.SpannerCommand(spanner=abjad.Slur()),
                 ...     )
 
             ::
@@ -308,8 +304,6 @@ class SpannerCommand(Command):
                         }
                     }
                 >>
-
-        Defaults to leaves.
 
         Set to selector or none.
 
@@ -387,8 +381,6 @@ class SpannerCommand(Command):
                         }
                     }
                 >>
-
-        Defaults to none.
 
         Set to spanner or none.
 

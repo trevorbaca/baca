@@ -1628,9 +1628,7 @@ class MusicMaker(abjad.AbjadObject):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.SpannerCommand(
-                ...         spanner=abjad.Slur(),
-                ...         ),
+                ...     baca.SpannerCommand(spanner=abjad.Slur()),
                 ...     )
 
             ::
@@ -1684,7 +1682,7 @@ class MusicMaker(abjad.AbjadObject):
 
                 >>> music_maker = baca.MusicMaker(
                 ...     baca.SpannerCommand(
-                ...         selector=baca.select().leaves_in_each_tuplet(),
+                ...         selector=baca.select().tuplets(),
                 ...         spanner=abjad.Slur(),
                 ...         ),
                 ...     )
@@ -1734,12 +1732,12 @@ class MusicMaker(abjad.AbjadObject):
 
         ..  container:: example
 
-            Slur specifier selects first two leaves in each tuplet:
+            Slur specifier selects first two pitched leaves in each tuplet:
 
             ::
 
                 >>> selector = baca.select().tuplets()
-                >>> selector = selector.map(baca.select().leaves()[:2])
+                >>> selector = selector.map(baca.select().pls()[:2])
                 >>> music_maker = baca.MusicMaker(
                 ...     baca.SpannerCommand(
                 ...         selector=selector,
@@ -1792,12 +1790,12 @@ class MusicMaker(abjad.AbjadObject):
 
         ..  container:: example
 
-            Slur specifier selects last two leaves in each tuplet:
+            Slur specifier selects last two pitched leaves in each tuplet:
 
             ::
 
                 >>> selector = baca.select().tuplets()
-                >>> selector = selector.map(baca.select().leaves()[-2:])
+                >>> selector = selector.map(baca.select().pls()[-2:])
                 >>> music_maker = baca.MusicMaker(
                 ...     baca.SpannerCommand(
                 ...         selector=selector,

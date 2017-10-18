@@ -366,12 +366,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def one_line_staff(selector=None):
-        r'''Attaches one-line staff to leaves.
+    def one_line_staff(selector='baca.select().leaves().wrap()'):
+        r'''Attaches one-line staff spanner.
 
         ..  container:: example
 
-            Attaches clef spanner and one-line spanner to all leaves:
+            Attaches clef spanner and one-line spanner to leaves:
 
             ::
 
@@ -443,11 +443,9 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.clef_spanner(
                 ...         clef='percussion',
-                ...         selector=baca.select().tuplet(1).leaves(),
+                ...         selector=baca.select().tuplet(1),
                 ...         ),
-                ...     baca.one_line_staff(
-                ...         selector=baca.select().tuplet(1).leaves(),
-                ...         ),
+                ...     baca.one_line_staff(selector=baca.select().tuplet(1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(9),
                 ...     counts=[1, 1, 5, -1],
@@ -505,12 +503,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def ottava(selector=None):
-        r'''Attaches ottava spanner to trimmed leaves.
+    def ottava(selector='baca.select().trimmed_leaves().wrap()'):
+        r'''Attaches ottava spanner.
 
         ..  container:: example
 
-            Attaches ottava spanner to all trimmed leaves:
+            Attaches ottava spanner to pitched leaves:
 
             ::
 
@@ -567,7 +565,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Attaches ottava spanner to pitched runs:
+            Attaches ottava spanner to each PLT run:
 
             ::
 
@@ -630,16 +628,15 @@ class LibraryNZ(object):
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.OctavationSpanner(start=1, stop=0),
-            target=baca.select().trimmed_leaves(),
             )
 
     @staticmethod
-    def ottava_bassa(selector=None):
-        r'''Attaches ottava bassa spanner to trimmed leaves.
+    def ottava_bassa(selector='baca.select().trimmed_leaves().wrap()'):
+        r'''Attaches ottava bassa spanner.
 
         ..  container:: example
 
-            Attaches ottava bassa spanner to all trimmed leaves:
+            Attaches ottava bassa spanner to trimmed leaves:
 
             ::
 
@@ -696,7 +693,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Attaches ottava bassa spanner to pitched runs:
+            Attaches ottava bassa spanner to each PLT run:
 
             ::
 
@@ -759,16 +756,15 @@ class LibraryNZ(object):
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.OctavationSpanner(start=-1, stop=0),
-            target=baca.select().trimmed_leaves(),
             )
 
     @staticmethod
-    def percussion_staff(selector=None):
-        r'''Attaches percussion staff spanner to leaves.
+    def percussion_staff(selector='baca.select().leaves().wrap()'):
+        r'''Attaches percussion staff spanner.
 
         ..  container:: example
 
-            Attaches percussion staff spanner to all leaves:
+            Attaches percussion staff spanner to leaves:
 
             ::
 
@@ -838,8 +834,8 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.one_line_staff(baca.select().tuplet(1).leaves()),
-                ...     baca.percussion_staff(baca.select().tuplet(1).leaves()),
+                ...     baca.one_line_staff(baca.select().tuplet(1)),
+                ...     baca.percussion_staff(baca.select().tuplet(1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(9),
                 ...     counts=[1, 1, 5, -1],
@@ -3859,13 +3855,14 @@ class LibraryNZ(object):
             skips_instead_of_rests=True,
             )
 
+    # TODO: change name to slurs() in plural
     @staticmethod
-    def slur(selector=None):
-        r'''Slurs trimmed leaves.
+    def slur(selector='baca.select().trimmed_leaves().wrap()'):
+        r'''Attaches slurs.
 
         ..  container:: example
 
-            Slurs all trimmed leaves:
+            Slurs trimmed leaves:
 
             ::
 
@@ -3923,7 +3920,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Slurs trimmed leaves in tuplet 1:
+            Attaches slur to trimmed leaves in tuplet 1:
 
             ::
 
@@ -3931,7 +3928,9 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.slur(baca.select().tuplet(1).trimmed_leaves()),
+                ...     baca.slur(
+                ...         baca.select().tuplet(1).trimmed_leaves().wrap(),
+                ...         ),
                 ...     baca.slurs_down(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3983,16 +3982,15 @@ class LibraryNZ(object):
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.Slur(),
-            target=baca.select().trimmed_leaves(),
             )
 
     @staticmethod
     def slur_each_plt_run(start=None, stop=None):
-        r'''Slurs pitched runs.
+        r'''Slurs each PLT run.
 
         ..  container:: example
 
-            Slurs all pitched runs:
+            Slurs each PLT runs
 
             ::
 
@@ -5712,7 +5710,7 @@ class LibraryNZ(object):
         return expression
 
     @staticmethod
-    def sustain_pedal(selector=None):
+    def sustain_pedal(selector='baca.select().leaves().wrap()'):
         r'''Pedals selection.
 
         ..  container:: example
@@ -5785,7 +5783,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
-                ...     baca.sustain_pedal(baca.select().tuplet(1).leaves()),
+                ...     baca.sustain_pedal(baca.select().tuplet(1)),
                 ...     baca.sustain_pedal_staff_padding(4),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -5840,15 +5838,13 @@ class LibraryNZ(object):
             ::
 
                 >>> music_maker = baca.MusicMaker()
+                >>> selector = baca.select().tuplet(1)
+                >>> selector = selector.leaves(leak=abjad.Left).wrap()
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
-                ...     baca.sustain_pedal(
-                ...         selector=baca.select().tuplet(1).leaves(
-                ...             leak=abjad.Left,
-                ...             ),
-                ...         ),
+                ...     baca.sustain_pedal(selector=selector),
                 ...     baca.sustain_pedal_staff_padding(4),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -5903,15 +5899,13 @@ class LibraryNZ(object):
             ::
 
                 >>> music_maker = baca.MusicMaker()
+                >>> selector = baca.select().tuplet(1)
+                >>> selector = selector.leaves(leak=abjad.Right).wrap()
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
-                ...     baca.sustain_pedal(
-                ...         selector=baca.select().tuplet(1).leaves(
-                ...             leak=abjad.Right,
-                ...             ),
-                ...         ),
+                ...     baca.sustain_pedal(selector=selector),
                 ...     baca.sustain_pedal_staff_padding(4),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -5966,15 +5960,13 @@ class LibraryNZ(object):
             ::
 
                 >>> music_maker = baca.MusicMaker()
+                >>> selector = baca.select().tuplet(1)
+                >>> selector = selector.leaves(leak=abjad.Both).wrap()
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
-                ...     baca.sustain_pedal(
-                ...         selector=baca.select().tuplet(1).leaves(
-                ...             leak=abjad.Both,
-                ...             ),
-                ...         ),
+                ...     baca.sustain_pedal(selector=selector),
                 ...     baca.sustain_pedal_staff_padding(4),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6033,9 +6025,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
-                ...     baca.sustain_pedal(
-                ...         selector=baca.select().leaves_in_each_tuplet(),
-                ...         ),
+                ...     baca.sustain_pedal(selector=baca.select().tuplets()),
                 ...     baca.sustain_pedal_staff_padding(4),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6092,13 +6082,13 @@ class LibraryNZ(object):
             ::
 
                 >>> music_maker = baca.MusicMaker()
+                >>> get = baca.select().leaves(leak=abjad.Left)
+                >>> selector = baca.select().tuplets().map(get)
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
-                ...     baca.sustain_pedal(
-                ...     selector=baca.select().leaves_in_each_tuplet(leak=abjad.Left),
-                ...         ),
+                ...     baca.sustain_pedal(selector=selector),
                 ...     baca.sustain_pedal_staff_padding(4),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6155,13 +6145,13 @@ class LibraryNZ(object):
             ::
 
                 >>> music_maker = baca.MusicMaker()
+                >>> get = baca.select().leaves(leak=abjad.Right)
+                >>> selector = baca.select().tuplets().map(get)
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
-                ...     baca.sustain_pedal(
-                ...     selector=baca.select().leaves_in_each_tuplet(leak=abjad.Right),
-                ...         ),
+                ...     baca.sustain_pedal(selector=selector),
                 ...     baca.sustain_pedal_staff_padding(4),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -7397,13 +7387,14 @@ class LibraryNZ(object):
             selector=selector,
             )
 
+    # TODO: change name to ties() in plural
     @staticmethod
-    def tie_each(selector=None):
+    def tie_each(selector='baca.select().plt_pruns()'):
         r'''Ties each PLT p-run.
 
         ..  container:: example
 
-            Ties all PLT p-runs:
+            Ties each PLT p-run:
 
             ::
 
@@ -7515,7 +7506,6 @@ class LibraryNZ(object):
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.Tie(),
-            target=baca.select().plt_pruns(),
             )
 
     @staticmethod
@@ -9219,12 +9209,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def two_line_staff(selector=None):
-        r'''Attaches two-line staff spanner to leaves.
+    def two_line_staff(selector='baca.select().leaves().wrap()'):
+        r'''Attaches two-line staff spanner.
 
         ..  container:: example
 
-            Attaches two-line percussion staff spanner to all leaves:
+            Attaches two-line percussion staff spanner to leaves:
 
             ::
 
@@ -9294,14 +9284,10 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.percussion_staff(
-                ...         baca.select().tuplet(1).leaves(),
-                ...         ),
+                ...     baca.percussion_staff(baca.select().tuplet(1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(9),
-                ...     baca.two_line_staff(
-                ...         baca.select().tuplet(1).leaves(),
-                ...         ),
+                ...     baca.two_line_staff(baca.select().tuplet(1)),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
                 ...     )

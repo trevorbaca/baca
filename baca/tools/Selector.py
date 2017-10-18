@@ -5073,9 +5073,7 @@ class Selector(abjad.Selector):
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
                 ...     baca.color(baca.select().plts_in_each_tuplet(start=-2)),
                 ...     baca.flags(),
-                ...     baca.messiaen_tie_each(
-                ...         baca.select().leaves_in_each_tuplet(),
-                ...         ),
+                ...     baca.messiaen_tie_each(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 6],
@@ -5101,12 +5099,7 @@ class Selector(abjad.Selector):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
-                                bf'16
+                                bf'16 \repeatTie
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
@@ -5149,7 +5142,7 @@ class Selector(abjad.Selector):
             ::
 
                 >>> contribution.print_color_selector_result()
-                [LogicalTie([Note("bf'16")]), LogicalTie([Note("e''16"), Note("e''4.")]), LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")])]
+                [LogicalTie([Note("e''16"), Note("e''4.")]), LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")])]
                 [LogicalTie([Note("a'16")])]
 
         '''
