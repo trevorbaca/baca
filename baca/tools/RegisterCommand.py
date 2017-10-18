@@ -274,8 +274,8 @@ class RegisterCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+    def __call__(self, music=None):
+        r'''Calls command on `music`.
 
         ..  container:: example
 
@@ -288,9 +288,7 @@ class RegisterCommand(Command):
                 ...     'Voice 1',
                 ...     [{10, 12, 14}],
                 ...     baca.RegisterCommand(
-                ...         registration=baca.Registration(
-                ...             [('[A0, C8]', -6)],
-                ...             ),
+                ...         baca.Registration([('[A0, C8]', -6)]),
                 ...         ),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -312,28 +310,22 @@ class RegisterCommand(Command):
 
         Returns none.
         '''
-        if argument is None:
-            return
-        if self.selector is not None:
-            argument = self.selector(argument)
-        selections = self._to_selection_list(argument)
+        selections = self._select(music)
         for selection in selections:
-            for logical_tie in abjad.iterate(selection).by_logical_tie(
-                pitched=True,
-                with_grace_notes=True,
-                ):
-                for leaf in logical_tie:
-                    if isinstance(leaf, abjad.Note):
-                        written_pitch = leaf.written_pitch
-                        written_pitches = self.registration([written_pitch])
-                        leaf.written_pitch = written_pitches[0]
-                    elif isinstance(leaf, abjad.Chord):
-                        written_pitches = leaf.written_pitches
-                        written_pitches = self.registration(written_pitches)
-                        leaf.written_pitches = written_pitches
+            plts = baca.select().plts()(selection)
+            for plt in plts:
+                for pl in plt:
+                    if isinstance(pl, abjad.Note):
+                        pitch = pl.written_pitch
+                        pitches = self.registration([pitch])
+                        pl.written_pitch = pitches[0]
+                    elif isinstance(pl, abjad.Chord):
+                        pitches = pl.written_pitches
+                        pitches = self.registration(pitches)
+                        pl.written_pitches = pitches
                     else:
-                        raise TypeError(leaf)
-                    abjad.detach('not yet registered', leaf)
+                        raise TypeError(pl)
+                    abjad.detach('not yet registered', pl)
 
     ### PUBLIC PROPERTIES ###
 

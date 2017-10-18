@@ -2137,7 +2137,7 @@ class Selector(abjad.Selector):
                 LogicalTie([Rest('r4')])
 
         '''
-        selector = self.by_logical_tie()
+        selector = self.by_logical_tie(with_grace_notes=True)
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
@@ -4949,7 +4949,7 @@ class Selector(abjad.Selector):
                 LogicalTie([Note("a'16")])
 
         '''
-        selector = self.by_logical_tie(pitched=True)
+        selector = self.by_logical_tie(pitched=True, with_grace_notes=True)
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 

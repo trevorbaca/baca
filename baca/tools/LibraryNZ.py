@@ -1631,8 +1631,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Octave-transposes all PLTs to the octave rooted at
-            -6:
+            Octave-transposes all PLTs to the octave rooted at -6:
 
             ::
 
@@ -1925,9 +1924,7 @@ class LibraryNZ(object):
         '''
         if stop is None:
             return baca.RegisterCommand(
-                registration=baca.Registration(
-                    [('[A0, C8]', start)],
-                    ),
+                registration=baca.Registration([('[A0, C8]', start)]),
                 selector=selector,
                 )
         return baca.RegisterInterpolationCommand(
