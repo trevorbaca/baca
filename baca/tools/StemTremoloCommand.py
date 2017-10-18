@@ -23,7 +23,7 @@ class StemTremoloCommand(Command):
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4 F4'),
             ...     baca.even_runs(),
-            ...     baca.StemTremoloCommand(),
+            ...     baca.stem_tremolo(),
             ...     )
 
         ::
@@ -122,31 +122,25 @@ class StemTremoloCommand(Command):
 
     def __init__(
         self,
-        selector=None,
-        target='baca.select().pls()',
+        selector='baca.select().pls()',
         tremolo_flags=32,
         ):
-        Command.__init__(self, selector=selector, target=target)
+        Command.__init__(self, selector=selector)
         assert abjad.mathtools.is_nonnegative_integer_power_of_two(
             tremolo_flags)
         self._tremolo_flags = tremolo_flags
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+    def __call__(self, music=None):
+        r'''Calls command on `music`.
 
         Returns none.
         '''
-        if argument is None:
-            return
-        if self.selector is not None:
-            argument = self.selector(argument)
-        if self.target is not None:
-            argument = self.target(argument)
-        selections = self._to_selection_list(argument)
+        selections = self._select(music)
         for selection in selections:
-            for pl in abjad.iterate(selection).by_leaf(pitched=True):
+            pls = baca.select().pls()(selection)
+            for pl in pls:
                 stem_tremolo = abjad.StemTremolo(
                     tremolo_flags=self.tremolo_flags
                     )
@@ -160,7 +154,7 @@ class StemTremoloCommand(Command):
 
         ..  container:: example
 
-            Selects notes and chords by default:
+            Selects pitched leaves:
 
             ::
 
@@ -175,7 +169,7 @@ class StemTremoloCommand(Command):
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.pitches('E4 F4'),
                 ...     baca.even_runs(),
-                ...     baca.StemTremoloCommand(),
+                ...     baca.stem_tremolo(),
                 ...     )
 
             ::
@@ -264,7 +258,7 @@ class StemTremoloCommand(Command):
 
         ..  container:: example
 
-            Selects last seven notes and chords:
+            Selects last seven pitched leaves:
 
             ::
 
@@ -279,9 +273,7 @@ class StemTremoloCommand(Command):
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.pitches('E4 F4'),
                 ...     baca.even_runs(),
-                ...     baca.StemTremoloCommand(
-                ...         selector=abjad.select().by_leaf(pitched=True)[-7:]
-                ...         ),
+                ...     baca.stem_tremolo(baca.select().pls()[-7:]),
                 ...     )
 
             ::
@@ -368,8 +360,6 @@ class StemTremoloCommand(Command):
                     >>
                 >>
 
-        Defaults to pitched logical ties.
-
         Set to selector or none.
 
         Returns selector or none.
@@ -397,7 +387,7 @@ class StemTremoloCommand(Command):
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.pitches('E4 F4'),
                 ...     baca.even_runs(),
-                ...     baca.StemTremoloCommand(),
+                ...     baca.stem_tremolo(),
                 ...     )
 
             ::
@@ -501,9 +491,7 @@ class StemTremoloCommand(Command):
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.pitches('E4 F4'),
                 ...     baca.even_runs(),
-                ...     baca.StemTremoloCommand(
-                ...         tremolo_flags=16,
-                ...         ),
+                ...     baca.StemTremoloCommand(tremolo_flags=16),
                 ...     )
 
             ::

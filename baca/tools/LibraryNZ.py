@@ -5235,12 +5235,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def stem_tremolo(selector=None):
-        r'''Attaches stem tremolo to pitched leaves.
+    def stem_tremolo(selector='baca.select().pls()'):
+        r'''Attaches stem tremolo.
 
         ..  container:: example
 
-            Attaches stem tremolo to all pitched leaves:
+            Attaches stem tremolo to pitched leaves:
 
             ::
 
@@ -5304,9 +5304,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
-                ...     baca.stem_tremolo(
-                ...         baca.select().tuplet(1).pls(),
-                ...         ),
+                ...     baca.stem_tremolo(baca.select().tuplet(1)),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -5351,11 +5349,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.StemTremoloCommand(
-            selector=selector,
-            tremolo_flags=32,
-            target=baca.select().pls(),
-            )
+        return baca.StemTremoloCommand(selector=selector, tremolo_flags=32)
 
     @staticmethod
     def stems_down(selector='baca.select().pls().wrap()'):
