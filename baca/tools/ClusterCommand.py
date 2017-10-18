@@ -1,4 +1,5 @@
 import abjad
+import baca
 from .Command import Command
 
 
@@ -541,14 +542,14 @@ class ClusterCommand(Command):
 
         Returns none.
         '''
-        plts = self._select(argument)
-        if not plts:
+        selections = self._select(argument)
+        if not selections:
             return
         if not self.widths:
             return
-        selector = abjad.select().by_leaf().first()
-        leaf = selector(plts)
+        leaf = baca.select().leaf()(selections)
         root = abjad.inspect(leaf).get_parentage().root
+        plts = baca.select().plts()(selections)
         with abjad.ForbidUpdate(component=root):
             for i, plt in enumerate(plts):
                 width = self.widths[i]
@@ -557,7 +558,7 @@ class ClusterCommand(Command):
     ### PRIVATE METHODS ###
 
     def _make_cluster(self, plt, width):
-        assert isinstance(plt, abjad.LogicalTie), repr(plt)
+        assert plt.is_pitched, repr(plt)
         if not width:
             return
         if self.start_pitch is not None:
@@ -584,25 +585,6 @@ class ClusterCommand(Command):
 
     def _mutates_score(self):
         return True
-
-    def _select(self, argument):
-        if argument is None:
-            return
-        assert self.selector is not None, repr(self)
-        plts = argument
-        if self.selector is not None:
-            plts = self.selector(plts)
-            last = self.selector.callbacks[-1]
-            if isinstance(last, abjad.GetItemCallback):
-                plts = [plts]
-        if not plts:
-            return
-        for plt in plts:
-            if not isinstance(plt, abjad.LogicalTie):
-                raise Exception(f'must be PLTs: {plts!r}')
-            if not plt.is_pitched:
-                raise Exception(f'must be PLTs: {plts!r}')
-        return plts
 
     ### PUBLIC PROPERTIES ###
 
@@ -763,7 +745,7 @@ class ClusterCommand(Command):
 
     @property
     def start_pitch(self):
-        r'''Gets start pitch of cluster.
+        r'''Gets start pitch.
 
         ..  container:: example
 

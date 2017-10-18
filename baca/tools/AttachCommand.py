@@ -197,8 +197,7 @@ class AttachCommand(Command):
             return
         if self.arguments is None:
             return
-        arguments = abjad.CyclicTuple(self.arguments)
-        i = 0
+        arguments, i = abjad.CyclicTuple(self.arguments), 0
         for selection in selections:
             for leaf in abjad.iterate(selection).by_leaf():
                 arguments_ = arguments[i]

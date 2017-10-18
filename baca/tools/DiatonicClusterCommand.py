@@ -1,4 +1,5 @@
 import abjad
+import baca
 from .Command import Command
 
 
@@ -42,14 +43,15 @@ class DiatonicClusterCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+    def __call__(self, music=None):
+        r'''Calls command on `music`.
 
         Returns none.
         '''
-        plts = self._select(argument)
-        if not plts:
+        selections = self._select(music)
+        if not selections:
             return
+        plts = baca.select().plts()(selections)
         for i, plt in enumerate(plts):
             width = self.widths[i]
             start = self._get_lowest_diatonic_pitch_number(plt)
@@ -79,25 +81,6 @@ class DiatonicClusterCommand(Command):
 
     def _mutates_score(self):
         return True
-
-    def _select(self, argument):
-        if argument is None:
-            return
-        assert self.selector is not None, repr(self)
-        plts = argument
-        if self.selector is not None:
-            plts = self.selector(plts)
-            last = self.selector.callbacks[-1]
-            if isinstance(last, abjad.GetItemCallback):
-                plts = [plts]
-        if not plts:
-            return
-        for plt in plts:
-            if not isinstance(plt, abjad.LogicalTie):
-                raise Exception(f'must be PLTs: {plts!r}')
-            if not plt.is_pitched:
-                raise Exception(f'must be PLTs: {plts!r}')
-        return plts
 
     ### PUBLIC PROPERTIES ###
 
