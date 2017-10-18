@@ -8,9 +8,7 @@ class RegisterInterpolationCommand(Command):
 
     ..  container:: example
 
-        With music-maker.
-
-        All stages glued together:
+        With music-maker:
 
         ::
 
@@ -22,10 +20,7 @@ class RegisterInterpolationCommand(Command):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     collections,
-            ...     baca.RegisterInterpolationCommand(
-            ...         start_pitch=0,
-            ...         stop_pitch=24,
-            ...         ),
+            ...     baca.register(0, 24),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
@@ -86,10 +81,7 @@ class RegisterInterpolationCommand(Command):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     collections,
-            ...     baca.RegisterInterpolationCommand(
-            ...         start_pitch=0,
-            ...         stop_pitch=24,
-            ...         ),
+            ...     baca.register(0, 24),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
@@ -125,8 +117,6 @@ class RegisterInterpolationCommand(Command):
 
     ..  container:: example
 
-        With segment-maker.
-
         Holds register constant:
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
@@ -142,10 +132,7 @@ class RegisterInterpolationCommand(Command):
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
-            ...     baca.RegisterInterpolationCommand(
-            ...         start_pitch=12,
-            ...         stop_pitch=12,
-            ...         ),
+            ...     baca.register(12, 12),
             ...     )
 
         ::
@@ -288,7 +275,7 @@ class RegisterInterpolationCommand(Command):
 
     ..  container:: example
 
-        Register interpolates from the octave of C5 to the octave of C4:
+        Octave-transposes to a target interpolated from 12 down to 0:
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
             >>> segment_maker = baca.SegmentMaker(
@@ -303,10 +290,7 @@ class RegisterInterpolationCommand(Command):
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
-            ...     baca.RegisterInterpolationCommand(
-            ...         start_pitch=12,
-            ...         stop_pitch=0,
-            ...         ),
+            ...     baca.register(12, 0),
             ...     )
 
         ::
@@ -449,7 +433,7 @@ class RegisterInterpolationCommand(Command):
 
     ..  container:: example
 
-        Register interpolates from the octave of C4 to the octave of C5:
+        Octave-transposes to a target interpolated from 0 up to 12:
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
             >>> segment_maker = baca.SegmentMaker(
@@ -464,10 +448,7 @@ class RegisterInterpolationCommand(Command):
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
-            ...     baca.RegisterInterpolationCommand(
-            ...         start_pitch=0,
-            ...         stop_pitch=12,
-            ...         ),
+            ...     baca.register(0, 12),
             ...     )
 
         ::
@@ -610,7 +591,7 @@ class RegisterInterpolationCommand(Command):
 
     ..  container:: example
 
-        Register interpolates from the octave of C5 to the octave of C3:
+        Octave-transposes to a target interpolated from 12 down to -12:
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
             >>> segment_maker = baca.SegmentMaker(
@@ -625,10 +606,7 @@ class RegisterInterpolationCommand(Command):
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
-            ...     baca.RegisterInterpolationCommand(
-            ...         start_pitch=12,
-            ...         stop_pitch=-12,
-            ...         ),
+            ...     baca.register(12, -12),
             ...     )
 
         ::
@@ -771,7 +749,7 @@ class RegisterInterpolationCommand(Command):
 
     ..  container:: example
 
-        Register interpolates from the octave of C3 to the octave of C5:
+        Octave-transposes to a target interpolated from -12 up to 12:
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
             >>> segment_maker = baca.SegmentMaker(
@@ -786,10 +764,7 @@ class RegisterInterpolationCommand(Command):
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches(pitches),
             ...     baca.even_runs(),
-            ...     baca.RegisterInterpolationCommand(
-            ...         start_pitch=-12,
-            ...         stop_pitch=12,
-            ...         ),
+            ...     baca.register(-12, 12),
             ...     )
 
         ::
@@ -935,7 +910,6 @@ class RegisterInterpolationCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_pattern',
         '_start_pitch',
         '_stop_pitch',
         )
@@ -946,15 +920,11 @@ class RegisterInterpolationCommand(Command):
 
     def __init__(
         self,
-        pattern=None,
-        selector=None,
+        selector='baca.select().plts().wrap()',
         start_pitch=None,
         stop_pitch=None,
         ):
         Command.__init__(self, selector=selector)
-        if pattern is not None:
-            assert isinstance(pattern, abjad.Pattern), repr(pattern)
-        self._pattern = pattern
         start_pitch = abjad.NumberedPitch(start_pitch)
         self._start_pitch = start_pitch
         stop_pitch = abjad.NumberedPitch(stop_pitch)
@@ -962,48 +932,39 @@ class RegisterInterpolationCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+    def __call__(self, music=None):
+        r'''Calls command on `music`.
 
         Returns none.
         '''
-        if argument is None:
-            return
-        selector = self.selector or baca.select().leaves()
-        result = selector(argument)
-        selections = self._to_selection_list(result)
+        selections = self._select(music)
         for selection in selections:
-            logical_ties = abjad.iterate(selection).by_logical_tie(
-                pitched=True,
-                with_grace_notes=True,
-                )
-            logical_ties = list(logical_ties)
-            length = len(logical_ties)
-            for index, logical_tie in enumerate(logical_ties):
-                registration = self._get_registration(index, length)
-                for leaf in logical_tie:
-                    if isinstance(leaf, abjad.Note):
-                        written_pitches = registration([leaf.written_pitch])
-                        leaf.written_pitch = written_pitches[0]
-                    elif isinstance(leaf, abjad.Chord):
-                        written_pitches = registration(leaf.written_pitches)
-                        leaf.written_pitches = written_pitches
+            plts = baca.select().plts()(selection)
+            length = len(plts)
+            for i, plt in enumerate(plts):
+                registration = self._get_registration(i, length)
+                for pl in plt:
+                    if isinstance(pl, abjad.Note):
+                        written_pitches = registration([pl.written_pitch])
+                        pl.written_pitch = written_pitches[0]
+                    elif isinstance(pl, abjad.Chord):
+                        written_pitches = registration(pl.written_pitches)
+                        pl.written_pitches = written_pitches
                     else:
-                        raise TypeError(leaf)
-                    abjad.detach('not yet registered', leaf)
+                        raise TypeError(pl)
+                    abjad.detach('not yet registered', pl)
 
     ### PRIVATE METHODS ###
 
-    def _get_registration(self, logical_tie_index, logical_tie_count):
+    def _get_registration(self, i, length):
         start_pitch = self.start_pitch.number
         stop_pitch = self.stop_pitch.number
         compass = stop_pitch - start_pitch
-        fraction = abjad.Fraction(logical_tie_index, logical_tie_count)
+        fraction = abjad.Fraction(i, length)
         addendum = fraction * compass
         current_pitch = start_pitch + addendum
         current_pitch = int(current_pitch)
-        registration = baca.Registration([('[A0, C8]', current_pitch)])
-        return registration
+        return baca.Registration([('[A0, C8]', current_pitch)])
 
     ### PUBLIC PROPERTIES ###
 
@@ -1025,11 +986,8 @@ class RegisterInterpolationCommand(Command):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.RegisterInterpolationCommand(
-                ...         selector=baca.select().tuplet(0),
-                ...         start_pitch=0,
-                ...         stop_pitch=24,
-                ...         ),
+                ...     baca.color(baca.select().tuplet(0)),
+                ...     baca.register(0, 24, baca.select().tuplet(0)),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1042,17 +1000,77 @@ class RegisterInterpolationCommand(Command):
                         \voiceOne
                         {
                             {
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 fs'16 [
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 e'16
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 ef''16
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 f''16
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 a'16
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 bf'16
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 c''16
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 b''16
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 af''16
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 g''16
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 cs'''16
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 d'''16 ]
                             }
                             {
@@ -1087,11 +1105,8 @@ class RegisterInterpolationCommand(Command):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.RegisterInterpolationCommand(
-                ...         selector=baca.select().tuplet(-1),
-                ...         start_pitch=0,
-                ...         stop_pitch=24,
-                ...         ),
+                ...     baca.color(baca.select().tuplet(-1)),
+                ...     baca.register(0, 24, baca.select().tuplet(-1)),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1118,17 +1133,77 @@ class RegisterInterpolationCommand(Command):
                                 d'16 ]
                             }
                             {
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 fs'16 [
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 e'16
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 ef''16
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 f''16
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 a'16
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 bf'16
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 c''16
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 b''16
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 af''16
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 g''16
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 cs'''16
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 d'''16 ]
                             }
                         }
@@ -1137,7 +1212,7 @@ class RegisterInterpolationCommand(Command):
 
         ..  container:: example
 
-            Selects leaves in each tuplet (selected separately):
+            Selects tuplets:
 
             ::
 
@@ -1149,11 +1224,8 @@ class RegisterInterpolationCommand(Command):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     collections,
-                ...     baca.RegisterInterpolationCommand(
-                ...         selector=baca.select().leaves_in_each_tuplet(),
-                ...         start_pitch=0,
-                ...         stop_pitch=24,
-                ...         ),
+                ...     baca.color(baca.select().tuplets()),
+                ...     baca.register(0, 24, baca.select().tuplets()),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
@@ -1166,31 +1238,151 @@ class RegisterInterpolationCommand(Command):
                         \voiceOne
                         {
                             {
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
                                 fs'16 [
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
                                 e'16
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
                                 ef''16
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
                                 f''16
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
                                 a'16
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
                                 bf'16
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
                                 c''16
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
                                 b''16
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
                                 af''16
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
                                 g''16
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
                                 cs'''16
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
                                 d'''16 ]
                             }
                             {
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 fs'16 [
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 e'16
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 ef''16
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 f''16
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 a'16
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 bf'16
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 c''16
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 b''16
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 af''16
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 g''16
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 cs'''16
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
                                 d'''16 ]
                             }
                         }

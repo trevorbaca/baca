@@ -1626,7 +1626,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def register(start, stop=None, selector=None):
+    def register(start, stop=None, selector='baca.select().plts().wrap()'):
         r'''Octave-transposes PLTs.
 
         ..  container:: example
@@ -1684,8 +1684,7 @@ class LibraryNZ(object):
                     }
                 >>
 
-            Octave-transposes PLTs in tuplet 1 to the octave
-            rooted at -6:
+            Octave-transposes PLTs in tuplet 1 to the octave rooted at -6:
 
             ::
 
@@ -1693,11 +1692,8 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.color(baca.select().tuplet(1).leaves()),
-                ...     baca.register(
-                ...         -6,
-                ...         selector=baca.select().tuplet(1).leaves(),
-                ...         ),
+                ...     baca.color(baca.select().tuplet(1)),
+                ...     baca.register(-6, selector=baca.select().tuplet(1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -1725,44 +1721,44 @@ class LibraryNZ(object):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 fs16 [
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 e'16 ]
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 ef'4 ~
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 ef'16
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #green
+                                \once \override Rest.color = #green
                                 r16
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 af16 [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 g16 ]
                             }
                             \times 4/5 {
@@ -1776,8 +1772,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Octave-transposes all PLTs to an octave
-            interpolated from -6 to 10:
+            Octave-transposes all PLTs to an octave interpolated from -6 to 18:
 
             ::
 
@@ -1785,7 +1780,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.register(-6, 10),
+                ...     baca.register(-6, 18),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -1807,22 +1802,22 @@ class LibraryNZ(object):
                                 r8
                                 c'16 [
                                 d'16 ]
-                                bf4 ~
-                                bf16
+                                bf'4 ~
+                                bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs'16 [
                                 e'16 ]
-                                ef'4 ~
-                                ef'16
+                                ef''4 ~
+                                ef''16
                                 r16
-                                af'16 [
-                                g'16 ]
+                                af''16 [
+                                g''16 ]
                             }
                             \times 4/5 {
-                                a'16
+                                a''16
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -1830,8 +1825,8 @@ class LibraryNZ(object):
                     }
                 >>
 
-            Octave-transposes PLTs in tuplet 1 to an octave
-            interpolated from -6 to 10:
+            Octave-transposes PLTs in tuplet 1 to an octave interpolated from
+            -6 to 18:
 
             ::
 
@@ -1839,11 +1834,11 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.color(baca.select().tuplet(1).leaves()),
+                ...     baca.color(baca.select().tuplet(1)),
                 ...     baca.register(
                 ...         start=-6,
-                ...         stop=10,
-                ...         selector=baca.select().tuplet(1).leaves(),
+                ...         stop=18,
+                ...         selector=baca.select().tuplet(1),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -1872,45 +1867,45 @@ class LibraryNZ(object):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 fs16 [
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 e'16 ]
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 ef'4 ~
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 ef'16
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
+                                \once \override Dots.color = #green
+                                \once \override Rest.color = #green
                                 r16
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 af'16 [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
-                                g'16 ]
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
+                                g''16 ]
                             }
                             \times 4/5 {
                                 a'16
