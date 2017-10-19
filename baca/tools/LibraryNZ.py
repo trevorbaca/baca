@@ -5192,7 +5192,7 @@ class LibraryNZ(object):
 
                 >>> music_maker = baca.MusicMaker()
                 >>> selector = baca.select().tuplet(1)
-                >>> selector = selector.leaves(leak=abjad.Left).wrap()
+                >>> selector = selector.lleaves().wrap()
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -5253,7 +5253,7 @@ class LibraryNZ(object):
 
                 >>> music_maker = baca.MusicMaker()
                 >>> selector = baca.select().tuplet(1)
-                >>> selector = selector.leaves(leak=abjad.Right).wrap()
+                >>> selector = selector.rleaves().wrap()
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -5314,7 +5314,7 @@ class LibraryNZ(object):
 
                 >>> music_maker = baca.MusicMaker()
                 >>> selector = baca.select().tuplet(1)
-                >>> selector = selector.leaves(leak=abjad.Both).wrap()
+                >>> selector = selector.lrleaves().wrap()
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -5435,7 +5435,7 @@ class LibraryNZ(object):
             ::
 
                 >>> music_maker = baca.MusicMaker()
-                >>> get = baca.select().leaves(leak=abjad.Left)
+                >>> get = baca.select().lleaves()
                 >>> selector = baca.select().tuplets().map(get)
                 >>> contribution = music_maker(
                 ...     'Voice 1',
@@ -5498,7 +5498,7 @@ class LibraryNZ(object):
             ::
 
                 >>> music_maker = baca.MusicMaker()
-                >>> get = baca.select().leaves(leak=abjad.Right)
+                >>> get = baca.select().rleaves()
                 >>> selector = baca.select().tuplets().map(get)
                 >>> contribution = music_maker(
                 ...     'Voice 1',

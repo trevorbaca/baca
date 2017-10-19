@@ -48,9 +48,6 @@ Bases
       ~baca.tools.Selector.Selector.group_by_pitch
       ~baca.tools.Selector.Selector.leaf
       ~baca.tools.Selector.Selector.leaves
-      ~baca.tools.Selector.Selector.leaves_in_each_lt
-      ~baca.tools.Selector.Selector.leaves_in_each_plt
-      ~baca.tools.Selector.Selector.leaves_in_each_tuplet
       ~baca.tools.Selector.Selector.lleaves
       ~baca.tools.Selector.Selector.lrleaves
       ~baca.tools.Selector.Selector.lt
@@ -221,12 +218,6 @@ Methods
 .. automethod:: baca.tools.Selector.Selector.leaf
 
 .. automethod:: baca.tools.Selector.Selector.leaves
-
-.. automethod:: baca.tools.Selector.Selector.leaves_in_each_lt
-
-.. automethod:: baca.tools.Selector.Selector.leaves_in_each_plt
-
-.. automethod:: baca.tools.Selector.Selector.leaves_in_each_tuplet
 
 .. automethod:: baca.tools.Selector.Selector.lleaves
 
