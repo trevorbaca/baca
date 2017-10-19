@@ -6096,9 +6096,8 @@ class LibraryAM(object):
                 ),
             )
 
-    # TODO: change name to self.messaien_ties() in plural
     @staticmethod
-    def messiaen_tie_each(selector='baca.select().plt_pruns()'):
+    def messiaen_ties(selector='baca.select().plt_pruns()'):
         r'''Attaches Messaien ties.
 
         ..  container:: example
@@ -6111,7 +6110,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.messiaen_tie_each(),
+                ...     baca.messiaen_ties(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6166,7 +6165,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.messiaen_tie_each(baca.select().plt_prun()),
+                ...     baca.messiaen_ties(baca.select().plt_prun()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],

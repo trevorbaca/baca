@@ -1674,7 +1674,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[11, 11, 12], [11, 11, 11], [11]],
-                ...     baca.messiaen_tie_each(),
+                ...     baca.messiaen_ties(),
                 ...     baca.repeat_ties_down(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_up(),
@@ -1733,7 +1733,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[11, 11, 12], [11, 11, 11], [11]],
-                ...     baca.messiaen_tie_each(),
+                ...     baca.messiaen_ties(),
                 ...     baca.repeat_ties_down(
                 ...         baca.select().tuplet(1).pls().wrap()
                 ...         ),
@@ -1807,7 +1807,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[11, 11, 12], [11, 11, 11], [11]],
-                ...     baca.messiaen_tie_each(),
+                ...     baca.messiaen_ties(),
                 ...     baca.repeat_ties_up(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_down(),
@@ -1866,7 +1866,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[11, 11, 12], [11, 11, 11], [11]],
-                ...     baca.messiaen_tie_each(),
+                ...     baca.messiaen_ties(),
                 ...     baca.repeat_ties_up(
                 ...         baca.select().tuplet(1).pls().wrap()
                 ...         ),
@@ -6740,14 +6740,13 @@ class LibraryNZ(object):
             selector=selector,
             )
 
-    # TODO: change name to ties() in plural
     @staticmethod
-    def tie_each(selector='baca.select().plt_pruns()'):
-        r'''Ties each PLT p-run.
+    def ties(selector='baca.select().plt_pruns()'):
+        r'''Attaches ties.
 
         ..  container:: example
 
-            Ties each PLT p-run:
+            Attaches tie to every PLT prun:
 
             ::
 
@@ -6755,7 +6754,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.tie_each(),
+                ...     baca.ties(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6802,7 +6801,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Ties PLT p-run 0:
+            Attaches tie to  PLT p-run 0:
 
             ::
 
@@ -6810,7 +6809,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.tie_each(baca.select().plt_prun()),
+                ...     baca.ties(baca.select().plt_prun()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6889,7 +6888,7 @@ class LibraryNZ(object):
                 ...     [[11, 11, 12], [11, 11, 11], [11]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_up(),
-                ...     baca.tie_each(),
+                ...     baca.ties(),
                 ...     baca.ties_down(),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6948,7 +6947,7 @@ class LibraryNZ(object):
                 ...     [[11, 11, 12], [11, 11, 11], [11]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_up(),
-                ...     baca.tie_each(),
+                ...     baca.ties(),
                 ...     baca.ties_down(baca.select().tuplet(1).pls().wrap()),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -7020,7 +7019,7 @@ class LibraryNZ(object):
                 ...     [[11, 11, 12], [11, 11, 11], [11]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_down(),
-                ...     baca.tie_each(),
+                ...     baca.ties(),
                 ...     baca.ties_up(),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -7079,7 +7078,7 @@ class LibraryNZ(object):
                 ...     [[11, 11, 12], [11, 11, 11], [11]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_down(),
-                ...     baca.tie_each(),
+                ...     baca.ties(),
                 ...     baca.ties_up(baca.select().tuplet(1).pls().wrap()),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
