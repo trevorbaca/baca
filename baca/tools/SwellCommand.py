@@ -5,11 +5,11 @@ from .Command import Command
 
 
 class SwellCommand(Command):
-    r'''Swell specifier.
+    r'''Swell command.
 
     ..  container:: example
 
-        Attaches niente swell to all pitched logical ties:
+        Attaches niente swell to trimmed leaves:
 
         ::
 
@@ -17,7 +17,7 @@ class SwellCommand(Command):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.niente_swell('p'),
+            ...     baca.niente_swells('p'),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -79,7 +79,7 @@ class SwellCommand(Command):
 
     def __init__(
         self,
-        selector=None,
+        selector='baca.select().trimmed_leaves().wrap()',
         start_count=None,
         start_token=None,
         stop_count=None,
@@ -97,29 +97,20 @@ class SwellCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls specifier on `argument`.
+    def __call__(self, music=None):
+        r'''Calls command on `music`.
 
         Returns none.
         '''
-        selector = self.selector or baca.select().pls()
-        selections = selector(argument)
-        selections = self._to_selection_list(selections)
+        selections = self._select(music)
         for selection in selections:
             leaves = abjad.select(selection).by_leaf()
-            start_hairpin = abjad.Hairpin(
-                self.start_token,
-                include_rests=True,
-                )
+            start_hairpin = abjad.Hairpin(self.start_token, include_rests=True)
             if len(leaves) < self.minimum_leaf_count:
-                #message = f'need at least {self.minimum_leaf_count} leaves:'
-                #message += f' {leaves!r}.'
-                #raise Exception(message)
                 if len(leaves) == 0:
                     return
-                prototype = (abjad.Note, abjad.Chord)
                 for leaf in leaves:
-                    if isinstance(leaf, prototype):
+                    if isinstance(leaf, (abjad.Chord, abjad.Note)):
                         lone_dynamic = start_hairpin.stop_dynamic
                         lone_dynamic = copy.copy(lone_dynamic)
                         abjad.attach(lone_dynamic, leaf)
@@ -127,10 +118,7 @@ class SwellCommand(Command):
                 return
             start_leaves = leaves[:self.start_count]
             abjad.attach(start_hairpin, start_leaves)
-            stop_hairpin = abjad.Hairpin(
-                self.stop_token,
-                include_rests=True,
-                )
+            stop_hairpin = abjad.Hairpin(self.stop_token, include_rests=True)
             stop_leaves = leaves[-self.stop_count:]
             abjad.attach(stop_hairpin, stop_leaves)
 

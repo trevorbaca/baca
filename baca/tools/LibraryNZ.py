@@ -228,12 +228,15 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def niente_swell(dynamic, selector=None):
-        r'''Attaches niente swell to PLTs:
+    def niente_swells(
+        dynamic,
+        selector='baca.select().trimmed_leaves().wrap()',
+        ):
+        r'''Attaches niente swells.
 
         ..  container:: example
 
-            Attaches niente swell to all PLTs:
+            Attaches niente swell to trimmed leaves:
 
             ::
 
@@ -241,7 +244,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.niente_swell('p'),
+                ...     baca.niente_swells('p'),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -290,7 +293,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Attaches niente swell to PLTs in tuplet 1:
+            Attaches niente swell to trimmed leaves in tuplet 1:
 
             ::
 
@@ -298,7 +301,10 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.niente_swell('p', baca.select().tuplet(1).pls()),
+                ...     baca.niente_swells(
+                ...         'p',
+                ...         baca.select().tuplet(1).trimmed_leaves().wrap(),
+                ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
