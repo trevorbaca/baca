@@ -51,6 +51,8 @@ Bases
       ~baca.tools.Selector.Selector.leaves_in_each_lt
       ~baca.tools.Selector.Selector.leaves_in_each_plt
       ~baca.tools.Selector.Selector.leaves_in_each_tuplet
+      ~baca.tools.Selector.Selector.lleaves
+      ~baca.tools.Selector.Selector.lrleaves
       ~baca.tools.Selector.Selector.lt
       ~baca.tools.Selector.Selector.lts
       ~baca.tools.Selector.Selector.map
@@ -75,6 +77,7 @@ Bases
       ~baca.tools.Selector.Selector.print
       ~baca.tools.Selector.Selector.rest
       ~baca.tools.Selector.Selector.rests
+      ~baca.tools.Selector.Selector.rleaves
       ~baca.tools.Selector.Selector.run_selectors
       ~baca.tools.Selector.Selector.stages
       ~baca.tools.Selector.Selector.template
@@ -225,6 +228,10 @@ Methods
 
 .. automethod:: baca.tools.Selector.Selector.leaves_in_each_tuplet
 
+.. automethod:: baca.tools.Selector.Selector.lleaves
+
+.. automethod:: baca.tools.Selector.Selector.lrleaves
+
 .. automethod:: baca.tools.Selector.Selector.lt
 
 .. automethod:: baca.tools.Selector.Selector.lts
@@ -288,6 +295,8 @@ Methods
 .. automethod:: baca.tools.Selector.Selector.rest
 
 .. automethod:: baca.tools.Selector.Selector.rests
+
+.. automethod:: baca.tools.Selector.Selector.rleaves
 
 .. automethod:: baca.tools.Selector.Selector.stages
 

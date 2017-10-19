@@ -1852,6 +1852,232 @@ class Selector(abjad.Selector):
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
+    def lleaves(self):
+        r'''Selects leaves, leaked to the left.
+
+        ..  container:: example
+
+            Selects leaves (leaked to the left) in tuplet 1:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
+                ...     baca.color(baca.select().tuplet(1).lleaves()),
+                ...     baca.flags(),
+                ...     baca.rests_around([2], [4]),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16
+                                c'16
+                                bf'4 ~
+                                bf'16
+                                \once \override Dots.color = #red
+                                \once \override Rest.color = #red
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                bf'16
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
+                                e''16
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                e''4 ~
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
+                                e''16
+                                \once \override Dots.color = #blue
+                                \once \override Rest.color = #blue
+                                r16
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
+                                fs''16
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                af''16
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+            ::
+
+                >>> contribution.print_color_selector_result()
+                Rest('r16')
+                Note("bf'16")
+                Note("e''16")
+                Note("e''4")
+                Note("e''16")
+                Rest('r16')
+                Note("fs''16")
+                Note("af''16")
+
+        '''
+        selector = self.by_leaf().with_previous_leaf()
+        template = self._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
+
+    def lrleaves(self):
+        r'''Selects leaves, leaked to both the left and right.
+
+        ..  container:: example
+
+            Selects leaves (leaked to both the left and right ) in tuplet 1:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
+                ...     baca.color(baca.select().tuplet(1).lrleaves()),
+                ...     baca.flags(),
+                ...     baca.rests_around([2], [4]),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16
+                                c'16
+                                bf'4 ~
+                                bf'16
+                                \once \override Dots.color = #red
+                                \once \override Rest.color = #red
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                bf'16
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
+                                e''16
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                e''4 ~
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
+                                e''16
+                                \once \override Dots.color = #blue
+                                \once \override Rest.color = #blue
+                                r16
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
+                                fs''16
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                af''16
+                            }
+                            \times 4/5 {
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+            ::
+
+                >>> contribution.print_color_selector_result()
+                Rest('r16')
+                Note("bf'16")
+                Note("e''16")
+                Note("e''4")
+                Note("e''16")
+                Rest('r16')
+                Note("fs''16")
+                Note("af''16")
+                Note("a'16")
+
+        '''
+        selector = self.by_leaf().with_previous_leaf().with_next_leaf()
+        template = self._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
+
     def lt(self, n=0):
         r'''Selects LT.
 
@@ -4519,6 +4745,119 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.by_class((abjad.MultimeasureRest, abjad.Rest))
+        template = self._get_template(inspect.currentframe())
+        return abjad.new(selector, template=template)
+
+    def rleaves(self):
+        r'''Selects leaves, leaked to the right.
+
+        ..  container:: example
+
+            Selects leaves (leaked to the right) in tuplet 1:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
+                ...     baca.color(baca.select().tuplet(1).rleaves()),
+                ...     baca.flags(),
+                ...     baca.rests_around([2], [4]),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16
+                                c'16
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
+                                bf'16
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                e''16
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
+                                e''4 ~
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                e''16
+                                \once \override Dots.color = #red
+                                \once \override Rest.color = #red
+                                r16
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                fs''16
+                                \once \override Accidental.color = #red
+                                \once \override Beam.color = #red
+                                \once \override Dots.color = #red
+                                \once \override NoteHead.color = #red
+                                \once \override Stem.color = #red
+                                af''16
+                            }
+                            \times 4/5 {
+                                \once \override Accidental.color = #blue
+                                \once \override Beam.color = #blue
+                                \once \override Dots.color = #blue
+                                \once \override NoteHead.color = #blue
+                                \once \override Stem.color = #blue
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+            ::
+
+                >>> contribution.print_color_selector_result()
+                Note("bf'16")
+                Note("e''16")
+                Note("e''4")
+                Note("e''16")
+                Rest('r16')
+                Note("fs''16")
+                Note("af''16")
+                Note("a'16")
+
+        '''
+        selector = self.by_leaf().with_next_leaf()
         template = self._get_template(inspect.currentframe())
         return abjad.new(selector, template=template)
 
