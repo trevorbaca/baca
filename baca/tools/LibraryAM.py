@@ -4973,7 +4973,6 @@ class LibraryAM(object):
         hairpins,
         selector='baca.select().tls().wrap()',
         flare=None,
-        include_rests=None,
         omit_lone_note_dynamic=None,
         ):
         r'''Attaches hairpins.
@@ -5160,7 +5159,6 @@ class LibraryAM(object):
         return baca.HairpinCommand(
             flare=flare,
             hairpin_tokens=hairpin_tokens,
-            include_rests=include_rests,
             omit_lone_note_dynamic=omit_lone_note_dynamic,
             selector=selector,
             )

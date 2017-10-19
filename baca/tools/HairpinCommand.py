@@ -44,7 +44,6 @@ class HairpinCommand(Command):
     __slots__ = (
         '_flare',
         '_hairpin_tokens',
-        '_include_rests',
         '_omit_lone_note_dynamic',
         )
 
@@ -56,7 +55,6 @@ class HairpinCommand(Command):
         self,
         flare=None,
         hairpin_tokens=None,
-        include_rests=None,
         omit_lone_note_dynamic=None,
         selector='baca.select().tls().wrap()',
         ):
@@ -75,9 +73,6 @@ class HairpinCommand(Command):
         hairpin_tokens = tokens
         hairpin_tokens = abjad.CyclicTuple(hairpin_tokens)
         self._hairpin_tokens = hairpin_tokens
-        if include_rests is not None:
-            include_rests = bool(include_rests)
-        self._include_rests = include_rests
         if omit_lone_note_dynamic is not None:
             omit_lone_note_dynamic = bool(omit_lone_note_dynamic)
         self._omit_lone_note_dynamic = omit_lone_note_dynamic
@@ -120,7 +115,7 @@ class HairpinCommand(Command):
                 descriptor = ' '.join([_ for _ in hairpin_token if _])
                 hairpin = abjad.Hairpin(
                     descriptor=descriptor,
-                    include_rests=self.include_rests,
+                    include_rests=True,
                     )
                 abjad.attach(hairpin, leaves)
             # hook to allow callable custom classes like SwellCommand
@@ -219,14 +214,6 @@ class HairpinCommand(Command):
         Returns cyclic tuple.
         '''
         return self._hairpin_tokens
-
-    @property
-    def include_rests(self):
-        r'''Is true when hairpin includes rests.
-
-        Returns true, false or none.
-        '''
-        return self._include_rests
 
     @property
     def omit_lone_note_dynamic(self):

@@ -25,7 +25,6 @@ Bases
 
       ~baca.tools.HairpinCommand.HairpinCommand.flare
       ~baca.tools.HairpinCommand.HairpinCommand.hairpin_tokens
-      ~baca.tools.HairpinCommand.HairpinCommand.include_rests
       ~baca.tools.HairpinCommand.HairpinCommand.omit_lone_note_dynamic
       ~baca.tools.HairpinCommand.HairpinCommand.selector
       ~baca.tools.HairpinCommand.HairpinCommand.__call__
@@ -40,8 +39,6 @@ Read-only properties
 .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.flare
 
 .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.hairpin_tokens
-
-.. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.include_rests
 
 .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.omit_lone_note_dynamic
 
