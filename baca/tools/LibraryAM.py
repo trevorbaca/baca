@@ -758,9 +758,9 @@ class LibraryAM(object):
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
                 ...     baca.bass_to_octave(
                 ...         n=3,
-                ...         selector=baca.select().leaves_in_each_plt(),
+                ...         selector=baca.select().plts(),
                 ...         ),
-                ...     baca.color(baca.select().leaves_in_each_plt()),
+                ...     baca.color(baca.select().plts()),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -866,9 +866,9 @@ class LibraryAM(object):
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
                 ...     baca.bass_to_octave(
                 ...         n=3,
-                ...         selector=baca.select().leaves_in_each_plt(start=-2),
+                ...         selector=baca.select().plts()[-2:],
                 ...         ),
-                ...     baca.color(baca.select().leaves_in_each_plt(start=-2)),
+                ...     baca.color(baca.select().plts()[-2:]),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -1704,9 +1704,9 @@ class LibraryAM(object):
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
                 ...     baca.center_to_octave(
                 ...         n=3,
-                ...         selector=baca.select().leaves_in_each_plt(start=-2),
+                ...         selector=baca.select().plts()[-2:],
                 ...         ),
-                ...     baca.color(baca.select().leaves_in_each_plt(start=-2)),
+                ...     baca.color(baca.select().plts()[-2:]),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )

@@ -5575,13 +5575,13 @@ class LibraryNZ(object):
             ::
 
                 >>> music_maker = baca.MusicMaker()
+                >>> get = baca.select().rleaves()
+                >>> selector = baca.select().tuplets().map(get)
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
-                ...     baca.sustain_pedal(
-                ...     selector=baca.select().leaves_in_each_tuplet(leak=abjad.Right),
-                ...         ),
+                ...     baca.sustain_pedal(selector=selector),
                 ...     baca.sustain_pedal_staff_padding(4),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -5642,9 +5642,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
-                ...     baca.sustain_pedal(
-                ...         selector=baca.select().leaves_in_each_tuplet(),
-                ...         ),
+                ...     baca.sustain_pedal(selector=baca.select().tuplets()),
                 ...     baca.sustain_pedal_staff_padding(
                 ...         n=4,
                 ...         selector=baca.select().tuplet(1).leaves().wrap(),
