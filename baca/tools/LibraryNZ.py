@@ -6494,7 +6494,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         target=baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_color('red'),
@@ -6556,7 +6556,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         target=baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_color(
@@ -6636,7 +6636,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         target=baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_padding(4),
@@ -6699,7 +6699,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         target=baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_padding(
@@ -6780,7 +6780,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         target=baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_staff_padding(n=4),
@@ -6842,7 +6842,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         target=baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_staff_padding(
@@ -6920,7 +6920,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         target=baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_scripts_down(),
@@ -6983,7 +6983,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         target=baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_scripts_down(
@@ -7060,7 +7060,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         target=baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_scripts_up(),
@@ -7123,7 +7123,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         target=baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplet(1).ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_scripts_up(
