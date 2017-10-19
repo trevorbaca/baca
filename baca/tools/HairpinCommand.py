@@ -58,7 +58,7 @@ class HairpinCommand(Command):
         hairpin_tokens=None,
         include_rests=None,
         omit_lone_note_dynamic=None,
-        selector='baca.select().trimmed_leaves()',
+        selector='baca.select().trimmed_leaves().wrap()',
         ):
         Command.__init__(self, selector=selector)
         self._flare = flare
@@ -84,20 +84,16 @@ class HairpinCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+    def __call__(self, music=None):
+        r'''Calls command on `music`.
 
         Returns none.
         '''
-        if not argument:
-            return
-        if self.selector is not None:
-            argument = self.selector(argument)
-        selections = self._to_selection_list(argument)
+        selections = self._select(music)
         if False:
-            print(format(selector))
+            print(format(self.selector))
             print()
-            print(argument)
+            print(music)
             print()
             print(selections)
             print()
