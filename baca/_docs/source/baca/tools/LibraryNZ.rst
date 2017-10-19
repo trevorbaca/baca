@@ -57,7 +57,6 @@ Bases
       ~baca.tools.LibraryNZ.LibraryNZ.skips_around
       ~baca.tools.LibraryNZ.LibraryNZ.skips_before
       ~baca.tools.LibraryNZ.LibraryNZ.slur_each_plt_run
-      ~baca.tools.LibraryNZ.LibraryNZ.slur_trimmed_run_in_each_tuplet
       ~baca.tools.LibraryNZ.LibraryNZ.slurs
       ~baca.tools.LibraryNZ.LibraryNZ.slurs_down
       ~baca.tools.LibraryNZ.LibraryNZ.slurs_up
@@ -188,8 +187,6 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.skips_before
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.slur_each_plt_run
-
-.. automethod:: baca.tools.LibraryNZ.LibraryNZ.slur_trimmed_run_in_each_tuplet
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.slurs
 

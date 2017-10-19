@@ -3719,134 +3719,6 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def slur_trimmed_run_in_each_tuplet(start=None, stop=None):
-        r'''Slurs trimmed leaves in tuplets.
-
-        ..  container:: example
-
-            Slurs trimmed leaves in all tuplets:
-
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.slur_trimmed_run_in_each_tuplet(),
-                ...     baca.slurs_down(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override Slur.direction = #down
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                c'16 [ (
-                                d'16 ]
-                                bf'4 ~
-                                bf'16 )
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16 [ (
-                                e''16 ]
-                                ef''4 ~
-                                ef''16
-                                r16
-                                af''16 [
-                                g''16 ] )
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert Slur.direction
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Slurs trimmed leaves in last two tuplets:
-
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.slur_trimmed_run_in_each_tuplet(start=-2),
-                ...     baca.slurs_down(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override Slur.direction = #down
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16 [ (
-                                e''16 ]
-                                ef''4 ~
-                                ef''16
-                                r16
-                                af''16 [
-                                g''16 ] )
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert Slur.direction
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        '''
-        get = baca.select().tls()
-        selector = baca.select().tuplets()[start:stop].map(get)
-        return baca.SpannerCommand(
-            selector=selector,
-            spanner=abjad.Slur(),
-            )
-
-    @staticmethod
     def slurs_down(selector='baca.select().leaves().wrap()'):
         r'''Overrides slur direction.
 
@@ -3860,7 +3732,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.slur_trimmed_run_in_each_tuplet(),
+                ...     baca.slurs(baca.select().tuplets().map(baca.select().tls())),
                 ...     baca.slurs_down(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3918,7 +3790,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.slur_trimmed_run_in_each_tuplet(),
+                ...     baca.slurs(baca.select().tuplets().map(baca.select().tls())),
                 ...     baca.slurs_down(
                 ...         baca.select().tuplet(1).leaves().wrap(),
                 ...         ),
@@ -3991,7 +3863,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.slur_trimmed_run_in_each_tuplet(),
+                ...     baca.slurs(baca.select().tuplets().map(baca.select().tls())),
                 ...     baca.slurs_up(),
                 ...     baca.stems_down(),
                 ...     baca.rests_around([2], [4]),
@@ -4055,7 +3927,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.slur_trimmed_run_in_each_tuplet(),
+                ...     baca.slurs(baca.select().tuplets().map(baca.select().tls())),
                 ...     baca.slurs_up(
                 ...         baca.select().tuplet(1).leaves().wrap(),
                 ...         ),
