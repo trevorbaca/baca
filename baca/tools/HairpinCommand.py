@@ -85,13 +85,7 @@ class HairpinCommand(Command):
         Returns none.
         '''
         selections = self._select(music)
-        if False:
-            print(format(self.selector))
-            print()
-            print(music)
-            print()
-            print(selections)
-            print()
+        #self._debug_selections(music, selections)
         if not self.hairpin_tokens:
             return
         for i, selection in enumerate(selections):
