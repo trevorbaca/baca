@@ -234,7 +234,7 @@ class TransitionCommand(Command):
 
     def __init__(
         self,
-        selector=None,
+        selector='baca.select().trimmed_leaves().wrap()',
         solid=None,
         start_markup=None,
         stop_markup=None,
@@ -249,38 +249,35 @@ class TransitionCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+    def __call__(self, music=None):
+        r'''Calls command on `music`.
 
         Returns none.
         '''
-        if argument is None:
-            return
-        if self.selector is not None:
-            argument = self.selector(argument)
-        leaves = abjad.select(argument).by_leaf()
-        spanner = abjad.TextSpanner()
-        abjad.attach(spanner, leaves)
-        start_leaf = leaves[0]
-        stop_leaf = leaves[-1]
-        start_markup = self.start_markup
-        if isinstance(start_markup, baca.AttachCommand):
-            start_markup = start_markup.arguments[0]
-        if start_markup is not None:
-            assert isinstance(start_markup, abjad.Markup), repr(start_markup)
-            start_markup = copy.copy(start_markup)
-            start_markup = start_markup.override(('font-name', 'Palatino'))
-            spanner.attach(start_markup, start_leaf)
-        arrow = self._get_arrow()
-        spanner.attach(arrow, start_leaf)
-        stop_markup = self.stop_markup
-        if isinstance(stop_markup, baca.AttachCommand):
-            stop_markup = stop_markup.arguments[0]
-        if stop_markup is not None:
-            assert isinstance(stop_markup, abjad.Markup), repr(stop_markup)
-            stop_markup = copy.copy(stop_markup)
-            stop_markup = stop_markup.override(('font-name', 'Palatino'))
-            spanner.attach(stop_markup, stop_leaf)
+        selections = self._select(music)
+        for selection in selections:
+            leaves = abjad.select(selection).by_leaf()
+            spanner = abjad.TextSpanner()
+            abjad.attach(spanner, leaves)
+            start_leaf, stop_leaf = leaves[0], leaves[-1]
+            start_markup = self.start_markup
+            if isinstance(start_markup, baca.AttachCommand):
+                start_markup = start_markup.arguments[0]
+            if start_markup is not None:
+                assert isinstance(start_markup, abjad.Markup)
+                start_markup = copy.copy(start_markup)
+                start_markup = start_markup.override(('font-name', 'Palatino'))
+                spanner.attach(start_markup, start_leaf)
+            arrow = self._get_arrow()
+            spanner.attach(arrow, start_leaf)
+            stop_markup = self.stop_markup
+            if isinstance(stop_markup, baca.AttachCommand):
+                stop_markup = stop_markup.arguments[0]
+            if stop_markup is not None:
+                assert isinstance(stop_markup, abjad.Markup), repr(stop_markup)
+                stop_markup = copy.copy(stop_markup)
+                stop_markup = stop_markup.override(('font-name', 'Palatino'))
+                spanner.attach(stop_markup, stop_leaf)
 
     ### PRIVATE METHODS ###
 

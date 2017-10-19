@@ -7229,6 +7229,10 @@ class LibraryNZ(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
+                                \override TextSpanner.staff-padding = #6
+                                \override TextScript.staff-padding = #6
+                                \override TupletBracket.staff-padding = #5
+                                r8
                                 \once \override TextSpanner.arrow-width = 0.25
                                 \once \override TextSpanner.bound-details.left-broken.text = ##f
                                 \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center
@@ -7251,11 +7255,7 @@ class LibraryNZ(object):
                                 \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center
                                 \once \override TextSpanner.dash-fraction = 0.25
                                 \once \override TextSpanner.dash-period = 1.5
-                                \override TextSpanner.staff-padding = #6
-                                \override TextScript.staff-padding = #6
-                                \override TupletBracket.staff-padding = #5
-                                r8 \startTextSpan
-                                c'16 [
+                                c'16 [ \startTextSpan
                                 d'16 ]
                                 bf'4 ~
                                 bf'16
@@ -7272,14 +7272,14 @@ class LibraryNZ(object):
                                 g''16 ]
                             }
                             \times 4/5 {
-                                a'16
-                                r4 \stopTextSpan ^ \markup {
+                                a'16 \stopTextSpan ^ \markup {
                                     \override
                                         #'(font-name . "Palatino")
                                         \whiteout
                                             \upright
                                                 ord.
                                     }
+                                r4
                                 \revert TextSpanner.staff-padding
                                 \revert TextScript.staff-padding
                                 \revert TupletBracket.staff-padding
@@ -7307,7 +7307,7 @@ class LibraryNZ(object):
                 ...     baca.transition_spanner(
                 ...         baca.markup.pont(),
                 ...         baca.markup.ord_(),
-                ...         selector=baca.select().tuplet(1).trimmed_leaves(),
+                ...         baca.select().tuplet(1).trimmed_leaves().wrap(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -7864,12 +7864,16 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def transition_spanner(start_markup=None, stop_markup=None, selector=None):
-        r'''Attaches transition spanner to trimmed leaves.
+    def transition_spanner(
+        start_markup=None,
+        stop_markup=None,
+        selector='baca.select().trimmed_leaves().wrap()',
+        ):
+        r'''Attaches transition spanner.
 
         ..  container:: example
 
-            Attaches transition spanner to all trimmed leaves:
+            Attaches transition spanner to leaves:
 
             ::
 
@@ -7900,6 +7904,10 @@ class LibraryNZ(object):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
+                                \override TextSpanner.staff-padding = #6
+                                \override TextScript.staff-padding = #6
+                                \override TupletBracket.staff-padding = #5
+                                r8
                                 \once \override TextSpanner.arrow-width = 0.25
                                 \once \override TextSpanner.bound-details.left-broken.text = ##f
                                 \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center
@@ -7922,11 +7930,7 @@ class LibraryNZ(object):
                                 \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center
                                 \once \override TextSpanner.dash-fraction = 0.25
                                 \once \override TextSpanner.dash-period = 1.5
-                                \override TextSpanner.staff-padding = #6
-                                \override TextScript.staff-padding = #6
-                                \override TupletBracket.staff-padding = #5
-                                r8 \startTextSpan
-                                c'16 [
+                                c'16 [ \startTextSpan
                                 d'16 ]
                                 bf'4 ~
                                 bf'16
@@ -7943,14 +7947,14 @@ class LibraryNZ(object):
                                 g''16 ]
                             }
                             \times 4/5 {
-                                a'16
-                                r4 \stopTextSpan ^ \markup {
+                                a'16 \stopTextSpan ^ \markup {
                                     \override
                                         #'(font-name . "Palatino")
                                         \whiteout
                                             \upright
                                                 ord.
                                     }
+                                r4
                                 \revert TextSpanner.staff-padding
                                 \revert TextScript.staff-padding
                                 \revert TupletBracket.staff-padding
@@ -7975,7 +7979,7 @@ class LibraryNZ(object):
                 ...     baca.transition_spanner(
                 ...         baca.markup.pont(),
                 ...         baca.markup.ord_(),
-                ...         selector=baca.select().tuplet(1).trimmed_leaves(),
+                ...         baca.select().tuplet(1).trimmed_leaves().wrap(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
