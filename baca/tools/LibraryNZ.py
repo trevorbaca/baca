@@ -3466,9 +3466,8 @@ class LibraryNZ(object):
             skips_instead_of_rests=True,
             )
 
-    # TODO: change name to slurs() in plural
     @staticmethod
-    def slur(selector='baca.select().tls().wrap()'):
+    def slurs(selector='baca.select().tls().wrap()'):
         r'''Attaches slurs.
 
         ..  container:: example
@@ -3481,7 +3480,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.slur(),
+                ...     baca.slurs(),
                 ...     baca.slurs_down(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3539,9 +3538,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.slur(
-                ...         baca.select().tuplet(1).tls().wrap(),
-                ...         ),
+                ...     baca.slurs(baca.select().tuplet(1).tls().wrap()),
                 ...     baca.slurs_down(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
