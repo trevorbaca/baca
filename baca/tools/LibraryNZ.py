@@ -899,10 +899,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def pervasive_trills(selector=None):
-        r'''Attaches pervasive trills to notes and chords.
+    def pervasive_trills(selector='baca.select().plt_pruns()'):
+        r'''Attaches trills.
 
         ..  container:: example
+
+            Attaches trill to every PLT p-run:
 
             ::
 
@@ -957,7 +959,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Attaches pervasive trills to PLTs in tuplet 1:
+            Attaches trill to each PLT p-run in tuplet 1:
 
             ::
 
@@ -965,7 +967,8 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.pervasive_trills(baca.select().tuplet(1).pls()),
+                ...     baca.pervasive_trills(
+                ...         baca.select().tuplet(1).plt_pruns()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -1017,12 +1020,15 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def pervasive_trills_at_interval(interval, selector=None):
-        r'''Attaches pervasive trills at `interval` to PLTs.
+    def pervasive_trills_at_interval(
+        interval,
+        selector='baca.select().plt_pruns()',
+        ):
+        r'''Attaches trills at `interval`.
 
         ..  container:: example
 
-            Attaches pervasive trills to all PLTs:
+            Attaches trill to every PLT p-run:
 
             ::
 
@@ -1086,7 +1092,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Attaches pervasive trills to pitched leaves in tuplet 1:
+            Attaches trill to every PLT p-run in tuplet 1:
 
             ::
 
@@ -1096,7 +1102,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.pervasive_trills_at_interval(
                 ...         2,
-                ...         baca.select().tuplet(1).pls(),
+                ...         baca.select().tuplet(1).plt_pruns(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -1155,12 +1161,16 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def pervasive_trills_at_pitch(pitch, harmonic=None, selector=None):
-        r'''Attaches pervasive trills at `pitch` to PLTs.
+    def pervasive_trills_at_pitch(
+        pitch,
+        harmonic=None,
+        selector='baca.select().plt_pruns()',
+        ):
+        r'''Attaches trills at `pitch`.
 
         ..  container:: example
 
-            Attaches pervasive trills to all PLTs:
+            Attaches trill to every PLT p-run:
 
             ::
 
@@ -1224,7 +1234,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Attaches pervasive trills to all pitched leaves in tuplet 1:
+            Attaches trill to every PLT p-run in tuplet 1:
 
             ::
 
@@ -1234,7 +1244,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.pervasive_trills_at_pitch(
                 ...         pitch=1,
-                ...         selector=baca.select().tuplet(1).pls(),
+                ...         selector=baca.select().tuplet(1).plt_pruns(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),

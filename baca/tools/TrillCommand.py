@@ -1,4 +1,5 @@
 import abjad
+import baca
 from .Command import Command
 
 
@@ -168,7 +169,7 @@ class TrillCommand(Command):
         minimum_written_duration=None,
         maximum_written_duration=None,
         pitch=None,
-        selector=None,
+        selector='baca.select().plt_runs()',
         ):
         Command.__init__(self, selector=selector)
         if deposit_annotations is not None:
@@ -195,47 +196,45 @@ class TrillCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+    def __call__(self, music=None):
+        r'''Calls command on `music`.
 
         Returns none.
         '''
-        if argument is None:
-            return
-        if self.selector is not None:
-            argument = self.selector(argument)
-        logical_ties = abjad.select(argument).by_logical_tie(pitched=True)
-        for logical_tie in logical_ties:
-            written_duration = abjad.Duration(0)
-            for note in logical_tie:
-                written_duration += note.written_duration
-            if self.minimum_written_duration is not None:
-                if written_duration < self.minimum_written_duration:
+        selections = self._select(music)
+        for selection in selections:
+            plts = baca.select().plts()(selection)
+            for plt in plts:
+                written_duration = abjad.Duration(0)
+                for pl in plt:
+                    written_duration += pl.written_duration
+                if self.minimum_written_duration is not None:
+                    if written_duration < self.minimum_written_duration:
+                        continue
+                if self.maximum_written_duration is not None:
+                    if self.maximum_written_duration <= written_duration:
+                        continue
+                spanner = abjad.TrillSpanner(
+                    interval=self.interval,
+                    is_harmonic=self.harmonic,
+                    pitch=self.pitch,
+                    )
+                leaves = []
+                for pl in plt:
+                    leaves.append(pl)
+                skip_spanner = False
+                for leaf in leaves:
+                    if self._has_forbidden_annotation(leaf):
+                        skip_spanner = True
+                        break
+                if skip_spanner:
                     continue
-            if self.maximum_written_duration is not None:
-                if self.maximum_written_duration <= written_duration:
-                    continue
-            spanner = abjad.TrillSpanner(
-                interval=self.interval,
-                is_harmonic=self.harmonic,
-                pitch=self.pitch,
-                )
-            leaves = []
-            for note in logical_tie:
-                leaves.append(note)
-            skip_spanner = False
-            for leaf in leaves:
-                if self._has_forbidden_annotation(leaf):
-                    skip_spanner = True
-                    break
-            if skip_spanner:
-                continue
-            next_leaf = abjad.inspect(leaves[-1]).get_leaf(1)
-            if next_leaf is not None:
-                leaves.append(next_leaf)
-            if 1 < len(leaves):
-                leaves = abjad.select(leaves)
-                abjad.attach(spanner, leaves)
+                next_leaf = abjad.inspect(leaves[-1]).get_leaf(1)
+                if next_leaf is not None:
+                    leaves.append(next_leaf)
+                if 1 < len(leaves):
+                    leaves = abjad.select(leaves)
+                    abjad.attach(spanner, leaves)
 
     def _has_forbidden_annotation(self, leaf):
         if self.forbidden_annotations is None:
