@@ -23,10 +23,8 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.RegisterCommand.RegisterCommand.normalize
       ~baca.tools.RegisterCommand.RegisterCommand.registration
       ~baca.tools.RegisterCommand.RegisterCommand.selector
-      ~baca.tools.RegisterCommand.RegisterCommand.target
       ~baca.tools.RegisterCommand.RegisterCommand.__call__
       ~baca.tools.RegisterCommand.RegisterCommand.__eq__
       ~baca.tools.RegisterCommand.RegisterCommand.__format__
@@ -43,21 +41,6 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.RegisterCommand.RegisterCommand.selector
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.RegisterCommand.RegisterCommand.target
-
-Methods
--------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.RegisterCommand.RegisterCommand.normalize
 
 Special methods
 ---------------

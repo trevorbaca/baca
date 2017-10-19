@@ -3519,7 +3519,7 @@ class LibraryAM(object):
                 ...     baca.dynamic_line_spanner_staff_padding(4),
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
-                ...         target=baca.select().trimmed_run_in_each_tuplet(),
+                ...         selector=baca.select().trimmed_run_in_each_tuplet(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3583,7 +3583,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
-                ...         target=baca.select().trimmed_run_in_each_tuplet()
+                ...         selector=baca.select().trimmed_run_in_each_tuplet()
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3657,7 +3657,7 @@ class LibraryAM(object):
                 ...     baca.dynamic_line_spanner_up(),
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
-                ...         target=baca.select().trimmed_run_in_each_tuplet()
+                ...         selector=baca.select().trimmed_run_in_each_tuplet()
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3720,7 +3720,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
-                ...         target=baca.select().trimmed_run_in_each_tuplet()
+                ...         selector=baca.select().trimmed_run_in_each_tuplet()
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4971,8 +4971,7 @@ class LibraryAM(object):
     @staticmethod
     def hairpins(
         hairpins,
-        selector=None,
-        target='baca.select().trimmed_leaves()',
+        selector='baca.select().trimmed_leaves()',
         flare=None,
         include_rests=None,
         omit_lone_note_dynamic=None,
@@ -5046,7 +5045,7 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
-                ...         target=baca.select().tuplet(1).trimmed_leaves(),
+                ...         selector=baca.select().tuplet(1).trimmed_leaves(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5104,7 +5103,7 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
-                ...         target=baca.select().trimmed_run_in_each_tuplet(),
+                ...         selector=baca.select().trimmed_run_in_each_tuplet(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5164,7 +5163,6 @@ class LibraryAM(object):
             include_rests=include_rests,
             omit_lone_note_dynamic=omit_lone_note_dynamic,
             selector=selector,
-            target=target,
             )
 
     @staticmethod

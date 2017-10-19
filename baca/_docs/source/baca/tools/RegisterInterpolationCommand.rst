@@ -23,11 +23,9 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.normalize
       ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.selector
       ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.start_pitch
       ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.stop_pitch
-      ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.target
       ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.__call__
       ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.__eq__
       ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.__format__
@@ -42,21 +40,6 @@ Read-only properties
 .. autoattribute:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.start_pitch
 
 .. autoattribute:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.stop_pitch
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.target
-
-Methods
--------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.normalize
 
 Special methods
 ---------------

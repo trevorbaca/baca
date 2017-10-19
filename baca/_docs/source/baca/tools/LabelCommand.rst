@@ -24,9 +24,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.LabelCommand.LabelCommand.expression
-      ~baca.tools.LabelCommand.LabelCommand.normalize
       ~baca.tools.LabelCommand.LabelCommand.selector
-      ~baca.tools.LabelCommand.LabelCommand.target
       ~baca.tools.LabelCommand.LabelCommand.__call__
       ~baca.tools.LabelCommand.LabelCommand.__eq__
       ~baca.tools.LabelCommand.LabelCommand.__format__
@@ -43,21 +41,6 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.LabelCommand.LabelCommand.selector
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.LabelCommand.LabelCommand.target
-
-Methods
--------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.LabelCommand.LabelCommand.normalize
 
 Special methods
 ---------------

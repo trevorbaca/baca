@@ -23,10 +23,8 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.normalize
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.numbers
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.selector
-      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.target
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.__call__
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.__eq__
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.__format__
@@ -43,21 +41,6 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.selector
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.target
-
-Methods
--------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.normalize
 
 Special methods
 ---------------

@@ -13,27 +13,21 @@ class Command(abjad.AbjadObject):
 
     __slots__ = (
         '_selector',
-        '_target',
         )
 
     ### INITIALIZER ###
 
-    def __init__(self, selector=None, target=None):
+    def __init__(self, selector=None):
         if isinstance(selector, str):
             selector = eval(selector)
         if selector is not None:
             assert isinstance(selector, abjad.Selector), repr(selector)
         self._selector = selector
-        if isinstance(target, str):
-            target = eval(target)
-        if target is not None:
-            assert isinstance(target, abjad.Selector), repr(target)
-        self._target = target
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+    def __call__(self, music=None):
+        r'''Calls command on `music`.
 
         Returns none.
         '''
@@ -90,37 +84,3 @@ class Command(abjad.AbjadObject):
         Returns selector or none.
         '''
         return self._selector
-
-    @property
-    def target(self):
-        r'''Gets target.
-
-        Defaults to none.
-
-        Set to target or none.
-
-        Returns target or none.
-        '''
-        return self._target
-
-    ### PUBLIC METHODS ###
-
-    def normalize(self, argument):
-        r'''Normalizes `argument` for iteration.
-        
-        Returns `argument` wrapped in list when target selector returns item.
-
-        Returns `argument` as-is when target selector does not return item.
-        '''
-        import abjad
-        if self.target is None:
-            if isinstance(argument, collections.Iterable):
-                return argument
-            else:
-                return [argument]
-        else:
-            targets = self.target(argument)
-            if isinstance(self.target.callbacks[-1], abjad.GetItemCallback):
-                return [targets]
-            else:
-                return targets

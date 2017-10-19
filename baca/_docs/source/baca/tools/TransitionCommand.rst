@@ -23,12 +23,10 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.TransitionCommand.TransitionCommand.normalize
       ~baca.tools.TransitionCommand.TransitionCommand.selector
       ~baca.tools.TransitionCommand.TransitionCommand.solid
       ~baca.tools.TransitionCommand.TransitionCommand.start_markup
       ~baca.tools.TransitionCommand.TransitionCommand.stop_markup
-      ~baca.tools.TransitionCommand.TransitionCommand.target
       ~baca.tools.TransitionCommand.TransitionCommand.__call__
       ~baca.tools.TransitionCommand.TransitionCommand.__eq__
       ~baca.tools.TransitionCommand.TransitionCommand.__format__
@@ -49,21 +47,6 @@ Read-only properties
 .. autoattribute:: baca.tools.TransitionCommand.TransitionCommand.start_markup
 
 .. autoattribute:: baca.tools.TransitionCommand.TransitionCommand.stop_markup
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.TransitionCommand.TransitionCommand.target
-
-Methods
--------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.TransitionCommand.TransitionCommand.normalize
 
 Special methods
 ---------------

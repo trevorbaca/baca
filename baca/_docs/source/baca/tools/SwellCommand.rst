@@ -24,13 +24,11 @@ Bases
    .. autosummary::
 
       ~baca.tools.SwellCommand.SwellCommand.minimum_leaf_count
-      ~baca.tools.SwellCommand.SwellCommand.normalize
       ~baca.tools.SwellCommand.SwellCommand.selector
       ~baca.tools.SwellCommand.SwellCommand.start_count
       ~baca.tools.SwellCommand.SwellCommand.start_token
       ~baca.tools.SwellCommand.SwellCommand.stop_count
       ~baca.tools.SwellCommand.SwellCommand.stop_token
-      ~baca.tools.SwellCommand.SwellCommand.target
       ~baca.tools.SwellCommand.SwellCommand.__call__
       ~baca.tools.SwellCommand.SwellCommand.__eq__
       ~baca.tools.SwellCommand.SwellCommand.__format__
@@ -55,21 +53,6 @@ Read-only properties
 .. autoattribute:: baca.tools.SwellCommand.SwellCommand.stop_count
 
 .. autoattribute:: baca.tools.SwellCommand.SwellCommand.stop_token
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.SwellCommand.SwellCommand.target
-
-Methods
--------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.SwellCommand.SwellCommand.normalize
 
 Special methods
 ---------------

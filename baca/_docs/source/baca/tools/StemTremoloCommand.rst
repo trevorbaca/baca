@@ -23,9 +23,7 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.StemTremoloCommand.StemTremoloCommand.normalize
       ~baca.tools.StemTremoloCommand.StemTremoloCommand.selector
-      ~baca.tools.StemTremoloCommand.StemTremoloCommand.target
       ~baca.tools.StemTremoloCommand.StemTremoloCommand.tremolo_flags
       ~baca.tools.StemTremoloCommand.StemTremoloCommand.__call__
       ~baca.tools.StemTremoloCommand.StemTremoloCommand.__eq__
@@ -38,22 +36,7 @@ Read-only properties
 
 .. autoattribute:: baca.tools.StemTremoloCommand.StemTremoloCommand.selector
 
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.StemTremoloCommand.StemTremoloCommand.target
-
 .. autoattribute:: baca.tools.StemTremoloCommand.StemTremoloCommand.tremolo_flags
-
-Methods
--------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.StemTremoloCommand.StemTremoloCommand.normalize
 
 Special methods
 ---------------

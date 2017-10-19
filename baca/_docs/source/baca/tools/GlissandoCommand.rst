@@ -23,9 +23,7 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.GlissandoCommand.GlissandoCommand.normalize
       ~baca.tools.GlissandoCommand.GlissandoCommand.selector
-      ~baca.tools.GlissandoCommand.GlissandoCommand.target
       ~baca.tools.GlissandoCommand.GlissandoCommand.__call__
       ~baca.tools.GlissandoCommand.GlissandoCommand.__eq__
       ~baca.tools.GlissandoCommand.GlissandoCommand.__format__
@@ -40,21 +38,6 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.GlissandoCommand.GlissandoCommand.selector
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.GlissandoCommand.GlissandoCommand.target
-
-Methods
--------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.GlissandoCommand.GlissandoCommand.normalize
 
 Special methods
 ---------------

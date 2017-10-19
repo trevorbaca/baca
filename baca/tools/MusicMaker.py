@@ -1468,7 +1468,7 @@ class MusicMaker(abjad.AbjadObject):
                 ...     [[0, 2, 10, 18], [15, 23], [19, 13, 9, 8]],
                 ...     baca.hairpins(
                 ...         ['p < f'],
-                ...         target=baca.select().plt_runs(),
+                ...         selector=baca.select().plt_runs(),
                 ...         ),
                 ...     baca.RestAffixSpecifier(
                 ...         pattern=abjad.Pattern(
@@ -1525,11 +1525,11 @@ class MusicMaker(abjad.AbjadObject):
                 ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
                 ...     baca.hairpins(
                 ...         ['p < f'],
-                ...         target=baca.select().tuplet(0).leaves(),
+                ...         selector=baca.select().tuplet(0).leaves(),
                 ...         ),
                 ...     baca.hairpins(
                 ...         ['f > p'],
-                ...         target=baca.select().tuplet(-1).leaves(),
+                ...         selector=baca.select().tuplet(-1).leaves(),
                 ...         ),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -1579,11 +1579,11 @@ class MusicMaker(abjad.AbjadObject):
                 ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
                 ...     baca.hairpins(
                 ...         ['p < f'],
-                ...         target=baca.select().tuplets()[:2],
+                ...         selector=baca.select().tuplets()[:2],
                 ...         ),
                 ...     baca.hairpins(
                 ...         ['f > p'],
-                ...         target=baca.select().tuplets()[-1:],
+                ...         selector=baca.select().tuplets()[-1:],
                 ...         ),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)

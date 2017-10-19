@@ -572,9 +572,9 @@ class MarkupLibrary(object):
     @staticmethod
     def make_markup(
         string,
+        selector=None,
         direction=abjad.Up,
         is_new=True,
-        selector=None,
         upright=True,
         whiteout=True,
         ):

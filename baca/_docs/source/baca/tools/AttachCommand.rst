@@ -24,9 +24,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.AttachCommand.AttachCommand.arguments
-      ~baca.tools.AttachCommand.AttachCommand.normalize
       ~baca.tools.AttachCommand.AttachCommand.selector
-      ~baca.tools.AttachCommand.AttachCommand.target
       ~baca.tools.AttachCommand.AttachCommand.__call__
       ~baca.tools.AttachCommand.AttachCommand.__eq__
       ~baca.tools.AttachCommand.AttachCommand.__format__
@@ -43,21 +41,6 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.AttachCommand.AttachCommand.selector
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.AttachCommand.AttachCommand.target
-
-Methods
--------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.AttachCommand.AttachCommand.normalize
 
 Special methods
 ---------------
