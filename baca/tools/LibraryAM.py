@@ -3519,7 +3519,7 @@ class LibraryAM(object):
                 ...     baca.dynamic_line_spanner_staff_padding(4),
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
-                ...         selector=baca.select().trimmed_run_in_each_tuplet(),
+                ...         selector=baca.select().tuplets().map(baca.select().tls()),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3583,7 +3583,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
-                ...         selector=baca.select().trimmed_run_in_each_tuplet()
+                ...         selector=baca.select().tuplets().map(baca.select().tls()),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3657,7 +3657,7 @@ class LibraryAM(object):
                 ...     baca.dynamic_line_spanner_up(),
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
-                ...         selector=baca.select().trimmed_run_in_each_tuplet()
+                ...         selector=baca.select().tuplets().map(baca.select().tls()),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3720,7 +3720,7 @@ class LibraryAM(object):
                 ...         ),
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
-                ...         selector=baca.select().trimmed_run_in_each_tuplet()
+                ...         selector=baca.select().tuplets().map(baca.select().tls()),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5103,7 +5103,7 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
-                ...         selector=baca.select().trimmed_run_in_each_tuplet(),
+                ...         selector=baca.select().tuplets().map(baca.select().tls()),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),

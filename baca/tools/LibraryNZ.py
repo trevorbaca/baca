@@ -3842,11 +3842,10 @@ class LibraryNZ(object):
                 >>
 
         '''
+        get = baca.select().tls()
+        selector = baca.select().tuplets()[start:stop].map(get)
         return baca.SpannerCommand(
-            selector=baca.select().trimmed_run_in_each_tuplet(
-                start=start,
-                stop=stop,
-                ),
+            selector=selector,
             spanner=abjad.Slur(),
             )
 
