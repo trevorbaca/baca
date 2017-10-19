@@ -899,411 +899,6 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def pervasive_trills(selector='baca.select().plt_pruns()'):
-        r'''Attaches trills.
-
-        ..  container:: example
-
-            Attaches trill to every PLT p-run:
-
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.pervasive_trills(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                c'16 [ \startTrillSpan
-                                d'16 ] \stopTrillSpan \startTrillSpan
-                                bf'4 ~ \stopTrillSpan \startTrillSpan
-                                bf'16
-                                r16 \stopTrillSpan
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16 [ \startTrillSpan
-                                e''16 ] \stopTrillSpan \startTrillSpan
-                                ef''4 ~ \stopTrillSpan \startTrillSpan
-                                ef''16
-                                r16 \stopTrillSpan
-                                af''16 [ \startTrillSpan
-                                g''16 ] \stopTrillSpan \startTrillSpan
-                            }
-                            \times 4/5 {
-                                a'16 \stopTrillSpan \startTrillSpan
-                                r4 \stopTrillSpan
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Attaches trill to each PLT p-run in tuplet 1:
-
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.pervasive_trills(
-                ...         baca.select().tuplet(1).plt_pruns()),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16 [ \startTrillSpan
-                                e''16 ] \stopTrillSpan \startTrillSpan
-                                ef''4 ~ \stopTrillSpan \startTrillSpan
-                                ef''16
-                                r16 \stopTrillSpan
-                                af''16 [ \startTrillSpan
-                                g''16 ] \stopTrillSpan \startTrillSpan
-                            }
-                            \times 4/5 {
-                                a'16 \stopTrillSpan
-                                r4
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        '''
-        return baca.TrillCommand(
-            minimum_written_duration=None,
-            selector=selector,
-            )
-
-    @staticmethod
-    def pervasive_trills_at_interval(
-        interval,
-        selector='baca.select().plt_pruns()',
-        ):
-        r'''Attaches trills at `interval`.
-
-        ..  container:: example
-
-            Attaches trill to every PLT p-run:
-
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.pervasive_trills_at_interval(2),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                \pitchedTrill
-                                c'16 [ \startTrillSpan d'
-                                \pitchedTrill
-                                d'16 ] \stopTrillSpan \startTrillSpan e'
-                                \pitchedTrill
-                                bf'4 ~ \stopTrillSpan \startTrillSpan c''
-                                bf'16
-                                r16 \stopTrillSpan
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \pitchedTrill
-                                fs''16 [ \startTrillSpan gs''
-                                \pitchedTrill
-                                e''16 ] \stopTrillSpan \startTrillSpan fs''
-                                \pitchedTrill
-                                ef''4 ~ \stopTrillSpan \startTrillSpan f''
-                                ef''16
-                                r16 \stopTrillSpan
-                                \pitchedTrill
-                                af''16 [ \startTrillSpan bf''
-                                \pitchedTrill
-                                g''16 ] \stopTrillSpan \startTrillSpan a''
-                            }
-                            \times 4/5 {
-                                \pitchedTrill
-                                a'16 \stopTrillSpan \startTrillSpan b'
-                                r4 \stopTrillSpan
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Attaches trill to every PLT p-run in tuplet 1:
-
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.pervasive_trills_at_interval(
-                ...         2,
-                ...         baca.select().tuplet(1).plt_pruns(),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \pitchedTrill
-                                fs''16 [ \startTrillSpan gs''
-                                \pitchedTrill
-                                e''16 ] \stopTrillSpan \startTrillSpan fs''
-                                \pitchedTrill
-                                ef''4 ~ \stopTrillSpan \startTrillSpan f''
-                                ef''16
-                                r16 \stopTrillSpan
-                                \pitchedTrill
-                                af''16 [ \startTrillSpan bf''
-                                \pitchedTrill
-                                g''16 ] \stopTrillSpan \startTrillSpan a''
-                            }
-                            \times 4/5 {
-                                a'16 \stopTrillSpan
-                                r4
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        '''
-        return baca.TrillCommand(
-            interval=interval,
-            minimum_written_duration=None,
-            selector=selector,
-            )
-
-    @staticmethod
-    def pervasive_trills_at_pitch(
-        pitch,
-        harmonic=None,
-        selector='baca.select().plt_pruns()',
-        ):
-        r'''Attaches trills at `pitch`.
-
-        ..  container:: example
-
-            Attaches trill to every PLT p-run:
-
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.pervasive_trills_at_pitch(1),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                \pitchedTrill
-                                c'16 [ \startTrillSpan cs'
-                                \pitchedTrill
-                                d'16 ] \stopTrillSpan \startTrillSpan cs'
-                                \pitchedTrill
-                                bf'4 ~ \stopTrillSpan \startTrillSpan cs'
-                                bf'16
-                                r16 \stopTrillSpan
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \pitchedTrill
-                                fs''16 [ \startTrillSpan cs'
-                                \pitchedTrill
-                                e''16 ] \stopTrillSpan \startTrillSpan cs'
-                                \pitchedTrill
-                                ef''4 ~ \stopTrillSpan \startTrillSpan cs'
-                                ef''16
-                                r16 \stopTrillSpan
-                                \pitchedTrill
-                                af''16 [ \startTrillSpan cs'
-                                \pitchedTrill
-                                g''16 ] \stopTrillSpan \startTrillSpan cs'
-                            }
-                            \times 4/5 {
-                                \pitchedTrill
-                                a'16 \stopTrillSpan \startTrillSpan cs'
-                                r4 \stopTrillSpan
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Attaches trill to every PLT p-run in tuplet 1:
-
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.pervasive_trills_at_pitch(
-                ...         pitch=1,
-                ...         selector=baca.select().tuplet(1).plt_pruns(),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \pitchedTrill
-                                fs''16 [ \startTrillSpan cs'
-                                \pitchedTrill
-                                e''16 ] \stopTrillSpan \startTrillSpan cs'
-                                \pitchedTrill
-                                ef''4 ~ \stopTrillSpan \startTrillSpan cs'
-                                ef''16
-                                r16 \stopTrillSpan
-                                \pitchedTrill
-                                af''16 [ \startTrillSpan cs'
-                                \pitchedTrill
-                                g''16 ] \stopTrillSpan \startTrillSpan cs'
-                            }
-                            \times 4/5 {
-                                a'16 \stopTrillSpan
-                                r4
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        '''
-        return baca.TrillCommand(
-            harmonic=harmonic,
-            minimum_written_duration=None,
-            pitch=pitch,
-            selector=selector,
-            )
-
-    @staticmethod
     def pitches(
         source,
         allow_repeat_pitches=True,
@@ -8455,12 +8050,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def trill_quarter_notes(selector=None):
-        r'''Trills quarter notes.
+    def trills(selector='baca.select().plt_pruns()'):
+        r'''Attaches trills.
 
         ..  container:: example
 
-            Trills all quarter notes:
+            Attaches trill to every PLT p-run:
 
             ::
 
@@ -8468,8 +8063,8 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.trills(),
                 ...     baca.rests_around([2], [4]),
-                ...     baca.trill_quarter_notes(),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -8488,25 +8083,25 @@ class LibraryNZ(object):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~ \startTrillSpan
+                                c'16 [ \startTrillSpan
+                                d'16 ] \stopTrillSpan \startTrillSpan
+                                bf'4 ~ \stopTrillSpan \startTrillSpan
                                 bf'16
                                 r16 \stopTrillSpan
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~ \startTrillSpan
+                                fs''16 [ \startTrillSpan
+                                e''16 ] \stopTrillSpan \startTrillSpan
+                                ef''4 ~ \stopTrillSpan \startTrillSpan
                                 ef''16
                                 r16 \stopTrillSpan
-                                af''16 [
-                                g''16 ]
+                                af''16 [ \startTrillSpan
+                                g''16 ] \stopTrillSpan \startTrillSpan
                             }
                             \times 4/5 {
-                                a'16
-                                r4
+                                a'16 \stopTrillSpan \startTrillSpan
+                                r4 \stopTrillSpan
                                 \revert TupletBracket.staff-padding
                             }
                         }
@@ -8515,7 +8110,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Trills quarter notes in tuplet 1:
+            Attaches trill to each PLT p-run in tuplet 1:
 
             ::
 
@@ -8523,10 +8118,9 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.trills(
+                ...         baca.select().tuplet(1).plt_pruns()),
                 ...     baca.rests_around([2], [4]),
-                ...     baca.trill_quarter_notes(
-                ...         baca.select().tuplet(1).leaves(),
-                ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -8553,16 +8147,16 @@ class LibraryNZ(object):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~ \startTrillSpan
+                                fs''16 [ \startTrillSpan
+                                e''16 ] \stopTrillSpan \startTrillSpan
+                                ef''4 ~ \stopTrillSpan \startTrillSpan
                                 ef''16
                                 r16 \stopTrillSpan
-                                af''16 [
-                                g''16 ]
+                                af''16 [ \startTrillSpan
+                                g''16 ] \stopTrillSpan \startTrillSpan
                             }
                             \times 4/5 {
-                                a'16
+                                a'16 \stopTrillSpan
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -8572,8 +8166,291 @@ class LibraryNZ(object):
 
         '''
         return baca.TrillCommand(
-            forbidden_annotations=['color fingering', 'color microtone'],
-            minimum_written_duration=abjad.Duration(1, 4),
+            minimum_written_duration=None,
+            selector=selector,
+            )
+
+    @staticmethod
+    def trills_at_interval(
+        interval,
+        selector='baca.select().plt_pruns()',
+        ):
+        r'''Attaches trills at `interval`.
+
+        ..  container:: example
+
+            Attaches trill to every PLT p-run:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.trills_at_interval(2),
+                ...     baca.rests_around([2], [4]),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                \pitchedTrill
+                                c'16 [ \startTrillSpan d'
+                                \pitchedTrill
+                                d'16 ] \stopTrillSpan \startTrillSpan e'
+                                \pitchedTrill
+                                bf'4 ~ \stopTrillSpan \startTrillSpan c''
+                                bf'16
+                                r16 \stopTrillSpan
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \pitchedTrill
+                                fs''16 [ \startTrillSpan gs''
+                                \pitchedTrill
+                                e''16 ] \stopTrillSpan \startTrillSpan fs''
+                                \pitchedTrill
+                                ef''4 ~ \stopTrillSpan \startTrillSpan f''
+                                ef''16
+                                r16 \stopTrillSpan
+                                \pitchedTrill
+                                af''16 [ \startTrillSpan bf''
+                                \pitchedTrill
+                                g''16 ] \stopTrillSpan \startTrillSpan a''
+                            }
+                            \times 4/5 {
+                                \pitchedTrill
+                                a'16 \stopTrillSpan \startTrillSpan b'
+                                r4 \stopTrillSpan
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Attaches trill to every PLT p-run in tuplet 1:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.trills_at_interval(
+                ...         2,
+                ...         baca.select().tuplet(1).plt_pruns(),
+                ...         ),
+                ...     baca.rests_around([2], [4]),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 [
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \pitchedTrill
+                                fs''16 [ \startTrillSpan gs''
+                                \pitchedTrill
+                                e''16 ] \stopTrillSpan \startTrillSpan fs''
+                                \pitchedTrill
+                                ef''4 ~ \stopTrillSpan \startTrillSpan f''
+                                ef''16
+                                r16 \stopTrillSpan
+                                \pitchedTrill
+                                af''16 [ \startTrillSpan bf''
+                                \pitchedTrill
+                                g''16 ] \stopTrillSpan \startTrillSpan a''
+                            }
+                            \times 4/5 {
+                                a'16 \stopTrillSpan
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        return baca.TrillCommand(
+            interval=interval,
+            minimum_written_duration=None,
+            selector=selector,
+            )
+
+    @staticmethod
+    def trills_at_pitch(
+        pitch,
+        harmonic=None,
+        selector='baca.select().plt_pruns()',
+        ):
+        r'''Attaches trills at `pitch`.
+
+        ..  container:: example
+
+            Attaches trill to every PLT p-run:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.trills_at_pitch(1),
+                ...     baca.rests_around([2], [4]),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                \pitchedTrill
+                                c'16 [ \startTrillSpan cs'
+                                \pitchedTrill
+                                d'16 ] \stopTrillSpan \startTrillSpan cs'
+                                \pitchedTrill
+                                bf'4 ~ \stopTrillSpan \startTrillSpan cs'
+                                bf'16
+                                r16 \stopTrillSpan
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \pitchedTrill
+                                fs''16 [ \startTrillSpan cs'
+                                \pitchedTrill
+                                e''16 ] \stopTrillSpan \startTrillSpan cs'
+                                \pitchedTrill
+                                ef''4 ~ \stopTrillSpan \startTrillSpan cs'
+                                ef''16
+                                r16 \stopTrillSpan
+                                \pitchedTrill
+                                af''16 [ \startTrillSpan cs'
+                                \pitchedTrill
+                                g''16 ] \stopTrillSpan \startTrillSpan cs'
+                            }
+                            \times 4/5 {
+                                \pitchedTrill
+                                a'16 \stopTrillSpan \startTrillSpan cs'
+                                r4 \stopTrillSpan
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Attaches trill to every PLT p-run in tuplet 1:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.trills_at_pitch(
+                ...         pitch=1,
+                ...         selector=baca.select().tuplet(1).plt_pruns(),
+                ...         ),
+                ...     baca.rests_around([2], [4]),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 [
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \pitchedTrill
+                                fs''16 [ \startTrillSpan cs'
+                                \pitchedTrill
+                                e''16 ] \stopTrillSpan \startTrillSpan cs'
+                                \pitchedTrill
+                                ef''4 ~ \stopTrillSpan \startTrillSpan cs'
+                                ef''16
+                                r16 \stopTrillSpan
+                                \pitchedTrill
+                                af''16 [ \startTrillSpan cs'
+                                \pitchedTrill
+                                g''16 ] \stopTrillSpan \startTrillSpan cs'
+                            }
+                            \times 4/5 {
+                                a'16 \stopTrillSpan
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        return baca.TrillCommand(
+            harmonic=harmonic,
+            minimum_written_duration=None,
+            pitch=pitch,
             selector=selector,
             )
 
