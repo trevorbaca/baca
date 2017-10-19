@@ -60,10 +60,8 @@ Bases
       ~baca.tools.Selector.Selector.partition_by_ratio
       ~baca.tools.Selector.Selector.ph
       ~baca.tools.Selector.Selector.phs
-      ~baca.tools.Selector.Selector.phs_in_each_tuplet
       ~baca.tools.Selector.Selector.pl
       ~baca.tools.Selector.Selector.pls
-      ~baca.tools.Selector.Selector.pls_in_each_tuplet
       ~baca.tools.Selector.Selector.plt
       ~baca.tools.Selector.Selector.plt_nprun
       ~baca.tools.Selector.Selector.plt_npruns
@@ -73,9 +71,7 @@ Bases
       ~baca.tools.Selector.Selector.plt_runs
       ~baca.tools.Selector.Selector.plt_tail
       ~baca.tools.Selector.Selector.plt_tails
-      ~baca.tools.Selector.Selector.plt_tails_in_each_tuplet
       ~baca.tools.Selector.Selector.plts
-      ~baca.tools.Selector.Selector.plts_in_each_tuplet
       ~baca.tools.Selector.Selector.print
       ~baca.tools.Selector.Selector.rest
       ~baca.tools.Selector.Selector.rests
@@ -259,13 +255,9 @@ Methods
 
 .. automethod:: baca.tools.Selector.Selector.phs
 
-.. automethod:: baca.tools.Selector.Selector.phs_in_each_tuplet
-
 .. automethod:: baca.tools.Selector.Selector.pl
 
 .. automethod:: baca.tools.Selector.Selector.pls
-
-.. automethod:: baca.tools.Selector.Selector.pls_in_each_tuplet
 
 .. automethod:: baca.tools.Selector.Selector.plt
 
@@ -285,11 +277,7 @@ Methods
 
 .. automethod:: baca.tools.Selector.Selector.plt_tails
 
-.. automethod:: baca.tools.Selector.Selector.plt_tails_in_each_tuplet
-
 .. automethod:: baca.tools.Selector.Selector.plts
-
-.. automethod:: baca.tools.Selector.Selector.plts_in_each_tuplet
 
 .. only:: html
 
