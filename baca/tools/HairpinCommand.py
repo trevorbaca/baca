@@ -58,7 +58,7 @@ class HairpinCommand(Command):
         hairpin_tokens=None,
         include_rests=None,
         omit_lone_note_dynamic=None,
-        selector='baca.select().trimmed_leaves().wrap()',
+        selector='baca.select().tls().wrap()',
         ):
         Command.__init__(self, selector=selector)
         self._flare = flare

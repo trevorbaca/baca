@@ -234,7 +234,7 @@ class TransitionCommand(Command):
 
     def __init__(
         self,
-        selector='baca.select().trimmed_leaves().wrap()',
+        selector='baca.select().tls().wrap()',
         solid=None,
         start_markup=None,
         stop_markup=None,

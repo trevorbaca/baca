@@ -4971,7 +4971,7 @@ class LibraryAM(object):
     @staticmethod
     def hairpins(
         hairpins,
-        selector='baca.select().trimmed_leaves().wrap()',
+        selector='baca.select().tls().wrap()',
         flare=None,
         include_rests=None,
         omit_lone_note_dynamic=None,
@@ -5045,7 +5045,7 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
-                ...         selector=baca.select().tuplet(1).trimmed_leaves().wrap(),
+                ...         selector=baca.select().tuplet(1).tls().wrap(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),

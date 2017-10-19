@@ -1525,11 +1525,11 @@ class MusicMaker(abjad.AbjadObject):
                 ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
                 ...     baca.hairpins(
                 ...         ['p < f'],
-                ...         selector=baca.select().tuplet(0).trimmed_leaves().wrap(),
+                ...         selector=baca.select().tuplet(0).tls().wrap(),
                 ...         ),
                 ...     baca.hairpins(
                 ...         ['f > p'],
-                ...         selector=baca.select().tuplet(-1).trimmed_leaves().wrap(),
+                ...         selector=baca.select().tuplet(-1).tls().wrap(),
                 ...         ),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)

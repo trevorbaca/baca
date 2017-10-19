@@ -230,7 +230,7 @@ class LibraryNZ(object):
     @staticmethod
     def niente_swells(
         dynamic,
-        selector='baca.select().trimmed_leaves().wrap()',
+        selector='baca.select().tls().wrap()',
         ):
         r'''Attaches niente swells.
 
@@ -303,7 +303,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.niente_swells(
                 ...         'p',
-                ...         baca.select().tuplet(1).trimmed_leaves().wrap(),
+                ...         baca.select().tuplet(1).tls().wrap(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -509,7 +509,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def ottava(selector='baca.select().trimmed_leaves().wrap()'):
+    def ottava(selector='baca.select().tls().wrap()'):
         r'''Attaches ottava spanner.
 
         ..  container:: example
@@ -637,7 +637,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def ottava_bassa(selector='baca.select().trimmed_leaves().wrap()'):
+    def ottava_bassa(selector='baca.select().tls().wrap()'):
         r'''Attaches ottava bassa spanner.
 
         ..  container:: example
@@ -3468,7 +3468,7 @@ class LibraryNZ(object):
 
     # TODO: change name to slurs() in plural
     @staticmethod
-    def slur(selector='baca.select().trimmed_leaves().wrap()'):
+    def slur(selector='baca.select().tls().wrap()'):
         r'''Attaches slurs.
 
         ..  container:: example
@@ -3540,7 +3540,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.slur(
-                ...         baca.select().tuplet(1).trimmed_leaves().wrap(),
+                ...         baca.select().tuplet(1).tls().wrap(),
                 ...         ),
                 ...     baca.slurs_down(),
                 ...     baca.rests_around([2], [4]),
@@ -6912,7 +6912,7 @@ class LibraryNZ(object):
                 ...     baca.transition_spanner(
                 ...         baca.markup.pont(),
                 ...         baca.markup.ord_(),
-                ...         baca.select().tuplet(1).trimmed_leaves().wrap(),
+                ...         baca.select().tuplet(1).tls().wrap(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -7472,7 +7472,7 @@ class LibraryNZ(object):
     def transition_spanner(
         start_markup=None,
         stop_markup=None,
-        selector='baca.select().trimmed_leaves().wrap()',
+        selector='baca.select().tls().wrap()',
         ):
         r'''Attaches transition spanner.
 
@@ -7584,7 +7584,7 @@ class LibraryNZ(object):
                 ...     baca.transition_spanner(
                 ...         baca.markup.pont(),
                 ...         baca.markup.ord_(),
-                ...         baca.select().tuplet(1).trimmed_leaves().wrap(),
+                ...         baca.select().tuplet(1).tls().wrap(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
