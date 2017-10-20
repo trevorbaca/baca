@@ -791,7 +791,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         '''
         score = segment_maker._score
         skip_context = score['Global Skips']
-        leaves = abjad.iterate(score).by_leaf()
+        leaves = abjad.iterate(score).by_leaf(with_grace_notes=False)
         minimum_durations_by_measure = self._get_minimum_durations_by_measure(
             skip_context,
             leaves,

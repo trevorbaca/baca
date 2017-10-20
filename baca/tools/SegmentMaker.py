@@ -1678,7 +1678,8 @@ class SegmentMaker(abjad.SegmentMaker):
             command = abjad.LilyPondCommand('newSpacingSection')
             abjad.attach(command, start_skip)
             moment = abjad.SchemeMoment(duration)
-            abjad.setting(start_skip).score.proportional_notation_duration = moment
+            agent = abjad.setting(start_skip)
+            agent.score.proportional_notation_duration = moment
 
     def _make_volta_containers(self):
         if not self.volta_measure_map:
