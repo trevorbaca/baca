@@ -2284,7 +2284,7 @@ class Selector(abjad.Selector):
             ::
 
                 >>> contribution.print_color_selector_result()
-                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
+                [LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])]
 
         ..  container:: example
 
@@ -2360,7 +2360,7 @@ class Selector(abjad.Selector):
             ::
 
                 >>> contribution.print_color_selector_result()
-                Selection([LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])
+                [LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])]
 
         '''
         selector = self.plt_npruns()[n]
@@ -2456,8 +2456,8 @@ class Selector(abjad.Selector):
             ::
 
                 >>> contribution.print_color_selector_result()
-                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
-                Selection([LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])
+                [LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])]
+                [LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])]
 
         '''
         selector = self.plts().group_by_pitch().by_length('>', 1)
@@ -2536,7 +2536,7 @@ class Selector(abjad.Selector):
             ::
 
                 >>> contribution.print_color_selector_result()
-                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
+                [LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])]
 
         ..  container:: example
 
@@ -2602,7 +2602,7 @@ class Selector(abjad.Selector):
             ::
 
                 >>> contribution.print_color_selector_result()
-                Selection([LogicalTie([Note("a'16")])])
+                [LogicalTie([Note("a'16")])]
 
         '''
         selector = self.plt_pruns()[n]
@@ -2726,13 +2726,13 @@ class Selector(abjad.Selector):
             ::
 
                 >>> contribution.print_color_selector_result()
-                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
-                Selection([LogicalTie([Note("bf'4"), Note("bf'16")])])
-                Selection([LogicalTie([Note("bf'16")])])
-                Selection([LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])
-                Selection([LogicalTie([Note("fs''16")])])
-                Selection([LogicalTie([Note("af''16")])])
-                Selection([LogicalTie([Note("a'16")])])
+                [LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])]
+                [LogicalTie([Note("bf'4"), Note("bf'16")])]
+                [LogicalTie([Note("bf'16")])]
+                [LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])]
+                [LogicalTie([Note("fs''16")])]
+                [LogicalTie([Note("af''16")])]
+                [LogicalTie([Note("a'16")])]
 
         '''
         selector = self.plts().group_by_pitch()
@@ -2821,7 +2821,7 @@ class Selector(abjad.Selector):
             ::
 
                 >>> contribution.print_color_selector_result()
-                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("bf'4"), Note("bf'16")])])
+                [LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("bf'4"), Note("bf'16")])]
 
         ..  container:: example
 
@@ -2897,7 +2897,7 @@ class Selector(abjad.Selector):
             ::
 
                 >>> contribution.print_color_selector_result()
-                Selection([LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")])])
+                [LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")])]
 
         '''
         selector = self.plt_runs()[n]
@@ -3021,9 +3021,9 @@ class Selector(abjad.Selector):
             ::
 
                 >>> contribution.print_color_selector_result()
-                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("bf'4"), Note("bf'16")])])
-                Selection([LogicalTie([Note("bf'16")]), LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])
-                Selection([LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")])])
+                [LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("bf'4"), Note("bf'16")])]
+                [LogicalTie([Note("bf'16")]), LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])]
+                [LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")])]
 
         '''
         selector = self.plts().by_contiguity()
