@@ -911,7 +911,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 >>> rhythm_maker = baca.MusicRhythmMaker(
                 ...     acciaccatura_specifiers=[
                 ...         baca.AcciaccaturaSpecifier(
-                ...             pattern=abjad.index_last(),
+                ...             pattern=abjad.index_last(1),
                 ...             ),
                 ...         ],
                 ...     talea=abjad.rhythmmakertools.Talea(

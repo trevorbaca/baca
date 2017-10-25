@@ -526,7 +526,7 @@ class ImbricateBuilder(Builder):
             hocket = bool(hocket)
         self._hocket = hocket
         if selector is not None:
-            if not isinstance(selector, abjad.Selector):
+            if not isinstance(selector, abjad.Expression):
                 raise TypeError(f'selector or none only: {selector!r}.')
         self._selector = selector
         if truncate_ties is not None:

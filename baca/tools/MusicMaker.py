@@ -791,12 +791,12 @@ class MusicMaker(abjad.AbjadObject):
 
     def _apply_remaining_specifiers(self, selections, specifiers):
         assert self._all_are_selections(selections), repr(selections)
-        selection = abjad.select(selections)
+        #selection = abjad.select(selections)
         for specifier in specifiers:
             if isinstance(specifier, abjad.rhythmmakertools.BeamSpecifier):
                 specifier._detach_all_beams(selections)
-            #specifier(selections)
-            specifier(selection)
+            specifier(selections)
+            #specifier(selection)
 
     def _apply_rhythm_specifiers(
         self,
@@ -958,7 +958,7 @@ class MusicMaker(abjad.AbjadObject):
         return anchor_specifier, specifiers_
 
     def _get_storage_format_specification(self):
-        agent = abjad.StorageFormatAgent(self)
+        agent = abjad.StorageFormatManager(self)
         keyword_argument_names = agent.signature_keyword_names
         positional_argument_values = self.specifiers
         return abjad.StorageFormatSpecification(
@@ -1525,11 +1525,11 @@ class MusicMaker(abjad.AbjadObject):
                 ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
                 ...     baca.hairpins(
                 ...         ['p < f'],
-                ...         selector=baca.select().tuplet(0).tls().wrap(),
+                ...         selector=baca.select().tuplets()[:1].tls().group(),
                 ...         ),
                 ...     baca.hairpins(
                 ...         ['f > p'],
-                ...         selector=baca.select().tuplet(-1).tls().wrap(),
+                ...         selector=baca.select().tuplets()[-1:].tls().group(),
                 ...         ),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -1579,11 +1579,11 @@ class MusicMaker(abjad.AbjadObject):
                 ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
                 ...     baca.hairpins(
                 ...         ['p < f'],
-                ...         selector=baca.select().tuplets()[:2].wrap(),
+                ...         selector=baca.select().tuplets()[:2].group(),
                 ...         ),
                 ...     baca.hairpins(
                 ...         ['f > p'],
-                ...         selector=baca.select().tuplets()[-1:].wrap(),
+                ...         selector=baca.select().tuplets()[-1:].group(),
                 ...         ),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
@@ -2159,7 +2159,7 @@ class MusicMaker(abjad.AbjadObject):
                 ...             ),
                 ...         ),
                 ...     baca.MusicRhythmSpecifier(
-                ...         pattern=abjad.index_first(),
+                ...         pattern=abjad.index_first(1),
                 ...         rhythm_maker=baca.MusicRhythmMaker(
                 ...             talea=abjad.rhythmmakertools.Talea(
                 ...                 counts=[1],

@@ -542,7 +542,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
         return divisions_
 
     def _get_storage_format_specification(self):
-        agent = abjad.StorageFormatAgent(self)
+        agent = abjad.StorageFormatManager(self)
         keyword_argument_names = agent.signature_keyword_names
         keyword_argument_names = list(keyword_argument_names)
         if bool(self.cyclic):

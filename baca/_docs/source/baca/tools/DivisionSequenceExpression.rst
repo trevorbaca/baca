@@ -29,6 +29,7 @@ Bases
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.argument_count
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.argument_values
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.callbacks
+      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.color
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.division_sequence
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.establish_equivalence
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.evaluation_template
@@ -39,7 +40,6 @@ Bases
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.is_composite
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.is_initializer
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.is_postfix
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.iterate
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.keywords
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.label
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.make_callback
@@ -49,14 +49,18 @@ Bases
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.name
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.next_name
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.pitch_class_segment
+      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.pitch_set
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.precedence
+      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.print
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.proxy_class
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.qualified_method_name
+      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.select
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.sequence
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.split_by_durations
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.string_template
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.subclass_hook
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.subexpressions
+      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.template
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.wrap_in_list
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__add__
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__call__
@@ -201,6 +205,12 @@ Read-only properties
 
       .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.subexpressions
 
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.template
+
 Methods
 -------
 
@@ -209,6 +219,12 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.append_callback
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.color
 
 .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.division_sequence
 
@@ -234,12 +250,6 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.iterate
-
-.. only:: html
-
-   .. container:: inherited
-
       .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.label
 
 .. only:: html
@@ -247,6 +257,24 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.pitch_class_segment
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.pitch_set
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.print
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.select
 
 .. only:: html
 

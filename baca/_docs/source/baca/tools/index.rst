@@ -247,7 +247,7 @@ Utilities
    RegistrationDictionary
    Scope
    ScoreTemplate
-   Selector
+   Selection
    Sequence
    SpacingIndication
    StageMeasureMap
@@ -294,7 +294,7 @@ Utilities
    RegistrationDictionary
    Scope
    ScoreTemplate
-   Selector
+   Selection
    Sequence
    SpacingIndication
    StageMeasureMap

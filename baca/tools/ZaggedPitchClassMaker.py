@@ -149,13 +149,13 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
 
         Returns boolean.
         '''
-        agent = abjad.StorageFormatAgent(self)
+        agent = abjad.StorageFormatManager(self)
         return agent.compare(argument)
 
     def __hash__(self):
         r'''Hashes zagged pitch-class maker.
         '''
-        agent = abjad.StorageFormatAgent(self)
+        agent = abjad.StorageFormatManager(self)
         return hash(agent.hash_values)
 
     ### PUBLIC PROPERTIES ###

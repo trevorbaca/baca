@@ -660,7 +660,8 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             affix_skips_instead_of_rests,
             decrease_durations,
             )
-        leaf_selection = abjad.Selection(leaves)
+        #leaf_selection = abjad.Selection(leaves)
+        leaf_selection = abjad.select(leaves)
         if isinstance(time_treatment, int):
             tuplet = self._make_tuplet_with_extra_count(
                 leaf_selection,
@@ -692,7 +693,8 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 if grace_container is None:
                     continue
                 abjad.attach(grace_container, logical_tie.head)
-        selection = abjad.Selection([tuplet])
+        #selection = abjad.Selection([tuplet])
+        selection = abjad.select([tuplet])
         return selection
 
     def _make_state_manifest(self):

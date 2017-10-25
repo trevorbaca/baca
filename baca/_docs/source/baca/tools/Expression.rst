@@ -29,6 +29,7 @@ Bases
       ~baca.tools.Expression.Expression.argument_count
       ~baca.tools.Expression.Expression.argument_values
       ~baca.tools.Expression.Expression.callbacks
+      ~baca.tools.Expression.Expression.color
       ~baca.tools.Expression.Expression.establish_equivalence
       ~baca.tools.Expression.Expression.evaluation_template
       ~baca.tools.Expression.Expression.force_return
@@ -38,7 +39,6 @@ Bases
       ~baca.tools.Expression.Expression.is_composite
       ~baca.tools.Expression.Expression.is_initializer
       ~baca.tools.Expression.Expression.is_postfix
-      ~baca.tools.Expression.Expression.iterate
       ~baca.tools.Expression.Expression.keywords
       ~baca.tools.Expression.Expression.label
       ~baca.tools.Expression.Expression.make_callback
@@ -49,13 +49,17 @@ Bases
       ~baca.tools.Expression.Expression.next_name
       ~baca.tools.Expression.Expression.pitch_class_segment
       ~baca.tools.Expression.Expression.pitch_class_segments
+      ~baca.tools.Expression.Expression.pitch_set
       ~baca.tools.Expression.Expression.precedence
+      ~baca.tools.Expression.Expression.print
       ~baca.tools.Expression.Expression.proxy_class
       ~baca.tools.Expression.Expression.qualified_method_name
+      ~baca.tools.Expression.Expression.select
       ~baca.tools.Expression.Expression.sequence
       ~baca.tools.Expression.Expression.string_template
       ~baca.tools.Expression.Expression.subclass_hook
       ~baca.tools.Expression.Expression.subexpressions
+      ~baca.tools.Expression.Expression.template
       ~baca.tools.Expression.Expression.wrap_in_list
       ~baca.tools.Expression.Expression.__add__
       ~baca.tools.Expression.Expression.__call__
@@ -200,6 +204,12 @@ Read-only properties
 
       .. autoattribute:: baca.tools.Expression.Expression.subexpressions
 
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.Expression.Expression.template
+
 Methods
 -------
 
@@ -208,6 +218,12 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Expression.Expression.append_callback
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Expression.Expression.color
 
 .. only:: html
 
@@ -231,17 +247,25 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.iterate
-
-.. only:: html
-
-   .. container:: inherited
-
       .. automethod:: baca.tools.Expression.Expression.label
 
 .. automethod:: baca.tools.Expression.Expression.pitch_class_segment
 
 .. automethod:: baca.tools.Expression.Expression.pitch_class_segments
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Expression.Expression.pitch_set
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Expression.Expression.print
+
+.. automethod:: baca.tools.Expression.Expression.select
 
 .. only:: html
 

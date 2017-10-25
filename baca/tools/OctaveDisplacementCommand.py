@@ -123,7 +123,7 @@ class OctaveDisplacementCommand(Command):
     def __init__(
         self,
         displacements=None,
-        selector='baca.select().plts().wrap()',
+        selector='baca.select().plts().group()',
         ):
         Command.__init__(self, selector=selector)
         if displacements is not None:

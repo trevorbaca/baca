@@ -93,3 +93,75 @@ class Expression(abjad.Expression):
         '''
         initializer = Expression().pitch_class_segment()
         return self.map(initializer)
+
+    def select(self, **keywords):
+        r'''Makes select expression.
+
+        ..  container:: example
+
+            Makes expression to select leaves:
+
+            ..  container:: example
+
+                ::
+
+                    >>> staff = abjad.Staff()
+                    >>> staff.append(abjad.Measure((2, 8), "<c' bf'>8 <g' a'>8"))
+                    >>> staff.append(abjad.Measure((2, 8), "af'8 r8"))
+                    >>> staff.append(abjad.Measure((2, 8), "r8 gf'8"))
+                    >>> show(staff) # doctest: +SKIP
+
+                ..  docs::
+
+                    >>> f(staff)
+                    \new Staff {
+                        {
+                            \time 2/8
+                            <c' bf'>8
+                            <g' a'>8
+                        }
+                        {
+                            af'8
+                            r8
+                        }
+                        {
+                            r8
+                            gf'8
+                        }
+                    }
+
+            ..  container:: example expression
+
+                ::
+
+                    >>> expression = baca.Expression()
+                    >>> expression = expression.select()
+                    >>> expression = expression.by_leaf()
+
+                ::
+
+                    >>> for leaf in expression(staff):
+                    ...     leaf
+                    ...
+                    Chord("<c' bf'>8")
+                    Chord("<g' a'>8")
+                    Note("af'8")
+                    Rest('r8')
+                    Rest('r8')
+                    Note("gf'8")
+
+        Returns expression.
+        '''
+        import baca
+        class_ = baca.Selection
+        callback = self._make_initializer_callback(
+            class_,
+            module_names=['baca'],
+            **keywords
+            )
+        expression = self.append_callback(callback)
+        return abjad.new(
+            expression,
+            proxy_class=class_,
+            template='baca.select()',
+            )

@@ -64,7 +64,7 @@ class RegistrationComponent(AbjadValueObject):
         Returns string.
         '''
         if format_specification in ('', 'storage'):
-            return abjad.StorageFormatAgent(self).get_storage_format()
+            return abjad.StorageFormatManager(self).get_storage_format()
         return str(self)
 
     def __hash__(self):

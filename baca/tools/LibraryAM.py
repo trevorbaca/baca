@@ -84,7 +84,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.accents(baca.select().tuplet(1).phs()),
+                ...     baca.accents(baca.select().tuplets()[1:2].phs()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -138,7 +138,7 @@ class LibraryAM(object):
     @staticmethod
     def alternate_bow_strokes(
         downbow_first=True,
-        selector='baca.select().phs().wrap()',
+        selector='baca.select().phs().group()',
         ):
         r'''Attaches alternate bow strokes.
 
@@ -264,7 +264,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.alternate_bow_strokes(
-                ...         selector=baca.select().tuplet(1).phs().wrap(),
+                ...         selector=baca.select().tuplets()[1:2].phs().group(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(6),
@@ -383,7 +383,7 @@ class LibraryAM(object):
                             direction=Down,
                             ),
                         ],
-                    selector=baca.select().ph(),
+                    selector=baca.select().plts().phs().ph(),
                     )
 
         ..  container:: example
@@ -459,7 +459,7 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.ancora_dynamic(
                 ...         'ff',
-                ...         baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplets()[1:2].ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -651,8 +651,8 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.bass_to_octave(3, baca.select().plts().wrap()),
-                ...     baca.color(baca.select().plts().wrap()),
+                ...     baca.bass_to_octave(3, baca.select().plts().group()),
+                ...     baca.color(baca.select().plts().group()),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -667,77 +667,77 @@ class LibraryAM(object):
                         \voiceOne
                         {
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 <c d bf>8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 <c d bf>32 ]
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 f'8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 f'32 ]
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 <ef' e' fs''>8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 <ef' e' fs''>32 ]
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 <g af'>8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 <g af'>32 ]
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 a8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 a32 ]
                                 r16.
                             }
@@ -1367,7 +1367,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def beam_positions(n=None, selector='baca.select().leaves().wrap()'):
+    def beam_positions(n=None, selector='baca.select().leaves().group()'):
         r'''Overrides beam positions.
 
         ..  container:: example
@@ -1429,7 +1429,7 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.beam_positions(
                 ...         6,
-                ...         baca.select().tuplet(1).leaves().wrap(),
+                ...         baca.select().tuplets()[1:2].leaves().group(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     time_treatments=[-1],
@@ -1492,8 +1492,8 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.center_to_octave(3, baca.select().plts().wrap()),
-                ...     baca.color(baca.select().plts().wrap()),
+                ...     baca.center_to_octave(3, baca.select().plts().group()),
+                ...     baca.color(baca.select().plts().group()),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -1508,77 +1508,77 @@ class LibraryAM(object):
                         \voiceOne
                         {
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 <c, d, bf,>8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 <c, d, bf,>32 ]
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 f8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 f32 ]
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 <ef e fs'>8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 <ef e fs'>32 ]
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 <g, af>8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 <g, af>32 ]
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 a,8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 a,32 ]
                                 r16.
                             }
@@ -1848,7 +1848,7 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.clef(
                 ...         clef='alto',
-                ...         selector=baca.select().tuplet(1).leaf(),
+                ...         selector=baca.select().tuplets()[1:2].leaf(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(7),
@@ -1904,7 +1904,7 @@ class LibraryAM(object):
     @staticmethod
     def clef_spanner(
         clef='percussion',
-        selector='baca.select().leaves().wrap()',
+        selector='baca.select().leaves().group()',
         ):
         r'''Attaches clef spanner.
 
@@ -2045,7 +2045,7 @@ class LibraryAM(object):
     def clusters(
         widths,
         start_pitch=None,
-        selector='baca.select().plts().wrap()',
+        selector='baca.select().plts().group()',
         ):
         r'''Makes clusters.
         '''
@@ -2271,7 +2271,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.color(selector=baca.select().tuplet(1).leaves()),
+                ...     baca.color(selector=baca.select().tuplets()[1:2].leaves()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2353,7 +2353,7 @@ class LibraryAM(object):
         return baca.ColorCommand(selector=selector)
 
     @staticmethod
-    def color_fingerings(numbers, selector='baca.select().phs().wrap()'):
+    def color_fingerings(numbers, selector='baca.select().phs().group()'):
         r'''Color fingerings.
 
         Returns color fingering command.
@@ -2443,7 +2443,7 @@ class LibraryAM(object):
         return result
 
     @staticmethod
-    def cross_note_heads(selector='baca.select().pls().wrap()'):
+    def cross_note_heads(selector='baca.select().pls().group()'):
         r'''Overrides note-head style on pitched leaves.
 
         ..  container:: example
@@ -2514,7 +2514,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.cross_note_heads(
-                ...         baca.select().tuplet(1).leaves().wrap(),
+                ...         baca.select().tuplets()[1:2].leaves().group(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2829,7 +2829,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def diatonic_clusters(widths, selector='baca.select().plts().wrap()'):
+    def diatonic_clusters(widths, selector='baca.select().plts().group()'):
         r'''Makes diatonic clusters.
         '''
         return baca.DiatonicClusterCommand(
@@ -2838,7 +2838,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def displacement(displacements, selector='baca.select().plts().wrap()'):
+    def displacement(displacements, selector='baca.select().plts().group()'):
         r'''Octave-displaces PLTs.
 
         ..  container:: example
@@ -2959,7 +2959,7 @@ class LibraryAM(object):
                 ...     3 * [[0, 2, 3]],
                 ...     baca.displacement(
                 ...         [0, 0, -1, -1, 1, 1],
-                ...         baca.select().plts()[-6:].wrap(),
+                ...         baca.select().plts()[-6:].group(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3084,7 +3084,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.double_tonguing(
-                ...         baca.select().tuplet(1).phs(),
+                ...         baca.select().tuplets()[1:2].phs(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3327,7 +3327,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.down_bows(
-                ...         baca.select().tuplet(1).phs(),
+                ...         baca.select().tuplets()[1:2].phs(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3448,7 +3448,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.dynamic('f', baca.select().tuplet(1).ph()),
+                ...     baca.dynamic('f', baca.select().tuplets()[1:2].ph()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -3502,7 +3502,7 @@ class LibraryAM(object):
     @staticmethod
     def dynamic_line_spanner_staff_padding(
         n=None,
-        selector='baca.select().leaves().wrap()',
+        selector='baca.select().leaves().group()',
         ):
         r'''Overrides dynamic line spanner staff padding on leaves.
 
@@ -3579,7 +3579,7 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.dynamic_line_spanner_staff_padding(
                 ...         n=4,
-                ...         selector=baca.select().tuplet(1).leaves().wrap(),
+                ...         selector=baca.select().tuplets()[1:2].leaves().group(),
                 ...         ),
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
@@ -3641,7 +3641,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def dynamic_line_spanner_up(selector='baca.select().leaves().wrap()'):
+    def dynamic_line_spanner_up(selector='baca.select().leaves().group()'):
         r'''Up-overrides dynamic line spanner direction.
 
         ..  container:: example
@@ -3716,7 +3716,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.dynamic_line_spanner_up(
-                ...         baca.select().tuplet(1).leaves().wrap(),
+                ...         baca.select().tuplets()[1:2].leaves().group(),
                 ...         ),
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
@@ -3792,7 +3792,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.dynamic('p'),
-                ...     baca.dynamic('f', baca.select().tuplet(1).pl()),
+                ...     baca.dynamic('f', baca.select().tuplets()[1:2].pl()),
                 ...     baca.dynamic_text_extra_offset((-3, 0)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3851,10 +3851,10 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.dynamic('p'),
-                ...     baca.dynamic('f', baca.select().tuplet(1).leaf()),
+                ...     baca.dynamic('f', baca.select().tuplets()[1:2].leaf()),
                 ...     baca.dynamic_text_extra_offset(
                 ...         (-3, 0),
-                ...         baca.select().tuplet(1).leaf(),
+                ...         baca.select().tuplets()[1:2].leaf(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3927,7 +3927,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.dynamic('p'),
-                ...     baca.dynamic('f', baca.select().tuplet(1).ph()),
+                ...     baca.dynamic('f', baca.select().tuplets()[1:2].ph()),
                 ...     baca.dynamics_down(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3985,8 +3985,8 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.dynamic('p'),
-                ...     baca.dynamic('f', baca.select().tuplet(1).ph()),
-                ...     baca.dynamics_down(baca.select().tuplet(1).leaf()),
+                ...     baca.dynamic('f', baca.select().tuplets()[1:2].ph()),
+                ...     baca.dynamics_down(baca.select().tuplets()[1:2].leaf()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -4053,7 +4053,7 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.dynamic('p'),
-                ...     baca.dynamic('f', baca.select().tuplet(1).ph()),
+                ...     baca.dynamic('f', baca.select().tuplets()[1:2].ph()),
                 ...     baca.dynamics_up(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4111,8 +4111,8 @@ class LibraryAM(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.dynamic('p'),
-                ...     baca.dynamic('f', baca.select().tuplet(1).ph()),
-                ...     baca.dynamics_up(baca.select().tuplet(1).leaf()),
+                ...     baca.dynamic('f', baca.select().tuplets()[1:2].ph()),
+                ...     baca.dynamics_up(baca.select().tuplets()[1:2].leaf()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -4251,7 +4251,7 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.effort_dynamic(
                 ...         'f',
-                ...         baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplets()[1:2].ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4402,7 +4402,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.fermata(baca.select().tuplet(1).ph()),
+                ...     baca.fermata(baca.select().tuplets()[1:2].ph()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -4454,7 +4454,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def five_line_staff(selector='baca.select().leaves().wrap()'):
+    def five_line_staff(selector='baca.select().leaves().group()'):
         r'''Attaches five-line staff spanner.
 
         ..  container:: example
@@ -4611,7 +4611,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.flageolets(baca.select().tuplet(1).phs()),
+                ...     baca.flageolets(baca.select().tuplets()[1:2].phs()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -4887,8 +4887,8 @@ class LibraryAM(object):
             ::
 
                 >>> music_maker = baca.MusicMaker()
-                >>> selector = abjad.select().by_class(abjad.Tuplet)[1]
-                >>> selector = selector.by_leaf(pitched=True).by_contiguity()
+                >>> selector = baca.select().tuplets()[1:2].pls()
+                >>> selector = selector.by_contiguity()
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -4971,7 +4971,7 @@ class LibraryAM(object):
     @staticmethod
     def hairpins(
         hairpins,
-        selector='baca.select().tls().wrap()',
+        selector='baca.select().tls().group()',
         flare=None,
         omit_lone_note_dynamic=None,
         ):
@@ -5044,7 +5044,7 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.hairpins(
                 ...         hairpins=['p < f'],
-                ...         selector=baca.select().tuplet(1).tls().wrap(),
+                ...         selector=baca.select().tuplets()[1:2].tls().group(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5421,7 +5421,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def label(expression, selector='baca.select().leaves().wrap()'):
+    def label(expression, selector='baca.select().leaves().group()'):
         r'''Labels selections with label `expression`.
 
         ..  container:: example
@@ -5527,7 +5527,7 @@ class LibraryAM(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.label(
                 ...         expression=abjad.label().with_pitches(locale='us'),
-                ...         selector=baca.select().tuplet(1).phs(),
+                ...         selector=baca.select().tuplets()[1:2].phs(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -5667,7 +5667,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.laissez_vibrer(baca.select().tuplet(1).plt_tails()),
+                ...     baca.laissez_vibrer(baca.select().tuplets()[1:2].plt_tails()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -5788,7 +5788,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.line_break(baca.select().tuplet(1).leaf(-1)),
+                ...     baca.line_break(baca.select().tuplets()[1:2].leaf(-1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -5910,7 +5910,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.long_fermata(baca.select().tuplet(1).ph()),
+                ...     baca.long_fermata(baca.select().tuplets()[1:2].ph()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6030,7 +6030,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.marcati(baca.select().tuplet(1).phs()),
+                ...     baca.marcati(baca.select().tuplets()[1:2].phs()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6238,7 +6238,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def molto_flaut_to_molto_grid(selector='baca.select().leaves().wrap()'):
+    def molto_flaut_to_molto_grid(selector='baca.select().leaves().group()'):
         r'''Makes color transition spanner.
         '''
         left_text = abjad.Markup('molto flautando').italic().larger() + abjad.Markup.hspace(1)

@@ -53,7 +53,7 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
             assert isinstance(pattern, abjad.Pattern), repr(pattern)
         self._pattern = pattern
         if selector is not None:
-            assert isinstance(selector, abjad.Selector), repr(selector)
+            assert isinstance(selector, abjad.Expression), repr(selector)
         self._selector = selector
 
     ### SPECIAL METHODS ###

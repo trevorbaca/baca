@@ -3,15 +3,15 @@ import baca
 import inspect
 
 
-class Selector(abjad.Selector):
-    r'''Selector.
+class Selection(abjad.Selection):
+    r'''Selection.
 
     ..  container:: example
 
         ::
 
             >>> baca.select()
-            Selector()
+            baca.select()
 
     '''
 
@@ -22,18 +22,18 @@ class Selector(abjad.Selector):
     __slots__ = (
         )
 
-    ### PRIVATE METHODS ###
-
-    def _get_template(self, frame):
-        try:
-            frame_info = inspect.getframeinfo(frame)
-            function_name = frame_info.function
-            arguments = abjad.Expression._wrap_arguments(frame)
-            stem = self.template or 'baca.select()'
-            template = f'{stem}.{function_name}({arguments})'
-        finally:
-            del frame
-        return template
+#    ### PRIVATE METHODS ###
+#
+#    @staticmethod
+#    def _get_template(frame):
+#        try:
+#            frame_info = inspect.getframeinfo(frame)
+#            function_name = frame_info.function
+#            arguments = abjad.Expression._wrap_arguments(frame)
+#            template = '{}.({})'.format(function_name, arguments)
+#        finally:
+#            del frame
+#        return template
 
     ### PUBLIC METHODS ###
 
@@ -182,7 +182,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.chords()[n]
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def chord_head(self, n=0):
@@ -320,7 +320,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.chord_heads()[n]
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def chord_heads(self):
@@ -405,7 +405,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.by_leaf(abjad.Chord, head=True)
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def chords(self):
@@ -495,7 +495,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.by_class(abjad.Chord)
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def leaf(self, n=0):
@@ -632,7 +632,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.leaves()[n]
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def leaves(self):
@@ -648,7 +648,7 @@ class Selector(abjad.Selector):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select().tuplet(1).leaves()),
+                ...     baca.color(baca.select().tuplets()[1:2].leaves()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -739,7 +739,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.by_leaf()
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def lleaves(self):
@@ -755,7 +755,7 @@ class Selector(abjad.Selector):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select().tuplet(1).lleaves()),
+                ...     baca.color(baca.select().tuplets()[1:2].lleaves()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -849,7 +849,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.by_leaf().with_previous_leaf()
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def lrleaves(self):
@@ -865,7 +865,7 @@ class Selector(abjad.Selector):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select().tuplet(1).lrleaves()),
+                ...     baca.color(baca.select().tuplets()[1:2].lrleaves()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -965,7 +965,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.by_leaf().with_previous_leaf().with_next_leaf()
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def lt(self, n=0):
@@ -1110,7 +1110,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.lts()[n]
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def lts(self):
@@ -1254,7 +1254,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.by_logical_tie(with_grace_notes=True)
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def note(self, n=0):
@@ -1394,7 +1394,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.notes()[n]
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def notes(self):
@@ -1528,7 +1528,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.by_class(abjad.Note)
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def ph(self, n=0):
@@ -1668,7 +1668,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.phs()[n]
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def phs(self):
@@ -1790,7 +1790,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.plts().map(baca.select()[0])
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def pl(self, n=0):
@@ -1930,7 +1930,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.pls()[n]
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def pls(self):
@@ -2064,7 +2064,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.by_leaf(pitched=True)
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def plt(self, n=0):
@@ -2209,7 +2209,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.plts()[n]
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def plt_nprun(self, n=0):
@@ -2284,7 +2284,7 @@ class Selector(abjad.Selector):
             ::
 
                 >>> contribution.print_color_selector_result()
-                [LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])]
+                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
 
         ..  container:: example
 
@@ -2360,11 +2360,11 @@ class Selector(abjad.Selector):
             ::
 
                 >>> contribution.print_color_selector_result()
-                [LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])]
+                Selection([LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])
 
         '''
         selector = self.plt_npruns()[n]
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def plt_npruns(self):
@@ -2380,9 +2380,7 @@ class Selector(abjad.Selector):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(
-                ...         baca.select().plt_npruns(),
-                ...         ),
+                ...     baca.color(baca.select().plt_npruns()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2391,6 +2389,12 @@ class Selector(abjad.Selector):
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
                 >>> show(lilypond_file) # doctest: +SKIP
+
+            ::
+
+                >>> contribution.print_color_selector_result()
+                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
+                Selection([LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])
 
             ..  docs::
 
@@ -2453,15 +2457,15 @@ class Selector(abjad.Selector):
                     }
                 >>
 
-            ::
-
-                >>> contribution.print_color_selector_result()
-                [LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])]
-                [LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])]
 
         '''
-        selector = self.plts().group_by_pitch().by_length('>', 1)
-        template = self._get_template(inspect.currentframe())
+        #selector = self.plts().group_by_pitch().by_length('>', 1)
+        selector = self.plts()
+        selector = selector.group(baca.select().get_pitches())
+        selector = selector.map(baca.select().by_contiguity())
+        selector = selector.flatten(depth=1)
+        selector = selector.filter(abjad.length('>', 1))
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def plt_prun(self, n=0):
@@ -2536,7 +2540,7 @@ class Selector(abjad.Selector):
             ::
 
                 >>> contribution.print_color_selector_result()
-                [LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])]
+                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
 
         ..  container:: example
 
@@ -2602,11 +2606,11 @@ class Selector(abjad.Selector):
             ::
 
                 >>> contribution.print_color_selector_result()
-                [LogicalTie([Note("a'16")])]
+                Selection([LogicalTie([Note("a'16")])])
 
         '''
         selector = self.plt_pruns()[n]
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def plt_pruns(self):
@@ -2726,17 +2730,21 @@ class Selector(abjad.Selector):
             ::
 
                 >>> contribution.print_color_selector_result()
-                [LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])]
-                [LogicalTie([Note("bf'4"), Note("bf'16")])]
-                [LogicalTie([Note("bf'16")])]
-                [LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])]
-                [LogicalTie([Note("fs''16")])]
-                [LogicalTie([Note("af''16")])]
-                [LogicalTie([Note("a'16")])]
+                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
+                Selection([LogicalTie([Note("bf'4"), Note("bf'16")])])
+                Selection([LogicalTie([Note("bf'16")])])
+                Selection([LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])
+                Selection([LogicalTie([Note("fs''16")])])
+                Selection([LogicalTie([Note("af''16")])])
+                Selection([LogicalTie([Note("a'16")])])
 
         '''
-        selector = self.plts().group_by_pitch()
-        template = self._get_template(inspect.currentframe())
+        #selector = self.plts().group_by_pitch()
+        selector = self.plts()
+        selector = selector.group(baca.select().get_pitches())
+        selector = selector.map(baca.select().by_contiguity())
+        selector = selector.flatten(depth=1)
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def plt_run(self, n=0):
@@ -2821,7 +2829,7 @@ class Selector(abjad.Selector):
             ::
 
                 >>> contribution.print_color_selector_result()
-                [LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("bf'4"), Note("bf'16")])]
+                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("bf'4"), Note("bf'16")])])
 
         ..  container:: example
 
@@ -2897,11 +2905,11 @@ class Selector(abjad.Selector):
             ::
 
                 >>> contribution.print_color_selector_result()
-                [LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")])]
+                Selection([LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")])])
 
         '''
         selector = self.plt_runs()[n]
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def plt_runs(self):
@@ -3021,13 +3029,13 @@ class Selector(abjad.Selector):
             ::
 
                 >>> contribution.print_color_selector_result()
-                [LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("bf'4"), Note("bf'16")])]
-                [LogicalTie([Note("bf'16")]), LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])]
-                [LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")])]
+                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("bf'4"), Note("bf'16")])])
+                Selection([LogicalTie([Note("bf'16")]), LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])
+                Selection([LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")])])
 
         '''
         selector = self.plts().by_contiguity()
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def plt_tail(self, n=0):
@@ -3167,7 +3175,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.plt_tails()[n]
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def plt_tails(self):
@@ -3289,7 +3297,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.plts().map(baca.select()[-1])
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def plts(self):
@@ -3421,7 +3429,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.by_logical_tie(pitched=True, with_grace_notes=True)
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def rest(self, n=0):
@@ -3555,7 +3563,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.rests()[n]
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def rests(self):
@@ -3635,7 +3643,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.by_class((abjad.MultimeasureRest, abjad.Rest))
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def rleaves(self):
@@ -3651,7 +3659,7 @@ class Selector(abjad.Selector):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select().tuplet(1).rleaves()),
+                ...     baca.color(baca.select().tuplets()[1:2].rleaves()),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3748,7 +3756,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.by_leaf().with_next_leaf()
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def stages(self, start, stop=None):
@@ -3898,270 +3906,270 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.by_leaf(trim=True)
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
-    def top(self):
-        r'''Selects top-level components.
-
-        ..  container:: example
-
-            Colors nothing because segment-maker passes leaves (not tuplets):
-
-            ::
-
-                >>> segment_maker = baca.SegmentMaker(
-                ...     allow_empty_selections=True,
-                ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-                ...     )
-
-            ::
-
-                >>> segment_maker(
-                ...     baca.scope('Violin Music Voice', 1),
-                ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-                ...     baca.RhythmBuilder(
-                ...         rhythm_maker=abjad.rhythmmakertools.TaleaRhythmMaker(
-                ...             extra_counts_per_division=[1],
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[1, 1, 1, -1],
-                ...                 denominator=8,
-                ...                 ),
-                ...             ),
-                ...         ),
-                ...     baca.color(baca.select().tuplet(1)),
-                ...     )
-
-            ::
-
-                >>> result = segment_maker.run(is_doc_example=True)
-                >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Score])
-                \context Score = "Score" <<
-                    \tag violin
-                    \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
-                        \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                        }
-                    >>
-                    \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
-                                \times 4/5 {
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                    \clef "treble"
-                                    e'8 [
-                                    d''8
-                                    f'8 ]
-                                    r8
-                                    e''8
-                                }
-                                \tweak text #tuplet-number::calc-fraction-text
-                                \times 3/4 {
-                                    g'8 [
-                                    f''8 ]
-                                    r8
-                                    e'8
-                                }
-                                \times 4/5 {
-                                    d''8 [
-                                    f'8 ]
-                                    r8
-                                    e''8 [
-                                    g'8 ]
-                                }
-                                \tweak text #tuplet-number::calc-fraction-text
-                                \times 3/4 {
-                                    f''8
-                                    r8
-                                    e'8 [
-                                    d''8 ]
-                                    \bar "|"
-                                }
-                            }
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
-            Accesses tuplets and colors tuplet 1:
-
-            ::
-
-                >>> segment_maker = baca.SegmentMaker(
-                ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-                ...     )
-
-            ::
-
-                >>> segment_maker(
-                ...     baca.scope('Violin Music Voice', 1),
-                ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-                ...     baca.RhythmBuilder(
-                ...         rhythm_maker=abjad.rhythmmakertools.TaleaRhythmMaker(
-                ...             extra_counts_per_division=[1],
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[1, 1, 1, -1],
-                ...                 denominator=8,
-                ...                 ),
-                ...             ),
-                ...         ),
-                ...     baca.color(baca.select().top().tuplet(1)),
-                ...     )
-
-            ::
-
-                >>> result = segment_maker.run(is_doc_example=True)
-                >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Score])
-                \context Score = "Score" <<
-                    \tag violin
-                    \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
-                        \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                        }
-                    >>
-                    \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
-                                \times 4/5 {
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                    \clef "treble"
-                                    e'8 [
-                                    d''8
-                                    f'8 ]
-                                    r8
-                                    e''8
-                                }
-                                \tweak text #tuplet-number::calc-fraction-text
-                                \times 3/4 {
-                                    \once \override Accidental.color = #green
-                                    \once \override Beam.color = #green
-                                    \once \override Dots.color = #green
-                                    \once \override NoteHead.color = #green
-                                    \once \override Stem.color = #green
-                                    g'8 [
-                                    \once \override Accidental.color = #green
-                                    \once \override Beam.color = #green
-                                    \once \override Dots.color = #green
-                                    \once \override NoteHead.color = #green
-                                    \once \override Stem.color = #green
-                                    f''8 ]
-                                    \once \override Dots.color = #green
-                                    \once \override Rest.color = #green
-                                    r8
-                                    \once \override Accidental.color = #green
-                                    \once \override Beam.color = #green
-                                    \once \override Dots.color = #green
-                                    \once \override NoteHead.color = #green
-                                    \once \override Stem.color = #green
-                                    e'8
-                                }
-                                \times 4/5 {
-                                    d''8 [
-                                    f'8 ]
-                                    r8
-                                    e''8 [
-                                    g'8 ]
-                                }
-                                \tweak text #tuplet-number::calc-fraction-text
-                                \times 3/4 {
-                                    f''8
-                                    r8
-                                    e'8 [
-                                    d''8 ]
-                                    \bar "|"
-                                }
-                            }
-                        }
-                    >>
-                >>
-
-        '''
-        selector = self._append_callback(abjad.TopCallback())
-        template = self._get_template(inspect.currentframe())
-        return abjad.new(selector, template=template)
+#    def top(self):
+#        r'''Selects top-level components.
+#
+#        ..  container:: example
+#
+#            Colors nothing because segment-maker passes leaves (not tuplets):
+#
+#            ::
+#
+#                >>> segment_maker = baca.SegmentMaker(
+#                ...     allow_empty_selections=True,
+#                ...     score_template=baca.ViolinSoloScoreTemplate(),
+#                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+#                ...     )
+#
+#            ::
+#
+#                >>> segment_maker(
+#                ...     baca.scope('Violin Music Voice', 1),
+#                ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+#                ...     baca.RhythmBuilder(
+#                ...         rhythm_maker=abjad.rhythmmakertools.TaleaRhythmMaker(
+#                ...             extra_counts_per_division=[1],
+#                ...             talea=abjad.rhythmmakertools.Talea(
+#                ...                 counts=[1, 1, 1, -1],
+#                ...                 denominator=8,
+#                ...                 ),
+#                ...             ),
+#                ...         ),
+#                ...     baca.color(baca.select().tuplet(1)),
+#                ...     )
+#
+#            ::
+#
+#                >>> result = segment_maker.run(is_doc_example=True)
+#                >>> lilypond_file, metadata = result
+#                >>> show(lilypond_file) # doctest: +SKIP
+#
+#            ..  docs::
+#
+#                >>> f(lilypond_file[abjad.Score])
+#                \context Score = "Score" <<
+#                    \tag violin
+#                    \context GlobalContext = "Global Context" <<
+#                        \context GlobalRests = "Global Rests" {
+#                            {
+#                                \time 4/8
+#                                R1 * 1/2
+#                            }
+#                            {
+#                                \time 3/8
+#                                R1 * 3/8
+#                            }
+#                            {
+#                                \time 4/8
+#                                R1 * 1/2
+#                            }
+#                            {
+#                                \time 3/8
+#                                R1 * 3/8
+#                            }
+#                        }
+#                        \context GlobalSkips = "Global Skips" {
+#                            {
+#                                \time 4/8
+#                                s1 * 1/2
+#                            }
+#                            {
+#                                \time 3/8
+#                                s1 * 3/8
+#                            }
+#                            {
+#                                \time 4/8
+#                                s1 * 1/2
+#                            }
+#                            {
+#                                \time 3/8
+#                                s1 * 3/8
+#                            }
+#                        }
+#                    >>
+#                    \context MusicContext = "Music Context" <<
+#                        \tag violin
+#                        \context ViolinMusicStaff = "Violin Music Staff" {
+#                            \context ViolinMusicVoice = "Violin Music Voice" {
+#                                \times 4/5 {
+#                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+#                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
+#                                    \clef "treble"
+#                                    e'8 [
+#                                    d''8
+#                                    f'8 ]
+#                                    r8
+#                                    e''8
+#                                }
+#                                \tweak text #tuplet-number::calc-fraction-text
+#                                \times 3/4 {
+#                                    g'8 [
+#                                    f''8 ]
+#                                    r8
+#                                    e'8
+#                                }
+#                                \times 4/5 {
+#                                    d''8 [
+#                                    f'8 ]
+#                                    r8
+#                                    e''8 [
+#                                    g'8 ]
+#                                }
+#                                \tweak text #tuplet-number::calc-fraction-text
+#                                \times 3/4 {
+#                                    f''8
+#                                    r8
+#                                    e'8 [
+#                                    d''8 ]
+#                                    \bar "|"
+#                                }
+#                            }
+#                        }
+#                    >>
+#                >>
+#
+#        ..  container:: example
+#
+#            Accesses tuplets and colors tuplet 1:
+#
+#            ::
+#
+#                >>> segment_maker = baca.SegmentMaker(
+#                ...     score_template=baca.ViolinSoloScoreTemplate(),
+#                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+#                ...     )
+#
+#            ::
+#
+#                >>> segment_maker(
+#                ...     baca.scope('Violin Music Voice', 1),
+#                ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+#                ...     baca.RhythmBuilder(
+#                ...         rhythm_maker=abjad.rhythmmakertools.TaleaRhythmMaker(
+#                ...             extra_counts_per_division=[1],
+#                ...             talea=abjad.rhythmmakertools.Talea(
+#                ...                 counts=[1, 1, 1, -1],
+#                ...                 denominator=8,
+#                ...                 ),
+#                ...             ),
+#                ...         ),
+#                ...     baca.color(baca.select().top().tuplet(1)),
+#                ...     )
+#
+#            ::
+#
+#                >>> result = segment_maker.run(is_doc_example=True)
+#                >>> lilypond_file, metadata = result
+#                >>> show(lilypond_file) # doctest: +SKIP
+#
+#            ..  docs::
+#
+#                >>> f(lilypond_file[abjad.Score])
+#                \context Score = "Score" <<
+#                    \tag violin
+#                    \context GlobalContext = "Global Context" <<
+#                        \context GlobalRests = "Global Rests" {
+#                            {
+#                                \time 4/8
+#                                R1 * 1/2
+#                            }
+#                            {
+#                                \time 3/8
+#                                R1 * 3/8
+#                            }
+#                            {
+#                                \time 4/8
+#                                R1 * 1/2
+#                            }
+#                            {
+#                                \time 3/8
+#                                R1 * 3/8
+#                            }
+#                        }
+#                        \context GlobalSkips = "Global Skips" {
+#                            {
+#                                \time 4/8
+#                                s1 * 1/2
+#                            }
+#                            {
+#                                \time 3/8
+#                                s1 * 3/8
+#                            }
+#                            {
+#                                \time 4/8
+#                                s1 * 1/2
+#                            }
+#                            {
+#                                \time 3/8
+#                                s1 * 3/8
+#                            }
+#                        }
+#                    >>
+#                    \context MusicContext = "Music Context" <<
+#                        \tag violin
+#                        \context ViolinMusicStaff = "Violin Music Staff" {
+#                            \context ViolinMusicVoice = "Violin Music Voice" {
+#                                \times 4/5 {
+#                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+#                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
+#                                    \clef "treble"
+#                                    e'8 [
+#                                    d''8
+#                                    f'8 ]
+#                                    r8
+#                                    e''8
+#                                }
+#                                \tweak text #tuplet-number::calc-fraction-text
+#                                \times 3/4 {
+#                                    \once \override Accidental.color = #green
+#                                    \once \override Beam.color = #green
+#                                    \once \override Dots.color = #green
+#                                    \once \override NoteHead.color = #green
+#                                    \once \override Stem.color = #green
+#                                    g'8 [
+#                                    \once \override Accidental.color = #green
+#                                    \once \override Beam.color = #green
+#                                    \once \override Dots.color = #green
+#                                    \once \override NoteHead.color = #green
+#                                    \once \override Stem.color = #green
+#                                    f''8 ]
+#                                    \once \override Dots.color = #green
+#                                    \once \override Rest.color = #green
+#                                    r8
+#                                    \once \override Accidental.color = #green
+#                                    \once \override Beam.color = #green
+#                                    \once \override Dots.color = #green
+#                                    \once \override NoteHead.color = #green
+#                                    \once \override Stem.color = #green
+#                                    e'8
+#                                }
+#                                \times 4/5 {
+#                                    d''8 [
+#                                    f'8 ]
+#                                    r8
+#                                    e''8 [
+#                                    g'8 ]
+#                                }
+#                                \tweak text #tuplet-number::calc-fraction-text
+#                                \times 3/4 {
+#                                    f''8
+#                                    r8
+#                                    e'8 [
+#                                    d''8 ]
+#                                    \bar "|"
+#                                }
+#                            }
+#                        }
+#                    >>
+#                >>
+#
+#        '''
+#        selector = super(Selection, self).top()
+#        template = self._get_template(inspect.currentframe(), selector)
+#        return abjad.new(selector, template=template)
 
     def tuplet(self, n=0):
         r'''Selects tuplet.
@@ -4261,7 +4269,7 @@ class Selector(abjad.Selector):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.color(baca.select().tuplet(n=-1)),
+                ...     baca.color(baca.select().tuplet(-1)),
                 ...     baca.flags(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4321,7 +4329,7 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.tuplets()[n]
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
     def tuplets(self):
@@ -4455,11 +4463,11 @@ class Selector(abjad.Selector):
 
         '''
         selector = self.by_class(abjad.Tuplet)
-        template = self._get_template(inspect.currentframe())
+        template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
 
-def _select(argument=None):
-    if argument is None:
-        return baca.Selector()
-    return abjad.Selection(argument)
+def _select(items=None):
+    if items is None:
+        return baca.Expression().select()
+    return baca.Selection(items=items)

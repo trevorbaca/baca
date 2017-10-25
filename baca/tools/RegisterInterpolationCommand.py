@@ -920,7 +920,7 @@ class RegisterInterpolationCommand(Command):
 
     def __init__(
         self,
-        selector='baca.select().plts().wrap()',
+        selector='baca.select().plts().group()',
         start_pitch=None,
         stop_pitch=None,
         ):

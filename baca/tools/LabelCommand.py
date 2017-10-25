@@ -239,7 +239,7 @@ class LabelCommand(Command):
     def __init__(
         self,
         expression=None,
-        selector='baca.select().leaves().wrap()',
+        selector='baca.select().leaves().group()',
         ):
         Command.__init__(self, selector=selector)
         if expression is not None:

@@ -21,7 +21,7 @@ class Command(abjad.AbjadObject):
         if isinstance(selector, str):
             selector = eval(selector)
         if selector is not None:
-            assert isinstance(selector, abjad.Selector), repr(selector)
+            assert isinstance(selector, abjad.Expression), repr(selector)
         self._selector = selector
 
     ### SPECIAL METHODS ###
@@ -46,8 +46,7 @@ class Command(abjad.AbjadObject):
             return
         if self.selector is not None:
             selections = self.selector(argument)
-            last = self.selector.callbacks[-1]
-            if isinstance(last, abjad.GetItemCallback):
+            if self.selector._is_singular_get_item():
                 selections = [selections]
         else:
             selections = argument

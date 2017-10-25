@@ -1,4 +1,5 @@
 from baca import tools
+# TODO: eliminate explicit class imports in favor of from baca.tools import *
 from baca.tools.CollectionList import CollectionList
 from baca.tools.Cursor import Cursor
 from baca.tools.Expression import Expression
@@ -16,8 +17,8 @@ from baca.tools.PitchSegment import _pitch_segment as pitch_segment
 from baca.tools.PitchSet import PitchSet
 from baca.tools.PitchSet import _pitch_set as pitch_set
 from baca.tools.SegmentMaker import SegmentMaker
-from baca.tools.Selector import Selector
-from baca.tools.Selector import _select as select
+from baca.tools.Selection import Selection
+from baca.tools.Selection import _select as select
 from baca.tools.Sequence import Sequence
 from baca.tools.Sequence import _sequence as sequence
 from baca.tools import *

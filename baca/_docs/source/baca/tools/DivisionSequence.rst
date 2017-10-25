@@ -25,8 +25,9 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.DivisionSequence.DivisionSequence.filter
       ~baca.tools.DivisionSequence.DivisionSequence.flatten
-      ~baca.tools.DivisionSequence.DivisionSequence.group_by
+      ~baca.tools.DivisionSequence.DivisionSequence.group
       ~baca.tools.DivisionSequence.DivisionSequence.is_decreasing
       ~baca.tools.DivisionSequence.DivisionSequence.is_increasing
       ~baca.tools.DivisionSequence.DivisionSequence.is_permutation
@@ -47,8 +48,10 @@ Bases
       ~baca.tools.DivisionSequence.DivisionSequence.repeat_to_weight
       ~baca.tools.DivisionSequence.DivisionSequence.replace
       ~baca.tools.DivisionSequence.DivisionSequence.retain
+      ~baca.tools.DivisionSequence.DivisionSequence.retain_pattern
       ~baca.tools.DivisionSequence.DivisionSequence.reverse
       ~baca.tools.DivisionSequence.DivisionSequence.rotate
+      ~baca.tools.DivisionSequence.DivisionSequence.select
       ~baca.tools.DivisionSequence.DivisionSequence.sort
       ~baca.tools.DivisionSequence.DivisionSequence.split
       ~baca.tools.DivisionSequence.DivisionSequence.split_by_durations
@@ -82,13 +85,19 @@ Methods
 
    .. container:: inherited
 
+      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.filter
+
+.. only:: html
+
+   .. container:: inherited
+
       .. automethod:: baca.tools.DivisionSequence.DivisionSequence.flatten
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.group_by
+      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.group
 
 .. only:: html
 
@@ -208,6 +217,12 @@ Methods
 
    .. container:: inherited
 
+      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.retain_pattern
+
+.. only:: html
+
+   .. container:: inherited
+
       .. automethod:: baca.tools.DivisionSequence.DivisionSequence.reverse
 
 .. only:: html
@@ -215,6 +230,12 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.DivisionSequence.DivisionSequence.rotate
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.select
 
 .. only:: html
 

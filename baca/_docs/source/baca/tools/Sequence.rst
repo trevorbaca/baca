@@ -27,10 +27,11 @@ Bases
 
       ~baca.tools.Sequence.Sequence.accumulate
       ~baca.tools.Sequence.Sequence.boustrophedon
+      ~baca.tools.Sequence.Sequence.filter
       ~baca.tools.Sequence.Sequence.flatten
       ~baca.tools.Sequence.Sequence.get_degree_of_rotational_symmetry
       ~baca.tools.Sequence.Sequence.get_period_of_rotation
-      ~baca.tools.Sequence.Sequence.group_by
+      ~baca.tools.Sequence.Sequence.group
       ~baca.tools.Sequence.Sequence.group_by_sign
       ~baca.tools.Sequence.Sequence.helianthate
       ~baca.tools.Sequence.Sequence.is_decreasing
@@ -54,9 +55,11 @@ Bases
       ~baca.tools.Sequence.Sequence.repeat_to_weight
       ~baca.tools.Sequence.Sequence.replace
       ~baca.tools.Sequence.Sequence.retain
+      ~baca.tools.Sequence.Sequence.retain_pattern
       ~baca.tools.Sequence.Sequence.reveal
       ~baca.tools.Sequence.Sequence.reverse
       ~baca.tools.Sequence.Sequence.rotate
+      ~baca.tools.Sequence.Sequence.select
       ~baca.tools.Sequence.Sequence.sort
       ~baca.tools.Sequence.Sequence.split
       ~baca.tools.Sequence.Sequence.sum
@@ -93,6 +96,12 @@ Methods
 
    .. container:: inherited
 
+      .. automethod:: baca.tools.Sequence.Sequence.filter
+
+.. only:: html
+
+   .. container:: inherited
+
       .. automethod:: baca.tools.Sequence.Sequence.flatten
 
 .. automethod:: baca.tools.Sequence.Sequence.get_degree_of_rotational_symmetry
@@ -103,7 +112,7 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.group_by
+      .. automethod:: baca.tools.Sequence.Sequence.group
 
 .. automethod:: baca.tools.Sequence.Sequence.group_by_sign
 
@@ -225,6 +234,12 @@ Methods
 
       .. automethod:: baca.tools.Sequence.Sequence.retain
 
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Sequence.Sequence.retain_pattern
+
 .. automethod:: baca.tools.Sequence.Sequence.reveal
 
 .. only:: html
@@ -238,6 +253,12 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Sequence.Sequence.rotate
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Sequence.Sequence.select
 
 .. only:: html
 

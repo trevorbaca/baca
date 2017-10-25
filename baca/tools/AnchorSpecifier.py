@@ -41,11 +41,11 @@ class AnchorSpecifier(abjad.AbjadValueObject):
             assert isinstance(figure_name, str), repr(figure_name)
         self._figure_name = figure_name
         if (local_selector is not None and
-            not isinstance(local_selector, abjad.Selector)):
+            not isinstance(local_selector, abjad.Expression)):
             raise TypeError(f'must be selector: {local_selector!r}.')
         self._local_selector = local_selector
         if (remote_selector is not None and
-            not isinstance(remote_selector, abjad.Selector)):
+            not isinstance(remote_selector, abjad.Expression)):
             raise TypeError(f'must be selector: {remote_selector!r}.')
         self._remote_selector = remote_selector
         if (remote_voice_name is not None and

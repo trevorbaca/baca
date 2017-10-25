@@ -166,7 +166,7 @@ class SpannerCommand(Command):
         ::
 
             >>> baca.SpannerCommand()
-            SpannerCommand(selector=baca.select().leaves().wrap())
+            SpannerCommand(selector=baca.select().leaves().group())
 
     '''
 
@@ -181,7 +181,7 @@ class SpannerCommand(Command):
 
     def __init__(
         self,
-        selector='baca.select().leaves().wrap()',
+        selector='baca.select().leaves().group()',
         spanner=None,
         ):
         Command.__init__(self, selector=selector)

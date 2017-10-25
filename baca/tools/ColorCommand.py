@@ -314,7 +314,7 @@ class ColorCommand(Command):
     def __call__(self, argument=None):
         r'''Calls command on `argument`.
 
-        Returns selector result for Selector docs.
+        Returns colored selector result.
         '''
         if not argument:
             return
@@ -330,5 +330,5 @@ class ColorCommand(Command):
             print('---')
             print(result)
             print('---')
-        abjad.label(result).color_selections(selector=self.selector)
+        selector.color(result)
         return result

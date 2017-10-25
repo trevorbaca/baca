@@ -252,7 +252,7 @@ class RhythmBuilder(Builder):
         return last_leaf
 
     def _get_storage_format_specification(self):
-        agent = abjad.StorageFormatAgent(self)
+        agent = abjad.StorageFormatManager(self)
         keyword_argument_names = agent.signature_keyword_names
         if not self.rhythm_overwrites:
             keyword_argument_names = list(keyword_argument_names)

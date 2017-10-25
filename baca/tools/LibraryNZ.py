@@ -19,7 +19,7 @@ class LibraryNZ(object):
     def natural_clusters(
         start_pitch=None,
         widths=None,
-        selector='baca.select().plts().wrap()',
+        selector='baca.select().plts().group()',
         ):
         r'''Makes natural clusters.
         '''
@@ -31,7 +31,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def natural_harmonics(selector='baca.select().plts().wrap()'):
+    def natural_harmonics(selector='baca.select().plts().group()'):
         r'''Overrides note-head style on PLTs.
 
         ..  container:: example
@@ -102,7 +102,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.natural_harmonics(
-                ...         baca.select().tuplet(1).plts().wrap(),
+                ...         baca.select().tuplets()[1:2].plts().group(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -230,7 +230,7 @@ class LibraryNZ(object):
     @staticmethod
     def niente_swells(
         dynamic,
-        selector='baca.select().tls().wrap()',
+        selector='baca.select().tls().group()',
         ):
         r'''Attaches niente swells.
 
@@ -303,7 +303,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.niente_swells(
                 ...         'p',
-                ...         baca.select().tuplet(1).tls().wrap(),
+                ...         baca.select().tuplets()[1:2].tls().group(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -372,7 +372,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def one_line_staff(selector='baca.select().leaves().wrap()'):
+    def one_line_staff(selector='baca.select().leaves().group()'):
         r'''Attaches one-line staff spanner.
 
         ..  container:: example
@@ -509,7 +509,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def ottava(selector='baca.select().tls().wrap()'):
+    def ottava(selector='baca.select().tls().group()'):
         r'''Attaches ottava spanner.
 
         ..  container:: example
@@ -637,7 +637,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def ottava_bassa(selector='baca.select().tls().wrap()'):
+    def ottava_bassa(selector='baca.select().tls().group()'):
         r'''Attaches ottava bassa spanner.
 
         ..  container:: example
@@ -765,7 +765,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def percussion_staff(selector='baca.select().leaves().wrap()'):
+    def percussion_staff(selector='baca.select().leaves().group()'):
         r'''Attaches percussion staff spanner.
 
         ..  container:: example
@@ -995,7 +995,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.possibile_dynamic(
                 ...         'ff',
-                ...         baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplets()[1:2].ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -1235,7 +1235,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def register(start, stop=None, selector='baca.select().plts().wrap()'):
+    def register(start, stop=None, selector='baca.select().plts().group()'):
         r'''Octave-transposes PLTs.
 
         ..  container:: example
@@ -1608,7 +1608,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.reiterated_dynamic(
                 ...         'f',
-                ...         selector=baca.select().tuplet(1).phs(),
+                ...         selector=baca.select().tuplets()[1:2].phs(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -1661,7 +1661,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def repeat_ties_down(selector='baca.select().pls().wrap()'):
+    def repeat_ties_down(selector='baca.select().pls().group()'):
         r'''Overrides repeat tie direction.
 
         ..  container:: example
@@ -1735,7 +1735,7 @@ class LibraryNZ(object):
                 ...     [[11, 11, 12], [11, 11, 11], [11]],
                 ...     baca.messiaen_ties(),
                 ...     baca.repeat_ties_down(
-                ...         baca.select().tuplet(1).pls().wrap()
+                ...         baca.select().tuplets()[1:2].pls().group()
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_up(),
@@ -1794,7 +1794,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def repeat_ties_up(selector='baca.select().pls().wrap()'):
+    def repeat_ties_up(selector='baca.select().pls().group()'):
         r'''Overrides repeat tie direction on leaves.
 
         ..  container:: example
@@ -1868,7 +1868,7 @@ class LibraryNZ(object):
                 ...     [[11, 11, 12], [11, 11, 11], [11]],
                 ...     baca.messiaen_ties(),
                 ...     baca.repeat_ties_up(
-                ...         baca.select().tuplet(1).pls().wrap()
+                ...         baca.select().tuplets()[1:2].pls().group()
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_down(),
@@ -1946,7 +1946,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def rest_position(n=None, selector='baca.select().rests().wrap()'):
+    def rest_position(n=None, selector='baca.select().rests().group()'):
         r'''Overrides position of rests.
 
         ..  container:: example
@@ -2018,7 +2018,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rest_position(
                 ...         -6,
-                ...         baca.select().tuplet(1).rests().wrap(),
+                ...         baca.select().tuplets()[1:2].rests().group(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2271,7 +2271,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def rests_down(selector='baca.select().rests().wrap()'):
+    def rests_down(selector='baca.select().rests().group()'):
         r'''Overrides direction of rests.
 
         ..  container:: example
@@ -2342,7 +2342,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_down(
-                ...         baca.select().tuplet(1).rests().wrap(),
+                ...         baca.select().tuplets()[1:2].rests().group(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -2400,7 +2400,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def rests_up(selector='baca.select().rests().wrap()'):
+    def rests_up(selector='baca.select().rests().group()'):
         r'''Up-overrides direction of rests.
 
         ..  container:: example
@@ -2470,7 +2470,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_up(baca.select().tuplet(1).rests().wrap()),
+                ...     baca.rests_up(baca.select().tuplets()[1:2].rests().group()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -2590,7 +2590,7 @@ class LibraryNZ(object):
         return scopes
 
     @staticmethod
-    def script_color(color='red', selector='baca.select().leaves().wrap()'):
+    def script_color(color='red', selector='baca.select().leaves().group()'):
         r'''Overrides script color.
 
         ..  container:: example
@@ -2665,7 +2665,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.script_color(
                 ...         'red',
-                ...         baca.select().tuplet(1).leaves().wrap(),
+                ...         baca.select().tuplets()[1:2].leaves().group(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -2797,7 +2797,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.script_extra_offset(
                 ...         (-1.5, 0),
-                ...         baca.select().tuplet(1).leaf(),
+                ...         baca.select().tuplets()[1:2].leaf(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -2854,7 +2854,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def scripts_down(selector='baca.select().leaves().wrap()'):
+    def scripts_down(selector='baca.select().leaves().group()'):
         r'''Down-overrides script direction on leaves.
 
         ..  container:: example
@@ -2928,7 +2928,7 @@ class LibraryNZ(object):
                 ...     baca.accents(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.scripts_down(
-                ...         baca.select().tuplet(1).leaves().wrap(),
+                ...         baca.select().tuplets()[1:2].leaves().group(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -2985,7 +2985,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def scripts_up(selector='baca.select().leaves().wrap()'):
+    def scripts_up(selector='baca.select().leaves().group()'):
         r'''Up-overrides script direction.
 
         ..  container:: example
@@ -3059,7 +3059,7 @@ class LibraryNZ(object):
                 ...     baca.accents(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.scripts_up(
-                ...         baca.select().tuplet(1).leaves().wrap(),
+                ...         baca.select().tuplets()[1:2].leaves().group(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -3185,7 +3185,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.short_fermata(
-                ...         baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplets()[1:2].ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3467,7 +3467,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def slurs(selector='baca.select().tls().wrap()'):
+    def slurs(selector='baca.select().tls().group()'):
         r'''Attaches slurs.
 
         ..  container:: example
@@ -3538,7 +3538,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.slurs(baca.select().tuplet(1).tls().wrap()),
+                ...     baca.slurs(baca.select().tuplets()[1:2].tls().group()),
                 ...     baca.slurs_down(),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3593,7 +3593,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def slurs_down(selector='baca.select().leaves().wrap()'):
+    def slurs_down(selector='baca.select().leaves().group()'):
         r'''Overrides slur direction.
 
         ..  container:: example
@@ -3666,7 +3666,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.slurs(baca.select().tuplets().map(baca.select().tls())),
                 ...     baca.slurs_down(
-                ...         baca.select().tuplet(1).leaves().wrap(),
+                ...         baca.select().tuplets()[1:2].leaves().group(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -3724,7 +3724,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def slurs_up(selector='baca.select().leaves().wrap()'):
+    def slurs_up(selector='baca.select().leaves().group()'):
         r'''Overrides slur direction.
 
         ..  container:: example
@@ -3803,7 +3803,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.slurs(baca.select().tuplets().map(baca.select().tls())),
                 ...     baca.slurs_up(
-                ...         baca.select().tuplet(1).leaves().wrap(),
+                ...         baca.select().tuplets()[1:2].leaves().group(),
                 ...         ),
                 ...     baca.stems_down(),
                 ...     baca.rests_around([2], [4]),
@@ -3881,8 +3881,8 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.color(baca.select().plts().wrap()),
-                ...     baca.soprano_to_octave(3, baca.select().plts().wrap()),
+                ...     baca.color(baca.select().plts().group()),
+                ...     baca.soprano_to_octave(3, baca.select().plts().group()),
                 ...     counts=[5, -3],
                 ...     talea_denominator=32,
                 ...     )
@@ -3897,77 +3897,77 @@ class LibraryNZ(object):
                         \voiceOne
                         {
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 <c,, d,, bf,,>8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 <c,, d,, bf,,>32 ]
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 f,8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 f,32 ]
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 <ef, e, fs>8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 <ef, e, fs>32 ]
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 <g,, af,>8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 <g,, af,>32 ]
                                 r16.
                             }
                             {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 a,,8 ~ [
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
+                                \once \override Accidental.color = #green
+                                \once \override Beam.color = #green
+                                \once \override Dots.color = #green
+                                \once \override NoteHead.color = #green
+                                \once \override Stem.color = #green
                                 a,,32 ]
                                 r16.
                             }
@@ -4279,7 +4279,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.staccati(baca.select().tuplet(1).phs()),
+                ...     baca.staccati(baca.select().tuplets()[1:2].phs()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -4399,7 +4399,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.staccatissimi(baca.select().tuplet(1).phs()),
+                ...     baca.staccatissimi(baca.select().tuplets()[1:2].phs()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -4454,7 +4454,7 @@ class LibraryNZ(object):
     def stem_color(
         color='red',
         context_name=None,
-        selector='baca.select().pls().wrap()',
+        selector='baca.select().pls().group()',
         ):
         r'''Overrides stem color.
 
@@ -4527,7 +4527,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.stem_color(
                 ...         color='red',
-                ...         selector=baca.select().tuplet(1).pls().wrap(),
+                ...         selector=baca.select().tuplets()[1:2].pls().group(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4703,7 +4703,7 @@ class LibraryNZ(object):
         return baca.StemTremoloCommand(selector=selector, tremolo_flags=32)
 
     @staticmethod
-    def stems_down(selector='baca.select().pls().wrap()'):
+    def stems_down(selector='baca.select().pls().group()'):
         r'''Down-overrides stem direction.
 
         ..  container:: example
@@ -4775,7 +4775,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_down(
-                ...         baca.select().tuplet(1).leaves().wrap(),
+                ...         baca.select().tuplets()[1:2].leaves().group(),
                 ...         ),
                 ...     baca.stems_up(),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -4835,7 +4835,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def stems_up(selector='baca.select().pls().wrap()'):
+    def stems_up(selector='baca.select().pls().group()'):
         r'''Up-overrides stem direction.
 
         ..  container:: example
@@ -4907,7 +4907,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [10]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_down(),
-                ...     baca.stems_up(baca.select().tuplet(1).leaves().wrap()),
+                ...     baca.stems_up(baca.select().tuplets()[1:2].leaves().group()),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -4965,7 +4965,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def strict_note_spacing_off(selector='baca.select().leaves().wrap()'):
+    def strict_note_spacing_off(selector='baca.select().leaves().group()'):
         r'''Turns strict note spacing off.
 
         ..  container:: example
@@ -5063,7 +5063,7 @@ class LibraryNZ(object):
         return expression
 
     @staticmethod
-    def sustain_pedal(selector='baca.select().leaves().wrap()'):
+    def sustain_pedal(selector='baca.select().leaves().group()'):
         r'''Pedals selection.
 
         ..  container:: example
@@ -5191,8 +5191,8 @@ class LibraryNZ(object):
             ::
 
                 >>> music_maker = baca.MusicMaker()
-                >>> selector = baca.select().tuplet(1)
-                >>> selector = selector.lleaves().wrap()
+                >>> selector = baca.select().tuplets()[1:2]
+                >>> selector = selector.lleaves().group()
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -5252,8 +5252,8 @@ class LibraryNZ(object):
             ::
 
                 >>> music_maker = baca.MusicMaker()
-                >>> selector = baca.select().tuplet(1)
-                >>> selector = selector.rleaves().wrap()
+                >>> selector = baca.select().tuplets()[1:2]
+                >>> selector = selector.rleaves().group()
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -5313,8 +5313,8 @@ class LibraryNZ(object):
             ::
 
                 >>> music_maker = baca.MusicMaker()
-                >>> selector = baca.select().tuplet(1)
-                >>> selector = selector.lrleaves().wrap()
+                >>> selector = baca.select().tuplets()[1:2]
+                >>> selector = selector.lrleaves().group()
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -5564,7 +5564,7 @@ class LibraryNZ(object):
     def sustain_pedal_staff_padding(
         n=None,
         context='Staff',
-        selector='baca.select().leaves().wrap()',
+        selector='baca.select().leaves().group()',
         ):
         r'''Overrides sustain pedal staff padding.
 
@@ -5645,7 +5645,7 @@ class LibraryNZ(object):
                 ...     baca.sustain_pedal(selector=baca.select().tuplets()),
                 ...     baca.sustain_pedal_staff_padding(
                 ...         n=4,
-                ...         selector=baca.select().tuplet(1).leaves().wrap(),
+                ...         selector=baca.select().tuplets()[1:2].leaves().group(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -5774,7 +5774,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.tenuti(baca.select().tuplet(1).phs()),
+                ...     baca.tenuti(baca.select().tuplets()[1:2].phs()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -5828,7 +5828,7 @@ class LibraryNZ(object):
     @staticmethod
     def text_script_color(
         color='red',
-        selector='baca.select().leaves().wrap()',
+        selector='baca.select().leaves().group()',
         ):
         r'''Overrides text script color.
 
@@ -5845,7 +5845,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplets()[1:2].ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_color('red'),
@@ -5907,12 +5907,12 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplets()[1:2].ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_color(
                 ...         'red',
-                ...         baca.select().tuplet(1).leaves().wrap(),
+                ...         baca.select().tuplets()[1:2].leaves().group(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -5970,7 +5970,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def text_script_padding(n=0, selector='baca.select().leaves().wrap()'):
+    def text_script_padding(n=0, selector='baca.select().leaves().group()'):
         r'''Overrides text script padding.
 
         ..  container:: example
@@ -5987,7 +5987,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplets()[1:2].ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_padding(4),
@@ -6050,12 +6050,12 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplets()[1:2].ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_padding(
                 ...         4,
-                ...         baca.select().tuplet(1).leaves().wrap(),
+                ...         baca.select().tuplets()[1:2].leaves().group(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6114,7 +6114,7 @@ class LibraryNZ(object):
     @staticmethod
     def text_script_staff_padding(
         n=0,
-        selector='baca.select().leaves().wrap()',
+        selector='baca.select().leaves().group()',
         ):
         r'''Overrides text script staff padding.
 
@@ -6131,7 +6131,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplets()[1:2].ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_staff_padding(n=4),
@@ -6193,12 +6193,12 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplets()[1:2].ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_script_staff_padding(
                 ...         n=4,
-                ...         selector=baca.select().tuplet(1).leaves().wrap(),
+                ...         selector=baca.select().tuplets()[1:2].leaves().group(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6255,7 +6255,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def text_scripts_down(selector='baca.select().leaves().wrap()'):
+    def text_scripts_down(selector='baca.select().leaves().group()'):
         r'''Down-overrides text script.
 
         ..  container:: example
@@ -6271,7 +6271,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplets()[1:2].ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_scripts_down(),
@@ -6334,11 +6334,11 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplets()[1:2].ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_scripts_down(
-                ...         selector=baca.select().tuplet(1).leaves().wrap(),
+                ...         selector=baca.select().tuplets()[1:2].leaves().group(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6395,7 +6395,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def text_scripts_up(selector='baca.select().leaves().wrap()'):
+    def text_scripts_up(selector='baca.select().leaves().group()'):
         r'''Up-overrides text script direction.
 
         ..  container:: example
@@ -6411,7 +6411,7 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplets()[1:2].ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_scripts_up(),
@@ -6474,11 +6474,11 @@ class LibraryNZ(object):
                 ...     baca.markup('più mosso'),
                 ...     baca.markup(
                 ...         'lo stesso tempo',
-                ...         baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplets()[1:2].ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_scripts_up(
-                ...         selector=baca.select().tuplet(1).leaves().wrap(),
+                ...         selector=baca.select().tuplets()[1:2].leaves().group(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6537,7 +6537,7 @@ class LibraryNZ(object):
     @staticmethod
     def text_spanner_staff_padding(
         n=0,
-        selector='baca.select().leaves().wrap()',
+        selector='baca.select().leaves().group()',
         ):
         r'''Overrides text spanner staff padding.
 
@@ -6646,13 +6646,13 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.text_spanner_staff_padding(
                 ...         n=6,
-                ...         selector=baca.select().tuplet(1).pls().wrap(),
+                ...         selector=baca.select().tuplets()[1:2].pls().group(),
                 ...         ),
                 ...     baca.text_script_staff_padding(6),
                 ...     baca.transition_spanner(
                 ...         baca.markup.pont(),
                 ...         baca.markup.ord_(),
-                ...         baca.select().tuplet(1).tls().wrap(),
+                ...         baca.select().tuplets()[1:2].tls().group(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6871,7 +6871,7 @@ class LibraryNZ(object):
         return specifier
 
     @staticmethod
-    def ties_down(selector='baca.select().pls().wrap()'):
+    def ties_down(selector='baca.select().pls().group()'):
         r'''Overrides tie direction.
 
         ..  container:: example
@@ -6946,7 +6946,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_up(),
                 ...     baca.ties(),
-                ...     baca.ties_down(baca.select().tuplet(1).pls().wrap()),
+                ...     baca.ties_down(baca.select().tuplets()[1:2].pls().group()),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -7002,7 +7002,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def ties_up(selector='baca.select().pls().wrap()'):
+    def ties_up(selector='baca.select().pls().group()'):
         r'''Overrides tie direction.
 
         ..  container:: example
@@ -7077,7 +7077,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.stems_down(),
                 ...     baca.ties(),
-                ...     baca.ties_up(baca.select().tuplet(1).pls().wrap()),
+                ...     baca.ties_up(baca.select().tuplets()[1:2].pls().group()),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -7135,7 +7135,7 @@ class LibraryNZ(object):
     @staticmethod
     def time_signature_extra_offset(
         pair=None,
-        selector='baca.select().leaves().wrap()',
+        selector='baca.select().leaves().group()',
         ):
         r'''Overrides time signature extra offset.
 
@@ -7211,7 +7211,7 @@ class LibraryNZ(object):
     def transition_spanner(
         start_markup=None,
         stop_markup=None,
-        selector='baca.select().tls().wrap()',
+        selector='baca.select().tls().group()',
         ):
         r'''Attaches transition spanner.
 
@@ -7323,7 +7323,7 @@ class LibraryNZ(object):
                 ...     baca.transition_spanner(
                 ...         baca.markup.pont(),
                 ...         baca.markup.ord_(),
-                ...         baca.select().tuplet(1).tls().wrap(),
+                ...         baca.select().tuplets()[1:2].tls().group(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -7478,7 +7478,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def transparent_rests(selector='baca.select().rests().wrap()'):
+    def transparent_rests(selector='baca.select().rests().group()'):
         r'''Makes rests transparent.
 
         ..  container:: example
@@ -7550,7 +7550,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.rests_around([2], [4]),
                 ...     baca.transparent_rests(
-                ...         baca.select().tuplet(1).rests().wrap(),
+                ...         baca.select().tuplets()[1:2].rests().group(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -7677,7 +7677,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def transparent_time_signatures(selector='baca.select().rests().wrap()'):
+    def transparent_time_signatures(selector='baca.select().rests().group()'):
         r'''Makes time signatures transparent.
 
         ..  container:: example
@@ -7770,7 +7770,7 @@ class LibraryNZ(object):
     def tremolo_down(
         n,
         maximum_adjustment=-1.5,
-        selector='baca.select().leaves().wrap()',
+        selector='baca.select().leaves().group()',
         ):
         r'''Overrides stem tremolo extra offset on leaves.
         '''
@@ -7858,7 +7858,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.trills(
-                ...         baca.select().tuplet(1).plt_pruns()),
+                ...         baca.select().tuplets()[1:2].plt_pruns()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -7992,7 +7992,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.trills_at_interval(
                 ...         2,
-                ...         baca.select().tuplet(1).plt_pruns(),
+                ...         baca.select().tuplets()[1:2].plt_pruns(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -8134,7 +8134,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.trills_at_pitch(
                 ...         pitch=1,
-                ...         selector=baca.select().tuplet(1).plt_pruns(),
+                ...         selector=baca.select().tuplets()[1:2].plt_pruns(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -8196,7 +8196,7 @@ class LibraryNZ(object):
     @staticmethod
     def tuplet_bracket_extra_offset(
         pair=None,
-        selector='baca.select().leaves().wrap()',
+        selector='baca.select().leaves().group()',
         ):
         r'''Overrides tuplet bracket extra offset.
 
@@ -8270,7 +8270,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_extra_offset(
                 ...         (-1, 0),
-                ...         baca.select().tuplet(1).leaves().wrap(),
+                ...         baca.select().tuplets()[1:2].leaves().group(),
                 ...         ),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -8329,7 +8329,7 @@ class LibraryNZ(object):
     @staticmethod
     def tuplet_bracket_staff_padding(
         n=None,
-        selector='baca.select().leaves().wrap()',
+        selector='baca.select().leaves().group()',
         ):
         r'''Overrides tuplet bracket staff padding.
 
@@ -8400,7 +8400,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(
                 ...         n=5,
-                ...         selector=baca.select().tuplet(1).leaves().wrap(),
+                ...         selector=baca.select().tuplets()[1:2].leaves().group(),
                 ...         ),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -8454,7 +8454,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def tuplet_brackets_down(selector='baca.select().leaves().wrap()'):
+    def tuplet_brackets_down(selector='baca.select().leaves().group()'):
         r'''Overrides tuplet bracket direction.
 
         ..  container:: example
@@ -8527,7 +8527,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     baca.tuplet_brackets_down(
-                ...         baca.select().tuplet(1).leaves().wrap(),
+                ...         baca.select().tuplets()[1:2].leaves().group(),
                 ...         ),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -8583,7 +8583,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def tuplet_brackets_up(selector='baca.select().leaves().wrap()'):
+    def tuplet_brackets_up(selector='baca.select().leaves().group()'):
         r'''Overrides tuplet bracket direction.
 
         ..  container:: example
@@ -8656,7 +8656,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     baca.tuplet_brackets_up(
-                ...         baca.select().tuplet(1).leaves().wrap(),
+                ...         baca.select().tuplets()[1:2].leaves().group(),
                 ...         ),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -8714,7 +8714,7 @@ class LibraryNZ(object):
     @staticmethod
     def tuplet_number_extra_offset(
         pair=None,
-        selector='baca.select().leaves().wrap()',
+        selector='baca.select().leaves().group()',
         ):
         r'''Overrides tuplet number extra offset.
 
@@ -8789,7 +8789,7 @@ class LibraryNZ(object):
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     baca.tuplet_number_extra_offset(
                 ...         (-1, 0),
-                ...         baca.select().tuplet(1).leaves().wrap(),
+                ...         baca.select().tuplets()[1:2].leaves().group(),
                 ...         ),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -8845,7 +8845,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def two_line_staff(selector='baca.select().leaves().wrap()'):
+    def two_line_staff(selector='baca.select().leaves().group()'):
         r'''Attaches two-line staff spanner.
 
         ..  container:: example
@@ -9173,7 +9173,7 @@ class LibraryNZ(object):
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     baca.up_bows(
-                ...         baca.select().tuplet(1).phs(),
+                ...         baca.select().tuplets()[1:2].phs(),
                 ...         ),
                 ...     counts=[1, 1, 5, -1],
                 ...     time_treatments=[-1],
@@ -9293,7 +9293,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.very_long_fermata(
-                ...         baca.select().tuplet(1).ph(),
+                ...         baca.select().tuplets()[1:2].ph(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),

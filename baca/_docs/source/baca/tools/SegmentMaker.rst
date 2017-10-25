@@ -8,7 +8,7 @@ SegmentMaker
 Bases
 -----
 
-- :py:class:`abjad.tools.makertools.SegmentMaker`
+- :py:class:`abjad.tools.segmenttools.SegmentMaker`
 
 - :py:class:`abjad.tools.abctools.AbjadObject`
 

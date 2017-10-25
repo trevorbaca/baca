@@ -10,7 +10,7 @@ Bases
 
 - :py:class:`baca.tools.ScoreTemplate`
 
-- :py:class:`abjad.tools.templatetools.ScoreTemplate`
+- :py:class:`abjad.tools.segmenttools.ScoreTemplate`
 
 - :py:class:`abjad.tools.abctools.AbjadValueObject`
 

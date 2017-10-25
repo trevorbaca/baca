@@ -181,7 +181,7 @@ class AttachCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, arguments=None, selector='baca.select().phs().wrap()'):
+    def __init__(self, arguments=None, selector='baca.select().phs().group()'):
         Command.__init__(self, selector=selector)
         self._arguments = arguments
 

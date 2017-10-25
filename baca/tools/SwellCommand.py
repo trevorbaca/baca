@@ -79,7 +79,7 @@ class SwellCommand(Command):
 
     def __init__(
         self,
-        selector='baca.select().tls().wrap()',
+        selector='baca.select().tls().group()',
         start_count=None,
         start_token=None,
         stop_count=None,
