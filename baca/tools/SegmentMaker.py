@@ -1849,24 +1849,9 @@ class SegmentMaker(abjad.SegmentMaker):
         stop_measure_index = measure_indices[stage_number] - 1
         return start_measure_index, stop_measure_index
 
-    def _transpose_instruments(self):
-        if not self.transpose_score:
-            return
-        for voice in abjad.iterate(self._score).by_class(abjad.Voice):
-            for leaf in abjad.iterate(voice).by_leaf(
-                pitched=True, with_grace_notes=True):
-                prototype = abjad.Instrument
-                instrument = abjad.inspect(leaf).get_effective(prototype)
-                if instrument is None:
-                    continue
-                assert isinstance(instrument, prototype), repr(instrument)
-                try:
-                    instrument.transpose_from_sounding_pitch(leaf)
-                except KeyError:
-                    sounding_pitch_number = leaf.written_pitch.number
-                    i = instrument.middle_c_sounding_pitch.number
-                    written_pitch_number = sounding_pitch_number - i
-                    leaf.written_pitch = written_pitch_number
+    def _transpose_score_(self):
+        if self.transpose_score:
+            abjad.Instrument.transpose_from_sounding_pitch(self._score)
 
     def _update_metadata(self):
         self._metadata['measure_count'] = self.measure_count
@@ -7245,7 +7230,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._label_clock_time_()
         self._hide_instrument_names_()
         self._label_instrument_changes()
-        self._transpose_instruments()
+        self._transpose_score_()
         self._attach_rehearsal_mark()
         self._add_final_barline()
         self._add_final_markup()

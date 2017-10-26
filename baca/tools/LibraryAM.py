@@ -6095,6 +6095,20 @@ class LibraryAM(object):
             )
 
     @staticmethod
+    def messiaen_tied_notes():
+        r'''Makes tied notes.
+        '''
+        return baca.RhythmBuilder(
+            rewrite_meter=True,
+            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
+                tie_specifier=abjad.rhythmmakertools.TieSpecifier(
+                    tie_across_divisions=True,
+                    use_messiaen_style_ties=True,
+                    ),
+                ),
+            )
+
+    @staticmethod
     def messiaen_ties(selector='baca.select().plt_pruns()'):
         r'''Attaches Messaien ties.
 
@@ -6212,20 +6226,6 @@ class LibraryAM(object):
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.Tie(use_messiaen_style_ties=True),
-            )
-
-    @staticmethod
-    def messiaen_tied_notes():
-        r'''Makes tied notes.
-        '''
-        return baca.RhythmBuilder(
-            rewrite_meter=True,
-            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
-                tie_specifier=abjad.rhythmmakertools.TieSpecifier(
-                    tie_across_divisions=True,
-                    use_messiaen_style_ties=True,
-                    ),
-                ),
             )
 
     @staticmethod

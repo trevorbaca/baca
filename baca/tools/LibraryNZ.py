@@ -6739,6 +6739,18 @@ class LibraryNZ(object):
             )
 
     @staticmethod
+    def tied_repeated_durations(durations):
+        r'''Makes tied repeated durations.
+        '''
+        specifier = baca.repeated_durations(durations)
+        specifier = abjad.new(
+            specifier,
+            rewrite_meter=False,
+            rhythm_maker__tie_specifier__tie_across_divisions=True,
+            )
+        return specifier
+
+    @staticmethod
     def ties(selector='baca.select().plt_pruns()'):
         r'''Attaches ties.
 
@@ -6857,18 +6869,6 @@ class LibraryNZ(object):
             selector=selector,
             spanner=abjad.Tie(),
             )
-
-    @staticmethod
-    def tied_repeated_durations(durations):
-        r'''Makes tied repeated durations.
-        '''
-        specifier = baca.repeated_durations(durations)
-        specifier = abjad.new(
-            specifier,
-            rewrite_meter=False,
-            rhythm_maker__tie_specifier__tie_across_divisions=True,
-            )
-        return specifier
 
     @staticmethod
     def ties_down(selector='baca.select().pls().group()'):
