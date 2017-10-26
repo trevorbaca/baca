@@ -40,7 +40,6 @@ Bases
       ~baca.tools.Selection.Selection.flatten
       ~baca.tools.Selection.Selection.get_duration
       ~baca.tools.Selection.Selection.get_pitches
-      ~baca.tools.Selection.Selection.get_spanners
       ~baca.tools.Selection.Selection.get_timespan
       ~baca.tools.Selection.Selection.get_vertical_moment_at
       ~baca.tools.Selection.Selection.group
@@ -181,12 +180,6 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Selection.Selection.get_pitches
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Selection.Selection.get_spanners
 
 .. only:: html
 
