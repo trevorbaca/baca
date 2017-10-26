@@ -266,17 +266,7 @@ class OverrideCommand(Command):
         Returns none.
         '''
         selections = self._select(argument)
-        if False:
-            print(format(self))
-            print()
-            print(format(self.selector))
-            print()
-            print(argument)
-            print()
-            print(selections)
-            print()
-            print('---')
-            print()
+        # self._debug_selections(argument, selections)
         statement = 'abjad.override(leaf)'
         if self.context_name is not None:
             statement += '.{context_name}'
@@ -315,7 +305,7 @@ class OverrideCommand(Command):
         revert = revert.replace('\\', '')
         revert = abjad.LilyPondCommand(revert, format_slot='after')
         for selection in selections:
-            leaves = abjad.select(selection).by_leaf()
+            leaves = abjad.select(selection).by_leaf(with_grace_notes=False)
             if self.revert:
                 abjad.attach(command, leaves[0])
                 abjad.attach(revert, leaves[-1])

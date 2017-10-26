@@ -404,7 +404,7 @@ class Selection(abjad.Selection):
                 Chord("<e'' fs''>4")
 
         '''
-        selector = self.by_leaf(abjad.Chord, head=True)
+        selector = self.by_leaf(abjad.Chord, head=True, with_grace_notes=False)
         template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
@@ -738,7 +738,7 @@ class Selection(abjad.Selection):
                 Note("af''16")
 
         '''
-        selector = self.by_leaf()
+        selector = self.by_leaf(with_grace_notes=False)
         template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
@@ -848,7 +848,7 @@ class Selection(abjad.Selection):
                 Note("af''16")
 
         '''
-        selector = self.by_leaf().with_previous_leaf()
+        selector = self.leaves().with_previous_leaf()
         template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
@@ -964,7 +964,7 @@ class Selection(abjad.Selection):
                 Note("a'16")
 
         '''
-        selector = self.by_leaf().with_previous_leaf().with_next_leaf()
+        selector = self.leaves().with_previous_leaf().with_next_leaf()
         template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
@@ -2063,7 +2063,7 @@ class Selection(abjad.Selection):
                 Note("a'16")
 
         '''
-        selector = self.by_leaf(pitched=True)
+        selector = self.by_leaf(pitched=True, with_grace_notes=False)
         template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
@@ -3755,7 +3755,7 @@ class Selection(abjad.Selection):
                 Note("a'16")
 
         '''
-        selector = self.by_leaf().with_next_leaf()
+        selector = self.leaves().with_next_leaf()
         template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 
@@ -3905,7 +3905,7 @@ class Selection(abjad.Selection):
                 Note("a'16")
 
         '''
-        selector = self.by_leaf(trim=True)
+        selector = self.by_leaf(trim=True, with_grace_notes=False)
         template = self._get_template(inspect.currentframe(), selector)
         return abjad.new(selector, template=template)
 

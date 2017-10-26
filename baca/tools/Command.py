@@ -35,9 +35,10 @@ class Command(abjad.AbjadObject):
 
     ### PRIVATE METHODS ###
 
-    def _debug_selections(self, music, selections):
+    def _debug_selections(self, argument, selections):
+        print(format(self))
         print(format(self.selector))
-        print(music)
+        print(argument)
         print(selections)
         print()
         

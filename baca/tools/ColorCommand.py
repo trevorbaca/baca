@@ -323,12 +323,6 @@ class ColorCommand(Command):
             result = selector(argument)
         except IndexError:
             return
-        if False:
-            print(format(selector))
-            print('---')
-            print(argument)
-            print('---')
-            print(result)
-            print('---')
+        # self._debug_selections(argument, result)
         selector.color(result)
         return result
