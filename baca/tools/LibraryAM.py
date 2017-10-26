@@ -84,7 +84,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.accents(baca.select().tuplets()[1:2].phs()),
+                ...     baca.map(baca.accents(), baca.select().tuplet(1)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
