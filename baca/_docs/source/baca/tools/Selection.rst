@@ -50,7 +50,6 @@ Bases
       ~baca.tools.Selection.Selection.leaf
       ~baca.tools.Selection.Selection.leaves
       ~baca.tools.Selection.Selection.lleaves
-      ~baca.tools.Selection.Selection.lrleaves
       ~baca.tools.Selection.Selection.lt
       ~baca.tools.Selection.Selection.lts
       ~baca.tools.Selection.Selection.map
@@ -83,6 +82,7 @@ Bases
       ~baca.tools.Selection.Selection.tuplets
       ~baca.tools.Selection.Selection.with_next_leaf
       ~baca.tools.Selection.Selection.with_previous_leaf
+      ~baca.tools.Selection.Selection.wleaves
       ~baca.tools.Selection.Selection.__add__
       ~baca.tools.Selection.Selection.__contains__
       ~baca.tools.Selection.Selection.__copy__
@@ -223,8 +223,6 @@ Methods
 
 .. automethod:: baca.tools.Selection.Selection.lleaves
 
-.. automethod:: baca.tools.Selection.Selection.lrleaves
-
 .. automethod:: baca.tools.Selection.Selection.lt
 
 .. automethod:: baca.tools.Selection.Selection.lts
@@ -316,6 +314,8 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Selection.Selection.with_previous_leaf
+
+.. automethod:: baca.tools.Selection.Selection.wleaves
 
 Special methods
 ---------------

@@ -5308,13 +5308,13 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Pedals leaves in tuplet 1 (leaked both left and right):
+            Pedals leaves in tuplet 1 (leaked wide):
 
             ::
 
                 >>> music_maker = baca.MusicMaker()
                 >>> selector = baca.select().tuplets()[1:2]
-                >>> selector = selector.lrleaves().group()
+                >>> selector = selector.wleaves().group()
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
