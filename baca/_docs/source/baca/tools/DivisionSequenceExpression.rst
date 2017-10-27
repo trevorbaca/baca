@@ -42,6 +42,7 @@ Bases
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.is_postfix
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.keywords
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.label
+      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.lone
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.make_callback
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.map_operand
       ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.markup_maker_callback
@@ -138,6 +139,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.keywords
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.lone
 
 .. only:: html
 

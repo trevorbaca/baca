@@ -41,6 +41,7 @@ Bases
       ~baca.tools.Expression.Expression.is_postfix
       ~baca.tools.Expression.Expression.keywords
       ~baca.tools.Expression.Expression.label
+      ~baca.tools.Expression.Expression.lone
       ~baca.tools.Expression.Expression.make_callback
       ~baca.tools.Expression.Expression.map_operand
       ~baca.tools.Expression.Expression.markup_maker_callback
@@ -137,6 +138,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.Expression.Expression.keywords
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.Expression.Expression.lone
 
 .. only:: html
 

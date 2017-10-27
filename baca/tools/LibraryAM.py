@@ -383,7 +383,7 @@ class LibraryAM(object):
                             direction=Down,
                             ),
                         ],
-                    selector=baca.select().plts().phs().ph(),
+                    selector=baca.select().ph(),
                     )
 
         ..  container:: example

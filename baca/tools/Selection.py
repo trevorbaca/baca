@@ -20,19 +20,6 @@ class Selection(abjad.Selection):
     __slots__ = (
         )
 
-#    ### PRIVATE METHODS ###
-#
-#    @staticmethod
-#    def _get_template(frame):
-#        try:
-#            frame_info = inspect.getframeinfo(frame)
-#            function_name = frame_info.function
-#            arguments = abjad.Expression._wrap_arguments(frame)
-#            template = '{}.({})'.format(function_name, arguments)
-#        finally:
-#            del frame
-#        return template
-
     ### PUBLIC METHODS ###
 
     def chord(self, n=0):
@@ -173,9 +160,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.chords()[n]
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.chords()[n]
 
     def chord_head(self, n=0):
         r'''Selects chord head.
@@ -305,9 +292,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.chord_heads()[n]
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.chord_heads()[n]
 
     def chord_heads(self):
         r'''Selects chord heads.
@@ -387,9 +374,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.by_leaf(abjad.Chord, head=True, with_grace_notes=False)
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.by_leaf(abjad.Chord, head=True, with_grace_notes=False)
 
     def chords(self):
         r'''Selects chords.
@@ -474,9 +461,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.by_class(abjad.Chord)
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.by_class(abjad.Chord)
 
     def leaf(self, n=0):
         r'''Selects leaf.
@@ -605,9 +592,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.leaves()[n]
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.leaves()[n]
 
     def leaves(self):
         r'''Selects leaves.
@@ -709,9 +696,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.by_leaf(with_grace_notes=False)
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.by_leaf(with_grace_notes=False)
 
     def lleaves(self):
         r'''Selects leaves, leaked to the left.
@@ -816,9 +803,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.leaves().with_previous_leaf()
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.leaves().with_previous_leaf()
 
     def lrleaves(self):
         r'''Selects leaves, leaked to both the left and right.
@@ -929,9 +916,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.leaves().with_previous_leaf().with_next_leaf()
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.leaves().with_previous_leaf().with_next_leaf()
 
     def lt(self, n=0):
         r'''Selects logical tie.
@@ -1068,9 +1055,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.lts()[n]
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.lts()[n]
 
     def lts(self):
         r'''Selects logical ties.
@@ -1209,9 +1196,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.by_logical_tie(with_grace_notes=True)
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.by_logical_tie(with_grace_notes=True)
 
     def note(self, n=0):
         r'''Selects note.
@@ -1343,9 +1330,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.notes()[n]
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.notes()[n]
 
     def notes(self):
         r'''Selects notes.
@@ -1474,9 +1461,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.by_class(abjad.Note)
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.by_class(abjad.Note)
 
     def ph(self, n=0):
         r'''Selects pitched head.
@@ -1608,9 +1595,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.phs()[n]
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.phs()[n]
 
     def phs(self):
         r'''Selects pitched heads.
@@ -1727,9 +1714,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.plts().map(baca.select()[0])
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.plts().map(baca.select()[0])
 
     def pl(self, n=0):
         r'''Selects pitched leaf.
@@ -1861,9 +1848,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.pls()[n]
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.pls()[n]
 
     def pls(self):
         r'''Selects pitched leaves.
@@ -1992,9 +1979,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.by_leaf(pitched=True, with_grace_notes=False)
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.by_leaf(pitched=True, with_grace_notes=False)
 
     def plt(self, n=0):
         r'''Selects pitched logical tie.
@@ -2131,9 +2118,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.plts()[n]
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.plts()[n]
 
     def plt_nprun(self, n=0):
         r'''Selects pitched logical tie np-run.
@@ -2280,9 +2267,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.plt_npruns()[n]
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.plt_npruns()[n]
 
     def plt_npruns(self):
         r'''Selects pitched logical tie np-runs.
@@ -2373,13 +2360,14 @@ class Selection(abjad.Selection):
 
 
         '''
-        selector = self.plts()
-        selector = selector.group(baca.select().get_pitches())
-        selector = selector.map(baca.select().by_contiguity())
-        selector = selector.flatten(depth=1)
-        selector = selector.filter(abjad.length('>', 1))
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        result = self.plts()
+        result = result.group(baca.select().get_pitches())
+        result = result.map(baca.select().by_contiguity())
+        result = result.flatten(depth=1)
+        result = result.filter(abjad.length('>', 1))
+        return result
 
     def plt_prun(self, n=0):
         r'''Selects pitched logical tie p-run.
@@ -2516,9 +2504,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.plt_pruns()[n]
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.plt_pruns()[n]
 
     def plt_pruns(self):
         r'''Selects pitched logical tie p-runs.
@@ -2643,12 +2631,13 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.plts()
-        selector = selector.group(baca.select().get_pitches())
-        selector = selector.map(baca.select().by_contiguity())
-        selector = selector.flatten(depth=1)
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        result = self.plts()
+        result = result.group(baca.select().get_pitches())
+        result = result.map(baca.select().by_contiguity())
+        result = result.flatten(depth=1)
+        return result
 
     def plt_run(self, n=0):
         r'''Selects pitched logical tie run.
@@ -2805,9 +2794,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.plt_runs()[n]
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.plt_runs()[n]
 
     def plt_runs(self):
         r'''Selects pitched logical tie runs.
@@ -2928,9 +2917,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.plts().by_contiguity()
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.plts().by_contiguity()
 
     def plt_tail(self, n=0):
         r'''Selects pitched logical tie tail.
@@ -3062,9 +3051,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.plt_tails()[n]
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.plt_tails()[n]
 
     def plt_tails(self):
         r'''Selects pitched logical tie tails.
@@ -3181,9 +3170,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.plts().map(baca.select()[-1])
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.plts().map(baca.select()[-1])
 
     def plts(self):
         r'''Selects pitched logical ties.
@@ -3310,9 +3299,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.by_logical_tie(pitched=True, with_grace_notes=True)
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.by_logical_tie(pitched=True, with_grace_notes=True)
 
     def rest(self, n=0):
         r'''Selects rest.
@@ -3438,9 +3427,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.rests()[n]
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return  self.rests()[n]
 
     def rests(self):
         r'''Selects rests.
@@ -3515,9 +3504,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.by_class((abjad.MultimeasureRest, abjad.Rest))
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.by_class((abjad.MultimeasureRest, abjad.Rest))
 
     def rleaves(self):
         r'''Selects leaves, leaked to the right.
@@ -3625,9 +3614,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.leaves().with_next_leaf()
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.leaves().with_next_leaf()
 
     def stages(self, start, stop=None):
         r'''Selects stages.
@@ -3772,9 +3761,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.by_leaf(trim=True, with_grace_notes=False)
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.by_leaf(trim=True, with_grace_notes=False)
 
 #    def top(self):
 #        r'''Selects top-level components.
@@ -4022,9 +4011,9 @@ class Selection(abjad.Selection):
 #                >>
 #
 #        '''
-#        selector = super(Selection, self).top()
-#        template = self._get_template(inspect.currentframe(), selector)
-#        return abjad.new(selector, template=template)
+#        if self._expression:
+#            return self._update_expression(inspect.currentframe())
+#        return self.top()
 
     def tuplet(self, n=0):
         r'''Selects tuplet.
@@ -4177,9 +4166,9 @@ class Selection(abjad.Selection):
                 >>
 
         '''
-        selector = self.tuplets()[n]
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.tuplets()[n]
 
     def tuplets(self):
         r'''Selects tuplets.
@@ -4325,9 +4314,6 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        #selector = self.by_class(abjad.Tuplet)
-        #template = self._get_template(inspect.currentframe(), selector)
-        #return abjad.new(selector, template=template)
         return self.by_class(abjad.Tuplet)
 
 
