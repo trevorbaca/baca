@@ -122,7 +122,7 @@ class StemTremoloCommand(Command):
 
     def __init__(
         self,
-        selector='baca.select().pls()',
+        selector='baca.select().pleaves()',
         tremolo_flags=32,
         ):
         Command.__init__(self, selector=selector)
@@ -139,12 +139,12 @@ class StemTremoloCommand(Command):
         '''
         selections = self._select(music)
         for selection in selections:
-            pls = baca.select().pls()(selection)
-            for pl in pls:
+            pleaves = baca.select().pleaves()(selection)
+            for pleaf in pleaves:
                 stem_tremolo = abjad.StemTremolo(
                     tremolo_flags=self.tremolo_flags
                     )
-                abjad.attach(stem_tremolo, pl)
+                abjad.attach(stem_tremolo, pleaf)
 
     ### PUBLIC PROPERTIES ###
 
@@ -273,7 +273,7 @@ class StemTremoloCommand(Command):
                 ...     baca.scope('Violin Music Voice', 1),
                 ...     baca.pitches('E4 F4'),
                 ...     baca.even_runs(),
-                ...     baca.stem_tremolo(baca.select().pls()[-7:]),
+                ...     baca.stem_tremolo(baca.select().pleaves()[-7:]),
                 ...     )
 
             ::

@@ -22,281 +22,181 @@ class Selection(abjad.Selection):
 
     ### PUBLIC METHODS ###
 
-    def chord(self, n=0):
-        r'''Selects chord.
-
-        ..  container:: example
-
-            Selects chord 0:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     3 * [{16, 18}, [0, 2, 10]],
-            ...     baca.color(baca.select().chord()),
-            ...     baca.rests_around([2], [3]),
-            ...     counts=[1, 5, -1],
-            ...     )
-
-            >>> contribution.print_color_selector_result()
-            Chord("<e'' fs''>16")
-
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            {
-                                r8
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
-                                <e'' fs''>16
-                            }
-                            {
-                                c'16
-                                d'4 ~
-                                d'16
-                                r16
-                                bf'16
-                            }
-                            {
-                                <e'' fs''>16
-                            }
-                            {
-                                c'16
-                                d'4 ~
-                                d'16
-                                r16
-                                bf'16
-                            }
-                            {
-                                <e'' fs''>16
-                            }
-                            {
-                                c'16
-                                d'4 ~
-                                d'16
-                                r16
-                                bf'16
-                                r8.
-                            }
-                        }
-                    }
-                >>
+    def chord(self, n):
+        r'''Selects chord `n`.
 
         ..  container:: example
 
             Selects chord -1:
 
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     3 * [{16, 18}, [0, 2, 10]],
-            ...     baca.color(baca.select().chord(n=-1)),
-            ...     baca.rests_around([2], [3]),
-            ...     counts=[1, 5, -1],
-            ...     )
+            ..  container:: example
 
-            >>> contribution.print_color_selector_result()
-            Chord("<e'' fs''>16")
+                >>> tuplets = [
+                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+                ...     ]
+                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+                >>> tuplets = [abjad.select(tuplets)]
+                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
+                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> show(lilypond_file) # doctest: +SKIP
+                >>> result = baca.select(staff).chord(-1)
+
+                >>> result
+                Chord("<fs' gs'>16")
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().chord(-1)
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Chord("<fs' gs'>16")
+
+                >>> selector.color(result)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            {
-                                r8
-                                <e'' fs''>16
-                            }
-                            {
-                                c'16
-                                d'4 ~
-                                d'16
-                                r16
-                                bf'16
-                            }
-                            {
-                                <e'' fs''>16
-                            }
-                            {
-                                c'16
-                                d'4 ~
-                                d'16
-                                r16
-                                bf'16
-                            }
-                            {
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
-                                <e'' fs''>16
-                            }
-                            {
-                                c'16
-                                d'4 ~
-                                d'16
-                                r16
-                                bf'16
-                                r8.
-                            }
+                >>> abjad.f(staff)
+                \new Staff \with {
+                    \override TupletBracket.direction = #up
+                    \override TupletBracket.staff-padding = #3
+                } {
+                    {
+                        \time 7/4
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 10/9 {
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            c'16
+                            <d' e'>4 ~
+                            <d' e'>16
+                        }
+                        \times 8/9 {
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            d'16
+                            <e' fs'>4 ~
+                            <e' fs'>16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 10/9 {
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            e'16
+                            <fs' gs'>4 ~
+                            \once \override Accidental.color = #green
+                            \once \override Beam.color = #green
+                            \once \override Dots.color = #green
+                            \once \override NoteHead.color = #green
+                            \once \override Stem.color = #green
+                            <fs' gs'>16
                         }
                     }
-                >>
+                }
 
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.chords()[n]
 
-    def chord_head(self, n=0):
-        r'''Selects chord head.
-
-        ..  container:: example
-
-            Selects chord head 0:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [{16, 18}, [0, 2], {16, 18}, [4, 5], {16, 18}],
-            ...     baca.color(baca.select().chord_head()),
-            ...     baca.rests_around([2], [4]),
-            ...     counts=[5, 1, -1],
-            ...     thread=True,
-            ...     )
-
-            >>> contribution.print_color_selector_result()
-            Chord("<e'' fs''>4")
-
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            {
-                                r8
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
-                                <e'' fs''>4 ~
-                                <e'' fs''>16
-                            }
-                            {
-                                c'16
-                                r16
-                                d'4 ~
-                                d'16
-                            }
-                            {
-                                <e'' fs''>16
-                                r16
-                            }
-                            {
-                                e'4 ~
-                                e'16 [
-                                f'16 ]
-                                r16
-                            }
-                            {
-                                <e'' fs''>4 ~
-                                <e'' fs''>16
-                                r4
-                            }
-                        }
-                    }
-                >>
+    def chead(self, n):
+        r'''Selects chord head `n`.
 
         ..  container:: example
 
             Selects chord head -1:
 
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [{16, 18}, [0, 2], {16, 18}, [4, 5], {16, 18}],
-            ...     baca.color(baca.select().chord_head(n=-1)),
-            ...     baca.rests_around([2], [4]),
-            ...     counts=[5, 1, -1],
-            ...     thread=True,
-            ...     )
+            ..  container:: example
 
-            >>> contribution.print_color_selector_result()
-            Chord("<e'' fs''>4")
+                >>> tuplets = [
+                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+                ...     ]
+                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+                >>> tuplets = [abjad.select(tuplets)]
+                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
+                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> show(lilypond_file) # doctest: +SKIP
+                >>> result = baca.select(staff).chead(-1)
+
+                >>> result
+                Chord("<fs' gs'>4")
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().chead(-1)
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Chord("<fs' gs'>4")
+
+                >>> selector.color(result)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            {
-                                r8
-                                <e'' fs''>4 ~
-                                <e'' fs''>16
-                            }
-                            {
-                                c'16
-                                r16
-                                d'4 ~
-                                d'16
-                            }
-                            {
-                                <e'' fs''>16
-                                r16
-                            }
-                            {
-                                e'4 ~
-                                e'16 [
-                                f'16 ]
-                                r16
-                            }
-                            {
-                                \once \override Accidental.color = #green
-                                \once \override Beam.color = #green
-                                \once \override Dots.color = #green
-                                \once \override NoteHead.color = #green
-                                \once \override Stem.color = #green
-                                <e'' fs''>4 ~
-                                <e'' fs''>16
-                                r4
-                            }
+                >>> abjad.f(staff)
+                \new Staff \with {
+                    \override TupletBracket.direction = #up
+                    \override TupletBracket.staff-padding = #3
+                } {
+                    {
+                        \time 7/4
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 10/9 {
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            c'16
+                            <d' e'>4 ~
+                            <d' e'>16
+                        }
+                        \times 8/9 {
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            d'16
+                            <e' fs'>4 ~
+                            <e' fs'>16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 10/9 {
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            e'16
+                            \once \override Accidental.color = #green
+                            \once \override Beam.color = #green
+                            \once \override Dots.color = #green
+                            \once \override NoteHead.color = #green
+                            \once \override Stem.color = #green
+                            <fs' gs'>4 ~
+                            <fs' gs'>16
                         }
                     }
-                >>
+                }
 
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe(), lone=True)
-        return self.chord_heads()[n]
+        return self.cheads()[n]
 
-    def chord_heads(self):
+    def cheads(self):
         r'''Selects chord heads.
 
         ..  container:: example
@@ -307,7 +207,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{16, 18}, [0, 2], {16, 18}, [4, 5], {16, 18}],
-            ...     baca.color(baca.select().chord_heads()),
+            ...     baca.color(baca.select().cheads()),
             ...     baca.rests_around([2], [4]),
             ...     counts=[5, 1, -1],
             ...     thread=True,
@@ -465,8 +365,8 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.by_class(abjad.Chord)
 
-    def leaf(self, n=0):
-        r'''Selects leaf.
+    def leaf(self, n):
+        r'''Selects leaf `n`.
 
         ..  container:: example
 
@@ -476,7 +376,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().leaf()),
+            ...     baca.color(baca.select().leaf(0)),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -920,8 +820,8 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.leaves().with_previous_leaf().with_next_leaf()
 
-    def lt(self, n=0):
-        r'''Selects logical tie.
+    def lt(self, n):
+        r'''Selects logical tie `n`.
 
         ..  container:: example
 
@@ -931,7 +831,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().lt(n=3)),
+            ...     baca.color(baca.select().lt(3)),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -999,7 +899,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().lt(n=-4)),
+            ...     baca.color(baca.select().lt(-4)),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -1200,8 +1100,8 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.by_logical_tie(with_grace_notes=True)
 
-    def note(self, n=0):
-        r'''Selects note.
+    def note(self, n):
+        r'''Selects note `n`.
 
         ..  container:: example
 
@@ -1211,7 +1111,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().note()),
+            ...     baca.color(baca.select().note(0)),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -1274,7 +1174,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().note(n=-1)),
+            ...     baca.color(baca.select().note(-1)),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -1465,8 +1365,8 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.by_class(abjad.Note)
 
-    def ph(self, n=0):
-        r'''Selects pitched head.
+    def phead(self, n):
+        r'''Selects pitched head `n`.
 
         ..  container:: example
 
@@ -1476,7 +1376,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().ph(n=2)),
+            ...     baca.color(baca.select().phead(2)),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -1539,7 +1439,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().ph(n=-4)),
+            ...     baca.color(baca.select().phead(-4)),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -1597,9 +1497,9 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe(), lone=True)
-        return self.phs()[n]
+        return self.pheads()[n]
 
-    def phs(self):
+    def pheads(self):
         r'''Selects pitched heads.
 
         ..  container:: example
@@ -1610,7 +1510,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().phs()),
+            ...     baca.color(baca.select().pheads()),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -1718,18 +1618,18 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.plts().map(baca.select()[0])
 
-    def pl(self, n=0):
-        r'''Selects pitched leaf.
+    def pleaf(self, n):
+        r'''Selects pitched leaf `n`.
 
         ..  container:: example
 
-            Selects PL 0:
+            Selects pitched leaf 0:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().pl()),
+            ...     baca.color(baca.select().pleaf(0)),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -1786,13 +1686,13 @@ class Selection(abjad.Selection):
 
         ..  container:: example
 
-            Selects PL -1:
+            Selects pitched leaf -1:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().pl(n=-1)),
+            ...     baca.color(baca.select().pleaf(-1)),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -1850,20 +1750,20 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe(), lone=True)
-        return self.pls()[n]
+        return self.pleaves()[n]
 
-    def pls(self):
+    def pleaves(self):
         r'''Selects pitched leaves.
 
         ..  container:: example
 
-            Selects PLs:
+            Selects pitched leaves:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().pls()),
+            ...     baca.color(baca.select().pleaves()),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -1983,8 +1883,8 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.by_leaf(pitched=True, with_grace_notes=False)
 
-    def plt(self, n=0):
-        r'''Selects pitched logical tie.
+    def plt(self, n):
+        r'''Selects pitched logical tie `n`.
 
         ..  container:: example
 
@@ -1994,7 +1894,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().plt(n=2)),
+            ...     baca.color(baca.select().plt(2)),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -2062,7 +1962,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().plt(n=-1)),
+            ...     baca.color(baca.select().plt(-1)),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -2122,8 +2022,8 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.plts()[n]
 
-    def plt_nprun(self, n=0):
-        r'''Selects pitched logical tie np-run.
+    def plt_nprun(self, n):
+        r'''Selects pitched logical tie np-run `n`.
 
         ..  container:: example
 
@@ -2133,7 +2033,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().plt_nprun()),
+            ...     baca.color(baca.select().plt_nprun(0)),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -2201,7 +2101,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().plt_nprun(n=-1)),
+            ...     baca.color(baca.select().plt_nprun(-1)),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -2369,8 +2269,8 @@ class Selection(abjad.Selection):
         result = result.filter(abjad.length('>', 1))
         return result
 
-    def plt_prun(self, n=0):
-        r'''Selects pitched logical tie p-run.
+    def plt_prun(self, n):
+        r'''Selects pitched logical tie p-run `n`.
 
         ..  container:: example
 
@@ -2380,7 +2280,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().plt_prun()),
+            ...     baca.color(baca.select().plt_prun(0)),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -2448,7 +2348,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().plt_prun(n=-1)),
+            ...     baca.color(baca.select().plt_prun(-1)),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -2639,8 +2539,8 @@ class Selection(abjad.Selection):
         result = result.flatten(depth=1)
         return result
 
-    def plt_run(self, n=0):
-        r'''Selects pitched logical tie run.
+    def plt_run(self, n):
+        r'''Selects pitched logical tie run `n`.
 
         ..  container:: example
 
@@ -2650,7 +2550,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().plt_run()),
+            ...     baca.color(baca.select().plt_run(0)),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -2728,7 +2628,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().plt_run(n=-1)),
+            ...     baca.color(baca.select().plt_run(-1)),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -2921,8 +2821,8 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.plts().by_contiguity()
 
-    def plt_tail(self, n=0):
-        r'''Selects pitched logical tie tail.
+    def plt_tail(self, n):
+        r'''Selects pitched logical tie tail `n`.
 
         ..  container:: example
 
@@ -2932,7 +2832,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().plt_tail(n=2)),
+            ...     baca.color(baca.select().plt_tail(2)),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -2995,7 +2895,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().plt_tail(n=-4)),
+            ...     baca.color(baca.select().plt_tail(-4)),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -3303,8 +3203,8 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.by_logical_tie(pitched=True, with_grace_notes=True)
 
-    def rest(self, n=0):
-        r'''Selects rest.
+    def rest(self, n):
+        r'''Selects rest `n`.
 
         ..  container:: example
 
@@ -3314,7 +3214,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().rest()),
+            ...     baca.color(baca.select().rest(0)),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -3374,7 +3274,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().rest(n=-1)),
+            ...     baca.color(baca.select().rest(-1)),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -3628,7 +3528,7 @@ class Selection(abjad.Selection):
             stop=stop,
             )
 
-    def tls(self):
+    def tleaves(self):
         r'''Selects trimmed leaves.
 
         ..  container:: example
@@ -3639,7 +3539,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().tls()),
+            ...     baca.color(baca.select().tleaves()),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -4015,8 +3915,8 @@ class Selection(abjad.Selection):
 #            return self._update_expression(inspect.currentframe())
 #        return self.top()
 
-    def tuplet(self, n=0):
-        r'''Selects tuplet.
+    def tuplet(self, n):
+        r'''Selects tuplet `n`.
 
         ..  container:: example
 
@@ -4026,7 +3926,7 @@ class Selection(abjad.Selection):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().tuplet()),
+            ...     baca.color(baca.select().tuplet(0)),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),

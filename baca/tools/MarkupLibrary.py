@@ -85,7 +85,7 @@ class MarkupLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.markup('più mosso', baca.select().tuplets()[1:2].ph()),
+                ...     baca.markup('più mosso', baca.select().tuplets()[1:2].phead(0)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -140,7 +140,7 @@ class MarkupLibrary(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.markup('*', baca.select().tuplets()[1:2].phs()),
+                ...     baca.markup('*', baca.select().tuplets()[1:2].pheads()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -188,7 +188,7 @@ class MarkupLibrary(object):
         '''
         if not isinstance(markup, abjad.Markup):
             markup = abjad.Markup(markup, direction=direction)
-        selector = selector or baca.select().ph()
+        selector = selector or baca.select().phead(0)
         return baca.AttachCommand(
             arguments=[markup],
             selector=selector,

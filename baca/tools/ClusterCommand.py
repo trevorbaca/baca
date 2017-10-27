@@ -547,7 +547,7 @@ class ClusterCommand(Command):
             return
         if not self.widths:
             return
-        leaf = baca.select().leaf()(selections)
+        leaf = baca.select().leaf(0)(selections)
         root = abjad.inspect(leaf).get_parentage().root
         with abjad.ForbidUpdate(component=root):
             for selection in selections:

@@ -123,7 +123,7 @@ class ColorFingeringCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, numbers=None, selector='baca.select().phs().group()'):
+    def __init__(self, numbers=None, selector='baca.select().pheads().group()'):
         Command.__init__(self, selector=selector)
         if numbers is not None:
             assert abjad.mathtools.all_are_nonnegative_integers(numbers)
@@ -141,13 +141,13 @@ class ColorFingeringCommand(Command):
             return
         numbers = abjad.CyclicTuple(self.numbers)
         for selection in selections:
-            pls = baca.select().pls()(selection)
-            for i, pl in enumerate(pls):
+            pleaves = baca.select().pleaves()(selection)
+            for i, pleaf in enumerate(pleaves):
                 number = numbers[i]
                 if number != 0:
                     fingering = abjad.ColorFingering(number)
-                    abjad.attach(fingering, pl)
-                abjad.attach({'color fingering': True}, pl)
+                    abjad.attach(fingering, pleaf)
+                abjad.attach({'color fingering': True}, pleaf)
 
     ### PUBLIC PROPERTIES ###
 

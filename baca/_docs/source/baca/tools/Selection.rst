@@ -32,9 +32,9 @@ Bases
       ~baca.tools.Selection.Selection.by_logical_measure
       ~baca.tools.Selection.Selection.by_logical_tie
       ~baca.tools.Selection.Selection.by_run
+      ~baca.tools.Selection.Selection.chead
+      ~baca.tools.Selection.Selection.cheads
       ~baca.tools.Selection.Selection.chord
-      ~baca.tools.Selection.Selection.chord_head
-      ~baca.tools.Selection.Selection.chord_heads
       ~baca.tools.Selection.Selection.chords
       ~baca.tools.Selection.Selection.filter
       ~baca.tools.Selection.Selection.flatten
@@ -59,10 +59,10 @@ Bases
       ~baca.tools.Selection.Selection.partition_by_counts
       ~baca.tools.Selection.Selection.partition_by_durations
       ~baca.tools.Selection.Selection.partition_by_ratio
-      ~baca.tools.Selection.Selection.ph
-      ~baca.tools.Selection.Selection.phs
-      ~baca.tools.Selection.Selection.pl
-      ~baca.tools.Selection.Selection.pls
+      ~baca.tools.Selection.Selection.phead
+      ~baca.tools.Selection.Selection.pheads
+      ~baca.tools.Selection.Selection.pleaf
+      ~baca.tools.Selection.Selection.pleaves
       ~baca.tools.Selection.Selection.plt
       ~baca.tools.Selection.Selection.plt_nprun
       ~baca.tools.Selection.Selection.plt_npruns
@@ -77,7 +77,7 @@ Bases
       ~baca.tools.Selection.Selection.rests
       ~baca.tools.Selection.Selection.rleaves
       ~baca.tools.Selection.Selection.stages
-      ~baca.tools.Selection.Selection.tls
+      ~baca.tools.Selection.Selection.tleaves
       ~baca.tools.Selection.Selection.top
       ~baca.tools.Selection.Selection.tuplet
       ~baca.tools.Selection.Selection.tuplets
@@ -149,11 +149,11 @@ Methods
 
       .. automethod:: baca.tools.Selection.Selection.by_run
 
+.. automethod:: baca.tools.Selection.Selection.chead
+
+.. automethod:: baca.tools.Selection.Selection.cheads
+
 .. automethod:: baca.tools.Selection.Selection.chord
-
-.. automethod:: baca.tools.Selection.Selection.chord_head
-
-.. automethod:: baca.tools.Selection.Selection.chord_heads
 
 .. automethod:: baca.tools.Selection.Selection.chords
 
@@ -257,13 +257,13 @@ Methods
 
       .. automethod:: baca.tools.Selection.Selection.partition_by_ratio
 
-.. automethod:: baca.tools.Selection.Selection.ph
+.. automethod:: baca.tools.Selection.Selection.phead
 
-.. automethod:: baca.tools.Selection.Selection.phs
+.. automethod:: baca.tools.Selection.Selection.pheads
 
-.. automethod:: baca.tools.Selection.Selection.pl
+.. automethod:: baca.tools.Selection.Selection.pleaf
 
-.. automethod:: baca.tools.Selection.Selection.pls
+.. automethod:: baca.tools.Selection.Selection.pleaves
 
 .. automethod:: baca.tools.Selection.Selection.plt
 
@@ -293,7 +293,7 @@ Methods
 
 .. automethod:: baca.tools.Selection.Selection.stages
 
-.. automethod:: baca.tools.Selection.Selection.tls
+.. automethod:: baca.tools.Selection.Selection.tleaves
 
 .. only:: html
 
