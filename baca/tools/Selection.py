@@ -2454,7 +2454,7 @@ class Selection(abjad.Selection):
                 >>> result = baca.select(staff).qrun(-1)
 
                 >>> result
-                Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+                Run([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
             ..  container:: example expression
 
@@ -2462,7 +2462,7 @@ class Selection(abjad.Selection):
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
-                Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+                Run([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
                 >>> selector.color(result)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2548,12 +2548,12 @@ class Selection(abjad.Selection):
                 >>> for item in result:
                 ...     item
                 ...
-                Selection([Note("c'16"), Note("c'16"), Note("c'16")])
-                Selection([Chord("<d' e'>4"), Chord("<d' e'>16")])
-                Selection([Note("d'16"), Note("d'16"), Note("d'16")])
-                Selection([Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-                Selection([Note("e'16"), Note("e'16"), Note("e'16")])
-                Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+                Run([Note("c'16"), Note("c'16"), Note("c'16")])
+                Run([Chord("<d' e'>4"), Chord("<d' e'>16")])
+                Run([Note("d'16"), Note("d'16"), Note("d'16")])
+                Run([Chord("<e' fs'>4"), Chord("<e' fs'>16")])
+                Run([Note("e'16"), Note("e'16"), Note("e'16")])
+                Run([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
             ..  container:: example expression
 
@@ -2561,12 +2561,12 @@ class Selection(abjad.Selection):
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
-                Selection([Note("c'16"), Note("c'16"), Note("c'16")])
-                Selection([Chord("<d' e'>4"), Chord("<d' e'>16")])
-                Selection([Note("d'16"), Note("d'16"), Note("d'16")])
-                Selection([Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-                Selection([Note("e'16"), Note("e'16"), Note("e'16")])
-                Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+                Run([Note("c'16"), Note("c'16"), Note("c'16")])
+                Run([Chord("<d' e'>4"), Chord("<d' e'>16")])
+                Run([Note("d'16"), Note("d'16"), Note("d'16")])
+                Run([Chord("<e' fs'>4"), Chord("<e' fs'>16")])
+                Run([Note("e'16"), Note("e'16"), Note("e'16")])
+                Run([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
                 >>> selector.color(result)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2691,6 +2691,7 @@ class Selection(abjad.Selection):
         result = result.group(baca.select().get_pitches())
         result = result.map(baca.select().by_contiguity())
         result = result.flatten(depth=1)
+        result = result.map(abjad.Run)
         return result
 
     def rest(self, n):
@@ -3022,7 +3023,7 @@ class Selection(abjad.Selection):
                 >>> result = baca.select(staff).run(-1)
 
                 >>> result
-                Selection([Note("bf'16"), Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+                Run([Note("bf'16"), Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
             ..  container:: example expression
 
@@ -3030,7 +3031,7 @@ class Selection(abjad.Selection):
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
-                Selection([Note("bf'16"), Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+                Run([Note("bf'16"), Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
                 >>> selector.color(result)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3131,9 +3132,9 @@ class Selection(abjad.Selection):
                 >>> for item in result:
                 ...     item
                 ...
-                Selection([Note("bf'16"), Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16")])
-                Selection([Note("bf'16"), Chord("<a'' b''>16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-                Selection([Note("bf'16"), Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+                Run([Note("bf'16"), Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16")])
+                Run([Note("bf'16"), Chord("<a'' b''>16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16")])
+                Run([Note("bf'16"), Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
             ..  container:: example expression
 
@@ -3141,9 +3142,9 @@ class Selection(abjad.Selection):
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
-                Selection([Note("bf'16"), Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16")])
-                Selection([Note("bf'16"), Chord("<a'' b''>16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-                Selection([Note("bf'16"), Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+                Run([Note("bf'16"), Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16")])
+                Run([Note("bf'16"), Chord("<a'' b''>16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16")])
+                Run([Note("bf'16"), Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
                 >>> selector.color(result)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3264,7 +3265,7 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.pleaves().by_contiguity()
+        return self.pleaves().by_contiguity().map(abjad.Run)
 
     def stages(self, start, stop=None):
         r'''Selects stages.
