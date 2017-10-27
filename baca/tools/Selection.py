@@ -1995,11 +1995,11 @@ class Selection(abjad.Selection):
         return self.plts()[n]
 
     def plt_prun(self, n):
-        r'''Selects pitched logical tie p-run `n`.
+        r'''Selects equipitch run `n`.
 
         ..  container:: example
 
-            Selects PLT p-run 0:
+            Selects equipitch run 0:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -2014,7 +2014,7 @@ class Selection(abjad.Selection):
             ...     )
 
             >>> contribution.print_color_selector_result()
-            Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
+            Selection([Note("c'16"), Note("c'16")])
 
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
@@ -2082,7 +2082,7 @@ class Selection(abjad.Selection):
             ...     )
 
             >>> contribution.print_color_selector_result()
-            Selection([LogicalTie([Note("a'16")])])
+            Selection([Note("a'16")])
 
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
@@ -2134,11 +2134,11 @@ class Selection(abjad.Selection):
         return self.plt_pruns()[n]
 
     def plt_pruns(self):
-        r'''Selects pitched logical tie p-runs.
+        r'''Selects equipitch runs.
 
         ..  container:: example
 
-            Selects PLT p-runs:
+            Selects equipitch runs:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -2153,13 +2153,13 @@ class Selection(abjad.Selection):
             ...     )
 
             >>> contribution.print_color_selector_result()
-            Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
-            Selection([LogicalTie([Note("bf'4"), Note("bf'16")])])
-            Selection([LogicalTie([Note("bf'16")])])
-            Selection([LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])
-            Selection([LogicalTie([Note("fs''16")])])
-            Selection([LogicalTie([Note("af''16")])])
-            Selection([LogicalTie([Note("a'16")])])
+            Selection([Note("c'16"), Note("c'16")])
+            Selection([Note("bf'4"), Note("bf'16")])
+            Selection([Note("bf'16")])
+            Selection([Note("e''16"), Note("e''4"), Note("e''16")])
+            Selection([Note("fs''16")])
+            Selection([Note("af''16")])
+            Selection([Note("a'16")])
 
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
@@ -2258,18 +2258,18 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        result = self.plts()
+        result = self.pleaves()
         result = result.group(baca.select().get_pitches())
         result = result.map(baca.select().by_contiguity())
         result = result.flatten(depth=1)
         return result
 
     def plt_run(self, n):
-        r'''Selects pitched logical tie run `n`.
+        r'''Selects run `n`.
 
         ..  container:: example
 
-            Selects PLT run 0:
+            Selects run 0:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -2284,7 +2284,7 @@ class Selection(abjad.Selection):
             ...     )
 
             >>> contribution.print_color_selector_result()
-            Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("bf'4"), Note("bf'16")])])
+            Selection([Note("c'16"), Note("c'16"), Note("bf'4"), Note("bf'16")])
 
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
@@ -2362,7 +2362,7 @@ class Selection(abjad.Selection):
             ...     )
 
             >>> contribution.print_color_selector_result()
-            Selection([LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")])])
+            Selection([Note("fs''16"), Note("af''16"), Note("a'16")])
 
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
@@ -2424,11 +2424,11 @@ class Selection(abjad.Selection):
         return self.plt_runs()[n]
 
     def plt_runs(self):
-        r'''Selects pitched logical tie runs.
+        r'''Selects runs.
 
         ..  container:: example
 
-            Selects PLT runs:
+            Selects runs:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -2443,9 +2443,9 @@ class Selection(abjad.Selection):
             ...     )
 
             >>> contribution.print_color_selector_result()
-            Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("bf'4"), Note("bf'16")])])
-            Selection([LogicalTie([Note("bf'16")]), LogicalTie([Note("e''16")]), LogicalTie([Note("e''4"), Note("e''16")])])
-            Selection([LogicalTie([Note("fs''16")]), LogicalTie([Note("af''16")]), LogicalTie([Note("a'16")])])
+            Selection([Note("c'16"), Note("c'16"), Note("bf'4"), Note("bf'16")])
+            Selection([Note("bf'16"), Note("e''16"), Note("e''4"), Note("e''16")])
+            Selection([Note("fs''16"), Note("af''16"), Note("a'16")])
 
             >>> lilypond_file = music_maker.show(contribution)
             >>> show(lilypond_file) # doctest: +SKIP
@@ -2544,7 +2544,7 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.plts().by_contiguity()
+        return self.pleaves().by_contiguity()
 
     def plts(self):
         r'''Selects pitched logical ties.
