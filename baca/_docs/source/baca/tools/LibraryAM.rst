@@ -27,8 +27,8 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.bass_to_octave
       ~baca.tools.LibraryAM.LibraryAM.beam_divisions
       ~baca.tools.LibraryAM.LibraryAM.beam_everything
-      ~baca.tools.LibraryAM.LibraryAM.beam_plt_runs
       ~baca.tools.LibraryAM.LibraryAM.beam_positions
+      ~baca.tools.LibraryAM.LibraryAM.beam_runs
       ~baca.tools.LibraryAM.LibraryAM.center_to_octave
       ~baca.tools.LibraryAM.LibraryAM.clef
       ~baca.tools.LibraryAM.LibraryAM.clef_spanner
@@ -105,9 +105,9 @@ Class & static methods
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.beam_everything
 
-.. automethod:: baca.tools.LibraryAM.LibraryAM.beam_plt_runs
-
 .. automethod:: baca.tools.LibraryAM.LibraryAM.beam_positions
+
+.. automethod:: baca.tools.LibraryAM.LibraryAM.beam_runs
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.center_to_octave
 

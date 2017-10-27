@@ -63,16 +63,16 @@ Bases
       ~baca.tools.Selection.Selection.pleaf
       ~baca.tools.Selection.Selection.pleaves
       ~baca.tools.Selection.Selection.plt
-      ~baca.tools.Selection.Selection.plt_prun
-      ~baca.tools.Selection.Selection.plt_pruns
-      ~baca.tools.Selection.Selection.plt_run
-      ~baca.tools.Selection.Selection.plt_runs
       ~baca.tools.Selection.Selection.plts
       ~baca.tools.Selection.Selection.ptail
       ~baca.tools.Selection.Selection.ptails
+      ~baca.tools.Selection.Selection.qrun
+      ~baca.tools.Selection.Selection.qruns
       ~baca.tools.Selection.Selection.rest
       ~baca.tools.Selection.Selection.rests
       ~baca.tools.Selection.Selection.rleaves
+      ~baca.tools.Selection.Selection.run
+      ~baca.tools.Selection.Selection.runs
       ~baca.tools.Selection.Selection.stages
       ~baca.tools.Selection.Selection.tleaves
       ~baca.tools.Selection.Selection.top
@@ -263,25 +263,25 @@ Methods
 
 .. automethod:: baca.tools.Selection.Selection.plt
 
-.. automethod:: baca.tools.Selection.Selection.plt_prun
-
-.. automethod:: baca.tools.Selection.Selection.plt_pruns
-
-.. automethod:: baca.tools.Selection.Selection.plt_run
-
-.. automethod:: baca.tools.Selection.Selection.plt_runs
-
 .. automethod:: baca.tools.Selection.Selection.plts
 
 .. automethod:: baca.tools.Selection.Selection.ptail
 
 .. automethod:: baca.tools.Selection.Selection.ptails
 
+.. automethod:: baca.tools.Selection.Selection.qrun
+
+.. automethod:: baca.tools.Selection.Selection.qruns
+
 .. automethod:: baca.tools.Selection.Selection.rest
 
 .. automethod:: baca.tools.Selection.Selection.rests
 
 .. automethod:: baca.tools.Selection.Selection.rleaves
+
+.. automethod:: baca.tools.Selection.Selection.run
+
+.. automethod:: baca.tools.Selection.Selection.runs
 
 .. automethod:: baca.tools.Selection.Selection.stages
 

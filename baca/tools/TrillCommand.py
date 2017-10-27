@@ -169,7 +169,7 @@ class TrillCommand(Command):
         minimum_written_duration=None,
         maximum_written_duration=None,
         pitch=None,
-        selector='baca.select().plt_runs()',
+        selector='baca.select().runs()',
         ):
         Command.__init__(self, selector=selector)
         if deposit_annotations is not None:

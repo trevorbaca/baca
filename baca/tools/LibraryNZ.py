@@ -579,7 +579,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.ottava(baca.select().plt_runs()),
+                ...     baca.ottava(baca.select().runs()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -707,7 +707,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.ottava_bassa(baca.select().plt_runs()),
+                ...     baca.ottava_bassa(baca.select().runs()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6751,7 +6751,7 @@ class LibraryNZ(object):
         return specifier
 
     @staticmethod
-    def ties(selector='baca.select().plt_pruns()'):
+    def ties(selector='baca.select().qruns()'):
         r'''Attaches ties.
 
         ..  container:: example
@@ -6819,7 +6819,7 @@ class LibraryNZ(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.ties(baca.select().plt_prun(0)),
+                ...     baca.ties(baca.select().qrun(0)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -7789,7 +7789,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def trills(selector='baca.select().plt_pruns()'):
+    def trills(selector='baca.select().qruns()'):
         r'''Attaches trills.
 
         ..  container:: example
@@ -7858,7 +7858,7 @@ class LibraryNZ(object):
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.trills(
-                ...         baca.select().tuplets()[1:2].plt_pruns()),
+                ...         baca.select().tuplets()[1:2].qruns()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -7912,7 +7912,7 @@ class LibraryNZ(object):
     @staticmethod
     def trills_at_interval(
         interval,
-        selector='baca.select().plt_pruns()',
+        selector='baca.select().qruns()',
         ):
         r'''Attaches trills at `interval`.
 
@@ -7992,7 +7992,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.trills_at_interval(
                 ...         2,
-                ...         baca.select().tuplets()[1:2].plt_pruns(),
+                ...         baca.select().tuplets()[1:2].qruns(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
@@ -8054,7 +8054,7 @@ class LibraryNZ(object):
     def trills_at_pitch(
         pitch,
         harmonic=None,
-        selector='baca.select().plt_pruns()',
+        selector='baca.select().qruns()',
         ):
         r'''Attaches trills at `pitch`.
 
@@ -8134,7 +8134,7 @@ class LibraryNZ(object):
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
                 ...     baca.trills_at_pitch(
                 ...         pitch=1,
-                ...         selector=baca.select().tuplets()[1:2].plt_pruns(),
+                ...         selector=baca.select().tuplets()[1:2].qruns(),
                 ...         ),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),

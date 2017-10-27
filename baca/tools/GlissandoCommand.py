@@ -270,7 +270,7 @@ class GlissandoCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, selector='baca.select().plt_runs()'):
+    def __init__(self, selector='baca.select().runs()'):
         Command.__init__(self, selector=selector)
 
     ### SPECIAL METHODS ###

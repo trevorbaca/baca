@@ -121,7 +121,7 @@ class MicrotoneDeviationCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, deviations=None, selector='baca.select().plt_pruns()'):
+    def __init__(self, deviations=None, selector='baca.select().qruns()'):
         Command.__init__(self, selector=selector)
         if deviations is not None:
             if all(isinstance(_, numbers.Number) for _ in deviations):

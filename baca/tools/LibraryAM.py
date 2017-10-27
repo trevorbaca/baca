@@ -1227,146 +1227,6 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def beam_plt_runs(hide_nibs=None):
-        r'''Beams PLT runs.
-
-        ..  container:: example
-
-            Beams PLT runs:
-
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.beam_plt_runs(),
-                ...     baca.rests_around([2], [2]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
-                                c'16 [
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
-                                d'16 ]
-                                bf'4 ~
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
-                                bf'16 [ ]
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \set stemLeftBeamCount = #1
-                                \set stemRightBeamCount = #2
-                                fs''16 [
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
-                                e''16 ]
-                                ef''4 ~
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
-                                ef''16 [ ]
-                                r16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
-                                af''16 [
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #1
-                                g''16
-                            }
-                            \times 2/3 {
-                                \set stemLeftBeamCount = #1
-                                \set stemRightBeamCount = #2
-                                a'16 ]
-                                r8
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Beams PLT runs without nibs:
-
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.beam_plt_runs(hide_nibs=True),
-                ...     baca.rests_around([2], [2]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~
-                                ef''16
-                                r16
-                                af''16 [
-                                g''16
-                            }
-                            \times 2/3 {
-                                a'16 ]
-                                r8
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        '''
-        return abjad.rhythmmakertools.BeamSpecifier(
-            beam_divisions_together=True,
-            beam_each_division=True,
-            beam_rests=False,
-            hide_nibs=hide_nibs,
-            )
-
-    @staticmethod
     def beam_positions(n=None, selector='baca.select().leaves().group()'):
         r'''Overrides beam positions.
 
@@ -1475,6 +1335,146 @@ class LibraryAM(object):
             grob_name='beam',
             revert=True,
             selector=selector,
+            )
+
+    @staticmethod
+    def beam_runs(hide_nibs=None):
+        r'''Beams PLT runs.
+
+        ..  container:: example
+
+            Beams PLT runs:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.beam_runs(),
+                ...     baca.rests_around([2], [2]),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                c'16 [
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                d'16 ]
+                                bf'4 ~
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                bf'16 [ ]
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \set stemLeftBeamCount = #1
+                                \set stemRightBeamCount = #2
+                                fs''16 [
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                e''16 ]
+                                ef''4 ~
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                ef''16 [ ]
+                                r16
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #2
+                                af''16 [
+                                \set stemLeftBeamCount = #2
+                                \set stemRightBeamCount = #1
+                                g''16
+                            }
+                            \times 2/3 {
+                                \set stemLeftBeamCount = #1
+                                \set stemRightBeamCount = #2
+                                a'16 ]
+                                r8
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Beams PLT runs without nibs:
+
+            ::
+
+                >>> music_maker = baca.MusicMaker()
+                >>> contribution = music_maker(
+                ...     'Voice 1',
+                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+                ...     baca.beam_runs(hide_nibs=True),
+                ...     baca.rests_around([2], [2]),
+                ...     baca.tuplet_bracket_staff_padding(5),
+                ...     counts=[1, 1, 5, -1],
+                ...     time_treatments=[-1],
+                ...     )
+                >>> lilypond_file = music_maker.show(contribution)
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 [
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 [
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                g''16
+                            }
+                            \times 2/3 {
+                                a'16 ]
+                                r8
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        return abjad.rhythmmakertools.BeamSpecifier(
+            beam_divisions_together=True,
+            beam_each_division=True,
+            beam_rests=False,
+            hide_nibs=hide_nibs,
             )
 
     @staticmethod
@@ -4822,7 +4822,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def glissandi(selector='baca.select().plt_runs()'):
+    def glissandi(selector='baca.select().runs()'):
         r'''Attaches glissandi to PLT runs.
 
         ..  container:: example
@@ -6109,7 +6109,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def messiaen_ties(selector='baca.select().plt_pruns()'):
+    def messiaen_ties(selector='baca.select().qruns()'):
         r'''Attaches Messaien ties.
 
         ..  container:: example
@@ -6177,7 +6177,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.messiaen_ties(baca.select().plt_prun(0)),
+                ...     baca.messiaen_ties(baca.select().qrun(0)),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
@@ -6229,7 +6229,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def microtone_deviation(deviations, selector='baca.select().plt_pruns()'):
+    def microtone_deviation(deviations, selector='baca.select().qruns()'):
         r''''Makes microtone deviation.
         '''
         return baca.MicrotoneDeviationCommand(
