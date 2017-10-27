@@ -28,7 +28,7 @@ class MusicAccumulator(abjad.AbjadObject):
         self._score_template = score_template
         voice_names = []
         dummy_score = score_template()
-        for voice in abjad.iterate(dummy_score).by_class(abjad.Voice):
+        for voice in abjad.iterate(dummy_score).components(abjad.Voice):
             voice_names.append(voice.name)
         self._voice_names = voice_names
         self._current_offset = abjad.Offset(0)

@@ -943,16 +943,16 @@ class RegisterInterpolationCommand(Command):
             length = len(plts)
             for i, plt in enumerate(plts):
                 registration = self._get_registration(i, length)
-                for pl in plt:
-                    if isinstance(pl, abjad.Note):
-                        written_pitches = registration([pl.written_pitch])
-                        pl.written_pitch = written_pitches[0]
-                    elif isinstance(pl, abjad.Chord):
-                        written_pitches = registration(pl.written_pitches)
-                        pl.written_pitches = written_pitches
+                for pleaf in plt:
+                    if isinstance(pleaf, abjad.Note):
+                        written_pitches = registration([pleaf.written_pitch])
+                        pleaf.written_pitch = written_pitches[0]
+                    elif isinstance(pleaf, abjad.Chord):
+                        written_pitches = registration(pleaf.written_pitches)
+                        pleaf.written_pitches = written_pitches
                     else:
-                        raise TypeError(pl)
-                    abjad.detach('not yet registered', pl)
+                        raise TypeError(pleaf)
+                    abjad.detach('not yet registered', pleaf)
 
     ### PRIVATE METHODS ###
 

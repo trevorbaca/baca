@@ -26,7 +26,6 @@ Bases
    .. autosummary::
 
       ~baca.tools.Selection.Selection.are_leaves
-      ~baca.tools.Selection.Selection.by_class
       ~baca.tools.Selection.Selection.by_contiguity
       ~baca.tools.Selection.Selection.by_leaf
       ~baca.tools.Selection.Selection.by_logical_measure
@@ -36,6 +35,7 @@ Bases
       ~baca.tools.Selection.Selection.cheads
       ~baca.tools.Selection.Selection.chord
       ~baca.tools.Selection.Selection.chords
+      ~baca.tools.Selection.Selection.components
       ~baca.tools.Selection.Selection.filter
       ~baca.tools.Selection.Selection.flatten
       ~baca.tools.Selection.Selection.get_duration
@@ -115,12 +115,6 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.by_class
-
-.. only:: html
-
-   .. container:: inherited
-
       .. automethod:: baca.tools.Selection.Selection.by_contiguity
 
 .. only:: html
@@ -154,6 +148,12 @@ Methods
 .. automethod:: baca.tools.Selection.Selection.chord
 
 .. automethod:: baca.tools.Selection.Selection.chords
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Selection.Selection.components
 
 .. only:: html
 

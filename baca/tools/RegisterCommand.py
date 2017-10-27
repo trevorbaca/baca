@@ -314,18 +314,18 @@ class RegisterCommand(Command):
         for selection in selections:
             plts = baca.select().plts()(selection)
             for plt in plts:
-                for pl in plt:
-                    if isinstance(pl, abjad.Note):
-                        pitch = pl.written_pitch
+                for pleaf in plt:
+                    if isinstance(pleaf, abjad.Note):
+                        pitch = pleaf.written_pitch
                         pitches = self.registration([pitch])
-                        pl.written_pitch = pitches[0]
-                    elif isinstance(pl, abjad.Chord):
-                        pitches = pl.written_pitches
+                        pleaf.written_pitch = pitches[0]
+                    elif isinstance(pleaf, abjad.Chord):
+                        pitches = pleaf.written_pitches
                         pitches = self.registration(pitches)
-                        pl.written_pitches = pitches
+                        pleaf.written_pitches = pitches
                     else:
-                        raise TypeError(pl)
-                    abjad.detach('not yet registered', pl)
+                        raise TypeError(pleaf)
+                    abjad.detach('not yet registered', pleaf)
 
     ### PUBLIC PROPERTIES ###
 

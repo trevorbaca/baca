@@ -206,8 +206,8 @@ class TrillCommand(Command):
             plts = baca.select().plts()(selection)
             for plt in plts:
                 written_duration = abjad.Duration(0)
-                for pl in plt:
-                    written_duration += pl.written_duration
+                for pleaf in plt:
+                    written_duration += pleaf.written_duration
                 if self.minimum_written_duration is not None:
                     if written_duration < self.minimum_written_duration:
                         continue
@@ -220,8 +220,8 @@ class TrillCommand(Command):
                     pitch=self.pitch,
                     )
                 leaves = []
-                for pl in plt:
-                    leaves.append(pl)
+                for pleaf in plt:
+                    leaves.append(pleaf)
                 skip_spanner = False
                 for leaf in leaves:
                     if self._has_forbidden_annotation(leaf):

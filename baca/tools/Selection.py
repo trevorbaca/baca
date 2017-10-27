@@ -463,7 +463,7 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.by_class(abjad.Chord)
+        return self.components(abjad.Chord)
 
     def leaf(self, n):
         r'''Selects leaf `n`.
@@ -1373,7 +1373,7 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.by_class(abjad.Note)
+        return self.components(abjad.Note)
 
     def phead(self, n):
         r'''Selects pitched head `n`.
@@ -2870,7 +2870,7 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.by_class((abjad.MultimeasureRest, abjad.Rest))
+        return self.components((abjad.MultimeasureRest, abjad.Rest))
 
     def rleaves(self):
         r'''Selects leaves, leaked to the right.
@@ -3998,7 +3998,7 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.by_class(abjad.Tuplet)
+        return self.components(abjad.Tuplet)
 
     def wleaves(self):
         r'''Selects leaves, leaked "wide" (to both the left and right).

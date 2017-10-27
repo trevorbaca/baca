@@ -147,16 +147,16 @@ class OctaveDisplacementCommand(Command):
             for i, plt in enumerate(plts):
                 displacement = self.displacements[i]
                 interval = abjad.NumberedInterval(12 * displacement)
-                for pl in plt:
-                    if isinstance(pl, abjad.Note):
-                        pitch = pl.written_pitch
+                for pleaf in plt:
+                    if isinstance(pleaf, abjad.Note):
+                        pitch = pleaf.written_pitch
                         pitch += interval
-                        pl.written_pitch = pitch
-                    elif isinstance(pl, abjad.Chord):
-                        pitches = [_ + interval for _ in pl.written_pitches]
-                        pl.written_pitches = pitches
+                        pleaf.written_pitch = pitch
+                    elif isinstance(pleaf, abjad.Chord):
+                        pitches = [_ + interval for _ in pleaf.written_pitches]
+                        pleaf.written_pitches = pitches
                     else:
-                        raise TypeError(pl)
+                        raise TypeError(pleaf)
 
     ### PRIVATE METHODS ###
 

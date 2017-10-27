@@ -1002,7 +1002,7 @@ class PitchTree(Tree):
     def _color_repeats(self, color_repeats, voice):
         if not color_repeats:
             return
-        leaves = abjad.iterate(voice).by_class(prototype=abjad.Note)
+        leaves = abjad.iterate(voice).components(prototype=abjad.Note)
         pairs = abjad.Sequence(leaves).nwise(n=2, wrapped=True)
         current_color = 'red'
         for left, right in pairs:

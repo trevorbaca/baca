@@ -810,7 +810,7 @@ class SegmentMaker(abjad.SegmentMaker):
             segment = self._get_segment_identifier()
             print('can not find previous metadata before {segment}.')
             return
-        for context in abjad.iterate(self._score).by_class(abjad.Context):
+        for context in abjad.iterate(self._score).components(abjad.Context):
             previous_instrument = self._get_previous_instrument(context.name)
             if not previous_instrument:
                 continue
@@ -822,7 +822,7 @@ class SegmentMaker(abjad.SegmentMaker):
             copied_previous_instrument._default_scope = context.context_name
             leaf = abjad.inspect(context).get_leaf(0)
             abjad.attach(copied_previous_instrument, leaf)
-        for context in abjad.iterate(self._score).by_class(abjad.Context):
+        for context in abjad.iterate(self._score).components(abjad.Context):
             previous_clef = self._get_previous_clef(context.name)
             if previous_clef is None:
                 continue
@@ -964,7 +964,7 @@ class SegmentMaker(abjad.SegmentMaker):
             stage_timespans.append(stage_timespan)
         self._cache = abjad.TypedOrderedDict()
         contexts = [self._score['Global Skips']]
-        contexts.extend(abjad.select(self._score).by_class(abjad.Voice))
+        contexts.extend(abjad.select(self._score).components(abjad.Voice))
         for context in contexts:
             leaves_by_stage_number = abjad.TypedOrderedDict()
             self._cache[context.name] = leaves_by_stage_number
@@ -989,7 +989,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if isinstance(self.range_checker, abjad.PitchRange):
             markup = abjad.Markup('*', direction=abjad.Up)
             abjad.tweak(markup).color = 'red'
-            for voice in abjad.iterate(self._score).by_class(abjad.Voice):
+            for voice in abjad.iterate(self._score).components(abjad.Voice):
                 for leaf in abjad.iterate(voice).by_leaf(pitched=True):
                     if leaf not in self.range_checker:
                         if self.color_out_of_range_pitches:
@@ -1042,7 +1042,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         markup = abjad.Markup('@', direction=abjad.Up)
         abjad.tweak(markup).color = 'red'
-        for voice in abjad.iterate(self._score).by_class(abjad.Voice):
+        for voice in abjad.iterate(self._score).components(abjad.Voice):
             previous_logical_tie, previous_pitch_classes = None, []
             agent = abjad.iterate(voice)
             for logical_tie in agent.by_logical_tie(pitched=True):
@@ -1175,7 +1175,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _get_end_clefs(self):
         result = abjad.TypedOrderedDict()
-        staves = abjad.iterate(self._score).by_class(abjad.Staff)
+        staves = abjad.iterate(self._score).components(abjad.Staff)
         staves = list(staves)
         staves.sort(key=lambda x: x.name)
         for staff in staves:
@@ -1189,7 +1189,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _get_end_instruments(self):
         result = abjad.TypedOrderedDict()
-        contexts = abjad.iterate(self._score).by_class(abjad.Context)
+        contexts = abjad.iterate(self._score).components(abjad.Context)
         contexts = list(contexts)
         contexts.sort(key=lambda x: x.name)
         for context in contexts:
@@ -1374,7 +1374,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         classes = (abjad.Staff, abjad.StaffGroup)
         prototype = abjad.Instrument
-        for staff in abjad.iterate(self._score).by_class(classes):
+        for staff in abjad.iterate(self._score).components(classes):
             if abjad.inspect(staff).get_indicator(prototype):
                 abjad.detach(prototype, staff)
 
@@ -1448,7 +1448,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._attach_tempo_indicators()
         self._attach_fermatas()
         self._make_spacing_regions()
-        for voice in abjad.iterate(self._score).by_class(abjad.Voice):
+        for voice in abjad.iterate(self._score).components(abjad.Voice):
             self._interpret_rhythm_commands_for_voice(voice)
 
     def _interpret_rhythm_commands_for_voice(self, voice):
@@ -1512,7 +1512,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _label_instrument_changes(self):
         prototype = abjad.Instrument
-        for staff in abjad.iterate(self._score).by_class(abjad.Staff):
+        for staff in abjad.iterate(self._score).components(abjad.Staff):
             leaves = abjad.iterate(staff).by_leaf()
             for leaf_index, leaf in enumerate(leaves):
                 instrument = abjad.inspect(leaf).get_indicator(prototype)

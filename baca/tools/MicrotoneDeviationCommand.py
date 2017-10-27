@@ -157,12 +157,12 @@ class MicrotoneDeviationCommand(Command):
         assert deviation in (0.5, 0, -0.5)
         if deviation == 0:
             return
-        for pl in plt:
-            pitch = pl.written_pitch
+        for pleaf in plt:
+            pitch = pleaf.written_pitch
             pitch = pitch.transpose_staff_position(0, deviation)
-            pl.written_pitch = pitch
+            pleaf.written_pitch = pitch
             annotation = {'color microtone': True}
-            abjad.attach(annotation, pl)
+            abjad.attach(annotation, pleaf)
 
     ### PUBLIC PROPERTIES ###
 

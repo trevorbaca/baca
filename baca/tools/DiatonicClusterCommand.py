@@ -60,10 +60,10 @@ class DiatonicClusterCommand(Command):
                     class_._diatonic_pitch_class_number_to_pitch_class_number
                 numbers = [(12 * (x // 7)) + change[x % 7] for x in numbers]
                 pitches = [abjad.NamedPitch(_) for _ in numbers]
-                for pl in plt:
-                    chord = abjad.Chord(pl)
+                for pleaf in plt:
+                    chord = abjad.Chord(pleaf)
                     chord.note_heads[:] = pitches
-                    abjad.mutate(pl).replace(chord)
+                    abjad.mutate(pleaf).replace(chord)
 
     ### PRIVATE METHODS ###
 

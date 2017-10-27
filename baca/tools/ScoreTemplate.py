@@ -45,7 +45,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     def _validate_voice_names(self, score):
         voice_names = []
-        for voice in abjad.iterate(score).by_class(abjad.Voice):
+        for voice in abjad.iterate(score).components(abjad.Voice):
             voice_names.append(voice.name)
         for voice_name in sorted(self.voice_colors):
             if voice_name not in voice_names:

@@ -1432,7 +1432,7 @@ class MarkupLibrary(object):
         second_is_new=True,
         selector=None,
         ):
-        selector = selector or baca.select().pl()
+        selector = selector or baca.select().pleaf(0)
         if first_is_new:
             if second_is_new:
                 composite_string = f'{string_1} + {string_2}'
