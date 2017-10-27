@@ -69,9 +69,9 @@ Bases
       ~baca.tools.Selection.Selection.plt_pruns
       ~baca.tools.Selection.Selection.plt_run
       ~baca.tools.Selection.Selection.plt_runs
-      ~baca.tools.Selection.Selection.plt_tail
-      ~baca.tools.Selection.Selection.plt_tails
       ~baca.tools.Selection.Selection.plts
+      ~baca.tools.Selection.Selection.ptail
+      ~baca.tools.Selection.Selection.ptails
       ~baca.tools.Selection.Selection.rest
       ~baca.tools.Selection.Selection.rests
       ~baca.tools.Selection.Selection.rleaves
@@ -277,11 +277,11 @@ Methods
 
 .. automethod:: baca.tools.Selection.Selection.plt_runs
 
-.. automethod:: baca.tools.Selection.Selection.plt_tail
-
-.. automethod:: baca.tools.Selection.Selection.plt_tails
-
 .. automethod:: baca.tools.Selection.Selection.plts
+
+.. automethod:: baca.tools.Selection.Selection.ptail
+
+.. automethod:: baca.tools.Selection.Selection.ptails
 
 .. automethod:: baca.tools.Selection.Selection.rest
 

@@ -5600,7 +5600,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def laissez_vibrer(selector='baca.select().plt_tails()'):
+    def laissez_vibrer(selector='baca.select().ptails()'):
         r'''Attaches laissez vibrer to PLT tails.
 
         ..  container:: example
@@ -5667,7 +5667,7 @@ class LibraryAM(object):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.laissez_vibrer(baca.select().tuplets()[1:2].plt_tails()),
+                ...     baca.laissez_vibrer(baca.select().tuplets()[1:2].ptails()),
                 ...     baca.rests_around([2], [4]),
                 ...     baca.tuplet_bracket_staff_padding(5),
                 ...     counts=[1, 1, 5, -1],
