@@ -4186,131 +4186,149 @@ class Selection(abjad.Selection):
 
         ..  container:: example
 
-            Selects tuplets:
+            ..  container:: example
 
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.color(baca.select().tuplets()),
-            ...     baca.flags(),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
+                >>> tuplets = [
+                ...     "r8 c'16 c'16 bf'4 ~ bf'16 r16",
+                ...     "bf'16 e''16 e''4 ~ e''16 r16 fs''16 af''16",
+                ...     "a'16 r4",
+                ...     ]
+                >>> tuplets = zip([(9, 10), (9, 10), (4, 5)], tuplets)
+                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+                >>> tuplets = [abjad.select(tuplets)]
+                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
+                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> contribution.print_color_selector_result()
-            Tuplet(Multiplier(9, 10), "r8 c'16 c'16 bf'4 ~ bf'16 r16")
-            Tuplet(Multiplier(9, 10), "bf'16 e''16 e''4 ~ e''16 r16 fs''16 af''16")
-            Tuplet(Multiplier(4, 5), "a'16 r4")
+                >>> result = baca.select(staff).tuplets()
 
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> show(lilypond_file) # doctest: +SKIP
+                >>> for item in result:
+                ...     item
+                ...
+                Tuplet(Multiplier(9, 10), "r8 c'16 c'16 bf'4 ~ bf'16 r16")
+                Tuplet(Multiplier(9, 10), "bf'16 e''16 e''4 ~ e''16 r16 fs''16 af''16")
+                Tuplet(Multiplier(4, 5), "a'16 r4")
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().tuplets()
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Tuplet(Multiplier(9, 10), "r8 c'16 c'16 bf'4 ~ bf'16 r16")
+                Tuplet(Multiplier(9, 10), "bf'16 e''16 e''4 ~ e''16 r16 fs''16 af''16")
+                Tuplet(Multiplier(4, 5), "a'16 r4")
+
+                >>> selector.color(result)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
-                                c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
-                                c'16
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
-                                bf'4 ~
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
-                                bf'16
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
-                                bf'16
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
-                                e''16
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
-                                e''4 ~
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
-                                e''16
-                                \once \override Dots.color = #blue
-                                \once \override Rest.color = #blue
-                                r16
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
-                                fs''16
-                                \once \override Accidental.color = #blue
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
-                                af''16
-                            }
-                            \times 4/5 {
-                                \once \override Accidental.color = #red
-                                \once \override Beam.color = #red
-                                \once \override Dots.color = #red
-                                \once \override NoteHead.color = #red
-                                \once \override Stem.color = #red
-                                a'16
-                                \once \override Dots.color = #red
-                                \once \override Rest.color = #red
-                                r4
-                                \revert TupletBracket.staff-padding
-                            }
+                >>> abjad.f(staff)
+                \new Staff \with {
+                    \override TupletBracket.direction = #up
+                    \override TupletBracket.staff-padding = #3
+                } {
+                    {
+                        \time 11/8
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \once \override Dots.color = #red
+                            \once \override Rest.color = #red
+                            r8
+                            \once \override Accidental.color = #red
+                            \once \override Beam.color = #red
+                            \once \override Dots.color = #red
+                            \once \override NoteHead.color = #red
+                            \once \override Stem.color = #red
+                            c'16
+                            \once \override Accidental.color = #red
+                            \once \override Beam.color = #red
+                            \once \override Dots.color = #red
+                            \once \override NoteHead.color = #red
+                            \once \override Stem.color = #red
+                            c'16
+                            \once \override Accidental.color = #red
+                            \once \override Beam.color = #red
+                            \once \override Dots.color = #red
+                            \once \override NoteHead.color = #red
+                            \once \override Stem.color = #red
+                            bf'4 ~
+                            \once \override Accidental.color = #red
+                            \once \override Beam.color = #red
+                            \once \override Dots.color = #red
+                            \once \override NoteHead.color = #red
+                            \once \override Stem.color = #red
+                            bf'16
+                            \once \override Dots.color = #red
+                            \once \override Rest.color = #red
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \once \override Accidental.color = #blue
+                            \once \override Beam.color = #blue
+                            \once \override Dots.color = #blue
+                            \once \override NoteHead.color = #blue
+                            \once \override Stem.color = #blue
+                            bf'16
+                            \once \override Accidental.color = #blue
+                            \once \override Beam.color = #blue
+                            \once \override Dots.color = #blue
+                            \once \override NoteHead.color = #blue
+                            \once \override Stem.color = #blue
+                            e''16
+                            \once \override Accidental.color = #blue
+                            \once \override Beam.color = #blue
+                            \once \override Dots.color = #blue
+                            \once \override NoteHead.color = #blue
+                            \once \override Stem.color = #blue
+                            e''4 ~
+                            \once \override Accidental.color = #blue
+                            \once \override Beam.color = #blue
+                            \once \override Dots.color = #blue
+                            \once \override NoteHead.color = #blue
+                            \once \override Stem.color = #blue
+                            e''16
+                            \once \override Dots.color = #blue
+                            \once \override Rest.color = #blue
+                            r16
+                            \once \override Accidental.color = #blue
+                            \once \override Beam.color = #blue
+                            \once \override Dots.color = #blue
+                            \once \override NoteHead.color = #blue
+                            \once \override Stem.color = #blue
+                            fs''16
+                            \once \override Accidental.color = #blue
+                            \once \override Beam.color = #blue
+                            \once \override Dots.color = #blue
+                            \once \override NoteHead.color = #blue
+                            \once \override Stem.color = #blue
+                            af''16
+                        }
+                        \times 4/5 {
+                            \once \override Accidental.color = #red
+                            \once \override Beam.color = #red
+                            \once \override Dots.color = #red
+                            \once \override NoteHead.color = #red
+                            \once \override Stem.color = #red
+                            a'16
+                            \once \override Dots.color = #red
+                            \once \override Rest.color = #red
+                            r4
                         }
                     }
-                >>
+                }
 
         '''
-        selector = self.by_class(abjad.Tuplet)
-        template = self._get_template(inspect.currentframe(), selector)
-        return abjad.new(selector, template=template)
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        #selector = self.by_class(abjad.Tuplet)
+        #template = self._get_template(inspect.currentframe(), selector)
+        #return abjad.new(selector, template=template)
+        return self.by_class(abjad.Tuplet)
 
 
 def _select(items=None):
