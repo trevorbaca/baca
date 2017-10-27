@@ -1642,8 +1642,8 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
                 >>> rhythm_maker = baca.MusicRhythmMaker(
                 ...     logical_tie_masks=[
-                ...         abjad.silence_first(),
-                ...         abjad.silence_last(),
+                ...         abjad.silence_first(1),
+                ...         abjad.silence_last(1),
                 ...         ],
                 ...     talea=abjad.rhythmmakertools.Talea(
                 ...         counts=[1, 1, 2],
