@@ -26,7 +26,6 @@ Bases
    .. autosummary::
 
       ~baca.tools.Selection.Selection.are_leaves
-      ~baca.tools.Selection.Selection.by_run
       ~baca.tools.Selection.Selection.chead
       ~baca.tools.Selection.Selection.cheads
       ~baca.tools.Selection.Selection.chord
@@ -34,13 +33,17 @@ Bases
       ~baca.tools.Selection.Selection.components
       ~baca.tools.Selection.Selection.contiguous
       ~baca.tools.Selection.Selection.filter
+      ~baca.tools.Selection.Selection.filter_duration
       ~baca.tools.Selection.Selection.filter_length
+      ~baca.tools.Selection.Selection.filter_pitches
       ~baca.tools.Selection.Selection.flatten
       ~baca.tools.Selection.Selection.get_duration
       ~baca.tools.Selection.Selection.get_pitches
       ~baca.tools.Selection.Selection.get_timespan
-      ~baca.tools.Selection.Selection.get_vertical_moment_at
       ~baca.tools.Selection.Selection.group
+      ~baca.tools.Selection.Selection.group_duration
+      ~baca.tools.Selection.Selection.group_length
+      ~baca.tools.Selection.Selection.group_pitches
       ~baca.tools.Selection.Selection.in_contiguous_logical_voice
       ~baca.tools.Selection.Selection.in_logical_voice
       ~baca.tools.Selection.Selection.in_same_parent
@@ -115,12 +118,6 @@ Methods
 
       .. automethod:: baca.tools.Selection.Selection.are_leaves
 
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Selection.Selection.by_run
-
 .. automethod:: baca.tools.Selection.Selection.chead
 
 .. automethod:: baca.tools.Selection.Selection.cheads
@@ -151,7 +148,19 @@ Methods
 
    .. container:: inherited
 
+      .. automethod:: baca.tools.Selection.Selection.filter_duration
+
+.. only:: html
+
+   .. container:: inherited
+
       .. automethod:: baca.tools.Selection.Selection.filter_length
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Selection.Selection.filter_pitches
 
 .. only:: html
 
@@ -181,13 +190,25 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.get_vertical_moment_at
+      .. automethod:: baca.tools.Selection.Selection.group
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.group
+      .. automethod:: baca.tools.Selection.Selection.group_duration
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Selection.Selection.group_length
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Selection.Selection.group_pitches
 
 .. only:: html
 
@@ -291,9 +312,17 @@ Methods
 
 .. automethod:: baca.tools.Selection.Selection.rleaves
 
-.. automethod:: baca.tools.Selection.Selection.run
+.. only:: html
 
-.. automethod:: baca.tools.Selection.Selection.runs
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Selection.Selection.run
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Selection.Selection.runs
 
 .. automethod:: baca.tools.Selection.Selection.stages
 
