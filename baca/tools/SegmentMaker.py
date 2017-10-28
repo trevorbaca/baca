@@ -1045,7 +1045,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for voice in abjad.iterate(self._score).components(abjad.Voice):
             previous_logical_tie, previous_pitch_classes = None, []
             agent = abjad.iterate(voice)
-            for logical_tie in agent.by_logical_tie(pitched=True):
+            for logical_tie in agent.logical_ties(pitched=True):
                 head = logical_tie.head
                 if isinstance(head, abjad.Note):
                     written_pitches = [head.written_pitch]

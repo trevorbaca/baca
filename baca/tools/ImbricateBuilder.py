@@ -1248,11 +1248,11 @@ class ImbricateBuilder(Builder):
         if self.selector is not None:
             selection = self.selector(container)
             agent = abjad.iterate(selection)
-            selected_logical_ties = agent.by_logical_tie(pitched=True)
+            selected_logical_ties = agent.logical_ties(pitched=True)
             selected_logical_ties = list(selected_logical_ties)
         selector = abjad.select(original_container)
-        original_logical_ties = selector.by_logical_tie()
-        logical_ties = abjad.select(container).by_logical_tie()
+        original_logical_ties = selector.logical_ties()
+        logical_ties = abjad.select(container).logical_ties()
         pairs = zip(logical_ties, original_logical_ties)
         for logical_tie, original_logical_tie in pairs:
             if (selected_logical_ties is not None and

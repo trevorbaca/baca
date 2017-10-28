@@ -131,7 +131,7 @@ class WellformednessManager(abjad.AbjadObject):
         violators = []
         total = 0
         not_yet_string = 'not yet pitched'
-        plts = abjad.iterate(argument).by_logical_tie(
+        plts = abjad.iterate(argument).logical_ties(
             pitched=True,
             with_grace_notes=True,
             )

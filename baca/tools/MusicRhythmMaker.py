@@ -687,7 +687,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             raise Exception(f'bad time treatment: {time_treatment!r}.')
         assert isinstance(tuplet, abjad.Tuplet)
         if grace_containers is not None:
-            logical_ties = abjad.iterate(tuplet).by_logical_tie()
+            logical_ties = abjad.iterate(tuplet).logical_ties()
             pairs = zip(grace_containers, logical_ties)
             for grace_container, logical_tie in pairs:
                 if grace_container is None:

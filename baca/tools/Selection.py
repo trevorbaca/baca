@@ -1509,8 +1509,7 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        result = self.by_logical_tie(pitched=True).by_contiguity()
-        return result.map(abjad.Run)
+        return self.logical_ties(pitched=True).by_contiguity().map(abjad.Run)
 
     def lts(self):
         r'''Selects logical ties.
@@ -1703,7 +1702,7 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.by_logical_tie(with_grace_notes=True)
+        return self.logical_ties(with_grace_notes=True)
 
     def note(self, n):
         r'''Selects note `n`.
@@ -2717,7 +2716,7 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.by_logical_tie(pitched=True, with_grace_notes=True)
+        return self.logical_ties(pitched=True, with_grace_notes=True)
 
     def ptail(self, n):
         r'''Selects pitched tail `n`.

@@ -100,7 +100,7 @@ class MusicRhythmSpecifier(abjad.AbjadObject):
             tuplet = stage_selection[0]
             assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
             agent = abjad.iterate(stage_selection)
-            logical_ties = agent.by_logical_tie(pitched=True)
+            logical_ties = agent.logical_ties(pitched=True)
             logical_ties = list(logical_ties)
             assert len(logical_ties) == 1, repr(stage_selection)
             logical_tie = logical_ties[0]
