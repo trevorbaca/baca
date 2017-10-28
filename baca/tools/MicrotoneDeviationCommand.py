@@ -132,20 +132,21 @@ class MicrotoneDeviationCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, music=None):
-        r'''Calls command on `music`.
+    def __call__(self, argument=None):
+        r'''Calls command on `argument`.
 
         Returns none.
         '''
-        selections = self._select(music)
         if not self.deviations:
             return
+        if self.selector:
+            argument = self.selector(argument)
         lists, i = abjad.CyclicTuple(self.deviations), 0
-        for selection in selections:
-            if len(selection) == 1:
+        for item in argument:
+            plts = baca.select().plts()(item)
+            if len(plts) == 1:
                 continue
             deviations = abjad.CyclicTuple(lists[i])
-            plts = baca.select().plts()(selection)
             for j, plt in enumerate(plts):
                 deviation = deviations[j]
                 self._adjust_pitch(plt, deviation)
