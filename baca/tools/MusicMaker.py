@@ -689,7 +689,7 @@ class MusicMaker(abjad.AbjadObject):
 
     @staticmethod
     def _annotate_collection_list(container, collections):
-        for leaf in abjad.iterate(container).by_leaf():
+        for leaf in abjad.iterate(container).leaves():
             collections_ = copy.deepcopy(collections)
             abjad.attach(collections_, leaf)
 
@@ -702,7 +702,7 @@ class MusicMaker(abjad.AbjadObject):
         ):
         if not is_foreshadow and not is_recollection and not is_incomplete:
             return
-        for leaf in abjad.iterate(argument).by_leaf():
+        for leaf in abjad.iterate(argument).leaves():
             if is_foreshadow:
                 abjad.attach(self._foreshadow_tag, leaf)
             if is_incomplete:
@@ -713,7 +713,7 @@ class MusicMaker(abjad.AbjadObject):
     def _annotate_repeat_pitches(self, container):
         if not self.allow_repeat_pitches:
             return
-        for leaf in abjad.iterate(container).by_leaf(pitched=True):
+        for leaf in abjad.iterate(container).leaves(pitched=True):
             abjad.attach(self._repeat_pitch_allowed_string, leaf)
 
     def _apply_cluster_specifiers(self, selections, specifiers):
@@ -915,7 +915,7 @@ class MusicMaker(abjad.AbjadObject):
             return
         prototype = (abjad.Note, abjad.Chord)
         agent = abjad.iterate(argument)
-        for note in agent.by_leaf(prototype, with_grace_notes=True):
+        for note in agent.leaves(prototype, with_grace_notes=True):
             abjad.attach('not yet registered', note)
 
     @staticmethod
@@ -937,7 +937,7 @@ class MusicMaker(abjad.AbjadObject):
     def _extend_beam_(self, selections, extend_beam):
         if not extend_beam:
             return
-        leaves = list(abjad.iterate(selections).by_leaf())
+        leaves = list(abjad.iterate(selections).leaves())
         last_leaf = leaves[-1]
         abjad.attach(self._extend_beam_tag, last_leaf)
 
@@ -1010,7 +1010,7 @@ class MusicMaker(abjad.AbjadObject):
             figure_name_markup, direction=abjad.Up)
         annotation = f'figure name: {original_figure_name}'
         figure_name_markup._annotation = annotation
-        leaves = list(abjad.iterate(container).by_leaf())
+        leaves = list(abjad.iterate(container).leaves())
         abjad.attach(figure_name_markup, leaves[0])
 
     @staticmethod

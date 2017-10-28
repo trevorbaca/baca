@@ -193,7 +193,7 @@ class RhythmBuilder(Builder):
             abjad.Rest,
             abjad.Skip,
             )
-        for leaf in abjad.iterate(argument).by_leaf():
+        for leaf in abjad.iterate(argument).leaves():
             if isinstance(leaf, abjad.Chord):
                 message = f'rhythm-makers make only notes and rests: {leaf!r}.'
                 raise Exception(message)

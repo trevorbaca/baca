@@ -231,7 +231,11 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.by_leaf(abjad.Chord, head=True, with_grace_notes=False)
+        return super(Selection, self).leaves(
+            abjad.Chord,
+            head=True,
+            with_grace_notes=False,
+            )
 
     def chord(self, n):
         r'''Selects chord `n`.
@@ -749,7 +753,7 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.by_leaf(with_grace_notes=False)
+        return super(Selection, self).leaves(with_grace_notes=False)
 
     def lleaves(self):
         r'''Selects leaves, leaked to the left.
@@ -2437,7 +2441,10 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.by_leaf(pitched=True, with_grace_notes=False)
+        return super(Selection, self).leaves(
+            pitched=True,
+            with_grace_notes=False,
+            )
 
     def plt(self, n):
         r'''Selects pitched logical tie `n`.
@@ -4007,7 +4014,7 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.by_leaf(trim=True, with_grace_notes=False)
+        return super(Selection, self).leaves(trim=True, with_grace_notes=False)
 
 #    def top(self):
 #        r'''Selects top-level components.

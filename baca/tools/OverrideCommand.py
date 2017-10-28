@@ -305,7 +305,7 @@ class OverrideCommand(Command):
         revert = revert.replace('\\', '')
         revert = abjad.LilyPondCommand(revert, format_slot='after')
         for selection in selections:
-            leaves = abjad.select(selection).by_leaf(with_grace_notes=False)
+            leaves = abjad.select(selection).leaves(with_grace_notes=False)
             if self.revert:
                 abjad.attach(command, leaves[0])
                 abjad.attach(revert, leaves[-1])

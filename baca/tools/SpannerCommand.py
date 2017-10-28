@@ -203,7 +203,7 @@ class SpannerCommand(Command):
             return
         for selection in selections:
             spanner = abjad.new(self.spanner)
-            leaves = abjad.select(selection).by_leaf()
+            leaves = abjad.select(selection).leaves()
             if len(leaves) <= 1:
                 continue
             if isinstance(spanner, abjad.Tie):

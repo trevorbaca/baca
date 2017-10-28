@@ -104,7 +104,7 @@ class SwellCommand(Command):
         '''
         selections = self._select(music)
         for selection in selections:
-            leaves = abjad.select(selection).by_leaf()
+            leaves = abjad.select(selection).leaves()
             start_hairpin = abjad.Hairpin(self.start_token, include_rests=True)
             if len(leaves) < self.minimum_leaf_count:
                 if len(leaves) == 0:

@@ -763,7 +763,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _apply_first_and_last_ties(self, voice):
         dummy_tie = abjad.Tie()
-        for current_leaf in abjad.iterate(voice).by_leaf():
+        for current_leaf in abjad.iterate(voice).leaves():
             if not dummy_tie._attachment_test(current_leaf):
                 continue
             if abjad.inspect(current_leaf).has_indicator('tie to me'):
@@ -934,7 +934,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if not self.metronome_mark_measure_map:
             return
         context = self._score['Global Skips']
-        skips = abjad.select(context).by_leaf(abjad.Skip)
+        skips = abjad.select(context).leaves(abjad.Skip)
         left_broken_text = abjad.Markup().null()
         left_broken_text._direction = None
         spanner = abjad.MetronomeMarkSpanner(
@@ -971,7 +971,7 @@ class SegmentMaker(abjad.SegmentMaker):
             for stage_index in range(self.stage_count):
                 stage_number = stage_index + 1
                 leaves_by_stage_number[stage_number] = []
-            for leaf in abjad.iterate(context).by_leaf():
+            for leaf in abjad.iterate(context).leaves():
                 leaf_timespan = abjad.inspect(leaf).get_timespan()
                 for stage_index, stage_timespan in enumerate(stage_timespans):
                     stage_number = stage_index + 1
@@ -990,7 +990,7 @@ class SegmentMaker(abjad.SegmentMaker):
             markup = abjad.Markup('*', direction=abjad.Up)
             abjad.tweak(markup).color = 'red'
             for voice in abjad.iterate(self._score).components(abjad.Voice):
-                for leaf in abjad.iterate(voice).by_leaf(pitched=True):
+                for leaf in abjad.iterate(voice).leaves(pitched=True):
                     if leaf not in self.range_checker:
                         if self.color_out_of_range_pitches:
                             abjad.label(leaf).color_leaves('red')
@@ -1069,7 +1069,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         color = 'blue'
         agent = abjad.iterate(self._score)
-        for note in agent.by_leaf(prototype=abjad.Note, with_grace_notes=True):
+        for note in agent.leaves(prototype=abjad.Note, with_grace_notes=True):
             if abjad.inspect(note).has_indicator('not yet pitched'):
                 abjad.override(note).beam.color = color
                 abjad.override(note).dots.color = color
@@ -1084,7 +1084,7 @@ class SegmentMaker(abjad.SegmentMaker):
         prototype = (abjad.Note, abjad.Chord)
         score = self._score
         agent = abjad.iterate(score)
-        for note in agent.by_leaf(prototype, with_grace_notes=True):
+        for note in agent.leaves(prototype, with_grace_notes=True):
             if abjad.inspect(note).has_indicator('not yet registered'):
                 abjad.override(note).accidental.color = color
                 abjad.override(note).beam.color = color
@@ -1108,7 +1108,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _detach_figure_names(self):
         if self.allow_figure_names:
             return
-        for leaf in abjad.iterate(self._score).by_leaf():
+        for leaf in abjad.iterate(self._score).leaves():
             markups = abjad.inspect(leaf).get_indicators(abjad.Markup)
             for markup in markups:
                 if (isinstance(markup._annotation, str) and
@@ -1169,7 +1169,7 @@ class SegmentMaker(abjad.SegmentMaker):
         abjad.attach(beam, all_leaves)
 
     def _extend_beams(self):
-        for leaf in abjad.iterate(self._score).by_leaf():
+        for leaf in abjad.iterate(self._score).leaves():
             if abjad.inspect(leaf).get_indicator(self._extend_beam_tag):
                 self._extend_beam(leaf)
 
@@ -1502,7 +1502,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         skip_context = self._score['Global Skips']
         skips = []
-        for skip in abjad.iterate(skip_context).by_leaf(abjad.Skip):
+        for skip in abjad.iterate(skip_context).leaves(abjad.Skip):
             start_offset = abjad.inspect(skip).get_timespan().start_offset
             if start_offset in self._fermata_start_offsets:
                 continue
@@ -1513,7 +1513,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _label_instrument_changes(self):
         prototype = abjad.Instrument
         for staff in abjad.iterate(self._score).components(abjad.Staff):
-            leaves = abjad.iterate(staff).by_leaf()
+            leaves = abjad.iterate(staff).leaves()
             for leaf_index, leaf in enumerate(leaves):
                 instrument = abjad.inspect(leaf).get_indicator(prototype)
                 if not instrument:
@@ -1730,7 +1730,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         context = self._score['Global Skips']
         current_tempo = None
-        leaves = abjad.iterate(context).by_leaf()
+        leaves = abjad.iterate(context).leaves()
         measure_summaries = []
         tempo_index = 0
         is_trending = False
@@ -1814,7 +1814,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return leaf_selections
 
     def _shorten_long_repeat_ties(self):
-        leaves = abjad.iterate(self._score).by_leaf()
+        leaves = abjad.iterate(self._score).leaves()
         for leaf in leaves:
             ties = abjad.inspect(leaf).get_spanners(abjad.Tie)
             if not ties:

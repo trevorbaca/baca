@@ -175,7 +175,7 @@ class RangeDictionary(TypedOrderedDict):
                 abjad.attach(glissando, notes)
             abjad.attach(abjad.Clef('treble'), treble_staff[0])
             abjad.attach(abjad.Clef('bass'), bass_staff[0])
-        for leaf in abjad.iterate(score).by_leaf():
+        for leaf in abjad.iterate(score).leaves():
             multiplier = abjad.Multiplier(1, 4)
             abjad.attach(multiplier, leaf)
         abjad.override(score).bar_line.stencil = False

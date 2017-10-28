@@ -136,7 +136,7 @@ class Expression(abjad.Expression):
 
                     >>> expression = baca.Expression()
                     >>> expression = expression.select()
-                    >>> expression = expression.by_leaf()
+                    >>> expression = expression.leaves()
 
                 ::
 

@@ -791,7 +791,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         '''
         score = segment_maker._score
         skip_context = score['Global Skips']
-        leaves = abjad.iterate(score).by_leaf(with_grace_notes=False)
+        leaves = abjad.iterate(score).leaves(with_grace_notes=False)
         minimum_durations_by_measure = self._get_minimum_durations_by_measure(
             skip_context,
             leaves,
@@ -801,7 +801,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             '_fermata_start_offsets',
             [],
             )
-        skips = abjad.iterate(skip_context).by_leaf(abjad.Skip)
+        skips = abjad.iterate(skip_context).leaves(abjad.Skip)
         for measure_index, skip in enumerate(skips):
             measure_timespan = abjad.inspect(skip).get_timespan()
             if (self.fermata_measure_width is not None and

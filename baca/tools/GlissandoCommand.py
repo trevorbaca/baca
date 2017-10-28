@@ -282,6 +282,6 @@ class GlissandoCommand(Command):
         '''
         selections = self._select(music)
         for selection in selections:
-            leaves = abjad.select(selection).by_leaf()
+            leaves = abjad.select(selection).leaves()
             if 1 < len(leaves):
                 abjad.attach(abjad.Glissando(), leaves)

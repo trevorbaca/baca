@@ -263,7 +263,7 @@ class PitchArray(abjad.AbjadObject):
     @staticmethod
     def _get_leaf_offsets(argment):
         offsets = []
-        for leaf in abjad.iterate(argment).by_leaf():
+        for leaf in abjad.iterate(argment).leaves():
             start_offset = leaf._get_timespan().start_offset
             if start_offset not in offsets:
                 offsets.append(start_offset)
@@ -708,7 +708,7 @@ class PitchArray(abjad.AbjadObject):
         items = class_._make_multiplied_quarter_notes(offsets)
         for leaf_iterable, pitch_array_row in zip(score, pitch_array.rows):
             durations = []
-            leaves = abjad.iterate(leaf_iterable).by_leaf()
+            leaves = abjad.iterate(leaf_iterable).leaves()
             for leaf in leaves:
                 durations.append(leaf._get_duration())
             parts = abjad.mutate(items).split(
@@ -725,7 +725,7 @@ class PitchArray(abjad.AbjadObject):
                 )
             for group in grouped_cells:
                 pitch_array_row.merge(group)
-            leaves = abjad.iterate(leaf_iterable).by_leaf()
+            leaves = abjad.iterate(leaf_iterable).leaves()
             if populate:
                 for cell, leaf in zip(pitch_array_row.cells, leaves):
                     cell.pitches.extend(abjad.iterate(leaf).by_pitch())

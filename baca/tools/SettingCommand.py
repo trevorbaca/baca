@@ -59,7 +59,7 @@ class SettingCommand(Command):
                 string = f'abjad.setting(leaf).{setting} = {value!r}'
             globals_ = globals()
             globals_.update(abjad.__dict__.copy())
-            for leaf in abjad.iterate(selection).by_leaf():
+            for leaf in abjad.iterate(selection).leaves():
                 exec(string, globals_, locals())
 
     ### PUBLIC PROPERTIES ###

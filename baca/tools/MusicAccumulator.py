@@ -122,7 +122,7 @@ class MusicAccumulator(abjad.AbjadObject):
         for voice_name in sorted(self._floating_selections.keys()):
             for floating_selection in self._floating_selections[voice_name]:
                 leaf_start_offset = floating_selection.timespan.start_offset
-                leaves = abjad.iterate(floating_selection.selection).by_leaf()
+                leaves = abjad.iterate(floating_selection.selection).leaves()
                 for leaf in leaves:
                     markup = abjad.inspect(leaf).get_indicators(abjad.Markup)
                     for markup_ in markup:
@@ -143,7 +143,7 @@ class MusicAccumulator(abjad.AbjadObject):
         found_leaf = False
         for floating_selection in floating_selections:
             leaf_start_offset = abjad.Offset(0)
-            for leaf_ in abjad.iterate(floating_selection.selection).by_leaf():
+            for leaf_ in abjad.iterate(floating_selection.selection).leaves():
                 leaf_duration = abjad.inspect(leaf_).get_duration()
                 if leaf_ is leaf:
                     found_leaf = True
@@ -183,7 +183,7 @@ class MusicAccumulator(abjad.AbjadObject):
         floating_selections = self._floating_selections[remote_voice_name]
         selections = [_.selection for _ in floating_selections]
         result = remote_selector(selections)
-        selected_leaves = list(abjad.iterate(result).by_leaf())
+        selected_leaves = list(abjad.iterate(result).leaves())
         first_selected_leaf = selected_leaves[0]
         timespan = self._get_leaf_timespan(
             first_selected_leaf,
@@ -200,7 +200,7 @@ class MusicAccumulator(abjad.AbjadObject):
             local_selector = None
         if local_selector is not None:
             result = local_selector(selection)
-            selected_leaves = list(abjad.iterate(result).by_leaf())
+            selected_leaves = list(abjad.iterate(result).leaves())
             first_selected_leaf = selected_leaves[0]
             dummy_container = abjad.Container(selection)
             timespan = abjad.inspect(first_selected_leaf).get_timespan()

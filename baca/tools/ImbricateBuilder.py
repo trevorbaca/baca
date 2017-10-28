@@ -1299,7 +1299,7 @@ class ImbricateBuilder(Builder):
             raise Exception(message)
         self._apply_specifiers(container)
         if self.extend_beam:
-            leaves = list(abjad.iterate(container).by_leaf())
+            leaves = list(abjad.iterate(container).leaves())
             last_leaf = leaves[-1]
             abjad.attach(self._extend_beam_tag, last_leaf)
         selection = abjad.select(container)

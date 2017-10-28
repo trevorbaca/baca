@@ -256,7 +256,7 @@ class TransitionCommand(Command):
         '''
         selections = self._select(music)
         for selection in selections:
-            leaves = abjad.select(selection).by_leaf()
+            leaves = abjad.select(selection).leaves()
             spanner = abjad.TextSpanner()
             abjad.attach(spanner, leaves)
             start_leaf, stop_leaf = leaves[0], leaves[-1]

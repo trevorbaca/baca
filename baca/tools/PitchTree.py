@@ -936,7 +936,7 @@ class PitchTree(Tree):
         abjad.override(score).time_signature.stencil = False
         string = 'override Score.BarLine.transparent = ##f'
         command = abjad.LilyPondCommand(string, format_slot='after')
-        last_leaf = abjad.select(score).by_leaf()[-1]
+        last_leaf = abjad.select(score).leaves()[-1]
         abjad.attach(command, last_leaf)
         moment = abjad.SchemeMoment((1, 16))
         abjad.setting(score).proportional_notation_duration = moment
@@ -1017,7 +1017,7 @@ class PitchTree(Tree):
 
     def _get_cell_spanners(self, voice):
         spanners = set()
-        for leaf in abjad.iterate(voice).by_leaf():
+        for leaf in abjad.iterate(voice).leaves():
             spanners_ = abjad.inspect(leaf).get_spanners()
             spanners.update(spanners_)
         class_ = abjad.Spanner

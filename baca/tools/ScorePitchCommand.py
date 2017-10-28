@@ -235,7 +235,7 @@ class ScorePitchCommand(Command):
         if argument is None:
             return
         leaves = []
-        for leaf in abjad.select(argument).by_leaf(pitched=True):
+        for leaf in abjad.select(argument).leaves(pitched=True):
             if abjad.inspect(leaf).get_logical_tie().head is leaf:
                 leaves.append(leaf)
         leaves = abjad.select(leaves)

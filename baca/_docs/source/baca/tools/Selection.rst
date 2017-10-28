@@ -27,7 +27,6 @@ Bases
 
       ~baca.tools.Selection.Selection.are_leaves
       ~baca.tools.Selection.Selection.by_contiguity
-      ~baca.tools.Selection.Selection.by_leaf
       ~baca.tools.Selection.Selection.by_logical_measure
       ~baca.tools.Selection.Selection.by_logical_tie
       ~baca.tools.Selection.Selection.by_run
@@ -121,12 +120,6 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Selection.Selection.by_contiguity
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Selection.Selection.by_leaf
 
 .. only:: html
 

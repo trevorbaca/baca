@@ -197,7 +197,7 @@ class AttachCommand(Command):
             return
         arguments = abjad.CyclicTuple(self.arguments)
         for selection in selections:
-            leaves = abjad.select(selection).by_leaf()
+            leaves = abjad.select(selection).leaves()
             for i, leaf in enumerate(leaves):
                 arguments_ = arguments[i]
                 arguments_ = self._token_to_arguments(arguments_)

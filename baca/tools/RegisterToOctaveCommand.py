@@ -333,14 +333,14 @@ class RegisterToOctaveCommand(Command):
             current_octave_number = self._get_anchor_octave_number(selection)
             octave_adjustment = target_octave_number - current_octave_number
             transposition = abjad.Transposition(12 * octave_adjustment)
-            for leaf in abjad.select(selection).by_leaf():
+            for leaf in abjad.select(selection).leaves():
                 self._set_pitch(leaf, transposition)
 
     ### PRIVATE METHODS ###
 
     def _get_anchor_octave_number(self, argument):
         pitches = []
-        for leaf in abjad.iterate(argument).by_leaf(pitched=True):
+        for leaf in abjad.iterate(argument).leaves(pitched=True):
             if isinstance(leaf, abjad.Note):
                 pitches.append(leaf.written_pitch)
             elif isinstance(leaf, abjad.Chord):

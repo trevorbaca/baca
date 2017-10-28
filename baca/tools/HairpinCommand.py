@@ -89,7 +89,7 @@ class HairpinCommand(Command):
         if not self.hairpin_tokens:
             return
         for i, selection in enumerate(selections):
-            leaves = abjad.select(selection).by_leaf()
+            leaves = abjad.select(selection).leaves()
             if len(leaves) == 1:
                 if self.omit_lone_note_dynamic:
                     continue
