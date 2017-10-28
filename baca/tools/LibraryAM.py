@@ -4894,7 +4894,7 @@ class LibraryAM(object):
 
                 >>> music_maker = baca.MusicMaker()
                 >>> selector = baca.select().tuplets()[1:2].pleaves()
-                >>> selector = selector.by_contiguity()
+                >>> selector = selector.contiguous()
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
