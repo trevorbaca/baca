@@ -37,6 +37,7 @@ Bases
       ~baca.tools.Selection.Selection.chords
       ~baca.tools.Selection.Selection.components
       ~baca.tools.Selection.Selection.filter
+      ~baca.tools.Selection.Selection.filter_length
       ~baca.tools.Selection.Selection.flatten
       ~baca.tools.Selection.Selection.get_duration
       ~baca.tools.Selection.Selection.get_pitches
@@ -51,6 +52,10 @@ Bases
       ~baca.tools.Selection.Selection.leaves
       ~baca.tools.Selection.Selection.lleaves
       ~baca.tools.Selection.Selection.lt
+      ~baca.tools.Selection.Selection.ltqrun
+      ~baca.tools.Selection.Selection.ltqruns
+      ~baca.tools.Selection.Selection.ltrun
+      ~baca.tools.Selection.Selection.ltruns
       ~baca.tools.Selection.Selection.lts
       ~baca.tools.Selection.Selection.map
       ~baca.tools.Selection.Selection.note
@@ -165,6 +170,12 @@ Methods
 
    .. container:: inherited
 
+      .. automethod:: baca.tools.Selection.Selection.filter_length
+
+.. only:: html
+
+   .. container:: inherited
+
       .. automethod:: baca.tools.Selection.Selection.flatten
 
 .. only:: html
@@ -222,6 +233,14 @@ Methods
 .. automethod:: baca.tools.Selection.Selection.lleaves
 
 .. automethod:: baca.tools.Selection.Selection.lt
+
+.. automethod:: baca.tools.Selection.Selection.ltqrun
+
+.. automethod:: baca.tools.Selection.Selection.ltqruns
+
+.. automethod:: baca.tools.Selection.Selection.ltrun
+
+.. automethod:: baca.tools.Selection.Selection.ltruns
 
 .. automethod:: baca.tools.Selection.Selection.lts
 
