@@ -1,5 +1,6 @@
 import abjad
 import baca
+import collections
 import numbers
 from .Command import Command
 
@@ -24,7 +25,7 @@ class MicrotoneDeviationCommand(Command):
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4'),
             ...     baca.even_runs(),
-            ...     baca.microtone_deviation([[0, 0.5, 0, -0.5]]),
+            ...     baca.deviation([0, 0.5, 0, -0.5]),
             ...     )
 
         ::
@@ -121,37 +122,26 @@ class MicrotoneDeviationCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, deviations=None, selector='baca.select().qruns()'):
-        Command.__init__(self, selector=selector)
+    def __init__(self, deviations=None):
+        Command.__init__(self)
         if deviations is not None:
-            if all(isinstance(_, numbers.Number) for _ in deviations):
-                deviations = (list(deviations),)
-            else:
-                deviations = tuple([list(_) for _ in deviations])
-        self._deviations = deviations
+            assert isinstance(deviations, collections.Iterable)
+            assert all(isinstance(_, numbers.Number) for _ in deviations)
+        self._deviations = abjad.CyclicTuple(deviations)
 
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
-        r'''Calls command on `argument`.
+        r'''Cyclically applies deviations to plts in `argument`.
 
         Returns none.
         '''
         if not self.deviations:
             return
-        if self.selector:
-            argument = self.selector(argument)
-        lists, i = abjad.CyclicTuple(self.deviations), 0
-        for item in argument:
-            plts = baca.select().plts()(item)
-            if len(plts) == 1:
-                continue
-            deviations = abjad.CyclicTuple(lists[i])
-            for j, plt in enumerate(plts):
-                deviation = deviations[j]
-                self._adjust_pitch(plt, deviation)
-            i += 1
-
+        for i, plt in enumerate(baca.select(argument).plts()):
+            deviation = self.deviations[i]
+            self._adjust_pitch(plt, deviation)
+            
     ### PRIVATE METHODS ###
 
     def _adjust_pitch(self, plt, deviation):
@@ -175,20 +165,12 @@ class MicrotoneDeviationCommand(Command):
 
             ::
 
-                >>> command = baca.microtone_deviation([0, -0.5, 0, 0.5])
+                >>> command = baca.deviation([0, -0.5, 0, 0.5])
                 >>> command.deviations
-                ([0, -0.5, 0, 0.5],)
+                CyclicTuple([0, -0.5, 0, 0.5])
 
-            ::
+        Set to iterable of items (each -0.5, 0 or 0.5).
 
-                >>> command = baca.microtone_deviation(
-                ...     [[0, -0.5, 0, 0.5], [0, 0.5, 0, -0.5]],
-                ...     )
-                >>> command.deviations
-                ([0, -0.5, 0, 0.5], [0, 0.5, 0, -0.5])
-
-        Set to one or more lists of +/- 0.5, or none.
-
-        Returns tuple of one or more lists of +/- 0.5, or none.
+        Returns cyclic tuple or none.
         '''
         return self._deviations

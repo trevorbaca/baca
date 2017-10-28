@@ -2829,6 +2829,12 @@ class LibraryAM(object):
             )
 
     @staticmethod
+    def deviation(deviations):
+        r''''Makes microtone deviation.
+        '''
+        return baca.MicrotoneDeviationCommand(deviations=deviations)
+
+    @staticmethod
     def diatonic_clusters(widths, selector='baca.select().plts().group()'):
         r'''Makes diatonic clusters.
         '''
@@ -6226,15 +6232,6 @@ class LibraryAM(object):
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.Tie(use_messiaen_style_ties=True),
-            )
-
-    @staticmethod
-    def microtone_deviation(deviations, selector='baca.select().qruns()'):
-        r''''Makes microtone deviation.
-        '''
-        return baca.MicrotoneDeviationCommand(
-            deviations=deviations,
-            selector=selector,
             )
 
     @staticmethod

@@ -80,16 +80,12 @@ class MapCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        commands=None,
-        selector=None,
-        ):
+    def __init__(self, commands=None, selector=None):
         Command.__init__(self, selector=selector)
         if isinstance(commands, baca.Command):
-            commands = (commands,)
+            commands = abjad.CyclicTuple([commands])
         elif isinstance(commands, collections.Iterable):
-            commands = tuple(commands)
+            commands = abjad.CyclicTuple(commands)
         self._commands = commands
 
     ### SPECIAL METHODS ###
@@ -99,17 +95,14 @@ class MapCommand(Command):
 
         Returns none.
         '''
+        if not self.commands:
+            return
         if argument is None:
             return
-        result = argument
         if self.selector is not None:
-            result = self.selector(result)
-        commands = self.commands or []
-        if not isinstance(commands, collections.Iterable):
-            commands = [commands]
-        commands = abjad.CyclicTuple(commands)
-        for i, item in enumerate(result):
-            command = commands[i]
+            argument = self.selector(argument)
+        for i, item in enumerate(argument):
+            command = self.commands[i]
             command(item)
 
     ### PUBLIC PROPERTIES ###
@@ -118,6 +111,6 @@ class MapCommand(Command):
     def commands(self):
         r'''Gets commands.
 
-        Returns tuple or none.
+        Returns cylic tuple or none.
         '''
         return self._commands

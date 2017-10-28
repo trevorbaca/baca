@@ -41,6 +41,7 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.constellate
       ~baca.tools.LibraryAM.LibraryAM.cross_note_heads
       ~baca.tools.LibraryAM.LibraryAM.cross_staff
+      ~baca.tools.LibraryAM.LibraryAM.deviation
       ~baca.tools.LibraryAM.LibraryAM.diatonic_clusters
       ~baca.tools.LibraryAM.LibraryAM.displacement
       ~baca.tools.LibraryAM.LibraryAM.double_tonguing
@@ -78,7 +79,6 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.messiaen_notes
       ~baca.tools.LibraryAM.LibraryAM.messiaen_tied_notes
       ~baca.tools.LibraryAM.LibraryAM.messiaen_ties
-      ~baca.tools.LibraryAM.LibraryAM.microtone_deviation
       ~baca.tools.LibraryAM.LibraryAM.molto_flaut_to_molto_grid
       ~baca.tools.LibraryAM.LibraryAM.multimeasure_rests
 
@@ -132,6 +132,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAM.LibraryAM.cross_note_heads
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.cross_staff
+
+.. automethod:: baca.tools.LibraryAM.LibraryAM.deviation
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.diatonic_clusters
 
@@ -206,8 +208,6 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAM.LibraryAM.messiaen_tied_notes
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.messiaen_ties
-
-.. automethod:: baca.tools.LibraryAM.LibraryAM.microtone_deviation
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.molto_flaut_to_molto_grid
 
