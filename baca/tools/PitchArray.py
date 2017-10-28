@@ -728,7 +728,7 @@ class PitchArray(abjad.AbjadObject):
             leaves = abjad.iterate(leaf_iterable).leaves()
             if populate:
                 for cell, leaf in zip(pitch_array_row.cells, leaves):
-                    cell.pitches.extend(abjad.iterate(leaf).by_pitch())
+                    cell.pitches.extend(abjad.iterate(leaf).pitches())
         return pitch_array
 
     def has_spanning_cell_over_index(self, index):
