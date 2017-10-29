@@ -319,7 +319,7 @@ class RhythmBuilder(Builder):
                 old_selection = abjad.select(old_selection)
                 result = old_selection._get_parent_and_start_stop_indices()
                 parent, start_index, stop_index = result
-                old_duration = old_selection.get_duration()
+                old_duration = abjad.inspect(old_selection).get_duration()
                 division_lists = division_maker([old_duration])
                 assert len(division_lists) == 1
                 division_list = division_lists[0]
@@ -329,7 +329,7 @@ class RhythmBuilder(Builder):
             #elif len(old_selection) == 1:
             #    assert isinstance(old_selection[0], abjad.Selection)
             #    old_selection = old_selection[0]
-            #    old_duration = old_selection.get_duration()
+            #    old_duration = abjad.inspect(old_selection).get_duration()
             #    division_lists = division_maker([old_duration])
             #    assert len(division_lists) == 1
             #    division_list = division_lists[0]

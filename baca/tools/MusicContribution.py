@@ -80,7 +80,7 @@ class MusicContribution(abjad.AbjadValueObject):
         for voice_name in sorted(self.selections):
             selection = self[voice_name]
             if selection:
-                durations.append(selection.get_duration())
+                durations.append(abjad.inspect(selection).get_duration())
         assert len(set(durations)) == 1, repr(durations)
         return durations[0]
 

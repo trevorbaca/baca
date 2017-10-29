@@ -678,7 +678,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             tuplet = abjad.Tuplet(time_treatment, leaf_selection)
         elif time_treatment.__class__ is abjad.Duration:
             tuplet_duration = time_treatment
-            contents_duration = leaf_selection.get_duration()
+            contents_duration = abjad.inspect(leaf_selection).get_duration()
             multiplier = tuplet_duration / contents_duration
             tuplet = abjad.Tuplet(multiplier, leaf_selection)
             if not tuplet.multiplier.is_proper_tuplet_multiplier:
@@ -710,7 +710,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         extra_count,
         denominator,
         ):
-        contents_duration = leaf_selection.get_duration()
+        contents_duration = abjad.inspect(leaf_selection).get_duration()
         contents_duration = contents_duration.with_denominator(denominator)
         contents_count = contents_duration.numerator
         if 0 < extra_count:

@@ -1095,8 +1095,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if contribution.start_offset < previous_stop_offset:
                 return False
             start_offset = contribution.start_offset
-            durations = [_.get_duration() for _ in contribution.payload]
-            duration = sum(durations)
+            duration = abjad.inspect(contribution.payload).get_duration()
             stop_offset = start_offset + duration
             previous_stop_offset = stop_offset
         return True
@@ -1122,7 +1121,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if hasattr(beam, 'durations'):
             durations.extend(beam.durations)
         else:
-            duration = abjad.select(beam.leaves).get_duration()
+            duration = abjad.inspect(beam.leaves).get_duration()
             durations.append(duration)
         intervening_skips = []
         index = 1
@@ -1141,7 +1140,7 @@ class SegmentMaker(abjad.SegmentMaker):
         all_leaves.extend(intervening_skips)
         if intervening_skips:
             intervening_skips = abjad.select(intervening_skips)
-            duration = intervening_skips.get_duration()
+            duration = abjad.inspect(intervening_skips).get_duration()
             durations.append(duration)
         beam = abjad.inspect(next_leaf).get_spanner(abjad.Beam)
         if beam is None:
@@ -1153,15 +1152,12 @@ class SegmentMaker(abjad.SegmentMaker):
             if hasattr(beam, 'durations'):
                 durations.extend(beam.durations)
             else:
-                duration = abjad.select(beam.leaves).get_duration()
+                duration = abjad.inspect(beam.leaves).get_duration()
                 durations.append(duration)
         abjad.detach(abjad.Beam, next_leaf)
         all_leaves = abjad.select(all_leaves)
-        assert all_leaves.get_duration() == sum(durations)
-        beam = abjad.DuratedComplexBeam(
-            beam_rests=True,
-            durations=durations,
-            )
+        assert abjad.inspect(all_leaves).get_duration() == sum(durations)
+        beam = abjad.DuratedComplexBeam(beam_rests=True, durations=durations)
         abjad.attach(beam, all_leaves)
 
     def _extend_beams(self):
@@ -1407,8 +1403,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     )
                 result.append(selection)
             result.extend(contribution.payload)
-            durations = [_.get_duration() for _ in contribution.payload]
-            duration = sum(durations)
+            duration = abjad.inspect(contribution.payload).get_duration()
             previous_stop_offset = contribution.start_offset + duration
         if previous_stop_offset < segment_duration:
             selection = self._make_intercalated_rests(

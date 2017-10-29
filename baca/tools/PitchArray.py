@@ -710,7 +710,7 @@ class PitchArray(abjad.AbjadObject):
             durations = []
             leaves = abjad.iterate(leaf_iterable).leaves()
             for leaf in leaves:
-                durations.append(leaf._get_duration())
+                durations.append(abjad.inspect(leaf).get_duration())
             parts = abjad.mutate(items).split(
                 durations,
                 cyclic=False,

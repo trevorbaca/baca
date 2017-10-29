@@ -99,7 +99,7 @@ class MusicAccumulator(abjad.AbjadObject):
                 selection,
                 music_contribution,
                 )
-            stop_offset = start_offset + selection.get_duration()
+            stop_offset = start_offset + abjad.inspect(selection).get_duration()
             timespan = abjad.Timespan(start_offset, stop_offset)
             floating_selection = baca.FloatingSelection(
                 selection=selection,

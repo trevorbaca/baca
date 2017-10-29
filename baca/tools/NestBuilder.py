@@ -395,7 +395,7 @@ class NestBuilder(Builder):
             assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
         if isinstance(time_treatment, str):
             addendum = abjad.Duration(time_treatment)
-            contents_duration = tuplet_selection.get_duration()
+            contents_duration = abjad.inspect(tuplet_selection).get_duration()
             target_duration = contents_duration + addendum
             multiplier = target_duration / contents_duration
             tuplet = abjad.Tuplet(multiplier, [])
@@ -406,7 +406,7 @@ class NestBuilder(Builder):
             abjad.mutate(tuplet_selection).wrap(tuplet)
         elif time_treatment.__class__ is abjad.Duration:
             target_duration = time_treatment
-            contents_duration = tuplet_selection.get_duration()
+            contents_duration = abjad.inspect(tuplet_selection).get_duration()
             multiplier = target_duration / contents_duration
             #tuplet = abjad.Tuplet(multiplier, tuplet_selection)
             tuplet = abjad.Tuplet(multiplier, [])

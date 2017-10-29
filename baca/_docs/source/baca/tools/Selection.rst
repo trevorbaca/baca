@@ -37,7 +37,6 @@ Bases
       ~baca.tools.Selection.Selection.filter_length
       ~baca.tools.Selection.Selection.filter_pitches
       ~baca.tools.Selection.Selection.flatten
-      ~baca.tools.Selection.Selection.get_duration
       ~baca.tools.Selection.Selection.get_pitches
       ~baca.tools.Selection.Selection.get_timespan
       ~baca.tools.Selection.Selection.group
@@ -167,12 +166,6 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Selection.Selection.flatten
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Selection.Selection.get_duration
 
 .. only:: html
 

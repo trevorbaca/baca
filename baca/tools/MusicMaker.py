@@ -1027,7 +1027,7 @@ class MusicMaker(abjad.AbjadObject):
     def _make_time_signature(self, selection, denominator=None):
         if denominator is None:
             denominator = self.denominator
-        duration = selection.get_duration()
+        duration = abjad.inspect(selection).get_duration()
         if denominator is not None:
             duration = duration.with_denominator(denominator)
         time_signature = abjad.TimeSignature(duration)
