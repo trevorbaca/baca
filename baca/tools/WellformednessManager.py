@@ -133,7 +133,7 @@ class WellformednessManager(abjad.AbjadObject):
         not_yet_string = 'not yet pitched'
         plts = abjad.iterate(argument).logical_ties(
             pitched=True,
-            with_grace_notes=True,
+            grace_notes=True,
             )
         plts = list(plts)
         plts.sort(

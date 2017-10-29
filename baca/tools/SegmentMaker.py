@@ -1069,7 +1069,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         color = 'blue'
         agent = abjad.iterate(self._score)
-        for note in agent.leaves(prototype=abjad.Note, with_grace_notes=True):
+        for note in agent.leaves(prototype=abjad.Note, grace_notes=True):
             if abjad.inspect(note).has_indicator('not yet pitched'):
                 abjad.override(note).beam.color = color
                 abjad.override(note).dots.color = color
@@ -1084,7 +1084,7 @@ class SegmentMaker(abjad.SegmentMaker):
         prototype = (abjad.Note, abjad.Chord)
         score = self._score
         agent = abjad.iterate(score)
-        for note in agent.leaves(prototype, with_grace_notes=True):
+        for note in agent.leaves(prototype, grace_notes=True):
             if abjad.inspect(note).has_indicator('not yet registered'):
                 abjad.override(note).accidental.color = color
                 abjad.override(note).beam.color = color

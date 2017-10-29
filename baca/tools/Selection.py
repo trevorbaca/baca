@@ -234,7 +234,7 @@ class Selection(abjad.Selection):
         return super(Selection, self).leaves(
             abjad.Chord,
             head=True,
-            with_grace_notes=False,
+            grace_notes=False,
             )
 
     def chord(self, n):
@@ -753,7 +753,7 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return super(Selection, self).leaves(with_grace_notes=False)
+        return super(Selection, self).leaves(grace_notes=False)
 
     def lleaves(self):
         r'''Selects leaves, leaked to the left.
@@ -1702,7 +1702,7 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.logical_ties(with_grace_notes=True)
+        return self.logical_ties(grace_notes=True)
 
     def note(self, n):
         r'''Selects note `n`.
@@ -2442,7 +2442,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return super(Selection, self).leaves(
             pitched=True,
-            with_grace_notes=False,
+            grace_notes=False,
             )
 
     def plt(self, n):
@@ -2716,7 +2716,7 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.logical_ties(pitched=True, with_grace_notes=True)
+        return self.logical_ties(pitched=True, grace_notes=True)
 
     def ptail(self, n):
         r'''Selects pitched tail `n`.
@@ -3743,7 +3743,7 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return super(Selection, self).leaves(trim=True, with_grace_notes=False)
+        return super(Selection, self).leaves(trim=True, grace_notes=False)
 
     def tuplet(self, n):
         r'''Selects tuplet `n`.

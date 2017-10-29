@@ -915,7 +915,7 @@ class MusicMaker(abjad.AbjadObject):
             return
         prototype = (abjad.Note, abjad.Chord)
         agent = abjad.iterate(argument)
-        for note in agent.leaves(prototype, with_grace_notes=True):
+        for note in agent.leaves(prototype, grace_notes=True):
             abjad.attach('not yet registered', note)
 
     @staticmethod
