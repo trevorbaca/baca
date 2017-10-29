@@ -1235,7 +1235,7 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         result = self.plts()
-        result = result.group(baca.select().get_pitches())
+        result = result.group_pitches()
         result = result.map(baca.select().contiguous())
         result = result.flatten(depth=1)
         result = result.map(abjad.Run)
@@ -3231,7 +3231,7 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         result = self.pleaves()
-        result = result.group(baca.select().get_pitches())
+        result = result.group_pitches()
         result = result.map(baca.select().contiguous())
         result = result.flatten(depth=1)
         result = result.map(abjad.Run)
