@@ -913,10 +913,8 @@ class MusicMaker(abjad.AbjadObject):
             color_unregistered_pitches = self.color_unregistered_pitches
         if not color_unregistered_pitches:
             return
-        prototype = (abjad.Note, abjad.Chord)
-        agent = abjad.iterate(argument)
-        for note in agent.leaves(prototype, grace_notes=True):
-            abjad.attach('not yet registered', note)
+        for pleaf in abjad.iterate(argument).leaves(pitched=True):
+            abjad.attach('not yet registered', pleaf)
 
     @staticmethod
     def _exactly_double(selections):

@@ -1702,7 +1702,7 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.logical_ties(grace_notes=True)
+        return self.logical_ties(grace_notes=None)
 
     def note(self, n):
         r'''Selects note `n`.
@@ -2441,8 +2441,8 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         return super(Selection, self).leaves(
-            pitched=True,
             grace_notes=False,
+            pitched=True,
             )
 
     def plt(self, n):
@@ -2716,7 +2716,7 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.logical_ties(pitched=True, grace_notes=True)
+        return self.logical_ties(pitched=True, grace_notes=None)
 
     def ptail(self, n):
         r'''Selects pitched tail `n`.

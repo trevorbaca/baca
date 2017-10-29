@@ -1068,30 +1068,26 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.ignore_unpitched_notes:
             return
         color = 'blue'
-        agent = abjad.iterate(self._score)
-        for note in agent.leaves(prototype=abjad.Note, grace_notes=True):
-            if abjad.inspect(note).has_indicator('not yet pitched'):
-                abjad.override(note).beam.color = color
-                abjad.override(note).dots.color = color
-                abjad.override(note).flag.color = color
-                abjad.override(note).note_head.color = color
-                abjad.override(note).stem.color = color
+        for pleaf in abjad.iterate(self._score).leaves(pitched=True):
+            if abjad.inspect(pleaf).has_indicator('not yet pitched'):
+                abjad.override(pleaf).beam.color = color
+                abjad.override(pleaf).dots.color = color
+                abjad.override(pleaf).flag.color = color
+                abjad.override(pleaf).note_head.color = color
+                abjad.override(pleaf).stem.color = color
 
     def _color_unregistered_pitches(self):
         if self.ignore_unregistered_pitches:
             return
         color = 'magenta'
-        prototype = (abjad.Note, abjad.Chord)
-        score = self._score
-        agent = abjad.iterate(score)
-        for note in agent.leaves(prototype, grace_notes=True):
-            if abjad.inspect(note).has_indicator('not yet registered'):
-                abjad.override(note).accidental.color = color
-                abjad.override(note).beam.color = color
-                abjad.override(note).dots.color = color
-                abjad.override(note).flag.color = color
-                abjad.override(note).note_head.color = color
-                abjad.override(note).stem.color = color
+        for pleaf in abjad.iterate(self._score).leaves(pitched=True):
+            if abjad.inspect(pleaf).has_indicator('not yet registered'):
+                abjad.override(pleaf).accidental.color = color
+                abjad.override(pleaf).beam.color = color
+                abjad.override(pleaf).dots.color = color
+                abjad.override(pleaf).flag.color = color
+                abjad.override(pleaf).note_head.color = color
+                abjad.override(pleaf).stem.color = color
 
     def _contributions_do_not_overlap(self, contributions):
         previous_stop_offset = 0
