@@ -47,7 +47,7 @@ class Expression(abjad.Expression):
             ::
 
                 >>> segment = baca.PitchClassSegment([-2, -1.5, 6, 7, -1.5, 7])
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  container:: example expression
 
@@ -66,7 +66,7 @@ class Expression(abjad.Expression):
 
                     >>> segment = expression([-2, -1.5, 6, 7, -1.5, 7])
                     >>> markup = expression.get_markup()
-                    >>> show(segment, figure_name=markup) # doctest: +SKIP
+                    >>> abjad.show(segment, figure_name=markup) # doctest: +SKIP
 
                 ..  docs::
 
@@ -109,11 +109,11 @@ class Expression(abjad.Expression):
                     >>> staff.append(abjad.Measure((2, 8), "<c' bf'>8 <g' a'>8"))
                     >>> staff.append(abjad.Measure((2, 8), "af'8 r8"))
                     >>> staff.append(abjad.Measure((2, 8), "r8 gf'8"))
-                    >>> show(staff) # doctest: +SKIP
+                    >>> abjad.show(staff) # doctest: +SKIP
 
                 ..  docs::
 
-                    >>> f(staff)
+                    >>> abjad.f(staff)
                     \new Staff {
                         {
                             \time 2/8

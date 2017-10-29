@@ -31,13 +31,13 @@ class PitchManager(abjad.AbjadObject):
 
                 >>> items = [-2, -1, 6, 7, -1, 7]
                 >>> segment_1 = abjad.PitchClassSegment(items=items)
-                >>> show(segment_1) # doctest: +SKIP
+                >>> abjad.show(segment_1) # doctest: +SKIP
 
             ::
 
                 >>> items = [9, 2, 1, 6, 2, 6]
                 >>> segment_2 = abjad.PitchClassSegment(items=items)
-                >>> show(segment_2) # doctest: +SKIP
+                >>> abjad.show(segment_2) # doctest: +SKIP
 
         ..  container:: example
 
@@ -142,7 +142,7 @@ class PitchManager(abjad.AbjadObject):
 
                 >>> items = [-2, -1, 6, 7, -1, 7]
                 >>> J = abjad.PitchClassSegment(items=items)
-                >>> show(J) # doctest: +SKIP
+                >>> abjad.show(J) # doctest: +SKIP
 
         ..  container:: example
 

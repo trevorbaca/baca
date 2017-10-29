@@ -22,7 +22,7 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
             ...         grouping_counts=[1, 1, 1, 2, 3],
             ...     )
             >>> pitch_class_tree = maker()
-            >>> show(pitch_class_tree) # doctest: +SKIP
+            >>> abjad.show(pitch_class_tree) # doctest: +SKIP
 
         ::
 
@@ -178,7 +178,7 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
                 ...     grouping_counts=None,
                 ...     )
                 >>> pitch_class_tree = maker()
-                >>> show(pitch_class_tree) # doctest: +SKIP
+                >>> abjad.show(pitch_class_tree) # doctest: +SKIP
 
             ::
 
@@ -210,7 +210,7 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
                 ...     grouping_counts=None,
                 ...     )
                 >>> pitch_class_tree = maker()
-                >>> show(pitch_class_tree) # doctest: +SKIP
+                >>> abjad.show(pitch_class_tree) # doctest: +SKIP
 
             ::
 
@@ -254,7 +254,7 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
                 ...     grouping_counts=[1, 2],
                 ...     )
                 >>> pitch_class_tree = maker()
-                >>> show(pitch_class_tree) # doctest: +SKIP
+                >>> abjad.show(pitch_class_tree) # doctest: +SKIP
 
             ::
 

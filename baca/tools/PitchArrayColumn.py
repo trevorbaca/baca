@@ -26,7 +26,7 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
         ::
 
-            >>> f(array.columns[0])
+            >>> abjad.f(array.columns[0])
             baca.PitchArrayColumn(
                 cells=(
                     baca.PitchArrayCell(

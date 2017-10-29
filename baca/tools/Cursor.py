@@ -673,7 +673,7 @@ class Cursor(abjad.AbjadObject):
 
             ::
 
-                >>> f(cursor)
+                >>> abjad.f(cursor)
                 baca.Cursor(
                     source=abjad.CyclicTuple(
                         [

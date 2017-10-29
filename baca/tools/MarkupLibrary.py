@@ -37,11 +37,11 @@ class MarkupLibrary(object):
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -92,11 +92,11 @@ class MarkupLibrary(object):
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -147,11 +147,11 @@ class MarkupLibrary(object):
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -463,11 +463,11 @@ class MarkupLibrary(object):
 
             ::
 
-                >>> show(markup) # doctest: +SKIP
+                >>> abjad.show(markup) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(markup)
+                >>> abjad.f(markup)
                 \markup {
                     \hcenter-in
                         #16
@@ -491,11 +491,11 @@ class MarkupLibrary(object):
 
             ::
 
-                >>> show(markup) # doctest: +SKIP
+                >>> abjad.show(markup) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(markup)
+                >>> abjad.f(markup)
                 \markup {
                     \hcenter-in
                         #16
@@ -1090,11 +1090,11 @@ class MarkupLibrary(object):
 
             ::
 
-                >>> show(markup) # doctest: +SKIP
+                >>> abjad.show(markup) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(markup)
+                >>> abjad.f(markup)
                 \markup {
                     \hcenter-in
                         #10
@@ -1118,11 +1118,11 @@ class MarkupLibrary(object):
 
             ::
 
-                >>> show(markup) # doctest: +SKIP
+                >>> abjad.show(markup) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(markup)
+                >>> abjad.f(markup)
                 \markup {
                     \hcenter-in
                         #10

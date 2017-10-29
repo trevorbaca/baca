@@ -27,11 +27,11 @@ class MusicPitchSpecifier(abjad.AbjadObject):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff])
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -236,11 +236,11 @@ class MusicPitchSpecifier(abjad.AbjadObject):
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> contribution = music_maker('Voice 1', collections)
                 >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -347,11 +347,11 @@ class MusicPitchSpecifier(abjad.AbjadObject):
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> contribution = music_maker('Voice 1', collections)
                 >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -392,11 +392,11 @@ class MusicPitchSpecifier(abjad.AbjadObject):
                 >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
                 >>> contribution = music_maker('Voice 1', collections)
                 >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne

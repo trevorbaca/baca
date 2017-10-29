@@ -19,11 +19,11 @@ class ClusterCommand(Command):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff])
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -200,11 +200,11 @@ class ClusterCommand(Command):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff])
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -318,11 +318,11 @@ class ClusterCommand(Command):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff])
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -384,11 +384,11 @@ class ClusterCommand(Command):
 
             >>> result = segment_maker.run(is_doc_example=True)
             >>> lilypond_file, metadata = result
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context GlobalContext = "Global Context" <<
@@ -617,11 +617,11 @@ class ClusterCommand(Command):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -772,11 +772,11 @@ class ClusterCommand(Command):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -917,11 +917,11 @@ class ClusterCommand(Command):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -1072,11 +1072,11 @@ class ClusterCommand(Command):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -1217,11 +1217,11 @@ class ClusterCommand(Command):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -1363,11 +1363,11 @@ class ClusterCommand(Command):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<

@@ -35,11 +35,11 @@ class ImbricateBuilder(Builder):
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score])
             \new Score <<
                 \new GlobalContext {
                     {
@@ -173,11 +173,11 @@ class ImbricateBuilder(Builder):
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score])
             \new Score <<
                 \new GlobalContext {
                     {
@@ -358,11 +358,11 @@ class ImbricateBuilder(Builder):
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score])
             \new Score <<
                 \new GlobalContext {
                     {
@@ -575,11 +575,11 @@ class ImbricateBuilder(Builder):
                 ...         ),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
                         {
@@ -674,11 +674,11 @@ class ImbricateBuilder(Builder):
                 ...         ),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
                         {
@@ -851,12 +851,12 @@ class ImbricateBuilder(Builder):
                 >>> lilypond_file, metadata = result
                 >>> voice = lilypond_file['Music Voice 2']
                 >>> abjad.override(voice).beam.positions = (-5, -5)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
@@ -1006,11 +1006,11 @@ class ImbricateBuilder(Builder):
                 ...         ),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
                         {
@@ -1121,11 +1121,11 @@ class ImbricateBuilder(Builder):
                 ...     baca.rests_around([2], [2]),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
                         {
@@ -1407,11 +1407,11 @@ class ImbricateBuilder(Builder):
                 ...         ),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
                         {
@@ -1602,11 +1602,11 @@ class ImbricateBuilder(Builder):
                 ...         ),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
                         {
@@ -1764,11 +1764,11 @@ class ImbricateBuilder(Builder):
                 ...         ),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
                         {
@@ -1941,11 +1941,11 @@ class ImbricateBuilder(Builder):
                 ...         ),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
                         {
@@ -2074,11 +2074,11 @@ class ImbricateBuilder(Builder):
                 ...         ),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
                         {
@@ -2215,11 +2215,11 @@ class ImbricateBuilder(Builder):
                 ...         ),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
                         {
@@ -2358,11 +2358,11 @@ class ImbricateBuilder(Builder):
                 ...         ),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
                         {
@@ -2499,11 +2499,11 @@ class ImbricateBuilder(Builder):
                 ...         ),
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
                         {

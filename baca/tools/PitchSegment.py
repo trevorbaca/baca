@@ -15,12 +15,12 @@ class PitchSegment(abjad.PitchSegment):
 
                 >>> items = [-2, -1.5, 6, 7, -1.5, 7]
                 >>> segment = baca.pitch_segment(items=items)
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.StaffGroup])
+                >>> abjad.f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \context Staff = "Treble Staff" {
                         \clef "treble"
@@ -64,12 +64,12 @@ class PitchSegment(abjad.PitchSegment):
             ::
 
                 >>> segment = baca.pitch_segment([-2, -1.5, 6, 7, -1.5, 7])
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.StaffGroup])
+                >>> abjad.f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \context Staff = "Treble Staff" {
                         \clef "treble"
@@ -99,12 +99,12 @@ class PitchSegment(abjad.PitchSegment):
             ::
 
                 >>> segment = segment.bass_to_octave(n=4)
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.StaffGroup])
+                >>> abjad.f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \context Staff = "Treble Staff" {
                         \clef "treble"
@@ -145,12 +145,12 @@ class PitchSegment(abjad.PitchSegment):
             ::
 
                 >>> segment = baca.pitch_segment([-2, -1.5, 6, 7, -1.5, 7])
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.StaffGroup])
+                >>> abjad.f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \context Staff = "Treble Staff" {
                         \clef "treble"
@@ -180,12 +180,12 @@ class PitchSegment(abjad.PitchSegment):
             ::
 
                 >>> segment = segment.center_to_octave(n=3)
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.StaffGroup])
+                >>> abjad.f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \context Staff = "Treble Staff" {
                         \clef "treble"
@@ -234,12 +234,12 @@ class PitchSegment(abjad.PitchSegment):
 
             ::
 
-                >>> show(segment.chord()) # doctest: +SKIP
+                >>> abjad.show(segment.chord()) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.chord().__illustrate__()
-                >>> f(lilypond_file[abjad.StaffGroup])
+                >>> abjad.f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \new Staff {
                         \new Voice {
@@ -268,12 +268,12 @@ class PitchSegment(abjad.PitchSegment):
             ::
 
                 >>> segment = baca.pitch_segment([-2, -1.5, 6, 7, -1.5, 7])
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.StaffGroup])
+                >>> abjad.f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \context Staff = "Treble Staff" {
                         \clef "treble"
@@ -303,12 +303,12 @@ class PitchSegment(abjad.PitchSegment):
             ::
 
                 >>> segment = segment.soprano_to_octave(n=3)
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.StaffGroup])
+                >>> abjad.f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \context Staff = "Treble Staff" {
                         \clef "treble"
@@ -354,12 +354,12 @@ class PitchSegment(abjad.PitchSegment):
             ::
 
                 >>> segment = baca.pitch_segment([12, 14, 21, 22])
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.StaffGroup])
+                >>> abjad.f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \context Staff = "Treble Staff" {
                         \clef "treble"
@@ -385,12 +385,12 @@ class PitchSegment(abjad.PitchSegment):
             ::
 
                 >>> segment = segment.space_down(bass=0)
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.StaffGroup])
+                >>> abjad.f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \context Staff = "Treble Staff" {
                         \clef "treble"
@@ -415,12 +415,12 @@ class PitchSegment(abjad.PitchSegment):
             ::
 
                 >>> segment = baca.pitch_segment([12, 14, 21, 22])
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.StaffGroup])
+                >>> abjad.f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \context Staff = "Treble Staff" {
                         \clef "treble"
@@ -446,12 +446,12 @@ class PitchSegment(abjad.PitchSegment):
             ::
 
                 >>> segment = segment.space_down(bass=2)
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.StaffGroup])
+                >>> abjad.f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \context Staff = "Treble Staff" {
                         \clef "treble"
@@ -496,12 +496,12 @@ class PitchSegment(abjad.PitchSegment):
             ::
 
                 >>> segment = baca.pitch_segment([12, 14, 21, 22])
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.StaffGroup])
+                >>> abjad.f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \context Staff = "Treble Staff" {
                         \clef "treble"
@@ -527,12 +527,12 @@ class PitchSegment(abjad.PitchSegment):
             ::
 
                 >>> segment = segment.space_up(bass=0)
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.StaffGroup])
+                >>> abjad.f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \context Staff = "Treble Staff" {
                         \clef "treble"
@@ -557,12 +557,12 @@ class PitchSegment(abjad.PitchSegment):
             ::
 
                 >>> segment = baca.pitch_segment([12, 14, 21, 22])
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.StaffGroup])
+                >>> abjad.f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \context Staff = "Treble Staff" {
                         \clef "treble"
@@ -588,12 +588,12 @@ class PitchSegment(abjad.PitchSegment):
             ::
 
                 >>> segment = segment.space_up(bass=2)
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.StaffGroup])
+                >>> abjad.f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \context Staff = "Treble Staff" {
                         \clef "treble"
@@ -634,12 +634,12 @@ class PitchSegment(abjad.PitchSegment):
 
                 >>> items = [-2, -1.5, 6, 7, -1.5, 7]
                 >>> segment = baca.pitch_segment(items=items)
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.StaffGroup])
+                >>> abjad.f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \context Staff = "Treble Staff" {
                         \clef "treble"
@@ -672,12 +672,12 @@ class PitchSegment(abjad.PitchSegment):
 
             ::
 
-                >>> show(upper) # doctest: +SKIP
+                >>> abjad.show(upper) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = upper.__illustrate__()
-                >>> f(lilypond_file[abjad.StaffGroup])
+                >>> abjad.f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \context Staff = "Treble Staff" {
                         \clef "treble"
@@ -700,12 +700,12 @@ class PitchSegment(abjad.PitchSegment):
 
             ::
 
-                >>> show(lower) # doctest: +SKIP
+                >>> abjad.show(lower) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = lower.__illustrate__()
-                >>> f(lilypond_file[abjad.StaffGroup])
+                >>> abjad.f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \context Staff = "Treble Staff" {
                         \clef "treble"

@@ -36,11 +36,11 @@ class ExpressionGallery(object):
         ::
 
             >>> markup = expression.get_markup()
-            >>> show(markup) # doctest: +SKIP
+            >>> abjad.show(markup) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(markup)
+            >>> abjad.f(markup)
             \markup {
                 \line
                     {
@@ -91,11 +91,11 @@ class ExpressionGallery(object):
         ::
 
             >>> markup = expression.get_markup()
-            >>> show(markup) # doctest: +SKIP
+            >>> abjad.show(markup) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(markup)
+            >>> abjad.f(markup)
             \markup {
                 \concat
                     {
@@ -160,11 +160,11 @@ class ExpressionGallery(object):
         ::
 
             >>> markup = expression.get_markup()
-            >>> show(markup) # doctest: +SKIP
+            >>> abjad.show(markup) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(markup)
+            >>> abjad.f(markup)
             \markup {
                 \concat
                     {
@@ -222,11 +222,11 @@ class ExpressionGallery(object):
         ::
 
             >>> markup = expression.get_markup()
-            >>> show(markup) # doctest: +SKIP
+            >>> abjad.show(markup) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(markup)
+            >>> abjad.f(markup)
             \markup {
                 \line
                     {
@@ -300,11 +300,11 @@ class ExpressionGallery(object):
         ::
 
             >>> markup = expression.get_markup()
-            >>> show(markup) # doctest: +SKIP
+            >>> abjad.show(markup) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(markup)
+            >>> abjad.f(markup)
             \markup {
                 \concat
                     {

@@ -20,7 +20,7 @@ class RhythmBuilder(Builder):
 
         ::
 
-            >>> f(builder)
+            >>> abjad.f(builder)
             baca.RhythmBuilder(
                 rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(),
                 )
@@ -36,7 +36,7 @@ class RhythmBuilder(Builder):
 
         ::
 
-            >>> f(builder)
+            >>> abjad.f(builder)
             baca.RhythmBuilder(
                 division_expression=abjad.Expression(
                     callbacks=[

@@ -18,11 +18,11 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
             >>> result = segment_maker.run(is_doc_example=True)
             >>> lilypond_file, metadata = result
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin.viola.cello
                 \context GlobalContext = "Global Context" <<

@@ -16,7 +16,7 @@ class Scope(abjad.AbjadObject):
 
         ::
 
-            >>> f(scope)
+            >>> abjad.f(scope)
             baca.Scope(
                 voice_name='Violin Music Voice',
                 stages=baca.StageSpecifier(

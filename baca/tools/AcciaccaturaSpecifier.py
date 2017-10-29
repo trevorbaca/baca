@@ -36,11 +36,11 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff])
             \new Staff {
                 {
                     \time 3/4
@@ -201,11 +201,11 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
                 >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -288,11 +288,11 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
                 >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -385,11 +385,11 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
                 >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -476,11 +476,11 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
                 >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 3/2
@@ -567,11 +567,11 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
                 >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 3/2
@@ -660,11 +660,11 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
                 >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 9/8
@@ -753,11 +753,11 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
                 >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 11/8
@@ -848,11 +848,11 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
                 >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 3/4
@@ -935,11 +935,11 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
                 >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 2/1
@@ -1014,11 +1014,11 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
                 >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
                     {
                         \time 3/2

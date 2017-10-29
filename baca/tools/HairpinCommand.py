@@ -19,11 +19,11 @@ class HairpinCommand(Command):
             >>> string = "c'4 ~ c' ~ c' r4 d'4 ~ d' ~ d' r4"
             >>> staff = abjad.Staff(string)
             >>> command(staff)
-            >>> show(staff) # doctest: +SKIP
+            >>> abjad.show(staff) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(staff)
+            >>> abjad.f(staff)
             \new Staff {
                 \once \override Hairpin.circled-tip = ##t
                 c'4 ~ \> \f
@@ -139,11 +139,11 @@ class HairpinCommand(Command):
                 >>> string = "c'4 ~ c' ~ c' r4 d'4 ~ d' ~ d' r4"
                 >>> staff = abjad.Staff(string)
                 >>> command(staff)
-                >>> show(staff) # doctest: +SKIP
+                >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(staff)
+                >>> abjad.f(staff)
                 \new Staff {
                     c'4 ~ \> \f
                     c'4 ~
@@ -169,11 +169,11 @@ class HairpinCommand(Command):
                 >>> string = "c'4 ~ c' ~ c' r4 d'4 ~ d' ~ d' r4"
                 >>> staff = abjad.Staff(string)
                 >>> command(staff)
-                >>> show(staff) # doctest: +SKIP
+                >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(staff)
+                >>> abjad.f(staff)
                 \new Staff {
                     \once \override Hairpin.stencil = #flared-hairpin
                     c'4 ~ \> \f
@@ -227,11 +227,11 @@ class HairpinCommand(Command):
                 >>> string = "c'4 ~ c'8 d'8 ~ d'4 r4 e'4 g'4 fs'4 ~ fs'4"
                 >>> staff = abjad.Staff(string)
                 >>> command(staff)
-                >>> show(staff) # doctest: +SKIP
+                >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(staff)
+                >>> abjad.f(staff)
                 \new Staff {
                     c'4 ~ \< \ppp
                     c'8 \p
@@ -258,11 +258,11 @@ class HairpinCommand(Command):
                 >>> string = "c'4 ~ c'8 d'8 ~ d'4 r4 e'4 g'4 fs'4 ~ fs'4"
                 >>> staff = abjad.Staff(string)
                 >>> command(staff)
-                >>> show(staff) # doctest: +SKIP
+                >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(staff)
+                >>> abjad.f(staff)
                 \new Staff {
                     c'4 ~ \< \ppp
                     c'8 \p

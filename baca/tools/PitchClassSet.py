@@ -15,12 +15,12 @@ class PitchClassSet(abjad.PitchClassSet):
 
                 >>> items = [-2, -1.5, 6, 7, -1.5, 7]
                 >>> setting = baca.pitch_class_set(items=items)
-                >>> show(setting) # doctest: +SKIP
+                >>> abjad.show(setting) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = setting.__illustrate__()
-                >>> f(lilypond_file[abjad.Voice])
+                >>> abjad.f(lilypond_file[abjad.Voice])
                 \new Voice {
                     <fs' g' bf' bqf'>1
                 }

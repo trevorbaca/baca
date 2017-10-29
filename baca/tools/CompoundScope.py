@@ -18,7 +18,7 @@ class CompoundScope(abjad.AbjadObject):
 
         ::
 
-            >>> f(scope)
+            >>> abjad.f(scope)
             baca.CompoundScope(
                 scopes=(
                     baca.Scope(

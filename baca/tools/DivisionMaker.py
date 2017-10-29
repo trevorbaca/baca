@@ -33,11 +33,11 @@ class DivisionMaker(abjad.AbjadValueObject):
             >>> divisions = baca.Sequence(division_lists).flatten()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = division_maker.show(music, input_divisions)
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff])
             \new RhythmicStaff {
                 {
                     \time 7/8
@@ -83,11 +83,11 @@ class DivisionMaker(abjad.AbjadValueObject):
             >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = division_maker.show(music, input_divisions)
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff])
             \new RhythmicStaff {
                 c'1...
             }
@@ -118,12 +118,12 @@ class DivisionMaker(abjad.AbjadValueObject):
             >>> divisions = baca.Sequence(division_lists).flatten()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = division_maker.show(music, input_divisions)
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff])
             \new RhythmicStaff {
                 c'4
                 c'4
@@ -162,11 +162,11 @@ class DivisionMaker(abjad.AbjadValueObject):
             >>> divisions = baca.Sequence(division_lists).flatten()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = division_maker.show(music, input_divisions)
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff])
             \new RhythmicStaff {
                 {
                     \time 7/8
@@ -211,11 +211,11 @@ class DivisionMaker(abjad.AbjadValueObject):
             >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = division_maker.show(music, input_divisions)
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff])
             \new RhythmicStaff {
                 c'2.
                 c'2..
@@ -255,11 +255,11 @@ class DivisionMaker(abjad.AbjadValueObject):
             >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = division_maker.show(music, input_divisions)
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff])
             \new RhythmicStaff {
                 c'2.
                 c'2..
@@ -449,11 +449,11 @@ class DivisionMaker(abjad.AbjadValueObject):
                 >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = division_maker.show(music, input_divisions)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
                     c'1..
                     c'4..
@@ -725,11 +725,11 @@ class DivisionMaker(abjad.AbjadValueObject):
                 >>> divisions = baca.Sequence(division_lists).flatten()
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = division_maker.show(music, input_divisions)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
                     {
                         \time 7/8
@@ -779,11 +779,11 @@ class DivisionMaker(abjad.AbjadValueObject):
                 >>> divisions = baca.Sequence(division_lists).flatten()
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = division_maker.show(music, input_divisions)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
                     {
                         \time 7/8
@@ -849,11 +849,11 @@ class DivisionMaker(abjad.AbjadValueObject):
                 >>> divisions = baca.Sequence(division_lists).flatten()
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = division_maker.show(music, input_divisions)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
                     {
                         \time 5/8
@@ -897,11 +897,11 @@ class DivisionMaker(abjad.AbjadValueObject):
                 >>> divisions = baca.Sequence(division_lists).flatten()
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = division_maker.show(music, input_divisions)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
                     {
                         \time 5/8

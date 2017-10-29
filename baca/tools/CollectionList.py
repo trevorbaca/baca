@@ -372,7 +372,7 @@ class CollectionList(abjad.AbjadValueObject):
 
             ::
 
-                >>> f(collections)
+                >>> abjad.f(collections)
                 baca.CollectionList(
                     collections=[
                         baca.PitchSegment(
@@ -469,12 +469,12 @@ class CollectionList(abjad.AbjadValueObject):
 
             ::
 
-                >>> show(collections) # doctest: +SKIP
+                >>> abjad.show(collections) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = collections.__illustrate__()
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1134,7 +1134,7 @@ class CollectionList(abjad.AbjadValueObject):
 
             ::
 
-                >>> f(cursor)
+                >>> abjad.f(cursor)
                 baca.Cursor(
                     source=baca.CollectionList(
                         collections=[

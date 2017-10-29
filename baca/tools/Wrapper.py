@@ -20,7 +20,7 @@ class Wrapper(abjad.AbjadObject):
 
         ::
 
-            >>> f(command)
+            >>> abjad.f(command)
             baca.Wrapper(
                 command=baca.ScorePitchCommand(
                     source=abjad.CyclicTuple(
@@ -61,7 +61,7 @@ class Wrapper(abjad.AbjadObject):
 
         ::
 
-            >>> f(command)
+            >>> abjad.f(command)
             baca.Wrapper(
                 command=baca.ScorePitchCommand(
                     source=abjad.CyclicTuple(
@@ -108,7 +108,7 @@ class Wrapper(abjad.AbjadObject):
 
         ::
 
-            >>> f(command)
+            >>> abjad.f(command)
             baca.Wrapper(
                 command=baca.OctaveDisplacementCommand(
                     displacements=abjad.CyclicTuple(
@@ -169,7 +169,7 @@ class Wrapper(abjad.AbjadObject):
 
             ::
 
-                >>> f(command.command)
+                >>> abjad.f(command.command)
                 baca.ScorePitchCommand(
                     source=abjad.CyclicTuple(
                         [
@@ -210,7 +210,7 @@ class Wrapper(abjad.AbjadObject):
 
             ::
 
-                >>> f(command.scope)
+                >>> abjad.f(command.scope)
                 baca.Scope(
                     voice_name='Violin Music Voice',
                     stages=baca.StageSpecifier(

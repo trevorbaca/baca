@@ -23,7 +23,7 @@ class RegistrationDictionary(abjad.TypedOrderedDict):
 
         ::
 
-            >>> f(registrations)
+            >>> abjad.f(registrations)
             baca.RegistrationDictionary(
                 [
                     (

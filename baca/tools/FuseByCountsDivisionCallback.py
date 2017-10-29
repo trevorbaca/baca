@@ -28,11 +28,11 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
             >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = division_maker.show(music, input_divisions)
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff])
             \new RhythmicStaff {
                 c'2
                 c'1
@@ -72,11 +72,11 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
             >>> divisions = baca.Sequence(division_lists).flatten()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = division_maker.show(music, input_divisions)
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff])
             \new RhythmicStaff {
                 c'8.
                 c'8.
@@ -160,11 +160,11 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
                 >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = division_maker.show(music, input_divisions)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
                     {
                         \time 2/8
@@ -209,11 +209,11 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
                 >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = division_maker.show(music, input_divisions)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
                     c'2
                     c'1
@@ -254,11 +254,11 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
                 >>> divisions = baca.Sequence(division_lists).flatten()
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = division_maker.show(music, input_divisions)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
                     c'8.
                     c'8.
@@ -303,11 +303,11 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
                 >>> divisions = baca.Sequence(division_lists).flatten()
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = division_maker.show(music, input_divisions)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
                     c'8
                     c'8.
@@ -346,11 +346,11 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
                 >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = division_maker.show(music, input_divisions)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
                     c'\breve
                 }
@@ -387,11 +387,11 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
                 >>> divisions = baca.Sequence(division_lists).flatten()
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = division_maker.show(music, input_divisions)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
                     c'8.
                     c'8.
@@ -433,11 +433,11 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
                 >>> divisions = baca.Sequence(division_lists).flatten()
                 >>> music = rhythm_maker(divisions)
                 >>> lilypond_file = division_maker.show(music, input_divisions)
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
                     c'8
                     c'8.

@@ -16,12 +16,12 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> items = [-2, -1.5, 6, 7, -1.5, 7]
                 >>> segment = baca.pitch_class_segment(items=items)
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.Voice])
+                >>> abjad.f(lilypond_file[abjad.Voice])
                 \new Voice {
                     bf'8
                     bqf'8
@@ -39,12 +39,12 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> expression = baca.pitch_class_segment()
                 >>> segment = expression(items=[-2, -1.5, 6, 7, -1.5, 7])
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.Voice])
+                >>> abjad.f(lilypond_file[abjad.Voice])
                 \new Voice {
                     bf'8
                     bqf'8
@@ -112,7 +112,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ::
 
-                >>> show(J) # doctest: +SKIP
+                >>> abjad.show(J) # doctest: +SKIP
 
         ..  container:: example
 
@@ -128,12 +128,12 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 ::
 
                     >>> segment = J.alpha()
-                    >>> show(segment) # doctest: +SKIP
+                    >>> abjad.show(segment) # doctest: +SKIP
 
                 ..  docs::
 
                     >>> lilypond_file = segment.__illustrate__()
-                    >>> f(lilypond_file[abjad.Voice])
+                    >>> abjad.f(lilypond_file[abjad.Voice])
                     \new Voice {
                         b'8
                         bqs'8
@@ -157,12 +157,12 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 ::
 
                     >>> segment = expression([-2, -1.5, 6, 7, -1.5, 7])
-                    >>> show(segment) # doctest: +SKIP
+                    >>> abjad.show(segment) # doctest: +SKIP
 
                 ..  docs::
 
                     >>> lilypond_file = segment.__illustrate__()
-                    >>> f(lilypond_file[abjad.Voice])
+                    >>> abjad.f(lilypond_file[abjad.Voice])
                     \new Voice {
                         b'8
                         bqs'8
@@ -188,12 +188,12 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 ::
 
                     >>> segment = J.alpha().alpha()
-                    >>> show(segment) # doctest: +SKIP
+                    >>> abjad.show(segment) # doctest: +SKIP
 
                 ..  docs::
 
                     >>> lilypond_file = segment.__illustrate__()
-                    >>> f(lilypond_file[abjad.Voice])
+                    >>> abjad.f(lilypond_file[abjad.Voice])
                     \new Voice {
                         bf'8
                         bqf'8
@@ -232,14 +232,14 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                     >>> segment = expression([-2, -1.5, 6, 7, -1.5, 7])
                     >>> markup = expression.get_markup()
-                    >>> show(segment, figure_name=markup) # doctest: +SKIP
+                    >>> abjad.show(segment, figure_name=markup) # doctest: +SKIP
 
                 ..  docs::
 
                     >>> lilypond_file = segment.__illustrate__(
                     ...     figure_name=markup,
                     ...     )
-                    >>> f(lilypond_file[abjad.Voice])
+                    >>> abjad.f(lilypond_file[abjad.Voice])
                     \new Voice {
                         bf'8
                             ^ \markup {
@@ -315,12 +315,12 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ::
 
-                >>> show(segment.arpeggiate_down()) # doctest: +SKIP
+                >>> abjad.show(segment.arpeggiate_down()) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.arpeggiate_down().__illustrate__()
-                >>> f(lilypond_file[abjad.StaffGroup])
+                >>> abjad.f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \context Staff = "Treble Staff" {
                         \clef "treble"
@@ -365,12 +365,12 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ::
 
-                >>> show(segment.arpeggiate_up()) # doctest: +SKIP
+                >>> abjad.show(segment.arpeggiate_up()) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.arpeggiate_up().__illustrate__()
-                >>> f(lilypond_file[abjad.StaffGroup])
+                >>> abjad.f(lilypond_file[abjad.StaffGroup])
                 \new PianoStaff <<
                     \context Staff = "Treble Staff" {
                         \clef "treble"
@@ -415,12 +415,12 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ::
 
-                >>> show(segment.chord()) # doctest: +SKIP
+                >>> abjad.show(segment.chord()) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.chord().__illustrate__()
-                >>> f(lilypond_file[abjad.Voice])
+                >>> abjad.f(lilypond_file[abjad.Voice])
                 \new Voice {
                     <fs' g' bf' bqf'>1
                 }
@@ -441,12 +441,12 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> items = [-2, -1.5, 6, 7]
                 >>> segment = baca.pitch_class_segment(items=items)
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.Voice])
+                >>> abjad.f(lilypond_file[abjad.Voice])
                 \new Voice {
                     bf'8
                     bqf'8
@@ -467,12 +467,12 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> items = [-2, -1.5, 6, 7, -1.5, 7]
                 >>> segment = baca.pitch_class_segment(items=items)
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.Voice])
+                >>> abjad.f(lilypond_file[abjad.Voice])
                 \new Voice {
                     bf'8
                     bqf'8
@@ -502,12 +502,12 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> items = [-2, -1.5, 6, 7, -1.5, 7]
                 >>> segment = baca.pitch_class_segment(items=items)
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.Voice])
+                >>> abjad.f(lilypond_file[abjad.Voice])
                 \new Voice {
                     bf'8
                     bqf'8
@@ -530,12 +530,12 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> items = [-2, -1.5, 6, 7, 7]
                 >>> segment = baca.pitch_class_segment(items=items)
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.Voice])
+                >>> abjad.f(lilypond_file[abjad.Voice])
                 \new Voice {
                     bf'8
                     bqf'8
@@ -568,12 +568,12 @@ class PitchClassSegment(abjad.PitchClassSegment):
             ::
 
                 >>> segment = baca.pitch_class_segment([10, 11, 5, 6, 7])
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.Voice])
+                >>> abjad.f(lilypond_file[abjad.Voice])
                 \new Voice {
                     bf'8
                     b'8
@@ -592,12 +592,12 @@ class PitchClassSegment(abjad.PitchClassSegment):
             ::
 
                 >>> segment = segment.space_down(bass=6, soprano=7)
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score \with {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
@@ -648,12 +648,12 @@ class PitchClassSegment(abjad.PitchClassSegment):
             ::
 
                 >>> segment = baca.pitch_class_segment([10, 11, 5, 6, 7])
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.Voice])
+                >>> abjad.f(lilypond_file[abjad.Voice])
                 \new Voice {
                     bf'8
                     b'8
@@ -672,12 +672,12 @@ class PitchClassSegment(abjad.PitchClassSegment):
             ::
 
                 >>> segment = segment.space_up(bass=6, soprano=7)
-                >>> show(segment) # doctest: +SKIP
+                >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = segment.__illustrate__()
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score \with {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t

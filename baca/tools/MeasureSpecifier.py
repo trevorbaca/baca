@@ -12,7 +12,7 @@ class MeasureSpecifier(abjad.AbjadValueObject):
 
         ::
 
-            >>> f(specifier)
+            >>> abjad.f(specifier)
             baca.MeasureSpecifier(
                 start=2,
                 stop=4,

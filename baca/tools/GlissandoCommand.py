@@ -31,11 +31,11 @@ class GlissandoCommand(Command):
 
             >>> result = segment_maker.run(is_doc_example=True)
             >>> lilypond_file, metadata = result
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context GlobalContext = "Global Context" <<
@@ -136,11 +136,11 @@ class GlissandoCommand(Command):
 
             >>> result = segment_maker.run(is_doc_example=True)
             >>> lilypond_file, metadata = result
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context GlobalContext = "Global Context" <<
@@ -233,11 +233,11 @@ class GlissandoCommand(Command):
             ...     baca.glissandi(baca.select().tuplets()[:1].plts().group()),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff])
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne

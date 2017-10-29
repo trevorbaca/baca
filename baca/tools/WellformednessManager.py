@@ -57,7 +57,7 @@ class WellformednessManager(abjad.AbjadObject):
             ::
 
                 >>> staff = abjad.Staff("c'4 d' e' f'")
-                >>> show(staff) # doctest: +SKIP
+                >>> abjad.show(staff) # doctest: +SKIP
 
             ::
 
@@ -72,7 +72,7 @@ class WellformednessManager(abjad.AbjadObject):
             ::
 
                 >>> staff = abjad.Staff("c'4 c' d' d'")
-                >>> show(staff) # doctest: +SKIP
+                >>> abjad.show(staff) # doctest: +SKIP
 
             ::
 
@@ -87,7 +87,7 @@ class WellformednessManager(abjad.AbjadObject):
             ::
 
                 >>> staff = abjad.Staff("c'4 d' e' e''")
-                >>> show(staff) # doctest: +SKIP
+                >>> abjad.show(staff) # doctest: +SKIP
 
             ::
 
@@ -104,11 +104,11 @@ class WellformednessManager(abjad.AbjadObject):
                 >>> voice_1 = abjad.Voice("c'4 d'")
                 >>> voice_2 = abjad.Voice("d''4 e''")
                 >>> staff = abjad.Staff([voice_1, voice_2])
-                >>> show(staff) # doctest: +SKIP
+                >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(staff)
+                >>> abjad.f(staff)
                 \new Staff {
                     \new Voice {
                         c'4

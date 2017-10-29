@@ -23,11 +23,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> result = segment_maker.run(is_doc_example=True)
             >>> lilypond_file, metadata = result
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context GlobalContext = "Global Context" <<
@@ -107,11 +107,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> result = segment_maker.run(is_doc_example=True)
             >>> lilypond_file, metadata = result
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context GlobalContext = "Global Context" <<
@@ -508,11 +508,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -1934,11 +1934,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -2084,11 +2084,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> lilypond_file, metadata = result
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).text_script.staff_padding = 3
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" \with {
                     \override TextScript.staff-padding = #3
                 } <<
@@ -2307,11 +2307,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin.viola.cello
                     \context GlobalContext = "Global Context" <<
@@ -2462,11 +2462,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -2629,11 +2629,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -2802,11 +2802,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -2978,11 +2978,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...     metadata=metadata,
                 ...     )
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -3151,11 +3151,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -3328,11 +3328,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...     metadata=metadata,
                 ...     )
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -3510,11 +3510,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -3685,11 +3685,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -3928,11 +3928,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -4101,11 +4101,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -4258,11 +4258,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
                 >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" \with {
                     \override SpacingSpanner.strict-grace-spacing = ##f
                     \override SpacingSpanner.strict-note-spacing = ##f
@@ -4509,11 +4509,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> score = lilypond_file[abjad.Score]
                 >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
                 >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" \with {
                     \override SpacingSpanner.strict-grace-spacing = ##f
                     \override SpacingSpanner.strict-note-spacing = ##f
@@ -4651,11 +4651,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -4842,13 +4842,13 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> result = segment_maker.run(is_doc_example=True) # doctest: +SKIP
                 >>> lilypond_file, metadata = result # doctest: +SKIP
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  todo:: MAKE THIS WORK AGAIN.
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -5043,11 +5043,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -5216,11 +5216,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -5400,11 +5400,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...     metadata=metadata,
                 ...     )
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -5614,11 +5614,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -5789,11 +5789,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -6101,11 +6101,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -6179,11 +6179,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -6312,11 +6312,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...     metadata=metadata,
                 ...     )
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -6497,11 +6497,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 ...     metadata=metadata,
                 ...     )
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -6699,11 +6699,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -6816,11 +6816,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<
@@ -6991,11 +6991,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> result = segment_maker.run(is_doc_example=True)
                 >>> lilypond_file, metadata = result
-                >>> show(lilypond_file) # doctest: +SKIP
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \tag violin
                     \context GlobalContext = "Global Context" <<

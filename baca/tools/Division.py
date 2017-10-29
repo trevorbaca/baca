@@ -18,7 +18,7 @@ class Division(abjad.NonreducedFraction):
 
         ::
 
-            >>> f(division)
+            >>> abjad.f(division)
             baca.Division(
                 (3, 8),
                 payload=abjad.rhythmmakertools.NoteRhythmMaker(),
@@ -38,7 +38,7 @@ class Division(abjad.NonreducedFraction):
 
         ::
 
-            >>> f(division)
+            >>> abjad.f(division)
             baca.Division(
                 (3, 8),
                 start_offset=abjad.Offset(5, 4),
@@ -54,7 +54,7 @@ class Division(abjad.NonreducedFraction):
 
         ::
 
-            >>> f(division)
+            >>> abjad.f(division)
             baca.Division(
                 (3, 8)
                 )
@@ -74,7 +74,7 @@ class Division(abjad.NonreducedFraction):
 
         ::
 
-            >>> f(new_division)
+            >>> abjad.f(new_division)
             baca.Division(
                 (3, 8),
                 payload=abjad.rhythmmakertools.NoteRhythmMaker(),
@@ -97,7 +97,7 @@ class Division(abjad.NonreducedFraction):
 
         ::
 
-            >>> f(new_division)
+            >>> abjad.f(new_division)
             baca.Division(
                 (6, 4),
                 payload=abjad.rhythmmakertools.NoteRhythmMaker(),
@@ -114,7 +114,7 @@ class Division(abjad.NonreducedFraction):
 
         ::
 
-            >>> f(division)
+            >>> abjad.f(division)
             baca.Division(
                 (0, 1)
                 )

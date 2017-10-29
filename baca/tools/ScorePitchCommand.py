@@ -33,11 +33,11 @@ class ScorePitchCommand(Command):
 
             >>> result = segment_maker.run(is_doc_example=True)
             >>> lilypond_file, metadata = result
-            >>> show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin
                 \context GlobalContext = "Global Context" <<
@@ -214,11 +214,11 @@ class ScorePitchCommand(Command):
 
                 >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
                 >>> command(staff)
-                >>> show(staff) # doctest: +SKIP
+                >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(staff)
+                >>> abjad.f(staff)
                 \new Staff {
                     g''8
                     cs''8
@@ -447,11 +447,11 @@ class ScorePitchCommand(Command):
 
                 >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
                 >>> command(staff)
-                >>> show(staff) # doctest: +SKIP
+                >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(staff)
+                >>> abjad.f(staff)
                 \new Staff {
                     d'8
                     d'8
@@ -480,11 +480,11 @@ class ScorePitchCommand(Command):
 
                 >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
                 >>> command(staff)
-                >>> show(staff) # doctest: +SKIP
+                >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(staff)
+                >>> abjad.f(staff)
                 \new Staff {
                     a''8
                     ef''8
@@ -514,11 +514,11 @@ class ScorePitchCommand(Command):
 
                 >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
                 >>> command(staff)
-                >>> show(staff) # doctest: +SKIP
+                >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
-                >>> f(staff)
+                >>> abjad.f(staff)
                 \new Staff {
                     a'8
                     ef'8

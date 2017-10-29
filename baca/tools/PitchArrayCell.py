@@ -52,7 +52,7 @@ class PitchArrayCell(abjad.AbjadObject):
 
         ::
 
-            >>> f(cell.parent_array)
+            >>> abjad.f(cell.parent_array)
             baca.PitchArray(
                 rows=(
                     baca.PitchArrayRow(
@@ -86,7 +86,7 @@ class PitchArrayCell(abjad.AbjadObject):
 
         ::
 
-            >>> f(cell.parent_column)
+            >>> abjad.f(cell.parent_column)
             baca.PitchArrayColumn(
                 cells=(
                     baca.PitchArrayCell(
@@ -100,7 +100,7 @@ class PitchArrayCell(abjad.AbjadObject):
 
         ::
 
-            >>> f(cell.parent_row)
+            >>> abjad.f(cell.parent_row)
             baca.PitchArrayRow(
                 cells=(
                     baca.PitchArrayCell(
