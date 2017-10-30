@@ -64,6 +64,7 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.fuse_compound_quarter_divisions
       ~baca.tools.LibraryAM.LibraryAM.fused_tuplet_monads
       ~baca.tools.LibraryAM.LibraryAM.glissandi
+      ~baca.tools.LibraryAM.LibraryAM.glissando
       ~baca.tools.LibraryAM.LibraryAM.grid_poss_to_flaut_poss
       ~baca.tools.LibraryAM.LibraryAM.hairpins
       ~baca.tools.LibraryAM.LibraryAM.helianthate
@@ -179,6 +180,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAM.LibraryAM.fused_tuplet_monads
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.glissandi
+
+.. automethod:: baca.tools.LibraryAM.LibraryAM.glissando
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.grid_poss_to_flaut_poss
 
