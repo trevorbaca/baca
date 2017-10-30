@@ -4678,11 +4678,9 @@ class LibraryAM(object):
 
     @staticmethod
     def glissandi(selector='baca.select().runs()'):
-        r'''Attaches glissandi to PLT runs.
+        r'''Maps glissando to runs.
 
         ..  container:: example
-
-            Attaches glissandi to PLT runs:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -4735,19 +4733,212 @@ class LibraryAM(object):
 
         ..  container:: example
 
-            Attaches glissandi to PLT runs in tuplet 1:
+            With segment-maker:
+
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> segment_maker(
+            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.even_runs(),
+            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+            ...     baca.glissandi()
+            ...     )
+
+            >>> result = segment_maker.run(is_doc_example=True)
+            >>> lilypond_file, metadata = result
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score])
+                \context Score = "Score" <<
+                    \tag violin
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context GlobalSkips = "Global Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
+                                    e'8 \glissando [
+                                    d''8 \glissando
+                                    f'8 \glissando
+                                    e''8 ] \glissando
+                                }
+                                {
+                                    g'8 \glissando [
+                                    f''8 \glissando
+                                    e'8 ] \glissando
+                                }
+                                {
+                                    d''8 \glissando [
+                                    f'8 \glissando
+                                    e''8 \glissando
+                                    g'8 ] \glissando
+                                }
+                                {
+                                    f''8 \glissando [
+                                    e'8 \glissando
+                                    d''8 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            First and last PLTs:
+
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> segment_maker(
+            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+            ...     baca.even_runs(),
+            ...     baca.glissandi(baca.select().plts()[:2].group()),
+            ...     baca.glissandi(baca.select().plts()[-2:].group()),
+            ...     )
+
+            >>> result = segment_maker.run(is_doc_example=True)
+            >>> lilypond_file, metadata = result
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score])
+                \context Score = "Score" <<
+                    \tag violin
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context GlobalSkips = "Global Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
+                                    e'8 \glissando [
+                                    d''8
+                                    f'8
+                                    e''8 ]
+                                }
+                                {
+                                    g'8 [
+                                    f''8
+                                    e'8 ]
+                                }
+                                {
+                                    d''8 [
+                                    f'8
+                                    e''8
+                                    g'8 ]
+                                }
+                                {
+                                    f''8 [
+                                    e'8 \glissando
+                                    d''8 ]
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            With music-maker:
 
             >>> music_maker = baca.MusicMaker()
-            >>> selector = baca.select().tuplets()[1:2].pleaves()
-            >>> selector = selector.contiguous()
+
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker(
             ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.glissandi(selector=selector),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
+            ...     collections,
+            ...     baca.map(baca.glissandi(), baca.select().tuplet(1)),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -4759,37 +4950,27 @@ class LibraryAM(object):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
-                                r8
+                            {
                                 c'16 [
-                                d'16 ]
-                                bf'4 ~
-                                bf'16
-                                r16
+                                d'16
+                                bf'16 ]
                             }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
+                            {
                                 fs''16 \glissando [
-                                e''16 ] \glissando
-                                ef''4 ~
-                                ef''16
-                                r16
-                                af''16 \glissando [
+                                e''16 \glissando
+                                ef''16 \glissando
+                                af''16 \glissando
                                 g''16 ]
                             }
-                            \times 4/5 {
+                            {
                                 a'16
-                                r4
-                                \revert TupletBracket.staff-padding
                             }
                         }
                     }
                 >>
 
         '''
-        return baca.GlissandoCommand(selector=selector)
+        return baca.map(baca.GlissandoCommand(), selector=selector)
 
     @staticmethod
     def grid_poss_to_flaut_poss():
