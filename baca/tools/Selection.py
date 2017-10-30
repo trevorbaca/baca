@@ -2242,6 +2242,242 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.plts().map(baca.select()[-1])
 
+    def ptlt(self, n):
+        r'''Selects pitched trivial logical tie `n`.
+
+        ..  container:: example
+
+            Selects pitched trivial logical tie -1:
+
+            ..  container:: example
+
+                >>> tuplets = [
+                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+                ...     ]
+                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+                >>> tuplets = [abjad.select(tuplets)]
+                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
+                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+                >>> result = baca.select(staff).ptlt(-1)
+
+                >>> result
+                LogicalTie([Note("e'16")])
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().ptlt(-1)
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                LogicalTie([Note("e'16")])
+
+                >>> selector.color(result)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff)
+                \new Staff \with {
+                    \override TupletBracket.direction = #up
+                    \override TupletBracket.staff-padding = #3
+                } {
+                    {
+                        \time 7/4
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 10/9 {
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            c'16
+                            <d' e'>4 ~
+                            <d' e'>16
+                        }
+                        \times 8/9 {
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            d'16
+                            <e' fs'>4 ~
+                            <e' fs'>16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 10/9 {
+                            r16
+                            bf'16
+                            <a'' b''>16
+                            \once \override Accidental.color = #green
+                            \once \override Beam.color = #green
+                            \once \override Dots.color = #green
+                            \once \override NoteHead.color = #green
+                            \once \override Stem.color = #green
+                            e'16
+                            <fs' gs'>4 ~
+                            <fs' gs'>16
+                        }
+                    }
+                }
+
+        '''
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.ptlts()[n]
+
+    def ptlts(self):
+        r'''Selects pitched trivial logical ties.
+
+        ..  container:: example
+
+            Selects pitched trivial logical ties:
+
+            ..  container:: example
+
+                >>> tuplets = [
+                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+                ...     ]
+                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+                >>> tuplets = [abjad.select(tuplets)]
+                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
+                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+                >>> result = baca.select(staff).ptlts()
+
+                >>> for item in result:
+                ...     item
+                ...
+                LogicalTie([Note("bf'16")])
+                LogicalTie([Chord("<a'' b''>16")])
+                LogicalTie([Note("c'16")])
+                LogicalTie([Note("bf'16")])
+                LogicalTie([Chord("<a'' b''>16")])
+                LogicalTie([Note("d'16")])
+                LogicalTie([Note("bf'16")])
+                LogicalTie([Chord("<a'' b''>16")])
+                LogicalTie([Note("e'16")])
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().ptlts()
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                LogicalTie([Note("bf'16")])
+                LogicalTie([Chord("<a'' b''>16")])
+                LogicalTie([Note("c'16")])
+                LogicalTie([Note("bf'16")])
+                LogicalTie([Chord("<a'' b''>16")])
+                LogicalTie([Note("d'16")])
+                LogicalTie([Note("bf'16")])
+                LogicalTie([Chord("<a'' b''>16")])
+                LogicalTie([Note("e'16")])
+
+                >>> selector.color(result)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff)
+                \new Staff \with {
+                    \override TupletBracket.direction = #up
+                    \override TupletBracket.staff-padding = #3
+                } {
+                    {
+                        \time 7/4
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 10/9 {
+                            r16
+                            \once \override Accidental.color = #red
+                            \once \override Beam.color = #red
+                            \once \override Dots.color = #red
+                            \once \override NoteHead.color = #red
+                            \once \override Stem.color = #red
+                            bf'16
+                            \once \override Accidental.color = #blue
+                            \once \override Beam.color = #blue
+                            \once \override Dots.color = #blue
+                            \once \override NoteHead.color = #blue
+                            \once \override Stem.color = #blue
+                            <a'' b''>16
+                            \once \override Accidental.color = #red
+                            \once \override Beam.color = #red
+                            \once \override Dots.color = #red
+                            \once \override NoteHead.color = #red
+                            \once \override Stem.color = #red
+                            c'16
+                            <d' e'>4 ~
+                            <d' e'>16
+                        }
+                        \times 8/9 {
+                            r16
+                            \once \override Accidental.color = #blue
+                            \once \override Beam.color = #blue
+                            \once \override Dots.color = #blue
+                            \once \override NoteHead.color = #blue
+                            \once \override Stem.color = #blue
+                            bf'16
+                            \once \override Accidental.color = #red
+                            \once \override Beam.color = #red
+                            \once \override Dots.color = #red
+                            \once \override NoteHead.color = #red
+                            \once \override Stem.color = #red
+                            <a'' b''>16
+                            \once \override Accidental.color = #blue
+                            \once \override Beam.color = #blue
+                            \once \override Dots.color = #blue
+                            \once \override NoteHead.color = #blue
+                            \once \override Stem.color = #blue
+                            d'16
+                            <e' fs'>4 ~
+                            <e' fs'>16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 10/9 {
+                            r16
+                            \once \override Accidental.color = #red
+                            \once \override Beam.color = #red
+                            \once \override Dots.color = #red
+                            \once \override NoteHead.color = #red
+                            \once \override Stem.color = #red
+                            bf'16
+                            \once \override Accidental.color = #blue
+                            \once \override Beam.color = #blue
+                            \once \override Dots.color = #blue
+                            \once \override NoteHead.color = #blue
+                            \once \override Stem.color = #blue
+                            <a'' b''>16
+                            \once \override Accidental.color = #red
+                            \once \override Beam.color = #red
+                            \once \override Dots.color = #red
+                            \once \override NoteHead.color = #red
+                            \once \override Stem.color = #red
+                            e'16
+                            <fs' gs'>4 ~
+                            <fs' gs'>16
+                        }
+                    }
+                }
+
+        '''
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.logical_ties(
+            grace_notes=None,
+            nontrivial=False,
+            pitched=True,
+            )
+
     def qrun(self, n):
         r'''Selects equipitch run `n`.
 

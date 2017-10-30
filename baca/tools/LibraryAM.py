@@ -637,6 +637,12 @@ class LibraryAM(object):
             )
 
     @staticmethod
+    def articulations(articulations, selector='baca.select().pheads()'):
+        r'''Attaches articulations.
+        '''
+        return baca.AttachCommand(arguments=articulations)
+
+    @staticmethod
     def bass_to_octave(n=4, selector=None):
         r"""Octave-transposes music.
 

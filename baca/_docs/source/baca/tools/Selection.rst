@@ -70,6 +70,8 @@ Bases
       ~baca.tools.Selection.Selection.plts
       ~baca.tools.Selection.Selection.ptail
       ~baca.tools.Selection.Selection.ptails
+      ~baca.tools.Selection.Selection.ptlt
+      ~baca.tools.Selection.Selection.ptlts
       ~baca.tools.Selection.Selection.qrun
       ~baca.tools.Selection.Selection.qruns
       ~baca.tools.Selection.Selection.rest
@@ -304,6 +306,10 @@ Methods
 .. automethod:: baca.tools.Selection.Selection.ptail
 
 .. automethod:: baca.tools.Selection.Selection.ptails
+
+.. automethod:: baca.tools.Selection.Selection.ptlt
+
+.. automethod:: baca.tools.Selection.Selection.ptlts
 
 .. automethod:: baca.tools.Selection.Selection.qrun
 

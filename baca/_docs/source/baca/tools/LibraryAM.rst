@@ -24,6 +24,7 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.anchor_to_figure
       ~baca.tools.LibraryAM.LibraryAM.ancora_dynamic
       ~baca.tools.LibraryAM.LibraryAM.arpeggios
+      ~baca.tools.LibraryAM.LibraryAM.articulations
       ~baca.tools.LibraryAM.LibraryAM.bass_to_octave
       ~baca.tools.LibraryAM.LibraryAM.beam_divisions
       ~baca.tools.LibraryAM.LibraryAM.beam_everything
@@ -98,6 +99,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAM.LibraryAM.ancora_dynamic
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.arpeggios
+
+.. automethod:: baca.tools.LibraryAM.LibraryAM.articulations
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.bass_to_octave
 
