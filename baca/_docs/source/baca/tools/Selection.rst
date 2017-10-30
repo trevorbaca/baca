@@ -25,7 +25,10 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.Selection.Selection.are_contiguous_logical_voice
       ~baca.tools.Selection.Selection.are_leaves
+      ~baca.tools.Selection.Selection.are_logical_voice
+      ~baca.tools.Selection.Selection.are_same_parent
       ~baca.tools.Selection.Selection.chead
       ~baca.tools.Selection.Selection.cheads
       ~baca.tools.Selection.Selection.chord
@@ -41,9 +44,6 @@ Bases
       ~baca.tools.Selection.Selection.group_duration
       ~baca.tools.Selection.Selection.group_length
       ~baca.tools.Selection.Selection.group_pitches
-      ~baca.tools.Selection.Selection.in_contiguous_logical_voice
-      ~baca.tools.Selection.Selection.in_logical_voice
-      ~baca.tools.Selection.Selection.in_same_parent
       ~baca.tools.Selection.Selection.items
       ~baca.tools.Selection.Selection.leaf
       ~baca.tools.Selection.Selection.leaves
@@ -113,7 +113,25 @@ Methods
 
    .. container:: inherited
 
+      .. automethod:: baca.tools.Selection.Selection.are_contiguous_logical_voice
+
+.. only:: html
+
+   .. container:: inherited
+
       .. automethod:: baca.tools.Selection.Selection.are_leaves
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Selection.Selection.are_logical_voice
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Selection.Selection.are_same_parent
 
 .. automethod:: baca.tools.Selection.Selection.chead
 
@@ -196,24 +214,6 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Selection.Selection.group_pitches
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Selection.Selection.in_contiguous_logical_voice
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Selection.Selection.in_logical_voice
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Selection.Selection.in_same_parent
 
 .. only:: html
 
