@@ -6074,18 +6074,18 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def messiaen_ties(selector='baca.select().qrun(0)'):
-        r'''Attaches Messaien ties.
+    def messiaen_tie(selector='baca.select().qrun(0)'):
+        r'''Attaches Messaien tie to equipitch run 0.
 
         ..  container:: example
 
-            Attaches Messiaen tie to each PLT p-run:
+            Attaches Messiaen tie to each equipitch run:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.messiaen_ties(),
+            ...     baca.map(baca.messiaen_tie(), baca.select().qruns()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -6131,13 +6131,10 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.map(
-            baca.SpannerCommand(
-                selector=selector,
-                spanner=abjad.Tie(use_messiaen_style_ties=True),
-                ),
-            baca.select().qruns(),
-            )
+        return baca.SpannerCommand(
+            selector=selector,
+            spanner=abjad.Tie(use_messiaen_style_ties=True),
+            ),
 
     @staticmethod
     def molto_flaut_to_molto_grid(selector='baca.select().leaves().group()'):

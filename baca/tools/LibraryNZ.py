@@ -1506,7 +1506,7 @@ class LibraryNZ(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[11, 11, 12], [11, 11, 11], [11]],
-            ...     baca.messiaen_ties(),
+            ...     baca.map(baca.messiaen_tie(), baca.select().qruns()),
             ...     baca.repeat_ties_down(),
             ...     baca.rests_around([2], [4]),
             ...     baca.stems_up(),
@@ -1563,7 +1563,7 @@ class LibraryNZ(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[11, 11, 12], [11, 11, 11], [11]],
-            ...     baca.messiaen_ties(),
+            ...     baca.map(baca.messiaen_tie(), baca.select().qruns()),
             ...     baca.repeat_ties_down(
             ...         baca.select().tuplets()[1:2].pleaves().group()
             ...         ),
@@ -1635,7 +1635,7 @@ class LibraryNZ(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[11, 11, 12], [11, 11, 11], [11]],
-            ...     baca.messiaen_ties(),
+            ...     baca.map(baca.messiaen_tie(), baca.select().qruns()),
             ...     baca.repeat_ties_up(),
             ...     baca.rests_around([2], [4]),
             ...     baca.stems_down(),
@@ -1692,7 +1692,7 @@ class LibraryNZ(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[11, 11, 12], [11, 11, 11], [11]],
-            ...     baca.messiaen_ties(),
+            ...     baca.map(baca.messiaen_tie(), baca.select().qruns()),
             ...     baca.repeat_ties_up(
             ...         baca.select().tuplets()[1:2].pleaves().group()
             ...         ),
