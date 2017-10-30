@@ -8,37 +8,31 @@ class TimeSignatureGroups(abjad.AbjadObject):
 
         Time signature groups:
 
-        ::
+        >>> group_1 = [(3, 8), (3, 16), (3, 16)]
+        >>> group_1 = [abjad.TimeSignature(_) for _ in group_1]
+        >>> group_2 = [(5, 8), (5, 16), (5, 16), (5, 16)]
+        >>> group_2 = [abjad.TimeSignature(_) for _ in group_2]
+        >>> groups = [group_1, group_2]
+        >>> groups = baca.TimeSignatureGroups(groups)
 
-            >>> group_1 = [(3, 8), (3, 16), (3, 16)]
-            >>> group_1 = [abjad.TimeSignature(_) for _ in group_1]
-            >>> group_2 = [(5, 8), (5, 16), (5, 16), (5, 16)]
-            >>> group_2 = [abjad.TimeSignature(_) for _ in group_2]
-            >>> groups = [group_1, group_2]
-            >>> groups = baca.TimeSignatureGroups(groups)
-
-        ::
-
-            >>> abjad.f(groups)
-            baca.TimeSignatureGroups(
+        >>> abjad.f(groups)
+        baca.TimeSignatureGroups(
+            [
                 [
-                    [
-                        abjad.TimeSignature((3, 8)),
-                        abjad.TimeSignature((3, 16)),
-                        abjad.TimeSignature((3, 16)),
-                        ],
-                    [
-                        abjad.TimeSignature((5, 8)),
-                        abjad.TimeSignature((5, 16)),
-                        abjad.TimeSignature((5, 16)),
-                        abjad.TimeSignature((5, 16)),
-                        ],
-                    ]
-                )
+                    abjad.TimeSignature((3, 8)),
+                    abjad.TimeSignature((3, 16)),
+                    abjad.TimeSignature((3, 16)),
+                    ],
+                [
+                    abjad.TimeSignature((5, 8)),
+                    abjad.TimeSignature((5, 16)),
+                    abjad.TimeSignature((5, 16)),
+                    abjad.TimeSignature((5, 16)),
+                    ],
+                ]
+            )
 
-        ::
-
-            >>> abjad.show(groups) # doctest: +SKIP
+        >>> abjad.show(groups) # doctest: +SKIP
 
     '''
 
@@ -65,9 +59,7 @@ class TimeSignatureGroups(abjad.AbjadObject):
     def __illustrate__(self):
         r'''Illustrates time signature groups.
 
-        ::
-
-            >>> abjad.show(groups) # doctest: +SKIP
+        >>> abjad.show(groups) # doctest: +SKIP
 
         ..  docs::
 

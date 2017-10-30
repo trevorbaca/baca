@@ -9,34 +9,30 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
         Default acciaccatura specifier:
 
-        ::
+        >>> rhythm_maker = baca.MusicRhythmMaker(
+        ...     acciaccatura_specifiers=[
+        ...         baca.AcciaccaturaSpecifier()
+        ...         ],
+        ...     talea=abjad.rhythmmakertools.Talea(
+        ...         counts=[1],
+        ...         denominator=8,
+        ...         ),
+        ...     )
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
-            ...     acciaccatura_specifiers=[
-            ...         baca.AcciaccaturaSpecifier()
-            ...         ],
-            ...     talea=abjad.rhythmmakertools.Talea(
-            ...         counts=[1],
-            ...         denominator=8,
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> collections = [
-            ...     [0],
-            ...     [2, 10],
-            ...     [18, 16, 15],
-            ...     [20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ...     [20, 19, 9, 0, 2, 10],
-            ...     ]
-            >>> selections, state_manifest = rhythm_maker(collections)
-            >>> lilypond_file = rhythm_maker.show(selections)
-            >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> collections = [
+        ...     [0],
+        ...     [2, 10],
+        ...     [18, 16, 15],
+        ...     [20, 19, 9, 0],
+        ...     [2, 10, 18, 16, 15],
+        ...     [20, 19, 9, 0, 2, 10],
+        ...     ]
+        >>> selections, state_manifest = rhythm_maker(collections)
+        >>> lilypond_file = rhythm_maker.show(selections)
+        >>> score = lilypond_file[abjad.Score]
+        >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
+        >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -174,34 +170,30 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             Sixteenth-note acciaccaturas by default:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     acciaccatura_specifiers=[
+            ...         baca.AcciaccaturaSpecifier()
+            ...         ],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1],
+            ...         denominator=8,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     acciaccatura_specifiers=[
-                ...         baca.AcciaccaturaSpecifier()
-                ...         ],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1],
-                ...         denominator=8,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0],
-                ...     [2, 10],
-                ...     [18, 16, 15],
-                ...     [20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     [20, 19, 9, 0, 2, 10],
-                ...     ]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> score = lilypond_file[abjad.Score]
-                >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-                >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0],
+            ...     [2, 10],
+            ...     [18, 16, 15],
+            ...     [20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     [20, 19, 9, 0, 2, 10],
+            ...     ]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> score = lilypond_file[abjad.Score]
+            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
+            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -259,36 +251,32 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             Eighth-note acciaccaturas:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     acciaccatura_specifiers=[
+            ...         baca.AcciaccaturaSpecifier(
+            ...             durations=[(1, 8)],
+            ...             ),
+            ...         ],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1],
+            ...         denominator=8,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     acciaccatura_specifiers=[
-                ...         baca.AcciaccaturaSpecifier(
-                ...             durations=[(1, 8)],
-                ...             ),
-                ...         ],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1],
-                ...         denominator=8,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0],
-                ...     [2, 10],
-                ...     [18, 16, 15],
-                ...     [20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     [20, 19, 9, 0, 2, 10],
-                ...     ]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> score = lilypond_file[abjad.Score]
-                >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-                >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0],
+            ...     [2, 10],
+            ...     [18, 16, 15],
+            ...     [20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     [20, 19, 9, 0, 2, 10],
+            ...     ]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> score = lilypond_file[abjad.Score]
+            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
+            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -358,34 +346,30 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             As many acciaccaturas as possible per collection:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     acciaccatura_specifiers=[
+            ...         baca.AcciaccaturaSpecifier()
+            ...         ],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1],
+            ...         denominator=8,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     acciaccatura_specifiers=[
-                ...         baca.AcciaccaturaSpecifier()
-                ...         ],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1],
-                ...         denominator=8,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0],
-                ...     [2, 10],
-                ...     [18, 16, 15],
-                ...     [20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     [20, 19, 9, 0, 2, 10],
-                ...     ]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> score = lilypond_file[abjad.Score]
-                >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-                >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0],
+            ...     [2, 10],
+            ...     [18, 16, 15],
+            ...     [20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     [20, 19, 9, 0, 2, 10],
+            ...     ]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> score = lilypond_file[abjad.Score]
+            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
+            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -443,40 +427,36 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             At most two acciaccaturas at the beginning of every collection:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     acciaccatura_specifiers=[
+            ...         baca.AcciaccaturaSpecifier(
+            ...             lmr_specifier=baca.LMRSpecifier(
+            ...                 left_length=3,
+            ...                 right_counts=[1],
+            ...                 right_cyclic=True,
+            ...                 ),
+            ...             ),
+            ...         ],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1],
+            ...         denominator=8,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     acciaccatura_specifiers=[
-                ...         baca.AcciaccaturaSpecifier(
-                ...             lmr_specifier=baca.LMRSpecifier(
-                ...                 left_length=3,
-                ...                 right_counts=[1],
-                ...                 right_cyclic=True,
-                ...                 ),
-                ...             ),
-                ...         ],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1],
-                ...         denominator=8,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0],
-                ...     [2, 10],
-                ...     [18, 16, 15],
-                ...     [20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     [20, 19, 9, 0, 2, 10],
-                ...     ]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> score = lilypond_file[abjad.Score]
-                >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-                >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0],
+            ...     [2, 10],
+            ...     [18, 16, 15],
+            ...     [20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     [20, 19, 9, 0, 2, 10],
+            ...     ]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> score = lilypond_file[abjad.Score]
+            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
+            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -534,40 +514,36 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             At most two acciaccaturas at the end of every collection:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     acciaccatura_specifiers=[
+            ...         baca.AcciaccaturaSpecifier(
+            ...             lmr_specifier=baca.LMRSpecifier(
+            ...                 right_length=3,
+            ...                 left_counts=[1],
+            ...                 left_cyclic=True,
+            ...                 ),
+            ...             ),
+            ...         ],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1],
+            ...         denominator=8,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     acciaccatura_specifiers=[
-                ...         baca.AcciaccaturaSpecifier(
-                ...             lmr_specifier=baca.LMRSpecifier(
-                ...                 right_length=3,
-                ...                 left_counts=[1],
-                ...                 left_cyclic=True,
-                ...                 ),
-                ...             ),
-                ...         ],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1],
-                ...         denominator=8,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0],
-                ...     [2, 10],
-                ...     [18, 16, 15],
-                ...     [20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     [20, 19, 9, 0, 2, 10],
-                ...     ]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> score = lilypond_file[abjad.Score]
-                >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-                >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0],
+            ...     [2, 10],
+            ...     [18, 16, 15],
+            ...     [20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     [20, 19, 9, 0, 2, 10],
+            ...     ]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> score = lilypond_file[abjad.Score]
+            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
+            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -626,41 +602,37 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             At most two acciaccaturas at the beginning of every collection and
             then at most two acciaccaturas at the end of every collection:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     acciaccatura_specifiers=[
+            ...         baca.AcciaccaturaSpecifier(
+            ...             lmr_specifier=baca.LMRSpecifier(
+            ...                 left_length=3,
+            ...                 middle_counts=[1],
+            ...                 middle_cyclic=True,
+            ...                 right_length=3,
+            ...                 ),
+            ...             ),
+            ...         ],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1],
+            ...         denominator=8,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     acciaccatura_specifiers=[
-                ...         baca.AcciaccaturaSpecifier(
-                ...             lmr_specifier=baca.LMRSpecifier(
-                ...                 left_length=3,
-                ...                 middle_counts=[1],
-                ...                 middle_cyclic=True,
-                ...                 right_length=3,
-                ...                 ),
-                ...             ),
-                ...         ],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1],
-                ...         denominator=8,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0],
-                ...     [2, 10],
-                ...     [18, 16, 15],
-                ...     [20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     [20, 19, 9, 0, 2, 10],
-                ...     ]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> score = lilypond_file[abjad.Score]
-                >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-                >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0],
+            ...     [2, 10],
+            ...     [18, 16, 15],
+            ...     [20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     [20, 19, 9, 0, 2, 10],
+            ...     ]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> score = lilypond_file[abjad.Score]
+            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
+            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -722,38 +694,34 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             As many acciaccaturas as possible in the middle of every collection:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     acciaccatura_specifiers=[
+            ...         baca.AcciaccaturaSpecifier(
+            ...             lmr_specifier=baca.LMRSpecifier(
+            ...                 left_length=1,
+            ...                 ),
+            ...             ),
+            ...         ],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1],
+            ...         denominator=8,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     acciaccatura_specifiers=[
-                ...         baca.AcciaccaturaSpecifier(
-                ...             lmr_specifier=baca.LMRSpecifier(
-                ...                 left_length=1,
-                ...                 ),
-                ...             ),
-                ...         ],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1],
-                ...         denominator=8,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0],
-                ...     [2, 10],
-                ...     [18, 16, 15],
-                ...     [20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     [20, 19, 9, 0, 2, 10],
-                ...     ]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> score = lilypond_file[abjad.Score]
-                >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-                >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0],
+            ...     [2, 10],
+            ...     [18, 16, 15],
+            ...     [20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     [20, 19, 9, 0, 2, 10],
+            ...     ]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> score = lilypond_file[abjad.Score]
+            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
+            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -821,34 +789,30 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             Applies to all collections by default:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     acciaccatura_specifiers=[
+            ...         baca.AcciaccaturaSpecifier()
+            ...         ],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1],
+            ...         denominator=8,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     acciaccatura_specifiers=[
-                ...         baca.AcciaccaturaSpecifier()
-                ...         ],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1],
-                ...         denominator=8,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0],
-                ...     [2, 10],
-                ...     [18, 16, 15],
-                ...     [20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     [20, 19, 9, 0, 2, 10],
-                ...     ]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> score = lilypond_file[abjad.Score]
-                >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-                >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0],
+            ...     [2, 10],
+            ...     [18, 16, 15],
+            ...     [20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     [20, 19, 9, 0, 2, 10],
+            ...     ]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> score = lilypond_file[abjad.Score]
+            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
+            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -906,36 +870,32 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             Applies to last collection:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     acciaccatura_specifiers=[
+            ...         baca.AcciaccaturaSpecifier(
+            ...             pattern=abjad.index_last(1),
+            ...             ),
+            ...         ],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1],
+            ...         denominator=8,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     acciaccatura_specifiers=[
-                ...         baca.AcciaccaturaSpecifier(
-                ...             pattern=abjad.index_last(1),
-                ...             ),
-                ...         ],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1],
-                ...         denominator=8,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0],
-                ...     [2, 10],
-                ...     [18, 16, 15],
-                ...     [20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     [20, 19, 9, 0, 2, 10],
-                ...     ]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> score = lilypond_file[abjad.Score]
-                >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-                >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0],
+            ...     [2, 10],
+            ...     [18, 16, 15],
+            ...     [20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     [20, 19, 9, 0, 2, 10],
+            ...     ]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> score = lilypond_file[abjad.Score]
+            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
+            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -985,36 +945,32 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             Applies to every other collection:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     acciaccatura_specifiers=[
+            ...         baca.AcciaccaturaSpecifier(
+            ...             pattern=abjad.index_every([1], period=2),
+            ...             ),
+            ...         ],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1],
+            ...         denominator=8,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     acciaccatura_specifiers=[
-                ...         baca.AcciaccaturaSpecifier(
-                ...             pattern=abjad.index_every([1], period=2),
-                ...             ),
-                ...         ],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1],
-                ...         denominator=8,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0],
-                ...     [2, 10],
-                ...     [18, 16, 15],
-                ...     [20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     [20, 19, 9, 0, 2, 10],
-                ...     ]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> score = lilypond_file[abjad.Score]
-                >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-                >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0],
+            ...     [2, 10],
+            ...     [18, 16, 15],
+            ...     [20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     [20, 19, 9, 0, 2, 10],
+            ...     ]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> score = lilypond_file[abjad.Score]
+            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
+            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 

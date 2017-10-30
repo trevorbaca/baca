@@ -39,34 +39,24 @@ class Expression(abjad.Expression):
 
             Makes expression to apply alpha transform to pitch-class segment:
 
-            ::
+            >>> baca.PitchClassSegment([-2, -1.5, 6, 7, -1.5, 7])
+            PitchClassSegment([10, 10.5, 6, 7, 10.5, 7])
 
-                >>> baca.PitchClassSegment([-2, -1.5, 6, 7, -1.5, 7])
-                PitchClassSegment([10, 10.5, 6, 7, 10.5, 7])
-
-            ::
-
-                >>> segment = baca.PitchClassSegment([-2, -1.5, 6, 7, -1.5, 7])
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> segment = baca.PitchClassSegment([-2, -1.5, 6, 7, -1.5, 7])
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  container:: example expression
 
-                ::
+                >>> expression = baca.Expression(name='J')
+                >>> expression = expression.pitch_class_segment()
+                >>> expression = expression.alpha()
 
-                    >>> expression = baca.Expression(name='J')
-                    >>> expression = expression.pitch_class_segment()
-                    >>> expression = expression.alpha()
+                >>> expression([-2, -1.5, 6, 7, -1.5, 7])
+                PitchClassSegment([11, 11.5, 7, 6, 11.5, 6])
 
-                ::
-
-                    >>> expression([-2, -1.5, 6, 7, -1.5, 7])
-                    PitchClassSegment([11, 11.5, 7, 6, 11.5, 6])
-
-                ::
-
-                    >>> segment = expression([-2, -1.5, 6, 7, -1.5, 7])
-                    >>> markup = expression.get_markup()
-                    >>> abjad.show(segment, figure_name=markup) # doctest: +SKIP
+                >>> segment = expression([-2, -1.5, 6, 7, -1.5, 7])
+                >>> markup = expression.get_markup()
+                >>> abjad.show(segment, figure_name=markup) # doctest: +SKIP
 
                 ..  docs::
 
@@ -103,13 +93,11 @@ class Expression(abjad.Expression):
 
             ..  container:: example
 
-                ::
-
-                    >>> staff = abjad.Staff()
-                    >>> staff.append(abjad.Measure((2, 8), "<c' bf'>8 <g' a'>8"))
-                    >>> staff.append(abjad.Measure((2, 8), "af'8 r8"))
-                    >>> staff.append(abjad.Measure((2, 8), "r8 gf'8"))
-                    >>> abjad.show(staff) # doctest: +SKIP
+                >>> staff = abjad.Staff()
+                >>> staff.append(abjad.Measure((2, 8), "<c' bf'>8 <g' a'>8"))
+                >>> staff.append(abjad.Measure((2, 8), "af'8 r8"))
+                >>> staff.append(abjad.Measure((2, 8), "r8 gf'8"))
+                >>> abjad.show(staff) # doctest: +SKIP
 
                 ..  docs::
 
@@ -132,23 +120,19 @@ class Expression(abjad.Expression):
 
             ..  container:: example expression
 
-                ::
+                >>> expression = baca.Expression()
+                >>> expression = expression.select()
+                >>> expression = expression.leaves()
 
-                    >>> expression = baca.Expression()
-                    >>> expression = expression.select()
-                    >>> expression = expression.leaves()
-
-                ::
-
-                    >>> for leaf in expression(staff):
-                    ...     leaf
-                    ...
-                    Chord("<c' bf'>8")
-                    Chord("<g' a'>8")
-                    Note("af'8")
-                    Rest('r8')
-                    Rest('r8')
-                    Note("gf'8")
+                >>> for leaf in expression(staff):
+                ...     leaf
+                ...
+                Chord("<c' bf'>8")
+                Chord("<g' a'>8")
+                Note("af'8")
+                Rest('r8')
+                Rest('r8')
+                Note("gf'8")
 
         Returns expression.
         '''

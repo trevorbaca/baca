@@ -24,20 +24,18 @@ class MarkupLibrary(object):
 
             Attaches markup to pitched head 0:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.markup('più mosso'),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.markup('più mosso'),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -79,20 +77,18 @@ class MarkupLibrary(object):
 
             Attaches markup to pitched head 0 in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.markup('più mosso', baca.select().tuplets()[1:2].phead(0)),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.markup('più mosso', baca.select().tuplets()[1:2].phead(0)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -134,20 +130,18 @@ class MarkupLibrary(object):
 
             Attaches markup to pitched heads in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.markup('*', baca.select().tuplets()[1:2].pheads()),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.markup('*', baca.select().tuplets()[1:2].pheads()),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -457,13 +451,9 @@ class MarkupLibrary(object):
 
             Makes instrument name markup in column:
 
-            ::
+            >>> markup = baca.markup.instrument('Eng. horn')
 
-                >>> markup = baca.markup.instrument('Eng. horn')
-
-            ::
-
-                >>> abjad.show(markup) # doctest: +SKIP
+            >>> abjad.show(markup) # doctest: +SKIP
 
             ..  docs::
 
@@ -482,16 +472,12 @@ class MarkupLibrary(object):
 
             Makes instrument name markup in line:
 
-            ::
+            >>> markup = baca.markup.instrument(
+            ...     'Violin 1',
+            ...     column=False,
+            ...     )
 
-                >>> markup = baca.markup.instrument(
-                ...     'Violin 1',
-                ...     column=False,
-                ...     )
-
-            ::
-
-                >>> abjad.show(markup) # doctest: +SKIP
+            >>> abjad.show(markup) # doctest: +SKIP
 
             ..  docs::
 
@@ -1084,13 +1070,9 @@ class MarkupLibrary(object):
 
             Makes short instrument name markup in column:
 
-            ::
+            >>> markup = baca.markup.short_instrument('Eng. hn.')
 
-                >>> markup = baca.markup.short_instrument('Eng. hn.')
-
-            ::
-
-                >>> abjad.show(markup) # doctest: +SKIP
+            >>> abjad.show(markup) # doctest: +SKIP
 
             ..  docs::
 
@@ -1109,16 +1091,12 @@ class MarkupLibrary(object):
 
             Makes short instrument name markup in line:
 
-            ::
+            >>> markup = baca.markup.short_instrument(
+            ...     'Vn. 1',
+            ...     column=False,
+            ...     )
 
-                >>> markup = baca.markup.short_instrument(
-                ...     'Vn. 1',
-                ...     column=False,
-                ...     )
-
-            ::
-
-                >>> abjad.show(markup) # doctest: +SKIP
+            >>> abjad.show(markup) # doctest: +SKIP
 
             ..  docs::
 

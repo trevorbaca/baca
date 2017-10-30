@@ -10,28 +10,24 @@ class IndicatorCommand(Command):
 
         With music-maker:
 
-        ::
+        >>> music_maker = baca.MusicMaker(
+        ...     baca.IndicatorCommand(
+        ...         arguments=[abjad.Fermata()],
+        ...         ),
+        ...     baca.MusicRhythmSpecifier(
+        ...         rhythm_maker=baca.MusicRhythmMaker(
+        ...             talea=abjad.rhythmmakertools.Talea(
+        ...                 counts=[5, 4, 4, 5, 4, 4, 4],
+        ...                 denominator=32,
+        ...                 ),
+        ...             ),
+        ...         ),
+        ...     )
 
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.IndicatorCommand(
-            ...         arguments=[abjad.Fermata()],
-            ...         ),
-            ...     baca.MusicRhythmSpecifier(
-            ...         rhythm_maker=baca.MusicRhythmMaker(
-            ...             talea=abjad.rhythmmakertools.Talea(
-            ...                 counts=[5, 4, 4, 5, 4, 4, 4],
-            ...                 denominator=32,
-            ...                 ),
-            ...             ),
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = music_maker('Voice 1', collections)
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> contribution = music_maker('Voice 1', collections)
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -67,29 +63,23 @@ class IndicatorCommand(Command):
 
         With segment-maker:
 
-        ::
+        >>> segment_maker = baca.SegmentMaker(
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
 
-            >>> segment_maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.even_runs(),
+        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.IndicatorCommand(
+        ...         arguments=[abjad.Fermata()],
+        ...         ),
+        ...     )
 
-        ::
-
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
-            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.IndicatorCommand(
-            ...         arguments=[abjad.Fermata()],
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -227,28 +217,24 @@ class IndicatorCommand(Command):
 
             Attaches fermata to head of every pitched logical tie:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.IndicatorCommand(
+            ...         arguments=[abjad.Fermata()],
+            ...         ),
+            ...     baca.MusicRhythmSpecifier(
+            ...         rhythm_maker=baca.MusicRhythmMaker(
+            ...             talea=abjad.rhythmmakertools.Talea(
+            ...                 counts=[5, 4, 4, 5, 4, 4, 4],
+            ...                 denominator=32,
+            ...                 ),
+            ...             ),
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.IndicatorCommand(
-                ...         arguments=[abjad.Fermata()],
-                ...         ),
-                ...     baca.MusicRhythmSpecifier(
-                ...         rhythm_maker=baca.MusicRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[5, 4, 4, 5, 4, 4, 4],
-                ...                 denominator=32,
-                ...                 ),
-                ...             ),
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -284,32 +270,28 @@ class IndicatorCommand(Command):
 
             Patterns fermatas:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.IndicatorCommand(
+            ...         arguments=[
+            ...             abjad.Fermata(), None, None,
+            ...             abjad.Fermata(), None, None,
+            ...             abjad.Fermata(), None,
+            ...             ],
+            ...         ),
+            ...     baca.MusicRhythmSpecifier(
+            ...         rhythm_maker=baca.MusicRhythmMaker(
+            ...             talea=abjad.rhythmmakertools.Talea(
+            ...                 counts=[5, 4, 4, 5, 4, 4, 4],
+            ...                 denominator=32,
+            ...                 ),
+            ...             ),
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.IndicatorCommand(
-                ...         arguments=[
-                ...             abjad.Fermata(), None, None,
-                ...             abjad.Fermata(), None, None,
-                ...             abjad.Fermata(), None,
-                ...             ],
-                ...         ),
-                ...     baca.MusicRhythmSpecifier(
-                ...         rhythm_maker=baca.MusicRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[5, 4, 4, 5, 4, 4, 4],
-                ...                 denominator=32,
-                ...                 ),
-                ...             ),
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 

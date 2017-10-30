@@ -9,102 +9,92 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
 
         Division lists for examples:
 
-        ::
-
-            >>> division_maker = baca.DivisionMaker()
-            >>> division_maker = division_maker.split_by_durations(
-            ...     compound_meter_multiplier=(3, 2),
-            ...     durations=[(1, 4)],
-            ...     )
-            >>> meters = [
-            ...     abjad.Meter((4, 4)),
-            ...     abjad.Meter((5, 4)),
-            ...     abjad.Meter((6, 4)),
-            ...     abjad.Meter((7, 4)),
-            ...     ]
-            >>> beat_lists = division_maker(meters)
-            >>> for beat_list in beat_lists:
-            ...     beat_list
-            [Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))]
-            [Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))]
-            [Division((3, 8)), Division((3, 8)), Division((3, 8)), Division((3, 8))]
-            [Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))]
+        >>> division_maker = baca.DivisionMaker()
+        >>> division_maker = division_maker.split_by_durations(
+        ...     compound_meter_multiplier=(3, 2),
+        ...     durations=[(1, 4)],
+        ...     )
+        >>> meters = [
+        ...     abjad.Meter((4, 4)),
+        ...     abjad.Meter((5, 4)),
+        ...     abjad.Meter((6, 4)),
+        ...     abjad.Meter((7, 4)),
+        ...     ]
+        >>> beat_lists = division_maker(meters)
+        >>> for beat_list in beat_lists:
+        ...     beat_list
+        [Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))]
+        [Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))]
+        [Division((3, 8)), Division((3, 8)), Division((3, 8)), Division((3, 8))]
+        [Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))]
 
     ..  container:: example
 
         Beat lists grouped in pairs. Remainder at right:
 
-        ::
-
-            >>> callback = baca.PartitionDivisionCallback(
-            ...     counts=[2],
-            ...     append_remainder=False,
-            ...     remainder_direction=abjad.Right,
-            ...     )
-            >>> grouped_beat_lists = callback(beat_lists)
-            >>> for grouped_beat_list in grouped_beat_lists:
-            ...     grouped_beat_list
-            ...
-            Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
-            [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
-            Sequence([Sequence([Division((3, 8)), Division((3, 8))]), Sequence([Division((3, 8)), Division((3, 8))])])
-            [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
+        >>> callback = baca.PartitionDivisionCallback(
+        ...     counts=[2],
+        ...     append_remainder=False,
+        ...     remainder_direction=abjad.Right,
+        ...     )
+        >>> grouped_beat_lists = callback(beat_lists)
+        >>> for grouped_beat_list in grouped_beat_lists:
+        ...     grouped_beat_list
+        ...
+        Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+        [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
+        Sequence([Sequence([Division((3, 8)), Division((3, 8))]), Sequence([Division((3, 8)), Division((3, 8))])])
+        [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
 
         Beat lists grouped in pairs. Remainder fused at right:
 
-        ::
-
-            >>> callback = baca.PartitionDivisionCallback(
-            ...     counts=[2],
-            ...     append_remainder=True,
-            ...     remainder_direction=abjad.Right,
-            ...     )
-            >>> grouped_beat_lists = callback(beat_lists)
-            >>> for grouped_beat_list in grouped_beat_lists:
-            ...     grouped_beat_list
-            ...
-            Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
-            [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))])]
-            Sequence([Sequence([Division((3, 8)), Division((3, 8))]), Sequence([Division((3, 8)), Division((3, 8))])])
-            [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))])]
+        >>> callback = baca.PartitionDivisionCallback(
+        ...     counts=[2],
+        ...     append_remainder=True,
+        ...     remainder_direction=abjad.Right,
+        ...     )
+        >>> grouped_beat_lists = callback(beat_lists)
+        >>> for grouped_beat_list in grouped_beat_lists:
+        ...     grouped_beat_list
+        ...
+        Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+        [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))])]
+        Sequence([Sequence([Division((3, 8)), Division((3, 8))]), Sequence([Division((3, 8)), Division((3, 8))])])
+        [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))])]
 
     ..  container:: example
 
         Beat lists grouped in pairs. Remainder at left:
 
-        ::
-
-            >>> callback = baca.PartitionDivisionCallback(
-            ...     counts=[2],
-            ...     append_remainder=False,
-            ...     remainder_direction=abjad.Left,
-            ...     )
-            >>> grouped_beat_lists = callback(beat_lists)
-            >>> for grouped_beat_list in grouped_beat_lists:
-            ...     grouped_beat_list
-            ...
-            Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
-            [[Division((1, 4))], Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])]
-            Sequence([Sequence([Division((3, 8)), Division((3, 8))]), Sequence([Division((3, 8)), Division((3, 8))])])
-            [[Division((1, 4))], Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])]
+        >>> callback = baca.PartitionDivisionCallback(
+        ...     counts=[2],
+        ...     append_remainder=False,
+        ...     remainder_direction=abjad.Left,
+        ...     )
+        >>> grouped_beat_lists = callback(beat_lists)
+        >>> for grouped_beat_list in grouped_beat_lists:
+        ...     grouped_beat_list
+        ...
+        Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+        [[Division((1, 4))], Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])]
+        Sequence([Sequence([Division((3, 8)), Division((3, 8))]), Sequence([Division((3, 8)), Division((3, 8))])])
+        [[Division((1, 4))], Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])]
 
         Beat lists grouped in pairs. Remainder fused at left:
 
-        ::
-
-            >>> callback = baca.PartitionDivisionCallback(
-            ...     counts=[2],
-            ...     append_remainder=True,
-            ...     remainder_direction=abjad.Left,
-            ...     )
-            >>> grouped_beat_lists = callback(beat_lists)
-            >>> for grouped_beat_list in grouped_beat_lists:
-            ...     grouped_beat_list
-            ...
-            Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
-            [Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])]
-            Sequence([Sequence([Division((3, 8)), Division((3, 8))]), Sequence([Division((3, 8)), Division((3, 8))])])
-            [Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])]
+        >>> callback = baca.PartitionDivisionCallback(
+        ...     counts=[2],
+        ...     append_remainder=True,
+        ...     remainder_direction=abjad.Left,
+        ...     )
+        >>> grouped_beat_lists = callback(beat_lists)
+        >>> for grouped_beat_list in grouped_beat_lists:
+        ...     grouped_beat_list
+        ...
+        Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+        [Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])]
+        Sequence([Sequence([Division((3, 8)), Division((3, 8))]), Sequence([Division((3, 8)), Division((3, 8))])])
+        [Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])]
 
     Groups beats into conductors' groups.
     '''
@@ -145,71 +135,55 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
 
             Groups beat list elements into pairs:
 
-            ::
+            >>> callback = baca.PartitionDivisionCallback(
+            ...     counts=[2],
+            ...     )
+            >>> division = 6 * [(1, 4)]
+            >>> grouped_divisions = callback([division])
+            >>> grouped_divisions[0]
+            Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
 
-                >>> callback = baca.PartitionDivisionCallback(
-                ...     counts=[2],
-                ...     )
-                >>> division = 6 * [(1, 4)]
-                >>> grouped_divisions = callback([division])
-                >>> grouped_divisions[0]
-                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
-
-            ::
-
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2]
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2, 2]
 
         ..  container:: example
 
             Groups beat list elements into groups of three:
 
-            ::
+            >>> callback = baca.PartitionDivisionCallback(
+            ...     counts=[3],
+            ...     )
+            >>> division = 6 * [(1, 4)]
+            >>> grouped_divisions = callback([division])
+            >>> grouped_divisions[0]
+            Sequence([Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))])])
 
-                >>> callback = baca.PartitionDivisionCallback(
-                ...     counts=[3],
-                ...     )
-                >>> division = 6 * [(1, 4)]
-                >>> grouped_divisions = callback([division])
-                >>> grouped_divisions[0]
-                Sequence([Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))])])
-
-            ::
-
-                >>> [len(beat_group) for beat_group in _]
-                [3, 3]
+            >>> [len(beat_group) for beat_group in _]
+            [3, 3]
 
         ..  container:: example
 
             Works with start offset:
 
-            ::
+            >>> callback = baca.PartitionDivisionCallback(counts=[3])
+            >>> divisions = 6 * [baca.Division((1, 4))]
+            >>> divisions[0]._start_offset = abjad.Offset(1, 4)
 
-                >>> callback = baca.PartitionDivisionCallback(counts=[3])
-                >>> divisions = 6 * [baca.Division((1, 4))]
-                >>> divisions[0]._start_offset = abjad.Offset(1, 4)
+            >>> division_lists = callback(divisions)
+            >>> len(division_lists)
+            2
 
-            ::
+            >>> for division in division_lists[0]:
+            ...     division
+            Division((1, 4), start_offset=Offset(1, 4))
+            Division((1, 4), start_offset=Offset(1, 2))
+            Division((1, 4), start_offset=Offset(3, 4))
 
-                >>> division_lists = callback(divisions)
-                >>> len(division_lists)
-                2
-
-            ::
-
-                >>> for division in division_lists[0]:
-                ...     division
-                Division((1, 4), start_offset=Offset(1, 4))
-                Division((1, 4), start_offset=Offset(1, 2))
-                Division((1, 4), start_offset=Offset(3, 4))
-
-            ::
-
-                >>> for division in division_lists[1]:
-                ...     division
-                Division((1, 4), start_offset=Offset(1, 1))
-                Division((1, 4), start_offset=Offset(5, 4))
-                Division((1, 4), start_offset=Offset(3, 2))
+            >>> for division in division_lists[1]:
+            ...     division
+            Division((1, 4), start_offset=Offset(1, 1))
+            Division((1, 4), start_offset=Offset(5, 4))
+            Division((1, 4), start_offset=Offset(3, 2))
 
         Returns list of division lists.
         '''
@@ -239,15 +213,13 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
-
-                >>> callback = baca.PartitionDivisionCallback()
-                >>> abjad.f(callback)
-                baca.PartitionDivisionCallback(
-                    fuse_assignable_total_duration=False,
-                    append_remainder=False,
-                    remainder_direction=Right,
-                    )
+            >>> callback = baca.PartitionDivisionCallback()
+            >>> abjad.f(callback)
+            baca.PartitionDivisionCallback(
+                fuse_assignable_total_duration=False,
+                append_remainder=False,
+                remainder_direction=Right,
+                )
 
         Returns string.
         '''
@@ -261,10 +233,8 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
-
-                >>> baca.PartitionDivisionCallback()
-                PartitionDivisionCallback(fuse_assignable_total_duration=False, append_remainder=False, remainder_direction=Right)
+            >>> baca.PartitionDivisionCallback()
+            PartitionDivisionCallback(fuse_assignable_total_duration=False, append_remainder=False, remainder_direction=Right)
 
         Returns string.
         '''
@@ -340,146 +310,102 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
             Groups beats into pairs. Remainder at right. Does not fuse
             remainder:
 
-            ::
+            >>> callback = baca.PartitionDivisionCallback(
+            ...     counts=[2],
+            ...     append_remainder=False,
+            ...     remainder_direction=abjad.Right,
+            ...     )
 
-                >>> callback = baca.PartitionDivisionCallback(
-                ...     counts=[2],
-                ...     append_remainder=False,
-                ...     remainder_direction=abjad.Right,
-                ...     )
+            >>> beat_list = 5 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
 
-            ::
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2, 1]
 
-                >>> beat_list = 5 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
+            >>> beat_list = 6 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
 
-            ::
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2, 2]
 
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 1]
+            >>> beat_list = 7 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
 
-            ::
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2, 2, 1]
 
-                >>> beat_list = 6 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+            >>> beat_list = 8 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
 
-            ::
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2, 2, 2]
 
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2]
+            >>> beat_list = 9 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
 
-            ::
-
-                >>> beat_list = 7 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
-
-            ::
-
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2, 1]
-
-            ::
-
-                >>> beat_list = 8 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
-
-            ::
-
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2, 2]
-
-            ::
-
-                >>> beat_list = 9 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
-
-            ::
-
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2, 2, 1]
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2, 2, 2, 1]
 
         ..  container:: example
 
             Groups beats into groups of two. Remainder at right.
             Fuses remainder to nearest group:
 
-            ::
+            >>> callback = baca.PartitionDivisionCallback(
+            ...     counts=[2],
+            ...     append_remainder=True,
+            ...     remainder_direction=abjad.Right,
+            ...     )
 
-                >>> callback = baca.PartitionDivisionCallback(
-                ...     counts=[2],
-                ...     append_remainder=True,
-                ...     remainder_direction=abjad.Right,
-                ...     )
+            >>> beat_list = 5 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))])]
 
-            ::
+            >>> [len(beat_group) for beat_group in _]
+            [2, 3]
 
-                >>> beat_list = 5 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))])]
+            >>> beat_list = 6 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
 
-            ::
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2, 2]
 
-                >>> [len(beat_group) for beat_group in _]
-                [2, 3]
+            >>> beat_list = 7 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))])]
 
-            ::
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2, 3]
 
-                >>> beat_list = 6 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+            >>> beat_list = 8 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
 
-            ::
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2, 2, 2]
 
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2]
+            >>> beat_list = 9 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))])]
 
-            ::
-
-                >>> beat_list = 7 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))])]
-
-            ::
-
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 3]
-
-            ::
-
-                >>> beat_list = 8 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
-
-            ::
-
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2, 2]
-
-            ::
-
-                >>> beat_list = 9 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))])]
-
-            ::
-
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2, 3]
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2, 2, 3]
 
         Defaults to false.
 
@@ -495,55 +421,45 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
 
             Groups beats into a single group:
 
-            ::
-
-                >>> callback = baca.PartitionDivisionCallback(
-                ...     counts=None,
-                ...     )
-                >>> beat_list = 6 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))]]
-                >>> [len(beat_group) for beat_group in _]
-                [6]
+            >>> callback = baca.PartitionDivisionCallback(
+            ...     counts=None,
+            ...     )
+            >>> beat_list = 6 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            [[Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))]]
+            >>> [len(beat_group) for beat_group in _]
+            [6]
 
         ..  container:: example
 
             Groups beats into pairs:
 
-            ::
+            >>> callback = baca.PartitionDivisionCallback(
+            ...     counts=[2],
+            ...     )
+            >>> beat_list = 6 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
 
-                >>> callback = baca.PartitionDivisionCallback(
-                ...     counts=[2],
-                ...     )
-                >>> beat_list = 6 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
-
-            ::
-
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2]
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2, 2]
 
         ..  container:: example
 
             Groups beats into groups of three:
 
-            ::
+            >>> callback = baca.PartitionDivisionCallback(
+            ...     counts=[3],
+            ...     )
+            >>> beat_list = 6 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            Sequence([Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))])])
 
-                >>> callback = baca.PartitionDivisionCallback(
-                ...     counts=[3],
-                ...     )
-                >>> beat_list = 6 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                Sequence([Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4)), Division((1, 4))])])
-
-            ::
-
-                >>> [len(beat_group) for beat_group in _]
-                [3, 3]
+            >>> [len(beat_group) for beat_group in _]
+            [3, 3]
 
         Defaults to none.
 
@@ -560,134 +476,96 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
 
             Groups beats into pairs. Does not fuse assignable total durations:
 
-            ::
+            >>> callback = baca.PartitionDivisionCallback(
+            ...     counts=[2],
+            ...     fuse_assignable_total_duration=False,
+            ...     )
 
-                >>> callback = baca.PartitionDivisionCallback(
-                ...     counts=[2],
-                ...     fuse_assignable_total_duration=False,
-                ...     )
+            >>> beat_list = 5 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
 
-            ::
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2, 1]
 
-                >>> beat_list = 5 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
+            >>> beat_list = 6 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
 
-            ::
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2, 2]
 
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 1]
+            >>> beat_list = 7 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
 
-            ::
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2, 2, 1]
 
-                >>> beat_list = 6 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+            >>> beat_list = 8 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
 
-            ::
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2, 2, 2]
 
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2]
+            >>> beat_list = 9 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
 
-            ::
-
-                >>> beat_list = 7 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
-
-            ::
-
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2, 1]
-
-            ::
-
-                >>> beat_list = 8 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
-
-            ::
-
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2, 2]
-
-            ::
-
-                >>> beat_list = 9 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
-
-            ::
-
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2, 2, 1]
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2, 2, 2, 1]
 
         ..  container:: example
 
             Groups beats into pairs. Fuse assignable total durations:
 
-            ::
+            >>> callback = baca.PartitionDivisionCallback(
+            ...     counts=[2],
+            ...     fuse_assignable_total_duration=True,
+            ...     )
 
-                >>> callback = baca.PartitionDivisionCallback(
-                ...     counts=[2],
-                ...     fuse_assignable_total_duration=True,
-                ...     )
+            >>> beat_list = 5 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
 
-            ::
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2, 1]
 
-                >>> beat_list = 5 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
+            >>> beat_list = 6 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            [[Division((3, 2))]]
+            >>> [len(beat_group) for beat_group in _]
+            [1]
 
-            ::
+            >>> beat_list = 7 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            [[Division((7, 4))]]
+            >>> [len(beat_group) for beat_group in _]
+            [1]
 
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 1]
+            >>> beat_list = 8 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            [[Division((2, 1))]]
+            >>> [len(beat_group) for beat_group in _]
+            [1]
 
-            ::
+            >>> beat_list = 9 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
 
-                >>> beat_list = 6 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [[Division((3, 2))]]
-                >>> [len(beat_group) for beat_group in _]
-                [1]
-
-            ::
-
-                >>> beat_list = 7 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [[Division((7, 4))]]
-                >>> [len(beat_group) for beat_group in _]
-                [1]
-
-            ::
-
-                >>> beat_list = 8 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [[Division((2, 1))]]
-                >>> [len(beat_group) for beat_group in _]
-                [1]
-
-            ::
-
-                >>> beat_list = 9 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
-
-            ::
-
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2, 2, 1]
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2, 2, 2, 1]
 
         Overrides all other settings when total duration is assignable.
 
@@ -705,119 +583,83 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
 
             Groups beats into pairs. Remainder at right:
 
-            ::
+            >>> callback = baca.PartitionDivisionCallback(
+            ...     counts=[2],
+            ...     remainder_direction=abjad.Right,
+            ...     )
 
-                >>> callback = baca.PartitionDivisionCallback(
-                ...     counts=[2],
-                ...     remainder_direction=abjad.Right,
-                ...     )
+            >>> beat_list = 4 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
 
-            ::
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2]
 
-                >>> beat_list = 4 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+            >>> beat_list = 5 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
 
-            ::
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2, 1]
 
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2]
+            >>> beat_list = 6 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
 
-            ::
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2, 2]
 
-                >>> beat_list = 5 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
+            >>> beat_list = 7 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
 
-            ::
-
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 1]
-
-            ::
-
-                >>> beat_list = 6 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
-
-            ::
-
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2]
-
-            ::
-
-                >>> beat_list = 7 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), [Division((1, 4))]]
-
-            ::
-
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2, 1]
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2, 2, 1]
 
         ..  container:: example
 
             Groups beats into pairs. Remainder at left:
 
-            ::
+            >>> callback = baca.PartitionDivisionCallback(
+            ...     counts=[2],
+            ...     remainder_direction=abjad.Left,
+            ...     )
 
-                >>> callback = baca.PartitionDivisionCallback(
-                ...     counts=[2],
-                ...     remainder_direction=abjad.Left,
-                ...     )
+            >>> beat_list = 4 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
 
-            ::
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2]
 
-                >>> beat_list = 4 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
+            >>> beat_list = 5 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            [[Division((1, 4))], Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])]
 
-            ::
+            >>> [len(beat_group) for beat_group in _]
+            [1, 2, 2]
 
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2]
+            >>> beat_list = 6 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
 
-            ::
+            >>> [len(beat_group) for beat_group in _]
+            [2, 2, 2]
 
-                >>> beat_list = 5 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [[Division((1, 4))], Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])]
+            >>> beat_list = 7 * [(1, 4)]
+            >>> grouped_beat_lists = callback([beat_list])
+            >>> grouped_beat_lists[0]
+            [[Division((1, 4))], Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])]
 
-            ::
-
-                >>> [len(beat_group) for beat_group in _]
-                [1, 2, 2]
-
-            ::
-
-                >>> beat_list = 6 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                Sequence([Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])])
-
-            ::
-
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2]
-
-            ::
-
-                >>> beat_list = 7 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [[Division((1, 4))], Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))]), Sequence([Division((1, 4)), Division((1, 4))])]
-
-            ::
-
-                >>> [len(beat_group) for beat_group in _]
-                [1, 2, 2, 2]
+            >>> [len(beat_group) for beat_group in _]
+            [1, 2, 2, 2]
 
         Defaults to right.
 

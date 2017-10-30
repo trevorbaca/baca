@@ -10,208 +10,180 @@ class CollectionList(abjad.AbjadValueObject):
 
         Initializes numbered pitch segments:
 
-        ::
-
-            >>> for collection in baca.CollectionList([
-            ...     [12, 14, 18, 17],
-            ...     [16, 20, 19],
-            ...     ]):
-            ...     collection
-            ...
-            PitchSegment([12, 14, 18, 17])
-            PitchSegment([16, 20, 19])
+        >>> for collection in baca.CollectionList([
+        ...     [12, 14, 18, 17],
+        ...     [16, 20, 19],
+        ...     ]):
+        ...     collection
+        ...
+        PitchSegment([12, 14, 18, 17])
+        PitchSegment([16, 20, 19])
 
     ..  container:: example
 
         Initializes named pitch segments:
 
-        ::
-
-            >>> for collection in baca.CollectionList([
-            ...     [12, 14, 18, 17],
-            ...     [16, 20, 19],
-            ...     ],
-            ...     item_class=abjad.NamedPitch,
-            ...     ):
-            ...     collection
-            ...
-            PitchSegment("c'' d'' fs'' f''")
-            PitchSegment("e'' af'' g''")
+        >>> for collection in baca.CollectionList([
+        ...     [12, 14, 18, 17],
+        ...     [16, 20, 19],
+        ...     ],
+        ...     item_class=abjad.NamedPitch,
+        ...     ):
+        ...     collection
+        ...
+        PitchSegment("c'' d'' fs'' f''")
+        PitchSegment("e'' af'' g''")
 
     ..  container:: example
 
         Initializes numbered pitch-class segments:
 
-        ::
-
-            >>> for collection in baca.CollectionList([
-            ...     [12, 14, 18, 17],
-            ...     [16, 20, 19],
-            ...     ],
-            ...     item_class=abjad.NumberedPitchClass,
-            ...     ):
-            ...     collection
-            ...
-            PitchClassSegment([0, 2, 6, 5])
-            PitchClassSegment([4, 8, 7])
+        >>> for collection in baca.CollectionList([
+        ...     [12, 14, 18, 17],
+        ...     [16, 20, 19],
+        ...     ],
+        ...     item_class=abjad.NumberedPitchClass,
+        ...     ):
+        ...     collection
+        ...
+        PitchClassSegment([0, 2, 6, 5])
+        PitchClassSegment([4, 8, 7])
 
     ..  container:: example
 
         Initializes named pitch-class segments:
 
-        ::
-
-            >>> for collection in baca.CollectionList([
-            ...     [12, 14, 18, 17],
-            ...     [16, 20, 19],
-            ...     ],
-            ...     item_class=abjad.NamedPitchClass,
-            ...     ):
-            ...     collection
-            ...
-            PitchClassSegment("c d fs f")
-            PitchClassSegment("e af g")
+        >>> for collection in baca.CollectionList([
+        ...     [12, 14, 18, 17],
+        ...     [16, 20, 19],
+        ...     ],
+        ...     item_class=abjad.NamedPitchClass,
+        ...     ):
+        ...     collection
+        ...
+        PitchClassSegment("c d fs f")
+        PitchClassSegment("e af g")
 
     ..  container:: example
 
         Initializes mixed numbered and named pitch segments:
 
-        ::
-
-            >>> for collection in baca.CollectionList([
-            ...     [12, 14, 18, 17],
-            ...     "ff'' gs'' g''",
-            ...     ]):
-            ...     collection
-            ...
-            PitchSegment([12, 14, 18, 17])
-            PitchSegment("ff'' gs'' g''")
+        >>> for collection in baca.CollectionList([
+        ...     [12, 14, 18, 17],
+        ...     "ff'' gs'' g''",
+        ...     ]):
+        ...     collection
+        ...
+        PitchSegment([12, 14, 18, 17])
+        PitchSegment("ff'' gs'' g''")
 
     ..  container:: example
 
         Initializes numbered pitch sets:
 
-        ::
-
-            >>> for collection in baca.CollectionList([
-            ...     {12, 14, 18, 17},
-            ...     {16, 20, 19},
-            ...     ]):
-            ...     collection
-            ...
-            PitchSet([12, 14, 17, 18])
-            PitchSet([16, 19, 20])
+        >>> for collection in baca.CollectionList([
+        ...     {12, 14, 18, 17},
+        ...     {16, 20, 19},
+        ...     ]):
+        ...     collection
+        ...
+        PitchSet([12, 14, 17, 18])
+        PitchSet([16, 19, 20])
 
     ..  container:: example
 
         Initializes named pitch sets:
 
-        ::
-
-            >>> for collection in baca.CollectionList([
-            ...     {12, 14, 18, 17},
-            ...     {16, 20, 19},
-            ...     ],
-            ...     item_class=abjad.NamedPitch,
-            ...     ):
-            ...     collection
-            ...
-            PitchSet(["c''", "d''", "f''", "fs''"])
-            PitchSet(["e''", "g''", "af''"])
+        >>> for collection in baca.CollectionList([
+        ...     {12, 14, 18, 17},
+        ...     {16, 20, 19},
+        ...     ],
+        ...     item_class=abjad.NamedPitch,
+        ...     ):
+        ...     collection
+        ...
+        PitchSet(["c''", "d''", "f''", "fs''"])
+        PitchSet(["e''", "g''", "af''"])
 
     ..  container:: example
 
         Initializes numbered pitch-class sets:
 
-        ::
-
-            >>> for collection in baca.CollectionList([
-            ...     {12, 14, 18, 17},
-            ...     {16, 20, 19},
-            ...     ],
-            ...     item_class=abjad.NumberedPitchClass,
-            ...     ):
-            ...     collection
-            ...
-            PitchClassSet([0, 2, 5, 6])
-            PitchClassSet([4, 7, 8])
+        >>> for collection in baca.CollectionList([
+        ...     {12, 14, 18, 17},
+        ...     {16, 20, 19},
+        ...     ],
+        ...     item_class=abjad.NumberedPitchClass,
+        ...     ):
+        ...     collection
+        ...
+        PitchClassSet([0, 2, 5, 6])
+        PitchClassSet([4, 7, 8])
 
     ..  container:: example
 
         Initializes named pitch-class sets:
 
-        ::
-
-            >>> for collection in baca.CollectionList([
-            ...     {12, 14, 18, 17},
-            ...     {16, 20, 19},
-            ...     ],
-            ...     item_class=abjad.NamedPitchClass,
-            ...     ):
-            ...     collection
-            ...
-            PitchClassSet(['c', 'd', 'f', 'fs'])
-            PitchClassSet(['e', 'g', 'af'])
+        >>> for collection in baca.CollectionList([
+        ...     {12, 14, 18, 17},
+        ...     {16, 20, 19},
+        ...     ],
+        ...     item_class=abjad.NamedPitchClass,
+        ...     ):
+        ...     collection
+        ...
+        PitchClassSet(['c', 'd', 'f', 'fs'])
+        PitchClassSet(['e', 'g', 'af'])
 
     ..  container:: example
 
         Initializes mixed numbered and named pitch segments:
 
-        ::
-
-            >>> for collection in baca.CollectionList([
-            ...     [12, 14, 18, 17],
-            ...     "ff'' gs'' g''",
-            ...     ]):
-            ...     collection
-            ...
-            PitchSegment([12, 14, 18, 17])
-            PitchSegment("ff'' gs'' g''")
+        >>> for collection in baca.CollectionList([
+        ...     [12, 14, 18, 17],
+        ...     "ff'' gs'' g''",
+        ...     ]):
+        ...     collection
+        ...
+        PitchSegment([12, 14, 18, 17])
+        PitchSegment("ff'' gs'' g''")
 
     ..  container:: example
 
         Initializes mixed segments and sets:
 
-        ::
-
-            >>> for collection in baca.CollectionList([
-            ...     {12, 14, 18, 17},
-            ...     [16, 20, 19],
-            ...     ]):
-            ...     collection
-            ...
-            PitchSet([12, 14, 17, 18])
-            PitchSegment([16, 20, 19])
+        >>> for collection in baca.CollectionList([
+        ...     {12, 14, 18, 17},
+        ...     [16, 20, 19],
+        ...     ]):
+        ...     collection
+        ...
+        PitchSet([12, 14, 17, 18])
+        PitchSegment([16, 20, 19])
 
     ..  container:: example
 
         Initializes from collection list:
 
-        ::
-
-            >>> collections = baca.CollectionList([[12, 13, 14], [15, 16, 17]])
-            >>> baca.CollectionList(collections)
-            CollectionList([<12, 13, 14>, <15, 16, 17>])
+        >>> collections = baca.CollectionList([[12, 13, 14], [15, 16, 17]])
+        >>> baca.CollectionList(collections)
+        CollectionList([<12, 13, 14>, <15, 16, 17>])
 
     ..  container:: example
 
         Initializes from list of collection lists:
 
-        ::
-
-            >>> collection_list_1 = baca.CollectionList([[12, 13, 14]])
-            >>> collection_list_2 = baca.CollectionList([[15, 16, 17]])
-            >>> baca.CollectionList([collection_list_1, collection_list_2])
-            CollectionList([<12, 13, 14>, <15, 16, 17>])
+        >>> collection_list_1 = baca.CollectionList([[12, 13, 14]])
+        >>> collection_list_2 = baca.CollectionList([[15, 16, 17]])
+        >>> baca.CollectionList([collection_list_1, collection_list_2])
+        CollectionList([<12, 13, 14>, <15, 16, 17>])
 
     ..  container:: example
 
         Initializes empty:
 
-        ::
-
-            >>> baca.CollectionList()
-            CollectionList([])
+        >>> baca.CollectionList()
+        CollectionList([])
 
     '''
 
@@ -276,81 +248,55 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> collections_1 = baca.CollectionList([[12, 13, 14], [15, 16, 17]])
+            >>> collections_2 = baca.CollectionList([[12, 13, 14], [15, 16, 17]])
+            >>> collections_3 = baca.CollectionList([[12, 13, 14]])
 
-                >>> collections_1 = baca.CollectionList([[12, 13, 14], [15, 16, 17]])
-                >>> collections_2 = baca.CollectionList([[12, 13, 14], [15, 16, 17]])
-                >>> collections_3 = baca.CollectionList([[12, 13, 14]])
+            >>> collections_1 == collections_1
+            True
 
-            ::
+            >>> collections_1 == collections_2
+            True
 
-                >>> collections_1 == collections_1
-                True
+            >>> collections_1 == collections_3
+            False
 
-            ::
+            >>> collections_2 == collections_1
+            True
 
-                >>> collections_1 == collections_2
-                True
+            >>> collections_2 == collections_2
+            True
 
-            ::
+            >>> collections_2 == collections_3
+            False
 
-                >>> collections_1 == collections_3
-                False
+            >>> collections_3 == collections_1
+            False
 
-            ::
+            >>> collections_3 == collections_2
+            False
 
-                >>> collections_2 == collections_1
-                True
-
-            ::
-
-                >>> collections_2 == collections_2
-                True
-
-            ::
-
-                >>> collections_2 == collections_3
-                False
-
-            ::
-
-                >>> collections_3 == collections_1
-                False
-
-            ::
-
-                >>> collections_3 == collections_2
-                False
-
-            ::
-
-                >>> collections_3 == collections_3
-                True
+            >>> collections_3 == collections_3
+            True
 
         ..  container:: example
 
             Ignores item class:
 
-            ::
+            >>> collections_1 = baca.CollectionList(
+            ...     collections=[[12, 13, 14], [15, 16, 17]],
+            ...     item_class=None,
+            ...     )
+            >>> collections_2 = baca.CollectionList(
+            ...     collections=[[12, 13, 14], [15, 16, 17]],
+            ...     item_class=abjad.NumberedPitch,
+            ...     )
 
-                >>> collections_1 = baca.CollectionList(
-                ...     collections=[[12, 13, 14], [15, 16, 17]],
-                ...     item_class=None,
-                ...     )
-                >>> collections_2 = baca.CollectionList(
-                ...     collections=[[12, 13, 14], [15, 16, 17]],
-                ...     item_class=abjad.NumberedPitch,
-                ...     )
+            >>> collections_1.item_class == collections_2.item_class
+            False
 
-            ::
-
-                >>> collections_1.item_class == collections_2.item_class
-                False
-
-            ::
-
-                >>> collections_1 == collections_2
-                True
+            >>> collections_1 == collections_2
+            True
 
         Returns true or false.
         '''
@@ -363,37 +309,33 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> collections = baca.CollectionList([
+            ...     [12, 14, 18, 17],
+            ...     [16, 20, 19],
+            ...     ])
 
-                >>> collections = baca.CollectionList([
-                ...     [12, 14, 18, 17],
-                ...     [16, 20, 19],
-                ...     ])
-
-            ::
-
-                >>> abjad.f(collections)
-                baca.CollectionList(
-                    collections=[
-                        baca.PitchSegment(
-                            (
-                                abjad.NumberedPitch(12),
-                                abjad.NumberedPitch(14),
-                                abjad.NumberedPitch(18),
-                                abjad.NumberedPitch(17),
-                                ),
-                            item_class=abjad.NumberedPitch,
+            >>> abjad.f(collections)
+            baca.CollectionList(
+                collections=[
+                    baca.PitchSegment(
+                        (
+                            abjad.NumberedPitch(12),
+                            abjad.NumberedPitch(14),
+                            abjad.NumberedPitch(18),
+                            abjad.NumberedPitch(17),
                             ),
-                        baca.PitchSegment(
-                            (
-                                abjad.NumberedPitch(16),
-                                abjad.NumberedPitch(20),
-                                abjad.NumberedPitch(19),
-                                ),
-                            item_class=abjad.NumberedPitch,
+                        item_class=abjad.NumberedPitch,
+                        ),
+                    baca.PitchSegment(
+                        (
+                            abjad.NumberedPitch(16),
+                            abjad.NumberedPitch(20),
+                            abjad.NumberedPitch(19),
                             ),
-                        ],
-                    )
+                        item_class=abjad.NumberedPitch,
+                        ),
+                    ],
+                )
 
         Returns string.
         '''
@@ -407,43 +349,31 @@ class CollectionList(abjad.AbjadValueObject):
 
             Gets collections:
 
-            ::
+            >>> collections = baca.CollectionList([
+            ...     [12, 14, 18, 17],
+            ...     [16, 20, 19],
+            ...     ])
 
-                >>> collections = baca.CollectionList([
-                ...     [12, 14, 18, 17],
-                ...     [16, 20, 19],
-                ...     ])
+            >>> collections[0]
+            PitchSegment([12, 14, 18, 17])
 
-            ::
-
-                >>> collections[0]
-                PitchSegment([12, 14, 18, 17])
-
-            ::
-
-                >>> collections[-1]
-                PitchSegment([16, 20, 19])
+            >>> collections[-1]
+            PitchSegment([16, 20, 19])
 
         ..  container:: example
 
             Gets collections lists:
 
-            ::
+            >>> collections = baca.CollectionList([
+            ...     [12, 14, 18, 17],
+            ...     [16, 20, 19],
+            ...     ])
 
-                >>> collections = baca.CollectionList([
-                ...     [12, 14, 18, 17],
-                ...     [16, 20, 19],
-                ...     ])
+            >>> collections[:1]
+            CollectionList([<12, 14, 18, 17>])
 
-            ::
-
-                >>> collections[:1]
-                CollectionList([<12, 14, 18, 17>])
-
-            ::
-
-                >>> collections[-1:]
-                CollectionList([<16, 20, 19>])
+            >>> collections[-1:]
+            CollectionList([<16, 20, 19>])
 
         Returns collection.
         '''
@@ -460,16 +390,12 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> collections = baca.CollectionList([
+            ...     [12, 14, 18, 17],
+            ...     [16, 20, 19],
+            ...     ])
 
-                >>> collections = baca.CollectionList([
-                ...     [12, 14, 18, 17],
-                ...     [16, 20, 19],
-                ...     ])
-
-            ::
-
-                >>> abjad.show(collections) # doctest: +SKIP
+            >>> abjad.show(collections) # doctest: +SKIP
 
             ..  docs::
 
@@ -520,17 +446,13 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> collections = baca.CollectionList([
+            ...     [12, 14, 18, 17],
+            ...     [16, 20, 19],
+            ...     ])
 
-                >>> collections = baca.CollectionList([
-                ...     [12, 14, 18, 17],
-                ...     [16, 20, 19],
-                ...     ])
-
-            ::
-
-                >>> len(collections)
-                2
+            >>> len(collections)
+            2
 
         Returns nonnegative integer.
         '''
@@ -541,13 +463,11 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
-
-                >>> baca.CollectionList([
-                ...     [12, 14, 18, 17],
-                ...     [16, 20, 19],
-                ...     ])
-                CollectionList([<12, 14, 18, 17>, <16, 20, 19>])
+            >>> baca.CollectionList([
+            ...     [12, 14, 18, 17],
+            ...     [16, 20, 19],
+            ...     ])
+            CollectionList([<12, 14, 18, 17>, <16, 20, 19>])
 
         Returns string.
         '''
@@ -719,17 +639,13 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> collections = baca.CollectionList([
+            ...     [12, 14, 18, 17],
+            ...     [16, 20, 19],
+            ...     ])
 
-                >>> collections = baca.CollectionList([
-                ...     [12, 14, 18, 17],
-                ...     [16, 20, 19],
-                ...     ])
-
-            ::
-
-                >>> collections.collections
-                [PitchSegment([12, 14, 18, 17]), PitchSegment([16, 20, 19])]
+            >>> collections.collections
+            [PitchSegment([12, 14, 18, 17]), PitchSegment([16, 20, 19])]
 
         Returns list.
         '''
@@ -755,71 +671,63 @@ class CollectionList(abjad.AbjadValueObject):
 
             Accumulates transposition:
 
-            ::
+            >>> collections = baca.CollectionList(
+            ...     [[0, 2, 6, 5], [4, 8, 7]],
+            ...     item_class=abjad.NumberedPitchClass,
+            ...     )
 
-                >>> collections = baca.CollectionList(
-                ...     [[0, 2, 6, 5], [4, 8, 7]],
-                ...     item_class=abjad.NumberedPitchClass,
-                ...     )
-
-            ::
-
-                >>> transposition = baca.pitch_class_segment().transpose(n=3)
-                >>> for collection in collections.accumulate([transposition]):
-                ...     collection
-                ...
-                PitchClassSegment([0, 2, 6, 5])
-                PitchClassSegment([4, 8, 7])
-                PitchClassSegment([3, 5, 9, 8])
-                PitchClassSegment([7, 11, 10])
-                PitchClassSegment([6, 8, 0, 11])
-                PitchClassSegment([10, 2, 1])
-                PitchClassSegment([9, 11, 3, 2])
-                PitchClassSegment([1, 5, 4])
+            >>> transposition = baca.pitch_class_segment().transpose(n=3)
+            >>> for collection in collections.accumulate([transposition]):
+            ...     collection
+            ...
+            PitchClassSegment([0, 2, 6, 5])
+            PitchClassSegment([4, 8, 7])
+            PitchClassSegment([3, 5, 9, 8])
+            PitchClassSegment([7, 11, 10])
+            PitchClassSegment([6, 8, 0, 11])
+            PitchClassSegment([10, 2, 1])
+            PitchClassSegment([9, 11, 3, 2])
+            PitchClassSegment([1, 5, 4])
 
         ..  container:: example
 
             Accumulates transposition followed by alpha:
 
-            ::
+            >>> collections = baca.CollectionList(
+            ...     [[0, 2, 6, 5], [4, 8, 7]],
+            ...     item_class=abjad.NumberedPitchClass,
+            ...     )
 
-                >>> collections = baca.CollectionList(
-                ...     [[0, 2, 6, 5], [4, 8, 7]],
-                ...     item_class=abjad.NumberedPitchClass,
-                ...     )
-
-            ::
-
-                >>> transposition = baca.pitch_class_segment().transpose(n=3)
-                >>> alpha = baca.pitch_class_segment().alpha()
-                >>> operands = [transposition, alpha]
-                >>> for collection in collections.accumulate(operands):
-                ...     collection
-                ...
-                PitchClassSegment([0, 2, 6, 5])
-                PitchClassSegment([4, 8, 7])
-                PitchClassSegment([3, 5, 9, 8])
-                PitchClassSegment([7, 11, 10])
-                PitchClassSegment([2, 4, 8, 9])
-                PitchClassSegment([6, 10, 11])
-                PitchClassSegment([5, 7, 11, 0])
-                PitchClassSegment([9, 1, 2])
-                PitchClassSegment([4, 6, 10, 1])
-                PitchClassSegment([8, 0, 3])
-                PitchClassSegment([7, 9, 1, 4])
-                PitchClassSegment([11, 3, 6])
-                PitchClassSegment([6, 8, 0, 5])
-                PitchClassSegment([10, 2, 7])
-                PitchClassSegment([9, 11, 3, 8])
-                PitchClassSegment([1, 5, 10])
-                PitchClassSegment([8, 10, 2, 9])
-                PitchClassSegment([0, 4, 11])
-                PitchClassSegment([11, 1, 5, 0])
-                PitchClassSegment([3, 7, 2])
-                PitchClassSegment([10, 0, 4, 1])
-                PitchClassSegment([2, 6, 3])
-                PitchClassSegment([1, 3, 7, 4])
-                PitchClassSegment([5, 9, 6])
+            >>> transposition = baca.pitch_class_segment().transpose(n=3)
+            >>> alpha = baca.pitch_class_segment().alpha()
+            >>> operands = [transposition, alpha]
+            >>> for collection in collections.accumulate(operands):
+            ...     collection
+            ...
+            PitchClassSegment([0, 2, 6, 5])
+            PitchClassSegment([4, 8, 7])
+            PitchClassSegment([3, 5, 9, 8])
+            PitchClassSegment([7, 11, 10])
+            PitchClassSegment([2, 4, 8, 9])
+            PitchClassSegment([6, 10, 11])
+            PitchClassSegment([5, 7, 11, 0])
+            PitchClassSegment([9, 1, 2])
+            PitchClassSegment([4, 6, 10, 1])
+            PitchClassSegment([8, 0, 3])
+            PitchClassSegment([7, 9, 1, 4])
+            PitchClassSegment([11, 3, 6])
+            PitchClassSegment([6, 8, 0, 5])
+            PitchClassSegment([10, 2, 7])
+            PitchClassSegment([9, 11, 3, 8])
+            PitchClassSegment([1, 5, 10])
+            PitchClassSegment([8, 10, 2, 9])
+            PitchClassSegment([0, 4, 11])
+            PitchClassSegment([11, 1, 5, 0])
+            PitchClassSegment([3, 7, 2])
+            PitchClassSegment([10, 0, 4, 1])
+            PitchClassSegment([2, 6, 3])
+            PitchClassSegment([1, 3, 7, 4])
+            PitchClassSegment([5, 9, 6])
 
         Returns new collection list.
         '''
@@ -836,31 +744,23 @@ class CollectionList(abjad.AbjadValueObject):
 
             Down-arpeggiates all collections:
 
-            ::
+            >>> collections = baca.CollectionList(
+            ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
+            ...     )
 
-                >>> collections = baca.CollectionList(
-                ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-                ...     )
-
-            ::
-
-                >>> collections.arpeggiate_down()
-                CollectionList([<29, 24, 14, 6, 5>, <28, 17, 7>, <3, 2, 1, 0>])
+            >>> collections.arpeggiate_down()
+            CollectionList([<29, 24, 14, 6, 5>, <28, 17, 7>, <3, 2, 1, 0>])
 
         ..  container:: example
 
             Down-arpeggiates collection -1:
 
-            ::
+            >>> collections = baca.CollectionList(
+            ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
+            ...     )
 
-                >>> collections = baca.CollectionList(
-                ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-                ...     )
-
-            ::
-
-                >>> collections.arpeggiate_down(pattern=[-1])
-                CollectionList([<5, 12, 14, 18, 17>, <16, 17, 19>, <3, 2, 1, 0>])
+            >>> collections.arpeggiate_down(pattern=[-1])
+            CollectionList([<5, 12, 14, 18, 17>, <16, 17, 19>, <3, 2, 1, 0>])
 
         Returns new collection list.
         '''
@@ -888,31 +788,23 @@ class CollectionList(abjad.AbjadValueObject):
 
             Up-arpeggiates all collections:
 
-            ::
+            >>> collections = baca.CollectionList(
+            ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
+            ...     )
 
-                >>> collections = baca.CollectionList(
-                ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-                ...     )
-
-            ::
-
-                >>> collections.arpeggiate_up()
-                CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
+            >>> collections.arpeggiate_up()
+            CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
 
         ..  container:: example
 
             Up-arpeggiates collection -1:
 
-            ::
+            >>> collections = baca.CollectionList(
+            ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
+            ...     )
 
-                >>> collections = baca.CollectionList(
-                ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-                ...     )
-
-            ::
-
-                >>> collections.arpeggiate_up(pattern=[-1])
-                CollectionList([<5, 12, 14, 18, 17>, <16, 17, 19>, <3, 14, 25, 36>])
+            >>> collections.arpeggiate_up(pattern=[-1])
+            CollectionList([<5, 12, 14, 18, 17>, <16, 17, 19>, <3, 14, 25, 36>])
 
         Returns new collection list.
         '''
@@ -940,43 +832,31 @@ class CollectionList(abjad.AbjadValueObject):
 
             Octave-transposes all collections:
 
-            ::
+            >>> collections = baca.CollectionList(
+            ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
+            ...     )
+            >>> collections = collections.arpeggiate_up()
 
-                >>> collections = baca.CollectionList(
-                ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-                ...     )
-                >>> collections = collections.arpeggiate_up()
+            >>> collections
+            CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
 
-            ::
-
-                >>> collections
-                CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
-
-            ::
-
-                >>> collections.bass_to_octave(n=3)
-                CollectionList([<-7, 0, 2, 6, 17>, <-8, -7, -5>, <-9, 2, 13, 24>])
+            >>> collections.bass_to_octave(n=3)
+            CollectionList([<-7, 0, 2, 6, 17>, <-8, -7, -5>, <-9, 2, 13, 24>])
 
         ..  container:: example
 
             Octave-transposes collection -1:
 
-            ::
+            >>> collections = baca.CollectionList(
+            ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
+            ...     )
+            >>> collections = collections.arpeggiate_up()
 
-                >>> collections = baca.CollectionList(
-                ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-                ...     )
-                >>> collections = collections.arpeggiate_up()
+            >>> collections
+            CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
 
-            ::
-
-                >>> collections
-                CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
-
-            ::
-
-                >>> collections.bass_to_octave(n=3, pattern=[-1])
-                CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <-9, 2, 13, 24>])
+            >>> collections.bass_to_octave(n=3, pattern=[-1])
+            CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <-9, 2, 13, 24>])
 
         Returns new collection list.
         '''
@@ -998,43 +878,31 @@ class CollectionList(abjad.AbjadValueObject):
 
             Octave-transposes all collections:
 
-            ::
+            >>> collections = baca.CollectionList(
+            ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
+            ...     )
+            >>> collections = collections.arpeggiate_up()
 
-                >>> collections = baca.CollectionList(
-                ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-                ...     )
-                >>> collections = collections.arpeggiate_up()
+            >>> collections
+            CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
 
-            ::
-
-                >>> collections
-                CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
-
-            ::
-
-                >>> collections.center_to_octave(n=3)
-                CollectionList([<-19, -12, -10, -6, 5>, <-8, -7, -5>, <-21, -10, 1, 12>])
+            >>> collections.center_to_octave(n=3)
+            CollectionList([<-19, -12, -10, -6, 5>, <-8, -7, -5>, <-21, -10, 1, 12>])
 
         ..  container:: example
 
             Octave-transposes collection -1:
 
-            ::
+            >>> collections = baca.CollectionList(
+            ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
+            ...     )
+            >>> collections = collections.arpeggiate_up()
 
-                >>> collections = baca.CollectionList(
-                ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-                ...     )
-                >>> collections = collections.arpeggiate_up()
+            >>> collections
+            CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
 
-            ::
-
-                >>> collections
-                CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
-
-            ::
-
-                >>> collections.center_to_octave(n=3, pattern=[-1])
-                CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <-21, -10, 1, 12>])
+            >>> collections.center_to_octave(n=3, pattern=[-1])
+            CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <-21, -10, 1, 12>])
 
         Returns new collection list.
         '''
@@ -1056,59 +924,48 @@ class CollectionList(abjad.AbjadValueObject):
 
             Without pattern:
 
-            ::
+            >>> collections = baca.CollectionList([
+            ...     [12, 14, 18, 17],
+            ...     [16, 20, 19],
+            ...     [12, 14, 18, 17],
+            ...     [16, 20, 19],
+            ...     ])
 
-                >>> collections = baca.CollectionList([
-                ...     [12, 14, 18, 17],
-                ...     [16, 20, 19],
-                ...     [12, 14, 18, 17],
-                ...     [16, 20, 19],
-                ...     ])
+            >>> for collection in collections:
+            ...     collection
+            ...
+            PitchSegment([12, 14, 18, 17])
+            PitchSegment([16, 20, 19])
+            PitchSegment([12, 14, 18, 17])
+            PitchSegment([16, 20, 19])
 
-            ::
-
-                >>> for collection in collections:
-                ...     collection
-                ...
-                PitchSegment([12, 14, 18, 17])
-                PitchSegment([16, 20, 19])
-                PitchSegment([12, 14, 18, 17])
-                PitchSegment([16, 20, 19])
-
-            ::
-
-                >>> for collection in collections.chords():
-                ...     collection
-                ...
-                PitchSet([12, 14, 17, 18])
-                PitchSet([16, 19, 20])
-                PitchSet([12, 14, 17, 18])
-                PitchSet([16, 19, 20])
+            >>> for collection in collections.chords():
+            ...     collection
+            ...
+            PitchSet([12, 14, 17, 18])
+            PitchSet([16, 19, 20])
+            PitchSet([12, 14, 17, 18])
+            PitchSet([16, 19, 20])
 
         ..  container:: example
 
             With pattern:
 
-            ::
+            >>> collections = baca.CollectionList([
+            ...     [12, 14, 18, 17],
+            ...     [16, 20, 19],
+            ...     [12, 14, 18, 17],
+            ...     [16, 20, 19],
+            ...     ])
 
-                >>> collections = baca.CollectionList([
-                ...     [12, 14, 18, 17],
-                ...     [16, 20, 19],
-                ...     [12, 14, 18, 17],
-                ...     [16, 20, 19],
-                ...     ])
-
-
-            ::
-
-                >>> pattern = abjad.index_every([1], period=2)
-                >>> for collection in collections.chords(pattern=pattern):
-                ...     collection
-                ...
-                PitchSegment([12, 14, 18, 17])
-                PitchSet([16, 19, 20])
-                PitchSegment([12, 14, 18, 17])
-                PitchSet([16, 19, 20])
+            >>> pattern = abjad.index_every([1], period=2)
+            >>> for collection in collections.chords(pattern=pattern):
+            ...     collection
+            ...
+            PitchSegment([12, 14, 18, 17])
+            PitchSet([16, 19, 20])
+            PitchSegment([12, 14, 18, 17])
+            PitchSet([16, 19, 20])
 
         Returns new collection list.
         '''
@@ -1127,46 +984,38 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> collections = baca.CollectionList([[5, 12, 14, 18], [16, 17]])
+            >>> cursor = collections.cursor()
 
-                >>> collections = baca.CollectionList([[5, 12, 14, 18], [16, 17]])
-                >>> cursor = collections.cursor()
-
-            ::
-
-                >>> abjad.f(cursor)
-                baca.Cursor(
-                    source=baca.CollectionList(
-                        collections=[
-                            baca.PitchSegment(
-                                (
-                                    abjad.NumberedPitch(5),
-                                    abjad.NumberedPitch(12),
-                                    abjad.NumberedPitch(14),
-                                    abjad.NumberedPitch(18),
-                                    ),
-                                item_class=abjad.NumberedPitch,
+            >>> abjad.f(cursor)
+            baca.Cursor(
+                source=baca.CollectionList(
+                    collections=[
+                        baca.PitchSegment(
+                            (
+                                abjad.NumberedPitch(5),
+                                abjad.NumberedPitch(12),
+                                abjad.NumberedPitch(14),
+                                abjad.NumberedPitch(18),
                                 ),
-                            baca.PitchSegment(
-                                (
-                                    abjad.NumberedPitch(16),
-                                    abjad.NumberedPitch(17),
-                                    ),
-                                item_class=abjad.NumberedPitch,
+                            item_class=abjad.NumberedPitch,
+                            ),
+                        baca.PitchSegment(
+                            (
+                                abjad.NumberedPitch(16),
+                                abjad.NumberedPitch(17),
                                 ),
-                            ],
-                        ),
-                    )
+                            item_class=abjad.NumberedPitch,
+                            ),
+                        ],
+                    ),
+                )
 
-            ::
+            >>> cursor.next()
+            [PitchSegment([5, 12, 14, 18])]
 
-                >>> cursor.next()
-                [PitchSegment([5, 12, 14, 18])]
-
-            ::
-
-                >>> cursor.next()
-                [PitchSegment([16, 17])]
+            >>> cursor.next()
+            [PitchSegment([16, 17])]
 
         Returns cursor.
         '''
@@ -1177,30 +1026,22 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> collections = baca.CollectionList(
+            ...     [[5, 12, 14, 18, 17], [16, 17, 19]],
+            ...     )
 
-                >>> collections = baca.CollectionList(
-                ...     [[5, 12, 14, 18, 17], [16, 17, 19]],
-                ...     )
-
-            ::
-
-                >>> str(collections.flatten())
-                '<5, 12, 14, 18, 17, 16, 17, 19>'
+            >>> str(collections.flatten())
+            '<5, 12, 14, 18, 17, 16, 17, 19>'
 
         ..  container:: example
 
-            ::
+            >>> collections = baca.CollectionList(
+            ...     [[5, 12, 14, 18, 17], [16, 17, 19]],
+            ...     item_class=abjad.NamedPitch,
+            ...     )
 
-                >>> collections = baca.CollectionList(
-                ...     [[5, 12, 14, 18, 17], [16, 17, 19]],
-                ...     item_class=abjad.NamedPitch,
-                ...     )
-
-            ::
-
-                >>> str(collections.flatten())
-                "<f' c'' d'' fs'' f'' e'' f'' g''>"
+            >>> str(collections.flatten())
+            "<f' c'' d'' fs'' f'' e'' f'' g''>"
 
         Returns collection.
         '''
@@ -1211,22 +1052,16 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> collections = baca.CollectionList([
+            ...     [4, 5, 7],
+            ...     [15, 16, 17, 19]
+            ...     ])
 
-                >>> collections = baca.CollectionList([
-                ...     [4, 5, 7],
-                ...     [15, 16, 17, 19]
-                ...     ])
+            >>> collections.has_duplicate_pitch_classes(level=1)
+            False
 
-            ::
-
-                >>> collections.has_duplicate_pitch_classes(level=1)
-                False
-
-            ::
-
-                >>> collections.has_duplicate_pitch_classes(level=-1)
-                True
+            >>> collections.has_duplicate_pitch_classes(level=-1)
+            True
 
         Set `level` to 1 or -1.
 
@@ -1258,70 +1093,46 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> collections = baca.CollectionList([
+            ...     [16, 17], [13], [16, 17],
+            ...     ])
 
-                >>> collections = baca.CollectionList([
-                ...     [16, 17], [13], [16, 17],
-                ...     ])
+            >>> collections.has_duplicates(level=0)
+            True
 
-            ::
+            >>> collections.has_duplicates(level=1)
+            False
 
-                >>> collections.has_duplicates(level=0)
-                True
-
-            ::
-
-                >>> collections.has_duplicates(level=1)
-                False
-
-            ::
-
-                >>> collections.has_duplicates(level=-1)
-                True
+            >>> collections.has_duplicates(level=-1)
+            True
 
         ..  container:: example
 
-            ::
+            >>> collections = baca.CollectionList([[16, 17], [14, 20, 14]])
 
-                >>> collections = baca.CollectionList([[16, 17], [14, 20, 14]])
+            >>> collections.has_duplicates(level=0)
+            False
 
-            ::
+            >>> collections.has_duplicates(level=1)
+            True
 
-                >>> collections.has_duplicates(level=0)
-                False
-
-            ::
-
-                >>> collections.has_duplicates(level=1)
-                True
-
-            ::
-
-                >>> collections.has_duplicates(level=-1)
-                True
+            >>> collections.has_duplicates(level=-1)
+            True
 
         ..  container:: example
 
-            ::
+            >>> collections = baca.CollectionList([
+            ...     [16, 17], [14, 20], [14],
+            ...     ])
 
-                >>> collections = baca.CollectionList([
-                ...     [16, 17], [14, 20], [14],
-                ...     ])
+            >>> collections.has_duplicates(level=0)
+            False
 
-            ::
+            >>> collections.has_duplicates(level=1)
+            False
 
-                >>> collections.has_duplicates(level=0)
-                False
-
-            ::
-
-                >>> collections.has_duplicates(level=1)
-                False
-
-            ::
-
-                >>> collections.has_duplicates(level=-1)
-                True
+            >>> collections.has_duplicates(level=-1)
+            True
 
         Set `level` to 0, 1 or -1.
 
@@ -1356,17 +1167,13 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-                >>> collections = baca.CollectionList([[4, 5, 4, 5], [17, 18]])
+            >>> collections = baca.CollectionList([[4, 5, 4, 5], [17, 18]])
 
-            ::
+            >>> collections.has_repeat_pitch_classes(level=1)
+            False
 
-                >>> collections.has_repeat_pitch_classes(level=1)
-                False
-
-            ::
-
-                >>> collections.has_repeat_pitch_classes(level=-1)
-                True
+            >>> collections.has_repeat_pitch_classes(level=-1)
+            True
 
         Set `level` to 0 or -1.
 
@@ -1398,70 +1205,46 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> collections = baca.CollectionList([[4, 5], [4, 5]])
 
-                >>> collections = baca.CollectionList([[4, 5], [4, 5]])
+            >>> collections.has_repeats(level=0)
+            True
 
-            ::
+            >>> collections.has_repeats(level=1)
+            False
 
-                >>> collections.has_repeats(level=0)
-                True
-
-            ::
-
-                >>> collections.has_repeats(level=1)
-                False
-
-            ::
-
-                >>> collections.has_repeats(level=-1)
-                False
+            >>> collections.has_repeats(level=-1)
+            False
 
         ..  container:: example
 
-            ::
+            >>> collections = baca.CollectionList([
+            ...     [4, 5], [18, 18], [4, 5],
+            ...     ])
 
-                >>> collections = baca.CollectionList([
-                ...     [4, 5], [18, 18], [4, 5],
-                ...     ])
+            >>> collections.has_repeats(level=0)
+            False
 
-            ::
+            >>> collections.has_repeats(level=1)
+            True
 
-                >>> collections.has_repeats(level=0)
-                False
-
-            ::
-
-                >>> collections.has_repeats(level=1)
-                True
-
-            ::
-
-                >>> collections.has_repeats(level=-1)
-                True
+            >>> collections.has_repeats(level=-1)
+            True
 
         ..  container:: example
 
-            ::
+            >>> collections = baca.CollectionList([
+            ...     [4, 5], [5, 18], [4, 5],
+            ...     ])
 
-                >>> collections = baca.CollectionList([
-                ...     [4, 5], [5, 18], [4, 5],
-                ...     ])
+            >>> collections.has_repeats(level=0)
+            False
 
-            ::
+            >>> collections.has_repeats(level=1)
+            False
 
-                >>> collections.has_repeats(level=0)
-                False
-
-            ::
-
-                >>> collections.has_repeats(level=1)
-                False
-
-            ::
-
-                >>> collections.has_repeats(level=-1)
-                True
+            >>> collections.has_repeats(level=-1)
+            True
 
         Set `level` to 0, 1 or -1.
 
@@ -1496,30 +1279,28 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
-
-                >>> collections = baca.CollectionList([[1, 2, 3], [4, 5], [6, 7, 8]])
-                >>> for collection in collections.helianthate(n=-1, m=1):
-                ...     collection
-                ...
-                PitchSegment([1, 2, 3])
-                PitchSegment([4, 5])
-                PitchSegment([6, 7, 8])
-                PitchSegment([5, 4])
-                PitchSegment([8, 6, 7])
-                PitchSegment([3, 1, 2])
-                PitchSegment([7, 8, 6])
-                PitchSegment([2, 3, 1])
-                PitchSegment([4, 5])
-                PitchSegment([1, 2, 3])
-                PitchSegment([5, 4])
-                PitchSegment([6, 7, 8])
-                PitchSegment([4, 5])
-                PitchSegment([8, 6, 7])
-                PitchSegment([3, 1, 2])
-                PitchSegment([7, 8, 6])
-                PitchSegment([2, 3, 1])
-                PitchSegment([5, 4])
+            >>> collections = baca.CollectionList([[1, 2, 3], [4, 5], [6, 7, 8]])
+            >>> for collection in collections.helianthate(n=-1, m=1):
+            ...     collection
+            ...
+            PitchSegment([1, 2, 3])
+            PitchSegment([4, 5])
+            PitchSegment([6, 7, 8])
+            PitchSegment([5, 4])
+            PitchSegment([8, 6, 7])
+            PitchSegment([3, 1, 2])
+            PitchSegment([7, 8, 6])
+            PitchSegment([2, 3, 1])
+            PitchSegment([4, 5])
+            PitchSegment([1, 2, 3])
+            PitchSegment([5, 4])
+            PitchSegment([6, 7, 8])
+            PitchSegment([4, 5])
+            PitchSegment([8, 6, 7])
+            PitchSegment([3, 1, 2])
+            PitchSegment([7, 8, 6])
+            PitchSegment([2, 3, 1])
+            PitchSegment([5, 4])
 
         Returns new collection list.
         '''
@@ -1532,17 +1313,13 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> collections = baca.CollectionList([
+            ...     [5, 12, 14, 18, 17],
+            ...     [16, 17, 19],
+            ...     ])
 
-                >>> collections = baca.CollectionList([
-                ...     [5, 12, 14, 18, 17],
-                ...     [16, 17, 19],
-                ...     ])
-
-            ::
-
-                >>> collections.join()
-                CollectionList([<5, 12, 14, 18, 17, 16, 17, 19>])
+            >>> collections.join()
+            CollectionList([<5, 12, 14, 18, 17, 16, 17, 19>])
 
         Returns new collection list.
         '''
@@ -1561,75 +1338,59 @@ class CollectionList(abjad.AbjadValueObject):
 
             Returns sequence:
 
-            ::
+            >>> collections = baca.CollectionList([
+            ...     [5, 12, 14, 18, 17],
+            ...     [16, 17, 19],
+            ...     [16, 17, 19],
+            ...     ])
 
-                >>> collections = baca.CollectionList([
-                ...     [5, 12, 14, 18, 17],
-                ...     [16, 17, 19],
-                ...     [16, 17, 19],
-                ...     ])
+            >>> sequence = collections.partition([1, 2], overhang=abjad.Exact)
+            >>> for collection_list in sequence:
+            ...     collection_list
+            ...
+            CollectionList([<5, 12, 14, 18, 17>])
+            CollectionList([<16, 17, 19>, <16, 17, 19>])
 
-            ::
-
-                >>> sequence = collections.partition([1, 2], overhang=abjad.Exact)
-                >>> for collection_list in sequence:
-                ...     collection_list
-                ...
-                CollectionList([<5, 12, 14, 18, 17>])
-                CollectionList([<16, 17, 19>, <16, 17, 19>])
-
-            ::
-
-                >>> isinstance(sequence, baca.Sequence)
-                True
+            >>> isinstance(sequence, baca.Sequence)
+            True
 
         ..  container:: example
 
             Joins parts. Returns new collection list:
 
-            ::
+            >>> collections = baca.CollectionList([
+            ...     [5, 12, 14, 18, 17],
+            ...     [16, 17, 19],
+            ...     [16, 17, 19],
+            ...     ])
 
-                >>> collections = baca.CollectionList([
-                ...     [5, 12, 14, 18, 17],
-                ...     [16, 17, 19],
-                ...     [16, 17, 19],
-                ...     ])
+            >>> collections
+            CollectionList([<5, 12, 14, 18, 17>, <16, 17, 19>, <16, 17, 19>])
 
-            ::
-
-                >>> collections
-                CollectionList([<5, 12, 14, 18, 17>, <16, 17, 19>, <16, 17, 19>])
-
-            ::
-
-                >>> collections.partition([1, 2], join=True, overhang=abjad.Exact)
-                CollectionList([<5, 12, 14, 18, 17>, <16, 17, 19, 16, 17, 19>])
+            >>> collections.partition([1, 2], join=True, overhang=abjad.Exact)
+            CollectionList([<5, 12, 14, 18, 17>, <16, 17, 19, 16, 17, 19>])
 
         ..  container:: example
 
             Repeats, partitions, joins parts. Returns new collection list:
 
-            ::
+            >>> collections = baca.CollectionList([
+            ...     [5, 12, 14, 18, 17],
+            ...     [16, 17, 19],
+            ...     [16, 17, 19],
+            ...     ])
 
-                >>> collections = baca.CollectionList([
-                ...     [5, 12, 14, 18, 17],
-                ...     [16, 17, 19],
-                ...     [16, 17, 19],
-                ...     ])
-
-            ::
-
-                >>> collections = collections.repeat(2)
-                >>> for collection in collections.partition(
-                ...     [2],
-                ...     cyclic=True,
-                ...     join=True,
-                ...     ):
-                ...     collection
-                ...
-                PitchSegment([5, 12, 14, 18, 17, 16, 17, 19])
-                PitchSegment([16, 17, 19, 5, 12, 14, 18, 17])
-                PitchSegment([16, 17, 19, 16, 17, 19])
+            >>> collections = collections.repeat(2)
+            >>> for collection in collections.partition(
+            ...     [2],
+            ...     cyclic=True,
+            ...     join=True,
+            ...     ):
+            ...     collection
+            ...
+            PitchSegment([5, 12, 14, 18, 17, 16, 17, 19])
+            PitchSegment([16, 17, 19, 5, 12, 14, 18, 17])
+            PitchSegment([16, 17, 19, 16, 17, 19])
 
         Returns sequence.
         '''
@@ -1655,47 +1416,37 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> collections = baca.CollectionList([
+            ...     [5, 12, 14, 18, 17],
+            ...     [16, 17, 19],
+            ...     ])
 
-                >>> collections = baca.CollectionList([
-                ...     [5, 12, 14, 18, 17],
-                ...     [16, 17, 19],
-                ...     ])
-
-            ::
-
-                >>> for collection in collections.read([3, 3, 3, 5, 5, 5]):
-                ...     collection
-                ...
-                PitchSegment([5, 12, 14])
-                PitchSegment([18, 17, 16])
-                PitchSegment([17, 19, 5])
-                PitchSegment([12, 14, 18, 17, 16])
-                PitchSegment([17, 19, 5, 12, 14])
-                PitchSegment([18, 17, 16, 17, 19])
+            >>> for collection in collections.read([3, 3, 3, 5, 5, 5]):
+            ...     collection
+            ...
+            PitchSegment([5, 12, 14])
+            PitchSegment([18, 17, 16])
+            PitchSegment([17, 19, 5])
+            PitchSegment([12, 14, 18, 17, 16])
+            PitchSegment([17, 19, 5, 12, 14])
+            PitchSegment([18, 17, 16, 17, 19])
 
         ..  container:: example
 
             Raises exception on inexact read:
 
-            ::
+            >>> collections = baca.CollectionList([
+            ...     [5, 12, 14, 18, 17],
+            ...     [16, 17, 19],
+            ...     ])
 
-                >>> collections = baca.CollectionList([
-                ...     [5, 12, 14, 18, 17],
-                ...     [16, 17, 19],
-                ...     ])
+            >>> len(collections.flatten())
+            8
 
-            ::
-
-                >>> len(collections.flatten())
-                8
-
-            ::
-
-                >>> collections.read([10, 10, 10], check=abjad.Exact)
-                Traceback (most recent call last):
-                    ...
-                ValueError: call reads 30 items; not a multiple of 8 items.
+            >>> collections.read([10, 10, 10], check=abjad.Exact)
+            Traceback (most recent call last):
+                ...
+            ValueError: call reads 30 items; not a multiple of 8 items.
 
         Returns new collection list.
         '''
@@ -1731,11 +1482,9 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
-
-                >>> collections = baca.CollectionList([[0, 1], [2, 3], [4], [5, 6]])
-                >>> collections.remove([0, -1])
-                CollectionList([<2, 3>, <4>])
+            >>> collections = baca.CollectionList([[0, 1], [2, 3], [4], [5, 6]])
+            >>> collections.remove([0, -1])
+            CollectionList([<2, 3>, <4>])
 
         Returns new collection list.
         '''
@@ -1748,19 +1497,13 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> collections = baca.CollectionList([[4, 5, 7], [16, 17, 16, 18]])
 
-                >>> collections = baca.CollectionList([[4, 5, 7], [16, 17, 16, 18]])
+            >>> collections.remove_duplicate_pitch_classes(level=1)
+            CollectionList([<4, 5, 7>, <16, 17, 18>])
 
-            ::
-
-                >>> collections.remove_duplicate_pitch_classes(level=1)
-                CollectionList([<4, 5, 7>, <16, 17, 18>])
-
-            ::
-
-                >>> collections.remove_duplicate_pitch_classes(level=-1)
-                CollectionList([<4, 5, 7>, <18>])
+            >>> collections.remove_duplicate_pitch_classes(level=-1)
+            CollectionList([<4, 5, 7>, <18>])
 
         Set `level` to 1 or -1.
 
@@ -1803,26 +1546,18 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> collections = baca.CollectionList(
+            ...     [[16, 17, 16], [13, 14, 16], [16, 17, 16]],
+            ...     )
 
-                >>> collections = baca.CollectionList(
-                ...     [[16, 17, 16], [13, 14, 16], [16, 17, 16]],
-                ...     )
+            >>> collections.remove_duplicates(level=0)
+            CollectionList([<16, 17, 16>, <13, 14, 16>])
 
-            ::
+            >>> collections.remove_duplicates(level=1)
+            CollectionList([<16, 17>, <13, 14, 16>, <16, 17>])
 
-                >>> collections.remove_duplicates(level=0)
-                CollectionList([<16, 17, 16>, <13, 14, 16>])
-
-            ::
-
-                >>> collections.remove_duplicates(level=1)
-                CollectionList([<16, 17>, <13, 14, 16>, <16, 17>])
-
-            ::
-
-                >>> collections.remove_duplicates(level=-1)
-                CollectionList([<16, 17>, <13, 14>])
+            >>> collections.remove_duplicates(level=-1)
+            CollectionList([<16, 17>, <13, 14>])
 
         Set `level` to 0, 1 or -1.
 
@@ -1868,19 +1603,13 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> collections = baca.CollectionList([[4, 4, 4, 5], [17, 18]])
 
-                >>> collections = baca.CollectionList([[4, 4, 4, 5], [17, 18]])
+            >>> collections.remove_repeat_pitch_classes(level=1)
+            CollectionList([<4, 5>, <17, 18>])
 
-            ::
-
-                >>> collections.remove_repeat_pitch_classes(level=1)
-                CollectionList([<4, 5>, <17, 18>])
-
-            ::
-
-                >>> collections.remove_repeat_pitch_classes(level=-1)
-                CollectionList([<4, 5>, <18>])
+            >>> collections.remove_repeat_pitch_classes(level=-1)
+            CollectionList([<4, 5>, <18>])
 
         Set `level` to 1 or -1.
 
@@ -1922,24 +1651,16 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> collections = baca.CollectionList([[4, 5], [4, 5], [5, 7, 7]])
 
-                >>> collections = baca.CollectionList([[4, 5], [4, 5], [5, 7, 7]])
+            >>> collections.remove_repeats(level=0)
+            CollectionList([<4, 5>, <5, 7, 7>])
 
-            ::
+            >>> collections.remove_repeats(level=1)
+            CollectionList([<4, 5>, <4, 5>, <5, 7>])
 
-                >>> collections.remove_repeats(level=0)
-                CollectionList([<4, 5>, <5, 7, 7>])
-
-            ::
-
-                >>> collections.remove_repeats(level=1)
-                CollectionList([<4, 5>, <4, 5>, <5, 7>])
-
-            ::
-
-                >>> collections.remove_repeats(level=-1)
-                CollectionList([<4, 5>, <4, 5>, <7>])
+            >>> collections.remove_repeats(level=-1)
+            CollectionList([<4, 5>, <4, 5>, <7>])
 
         Set `level` to 0, 1 or -1.
 
@@ -1985,18 +1706,16 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
-
-                >>> collections = baca.CollectionList([[12, 14, 18, 17], [16, 19]])
-                >>> for collection in collections.repeat(n=3):
-                ...     collection
-                ...
-                PitchSegment([12, 14, 18, 17])
-                PitchSegment([16, 19])
-                PitchSegment([12, 14, 18, 17])
-                PitchSegment([16, 19])
-                PitchSegment([12, 14, 18, 17])
-                PitchSegment([16, 19])
+            >>> collections = baca.CollectionList([[12, 14, 18, 17], [16, 19]])
+            >>> for collection in collections.repeat(n=3):
+            ...     collection
+            ...
+            PitchSegment([12, 14, 18, 17])
+            PitchSegment([16, 19])
+            PitchSegment([12, 14, 18, 17])
+            PitchSegment([16, 19])
+            PitchSegment([12, 14, 18, 17])
+            PitchSegment([16, 19])
 
         Returns new collection list.
         '''
@@ -2012,21 +1731,17 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
-
-                >>> collections = baca.CollectionList([[0, 1], [2, 3], [4], [5, 6]])
-                >>> collections.retain([0, -1])
-                CollectionList([<0, 1>, <5, 6>])
+            >>> collections = baca.CollectionList([[0, 1], [2, 3], [4], [5, 6]])
+            >>> collections.retain([0, -1])
+            CollectionList([<0, 1>, <5, 6>])
 
         ..  container:: example
 
-            ::
-
-                >>> collections = baca.CollectionList(
-                ...     [[0, 1], [2, 3], [4], [5, 6], [7], [8]],
-                ...     )
-                >>> collections.retain([0], period=2)
-                CollectionList([<0, 1>, <4>, <7>])
+            >>> collections = baca.CollectionList(
+            ...     [[0, 1], [2, 3], [4], [5, 6], [7], [8]],
+            ...     )
+            >>> collections.retain([0], period=2)
+            CollectionList([<0, 1>, <4>, <7>])
 
         Returns new collection list.
         '''
@@ -2041,43 +1756,31 @@ class CollectionList(abjad.AbjadValueObject):
 
             Octave-transposes all collections:
 
-            ::
+            >>> collections = baca.CollectionList(
+            ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
+            ...     )
+            >>> collections = collections.arpeggiate_up()
 
-                >>> collections = baca.CollectionList(
-                ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-                ...     )
-                >>> collections = collections.arpeggiate_up()
+            >>> collections
+            CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
 
-            ::
-
-                >>> collections
-                CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
-
-            ::
-
-                >>> collections.soprano_to_octave(n=4)
-                CollectionList([<-19, -12, -10, -6, 5>, <4, 5, 7>, <-33, -22, -11, 0>])
+            >>> collections.soprano_to_octave(n=4)
+            CollectionList([<-19, -12, -10, -6, 5>, <4, 5, 7>, <-33, -22, -11, 0>])
 
         ..  container:: example
 
             Octave-transposes collection -1:
 
-            ::
+            >>> collections = baca.CollectionList(
+            ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
+            ...     )
+            >>> collections = collections.arpeggiate_up()
 
-                >>> collections = baca.CollectionList(
-                ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-                ...     )
-                >>> collections = collections.arpeggiate_up()
+            >>> collections
+            CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
 
-            ::
-
-                >>> collections
-                CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
-
-            ::
-
-                >>> collections.soprano_to_octave(n=4, pattern=[-1])
-                CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <-33, -22, -11, 0>])
+            >>> collections.soprano_to_octave(n=4, pattern=[-1])
+            CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <-33, -22, -11, 0>])
 
         Returns new collection list.
         '''
@@ -2103,16 +1806,12 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> collections = baca.CollectionList(
+            ...     [[5, 12, 14, 18, 17], [16, 17, 19]],
+            ...     )
 
-                >>> collections = baca.CollectionList(
-                ...     [[5, 12, 14, 18, 17], [16, 17, 19]],
-                ...     )
-
-            ::
-
-                >>> collections.space_down(bass=5)
-                CollectionList([<24, 18, 14, 5>, <16, 7, 5>])
+            >>> collections.space_down(bass=5)
+            CollectionList([<24, 18, 14, 5>, <16, 7, 5>])
 
         '''
         if isinstance(pattern, list):
@@ -2141,16 +1840,12 @@ class CollectionList(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> collections = baca.CollectionList(
+            ...     [[5, 12, 14, 18, 17], [16, 17, 19]],
+            ...     )
 
-                >>> collections = baca.CollectionList(
-                ...     [[5, 12, 14, 18, 17], [16, 17, 19]],
-                ...     )
-
-            ::
-
-                >>> collections.space_up(bass=5)
-                CollectionList([<5, 6, 12, 14>, <5, 7, 16>])
+            >>> collections.space_up(bass=5)
+            CollectionList([<5, 6, 12, 14>, <5, 7, 16>])
 
         '''
         if isinstance(pattern, list):
@@ -2177,31 +1872,23 @@ class CollectionList(abjad.AbjadValueObject):
 
             ..  container:: example
 
-                ::
+                >>> collections = baca.CollectionList(
+                ...     [[12, 14, 18, 17], [16, 20, 19]],
+                ...     item_class=abjad.NumberedPitch,
+                ...     )
 
-                    >>> collections = baca.CollectionList(
-                    ...     [[12, 14, 18, 17], [16, 20, 19]],
-                    ...     item_class=abjad.NumberedPitch,
-                    ...     )
-
-                ::
-
-                    >>> collections.to_pitch_classes()
-                    CollectionList([PC<0, 2, 6, 5>, PC<4, 8, 7>])
+                >>> collections.to_pitch_classes()
+                CollectionList([PC<0, 2, 6, 5>, PC<4, 8, 7>])
 
             ..  container:: example
 
-                ::
+                >>> collections = baca.CollectionList(
+                ...     [[0, 2, 6, 5], [4, 8, 7]],
+                ...     item_class=abjad.NumberedPitchClass,
+                ...     )
 
-                    >>> collections = baca.CollectionList(
-                    ...     [[0, 2, 6, 5], [4, 8, 7]],
-                    ...     item_class=abjad.NumberedPitchClass,
-                    ...     )
-
-                ::
-
-                    >>> collections.to_pitch_classes()
-                    CollectionList([PC<0, 2, 6, 5>, PC<4, 8, 7>])
+                >>> collections.to_pitch_classes()
+                CollectionList([PC<0, 2, 6, 5>, PC<4, 8, 7>])
 
         ..  container:: example
 
@@ -2209,31 +1896,23 @@ class CollectionList(abjad.AbjadValueObject):
 
             ..  container:: example
 
-                ::
+                >>> collections = baca.CollectionList(
+                ...     [[12, 14, 18, 17], [16, 20, 19]],
+                ...     item_class=abjad.NamedPitch,
+                ...     )
 
-                    >>> collections = baca.CollectionList(
-                    ...     [[12, 14, 18, 17], [16, 20, 19]],
-                    ...     item_class=abjad.NamedPitch,
-                    ...     )
-
-                ::
-
-                    >>> collections.to_pitch_classes()
-                    CollectionList([PC<c d fs f>, PC<e af g>])
+                >>> collections.to_pitch_classes()
+                CollectionList([PC<c d fs f>, PC<e af g>])
 
             ..  container:: example
 
-                ::
+                >>> collections = baca.CollectionList(
+                ...     [[0, 2, 6, 5], [4, 8, 7]],
+                ...     item_class=abjad.NamedPitchClass,
+                ...     )
 
-                    >>> collections = baca.CollectionList(
-                    ...     [[0, 2, 6, 5], [4, 8, 7]],
-                    ...     item_class=abjad.NamedPitchClass,
-                    ...     )
-
-                ::
-
-                    >>> collections.to_pitch_classes()
-                    CollectionList([PC<c d fs f>, PC<e af g>])
+                >>> collections.to_pitch_classes()
+                CollectionList([PC<c d fs f>, PC<e af g>])
 
         Returns new collection list.
         '''
@@ -2253,31 +1932,23 @@ class CollectionList(abjad.AbjadValueObject):
 
             ..  container:: example
 
-                ::
+                >>> collections = baca.CollectionList(
+                ...     [[12, 14, 18, 17], [16, 20, 19]],
+                ...     item_class=abjad.NumberedPitch,
+                ...     )
 
-                    >>> collections = baca.CollectionList(
-                    ...     [[12, 14, 18, 17], [16, 20, 19]],
-                    ...     item_class=abjad.NumberedPitch,
-                    ...     )
-
-                ::
-
-                    >>> collections.to_pitches()
-                    CollectionList([<12, 14, 18, 17>, <16, 20, 19>])
+                >>> collections.to_pitches()
+                CollectionList([<12, 14, 18, 17>, <16, 20, 19>])
 
             ..  container:: example
 
-                ::
+                >>> collections = baca.CollectionList(
+                ...     [[0, 2, 6, 5], [4, 8, 7]],
+                ...     item_class=abjad.NumberedPitchClass,
+                ...     )
 
-                    >>> collections = baca.CollectionList(
-                    ...     [[0, 2, 6, 5], [4, 8, 7]],
-                    ...     item_class=abjad.NumberedPitchClass,
-                    ...     )
-
-                ::
-
-                    >>> collections.to_pitches()
-                    CollectionList([<0, 2, 6, 5>, <4, 8, 7>])
+                >>> collections.to_pitches()
+                CollectionList([<0, 2, 6, 5>, <4, 8, 7>])
 
         ..  container:: example
 
@@ -2285,31 +1956,23 @@ class CollectionList(abjad.AbjadValueObject):
 
             ..  container:: example
 
-                ::
+                >>> collections = baca.CollectionList(
+                ...     [[12, 14, 18, 17], [16, 20, 19]],
+                ...     item_class=abjad.NamedPitch,
+                ...     )
 
-                    >>> collections = baca.CollectionList(
-                    ...     [[12, 14, 18, 17], [16, 20, 19]],
-                    ...     item_class=abjad.NamedPitch,
-                    ...     )
-
-                ::
-
-                    >>> collections.to_pitches()
-                    CollectionList([<c'' d'' fs'' f''>, <e'' af'' g''>])
+                >>> collections.to_pitches()
+                CollectionList([<c'' d'' fs'' f''>, <e'' af'' g''>])
 
             ..  container:: example
 
-                ::
+                >>> collections = baca.CollectionList(
+                ...     [[0, 2, 6, 5], [4, 8, 7]],
+                ...     item_class=abjad.NamedPitchClass,
+                ...     )
 
-                    >>> collections = baca.CollectionList(
-                    ...     [[0, 2, 6, 5], [4, 8, 7]],
-                    ...     item_class=abjad.NamedPitchClass,
-                    ...     )
-
-                ::
-
-                    >>> collections.to_pitches()
-                    CollectionList([<c' d' fs' f'>, <e' af' g'>])
+                >>> collections.to_pitches()
+                CollectionList([<c' d' fs' f'>, <e' af' g'>])
 
         Returns new collection list.
         '''

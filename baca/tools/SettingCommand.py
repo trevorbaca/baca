@@ -8,10 +8,8 @@ class SettingCommand(Command):
 
     ..  container:: example
 
-        ::
-
-            >>> baca.SettingCommand()
-            SettingCommand()
+        >>> baca.SettingCommand()
+        SettingCommand()
 
     '''
 

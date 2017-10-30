@@ -10,98 +10,70 @@ class Tree(abjad.AbjadObject):
 
         Here's a tree:
 
-        ::
+        >>> items = [[[0, 1], [2, 3]], [4, 5]]
+        >>> tree = baca.Tree(items=items)
 
-            >>> items = [[[0, 1], [2, 3]], [4, 5]]
-            >>> tree = baca.Tree(items=items)
+        >>> graph(tree) # doctest: +SKIP
 
-        ::
+        >>> tree.get_payload(nested=True)
+        [[[0, 1], [2, 3]], [4, 5]]
 
-            >>> graph(tree) # doctest: +SKIP
-
-        ::
-
-            >>> tree.get_payload(nested=True)
-            [[[0, 1], [2, 3]], [4, 5]]
-
-        ::
-
-            >>> tree.get_payload()
-            [0, 1, 2, 3, 4, 5]
+        >>> tree.get_payload()
+        [0, 1, 2, 3, 4, 5]
 
     ..  container:: example
 
         Here's an internal node:
 
-        ::
+        >>> tree[1]
+        Tree(items=[Tree(items=4), Tree(items=5)])
 
-            >>> tree[1]
-            Tree(items=[Tree(items=4), Tree(items=5)])
+        >>> abjad.f(tree[1])
+        baca.Tree(
+            items=[
+                baca.Tree(
+                    items=4,
+                    ),
+                baca.Tree(
+                    items=5,
+                    ),
+                ],
+            )
 
-        ::
+        >>> tree[1].get_payload(nested=True)
+        [4, 5]
 
-            >>> abjad.f(tree[1])
-            baca.Tree(
-                items=[
-                    baca.Tree(
-                        items=4,
-                        ),
-                    baca.Tree(
-                        items=5,
-                        ),
-                    ],
-                )
-
-        ::
-
-            >>> tree[1].get_payload(nested=True)
-            [4, 5]
-
-        ::
-
-            >>> tree[1].get_payload()
-            [4, 5]
+        >>> tree[1].get_payload()
+        [4, 5]
 
     ..  container:: example
 
         Here's a leaf:
 
-        ::
+        >>> tree[1][0]
+        Tree(items=4)
 
-            >>> tree[1][0]
-            Tree(items=4)
+        >>> abjad.f(tree[1][0])
+        baca.Tree(
+            items=4,
+            )
 
-        ::
+        >>> tree[1][0].get_payload(nested=True)
+        4
 
-            >>> abjad.f(tree[1][0])
-            baca.Tree(
-                items=4,
-                )
-
-        ::
-
-            >>> tree[1][0].get_payload(nested=True)
-            4
-
-        ::
-
-            >>> tree[1][0].get_payload()
-            [4]
+        >>> tree[1][0].get_payload()
+        [4]
 
     ..  container:: example
 
         Initializes from other trees:
 
-        ::
+        >>> tree_1 = baca.Tree(items=[0, 1])
+        >>> tree_2 = baca.Tree(items=[2, 3])
+        >>> tree_3 = baca.Tree(items=[4, 5])
+        >>> tree = baca.Tree(items=[[tree_1, tree_2], tree_3])
 
-            >>> tree_1 = baca.Tree(items=[0, 1])
-            >>> tree_2 = baca.Tree(items=[2, 3])
-            >>> tree_3 = baca.Tree(items=[4, 5])
-            >>> tree = baca.Tree(items=[[tree_1, tree_2], tree_3])
-
-        ::
-
-            >>> graph(tree) # doctest: +SKIP
+        >>> graph(tree) # doctest: +SKIP
 
         ..  docs::
 
@@ -185,31 +157,23 @@ class Tree(abjad.AbjadObject):
 
             Tree contains node:
 
-            ::
+            >>> items = [[[0, 1], [2, 3]], [4, 5]]
+            >>> tree = baca.Tree(items=items)
 
-                >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.Tree(items=items)
+            >>> for node in tree:
+            ...     node
+            Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
+            Tree(items=[Tree(items=4), Tree(items=5)])
 
-            ::
-
-                >>> for node in tree:
-                ...     node
-                Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
-                Tree(items=[Tree(items=4), Tree(items=5)])
-
-            ::
-
-                >>> tree[-1] in tree
-                True
+            >>> tree[-1] in tree
+            True
 
         ..  container:: example
 
             Tree does not contain node:
 
-            ::
-
-                >>> tree[-1][-1] in tree
-                False
+            >>> tree[-1][-1] in tree
+            False
 
         Returns true or false.
         '''
@@ -223,35 +187,31 @@ class Tree(abjad.AbjadObject):
 
             Is true when subtrees are equal:
 
-            ::
+            >>> sequence_1 = [[[0, 1], [2, 3]], [4, 5]]
+            >>> tree_1 = baca.Tree(sequence_1)
+            >>> sequence_2 = [[[0, 1], [2, 3]], [4, 5]]
+            >>> tree_2 = baca.Tree(sequence_2)
+            >>> sequence_3 = [[0, 1], [2, 3], [4, 5], [6, 7]]
+            >>> tree_3 = baca.Tree(sequence_3)
 
-                >>> sequence_1 = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree_1 = baca.Tree(sequence_1)
-                >>> sequence_2 = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree_2 = baca.Tree(sequence_2)
-                >>> sequence_3 = [[0, 1], [2, 3], [4, 5], [6, 7]]
-                >>> tree_3 = baca.Tree(sequence_3)
-
-            ::
-
-                >>> tree_1 == tree_1
-                True
-                >>> tree_1 == tree_2
-                True
-                >>> tree_1 == tree_3
-                False
-                >>> tree_2 == tree_1
-                True
-                >>> tree_2 == tree_2
-                True
-                >>> tree_2 == tree_3
-                False
-                >>> tree_3 == tree_1
-                False
-                >>> tree_3 == tree_2
-                False
-                >>> tree_3 == tree_3
-                True
+            >>> tree_1 == tree_1
+            True
+            >>> tree_1 == tree_2
+            True
+            >>> tree_1 == tree_3
+            False
+            >>> tree_2 == tree_1
+            True
+            >>> tree_2 == tree_2
+            True
+            >>> tree_2 == tree_3
+            False
+            >>> tree_3 == tree_1
+            False
+            >>> tree_3 == tree_2
+            False
+            >>> tree_3 == tree_3
+            True
 
         Returns true or false.
         '''
@@ -274,52 +234,48 @@ class Tree(abjad.AbjadObject):
 
             Formats tree:
 
-            ::
+            >>> items = [[[0, 1], [2, 3]], [4, 5]]
+            >>> tree = baca.Tree(items=items)
 
-                >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.Tree(items=items)
-
-            ::
-
-                >>> abjad.f(tree)
-                baca.Tree(
-                    items=[
-                        baca.Tree(
-                            items=[
-                                baca.Tree(
-                                    items=[
-                                        baca.Tree(
-                                            items=0,
-                                            ),
-                                        baca.Tree(
-                                            items=1,
-                                            ),
-                                        ],
-                                    ),
-                                baca.Tree(
-                                    items=[
-                                        baca.Tree(
-                                            items=2,
-                                            ),
-                                        baca.Tree(
-                                            items=3,
-                                            ),
-                                        ],
-                                    ),
-                                ],
-                            ),
-                        baca.Tree(
-                            items=[
-                                baca.Tree(
-                                    items=4,
-                                    ),
-                                baca.Tree(
-                                    items=5,
-                                    ),
-                                ],
-                            ),
-                        ],
-                    )
+            >>> abjad.f(tree)
+            baca.Tree(
+                items=[
+                    baca.Tree(
+                        items=[
+                            baca.Tree(
+                                items=[
+                                    baca.Tree(
+                                        items=0,
+                                        ),
+                                    baca.Tree(
+                                        items=1,
+                                        ),
+                                    ],
+                                ),
+                            baca.Tree(
+                                items=[
+                                    baca.Tree(
+                                        items=2,
+                                        ),
+                                    baca.Tree(
+                                        items=3,
+                                        ),
+                                    ],
+                                ),
+                            ],
+                        ),
+                    baca.Tree(
+                        items=[
+                            baca.Tree(
+                                items=4,
+                                ),
+                            baca.Tree(
+                                items=5,
+                                ),
+                            ],
+                        ),
+                    ],
+                )
 
         Returns string.
         '''
@@ -333,24 +289,18 @@ class Tree(abjad.AbjadObject):
 
             Gets node:
 
-            ::
+            >>> items = [[[0, 1], [2, 3]], [4, 5]]
+            >>> tree = baca.Tree(items=items)
 
-                >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.Tree(items=items)
-
-            ::
-
-                >>> tree[-1]
-                Tree(items=[Tree(items=4), Tree(items=5)])
+            >>> tree[-1]
+            Tree(items=[Tree(items=4), Tree(items=5)])
 
         ..  container:: example
 
             Gets slice:
 
-            ::
-
-                >>> tree[-1:]
-                [Tree(items=[Tree(items=4), Tree(items=5)])]
+            >>> tree[-1:]
+            [Tree(items=[Tree(items=4), Tree(items=5)])]
 
         Returns node or slice of nodes.
         '''
@@ -363,55 +313,49 @@ class Tree(abjad.AbjadObject):
 
             Graphs tree:
 
-            ::
+            >>> items = [[[0, 1], [2, 3]], [4, 5]]
+            >>> tree = baca.Tree(items=items)
 
-                >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.Tree(items=items)
+            >>> graph(tree) # doctest: +SKIP
 
-            ::
-
-                >>> graph(tree) # doctest: +SKIP
-
-            ::
-
-                >>> tree_graph = tree.__graph__()
-                >>> abjad.f(tree_graph)
-                digraph G {
-                    graph [bgcolor=transparent,
-                        truecolor=true];
-                    node_0 [label="",
-                        shape=circle];
-                    node_1 [label="",
-                        shape=circle];
-                    node_2 [label="",
-                        shape=circle];
-                    node_3 [label="0",
-                        shape=box];
-                    node_4 [label="1",
-                        shape=box];
-                    node_5 [label="",
-                        shape=circle];
-                    node_6 [label="2",
-                        shape=box];
-                    node_7 [label="3",
-                        shape=box];
-                    node_8 [label="",
-                        shape=circle];
-                    node_9 [label="4",
-                        shape=box];
-                    node_10 [label="5",
-                        shape=box];
-                    node_0 -> node_1;
-                    node_0 -> node_8;
-                    node_1 -> node_2;
-                    node_1 -> node_5;
-                    node_2 -> node_3;
-                    node_2 -> node_4;
-                    node_5 -> node_6;
-                    node_5 -> node_7;
-                    node_8 -> node_9;
-                    node_8 -> node_10;
-                }
+            >>> tree_graph = tree.__graph__()
+            >>> abjad.f(tree_graph)
+            digraph G {
+                graph [bgcolor=transparent,
+                    truecolor=true];
+                node_0 [label="",
+                    shape=circle];
+                node_1 [label="",
+                    shape=circle];
+                node_2 [label="",
+                    shape=circle];
+                node_3 [label="0",
+                    shape=box];
+                node_4 [label="1",
+                    shape=box];
+                node_5 [label="",
+                    shape=circle];
+                node_6 [label="2",
+                    shape=box];
+                node_7 [label="3",
+                    shape=box];
+                node_8 [label="",
+                    shape=circle];
+                node_9 [label="4",
+                    shape=box];
+                node_10 [label="5",
+                    shape=box];
+                node_0 -> node_1;
+                node_0 -> node_8;
+                node_1 -> node_2;
+                node_1 -> node_5;
+                node_2 -> node_3;
+                node_2 -> node_4;
+                node_5 -> node_6;
+                node_5 -> node_7;
+                node_8 -> node_9;
+                node_8 -> node_10;
+            }
 
         Returns Graphviz graph.
         '''
@@ -457,12 +401,8 @@ class Tree(abjad.AbjadObject):
 #
 #            Gets node:
 #
-#            ::
-#
 #                >>> items = [[[0, 1], [2, 3]], [4, 5]]
 #                >>> tree = baca.Tree(items=items)
-#
-#            ::
 #
 #                >>> tree.__iter__()
 #
@@ -476,15 +416,11 @@ class Tree(abjad.AbjadObject):
 
             Gets length of tree:
 
-            ::
+            >>> items = [[[0, 1], [2, 3]], [4, 5]]
+            >>> tree = baca.Tree(items=items)
 
-                >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.Tree(items=items)
-
-            ::
-
-                >>> len(tree)
-                2
+            >>> len(tree)
+            2
 
         Defined equal to number of nodes in tree at level 1.
 
@@ -499,29 +435,23 @@ class Tree(abjad.AbjadObject):
 
             Gets interpreter representation of tree:
 
-            ::
-
-                >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> baca.Tree(items=items)
-                Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
+            >>> items = [[[0, 1], [2, 3]], [4, 5]]
+            >>> baca.Tree(items=items)
+            Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
 
         ..  container:: example
 
             Gets interpreter representation of leaf:
 
-            ::
-
-                >>> baca.Tree(0)
-                Tree(items=0)
+            >>> baca.Tree(0)
+            Tree(items=0)
 
         ..  container:: example
 
             Gets interpreter representation of empty tree:
 
-            ::
-
-                >>> baca.Tree()
-                Tree()
+            >>> baca.Tree()
+            Tree()
 
         Returns string.
         '''
@@ -564,15 +494,11 @@ class Tree(abjad.AbjadObject):
 
             Gets depth:
 
-            ::
+            >>> items = [[[0, 1], [2, 3]], [4, 5]]
+            >>> tree = baca.Tree(items=items)
 
-                >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.Tree(items=items)
-
-            ::
-
-                >>> tree[1]._get_depth()
-                2
+            >>> tree[1]._get_depth()
+            2
 
         Returns nonnegative integer.
         '''
@@ -597,20 +523,14 @@ class Tree(abjad.AbjadObject):
                 >>> items = [[[0, 1], [2, 3]], [4, 5]]
                 >>> tree = baca.Tree(items=items)
 
-            ::
+            >>> tree._get_level()
+            0
 
-                >>> tree._get_level()
-                0
+            >>> tree[1]._get_level()
+            1
 
-            ::
-
-                >>> tree[1]._get_level()
-                1
-
-            ::
-
-                >>> tree[1][1]._get_level()
-                2
+            >>> tree[1][1]._get_level()
+            2
 
         ..  container:: example
 
@@ -619,30 +539,20 @@ class Tree(abjad.AbjadObject):
                 >>> items = [[[0, 1], [2, 3]], [4, 5]]
                 >>> tree = baca.Tree(items=items)
 
-            ::
+            >>> tree._get_level(negative=True)
+            -4
 
-                >>> tree._get_level(negative=True)
-                -4
+            >>> tree[1]._get_level(negative=True)
+            -2
 
-            ::
+            >>> tree[1][1]._get_level(negative=True)
+            -1
 
-                >>> tree[1]._get_level(negative=True)
-                -2
+            >>> tree[-1][-1]._get_level(negative=True)
+            -1
 
-            ::
-
-                >>> tree[1][1]._get_level(negative=True)
-                -1
-
-            ::
-
-                >>> tree[-1][-1]._get_level(negative=True)
-                -1
-
-            ::
-
-                >>> tree[-1]._get_level(negative=True)
-                -2
+            >>> tree[-1]._get_level(negative=True)
+            -2
 
         Returns nonnegative integer when `negative` is false.
 
@@ -664,222 +574,176 @@ class Tree(abjad.AbjadObject):
 
             Nodes don't need to be complete:
 
-            ::
-
-                >>> items = [[0, 1], [2, 3], [4, 5], [6, 7]]
-                >>> tree = baca.Tree(items=items)
+            >>> items = [[0, 1], [2, 3], [4, 5], [6, 7]]
+            >>> tree = baca.Tree(items=items)
 
             Gets all nodes at level 2:
 
-            ::
-
-                >>> tree[0][0]._get_next_n_nodes_at_level(None, 2)
-                [Tree(items=1), Tree(items=2), Tree(items=3), Tree(items=4), Tree(items=5), Tree(items=6), Tree(items=7)]
+            >>> tree[0][0]._get_next_n_nodes_at_level(None, 2)
+            [Tree(items=1), Tree(items=2), Tree(items=3), Tree(items=4), Tree(items=5), Tree(items=6), Tree(items=7)]
 
             Gets all nodes at level -1:
 
-            ::
-
-                >>> tree[0][0]._get_next_n_nodes_at_level(None, -1)
-                [Tree(items=1), Tree(items=2), Tree(items=3), Tree(items=4), Tree(items=5), Tree(items=6), Tree(items=7)]
+            >>> tree[0][0]._get_next_n_nodes_at_level(None, -1)
+            [Tree(items=1), Tree(items=2), Tree(items=3), Tree(items=4), Tree(items=5), Tree(items=6), Tree(items=7)]
 
             Gets next 4 nodes at level 2:
 
-            ::
-
-                >>> tree[0][0]._get_next_n_nodes_at_level(4, 2)
-                [Tree(items=1), Tree(items=2), Tree(items=3), Tree(items=4)]
+            >>> tree[0][0]._get_next_n_nodes_at_level(4, 2)
+            [Tree(items=1), Tree(items=2), Tree(items=3), Tree(items=4)]
 
             Gets next 3 nodes at level 1:
 
-            ::
-
-                >>> tree[0][0]._get_next_n_nodes_at_level(3, 1)
-                [Tree(items=[Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)]), Tree(items=[Tree(items=4), Tree(items=5)])]
+            >>> tree[0][0]._get_next_n_nodes_at_level(3, 1)
+            [Tree(items=[Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)]), Tree(items=[Tree(items=4), Tree(items=5)])]
 
             Gets next node at level 0:
 
-            ::
-
-                >>> tree[0][0]._get_next_n_nodes_at_level(1, 0)
-                [Tree(items=[Tree(items=[Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)]), Tree(items=[Tree(items=4), Tree(items=5)]), Tree(items=[Tree(items=6), Tree(items=7)])])]
+            >>> tree[0][0]._get_next_n_nodes_at_level(1, 0)
+            [Tree(items=[Tree(items=[Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)]), Tree(items=[Tree(items=4), Tree(items=5)]), Tree(items=[Tree(items=6), Tree(items=7)])])]
 
             Gets next 4 nodes at level -1:
 
-            ::
-
-                >>> tree[0][0]._get_next_n_nodes_at_level(4, -1)
-                [Tree(items=1), Tree(items=2), Tree(items=3), Tree(items=4)]
+            >>> tree[0][0]._get_next_n_nodes_at_level(4, -1)
+            [Tree(items=1), Tree(items=2), Tree(items=3), Tree(items=4)]
 
             Gets next 3 nodes at level -2:
 
-            ::
-
-                >>> tree[0][0]._get_next_n_nodes_at_level(3, -2)
-                [Tree(items=[Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)]), Tree(items=[Tree(items=4), Tree(items=5)])]
+            >>> tree[0][0]._get_next_n_nodes_at_level(3, -2)
+            [Tree(items=[Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)]), Tree(items=[Tree(items=4), Tree(items=5)])]
 
             Gets previous 4 nodes at level 2:
 
-            ::
-
-                >>> tree[-1][-1]._get_next_n_nodes_at_level(-4, 2)
-                [Tree(items=6), Tree(items=5), Tree(items=4), Tree(items=3)]
+            >>> tree[-1][-1]._get_next_n_nodes_at_level(-4, 2)
+            [Tree(items=6), Tree(items=5), Tree(items=4), Tree(items=3)]
 
             Gets previous 3 nodes at level 1:
 
-            ::
-
-                >>> tree[-1][-1]._get_next_n_nodes_at_level(-3, 1)
-                [Tree(items=[Tree(items=6)]), Tree(items=[Tree(items=4), Tree(items=5)]), Tree(items=[Tree(items=2), Tree(items=3)])]
+            >>> tree[-1][-1]._get_next_n_nodes_at_level(-3, 1)
+            [Tree(items=[Tree(items=6)]), Tree(items=[Tree(items=4), Tree(items=5)]), Tree(items=[Tree(items=2), Tree(items=3)])]
 
             Gets previous node at level 0:
 
-            ::
-
-                >>> tree[-1][-1]._get_next_n_nodes_at_level(-1, 0)
-                [Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)]), Tree(items=[Tree(items=4), Tree(items=5)]), Tree(items=[Tree(items=6)])])]
+            >>> tree[-1][-1]._get_next_n_nodes_at_level(-1, 0)
+            [Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)]), Tree(items=[Tree(items=4), Tree(items=5)]), Tree(items=[Tree(items=6)])])]
 
             Gets previous 4 nodes at level -1:
 
-            ::
-
-                >>> tree[-1][-1]._get_next_n_nodes_at_level(-4, -1)
-                [Tree(items=6), Tree(items=5), Tree(items=4), Tree(items=3)]
+            >>> tree[-1][-1]._get_next_n_nodes_at_level(-4, -1)
+            [Tree(items=6), Tree(items=5), Tree(items=4), Tree(items=3)]
 
             Gets previous 3 nodes at level -2:
 
-            ::
-
-                >>> tree[-1][-1]._get_next_n_nodes_at_level(-3, -2)
-                [Tree(items=[Tree(items=6)]), Tree(items=[Tree(items=4), Tree(items=5)]), Tree(items=[Tree(items=2), Tree(items=3)])]
+            >>> tree[-1][-1]._get_next_n_nodes_at_level(-3, -2)
+            [Tree(items=[Tree(items=6)]), Tree(items=[Tree(items=4), Tree(items=5)]), Tree(items=[Tree(items=2), Tree(items=3)])]
 
         ..  container:: example
 
             Tree of length greater than ``1`` for examples with positive `n`:
 
-            ::
-
-                >>> items = [[0, 1], [2, 3], [4, 5], [6, 7]]
-                >>> tree = baca.Tree(items=items)
+            >>> items = [[0, 1], [2, 3], [4, 5], [6, 7]]
+            >>> tree = baca.Tree(items=items)
 
             Gets next 4 nodes at level 2:
 
-            ::
-
-                >>> for node in tree[0][0]._get_next_n_nodes_at_level(
-                ...     4, 2,
-                ...     nodes_must_be_complete=True,
-                ...     ):
-                ...     node
-                ...
-                Tree(items=1)
-                Tree(items=2)
-                Tree(items=3)
-                Tree(items=4)
+            >>> for node in tree[0][0]._get_next_n_nodes_at_level(
+            ...     4, 2,
+            ...     nodes_must_be_complete=True,
+            ...     ):
+            ...     node
+            ...
+            Tree(items=1)
+            Tree(items=2)
+            Tree(items=3)
+            Tree(items=4)
 
             Gets next 3 nodes at level 1:
 
-            ::
-
-                >>> for node in tree[0][0]._get_next_n_nodes_at_level(
-                ...     3, 1,
-                ...     nodes_must_be_complete=True,
-                ...     ):
-                ...     node
-                Tree(items=[Tree(items=1)])
-                Tree(items=[Tree(items=2), Tree(items=3)])
-                Tree(items=[Tree(items=4), Tree(items=5)])
-                Tree(items=[Tree(items=6), Tree(items=7)])
+            >>> for node in tree[0][0]._get_next_n_nodes_at_level(
+            ...     3, 1,
+            ...     nodes_must_be_complete=True,
+            ...     ):
+            ...     node
+            Tree(items=[Tree(items=1)])
+            Tree(items=[Tree(items=2), Tree(items=3)])
+            Tree(items=[Tree(items=4), Tree(items=5)])
+            Tree(items=[Tree(items=6), Tree(items=7)])
 
             Gets next 4 nodes at level -1:
 
-            ::
-
-                >>> for node in tree[0][0]._get_next_n_nodes_at_level(4, -1):
-                ...     node
-                Tree(items=1)
-                Tree(items=2)
-                Tree(items=3)
-                Tree(items=4)
+            >>> for node in tree[0][0]._get_next_n_nodes_at_level(4, -1):
+            ...     node
+            Tree(items=1)
+            Tree(items=2)
+            Tree(items=3)
+            Tree(items=4)
 
             Gets next 3 nodes at level -2:
 
-            ::
-
-                >>> for node in tree[0][0]._get_next_n_nodes_at_level(
-                ...     3, -2,
-                ...     nodes_must_be_complete=True,
-                ...     ):
-                ...     node
-                Tree(items=[Tree(items=1)])
-                Tree(items=[Tree(items=2), Tree(items=3)])
-                Tree(items=[Tree(items=4), Tree(items=5)])
-                Tree(items=[Tree(items=6), Tree(items=7)])
+            >>> for node in tree[0][0]._get_next_n_nodes_at_level(
+            ...     3, -2,
+            ...     nodes_must_be_complete=True,
+            ...     ):
+            ...     node
+            Tree(items=[Tree(items=1)])
+            Tree(items=[Tree(items=2), Tree(items=3)])
+            Tree(items=[Tree(items=4), Tree(items=5)])
+            Tree(items=[Tree(items=6), Tree(items=7)])
 
         ..  container:: example
 
             Tree of length greater than ``1`` for examples with negative `n`:
 
-            ::
-
-                >>> items = [[0, 1], [2, 3], [4, 5], [6, 7]]
-                >>> tree = baca.Tree(items=items)
+            >>> items = [[0, 1], [2, 3], [4, 5], [6, 7]]
+            >>> tree = baca.Tree(items=items)
 
             Gets previous 4 nodes at level 2:
 
-            ::
-
-                >>> for node in tree[-1][-1]._get_next_n_nodes_at_level(
-                ...     -4, 2,
-                ...     nodes_must_be_complete=True,
-                ...     ):
-                ...     node
-                Tree(items=6)
-                Tree(items=5)
-                Tree(items=4)
-                Tree(items=3)
+            >>> for node in tree[-1][-1]._get_next_n_nodes_at_level(
+            ...     -4, 2,
+            ...     nodes_must_be_complete=True,
+            ...     ):
+            ...     node
+            Tree(items=6)
+            Tree(items=5)
+            Tree(items=4)
+            Tree(items=3)
 
             Gets previous 3 nodes at level 1:
 
-            ::
-
-                >>> for node in tree[-1][-1]._get_next_n_nodes_at_level(
-                ...     -3, 1,
-                ...     nodes_must_be_complete=True,
-                ...     ):
-                ...     node
-                Tree(items=[Tree(items=6)])
-                Tree(items=[Tree(items=4), Tree(items=5)])
-                Tree(items=[Tree(items=2), Tree(items=3)])
-                Tree(items=[Tree(items=0), Tree(items=1)])
+            >>> for node in tree[-1][-1]._get_next_n_nodes_at_level(
+            ...     -3, 1,
+            ...     nodes_must_be_complete=True,
+            ...     ):
+            ...     node
+            Tree(items=[Tree(items=6)])
+            Tree(items=[Tree(items=4), Tree(items=5)])
+            Tree(items=[Tree(items=2), Tree(items=3)])
+            Tree(items=[Tree(items=0), Tree(items=1)])
 
             Gets previous 4 nodes at level -1:
 
-            ::
-
-                >>> for node in tree[-1][-1]._get_next_n_nodes_at_level(
-                ...     -4, -1,
-                ...     nodes_must_be_complete=True,
-                ...     ):
-                ...     node
-                Tree(items=6)
-                Tree(items=5)
-                Tree(items=4)
-                Tree(items=3)
+            >>> for node in tree[-1][-1]._get_next_n_nodes_at_level(
+            ...     -4, -1,
+            ...     nodes_must_be_complete=True,
+            ...     ):
+            ...     node
+            Tree(items=6)
+            Tree(items=5)
+            Tree(items=4)
+            Tree(items=3)
 
             Gets previous 3 nodes at level -2:
 
-            ::
-
-                >>> for node in tree[-1][-1]._get_next_n_nodes_at_level(
-                ...     -3, -2,
-                ...     nodes_must_be_complete=True,
-                ...     ):
-                ...     node
-                Tree(items=[Tree(items=6)])
-                Tree(items=[Tree(items=4), Tree(items=5)])
-                Tree(items=[Tree(items=2), Tree(items=3)])
-                Tree(items=[Tree(items=0), Tree(items=1)])
+            >>> for node in tree[-1][-1]._get_next_n_nodes_at_level(
+            ...     -3, -2,
+            ...     nodes_must_be_complete=True,
+            ...     ):
+            ...     node
+            Tree(items=[Tree(items=6)])
+            Tree(items=[Tree(items=4), Tree(items=5)])
+            Tree(items=[Tree(items=2), Tree(items=3)])
+            Tree(items=[Tree(items=0), Tree(items=1)])
 
         '''
         if not self._is_valid_level(level):
@@ -956,26 +820,22 @@ class Tree(abjad.AbjadObject):
 
             Gets parentage with self:
 
-            ::
-
-                >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.Tree(items=items)
-                >>> parentage = tree[1]._get_parentage()
-                >>> for tree in parentage:
-                ...     tree
-                Tree(items=[Tree(items=4), Tree(items=5)])
-                Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
+            >>> items = [[[0, 1], [2, 3]], [4, 5]]
+            >>> tree = baca.Tree(items=items)
+            >>> parentage = tree[1]._get_parentage()
+            >>> for tree in parentage:
+            ...     tree
+            Tree(items=[Tree(items=4), Tree(items=5)])
+            Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
 
             Gets parentage without self:
 
-            ::
-
-                >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.Tree(items=items)
-                >>> parentage = tree[1]._get_parentage(include_self=False)
-                >>> for tree in parentage:
-                ...     tree
-                Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
+            >>> items = [[[0, 1], [2, 3]], [4, 5]]
+            >>> tree = baca.Tree(items=items)
+            >>> parentage = tree[1]._get_parentage(include_self=False)
+            >>> for tree in parentage:
+            ...     tree
+            Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
 
         Returns tuple.
         '''
@@ -995,15 +855,11 @@ class Tree(abjad.AbjadObject):
 
             Gets position:
 
-            ::
+            >>> items = [[[0, 1], [2, 3]], [4, 5]]
+            >>> tree = baca.Tree(items=items)
 
-                >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.Tree(items=items)
-
-            ::
-
-                >>> tree[1]._get_position()
-                (1,)
+            >>> tree[1]._get_position()
+            (1,)
 
         Position of node defined relative to root.
 
@@ -1024,15 +880,11 @@ class Tree(abjad.AbjadObject):
 
             Gets position of descendant:
 
-            ::
+            >>> items = [[0, 1], [2, 3], [4, 5], [6, 7]]
+            >>> tree = baca.Tree(items=items)
 
-                >>> items = [[0, 1], [2, 3], [4, 5], [6, 7]]
-                >>> tree = baca.Tree(items=items)
-
-            ::
-
-                >>> tree[3]._get_position_of_descendant(tree[3][0])
-                (0,)
+            >>> tree[3]._get_position_of_descendant(tree[3][0])
+            (0,)
 
         Returns tuple of zero or more nonnegative integers.
         '''
@@ -1105,50 +957,44 @@ class Tree(abjad.AbjadObject):
 
             Iterates tree depth-first from left to right:
 
-            ::
+            >>> items = [[0, 1], [2, 3], [4, 5], [6, 7]]
+            >>> tree = baca.Tree(items=items)
 
-                >>> items = [[0, 1], [2, 3], [4, 5], [6, 7]]
-                >>> tree = baca.Tree(items=items)
-
-            ::
-
-                >>> for node in tree._iterate_depth_first(): node
-                ...
-                Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)]), Tree(items=[Tree(items=4), Tree(items=5)]), Tree(items=[Tree(items=6), Tree(items=7)])])
-                Tree(items=[Tree(items=0), Tree(items=1)])
-                Tree(items=0)
-                Tree(items=1)
-                Tree(items=[Tree(items=2), Tree(items=3)])
-                Tree(items=2)
-                Tree(items=3)
-                Tree(items=[Tree(items=4), Tree(items=5)])
-                Tree(items=4)
-                Tree(items=5)
-                Tree(items=[Tree(items=6), Tree(items=7)])
-                Tree(items=6)
-                Tree(items=7)
+            >>> for node in tree._iterate_depth_first(): node
+            ...
+            Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)]), Tree(items=[Tree(items=4), Tree(items=5)]), Tree(items=[Tree(items=6), Tree(items=7)])])
+            Tree(items=[Tree(items=0), Tree(items=1)])
+            Tree(items=0)
+            Tree(items=1)
+            Tree(items=[Tree(items=2), Tree(items=3)])
+            Tree(items=2)
+            Tree(items=3)
+            Tree(items=[Tree(items=4), Tree(items=5)])
+            Tree(items=4)
+            Tree(items=5)
+            Tree(items=[Tree(items=6), Tree(items=7)])
+            Tree(items=6)
+            Tree(items=7)
 
         ..  container::
 
             Iterates tree depth-first from right to left:
 
-            ::
-
-                >>> for node in tree._iterate_depth_first(reverse=True): node
-                ...
-                Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)]), Tree(items=[Tree(items=4), Tree(items=5)]), Tree(items=[Tree(items=6), Tree(items=7)])])
-                Tree(items=[Tree(items=6), Tree(items=7)])
-                Tree(items=7)
-                Tree(items=6)
-                Tree(items=[Tree(items=4), Tree(items=5)])
-                Tree(items=5)
-                Tree(items=4)
-                Tree(items=[Tree(items=2), Tree(items=3)])
-                Tree(items=3)
-                Tree(items=2)
-                Tree(items=[Tree(items=0), Tree(items=1)])
-                Tree(items=1)
-                Tree(items=0)
+            >>> for node in tree._iterate_depth_first(reverse=True): node
+            ...
+            Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)]), Tree(items=[Tree(items=4), Tree(items=5)]), Tree(items=[Tree(items=6), Tree(items=7)])])
+            Tree(items=[Tree(items=6), Tree(items=7)])
+            Tree(items=7)
+            Tree(items=6)
+            Tree(items=[Tree(items=4), Tree(items=5)])
+            Tree(items=5)
+            Tree(items=4)
+            Tree(items=[Tree(items=2), Tree(items=3)])
+            Tree(items=3)
+            Tree(items=2)
+            Tree(items=[Tree(items=0), Tree(items=1)])
+            Tree(items=1)
+            Tree(items=0)
 
         Returns generator.
         '''
@@ -1171,30 +1017,22 @@ class Tree(abjad.AbjadObject):
 
             Removes node and all nodes left of node to root:
 
-            ::
+            >>> items = [[0, 1], [2, 3], [4, 5], [6, 7]]
 
-                >>> items = [[0, 1], [2, 3], [4, 5], [6, 7]]
+            >>> tree = baca.Tree(items=items)
+            >>> tree[0][0]._remove_to_root()
+            >>> tree.get_payload(nested=True)
+            [[1], [2, 3], [4, 5], [6, 7]]
 
-            ::
+            >>> tree = baca.Tree(items=items)
+            >>> tree[0][1]._remove_to_root()
+            >>> tree.get_payload(nested=True)
+            [[2, 3], [4, 5], [6, 7]]
 
-                >>> tree = baca.Tree(items=items)
-                >>> tree[0][0]._remove_to_root()
-                >>> tree.get_payload(nested=True)
-                [[1], [2, 3], [4, 5], [6, 7]]
-
-            ::
-
-                >>> tree = baca.Tree(items=items)
-                >>> tree[0][1]._remove_to_root()
-                >>> tree.get_payload(nested=True)
-                [[2, 3], [4, 5], [6, 7]]
-
-            ::
-
-                >>> tree = baca.Tree(items=items)
-                >>> tree[1]._remove_to_root()
-                >>> tree.get_payload(nested=True)
-                [[4, 5], [6, 7]]
+            >>> tree = baca.Tree(items=items)
+            >>> tree[1]._remove_to_root()
+            >>> tree.get_payload(nested=True)
+            [[4, 5], [6, 7]]
 
         Modifies in-place to root.
 
@@ -1243,24 +1081,18 @@ class Tree(abjad.AbjadObject):
 
             Coerces input:
 
-            ::
+            >>> items = [[1.1, 2.2], [8.8, 9.9]]
+            >>> tree = baca.Tree(items=items, item_class=int)
 
-                >>> items = [[1.1, 2.2], [8.8, 9.9]]
-                >>> tree = baca.Tree(items=items, item_class=int)
+            >>> for node in tree.iterate(level=-1):
+            ...     node
+            Tree(items=1, item_class=int)
+            Tree(items=2, item_class=int)
+            Tree(items=8, item_class=int)
+            Tree(items=9, item_class=int)
 
-            ::
-
-                >>> for node in tree.iterate(level=-1):
-                ...     node
-                Tree(items=1, item_class=int)
-                Tree(items=2, item_class=int)
-                Tree(items=8, item_class=int)
-                Tree(items=9, item_class=int)
-
-            ::
-
-                >>> tree.get_payload(nested=True)
-                [[1, 2], [8, 9]]
+            >>> tree.get_payload(nested=True)
+            [[1, 2], [8, 9]]
 
         Defaults to none.
 
@@ -1278,26 +1110,20 @@ class Tree(abjad.AbjadObject):
 
             Gets items:
 
-            ::
+            >>> items = [[[0, 1], [2, 3]], [4, 5]]
+            >>> tree = baca.Tree(items=items)
 
-                >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.Tree(items=items)
-
-            ::
-
-                >>> for item in tree.items:
-                ...     item
-                Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
-                Tree(items=[Tree(items=4), Tree(items=5)])
+            >>> for item in tree.items:
+            ...     item
+            Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
+            Tree(items=[Tree(items=4), Tree(items=5)])
 
         ..  container:: example
 
             Returns list:
 
-            ::
-
-                >>> isinstance(tree.items, list)
-                True
+            >>> isinstance(tree.items, list)
+            True
 
         '''
         return self._items
@@ -1311,33 +1137,25 @@ class Tree(abjad.AbjadObject):
 
             Gets payload:
 
-            ::
+            >>> items = [[[0, 1], [2, 3]], [4, 5]]
+            >>> tree = baca.Tree(items=items)
 
-                >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.Tree(items=items)
-
-            ::
-
-                >>> tree.get_payload()
-                [0, 1, 2, 3, 4, 5]
+            >>> tree.get_payload()
+            [0, 1, 2, 3, 4, 5]
 
         ..  container:: example
 
             Gets nested payload:
 
-            ::
-
-                >>> tree.get_payload(nested=True)
-                [[[0, 1], [2, 3]], [4, 5]]
+            >>> tree.get_payload(nested=True)
+            [[[0, 1], [2, 3]], [4, 5]]
 
         ..  container:: example
 
             Gets payload in reverse:
 
-            ::
-
-                >>> tree.get_payload(reverse=True)
-                [5, 4, 3, 2, 1, 0]
+            >>> tree.get_payload(reverse=True)
+            [5, 4, 3, 2, 1, 0]
 
         Nested payload in reverse is not yet implemented.
 
@@ -1367,175 +1185,137 @@ class Tree(abjad.AbjadObject):
 
             Example tree:
 
-            ::
-
-                >>> items = [[[0, 1], [2, 3]], [4, 5]]
-                >>> tree = baca.Tree(items=items)
-                >>> graph(tree) # doctest: +SKIP
+            >>> items = [[[0, 1], [2, 3]], [4, 5]]
+            >>> tree = baca.Tree(items=items)
+            >>> graph(tree) # doctest: +SKIP
 
             Iterates all levels:
 
-            ::
-
-                >>> for node in tree.iterate():
-                ...     node
-                Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
-                Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
-                Tree(items=[Tree(items=0), Tree(items=1)])
-                Tree(items=0)
-                Tree(items=1)
-                Tree(items=[Tree(items=2), Tree(items=3)])
-                Tree(items=2)
-                Tree(items=3)
-                Tree(items=[Tree(items=4), Tree(items=5)])
-                Tree(items=4)
-                Tree(items=5)
+            >>> for node in tree.iterate():
+            ...     node
+            Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
+            Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
+            Tree(items=[Tree(items=0), Tree(items=1)])
+            Tree(items=0)
+            Tree(items=1)
+            Tree(items=[Tree(items=2), Tree(items=3)])
+            Tree(items=2)
+            Tree(items=3)
+            Tree(items=[Tree(items=4), Tree(items=5)])
+            Tree(items=4)
+            Tree(items=5)
 
             Iterates all levels in reverse:
 
-            ::
-
-                >>> for node in tree.iterate(reverse=True):
-                ...     node
-                Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
-                Tree(items=[Tree(items=4), Tree(items=5)])
-                Tree(items=5)
-                Tree(items=4)
-                Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
-                Tree(items=[Tree(items=2), Tree(items=3)])
-                Tree(items=3)
-                Tree(items=2)
-                Tree(items=[Tree(items=0), Tree(items=1)])
-                Tree(items=1)
-                Tree(items=0)
+            >>> for node in tree.iterate(reverse=True):
+            ...     node
+            Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
+            Tree(items=[Tree(items=4), Tree(items=5)])
+            Tree(items=5)
+            Tree(items=4)
+            Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
+            Tree(items=[Tree(items=2), Tree(items=3)])
+            Tree(items=3)
+            Tree(items=2)
+            Tree(items=[Tree(items=0), Tree(items=1)])
+            Tree(items=1)
+            Tree(items=0)
 
             Iterates select levels:
 
-            ::
+            >>> for node in tree.iterate(level=0):
+            ...     node
+            Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
 
-                >>> for node in tree.iterate(level=0):
-                ...     node
-                Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
+            >>> for node in tree.iterate(level=1):
+            ...     node
+            Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
+            Tree(items=[Tree(items=4), Tree(items=5)])
 
-            ::
+            >>> for node in tree.iterate(level=2):
+            ...     node
+            Tree(items=[Tree(items=0), Tree(items=1)])
+            Tree(items=[Tree(items=2), Tree(items=3)])
+            Tree(items=4)
+            Tree(items=5)
 
-                >>> for node in tree.iterate(level=1):
-                ...     node
-                Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
-                Tree(items=[Tree(items=4), Tree(items=5)])
+            >>> for node in tree.iterate(level=3):
+            ...     node
+            Tree(items=0)
+            Tree(items=1)
+            Tree(items=2)
+            Tree(items=3)
 
-            ::
+            >>> for node in tree.iterate(level=-4):
+            ...     node
+            Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
 
-                >>> for node in tree.iterate(level=2):
-                ...     node
-                Tree(items=[Tree(items=0), Tree(items=1)])
-                Tree(items=[Tree(items=2), Tree(items=3)])
-                Tree(items=4)
-                Tree(items=5)
+            >>> for node in tree.iterate(level=-3):
+            ...     node
+            Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
 
-            ::
+            >>> for node in tree.iterate(level=-2):
+            ...     node
+            Tree(items=[Tree(items=0), Tree(items=1)])
+            Tree(items=[Tree(items=2), Tree(items=3)])
+            Tree(items=[Tree(items=4), Tree(items=5)])
 
-                >>> for node in tree.iterate(level=3):
-                ...     node
-                Tree(items=0)
-                Tree(items=1)
-                Tree(items=2)
-                Tree(items=3)
-
-            ::
-
-                >>> for node in tree.iterate(level=-4):
-                ...     node
-                Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
-
-            ::
-
-                >>> for node in tree.iterate(level=-3):
-                ...     node
-                Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
-
-            ::
-
-                >>> for node in tree.iterate(level=-2):
-                ...     node
-                Tree(items=[Tree(items=0), Tree(items=1)])
-                Tree(items=[Tree(items=2), Tree(items=3)])
-                Tree(items=[Tree(items=4), Tree(items=5)])
-
-            ::
-
-                >>> for node in tree.iterate(level=-1):
-                ...     node
-                Tree(items=0)
-                Tree(items=1)
-                Tree(items=2)
-                Tree(items=3)
-                Tree(items=4)
-                Tree(items=5)
+            >>> for node in tree.iterate(level=-1):
+            ...     node
+            Tree(items=0)
+            Tree(items=1)
+            Tree(items=2)
+            Tree(items=3)
+            Tree(items=4)
+            Tree(items=5)
 
             Iterates select levels in reverse:
 
-            ::
+            >>> for node in tree.iterate(level=0, reverse=True):
+            ...     node
+            Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
 
-                >>> for node in tree.iterate(level=0, reverse=True):
-                ...     node
-                Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
+            >>> for node in tree.iterate(level=1, reverse=True):
+            ...     node
+            Tree(items=[Tree(items=4), Tree(items=5)])
+            Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
 
-            ::
+            >>> for node in tree.iterate(level=2, reverse=True):
+            ...     node
+            Tree(items=5)
+            Tree(items=4)
+            Tree(items=[Tree(items=2), Tree(items=3)])
+            Tree(items=[Tree(items=0), Tree(items=1)])
 
-                >>> for node in tree.iterate(level=1, reverse=True):
-                ...     node
-                Tree(items=[Tree(items=4), Tree(items=5)])
-                Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
+            >>> for node in tree.iterate(level=3, reverse=True):
+            ...     node
+            Tree(items=3)
+            Tree(items=2)
+            Tree(items=1)
+            Tree(items=0)
 
-            ::
+            >>> for node in tree.iterate(level=-4, reverse=True):
+            ...     node
+            Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
 
-                >>> for node in tree.iterate(level=2, reverse=True):
-                ...     node
-                Tree(items=5)
-                Tree(items=4)
-                Tree(items=[Tree(items=2), Tree(items=3)])
-                Tree(items=[Tree(items=0), Tree(items=1)])
+            >>> for node in tree.iterate(level=-3, reverse=True):
+            ...     node
+            Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
 
-            ::
+            >>> for node in tree.iterate(level=-2, reverse=True):
+            ...     node
+            Tree(items=[Tree(items=4), Tree(items=5)])
+            Tree(items=[Tree(items=2), Tree(items=3)])
+            Tree(items=[Tree(items=0), Tree(items=1)])
 
-                >>> for node in tree.iterate(level=3, reverse=True):
-                ...     node
-                Tree(items=3)
-                Tree(items=2)
-                Tree(items=1)
-                Tree(items=0)
-
-            ::
-
-                >>> for node in tree.iterate(level=-4, reverse=True):
-                ...     node
-                Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
-
-            ::
-
-                >>> for node in tree.iterate(level=-3, reverse=True):
-                ...     node
-                Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
-
-            ::
-
-                >>> for node in tree.iterate(level=-2, reverse=True):
-                ...     node
-                Tree(items=[Tree(items=4), Tree(items=5)])
-                Tree(items=[Tree(items=2), Tree(items=3)])
-                Tree(items=[Tree(items=0), Tree(items=1)])
-
-            ::
-
-                >>> for node in tree.iterate(level=-1, reverse=True):
-                ...     node
-                Tree(items=5)
-                Tree(items=4)
-                Tree(items=3)
-                Tree(items=2)
-                Tree(items=1)
-                Tree(items=0)
+            >>> for node in tree.iterate(level=-1, reverse=True):
+            ...     node
+            Tree(items=5)
+            Tree(items=4)
+            Tree(items=3)
+            Tree(items=2)
+            Tree(items=1)
+            Tree(items=0)
 
         Returns generator.
         '''

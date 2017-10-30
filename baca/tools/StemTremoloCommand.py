@@ -10,27 +10,21 @@ class StemTremoloCommand(Command):
 
         Selects notes and chords by default:
 
-        ::
+        >>> segment_maker = baca.SegmentMaker(
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
 
-            >>> segment_maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.pitches('E4 F4'),
+        ...     baca.even_runs(),
+        ...     baca.stem_tremolo(),
+        ...     )
 
-        ::
-
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.pitches('E4 F4'),
-            ...     baca.even_runs(),
-            ...     baca.stem_tremolo(),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -156,27 +150,21 @@ class StemTremoloCommand(Command):
 
             Selects pitched leaves:
 
-            ::
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
 
-                >>> segment_maker = baca.SegmentMaker(
-                ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-                ...     )
+            >>> segment_maker(
+            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.pitches('E4 F4'),
+            ...     baca.even_runs(),
+            ...     baca.stem_tremolo(),
+            ...     )
 
-            ::
-
-                >>> segment_maker(
-                ...     baca.scope('Violin Music Voice', 1),
-                ...     baca.pitches('E4 F4'),
-                ...     baca.even_runs(),
-                ...     baca.stem_tremolo(),
-                ...     )
-
-            ::
-
-                >>> result = segment_maker.run(is_doc_example=True)
-                >>> lilypond_file, metadata = result
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = segment_maker.run(is_doc_example=True)
+            >>> lilypond_file, metadata = result
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -260,27 +248,21 @@ class StemTremoloCommand(Command):
 
             Selects last seven pitched leaves:
 
-            ::
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
 
-                >>> segment_maker = baca.SegmentMaker(
-                ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-                ...     )
+            >>> segment_maker(
+            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.pitches('E4 F4'),
+            ...     baca.even_runs(),
+            ...     baca.stem_tremolo(baca.select().pleaves()[-7:]),
+            ...     )
 
-            ::
-
-                >>> segment_maker(
-                ...     baca.scope('Violin Music Voice', 1),
-                ...     baca.pitches('E4 F4'),
-                ...     baca.even_runs(),
-                ...     baca.stem_tremolo(baca.select().pleaves()[-7:]),
-                ...     )
-
-            ::
-
-                >>> result = segment_maker.run(is_doc_example=True)
-                >>> lilypond_file, metadata = result
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = segment_maker.run(is_doc_example=True)
+            >>> lilypond_file, metadata = result
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -374,27 +356,21 @@ class StemTremoloCommand(Command):
 
             Gets thirty-second-valued tremolo flags by default:
 
-            ::
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
 
-                >>> segment_maker = baca.SegmentMaker(
-                ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-                ...     )
+            >>> segment_maker(
+            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.pitches('E4 F4'),
+            ...     baca.even_runs(),
+            ...     baca.stem_tremolo(),
+            ...     )
 
-            ::
-
-                >>> segment_maker(
-                ...     baca.scope('Violin Music Voice', 1),
-                ...     baca.pitches('E4 F4'),
-                ...     baca.even_runs(),
-                ...     baca.stem_tremolo(),
-                ...     )
-
-            ::
-
-                >>> result = segment_maker.run(is_doc_example=True)
-                >>> lilypond_file, metadata = result
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = segment_maker.run(is_doc_example=True)
+            >>> lilypond_file, metadata = result
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -478,27 +454,21 @@ class StemTremoloCommand(Command):
 
             With sixteenth-valued tremolo flags:
 
-            ::
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
 
-                >>> segment_maker = baca.SegmentMaker(
-                ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-                ...     )
+            >>> segment_maker(
+            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.pitches('E4 F4'),
+            ...     baca.even_runs(),
+            ...     baca.StemTremoloCommand(tremolo_flags=16),
+            ...     )
 
-            ::
-
-                >>> segment_maker(
-                ...     baca.scope('Violin Music Voice', 1),
-                ...     baca.pitches('E4 F4'),
-                ...     baca.even_runs(),
-                ...     baca.StemTremoloCommand(tremolo_flags=16),
-                ...     )
-
-            ::
-
-                >>> result = segment_maker.run(is_doc_example=True)
-                >>> lilypond_file, metadata = result
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = segment_maker.run(is_doc_example=True)
+            >>> lilypond_file, metadata = result
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 

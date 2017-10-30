@@ -6,64 +6,44 @@ class Matrix(abjad.AbjadObject):
 
     Initializes from rows:
 
-    ::
+    >>> matrix = baca.Matrix([
+    ...     [0, 1, 2, 3],
+    ...     [10, 11, 12, 13],
+    ...     [20, 21, 22, 23],
+    ...     ])
 
-        >>> matrix = baca.Matrix([
-        ...     [0, 1, 2, 3],
-        ...     [10, 11, 12, 13],
-        ...     [20, 21, 22, 23],
-        ...     ])
+    >>> matrix
+    Matrix(3x4)
 
-    ::
+    >>> matrix[:]
+    ((0, 1, 2, 3), (10, 11, 12, 13), (20, 21, 22, 23))
 
-        >>> matrix
-        Matrix(3x4)
+    >>> matrix[2]
+    (20, 21, 22, 23)
 
-    ::
-
-        >>> matrix[:]
-        ((0, 1, 2, 3), (10, 11, 12, 13), (20, 21, 22, 23))
-
-    ::
-
-        >>> matrix[2]
-        (20, 21, 22, 23)
-
-    ::
-
-        >>> matrix[2][0]
-        20
+    >>> matrix[2][0]
+    20
 
     Initializes from columns:
 
-    ::
+    >>> matrix = baca.Matrix(columns=[
+    ...     [0, 10, 20],
+    ...     [1, 11, 21],
+    ...     [2, 12, 22],
+    ...     [3, 13, 23],
+    ...     ])
 
-        >>> matrix = baca.Matrix(columns=[
-        ...     [0, 10, 20],
-        ...     [1, 11, 21],
-        ...     [2, 12, 22],
-        ...     [3, 13, 23],
-        ...     ])
+    >>> matrix
+    Matrix(3x4)
 
-    ::
+    >>> matrix[:]
+    ((0, 1, 2, 3), (10, 11, 12, 13), (20, 21, 22, 23))
 
-        >>> matrix
-        Matrix(3x4)
+    >>> matrix[2]
+    (20, 21, 22, 23)
 
-    ::
-
-        >>> matrix[:]
-        ((0, 1, 2, 3), (10, 11, 12, 13), (20, 21, 22, 23))
-
-    ::
-
-        >>> matrix[2]
-        (20, 21, 22, 23)
-
-    ::
-
-        >>> matrix[2][0]
-        20
+    >>> matrix[2][0]
+    20
 
     Matrix currently implements only item retrieval.
 
@@ -101,10 +81,8 @@ class Matrix(abjad.AbjadObject):
     def __getitem__(self, argument):
         r'''Gets row `argument` from matrix.
 
-        ::
-
-            >>> matrix[1]
-            (10, 11, 12, 13)
+        >>> matrix[1]
+        (10, 11, 12, 13)
 
         Returns row.
         '''
@@ -113,10 +91,8 @@ class Matrix(abjad.AbjadObject):
     def __repr__(self):
         r'''Gets interpreter representation of matrix.
 
-        ::
-
-            >>> matrix
-            Matrix(3x4)
+        >>> matrix
+        Matrix(3x4)
 
         Returns string.
         '''
@@ -150,18 +126,14 @@ class Matrix(abjad.AbjadObject):
     def columns(self):
         r'''Columns of matrix.
 
-        ::
+        >>> matrix = baca.Matrix(
+        ...     [[0, 1, 2, 3],
+        ...     [10, 11, 12, 13],
+        ...     [20, 21, 22, 23],
+        ...     ])
 
-            >>> matrix = baca.Matrix(
-            ...     [[0, 1, 2, 3],
-            ...     [10, 11, 12, 13],
-            ...     [20, 21, 22, 23],
-            ...     ])
-
-        ::
-
-            >>> matrix.columns
-            ((0, 10, 20), (1, 11, 21), (2, 12, 22), (3, 13, 23))
+        >>> matrix.columns
+        ((0, 10, 20), (1, 11, 21), (2, 12, 22), (3, 13, 23))
 
         Returns tuple.
         '''
@@ -171,18 +143,14 @@ class Matrix(abjad.AbjadObject):
     def rows(self):
         r'''Rows of matrix.
 
-        ::
+        >>> matrix = baca.Matrix(
+        ...     [[0, 1, 2, 3],
+        ...     [10, 11, 12, 13],
+        ...     [20, 21, 22, 23],
+        ...     ])
 
-            >>> matrix = baca.Matrix(
-            ...     [[0, 1, 2, 3],
-            ...     [10, 11, 12, 13],
-            ...     [20, 21, 22, 23],
-            ...     ])
-
-        ::
-
-            >>> matrix.rows
-            ((0, 1, 2, 3), (10, 11, 12, 13), (20, 21, 22, 23))
+        >>> matrix.rows
+        ((0, 1, 2, 3), (10, 11, 12, 13), (20, 21, 22, 23))
 
         Returns tuple.
         '''

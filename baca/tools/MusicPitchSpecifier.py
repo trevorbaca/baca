@@ -9,25 +9,21 @@ class MusicPitchSpecifier(abjad.AbjadObject):
 
         Accumulates transposed pitch-classes to identity:
 
-        ::
+        >>> transposition = baca.pitch_class_segment().transpose(n=3)
+        >>> expression = baca.sequence().map(transposition)
+        >>> expression = baca.sequence().accumulate([transposition])
+        >>> expression = expression.join()[0]
+        >>> music_maker = baca.MusicMaker(
+        ...     baca.MusicPitchSpecifier(
+        ...         expressions=[expression],
+        ...         to_pitch_classes=True,
+        ...         ),
+        ...     )
 
-            >>> transposition = baca.pitch_class_segment().transpose(n=3)
-            >>> expression = baca.sequence().map(transposition)
-            >>> expression = baca.sequence().accumulate([transposition])
-            >>> expression = expression.join()[0]
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.MusicPitchSpecifier(
-            ...         expressions=[expression],
-            ...         to_pitch_classes=True,
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = music_maker('Voice 1', collections)
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> contribution = music_maker('Voice 1', collections)
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -138,26 +134,22 @@ class MusicPitchSpecifier(abjad.AbjadObject):
 
             Returns none when `collections` is none:
 
-            ::
-
-                >>> specifier = baca.MusicPitchSpecifier()
-                >>> specifier() is None
-                True
+            >>> specifier = baca.MusicPitchSpecifier()
+            >>> specifier() is None
+            True
 
         ..  container:: example
 
             Returns sequence of numbered pitch collections by default:
 
-            ::
-
-                >>> specifier = baca.MusicPitchSpecifier()
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> for collection in specifier(collections):
-                ...     collection
-                ...
-                PitchSegment([0, 2, 10])
-                PitchSegment([18, 16, 15, 20, 19])
-                PitchSegment([9])
+            >>> specifier = baca.MusicPitchSpecifier()
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> for collection in specifier(collections):
+            ...     collection
+            ...
+            PitchSegment([0, 2, 10])
+            PitchSegment([18, 16, 15, 20, 19])
+            PitchSegment([9])
 
         Returns new collection list.
         '''
@@ -175,10 +167,8 @@ class MusicPitchSpecifier(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> baca.MusicPitchSpecifier()
-                MusicPitchSpecifier()
+            >>> baca.MusicPitchSpecifier()
+            MusicPitchSpecifier()
 
         Returns string.
         '''
@@ -220,23 +210,19 @@ class MusicPitchSpecifier(abjad.AbjadObject):
 
             Transposes pitch-classes:
 
-            ::
+            >>> transposition = baca.pitch_class_segment().transpose(n=3)
+            >>> transposition = baca.sequence().map(transposition)
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.MusicPitchSpecifier(
+            ...         expressions=[transposition],
+            ...         to_pitch_classes=True,
+            ...         ),
+            ...     )
 
-                >>> transposition = baca.pitch_class_segment().transpose(n=3)
-                >>> transposition = baca.sequence().map(transposition)
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.MusicPitchSpecifier(
-                ...         expressions=[transposition],
-                ...         to_pitch_classes=True,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -268,11 +254,9 @@ class MusicPitchSpecifier(abjad.AbjadObject):
 
             Defaults to none:
 
-            ::
-
-                >>> specifier = baca.MusicPitchSpecifier()
-                >>> specifier.expressions is None
-                True
+            >>> specifier = baca.MusicPitchSpecifier()
+            >>> specifier.expressions is None
+            True
 
         Set to expressions or none.
 
@@ -287,18 +271,16 @@ class MusicPitchSpecifier(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> specifier = baca.MusicPitchSpecifier(
-                ...     remove_duplicate_pitch_classes=True
-                ...     )
-                >>> collections = [[0, 2, 10], [18, 16, 15, 22, 19], [9]]
-                >>> for collection in specifier(collections):
-                ...     collection
-                ...
-                PitchSegment([0, 2, 10])
-                PitchSegment([18, 16, 15, 19])
-                PitchSegment([9])
+            >>> specifier = baca.MusicPitchSpecifier(
+            ...     remove_duplicate_pitch_classes=True
+            ...     )
+            >>> collections = [[0, 2, 10], [18, 16, 15, 22, 19], [9]]
+            >>> for collection in specifier(collections):
+            ...     collection
+            ...
+            PitchSegment([0, 2, 10])
+            PitchSegment([18, 16, 15, 19])
+            PitchSegment([9])
 
         Returns true, false or none.
         '''
@@ -310,18 +292,16 @@ class MusicPitchSpecifier(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> specifier = baca.MusicPitchSpecifier(
-                ...     remove_duplicates=True
-                ...     )
-                >>> collections = [[0, 2, 10], [18, 16, 15, 10, 19], [9]]
-                >>> for collection in specifier(collections):
-                ...     collection
-                ...
-                PitchSegment([0, 2, 10])
-                PitchSegment([18, 16, 15, 19])
-                PitchSegment([9])
+            >>> specifier = baca.MusicPitchSpecifier(
+            ...     remove_duplicates=True
+            ...     )
+            >>> collections = [[0, 2, 10], [18, 16, 15, 10, 19], [9]]
+            >>> for collection in specifier(collections):
+            ...     collection
+            ...
+            PitchSegment([0, 2, 10])
+            PitchSegment([18, 16, 15, 19])
+            PitchSegment([9])
 
         Returns true, false or none.
         '''
@@ -338,16 +318,12 @@ class MusicPitchSpecifier(abjad.AbjadObject):
 
             Example figure:
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -379,20 +355,16 @@ class MusicPitchSpecifier(abjad.AbjadObject):
 
             Changes pitches to pitch-classes:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.MusicPitchSpecifier(
+            ...         to_pitch_classes=True,
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.MusicPitchSpecifier(
-                ...         to_pitch_classes=True,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -422,44 +394,38 @@ class MusicPitchSpecifier(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> specifier = baca.MusicPitchSpecifier(
-                ...     to_pitch_classes=True,
-                ...     )
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> for collection in specifier(collections):
-                ...     collection
-                ...
-                PitchClassSegment([0, 2, 10])
-                PitchClassSegment([6, 4, 3, 8, 7])
-                PitchClassSegment([9])
+            >>> specifier = baca.MusicPitchSpecifier(
+            ...     to_pitch_classes=True,
+            ...     )
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> for collection in specifier(collections):
+            ...     collection
+            ...
+            PitchClassSegment([0, 2, 10])
+            PitchClassSegment([6, 4, 3, 8, 7])
+            PitchClassSegment([9])
 
         ..  container:: example
 
-            ::
-
-                >>> specifier = baca.MusicPitchSpecifier(
-                ...     to_pitch_classes=True,
-                ...     )
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> collections = baca.CollectionList(collections)
-                >>> for collection in specifier(collections):
-                ...     collection
-                ...
-                PitchClassSegment([0, 2, 10])
-                PitchClassSegment([6, 4, 3, 8, 7])
-                PitchClassSegment([9])
+            >>> specifier = baca.MusicPitchSpecifier(
+            ...     to_pitch_classes=True,
+            ...     )
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> collections = baca.CollectionList(collections)
+            >>> for collection in specifier(collections):
+            ...     collection
+            ...
+            PitchClassSegment([0, 2, 10])
+            PitchClassSegment([6, 4, 3, 8, 7])
+            PitchClassSegment([9])
 
         ..  container:: example
 
             Defaults to none:
 
-            ::
-
-                >>> specifier = baca.MusicPitchSpecifier()
-                >>> specifier.to_pitch_classes is None
-                True
+            >>> specifier = baca.MusicPitchSpecifier()
+            >>> specifier.to_pitch_classes is None
+            True
 
         Set to true, false or none.
 

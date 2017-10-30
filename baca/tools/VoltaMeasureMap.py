@@ -6,29 +6,23 @@ class VoltaMeasureMap(abjad.AbjadObject):
 
     ..  container:: example
 
-        ::
+        >>> segment_maker = baca.SegmentMaker(
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     volta_measure_map=baca.VoltaMeasureMap([
+        ...         baca.MeasureSpecifier(1, 3),
+        ...         ]),
+        ...     )
 
-            >>> segment_maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     volta_measure_map=baca.VoltaMeasureMap([
-            ...         baca.MeasureSpecifier(1, 3),
-            ...         ]),
-            ...     )
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.pitches('E4', allow_repeat_pitches=True),
+        ...     baca.messiaen_notes(),
+        ...     )
 
-        ::
-
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.pitches('E4', allow_repeat_pitches=True),
-            ...     baca.messiaen_notes(),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -117,17 +111,13 @@ class VoltaMeasureMap(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> voltas = baca.VoltaMeasureMap([
+            ...     baca.MeasureSpecifier(2, 4),
+            ...     baca.MeasureSpecifier(16, 18),
+            ...     ])
 
-                >>> voltas = baca.VoltaMeasureMap([
-                ...     baca.MeasureSpecifier(2, 4),
-                ...     baca.MeasureSpecifier(16, 18),
-                ...     ])
-
-            ::
-
-                >>> voltas[1]
-                MeasureSpecifier(start=16, stop=18)
+            >>> voltas[1]
+            MeasureSpecifier(start=16, stop=18)
 
         Returns item.
         '''
@@ -141,19 +131,15 @@ class VoltaMeasureMap(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> voltas = baca.VoltaMeasureMap([
+            ...     baca.MeasureSpecifier(2, 4),
+            ...     baca.MeasureSpecifier(16, 18),
+            ...     ])
 
-                >>> voltas = baca.VoltaMeasureMap([
-                ...     baca.MeasureSpecifier(2, 4),
-                ...     baca.MeasureSpecifier(16, 18),
-                ...     ])
-
-            ::
-
-                >>> for item in voltas.items:
-                ...     item
-                MeasureSpecifier(start=2, stop=4)
-                MeasureSpecifier(start=16, stop=18)
+            >>> for item in voltas.items:
+            ...     item
+            MeasureSpecifier(start=2, stop=4)
+            MeasureSpecifier(start=16, stop=18)
 
         Returns items.
         '''

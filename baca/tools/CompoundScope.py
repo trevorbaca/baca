@@ -7,57 +7,51 @@ class CompoundScope(abjad.AbjadObject):
 
     ..  container:: example
 
-        ::
+        >>> scope = baca.compound([
+        ...     baca.scope('Piano Music Voice', 5, 9),
+        ...     baca.scope('Clarinet Music Voice', 7, 12),
+        ...     baca.scope('Violin Music Voice', 8, 12),
+        ...     baca.scope('Oboe Music Voice', 9, 12),
+        ...     ])
 
-            >>> scope = baca.compound([
-            ...     baca.scope('Piano Music Voice', 5, 9),
-            ...     baca.scope('Clarinet Music Voice', 7, 12),
-            ...     baca.scope('Violin Music Voice', 8, 12),
-            ...     baca.scope('Oboe Music Voice', 9, 12),
-            ...     ])
-
-        ::
-
-            >>> abjad.f(scope)
-            baca.CompoundScope(
-                scopes=(
-                    baca.Scope(
-                        voice_name='Piano Music Voice',
-                        stages=baca.StageSpecifier(
-                            start=5,
-                            stop=9,
-                            ),
-                        ),
-                    baca.Scope(
-                        voice_name='Clarinet Music Voice',
-                        stages=baca.StageSpecifier(
-                            start=7,
-                            stop=12,
-                            ),
-                        ),
-                    baca.Scope(
-                        voice_name='Violin Music Voice',
-                        stages=baca.StageSpecifier(
-                            start=8,
-                            stop=12,
-                            ),
-                        ),
-                    baca.Scope(
-                        voice_name='Oboe Music Voice',
-                        stages=baca.StageSpecifier(
-                            start=9,
-                            stop=12,
-                            ),
+        >>> abjad.f(scope)
+        baca.CompoundScope(
+            scopes=(
+                baca.Scope(
+                    voice_name='Piano Music Voice',
+                    stages=baca.StageSpecifier(
+                        start=5,
+                        stop=9,
                         ),
                     ),
-                )
+                baca.Scope(
+                    voice_name='Clarinet Music Voice',
+                    stages=baca.StageSpecifier(
+                        start=7,
+                        stop=12,
+                        ),
+                    ),
+                baca.Scope(
+                    voice_name='Violin Music Voice',
+                    stages=baca.StageSpecifier(
+                        start=8,
+                        stop=12,
+                        ),
+                    ),
+                baca.Scope(
+                    voice_name='Oboe Music Voice',
+                    stages=baca.StageSpecifier(
+                        start=9,
+                        stop=12,
+                        ),
+                    ),
+                ),
+            )
 
         ..  container:: example
 
-            ::
-
-                >>> baca.CompoundScope()
-                CompoundScope()
+            >>> baca.CompoundScope()
+            CompoundScope()
 
     '''
 

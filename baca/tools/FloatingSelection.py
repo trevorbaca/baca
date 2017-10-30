@@ -6,10 +6,8 @@ class FloatingSelection(abjad.AbjadValueObject):
 
     ..  container:: example
 
-        ::
-
-            >>> baca.FloatingSelection()
-            FloatingSelection()
+        >>> baca.FloatingSelection()
+        FloatingSelection()
 
     '''
 

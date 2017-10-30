@@ -10,22 +10,18 @@ class RegisterToOctaveCommand(Command):
 
         Chords:
 
-        ::
+        >>> music_maker = baca.MusicMaker()
 
-            >>> music_maker = baca.MusicMaker()
-
-        ::
-
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [{0, 14, 28}],
-            ...     baca.RegisterToOctaveCommand(
-            ...         anchor=abjad.Bottom,
-            ...         octave_number=4,
-            ...         ),
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [{0, 14, 28}],
+        ...     baca.RegisterToOctaveCommand(
+        ...         anchor=abjad.Bottom,
+        ...         octave_number=4,
+        ...         ),
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -41,18 +37,16 @@ class RegisterToOctaveCommand(Command):
                 }
             >>
 
-        ::
-
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [{0, 14, 28}],
-            ...     baca.RegisterToOctaveCommand(
-            ...         anchor=abjad.Center,
-            ...         octave_number=4,
-            ...         ),
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [{0, 14, 28}],
+        ...     baca.RegisterToOctaveCommand(
+        ...         anchor=abjad.Center,
+        ...         octave_number=4,
+        ...         ),
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -68,18 +62,16 @@ class RegisterToOctaveCommand(Command):
                 }
             >>
 
-        ::
-
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [{0, 14, 28}],
-            ...     baca.RegisterToOctaveCommand(
-            ...         anchor=abjad.Top,
-            ...         octave_number=4,
-            ...         ),
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [{0, 14, 28}],
+        ...     baca.RegisterToOctaveCommand(
+        ...         anchor=abjad.Top,
+        ...         octave_number=4,
+        ...         ),
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -99,22 +91,18 @@ class RegisterToOctaveCommand(Command):
 
         Disjunct notes:
 
-        ::
+        >>> music_maker = baca.MusicMaker()
 
-            >>> music_maker = baca.MusicMaker()
-
-        ::
-
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 14, 28]],
-            ...     baca.RegisterToOctaveCommand(
-            ...         anchor=abjad.Bottom,
-            ...         octave_number=4,
-            ...         ),
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 14, 28]],
+        ...     baca.RegisterToOctaveCommand(
+        ...         anchor=abjad.Bottom,
+        ...         octave_number=4,
+        ...         ),
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -132,18 +120,16 @@ class RegisterToOctaveCommand(Command):
                 }
             >>
 
-        ::
-
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 14, 28]],
-            ...     baca.RegisterToOctaveCommand(
-            ...         anchor=abjad.Center,
-            ...         octave_number=4,
-            ...         ),
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 14, 28]],
+        ...     baca.RegisterToOctaveCommand(
+        ...         anchor=abjad.Center,
+        ...         octave_number=4,
+        ...         ),
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -161,18 +147,16 @@ class RegisterToOctaveCommand(Command):
                 }
             >>
 
-        ::
-
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 14, 28]],
-            ...     baca.RegisterToOctaveCommand(
-            ...         anchor=abjad.Top,
-            ...         octave_number=4,
-            ...         ),
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 14, 28]],
+        ...     baca.RegisterToOctaveCommand(
+        ...         anchor=abjad.Top,
+        ...         octave_number=4,
+        ...         ),
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -194,22 +178,18 @@ class RegisterToOctaveCommand(Command):
 
         Conjunct notes:
 
-        ::
+        >>> music_maker = baca.MusicMaker()
 
-            >>> music_maker = baca.MusicMaker()
-
-        ::
-
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[10, 12, 14]],
-            ...     baca.RegisterToOctaveCommand(
-            ...         anchor=abjad.Bottom,
-            ...         octave_number=4,
-            ...         ),
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[10, 12, 14]],
+        ...     baca.RegisterToOctaveCommand(
+        ...         anchor=abjad.Bottom,
+        ...         octave_number=4,
+        ...         ),
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -227,18 +207,16 @@ class RegisterToOctaveCommand(Command):
                 }
             >>
 
-        ::
-
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[10, 12, 14]],
-            ...     baca.RegisterToOctaveCommand(
-            ...         anchor=abjad.Center,
-            ...         octave_number=4,
-            ...         ),
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[10, 12, 14]],
+        ...     baca.RegisterToOctaveCommand(
+        ...         anchor=abjad.Center,
+        ...         octave_number=4,
+        ...         ),
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -256,18 +234,16 @@ class RegisterToOctaveCommand(Command):
                 }
             >>
 
-        ::
-
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[10, 12, 14]],
-            ...     baca.RegisterToOctaveCommand(
-            ...         anchor=abjad.Top,
-            ...         octave_number=4,
-            ...         ),
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[10, 12, 14]],
+        ...     baca.RegisterToOctaveCommand(
+        ...         anchor=abjad.Top,
+        ...         octave_number=4,
+        ...         ),
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -287,10 +263,8 @@ class RegisterToOctaveCommand(Command):
 
     ..  container:: example
 
-        ::
-
-            >>> baca.RegisterToOctaveCommand()
-            RegisterToOctaveCommand()
+        >>> baca.RegisterToOctaveCommand()
+        RegisterToOctaveCommand()
 
     """
 
@@ -386,16 +360,14 @@ class RegisterToOctaveCommand(Command):
 
             Bass anchored at octave 5:
 
-            ::
-
-                >>> chord = abjad.Chord("<c, d e'>1")
-                >>> command = baca.RegisterToOctaveCommand(
-                ...     anchor=abjad.Bottom,
-                ...     octave_number=5,
-                ...     )
-                >>> command(chord)
-                >>> staff = abjad.Staff([chord])
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> chord = abjad.Chord("<c, d e'>1")
+            >>> command = baca.RegisterToOctaveCommand(
+            ...     anchor=abjad.Bottom,
+            ...     octave_number=5,
+            ...     )
+            >>> command(chord)
+            >>> staff = abjad.Staff([chord])
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -406,16 +378,14 @@ class RegisterToOctaveCommand(Command):
 
             Center anchored at octave 5:
 
-            ::
-
-                >>> chord = abjad.Chord("<c, d e'>1")
-                >>> command = baca.RegisterToOctaveCommand(
-                ...     anchor=abjad.Center,
-                ...     octave_number=5,
-                ...     )
-                >>> command(chord)
-                >>> staff = abjad.Staff([chord])
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> chord = abjad.Chord("<c, d e'>1")
+            >>> command = baca.RegisterToOctaveCommand(
+            ...     anchor=abjad.Center,
+            ...     octave_number=5,
+            ...     )
+            >>> command(chord)
+            >>> staff = abjad.Staff([chord])
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -426,16 +396,14 @@ class RegisterToOctaveCommand(Command):
 
             Soprano anchored at octave 5:
 
-            ::
-
-                >>> chord = abjad.Chord("<c, d e'>1")
-                >>> command = baca.RegisterToOctaveCommand(
-                ...     anchor=abjad.Top,
-                ...     octave_number=5,
-                ...     )
-                >>> command(chord)
-                >>> staff = abjad.Staff([chord])
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> chord = abjad.Chord("<c, d e'>1")
+            >>> command = baca.RegisterToOctaveCommand(
+            ...     anchor=abjad.Top,
+            ...     octave_number=5,
+            ...     )
+            >>> command(chord)
+            >>> staff = abjad.Staff([chord])
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -454,12 +422,10 @@ class RegisterToOctaveCommand(Command):
 
         ..  container:: example
 
-            ::
-
-                >>> chord = abjad.Chord("<c, d e'>1")
-                >>> staff = abjad.Staff([chord])
-                >>> abjad.attach(abjad.Clef('bass'), staff[0])
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> chord = abjad.Chord("<c, d e'>1")
+            >>> staff = abjad.Staff([chord])
+            >>> abjad.attach(abjad.Clef('bass'), staff[0])
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -469,16 +435,14 @@ class RegisterToOctaveCommand(Command):
 
         ..  container:: example
 
-            ::
-
-                >>> chord = abjad.Chord("<c, d e'>1")
-                >>> command = baca.RegisterToOctaveCommand(
-                ...     octave_number=1,
-                ...     )
-                >>> command(chord)
-                >>> staff = abjad.Staff([chord])
-                >>> abjad.attach(abjad.Clef('bass'), staff[0])
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> chord = abjad.Chord("<c, d e'>1")
+            >>> command = baca.RegisterToOctaveCommand(
+            ...     octave_number=1,
+            ...     )
+            >>> command(chord)
+            >>> staff = abjad.Staff([chord])
+            >>> abjad.attach(abjad.Clef('bass'), staff[0])
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -488,16 +452,14 @@ class RegisterToOctaveCommand(Command):
 
         ..  container:: example
 
-            ::
-
-                >>> chord = abjad.Chord("<c, d e'>1")
-                >>> command = baca.RegisterToOctaveCommand(
-                ...     octave_number=2,
-                ...     )
-                >>> command(chord)
-                >>> staff = abjad.Staff([chord])
-                >>> abjad.attach(abjad.Clef('bass'), staff[0])
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> chord = abjad.Chord("<c, d e'>1")
+            >>> command = baca.RegisterToOctaveCommand(
+            ...     octave_number=2,
+            ...     )
+            >>> command(chord)
+            >>> staff = abjad.Staff([chord])
+            >>> abjad.attach(abjad.Clef('bass'), staff[0])
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -507,16 +469,14 @@ class RegisterToOctaveCommand(Command):
 
         ..  container:: example
 
-            ::
-
-                >>> chord = abjad.Chord("<c, d e'>1")
-                >>> command = baca.RegisterToOctaveCommand(
-                ...     octave_number=3,
-                ...     )
-                >>> command(chord)
-                >>> staff = abjad.Staff([chord])
-                >>> abjad.attach(abjad.Clef('bass'), staff[0])
-                >>> abjad.show(chord) # doctest: +SKIP
+            >>> chord = abjad.Chord("<c, d e'>1")
+            >>> command = baca.RegisterToOctaveCommand(
+            ...     octave_number=3,
+            ...     )
+            >>> command(chord)
+            >>> staff = abjad.Staff([chord])
+            >>> abjad.attach(abjad.Clef('bass'), staff[0])
+            >>> abjad.show(chord) # doctest: +SKIP
 
             ..  docs::
 
@@ -526,14 +486,12 @@ class RegisterToOctaveCommand(Command):
 
         ..  container:: example
 
-            ::
-
-                >>> chord = abjad.Chord("<c, d e'>1")
-                >>> command = baca.RegisterToOctaveCommand(
-                ...     octave_number=4,
-                ...     )
-                >>> command(chord)
-                >>> abjad.show(chord) # doctest: +SKIP
+            >>> chord = abjad.Chord("<c, d e'>1")
+            >>> command = baca.RegisterToOctaveCommand(
+            ...     octave_number=4,
+            ...     )
+            >>> command(chord)
+            >>> abjad.show(chord) # doctest: +SKIP
 
             ..  docs::
 
@@ -542,14 +500,12 @@ class RegisterToOctaveCommand(Command):
 
         ..  container:: example
 
-            ::
-
-                >>> chord = abjad.Chord("<c, d e'>1")
-                >>> command = baca.RegisterToOctaveCommand(
-                ...     octave_number=5,
-                ...     )
-                >>> command(chord)
-                >>> abjad.show(chord) # doctest: +SKIP
+            >>> chord = abjad.Chord("<c, d e'>1")
+            >>> command = baca.RegisterToOctaveCommand(
+            ...     octave_number=5,
+            ...     )
+            >>> command(chord)
+            >>> abjad.show(chord) # doctest: +SKIP
 
             ..  docs::
 

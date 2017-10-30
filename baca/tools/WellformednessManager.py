@@ -6,10 +6,8 @@ class WellformednessManager(abjad.AbjadObject):
 
     ..  container:: example
 
-        ::
-
-            >>> baca.WellformednessManager()
-            WellformednessManager()
+        >>> baca.WellformednessManager()
+        WellformednessManager()
 
     '''
 
@@ -24,12 +22,10 @@ class WellformednessManager(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> staff = abjad.Staff("c'4 c' d' d'")
-                >>> manager = baca.WellformednessManager()
-                >>> manager(staff)
-                [([LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")])], 4, 'check_repeat_pitch_classes')]
+            >>> staff = abjad.Staff("c'4 c' d' d'")
+            >>> manager = baca.WellformednessManager()
+            >>> manager(staff)
+            [([LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")])], 4, 'check_repeat_pitch_classes')]
 
         Returns violators, total, check triples.
         '''
@@ -54,46 +50,34 @@ class WellformednessManager(abjad.AbjadObject):
 
             Finds no repeats:
 
-            ::
+            >>> staff = abjad.Staff("c'4 d' e' f'")
+            >>> abjad.show(staff) # doctest: +SKIP
 
-                >>> staff = abjad.Staff("c'4 d' e' f'")
-                >>> abjad.show(staff) # doctest: +SKIP
-
-            ::
-
-                >>> manager = baca.WellformednessManager
-                >>> manager.check_repeat_pitch_classes(staff)
-                ([], 4)
+            >>> manager = baca.WellformednessManager
+            >>> manager.check_repeat_pitch_classes(staff)
+            ([], 4)
 
         ..  container:: example
 
             Finds repeat pitches:
 
-            ::
+            >>> staff = abjad.Staff("c'4 c' d' d'")
+            >>> abjad.show(staff) # doctest: +SKIP
 
-                >>> staff = abjad.Staff("c'4 c' d' d'")
-                >>> abjad.show(staff) # doctest: +SKIP
-
-            ::
-
-                >>> manager = baca.WellformednessManager
-                >>> manager.check_repeat_pitch_classes(staff)
-                ([LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")])], 4)
+            >>> manager = baca.WellformednessManager
+            >>> manager.check_repeat_pitch_classes(staff)
+            ([LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")])], 4)
 
         ..  container:: example
 
             Finds repeat pitch-classes:
 
-            ::
+            >>> staff = abjad.Staff("c'4 d' e' e''")
+            >>> abjad.show(staff) # doctest: +SKIP
 
-                >>> staff = abjad.Staff("c'4 d' e' e''")
-                >>> abjad.show(staff) # doctest: +SKIP
-
-            ::
-
-                >>> manager = baca.WellformednessManager
-                >>> manager.check_repeat_pitch_classes(staff)
-                ([LogicalTie([Note("e''4")])], 4)
+            >>> manager = baca.WellformednessManager
+            >>> manager.check_repeat_pitch_classes(staff)
+            ([LogicalTie([Note("e''4")])], 4)
 
         ..  container:: example
 

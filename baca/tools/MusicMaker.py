@@ -10,16 +10,12 @@ class MusicMaker(abjad.AbjadObject):
 
         Default music-maker:
 
-        ::
+        >>> music_maker = baca.MusicMaker()
 
-            >>> music_maker = baca.MusicMaker()
-
-        ::
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = music_maker('Voice 1', collections)
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> contribution = music_maker('Voice 1', collections)
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -142,16 +138,12 @@ class MusicMaker(abjad.AbjadObject):
 
             Default music-maker:
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -183,20 +175,16 @@ class MusicMaker(abjad.AbjadObject):
 
             Calltime counts:
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     collections,
-                ...     counts=[1, 2],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     counts=[1, 2],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -228,20 +216,16 @@ class MusicMaker(abjad.AbjadObject):
 
             Calltime denominator:
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     collections,
-                ...     talea_denominator=32,
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     talea_denominator=32,
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -273,20 +257,16 @@ class MusicMaker(abjad.AbjadObject):
 
             Calltime time treatments:
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     collections,
-                ...     time_treatments=[1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     time_treatments=[1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -320,20 +300,16 @@ class MusicMaker(abjad.AbjadObject):
 
             Rest input:
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [abjad.Rest((3, 8)), abjad.Rest((3, 8))],
-                ...     baca.nest('+1/8'),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [abjad.Rest((3, 8)), abjad.Rest((3, 8))],
+            ...     baca.nest('+1/8'),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -357,19 +333,15 @@ class MusicMaker(abjad.AbjadObject):
 
             The following negative-valued talea count patterns work:
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[18, 16, 15, 20, 19]],
-                ...     counts=[2, -1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[18, 16, 15, 20, 19]],
+            ...     counts=[2, -1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -394,15 +366,13 @@ class MusicMaker(abjad.AbjadObject):
                     }
                 >>
 
-            ::
-
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[18, 16, 15, 20, 19]],
-                ...     counts=[2, -1, -1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[18, 16, 15, 20, 19]],
+            ...     counts=[2, -1, -1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -432,15 +402,13 @@ class MusicMaker(abjad.AbjadObject):
                     }
                 >>
 
-            ::
-
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[18, 16, 15, 20, 19]],
-                ...     counts=[-1, 2],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[18, 16, 15, 20, 19]],
+            ...     counts=[-1, 2],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -465,15 +433,13 @@ class MusicMaker(abjad.AbjadObject):
                     }
                 >>
 
-            ::
-
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[18, 16, 15, 20, 19]],
-                ...     counts=[-1, -1, 2],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[18, 16, 15, 20, 19]],
+            ...     counts=[-1, -1, 2],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -503,15 +469,13 @@ class MusicMaker(abjad.AbjadObject):
                     }
                 >>
 
-            ::
-
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[18, 16, 15, 20, 19]],
-                ...     counts=[-1, -1, 2, -2, -2],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[18, 16, 15, 20, 19]],
+            ...     counts=[-1, -1, 2, -2, -2],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -558,20 +522,16 @@ class MusicMaker(abjad.AbjadObject):
 
             Works with chords:
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = [
-                ...     {0, 2, 10},
-                ...     [18, 16, 15, 20, 19],
-                ...     [9],
-                ...     ]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     {0, 2, 10},
+            ...     [18, 16, 15, 20, 19],
+            ...     [9],
+            ...     ]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1091,20 +1051,16 @@ class MusicMaker(abjad.AbjadObject):
 
             No denominator by default:
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18],
-                ...     [16, 15, 23, 17],
-                ...     [19, 13, 9, 8],
-                ...     ]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18],
+            ...     [16, 15, 23, 17],
+            ...     [19, 13, 9, 8],
+            ...     ]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1139,25 +1095,21 @@ class MusicMaker(abjad.AbjadObject):
 
             Denominator supplied at configuration time:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     denominator=16,
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     denominator=16,
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18],
-                ...     [16, 15, 23, 17],
-                ...     [19, 13, 9, 8],
-                ...     ]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(
-                ...     contribution,
-                ...     time_signatures=[contribution.time_signature],
-                ...     )
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18],
+            ...     [16, 15, 23, 17],
+            ...     [19, 13, 9, 8],
+            ...     ]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(
+            ...     contribution,
+            ...     time_signatures=[contribution.time_signature],
+            ...     )
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1192,27 +1144,23 @@ class MusicMaker(abjad.AbjadObject):
 
             Denominator supplied at call time:
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18],
-                ...     [16, 15, 23, 17],
-                ...     [19, 13, 9, 8],
-                ...     ]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     collections,
-                ...     denominator=8,
-                ...     )
-                >>> lilypond_file = music_maker.show(
-                ...     contribution,
-                ...     time_signatures=[contribution.time_signature],
-                ...     )
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18],
+            ...     [16, 15, 23, 17],
+            ...     [19, 13, 9, 8],
+            ...     ]
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     denominator=8,
+            ...     )
+            >>> lilypond_file = music_maker.show(
+            ...     contribution,
+            ...     time_signatures=[contribution.time_signature],
+            ...     )
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1248,29 +1196,25 @@ class MusicMaker(abjad.AbjadObject):
             Denominator supplied at call time overrides denominator supplied at
             configuration time:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     denominator=16,
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     denominator=16,
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18],
-                ...     [16, 15, 23, 17],
-                ...     [19, 13, 9, 8],
-                ...     ]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     collections,
-                ...     denominator=8,
-                ...     )
-                >>> lilypond_file = music_maker.show(
-                ...     contribution,
-                ...     time_signatures=[contribution.time_signature],
-                ...     )
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18],
+            ...     [16, 15, 23, 17],
+            ...     [19, 13, 9, 8],
+            ...     ]
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     denominator=8,
+            ...     )
+            >>> lilypond_file = music_maker.show(
+            ...     contribution,
+            ...     time_signatures=[contribution.time_signature],
+            ...     )
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1317,22 +1261,18 @@ class MusicMaker(abjad.AbjadObject):
 
             Register specifier transposes to octave rooted on F#3:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.RegisterCommand(
+            ...         registration=baca.Registration(
+            ...             [('[A0, C8]', -6)],
+            ...             ),
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.RegisterCommand(
-                ...         registration=baca.Registration(
-                ...             [('[A0, C8]', -6)],
-                ...             ),
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1364,16 +1304,12 @@ class MusicMaker(abjad.AbjadObject):
 
             Ocatve-transposes to a target interpolated from C4 up to C5:
 
-            ::
+            >>> music_maker = baca.MusicMaker(baca.register(0, 12))
 
-                >>> music_maker = baca.MusicMaker(baca.register(0, 12))
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1405,24 +1341,20 @@ class MusicMaker(abjad.AbjadObject):
 
             Hairpin specifier selects all leaves:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.hairpins(['p < f']),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.hairpins(['p < f']),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18],
-                ...     [16, 15, 23],
-                ...     [19, 13, 9, 8],
-                ...     ]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18],
+            ...     [16, 15, 23],
+            ...     [19, 13, 9, 8],
+            ...     ]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1458,28 +1390,26 @@ class MusicMaker(abjad.AbjadObject):
 
             Hairpin specifier selects each PLT run:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10, 18], [15, 23], [19, 13, 9, 8]],
-                ...     baca.hairpins(
-                ...         ['p < f'],
-                ...         selector=baca.select().runs(),
-                ...         ),
-                ...     baca.RestAffixSpecifier(
-                ...         pattern=abjad.Pattern(
-                ...             indices=[0, -1],
-                ...             inverted=True,
-                ...             ),
-                ...         prefix=[1],
-                ...         ),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10, 18], [15, 23], [19, 13, 9, 8]],
+            ...     baca.hairpins(
+            ...         ['p < f'],
+            ...         selector=baca.select().runs(),
+            ...         ),
+            ...     baca.RestAffixSpecifier(
+            ...         pattern=abjad.Pattern(
+            ...             indices=[0, -1],
+            ...             inverted=True,
+            ...             ),
+            ...         prefix=[1],
+            ...         ),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1515,25 +1445,23 @@ class MusicMaker(abjad.AbjadObject):
 
             Hairpin specifiers select notes of first and last tuplet:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
-                ...     baca.hairpins(
-                ...         ['p < f'],
-                ...         selector=baca.select().tuplets()[:1].tleaves().group(),
-                ...         ),
-                ...     baca.hairpins(
-                ...         ['f > p'],
-                ...         selector=baca.select().tuplets()[-1:].tleaves().group(),
-                ...         ),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
+            ...     baca.hairpins(
+            ...         ['p < f'],
+            ...         selector=baca.select().tuplets()[:1].tleaves().group(),
+            ...         ),
+            ...     baca.hairpins(
+            ...         ['f > p'],
+            ...         selector=baca.select().tuplets()[-1:].tleaves().group(),
+            ...         ),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1569,25 +1497,23 @@ class MusicMaker(abjad.AbjadObject):
 
             Hairpin specifiers treat first two tuplets and then the rest:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
-                ...     baca.hairpins(
-                ...         ['p < f'],
-                ...         selector=baca.select().tuplets()[:2].group(),
-                ...         ),
-                ...     baca.hairpins(
-                ...         ['f > p'],
-                ...         selector=baca.select().tuplets()[-1:].group(),
-                ...         ),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 6
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
+            ...     baca.hairpins(
+            ...         ['p < f'],
+            ...         selector=baca.select().tuplets()[:2].group(),
+            ...         ),
+            ...     baca.hairpins(
+            ...         ['f > p'],
+            ...         selector=baca.select().tuplets()[-1:].group(),
+            ...         ),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 6
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1623,24 +1549,20 @@ class MusicMaker(abjad.AbjadObject):
 
             Spanner specifier selects all leaves by default:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.SpannerCommand(spanner=abjad.Slur()),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.SpannerCommand(spanner=abjad.Slur()),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18],
-                ...     [16, 15, 23],
-                ...     [19, 13, 9, 8],
-                ...     ]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).stem.direction = Down
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18],
+            ...     [16, 15, 23],
+            ...     [19, 13, 9, 8],
+            ...     ]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).stem.direction = Down
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1676,27 +1598,23 @@ class MusicMaker(abjad.AbjadObject):
 
             Slur specifier selects leaves in each tuplet:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.SpannerCommand(
+            ...         selector=baca.select().tuplets(),
+            ...         spanner=abjad.Slur(),
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.SpannerCommand(
-                ...         selector=baca.select().tuplets(),
-                ...         spanner=abjad.Slur(),
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18],
-                ...     [16, 15, 23],
-                ...     [19, 13, 9, 8],
-                ...     ]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).stem.direction = Down
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18],
+            ...     [16, 15, 23],
+            ...     [19, 13, 9, 8],
+            ...     ]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).stem.direction = Down
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1732,29 +1650,25 @@ class MusicMaker(abjad.AbjadObject):
 
             Slur specifier selects first two pitched leaves in each tuplet:
 
-            ::
+            >>> selector = baca.select().tuplets()
+            >>> selector = selector.map(baca.select().pleaves()[:2])
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.SpannerCommand(
+            ...         selector=selector,
+            ...         spanner=abjad.Slur(),
+            ...         ),
+            ...     )
 
-                >>> selector = baca.select().tuplets()
-                >>> selector = selector.map(baca.select().pleaves()[:2])
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.SpannerCommand(
-                ...         selector=selector,
-                ...         spanner=abjad.Slur(),
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18],
-                ...     [16, 15, 23],
-                ...     [19, 13, 9, 8],
-                ...     ]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).stem.direction = Down
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18],
+            ...     [16, 15, 23],
+            ...     [19, 13, 9, 8],
+            ...     ]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).stem.direction = Down
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1790,29 +1704,25 @@ class MusicMaker(abjad.AbjadObject):
 
             Slur specifier selects last two pitched leaves in each tuplet:
 
-            ::
+            >>> selector = baca.select().tuplets()
+            >>> selector = selector.map(baca.select().pleaves()[-2:])
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.SpannerCommand(
+            ...         selector=selector,
+            ...         spanner=abjad.Slur(),
+            ...         ),
+            ...     )
 
-                >>> selector = baca.select().tuplets()
-                >>> selector = selector.map(baca.select().pleaves()[-2:])
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.SpannerCommand(
-                ...         selector=selector,
-                ...         spanner=abjad.Slur(),
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18],
-                ...     [16, 15, 23],
-                ...     [19, 13, 9, 8],
-                ...     ]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).stem.direction = Down
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18],
+            ...     [16, 15, 23],
+            ...     [19, 13, 9, 8],
+            ...     ]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).stem.direction = Down
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1848,26 +1758,22 @@ class MusicMaker(abjad.AbjadObject):
 
             Beam specifier beams divisions together:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...         beam_divisions_together=True,
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     abjad.rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18],
-                ...     [16, 15, 23],
-                ...     [19, 13, 9, 8],
-                ...     ]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).beam.positions = (-6, -6)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18],
+            ...     [16, 15, 23],
+            ...     [19, 13, 9, 8],
+            ...     ]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).beam.positions = (-6, -6)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1925,24 +1831,20 @@ class MusicMaker(abjad.AbjadObject):
 
             Beam specifier beams nothing:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...         beam_each_division=False,
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     abjad.rhythmmakertools.BeamSpecifier(
-                ...         beam_each_division=False,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18],
-                ...     [16, 15, 23],
-                ...     [19, 13, 9, 8],
-                ...     ]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18],
+            ...     [16, 15, 23],
+            ...     [19, 13, 9, 8],
+            ...     ]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1976,29 +1878,25 @@ class MusicMaker(abjad.AbjadObject):
 
             Nesting specifier augments one sixteenth:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.NestBuilder(
+            ...         time_treatments=['+1/16'],
+            ...         ),
+            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...         beam_divisions_together=True,
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.NestBuilder(
-                ...         time_treatments=['+1/16'],
-                ...         ),
-                ...     abjad.rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18],
-                ...     [16, 15, 23],
-                ...     [19, 13, 9, 8],
-                ...     ]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18],
+            ...     [16, 15, 23],
+            ...     [19, 13, 9, 8],
+            ...     ]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2059,32 +1957,28 @@ class MusicMaker(abjad.AbjadObject):
 
             Nesting specifier augments first two collections one sixteenth:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.NestBuilder(
+            ...         lmr_specifier=baca.LMRSpecifier(
+            ...             left_length=2,
+            ...             ),
+            ...         time_treatments=['+1/16', None],
+            ...         ),
+            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...         beam_divisions_together=True,
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.NestBuilder(
-                ...         lmr_specifier=baca.LMRSpecifier(
-                ...             left_length=2,
-                ...             ),
-                ...         time_treatments=['+1/16', None],
-                ...         ),
-                ...     abjad.rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18],
-                ...     [16, 15, 23],
-                ...     [19, 13, 9, 8],
-                ...     ]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18],
+            ...     [16, 15, 23],
+            ...     [19, 13, 9, 8],
+            ...     ]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2145,34 +2039,30 @@ class MusicMaker(abjad.AbjadObject):
 
             Sixteenths followed by eighths:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.MusicRhythmSpecifier(
+            ...         rhythm_maker=baca.MusicRhythmMaker(
+            ...             talea=abjad.rhythmmakertools.Talea(
+            ...                 counts=[1],
+            ...                 denominator=8,
+            ...                 ),
+            ...             ),
+            ...         ),
+            ...     baca.MusicRhythmSpecifier(
+            ...         pattern=abjad.index_first(1),
+            ...         rhythm_maker=baca.MusicRhythmMaker(
+            ...             talea=abjad.rhythmmakertools.Talea(
+            ...                 counts=[1],
+            ...                 denominator=16,
+            ...                 ),
+            ...             ),
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.MusicRhythmSpecifier(
-                ...         rhythm_maker=baca.MusicRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[1],
-                ...                 denominator=8,
-                ...                 ),
-                ...             ),
-                ...         ),
-                ...     baca.MusicRhythmSpecifier(
-                ...         pattern=abjad.index_first(1),
-                ...         rhythm_maker=baca.MusicRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[1],
-                ...                 denominator=16,
-                ...                 ),
-                ...             ),
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2204,34 +2094,30 @@ class MusicMaker(abjad.AbjadObject):
 
             Sixteenths surrounding dotted eighths:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.MusicRhythmSpecifier(
+            ...         rhythm_maker=baca.MusicRhythmMaker(
+            ...             talea=abjad.rhythmmakertools.Talea(
+            ...                 counts=[3],
+            ...                 denominator=16,
+            ...                 ),
+            ...             ),
+            ...         ),
+            ...     baca.MusicRhythmSpecifier(
+            ...         pattern=abjad.Pattern(indices=[0, -1]),
+            ...         rhythm_maker=baca.MusicRhythmMaker(
+            ...             talea=abjad.rhythmmakertools.Talea(
+            ...                 counts=[1],
+            ...                 denominator=16,
+            ...                 ),
+            ...             ),
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.MusicRhythmSpecifier(
-                ...         rhythm_maker=baca.MusicRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[3],
-                ...                 denominator=16,
-                ...                 ),
-                ...             ),
-                ...         ),
-                ...     baca.MusicRhythmSpecifier(
-                ...         pattern=abjad.Pattern(indices=[0, -1]),
-                ...         rhythm_maker=baca.MusicRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[1],
-                ...                 denominator=16,
-                ...                 ),
-                ...             ),
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2263,35 +2149,31 @@ class MusicMaker(abjad.AbjadObject):
 
             Sixteenths surrounding argumented dotted eighths:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.MusicRhythmSpecifier(
+            ...         rhythm_maker=baca.MusicRhythmMaker(
+            ...             talea=abjad.rhythmmakertools.Talea(
+            ...                 counts=[3],
+            ...                 denominator=16,
+            ...                 ),
+            ...             time_treatments=[1],
+            ...             ),
+            ...         ),
+            ...     baca.MusicRhythmSpecifier(
+            ...         pattern=abjad.Pattern(indices=[0, -1]),
+            ...         rhythm_maker=baca.MusicRhythmMaker(
+            ...             talea=abjad.rhythmmakertools.Talea(
+            ...                 counts=[1],
+            ...                 denominator=16,
+            ...                 ),
+            ...             ),
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.MusicRhythmSpecifier(
-                ...         rhythm_maker=baca.MusicRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[3],
-                ...                 denominator=16,
-                ...                 ),
-                ...             time_treatments=[1],
-                ...             ),
-                ...         ),
-                ...     baca.MusicRhythmSpecifier(
-                ...         pattern=abjad.Pattern(indices=[0, -1]),
-                ...         rhythm_maker=baca.MusicRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[1],
-                ...                 denominator=16,
-                ...                 ),
-                ...             ),
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2324,35 +2206,31 @@ class MusicMaker(abjad.AbjadObject):
 
             Augmented sixteenths surrounding dotted eighths:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.MusicRhythmSpecifier(
+            ...         rhythm_maker=baca.MusicRhythmMaker(
+            ...             talea=abjad.rhythmmakertools.Talea(
+            ...                 counts=[3],
+            ...                 denominator=16,
+            ...                 ),
+            ...             ),
+            ...         ),
+            ...     baca.MusicRhythmSpecifier(
+            ...         pattern=abjad.Pattern(indices=[0, -1]),
+            ...         rhythm_maker=baca.MusicRhythmMaker(
+            ...             talea=abjad.rhythmmakertools.Talea(
+            ...                 counts=[1],
+            ...                 denominator=16,
+            ...                 ),
+            ...             time_treatments=[1],
+            ...             ),
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.MusicRhythmSpecifier(
-                ...         rhythm_maker=baca.MusicRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[3],
-                ...                 denominator=16,
-                ...                 ),
-                ...             ),
-                ...         ),
-                ...     baca.MusicRhythmSpecifier(
-                ...         pattern=abjad.Pattern(indices=[0, -1]),
-                ...         rhythm_maker=baca.MusicRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[1],
-                ...                 denominator=16,
-                ...                 ),
-                ...             time_treatments=[1],
-                ...             ),
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2385,35 +2263,31 @@ class MusicMaker(abjad.AbjadObject):
 
             Diminished sixteenths surrounding dotted eighths:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.MusicRhythmSpecifier(
+            ...         rhythm_maker=baca.MusicRhythmMaker(
+            ...             talea=abjad.rhythmmakertools.Talea(
+            ...                 counts=[3],
+            ...                 denominator=16,
+            ...                 ),
+            ...             ),
+            ...         ),
+            ...     baca.MusicRhythmSpecifier(
+            ...         pattern=abjad.Pattern(indices=[0, -1]),
+            ...         rhythm_maker=baca.MusicRhythmMaker(
+            ...             talea=abjad.rhythmmakertools.Talea(
+            ...                 counts=[1],
+            ...                 denominator=16,
+            ...                 ),
+            ...             time_treatments=[-1],
+            ...             ),
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.MusicRhythmSpecifier(
-                ...         rhythm_maker=baca.MusicRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[3],
-                ...                 denominator=16,
-                ...                 ),
-                ...             ),
-                ...         ),
-                ...     baca.MusicRhythmSpecifier(
-                ...         pattern=abjad.Pattern(indices=[0, -1]),
-                ...         rhythm_maker=baca.MusicRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[1],
-                ...                 denominator=16,
-                ...                 ),
-                ...             time_treatments=[-1],
-                ...             ),
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2457,20 +2331,16 @@ class MusicMaker(abjad.AbjadObject):
 
             Does not thread rhythm-maker over collections:
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     collections,
-                ...     counts=[1, 2, 3],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     counts=[1, 2, 3],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2500,17 +2370,15 @@ class MusicMaker(abjad.AbjadObject):
 
             Does thread rhythm-maker over collections:
 
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     collections,
-                ...     counts=[1, 2, 3],
-                ...     thread=True,
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     counts=[1, 2, 3],
+            ...     thread=True,
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 

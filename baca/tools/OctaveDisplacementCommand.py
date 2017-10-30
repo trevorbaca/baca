@@ -10,27 +10,21 @@ class OctaveDisplacementCommand(Command):
 
         Displaces octaves:
 
-        ::
+        >>> segment_maker = baca.SegmentMaker(
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
 
-            >>> segment_maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.pitches('G4'),
+        ...     baca.even_runs(),
+        ...     baca.displacement([0, 0, 1, 1, 0, 0, -1, -1, 2, 2]),
+        ...     )
 
-        ::
-
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.pitches('G4'),
-            ...     baca.even_runs(),
-            ...     baca.displacement([0, 0, 1, 1, 0, 0, -1, -1, 2, 2]),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -174,13 +168,11 @@ class OctaveDisplacementCommand(Command):
 
         ..  container:: example
 
-            ::
-
-                >>> command = baca.displacement(
-                ...     [0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2],
-                ...     )
-                >>> command.displacements
-                CyclicTuple([0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2])
+            >>> command = baca.displacement(
+            ...     [0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2],
+            ...     )
+            >>> command.displacements
+            CyclicTuple([0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2])
 
         Defaults to none.
 

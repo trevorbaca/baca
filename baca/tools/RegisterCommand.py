@@ -10,20 +10,18 @@ class RegisterCommand(Command):
 
         With music-maker:
 
-        ::
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
-            ...     baca.RegisterCommand(
-            ...         registration=baca.Registration(
-            ...             [('[A0, C8]', 15)],
-            ...             ),
-            ...         ),
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
+        ...     baca.RegisterCommand(
+        ...         registration=baca.Registration(
+        ...             [('[A0, C8]', 15)],
+        ...             ),
+        ...         ),
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -55,21 +53,19 @@ class RegisterCommand(Command):
 
         First stage only:
 
-        ::
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
-            ...     baca.RegisterCommand(
-            ...         registration=baca.Registration(
-            ...             [('[A0, C8]', 0)],
-            ...             ),
-            ...         selector=baca.select().tuplet(0),
-            ...         ),
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
+        ...     baca.RegisterCommand(
+        ...         registration=baca.Registration(
+        ...             [('[A0, C8]', 0)],
+        ...             ),
+        ...         selector=baca.select().tuplet(0),
+        ...         ),
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -101,24 +97,20 @@ class RegisterCommand(Command):
 
         Last stage only:
 
-        ::
+        >>> music_maker = baca.MusicMaker()
 
-            >>> music_maker = baca.MusicMaker()
-
-        ::
-
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
-            ...     baca.RegisterCommand(
-            ...         registration=baca.Registration(
-            ...             [('[A0, C8]', 0)],
-            ...             ),
-            ...         selector=baca.select().tuplet(-1),
-            ...         ),
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
+        ...     baca.RegisterCommand(
+        ...         registration=baca.Registration(
+        ...             [('[A0, C8]', 0)],
+        ...             ),
+        ...         selector=baca.select().tuplet(-1),
+        ...         ),
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -150,31 +142,25 @@ class RegisterCommand(Command):
 
         With segment-maker:
 
-        ::
+        >>> segment_maker = baca.SegmentMaker(
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
 
-            >>> segment_maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.pitches('G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4'),
+        ...     baca.even_runs(),
+        ...     baca.RegisterCommand(
+        ...         registration=baca.Registration(
+        ...             [('[A0, C8]', 15)],
+        ...             ),
+        ...         ),
+        ...     )
 
-        ::
-
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.pitches('G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4'),
-            ...     baca.even_runs(),
-            ...     baca.RegisterCommand(
-            ...         registration=baca.Registration(
-            ...             [('[A0, C8]', 15)],
-            ...             ),
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -281,18 +267,16 @@ class RegisterCommand(Command):
 
             Works with chords:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [{10, 12, 14}],
-                ...     baca.RegisterCommand(
-                ...         baca.Registration([('[A0, C8]', -6)]),
-                ...         ),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [{10, 12, 14}],
+            ...     baca.RegisterCommand(
+            ...         baca.Registration([('[A0, C8]', -6)]),
+            ...         ),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -335,29 +319,25 @@ class RegisterCommand(Command):
 
         ..  container:: example
 
-            ::
+            >>> command = baca.RegisterCommand(
+            ...     registration=baca.Registration(
+            ...         [('[A0, C4)', 15), ('[C4, C8)', 27)],
+            ...         ),
+            ...     )
 
-                >>> command = baca.RegisterCommand(
-                ...     registration=baca.Registration(
-                ...         [('[A0, C4)', 15), ('[C4, C8)', 27)],
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> abjad.f(command.registration)
-                baca.Registration(
-                    components=[
-                        baca.RegistrationComponent(
-                            source_pitch_range=abjad.PitchRange('[A0, C4)'),
-                            target_octave_start_pitch=abjad.NumberedPitch(15),
-                            ),
-                        baca.RegistrationComponent(
-                            source_pitch_range=abjad.PitchRange('[C4, C8)'),
-                            target_octave_start_pitch=abjad.NumberedPitch(27),
-                            ),
-                        ],
-                    )
+            >>> abjad.f(command.registration)
+            baca.Registration(
+                components=[
+                    baca.RegistrationComponent(
+                        source_pitch_range=abjad.PitchRange('[A0, C4)'),
+                        target_octave_start_pitch=abjad.NumberedPitch(15),
+                        ),
+                    baca.RegistrationComponent(
+                        source_pitch_range=abjad.PitchRange('[C4, C8)'),
+                        target_octave_start_pitch=abjad.NumberedPitch(27),
+                        ),
+                    ],
+                )
 
         Set to registration or none.
 

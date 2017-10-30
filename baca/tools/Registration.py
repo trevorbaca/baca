@@ -9,26 +9,22 @@ class Registration(abjad.AbjadValueObject):
 
         Registration in two parts:
 
-        ::
+        >>> components = [('[A0, C4)', 15), ('[C4, C8)', 27)]
+        >>> registration = baca.Registration(components)
 
-            >>> components = [('[A0, C4)', 15), ('[C4, C8)', 27)]
-            >>> registration = baca.Registration(components)
-
-        ::
-
-            >>> abjad.f(registration)
-            baca.Registration(
-                components=[
-                    baca.RegistrationComponent(
-                        source_pitch_range=abjad.PitchRange('[A0, C4)'),
-                        target_octave_start_pitch=abjad.NumberedPitch(15),
-                        ),
-                    baca.RegistrationComponent(
-                        source_pitch_range=abjad.PitchRange('[C4, C8)'),
-                        target_octave_start_pitch=abjad.NumberedPitch(27),
-                        ),
-                    ],
-                )
+        >>> abjad.f(registration)
+        baca.Registration(
+            components=[
+                baca.RegistrationComponent(
+                    source_pitch_range=abjad.PitchRange('[A0, C4)'),
+                    target_octave_start_pitch=abjad.NumberedPitch(15),
+                    ),
+                baca.RegistrationComponent(
+                    source_pitch_range=abjad.PitchRange('[C4, C8)'),
+                    target_octave_start_pitch=abjad.NumberedPitch(27),
+                    ),
+                ],
+            )
 
     '''
 
@@ -64,52 +60,46 @@ class Registration(abjad.AbjadValueObject):
 
             Transposes four pitches:
 
-            ::
-
-                >>> components = [('[A0, C4)', 15), ('[C4, C8)', 27)]
-                >>> registration = baca.Registration(components)
-                >>> pitches = registration([-24, -22, -23, -21])
-                >>> for pitch in pitches:
-                ...     pitch
-                ...
-                NamedPitch("c'''")
-                NamedPitch("d'''")
-                NamedPitch("cs'''")
-                NamedPitch("ef''")
+            >>> components = [('[A0, C4)', 15), ('[C4, C8)', 27)]
+            >>> registration = baca.Registration(components)
+            >>> pitches = registration([-24, -22, -23, -21])
+            >>> for pitch in pitches:
+            ...     pitch
+            ...
+            NamedPitch("c'''")
+            NamedPitch("d'''")
+            NamedPitch("cs'''")
+            NamedPitch("ef''")
 
         ..  container:: example
 
             Transposes four other pitches:
 
-            ::
-
-                >>> components = [('[A0, C4)', 15), ('[C4, C8)', 27)]
-                >>> registration = baca.Registration(components)
-                >>> pitches = registration([0, 2, 1, 3])
-                >>> for pitch in pitches:
-                ...     pitch
-                ...
-                NamedPitch("c''''")
-                NamedPitch("d''''")
-                NamedPitch("cs''''")
-                NamedPitch("ef'''")
+            >>> components = [('[A0, C4)', 15), ('[C4, C8)', 27)]
+            >>> registration = baca.Registration(components)
+            >>> pitches = registration([0, 2, 1, 3])
+            >>> for pitch in pitches:
+            ...     pitch
+            ...
+            NamedPitch("c''''")
+            NamedPitch("d''''")
+            NamedPitch("cs''''")
+            NamedPitch("ef'''")
 
         ..  container:: example
 
             Transposes four quartertones:
 
-            ::
-
-                >>> components = [('[A0, C4)', 15), ('[C4, C8)', 27)]
-                >>> registration = baca.Registration(components)
-                >>> pitches = registration([0.5, 2.5, 1.5, 3.5])
-                >>> for pitch in pitches:
-                ...     pitch
-                ...
-                NamedPitch("cqs''''")
-                NamedPitch("dqs''''")
-                NamedPitch("dqf''''")
-                NamedPitch("eqf'''")
+            >>> components = [('[A0, C4)', 15), ('[C4, C8)', 27)]
+            >>> registration = baca.Registration(components)
+            >>> pitches = registration([0.5, 2.5, 1.5, 3.5])
+            >>> for pitch in pitches:
+            ...     pitch
+            ...
+            NamedPitch("cqs''''")
+            NamedPitch("dqs''''")
+            NamedPitch("dqf''''")
+            NamedPitch("eqf'''")
 
         Returns list of new pitches.
         """

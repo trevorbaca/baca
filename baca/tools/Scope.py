@@ -7,23 +7,19 @@ class Scope(abjad.AbjadObject):
 
     ..  container:: example
 
-        ::
+        >>> scope = baca.Scope(
+        ...     voice_name='Violin Music Voice',
+        ...     stages=(1, 9),
+        ...     )
 
-            >>> scope = baca.Scope(
-            ...     voice_name='Violin Music Voice',
-            ...     stages=(1, 9),
-            ...     )
-
-        ::
-
-            >>> abjad.f(scope)
-            baca.Scope(
-                voice_name='Violin Music Voice',
-                stages=baca.StageSpecifier(
-                    start=1,
-                    stop=9,
-                    ),
-                )
+        >>> abjad.f(scope)
+        baca.Scope(
+            voice_name='Violin Music Voice',
+            stages=baca.StageSpecifier(
+                start=1,
+                stop=9,
+                ),
+            )
 
     '''
 

@@ -7,71 +7,53 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
 
     ..  container:: example
 
-        ::
-
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     bass=6,
-            ...     soprano=7,
-            ...     )
-            >>> specifier([[-6, -3, -5, -1, -7]])
-            CollectionList([<6, 9, 11, 17, 19>])
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     bass=6,
+        ...     soprano=7,
+        ...     )
+        >>> specifier([[-6, -3, -5, -1, -7]])
+        CollectionList([<6, 9, 11, 17, 19>])
 
     ..  container:: example
 
-        ::
-
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     bass=6,
-            ...     direction=abjad.Down,
-            ...     soprano=7,
-            ...     )
-            >>> specifier([[-6, -3, -5, -1, -7]])
-            CollectionList([<19, 17, 11, 9, 6>])
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     bass=6,
+        ...     direction=abjad.Down,
+        ...     soprano=7,
+        ...     )
+        >>> specifier([[-6, -3, -5, -1, -7]])
+        CollectionList([<19, 17, 11, 9, 6>])
 
     ..  container:: example
 
-        ::
-
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     bass=11,
-            ...     direction=abjad.Down,
-            ...     soprano=7,
-            ...     )
-            >>> specifier([[-6, -3, -5, -1, -7]])
-            CollectionList([<31, 30, 29, 21, 11>])
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     bass=11,
+        ...     direction=abjad.Down,
+        ...     soprano=7,
+        ...     )
+        >>> specifier([[-6, -3, -5, -1, -7]])
+        CollectionList([<31, 30, 29, 21, 11>])
 
     ..  container:: example
 
-        ::
+        >>> specifier = baca.ChordalSpacingSpecifier()
+        >>> specifier([[0, 1, 2]])
+        CollectionList([<0, 1, 2>])
 
-            >>> specifier = baca.ChordalSpacingSpecifier()
-            >>> specifier([[0, 1, 2]])
-            CollectionList([<0, 1, 2>])
+        >>> specifier([[0, 2, 1]])
+        CollectionList([<0, 1, 2>])
 
-        ::
+        >>> specifier([[1, 0, 2]])
+        CollectionList([<1, 2, 12>])
 
-            >>> specifier([[0, 2, 1]])
-            CollectionList([<0, 1, 2>])
+        >>> specifier([[1, 2, 0]])
+        CollectionList([<1, 2, 12>])
 
-        ::
+        >>> specifier([[2, 0, 1]])
+        CollectionList([<2, 12, 13>])
 
-            >>> specifier([[1, 0, 2]])
-            CollectionList([<1, 2, 12>])
-
-        ::
-
-            >>> specifier([[1, 2, 0]])
-            CollectionList([<1, 2, 12>])
-
-        ::
-
-            >>> specifier([[2, 0, 1]])
-            CollectionList([<2, 12, 13>])
-
-        ::
-
-            >>> specifier([[2, 1, 0]])
-            CollectionList([<2, 12, 13>])
+        >>> specifier([[2, 1, 0]])
+        CollectionList([<2, 12, 13>])
 
     '''
 
@@ -119,11 +101,9 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
-
-                >>> specifier = baca.ChordalSpacingSpecifier()
-                >>> specifier() is None
-                True
+            >>> specifier = baca.ChordalSpacingSpecifier()
+            >>> specifier() is None
+            True
 
         Returns pitch collection or none.
         '''
@@ -294,53 +274,41 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
 
             Up-directed bass specification:
 
-            ::
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=None,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<6, 7, 9, 11, 17>])
 
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     bass=None,
-                ...     )
-                >>> specifier([[-6, -3, -5, -1, -7]])
-                CollectionList([<6, 7, 9, 11, 17>])
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<6, 7, 9, 11, 17>])
 
-            ::
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=7,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<7, 9, 11, 17, 18>])
 
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     bass=6,
-                ...     )
-                >>> specifier([[-6, -3, -5, -1, -7]])
-                CollectionList([<6, 7, 9, 11, 17>])
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=9,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<9, 11, 17, 18, 19>])
 
-            ::
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=11,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<11, 17, 18, 19, 21>])
 
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     bass=7,
-                ...     )
-                >>> specifier([[-6, -3, -5, -1, -7]])
-                CollectionList([<7, 9, 11, 17, 18>])
-
-            ::
-
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     bass=9,
-                ...     )
-                >>> specifier([[-6, -3, -5, -1, -7]])
-                CollectionList([<9, 11, 17, 18, 19>])
-
-            ::
-
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     bass=11,
-                ...     )
-                >>> specifier([[-6, -3, -5, -1, -7]])
-                CollectionList([<11, 17, 18, 19, 21>])
-
-            ::
-
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     bass=5,
-                ...     )
-                >>> specifier([[-6, -3, -5, -1, -7]])
-                CollectionList([<5, 6, 7, 9, 11>])
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=5,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<5, 6, 7, 9, 11>])
 
         Returns pitch-class or none.
         '''
@@ -354,41 +322,33 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
 
             Up-directed joint control:
 
-            ::
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     soprano=7,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<6, 9, 11, 17, 19>])
 
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     bass=6,
-                ...     soprano=7,
-                ...     )
-                >>> specifier([[-6, -3, -5, -1, -7]])
-                CollectionList([<6, 9, 11, 17, 19>])
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     soprano=9,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<6, 7, 11, 17, 21>])
 
-            ::
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     soprano=11,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<6, 7, 9, 17, 23>])
 
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     bass=6,
-                ...     soprano=9,
-                ...     )
-                >>> specifier([[-6, -3, -5, -1, -7]])
-                CollectionList([<6, 7, 11, 17, 21>])
-
-            ::
-
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     bass=6,
-                ...     soprano=11,
-                ...     )
-                >>> specifier([[-6, -3, -5, -1, -7]])
-                CollectionList([<6, 7, 9, 17, 23>])
-
-            ::
-
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     bass=6,
-                ...     soprano=5
-                ...     )
-                >>> specifier([[-6, -3, -5, -1, -7]])
-                CollectionList([<6, 7, 9, 11, 17>])
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     soprano=5
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<6, 7, 9, 11, 17>])
 
         Returns up, down or none.
         '''
@@ -404,44 +364,36 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
 
             First three examples give the same spacing:
 
-            ::
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     soprano=7,
+            ...     )
+            >>> specifier([[5, 6, 7, 9, 11]])
+            CollectionList([<6, 9, 11, 17, 19>])
 
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     bass=6,
-                ...     soprano=7,
-                ...     )
-                >>> specifier([[5, 6, 7, 9, 11]])
-                CollectionList([<6, 9, 11, 17, 19>])
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     minimum_semitones=1,
+            ...     soprano=7,
+            ...     )
+            >>> specifier([[5, 6, 7, 9, 11]])
+            CollectionList([<6, 9, 11, 17, 19>])
 
-            ::
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     minimum_semitones=2,
+            ...     soprano=7,
+            ...     )
+            >>> specifier([[5, 6, 7, 9, 11]])
+            CollectionList([<6, 9, 11, 17, 19>])
 
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     bass=6,
-                ...     minimum_semitones=1,
-                ...     soprano=7,
-                ...     )
-                >>> specifier([[5, 6, 7, 9, 11]])
-                CollectionList([<6, 9, 11, 17, 19>])
-
-            ::
-
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     bass=6,
-                ...     minimum_semitones=2,
-                ...     soprano=7,
-                ...     )
-                >>> specifier([[5, 6, 7, 9, 11]])
-                CollectionList([<6, 9, 11, 17, 19>])
-
-            ::
-
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     bass=6,
-                ...     minimum_semitones=3,
-                ...     soprano=7,
-                ...     )
-                >>> specifier([[5, 6, 7, 9, 11]])
-                CollectionList([<6, 9, 17, 23, 31>])
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     minimum_semitones=3,
+            ...     soprano=7,
+            ...     )
+            >>> specifier([[5, 6, 7, 9, 11]])
+            CollectionList([<6, 9, 17, 23, 31>])
 
         ..  container:: example
 
@@ -449,48 +401,40 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
 
             First three examples give the same spacing:
 
-            ::
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     direction=abjad.Down,
+            ...     soprano=7,
+            ...     )
+            >>> specifier([[5, 6, 7, 9, 11]])
+            CollectionList([<19, 17, 11, 9, 6>])
 
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     bass=6,
-                ...     direction=abjad.Down,
-                ...     soprano=7,
-                ...     )
-                >>> specifier([[5, 6, 7, 9, 11]])
-                CollectionList([<19, 17, 11, 9, 6>])
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     direction=abjad.Down,
+            ...     minimum_semitones=1,
+            ...     soprano=7,
+            ...     )
+            >>> specifier([[5, 6, 7, 9, 11]])
+            CollectionList([<19, 17, 11, 9, 6>])
 
-            ::
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     direction=abjad.Down,
+            ...     minimum_semitones=2,
+            ...     soprano=7,
+            ...     )
+            >>> specifier([[5, 6, 7, 9, 11]])
+            CollectionList([<19, 17, 11, 9, 6>])
 
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     bass=6,
-                ...     direction=abjad.Down,
-                ...     minimum_semitones=1,
-                ...     soprano=7,
-                ...     )
-                >>> specifier([[5, 6, 7, 9, 11]])
-                CollectionList([<19, 17, 11, 9, 6>])
-
-            ::
-
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     bass=6,
-                ...     direction=abjad.Down,
-                ...     minimum_semitones=2,
-                ...     soprano=7,
-                ...     )
-                >>> specifier([[5, 6, 7, 9, 11]])
-                CollectionList([<19, 17, 11, 9, 6>])
-
-            ::
-
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     bass=6,
-                ...     direction=abjad.Down,
-                ...     minimum_semitones=3,
-                ...     soprano=7,
-                ...     )
-                >>> specifier([[5, 6, 7, 9, 11]])
-                CollectionList([<31, 23, 17, 9, 6>])
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     bass=6,
+            ...     direction=abjad.Down,
+            ...     minimum_semitones=3,
+            ...     soprano=7,
+            ...     )
+            >>> specifier([[5, 6, 7, 9, 11]])
+            CollectionList([<31, 23, 17, 9, 6>])
 
         Set to positive integer or none.
 
@@ -516,59 +460,47 @@ class ChordalSpacingSpecifier(abjad.AbjadValueObject):
 
             Down-directed soprano control:
 
-            ::
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     direction=abjad.Down,
+            ...     soprano=None,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<18, 17, 11, 9, 7>])
 
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     direction=abjad.Down,
-                ...     soprano=None,
-                ...     )
-                >>> specifier([[-6, -3, -5, -1, -7]])
-                CollectionList([<18, 17, 11, 9, 7>])
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     direction=abjad.Down,
+            ...     soprano=6,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<18, 17, 11, 9, 7>])
 
-            ::
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     direction=abjad.Down,
+            ...     soprano=5,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<17, 11, 9, 7, 6>])
 
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     direction=abjad.Down,
-                ...     soprano=6,
-                ...     )
-                >>> specifier([[-6, -3, -5, -1, -7]])
-                CollectionList([<18, 17, 11, 9, 7>])
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     direction=abjad.Down,
+            ...     soprano=11,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<11, 9, 7, 6, 5>])
 
-            ::
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     direction=abjad.Down,
+            ...     soprano=9,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<21, 19, 18, 17, 11>])
 
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     direction=abjad.Down,
-                ...     soprano=5,
-                ...     )
-                >>> specifier([[-6, -3, -5, -1, -7]])
-                CollectionList([<17, 11, 9, 7, 6>])
-
-            ::
-
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     direction=abjad.Down,
-                ...     soprano=11,
-                ...     )
-                >>> specifier([[-6, -3, -5, -1, -7]])
-                CollectionList([<11, 9, 7, 6, 5>])
-
-            ::
-
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     direction=abjad.Down,
-                ...     soprano=9,
-                ...     )
-                >>> specifier([[-6, -3, -5, -1, -7]])
-                CollectionList([<21, 19, 18, 17, 11>])
-
-            ::
-
-                >>> specifier = baca.ChordalSpacingSpecifier(
-                ...     direction=abjad.Down,
-                ...     soprano=7,
-                ...     )
-                >>> specifier([[-6, -3, -5, -1, -7]])
-                CollectionList([<19, 18, 17, 11, 9>])
+            >>> specifier = baca.ChordalSpacingSpecifier(
+            ...     direction=abjad.Down,
+            ...     soprano=7,
+            ...     )
+            >>> specifier([[-6, -3, -5, -1, -7]])
+            CollectionList([<19, 18, 17, 11, 9>])
 
         Returns pitch-class or none.
         '''

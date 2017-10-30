@@ -23,20 +23,18 @@ class LibraryAM(object):
 
             Attaches accents to all pitched heads:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.accents(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.accents(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -78,20 +76,18 @@ class LibraryAM(object):
 
             Attaches accents to pitched heads in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.map(baca.accents(), baca.select().tuplet(1)),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.map(baca.accents(), baca.select().tuplet(1)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -147,20 +143,18 @@ class LibraryAM(object):
             Attaches alternate bow strokes to all pitched heads (down-bow
             first):
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.alternate_bow_strokes(downbow_first=True),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.alternate_bow_strokes(downbow_first=True),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -202,20 +196,18 @@ class LibraryAM(object):
 
             Attaches alternate bow strokes to all pitched heads (up-bow first):
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.alternate_bow_strokes(downbow_first=False),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(6),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.alternate_bow_strokes(downbow_first=False),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(6),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -257,22 +249,20 @@ class LibraryAM(object):
 
             Attaches alternate bow strokes to pitched heads in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.alternate_bow_strokes(
-                ...         selector=baca.select().tuplets()[1:2].pheads().group(),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(6),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.alternate_bow_strokes(
+            ...         selector=baca.select().tuplets()[1:2].pheads().group(),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(6),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -364,46 +354,42 @@ class LibraryAM(object):
 
         ..  container::
 
-            ::
-
-                >>> abjad.f(baca.ancora_dynamic('f'))
-                baca.IndicatorCommand(
-                    arguments=[
-                        abjad.Markup(
-                            contents=[
-                                abjad.MarkupCommand(
-                                    'dynamic',
-                                    'f'
-                                    ),
-                                abjad.MarkupCommand(
-                                    'upright',
-                                    'ancora'
-                                    ),
-                                ],
-                            direction=Down,
-                            ),
-                        ],
-                    selector=baca.select().phead(0),
-                    )
+            >>> abjad.f(baca.ancora_dynamic('f'))
+            baca.IndicatorCommand(
+                arguments=[
+                    abjad.Markup(
+                        contents=[
+                            abjad.MarkupCommand(
+                                'dynamic',
+                                'f'
+                                ),
+                            abjad.MarkupCommand(
+                                'upright',
+                                'ancora'
+                                ),
+                            ],
+                        direction=Down,
+                        ),
+                    ],
+                selector=baca.select().phead(0),
+                )
 
         ..  container:: example
 
             Attaches ancora dynamic to pitched head 0:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.ancora_dynamic('ff'),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.ancora_dynamic('ff'),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -451,23 +437,21 @@ class LibraryAM(object):
 
             Attaches ancora dynamic to pitched head 0 in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.ancora_dynamic(
-                ...         'ff',
-                ...         baca.select().tuplets()[1:2].phead(0),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.ancora_dynamic(
+            ...         'ff',
+            ...         baca.select().tuplets()[1:2].phead(0),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -528,18 +512,16 @@ class LibraryAM(object):
 
             Attaches arpeggios to all chord heads:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.arpeggios(),
-                ...     counts=[5, -3],
-                ...     talea_denominator=32,
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
+            ...     baca.arpeggios(),
+            ...     counts=[5, -3],
+            ...     talea_denominator=32,
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -581,18 +563,16 @@ class LibraryAM(object):
 
             Attaches arpeggios to last two chord heads:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.arpeggios(baca.select().cheads()[-2:]),
-                ...     counts=[5, -3],
-                ...     talea_denominator=32,
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
+            ...     baca.arpeggios(baca.select().cheads()[-2:]),
+            ...     counts=[5, -3],
+            ...     talea_denominator=32,
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -651,19 +631,17 @@ class LibraryAM(object):
             Octave-transposes music such that the lowest note in the entire
             selection appears in octave 3:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.bass_to_octave(3, baca.select().plts().group()),
-                ...     baca.color(baca.select().plts().group()),
-                ...     counts=[5, -3],
-                ...     talea_denominator=32,
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
+            ...     baca.bass_to_octave(3, baca.select().plts().group()),
+            ...     baca.color(baca.select().plts().group()),
+            ...     counts=[5, -3],
+            ...     talea_denominator=32,
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -756,22 +734,20 @@ class LibraryAM(object):
             Octave-transposes music such that the lowest pitch in each pitched
             logical tie appears in octave 3:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.bass_to_octave(
-                ...         n=3,
-                ...         selector=baca.select().plts(),
-                ...         ),
-                ...     baca.color(baca.select().plts()),
-                ...     counts=[5, -3],
-                ...     talea_denominator=32,
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
+            ...     baca.bass_to_octave(
+            ...         n=3,
+            ...         selector=baca.select().plts(),
+            ...         ),
+            ...     baca.color(baca.select().plts()),
+            ...     counts=[5, -3],
+            ...     talea_denominator=32,
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -864,22 +840,20 @@ class LibraryAM(object):
             Octave-transposes music such that the lowest pitch in each of the
             last two pitched logical ties appears in octave 3:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.bass_to_octave(
-                ...         n=3,
-                ...         selector=baca.select().plts()[-2:],
-                ...         ),
-                ...     baca.color(baca.select().plts()[-2:]),
-                ...     counts=[5, -3],
-                ...     talea_denominator=32,
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
+            ...     baca.bass_to_octave(
+            ...         n=3,
+            ...         selector=baca.select().plts()[-2:],
+            ...         ),
+            ...     baca.color(baca.select().plts()[-2:]),
+            ...     counts=[5, -3],
+            ...     talea_denominator=32,
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -952,17 +926,15 @@ class LibraryAM(object):
 
             Beams divisions:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.beam_divisions(),
-                ...     baca.rests_around([2], [2]),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.beam_divisions(),
+            ...     baca.rests_around([2], [2]),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -996,17 +968,15 @@ class LibraryAM(object):
 
             Beams divisions with stemlets:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.beam_divisions(stemlets=2),
-                ...     baca.rests_around([2], [2]),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.beam_divisions(stemlets=2),
+            ...     baca.rests_around([2], [2]),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1057,17 +1027,15 @@ class LibraryAM(object):
 
             Beams everything:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.beam_everything(),
-                ...     baca.rests_around([2], [2]),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.beam_everything(),
+            ...     baca.rests_around([2], [2]),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1119,17 +1087,15 @@ class LibraryAM(object):
 
             Beams everything with stemlets:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.beam_everything(stemlets=2),
-                ...     baca.rests_around([2], [2]),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.beam_everything(stemlets=2),
+            ...     baca.rests_around([2], [2]),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1183,17 +1149,15 @@ class LibraryAM(object):
 
             Beams everything without nibs:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.beam_everything(hide_nibs=True),
-                ...     baca.rests_around([2], [2]),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.beam_everything(hide_nibs=True),
+            ...     baca.rests_around([2], [2]),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1240,18 +1204,16 @@ class LibraryAM(object):
 
             Overrides beam positions on all leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.beam_positions(6),
-                ...     baca.rests_around([2], [4]),
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.beam_positions(6),
+            ...     baca.rests_around([2], [4]),
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1287,21 +1249,19 @@ class LibraryAM(object):
 
             Overrides beam positions on leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.beam_positions(
-                ...         6,
-                ...         baca.select().tuplets()[1:2].leaves().group(),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.beam_positions(
+            ...         6,
+            ...         baca.select().tuplets()[1:2].leaves().group(),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1351,20 +1311,18 @@ class LibraryAM(object):
 
             Beams PLT runs:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.beam_runs(),
-                ...     baca.rests_around([2], [2]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.beam_runs(),
+            ...     baca.rests_around([2], [2]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1424,20 +1382,18 @@ class LibraryAM(object):
 
             Beams PLT runs without nibs:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.beam_runs(hide_nibs=True),
-                ...     baca.rests_around([2], [2]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.beam_runs(hide_nibs=True),
+            ...     baca.rests_around([2], [2]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1492,19 +1448,17 @@ class LibraryAM(object):
             Octave-transposes music such that the centroid of the entire
             selection appears in octave 3:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.center_to_octave(3, baca.select().plts().group()),
-                ...     baca.color(baca.select().plts().group()),
-                ...     counts=[5, -3],
-                ...     talea_denominator=32,
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
+            ...     baca.center_to_octave(3, baca.select().plts().group()),
+            ...     baca.color(baca.select().plts().group()),
+            ...     counts=[5, -3],
+            ...     talea_denominator=32,
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1597,19 +1551,17 @@ class LibraryAM(object):
             Octave-transposes music such that the centroid of each pitched
             logical tie appears in octave 3:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.center_to_octave(3, baca.select().plts()),
-                ...     baca.color(baca.select().plts()),
-                ...     counts=[5, -3],
-                ...     talea_denominator=32,
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
+            ...     baca.center_to_octave(3, baca.select().plts()),
+            ...     baca.color(baca.select().plts()),
+            ...     counts=[5, -3],
+            ...     talea_denominator=32,
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1702,22 +1654,20 @@ class LibraryAM(object):
             Octave-transposes music such that the centroid of each of the last
             two pitched logical ties appears in octave 3:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.center_to_octave(
-                ...         n=3,
-                ...         selector=baca.select().plts()[-2:],
-                ...         ),
-                ...     baca.color(baca.select().plts()[-2:]),
-                ...     counts=[5, -3],
-                ...     talea_denominator=32,
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
+            ...     baca.center_to_octave(
+            ...         n=3,
+            ...         selector=baca.select().plts()[-2:],
+            ...         ),
+            ...     baca.color(baca.select().plts()[-2:]),
+            ...     counts=[5, -3],
+            ...     talea_denominator=32,
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1790,20 +1740,18 @@ class LibraryAM(object):
 
             Attaches clef to leaf 0:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.clef('alto'),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(7),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.clef('alto'),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(7),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1846,23 +1794,21 @@ class LibraryAM(object):
 
             Attaches clef to leaf 0 in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.clef(
-                ...         clef='alto',
-                ...         selector=baca.select().tuplets()[1:2].leaf(0),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(7),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.clef(
+            ...         clef='alto',
+            ...         selector=baca.select().tuplets()[1:2].leaf(0),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(7),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1918,21 +1864,19 @@ class LibraryAM(object):
 
             Attaches clef spanner and one-line spanner to leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.clef_spanner(),
-                ...     baca.one_line_staff(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(9),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.clef_spanner(),
+            ...     baca.one_line_staff(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(9),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1980,24 +1924,22 @@ class LibraryAM(object):
 
             Attaches clef spanner and one-line spanner to leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.clef_spanner(
-                ...         clef='percussion',
-                ...         selector=baca.select().tuplet(1),
-                ...         ),
-                ...     baca.one_line_staff(selector=baca.select().tuplet(1)),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(9),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.clef_spanner(
+            ...         clef='percussion',
+            ...         selector=baca.select().tuplet(1),
+            ...         ),
+            ...     baca.one_line_staff(selector=baca.select().tuplet(1)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(9),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2065,21 +2007,19 @@ class LibraryAM(object):
 
             Coats pitches:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     3 * [[0, 2, 10]],
-                ...     baca.imbricate(
-                ...         'Voice 2',
-                ...         [baca.coat(0), baca.coat(2), 10, 0, 2],
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     3 * [[0, 2, 10]],
+            ...     baca.imbricate(
+            ...         'Voice 2',
+            ...         [baca.coat(0), baca.coat(2), 10, 0, 2],
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2148,21 +2088,19 @@ class LibraryAM(object):
 
             Colors all leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.color(),
-                ...     baca.flags(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.color(),
+            ...     baca.flags(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2267,21 +2205,19 @@ class LibraryAM(object):
 
             Colors leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.color(selector=baca.select().tuplets()[1:2].leaves()),
-                ...     baca.flags(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.color(selector=baca.select().tuplets()[1:2].leaves()),
+            ...     baca.flags(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2393,38 +2329,34 @@ class LibraryAM(object):
 
         ..  container:: example
 
-            ::
-
-                >>> pitches = [[0, 2, 10], [16, 19, 20]]
-                >>> range_ = abjad.PitchRange('[C4, C#7]')
-                >>> segments = baca.constellate(pitches, range_)
-                >>> for segment in segments:
-                ...     segment
-                Sequence([0, 2, 4, 7, 8, 10])
-                Sequence([0, 2, 10, 16, 19, 20])
-                Sequence([0, 2, 10, 28, 31, 32])
-                Sequence([4, 7, 8, 12, 14, 22])
-                Sequence([12, 14, 16, 19, 20, 22])
-                Sequence([12, 14, 22, 28, 31, 32])
-                Sequence([4, 7, 8, 24, 26, 34])
-                Sequence([16, 19, 20, 24, 26, 34])
-                Sequence([24, 26, 28, 31, 32, 34])
+            >>> pitches = [[0, 2, 10], [16, 19, 20]]
+            >>> range_ = abjad.PitchRange('[C4, C#7]')
+            >>> segments = baca.constellate(pitches, range_)
+            >>> for segment in segments:
+            ...     segment
+            Sequence([0, 2, 4, 7, 8, 10])
+            Sequence([0, 2, 10, 16, 19, 20])
+            Sequence([0, 2, 10, 28, 31, 32])
+            Sequence([4, 7, 8, 12, 14, 22])
+            Sequence([12, 14, 16, 19, 20, 22])
+            Sequence([12, 14, 22, 28, 31, 32])
+            Sequence([4, 7, 8, 24, 26, 34])
+            Sequence([16, 19, 20, 24, 26, 34])
+            Sequence([24, 26, 28, 31, 32, 34])
 
         ..  container:: example
 
-            ::
-
-                >>> pitches = [[4, 8, 11], [7, 15, 17]]
-                >>> range_ = abjad.PitchRange('[C4, C#7]')
-                >>> segments = baca.constellate(pitches, range_)
-                >>> for segment in segments:
-                ...     segment
-                Sequence([4, 7, 8, 11, 15, 17])
-                Sequence([4, 8, 11, 19, 27, 29])
-                Sequence([7, 15, 16, 17, 20, 23])
-                Sequence([16, 19, 20, 23, 27, 29])
-                Sequence([7, 15, 17, 28, 32, 35])
-                Sequence([19, 27, 28, 29, 32, 35])
+            >>> pitches = [[4, 8, 11], [7, 15, 17]]
+            >>> range_ = abjad.PitchRange('[C4, C#7]')
+            >>> segments = baca.constellate(pitches, range_)
+            >>> for segment in segments:
+            ...     segment
+            Sequence([4, 7, 8, 11, 15, 17])
+            Sequence([4, 8, 11, 19, 27, 29])
+            Sequence([7, 15, 16, 17, 20, 23])
+            Sequence([16, 19, 20, 23, 27, 29])
+            Sequence([7, 15, 17, 28, 32, 35])
+            Sequence([19, 27, 28, 29, 32, 35])
 
         Returns outer product of octave transpositions of `cells` in `range`.
         '''
@@ -2452,20 +2384,18 @@ class LibraryAM(object):
 
             Overrides note-head style on all pitched leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.cross_note_heads(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.cross_note_heads(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2509,22 +2439,20 @@ class LibraryAM(object):
 
             Overrides note-head style on pitched leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.cross_note_heads(
-                ...         baca.select().tuplets()[1:2].leaves().group(),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.cross_note_heads(
+            ...         baca.select().tuplets()[1:2].leaves().group(),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2581,47 +2509,43 @@ class LibraryAM(object):
 
             Attaches cross-staff command to all leaves:
 
-            ::
+            >>> score_template = baca.StringTrioScoreTemplate()
+            >>> accumulator = baca.MusicAccumulator(score_template)
+            >>> accumulator(
+            ...     accumulator.music_maker(
+            ...         'Violin Music Voice',
+            ...         [[9, 11, 12, 14, 16]],
+            ...         baca.flags(),
+            ...         baca.stems_up(),
+            ...         denominator=8,
+            ...         figure_name='vn 1',
+            ...         talea_denominator=8,
+            ...         ),
+            ...     )
+            >>> accumulator(
+            ...     accumulator.music_maker(
+            ...         'Viola Music Voice',
+            ...         [[0, 2, 4, 5, 7]],
+            ...         baca.anchor('Violin Music Voice'),
+            ...         baca.cross_staff(),
+            ...         baca.flags(),
+            ...         baca.stems_up(),
+            ...         figure_name='vn 2',
+            ...         talea_denominator=8,
+            ...         ),
+            ...     )
 
-                >>> score_template = baca.StringTrioScoreTemplate()
-                >>> accumulator = baca.MusicAccumulator(score_template)
-                >>> accumulator(
-                ...     accumulator.music_maker(
-                ...         'Violin Music Voice',
-                ...         [[9, 11, 12, 14, 16]],
-                ...         baca.flags(),
-                ...         baca.stems_up(),
-                ...         denominator=8,
-                ...         figure_name='vn 1',
-                ...         talea_denominator=8,
-                ...         ),
-                ...     )
-                >>> accumulator(
-                ...     accumulator.music_maker(
-                ...         'Viola Music Voice',
-                ...         [[0, 2, 4, 5, 7]],
-                ...         baca.anchor('Violin Music Voice'),
-                ...         baca.cross_staff(),
-                ...         baca.flags(),
-                ...         baca.stems_up(),
-                ...         figure_name='vn 2',
-                ...         talea_denominator=8,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> segment_maker = baca.SegmentMaker(
-                ...     allow_figure_names=False,
-                ...     ignore_repeat_pitch_classes=True,
-                ...     ignore_unregistered_pitches=True,
-                ...     score_template=accumulator.score_template,
-                ...     time_signatures=accumulator.time_signatures,
-                ...     )
-                >>> accumulator.populate_segment_maker(segment_maker)
-                >>> result = segment_maker.run(is_doc_example=True)
-                >>> lilypond_file, metadata = result
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> segment_maker = baca.SegmentMaker(
+            ...     allow_figure_names=False,
+            ...     ignore_repeat_pitch_classes=True,
+            ...     ignore_unregistered_pitches=True,
+            ...     score_template=accumulator.score_template,
+            ...     time_signatures=accumulator.time_signatures,
+            ...     )
+            >>> accumulator.populate_segment_maker(segment_maker)
+            >>> result = segment_maker.run(is_doc_example=True)
+            >>> lilypond_file, metadata = result
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2706,47 +2630,43 @@ class LibraryAM(object):
 
             Attaches cross-staff command to last two pitched leaves:
 
-            ::
+            >>> score_template = baca.StringTrioScoreTemplate()
+            >>> accumulator = baca.MusicAccumulator(score_template)
+            >>> accumulator(
+            ...     accumulator.music_maker(
+            ...         'Violin Music Voice',
+            ...         [[9, 11, 12, 14, 16]],
+            ...         baca.flags(),
+            ...         baca.stems_up(),
+            ...         denominator=8,
+            ...         figure_name='vn 1',
+            ...         talea_denominator=8,
+            ...         ),
+            ...     )
+            >>> accumulator(
+            ...     accumulator.music_maker(
+            ...         'Viola Music Voice',
+            ...         [[0, 2, 4, 5, 7]],
+            ...         baca.anchor('Violin Music Voice'),
+            ...         baca.cross_staff(selector=baca.select().pleaves()[-2:]),
+            ...         baca.flags(),
+            ...         baca.stems_up(),
+            ...         figure_name='vn 2',
+            ...         talea_denominator=8,
+            ...         ),
+            ...     )
 
-                >>> score_template = baca.StringTrioScoreTemplate()
-                >>> accumulator = baca.MusicAccumulator(score_template)
-                >>> accumulator(
-                ...     accumulator.music_maker(
-                ...         'Violin Music Voice',
-                ...         [[9, 11, 12, 14, 16]],
-                ...         baca.flags(),
-                ...         baca.stems_up(),
-                ...         denominator=8,
-                ...         figure_name='vn 1',
-                ...         talea_denominator=8,
-                ...         ),
-                ...     )
-                >>> accumulator(
-                ...     accumulator.music_maker(
-                ...         'Viola Music Voice',
-                ...         [[0, 2, 4, 5, 7]],
-                ...         baca.anchor('Violin Music Voice'),
-                ...         baca.cross_staff(selector=baca.select().pleaves()[-2:]),
-                ...         baca.flags(),
-                ...         baca.stems_up(),
-                ...         figure_name='vn 2',
-                ...         talea_denominator=8,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> segment_maker = baca.SegmentMaker(
-                ...     allow_figure_names=False,
-                ...     ignore_repeat_pitch_classes=True,
-                ...     ignore_unregistered_pitches=True,
-                ...     score_template=accumulator.score_template,
-                ...     time_signatures=accumulator.time_signatures,
-                ...     )
-                >>> accumulator.populate_segment_maker(segment_maker)
-                >>> result = segment_maker.run(is_doc_example=True)
-                >>> lilypond_file, metadata = result
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> segment_maker = baca.SegmentMaker(
+            ...     allow_figure_names=False,
+            ...     ignore_repeat_pitch_classes=True,
+            ...     ignore_unregistered_pitches=True,
+            ...     score_template=accumulator.score_template,
+            ...     time_signatures=accumulator.time_signatures,
+            ...     )
+            >>> accumulator.populate_segment_maker(segment_maker)
+            >>> result = segment_maker.run(is_doc_example=True)
+            >>> lilypond_file, metadata = result
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2853,20 +2773,18 @@ class LibraryAM(object):
 
             Octave-displaces PLTs:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     3 * [[0, 2, 3]],
-                ...     baca.displacement([0, 0, -1, -1, 1, 1]),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     3 * [[0, 2, 3]],
+            ...     baca.displacement([0, 0, -1, -1, 1, 1]),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2911,18 +2829,16 @@ class LibraryAM(object):
 
             Octave-displaces chords:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     6 * [{0, 2, 3}],
-                ...     baca.displacement([0, 0, -1, -1, 1, 1]),
-                ...     baca.rests_around([2], [4]),
-                ...     counts=[4],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     6 * [{0, 2, 3}],
+            ...     baca.displacement([0, 0, -1, -1, 1, 1]),
+            ...     baca.rests_around([2], [4]),
+            ...     counts=[4],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2959,23 +2875,21 @@ class LibraryAM(object):
 
             Octave-displaces last six pitched logical ties:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     3 * [[0, 2, 3]],
-                ...     baca.displacement(
-                ...         [0, 0, -1, -1, 1, 1],
-                ...         baca.select().plts()[-6:].group(),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     3 * [[0, 2, 3]],
+            ...     baca.displacement(
+            ...         [0, 0, -1, -1, 1, 1],
+            ...         baca.select().plts()[-6:].group(),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3030,20 +2944,18 @@ class LibraryAM(object):
 
             Attaches double-staccati to all pitched heads:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.double_tonguing(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.double_tonguing(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3085,22 +2997,20 @@ class LibraryAM(object):
 
             Attaches double-staccati to pitched heads in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.double_tonguing(
-                ...         baca.select().tuplets()[1:2].pheads(),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.double_tonguing(
+            ...         baca.select().tuplets()[1:2].pheads(),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3152,18 +3062,16 @@ class LibraryAM(object):
 
             Attaches down-arpeggios to all chord heads:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.down_arpeggios(),
-                ...     counts=[5, -3],
-                ...     talea_denominator=32,
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
+            ...     baca.down_arpeggios(),
+            ...     counts=[5, -3],
+            ...     talea_denominator=32,
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3208,18 +3116,16 @@ class LibraryAM(object):
 
             Attaches down-arpeggios to last two chord heads:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.down_arpeggios(baca.select().cheads()[-2:]),
-                ...     counts=[5, -3],
-                ...     talea_denominator=32,
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
+            ...     baca.down_arpeggios(baca.select().cheads()[-2:]),
+            ...     counts=[5, -3],
+            ...     talea_denominator=32,
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3273,20 +3179,18 @@ class LibraryAM(object):
 
             Attaches down-bows to all pitched heads:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.down_bows(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.down_bows(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3328,22 +3232,20 @@ class LibraryAM(object):
 
             Attaches down-bows to pitched heads in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.down_bows(
-                ...         baca.select().tuplets()[1:2].pheads(),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.down_bows(
+            ...         baca.select().tuplets()[1:2].pheads(),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3395,20 +3297,18 @@ class LibraryAM(object):
 
             Attaches dynamic to pitched head 0:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.dynamic('f'),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.dynamic('f'),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3450,20 +3350,18 @@ class LibraryAM(object):
 
             Attaches dynamic to pitched head 0 in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.dynamic('f', baca.select().tuplets()[1:2].phead(0)),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.dynamic('f', baca.select().tuplets()[1:2].phead(0)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3518,24 +3416,22 @@ class LibraryAM(object):
 
             Overrides dynamic line spanner staff padding on all leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.dynamic_line_spanner_staff_padding(4),
-                ...     baca.hairpins(
-                ...         hairpins=['p < f'],
-                ...         selector=baca.select().tuplets().map(baca.select().tleaves()),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.dynamic_line_spanner_staff_padding(4),
+            ...     baca.hairpins(
+            ...         hairpins=['p < f'],
+            ...         selector=baca.select().tuplets().map(baca.select().tleaves()),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3579,27 +3475,25 @@ class LibraryAM(object):
 
             Overrides dynamic line spanner staff padding on leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.dynamic_line_spanner_staff_padding(
-                ...         n=4,
-                ...         selector=baca.select().tuplets()[1:2].leaves().group(),
-                ...         ),
-                ...     baca.hairpins(
-                ...         hairpins=['p < f'],
-                ...         selector=baca.select().tuplets().map(baca.select().tleaves()),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.dynamic_line_spanner_staff_padding(
+            ...         n=4,
+            ...         selector=baca.select().tuplets()[1:2].leaves().group(),
+            ...         ),
+            ...     baca.hairpins(
+            ...         hairpins=['p < f'],
+            ...         selector=baca.select().tuplets().map(baca.select().tleaves()),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3656,24 +3550,22 @@ class LibraryAM(object):
 
             Up-overrides dynamic line spanner direction on all leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.dynamic_line_spanner_up(),
-                ...     baca.hairpins(
-                ...         hairpins=['p < f'],
-                ...         selector=baca.select().tuplets().map(baca.select().tleaves()),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.dynamic_line_spanner_up(),
+            ...     baca.hairpins(
+            ...         hairpins=['p < f'],
+            ...         selector=baca.select().tuplets().map(baca.select().tleaves()),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3717,26 +3609,24 @@ class LibraryAM(object):
 
             Up-overrides dynamic line spanner direction on leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.dynamic_line_spanner_up(
-                ...         baca.select().tuplets()[1:2].leaves().group(),
-                ...         ),
-                ...     baca.hairpins(
-                ...         hairpins=['p < f'],
-                ...         selector=baca.select().tuplets().map(baca.select().tleaves()),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.dynamic_line_spanner_up(
+            ...         baca.select().tuplets()[1:2].leaves().group(),
+            ...         ),
+            ...     baca.hairpins(
+            ...         hairpins=['p < f'],
+            ...         selector=baca.select().tuplets().map(baca.select().tleaves()),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3793,22 +3683,20 @@ class LibraryAM(object):
 
             Overrides dynamic text extra offset on pitched leaf 0:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.dynamic('p'),
-                ...     baca.dynamic('f', baca.select().tuplets()[1:2].pleaf(0)),
-                ...     baca.dynamic_text_extra_offset((-3, 0)),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.dynamic('p'),
+            ...     baca.dynamic('f', baca.select().tuplets()[1:2].pleaf(0)),
+            ...     baca.dynamic_text_extra_offset((-3, 0)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3852,25 +3740,23 @@ class LibraryAM(object):
 
             Overrides dynamic text extra offset on leaf 0 in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.dynamic('p'),
-                ...     baca.dynamic('f', baca.select().tuplets()[1:2].leaf(0)),
-                ...     baca.dynamic_text_extra_offset(
-                ...         (-3, 0),
-                ...         baca.select().tuplets()[1:2].leaf(0),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.dynamic('p'),
+            ...     baca.dynamic('f', baca.select().tuplets()[1:2].leaf(0)),
+            ...     baca.dynamic_text_extra_offset(
+            ...         (-3, 0),
+            ...         baca.select().tuplets()[1:2].leaf(0),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
 
             ..  docs::
@@ -3928,22 +3814,20 @@ class LibraryAM(object):
 
             Attaches dynamic-down command to leaf 0:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.dynamic('p'),
-                ...     baca.dynamic('f', baca.select().tuplets()[1:2].phead(0)),
-                ...     baca.dynamics_down(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.dynamic('p'),
+            ...     baca.dynamic('f', baca.select().tuplets()[1:2].phead(0)),
+            ...     baca.dynamics_down(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3986,22 +3870,20 @@ class LibraryAM(object):
 
             Attaches dynamic-down command to leaf 0 in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.dynamic('p'),
-                ...     baca.dynamic('f', baca.select().tuplets()[1:2].phead(0)),
-                ...     baca.dynamics_down(baca.select().tuplets()[1:2].leaf(0)),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.dynamic('p'),
+            ...     baca.dynamic('f', baca.select().tuplets()[1:2].phead(0)),
+            ...     baca.dynamics_down(baca.select().tuplets()[1:2].leaf(0)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4054,22 +3936,20 @@ class LibraryAM(object):
 
             Attaches dynamic-up command to leaf 0:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.dynamic('p'),
-                ...     baca.dynamic('f', baca.select().tuplets()[1:2].phead(0)),
-                ...     baca.dynamics_up(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.dynamic('p'),
+            ...     baca.dynamic('f', baca.select().tuplets()[1:2].phead(0)),
+            ...     baca.dynamics_up(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4112,22 +3992,20 @@ class LibraryAM(object):
 
             Attaches dynamic-up command to leaf 0 in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.dynamic('p'),
-                ...     baca.dynamic('f', baca.select().tuplets()[1:2].phead(0)),
-                ...     baca.dynamics_up(baca.select().tuplets()[1:2].leaf(0)),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.dynamic('p'),
+            ...     baca.dynamic('f', baca.select().tuplets()[1:2].phead(0)),
+            ...     baca.dynamics_up(baca.select().tuplets()[1:2].leaf(0)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4184,20 +4062,18 @@ class LibraryAM(object):
 
             Attaches effort dynamic to pitched head 0:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.effort_dynamic('f'),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.effort_dynamic('f'),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4251,23 +4127,21 @@ class LibraryAM(object):
 
             Attaches effort dynamic to pitched head 0 in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.effort_dynamic(
-                ...         'f',
-                ...         baca.select().tuplets()[1:2].phead(0),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.effort_dynamic(
+            ...         'f',
+            ...         baca.select().tuplets()[1:2].phead(0),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4349,20 +4223,18 @@ class LibraryAM(object):
 
             Attaches fermata to first leaf:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.fermata(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.fermata(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4404,20 +4276,18 @@ class LibraryAM(object):
 
             Attaches fermata to first leaf in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.fermata(baca.select().tuplets()[1:2].phead(0)),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.fermata(baca.select().tuplets()[1:2].phead(0)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4469,23 +4339,21 @@ class LibraryAM(object):
 
             Attaches five-line staff to leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.clef_spanner(clef='percussion'),
-                ...     baca.clef_spanner('treble', baca.select().tuplet(1)),
-                ...     baca.five_line_staff(baca.select().tuplet(1)),
-                ...     baca.one_line_staff(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(9),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.clef_spanner(clef='percussion'),
+            ...     baca.clef_spanner('treble', baca.select().tuplet(1)),
+            ...     baca.five_line_staff(baca.select().tuplet(1)),
+            ...     baca.one_line_staff(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(9),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4558,20 +4426,18 @@ class LibraryAM(object):
 
             Attaches flageolets to all pitched heads:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.flageolets(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.flageolets(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4613,20 +4479,18 @@ class LibraryAM(object):
 
             Attaches flageolets to pitched heads in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.flageolets(baca.select().tuplets()[1:2].pheads()),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.flageolets(baca.select().tuplets()[1:2].pheads()),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4678,20 +4542,18 @@ class LibraryAM(object):
 
             Flags music:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.flags(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.flags(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4741,53 +4603,41 @@ class LibraryAM(object):
 
         ..  container:: example
 
-            ::
+            >>> expression = baca.fuse_compound_quarter_divisions([1])
 
-                >>> expression = baca.fuse_compound_quarter_divisions([1])
+            >>> for item in expression([(2, 8), (2, 8), (2, 8)]):
+            ...     item
+            ...
+            Division((1, 4))
+            Division((1, 4))
+            Division((1, 4))
 
-            ::
-
-                >>> for item in expression([(2, 8), (2, 8), (2, 8)]):
-                ...     item
-                ...
-                Division((1, 4))
-                Division((1, 4))
-                Division((1, 4))
-
-            ::
-
-                >>> for item in expression([(3, 8), (3, 8), (3, 8)]):
-                ...     item
-                ...
-                Division((1, 4))
-                Division((1, 8))
-                Division((1, 4))
-                Division((1, 8))
-                Division((1, 4))
-                Division((1, 8))
+            >>> for item in expression([(3, 8), (3, 8), (3, 8)]):
+            ...     item
+            ...
+            Division((1, 4))
+            Division((1, 8))
+            Division((1, 4))
+            Division((1, 8))
+            Division((1, 4))
+            Division((1, 8))
 
         ..  container:: example
 
-            ::
+            >>> expression = baca.fuse_compound_quarter_divisions([2])
 
-                >>> expression = baca.fuse_compound_quarter_divisions([2])
+            >>> for item in expression([(2, 8), (2, 8), (2, 8)]):
+            ...     item
+            ...
+            Division((2, 4))
+            Division((1, 4))
 
-            ::
-
-                >>> for item in expression([(2, 8), (2, 8), (2, 8)]):
-                ...     item
-                ...
-                Division((2, 4))
-                Division((1, 4))
-
-            ::
-
-                >>> for item in expression([(3, 8), (3, 8), (3, 8)]):
-                ...     item
-                ...
-                Division((3, 8))
-                Division((3, 8))
-                Division((3, 8))
+            >>> for item in expression([(3, 8), (3, 8), (3, 8)]):
+            ...     item
+            ...
+            Division((3, 8))
+            Division((3, 8))
+            Division((3, 8))
 
         Returns division sequence expression.
         '''
@@ -4837,20 +4687,18 @@ class LibraryAM(object):
 
             Attaches glissandi to PLT runs:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.glissandi(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.glissandi(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4892,22 +4740,20 @@ class LibraryAM(object):
 
             Attaches glissandi to PLT runs in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> selector = baca.select().tuplets()[1:2].pleaves()
-                >>> selector = selector.contiguous()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.glissandi(selector=selector),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> selector = baca.select().tuplets()[1:2].pleaves()
+            >>> selector = selector.contiguous()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.glissandi(selector=selector),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4989,20 +4835,18 @@ class LibraryAM(object):
 
             Attaches hairpins to trimmed leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.hairpins(['p < f']),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.hairpins(['p < f']),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5044,23 +4888,21 @@ class LibraryAM(object):
 
             Attaches hairpins to trimmed leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.hairpins(
-                ...         hairpins=['p < f'],
-                ...         selector=baca.select().tuplets()[1:2].tleaves().group(),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.hairpins(
+            ...         hairpins=['p < f'],
+            ...         selector=baca.select().tuplets()[1:2].tleaves().group(),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5102,23 +4944,21 @@ class LibraryAM(object):
 
             Attaches hairpins to trimmed leaves in tuplets:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.hairpins(
-                ...         hairpins=['p < f'],
-                ...         selector=baca.select().tuplets().map(baca.select().tleaves()),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.hairpins(
+            ...         hairpins=['p < f'],
+            ...         selector=baca.select().tuplets().map(baca.select().tleaves()),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5180,72 +5020,66 @@ class LibraryAM(object):
 
             Helianthates list of lists:
 
-            ::
-
-                >>> sequence = [[1, 2, 3], [4, 5], [6, 7, 8]]
-                >>> sequence = baca.helianthate(sequence, n=-1, m=1)
-                >>> for item in sequence:
-                ...     item
-                [1, 2, 3]
-                [4, 5]
-                [6, 7, 8]
-                [5, 4]
-                [8, 6, 7]
-                [3, 1, 2]
-                [7, 8, 6]
-                [2, 3, 1]
-                [4, 5]
-                [1, 2, 3]
-                [5, 4]
-                [6, 7, 8]
-                [4, 5]
-                [8, 6, 7]
-                [3, 1, 2]
-                [7, 8, 6]
-                [2, 3, 1]
-                [5, 4]
+            >>> sequence = [[1, 2, 3], [4, 5], [6, 7, 8]]
+            >>> sequence = baca.helianthate(sequence, n=-1, m=1)
+            >>> for item in sequence:
+            ...     item
+            [1, 2, 3]
+            [4, 5]
+            [6, 7, 8]
+            [5, 4]
+            [8, 6, 7]
+            [3, 1, 2]
+            [7, 8, 6]
+            [2, 3, 1]
+            [4, 5]
+            [1, 2, 3]
+            [5, 4]
+            [6, 7, 8]
+            [4, 5]
+            [8, 6, 7]
+            [3, 1, 2]
+            [7, 8, 6]
+            [2, 3, 1]
+            [5, 4]
 
         ..  container:: example
 
             Helianthates list of segments:
 
-            ::
-
-                >>> J = abjad.PitchClassSegment(items=[0, 2, 4])
-                >>> K = abjad.PitchClassSegment(items=[5, 6])
-                >>> L = abjad.PitchClassSegment(items=[7, 9, 11])
-                >>> sequence = baca.helianthate([J, K, L], n=-1, m=1)
-                >>> for item in sequence:
-                ...     item
-                ...
-                PitchClassSegment([0, 2, 4])
-                PitchClassSegment([5, 6])
-                PitchClassSegment([7, 9, 11])
-                PitchClassSegment([6, 5])
-                PitchClassSegment([11, 7, 9])
-                PitchClassSegment([4, 0, 2])
-                PitchClassSegment([9, 11, 7])
-                PitchClassSegment([2, 4, 0])
-                PitchClassSegment([5, 6])
-                PitchClassSegment([0, 2, 4])
-                PitchClassSegment([6, 5])
-                PitchClassSegment([7, 9, 11])
-                PitchClassSegment([5, 6])
-                PitchClassSegment([11, 7, 9])
-                PitchClassSegment([4, 0, 2])
-                PitchClassSegment([9, 11, 7])
-                PitchClassSegment([2, 4, 0])
-                PitchClassSegment([6, 5])
+            >>> J = abjad.PitchClassSegment(items=[0, 2, 4])
+            >>> K = abjad.PitchClassSegment(items=[5, 6])
+            >>> L = abjad.PitchClassSegment(items=[7, 9, 11])
+            >>> sequence = baca.helianthate([J, K, L], n=-1, m=1)
+            >>> for item in sequence:
+            ...     item
+            ...
+            PitchClassSegment([0, 2, 4])
+            PitchClassSegment([5, 6])
+            PitchClassSegment([7, 9, 11])
+            PitchClassSegment([6, 5])
+            PitchClassSegment([11, 7, 9])
+            PitchClassSegment([4, 0, 2])
+            PitchClassSegment([9, 11, 7])
+            PitchClassSegment([2, 4, 0])
+            PitchClassSegment([5, 6])
+            PitchClassSegment([0, 2, 4])
+            PitchClassSegment([6, 5])
+            PitchClassSegment([7, 9, 11])
+            PitchClassSegment([5, 6])
+            PitchClassSegment([11, 7, 9])
+            PitchClassSegment([4, 0, 2])
+            PitchClassSegment([9, 11, 7])
+            PitchClassSegment([2, 4, 0])
+            PitchClassSegment([6, 5])
 
         ..  container:: example
 
             Helianthates trivially:
 
-            ::
-
-                >>> sequence = [[1, 2, 3], [4, 5], [6, 7, 8]]
-                >>> baca.helianthate(sequence)
-                [[1, 2, 3], [4, 5], [6, 7, 8]]
+            >>> sequence = [[1, 2, 3], [4, 5], [6, 7, 8]]
+            >>> baca.helianthate(sequence)
+            [[1, 2, 3], [4, 5], [6, 7, 8]]
 
         Returns new object with type equal to that of `sequence`.
         '''
@@ -5292,20 +5126,18 @@ class LibraryAM(object):
 
             Imbricates segment:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.imbricate('Voice 2', [10, 20, 19]),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.imbricate('Voice 2', [10, 20, 19]),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5436,20 +5268,18 @@ class LibraryAM(object):
 
             Labels pitch names:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.label(abjad.label().with_pitches(locale='us')),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.label(abjad.label().with_pitches(locale='us')),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5527,23 +5357,21 @@ class LibraryAM(object):
 
             Labels pitch names in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.label(
-                ...         expression=abjad.label().with_pitches(locale='us'),
-                ...         selector=baca.select().tuplets()[1:2].pheads(),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.label(
+            ...         expression=abjad.label().with_pitches(locale='us'),
+            ...         selector=baca.select().tuplets()[1:2].pheads(),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5615,20 +5443,18 @@ class LibraryAM(object):
 
             Attaches laissez vibrer to all PLT tails:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.laissez_vibrer(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.laissez_vibrer(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs:: 
                 >>> abjad.f(lilypond_file[abjad.Staff])
@@ -5669,20 +5495,18 @@ class LibraryAM(object):
 
             Attaches laissez vibrer to pitched tails in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.laissez_vibrer(baca.select().tuplets()[1:2].ptails()),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.laissez_vibrer(baca.select().tuplets()[1:2].ptails()),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5734,20 +5558,18 @@ class LibraryAM(object):
 
             Attaches line break after last leaf:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.line_break(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.line_break(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5790,20 +5612,18 @@ class LibraryAM(object):
 
             Attaches line break after last leaf in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.line_break(baca.select().tuplets()[1:2].leaf(-1)),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.line_break(baca.select().tuplets()[1:2].leaf(-1)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5857,20 +5677,18 @@ class LibraryAM(object):
 
             Attaches long fermata to first leaf:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.long_fermata(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.long_fermata(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5912,20 +5730,18 @@ class LibraryAM(object):
 
             Attaches long fermata to first leaf in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.long_fermata(baca.select().tuplets()[1:2].phead(0)),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.long_fermata(baca.select().tuplets()[1:2].phead(0)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5977,20 +5793,18 @@ class LibraryAM(object):
 
             Attaches marcati to all pitched heads:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.marcati(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.marcati(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6032,20 +5846,18 @@ class LibraryAM(object):
 
             Attaches marcati to pitched heads in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.marcati(baca.select().tuplets()[1:2].pheads()),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.marcati(baca.select().tuplets()[1:2].pheads()),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6124,20 +5936,18 @@ class LibraryAM(object):
 
             Attaches Messiaen tie to each PLT p-run:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.messiaen_ties(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
+            ...     baca.messiaen_ties(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6179,20 +5989,18 @@ class LibraryAM(object):
 
             Attaches Messiaen tie to PLT p-run 0:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.messiaen_ties(baca.select().qrun(0)),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
+            ...     baca.messiaen_ties(baca.select().qrun(0)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 

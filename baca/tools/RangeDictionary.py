@@ -10,32 +10,26 @@ class RangeDictionary(TypedOrderedDict):
 
         Two ranges:
 
-        ::
+        >>> ranges = baca.RangeDictionary([
+        ...     ('tenor', '[C3, C6]'),
+        ...     ('soprano', '[C4, C6]'),
+        ...     ])
 
-            >>> ranges = baca.RangeDictionary([
-            ...     ('tenor', '[C3, C6]'),
-            ...     ('soprano', '[C4, C6]'),
-            ...     ])
+        >>> abjad.f(ranges)
+        baca.RangeDictionary(
+            [
+                (
+                    'tenor',
+                    abjad.PitchRange('[C3, C6]'),
+                    ),
+                (
+                    'soprano',
+                    abjad.PitchRange('[C4, C6]'),
+                    ),
+                ]
+            )
 
-        ::
-
-            >>> abjad.f(ranges)
-            baca.RangeDictionary(
-                [
-                    (
-                        'tenor',
-                        abjad.PitchRange('[C3, C6]'),
-                        ),
-                    (
-                        'soprano',
-                        abjad.PitchRange('[C4, C6]'),
-                        ),
-                    ]
-                )
-
-        ::
-
-            >>> abjad.show(ranges) # doctest: +SKIP
+        >>> abjad.show(ranges) # doctest: +SKIP
 
         ..  docs::
 
@@ -81,16 +75,12 @@ class RangeDictionary(TypedOrderedDict):
 
         ..  container:: example
 
-            ::
+            >>> ranges = baca.RangeDictionary([
+            ...     ('tenor', '[C3, C6]'),
+            ...     ('soprano', '[C4, C6]'),
+            ...     ])
 
-                >>> ranges = baca.RangeDictionary([
-                ...     ('tenor', '[C3, C6]'),
-                ...     ('soprano', '[C4, C6]'),
-                ...     ])
-
-            ::
-
-                >>> abjad.show(ranges) # doctest: +SKIP
+            >>> abjad.show(ranges) # doctest: +SKIP
 
             ..  docs::
 

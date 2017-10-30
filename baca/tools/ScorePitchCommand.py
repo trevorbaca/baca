@@ -12,28 +12,22 @@ class ScorePitchCommand(Command):
 
         With pitch numbers:
 
-        ::
+        >>> segment_maker = baca.SegmentMaker(
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
 
-            >>> segment_maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.even_runs(),
+        ...     baca.ScorePitchCommand(
+        ...         source=[19, 13, 15, 16, 17, 23],
+        ...         ),
+        ...     )
 
-        ::
-
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
-            ...     baca.ScorePitchCommand(
-            ...         source=[19, 13, 15, 16, 17, 23],
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -204,17 +198,13 @@ class ScorePitchCommand(Command):
 
             Calls command on Abjad container:
 
-            ::
+            >>> command = baca.ScorePitchCommand(
+            ...     source=[19, 13, 15, 16, 17, 23],
+            ...     )
 
-                >>> command = baca.ScorePitchCommand(
-                ...     source=[19, 13, 15, 16, 17, 23],
-                ...     )
-
-            ::
-
-                >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
-                >>> command(staff)
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
+            >>> command(staff)
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -405,21 +395,17 @@ class ScorePitchCommand(Command):
 
             Gets counts:
 
-            ::
+            >>> command = baca.ScorePitchCommand(
+            ...     counts=[20, 12, 12, 6],
+            ...     operators=[
+            ...         abjad.Inversion(),
+            ...         abjad.Transposition(n=2),
+            ...         ],
+            ...     source=[19, 13, 15, 16, 17, 23],
+            ...     )
 
-                >>> command = baca.ScorePitchCommand(
-                ...     counts=[20, 12, 12, 6],
-                ...     operators=[
-                ...         abjad.Inversion(),
-                ...         abjad.Transposition(n=2),
-                ...         ],
-                ...     source=[19, 13, 15, 16, 17, 23],
-                ...     )
-
-            ::
-
-                >>> command.counts
-                [20, 12, 12, 6]
+            >>> command.counts
+            [20, 12, 12, 6]
 
         Defaults to none.
 
@@ -437,17 +423,13 @@ class ScorePitchCommand(Command):
 
             Transposes input pitches:
 
-            ::
+            >>> command = baca.ScorePitchCommand(
+            ...     operators=[abjad.Transposition(n=2)],
+            ...     )
 
-                >>> command = baca.ScorePitchCommand(
-                ...     operators=[abjad.Transposition(n=2)],
-                ...     )
-
-            ::
-
-                >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
-                >>> command(staff)
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
+            >>> command(staff)
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -467,20 +449,16 @@ class ScorePitchCommand(Command):
 
             Applies source to input pitches and then transposes:
 
-            ::
+            >>> command = baca.ScorePitchCommand(
+            ...     operators=[
+            ...         abjad.Transposition(n=2),
+            ...         ],
+            ...     source=[19, 13, 15, 16, 17, 23],
+            ...     )
 
-                >>> command = baca.ScorePitchCommand(
-                ...     operators=[
-                ...         abjad.Transposition(n=2),
-                ...         ],
-                ...     source=[19, 13, 15, 16, 17, 23],
-                ...     )
-
-            ::
-
-                >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
-                >>> command(staff)
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
+            >>> command(staff)
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -500,21 +478,17 @@ class ScorePitchCommand(Command):
 
             Transposes pitches twice:
 
-            ::
+            >>> operator = abjad.CompoundOperator()
+            >>> operator = operator.transpose(n=2)
+            >>> operator = operator.transpose(n=-12)
+            >>> command = baca.ScorePitchCommand(
+            ...     operators=[operator],
+            ...     source=[19, 13, 15, 16, 17, 23],
+            ...     )
 
-                >>> operator = abjad.CompoundOperator()
-                >>> operator = operator.transpose(n=2)
-                >>> operator = operator.transpose(n=-12)
-                >>> command = baca.ScorePitchCommand(
-                ...     operators=[operator],
-                ...     source=[19, 13, 15, 16, 17, 23],
-                ...     )
-
-            ::
-
-                >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
-                >>> command(staff)
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
+            >>> command(staff)
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -538,10 +512,8 @@ class ScorePitchCommand(Command):
 
             Returns list of operators or none:
 
-            ::
-
-                >>> command.operators
-                [CompoundOperator(operators=[Transposition(n=2), Transposition(n=-12)])]
+            >>> command.operators
+            [CompoundOperator(operators=[Transposition(n=2), Transposition(n=-12)])]
 
         """
         if self._operators:
@@ -556,102 +528,84 @@ class ScorePitchCommand(Command):
 
             With no repetition intervals:
 
-            ::
+            >>> command = baca.ScorePitchCommand(
+            ...     source=[0, 1, 2, 3],
+            ...     )
 
-                >>> command = baca.ScorePitchCommand(
-                ...     source=[0, 1, 2, 3],
-                ...     )
+            >>> command.repetition_intervals is None
+            True
 
-            ::
-
-                >>> command.repetition_intervals is None
-                True
-
-            ::
-
-                >>> for index in range(12):
-                ...     pitch = command.get_pitch(index)
-                ...     pitch.number
-                0
-                1
-                2
-                3
-                0
-                1
-                2
-                3
-                0
-                1
-                2
-                3
+            >>> for index in range(12):
+            ...     pitch = command.get_pitch(index)
+            ...     pitch.number
+            0
+            1
+            2
+            3
+            0
+            1
+            2
+            3
+            0
+            1
+            2
+            3
 
         ..  container:: example
 
             With fixed repetition interval:
 
-            ::
+            >>> command = baca.ScorePitchCommand(
+            ...     repetition_intervals=[12],
+            ...     source=[0, 1, 2, 3],
+            ...     )
 
-                >>> command = baca.ScorePitchCommand(
-                ...     repetition_intervals=[12],
-                ...     source=[0, 1, 2, 3],
-                ...     )
+            >>> command.repetition_intervals
+            [12]
 
-            ::
-
-                >>> command.repetition_intervals
-                [12]
-
-            ::
-
-                >>> for index in range(12):
-                ...     pitch = command.get_pitch(index)
-                ...     pitch.number
-                0
-                1
-                2
-                3
-                12
-                13
-                14
-                15
-                24
-                25
-                26
-                27
+            >>> for index in range(12):
+            ...     pitch = command.get_pitch(index)
+            ...     pitch.number
+            0
+            1
+            2
+            3
+            12
+            13
+            14
+            15
+            24
+            25
+            26
+            27
 
         ..  container:: example
 
             With patterned repetition intervals:
 
-            ::
+            >>> command = baca.ScorePitchCommand(
+            ...     repetition_intervals=[12, 1],
+            ...     source=[0, 1, 2, 3],
+            ...     )
 
-                >>> command = baca.ScorePitchCommand(
-                ...     repetition_intervals=[12, 1],
-                ...     source=[0, 1, 2, 3],
-                ...     )
+            >>> command.repetition_intervals
+            [12, 1]
 
-            ::
-
-                >>> command.repetition_intervals
-                [12, 1]
-
-            ::
-
-                >>> for index in range(12):
-                ...     pitch = command.get_pitch(index)
-                ...     pitch.number
-                0
-                1
-                2
-                3
-                12
-                13
-                14
-                15
-                13
-                14
-                15
-                16
+            >>> for index in range(12):
+            ...     pitch = command.get_pitch(index)
+            ...     pitch.number
+            0
+            1
+            2
+            3
+            12
+            13
+            14
+            15
+            13
+            14
+            15
+            16
 
         Defaults to none.
 
@@ -669,18 +623,14 @@ class ScorePitchCommand(Command):
 
             Reverses command:
 
-            ::
+            >>> command = baca.ScorePitchCommand(
+            ...     reverse=True,
+            ...     source=[19, 13, 15, 16, 17, 23],
+            ...     start_index=-1,
+            ...     )
 
-                >>> command = baca.ScorePitchCommand(
-                ...     reverse=True,
-                ...     source=[19, 13, 15, 16, 17, 23],
-                ...     start_index=-1,
-                ...     )
-
-            ::
-
-                >>> command.reverse
-                True
+            >>> command.reverse
+            True
 
         Defaults to none.
 
@@ -698,22 +648,18 @@ class ScorePitchCommand(Command):
 
             Gets source:
 
-            ::
+            >>> command = baca.ScorePitchCommand(
+            ...     source=[19, 13, 15, 16, 17, 23],
+            ...     )
 
-                >>> command = baca.ScorePitchCommand(
-                ...     source=[19, 13, 15, 16, 17, 23],
-                ...     )
-
-            ::
-
-                >>> for pitch in command.source:
-                ...     pitch
-                NamedPitch("g''")
-                NamedPitch("cs''")
-                NamedPitch("ef''")
-                NamedPitch("e''")
-                NamedPitch("f''")
-                NamedPitch("b''")
+            >>> for pitch in command.source:
+            ...     pitch
+            NamedPitch("g''")
+            NamedPitch("cs''")
+            NamedPitch("ef''")
+            NamedPitch("e''")
+            NamedPitch("f''")
+            NamedPitch("b''")
 
         Defaults to none.
 
@@ -731,18 +677,14 @@ class ScorePitchCommand(Command):
 
             Gets start index:
 
-            ::
+            >>> command = baca.ScorePitchCommand(
+            ...     reverse=True,
+            ...     source=[19, 13, 15, 16, 17, 23],
+            ...     start_index=-1,
+            ...     )
 
-                >>> command = baca.ScorePitchCommand(
-                ...     reverse=True,
-                ...     source=[19, 13, 15, 16, 17, 23],
-                ...     start_index=-1,
-                ...     )
-
-            ::
-
-                >>> command.start_index
-                -1
+            >>> command.start_index
+            -1
 
         Defaults to none.
 
@@ -761,29 +703,25 @@ class ScorePitchCommand(Command):
 
             Gets pitches:
 
-            ::
+            >>> command = baca.ScorePitchCommand(
+            ...     source=[12, 13, 14, 15]
+            ...     )
 
-                >>> command = baca.ScorePitchCommand(
-                ...     source=[12, 13, 14, 15]
-                ...     )
-
-            ::
-
-                >>> for index in range(12):
-                ...     command.get_pitch(index)
-                ...
-                NamedPitch("c''")
-                NamedPitch("cs''")
-                NamedPitch("d''")
-                NamedPitch("ef''")
-                NamedPitch("c''")
-                NamedPitch("cs''")
-                NamedPitch("d''")
-                NamedPitch("ef''")
-                NamedPitch("c''")
-                NamedPitch("cs''")
-                NamedPitch("d''")
-                NamedPitch("ef''")
+            >>> for index in range(12):
+            ...     command.get_pitch(index)
+            ...
+            NamedPitch("c''")
+            NamedPitch("cs''")
+            NamedPitch("d''")
+            NamedPitch("ef''")
+            NamedPitch("c''")
+            NamedPitch("cs''")
+            NamedPitch("d''")
+            NamedPitch("ef''")
+            NamedPitch("c''")
+            NamedPitch("cs''")
+            NamedPitch("d''")
+            NamedPitch("ef''")
 
         Returns pitch.
         '''

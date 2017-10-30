@@ -9,10 +9,8 @@ class DesignMaker(abjad.AbjadObject):
 
         Initializes design-maker:
 
-        ::
-
-            >>> baca.DesignMaker()
-            DesignMaker()
+        >>> baca.DesignMaker()
+        DesignMaker()
 
     '''
 

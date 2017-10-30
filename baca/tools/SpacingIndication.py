@@ -9,29 +9,21 @@ class SpacingIndication(abjad.AbjadValueObject):
 
     Initialize from tempo and proportional notation duration:
 
-    ::
+    >>> tempo = abjad.MetronomeMark((1, 8), 44)
+    >>> indication = baca.SpacingIndication(tempo, abjad.Duration(1, 68))
 
-        >>> tempo = abjad.MetronomeMark((1, 8), 44)
-        >>> indication = baca.SpacingIndication(tempo, abjad.Duration(1, 68))
-
-    ::
-
-        >>> indication
-        SpacingIndication(MetronomeMark(reference_duration=Duration(1, 8), units_per_minute=44), Duration(1, 68))
+    >>> indication
+    SpacingIndication(MetronomeMark(reference_duration=Duration(1, 8), units_per_minute=44), Duration(1, 68))
 
     Initialize from constants:
 
-    ::
-
-        >>> baca.SpacingIndication(((1, 8), 44), (1, 68))
-        SpacingIndication(MetronomeMark(reference_duration=Duration(1, 8), units_per_minute=44), Duration(1, 68))
+    >>> baca.SpacingIndication(((1, 8), 44), (1, 68))
+    SpacingIndication(MetronomeMark(reference_duration=Duration(1, 8), units_per_minute=44), Duration(1, 68))
 
     Initialize from other spacing indication:
 
-    ::
-
-        >>> baca.SpacingIndication(indication)
-        SpacingIndication(MetronomeMark(reference_duration=Duration(1, 8), units_per_minute=44), Duration(1, 68))
+    >>> baca.SpacingIndication(indication)
+    SpacingIndication(MetronomeMark(reference_duration=Duration(1, 8), units_per_minute=44), Duration(1, 68))
 
     Spacing indications are immutable.
     '''

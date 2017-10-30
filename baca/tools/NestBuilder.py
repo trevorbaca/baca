@@ -10,27 +10,23 @@ class NestBuilder(Builder):
 
         Nest builder augments one sixteenth:
 
-        ::
+        >>> music_maker = baca.MusicMaker(
+        ...     baca.NestBuilder(
+        ...         time_treatments=['+1/16'],
+        ...         ),
+        ...     abjad.rhythmmakertools.BeamSpecifier(
+        ...         beam_divisions_together=True,
+        ...         ),
+        ...     )
 
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.NestBuilder(
-            ...         time_treatments=['+1/16'],
-            ...         ),
-            ...     abjad.rhythmmakertools.BeamSpecifier(
-            ...         beam_divisions_together=True,
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> collections = [
-            ...     [0, 2, 10, 18],
-            ...     [16, 15, 23],
-            ...     [19, 13, 9, 8],
-            ...     ]
-            >>> contribution = music_maker('Voice 1', collections)
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> collections = [
+        ...     [0, 2, 10, 18],
+        ...     [16, 15, 23],
+        ...     [19, 13, 9, 8],
+        ...     ]
+        >>> contribution = music_maker('Voice 1', collections)
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -96,47 +92,41 @@ class NestBuilder(Builder):
             ...         ),
             ...     )
 
-        ::
+        >>> containers, time_signatures = [], []
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 2, 10, 18], [16, 15, 23]],
+        ...     baca.NestBuilder(
+        ...         time_treatments=['+1/16'],
+        ...         ),
+        ...     extend_beam=True,
+        ...     )
+        >>> containers.extend(contribution['Voice 1'])
+        >>> time_signatures.append(contribution.time_signature)
+        >>> contribution = music_maker('Voice 1', [[19, 13, 9, 8]])
+        >>> containers.extend(contribution['Voice 1'])
+        >>> time_signatures.append(contribution.time_signature)
+        >>> selection = abjad.select(containers)
 
-            >>> containers, time_signatures = [], []
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10, 18], [16, 15, 23]],
-            ...     baca.NestBuilder(
-            ...         time_treatments=['+1/16'],
-            ...         ),
-            ...     extend_beam=True,
-            ...     )
-            >>> containers.extend(contribution['Voice 1'])
-            >>> time_signatures.append(contribution.time_signature)
-            >>> contribution = music_maker('Voice 1', [[19, 13, 9, 8]])
-            >>> containers.extend(contribution['Voice 1'])
-            >>> time_signatures.append(contribution.time_signature)
-            >>> selection = abjad.select(containers)
+        >>> segment_maker = baca.SegmentMaker(
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
+        ...         minimum_width=abjad.Duration(1, 24),
+        ...         ),
+        ...     time_signatures=time_signatures,
+        ...     )
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.RhythmBuilder(
+        ...         rhythm_maker=selection,
+        ...         ),
+        ...     )
 
-        ::
-
-            >>> segment_maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
-            ...         minimum_width=abjad.Duration(1, 24),
-            ...         ),
-            ...     time_signatures=time_signatures,
-            ...     )
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.RhythmBuilder(
-            ...         rhythm_maker=selection,
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> staff = lilypond_file[abjad.Staff]
+        >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -266,29 +256,25 @@ class NestBuilder(Builder):
 
             With rest affixes:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.NestBuilder(time_treatments=['+1/16']),
+            ...     baca.RestAffixSpecifier(
+            ...         prefix=[2],
+            ...         suffix=[3],
+            ...         ),
+            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...         beam_divisions_together=True,
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.NestBuilder(time_treatments=['+1/16']),
-                ...     baca.RestAffixSpecifier(
-                ...         prefix=[2],
-                ...         suffix=[3],
-                ...         ),
-                ...     abjad.rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18],
-                ...     [16, 15, 23],
-                ...     [19, 13, 9, 8],
-                ...     ]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18],
+            ...     [16, 15, 23],
+            ...     [19, 13, 9, 8],
+            ...     ]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 

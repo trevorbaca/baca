@@ -6,60 +6,50 @@ from .Builder import Builder
 class RhythmBuilder(Builder):
     r'''Rhythm builder.
 
-    ::
-
-        >>> from abjad import rhythmmakertools
+    >>> from abjad import rhythmmakertools
 
     ..  container:: example
 
-        ::
+        >>> builder = baca.RhythmBuilder(
+        ...     rhythm_maker=rhythmmakertools.NoteRhythmMaker(),
+        ...     )
 
-            >>> builder = baca.RhythmBuilder(
-            ...     rhythm_maker=rhythmmakertools.NoteRhythmMaker(),
-            ...     )
-
-        ::
-
-            >>> abjad.f(builder)
-            baca.RhythmBuilder(
-                rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(),
-                )
+        >>> abjad.f(builder)
+        baca.RhythmBuilder(
+            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(),
+            )
 
     ..  container:: example
 
-        ::
+        >>> builder = baca.RhythmBuilder(
+        ...     division_expression=abjad.sequence().sum().sequence(),
+        ...     rhythm_maker=rhythmmakertools.NoteRhythmMaker(),
+        ...     )
 
-            >>> builder = baca.RhythmBuilder(
-            ...     division_expression=abjad.sequence().sum().sequence(),
-            ...     rhythm_maker=rhythmmakertools.NoteRhythmMaker(),
-            ...     )
-
-        ::
-
-            >>> abjad.f(builder)
-            baca.RhythmBuilder(
-                division_expression=abjad.Expression(
-                    callbacks=[
-                        abjad.Expression(
-                            evaluation_template='abjad.Sequence',
-                            is_initializer=True,
-                            string_template='{}',
-                            ),
-                        abjad.Expression(
-                            evaluation_template='{}.sum()',
-                            qualified_method_name='abjad.Sequence.sum',
-                            string_template='sum({})',
-                            ),
-                        abjad.Expression(
-                            evaluation_template='abjad.Sequence',
-                            is_initializer=True,
-                            string_template='{}',
-                            ),
-                        ],
-                    proxy_class=abjad.Sequence,
-                    ),
-                rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(),
-                )
+        >>> abjad.f(builder)
+        baca.RhythmBuilder(
+            division_expression=abjad.Expression(
+                callbacks=[
+                    abjad.Expression(
+                        evaluation_template='abjad.Sequence',
+                        is_initializer=True,
+                        string_template='{}',
+                        ),
+                    abjad.Expression(
+                        evaluation_template='{}.sum()',
+                        qualified_method_name='abjad.Sequence.sum',
+                        string_template='sum({})',
+                        ),
+                    abjad.Expression(
+                        evaluation_template='abjad.Sequence',
+                        is_initializer=True,
+                        string_template='{}',
+                        ),
+                    ],
+                proxy_class=abjad.Sequence,
+                ),
+            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(),
+            )
 
     '''
 

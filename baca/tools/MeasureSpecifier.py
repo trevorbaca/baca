@@ -6,17 +6,13 @@ class MeasureSpecifier(abjad.AbjadValueObject):
 
     ..  container:: example
 
-        ::
+        >>> specifier = baca.MeasureSpecifier(2, 4)
 
-            >>> specifier = baca.MeasureSpecifier(2, 4)
-
-        ::
-
-            >>> abjad.f(specifier)
-            baca.MeasureSpecifier(
-                start=2,
-                stop=4,
-                )
+        >>> abjad.f(specifier)
+        baca.MeasureSpecifier(
+            start=2,
+            stop=4,
+            )
 
     '''
 

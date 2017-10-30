@@ -9,46 +9,42 @@ class PitchArray(abjad.AbjadObject):
 
         A two-by-three pitch array:
 
-        ::
+        >>> pitch_array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+        >>> print(pitch_array)
+        [ ] [     ] [ ]
+        [     ] [ ] [ ]
 
-            >>> pitch_array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
-            >>> print(pitch_array)
-            [ ] [     ] [ ]
-            [     ] [ ] [ ]
-
-        ::
-
-            >>> abjad.f(pitch_array)
-            baca.PitchArray(
-                rows=(
-                    baca.PitchArrayRow(
-                        cells=(
-                            baca.PitchArrayCell(
-                                width=1,
-                                ),
-                            baca.PitchArrayCell(
-                                width=2,
-                                ),
-                            baca.PitchArrayCell(
-                                width=1,
-                                ),
+        >>> abjad.f(pitch_array)
+        baca.PitchArray(
+            rows=(
+                baca.PitchArrayRow(
+                    cells=(
+                        baca.PitchArrayCell(
+                            width=1,
                             ),
-                        ),
-                    baca.PitchArrayRow(
-                        cells=(
-                            baca.PitchArrayCell(
-                                width=2,
-                                ),
-                            baca.PitchArrayCell(
-                                width=1,
-                                ),
-                            baca.PitchArrayCell(
-                                width=1,
-                                ),
+                        baca.PitchArrayCell(
+                            width=2,
+                            ),
+                        baca.PitchArrayCell(
+                            width=1,
                             ),
                         ),
                     ),
-                )
+                baca.PitchArrayRow(
+                    cells=(
+                        baca.PitchArrayCell(
+                            width=2,
+                            ),
+                        baca.PitchArrayCell(
+                            width=1,
+                            ),
+                        baca.PitchArrayCell(
+                            width=1,
+                            ),
+                        ),
+                    ),
+                ),
+            )
 
     '''
 
@@ -168,40 +164,30 @@ class PitchArray(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> array_1 = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> print(array_1)
+            [ ] [     ] [ ]
+            [     ] [ ] [ ]
 
-                >>> array_1 = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
-                >>> print(array_1)
-                [ ] [     ] [ ]
-                [     ] [ ] [ ]
+            >>> array_2 = baca.PitchArray([[3, 4], [4, 3]])
+            >>> print(array_2)
+            [     ] [           ]
+            [           ] [     ]
 
-            ::
+            >>> array_3 = baca.PitchArray([[1, 1], [1, 1]])
+            >>> print(array_3)
+            [ ] [ ]
+            [ ] [ ]
 
-                >>> array_2 = baca.PitchArray([[3, 4], [4, 3]])
-                >>> print(array_2)
-                [     ] [           ]
-                [           ] [     ]
+            >>> array_1 += array_2
+            >>> print(array_1)
+            [ ] [     ] [ ] [     ] [         ]
+            [     ] [ ] [ ] [         ] [     ]
 
-            ::
-
-                >>> array_3 = baca.PitchArray([[1, 1], [1, 1]])
-                >>> print(array_3)
-                [ ] [ ]
-                [ ] [ ]
-
-            ::
-
-                >>> array_1 += array_2
-                >>> print(array_1)
-                [ ] [     ] [ ] [     ] [         ]
-                [     ] [ ] [ ] [         ] [     ]
-
-            ::
-
-                >>> array_1 += array_3
-                >>> print(array_1)
-                [ ] [     ] [ ] [     ] [         ] [ ] [ ]
-                [     ] [ ] [ ] [         ] [     ] [ ] [ ]
+            >>> array_1 += array_3
+            >>> print(array_1)
+            [ ] [     ] [ ] [     ] [         ] [ ] [ ]
+            [     ] [ ] [ ] [         ] [     ] [ ] [ ]
 
         Returns pitch array.
         '''
@@ -354,23 +340,17 @@ class PitchArray(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> array = baca.PitchArray([
+            ...     [1, (2, 1), (-1.5, 2)],
+            ...     [(7, 2), (6, 1), 1],
+            ...     ])
 
-                >>> array = baca.PitchArray([
-                ...     [1, (2, 1), (-1.5, 2)],
-                ...     [(7, 2), (6, 1), 1],
-                ...     ])
+            >>> print(array)
+            [  ] [d'] [bqf    ]
+            [g'     ] [fs'] [ ]
 
-            ::
-
-                >>> print(array)
-                [  ] [d'] [bqf    ]
-                [g'     ] [fs'] [ ]
-
-            ::
-
-                >>> array.has_voice_crossing
-                True
+            >>> array.has_voice_crossing
+            True
 
         Returns true or false.
         '''
@@ -493,28 +473,20 @@ class PitchArray(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> array = baca.PitchArray([
+            ...     [1, (0, 1), (0, 2)],
+            ...     [(0, 2), (0, 1), 1],
+            ...     ])
 
-                >>> array = baca.PitchArray([
-                ...     [1, (0, 1), (0, 2)],
-                ...     [(0, 2), (0, 1), 1],
-                ...     ])
+            >>> print(array)
+            [  ] [c'] [c'    ]
+            [c'     ] [c'] [ ]
 
-            ::
+            >>> array.apply_pitches_by_row([[-2, -1.5], [7, 6]])
 
-                >>> print(array)
-                [  ] [c'] [c'    ]
-                [c'     ] [c'] [ ]
-
-            ::
-
-                >>> array.apply_pitches_by_row([[-2, -1.5], [7, 6]])
-
-            ::
-
-                >>> print(array)
-                [  ] [bf] [bqf    ]
-                [g'     ] [fs'] [ ]
+            >>> print(array)
+            [  ] [bf] [bqf    ]
+            [g'     ] [fs'] [ ]
 
         Returns none.
         '''
@@ -526,28 +498,20 @@ class PitchArray(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array[0].cells[0].append_pitch(0)
+            >>> array[0].cells[1].append_pitch(2)
+            >>> array[1].cells[2].append_pitch(4)
 
-                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
-                >>> array[0].cells[0].append_pitch(0)
-                >>> array[0].cells[1].append_pitch(2)
-                >>> array[1].cells[2].append_pitch(4)
+            >>> print(array)
+            [c'] [d'    ] [  ]
+            [       ] [ ] [e']
 
-            ::
+            >>> subarray = array.copy_subarray((0, 0), (2, 2))
 
-                >>> print(array)
-                [c'] [d'    ] [  ]
-                [       ] [ ] [e']
-
-            ::
-
-                >>> subarray = array.copy_subarray((0, 0), (2, 2))
-
-            ::
-
-                >>> print(subarray)
-                [c'] [d']
-                [       ]
+            >>> print(subarray)
+            [c'] [d']
+            [       ]
 
         Returns new pitch array.
         '''
@@ -592,13 +556,11 @@ class PitchArray(abjad.AbjadObject):
 
             Makes empty pitch array from score:
 
-            ::
-
-                >>> score = abjad.Score([])
-                >>> score.append(abjad.Staff("c'8 d'8 e'8 f'8"))
-                >>> score.append(abjad.Staff("c'4 d'4"))
-                >>> tuplet = abjad.Tuplet((2, 3), "c'8 d'8 e'8")
-                >>> score.append(abjad.Staff(2 * tuplet))
+            >>> score = abjad.Score([])
+            >>> score.append(abjad.Staff("c'8 d'8 e'8 f'8"))
+            >>> score.append(abjad.Staff("c'4 d'4"))
+            >>> tuplet = abjad.Tuplet((2, 3), "c'8 d'8 e'8")
+            >>> score.append(abjad.Staff(2 * tuplet))
 
             ..  docs::
 
@@ -628,33 +590,25 @@ class PitchArray(abjad.AbjadObject):
                     }
                 >>
 
-            ::
+            >>> abjad.show(score) # doctest: +SKIP
 
-                >>> abjad.show(score) # doctest: +SKIP
+            >>> array = baca.PitchArray.from_score(
+            ...     score, populate=False)
 
-            ::
-
-                >>> array = baca.PitchArray.from_score(
-                ...     score, populate=False)
-
-            ::
-
-                >>> print(array)
-                [     ] [     ] [     ] [     ]
-                [                 ] [                 ]
-                [ ] [     ] [ ] [ ] [     ] [ ]
+            >>> print(array)
+            [     ] [     ] [     ] [     ]
+            [                 ] [                 ]
+            [ ] [     ] [ ] [ ] [     ] [ ]
 
         ..  container:: example
 
             Makes populated pitch array from `score`:
 
-            ::
-
-                >>> score = abjad.Score([])
-                >>> score.append(abjad.Staff("c'8 d'8 e'8 f'8"))
-                >>> score.append(abjad.Staff("c'4 d'4"))
-                >>> tuplet = abjad.Tuplet((2, 3), "c'8 d'8 e'8")
-                >>> score.append(abjad.Staff(2 * tuplet))
+            >>> score = abjad.Score([])
+            >>> score.append(abjad.Staff("c'8 d'8 e'8 f'8"))
+            >>> score.append(abjad.Staff("c'4 d'4"))
+            >>> tuplet = abjad.Tuplet((2, 3), "c'8 d'8 e'8")
+            >>> score.append(abjad.Staff(2 * tuplet))
 
             ..  docs::
 
@@ -684,21 +638,15 @@ class PitchArray(abjad.AbjadObject):
                     }
                 >>
 
-            ::
+            >>> abjad.show(score) # doctest: +SKIP
 
-                >>> abjad.show(score) # doctest: +SKIP
+            >>> array = baca.PitchArray.from_score(
+            ...     score, populate=True)
 
-            ::
-
-                >>> array = baca.PitchArray.from_score(
-                ...     score, populate=True)
-
-            ::
-
-                >>> print(array)
-                [c'     ] [d'     ] [e'     ] [f'     ]
-                [c'                   ] [d'                   ]
-                [c'] [d'     ] [e'] [c'] [d'     ] [e']
+            >>> print(array)
+            [c'     ] [d'     ] [e'     ] [f'     ]
+            [c'                   ] [d'                   ]
+            [c'] [d'     ] [e'] [c'] [d'     ] [e']
 
         Returns pitch array.
         '''
@@ -748,46 +696,34 @@ class PitchArray(abjad.AbjadObject):
 
             Lists three nonspanning subarrays:
 
-            ::
+            >>> array = baca.PitchArray([
+            ...     [2, 2, 3, 1],
+            ...     [1, 2, 1, 1, 2, 1],
+            ...     [1, 1, 1, 1, 1, 1, 1, 1]])
 
-                >>> array = baca.PitchArray([
-                ...     [2, 2, 3, 1],
-                ...     [1, 2, 1, 1, 2, 1],
-                ...     [1, 1, 1, 1, 1, 1, 1, 1]])
+            >>> print(array)
+            [     ] [     ] [         ] [ ]
+            [ ] [     ] [ ] [ ] [     ] [ ]
+            [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]
 
-            ::
+            >>> subarrays = array.list_nonspanning_subarrays()
+            >>> len(subarrays)
+            3
 
-                >>> print(array)
-                [     ] [     ] [         ] [ ]
-                [ ] [     ] [ ] [ ] [     ] [ ]
-                [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]
+            >>> print(subarrays[0])
+            [     ] [     ]
+            [ ] [     ] [ ]
+            [ ] [ ] [ ] [ ]
 
-            ::
+            >>> print(subarrays[1])
+            [         ]
+            [ ] [     ]
+            [ ] [ ] [ ]
 
-                >>> subarrays = array.list_nonspanning_subarrays()
-                >>> len(subarrays)
-                3
-
-            ::
-
-                >>> print(subarrays[0])
-                [     ] [     ]
-                [ ] [     ] [ ]
-                [ ] [ ] [ ] [ ]
-
-            ::
-
-                >>> print(subarrays[1])
-                [         ]
-                [ ] [     ]
-                [ ] [ ] [ ]
-
-            ::
-
-                >>> print(subarrays[2])
-                [ ]
-                [ ]
-                [ ]
+            >>> print(subarrays[2])
+            [ ]
+            [ ]
+            [ ]
 
         Returns list.
         '''
@@ -875,24 +811,18 @@ class PitchArray(abjad.AbjadObject):
 
             Changes two-by-three pitch array to measures:
 
-            ::
+            >>> array = baca.PitchArray([
+            ...     [1, (2, 1), ([-2, -1.5], 2)],
+            ...     [(7, 2), (6, 1), 1],
+            ...     ])
 
-                >>> array = baca.PitchArray([
-                ...     [1, (2, 1), ([-2, -1.5], 2)],
-                ...     [(7, 2), (6, 1), 1],
-                ...     ])
+            >>> print(array)
+            [  ] [d'] [bf bqf    ]
+            [g'     ] [fs'   ] [ ]
 
-            ::
-
-                >>> print(array)
-                [  ] [d'] [bf bqf    ]
-                [g'     ] [fs'   ] [ ]
-
-            ::
-
-                >>> measures = array.to_measures()
-                >>> staff = abjad.Staff(measures)
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> measures = array.to_measures()
+            >>> staff = abjad.Staff(measures)
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 

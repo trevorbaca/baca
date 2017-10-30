@@ -7,26 +7,20 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
 
     ..  container:: example
 
-        ::
-
-            >>> specifier = baca.ArpeggiationSpacingSpecifier()
-            >>> specifier([[6, 0, 4, 5, 8]])
-            CollectionList([<6, 12, 16, 17, 20>])
+        >>> specifier = baca.ArpeggiationSpacingSpecifier()
+        >>> specifier([[6, 0, 4, 5, 8]])
+        CollectionList([<6, 12, 16, 17, 20>])
 
     ..  container:: example
 
-        ::
-
-            >>> specifier = baca.ArpeggiationSpacingSpecifier()
-            >>> specifier([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-            CollectionList([<0, 2, 10>, <6, 16, 27, 32, 43>, <9>])
+        >>> specifier = baca.ArpeggiationSpacingSpecifier()
+        >>> specifier([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        CollectionList([<0, 2, 10>, <6, 16, 27, 32, 43>, <9>])
 
     ..  container:: example
 
-        ::
-
-            >>> baca.ArpeggiationSpacingSpecifier()
-            ArpeggiationSpacingSpecifier()
+        >>> baca.ArpeggiationSpacingSpecifier()
+        ArpeggiationSpacingSpecifier()
 
     '''
 
@@ -63,19 +57,15 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
-
-                >>> specifier = baca.ArpeggiationSpacingSpecifier()
-                >>> specifier([])
-                PitchSegment([])
+            >>> specifier = baca.ArpeggiationSpacingSpecifier()
+            >>> specifier([])
+            PitchSegment([])
 
         ..  container:: example
 
-            ::
-
-                >>> specifier = baca.ArpeggiationSpacingSpecifier()
-                >>> specifier() is None
-                True
+            >>> specifier = baca.ArpeggiationSpacingSpecifier()
+            >>> specifier() is None
+            True
 
         Returns collection list or none.
         '''
@@ -123,23 +113,19 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     collections,
-                ...     baca.ArpeggiationSpacingSpecifier(
-                ...         direction=abjad.Up,
-                ...         ),
-                ...     baca.RegisterToOctaveCommand(octave_number=2),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     baca.ArpeggiationSpacingSpecifier(
+            ...         direction=abjad.Up,
+            ...         ),
+            ...     baca.RegisterToOctaveCommand(octave_number=2),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -169,23 +155,19 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     collections,
-                ...     baca.ArpeggiationSpacingSpecifier(
-                ...         direction=abjad.Down,
-                ...         ),
-                ...     baca.RegisterToOctaveCommand(octave_number=2),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     baca.ArpeggiationSpacingSpecifier(
+            ...         direction=abjad.Down,
+            ...         ),
+            ...     baca.RegisterToOctaveCommand(octave_number=2),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 

@@ -10,53 +10,43 @@ class PitchArrayRow(abjad.AbjadObject):
 
         A pitch array row:
 
-        ::
+        >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+        >>> array[0].cells[0].append_pitch(0)
+        >>> array[0].cells[1].append_pitch(2)
+        >>> array[1].cells[2].append_pitch(4)
+        >>> print(array)
+        [c'] [d'    ] [  ]
+        [       ] [ ] [e']
 
-            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
-            >>> array[0].cells[0].append_pitch(0)
-            >>> array[0].cells[1].append_pitch(2)
-            >>> array[1].cells[2].append_pitch(4)
-            >>> print(array)
-            [c'] [d'    ] [  ]
-            [       ] [ ] [e']
-
-        ::
-
-            >>> abjad.f(array[0])
-            baca.PitchArrayRow(
-                cells=(
-                    baca.PitchArrayCell(
-                        pitches=[
-                            abjad.NamedPitch("c'"),
-                            ],
-                        width=1,
-                        ),
-                    baca.PitchArrayCell(
-                        pitches=[
-                            abjad.NamedPitch("d'"),
-                            ],
-                        width=2,
-                        ),
-                    baca.PitchArrayCell(
-                        width=1,
-                        ),
+        >>> abjad.f(array[0])
+        baca.PitchArrayRow(
+            cells=(
+                baca.PitchArrayCell(
+                    pitches=[
+                        abjad.NamedPitch("c'"),
+                        ],
+                    width=1,
                     ),
-                )
+                baca.PitchArrayCell(
+                    pitches=[
+                        abjad.NamedPitch("d'"),
+                        ],
+                    width=2,
+                    ),
+                baca.PitchArrayCell(
+                    width=1,
+                    ),
+                ),
+            )
 
-        ::
+        >>> array[0].cell_widths
+        (1, 2, 1)
 
-            >>> array[0].cell_widths
-            (1, 2, 1)
+        >>> array[0].dimensions
+        (1, 4)
 
-        ::
-
-            >>> array[0].dimensions
-            (1, 4)
-
-        ::
-
-            >>> array[0].pitches
-            (NamedPitch("c'"), NamedPitch("d'"))
+        >>> array[0].pitches
+        (NamedPitch("c'"), NamedPitch("d'"))
 
     '''
 
@@ -88,27 +78,19 @@ class PitchArrayRow(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array[0].cells[0].append_pitch(0)
+            >>> array[0].cells[1].append_pitch(2)
+            >>> array[1].cells[2].append_pitch(4)
 
-                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
-                >>> array[0].cells[0].append_pitch(0)
-                >>> array[0].cells[1].append_pitch(2)
-                >>> array[1].cells[2].append_pitch(4)
+            >>> print(array)
+            [c'] [d'    ] [  ]
+            [       ] [ ] [e']
 
-            ::
+            >>> new_row = array[0] + array[1]
 
-                >>> print(array)
-                [c'] [d'    ] [  ]
-                [       ] [ ] [e']
-
-            ::
-
-                >>> new_row = array[0] + array[1]
-
-            ::
-
-                >>> print(new_row)
-                [c'] [d'] [ ] [ ] [ ] [e']
+            >>> print(new_row)
+            [c'] [d'] [ ] [ ] [ ] [e']
 
         Returns new pitch array row.
         '''
@@ -200,28 +182,20 @@ class PitchArrayRow(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array[0].cells[0].append_pitch(0)
+            >>> array[0].cells[1].append_pitch(2)
+            >>> array[1].cells[2].append_pitch(4)
 
-                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
-                >>> array[0].cells[0].append_pitch(0)
-                >>> array[0].cells[1].append_pitch(2)
-                >>> array[1].cells[2].append_pitch(4)
+            >>> print(array)
+            [c'] [d'    ] [  ]
+            [       ] [ ] [e']
 
-            ::
+            >>> row = array[0].withdraw()
+            >>> row += row
 
-                >>> print(array)
-                [c'] [d'    ] [  ]
-                [       ] [ ] [e']
-
-            ::
-
-                >>> row = array[0].withdraw()
-                >>> row += row
-
-            ::
-
-                >>> print(row)
-                [c'] [d'] [ ] [c'] [d'] [ ]
+            >>> print(row)
+            [c'] [d'] [ ] [c'] [d'] [ ]
 
         Returns pitch array row.
         '''
@@ -431,31 +405,23 @@ class PitchArrayRow(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array[0].cells[0].append_pitch(abjad.NamedPitch(0))
+            >>> array[0].cells[1].append_pitch(abjad.NamedPitch(2))
+            >>> array[0].cells[1].append_pitch(abjad.NamedPitch(4))
 
-                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
-                >>> array[0].cells[0].append_pitch(abjad.NamedPitch(0))
-                >>> array[0].cells[1].append_pitch(abjad.NamedPitch(2))
-                >>> array[0].cells[1].append_pitch(abjad.NamedPitch(4))
+            >>> print(array)
+            [c'] [d' e'    ] [ ]
+            [          ] [ ] [ ]
 
-            ::
+            >>> cell = baca.PitchArrayCell(width=1)
+            >>> array[0].append(cell)
+            >>> cell = baca.PitchArrayCell(width=1)
+            >>> array[1].append(cell)
 
-                >>> print(array)
-                [c'] [d' e'    ] [ ]
-                [          ] [ ] [ ]
-
-            ::
-
-                >>> cell = baca.PitchArrayCell(width=1)
-                >>> array[0].append(cell)
-                >>> cell = baca.PitchArrayCell(width=1)
-                >>> array[1].append(cell)
-
-            ::
-
-                >>> print(array)
-                [c'] [d' e'    ] [ ] [ ]
-                [          ] [ ] [ ] [ ]
+            >>> print(array)
+            [c'] [d' e'    ] [ ] [ ]
+            [          ] [ ] [ ] [ ]
 
         Returns none.
         '''
@@ -468,28 +434,20 @@ class PitchArrayRow(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> array = baca.PitchArray([
+            ...     [1, (0, 1), (0, 2)],
+            ...     [(0, 2), (0, 1), 1],
+            ...     ])
 
-                >>> array = baca.PitchArray([
-                ...     [1, (0, 1), (0, 2)],
-                ...     [(0, 2), (0, 1), 1],
-                ...     ])
+            >>> print(array)
+            [  ] [c'] [c'    ]
+            [c'     ] [c'] [ ]
 
-            ::
+            >>> array[0].apply_pitches([-2, -1.5])
 
-                >>> print(array)
-                [  ] [c'] [c'    ]
-                [c'     ] [c'] [ ]
-
-            ::
-
-                >>> array[0].apply_pitches([-2, -1.5])
-
-            ::
-
-                >>> print(array)
-                [  ] [bf] [bqf    ]
-                [c'     ] [c' ] [ ]
+            >>> print(array)
+            [  ] [bf] [bqf    ]
+            [c'     ] [c' ] [ ]
 
         Returns none.
         '''
@@ -506,27 +464,19 @@ class PitchArrayRow(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array[0].cells[0].append_pitch(0)
+            >>> array[0].cells[1].append_pitch(2)
+            >>> array[1].cells[2].append_pitch(4)
 
-                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
-                >>> array[0].cells[0].append_pitch(0)
-                >>> array[0].cells[1].append_pitch(2)
-                >>> array[1].cells[2].append_pitch(4)
+            >>> print(array)
+            [c'] [d'    ] [  ]
+            [       ] [ ] [e']
 
-            ::
+            >>> subrow = array[0].copy_subrow(2, None)
 
-                >>> print(array)
-                [c'] [d'    ] [  ]
-                [       ] [ ] [e']
-
-            ::
-
-                >>> subrow = array[0].copy_subrow(2, None)
-
-            ::
-
-                >>> print(subrow)
-                [d'] [ ]
+            >>> print(subrow)
+            [d'] [ ]
 
         Returns new pitch array row.
         '''
@@ -556,28 +506,20 @@ class PitchArrayRow(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array[0].cells[0].append_pitch(0)
+            >>> array[0].cells[1].append_pitch(2)
+            >>> array[1].cells[2].append_pitch(4)
 
-                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
-                >>> array[0].cells[0].append_pitch(0)
-                >>> array[0].cells[1].append_pitch(2)
-                >>> array[1].cells[2].append_pitch(4)
+            >>> print(array)
+            [c'] [d'    ] [  ]
+            [       ] [ ] [e']
 
-            ::
+            >>> array[0].empty_pitches()
 
-                >>> print(array)
-                [c'] [d'    ] [  ]
-                [       ] [ ] [e']
-
-            ::
-
-                >>> array[0].empty_pitches()
-
-            ::
-
-                >>> print(array)
-                [ ] [     ] [  ]
-                [     ] [ ] [e']
+            >>> print(array)
+            [ ] [     ] [  ]
+            [     ] [ ] [e']
 
         Returns none.
         '''
@@ -589,31 +531,23 @@ class PitchArrayRow(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array[0].cells[0].append_pitch(0)
+            >>> array[0].cells[1].append_pitch(2)
+            >>> array[1].cells[2].append_pitch(4)
 
-                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
-                >>> array[0].cells[0].append_pitch(0)
-                >>> array[0].cells[1].append_pitch(2)
-                >>> array[1].cells[2].append_pitch(4)
+            >>> print(array)
+            [c'] [d'    ] [  ]
+            [       ] [ ] [e']
 
-            ::
+            >>> cells = [baca.PitchArrayCell(width=_) for _ in [1, 1, 1]]
+            >>> array[0].extend(cells)
+            >>> cell = baca.PitchArrayCell(width=3)
+            >>> array[1].append(cell)
 
-                >>> print(array)
-                [c'] [d'    ] [  ]
-                [       ] [ ] [e']
-
-            ::
-
-                >>> cells = [baca.PitchArrayCell(width=_) for _ in [1, 1, 1]]
-                >>> array[0].extend(cells)
-                >>> cell = baca.PitchArrayCell(width=3)
-                >>> array[1].append(cell)
-
-            ::
-
-                >>> print(array)
-                [c'] [d'    ] [  ] [ ] [ ] [ ]
-                [       ] [ ] [e'] [     ]
+            >>> print(array)
+            [c'] [d'    ] [  ] [ ] [ ] [ ]
+            [       ] [ ] [e'] [     ]
 
         Returns none.
         '''
@@ -626,33 +560,27 @@ class PitchArrayRow(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array[0].cells[0].append_pitch(0)
+            >>> array[0].cells[1].append_pitch(2)
+            >>> array[1].cells[2].append_pitch(4)
 
-                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
-                >>> array[0].cells[0].append_pitch(0)
-                >>> array[0].cells[1].append_pitch(2)
-                >>> array[1].cells[2].append_pitch(4)
+            >>> print(array)
+            [c'] [d'    ] [  ]
+            [       ] [ ] [e']
 
-            ::
-
-                >>> print(array)
-                [c'] [d'    ] [  ]
-                [       ] [ ] [e']
-
-            ::
-
-                >>> for row in array:
-                ...     for i in range(4):
-                ...         i, row.has_spanning_cell_over_index(i)
-                ...
-                (0, False)
-                (1, False)
-                (2, True)
-                (3, False)
-                (0, False)
-                (1, True)
-                (2, False)
-                (3, False)
+            >>> for row in array:
+            ...     for i in range(4):
+            ...         i, row.has_spanning_cell_over_index(i)
+            ...
+            (0, False)
+            (1, False)
+            (2, True)
+            (3, False)
+            (0, False)
+            (1, True)
+            (2, False)
+            (3, False)
 
         Returns true or false.
         '''
@@ -743,22 +671,16 @@ class PitchArrayRow(abjad.AbjadObject):
 
             Changes row to measure:
 
-            ::
+            >>> array = baca.PitchArray([
+            ...     [1, (2, 1), ([-2, -1.5], 2)],
+            ...     [(7, 2), (6, 1), 1]])
 
-                >>> array = baca.PitchArray([
-                ...     [1, (2, 1), ([-2, -1.5], 2)],
-                ...     [(7, 2), (6, 1), 1]])
+            >>> print(array)
+            [  ] [d'] [bf bqf    ]
+            [g'     ] [fs'   ] [ ]
 
-            ::
-
-                >>> print(array)
-                [  ] [d'] [bf bqf    ]
-                [g'     ] [fs'   ] [ ]
-
-            ::
-
-                >>> measure = array.rows[0].to_measure()
-                >>> abjad.show(measure) # doctest: +SKIP
+            >>> measure = array.rows[0].to_measure()
+            >>> abjad.show(measure) # doctest: +SKIP
 
             ..  docs::
 

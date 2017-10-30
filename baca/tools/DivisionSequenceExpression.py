@@ -12,112 +12,92 @@ class DivisionSequenceExpression(abjad.Expression):
 
         Inherits from sequence expression and coerces input:
 
-        ::
+        >>> expression = baca.DivisionSequenceExpression()
+        >>> expression = expression.division_sequence()
+        >>> expression = expression[-3:]
 
-            >>> expression = baca.DivisionSequenceExpression()
-            >>> expression = expression.division_sequence()
-            >>> expression = expression[-3:]
-
-        ::
-
-            >>> expression([1, 2, 3, 4, 5])
-            DivisionSequence([Division((3, 1)), Division((4, 1)), Division((5, 1))])
+        >>> expression([1, 2, 3, 4, 5])
+        DivisionSequence([Division((3, 1)), Division((4, 1)), Division((5, 1))])
 
     ..  container:: example
 
         Splits into quarter notes:
 
-        ::
+        >>> expression = baca.DivisionSequenceExpression()
+        >>> expression = expression.division_sequence()
+        >>> expression = expression.split_by_durations(
+        ...     durations=[(1, 4)],
+        ...     )
 
-            >>> expression = baca.DivisionSequenceExpression()
-            >>> expression = expression.division_sequence()
-            >>> expression = expression.split_by_durations(
-            ...     durations=[(1, 4)],
-            ...     )
-
-        ::
-
-            >>> divisions = [(4, 4), (6, 4)]
-            >>> for item in expression(divisions):
-            ...     item
-            ...
-            DivisionSequence([Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))])
-            DivisionSequence([Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))])
+        >>> divisions = [(4, 4), (6, 4)]
+        >>> for item in expression(divisions):
+        ...     item
+        ...
+        DivisionSequence([Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))])
+        DivisionSequence([Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))])
 
     ..  container:: example
 
         Splits into quarter notes and flattens result:
 
-        ::
+        >>> expression = baca.DivisionSequenceExpression()
+        >>> expression = expression.division_sequence()
+        >>> expression = expression.split_by_durations(
+        ...     durations=[(1, 4)],
+        ...     )
+        >>> expression = expression.flatten()
 
-            >>> expression = baca.DivisionSequenceExpression()
-            >>> expression = expression.division_sequence()
-            >>> expression = expression.split_by_durations(
-            ...     durations=[(1, 4)],
-            ...     )
-            >>> expression = expression.flatten()
-
-        ::
-
-            >>> divisions = [(4, 4), (6, 4)]
-            >>> for item in expression(divisions):
-            ...     item
-            ...
-            Division((1, 4))
-            Division((1, 4))
-            Division((1, 4))
-            Division((1, 4))
-            Division((1, 4))
-            Division((1, 4))
-            Division((1, 4))
-            Division((1, 4))
-            Division((1, 4))
-            Division((1, 4))
+        >>> divisions = [(4, 4), (6, 4)]
+        >>> for item in expression(divisions):
+        ...     item
+        ...
+        Division((1, 4))
+        Division((1, 4))
+        Division((1, 4))
+        Division((1, 4))
+        Division((1, 4))
+        Division((1, 4))
+        Division((1, 4))
+        Division((1, 4))
+        Division((1, 4))
+        Division((1, 4))
 
     ..  container:: example
 
         Splits into quarter notes with compound meter multiplier:
 
-        ::
+        >>> expression = baca.DivisionSequenceExpression()
+        >>> expression = expression.division_sequence()
+        >>> expression = expression.split_by_durations(
+        ...     compound_meter_multiplier=(3, 2),
+        ...     durations=[(1, 4)],
+        ...     )
 
-            >>> expression = baca.DivisionSequenceExpression()
-            >>> expression = expression.division_sequence()
-            >>> expression = expression.split_by_durations(
-            ...     compound_meter_multiplier=(3, 2),
-            ...     durations=[(1, 4)],
-            ...     )
-
-        ::
-
-            >>> divisions = [(4, 4), (6, 4)]
-            >>> for item in expression(divisions):
-            ...     item
-            ...
-            DivisionSequence([Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))])
-            DivisionSequence([Division((3, 8)), Division((3, 8)), Division((3, 8)), Division((3, 8))])
+        >>> divisions = [(4, 4), (6, 4)]
+        >>> for item in expression(divisions):
+        ...     item
+        ...
+        DivisionSequence([Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))])
+        DivisionSequence([Division((3, 8)), Division((3, 8)), Division((3, 8)), Division((3, 8))])
 
     ..  container:: example
 
         Splits into quarter notes with compound meter multiplier and gets
         first division of part:
 
-        ::
+        >>> expression = baca.DivisionSequenceExpression()
+        >>> expression = expression.division_sequence()
+        >>> expression = expression.split_by_durations(
+        ...     compound_meter_multiplier=(3, 2),
+        ...     durations=[(1, 4)],
+        ...     )
+        >>> expression_2 = baca.DivisionSequenceExpression()
+        >>> expression_2 = expression_2.division_sequence()[0]
+        >>> expression = expression.map(expression_2)
 
-            >>> expression = baca.DivisionSequenceExpression()
-            >>> expression = expression.division_sequence()
-            >>> expression = expression.split_by_durations(
-            ...     compound_meter_multiplier=(3, 2),
-            ...     durations=[(1, 4)],
-            ...     )
-            >>> expression_2 = baca.DivisionSequenceExpression()
-            >>> expression_2 = expression_2.division_sequence()[0]
-            >>> expression = expression.map(expression_2)
-
-        ::
-
-            >>> divisions = [(4, 4), (6, 4)]
-            >>> expression(divisions)
-            DivisionSequence([Division((1, 4)), Division((3, 8))])
+        >>> divisions = [(4, 4), (6, 4)]
+        >>> expression(divisions)
+        DivisionSequence([Division((1, 4)), Division((3, 8))])
 
     Initializer returns division sequence expression.
 

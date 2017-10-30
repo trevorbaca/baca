@@ -48,30 +48,26 @@ class MusicAccumulator(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> score_template = baca.StringTrioScoreTemplate()
+            >>> accumulator = baca.MusicAccumulator(score_template)
+            >>> accumulator(
+            ...     accumulator.music_maker(
+            ...         'Violin Music Voice',
+            ...         [[0, 1, 2, 3]],
+            ...         figure_name='D',
+            ...         ),
+            ...     )
 
-                >>> score_template = baca.StringTrioScoreTemplate()
-                >>> accumulator = baca.MusicAccumulator(score_template)
-                >>> accumulator(
-                ...     accumulator.music_maker(
-                ...         'Violin Music Voice',
-                ...         [[0, 1, 2, 3]],
-                ...         figure_name='D',
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> accumulator(
-                ...     accumulator.music_maker(
-                ...         'Violin Music Voice',
-                ...         [[4, 5, 6, 7]],
-                ...         figure_name='D',
-                ...         ),
-                ...     )
-                Traceback (most recent call last):
-                    ...
-                Exception: duplicate figure name: 'D'.
+            >>> accumulator(
+            ...     accumulator.music_maker(
+            ...         'Violin Music Voice',
+            ...         [[4, 5, 6, 7]],
+            ...         figure_name='D',
+            ...         ),
+            ...     )
+            Traceback (most recent call last):
+                ...
+            Exception: duplicate figure name: 'D'.
 
         Returns none.
         '''

@@ -9,49 +9,41 @@ class Cursor(abjad.AbjadObject):
 
         Gets elements one at a time:
 
-        ::
+        >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+        >>> cursor = baca.Cursor(source=source, cyclic=True)
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-            >>> cursor = baca.Cursor(source=source, cyclic=True)
-
-        ::
-
-                >>> cursor.next()
-                [13]
-                >>> cursor.next()
-                ['da capo']
-                >>> cursor.next()
-                [Note("cs'8.")]
-                >>> cursor.next()
-                ['rit.']
-                >>> cursor.next()
-                [13]
-                >>> cursor.next()
-                ['da capo']
+        >>> cursor.next()
+        [13]
+        >>> cursor.next()
+        ['da capo']
+        >>> cursor.next()
+        [Note("cs'8.")]
+        >>> cursor.next()
+        ['rit.']
+        >>> cursor.next()
+        [13]
+        >>> cursor.next()
+        ['da capo']
 
     ..  container:: example
 
         Gets different numbers of elements at a time:
 
-        ::
+        >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+        >>> cursor = baca.Cursor(source=source, cyclic=True)
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-            >>> cursor = baca.Cursor(source=source, cyclic=True)
-
-        ::
-
-            >>> cursor.next(count=2)
-            [13, 'da capo']
-            >>> cursor.next(count=-1)
-            ['da capo']
-            >>> cursor.next(count=2)
-            ['da capo', Note("cs'8.")]
-            >>> cursor.next(count=-1)
-            [Note("cs'8.")]
-            >>> cursor.next(count=2)
-            [Note("cs'8."), 'rit.']
-            >>> cursor.next(count=-1)
-            ['rit.']
+        >>> cursor.next(count=2)
+        [13, 'da capo']
+        >>> cursor.next(count=-1)
+        ['da capo']
+        >>> cursor.next(count=2)
+        ['da capo', Note("cs'8.")]
+        >>> cursor.next(count=-1)
+        [Note("cs'8.")]
+        >>> cursor.next(count=2)
+        [Note("cs'8."), 'rit.']
+        >>> cursor.next(count=-1)
+        ['rit.']
 
     '''
 
@@ -113,25 +105,17 @@ class Cursor(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source, cyclic=True)
 
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(source=source, cyclic=True)
+            >>> cursor[0]
+            13
 
-            ::
+            >>> cursor[:2]
+            (13, 'da capo')
 
-                >>> cursor[0]
-                13
-
-            ::
-
-                >>> cursor[:2]
-                (13, 'da capo')
-
-            ::
-
-                >>> cursor[-1]
-                'rit.'
+            >>> cursor[-1]
+            'rit.'
 
         Returns item or slice.
         '''
@@ -153,33 +137,29 @@ class Cursor(abjad.AbjadObject):
 
             Iterates acyclic cursor:
 
-            ::
-
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(source=source)
-                >>> for item in cursor:
-                ...     item
-                ...
-                13
-                'da capo'
-                Note("cs'8.")
-                'rit.'
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source)
+            >>> for item in cursor:
+            ...     item
+            ...
+            13
+            'da capo'
+            Note("cs'8.")
+            'rit.'
 
         ..  container:: example
 
             Iterates cyclic cursor:
 
-            ::
-
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(source=source, cyclic=True)
-                >>> for item in cursor:
-                ...     item
-                ...
-                13
-                'da capo'
-                Note("cs'8.")
-                'rit.'
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source, cyclic=True)
+            >>> for item in cursor:
+            ...     item
+            ...
+            13
+            'da capo'
+            Note("cs'8.")
+            'rit.'
 
         Returns generator.
         '''
@@ -190,12 +170,10 @@ class Cursor(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(source=source)
-                >>> len(cursor)
-                4
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source)
+            >>> len(cursor)
+            4
 
         Defined equal to length of cursor source.
 
@@ -225,32 +203,22 @@ class Cursor(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source)
+            >>> cursor.is_exhausted
+            False
 
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(source=source)
-                >>> cursor.is_exhausted
-                False
+            >>> cursor.next(), cursor.is_exhausted
+            ([13], False)
 
-            ::
+            >>> cursor.next(), cursor.is_exhausted
+            (['da capo'], False)
 
-                >>> cursor.next(), cursor.is_exhausted
-                ([13], False)
+            >>> cursor.next(), cursor.is_exhausted
+            ([Note("cs'8.")], False)
 
-            ::
-
-                >>> cursor.next(), cursor.is_exhausted
-                (['da capo'], False)
-
-            ::
-
-                >>> cursor.next(), cursor.is_exhausted
-                ([Note("cs'8.")], False)
-
-            ::
-
-                >>> cursor.next(), cursor.is_exhausted
-                (['rit.'], True)
+            >>> cursor.next(), cursor.is_exhausted
+            (['rit.'], True)
 
         Returns true or false.
         '''
@@ -270,159 +238,123 @@ class Cursor(abjad.AbjadObject):
 
             Position starts at none by default:
 
-            ::
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source, cyclic=True)
 
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(source=source, cyclic=True)
+            >>> cursor.position is None
+            True
 
-            ::
+            >>> cursor.next()
+            [13]
+            >>> cursor.next()
+            ['da capo']
+            >>> cursor.next()
+            [Note("cs'8.")]
+            >>> cursor.next()
+            ['rit.']
 
-                >>> cursor.position is None
-                True
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(
+            ...     source=source,
+            ...     cyclic=True,
+            ...     position=None,
+            ...     )
 
-            ::
+            >>> cursor.position is None
+            True
 
-                >>> cursor.next()
-                [13]
-                >>> cursor.next()
-                ['da capo']
-                >>> cursor.next()
-                [Note("cs'8.")]
-                >>> cursor.next()
-                ['rit.']
-
-            ::
-
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(
-                ...     source=source,
-                ...     cyclic=True,
-                ...     position=None,
-                ...     )
-
-            ::
-
-                >>> cursor.position is None
-                True
-
-            ::
-
-                >>> cursor.next(count=-1)
-                ['rit.']
-                >>> cursor.next(count=-1)
-                [Note("cs'8.")]
-                >>> cursor.next(count=-1)
-                ['da capo']
-                >>> cursor.next(count=-1)
-                [13]
+            >>> cursor.next(count=-1)
+            ['rit.']
+            >>> cursor.next(count=-1)
+            [Note("cs'8.")]
+            >>> cursor.next(count=-1)
+            ['da capo']
+            >>> cursor.next(count=-1)
+            [13]
 
         ..  container:: example
 
             Position starting at 0:
 
-            ::
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(
+            ...     source=source,
+            ...     cyclic=True,
+            ...     position=0,
+            ...     )
 
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(
-                ...     source=source,
-                ...     cyclic=True,
-                ...     position=0,
-                ...     )
+            >>> cursor.position
+            0
 
-            ::
+            >>> cursor.next()
+            [13]
+            >>> cursor.next()
+            ['da capo']
+            >>> cursor.next()
+            [Note("cs'8.")]
+            >>> cursor.next()
+            ['rit.']
 
-                >>> cursor.position
-                0
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(
+            ...     source=source,
+            ...     cyclic=True,
+            ...     position=0,
+            ...     )
 
-            ::
+            >>> cursor.position
+            0
 
-                >>> cursor.next()
-                [13]
-                >>> cursor.next()
-                ['da capo']
-                >>> cursor.next()
-                [Note("cs'8.")]
-                >>> cursor.next()
-                ['rit.']
-
-            ::
-
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(
-                ...     source=source,
-                ...     cyclic=True,
-                ...     position=0,
-                ...     )
-
-            ::
-
-                >>> cursor.position
-                0
-
-            ::
-
-                >>> cursor.next(count=-1)
-                ['rit.']
-                >>> cursor.next(count=-1)
-                [Note("cs'8.")]
-                >>> cursor.next(count=-1)
-                ['da capo']
-                >>> cursor.next(count=-1)
-                [13]
+            >>> cursor.next(count=-1)
+            ['rit.']
+            >>> cursor.next(count=-1)
+            [Note("cs'8.")]
+            >>> cursor.next(count=-1)
+            ['da capo']
+            >>> cursor.next(count=-1)
+            [13]
 
         ..  container:: example
 
             Position starting at -1:
 
-            ::
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(
+            ...     source=source,
+            ...     cyclic=True,
+            ...     position=-1,
+            ...     )
 
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(
-                ...     source=source,
-                ...     cyclic=True,
-                ...     position=-1,
-                ...     )
+            >>> cursor.position
+            -1
 
-            ::
+            >>> cursor.next()
+            ['rit.']
+            >>> cursor.next()
+            [13]
+            >>> cursor.next()
+            ['da capo']
+            >>> cursor.next()
+            [Note("cs'8.")]
 
-                >>> cursor.position
-                -1
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(
+            ...     source=source,
+            ...     cyclic=True,
+            ...     position=-1,
+            ...     )
 
-            ::
+            >>> cursor.position
+            -1
 
-                >>> cursor.next()
-                ['rit.']
-                >>> cursor.next()
-                [13]
-                >>> cursor.next()
-                ['da capo']
-                >>> cursor.next()
-                [Note("cs'8.")]
-
-            ::
-
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(
-                ...     source=source,
-                ...     cyclic=True,
-                ...     position=-1,
-                ...     )
-
-            ::
-
-                >>> cursor.position
-                -1
-
-            ::
-
-                >>> cursor.next(count=-1)
-                [Note("cs'8.")]
-                >>> cursor.next(count=-1)
-                ['da capo']
-                >>> cursor.next(count=-1)
-                [13]
-                >>> cursor.next(count=-1)
-                ['rit.']
+            >>> cursor.next(count=-1)
+            [Note("cs'8.")]
+            >>> cursor.next(count=-1)
+            ['da capo']
+            >>> cursor.next(count=-1)
+            [13]
+            >>> cursor.next(count=-1)
+            ['rit.']
 
         Returns tuple.
         '''
@@ -437,86 +369,58 @@ class Cursor(abjad.AbjadObject):
 
             Returns singletons enclosed within a list:
 
-            ::
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(
+            ...     source=source,
+            ...     suppress_exception=True,
+            ...     )
 
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(
-                ...     source=source,
-                ...     suppress_exception=True,
-                ...     )
+            >>> cursor.next()
+            [13]
 
-            ::
+            >>> cursor.next()
+            ['da capo']
 
-                >>> cursor.next()
-                [13]
+            >>> cursor.next()
+            [Note("cs'8.")]
 
-            ::
+            >>> cursor.next()
+            ['rit.']
 
-                >>> cursor.next()
-                ['da capo']
+            >>> cursor.next()
+            []
 
-            ::
-
-                >>> cursor.next()
-                [Note("cs'8.")]
-
-            ::
-
-                >>> cursor.next()
-                ['rit.']
-
-            ::
-
-                >>> cursor.next()
-                []
-
-            ::
-
-                >>> cursor.next()
-                []
+            >>> cursor.next()
+            []
 
         ..  container:: example
 
             Returns singletons free of enclosing list:
 
-            ::
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(
+            ...     source=source,
+            ...     singletons=True,
+            ...     suppress_exception=True,
+            ...     )
 
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(
-                ...     source=source,
-                ...     singletons=True,
-                ...     suppress_exception=True,
-                ...     )
+            >>> cursor.next()
+            13
 
-            ::
+            >>> cursor.next()
+            'da capo'
 
-                >>> cursor.next()
-                13
+            >>> cursor.next()
+            Note("cs'8.")
 
-            ::
+            >>> cursor.next()
+            'rit.'
 
-                >>> cursor.next()
-                'da capo'
+            >>> cursor.next() is None
+            True
 
-            ::
-
-                >>> cursor.next()
-                Note("cs'8.")
-
-            ::
-
-                >>> cursor.next()
-                'rit.'
-
-            ::
-
-                >>> cursor.next() is None
-                True
-
-            ::
-
-                >>> cursor.next() is None
-                True
+            >>> cursor.next() is None
+            True
 
         '''
         return self._singletons
@@ -529,29 +433,21 @@ class Cursor(abjad.AbjadObject):
 
             List source:
 
-            ::
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source)
 
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(source=source)
-
-            ::
-
-                >>> cursor.source
-                [13, 'da capo', Note("cs'8."), 'rit.']
+            >>> cursor.source
+            [13, 'da capo', Note("cs'8."), 'rit.']
 
         ..  container:: example
 
             Cyclic tuple source:
 
-            ::
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source, cyclic=True)
 
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(source=source, cyclic=True)
-
-            ::
-
-                >>> cursor.source
-                CyclicTuple([13, 'da capo', Note("cs'8."), 'rit.'])
+            >>> cursor.source
+            CyclicTuple([13, 'da capo', Note("cs'8."), 'rit.'])
 
         Returns source.
         '''
@@ -566,90 +462,62 @@ class Cursor(abjad.AbjadObject):
 
             Exhausted cursor raises exception:
 
-            ::
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source)
+            >>> cursor.is_exhausted
+            False
 
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(source=source)
-                >>> cursor.is_exhausted
-                False
+            >>> cursor.next()
+            [13]
 
-            ::
+            >>> cursor.next()
+            ['da capo']
 
-                >>> cursor.next()
-                [13]
+            >>> cursor.next()
+            [Note("cs'8.")]
 
-            ::
+            >>> cursor.next()
+            ['rit.']
 
-                >>> cursor.next()
-                ['da capo']
+            >>> cursor.next()
+            Traceback (most recent call last):
+            ...
+            Exception: cursor only 4.
 
-            ::
-
-                >>> cursor.next()
-                [Note("cs'8.")]
-
-            ::
-
-                >>> cursor.next()
-                ['rit.']
-
-            ::
-
-                >>> cursor.next()
-                Traceback (most recent call last):
-                ...
-                Exception: cursor only 4.
-
-            ::
-
-                >>> cursor.next()
-                Traceback (most recent call last):
-                ...
-                Exception: cursor only 4.
+            >>> cursor.next()
+            Traceback (most recent call last):
+            ...
+            Exception: cursor only 4.
 
         ..  container:: example
 
             Exhausted cursor returns none:
 
-            ::
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(
+            ...     source=source,
+            ...     suppress_exception=True,
+            ...     )
+            >>> cursor.is_exhausted
+            False
 
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(
-                ...     source=source,
-                ...     suppress_exception=True,
-                ...     )
-                >>> cursor.is_exhausted
-                False
+            >>> cursor.next()
+            [13]
 
-            ::
+            >>> cursor.next()
+            ['da capo']
 
-                >>> cursor.next()
-                [13]
+            >>> cursor.next()
+            [Note("cs'8.")]
 
-            ::
+            >>> cursor.next()
+            ['rit.']
 
-                >>> cursor.next()
-                ['da capo']
+            >>> cursor.next()
+            []
 
-            ::
-
-                >>> cursor.next()
-                [Note("cs'8.")]
-
-            ::
-
-                >>> cursor.next()
-                ['rit.']
-
-            ::
-
-                >>> cursor.next()
-                []
-
-            ::
-
-                >>> cursor.next()
-                []
+            >>> cursor.next()
+            []
 
         '''
         return self._suppress_exception
@@ -664,39 +532,35 @@ class Cursor(abjad.AbjadObject):
 
             Makes cursor from pitch-class segments:
 
-            ::
+            >>> number_lists = [[13, 13.5, 11], [-2, 2, 1.5]]
+            >>> cursor = baca.Cursor.from_pitch_class_segments(
+            ...     number_lists,
+            ...     )
 
-                >>> number_lists = [[13, 13.5, 11], [-2, 2, 1.5]]
-                >>> cursor = baca.Cursor.from_pitch_class_segments(
-                ...     number_lists,
-                ...     )
-
-            ::
-
-                >>> abjad.f(cursor)
-                baca.Cursor(
-                    source=abjad.CyclicTuple(
-                        [
-                            abjad.PitchClassSegment(
-                                (
-                                    abjad.NumberedPitchClass(1),
-                                    abjad.NumberedPitchClass(1.5),
-                                    abjad.NumberedPitchClass(11),
-                                    ),
-                                item_class=abjad.NumberedPitchClass,
+            >>> abjad.f(cursor)
+            baca.Cursor(
+                source=abjad.CyclicTuple(
+                    [
+                        abjad.PitchClassSegment(
+                            (
+                                abjad.NumberedPitchClass(1),
+                                abjad.NumberedPitchClass(1.5),
+                                abjad.NumberedPitchClass(11),
                                 ),
-                            abjad.PitchClassSegment(
-                                (
-                                    abjad.NumberedPitchClass(10),
-                                    abjad.NumberedPitchClass(2),
-                                    abjad.NumberedPitchClass(1.5),
-                                    ),
-                                item_class=abjad.NumberedPitchClass,
+                            item_class=abjad.NumberedPitchClass,
+                            ),
+                        abjad.PitchClassSegment(
+                            (
+                                abjad.NumberedPitchClass(10),
+                                abjad.NumberedPitchClass(2),
+                                abjad.NumberedPitchClass(1.5),
                                 ),
-                            ]
-                        ),
-                    cyclic=True,
-                    )
+                            item_class=abjad.NumberedPitchClass,
+                            ),
+                        ]
+                    ),
+                cyclic=True,
+                )
 
         Coerces numeric `pitch_class_segments`.
 
@@ -718,129 +582,105 @@ class Cursor(abjad.AbjadObject):
 
             Gets elements one at a time:
 
-            ::
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source, cyclic=True)
 
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(source=source, cyclic=True)
-
-            ::
-
-                >>> cursor.next()
-                [13]
-                >>> cursor.next()
-                ['da capo']
-                >>> cursor.next()
-                [Note("cs'8.")]
-                >>> cursor.next()
-                ['rit.']
-                >>> cursor.next()
-                [13]
-                >>> cursor.next()
-                ['da capo']
+            >>> cursor.next()
+            [13]
+            >>> cursor.next()
+            ['da capo']
+            >>> cursor.next()
+            [Note("cs'8.")]
+            >>> cursor.next()
+            ['rit.']
+            >>> cursor.next()
+            [13]
+            >>> cursor.next()
+            ['da capo']
 
         ..  container:: example
 
             Gets elements one at a time in reverse:
 
-            ::
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source, cyclic=True)
 
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(source=source, cyclic=True)
-
-            ::
-
-                >>> cursor.next(count=-1)
-                ['rit.']
-                >>> cursor.next(count=-1)
-                [Note("cs'8.")]
-                >>> cursor.next(count=-1)
-                ['da capo']
-                >>> cursor.next(count=-1)
-                [13]
+            >>> cursor.next(count=-1)
+            ['rit.']
+            >>> cursor.next(count=-1)
+            [Note("cs'8.")]
+            >>> cursor.next(count=-1)
+            ['da capo']
+            >>> cursor.next(count=-1)
+            [13]
 
         ..  container:: example
 
             Gets same two elements forward and back:
 
-            ::
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source, cyclic=True)
 
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(source=source, cyclic=True)
-
-            ::
-
-                >>> cursor.next(count=2)
-                [13, 'da capo']
-                >>> cursor.next(count=-2)
-                ['da capo', 13]
-                >>> cursor.next(count=2)
-                [13, 'da capo']
-                >>> cursor.next(count=-2)
-                ['da capo', 13]
+            >>> cursor.next(count=2)
+            [13, 'da capo']
+            >>> cursor.next(count=-2)
+            ['da capo', 13]
+            >>> cursor.next(count=2)
+            [13, 'da capo']
+            >>> cursor.next(count=-2)
+            ['da capo', 13]
 
         ..  container:: example
 
             Gets different numbers of elements at a time:
 
-            ::
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source, cyclic=True)
 
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(source=source, cyclic=True)
-
-            ::
-
-                >>> cursor.next(count=2)
-                [13, 'da capo']
-                >>> cursor.next(count=-1)
-                ['da capo']
-                >>> cursor.next(count=2)
-                ['da capo', Note("cs'8.")]
-                >>> cursor.next(count=-1)
-                [Note("cs'8.")]
-                >>> cursor.next(count=2)
-                [Note("cs'8."), 'rit.']
-                >>> cursor.next(count=-1)
-                ['rit.']
+            >>> cursor.next(count=2)
+            [13, 'da capo']
+            >>> cursor.next(count=-1)
+            ['da capo']
+            >>> cursor.next(count=2)
+            ['da capo', Note("cs'8.")]
+            >>> cursor.next(count=-1)
+            [Note("cs'8.")]
+            >>> cursor.next(count=2)
+            [Note("cs'8."), 'rit.']
+            >>> cursor.next(count=-1)
+            ['rit.']
 
         ..  container:: example
 
             Gets different numbers of elements at a time:
 
-            ::
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source, cyclic=True)
 
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(source=source, cyclic=True)
-
-            ::
-
-                >>> cursor.next(count=2)
-                [13, 'da capo']
-                >>> cursor.next(count=-3)
-                ['da capo', 13, 'rit.']
-                >>> cursor.next(count=2)
-                ['rit.', 13]
-                >>> cursor.next(count=-3)
-                [13, 'rit.', Note("cs'8.")]
-                >>> cursor.next(count=2)
-                [Note("cs'8."), 'rit.']
-                >>> cursor.next(count=-3)
-                ['rit.', Note("cs'8."), 'da capo']
+            >>> cursor.next(count=2)
+            [13, 'da capo']
+            >>> cursor.next(count=-3)
+            ['da capo', 13, 'rit.']
+            >>> cursor.next(count=2)
+            ['rit.', 13]
+            >>> cursor.next(count=-3)
+            [13, 'rit.', Note("cs'8.")]
+            >>> cursor.next(count=2)
+            [Note("cs'8."), 'rit.']
+            >>> cursor.next(count=-3)
+            ['rit.', Note("cs'8."), 'da capo']
 
         ..  container:: example
 
             Raises exception when cursor is exhausted:
 
-            ::
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source)
 
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(source=source)
-
-            ::
-
-                >>> cursor.next(count=99)
-                Traceback (most recent call last):
-                ...
-                Exception: cursor only 4.
+            >>> cursor.next(count=99)
+            Traceback (most recent call last):
+            ...
+            Exception: cursor only 4.
 
         Returns tuple.
         '''
@@ -879,28 +719,20 @@ class Cursor(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> cursor = baca.Cursor(source=source)
 
-                >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
-                >>> cursor = baca.Cursor(source=source)
+            >>> cursor.next()
+            [13]
+            >>> cursor.next()
+            ['da capo']
 
-            ::
+            >>> cursor.reset()
 
-                >>> cursor.next()
-                [13]
-                >>> cursor.next()
-                ['da capo']
-
-            ::
-
-                >>> cursor.reset()
-
-            ::
-
-                >>> cursor.next()
-                [13]
-                >>> cursor.next()
-                ['da capo']
+            >>> cursor.next()
+            [13]
+            >>> cursor.next()
+            ['da capo']
 
         Returns none.
         '''

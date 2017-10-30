@@ -6,31 +6,25 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
 
     ..  container:: example
 
-        ::
+        >>> segment_maker = baca.SegmentMaker(
+        ...     measures_per_stage=[2, 2],
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
+        ...         (1, abjad.MetronomeMark((1, 4), 90)),
+        ...         (2, abjad.MetronomeMark((1, 4), 72)),
+        ...         ]),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
 
-            >>> segment_maker = baca.SegmentMaker(
-            ...     measures_per_stage=[2, 2],
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
-            ...         (1, abjad.MetronomeMark((1, 4), 90)),
-            ...         (2, abjad.MetronomeMark((1, 4), 72)),
-            ...         ]),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.pitches('E4 F4'),
+        ...     baca.even_runs(),
+        ...     )
 
-        ::
-
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.pitches('E4 F4'),
-            ...     baca.even_runs(),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -154,18 +148,14 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> marks = baca.MetronomeMarkMeasureMap([
+            ...     (1, abjad.MetronomeMark((1, 4), 90)),
+            ...     (1, abjad.Accelerando()),
+            ...     (4, abjad.MetronomeMark((1, 4), 120)),
+            ...     ])
 
-                >>> marks = baca.MetronomeMarkMeasureMap([
-                ...     (1, abjad.MetronomeMark((1, 4), 90)),
-                ...     (1, abjad.Accelerando()),
-                ...     (4, abjad.MetronomeMark((1, 4), 120)),
-                ...     ])
-
-            ::
-
-                >>> marks[1]
-                (1, Accelerando())
+            >>> marks[1]
+            (1, Accelerando())
 
         Returns item.
         '''
@@ -179,21 +169,17 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> marks = baca.MetronomeMarkMeasureMap([
+            ...     (1, abjad.MetronomeMark((1, 4), 90)),
+            ...     (1, abjad.Accelerando()),
+            ...     (4, abjad.MetronomeMark((1, 4), 120)),
+            ...     ])
 
-                >>> marks = baca.MetronomeMarkMeasureMap([
-                ...     (1, abjad.MetronomeMark((1, 4), 90)),
-                ...     (1, abjad.Accelerando()),
-                ...     (4, abjad.MetronomeMark((1, 4), 120)),
-                ...     ])
-
-            ::
-
-                >>> for item in marks.items:
-                ...     item
-                (1, MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=90))
-                (1, Accelerando())
-                (4, MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=120))
+            >>> for item in marks.items:
+            ...     item
+            (1, MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=90))
+            (1, Accelerando())
+            (4, MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=120))
 
         Defaults to none.
 

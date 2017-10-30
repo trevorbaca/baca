@@ -8,242 +8,200 @@ class Division(abjad.NonreducedFraction):
 
         Division with duration, start offset and payload:
 
-        ::
+        >>> division = baca.Division(
+        ...     (3, 8),
+        ...     payload=abjad.rhythmmakertools.NoteRhythmMaker(),
+        ...     start_offset=abjad.Offset((5, 4)),
+        ...     )
 
-            >>> division = baca.Division(
-            ...     (3, 8),
-            ...     payload=abjad.rhythmmakertools.NoteRhythmMaker(),
-            ...     start_offset=abjad.Offset((5, 4)),
-            ...     )
-
-        ::
-
-            >>> abjad.f(division)
-            baca.Division(
-                (3, 8),
-                payload=abjad.rhythmmakertools.NoteRhythmMaker(),
-                start_offset=abjad.Offset(5, 4),
-                )
+        >>> abjad.f(division)
+        baca.Division(
+            (3, 8),
+            payload=abjad.rhythmmakertools.NoteRhythmMaker(),
+            start_offset=abjad.Offset(5, 4),
+            )
 
     ..  container:: example
 
         Division with duration and start offset:
 
-        ::
+        >>> division = baca.Division(
+        ...     (3, 8),
+        ...     start_offset=abjad.Offset((5, 4)),
+        ...     )
 
-            >>> division = baca.Division(
-            ...     (3, 8),
-            ...     start_offset=abjad.Offset((5, 4)),
-            ...     )
-
-        ::
-
-            >>> abjad.f(division)
-            baca.Division(
-                (3, 8),
-                start_offset=abjad.Offset(5, 4),
-                )
+        >>> abjad.f(division)
+        baca.Division(
+            (3, 8),
+            start_offset=abjad.Offset(5, 4),
+            )
 
     ..  container:: example
 
         Division with duration:
 
-        ::
+        >>> division = baca.Division((3, 8))
 
-            >>> division = baca.Division((3, 8))
-
-        ::
-
-            >>> abjad.f(division)
-            baca.Division(
-                (3, 8)
-                )
+        >>> abjad.f(division)
+        baca.Division(
+            (3, 8)
+            )
 
     ..  container:: example
 
         Initializes from other division:
 
-        ::
+        >>> division = baca.Division(
+        ...     (3, 8),
+        ...     payload=abjad.rhythmmakertools.NoteRhythmMaker(),
+        ...     start_offset=abjad.Offset((5, 4)),
+        ...     )
+        >>> new_division = baca.Division(division)
 
-            >>> division = baca.Division(
-            ...     (3, 8),
-            ...     payload=abjad.rhythmmakertools.NoteRhythmMaker(),
-            ...     start_offset=abjad.Offset((5, 4)),
-            ...     )
-            >>> new_division = baca.Division(division)
-
-        ::
-
-            >>> abjad.f(new_division)
-            baca.Division(
-                (3, 8),
-                payload=abjad.rhythmmakertools.NoteRhythmMaker(),
-                start_offset=abjad.Offset(5, 4),
-                )
+        >>> abjad.f(new_division)
+        baca.Division(
+            (3, 8),
+            payload=abjad.rhythmmakertools.NoteRhythmMaker(),
+            start_offset=abjad.Offset(5, 4),
+            )
 
     ..  container:: example
 
         Initializes from nonreduced fraction:
 
-        ::
+        >>> fraction = abjad.NonreducedFraction((6, 4))
+        >>> division = baca.Division(
+        ...     fraction,
+        ...     payload=abjad.rhythmmakertools.NoteRhythmMaker(),
+        ...     start_offset=abjad.Offset((5, 4)),
+        ...     )
+        >>> new_division = baca.Division(division)
 
-            >>> fraction = abjad.NonreducedFraction((6, 4))
-            >>> division = baca.Division(
-            ...     fraction,
-            ...     payload=abjad.rhythmmakertools.NoteRhythmMaker(),
-            ...     start_offset=abjad.Offset((5, 4)),
-            ...     )
-            >>> new_division = baca.Division(division)
-
-        ::
-
-            >>> abjad.f(new_division)
-            baca.Division(
-                (6, 4),
-                payload=abjad.rhythmmakertools.NoteRhythmMaker(),
-                start_offset=abjad.Offset(5, 4),
-                )
+        >>> abjad.f(new_division)
+        baca.Division(
+            (6, 4),
+            payload=abjad.rhythmmakertools.NoteRhythmMaker(),
+            start_offset=abjad.Offset(5, 4),
+            )
 
     ..  container:: example
 
         Empty initialization:
 
-        ::
+        >>> division = baca.Division()
 
-            >>> division = baca.Division()
-
-        ::
-
-            >>> abjad.f(division)
-            baca.Division(
-                (0, 1)
-                )
+        >>> abjad.f(division)
+        baca.Division(
+            (0, 1)
+            )
 
     ..  container:: example
 
         Makes divisions from durations:
 
-        ::
+        >>> durations = 10 * [abjad.Duration(1, 8)]
+        >>> start_offsets = abjad.mathtools.cumulative_sums(durations)[:-1]
+        >>> divisions = []
+        >>> for duration, start_offset in zip(durations, start_offsets):
+        ...     division = baca.Division(
+        ...         duration,
+        ...         start_offset=start_offset,
+        ...         )
+        ...     divisions.append(division)
+        >>> divisions = abjad.Sequence(divisions)
 
-            >>> durations = 10 * [abjad.Duration(1, 8)]
-            >>> start_offsets = abjad.mathtools.cumulative_sums(durations)[:-1]
-            >>> divisions = []
-            >>> for duration, start_offset in zip(durations, start_offsets):
-            ...     division = baca.Division(
-            ...         duration,
-            ...         start_offset=start_offset,
-            ...         )
-            ...     divisions.append(division)
-            >>> divisions = abjad.Sequence(divisions)
-
-        ::
-
-            >>> for division in divisions:
-            ...     print(division)
-            ...
-            Division((1, 8), start_offset=Offset(0, 1))
-            Division((1, 8), start_offset=Offset(1, 8))
-            Division((1, 8), start_offset=Offset(1, 4))
-            Division((1, 8), start_offset=Offset(3, 8))
-            Division((1, 8), start_offset=Offset(1, 2))
-            Division((1, 8), start_offset=Offset(5, 8))
-            Division((1, 8), start_offset=Offset(3, 4))
-            Division((1, 8), start_offset=Offset(7, 8))
-            Division((1, 8), start_offset=Offset(1, 1))
-            Division((1, 8), start_offset=Offset(9, 8))
+        >>> for division in divisions:
+        ...     print(division)
+        ...
+        Division((1, 8), start_offset=Offset(0, 1))
+        Division((1, 8), start_offset=Offset(1, 8))
+        Division((1, 8), start_offset=Offset(1, 4))
+        Division((1, 8), start_offset=Offset(3, 8))
+        Division((1, 8), start_offset=Offset(1, 2))
+        Division((1, 8), start_offset=Offset(5, 8))
+        Division((1, 8), start_offset=Offset(3, 4))
+        Division((1, 8), start_offset=Offset(7, 8))
+        Division((1, 8), start_offset=Offset(1, 1))
+        Division((1, 8), start_offset=Offset(9, 8))
 
         Partitions divisions into thirds:
 
-        ::
-
-            >>> ratio = abjad.Ratio((1, 1, 1))
-            >>> parts = divisions.partition_by_ratio_of_lengths(ratio)
+        >>> ratio = abjad.Ratio((1, 1, 1))
+        >>> parts = divisions.partition_by_ratio_of_lengths(ratio)
 
         Gets middle third:
 
-        ::
-
-            >>> for division in parts[1]:
-            ...     division
-            Division((1, 8), start_offset=Offset(3, 8))
-            Division((1, 8), start_offset=Offset(1, 2))
-            Division((1, 8), start_offset=Offset(5, 8))
-            Division((1, 8), start_offset=Offset(3, 4))
+        >>> for division in parts[1]:
+        ...     division
+        Division((1, 8), start_offset=Offset(3, 8))
+        Division((1, 8), start_offset=Offset(1, 2))
+        Division((1, 8), start_offset=Offset(5, 8))
+        Division((1, 8), start_offset=Offset(3, 4))
 
         Gets start offset of middle third:
 
-        ::
-
-            >>> parts[1][0].start_offset
-            Offset(3, 8)
+        >>> parts[1][0].start_offset
+        Offset(3, 8)
 
     ..  container:: example
 
         Makes divisions from durations:
 
-        ::
+        >>> durations = 10 * [abjad.Duration(1, 8)]
+        >>> start_offsets = abjad.mathtools.cumulative_sums(durations)[:-1]
+        >>> divisions = []
+        >>> for duration, start_offset in zip(durations, start_offsets):
+        ...     division = baca.Division(
+        ...         duration,
+        ...         start_offset=start_offset,
+        ...         )
+        ...     divisions.append(division)
+        >>> divisions = abjad.Sequence(divisions)
 
-            >>> durations = 10 * [abjad.Duration(1, 8)]
-            >>> start_offsets = abjad.mathtools.cumulative_sums(durations)[:-1]
-            >>> divisions = []
-            >>> for duration, start_offset in zip(durations, start_offsets):
-            ...     division = baca.Division(
-            ...         duration,
-            ...         start_offset=start_offset,
-            ...         )
-            ...     divisions.append(division)
-            >>> divisions = abjad.Sequence(divisions)
-
-        ::
-
-            >>> for division in divisions:
-            ...     print(division)
-            ...
-            Division((1, 8), start_offset=Offset(0, 1))
-            Division((1, 8), start_offset=Offset(1, 8))
-            Division((1, 8), start_offset=Offset(1, 4))
-            Division((1, 8), start_offset=Offset(3, 8))
-            Division((1, 8), start_offset=Offset(1, 2))
-            Division((1, 8), start_offset=Offset(5, 8))
-            Division((1, 8), start_offset=Offset(3, 4))
-            Division((1, 8), start_offset=Offset(7, 8))
-            Division((1, 8), start_offset=Offset(1, 1))
-            Division((1, 8), start_offset=Offset(9, 8))
+        >>> for division in divisions:
+        ...     print(division)
+        ...
+        Division((1, 8), start_offset=Offset(0, 1))
+        Division((1, 8), start_offset=Offset(1, 8))
+        Division((1, 8), start_offset=Offset(1, 4))
+        Division((1, 8), start_offset=Offset(3, 8))
+        Division((1, 8), start_offset=Offset(1, 2))
+        Division((1, 8), start_offset=Offset(5, 8))
+        Division((1, 8), start_offset=Offset(3, 4))
+        Division((1, 8), start_offset=Offset(7, 8))
+        Division((1, 8), start_offset=Offset(1, 1))
+        Division((1, 8), start_offset=Offset(9, 8))
 
         Splits divisions every five sixteenths:
 
-        ::
-
-            >>> parts = divisions.split([abjad.Fraction(5, 16)], cyclic=True)
-            >>> for i, part in enumerate(parts):
-            ...     message = 'part {}'.format(i)
-            ...     print(message)
-            ...     for division in part:
-            ...         print('\t' + str(division))
-            ...
-            part 0
-                Division((1, 8), start_offset=Offset(0, 1))
-                Division((1, 8), start_offset=Offset(1, 8))
-                Division((1, 16), start_offset=Offset(1, 4))
-            part 1
-                Division((1, 16), start_offset=Offset(5, 16))
-                Division((1, 8), start_offset=Offset(3, 8))
-                Division((1, 8), start_offset=Offset(1, 2))
-            part 2
-                Division((1, 8), start_offset=Offset(5, 8))
-                Division((1, 8), start_offset=Offset(3, 4))
-                Division((1, 16), start_offset=Offset(7, 8))
-            part 3
-                Division((1, 16), start_offset=Offset(15, 16))
-                Division((1, 8), start_offset=Offset(1, 1))
-                Division((1, 8), start_offset=Offset(9, 8))
+        >>> parts = divisions.split([abjad.Fraction(5, 16)], cyclic=True)
+        >>> for i, part in enumerate(parts):
+        ...     message = 'part {}'.format(i)
+        ...     print(message)
+        ...     for division in part:
+        ...         print('\t' + str(division))
+        ...
+        part 0
+            Division((1, 8), start_offset=Offset(0, 1))
+            Division((1, 8), start_offset=Offset(1, 8))
+            Division((1, 16), start_offset=Offset(1, 4))
+        part 1
+            Division((1, 16), start_offset=Offset(5, 16))
+            Division((1, 8), start_offset=Offset(3, 8))
+            Division((1, 8), start_offset=Offset(1, 2))
+        part 2
+            Division((1, 8), start_offset=Offset(5, 8))
+            Division((1, 8), start_offset=Offset(3, 4))
+            Division((1, 16), start_offset=Offset(7, 8))
+        part 3
+            Division((1, 16), start_offset=Offset(15, 16))
+            Division((1, 8), start_offset=Offset(1, 1))
+            Division((1, 8), start_offset=Offset(9, 8))
 
         Gets start offset of first division of last part:
 
-        ::
-
-            >>> parts[-1][0].start_offset
-            Offset(15, 16)
+        >>> parts[-1][0].start_offset
+        Offset(15, 16)
 
     '''
 
@@ -295,94 +253,82 @@ class Division(abjad.NonreducedFraction):
 
             No start offsets:
 
-            ::
-
-                >>> division_1 = baca.Division((2, 4))
-                >>> division_2 = baca.Division((4, 4))
-                >>> division_1 + division_2
-                Division((6, 4))
+            >>> division_1 = baca.Division((2, 4))
+            >>> division_2 = baca.Division((4, 4))
+            >>> division_1 + division_2
+            Division((6, 4))
 
         ..  container:: example
 
             One start offset:
 
-            ::
-
-                >>> division_1 = baca.Division(
-                ...     (2, 4),
-                ...     start_offset=abjad.Offset(1),
-                ...     )
-                >>> division_2 = baca.Division((4, 4))
-                >>> division_1 + division_2
-                Division((6, 4), start_offset=Offset(1, 1))
+            >>> division_1 = baca.Division(
+            ...     (2, 4),
+            ...     start_offset=abjad.Offset(1),
+            ...     )
+            >>> division_2 = baca.Division((4, 4))
+            >>> division_1 + division_2
+            Division((6, 4), start_offset=Offset(1, 1))
 
         ..  container:: example
 
             Contiguous start offsets:
 
-            ::
-
-                >>> division_1 = baca.Division(
-                ...     (2, 4),
-                ...     start_offset=abjad.Offset(1),
-                ...     )
-                >>> division_2 = baca.Division(
-                ...     (4, 4),
-                ...     start_offset=abjad.Offset((3, 2)),
-                ...     )
-                >>> division_1 + division_2
-                Division((6, 4), start_offset=Offset(1, 1))
+            >>> division_1 = baca.Division(
+            ...     (2, 4),
+            ...     start_offset=abjad.Offset(1),
+            ...     )
+            >>> division_2 = baca.Division(
+            ...     (4, 4),
+            ...     start_offset=abjad.Offset((3, 2)),
+            ...     )
+            >>> division_1 + division_2
+            Division((6, 4), start_offset=Offset(1, 1))
 
         ..  container:: example
 
             Noncontiguous start offsets:
 
-            ::
-
-                >>> division_1 = baca.Division(
-                ...     (2, 4),
-                ...     start_offset=abjad.Offset(1),
-                ...     )
-                >>> division_2 = baca.Division(
-                ...     (4, 4),
-                ...     start_offset=abjad.Offset(10),
-                ...     )
-                >>> division_1 + division_2
-                Division((40, 4), start_offset=Offset(1, 1))
+            >>> division_1 = baca.Division(
+            ...     (2, 4),
+            ...     start_offset=abjad.Offset(1),
+            ...     )
+            >>> division_2 = baca.Division(
+            ...     (4, 4),
+            ...     start_offset=abjad.Offset(10),
+            ...     )
+            >>> division_1 + division_2
+            Division((40, 4), start_offset=Offset(1, 1))
 
         ..  container:: example
 
             Identical start offsets:
 
-            ::
-
-                >>> division_1 = baca.Division(
-                ...     (2, 4),
-                ...     start_offset=abjad.Offset(1),
-                ...     )
-                >>> division_2 = baca.Division(
-                ...     (4, 4),
-                ...     start_offset=abjad.Offset(1),
-                ...     )
-                >>> division_1 + division_2
-                Division((4, 4), start_offset=Offset(1, 1))
+            >>> division_1 = baca.Division(
+            ...     (2, 4),
+            ...     start_offset=abjad.Offset(1),
+            ...     )
+            >>> division_2 = baca.Division(
+            ...     (4, 4),
+            ...     start_offset=abjad.Offset(1),
+            ...     )
+            >>> division_1 + division_2
+            Division((4, 4), start_offset=Offset(1, 1))
 
         ..  container:: example
 
             Overlapping start offsets:
 
-            ::
-
-                >>> division_1 = baca.Division(
-                ...     (2, 4),
-                ...     start_offset=abjad.Offset(1),
-                ...     )
-                >>> division_2 = baca.Division(
-                ...     (4, 4),
-                ...     start_offset=abjad.Offset((5, 4)),
-                ...     )
-                >>> division_1 + division_2
-                Division((5, 4), start_offset=Offset(1, 1))
+            >>> division_1 = baca.Division(
+            ...     (2, 4),
+            ...     start_offset=abjad.Offset(1),
+            ...     )
+            >>> division_2 = baca.Division(
+            ...     (4, 4),
+            ...     start_offset=abjad.Offset((5, 4)),
+            ...     )
+            >>> division_1 + division_2
+            Division((5, 4), start_offset=Offset(1, 1))
 
         Returns new division.
         '''
@@ -452,122 +398,92 @@ class Division(abjad.NonreducedFraction):
 
             No timespans:
 
-            ::
+            >>> division_1 = baca.Division((6, 2))
+            >>> division_2 = baca.Division((4, 2))
 
-                >>> division_1 = baca.Division((6, 2))
-                >>> division_2 = baca.Division((4, 2))
+            >>> division_1 - division_2
+            Division((2, 2))
 
-            ::
-
-                >>> division_1 - division_2
-                Division((2, 2))
-
-            ::
-
-                >>> division_2 - division_1
-                Division((-2, 2))
+            >>> division_2 - division_1
+            Division((-2, 2))
 
         ..  container:: example
 
             Overlapping timespans that start at the same time:
 
-            ::
+            >>> division_1 = baca.Division(
+            ...     (4, 1),
+            ...     start_offset=abjad.Offset(10),
+            ...     )
+            >>> division_2 = baca.Division(
+            ...     (2, 1),
+            ...     start_offset=abjad.Offset(10),
+            ...     )
 
-                >>> division_1 = baca.Division(
-                ...     (4, 1),
-                ...     start_offset=abjad.Offset(10),
-                ...     )
-                >>> division_2 = baca.Division(
-                ...     (2, 1),
-                ...     start_offset=abjad.Offset(10),
-                ...     )
+            >>> division_1 - division_2
+            Division((2, 1), start_offset=Offset(12, 1))
 
-            ::
-
-                >>> division_1 - division_2
-                Division((2, 1), start_offset=Offset(12, 1))
-
-            ::
-
-                >>> division_2 - division_1
-                Division((-2, 1), start_offset=Offset(12, 1))
+            >>> division_2 - division_1
+            Division((-2, 1), start_offset=Offset(12, 1))
 
         ..  container:: example
 
             Overlapping timespans that start at different times:
 
-            ::
+            >>> division_1 = baca.Division(
+            ...     (4, 1),
+            ...     start_offset=abjad.Offset(10),
+            ...     )
+            >>> division_2 = baca.Division(
+            ...     (4, 1),
+            ...     start_offset=abjad.Offset(12),
+            ...     )
 
-                >>> division_1 = baca.Division(
-                ...     (4, 1),
-                ...     start_offset=abjad.Offset(10),
-                ...     )
-                >>> division_2 = baca.Division(
-                ...     (4, 1),
-                ...     start_offset=abjad.Offset(12),
-                ...     )
+            >>> division_1 - division_2
+            Division((2, 1), start_offset=Offset(10, 1))
 
-            ::
-
-                >>> division_1 - division_2
-                Division((2, 1), start_offset=Offset(10, 1))
-
-            ::
-
-                >>> division_2 - division_1
-                Division((2, 1), start_offset=Offset(14, 1))
+            >>> division_2 - division_1
+            Division((2, 1), start_offset=Offset(14, 1))
 
         ..  container:: example
 
             Nonoverlapping timespans:
 
-            ::
+            >>> division_1 = baca.Division(
+            ...     (6, 2),
+            ...     start_offset=abjad.Offset(0),
+            ...     )
+            >>> division_2 = baca.Division(
+            ...     (4, 2),
+            ...     start_offset=abjad.Offset(20),
+            ...     )
 
-                >>> division_1 = baca.Division(
-                ...     (6, 2),
-                ...     start_offset=abjad.Offset(0),
-                ...     )
-                >>> division_2 = baca.Division(
-                ...     (4, 2),
-                ...     start_offset=abjad.Offset(20),
-                ...     )
+            >>> division_1 - division_2
+            Division((6, 2), start_offset=Offset(0, 1))
 
-            ::
-
-                >>> division_1 - division_2
-                Division((6, 2), start_offset=Offset(0, 1))
-
-            ::
-
-                >>> division_2 - division_1
-                Division((4, 2), start_offset=Offset(20, 1))
+            >>> division_2 - division_1
+            Division((4, 2), start_offset=Offset(20, 1))
 
         ..  container:: example
 
              Raises exception when one division has a start offset and the
              other does not:
 
-            ::
+            >>> division_1 = baca.Division(
+            ...     (6, 4),
+            ...     start_offset=abjad.Offset(5),
+            ...     )
+            >>> division_2 = baca.Division((2, 4))
 
-                >>> division_1 = baca.Division(
-                ...     (6, 4),
-                ...     start_offset=abjad.Offset(5),
-                ...     )
-                >>> division_2 = baca.Division((2, 4))
+            >>> division_1 - division_2
+            Traceback (most recent call last):
+            ...
+            Exception: both divisions must have (or not have) start offsets.
 
-            ::
-
-                >>> division_1 - division_2
-                Traceback (most recent call last):
-                ...
-                Exception: both divisions must have (or not have) start offsets.
-
-            ::
-
-                >>> division_2 - division_1
-                Traceback (most recent call last):
-                ...
-                Exception: both divisions must have (or not have) start offsets.
+            >>> division_2 - division_1
+            Traceback (most recent call last):
+            ...
+            Exception: both divisions must have (or not have) start offsets.
 
         Uses timespan arithmetic when both divisions have a start offset.
 
@@ -644,27 +560,19 @@ class Division(abjad.NonreducedFraction):
 
             Gets duration:
 
-            ::
+            >>> division = baca.Division((3, 8))
 
-                >>> division = baca.Division((3, 8))
-
-            ::
-
-                >>> division.duration
-                Duration(3, 8)
+            >>> division.duration
+            Duration(3, 8)
 
         ..  container:: example
 
             Gets duration:
 
-            ::
+            >>> division = baca.Division((6, 4))
 
-                >>> division = baca.Division((6, 4))
-
-            ::
-
-                >>> division.duration
-                Duration(3, 2)
+            >>> division.duration
+            Duration(3, 2)
 
         Returns duration.
         '''
@@ -678,34 +586,26 @@ class Division(abjad.NonreducedFraction):
 
             Division with payload:
 
-            ::
+            >>> division = baca.Division(
+            ...     (3, 8),
+            ...     payload=abjad.rhythmmakertools.NoteRhythmMaker(),
+            ...     start_offset=abjad.Offset((5, 4)),
+            ...     )
 
-                >>> division = baca.Division(
-                ...     (3, 8),
-                ...     payload=abjad.rhythmmakertools.NoteRhythmMaker(),
-                ...     start_offset=abjad.Offset((5, 4)),
-                ...     )
-
-            ::
-
-                >>> division.payload
-                NoteRhythmMaker()
+            >>> division.payload
+            NoteRhythmMaker()
 
         ..  container:: example
 
             Division without duration:
 
-            ::
+            >>> division = baca.Division(
+            ...     (3, 8),
+            ...     start_offset=abjad.Offset((5, 4)),
+            ...     )
 
-                >>> division = baca.Division(
-                ...     (3, 8),
-                ...     start_offset=abjad.Offset((5, 4)),
-                ...     )
-
-            ::
-
-                >>> division.payload is None
-                True
+            >>> division.payload is None
+            True
 
         Set to object or none.
 
@@ -723,30 +623,22 @@ class Division(abjad.NonreducedFraction):
 
             Division with start offset:
 
-            ::
+            >>> division = baca.Division(
+            ...     (3, 8),
+            ...     start_offset=abjad.Offset((5, 4)),
+            ...     )
 
-                >>> division = baca.Division(
-                ...     (3, 8),
-                ...     start_offset=abjad.Offset((5, 4)),
-                ...     )
-
-            ::
-
-                >>> division.start_offset
-                Offset(5, 4)
+            >>> division.start_offset
+            Offset(5, 4)
 
         ..  container:: example
 
             Division without start offset:
 
-            ::
+            >>> division = baca.Division((3, 8))
 
-                >>> division = baca.Division((3, 8))
-
-            ::
-
-                >>> division.start_offset is None
-                True
+            >>> division.start_offset is None
+            True
 
         Set to offset or none.
 
@@ -764,30 +656,22 @@ class Division(abjad.NonreducedFraction):
 
             Division with start offset:
 
-            ::
+            >>> division = baca.Division(
+            ...     (3, 8),
+            ...     start_offset=abjad.Offset((5, 4)),
+            ...     )
 
-                >>> division = baca.Division(
-                ...     (3, 8),
-                ...     start_offset=abjad.Offset((5, 4)),
-                ...     )
-
-            ::
-
-                >>> division.stop_offset
-                Offset(13, 8)
+            >>> division.stop_offset
+            Offset(13, 8)
 
         ..  container:: example
 
             Division without start offset:
 
-            ::
+            >>> division = baca.Division((3, 8))
 
-                >>> division = baca.Division((3, 8))
-
-            ::
-
-                >>> division.stop_offset is None
-                True
+            >>> division.stop_offset is None
+            True
 
             Returns none when start offset is none.
 
@@ -807,56 +691,52 @@ class Division(abjad.NonreducedFraction):
 
             Yields all positive durations in Cantor diagonalized order:
 
-            ::
-
-                >>> generator = baca.Division.yield_durations()
-                >>> for i in range(16):
-                ...     next(generator)
-                ...
-                Duration(1, 1)
-                Duration(2, 1)
-                Duration(1, 2)
-                Duration(1, 3)
-                Duration(1, 1)
-                Duration(3, 1)
-                Duration(4, 1)
-                Duration(3, 2)
-                Duration(2, 3)
-                Duration(1, 4)
-                Duration(1, 5)
-                Duration(1, 2)
-                Duration(1, 1)
-                Duration(2, 1)
-                Duration(5, 1)
-                Duration(6, 1)
+            >>> generator = baca.Division.yield_durations()
+            >>> for i in range(16):
+            ...     next(generator)
+            ...
+            Duration(1, 1)
+            Duration(2, 1)
+            Duration(1, 2)
+            Duration(1, 3)
+            Duration(1, 1)
+            Duration(3, 1)
+            Duration(4, 1)
+            Duration(3, 2)
+            Duration(2, 3)
+            Duration(1, 4)
+            Duration(1, 5)
+            Duration(1, 2)
+            Duration(1, 1)
+            Duration(2, 1)
+            Duration(5, 1)
+            Duration(6, 1)
 
         ..  container:: example
 
             Yields all positive durations in Cantor diagonalized order
             uniquely:
 
-            ::
-
-                >>> generator = baca.Division.yield_durations(unique=True)
-                >>> for i in range(16):
-                ...     next(generator)
-                ...
-                Duration(1, 1)
-                Duration(2, 1)
-                Duration(1, 2)
-                Duration(1, 3)
-                Duration(3, 1)
-                Duration(4, 1)
-                Duration(3, 2)
-                Duration(2, 3)
-                Duration(1, 4)
-                Duration(1, 5)
-                Duration(5, 1)
-                Duration(6, 1)
-                Duration(5, 2)
-                Duration(4, 3)
-                Duration(3, 4)
-                Duration(2, 5)
+            >>> generator = baca.Division.yield_durations(unique=True)
+            >>> for i in range(16):
+            ...     next(generator)
+            ...
+            Duration(1, 1)
+            Duration(2, 1)
+            Duration(1, 2)
+            Duration(1, 3)
+            Duration(3, 1)
+            Duration(4, 1)
+            Duration(3, 2)
+            Duration(2, 3)
+            Duration(1, 4)
+            Duration(1, 5)
+            Duration(5, 1)
+            Duration(6, 1)
+            Duration(5, 2)
+            Duration(4, 3)
+            Duration(3, 4)
+            Duration(2, 5)
 
         Returns generator.
         '''
@@ -880,71 +760,65 @@ class Division(abjad.NonreducedFraction):
 
             Yields durations equivalent to ``1/8``:
 
-            ::
-
-                >>> pairs = baca.Division(1, 8).yield_equivalent_durations()
-                >>> for pair in pairs: pair
-                ...
-                (Multiplier(1, 1), Duration(1, 1))
-                (Multiplier(2, 3), Duration(3, 2))
-                (Multiplier(4, 3), Duration(3, 4))
-                (Multiplier(4, 7), Duration(7, 4))
-                (Multiplier(8, 7), Duration(7, 8))
-                (Multiplier(8, 15), Duration(15, 8))
-                (Multiplier(16, 15), Duration(15, 16))
-                (Multiplier(16, 31), Duration(31, 16))
-                (Multiplier(32, 31), Duration(31, 32))
-                (Multiplier(32, 63), Duration(63, 32))
-                (Multiplier(64, 63), Duration(63, 64))
-                (Multiplier(64, 127), Duration(127, 64))
-                (Multiplier(128, 127), Duration(127, 128))
+            >>> pairs = baca.Division(1, 8).yield_equivalent_durations()
+            >>> for pair in pairs: pair
+            ...
+            (Multiplier(1, 1), Duration(1, 1))
+            (Multiplier(2, 3), Duration(3, 2))
+            (Multiplier(4, 3), Duration(3, 4))
+            (Multiplier(4, 7), Duration(7, 4))
+            (Multiplier(8, 7), Duration(7, 8))
+            (Multiplier(8, 15), Duration(15, 8))
+            (Multiplier(16, 15), Duration(15, 16))
+            (Multiplier(16, 31), Duration(31, 16))
+            (Multiplier(32, 31), Duration(31, 32))
+            (Multiplier(32, 63), Duration(63, 32))
+            (Multiplier(64, 63), Duration(63, 64))
+            (Multiplier(64, 127), Duration(127, 64))
+            (Multiplier(128, 127), Duration(127, 128))
 
         ..  container:: example
 
             Yields durations equivalent to ``1/12``:
 
-            ::
-
-                >>> pairs = baca.Division(1, 12).yield_equivalent_durations()
-                >>> for pair in pairs: pair
-                ...
-                (Multiplier(1, 1), Duration(1, 1))
-                (Multiplier(2, 3), Duration(3, 2))
-                (Multiplier(4, 3), Duration(3, 4))
-                (Multiplier(4, 7), Duration(7, 4))
-                (Multiplier(8, 7), Duration(7, 8))
-                (Multiplier(8, 15), Duration(15, 8))
-                (Multiplier(16, 15), Duration(15, 16))
-                (Multiplier(16, 31), Duration(31, 16))
-                (Multiplier(32, 31), Duration(31, 32))
-                (Multiplier(32, 63), Duration(63, 32))
-                (Multiplier(64, 63), Duration(63, 64))
-                (Multiplier(64, 127), Duration(127, 64))
-                (Multiplier(128, 127), Duration(127, 128))
+            >>> pairs = baca.Division(1, 12).yield_equivalent_durations()
+            >>> for pair in pairs: pair
+            ...
+            (Multiplier(1, 1), Duration(1, 1))
+            (Multiplier(2, 3), Duration(3, 2))
+            (Multiplier(4, 3), Duration(3, 4))
+            (Multiplier(4, 7), Duration(7, 4))
+            (Multiplier(8, 7), Duration(7, 8))
+            (Multiplier(8, 15), Duration(15, 8))
+            (Multiplier(16, 15), Duration(15, 16))
+            (Multiplier(16, 31), Duration(31, 16))
+            (Multiplier(32, 31), Duration(31, 32))
+            (Multiplier(32, 63), Duration(63, 32))
+            (Multiplier(64, 63), Duration(63, 64))
+            (Multiplier(64, 127), Duration(127, 64))
+            (Multiplier(128, 127), Duration(127, 128))
 
         ..  container:: example
 
             Yields durations equivalent to ``5/48``:
 
-            ::
-
-                >>> pairs = baca.Division(5, 48).yield_equivalent_durations()
-                >>> for pair in pairs: pair
-                ...
-                (Multiplier(5, 3), Duration(3, 1))
-                (Multiplier(5, 4), Duration(4, 1))
-                (Multiplier(5, 6), Duration(6, 1))
-                (Multiplier(5, 7), Duration(7, 1))
-                (Multiplier(5, 8), Duration(8, 1))
-                (Multiplier(10, 7), Duration(7, 2))
-                (Multiplier(2, 3), Duration(15, 2))
-                (Multiplier(4, 3), Duration(15, 4))
-                (Multiplier(20, 31), Duration(31, 4))
-                (Multiplier(40, 31), Duration(31, 8))
-                (Multiplier(40, 63), Duration(63, 8))
-                (Multiplier(80, 63), Duration(63, 16))
-                (Multiplier(80, 127), Duration(127, 16))
-                (Multiplier(160, 127), Duration(127, 32))
+            >>> pairs = baca.Division(5, 48).yield_equivalent_durations()
+            >>> for pair in pairs: pair
+            ...
+            (Multiplier(5, 3), Duration(3, 1))
+            (Multiplier(5, 4), Duration(4, 1))
+            (Multiplier(5, 6), Duration(6, 1))
+            (Multiplier(5, 7), Duration(7, 1))
+            (Multiplier(5, 8), Duration(8, 1))
+            (Multiplier(10, 7), Duration(7, 2))
+            (Multiplier(2, 3), Duration(15, 2))
+            (Multiplier(4, 3), Duration(15, 4))
+            (Multiplier(20, 31), Duration(31, 4))
+            (Multiplier(40, 31), Duration(31, 8))
+            (Multiplier(40, 63), Duration(63, 8))
+            (Multiplier(80, 63), Duration(63, 16))
+            (Multiplier(80, 127), Duration(127, 16))
+            (Multiplier(160, 127), Duration(127, 32))
 
         Defaults `minimum_written_duration` to ``1/128``.
 
@@ -975,28 +849,26 @@ class Division(abjad.NonreducedFraction):
 
         ..  container:: example
 
-            ::
-
-                >>> generator = baca.Division.yield_nonreduced_fractions()
-                >>> for i in range(16):
-                ...     next(generator)
-                ...
-                (1, 1)
-                (2, 1)
-                (1, 2)
-                (1, 3)
-                (2, 2)
-                (3, 1)
-                (4, 1)
-                (3, 2)
-                (2, 3)
-                (1, 4)
-                (1, 5)
-                (2, 4)
-                (3, 3)
-                (4, 2)
-                (5, 1)
-                (6, 1)
+            >>> generator = baca.Division.yield_nonreduced_fractions()
+            >>> for i in range(16):
+            ...     next(generator)
+            ...
+            (1, 1)
+            (2, 1)
+            (1, 2)
+            (1, 3)
+            (2, 2)
+            (3, 1)
+            (4, 1)
+            (3, 2)
+            (2, 3)
+            (1, 4)
+            (1, 5)
+            (2, 4)
+            (3, 3)
+            (4, 2)
+            (5, 1)
+            (6, 1)
 
         Returns generator.
         '''

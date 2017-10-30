@@ -11,31 +11,27 @@ class ImbricateBuilder(Builder):
 
         Defaults:
 
-        ::
+        >>> music_maker = baca.MusicMaker(
+        ...     abjad.rhythmmakertools.BeamSpecifier(
+        ...         beam_divisions_together=True,
+        ...         ),
+        ...     )
 
-            >>> music_maker = baca.MusicMaker(
-            ...     abjad.rhythmmakertools.BeamSpecifier(
-            ...         beam_divisions_together=True,
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> collections = [
-            ...     [0, 2, 10, 18, 16],
-            ...     [15, 20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ...     ]
-            >>> contribution = music_maker(
-            ...     'Voice 2',
-            ...     collections,
-            ...     baca.ImbricateBuilder(
-            ...         'Voice 1',
-            ...         [2, 19, 9, 18, 16],
-            ...         ),
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> collections = [
+        ...     [0, 2, 10, 18, 16],
+        ...     [15, 20, 19, 9, 0],
+        ...     [2, 10, 18, 16, 15],
+        ...     ]
+        >>> contribution = music_maker(
+        ...     'Voice 2',
+        ...     collections,
+        ...     baca.ImbricateBuilder(
+        ...         'Voice 1',
+        ...         [2, 19, 9, 18, 16],
+        ...         ),
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -141,39 +137,35 @@ class ImbricateBuilder(Builder):
 
         Multiple imbricated voices:
 
-        ::
+        >>> music_maker = baca.MusicMaker(
+        ...     abjad.rhythmmakertools.BeamSpecifier(
+        ...         beam_divisions_together=True,
+        ...         ),
+        ...     )
 
-            >>> music_maker = baca.MusicMaker(
-            ...     abjad.rhythmmakertools.BeamSpecifier(
-            ...         beam_divisions_together=True,
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> collections = [
-            ...     [0, 2, 10, 18, 16],
-            ...     [15, 20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ...     ]
-            >>> contribution = music_maker(
-            ...     'Voice 2',
-            ...     collections,
-            ...     baca.ImbricateBuilder(
-            ...         'Voice 1',
-            ...         [2, 19, 9],
-            ...         baca.beam_everything(),
-            ...         baca.staccati(),
-            ...         ),
-            ...     baca.ImbricateBuilder(
-            ...         'Voice 3',
-            ...         [16, 10, 18],
-            ...         baca.beam_everything(),
-            ...         baca.accents(),
-            ...         ),
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> collections = [
+        ...     [0, 2, 10, 18, 16],
+        ...     [15, 20, 19, 9, 0],
+        ...     [2, 10, 18, 16, 15],
+        ...     ]
+        >>> contribution = music_maker(
+        ...     'Voice 2',
+        ...     collections,
+        ...     baca.ImbricateBuilder(
+        ...         'Voice 1',
+        ...         [2, 19, 9],
+        ...         baca.beam_everything(),
+        ...         baca.staccati(),
+        ...         ),
+        ...     baca.ImbricateBuilder(
+        ...         'Voice 3',
+        ...         [16, 10, 18],
+        ...         baca.beam_everything(),
+        ...         baca.accents(),
+        ...         ),
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -321,44 +313,40 @@ class ImbricateBuilder(Builder):
 
         Hides tuplet brackets above imbricated voice:
 
-        ::
+        >>> music_maker = baca.MusicMaker(
+        ...     abjad.rhythmmakertools.BeamSpecifier(
+        ...         beam_divisions_together=True,
+        ...         beam_rests=True,
+        ...         ),
+        ...     baca.staccati(),
+        ...     baca.MusicRhythmSpecifier(
+        ...         rhythm_maker=baca.MusicRhythmMaker(
+        ...             talea=abjad.rhythmmakertools.Talea(
+        ...                 counts=[1],
+        ...                 denominator=16,
+        ...                 ),
+        ...             time_treatments=[1],
+        ...             ),
+        ...         ),
+        ...     )
 
-            >>> music_maker = baca.MusicMaker(
-            ...     abjad.rhythmmakertools.BeamSpecifier(
-            ...         beam_divisions_together=True,
-            ...         beam_rests=True,
-            ...         ),
-            ...     baca.staccati(),
-            ...     baca.MusicRhythmSpecifier(
-            ...         rhythm_maker=baca.MusicRhythmMaker(
-            ...             talea=abjad.rhythmmakertools.Talea(
-            ...                 counts=[1],
-            ...                 denominator=16,
-            ...                 ),
-            ...             time_treatments=[1],
-            ...             ),
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> collections = [
-            ...     [0, 2, 10, 18, 16],
-            ...     [15, 20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ...     ]
-            >>> contribution = music_maker(
-            ...     'Voice 2',
-            ...     collections,
-            ...     baca.ImbricateBuilder(
-            ...         'Voice 1',
-            ...         [2, 19, 9, 18, 16],
-            ...         baca.accents(),
-            ...         baca.beam_everything(),
-            ...         ),
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> collections = [
+        ...     [0, 2, 10, 18, 16],
+        ...     [15, 20, 19, 9, 0],
+        ...     [2, 10, 18, 16, 15],
+        ...     ]
+        >>> contribution = music_maker(
+        ...     'Voice 2',
+        ...     collections,
+        ...     baca.ImbricateBuilder(
+        ...         'Voice 1',
+        ...         [2, 19, 9, 18, 16],
+        ...         baca.accents(),
+        ...         baca.beam_everything(),
+        ...         ),
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -542,40 +530,36 @@ class ImbricateBuilder(Builder):
 
             Works with pitch-classes:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.MusicRhythmSpecifier(
+            ...         rhythm_maker=baca.MusicRhythmMaker(
+            ...             talea=abjad.rhythmmakertools.Talea(
+            ...                 counts=[3],
+            ...                 denominator=16,
+            ...                 ),
+            ...             ),
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.MusicRhythmSpecifier(
-                ...         rhythm_maker=baca.MusicRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[3],
-                ...                 denominator=16,
-                ...                 ),
-                ...             ),
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> segment = [
-                ...     abjad.NumberedPitchClass(10),
-                ...     abjad.NumberedPitchClass(6),
-                ...     abjad.NumberedPitchClass(4),
-                ...     abjad.NumberedPitchClass(3),
-                ...     ]
-                >>> contribution = music_maker(
-                ...     'Voice 2',
-                ...     collections,
-                ...     baca.ImbricateBuilder(
-                ...         'Voice 1',
-                ...         segment,
-                ...         baca.accents(),
-                ...         baca.beam_everything(),
-                ...         ),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> segment = [
+            ...     abjad.NumberedPitchClass(10),
+            ...     abjad.NumberedPitchClass(6),
+            ...     abjad.NumberedPitchClass(4),
+            ...     abjad.NumberedPitchClass(3),
+            ...     ]
+            >>> contribution = music_maker(
+            ...     'Voice 2',
+            ...     collections,
+            ...     baca.ImbricateBuilder(
+            ...         'Voice 1',
+            ...         segment,
+            ...         baca.accents(),
+            ...         baca.beam_everything(),
+            ...         ),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -647,34 +631,30 @@ class ImbricateBuilder(Builder):
 
             Skips wrapped pitches:
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
-                ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
-                ...     ]
-                >>> segment = [
-                ...     0,
-                ...     baca.coat(10),
-                ...     baca.coat(18),
-                ...     10, 18,
-                ...     ]
-                >>> contribution = music_maker(
-                ...     'Voice 2',
-                ...     collections,
-                ...     baca.ImbricateBuilder(
-                ...         'Voice 1',
-                ...         segment,
-                ...         baca.accents(),
-                ...         baca.beam_everything(),
-                ...         ),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
+            ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
+            ...     ]
+            >>> segment = [
+            ...     0,
+            ...     baca.coat(10),
+            ...     baca.coat(18),
+            ...     10, 18,
+            ...     ]
+            >>> contribution = music_maker(
+            ...     'Voice 2',
+            ...     collections,
+            ...     baca.ImbricateBuilder(
+            ...         'Voice 1',
+            ...         segment,
+            ...         baca.accents(),
+            ...         baca.beam_everything(),
+            ...         ),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -774,85 +754,78 @@ class ImbricateBuilder(Builder):
                 ...         ),
                 ...     )
 
-            ::
+            >>> voice_1_selections = []
+            >>> voice_2_selections = []
+            >>> time_signatures = []
+            >>> contribution = music_maker(
+            ...     'Voice 2',
+            ...     [[0, 2, 10, 18], [16, 15, 23]],
+            ...     baca.ImbricateBuilder(
+            ...         'Voice 1',
+            ...         [2, 10],
+            ...         baca.staccati(),
+            ...         baca.beam_everything(),
+            ...         extend_beam=True,
+            ...         ),
+            ...     )
+            >>> dictionary = contribution.selections
+            >>> voice_1_selections.append(dictionary['Voice 1'])
+            >>> voice_2_selections.append(dictionary['Voice 2'])
+            >>> time_signatures.append(contribution.time_signature)
+            >>> contribution = music_maker(
+            ...     'Voice 2',
+            ...     [[19, 13, 9, 8]],
+            ...     baca.ImbricateBuilder(
+            ...         'Voice 1',
+            ...         [13, 9],
+            ...         baca.staccati(),
+            ...         baca.beam_everything(),
+            ...         ),
+            ...     )
+            >>> dictionary = contribution.selections
+            >>> voice_1_selections.append(dictionary['Voice 1'])
+            >>> voice_2_selections.append(dictionary['Voice 2'])
+            >>> time_signatures.append(contribution.time_signature)
 
-                >>> voice_1_selections = []
-                >>> voice_2_selections = []
-                >>> time_signatures = []
-                >>> contribution = music_maker(
-                ...     'Voice 2',
-                ...     [[0, 2, 10, 18], [16, 15, 23]],
-                ...     baca.ImbricateBuilder(
-                ...         'Voice 1',
-                ...         [2, 10],
-                ...         baca.staccati(),
-                ...         baca.beam_everything(),
-                ...         extend_beam=True,
-                ...         ),
-                ...     )
-                >>> dictionary = contribution.selections
-                >>> voice_1_selections.append(dictionary['Voice 1'])
-                >>> voice_2_selections.append(dictionary['Voice 2'])
-                >>> time_signatures.append(contribution.time_signature)
-                >>> contribution = music_maker(
-                ...     'Voice 2',
-                ...     [[19, 13, 9, 8]],
-                ...     baca.ImbricateBuilder(
-                ...         'Voice 1',
-                ...         [13, 9],
-                ...         baca.staccati(),
-                ...         baca.beam_everything(),
-                ...         ),
-                ...     )
-                >>> dictionary = contribution.selections
-                >>> voice_1_selections.append(dictionary['Voice 1'])
-                >>> voice_2_selections.append(dictionary['Voice 2'])
-                >>> time_signatures.append(contribution.time_signature)
+            >>> segment_maker = baca.SegmentMaker(
+            ...     ignore_repeat_pitch_classes=True,
+            ...     measures_per_stage=[1, 1],
+            ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
+            ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
+            ...         minimum_width=abjad.Duration(1, 24),
+            ...         ),
+            ...     time_signatures=time_signatures,
+            ...     )
+            >>> segment_maker(
+            ...     baca.scope('Music Voice 2', 1),
+            ...     baca.RhythmBuilder(
+            ...         rhythm_maker=voice_2_selections[0],
+            ...         ),
+            ...     )
+            >>> segment_maker(
+            ...     baca.scope('Music Voice 2', 2),
+            ...     baca.RhythmBuilder(
+            ...         rhythm_maker=voice_2_selections[1],
+            ...         ),
+            ...     )
+            >>> segment_maker(
+            ...     baca.scope('Music Voice 1', 1),
+            ...     baca.RhythmBuilder(
+            ...         rhythm_maker=voice_1_selections[0],
+            ...         ),
+            ...     )
+            >>> segment_maker(
+            ...     baca.scope('Music Voice 1', 2),
+            ...     baca.RhythmBuilder(
+            ...         rhythm_maker=voice_1_selections[1],
+            ...         ),
+            ...     )
 
-            ::
-
-                >>> segment_maker = baca.SegmentMaker(
-                ...     ignore_repeat_pitch_classes=True,
-                ...     measures_per_stage=[1, 1],
-                ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
-                ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
-                ...         minimum_width=abjad.Duration(1, 24),
-                ...         ),
-                ...     time_signatures=time_signatures,
-                ...     )
-                >>> segment_maker(
-                ...     baca.scope('Music Voice 2', 1),
-                ...     baca.RhythmBuilder(
-                ...         rhythm_maker=voice_2_selections[0],
-                ...         ),
-                ...     )
-                >>> segment_maker(
-                ...     baca.scope('Music Voice 2', 2),
-                ...     baca.RhythmBuilder(
-                ...         rhythm_maker=voice_2_selections[1],
-                ...         ),
-                ...     )
-                >>> segment_maker(
-                ...     baca.scope('Music Voice 1', 1),
-                ...     baca.RhythmBuilder(
-                ...         rhythm_maker=voice_1_selections[0],
-                ...         ),
-                ...     )
-                >>> segment_maker(
-                ...     baca.scope('Music Voice 1', 2),
-                ...     baca.RhythmBuilder(
-                ...         rhythm_maker=voice_1_selections[1],
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> result = segment_maker.run(is_doc_example=True)
-                >>> lilypond_file, metadata = result
-                >>> voice = lilypond_file['Music Voice 2']
-                >>> abjad.override(voice).beam.positions = (-5, -5)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
-
+            >>> result = segment_maker.run(is_doc_example=True)
+            >>> lilypond_file, metadata = result
+            >>> voice = lilypond_file['Music Voice 2']
+            >>> abjad.override(voice).beam.positions = (-5, -5)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -982,31 +955,27 @@ class ImbricateBuilder(Builder):
 
             Works with chords:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...         beam_divisions_together=True,
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     abjad.rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     {0, 2, 10, 18, 16},
-                ...     [15, 20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     ]
-                >>> contribution = music_maker(
-                ...     'Voice 2',
-                ...     collections,
-                ...     baca.ImbricateBuilder(
-                ...         'Voice 1',
-                ...         [2, 19, 9, 18, 16],
-                ...         ),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     {0, 2, 10, 18, 16},
+            ...     [15, 20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     ]
+            >>> contribution = music_maker(
+            ...     'Voice 2',
+            ...     collections,
+            ...     baca.ImbricateBuilder(
+            ...         'Voice 1',
+            ...         [2, 19, 9, 18, 16],
+            ...         ),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1096,32 +1065,28 @@ class ImbricateBuilder(Builder):
 
             Works with rests:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...         beam_divisions_together=True,
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     abjad.rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18, 16],
-                ...     [15, 20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     ]
-                >>> contribution = music_maker(
-                ...     'Voice 2',
-                ...     collections,
-                ...     baca.ImbricateBuilder(
-                ...         'Voice 1',
-                ...         [2, 19, 9, 18, 16],
-                ...         ),
-                ...     baca.rests_around([2], [2]),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18, 16],
+            ...     [15, 20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     ]
+            >>> contribution = music_maker(
+            ...     'Voice 2',
+            ...     collections,
+            ...     baca.ImbricateBuilder(
+            ...         'Voice 1',
+            ...         [2, 19, 9, 18, 16],
+            ...         ),
+            ...     baca.rests_around([2], [2]),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1379,35 +1344,31 @@ class ImbricateBuilder(Builder):
 
             Allows unused pitches:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...         beam_divisions_together=True,
+            ...         beam_rests=True,
+            ...         ),
+            ...     baca.staccati(),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     abjad.rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         beam_rests=True,
-                ...         ),
-                ...     baca.staccati(),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18, 16],
-                ...     [15, 20, 19, 9, 0],
-                ...     ]
-                >>> contribution = music_maker(
-                ...     'Voice 2',
-                ...     collections,
-                ...     baca.ImbricateBuilder(
-                ...         'Voice 1',
-                ...         [2, 19, 9, 18, 16],
-                ...         baca.accents(),
-                ...         baca.beam_everything(),
-                ...         allow_unused_pitches=True,
-                ...         ),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18, 16],
+            ...     [15, 20, 19, 9, 0],
+            ...     ]
+            >>> contribution = music_maker(
+            ...     'Voice 2',
+            ...     collections,
+            ...     baca.ImbricateBuilder(
+            ...         'Voice 1',
+            ...         [2, 19, 9, 18, 16],
+            ...         baca.accents(),
+            ...         baca.beam_everything(),
+            ...         allow_unused_pitches=True,
+            ...         ),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1495,47 +1456,41 @@ class ImbricateBuilder(Builder):
 
             Raises exception on unused pitches:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...         beam_divisions_together=True,
+            ...         beam_rests=True,
+            ...         ),
+            ...     baca.staccati(),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     abjad.rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         beam_rests=True,
-                ...         ),
-                ...     baca.staccati(),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18, 16],
-                ...     [15, 20, 19, 9, 0],
-                ...     ]
-                >>> result = music_maker(
-                ...     'Voice 2',
-                ...     collections,
-                ...     baca.ImbricateBuilder(
-                ...         'Voice 1',
-                ...         [2, 19, 9, 18, 16],
-                ...         baca.accents(),
-                ...         baca.beam_everything(),
-                ...         ),
-                ...     )
-                Traceback (most recent call last):
-                    ...
-                Exception: Cursor(source=Sequence(items=(2, 19, 9, 18, 16)),
-                position=4, singletons=True, suppress_exception=True)
-                used only 3 of 5 pitches.
+            >>> collections = [
+            ...     [0, 2, 10, 18, 16],
+            ...     [15, 20, 19, 9, 0],
+            ...     ]
+            >>> result = music_maker(
+            ...     'Voice 2',
+            ...     collections,
+            ...     baca.ImbricateBuilder(
+            ...         'Voice 1',
+            ...         [2, 19, 9, 18, 16],
+            ...         baca.accents(),
+            ...         baca.beam_everything(),
+            ...         ),
+            ...     )
+            Traceback (most recent call last):
+                ...
+            Exception: Cursor(source=Sequence(items=(2, 19, 9, 18, 16)),
+            position=4, singletons=True, suppress_exception=True)
+            used only 3 of 5 pitches.
 
         ..  container:: example
 
             Defaults to none:
 
-            ::
-
-                >>> specifier = baca.ImbricateBuilder()
-                >>> specifier.allow_unused_pitches is None
-                True
+            >>> specifier = baca.ImbricateBuilder()
+            >>> specifier.allow_unused_pitches is None
+            True
 
         Set to true, false or none.
 
@@ -1573,36 +1528,32 @@ class ImbricateBuilder(Builder):
 
             Hockets voices:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...         beam_divisions_together=True,
+            ...         beam_rests=True,
+            ...         ),
+            ...     baca.staccati(),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     abjad.rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         beam_rests=True,
-                ...         ),
-                ...     baca.staccati(),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18, 16],
-                ...     [15, 20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     ]
-                >>> contribution = music_maker(
-                ...     'Voice 2',
-                ...     collections,
-                ...     baca.ImbricateBuilder(
-                ...         'Voice 1',
-                ...         [2, 19, 9, 18, 16],
-                ...         baca.accents(),
-                ...         baca.beam_everything(),
-                ...         hocket=True,
-                ...         ),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18, 16],
+            ...     [15, 20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     ]
+            >>> contribution = music_maker(
+            ...     'Voice 2',
+            ...     collections,
+            ...     baca.ImbricateBuilder(
+            ...         'Voice 1',
+            ...         [2, 19, 9, 18, 16],
+            ...         baca.accents(),
+            ...         baca.beam_everything(),
+            ...         hocket=True,
+            ...         ),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1708,11 +1659,9 @@ class ImbricateBuilder(Builder):
 
             Defaults to none:
 
-            ::
-
-                >>> specifier = baca.ImbricateBuilder()
-                >>> specifier.hocket is None
-                True
+            >>> specifier = baca.ImbricateBuilder()
+            >>> specifier.hocket is None
+            True
 
         Set to true, false or none.
 
@@ -1736,35 +1685,31 @@ class ImbricateBuilder(Builder):
 
             Selects last nine notes:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...         beam_divisions_together=True,
+            ...         beam_rests=True,
+            ...         ),
+            ...     baca.staccati(),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     abjad.rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         beam_rests=True,
-                ...         ),
-                ...     baca.staccati(),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
-                ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
-                ...     ]
-                >>> contribution = music_maker(
-                ...     'Voice 2',
-                ...     collections,
-                ...     baca.ImbricateBuilder(
-                ...         'Voice 1',
-                ...         [2, 18, 16, 15],
-                ...         baca.accents(),
-                ...         baca.beam_everything(),
-                ...         selector=baca.select().plts()[-9:],
-                ...         ),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
+            ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
+            ...     ]
+            >>> contribution = music_maker(
+            ...     'Voice 2',
+            ...     collections,
+            ...     baca.ImbricateBuilder(
+            ...         'Voice 1',
+            ...         [2, 18, 16, 15],
+            ...         baca.accents(),
+            ...         baca.beam_everything(),
+            ...         selector=baca.select().plts()[-9:],
+            ...         ),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1894,11 +1839,9 @@ class ImbricateBuilder(Builder):
 
             Defaults to none:
 
-            ::
-
-                >>> specifier = baca.ImbricateBuilder()
-                >>> specifier.selector is None
-                True
+            >>> specifier = baca.ImbricateBuilder()
+            >>> specifier.selector is None
+            True
 
         Set to selector or none.
 
@@ -1914,34 +1857,30 @@ class ImbricateBuilder(Builder):
 
             Beams nothing:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...         beam_divisions_together=True,
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     abjad.rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18, 16],
-                ...     [15, 20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     ]
-                >>> contribution = music_maker(
-                ...     'Voice 2',
-                ...     collections,
-                ...     baca.ImbricateBuilder(
-                ...         'Voice 1',
-                ...         [2, 19, 9, 18, 16],
-                ...         abjad.rhythmmakertools.BeamSpecifier(
-                ...             beam_each_division=False,
-                ...             ),
-                ...         ),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18, 16],
+            ...     [15, 20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     ]
+            >>> contribution = music_maker(
+            ...     'Voice 2',
+            ...     collections,
+            ...     baca.ImbricateBuilder(
+            ...         'Voice 1',
+            ...         [2, 19, 9, 18, 16],
+            ...         abjad.rhythmmakertools.BeamSpecifier(
+            ...             beam_each_division=False,
+            ...             ),
+            ...         ),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2047,34 +1986,30 @@ class ImbricateBuilder(Builder):
 
             Beams divisions together but excludes skips:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...         beam_divisions_together=True,
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     abjad.rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18, 16],
-                ...     [15, 20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     ]
-                >>> contribution = music_maker(
-                ...     'Voice 2',
-                ...     collections,
-                ...     baca.ImbricateBuilder(
-                ...         'Voice 1',
-                ...         [2, 19, 9, 18, 16],
-                ...         abjad.rhythmmakertools.BeamSpecifier(
-                ...             beam_divisions_together=True,
-                ...             ),
-                ...         ),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18, 16],
+            ...     [15, 20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     ]
+            >>> contribution = music_maker(
+            ...     'Voice 2',
+            ...     collections,
+            ...     baca.ImbricateBuilder(
+            ...         'Voice 1',
+            ...         [2, 19, 9, 18, 16],
+            ...         abjad.rhythmmakertools.BeamSpecifier(
+            ...             beam_divisions_together=True,
+            ...             ),
+            ...         ),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2190,32 +2125,28 @@ class ImbricateBuilder(Builder):
 
             Beams divisions together and includes skips:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...         beam_divisions_together=True,
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     abjad.rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18, 16],
-                ...     [15, 20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     ]
-                >>> contribution = music_maker(
-                ...     'Voice 2',
-                ...     collections,
-                ...     baca.ImbricateBuilder(
-                ...         'Voice 1',
-                ...         [2, 19, 9, 18, 16],
-                ...         baca.beam_everything(),
-                ...         ),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18, 16],
+            ...     [15, 20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     ]
+            >>> contribution = music_maker(
+            ...     'Voice 2',
+            ...     collections,
+            ...     baca.ImbricateBuilder(
+            ...         'Voice 1',
+            ...         [2, 19, 9, 18, 16],
+            ...         baca.beam_everything(),
+            ...         ),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2331,34 +2262,30 @@ class ImbricateBuilder(Builder):
 
             Beams each division and includes skips:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...         beam_divisions_together=True,
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     abjad.rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18, 16],
-                ...     [15, 20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     ]
-                >>> contribution = music_maker(
-                ...     'Voice 2',
-                ...     collections,
-                ...     baca.ImbricateBuilder(
-                ...         'Voice 1',
-                ...         [2, 19, 9, 18, 16],
-                ...         abjad.rhythmmakertools.BeamSpecifier(
-                ...             beam_rests=True,
-                ...             ),
-                ...         ),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18, 16],
+            ...     [15, 20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     ]
+            >>> contribution = music_maker(
+            ...     'Voice 2',
+            ...     collections,
+            ...     baca.ImbricateBuilder(
+            ...         'Voice 1',
+            ...         [2, 19, 9, 18, 16],
+            ...         abjad.rhythmmakertools.BeamSpecifier(
+            ...             beam_rests=True,
+            ...             ),
+            ...         ),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2472,34 +2399,30 @@ class ImbricateBuilder(Builder):
 
             Truncates ties:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.MusicRhythmSpecifier(
+            ...         rhythm_maker=baca.MusicRhythmMaker(
+            ...             talea=abjad.rhythmmakertools.Talea(
+            ...                 counts=[5],
+            ...                 denominator=32,
+            ...                 ),
+            ...             ),
+            ...         ),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.MusicRhythmSpecifier(
-                ...         rhythm_maker=baca.MusicRhythmMaker(
-                ...             talea=abjad.rhythmmakertools.Talea(
-                ...                 counts=[5],
-                ...                 denominator=32,
-                ...                 ),
-                ...             ),
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker(
-                ...     'Voice 2',
-                ...     collections,
-                ...     baca.ImbricateBuilder(
-                ...         'Voice 1',
-                ...         [2, 10, 18, 19, 9],
-                ...         baca.beam_everything(),
-                ...         truncate_ties=True,
-                ...         ),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker(
+            ...     'Voice 2',
+            ...     collections,
+            ...     baca.ImbricateBuilder(
+            ...         'Voice 1',
+            ...         [2, 10, 18, 19, 9],
+            ...         baca.beam_everything(),
+            ...         truncate_ties=True,
+            ...         ),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2591,11 +2514,9 @@ class ImbricateBuilder(Builder):
 
             Defaults to none:
 
-            ::
-
-                >>> specifier = baca.ImbricateBuilder()
-                >>> specifier.truncate_ties is None
-                True
+            >>> specifier = baca.ImbricateBuilder()
+            >>> specifier.truncate_ties is None
+            True
 
         Set to true, false or none.
 

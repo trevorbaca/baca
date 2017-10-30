@@ -9,198 +9,148 @@ class PitchArrayCell(abjad.AbjadObject):
 
         A pitch array cell:
 
-        ::
+        >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+        >>> print(array)
+        [ ] [     ] [ ]
+        [     ] [ ] [ ]
 
-            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
-            >>> print(array)
-            [ ] [     ] [ ]
-            [     ] [ ] [ ]
+        >>> cell = array[0][1]
 
-        ::
+        >>> cell
+        PitchArrayCell(width=2)
 
-            >>> cell = array[0][1]
+        >>> cell.column_indices
+        (1, 2)
 
-        ::
+        >>> cell.indices
+        (0, (1, 2))
 
-            >>> cell
-            PitchArrayCell(width=2)
+        >>> cell.is_first_in_row
+        False
 
-        ::
+        >>> cell.is_last_in_row
+        False
 
-            >>> cell.column_indices
-            (1, 2)
+        >>> cell.next
+        PitchArrayCell(width=1)
 
-        ::
-
-            >>> cell.indices
-            (0, (1, 2))
-
-        ::
-
-            >>> cell.is_first_in_row
-            False
-
-        ::
-
-            >>> cell.is_last_in_row
-            False
-
-        ::
-
-            >>> cell.next
-            PitchArrayCell(width=1)
-
-        ::
-
-            >>> abjad.f(cell.parent_array)
-            baca.PitchArray(
-                rows=(
-                    baca.PitchArrayRow(
-                        cells=(
-                            baca.PitchArrayCell(
-                                width=1,
-                                ),
-                            baca.PitchArrayCell(
-                                width=2,
-                                ),
-                            baca.PitchArrayCell(
-                                width=1,
-                                ),
+        >>> abjad.f(cell.parent_array)
+        baca.PitchArray(
+            rows=(
+                baca.PitchArrayRow(
+                    cells=(
+                        baca.PitchArrayCell(
+                            width=1,
                             ),
-                        ),
-                    baca.PitchArrayRow(
-                        cells=(
-                            baca.PitchArrayCell(
-                                width=2,
-                                ),
-                            baca.PitchArrayCell(
-                                width=1,
-                                ),
-                            baca.PitchArrayCell(
-                                width=1,
-                                ),
+                        baca.PitchArrayCell(
+                            width=2,
+                            ),
+                        baca.PitchArrayCell(
+                            width=1,
                             ),
                         ),
                     ),
-                )
-
-        ::
-
-            >>> abjad.f(cell.parent_column)
-            baca.PitchArrayColumn(
-                cells=(
-                    baca.PitchArrayCell(
-                        width=2,
-                        ),
-                    baca.PitchArrayCell(
-                        width=2,
-                        ),
-                    ),
-                )
-
-        ::
-
-            >>> abjad.f(cell.parent_row)
-            baca.PitchArrayRow(
-                cells=(
-                    baca.PitchArrayCell(
-                        width=1,
-                        ),
-                    baca.PitchArrayCell(
-                        width=2,
-                        ),
-                    baca.PitchArrayCell(
-                        width=1,
+                baca.PitchArrayRow(
+                    cells=(
+                        baca.PitchArrayCell(
+                            width=2,
+                            ),
+                        baca.PitchArrayCell(
+                            width=1,
+                            ),
+                        baca.PitchArrayCell(
+                            width=1,
+                            ),
                         ),
                     ),
-                )
+                ),
+            )
 
-        ::
+        >>> abjad.f(cell.parent_column)
+        baca.PitchArrayColumn(
+            cells=(
+                baca.PitchArrayCell(
+                    width=2,
+                    ),
+                baca.PitchArrayCell(
+                    width=2,
+                    ),
+                ),
+            )
 
-            >>> cell.pitches is None
-            True
+        >>> abjad.f(cell.parent_row)
+        baca.PitchArrayRow(
+            cells=(
+                baca.PitchArrayCell(
+                    width=1,
+                    ),
+                baca.PitchArrayCell(
+                    width=2,
+                    ),
+                baca.PitchArrayCell(
+                    width=1,
+                    ),
+                ),
+            )
 
-        ::
+        >>> cell.pitches is None
+        True
 
-            >>> cell.previous
-            PitchArrayCell(width=1)
+        >>> cell.previous
+        PitchArrayCell(width=1)
 
-        ::
+        >>> cell.row_index
+        0
 
-            >>> cell.row_index
-            0
+        >>> cell.item
+        2
 
-        ::
-
-            >>> cell.item
-            2
-
-        ::
-
-            >>> cell.width
-            2
+        >>> cell.width
+        2
 
     ..  container:: example
 
         Initializes empty:
 
-        ::
-
-            >>> baca.PitchArrayCell()
-            PitchArrayCell(width=1)
+        >>> baca.PitchArrayCell()
+        PitchArrayCell(width=1)
 
         Initializes with width:
 
-        ::
-
-            >>> baca.PitchArrayCell(width=2)
-            PitchArrayCell(width=2)
+        >>> baca.PitchArrayCell(width=2)
+        PitchArrayCell(width=2)
 
         Initializes with pitch:
 
-        ::
-
-            >>> baca.PitchArrayCell(pitches=[abjad.NamedPitch(0)])
-            PitchArrayCell(pitches=[NamedPitch("c'")], width=1)
+        >>> baca.PitchArrayCell(pitches=[abjad.NamedPitch(0)])
+        PitchArrayCell(pitches=[NamedPitch("c'")], width=1)
 
         Initializes with pitch numbers:
 
-        ::
-
-
-            >>> baca.PitchArrayCell(pitches=[0, 2, 4])
-            PitchArrayCell(pitches=[NamedPitch("c'"), NamedPitch("d'"), NamedPitch("e'")], width=1)
-
+        >>> baca.PitchArrayCell(pitches=[0, 2, 4])
+        PitchArrayCell(pitches=[NamedPitch("c'"), NamedPitch("d'"), NamedPitch("e'")], width=1)
 
         Initializes with pitches:
 
-        ::
-
-            >>> pitches = [abjad.NamedPitch(_) for _ in [0, 2, 4]]
-            >>> baca.PitchArrayCell(pitches)
-            PitchArrayCell(pitches=[NamedPitch("c'"), NamedPitch("d'"), NamedPitch("e'")], width=1)
+        >>> pitches = [abjad.NamedPitch(_) for _ in [0, 2, 4]]
+        >>> baca.PitchArrayCell(pitches)
+        PitchArrayCell(pitches=[NamedPitch("c'"), NamedPitch("d'"), NamedPitch("e'")], width=1)
 
         Initializes with pitch number and width:
 
-        ::
-
-            >>> baca.PitchArrayCell(pitches=0, width=2)
-            PitchArrayCell(pitches=[NamedPitch("c'")], width=2)
+        >>> baca.PitchArrayCell(pitches=0, width=2)
+        PitchArrayCell(pitches=[NamedPitch("c'")], width=2)
 
         Initializes with pitch and width:
 
-        ::
-
-            >>> baca.PitchArrayCell(
-            ...     pitches=[abjad.NamedPitch(0)], width=2)
-            PitchArrayCell(pitches=[NamedPitch("c'")], width=2)
+        >>> baca.PitchArrayCell(
+        ...     pitches=[abjad.NamedPitch(0)], width=2)
+        PitchArrayCell(pitches=[NamedPitch("c'")], width=2)
 
         Initializes with pitch numbers and width:
 
-        ::
-
-            >>> baca.PitchArrayCell(pitches=[0, 2, 4], width=2)
-            PitchArrayCell(pitches=[NamedPitch("c'"), NamedPitch("d'"), NamedPitch("e'")], width=2)
+        >>> baca.PitchArrayCell(pitches=[0, 2, 4], width=2)
+        PitchArrayCell(pitches=[NamedPitch("c'"), NamedPitch("d'"), NamedPitch("e'")], width=2)
 
     '''
 
@@ -369,22 +319,18 @@ class PitchArrayCell(abjad.AbjadObject):
 
             Gets column start and stop indices of cell in array:
 
-            ::
-
-                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
-                >>> cell = array[0][1]
-                >>> cell.column_indices
-                (1, 2)
+            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> cell = array[0][1]
+            >>> cell.column_indices
+            (1, 2)
 
         ..  container:: example
 
             Gets column start and stop indices of cell outside array:
 
-            ::
-
-                >>> cell = baca.PitchArrayCell()
-                >>> cell.column_indices is None
-                True
+            >>> cell = baca.PitchArrayCell()
+            >>> cell.column_indices is None
+            True
 
         Returns tuple or none.
         '''
@@ -402,22 +348,18 @@ class PitchArrayCell(abjad.AbjadObject):
 
             Gets column start index of cell in array:
 
-            ::
-
-                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
-                >>> cell = array[0][1]
-                >>> cell.column_start_index
-                1
+            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> cell = array[0][1]
+            >>> cell.column_start_index
+            1
 
         ..  container:: example
 
             Gets column start index of cell outside array:
 
-            ::
-
-                >>> cell = baca.PitchArrayCell()
-                >>> cell.column_start_index is None
-                True
+            >>> cell = baca.PitchArrayCell()
+            >>> cell.column_start_index is None
+            True
 
         Returns nonnegative integer or none.
         '''
@@ -437,22 +379,18 @@ class PitchArrayCell(abjad.AbjadObject):
 
             Gets column stop index of cell in array:
 
-            ::
-
-                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
-                >>> cell = array[0][1]
-                >>> cell.column_stop_index
-                2
+            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> cell = array[0][1]
+            >>> cell.column_stop_index
+            2
 
         ..  container:: example
 
             Gets column stop index of cell outside array:
 
-            ::
-
-                >>> cell = baca.PitchArrayCell()
-                >>> cell.column_stop_index is None
-                True
+            >>> cell = baca.PitchArrayCell()
+            >>> cell.column_stop_index is None
+            True
 
         Returns nonnegative integer or none.
         '''
@@ -465,28 +403,22 @@ class PitchArrayCell(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
 
-                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> print(array)
+            [ ] [     ] [ ]
+            [     ] [ ] [ ]
 
-            ::
-
-                >>> print(array)
-                [ ] [     ] [ ]
-                [     ] [ ] [ ]
-
-            ::
-
-                >>> for row in array:
-                ...     for cell in row:
-                ...         cell.indices
-                ...
-                (0, (0,))
-                (0, (1, 2))
-                (0, (3,))
-                (1, (0, 1))
-                (1, (2,))
-                (1, (3,))
+            >>> for row in array:
+            ...     for cell in row:
+            ...         cell.indices
+            ...
+            (0, (0,))
+            (0, (1, 2))
+            (0, (3,))
+            (1, (0, 1))
+            (1, (2,))
+            (1, (3,))
 
         Returns pair.
         '''
@@ -498,28 +430,22 @@ class PitchArrayCell(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
 
-                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> print(array)
+            [ ] [     ] [ ]
+            [     ] [ ] [ ]
 
-            ::
-
-                >>> print(array)
-                [ ] [     ] [ ]
-                [     ] [ ] [ ]
-
-            ::
-
-                >>> for row in array:
-                ...     for cell in row:
-                ...         cell, cell.is_first_in_row
-                ...
-                (PitchArrayCell(width=1), True)
-                (PitchArrayCell(width=2), False)
-                (PitchArrayCell(width=1), False)
-                (PitchArrayCell(width=2), True)
-                (PitchArrayCell(width=1), False)
-                (PitchArrayCell(width=1), False)
+            >>> for row in array:
+            ...     for cell in row:
+            ...         cell, cell.is_first_in_row
+            ...
+            (PitchArrayCell(width=1), True)
+            (PitchArrayCell(width=2), False)
+            (PitchArrayCell(width=1), False)
+            (PitchArrayCell(width=2), True)
+            (PitchArrayCell(width=1), False)
+            (PitchArrayCell(width=1), False)
 
         Returns true or false.
         '''
@@ -534,28 +460,22 @@ class PitchArrayCell(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
 
-                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> print(array)
+            [ ] [     ] [ ]
+            [     ] [ ] [ ]
 
-            ::
-
-                >>> print(array)
-                [ ] [     ] [ ]
-                [     ] [ ] [ ]
-
-            ::
-
-                >>> for row in array:
-                ...     for cell in row:
-                ...         cell, cell.is_last_in_row
-                ...
-                (PitchArrayCell(width=1), False)
-                (PitchArrayCell(width=2), False)
-                (PitchArrayCell(width=1), True)
-                (PitchArrayCell(width=2), False)
-                (PitchArrayCell(width=1), False)
-                (PitchArrayCell(width=1), True)
+            >>> for row in array:
+            ...     for cell in row:
+            ...         cell, cell.is_last_in_row
+            ...
+            (PitchArrayCell(width=1), False)
+            (PitchArrayCell(width=2), False)
+            (PitchArrayCell(width=1), True)
+            (PitchArrayCell(width=2), False)
+            (PitchArrayCell(width=1), False)
+            (PitchArrayCell(width=1), True)
 
         Returns true or false.
         '''
@@ -602,26 +522,20 @@ class PitchArrayCell(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
 
-                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> print(array)
+            [ ] [     ] [ ]
+            [     ] [ ] [ ]
 
-            ::
-
-                >>> print(array)
-                [ ] [     ] [ ]
-                [     ] [ ] [ ]
-
-            ::
-
-                >>> for row in array:
-                ...     for cell in row.cells[:-1]:
-                ...         cell, cell.next
-                ...
-                (PitchArrayCell(width=1), PitchArrayCell(width=2))
-                (PitchArrayCell(width=2), PitchArrayCell(width=1))
-                (PitchArrayCell(width=2), PitchArrayCell(width=1))
-                (PitchArrayCell(width=1), PitchArrayCell(width=1))
+            >>> for row in array:
+            ...     for cell in row.cells[:-1]:
+            ...         cell, cell.next
+            ...
+            (PitchArrayCell(width=1), PitchArrayCell(width=2))
+            (PitchArrayCell(width=2), PitchArrayCell(width=1))
+            (PitchArrayCell(width=2), PitchArrayCell(width=1))
+            (PitchArrayCell(width=1), PitchArrayCell(width=1))
 
         Returns pitch array cell.
         '''
@@ -689,26 +603,20 @@ class PitchArrayCell(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
 
-                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> print(array)
+            [ ] [     ] [ ]
+            [     ] [ ] [ ]
 
-            ::
-
-                >>> print(array)
-                [ ] [     ] [ ]
-                [     ] [ ] [ ]
-
-            ::
-
-                >>> for row in array:
-                ...     for cell in row.cells[1:]:
-                ...         cell, cell.previous
-                ...
-                (PitchArrayCell(width=2), PitchArrayCell(width=1))
-                (PitchArrayCell(width=1), PitchArrayCell(width=2))
-                (PitchArrayCell(width=1), PitchArrayCell(width=2))
-                (PitchArrayCell(width=1), PitchArrayCell(width=1))
+            >>> for row in array:
+            ...     for cell in row.cells[1:]:
+            ...         cell, cell.previous
+            ...
+            (PitchArrayCell(width=2), PitchArrayCell(width=1))
+            (PitchArrayCell(width=1), PitchArrayCell(width=2))
+            (PitchArrayCell(width=1), PitchArrayCell(width=2))
+            (PitchArrayCell(width=1), PitchArrayCell(width=1))
 
         Returns pitch array cell.
         '''
@@ -768,28 +676,20 @@ class PitchArrayCell(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array[0].cells[0].append_pitch(0)
+            >>> array[0].cells[1].append_pitch(2)
+            >>> array[0].cells[1].append_pitch(4)
 
-                >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
-                >>> array[0].cells[0].append_pitch(0)
-                >>> array[0].cells[1].append_pitch(2)
-                >>> array[0].cells[1].append_pitch(4)
+            >>> print(array)
+            [c'] [d' e'    ] [ ]
+            [          ] [ ] [ ]
 
-            ::
+            >>> array[0].cells[0].matches_cell(array[0].cells[0])
+            True
 
-                >>> print(array)
-                [c'] [d' e'    ] [ ]
-                [          ] [ ] [ ]
-
-            ::
-
-                >>> array[0].cells[0].matches_cell(array[0].cells[0])
-                True
-
-            ::
-
-                >>> array[0].cells[0].matches_cell(array[0].cells[1])
-                False
+            >>> array[0].cells[0].matches_cell(array[0].cells[1])
+            False
 
         Returns true or false.
         '''

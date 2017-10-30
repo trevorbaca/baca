@@ -9,27 +9,23 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
         Works together with negative-valued talea:
 
-        ::
+        >>> music_maker = baca.MusicMaker()
 
-            >>> music_maker = baca.MusicMaker()
-
-        ::
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     collections,
-            ...     baca.RestAffixSpecifier(
-            ...         prefix=[2],
-            ...         suffix=[3],
-            ...         ),
-            ...     counts=[1, -1],
-            ...     time_treatments=[1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.override(staff).tuplet_bracket.staff_padding = 4
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     collections,
+        ...     baca.RestAffixSpecifier(
+        ...         prefix=[2],
+        ...         suffix=[3],
+        ...         ),
+        ...     counts=[1, -1],
+        ...     time_treatments=[1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> staff = lilypond_file[abjad.Staff]
+        >>> abjad.override(staff).tuplet_bracket.staff_padding = 4
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -73,23 +69,21 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
                 }
             >>
 
-        ::
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     collections,
-            ...     baca.RestAffixSpecifier(
-            ...         prefix=[2],
-            ...         suffix=[3],
-            ...         ),
-            ...     counts=[-1, 1],
-            ...     time_treatments=[1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.override(staff).tuplet_bracket.staff_padding = 4
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     collections,
+        ...     baca.RestAffixSpecifier(
+        ...         prefix=[2],
+        ...         suffix=[3],
+        ...         ),
+        ...     counts=[-1, 1],
+        ...     time_treatments=[1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> staff = lilypond_file[abjad.Staff]
+        >>> abjad.override(staff).tuplet_bracket.staff_padding = 4
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -135,10 +129,8 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
     ..  container:: example
 
-        ::
-
-            >>> baca.RestAffixSpecifier()
-            RestAffixSpecifier()
+        >>> baca.RestAffixSpecifier()
+        RestAffixSpecifier()
 
     '''
 
@@ -187,21 +179,17 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
             With time treatments:
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     collections,
-                ...     baca.RestAffixSpecifier(prefix=[1], suffix=[1]),
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     baca.RestAffixSpecifier(prefix=[1], suffix=[1]),
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -255,24 +243,20 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
             Treats entire figure when pattern is none:
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     collections,
-                ...     baca.RestAffixSpecifier(
-                ...         prefix=[1],
-                ...         suffix=[2],
-                ...         ),
-                ...     time_treatments=[1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     baca.RestAffixSpecifier(
+            ...         prefix=[1],
+            ...         suffix=[2],
+            ...         ),
+            ...     time_treatments=[1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -309,24 +293,20 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
             Treats entire figure (of only one segment) when pattern is none:
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = [[18, 16, 15, 20, 19]]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     collections,
-                ...     baca.RestAffixSpecifier(
-                ...         prefix=[1],
-                ...         suffix=[2],
-                ...         ),
-                ...     time_treatments=[1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[18, 16, 15, 20, 19]]
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     baca.RestAffixSpecifier(
+            ...         prefix=[1],
+            ...         suffix=[2],
+            ...         ),
+            ...     time_treatments=[1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -353,25 +333,21 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
             Treats first segment and last segment in figure:
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     collections,
-                ...     baca.RestAffixSpecifier(
-                ...         pattern=abjad.Pattern(indices=[0, -1]),
-                ...         prefix=[1],
-                ...         suffix=[2],
-                ...         ),
-                ...     time_treatments=[1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     baca.RestAffixSpecifier(
+            ...         pattern=abjad.Pattern(indices=[0, -1]),
+            ...         prefix=[1],
+            ...         suffix=[2],
+            ...         ),
+            ...     time_treatments=[1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -410,25 +386,21 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
             Treats every segment in figure:
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     collections,
-                ...     baca.RestAffixSpecifier(
-                ...         pattern=abjad.index_all(),
-                ...         prefix=[1],
-                ...         suffix=[2],
-                ...         ),
-                ...     time_treatments=[1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     baca.RestAffixSpecifier(
+            ...         pattern=abjad.index_all(),
+            ...         prefix=[1],
+            ...         suffix=[2],
+            ...         ),
+            ...     time_treatments=[1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -479,20 +451,16 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     collections,
-                ...     baca.RestAffixSpecifier(prefix=[3]),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     baca.RestAffixSpecifier(prefix=[3]),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -547,20 +515,16 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     collections,
-                ...     baca.RestAffixSpecifier(suffix=[3]),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     baca.RestAffixSpecifier(suffix=[3]),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 

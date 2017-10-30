@@ -9,26 +9,20 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
         Fuses divisions together two at a time:
 
-        ::
+        >>> division_maker = baca.DivisionMaker()
+        >>> division_maker = division_maker.fuse_by_counts(
+        ...     counts=[2],
+        ...     )
 
-            >>> division_maker = baca.DivisionMaker()
-            >>> division_maker = division_maker.fuse_by_counts(
-            ...     counts=[2],
-            ...     )
+        >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
+        >>> divisions = division_maker(input_divisions)
+        >>> divisions
+        [Division((4, 8)), Division((8, 8)), Division((2, 4))]
 
-        ::
-
-            >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
-            >>> divisions = division_maker(input_divisions)
-            >>> divisions
-            [Division((4, 8)), Division((8, 8)), Division((2, 4))]
-
-        ::
-
-            >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
-            >>> music = rhythm_maker(divisions)
-            >>> lilypond_file = division_maker.show(music, input_divisions)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
+        >>> music = rhythm_maker(divisions)
+        >>> lilypond_file = division_maker.show(music, input_divisions)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -44,35 +38,29 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
         Fuses divisions together two at a time. Then splits resulting divisions
         by ``3/16`` durations:
 
-        ::
+        >>> division_maker = baca.DivisionMaker()
+        >>> division_maker = division_maker.fuse_by_counts(
+        ...     counts=[2],
+        ...     )
+        >>> division_maker = division_maker.split_by_durations(
+        ...     durations=[(3, 16)],
+        ...     remainder=abjad.Right,
+        ...     )
 
-            >>> division_maker = baca.DivisionMaker()
-            >>> division_maker = division_maker.fuse_by_counts(
-            ...     counts=[2],
-            ...     )
-            >>> division_maker = division_maker.split_by_durations(
-            ...     durations=[(3, 16)],
-            ...     remainder=abjad.Right,
-            ...     )
+        >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
+        >>> division_lists = division_maker(input_divisions)
+        >>> for division_list in division_lists:
+        ...     division_list
+        ...
+        [Division((3, 16)), Division((3, 16)), Division((1, 8))]
+        [Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((1, 16))]
+        [Division((3, 16)), Division((3, 16)), Division((1, 8))]
 
-        ::
-
-            >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
-            >>> division_lists = division_maker(input_divisions)
-            >>> for division_list in division_lists:
-            ...     division_list
-            ...
-            [Division((3, 16)), Division((3, 16)), Division((1, 8))]
-            [Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((1, 16))]
-            [Division((3, 16)), Division((3, 16)), Division((1, 8))]
-
-        ::
-
-            >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
-            >>> divisions = baca.Sequence(division_lists).flatten()
-            >>> music = rhythm_maker(divisions)
-            >>> lilypond_file = division_maker.show(music, input_divisions)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
+        >>> divisions = baca.Sequence(division_lists).flatten()
+        >>> music = rhythm_maker(divisions)
+        >>> lilypond_file = division_maker.show(music, input_divisions)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -143,24 +131,18 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
             Returns divisions unfused:
 
-            ::
+            >>> division_maker = baca.DivisionMaker()
+            >>> division_maker = division_maker.fuse_by_counts()
 
-                >>> division_maker = baca.DivisionMaker()
-                >>> division_maker = division_maker.fuse_by_counts()
+            >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
+            >>> divisions = division_maker(input_divisions)
+            >>> divisions
+            [Division((2, 8)), Division((2, 8)), Division((4, 8)), Division((4, 8)), Division((2, 4))]
 
-            ::
-
-                >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
-                >>> divisions = division_maker(input_divisions)
-                >>> divisions
-                [Division((2, 8)), Division((2, 8)), Division((4, 8)), Division((4, 8)), Division((2, 4))]
-
-            ::
-
-                >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
-                >>> music = rhythm_maker(divisions)
-                >>> lilypond_file = division_maker.show(music, input_divisions)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
+            >>> music = rhythm_maker(divisions)
+            >>> lilypond_file = division_maker.show(music, input_divisions)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -190,26 +172,20 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
             Fuses divisions two at a time:
 
-            ::
+            >>> division_maker = baca.DivisionMaker()
+            >>> division_maker = division_maker.fuse_by_counts(
+            ...     counts=[2],
+            ...     )
 
-                >>> division_maker = baca.DivisionMaker()
-                >>> division_maker = division_maker.fuse_by_counts(
-                ...     counts=[2],
-                ...     )
+            >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
+            >>> divisions = division_maker(input_divisions)
+            >>> divisions
+            [Division((4, 8)), Division((8, 8)), Division((2, 4))]
 
-            ::
-
-                >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
-                >>> divisions = division_maker(input_divisions)
-                >>> divisions
-                [Division((4, 8)), Division((8, 8)), Division((2, 4))]
-
-            ::
-
-                >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
-                >>> music = rhythm_maker(divisions)
-                >>> lilypond_file = division_maker.show(music, input_divisions)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
+            >>> music = rhythm_maker(divisions)
+            >>> lilypond_file = division_maker.show(music, input_divisions)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -227,34 +203,28 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
             Remainders to the right:
 
-            ::
+            >>> division_maker = baca.DivisionMaker()
+            >>> division_maker = division_maker.fuse_by_counts(
+            ...     counts=[2],
+            ...     )
+            >>> division_maker = division_maker.split_by_durations(
+            ...     durations=[(3, 16)],
+            ...     remainder=abjad.Right,
+            ...     )
 
-                >>> division_maker = baca.DivisionMaker()
-                >>> division_maker = division_maker.fuse_by_counts(
-                ...     counts=[2],
-                ...     )
-                >>> division_maker = division_maker.split_by_durations(
-                ...     durations=[(3, 16)],
-                ...     remainder=abjad.Right,
-                ...     )
+            >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
+            >>> division_lists = division_maker(input_divisions)
+            >>> for division_list in division_lists:
+            ...     division_list
+            [Division((3, 16)), Division((3, 16)), Division((1, 8))]
+            [Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((1, 16))]
+            [Division((3, 16)), Division((3, 16)), Division((1, 8))]
 
-            ::
-
-                >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
-                >>> division_lists = division_maker(input_divisions)
-                >>> for division_list in division_lists:
-                ...     division_list
-                [Division((3, 16)), Division((3, 16)), Division((1, 8))]
-                [Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((1, 16))]
-                [Division((3, 16)), Division((3, 16)), Division((1, 8))]
-
-            ::
-
-                >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
-                >>> divisions = baca.Sequence(division_lists).flatten()
-                >>> music = rhythm_maker(divisions)
-                >>> lilypond_file = division_maker.show(music, input_divisions)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
+            >>> divisions = baca.Sequence(division_lists).flatten()
+            >>> music = rhythm_maker(divisions)
+            >>> lilypond_file = division_maker.show(music, input_divisions)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -276,34 +246,28 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
             Remainders to the left:
 
-            ::
+            >>> division_maker = baca.DivisionMaker()
+            >>> division_maker = division_maker.fuse_by_counts(
+            ...     counts=[2],
+            ...     )
+            >>> division_maker = division_maker.split_by_durations(
+            ...     durations=[(3, 16)],
+            ...     remainder=abjad.Left,
+            ...     )
 
-                >>> division_maker = baca.DivisionMaker()
-                >>> division_maker = division_maker.fuse_by_counts(
-                ...     counts=[2],
-                ...     )
-                >>> division_maker = division_maker.split_by_durations(
-                ...     durations=[(3, 16)],
-                ...     remainder=abjad.Left,
-                ...     )
+            >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
+            >>> division_lists = division_maker(input_divisions)
+            >>> for division_list in division_lists:
+            ...     division_list
+            [Division((1, 8)), Division((3, 16)), Division((3, 16))]
+            [Division((1, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16))]
+            [Division((1, 8)), Division((3, 16)), Division((3, 16))]
 
-            ::
-
-                >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
-                >>> division_lists = division_maker(input_divisions)
-                >>> for division_list in division_lists:
-                ...     division_list
-                [Division((1, 8)), Division((3, 16)), Division((3, 16))]
-                [Division((1, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16))]
-                [Division((1, 8)), Division((3, 16)), Division((3, 16))]
-
-            ::
-
-                >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
-                >>> divisions = baca.Sequence(division_lists).flatten()
-                >>> music = rhythm_maker(divisions)
-                >>> lilypond_file = division_maker.show(music, input_divisions)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
+            >>> divisions = baca.Sequence(division_lists).flatten()
+            >>> music = rhythm_maker(divisions)
+            >>> lilypond_file = division_maker.show(music, input_divisions)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -327,26 +291,20 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
             Fuses all divisions:
 
-            ::
+            >>> division_maker = baca.DivisionMaker()
+            >>> division_maker = division_maker.fuse_by_counts(
+            ...     counts=abjad.Infinity,
+            ...     )
 
-                >>> division_maker = baca.DivisionMaker()
-                >>> division_maker = division_maker.fuse_by_counts(
-                ...     counts=abjad.Infinity,
-                ...     )
+            >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
+            >>> divisions = division_maker(input_divisions)
+            >>> divisions
+            [Division((16, 8))]
 
-            ::
-
-                >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
-                >>> divisions = division_maker(input_divisions)
-                >>> divisions
-                [Division((16, 8))]
-
-            ::
-
-                >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
-                >>> music = rhythm_maker(divisions)
-                >>> lilypond_file = division_maker.show(music, input_divisions)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
+            >>> music = rhythm_maker(divisions)
+            >>> lilypond_file = division_maker.show(music, input_divisions)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -362,32 +320,26 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
             Remainder at right:
 
-            ::
+            >>> division_maker = baca.DivisionMaker()
+            >>> division_maker = division_maker.fuse_by_counts(
+            ...     counts=abjad.Infinity,
+            ...     )
+            >>> division_maker = division_maker.split_by_durations(
+            ...     durations=[(3, 16)],
+            ...     remainder=abjad.Right,
+            ...     )
 
-                >>> division_maker = baca.DivisionMaker()
-                >>> division_maker = division_maker.fuse_by_counts(
-                ...     counts=abjad.Infinity,
-                ...     )
-                >>> division_maker = division_maker.split_by_durations(
-                ...     durations=[(3, 16)],
-                ...     remainder=abjad.Right,
-                ...     )
+            >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
+            >>> division_lists = division_maker(input_divisions)
+            >>> for division_list in division_lists:
+            ...     division_list
+            [Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((1, 8))]
 
-            ::
-
-                >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
-                >>> division_lists = division_maker(input_divisions)
-                >>> for division_list in division_lists:
-                ...     division_list
-                [Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((1, 8))]
-
-            ::
-
-                >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
-                >>> divisions = baca.Sequence(division_lists).flatten()
-                >>> music = rhythm_maker(divisions)
-                >>> lilypond_file = division_maker.show(music, input_divisions)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
+            >>> divisions = baca.Sequence(division_lists).flatten()
+            >>> music = rhythm_maker(divisions)
+            >>> lilypond_file = division_maker.show(music, input_divisions)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -408,32 +360,26 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
             Remainder at left:
 
-            ::
+            >>> division_maker = baca.DivisionMaker()
+            >>> division_maker = division_maker.fuse_by_counts(
+            ...     counts=abjad.Infinity,
+            ...     )
+            >>> division_maker = division_maker.split_by_durations(
+            ...     durations=[(3, 16)],
+            ...     remainder=abjad.Left,
+            ...     )
 
-                >>> division_maker = baca.DivisionMaker()
-                >>> division_maker = division_maker.fuse_by_counts(
-                ...     counts=abjad.Infinity,
-                ...     )
-                >>> division_maker = division_maker.split_by_durations(
-                ...     durations=[(3, 16)],
-                ...     remainder=abjad.Left,
-                ...     )
+            >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
+            >>> division_lists = division_maker(input_divisions)
+            >>> for division_list in division_lists:
+            ...     division_list
+            [Division((1, 8)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16))]
 
-            ::
-
-                >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
-                >>> division_lists = division_maker(input_divisions)
-                >>> for division_list in division_lists:
-                ...     division_list
-                [Division((1, 8)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16)), Division((3, 16))]
-
-            ::
-
-                >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
-                >>> divisions = baca.Sequence(division_lists).flatten()
-                >>> music = rhythm_maker(divisions)
-                >>> lilypond_file = division_maker.show(music, input_divisions)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
+            >>> divisions = baca.Sequence(division_lists).flatten()
+            >>> music = rhythm_maker(divisions)
+            >>> lilypond_file = division_maker.show(music, input_divisions)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -456,36 +402,28 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
             Empty input:
 
-            ::
-
-                >>> input_divisions = []
-                >>> division_lists = division_maker(input_divisions)
-                >>> for division_list in division_lists:
-                ...     division_list
+            >>> input_divisions = []
+            >>> division_lists = division_maker(input_divisions)
+            >>> for division_list in division_lists:
+            ...     division_list
 
             Works with start offset:
 
-            ::
+            >>> callback = baca.FuseByCountsDivisionCallback(
+            ...     counts=abjad.Infinity,
+            ...     )
 
-                >>> callback = baca.FuseByCountsDivisionCallback(
-                ...     counts=abjad.Infinity,
-                ...     )
+            >>> divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
+            >>> divisions = [baca.Division(_) for _ in divisions]
+            >>> divisions[0] = abjad.new(
+            ...     divisions[0],
+            ...     start_offset=abjad.Offset(1, 4),
+            ...     )
+            >>> divisions
+            [Division((0, 1), start_offset=Offset(1, 4)), Division((2, 8)), Division((4, 8)), Division((4, 8)), Division((2, 4))]
 
-            ::
-
-                >>> divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
-                >>> divisions = [baca.Division(_) for _ in divisions]
-                >>> divisions[0] = abjad.new(
-                ...     divisions[0],
-                ...     start_offset=abjad.Offset(1, 4),
-                ...     )
-                >>> divisions
-                [Division((0, 1), start_offset=Offset(1, 4)), Division((2, 8)), Division((4, 8)), Division((4, 8)), Division((2, 4))]
-
-            ::
-
-                >>> callback(divisions)
-                [Division((14, 8), start_offset=Offset(1, 4))]
+            >>> callback(divisions)
+            [Division((14, 8), start_offset=Offset(1, 4))]
 
         Returns list of division lists.
         '''

@@ -12,11 +12,9 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            ::
-
-                >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-                >>> segment = baca.pitch_class_segment(items=items)
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> items = [-2, -1.5, 6, 7, -1.5, 7]
+            >>> segment = baca.pitch_class_segment(items=items)
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -35,11 +33,9 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
         ..  container:: example expression
 
-            ::
-
-                >>> expression = baca.pitch_class_segment()
-                >>> segment = expression(items=[-2, -1.5, 6, 7, -1.5, 7])
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> expression = baca.pitch_class_segment()
+            >>> segment = expression(items=[-2, -1.5, 6, 7, -1.5, 7])
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -74,20 +70,14 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             Works with Abjad pitch-class segments:
 
-            ::
+            >>> segment_1 = abjad.PitchClassSegment([0, 1, 2, 3])
+            >>> segment_2 = baca.PitchClassSegment([0, 1, 2, 3])
 
-                >>> segment_1 = abjad.PitchClassSegment([0, 1, 2, 3])
-                >>> segment_2 = baca.PitchClassSegment([0, 1, 2, 3])
+            >>> segment_1 == segment_2
+            True
 
-            ::
-
-                >>> segment_1 == segment_2
-                True
-
-            ::
-
-                >>> segment_2 == segment_1
-                True
+            >>> segment_2 == segment_1
+            True
 
         '''
         if (not issubclass(type(argument), type(self)) and
@@ -105,14 +95,10 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             Example segment:
 
-            ::
+            >>> items = [-2, -1.5, 6, 7, -1.5, 7]
+            >>> J = baca.pitch_class_segment(items=items)
 
-                >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-                >>> J = baca.pitch_class_segment(items=items)
-
-            ::
-
-                >>> abjad.show(J) # doctest: +SKIP
+            >>> abjad.show(J) # doctest: +SKIP
 
         ..  container:: example
 
@@ -120,15 +106,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  container:: example
 
-                ::
+                >>> J.alpha()
+                PitchClassSegment([11, 11.5, 7, 6, 11.5, 6])
 
-                    >>> J.alpha()
-                    PitchClassSegment([11, 11.5, 7, 6, 11.5, 6])
-
-                ::
-
-                    >>> segment = J.alpha()
-                    >>> abjad.show(segment) # doctest: +SKIP
+                >>> segment = J.alpha()
+                >>> abjad.show(segment) # doctest: +SKIP
 
                 ..  docs::
 
@@ -147,17 +129,13 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  container:: example expression
 
-                ::
+                >>> expression = baca.pitch_class_segment(name='J')
+                >>> expression = expression.alpha()
+                >>> expression([-2, -1.5, 6, 7, -1.5, 7])
+                PitchClassSegment([11, 11.5, 7, 6, 11.5, 6])
 
-                    >>> expression = baca.pitch_class_segment(name='J')
-                    >>> expression = expression.alpha()
-                    >>> expression([-2, -1.5, 6, 7, -1.5, 7])
-                    PitchClassSegment([11, 11.5, 7, 6, 11.5, 6])
-
-                ::
-
-                    >>> segment = expression([-2, -1.5, 6, 7, -1.5, 7])
-                    >>> abjad.show(segment) # doctest: +SKIP
+                >>> segment = expression([-2, -1.5, 6, 7, -1.5, 7])
+                >>> abjad.show(segment) # doctest: +SKIP
 
                 ..  docs::
 
@@ -180,15 +158,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  container:: example
 
-                ::
+                >>> J.alpha().alpha()
+                PitchClassSegment([10, 10.5, 6, 7, 10.5, 7])
 
-                    >>> J.alpha().alpha()
-                    PitchClassSegment([10, 10.5, 6, 7, 10.5, 7])
-
-                ::
-
-                    >>> segment = J.alpha().alpha()
-                    >>> abjad.show(segment) # doctest: +SKIP
+                >>> segment = J.alpha().alpha()
+                >>> abjad.show(segment) # doctest: +SKIP
 
                 ..  docs::
 
@@ -205,34 +179,24 @@ class PitchClassSegment(abjad.PitchClassSegment):
                         \override Score.BarLine.transparent = ##f
                     }
 
-                ::
-
-                    >>> segment == J
-                    True
+                >>> segment == J
+                True
 
             ..  container:: example expression
 
-                ::
+                >>> expression = baca.pitch_class_segment(name='J')
+                >>> expression = expression.alpha()
+                >>> expression = expression.alpha()
 
-                    >>> expression = baca.pitch_class_segment(name='J')
-                    >>> expression = expression.alpha()
-                    >>> expression = expression.alpha()
+                >>> expression([-2, -1.5, 6, 7, -1.5, 7])
+                PitchClassSegment([10, 10.5, 6, 7, 10.5, 7])
 
-                ::
+                >>> expression.get_string()
+                'A(A(J))'
 
-                    >>> expression([-2, -1.5, 6, 7, -1.5, 7])
-                    PitchClassSegment([10, 10.5, 6, 7, 10.5, 7])
-
-                ::
-
-                    >>> expression.get_string()
-                    'A(A(J))'
-
-                ::
-
-                    >>> segment = expression([-2, -1.5, 6, 7, -1.5, 7])
-                    >>> markup = expression.get_markup()
-                    >>> abjad.show(segment, figure_name=markup) # doctest: +SKIP
+                >>> segment = expression([-2, -1.5, 6, 7, -1.5, 7])
+                >>> markup = expression.get_markup()
+                >>> abjad.show(segment, figure_name=markup) # doctest: +SKIP
 
                 ..  docs::
 
@@ -263,19 +227,15 @@ class PitchClassSegment(abjad.PitchClassSegment):
                         \override Score.BarLine.transparent = ##f
                     }
 
-                ::
-
-                    >>> segment == J
-                    True
+                >>> segment == J
+                True
 
         ..  container:: example
 
             Returns pitch-class segment:
 
-            ::
-
-                >>> isinstance(segment, baca.PitchClassSegment)
-                True
+            >>> isinstance(segment, baca.PitchClassSegment)
+            True
 
         '''
         if self._expression:
@@ -304,18 +264,12 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            ::
+            >>> segment = baca.pitch_class_segment([6, 0, 4, 5, 8])
 
-                >>> segment = baca.pitch_class_segment([6, 0, 4, 5, 8])
+            >>> segment.arpeggiate_down()
+            PitchSegment([42, 36, 28, 17, 8])
 
-            ::
-
-                >>> segment.arpeggiate_down()
-                PitchSegment([42, 36, 28, 17, 8])
-
-            ::
-
-                >>> abjad.show(segment.arpeggiate_down()) # doctest: +SKIP
+            >>> abjad.show(segment.arpeggiate_down()) # doctest: +SKIP
 
             ..  docs::
 
@@ -354,18 +308,12 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            ::
+            >>> segment = baca.pitch_class_segment([6, 0, 4, 5, 8])
 
-                >>> segment = baca.pitch_class_segment([6, 0, 4, 5, 8])
+            >>> segment.arpeggiate_up()
+            PitchSegment([6, 12, 16, 17, 20])
 
-            ::
-
-                >>> segment.arpeggiate_up()
-                PitchSegment([6, 12, 16, 17, 20])
-
-            ::
-
-                >>> abjad.show(segment.arpeggiate_up()) # doctest: +SKIP
+            >>> abjad.show(segment.arpeggiate_up()) # doctest: +SKIP
 
             ..  docs::
 
@@ -404,18 +352,12 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            ::
+            >>> segment = baca.pitch_class_segment([-2, -1.5, 6, 7])
 
-                >>> segment = baca.pitch_class_segment([-2, -1.5, 6, 7])
+            >>> segment.chord()
+            PitchClassSet([6, 7, 10, 10.5])
 
-            ::
-
-                >>> segment.chord()
-                PitchClassSet([6, 7, 10, 10.5])
-
-            ::
-
-                >>> abjad.show(segment.chord()) # doctest: +SKIP
+            >>> abjad.show(segment.chord()) # doctest: +SKIP
 
             ..  docs::
 
@@ -437,11 +379,9 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            ::
-
-                >>> items = [-2, -1.5, 6, 7]
-                >>> segment = baca.pitch_class_segment(items=items)
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> items = [-2, -1.5, 6, 7]
+            >>> segment = baca.pitch_class_segment(items=items)
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -456,18 +396,14 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     \override Score.BarLine.transparent = ##f
                 }
 
-            ::
-
-                >>> segment.has_duplicates()
-                False
+            >>> segment.has_duplicates()
+            False
 
         ..  container:: example
 
-            ::
-
-                >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-                >>> segment = baca.pitch_class_segment(items=items)
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> items = [-2, -1.5, 6, 7, -1.5, 7]
+            >>> segment = baca.pitch_class_segment(items=items)
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -484,10 +420,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     \override Score.BarLine.transparent = ##f
                 }
 
-            ::
-
-                >>> segment.has_duplicates()
-                True
+            >>> segment.has_duplicates()
+            True
 
         Returns true or false.
         '''
@@ -498,11 +432,9 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            ::
-
-                >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-                >>> segment = baca.pitch_class_segment(items=items)
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> items = [-2, -1.5, 6, 7, -1.5, 7]
+            >>> segment = baca.pitch_class_segment(items=items)
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -519,18 +451,14 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     \override Score.BarLine.transparent = ##f
                 }
 
-            ::
-
-                >>> segment.has_repeats()
-                False
+            >>> segment.has_repeats()
+            False
 
         ..  container:: example
 
-            ::
-
-                >>> items = [-2, -1.5, 6, 7, 7]
-                >>> segment = baca.pitch_class_segment(items=items)
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> items = [-2, -1.5, 6, 7, 7]
+            >>> segment = baca.pitch_class_segment(items=items)
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -546,10 +474,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     \override Score.BarLine.transparent = ##f
                 }
 
-            ::
-
-                >>> segment.has_repeats()
-                True
+            >>> segment.has_repeats()
+            True
 
         Returns true or false.
         '''
@@ -565,10 +491,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            ::
-
-                >>> segment = baca.pitch_class_segment([10, 11, 5, 6, 7])
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> segment = baca.pitch_class_segment([10, 11, 5, 6, 7])
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -584,15 +508,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     \override Score.BarLine.transparent = ##f
                 }
 
-            ::
+            >>> segment.space_down(bass=6, soprano=7)
+            PitchSegment([19, 17, 11, 10, 6])
 
-                >>> segment.space_down(bass=6, soprano=7)
-                PitchSegment([19, 17, 11, 10, 6])
-
-            ::
-
-                >>> segment = segment.space_down(bass=6, soprano=7)
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> segment = segment.space_down(bass=6, soprano=7)
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -645,10 +565,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            ::
-
-                >>> segment = baca.pitch_class_segment([10, 11, 5, 6, 7])
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> segment = baca.pitch_class_segment([10, 11, 5, 6, 7])
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -664,15 +582,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     \override Score.BarLine.transparent = ##f
                 }
 
-            ::
+            >>> segment.space_up(bass=6, soprano=7)
+            PitchSegment([6, 10, 11, 17, 19])
 
-                >>> segment.space_up(bass=6, soprano=7)
-                PitchSegment([6, 10, 11, 17, 19])
-
-            ::
-
-                >>> segment = segment.space_up(bass=6, soprano=7)
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> segment = segment.space_up(bass=6, soprano=7)
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 

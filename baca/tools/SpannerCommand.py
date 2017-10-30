@@ -10,21 +10,17 @@ class SpannerCommand(Command):
 
         With music-maker:
 
-        ::
+        >>> music_maker = baca.MusicMaker(
+        ...     baca.SpannerCommand(
+        ...         selector=baca.select().tuplets(),
+        ...         spanner=abjad.Slur(),
+        ...         ),
+        ...     )
 
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.SpannerCommand(
-            ...         selector=baca.select().tuplets(),
-            ...         spanner=abjad.Slur(),
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = music_maker('Voice 1', collections)
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> contribution = music_maker('Voice 1', collections)
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -58,30 +54,24 @@ class SpannerCommand(Command):
 
         ..  note:: Teach SegmentMaker about SpannerCommand.
 
-        ::
+        >>> segment_maker = baca.SegmentMaker(
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
 
-            >>> segment_maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.even_runs(),
+        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.SpannerCommand(
+        ...         selector=baca.select().tuplets(),
+        ...         spanner=abjad.Slur(),
+        ...         ),
+        ...     )
 
-        ::
-
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
-            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.SpannerCommand(
-            ...         selector=baca.select().tuplets(),
-            ...         spanner=abjad.Slur(),
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, collection_metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, collection_metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -163,10 +153,8 @@ class SpannerCommand(Command):
 
     ..  container:: example
 
-        ::
-
-            >>> baca.SpannerCommand()
-            SpannerCommand(selector=baca.select().leaves().group())
+        >>> baca.SpannerCommand()
+        SpannerCommand(selector=baca.select().leaves().group())
 
     '''
 
@@ -221,18 +209,14 @@ class SpannerCommand(Command):
 
             Selects wrapped leaves:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.SpannerCommand(spanner=abjad.Slur()),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.SpannerCommand(spanner=abjad.Slur()),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -264,18 +248,14 @@ class SpannerCommand(Command):
 
             Spanner refuses to span a single leaf:
 
-            ::
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.SpannerCommand(spanner=abjad.Slur()),
+            ...     )
 
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.SpannerCommand(spanner=abjad.Slur()),
-                ...     )
-
-            ::
-
-                >>> collections = [[1]]
-                >>> contribution = music_maker('Voice 1', collections)
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[1]]
+            >>> contribution = music_maker('Voice 1', collections)
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -305,19 +285,15 @@ class SpannerCommand(Command):
 
             Ties are smart enough to remove existing ties prior to attach:
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[14, 14, 14]],
-                ...     counts=[5],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[14, 14, 14]],
+            ...     counts=[5],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -338,16 +314,14 @@ class SpannerCommand(Command):
                     }
                 >>
 
-            ::
-
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[14, 14, 14]],
-                ...     baca.SpannerCommand(spanner=abjad.Tie()),
-                ...     counts=[5],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[14, 14, 14]],
+            ...     baca.SpannerCommand(spanner=abjad.Tie()),
+            ...     counts=[5],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 

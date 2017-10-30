@@ -8,64 +8,43 @@ class LMRSpecifier(abjad.AbjadObject):
 
         Default LMR specifier:
 
-        ::
+        >>> lmr_specifier = baca.LMRSpecifier()
 
-            >>> lmr_specifier = baca.LMRSpecifier()
+        >>> parts = lmr_specifier([1])
+        >>> for part in parts: part
+        Sequence([1])
 
-        ::
+        >>> parts =lmr_specifier([1, 2])
+        >>> for part in parts: part
+        Sequence([1, 2])
 
-            >>> parts = lmr_specifier([1])
-            >>> for part in parts: part
-            Sequence([1])
+        >>> parts = lmr_specifier([1, 2, 3])
+        >>> for part in parts: part
+        Sequence([1, 2, 3])
 
-        ::
+        >>> parts = lmr_specifier([1, 2, 3, 4])
+        >>> for part in parts: part
+        Sequence([1, 2, 3, 4])
 
-            >>> parts =lmr_specifier([1, 2])
-            >>> for part in parts: part
-            Sequence([1, 2])
+        >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+        >>> for part in parts: part
+        Sequence([1, 2, 3, 4, 5])
 
-        ::
+        >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+        >>> for part in parts: part
+        Sequence([1, 2, 3, 4, 5, 6])
 
-            >>> parts = lmr_specifier([1, 2, 3])
-            >>> for part in parts: part
-            Sequence([1, 2, 3])
+        >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+        >>> for part in parts: part
+        Sequence([1, 2, 3, 4, 5, 6, 7])
 
-        ::
+        >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+        >>> for part in parts: part
+        Sequence([1, 2, 3, 4, 5, 6, 7, 8])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4])
-            >>> for part in parts: part
-            Sequence([1, 2, 3, 4])
-
-        ::
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
-            >>> for part in parts: part
-            Sequence([1, 2, 3, 4, 5])
-
-        ::
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
-            >>> for part in parts: part
-            Sequence([1, 2, 3, 4, 5, 6])
-
-
-        ::
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
-            >>> for part in parts: part
-            Sequence([1, 2, 3, 4, 5, 6, 7])
-
-        ::
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
-            >>> for part in parts: part
-            Sequence([1, 2, 3, 4, 5, 6, 7, 8])
-
-        ::
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
-            >>> for part in parts: part
-            Sequence([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        >>> for part in parts: part
+        Sequence([1, 2, 3, 4, 5, 6, 7, 8, 9])
 
     '''
 
@@ -253,178 +232,138 @@ class LMRSpecifier(abjad.AbjadObject):
 
             Left counts equal to a single 1:
 
-            ::
+            >>> lmr_specifier = baca.LMRSpecifier(
+            ...     left_counts=[1],
+            ...     left_cyclic=False,
+            ...     left_length=3,
+            ...     right_length=2,
+            ...     )
 
-                >>> lmr_specifier = baca.LMRSpecifier(
-                ...     left_counts=[1],
-                ...     left_cyclic=False,
-                ...     left_length=3,
-                ...     right_length=2,
-                ...     )
+            >>> parts = lmr_specifier([1])
+            >>> for part in parts: part
+            Sequence([1])
 
-            ::
+            >>> parts = lmr_specifier([1, 2])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2])
 
-                >>> parts = lmr_specifier([1])
-                >>> for part in parts: part
-                Sequence([1])
+            >>> parts = lmr_specifier([1, 2, 3])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+            Sequence([4])
 
-                >>> parts = lmr_specifier([1, 2])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+            Sequence([4, 5])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+            Sequence([4])
+            Sequence([5, 6])
 
-                >>> parts = lmr_specifier([1, 2, 3])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2, 3])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+            Sequence([4, 5])
+            Sequence([6, 7])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+            Sequence([4, 5, 6])
+            Sequence([7, 8])
 
-                >>> parts = lmr_specifier([1, 2, 3, 4])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2, 3])
-                Sequence([4])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2, 3])
-                Sequence([4, 5])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2, 3])
-                Sequence([4])
-                Sequence([5, 6])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2, 3])
-                Sequence([4, 5])
-                Sequence([6, 7])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2, 3])
-                Sequence([4, 5, 6])
-                Sequence([7, 8])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2, 3])
-                Sequence([4, 5, 6, 7])
-                Sequence([8, 9])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+            Sequence([4, 5, 6, 7])
+            Sequence([8, 9])
 
         ..  container:: example
 
             Left counts all equal to 1:
 
-            ::
+            >>> lmr_specifier = baca.LMRSpecifier(
+            ...     left_counts=[1],
+            ...     left_cyclic=True,
+            ...     left_length=3,
+            ...     right_length=2,
+            ...     )
 
-                >>> lmr_specifier = baca.LMRSpecifier(
-                ...     left_counts=[1],
-                ...     left_cyclic=True,
-                ...     left_length=3,
-                ...     right_length=2,
-                ...     )
+            >>> parts = lmr_specifier([1])
+            >>> for part in parts: part
+            Sequence([1])
 
-            ::
+            >>> parts = lmr_specifier([1, 2])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2])
 
-                >>> parts = lmr_specifier([1])
-                >>> for part in parts: part
-                Sequence([1])
+            >>> parts = lmr_specifier([1, 2, 3])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2])
+            Sequence([3])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2])
+            Sequence([3])
+            Sequence([4])
 
-                >>> parts = lmr_specifier([1, 2])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2])
+            Sequence([3])
+            Sequence([4, 5])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2])
+            Sequence([3])
+            Sequence([4])
+            Sequence([5, 6])
 
-                >>> parts = lmr_specifier([1, 2, 3])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2])
-                Sequence([3])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2])
+            Sequence([3])
+            Sequence([4, 5])
+            Sequence([6, 7])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2])
+            Sequence([3])
+            Sequence([4, 5, 6])
+            Sequence([7, 8])
 
-                >>> parts = lmr_specifier([1, 2, 3, 4])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2])
-                Sequence([3])
-                Sequence([4])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2])
-                Sequence([3])
-                Sequence([4, 5])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2])
-                Sequence([3])
-                Sequence([4])
-                Sequence([5, 6])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2])
-                Sequence([3])
-                Sequence([4, 5])
-                Sequence([6, 7])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2])
-                Sequence([3])
-                Sequence([4, 5, 6])
-                Sequence([7, 8])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2])
-                Sequence([3])
-                Sequence([4, 5, 6, 7])
-                Sequence([8, 9])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2])
+            Sequence([3])
+            Sequence([4, 5, 6, 7])
+            Sequence([8, 9])
 
         Defaults to none.
 
@@ -455,72 +394,52 @@ class LMRSpecifier(abjad.AbjadObject):
 
             Left length equal to 2:
 
-            ::
+            >>> lmr_specifier = baca.LMRSpecifier(
+            ...     left_length=2,
+            ...     )
 
-                >>> lmr_specifier = baca.LMRSpecifier(
-                ...     left_length=2,
-                ...     )
+            >>> parts = lmr_specifier([1])
+            >>> for part in parts: part
+            Sequence([1])
 
-            ::
+            >>> parts = lmr_specifier([1, 2])
+            >>> for part in parts: part
+            Sequence([1, 2])
 
-                >>> parts = lmr_specifier([1])
-                >>> for part in parts: part
-                Sequence([1])
+            >>> parts = lmr_specifier([1, 2, 3])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
 
-                >>> parts = lmr_specifier([1, 2])
-                >>> for part in parts: part
-                Sequence([1, 2])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5, 6])
 
-                >>> parts = lmr_specifier([1, 2, 3])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5, 6, 7])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5, 6, 7, 8])
 
-                >>> parts = lmr_specifier([1, 2, 3, 4])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4, 5])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4, 5, 6])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4, 5, 6, 7])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4, 5, 6, 7, 8])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4, 5, 6, 7, 8, 9])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5, 6, 7, 8, 9])
 
         Defaults to none.
 
@@ -564,82 +483,62 @@ class LMRSpecifier(abjad.AbjadObject):
 
             Cyclic middle counts equal to [2]:
 
-            ::
+            >>> lmr_specifier = baca.LMRSpecifier(
+            ...     middle_counts=[2],
+            ...     middle_cyclic=True,
+            ...     )
 
-                >>> lmr_specifier = baca.LMRSpecifier(
-                ...     middle_counts=[2],
-                ...     middle_cyclic=True,
-                ...     )
+            >>> parts = lmr_specifier([1])
+            >>> for part in parts: part
+            Sequence([1])
 
-            ::
+            >>> parts = lmr_specifier([1, 2])
+            >>> for part in parts: part
+            Sequence([1, 2])
 
-                >>> parts = lmr_specifier([1])
-                >>> for part in parts: part
-                Sequence([1])
+            >>> parts = lmr_specifier([1, 2, 3])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
 
-                >>> parts = lmr_specifier([1, 2])
-                >>> for part in parts: part
-                Sequence([1, 2])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
+            Sequence([5])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
+            Sequence([5, 6])
 
-                >>> parts = lmr_specifier([1, 2, 3])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
+            Sequence([5, 6])
+            Sequence([7])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
+            Sequence([5, 6])
+            Sequence([7, 8])
 
-                >>> parts = lmr_specifier([1, 2, 3, 4])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4])
-                Sequence([5])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4])
-                Sequence([5, 6])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4])
-                Sequence([5, 6])
-                Sequence([7])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4])
-                Sequence([5, 6])
-                Sequence([7, 8])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4])
-                Sequence([5, 6])
-                Sequence([7, 8])
-                Sequence([9])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
+            Sequence([5, 6])
+            Sequence([7, 8])
+            Sequence([9])
 
             Odd parity produces length-1 part at right.
 
@@ -660,83 +559,63 @@ class LMRSpecifier(abjad.AbjadObject):
 
             Reversed cyclic middle counts equal to [2]:
 
-            ::
+            >>> lmr_specifier = baca.LMRSpecifier(
+            ...     middle_counts=[2],
+            ...     middle_cyclic=True,
+            ...     middle_reversed=True,
+            ...     )
 
-                >>> lmr_specifier = baca.LMRSpecifier(
-                ...     middle_counts=[2],
-                ...     middle_cyclic=True,
-                ...     middle_reversed=True,
-                ...     )
+            >>> parts = lmr_specifier([1])
+            >>> for part in parts: part
+            Sequence([1])
 
-            ::
+            >>> parts = lmr_specifier([1, 2])
+            >>> for part in parts: part
+            Sequence([1, 2])
 
-                >>> parts = lmr_specifier([1])
-                >>> for part in parts: part
-                Sequence([1])
+            >>> parts = lmr_specifier([1, 2, 3])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
 
-                >>> parts = lmr_specifier([1, 2])
-                >>> for part in parts: part
-                Sequence([1, 2])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+            Sequence([4, 5])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
+            Sequence([5, 6])
 
-                >>> parts = lmr_specifier([1, 2, 3])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2, 3])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+            Sequence([4, 5])
+            Sequence([6, 7])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
+            Sequence([5, 6])
+            Sequence([7, 8])
 
-                >>> parts = lmr_specifier([1, 2, 3, 4])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2, 3])
-                Sequence([4, 5])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4])
-                Sequence([5, 6])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2, 3])
-                Sequence([4, 5])
-                Sequence([6, 7])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4])
-                Sequence([5, 6])
-                Sequence([7, 8])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2, 3])
-                Sequence([4, 5])
-                Sequence([6, 7])
-                Sequence([8, 9])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+            Sequence([4, 5])
+            Sequence([6, 7])
+            Sequence([8, 9])
 
             Odd parity produces length-1 part at left.
 
@@ -756,159 +635,119 @@ class LMRSpecifier(abjad.AbjadObject):
 
             Priority to the left:
 
-            ::
+            >>> lmr_specifier = baca.LMRSpecifier(
+            ...     left_length=2,
+            ...     right_length=1,
+            ...     )
 
-                >>> lmr_specifier = baca.LMRSpecifier(
-                ...     left_length=2,
-                ...     right_length=1,
-                ...     )
+            >>> parts = lmr_specifier([1])
+            >>> for part in parts: part
+            Sequence([1])
 
-            ::
+            >>> parts = lmr_specifier([1, 2])
+            >>> for part in parts: part
+            Sequence([1, 2])
 
-                >>> parts = lmr_specifier([1])
-                >>> for part in parts: part
-                Sequence([1])
+            >>> parts = lmr_specifier([1, 2, 3])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3])
+            Sequence([4])
 
-                >>> parts = lmr_specifier([1, 2])
-                >>> for part in parts: part
-                Sequence([1, 2])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
+            Sequence([5])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5])
+            Sequence([6])
 
-                >>> parts = lmr_specifier([1, 2, 3])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5, 6])
+            Sequence([7])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5, 6, 7])
+            Sequence([8])
 
-                >>> parts = lmr_specifier([1, 2, 3, 4])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3])
-                Sequence([4])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4])
-                Sequence([5])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4, 5])
-                Sequence([6])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4, 5, 6])
-                Sequence([7])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4, 5, 6, 7])
-                Sequence([8])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4, 5, 6, 7, 8])
-                Sequence([9])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5, 6, 7, 8])
+            Sequence([9])
 
         ..  container:: example
 
             Priority to the right:
 
-            ::
+            >>> lmr_specifier = baca.LMRSpecifier(
+            ...     left_length=2,
+            ...     priority=abjad.Right,
+            ...     right_length=1,
+            ...     )
 
-                >>> lmr_specifier = baca.LMRSpecifier(
-                ...     left_length=2,
-                ...     priority=abjad.Right,
-                ...     right_length=1,
-                ...     )
+            >>> parts = lmr_specifier([1])
+            >>> for part in parts: part
+            Sequence([1])
 
-            ::
+            >>> parts = lmr_specifier([1, 2])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2])
 
-                >>> parts = lmr_specifier([1])
-                >>> for part in parts: part
-                Sequence([1])
+            >>> parts = lmr_specifier([1, 2, 3])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3])
+            Sequence([4])
 
-                >>> parts = lmr_specifier([1, 2])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
+            Sequence([5])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5])
+            Sequence([6])
 
-                >>> parts = lmr_specifier([1, 2, 3])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5, 6])
+            Sequence([7])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5, 6, 7])
+            Sequence([8])
 
-                >>> parts = lmr_specifier([1, 2, 3, 4])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3])
-                Sequence([4])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4])
-                Sequence([5])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4, 5])
-                Sequence([6])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4, 5, 6])
-                Sequence([7])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4, 5, 6, 7])
-                Sequence([8])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4, 5, 6, 7, 8])
-                Sequence([9])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5, 6, 7, 8])
+            Sequence([9])
 
         Defaults to none.
 
@@ -951,151 +790,111 @@ class LMRSpecifier(abjad.AbjadObject):
 
             Right length equal to 2:
 
-            ::
+            >>> lmr_specifier = baca.LMRSpecifier(
+            ...     right_length=2,
+            ...     )
 
-                >>> lmr_specifier = baca.LMRSpecifier(
-                ...     right_length=2,
-                ...     )
+            >>> parts = lmr_specifier([1])
+            >>> for part in parts: part
+            Sequence([1])
 
-            ::
+            >>> parts = lmr_specifier([1, 2])
+            >>> for part in parts: part
+            Sequence([1, 2])
 
-                >>> parts = lmr_specifier([1])
-                >>> for part in parts: part
-                Sequence([1])
+            >>> parts = lmr_specifier([1, 2, 3])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
 
-                >>> parts = lmr_specifier([1, 2])
-                >>> for part in parts: part
-                Sequence([1, 2])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> for part in parts: part
+            Sequence([1, 2, 3])
+            Sequence([4, 5])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> for part in parts: part
+            Sequence([1, 2, 3, 4])
+            Sequence([5, 6])
 
-                >>> parts = lmr_specifier([1, 2, 3])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2, 3])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> for part in parts: part
+            Sequence([1, 2, 3, 4, 5])
+            Sequence([6, 7])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> for part in parts: part
+            Sequence([1, 2, 3, 4, 5, 6])
+            Sequence([7, 8])
 
-                >>> parts = lmr_specifier([1, 2, 3, 4])
-                >>> for part in parts: part
-                Sequence([1, 2])
-                Sequence([3, 4])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5])
-                >>> for part in parts: part
-                Sequence([1, 2, 3])
-                Sequence([4, 5])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
-                >>> for part in parts: part
-                Sequence([1, 2, 3, 4])
-                Sequence([5, 6])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
-                >>> for part in parts: part
-                Sequence([1, 2, 3, 4, 5])
-                Sequence([6, 7])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
-                >>> for part in parts: part
-                Sequence([1, 2, 3, 4, 5, 6])
-                Sequence([7, 8])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
-                >>> for part in parts: part
-                Sequence([1, 2, 3, 4, 5, 6, 7])
-                Sequence([8, 9])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> for part in parts: part
+            Sequence([1, 2, 3, 4, 5, 6, 7])
+            Sequence([8, 9])
 
         ..  container:: example
 
             Right length equal to 2 and left counts equal to [1]:
 
-            ::
+            >>> lmr_specifier = baca.LMRSpecifier(
+            ...     left_counts=[1],
+            ...     left_cyclic=False,
+            ...     right_length=2,
+            ...     )
 
-                >>> lmr_specifier = baca.LMRSpecifier(
-                ...     left_counts=[1],
-                ...     left_cyclic=False,
-                ...     right_length=2,
-                ...     )
+            >>> parts = lmr_specifier([1])
+            >>> for part in parts: part
+            Sequence([1])
 
-            ::
+            >>> parts = lmr_specifier([1, 2])
+            >>> for part in parts: part
+            Sequence([1, 2])
 
-                >>> parts = lmr_specifier([1])
-                >>> for part in parts: part
-                Sequence([1])
+            >>> parts = lmr_specifier([1, 2, 3])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2])
+            Sequence([3, 4])
 
-                >>> parts = lmr_specifier([1, 2])
-                >>> for part in parts: part
-                Sequence([1, 2])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+            Sequence([4, 5])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3, 4])
+            Sequence([5, 6])
 
-                >>> parts = lmr_specifier([1, 2, 3])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2, 3])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3, 4, 5])
+            Sequence([6, 7])
 
-            ::
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3, 4, 5, 6])
+            Sequence([7, 8])
 
-                >>> parts = lmr_specifier([1, 2, 3, 4])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2])
-                Sequence([3, 4])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2, 3])
-                Sequence([4, 5])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2, 3, 4])
-                Sequence([5, 6])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2, 3, 4, 5])
-                Sequence([6, 7])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2, 3, 4, 5, 6])
-                Sequence([7, 8])
-
-            ::
-
-                >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
-                >>> for part in parts: part
-                Sequence([1])
-                Sequence([2, 3, 4, 5, 6, 7])
-                Sequence([8, 9])
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3, 4, 5, 6, 7])
+            Sequence([8, 9])
 
         Defaults to none.
 

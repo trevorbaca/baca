@@ -10,16 +10,14 @@ class HairpinCommand(Command):
 
         Attaches hairpin to each PLT run:
 
-        ::
-
-            >>> command = baca.HairpinCommand(
-            ...     hairpin_tokens=['f > niente', 'niente < f'],
-            ...     selector=baca.select().runs(),
-            ...     )
-            >>> string = "c'4 ~ c' ~ c' r4 d'4 ~ d' ~ d' r4"
-            >>> staff = abjad.Staff(string)
-            >>> command(staff)
-            >>> abjad.show(staff) # doctest: +SKIP
+        >>> command = baca.HairpinCommand(
+        ...     hairpin_tokens=['f > niente', 'niente < f'],
+        ...     selector=baca.select().runs(),
+        ...     )
+        >>> string = "c'4 ~ c' ~ c' r4 d'4 ~ d' ~ d' r4"
+        >>> staff = abjad.Staff(string)
+        >>> command(staff)
+        >>> abjad.show(staff) # doctest: +SKIP
 
         ..  docs::
 
@@ -130,16 +128,14 @@ class HairpinCommand(Command):
 
             Does not flare hairpins:
 
-            ::
-
-                >>> command = baca.HairpinCommand(
-                ...     hairpin_tokens=['f > p', 'p < f'],
-                ...     selector=baca.select().runs(),
-                ...     )
-                >>> string = "c'4 ~ c' ~ c' r4 d'4 ~ d' ~ d' r4"
-                >>> staff = abjad.Staff(string)
-                >>> command(staff)
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> command = baca.HairpinCommand(
+            ...     hairpin_tokens=['f > p', 'p < f'],
+            ...     selector=baca.select().runs(),
+            ...     )
+            >>> string = "c'4 ~ c' ~ c' r4 d'4 ~ d' ~ d' r4"
+            >>> staff = abjad.Staff(string)
+            >>> command(staff)
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -159,17 +155,15 @@ class HairpinCommand(Command):
 
             Does flare hairpins:
 
-            ::
-
-                >>> command = baca.HairpinCommand(
-                ...     flare=True,
-                ...     hairpin_tokens=['f > p', 'p < f'],
-                ...     selector=baca.select().runs(),
-                ...     )
-                >>> string = "c'4 ~ c' ~ c' r4 d'4 ~ d' ~ d' r4"
-                >>> staff = abjad.Staff(string)
-                >>> command(staff)
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> command = baca.HairpinCommand(
+            ...     flare=True,
+            ...     hairpin_tokens=['f > p', 'p < f'],
+            ...     selector=baca.select().runs(),
+            ...     )
+            >>> string = "c'4 ~ c' ~ c' r4 d'4 ~ d' ~ d' r4"
+            >>> staff = abjad.Staff(string)
+            >>> command(staff)
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -218,16 +212,14 @@ class HairpinCommand(Command):
 
             Does not omit lone note dynamic:
 
-            ::
-
-                >>> command = baca.HairpinCommand(
-                ...     hairpin_tokens=['ppp < p'],
-                ...     selector=baca.select().plts(),
-                ...     )
-                >>> string = "c'4 ~ c'8 d'8 ~ d'4 r4 e'4 g'4 fs'4 ~ fs'4"
-                >>> staff = abjad.Staff(string)
-                >>> command(staff)
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> command = baca.HairpinCommand(
+            ...     hairpin_tokens=['ppp < p'],
+            ...     selector=baca.select().plts(),
+            ...     )
+            >>> string = "c'4 ~ c'8 d'8 ~ d'4 r4 e'4 g'4 fs'4 ~ fs'4"
+            >>> staff = abjad.Staff(string)
+            >>> command(staff)
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -248,17 +240,15 @@ class HairpinCommand(Command):
 
             Omits lone note dynamic:
 
-            ::
-
-                >>> command = baca.HairpinCommand(
-                ...     hairpin_tokens=['ppp < p'],
-                ...     omit_lone_note_dynamic=True,
-                ...     selector=baca.select().plts(),
-                ...     )
-                >>> string = "c'4 ~ c'8 d'8 ~ d'4 r4 e'4 g'4 fs'4 ~ fs'4"
-                >>> staff = abjad.Staff(string)
-                >>> command(staff)
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> command = baca.HairpinCommand(
+            ...     hairpin_tokens=['ppp < p'],
+            ...     omit_lone_note_dynamic=True,
+            ...     selector=baca.select().plts(),
+            ...     )
+            >>> string = "c'4 ~ c'8 d'8 ~ d'4 r4 e'4 g'4 fs'4 ~ fs'4"
+            >>> staff = abjad.Staff(string)
+            >>> command(staff)
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 

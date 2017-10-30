@@ -38,20 +38,18 @@ class LibraryNZ(object):
 
             Overrides note-head style on all PLTs:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.natural_harmonics(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.natural_harmonics(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -95,22 +93,20 @@ class LibraryNZ(object):
 
             Overrides note-head style on PLTs in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.natural_harmonics(
-                ...         baca.select().tuplets()[1:2].plts().group(),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.natural_harmonics(
+            ...         baca.select().tuplets()[1:2].plts().group(),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -165,20 +161,18 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.nest('+4/16'),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.nest('+4/16'),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -238,20 +232,18 @@ class LibraryNZ(object):
 
             Attaches niente swell to trimmed leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.niente_swells('p'),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.niente_swells('p'),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -295,23 +287,21 @@ class LibraryNZ(object):
 
             Attaches niente swell to trimmed leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.niente_swells(
-                ...         'p',
-                ...         baca.select().tuplets()[1:2].tleaves().group(),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.niente_swells(
+            ...         'p',
+            ...         baca.select().tuplets()[1:2].tleaves().group(),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -379,21 +369,19 @@ class LibraryNZ(object):
 
             Attaches clef spanner and one-line spanner to leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.clef_spanner(),
-                ...     baca.one_line_staff(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(9),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.clef_spanner(),
+            ...     baca.one_line_staff(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(9),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -441,24 +429,22 @@ class LibraryNZ(object):
 
             Attaches clef spanner and one-line spanner to leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.clef_spanner(
-                ...         clef='percussion',
-                ...         selector=baca.select().tuplet(1),
-                ...         ),
-                ...     baca.one_line_staff(selector=baca.select().tuplet(1)),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(9),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.clef_spanner(
+            ...         clef='percussion',
+            ...         selector=baca.select().tuplet(1),
+            ...         ),
+            ...     baca.one_line_staff(selector=baca.select().tuplet(1)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(9),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -516,20 +502,18 @@ class LibraryNZ(object):
 
             Attaches ottava spanner to pitched leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.ottava(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.ottava(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -573,20 +557,18 @@ class LibraryNZ(object):
 
             Attaches ottava spanner to each PLT run:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.ottava(baca.select().runs()),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.ottava(baca.select().runs()),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -644,20 +626,18 @@ class LibraryNZ(object):
 
             Attaches ottava bassa spanner to trimmed leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.ottava_bassa(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.ottava_bassa(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -701,20 +681,18 @@ class LibraryNZ(object):
 
             Attaches ottava bassa spanner to each PLT run:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.ottava_bassa(baca.select().runs()),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.ottava_bassa(baca.select().runs()),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -772,21 +750,19 @@ class LibraryNZ(object):
 
             Attaches percussion staff spanner to leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.percussion_staff(),
-                ...     baca.one_line_staff(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(9),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.percussion_staff(),
+            ...     baca.one_line_staff(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(9),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -834,21 +810,19 @@ class LibraryNZ(object):
 
             Attaches percussion staff spanner to leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.one_line_staff(baca.select().tuplet(1)),
-                ...     baca.percussion_staff(baca.select().tuplet(1)),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(9),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.one_line_staff(baca.select().tuplet(1)),
+            ...     baca.percussion_staff(baca.select().tuplet(1)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(9),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -926,20 +900,18 @@ class LibraryNZ(object):
 
             Attaches possibilie dynamic to pitched head 0:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.possibile_dynamic('ff'),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.possibile_dynamic('ff'),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -987,23 +959,21 @@ class LibraryNZ(object):
 
             Attaches possibile dynamic to pitched head 0 of tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.possibile_dynamic(
-                ...         'ff',
-                ...         baca.select().tuplets()[1:2].phead(0),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.possibile_dynamic(
+            ...         'ff',
+            ...         baca.select().tuplets()[1:2].phead(0),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1067,20 +1037,18 @@ class LibraryNZ(object):
 
             Sets proportional notation duration on leaf 0:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.proportional_notation_duration((1, 8)),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.proportional_notation_duration((1, 8)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1119,20 +1087,18 @@ class LibraryNZ(object):
                     }
                 >>
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.proportional_notation_duration((1, 12)),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.proportional_notation_duration((1, 12)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1171,20 +1137,18 @@ class LibraryNZ(object):
                     }
                 >>
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.proportional_notation_duration((1, 16)),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.proportional_notation_duration((1, 16)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1242,20 +1206,18 @@ class LibraryNZ(object):
 
             Octave-transposes all PLTs to the octave rooted at -6:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.register(-6),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.register(-6),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1295,21 +1257,19 @@ class LibraryNZ(object):
 
             Octave-transposes PLTs in tuplet 1 to the octave rooted at -6:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.color(baca.select().tuplet(1)),
-                ...     baca.register(-6, selector=baca.select().tuplet(1)),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.color(baca.select().tuplet(1)),
+            ...     baca.register(-6, selector=baca.select().tuplet(1)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1383,20 +1343,18 @@ class LibraryNZ(object):
 
             Octave-transposes all PLTs to an octave interpolated from -6 to 18:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.register(-6, 18),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.register(-6, 18),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1437,25 +1395,23 @@ class LibraryNZ(object):
             Octave-transposes PLTs in tuplet 1 to an octave interpolated from
             -6 to 18:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.color(baca.select().tuplet(1)),
-                ...     baca.register(
-                ...         start=-6,
-                ...         stop=18,
-                ...         selector=baca.select().tuplet(1),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.color(baca.select().tuplet(1)),
+            ...     baca.register(
+            ...         start=-6,
+            ...         stop=18,
+            ...         selector=baca.select().tuplet(1),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1545,20 +1501,18 @@ class LibraryNZ(object):
 
             Attaches dynamic to all pitched heads:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.reiterated_dynamic('f'),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.reiterated_dynamic('f'),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1600,23 +1554,21 @@ class LibraryNZ(object):
 
             Attaches dynamic to pitched heads in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.reiterated_dynamic(
-                ...         'f',
-                ...         selector=baca.select().tuplets()[1:2].pheads(),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.reiterated_dynamic(
+            ...         'f',
+            ...         selector=baca.select().tuplets()[1:2].pheads(),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1668,22 +1620,20 @@ class LibraryNZ(object):
 
             Overrides repeat tie direction on pitched leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[11, 11, 12], [11, 11, 11], [11]],
-                ...     baca.messiaen_ties(),
-                ...     baca.repeat_ties_down(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.stems_up(),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[11, 11, 12], [11, 11, 11], [11]],
+            ...     baca.messiaen_ties(),
+            ...     baca.repeat_ties_down(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.stems_up(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1727,24 +1677,22 @@ class LibraryNZ(object):
 
             Overrides repeat tie direction on leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[11, 11, 12], [11, 11, 11], [11]],
-                ...     baca.messiaen_ties(),
-                ...     baca.repeat_ties_down(
-                ...         baca.select().tuplets()[1:2].pleaves().group()
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.stems_up(),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[11, 11, 12], [11, 11, 11], [11]],
+            ...     baca.messiaen_ties(),
+            ...     baca.repeat_ties_down(
+            ...         baca.select().tuplets()[1:2].pleaves().group()
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.stems_up(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1801,22 +1749,20 @@ class LibraryNZ(object):
 
             Overrides repeat tie direction on all leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[11, 11, 12], [11, 11, 11], [11]],
-                ...     baca.messiaen_ties(),
-                ...     baca.repeat_ties_up(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.stems_down(),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[11, 11, 12], [11, 11, 11], [11]],
+            ...     baca.messiaen_ties(),
+            ...     baca.repeat_ties_up(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.stems_down(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1860,24 +1806,22 @@ class LibraryNZ(object):
 
             Overrides repeat tie direction on leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[11, 11, 12], [11, 11, 11], [11]],
-                ...     baca.messiaen_ties(),
-                ...     baca.repeat_ties_up(
-                ...         baca.select().tuplets()[1:2].pleaves().group()
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.stems_down(),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[11, 11, 12], [11, 11, 11], [11]],
+            ...     baca.messiaen_ties(),
+            ...     baca.repeat_ties_up(
+            ...         baca.select().tuplets()[1:2].pleaves().group()
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.stems_down(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1953,20 +1897,18 @@ class LibraryNZ(object):
 
             Overrides position of all rests:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rest_position(-6),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rest_position(-6),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2010,23 +1952,21 @@ class LibraryNZ(object):
 
             Overrides position of rests in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rest_position(
-                ...         -6,
-                ...         baca.select().tuplets()[1:2].rests().group(),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rest_position(
+            ...         -6,
+            ...         baca.select().tuplets()[1:2].rests().group(),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2094,19 +2034,17 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_after([2]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_after([2]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2154,19 +2092,17 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [2]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [2]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2216,19 +2152,17 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_before([2]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_before([2]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2278,20 +2212,18 @@ class LibraryNZ(object):
 
             Down-overrides direction of rests:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_down(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_down(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2335,22 +2267,20 @@ class LibraryNZ(object):
 
             Down-overrides direction of rests in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_down(
-                ...         baca.select().tuplets()[1:2].rests().group(),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_down(
+            ...         baca.select().tuplets()[1:2].rests().group(),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2407,20 +2337,18 @@ class LibraryNZ(object):
 
             Up-overrides direction of rests:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_up(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_up(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2464,20 +2392,18 @@ class LibraryNZ(object):
 
             Up-overrides direction of rests in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_up(baca.select().tuplets()[1:2].rests().group()),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_up(baca.select().tuplets()[1:2].rests().group()),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2597,21 +2523,19 @@ class LibraryNZ(object):
 
             Overrides script color on all leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.accents(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.script_color('red'),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.accents(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.script_color('red'),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2655,24 +2579,22 @@ class LibraryNZ(object):
 
             Overrides script color on leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.accents(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.script_color(
-                ...         'red',
-                ...         baca.select().tuplets()[1:2].leaves().group(),
-                ...         ),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.accents(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.script_color(
+            ...         'red',
+            ...         baca.select().tuplets()[1:2].leaves().group(),
+            ...         ),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2729,21 +2651,19 @@ class LibraryNZ(object):
 
             Overrides script extra offset on leaf 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.accents(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.script_extra_offset((-1.5, 0)),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.accents(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.script_extra_offset((-1.5, 0)),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2787,24 +2707,22 @@ class LibraryNZ(object):
 
             Overrides script extra offset on leaf 0 in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.accents(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.script_extra_offset(
-                ...         (-1.5, 0),
-                ...         baca.select().tuplets()[1:2].leaf(0),
-                ...         ),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.accents(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.script_extra_offset(
+            ...         (-1.5, 0),
+            ...         baca.select().tuplets()[1:2].leaf(0),
+            ...         ),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2861,21 +2779,19 @@ class LibraryNZ(object):
 
             Down-overrides script direction on all leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.accents(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.scripts_down(),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.accents(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.scripts_down(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2919,23 +2835,21 @@ class LibraryNZ(object):
 
             Down-overrides script direction all leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.accents(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.scripts_down(
-                ...         baca.select().tuplets()[1:2].leaves().group(),
-                ...         ),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.accents(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.scripts_down(
+            ...         baca.select().tuplets()[1:2].leaves().group(),
+            ...         ),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2992,21 +2906,19 @@ class LibraryNZ(object):
 
             Up-overrides script direction on all leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.accents(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.scripts_up(),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.accents(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.scripts_up(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3050,23 +2962,21 @@ class LibraryNZ(object):
 
             Up-overrides script direction on leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.accents(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.scripts_up(
-                ...         baca.select().tuplets()[1:2].leaves().group(),
-                ...         ),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.accents(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.scripts_up(
+            ...         baca.select().tuplets()[1:2].leaves().group(),
+            ...         ),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3123,20 +3033,18 @@ class LibraryNZ(object):
 
             Attaches short fermata to first leaf:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.short_fermata(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.short_fermata(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3178,22 +3086,20 @@ class LibraryNZ(object):
 
             Attaches short fermata to first leaf in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.short_fermata(
-                ...         baca.select().tuplets()[1:2].phead(0),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.short_fermata(
+            ...         baca.select().tuplets()[1:2].phead(0),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3287,19 +3193,17 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.skips_after([2]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.skips_after([2]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3348,19 +3252,17 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.skips_around([2], [2]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.skips_around([2], [2]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3411,19 +3313,17 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.skips_before([2]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.skips_before([2]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3474,21 +3374,19 @@ class LibraryNZ(object):
 
             Slurs trimmed leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.slurs(),
-                ...     baca.slurs_down(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.slurs(),
+            ...     baca.slurs_down(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3532,21 +3430,19 @@ class LibraryNZ(object):
 
             Attaches slur to trimmed leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.slurs(baca.select().tuplets()[1:2].tleaves().group()),
-                ...     baca.slurs_down(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.slurs(baca.select().tuplets()[1:2].tleaves().group()),
+            ...     baca.slurs_down(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3600,21 +3496,19 @@ class LibraryNZ(object):
 
             Overrides slur direction for leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.slurs(baca.select().tuplets().map(baca.select().tleaves())),
-                ...     baca.slurs_down(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.slurs(baca.select().tuplets().map(baca.select().tleaves())),
+            ...     baca.slurs_down(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3658,23 +3552,21 @@ class LibraryNZ(object):
 
             Overrides slur direction leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.slurs(baca.select().tuplets().map(baca.select().tleaves())),
-                ...     baca.slurs_down(
-                ...         baca.select().tuplets()[1:2].leaves().group(),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.slurs(baca.select().tuplets().map(baca.select().tleaves())),
+            ...     baca.slurs_down(
+            ...         baca.select().tuplets()[1:2].leaves().group(),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3731,23 +3623,21 @@ class LibraryNZ(object):
 
             Up-overrides slur direction for leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.slurs(baca.select().tuplets().map(baca.select().tleaves())),
-                ...     baca.slurs_up(),
-                ...     baca.stems_down(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     baca.tuplet_brackets_down(),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.slurs(baca.select().tuplets().map(baca.select().tleaves())),
+            ...     baca.slurs_up(),
+            ...     baca.stems_down(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     baca.tuplet_brackets_down(),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3795,25 +3685,23 @@ class LibraryNZ(object):
 
             Up-overrides slur direction for leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.slurs(baca.select().tuplets().map(baca.select().tleaves())),
-                ...     baca.slurs_up(
-                ...         baca.select().tuplets()[1:2].leaves().group(),
-                ...         ),
-                ...     baca.stems_down(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     baca.tuplet_brackets_down(),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.slurs(baca.select().tuplets().map(baca.select().tleaves())),
+            ...     baca.slurs_up(
+            ...         baca.select().tuplets()[1:2].leaves().group(),
+            ...         ),
+            ...     baca.stems_down(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     baca.tuplet_brackets_down(),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3875,19 +3763,17 @@ class LibraryNZ(object):
             Octave-transposes music such that the highest note in the entire
             selection appears in octave 3:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.color(baca.select().plts().group()),
-                ...     baca.soprano_to_octave(3, baca.select().plts().group()),
-                ...     counts=[5, -3],
-                ...     talea_denominator=32,
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
+            ...     baca.color(baca.select().plts().group()),
+            ...     baca.soprano_to_octave(3, baca.select().plts().group()),
+            ...     counts=[5, -3],
+            ...     talea_denominator=32,
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3980,19 +3866,17 @@ class LibraryNZ(object):
             Octave-transposes music that such that the highest note in each
             pitched logical tie appears in octave 3:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.soprano_to_octave(3, baca.select().plts()),
-                ...     baca.color(baca.select().plts()),
-                ...     counts=[5, -3],
-                ...     talea_denominator=32,
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
+            ...     baca.soprano_to_octave(3, baca.select().plts()),
+            ...     baca.color(baca.select().plts()),
+            ...     counts=[5, -3],
+            ...     talea_denominator=32,
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4085,19 +3969,17 @@ class LibraryNZ(object):
             Octave-transposes music that such that the highest note in each
             of the last two PLTs appears in octave 3:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.soprano_to_octave(3, baca.select().plts()[-2:]),
-                ...     baca.color(baca.select().plts()[-2:]),
-                ...     counts=[5, -3],
-                ...     talea_denominator=32,
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
+            ...     baca.soprano_to_octave(3, baca.select().plts()[-2:]),
+            ...     baca.color(baca.select().plts()[-2:]),
+            ...     counts=[5, -3],
+            ...     talea_denominator=32,
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4168,34 +4050,26 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            ::
+            >>> expression = baca.split_by_durations([(3, 8)])
 
-                >>> expression = baca.split_by_durations([(3, 8)])
+            >>> for item in expression([(2, 8), (2, 8)]):
+            ...     item
+            ...
+            Division((3, 8))
+            Division((1, 8))
 
-            ::
+            >>> for item in expression([(2, 8), (2, 8), (2, 8)]):
+            ...     item
+            ...
+            Division((3, 8))
+            Division((3, 8))
 
-                >>> for item in expression([(2, 8), (2, 8)]):
-                ...     item
-                ...
-                Division((3, 8))
-                Division((1, 8))
-
-            ::
-
-                >>> for item in expression([(2, 8), (2, 8), (2, 8)]):
-                ...     item
-                ...
-                Division((3, 8))
-                Division((3, 8))
-
-            ::
-
-                >>> for item in expression([(2, 8), (2, 8), (2, 8), (2, 8)]):
-                ...     item
-                ...
-                Division((3, 8))
-                Division((3, 8))
-                Division((2, 8))
+            >>> for item in expression([(2, 8), (2, 8), (2, 8), (2, 8)]):
+            ...     item
+            ...
+            Division((3, 8))
+            Division((3, 8))
+            Division((2, 8))
 
         '''
         expression = baca.DivisionSequenceExpression()
@@ -4218,20 +4092,18 @@ class LibraryNZ(object):
 
             Attaches staccati to all pitched heads:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.staccati(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.staccati(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4273,20 +4145,18 @@ class LibraryNZ(object):
 
             Attaches staccati to pitched heads in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.staccati(baca.select().tuplets()[1:2].pheads()),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.staccati(baca.select().tuplets()[1:2].pheads()),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4338,20 +4208,18 @@ class LibraryNZ(object):
 
             Attaches staccatissimi to all pitched heads:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.staccatissimi(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.staccatissimi(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4393,20 +4261,18 @@ class LibraryNZ(object):
 
             Attaches staccatissimi to pitched heads in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.staccatissimi(baca.select().tuplets()[1:2].pheads()),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.staccatissimi(baca.select().tuplets()[1:2].pheads()),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4462,20 +4328,18 @@ class LibraryNZ(object):
 
             Overrides stem color on pitched leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.stem_color(color='red'),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.stem_color(color='red'),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4519,23 +4383,21 @@ class LibraryNZ(object):
 
             Overrides stem color on pitched leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.stem_color(
-                ...         color='red',
-                ...         selector=baca.select().tuplets()[1:2].pleaves().group(),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.stem_color(
+            ...         color='red',
+            ...         selector=baca.select().tuplets()[1:2].pleaves().group(),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4593,20 +4455,18 @@ class LibraryNZ(object):
 
             Attaches stem tremolo to pitched leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.stem_tremolo(),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.stem_tremolo(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4648,20 +4508,18 @@ class LibraryNZ(object):
 
             Attaches stem tremolo to pitched leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.stem_tremolo(baca.select().tuplet(1)),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.stem_tremolo(baca.select().tuplet(1)),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4710,20 +4568,18 @@ class LibraryNZ(object):
 
             Down-overrides stem direction pitched leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.stems_down(),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.stems_down(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4767,23 +4623,21 @@ class LibraryNZ(object):
 
             Down-overrides stem direction for leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.stems_down(
-                ...         baca.select().tuplets()[1:2].leaves().group(),
-                ...         ),
-                ...     baca.stems_up(),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.stems_down(
+            ...         baca.select().tuplets()[1:2].leaves().group(),
+            ...         ),
+            ...     baca.stems_up(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4842,20 +4696,18 @@ class LibraryNZ(object):
 
             Up-overrides stem direction on pitched leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 2',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.stems_up(),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 2',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.stems_up(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4899,21 +4751,19 @@ class LibraryNZ(object):
 
             Up-overrides stem direction on leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 2',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [10]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.stems_down(),
-                ...     baca.stems_up(baca.select().tuplets()[1:2].leaves().group()),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 2',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [10]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.stems_down(),
+            ...     baca.stems_up(baca.select().tuplets()[1:2].leaves().group()),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4972,20 +4822,18 @@ class LibraryNZ(object):
 
             Turns strict note spacing off on leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.strict_note_spacing_off(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.strict_note_spacing_off(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5041,16 +4889,14 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            ::
-
-                >>> expression = baca.strict_quarter_divisions()
-                >>> for item in expression([(2, 4), (2, 4)]):
-                ...     item
-                ...
-                Division((1, 4))
-                Division((1, 4))
-                Division((1, 4))
-                Division((1, 4))
+            >>> expression = baca.strict_quarter_divisions()
+            >>> for item in expression([(2, 4), (2, 4)]):
+            ...     item
+            ...
+            Division((1, 4))
+            Division((1, 4))
+            Division((1, 4))
+            Division((1, 4))
 
         '''
         expression = baca.DivisionSequenceExpression()
@@ -5070,21 +4916,19 @@ class LibraryNZ(object):
 
             Pedals leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.sustain_pedal(),
-                ...     baca.sustain_pedal_staff_padding(4),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.sustain_pedal(),
+            ...     baca.sustain_pedal_staff_padding(4),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5129,21 +4973,19 @@ class LibraryNZ(object):
 
             Pedals leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.sustain_pedal(baca.select().tuplet(1)),
-                ...     baca.sustain_pedal_staff_padding(4),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.sustain_pedal(baca.select().tuplet(1)),
+            ...     baca.sustain_pedal_staff_padding(4),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5188,23 +5030,21 @@ class LibraryNZ(object):
 
             Pedals leaves in tuplet 1 (leaked to the left):
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> selector = baca.select().tuplets()[1:2]
-                >>> selector = selector.lleaves().group()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.sustain_pedal(selector=selector),
-                ...     baca.sustain_pedal_staff_padding(4),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> selector = baca.select().tuplets()[1:2]
+            >>> selector = selector.lleaves().group()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.sustain_pedal(selector=selector),
+            ...     baca.sustain_pedal_staff_padding(4),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5249,23 +5089,21 @@ class LibraryNZ(object):
 
             Pedals leaves in tuplet 1 (leaked to the right):
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> selector = baca.select().tuplets()[1:2]
-                >>> selector = selector.rleaves().group()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.sustain_pedal(selector=selector),
-                ...     baca.sustain_pedal_staff_padding(4),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> selector = baca.select().tuplets()[1:2]
+            >>> selector = selector.rleaves().group()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.sustain_pedal(selector=selector),
+            ...     baca.sustain_pedal_staff_padding(4),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5310,23 +5148,21 @@ class LibraryNZ(object):
 
             Pedals leaves in tuplet 1 (leaked wide):
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> selector = baca.select().tuplets()[1:2]
-                >>> selector = selector.wleaves().group()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.sustain_pedal(selector=selector),
-                ...     baca.sustain_pedal_staff_padding(4),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> selector = baca.select().tuplets()[1:2]
+            >>> selector = selector.wleaves().group()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.sustain_pedal(selector=selector),
+            ...     baca.sustain_pedal_staff_padding(4),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5371,21 +5207,19 @@ class LibraryNZ(object):
 
             Pedals leaves in tuplets:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.sustain_pedal(selector=baca.select().tuplets()),
-                ...     baca.sustain_pedal_staff_padding(4),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.sustain_pedal(selector=baca.select().tuplets()),
+            ...     baca.sustain_pedal_staff_padding(4),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5432,23 +5266,21 @@ class LibraryNZ(object):
 
             Pedals leaves in tuplets (leaked to the left):
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> get = baca.select().lleaves()
-                >>> selector = baca.select().tuplets().map(get)
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.sustain_pedal(selector=selector),
-                ...     baca.sustain_pedal_staff_padding(4),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> get = baca.select().lleaves()
+            >>> selector = baca.select().tuplets().map(get)
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.sustain_pedal(selector=selector),
+            ...     baca.sustain_pedal_staff_padding(4),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5495,23 +5327,21 @@ class LibraryNZ(object):
 
             Pedals leaves in tuplets (leaked to the right):
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> get = baca.select().rleaves()
-                >>> selector = baca.select().tuplets().map(get)
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.sustain_pedal(selector=selector),
-                ...     baca.sustain_pedal_staff_padding(4),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> get = baca.select().rleaves()
+            >>> selector = baca.select().tuplets().map(get)
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.sustain_pedal(selector=selector),
+            ...     baca.sustain_pedal_staff_padding(4),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5572,23 +5402,21 @@ class LibraryNZ(object):
 
             Overrides sustain pedal staff padding on leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> get = baca.select().rleaves()
-                >>> selector = baca.select().tuplets().map(get)
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.sustain_pedal(selector=selector),
-                ...     baca.sustain_pedal_staff_padding(4),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> get = baca.select().rleaves()
+            >>> selector = baca.select().tuplets().map(get)
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.sustain_pedal(selector=selector),
+            ...     baca.sustain_pedal_staff_padding(4),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5635,24 +5463,22 @@ class LibraryNZ(object):
 
             Overrides sustain pedal staff padding on leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.sustain_pedal(selector=baca.select().tuplets()),
-                ...     baca.sustain_pedal_staff_padding(
-                ...         n=4,
-                ...         selector=baca.select().tuplets()[1:2].leaves().group(),
-                ...         ),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.sustain_pedal(selector=baca.select().tuplets()),
+            ...     baca.sustain_pedal_staff_padding(
+            ...         n=4,
+            ...         selector=baca.select().tuplets()[1:2].leaves().group(),
+            ...         ),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5713,20 +5539,18 @@ class LibraryNZ(object):
 
             Attaches tenuti to all pitched heads:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tenuti(),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tenuti(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5768,20 +5592,18 @@ class LibraryNZ(object):
 
             Attaches tenuti to pitched heads in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.tenuti(baca.select().tuplets()[1:2].pheads()),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.tenuti(baca.select().tuplets()[1:2].pheads()),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5836,25 +5658,23 @@ class LibraryNZ(object):
 
             Overrides text script color on all leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.markup('più mosso'),
-                ...     baca.markup(
-                ...         'lo stesso tempo',
-                ...         baca.select().tuplets()[1:2].phead(0),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.text_script_color('red'),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.markup('più mosso'),
+            ...     baca.markup(
+            ...         'lo stesso tempo',
+            ...         baca.select().tuplets()[1:2].phead(0),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.text_script_color('red'),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5898,29 +5718,26 @@ class LibraryNZ(object):
 
             Overrides text script color on leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.markup('più mosso'),
-                ...     baca.markup(
-                ...         'lo stesso tempo',
-                ...         baca.select().tuplets()[1:2].phead(0),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.text_script_color(
-                ...         'red',
-                ...         baca.select().tuplets()[1:2].leaves().group(),
-                ...         ),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
-
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.markup('più mosso'),
+            ...     baca.markup(
+            ...         'lo stesso tempo',
+            ...         baca.select().tuplets()[1:2].phead(0),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.text_script_color(
+            ...         'red',
+            ...         baca.select().tuplets()[1:2].leaves().group(),
+            ...         ),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5976,8 +5793,6 @@ class LibraryNZ(object):
         ..  container:: example
 
             Overrides text script padding on leaves:
-
-            ::
 
 
                 >>> music_maker = baca.MusicMaker()
@@ -6040,29 +5855,26 @@ class LibraryNZ(object):
 
             Overrides text script padding on leaves in tuplet 1:
 
-            ::
-
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.markup('più mosso'),
-                ...     baca.markup(
-                ...         'lo stesso tempo',
-                ...         baca.select().tuplets()[1:2].phead(0),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.text_script_padding(
-                ...         4,
-                ...         baca.select().tuplets()[1:2].leaves().group(),
-                ...         ),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.markup('più mosso'),
+            ...     baca.markup(
+            ...         'lo stesso tempo',
+            ...         baca.select().tuplets()[1:2].phead(0),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.text_script_padding(
+            ...         4,
+            ...         baca.select().tuplets()[1:2].leaves().group(),
+            ...         ),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6122,25 +5934,23 @@ class LibraryNZ(object):
 
             Overrides text script staff padding on leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.markup('più mosso'),
-                ...     baca.markup(
-                ...         'lo stesso tempo',
-                ...         baca.select().tuplets()[1:2].phead(0),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.text_script_staff_padding(n=4),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.markup('più mosso'),
+            ...     baca.markup(
+            ...         'lo stesso tempo',
+            ...         baca.select().tuplets()[1:2].phead(0),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.text_script_staff_padding(n=4),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6184,28 +5994,26 @@ class LibraryNZ(object):
 
             Overrides text script staff padding on leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.markup('più mosso'),
-                ...     baca.markup(
-                ...         'lo stesso tempo',
-                ...         baca.select().tuplets()[1:2].phead(0),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.text_script_staff_padding(
-                ...         n=4,
-                ...         selector=baca.select().tuplets()[1:2].leaves().group(),
-                ...         ),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.markup('più mosso'),
+            ...     baca.markup(
+            ...         'lo stesso tempo',
+            ...         baca.select().tuplets()[1:2].phead(0),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.text_script_staff_padding(
+            ...         n=4,
+            ...         selector=baca.select().tuplets()[1:2].leaves().group(),
+            ...         ),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6262,25 +6070,23 @@ class LibraryNZ(object):
 
             Down-overrides text script direction on leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.markup('più mosso'),
-                ...     baca.markup(
-                ...         'lo stesso tempo',
-                ...         baca.select().tuplets()[1:2].phead(0),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.text_scripts_down(),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.markup('più mosso'),
+            ...     baca.markup(
+            ...         'lo stesso tempo',
+            ...         baca.select().tuplets()[1:2].phead(0),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.text_scripts_down(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6324,28 +6130,25 @@ class LibraryNZ(object):
 
             Down-overrides text script direction on leaves in tuplet 1:
 
-            ::
-
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.markup('più mosso'),
-                ...     baca.markup(
-                ...         'lo stesso tempo',
-                ...         baca.select().tuplets()[1:2].phead(0),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.text_scripts_down(
-                ...         selector=baca.select().tuplets()[1:2].leaves().group(),
-                ...         ),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.markup('più mosso'),
+            ...     baca.markup(
+            ...         'lo stesso tempo',
+            ...         baca.select().tuplets()[1:2].phead(0),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.text_scripts_down(
+            ...         selector=baca.select().tuplets()[1:2].leaves().group(),
+            ...         ),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6402,25 +6205,23 @@ class LibraryNZ(object):
 
             Up-overrides text script direction on leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.markup('più mosso'),
-                ...     baca.markup(
-                ...         'lo stesso tempo',
-                ...         baca.select().tuplets()[1:2].phead(0),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.text_scripts_up(),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.markup('più mosso'),
+            ...     baca.markup(
+            ...         'lo stesso tempo',
+            ...         baca.select().tuplets()[1:2].phead(0),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.text_scripts_up(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6464,28 +6265,25 @@ class LibraryNZ(object):
 
             Up-overrides text script direction on leaves in tuplet 1:
 
-            ::
-
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.markup('più mosso'),
-                ...     baca.markup(
-                ...         'lo stesso tempo',
-                ...         baca.select().tuplets()[1:2].phead(0),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.text_scripts_up(
-                ...         selector=baca.select().tuplets()[1:2].leaves().group(),
-                ...         ),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.markup('più mosso'),
+            ...     baca.markup(
+            ...         'lo stesso tempo',
+            ...         baca.select().tuplets()[1:2].phead(0),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.text_scripts_up(
+            ...         selector=baca.select().tuplets()[1:2].leaves().group(),
+            ...         ),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6545,25 +6343,23 @@ class LibraryNZ(object):
 
             Overrides text spanner staff padding on all trimmed leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.text_spanner_staff_padding(6),
-                ...     baca.text_script_staff_padding(6),
-                ...     baca.transition_spanner(
-                ...         baca.markup.pont(),
-                ...         baca.markup.ord_(),
-                ...         ),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.text_spanner_staff_padding(6),
+            ...     baca.text_script_staff_padding(6),
+            ...     baca.transition_spanner(
+            ...         baca.markup.pont(),
+            ...         baca.markup.ord_(),
+            ...         ),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6637,29 +6433,27 @@ class LibraryNZ(object):
 
             Overrides text spanner staff padding on trimmed leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.text_spanner_staff_padding(
-                ...         n=6,
-                ...         selector=baca.select().tuplets()[1:2].pleaves().group(),
-                ...         ),
-                ...     baca.text_script_staff_padding(6),
-                ...     baca.transition_spanner(
-                ...         baca.markup.pont(),
-                ...         baca.markup.ord_(),
-                ...         baca.select().tuplets()[1:2].tleaves().group(),
-                ...         ),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.text_spanner_staff_padding(
+            ...         n=6,
+            ...         selector=baca.select().tuplets()[1:2].pleaves().group(),
+            ...         ),
+            ...     baca.text_script_staff_padding(6),
+            ...     baca.transition_spanner(
+            ...         baca.markup.pont(),
+            ...         baca.markup.ord_(),
+            ...         baca.select().tuplets()[1:2].tleaves().group(),
+            ...         ),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6758,20 +6552,18 @@ class LibraryNZ(object):
 
             Attaches tie to every PLT prun:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.ties(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
+            ...     baca.ties(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6813,20 +6605,18 @@ class LibraryNZ(object):
 
             Attaches tie to  PLT p-run 0:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-                ...     baca.ties(baca.select().qrun(0)),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
+            ...     baca.ties(baca.select().qrun(0)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6878,22 +6668,20 @@ class LibraryNZ(object):
 
             Overrides tie direction on pitched leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[11, 11, 12], [11, 11, 11], [11]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.stems_up(),
-                ...     baca.ties(),
-                ...     baca.ties_down(),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[11, 11, 12], [11, 11, 11], [11]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.stems_up(),
+            ...     baca.ties(),
+            ...     baca.ties_down(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6937,22 +6725,20 @@ class LibraryNZ(object):
 
             Overrides tie direction on pitched leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[11, 11, 12], [11, 11, 11], [11]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.stems_up(),
-                ...     baca.ties(),
-                ...     baca.ties_down(baca.select().tuplets()[1:2].pleaves().group()),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[11, 11, 12], [11, 11, 11], [11]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.stems_up(),
+            ...     baca.ties(),
+            ...     baca.ties_down(baca.select().tuplets()[1:2].pleaves().group()),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -7009,22 +6795,20 @@ class LibraryNZ(object):
 
             Overrides tie direction on pitched leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[11, 11, 12], [11, 11, 11], [11]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.stems_down(),
-                ...     baca.ties(),
-                ...     baca.ties_up(),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[11, 11, 12], [11, 11, 11], [11]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.stems_down(),
+            ...     baca.ties(),
+            ...     baca.ties_up(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -7068,22 +6852,20 @@ class LibraryNZ(object):
 
             Overrides tie direction on pitched leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[11, 11, 12], [11, 11, 11], [11]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.stems_down(),
-                ...     baca.ties(),
-                ...     baca.ties_up(baca.select().tuplets()[1:2].pleaves().group()),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[11, 11, 12], [11, 11, 11], [11]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.stems_down(),
+            ...     baca.ties(),
+            ...     baca.ties_up(baca.select().tuplets()[1:2].pleaves().group()),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -7143,20 +6925,18 @@ class LibraryNZ(object):
 
             Overrides time signature extra offset on leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.time_signature_extra_offset((-6, 0)),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.time_signature_extra_offset((-6, 0)),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -7219,25 +6999,23 @@ class LibraryNZ(object):
 
             Attaches transition spanner to leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.text_spanner_staff_padding(6),
-                ...     baca.text_script_staff_padding(6),
-                ...     baca.transition_spanner(
-                ...         baca.markup.pont(),
-                ...         baca.markup.ord_(),
-                ...         ),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.text_spanner_staff_padding(6),
+            ...     baca.text_script_staff_padding(6),
+            ...     baca.transition_spanner(
+            ...         baca.markup.pont(),
+            ...         baca.markup.ord_(),
+            ...         ),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -7311,26 +7089,24 @@ class LibraryNZ(object):
 
             Attaches transition spanner to trimmed leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.text_spanner_staff_padding(6),
-                ...     baca.text_script_staff_padding(6),
-                ...     baca.transition_spanner(
-                ...         baca.markup.pont(),
-                ...         baca.markup.ord_(),
-                ...         baca.select().tuplets()[1:2].tleaves().group(),
-                ...         ),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.text_spanner_staff_padding(6),
+            ...     baca.text_script_staff_padding(6),
+            ...     baca.transition_spanner(
+            ...         baca.markup.pont(),
+            ...         baca.markup.ord_(),
+            ...         baca.select().tuplets()[1:2].tleaves().group(),
+            ...         ),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -7415,20 +7191,18 @@ class LibraryNZ(object):
 
             Makes bar lines before leaf 0 transparent:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.transparent_bar_lines(),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.transparent_bar_lines(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -7485,20 +7259,18 @@ class LibraryNZ(object):
 
             Makes rests transparent:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.transparent_rests(),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.transparent_rests(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -7542,22 +7314,20 @@ class LibraryNZ(object):
 
             Makes rests in tuplet 1 transparent:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.transparent_rests(
-                ...         baca.select().tuplets()[1:2].rests().group(),
-                ...         ),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.transparent_rests(
+            ...         baca.select().tuplets()[1:2].rests().group(),
+            ...         ),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -7614,20 +7384,18 @@ class LibraryNZ(object):
 
             Makes span bar before leaf 0 transparent:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.transparent_span_bars(),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.transparent_span_bars(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -7684,20 +7452,18 @@ class LibraryNZ(object):
 
             Makes all time signatures transparent:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.transparent_time_signatures(),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.transparent_time_signatures(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -7796,20 +7562,18 @@ class LibraryNZ(object):
 
             Attaches trill to every PLT p-run:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.trills(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.trills(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -7851,21 +7615,19 @@ class LibraryNZ(object):
 
             Attaches trill to each PLT p-run in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.trills(
-                ...         baca.select().tuplets()[1:2].qruns()),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.trills(
+            ...         baca.select().tuplets()[1:2].qruns()),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -7920,20 +7682,18 @@ class LibraryNZ(object):
 
             Attaches trill to every PLT p-run:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.trills_at_interval(2),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.trills_at_interval(2),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -7984,23 +7744,21 @@ class LibraryNZ(object):
 
             Attaches trill to every PLT p-run in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.trills_at_interval(
-                ...         2,
-                ...         baca.select().tuplets()[1:2].qruns(),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.trills_at_interval(
+            ...         2,
+            ...         baca.select().tuplets()[1:2].qruns(),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -8062,20 +7820,18 @@ class LibraryNZ(object):
 
             Attaches trill to every PLT p-run:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.trills_at_pitch(1),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.trills_at_pitch(1),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -8126,23 +7882,21 @@ class LibraryNZ(object):
 
             Attaches trill to every PLT p-run in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.trills_at_pitch(
-                ...         pitch=1,
-                ...         selector=baca.select().tuplets()[1:2].qruns(),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.trills_at_pitch(
+            ...         pitch=1,
+            ...         selector=baca.select().tuplets()[1:2].qruns(),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -8204,20 +7958,18 @@ class LibraryNZ(object):
 
             Overrides tuplet bracket extra offset on leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_extra_offset((-1, 0)),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_extra_offset((-1, 0)),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -8261,23 +8013,21 @@ class LibraryNZ(object):
 
             Overrides tuplet bracket extra offset on leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_extra_offset(
-                ...         (-1, 0),
-                ...         baca.select().tuplets()[1:2].leaves().group(),
-                ...         ),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_extra_offset(
+            ...         (-1, 0),
+            ...         baca.select().tuplets()[1:2].leaves().group(),
+            ...         ),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -8337,19 +8087,17 @@ class LibraryNZ(object):
 
             Overrides tuplet bracket staff padding on leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -8391,22 +8139,20 @@ class LibraryNZ(object):
 
             Overrides tuplet bracket staff padding on leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(
-                ...         n=5,
-                ...         selector=baca.select().tuplets()[1:2].leaves().group(),
-                ...         ),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(
+            ...         n=5,
+            ...         selector=baca.select().tuplets()[1:2].leaves().group(),
+            ...         ),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -8461,20 +8207,18 @@ class LibraryNZ(object):
 
             Overrides tuplet bracket direction on leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     baca.tuplet_brackets_down(),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     baca.tuplet_brackets_down(),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -8518,22 +8262,20 @@ class LibraryNZ(object):
 
             Overrides tuplet bracket direction on leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     baca.tuplet_brackets_down(
-                ...         baca.select().tuplets()[1:2].leaves().group(),
-                ...         ),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     baca.tuplet_brackets_down(
+            ...         baca.select().tuplets()[1:2].leaves().group(),
+            ...         ),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -8590,20 +8332,18 @@ class LibraryNZ(object):
 
             Override tuplet bracket direction on leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     baca.tuplet_brackets_up(),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     baca.tuplet_brackets_up(),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -8647,22 +8387,20 @@ class LibraryNZ(object):
 
             Override tuplet bracket direction on leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     baca.tuplet_brackets_up(
-                ...         baca.select().tuplets()[1:2].leaves().group(),
-                ...         ),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     baca.tuplet_brackets_up(
+            ...         baca.select().tuplets()[1:2].leaves().group(),
+            ...         ),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -8722,20 +8460,18 @@ class LibraryNZ(object):
 
             Overrides tuplet number extra offset on leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     baca.tuplet_number_extra_offset((-1, 0)),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     baca.tuplet_number_extra_offset((-1, 0)),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -8779,23 +8515,21 @@ class LibraryNZ(object):
 
             Overrides tuplet number extra offset on leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     baca.tuplet_number_extra_offset(
-                ...         (-1, 0),
-                ...         baca.select().tuplets()[1:2].leaves().group(),
-                ...         ),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     baca.tuplet_number_extra_offset(
+            ...         (-1, 0),
+            ...         baca.select().tuplets()[1:2].leaves().group(),
+            ...         ),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -8852,21 +8586,19 @@ class LibraryNZ(object):
 
             Attaches two-line percussion staff spanner to leaves:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.percussion_staff(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(9),
-                ...     baca.two_line_staff(),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.percussion_staff(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(9),
+            ...     baca.two_line_staff(),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -8914,21 +8646,19 @@ class LibraryNZ(object):
 
             Attaches two-line percussion staff spanner to leaves in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.percussion_staff(baca.select().tuplet(1)),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(9),
-                ...     baca.two_line_staff(baca.select().tuplet(1)),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.percussion_staff(baca.select().tuplet(1)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(9),
+            ...     baca.two_line_staff(baca.select().tuplet(1)),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -8986,20 +8716,18 @@ class LibraryNZ(object):
 
             Attaches up-arpeggios to all chord heads:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.up_arpeggios(),
-                ...     counts=[5, -3],
-                ...     talea_denominator=32,
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
+            ...     baca.up_arpeggios(),
+            ...     counts=[5, -3],
+            ...     talea_denominator=32,
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -9044,18 +8772,16 @@ class LibraryNZ(object):
 
             Attaches up-arpeggios to last two chord heads:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-                ...     baca.up_arpeggios(baca.select().cheads()[-2:]),
-                ...     counts=[5, -3],
-                ...     talea_denominator=32,
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
+            ...     baca.up_arpeggios(baca.select().cheads()[-2:]),
+            ...     counts=[5, -3],
+            ...     talea_denominator=32,
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -9109,20 +8835,18 @@ class LibraryNZ(object):
 
             Attaches up-bows to all pitched heads:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     baca.up_bows(),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     baca.up_bows(),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -9164,22 +8888,20 @@ class LibraryNZ(object):
 
             Attaches up-bows to pitched heads in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     baca.up_bows(
-                ...         baca.select().tuplets()[1:2].pheads(),
-                ...         ),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     baca.up_bows(
+            ...         baca.select().tuplets()[1:2].pheads(),
+            ...         ),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -9231,20 +8953,18 @@ class LibraryNZ(object):
 
             Attaches very long fermata to first leaf:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.very_long_fermata(),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.very_long_fermata(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -9286,22 +9006,20 @@ class LibraryNZ(object):
 
             Attaches very long fermata to first leaf in tuplet 1:
 
-            ::
-
-                >>> music_maker = baca.MusicMaker()
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.very_long_fermata(
-                ...         baca.select().tuplets()[1:2].phead(0),
-                ...         ),
-                ...     baca.rests_around([2], [4]),
-                ...     baca.tuplet_bracket_staff_padding(5),
-                ...     counts=[1, 1, 5, -1],
-                ...     time_treatments=[-1],
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.very_long_fermata(
+            ...         baca.select().tuplets()[1:2].phead(0),
+            ...         ),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 

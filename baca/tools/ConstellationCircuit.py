@@ -7,26 +7,22 @@ class ConstellationCircuit(abjad.AbjadObject):
 
     ..  container:: example
 
-        ::
+        >>> range_ = abjad.PitchRange('[A0, C8]')
+        >>> constellation_circuit = baca.ConstellationCircuit(
+        ...     baca.ConstellationCircuit.CC1,
+        ...     range_,
+        ...     )
 
-            >>> range_ = abjad.PitchRange('[A0, C8]')
-            >>> constellation_circuit = baca.ConstellationCircuit(
-            ...     baca.ConstellationCircuit.CC1,
-            ...     range_,
-            ...     )
-
-        ::
-
-            >>> for constellation in constellation_circuit:
-            ...     constellation
-            Constellation(180)
-            Constellation(140)
-            Constellation(80)
-            Constellation(100)
-            Constellation(180)
-            Constellation(150)
-            Constellation(120)
-            Constellation(108)
+        >>> for constellation in constellation_circuit:
+        ...     constellation
+        Constellation(180)
+        Constellation(140)
+        Constellation(80)
+        Constellation(100)
+        Constellation(180)
+        Constellation(150)
+        Constellation(120)
+        Constellation(108)
 
     '''
 
@@ -59,10 +55,8 @@ class ConstellationCircuit(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> constellation_circuit[-1]
-                Constellation(108)
+            >>> constellation_circuit[-1]
+            Constellation(108)
 
         Returns constellation.
         '''
@@ -73,10 +67,8 @@ class ConstellationCircuit(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> len(constellation_circuit)
-                8
+            >>> len(constellation_circuit)
+            8
 
         '''
         return len(self._constellations)
@@ -86,10 +78,8 @@ class ConstellationCircuit(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> constellation_circuit
-                ConstellationCircuit(8)
+            >>> constellation_circuit
+            ConstellationCircuit(8)
 
         Returns string.
         '''
@@ -156,18 +146,16 @@ class ConstellationCircuit(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> for chord in constellation_circuit.generator_chords:
-                ...     chord
-                Chord("<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4")
-                Chord("<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4")
-                Chord("<e b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4")
-                Chord("<e c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4")
-                Chord("<c ef b cs' e' d'' fs'' g'' af'' bf'' f''' a'''>4")
-                Chord("<d g bf c' ef' f' b' cs'' e'' fs''' af''' a''''>4")
-                Chord("<d bf b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4")
-                Chord("<c b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4")
+            >>> for chord in constellation_circuit.generator_chords:
+            ...     chord
+            Chord("<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4")
+            Chord("<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4")
+            Chord("<e b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4")
+            Chord("<e c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4")
+            Chord("<c ef b cs' e' d'' fs'' g'' af'' bf'' f''' a'''>4")
+            Chord("<d g bf c' ef' f' b' cs'' e'' fs''' af''' a''''>4")
+            Chord("<d bf b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4")
+            Chord("<c b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4")
 
         Returns list of chords.
         """
@@ -182,10 +170,8 @@ class ConstellationCircuit(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> constellation_circuit.pitch_range
-                PitchRange('[A0, C8]')
+            >>> constellation_circuit.pitch_range
+            PitchRange('[A0, C8]')
 
         Returns pitch range.
         '''
@@ -197,18 +183,16 @@ class ConstellationCircuit(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> for chord in constellation_circuit.pivot_chords:
-                ...     chord
-                Chord("<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4")
-                Chord("<e b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4")
-                Chord("<e c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4")
-                Chord("<c ef b cs' e' d'' fs'' g'' af'' bf'' f''' a'''>4")
-                Chord("<d g bf c' ef' f' b' cs'' e'' fs''' af''' a''''>4")
-                Chord("<d bf b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4")
-                Chord("<c b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4")
-                Chord("<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4")
+            >>> for chord in constellation_circuit.pivot_chords:
+            ...     chord
+            Chord("<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4")
+            Chord("<e b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4")
+            Chord("<e c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4")
+            Chord("<c ef b cs' e' d'' fs'' g'' af'' bf'' f''' a'''>4")
+            Chord("<d g bf c' ef' f' b' cs'' e'' fs''' af''' a''''>4")
+            Chord("<d bf b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4")
+            Chord("<c b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4")
+            Chord("<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4")
 
         Returns list of chords.
         """
@@ -224,17 +208,13 @@ class ConstellationCircuit(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> constellation_circuit.get(8)
-                Constellation(108)
+            >>> constellation_circuit.get(8)
+            Constellation(108)
 
         ..  container:: example
 
-            ::
-
-                >>> constellation_circuit.get(8, 108)
-                Sequence([-12, 17, 23, 26, 27, 31, 34, 37, 40, 42, 44, 45])
+            >>> constellation_circuit.get(8, 108)
+            Sequence([-12, 17, 23, 26, 27, 31, 34, 37, 40, 42, 44, 45])
 
         Returns constellation or list.
         '''
@@ -253,10 +233,8 @@ class ConstellationCircuit(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> lilypond_file = constellation_circuit.illustrate_colored_generator_chords()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = constellation_circuit.illustrate_colored_generator_chords()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -503,10 +481,8 @@ class ConstellationCircuit(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> lilypond_file = constellation_circuit.illustrate_colored_generator_chords_and_pivot_chords()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = constellation_circuit.illustrate_colored_generator_chords_and_pivot_chords()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -771,10 +747,8 @@ class ConstellationCircuit(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> lilypond_file = constellation_circuit.illustrate_generator_chords()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = constellation_circuit.illustrate_generator_chords()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -822,10 +796,8 @@ class ConstellationCircuit(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> lilypond_file = constellation_circuit.illustrate_generator_chords_and_pivot_chords()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = constellation_circuit.illustrate_generator_chords_and_pivot_chords()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -891,10 +863,8 @@ class ConstellationCircuit(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> lilypond_file = constellation_circuit.illustrate_pivot_chords()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = constellation_circuit.illustrate_pivot_chords()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 

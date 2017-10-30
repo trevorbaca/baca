@@ -7,10 +7,8 @@ class MusicContribution(abjad.AbjadValueObject):
 
     ..  container:: example
 
-        ::
-
-            >>> baca.MusicContribution()
-            MusicContribution()
+        >>> baca.MusicContribution()
+        MusicContribution()
 
     '''
 

@@ -7,36 +7,30 @@ class TimeSignatureMaker(abjad.AbjadObject):
 
     ..  container:: example
 
-        ::
+        >>> time_signatures = [
+        ...     [(1, 16), (2, 16), (3, 16)],
+        ...     [(1, 8), (2, 8), (3, 8)],
+        ...     ]
+        >>> stage_measure_map = baca.StageMeasureMap([
+        ...     2,
+        ...     2,
+        ...     abjad.Fermata('longfermata'),
+        ...     ])
+        >>> metronome_mark_measure_map = baca.MetronomeMarkMeasureMap([
+        ...     (1, abjad.MetronomeMark((1, 4), 90)),
+        ...     ])
+        >>> maker = baca.TimeSignatureMaker(
+        ...     time_signatures=time_signatures,
+        ...     stage_measure_map=stage_measure_map,
+        ...     metronome_mark_measure_map=metronome_mark_measure_map,
+        ...     )
+        >>> measures_per_stage, metronome_mark_measure_map, time_signatures = maker()
 
-            >>> time_signatures = [
-            ...     [(1, 16), (2, 16), (3, 16)],
-            ...     [(1, 8), (2, 8), (3, 8)],
-            ...     ]
-            >>> stage_measure_map = baca.StageMeasureMap([
-            ...     2,
-            ...     2,
-            ...     abjad.Fermata('longfermata'),
-            ...     ])
-            >>> metronome_mark_measure_map = baca.MetronomeMarkMeasureMap([
-            ...     (1, abjad.MetronomeMark((1, 4), 90)),
-            ...     ])
-            >>> maker = baca.TimeSignatureMaker(
-            ...     time_signatures=time_signatures,
-            ...     stage_measure_map=stage_measure_map,
-            ...     metronome_mark_measure_map=metronome_mark_measure_map,
-            ...     )
-            >>> measures_per_stage, metronome_mark_measure_map, time_signatures = maker()
+        >>> measures_per_stage
+        [2, 2, 1]
 
-        ::
-
-            >>> measures_per_stage
-            [2, 2, 1]
-
-        ::
-
-            >>> time_signatures
-            Sequence([(1, 16), (2, 16), (3, 16), (1, 8), TimeSignature((1, 4))])
+        >>> time_signatures
+        Sequence([(1, 16), (2, 16), (3, 16), (1, 8), TimeSignature((1, 4))])
 
     '''
 

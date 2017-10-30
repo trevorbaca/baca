@@ -12,27 +12,21 @@ class MicrotoneDeviationCommand(Command):
 
         With alternating up- and down-quatertones:
 
-        ::
+        >>> segment_maker = baca.SegmentMaker(
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
 
-            >>> segment_maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.pitches('E4'),
+        ...     baca.even_runs(),
+        ...     baca.deviation([0, 0.5, 0, -0.5]),
+        ...     )
 
-        ::
-
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.pitches('E4'),
-            ...     baca.even_runs(),
-            ...     baca.deviation([0, 0.5, 0, -0.5]),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -163,11 +157,9 @@ class MicrotoneDeviationCommand(Command):
 
         ..  container:: example
 
-            ::
-
-                >>> command = baca.deviation([0, -0.5, 0, 0.5])
-                >>> command.deviations
-                CyclicTuple([0, -0.5, 0, 0.5])
+            >>> command = baca.deviation([0, -0.5, 0, 0.5])
+            >>> command.deviations
+            CyclicTuple([0, -0.5, 0, 0.5])
 
         Set to iterable of items (each -0.5, 0 or 0.5).
 

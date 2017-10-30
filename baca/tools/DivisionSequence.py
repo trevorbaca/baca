@@ -8,10 +8,8 @@ class DivisionSequence(abjad.Sequence):
 
     ..  container:: example
 
-        ::
-
-            >>> baca.DivisionSequence([(3, 8), (3, 8), (2, 8)])
-            DivisionSequence([Division((3, 8)), Division((3, 8)), Division((2, 8))])
+        >>> baca.DivisionSequence([(3, 8), (3, 8), (2, 8)])
+        DivisionSequence([Division((3, 8)), Division((3, 8)), Division((2, 8))])
 
     '''
 

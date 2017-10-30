@@ -7,36 +7,32 @@ class Constellation(abjad.AbjadObject):
 
     ..  container:: example
 
-        ::
+        >>> cells = [
+        ...     [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]],
+        ...     [[-12, -10, -2], [4, 11, 27, 33, 37], [8, 17, 19, 30]],
+        ...     [[-8, 2, 15, 25], [-1, 20, 29, 31], [0, 10, 21, 42]],
+        ...     [[-8, 2, 10, 21], [0, 11, 32, 41], [15, 25, 42, 43]],
+        ...     [[-12, -9, 1, 4], [-1, 18, 20, 33], [14, 19, 22, 29]],
+        ...     [[-10, -2, 0, 5], [-5, 3, 13, 16], [11, 30, 32, 45]],
+        ...     [[-10, -2, 5, 15, 25], [-1, 7, 18, 20], [0, 28, 33]],
+        ...     [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]],
+        ...     ]
+        >>> range_ = abjad.PitchRange('[A0, C8]')
+        >>> constellation_circuit = baca.ConstellationCircuit(
+        ...     cells,
+        ...     range_,
+        ...     )
 
-            >>> cells = [
-            ...     [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]],
-            ...     [[-12, -10, -2], [4, 11, 27, 33, 37], [8, 17, 19, 30]],
-            ...     [[-8, 2, 15, 25], [-1, 20, 29, 31], [0, 10, 21, 42]],
-            ...     [[-8, 2, 10, 21], [0, 11, 32, 41], [15, 25, 42, 43]],
-            ...     [[-12, -9, 1, 4], [-1, 18, 20, 33], [14, 19, 22, 29]],
-            ...     [[-10, -2, 0, 5], [-5, 3, 13, 16], [11, 30, 32, 45]],
-            ...     [[-10, -2, 5, 15, 25], [-1, 7, 18, 20], [0, 28, 33]],
-            ...     [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]],
-            ...     ]
-            >>> range_ = abjad.PitchRange('[A0, C8]')
-            >>> constellation_circuit = baca.ConstellationCircuit(
-            ...     cells,
-            ...     range_,
-            ...     )
-
-        ::
-
-            >>> for constellation in constellation_circuit:
-            ...     constellation
-            Constellation(180)
-            Constellation(140)
-            Constellation(80)
-            Constellation(100)
-            Constellation(180)
-            Constellation(150)
-            Constellation(120)
-            Constellation(108)
+        >>> for constellation in constellation_circuit:
+        ...     constellation
+        Constellation(180)
+        Constellation(140)
+        Constellation(80)
+        Constellation(100)
+        Constellation(180)
+        Constellation(150)
+        Constellation(120)
+        Constellation(108)
 
     '''
 
@@ -61,24 +57,20 @@ class Constellation(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> pitch_numbers = [
-                ...     -38, -36, -34, -29, -28, -25,
-                ...     -21, -20, -19, -18, -15, -11,
-                ...     ]
-                >>> pitch_set = baca.Sequence(items=pitch_numbers)
-                >>> constellation = constellation_circuit[0]
-                >>> pitch_set in constellation
-                True
+            >>> pitch_numbers = [
+            ...     -38, -36, -34, -29, -28, -25,
+            ...     -21, -20, -19, -18, -15, -11,
+            ...     ]
+            >>> pitch_set = baca.Sequence(items=pitch_numbers)
+            >>> constellation = constellation_circuit[0]
+            >>> pitch_set in constellation
+            True
 
         ..  container:: example
 
-            ::
-
-                >>> constellation = constellation_circuit[0]
-                >>> [-38] in constellation
-                False
+            >>> constellation = constellation_circuit[0]
+            >>> [-38] in constellation
+            False
 
         Returns true or false.
         '''
@@ -89,11 +81,9 @@ class Constellation(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> constellation = constellation_circuit[0]
-                >>> constellation[0]
-                Sequence([-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11])
+            >>> constellation = constellation_circuit[0]
+            >>> constellation[0]
+            Sequence([-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11])
 
         Returns list.
         '''
@@ -104,11 +94,9 @@ class Constellation(abjad.AbjadObject):
 
         ..  container::
 
-            ::
-
-                >>> constellation = constellation_circuit[0]
-                >>> len(constellation)
-                180
+            >>> constellation = constellation_circuit[0]
+            >>> len(constellation)
+            180
 
         Returns nonnegative integer.
         '''
@@ -119,12 +107,9 @@ class Constellation(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> constellation = constellation_circuit[0]
-                >>> constellation
-                Constellation(180)
-
+            >>> constellation = constellation_circuit[0]
+            >>> constellation
+            Constellation(180)
 
         '''
         return f'{type(self).__name__}({len(self)})'
@@ -227,11 +212,9 @@ class Constellation(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> constellation = constellation_circuit[0]
-                >>> constellation.constellation_number
-                1
+            >>> constellation = constellation_circuit[0]
+            >>> constellation.constellation_number
+            1
 
         Returns positive integer.
         '''
@@ -243,10 +226,8 @@ class Constellation(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> constellation = constellation_circuit[0]
-                >>> abjad.show(constellation.generator_chord) # doctest: +SKIP
+            >>> constellation = constellation_circuit[0]
+            >>> abjad.show(constellation.generator_chord) # doctest: +SKIP
 
             ..  docs::
 
@@ -265,18 +246,16 @@ class Constellation(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> for constellation in constellation_circuit:
-                ...     constellation.partitioned_generator_pitch_numbers
-                [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]]
-                [[-12, -10, -2], [4, 11, 27, 33, 37], [8, 17, 19, 30]]
-                [[-8, 2, 15, 25], [-1, 20, 29, 31], [0, 10, 21, 42]]
-                [[-8, 2, 10, 21], [0, 11, 32, 41], [15, 25, 42, 43]]
-                [[-12, -9, 1, 4], [-1, 18, 20, 33], [14, 19, 22, 29]]
-                [[-10, -2, 0, 5], [-5, 3, 13, 16], [11, 30, 32, 45]]
-                [[-10, -2, 5, 15, 25], [-1, 7, 18, 20], [0, 28, 33]]
-                [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]]
+            >>> for constellation in constellation_circuit:
+            ...     constellation.partitioned_generator_pitch_numbers
+            [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]]
+            [[-12, -10, -2], [4, 11, 27, 33, 37], [8, 17, 19, 30]]
+            [[-8, 2, 15, 25], [-1, 20, 29, 31], [0, 10, 21, 42]]
+            [[-8, 2, 10, 21], [0, 11, 32, 41], [15, 25, 42, 43]]
+            [[-12, -9, 1, 4], [-1, 18, 20, 33], [14, 19, 22, 29]]
+            [[-10, -2, 0, 5], [-5, 3, 13, 16], [11, 30, 32, 45]]
+            [[-10, -2, 5, 15, 25], [-1, 7, 18, 20], [0, 28, 33]]
+            [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]]
 
         Returns list of lists.
         '''
@@ -288,11 +267,9 @@ class Constellation(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> constellation = constellation_circuit[0]
-                >>> constellation.pitch_range
-                PitchRange('[A0, C8]')
+            >>> constellation = constellation_circuit[0]
+            >>> constellation.pitch_range
+            PitchRange('[A0, C8]')
 
         '''
         return self._circuit.pitch_range
@@ -303,10 +280,8 @@ class Constellation(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> constellation = constellation_circuit[0]
-                >>> abjad.show(constellation.pivot_chord) # doctest: +SKIP
+            >>> constellation = constellation_circuit[0]
+            >>> abjad.show(constellation.pivot_chord) # doctest: +SKIP
 
             ..  docs::
 
@@ -326,11 +301,9 @@ class Constellation(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> constellation = constellation_circuit[0]
-                >>> constellation.get_chord(1)
-                Sequence([-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11])
+            >>> constellation = constellation_circuit[0]
+            >>> constellation.get_chord(1)
+            Sequence([-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11])
 
         Returns list of numbers.
         '''
@@ -343,12 +316,10 @@ class Constellation(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
-
-                >>> constellation = constellation_circuit[0]
-                >>> chord = constellation.get_chord(17)
-                >>> constellation.get_number_of_chord(chord)
-                17
+            >>> constellation = constellation_circuit[0]
+            >>> chord = constellation.get_chord(17)
+            >>> constellation.get_number_of_chord(chord)
+            17
 
         Returns positive integer.
         '''

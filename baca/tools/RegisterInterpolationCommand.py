@@ -10,20 +10,16 @@ class RegisterInterpolationCommand(Command):
 
         With music-maker:
 
-        ::
+        >>> music_maker = baca.MusicMaker()
 
-            >>> music_maker = baca.MusicMaker()
-
-        ::
-
-            >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     collections,
-            ...     baca.register(0, 24),
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     collections,
+        ...     baca.register(0, 24),
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -68,23 +64,19 @@ class RegisterInterpolationCommand(Command):
 
         With chords:
 
-        ::
+        >>> music_maker = baca.MusicMaker()
 
-            >>> music_maker = baca.MusicMaker()
-
-        ::
-
-            >>> collections = [
-            ...     [6, 4], [3, 5], [9, 10], [0, 11], [8, 7], [1, 2],
-            ...     ]
-            >>> collections = [set(_) for _ in collections]
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     collections,
-            ...     baca.register(0, 24),
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> collections = [
+        ...     [6, 4], [3, 5], [9, 10], [0, 11], [8, 7], [1, 2],
+        ...     ]
+        >>> collections = [set(_) for _ in collections]
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     collections,
+        ...     baca.register(0, 24),
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -125,21 +117,17 @@ class RegisterInterpolationCommand(Command):
             ...     time_signatures=time_signatures,
             ...     )
 
-        ::
+        >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.pitches(pitches),
+        ...     baca.even_runs(),
+        ...     baca.register(12, 12),
+        ...     )
 
-            >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.pitches(pitches),
-            ...     baca.even_runs(),
-            ...     baca.register(12, 12),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -283,21 +271,17 @@ class RegisterInterpolationCommand(Command):
             ...     time_signatures=time_signatures,
             ...     )
 
-        ::
+        >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.pitches(pitches),
+        ...     baca.even_runs(),
+        ...     baca.register(12, 0),
+        ...     )
 
-            >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.pitches(pitches),
-            ...     baca.even_runs(),
-            ...     baca.register(12, 0),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -441,21 +425,17 @@ class RegisterInterpolationCommand(Command):
             ...     time_signatures=time_signatures,
             ...     )
 
-        ::
+        >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.pitches(pitches),
+        ...     baca.even_runs(),
+        ...     baca.register(0, 12),
+        ...     )
 
-            >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.pitches(pitches),
-            ...     baca.even_runs(),
-            ...     baca.register(0, 12),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -599,21 +579,17 @@ class RegisterInterpolationCommand(Command):
             ...     time_signatures=time_signatures,
             ...     )
 
-        ::
+        >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.pitches(pitches),
+        ...     baca.even_runs(),
+        ...     baca.register(12, -12),
+        ...     )
 
-            >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.pitches(pitches),
-            ...     baca.even_runs(),
-            ...     baca.register(12, -12),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -757,21 +733,17 @@ class RegisterInterpolationCommand(Command):
             ...     time_signatures=time_signatures,
             ...     )
 
-        ::
+        >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.pitches(pitches),
+        ...     baca.even_runs(),
+        ...     baca.register(-12, 12),
+        ...     )
 
-            >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.pitches(pitches),
-            ...     baca.even_runs(),
-            ...     baca.register(-12, 12),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -976,21 +948,17 @@ class RegisterInterpolationCommand(Command):
 
             Selects tuplet 0:
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     collections,
-                ...     baca.color(baca.select().tuplet(0)),
-                ...     baca.register(0, 24, baca.select().tuplet(0)),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     baca.color(baca.select().tuplet(0)),
+            ...     baca.register(0, 24, baca.select().tuplet(0)),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1095,21 +1063,17 @@ class RegisterInterpolationCommand(Command):
 
             Selects tuplet -1:
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     collections,
-                ...     baca.color(baca.select().tuplet(-1)),
-                ...     baca.register(0, 24, baca.select().tuplet(-1)),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     baca.color(baca.select().tuplet(-1)),
+            ...     baca.register(0, 24, baca.select().tuplet(-1)),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1214,21 +1178,17 @@ class RegisterInterpolationCommand(Command):
 
             Selects tuplets:
 
-            ::
+            >>> music_maker = baca.MusicMaker()
 
-                >>> music_maker = baca.MusicMaker()
-
-            ::
-
-                >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-                >>> contribution = music_maker(
-                ...     'Voice 1',
-                ...     collections,
-                ...     baca.color(baca.select().tuplets()),
-                ...     baca.register(0, 24, baca.select().tuplets()),
-                ...     )
-                >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     collections,
+            ...     baca.color(baca.select().tuplets()),
+            ...     baca.register(0, 24, baca.select().tuplets()),
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 

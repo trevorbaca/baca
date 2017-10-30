@@ -6,10 +6,8 @@ class AnchorSpecifier(abjad.AbjadValueObject):
 
     ..  container:: example
 
-        ::
-
-            >>> baca.AnchorSpecifier()
-            AnchorSpecifier()
+        >>> baca.AnchorSpecifier()
+        AnchorSpecifier()
 
     '''
 

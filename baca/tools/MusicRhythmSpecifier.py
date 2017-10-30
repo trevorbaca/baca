@@ -6,10 +6,8 @@ class MusicRhythmSpecifier(abjad.AbjadObject):
 
     ..  container:: example
 
-        ::
-
-            >>> baca.MusicRhythmSpecifier()
-            MusicRhythmSpecifier()
+        >>> baca.MusicRhythmSpecifier()
+        MusicRhythmSpecifier()
 
     '''
 

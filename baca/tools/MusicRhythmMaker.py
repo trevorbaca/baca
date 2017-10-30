@@ -11,21 +11,17 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         Sixteenths and eighths:
 
-        ::
+        >>> rhythm_maker = baca.MusicRhythmMaker(
+        ...     talea=abjad.rhythmmakertools.Talea(
+        ...         counts=[1, 1, 2],
+        ...         denominator=16,
+        ...         ),
+        ...     )
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
-            ...     talea=abjad.rhythmmakertools.Talea(
-            ...         counts=[1, 1, 2],
-            ...         denominator=16,
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> collections = [[0, 2, 10, 8]]
-            >>> selections, state_manifest = rhythm_maker(collections)
-            >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> collections = [[0, 2, 10, 8]]
+        >>> selections, state_manifest = rhythm_maker(collections)
+        >>> lilypond_file = rhythm_maker.show(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -42,12 +38,10 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 }
             }
 
-        ::
-
-            >>> collections = [[18, 16, 15, 20, 19]]
-            >>> selections, state_manifest = rhythm_maker(collections)
-            >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> collections = [[18, 16, 15, 20, 19]]
+        >>> selections, state_manifest = rhythm_maker(collections)
+        >>> lilypond_file = rhythm_maker.show(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -65,12 +59,10 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 }
             }
 
-        ::
-
-            >>> collections = [[9]]
-            >>> selections, state_manifest = rhythm_maker(collections)
-            >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> collections = [[9]]
+        >>> selections, state_manifest = rhythm_maker(collections)
+        >>> lilypond_file = rhythm_maker.show(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -84,12 +76,10 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                 }
             }
 
-        ::
-
-            >>> collections = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state_manifest = rhythm_maker(collections)
-            >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> collections = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
+        >>> selections, state_manifest = rhythm_maker(collections)
+        >>> lilypond_file = rhythm_maker.show(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -193,21 +183,17 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Without state manifest:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1, 1, 2],
-                ...         denominator=16,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -233,35 +219,29 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                     }
                 }
 
-            ::
-
-                >>> rhythm_maker._print_state_manifest()
-                _next_attack: 9
-                _next_segment: 3
+            >>> rhythm_maker._print_state_manifest()
+            _next_attack: 9
+            _next_segment: 3
 
         ..  container:: example
 
             With state manifest:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1, 1, 2],
-                ...         denominator=16,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> state_manifest = {'_next_attack': 2}
-                >>> selections, state_manifest = rhythm_maker(
-                ...     collections,
-                ...     state_manifest=state_manifest,
-                ...     )
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> state_manifest = {'_next_attack': 2}
+            >>> selections, state_manifest = rhythm_maker(
+            ...     collections,
+            ...     state_manifest=state_manifest,
+            ...     )
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -287,12 +267,9 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
                     }
                 }
 
-            ::
-
-                >>> rhythm_maker._print_state_manifest()
-                _next_attack: 11
-                _next_segment: 3
-
+            >>> rhythm_maker._print_state_manifest()
+            _next_attack: 11
+            _next_segment: 3
 
         Returns selections together with state manifest.
         '''
@@ -438,55 +415,49 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Set exponent less than 1 for decreasing durations:
 
-            ::
-
-                >>> class_ = baca.MusicRhythmMaker
-                >>> durations = 4 * [abjad.Duration(1)]
-                >>> result = class_._make_accelerando_multipliers(
-                ...     durations,
-                ...     0.5,
-                ...     )
-                >>> for multiplier in result: multiplier
-                ...
-                NonreducedFraction(2048, 1024)
-                NonreducedFraction(848, 1024)
-                NonreducedFraction(651, 1024)
-                NonreducedFraction(549, 1024)
+            >>> class_ = baca.MusicRhythmMaker
+            >>> durations = 4 * [abjad.Duration(1)]
+            >>> result = class_._make_accelerando_multipliers(
+            ...     durations,
+            ...     0.5,
+            ...     )
+            >>> for multiplier in result: multiplier
+            ...
+            NonreducedFraction(2048, 1024)
+            NonreducedFraction(848, 1024)
+            NonreducedFraction(651, 1024)
+            NonreducedFraction(549, 1024)
 
         ..  container:: example
 
             Set exponent to 1 for trivial multipliers:
 
-            ::
-
-                >>> class_ = baca.MusicRhythmMaker
-                >>> durations = 4 * [abjad.Duration(1)]
-                >>> result = class_._make_accelerando_multipliers(durations, 1)
-                >>> for multiplier in result: multiplier
-                ...
-                NonreducedFraction(1024, 1024)
-                NonreducedFraction(1024, 1024)
-                NonreducedFraction(1024, 1024)
-                NonreducedFraction(1024, 1024)
+            >>> class_ = baca.MusicRhythmMaker
+            >>> durations = 4 * [abjad.Duration(1)]
+            >>> result = class_._make_accelerando_multipliers(durations, 1)
+            >>> for multiplier in result: multiplier
+            ...
+            NonreducedFraction(1024, 1024)
+            NonreducedFraction(1024, 1024)
+            NonreducedFraction(1024, 1024)
+            NonreducedFraction(1024, 1024)
 
         ..  container:: example
 
             Set exponent greater than 1 for increasing durations:
 
-            ::
-
-                >>> class_ = baca.MusicRhythmMaker
-                >>> durations = 4 * [abjad.Duration(1)]
-                >>> result = class_._make_accelerando_multipliers(
-                ...     durations,
-                ...     0.5,
-                ...     )
-                >>> for multiplier in result: multiplier
-                ...
-                NonreducedFraction(2048, 1024)
-                NonreducedFraction(848, 1024)
-                NonreducedFraction(651, 1024)
-                NonreducedFraction(549, 1024)
+            >>> class_ = baca.MusicRhythmMaker
+            >>> durations = 4 * [abjad.Duration(1)]
+            >>> result = class_._make_accelerando_multipliers(
+            ...     durations,
+            ...     0.5,
+            ...     )
+            >>> for multiplier in result: multiplier
+            ...
+            NonreducedFraction(2048, 1024)
+            NonreducedFraction(848, 1024)
+            NonreducedFraction(651, 1024)
+            NonreducedFraction(549, 1024)
 
         Set exponent greater than 1 for ritardando.
 
@@ -757,34 +728,30 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Graced quarters:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     acciaccatura_specifiers=[
+            ...         baca.AcciaccaturaSpecifier()
+            ...         ],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1],
+            ...         denominator=4,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     acciaccatura_specifiers=[
-                ...         baca.AcciaccaturaSpecifier()
-                ...         ],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1],
-                ...         denominator=4,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0],
-                ...     [2, 10],
-                ...     [18, 16, 15],
-                ...     [20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     [20, 19, 9, 0, 2, 10],
-                ...     ]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> score = lilypond_file[abjad.Score]
-                >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-                >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0],
+            ...     [2, 10],
+            ...     [18, 16, 15],
+            ...     [20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     [20, 19, 9, 0, 2, 10],
+            ...     ]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> score = lilypond_file[abjad.Score]
+            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
+            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -842,37 +809,33 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Graced rests:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     acciaccatura_specifiers=[
+            ...         baca.AcciaccaturaSpecifier(
+            ...             lmr_specifier=baca.LMRSpecifier()
+            ...             ),
+            ...         ],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1],
+            ...         denominator=4,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     acciaccatura_specifiers=[
-                ...         baca.AcciaccaturaSpecifier(
-                ...             lmr_specifier=baca.LMRSpecifier()
-                ...             ),
-                ...         ],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1],
-                ...         denominator=4,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [None],
-                ...     [0, None],
-                ...     [2, 10, None],
-                ...     [18, 16, 15, None],
-                ...     [20, 19, 9, 0, None],
-                ...     [2, 10, 18, 16, 15, None],
-                ...     [20, 19, 9, 0, 2, 10, None],
-                ...     ]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> score = lilypond_file[abjad.Score]
-                >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-                >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [None],
+            ...     [0, None],
+            ...     [2, 10, None],
+            ...     [18, 16, 15, None],
+            ...     [20, 19, 9, 0, None],
+            ...     [2, 10, 18, 16, 15, None],
+            ...     [20, 19, 9, 0, 2, 10, None],
+            ...     ]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> score = lilypond_file[abjad.Score]
+            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
+            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -941,11 +904,9 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Defaults to none:
 
-            ::
-
-                >>> rhythm_maker = baca.MusicRhythmMaker()
-                >>> rhythm_maker.acciaccatura_specifiers is None
-                True
+            >>> rhythm_maker = baca.MusicRhythmMaker()
+            >>> rhythm_maker.acciaccatura_specifiers is None
+            True
 
         Set to acciaccatura specifiers or none.
 
@@ -961,24 +922,20 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Beams each division by default:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     time_treatments=[1],
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1, 1, 2],
-                ...         denominator=16,
-                ...         ),
-                ...     time_treatments=[1],
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1013,27 +970,23 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Beams divisions together:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
+            ...         beam_divisions_together=True,
+            ...         ),
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     time_treatments=[1],
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
-                ...         beam_divisions_together=True,
-                ...         ),
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1, 1, 2],
-                ...         denominator=16,
-                ...         ),
-                ...     time_treatments=[1],
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1086,25 +1039,21 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Beams nothing:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
+            ...         beam_each_division=False,
+            ...         ),
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     time_treatments=[1],
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
-                ...         beam_each_division=False,
-                ...         ),
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1, 1, 2],
-                ...         denominator=16,
-                ...         ),
-                ...     time_treatments=[1],
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1137,24 +1086,20 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Does not beam rests:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     time_treatments=[1],
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1, 1, 2],
-                ...         denominator=16,
-                ...         ),
-                ...     time_treatments=[1],
-                ...     )
-
-            ::
-
-                >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1189,27 +1134,23 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Does beam rests:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
+            ...         beam_rests=True,
+            ...     ),
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     time_treatments=[1],
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
-                ...         beam_rests=True,
-                ...     ),
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1, 1, 2],
-                ...         denominator=16,
-                ...         ),
-                ...     time_treatments=[1],
-                ...     )
-
-            ::
-
-                >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1244,28 +1185,24 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Beams rests with stemlets:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
+            ...         beam_rests=True,
+            ...         stemlet_length=0.75,
+            ...     ),
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     time_treatments=[1],
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
-                ...         beam_rests=True,
-                ...         stemlet_length=0.75,
-                ...     ),
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1, 1, 2],
-                ...         denominator=16,
-                ...         ),
-                ...     time_treatments=[1],
-                ...     )
-
-            ::
-
-                >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1306,11 +1243,9 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Defaults to none:
 
-            ::
-
-                >>> rhythm_maker = baca.MusicRhythmMaker()
-                >>> rhythm_maker.beam_specifier is None
-                True
+            >>> rhythm_maker = baca.MusicRhythmMaker()
+            >>> rhythm_maker.beam_specifier is None
+            True
 
         Set to beam specifier or none.
 
@@ -1326,21 +1261,17 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             No division masks:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1, 1, 2],
-                ...         denominator=16,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1370,24 +1301,20 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Silences every other division:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     division_masks=[
+            ...         abjad.silence_every([1], period=2),
+            ...         ],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     division_masks=[
-                ...         abjad.silence_every([1], period=2),
-                ...         ],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1, 1, 2],
-                ...         denominator=16,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1411,24 +1338,20 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Sustains every other division:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     division_masks=[
+            ...         abjad.sustain_every([1], period=2),
+            ...         ],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     division_masks=[
-                ...         abjad.sustain_every([1], period=2),
-                ...         ],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1, 1, 2],
-                ...         denominator=16,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1452,11 +1375,9 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Defaults to none:
 
-            ::
-
-                >>> rhythm_maker = baca.MusicRhythmMaker()
-                >>> rhythm_maker.division_masks is None
-                True
+            >>> rhythm_maker = baca.MusicRhythmMaker()
+            >>> rhythm_maker.division_masks is None
+            True
 
         Set to division masks or none.
 
@@ -1473,21 +1394,17 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             Spells nonassignable durations with monontonically decreasing
             durations by default:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[4, 4, 5],
+            ...         denominator=32,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[4, 4, 5],
-                ...         denominator=32,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1521,24 +1438,20 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             Spells nonassignable durations with monontonically increasing
             durations:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     duration_specifier=abjad.rhythmmakertools.DurationSpecifier(
+            ...         decrease_monotonic=False,
+            ...         ),
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[4, 4, 5],
+            ...         denominator=32,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     duration_specifier=abjad.rhythmmakertools.DurationSpecifier(
-                ...         decrease_monotonic=False,
-                ...         ),
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[4, 4, 5],
-                ...         denominator=32,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1571,11 +1484,9 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Defaults to none:
 
-            ::
-
-                >>> rhythm_maker = baca.MusicRhythmMaker()
-                >>> rhythm_maker.duration_specifier is None
-                True
+            >>> rhythm_maker = baca.MusicRhythmMaker()
+            >>> rhythm_maker.duration_specifier is None
+            True
 
         Set to duration specifier or none.
 
@@ -1591,24 +1502,20 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Silences every third logical tie:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     logical_tie_masks=[
+            ...         abjad.silence_every([2], period=3),
+            ...         ],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     logical_tie_masks=[
-                ...         abjad.silence_every([2], period=3),
-                ...         ],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1, 1, 2],
-                ...         denominator=16,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1638,25 +1545,21 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Silences first and last logical ties:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     logical_tie_masks=[
+            ...         abjad.silence_first(1),
+            ...         abjad.silence_last(1),
+            ...         ],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     logical_tie_masks=[
-                ...         abjad.silence_first(1),
-                ...         abjad.silence_last(1),
-                ...         ],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1, 1, 2],
-                ...         denominator=16,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1686,11 +1589,9 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Defaults to none:
 
-            ::
-
-                >>> rhythm_maker = baca.MusicRhythmMaker()
-                >>> rhythm_maker.logical_tie_masks is None
-                True
+            >>> rhythm_maker = baca.MusicRhythmMaker()
+            >>> rhythm_maker.logical_tie_masks is None
+            True
 
         Set to patterns or none.
 
@@ -1706,25 +1607,21 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             With rests:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
+            ...         beam_rests=True,
+            ...         stemlet_length=1.5,
+            ...         ),
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[3, -1, 2, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
-                ...         beam_rests=True,
-                ...         stemlet_length=1.5,
-                ...         ),
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[3, -1, 2, 2],
-                ...         denominator=16,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1763,24 +1660,20 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             With very large nonassignable counts:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[29],
+            ...         denominator=64,
+            ...         ),
+            ...     tie_specifier=abjad.rhythmmakertools.TieSpecifier(
+            ...         use_messiaen_style_ties=True,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[29],
-                ...         denominator=64,
-                ...         ),
-                ...     tie_specifier=abjad.rhythmmakertools.TieSpecifier(
-                ...         use_messiaen_style_ties=True,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2]]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2]]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1801,11 +1694,9 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Defaults to even sixteenths:
 
-            ::
-
-                >>> rhythm_maker = baca.MusicRhythmMaker()
-                >>> rhythm_maker.talea
-                Talea(counts=[1], denominator=16)
+            >>> rhythm_maker = baca.MusicRhythmMaker()
+            >>> rhythm_maker.talea
+            Talea(counts=[1], denominator=16)
 
         Set to talea or none.
 
@@ -1821,24 +1712,20 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Ties across divisions with matching pitches:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     tie_specifier=abjad.rhythmmakertools.TieSpecifier(
+            ...         tie_across_divisions=True,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1, 1, 2],
-                ...         denominator=16,
-                ...         ),
-                ...     tie_specifier=abjad.rhythmmakertools.TieSpecifier(
-                ...         tie_across_divisions=True,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [10, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [10, 16, 15, 20, 19], [9]]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1868,24 +1755,20 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Ties consecutive notes with matching pitches:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     tie_specifier=abjad.rhythmmakertools.TieSpecifier(
+            ...         tie_consecutive_notes=True,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1, 1, 2],
-                ...         denominator=16,
-                ...         ),
-                ...     tie_specifier=abjad.rhythmmakertools.TieSpecifier(
-                ...         tie_consecutive_notes=True,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [10, 16, 16, 19, 19], [19]]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [10, 16, 16, 19, 19], [19]]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1915,11 +1798,9 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Defaults to none:
 
-            ::
-
-                >>> rhythm_maker = baca.MusicRhythmMaker()
-                >>> rhythm_maker.tie_specifier is None
-                True
+            >>> rhythm_maker = baca.MusicRhythmMaker()
+            >>> rhythm_maker.tie_specifier is None
+            True
 
         Set to tie specifier or none.
 
@@ -1935,22 +1816,18 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             One extra count per division:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     time_treatments=[1],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     time_treatments=[1],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1, 1, 2],
-                ...         denominator=16,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1983,22 +1860,18 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             One missing count per division:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     time_treatments=[-1],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     time_treatments=[-1],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1, 1, 2],
-                ...         denominator=16,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2030,32 +1903,28 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Accelerandi:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     time_treatments=['accel'],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1],
+            ...         denominator=16,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     time_treatments=['accel'],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1],
-                ...         denominator=16,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0],
-                ...     [2, 10],
-                ...     [18, 16, 15],
-                ...     [20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     [20, 19, 9, 0, 2, 10],
-                ...     ]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).beam.positions = (-5, -5)
-                >>> abjad.override(staff).stem.direction = Down
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0],
+            ...     [2, 10],
+            ...     [18, 16, 15],
+            ...     [20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     [20, 19, 9, 0, 2, 10],
+            ...     ]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).beam.positions = (-5, -5)
+            >>> abjad.override(staff).stem.direction = Down
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2267,32 +2136,28 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Ritardandi:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     time_treatments=['rit'],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1],
+            ...         denominator=16,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     time_treatments=['rit'],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1],
-                ...         denominator=16,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0],
-                ...     [2, 10],
-                ...     [18, 16, 15],
-                ...     [20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     [20, 19, 9, 0, 2, 10],
-                ...     ]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).beam.positions = (-5, -5)
-                >>> abjad.override(staff).stem.direction = Down
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0],
+            ...     [2, 10],
+            ...     [18, 16, 15],
+            ...     [20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     [20, 19, 9, 0, 2, 10],
+            ...     ]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).beam.positions = (-5, -5)
+            >>> abjad.override(staff).stem.direction = Down
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2504,30 +2369,26 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Accelerandi followed by ritardandi:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     time_treatments=['accel', 'rit'],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1],
+            ...         denominator=16,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     time_treatments=['accel', 'rit'],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1],
-                ...         denominator=16,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18, 16],
-                ...     [15, 20, 19, 9, 0, 2],
-                ...     [10, 18, 16, 15, 20],
-                ...     [19, 9, 0, 2, 10, 18],
-                ...     ]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).beam.positions = (-5, -5)
-                >>> abjad.override(staff).stem.direction = Down
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18, 16],
+            ...     [15, 20, 19, 9, 0, 2],
+            ...     [10, 18, 16, 15, 20],
+            ...     [19, 9, 0, 2, 10, 18],
+            ...     ]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).beam.positions = (-5, -5)
+            >>> abjad.override(staff).stem.direction = Down
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2705,32 +2566,28 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Mixed accelerandi, ritardandi and prolation:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     time_treatments=['accel', -2, 'rit'],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1],
+            ...         denominator=16,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     time_treatments=['accel', -2, 'rit'],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1],
-                ...         denominator=16,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18, 16],
-                ...     [15, 20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     [20, 19, 9, 0, 2],
-                ...     [10, 18, 16, 15, 20],
-                ...     [19, 9, 0, 2, 10],
-                ...     ]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).beam.positions = (-5, -5)
-                >>> abjad.override(staff).stem.direction = Down
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18, 16],
+            ...     [15, 20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     [20, 19, 9, 0, 2],
+            ...     [10, 18, 16, 15, 20],
+            ...     [19, 9, 0, 2, 10],
+            ...     ]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).beam.positions = (-5, -5)
+            >>> abjad.override(staff).stem.direction = Down
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2924,32 +2781,28 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Specified by tuplet multiplier:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     time_treatments=[abjad.Ratio((3, 2))],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1],
+            ...         denominator=8,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     time_treatments=[abjad.Ratio((3, 2))],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1],
-                ...         denominator=8,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0],
-                ...     [2, 10],
-                ...     [18, 16, 15],
-                ...     [20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     [20, 19, 9, 0, 2, 10],
-                ...     ]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).beam.positions = (-6, -6)
-                >>> abjad.override(staff).stem.direction = Down
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0],
+            ...     [2, 10],
+            ...     [18, 16, 15],
+            ...     [20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     [20, 19, 9, 0, 2, 10],
+            ...     ]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).beam.positions = (-6, -6)
+            >>> abjad.override(staff).stem.direction = Down
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3004,35 +2857,31 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Segment durations equal to a quarter:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     time_treatments=[abjad.Duration(1, 4)],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1],
+            ...         denominator=8,
+            ...         ),
+            ...     tuplet_specifier=abjad.rhythmmakertools.TupletSpecifier(
+            ...         preferred_denominator=abjad.Duration(1, 16),
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     time_treatments=[abjad.Duration(1, 4)],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1],
-                ...         denominator=8,
-                ...         ),
-                ...     tuplet_specifier=abjad.rhythmmakertools.TupletSpecifier(
-                ...         preferred_denominator=abjad.Duration(1, 16),
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0],
-                ...     [2, 10],
-                ...     [18, 16, 15],
-                ...     [20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     [20, 19, 9, 0, 2, 10],
-                ...     ]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).beam.positions = (-6, -6)
-                >>> abjad.override(staff).stem.direction = Down
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0],
+            ...     [2, 10],
+            ...     [18, 16, 15],
+            ...     [20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     [20, 19, 9, 0, 2, 10],
+            ...     ]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).beam.positions = (-6, -6)
+            >>> abjad.override(staff).stem.direction = Down
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3084,35 +2933,31 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             Segment durations alternating between a quarter and a dotted
             quarter:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     time_treatments=[abjad.Duration(1, 4), abjad.Duration(3, 8)],
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=8,
+            ...         ),
+            ...     tuplet_specifier=abjad.rhythmmakertools.TupletSpecifier(
+            ...         preferred_denominator=abjad.Duration(1, 16),
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     time_treatments=[abjad.Duration(1, 4), abjad.Duration(3, 8)],
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[1, 1, 2],
-                ...         denominator=8,
-                ...         ),
-                ...     tuplet_specifier=abjad.rhythmmakertools.TupletSpecifier(
-                ...         preferred_denominator=abjad.Duration(1, 16),
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [
-                ...     [0, 2, 10, 18, 16],
-                ...     [15, 20, 19, 9, 0],
-                ...     [2, 10, 18, 16, 15],
-                ...     [20, 19, 9, 0, 2],
-                ...     [10, 18, 16, 15, 20],
-                ...     [19, 9, 0, 2, 10],
-                ...     ]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).beam.positions = (-6, -6)
-                >>> abjad.override(staff).stem.direction = Down
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [
+            ...     [0, 2, 10, 18, 16],
+            ...     [15, 20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     [20, 19, 9, 0, 2],
+            ...     [10, 18, 16, 15, 20],
+            ...     [19, 9, 0, 2, 10],
+            ...     ]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).beam.positions = (-6, -6)
+            >>> abjad.override(staff).stem.direction = Down
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3174,11 +3019,9 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Defaults to none:
 
-            ::
-
-                >>> rhythm_maker = baca.MusicRhythmMaker()
-                >>> rhythm_maker.time_treatments is None
-                True
+            >>> rhythm_maker = baca.MusicRhythmMaker()
+            >>> rhythm_maker.time_treatments is None
+            True
 
         Set to time treatments or none.
 
@@ -3197,24 +3040,20 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Does not simplify redudant tuplets by default:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[3],
+            ...         denominator=16,
+            ...         ),
+            ...     time_treatments=[-2],
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[3],
-                ...         denominator=16,
-                ...         ),
-                ...     time_treatments=[-2],
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3251,27 +3090,23 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Simplifies redundant tuplets:
 
-            ::
+            >>> rhythm_maker = baca.MusicRhythmMaker(
+            ...     talea=abjad.rhythmmakertools.Talea(
+            ...         counts=[3],
+            ...         denominator=16,
+            ...         ),
+            ...     time_treatments=[-2],
+            ...     tuplet_specifier=abjad.rhythmmakertools.TupletSpecifier(
+            ...         simplify_redundant_tuplets=True,
+            ...         ),
+            ...     )
 
-                >>> rhythm_maker = baca.MusicRhythmMaker(
-                ...     talea=abjad.rhythmmakertools.Talea(
-                ...         counts=[3],
-                ...         denominator=16,
-                ...         ),
-                ...     time_treatments=[-2],
-                ...     tuplet_specifier=abjad.rhythmmakertools.TupletSpecifier(
-                ...         simplify_redundant_tuplets=True,
-                ...         ),
-                ...     )
-
-            ::
-
-                >>> collections = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
-                >>> selections, state_manifest = rhythm_maker(collections)
-                >>> lilypond_file = rhythm_maker.show(selections)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> collections = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
+            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3308,11 +3143,9 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Defaults to none:
 
-            ::
-
-                >>> rhythm_maker = baca.MusicRhythmMaker()
-                >>> rhythm_maker.tuplet_specifier is None
-                True
+            >>> rhythm_maker = baca.MusicRhythmMaker()
+            >>> rhythm_maker.tuplet_specifier is None
+            True
 
         Set to tuplet specifier or none.
 

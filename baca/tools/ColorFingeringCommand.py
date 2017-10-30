@@ -10,27 +10,21 @@ class ColorFingeringCommand(Command):
 
         With segment-maker:
 
-        ::
+        >>> segment_maker = baca.SegmentMaker(
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
 
-            >>> segment_maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.pitches('E4', allow_repeat_pitches=True),
+        ...     baca.messiaen_notes(),
+        ...     baca.ColorFingeringCommand(numbers=[0, 1, 2, 1]),
+        ...     )
 
-        ::
-
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.pitches('E4', allow_repeat_pitches=True),
-            ...     baca.messiaen_notes(),
-            ...     baca.ColorFingeringCommand(numbers=[0, 1, 2, 1]),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -157,11 +151,9 @@ class ColorFingeringCommand(Command):
 
         ..  container:: example
 
-            ::
-
-                >>> command = baca.ColorFingeringCommand(numbers=[0, 1, 2, 1])
-                >>> command.numbers
-                [0, 1, 2, 1]
+            >>> command = baca.ColorFingeringCommand(numbers=[0, 1, 2, 1])
+            >>> command.numbers
+            [0, 1, 2, 1]
 
         Set to nonnegative integers.
         '''

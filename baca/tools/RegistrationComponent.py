@@ -12,11 +12,9 @@ class RegistrationComponent(AbjadValueObject):
         from A0 up to and including C8 should be transposed to the octave
         starting at Eb5 (numbered pitch 15):
 
-        ::
-
-            >>> component = baca.RegistrationComponent('[A0, C8]', 15)
-            >>> component
-            RegistrationComponent(source_pitch_range=PitchRange('[A0, C8]'), target_octave_start_pitch=NumberedPitch(15))
+        >>> component = baca.RegistrationComponent('[A0, C8]', 15)
+        >>> component
+        RegistrationComponent(source_pitch_range=PitchRange('[A0, C8]'), target_octave_start_pitch=NumberedPitch(15))
 
     '''
 
@@ -86,11 +84,9 @@ class RegistrationComponent(AbjadValueObject):
 
             Gets source pitch range of example component:
 
-            ::
-
-                >>> component = baca.RegistrationComponent('[A0, C8]', 15)
-                >>> component.source_pitch_range
-                PitchRange('[A0, C8]')
+            >>> component = baca.RegistrationComponent('[A0, C8]', 15)
+            >>> component.source_pitch_range
+            PitchRange('[A0, C8]')
 
         Returns pitch range or none.
         '''
@@ -104,11 +100,9 @@ class RegistrationComponent(AbjadValueObject):
 
             Gets target octave start pitch of example component:
 
-            ::
-
-                >>> component = baca.RegistrationComponent('[A0, C8]', 15)
-                >>> component.target_octave_start_pitch
-                NumberedPitch(15)
+            >>> component = baca.RegistrationComponent('[A0, C8]', 15)
+            >>> component.target_octave_start_pitch
+            NumberedPitch(15)
 
         Returns numbered pitch or none.
         '''

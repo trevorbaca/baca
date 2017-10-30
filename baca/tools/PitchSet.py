@@ -11,10 +11,8 @@ class PitchSet(abjad.PitchSet):
 
         ..  container:: example
 
-            ::
-
-                >>> setting = baca.pitch_set([-2, -1.5, 6, 7, -1.5, 7])
-                >>> abjad.show(setting) # doctest: +SKIP
+            >>> setting = baca.pitch_set([-2, -1.5, 6, 7, -1.5, 7])
+            >>> abjad.show(setting) # doctest: +SKIP
 
             ..  docs::
 
@@ -53,20 +51,14 @@ class PitchSet(abjad.PitchSet):
 
             Works with Abjad pitch sets:
 
-            ::
+            >>> set_1 = abjad.PitchSet([0, 1, 2, 3])
+            >>> set_2 = baca.PitchSet([0, 1, 2, 3])
 
-                >>> set_1 = abjad.PitchSet([0, 1, 2, 3])
-                >>> set_2 = baca.PitchSet([0, 1, 2, 3])
+            >>> set_1 == set_2
+            True
 
-            ::
-
-                >>> set_1 == set_2
-                True
-
-            ::
-
-                >>> set_2 == set_1
-                True
+            >>> set_2 == set_1
+            True
 
         '''
         if (not issubclass(type(argument), type(self)) and
@@ -86,10 +78,8 @@ class PitchSet(abjad.PitchSet):
 
         ..  container:: example
 
-            ::
-
-                >>> setting = baca.pitch_set([12, 14, 21, 22])
-                >>> abjad.show(setting) # doctest: +SKIP
+            >>> setting = baca.pitch_set([12, 14, 21, 22])
+            >>> abjad.show(setting) # doctest: +SKIP
 
             ..  docs::
 
@@ -108,15 +98,11 @@ class PitchSet(abjad.PitchSet):
                     }
                 >>
 
-            ::
+            >>> setting.space_down(bass=0)
+            PitchSet([0, 9, 10, 14])
 
-                >>> setting.space_down(bass=0)
-                PitchSet([0, 9, 10, 14])
-
-            ::
-
-                >>> setting = setting.space_down(bass=0)
-                >>> abjad.show(setting) # doctest: +SKIP
+            >>> setting = setting.space_down(bass=0)
+            >>> abjad.show(setting) # doctest: +SKIP
 
             ..  docs::
 
@@ -139,10 +125,8 @@ class PitchSet(abjad.PitchSet):
 
             With 2 in bass:
 
-            ::
-
-                >>> setting = baca.pitch_set([12, 14, 21, 22])
-                >>> abjad.show(setting) # doctest: +SKIP
+            >>> setting = baca.pitch_set([12, 14, 21, 22])
+            >>> abjad.show(setting) # doctest: +SKIP
 
             ..  docs::
 
@@ -161,15 +145,11 @@ class PitchSet(abjad.PitchSet):
                     }
                 >>
 
-            ::
+            >>> setting.space_down(bass=2)
+            PitchSet([2, 9, 10, 12])
 
-                >>> setting.space_down(bass=2)
-                PitchSet([2, 9, 10, 12])
-
-            ::
-
-                >>> setting = setting.space_down(bass=2)
-                >>> abjad.show(setting) # doctest: +SKIP
+            >>> setting = setting.space_down(bass=2)
+            >>> abjad.show(setting) # doctest: +SKIP
 
             ..  docs::
 
@@ -212,10 +192,8 @@ class PitchSet(abjad.PitchSet):
 
         ..  container:: example
 
-            ::
-
-                >>> setting = baca.pitch_set([12, 14, 21, 22])
-                >>> abjad.show(setting) # doctest: +SKIP
+            >>> setting = baca.pitch_set([12, 14, 21, 22])
+            >>> abjad.show(setting) # doctest: +SKIP
 
             ..  docs::
 
@@ -234,15 +212,11 @@ class PitchSet(abjad.PitchSet):
                     }
                 >>
 
-            ::
+            >>> setting.space_up(bass=0)
+            PitchSet([0, 2, 9, 10])
 
-                >>> setting.space_up(bass=0)
-                PitchSet([0, 2, 9, 10])
-
-            ::
-
-                >>> setting = setting.space_up(bass=0)
-                >>> abjad.show(setting) # doctest: +SKIP
+            >>> setting = setting.space_up(bass=0)
+            >>> abjad.show(setting) # doctest: +SKIP
 
             ..  docs::
 
@@ -265,10 +239,8 @@ class PitchSet(abjad.PitchSet):
 
             With 2 in bass:
 
-            ::
-
-                >>> setting = baca.pitch_set([12, 14, 21, 22])
-                >>> abjad.show(setting) # doctest: +SKIP
+            >>> setting = baca.pitch_set([12, 14, 21, 22])
+            >>> abjad.show(setting) # doctest: +SKIP
 
             ..  docs::
 
@@ -287,15 +259,11 @@ class PitchSet(abjad.PitchSet):
                     }
                 >>
 
-            ::
+            >>> setting.space_up(bass=2)
+            PitchSet([2, 9, 10, 12])
 
-                >>> setting.space_up(bass=2)
-                PitchSet([2, 9, 10, 12])
-
-            ::
-
-                >>> setting = setting.space_up(bass=2)
-                >>> abjad.show(setting) # doctest: +SKIP
+            >>> setting = setting.space_up(bass=2)
+            >>> abjad.show(setting) # doctest: +SKIP
 
             ..  docs::
 
@@ -333,16 +301,12 @@ class PitchSet(abjad.PitchSet):
 
         ..  container:: example
 
-            ::
+            >>> setting = baca.pitch_set([-2, -1.5, 6, 19, -1.5, 21])
+            >>> setting
+            PitchSet([-2, -1.5, 6, 19, 21])
 
-                >>> setting = baca.pitch_set([-2, -1.5, 6, 19, -1.5, 21])
-                >>> setting
-                PitchSet([-2, -1.5, 6, 19, 21])
-
-            ::
-
-                >>> setting.to_pitch_classes()
-                PitchClassSet([6, 7, 9, 10, 10.5])
+            >>> setting.to_pitch_classes()
+            PitchClassSet([6, 7, 9, 10, 10.5])
 
         Returns new pitch-class set.
         '''

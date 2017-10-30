@@ -11,25 +11,21 @@ class TransitionCommand(Command):
 
         With music-maker:
 
-        ::
+        >>> music_maker = baca.MusicMaker(
+        ...     baca.TransitionCommand(
+        ...         start_markup=baca.markup.ord_(),
+        ...         stop_markup=baca.markup.pont(),
+        ...         ),
+        ...     )
 
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.TransitionCommand(
-            ...         start_markup=baca.markup.ord_(),
-            ...         stop_markup=baca.markup.pont(),
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     collections,
-            ...     talea_denominator=4,
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     collections,
+        ...     talea_denominator=4,
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -89,30 +85,24 @@ class TransitionCommand(Command):
 
         With collection-maker:
 
-        ::
+        >>> segment_maker = baca.SegmentMaker(
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
 
-            >>> segment_maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.pitches('E4 F4'),
+        ...     baca.even_runs(),
+        ...     baca.TransitionCommand(
+        ...         start_markup=baca.markup.ord_(),
+        ...         stop_markup=baca.markup.pont(),
+        ...         ),
+        ...     )
 
-        ::
-
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.pitches('E4 F4'),
-            ...     baca.even_runs(),
-            ...     baca.TransitionCommand(
-            ...         start_markup=baca.markup.ord_(),
-            ...         stop_markup=baca.markup.pont(),
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, collection_metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, collection_metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 

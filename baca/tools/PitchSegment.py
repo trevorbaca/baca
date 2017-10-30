@@ -11,11 +11,9 @@ class PitchSegment(abjad.PitchSegment):
 
         ..  container:: example
 
-            ::
-
-                >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-                >>> segment = baca.pitch_segment(items=items)
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> items = [-2, -1.5, 6, 7, -1.5, 7]
+            >>> segment = baca.pitch_segment(items=items)
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -61,10 +59,8 @@ class PitchSegment(abjad.PitchSegment):
 
         ..  container:: example
 
-            ::
-
-                >>> segment = baca.pitch_segment([-2, -1.5, 6, 7, -1.5, 7])
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> segment = baca.pitch_segment([-2, -1.5, 6, 7, -1.5, 7])
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -91,15 +87,11 @@ class PitchSegment(abjad.PitchSegment):
                     }
                 >>
 
-            ::
+            >>> segment.bass_to_octave(n=4)
+            PitchSegment([10, 10.5, 18, 19, 10.5, 19])
 
-                >>> segment.bass_to_octave(n=4)
-                PitchSegment([10, 10.5, 18, 19, 10.5, 19])
-
-            ::
-
-                >>> segment = segment.bass_to_octave(n=4)
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> segment = segment.bass_to_octave(n=4)
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -142,10 +134,8 @@ class PitchSegment(abjad.PitchSegment):
 
         ..  container:: example
 
-            ::
-
-                >>> segment = baca.pitch_segment([-2, -1.5, 6, 7, -1.5, 7])
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> segment = baca.pitch_segment([-2, -1.5, 6, 7, -1.5, 7])
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -172,15 +162,11 @@ class PitchSegment(abjad.PitchSegment):
                     }
                 >>
 
-            ::
+            >>> segment.center_to_octave(n=3)
+            PitchSegment([-14, -13.5, -6, -5, -13.5, -5])
 
-                >>> segment.center_to_octave(n=3)
-                PitchSegment([-14, -13.5, -6, -5, -13.5, -5])
-
-            ::
-
-                >>> segment = segment.center_to_octave(n=3)
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> segment = segment.center_to_octave(n=3)
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -223,18 +209,12 @@ class PitchSegment(abjad.PitchSegment):
 
         ..  container:: example
 
-            ::
+            >>> segment = baca.pitch_segment([-2, -1.5, 6, 7])
 
-                >>> segment = baca.pitch_segment([-2, -1.5, 6, 7])
+            >>> segment.chord()
+            PitchSet([-2, -1.5, 6, 7])
 
-            ::
-
-                >>> segment.chord()
-                PitchSet([-2, -1.5, 6, 7])
-
-            ::
-
-                >>> abjad.show(segment.chord()) # doctest: +SKIP
+            >>> abjad.show(segment.chord()) # doctest: +SKIP
 
             ..  docs::
 
@@ -265,10 +245,8 @@ class PitchSegment(abjad.PitchSegment):
 
         ..  container:: example
 
-            ::
-
-                >>> segment = baca.pitch_segment([-2, -1.5, 6, 7, -1.5, 7])
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> segment = baca.pitch_segment([-2, -1.5, 6, 7, -1.5, 7])
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -295,15 +273,11 @@ class PitchSegment(abjad.PitchSegment):
                     }
                 >>
 
-            ::
+            >>> segment.soprano_to_octave(n=3)
+            PitchSegment([-14, -13.5, -6, -5, -13.5, -5])
 
-                >>> segment.soprano_to_octave(n=3)
-                PitchSegment([-14, -13.5, -6, -5, -13.5, -5])
-
-            ::
-
-                >>> segment = segment.soprano_to_octave(n=3)
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> segment = segment.soprano_to_octave(n=3)
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -351,10 +325,8 @@ class PitchSegment(abjad.PitchSegment):
 
         ..  container:: example
 
-            ::
-
-                >>> segment = baca.pitch_segment([12, 14, 21, 22])
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> segment = baca.pitch_segment([12, 14, 21, 22])
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -377,15 +349,11 @@ class PitchSegment(abjad.PitchSegment):
                     }
                 >>
 
-            ::
+            >>> segment.space_down(bass=0)
+            PitchSegment([14, 10, 9, 0])
 
-                >>> segment.space_down(bass=0)
-                PitchSegment([14, 10, 9, 0])
-
-            ::
-
-                >>> segment = segment.space_down(bass=0)
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> segment = segment.space_down(bass=0)
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -412,10 +380,8 @@ class PitchSegment(abjad.PitchSegment):
 
             With 2 in bass:
 
-            ::
-
-                >>> segment = baca.pitch_segment([12, 14, 21, 22])
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> segment = baca.pitch_segment([12, 14, 21, 22])
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -438,15 +404,11 @@ class PitchSegment(abjad.PitchSegment):
                     }
                 >>
 
-            ::
+            >>> segment.space_down(bass=2)
+            PitchSegment([12, 10, 9, 2])
 
-                >>> segment.space_down(bass=2)
-                PitchSegment([12, 10, 9, 2])
-
-            ::
-
-                >>> segment = segment.space_down(bass=2)
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> segment = segment.space_down(bass=2)
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -493,10 +455,8 @@ class PitchSegment(abjad.PitchSegment):
 
         ..  container:: example
 
-            ::
-
-                >>> segment = baca.pitch_segment([12, 14, 21, 22])
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> segment = baca.pitch_segment([12, 14, 21, 22])
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -519,15 +479,11 @@ class PitchSegment(abjad.PitchSegment):
                     }
                 >>
 
-            ::
+            >>> segment.space_up(bass=0)
+            PitchSegment([0, 2, 9, 10])
 
-                >>> segment.space_up(bass=0)
-                PitchSegment([0, 2, 9, 10])
-
-            ::
-
-                >>> segment = segment.space_up(bass=0)
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> segment = segment.space_up(bass=0)
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -554,10 +510,8 @@ class PitchSegment(abjad.PitchSegment):
 
             With 2 in bass:
 
-            ::
-
-                >>> segment = baca.pitch_segment([12, 14, 21, 22])
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> segment = baca.pitch_segment([12, 14, 21, 22])
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -580,15 +534,11 @@ class PitchSegment(abjad.PitchSegment):
                     }
                 >>
 
-            ::
+            >>> segment.space_up(bass=2)
+            PitchSegment([2, 9, 10, 12])
 
-                >>> segment.space_up(bass=2)
-                PitchSegment([2, 9, 10, 12])
-
-            ::
-
-                >>> segment = segment.space_up(bass=2)
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> segment = segment.space_up(bass=2)
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -630,11 +580,9 @@ class PitchSegment(abjad.PitchSegment):
 
         ..  container:: example
 
-            ::
-
-                >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-                >>> segment = baca.pitch_segment(items=items)
-                >>> abjad.show(segment) # doctest: +SKIP
+            >>> items = [-2, -1.5, 6, 7, -1.5, 7]
+            >>> segment = baca.pitch_segment(items=items)
+            >>> abjad.show(segment) # doctest: +SKIP
 
             ..  docs::
 
@@ -661,18 +609,12 @@ class PitchSegment(abjad.PitchSegment):
                     }
                 >>
 
-            ::
+            >>> upper, lower = segment.split(pitch=0)
 
-                >>> upper, lower = segment.split(pitch=0)
+            >>> upper
+            PitchSegment([6, 7, 7])
 
-            ::
-
-                >>> upper
-                PitchSegment([6, 7, 7])
-
-            ::
-
-                >>> abjad.show(upper) # doctest: +SKIP
+            >>> abjad.show(upper) # doctest: +SKIP
 
             ..  docs::
 
@@ -693,14 +635,10 @@ class PitchSegment(abjad.PitchSegment):
                     }
                 >>
 
-            ::
+            >>> lower
+            PitchSegment([-2, -1.5, -1.5])
 
-                >>> lower
-                PitchSegment([-2, -1.5, -1.5])
-
-            ::
-
-                >>> abjad.show(lower) # doctest: +SKIP
+            >>> abjad.show(lower) # doctest: +SKIP
 
             ..  docs::
 

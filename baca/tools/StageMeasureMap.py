@@ -6,54 +6,46 @@ class StageMeasureMap(abjad.AbjadObject):
 
     ..  container:: example
 
-        ::
+        >>> stages = baca.StageMeasureMap([
+        ...     4,
+        ...     4,
+        ...     4, abjad.TimeSignature((1, 4)),
+        ...     4,
+        ...     ])
 
-            >>> stages = baca.StageMeasureMap([
-            ...     4,
-            ...     4,
-            ...     4, abjad.TimeSignature((1, 4)),
-            ...     4,
-            ...     ])
-
-        ::
-
-            >>> abjad.f(stages)
-            baca.StageMeasureMap(
-                items=(
-                    4,
-                    4,
-                    4,
-                    abjad.TimeSignature((1, 4)),
-                    4,
-                    ),
-                )
+        >>> abjad.f(stages)
+        baca.StageMeasureMap(
+            items=(
+                4,
+                4,
+                4,
+                abjad.TimeSignature((1, 4)),
+                4,
+                ),
+            )
 
     ..  container:: example
 
-        ::
+        >>> stages = baca.StageMeasureMap([
+        ...     4,
+        ...     4,
+        ...     4, [abjad.TimeSignature((5, 4)), abjad.TimeSignature((5, 4))],
+        ...     4,
+        ...     ])
 
-            >>> stages = baca.StageMeasureMap([
-            ...     4,
-            ...     4,
-            ...     4, [abjad.TimeSignature((5, 4)), abjad.TimeSignature((5, 4))],
-            ...     4,
-            ...     ])
-
-        ::
-
-            >>> abjad.f(stages)
-            baca.StageMeasureMap(
-                items=(
-                    4,
-                    4,
-                    4,
-                    [
-                        abjad.TimeSignature((5, 4)),
-                        abjad.TimeSignature((5, 4)),
-                        ],
-                    4,
-                    ),
-                )
+        >>> abjad.f(stages)
+        baca.StageMeasureMap(
+            items=(
+                4,
+                4,
+                4,
+                [
+                    abjad.TimeSignature((5, 4)),
+                    abjad.TimeSignature((5, 4)),
+                    ],
+                4,
+                ),
+            )
 
     '''
 
@@ -81,19 +73,15 @@ class StageMeasureMap(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> stages = baca.StageMeasureMap([
+            ...     4,
+            ...     4,
+            ...     4, abjad.TimeSignature((1, 4)),
+            ...     4,
+            ...     ])
 
-                >>> stages = baca.StageMeasureMap([
-                ...     4,
-                ...     4,
-                ...     4, abjad.TimeSignature((1, 4)),
-                ...     4,
-                ...     ])
-
-            ::
-
-                >>> stages[0]
-                4
+            >>> stages[0]
+            4
 
         Returns item.
         '''
@@ -107,19 +95,15 @@ class StageMeasureMap(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> stages = baca.StageMeasureMap([
+            ...     4,
+            ...     4,
+            ...     4, abjad.TimeSignature((1, 4)),
+            ...     4,
+            ...     ])
 
-                >>> stages = baca.StageMeasureMap([
-                ...     4,
-                ...     4,
-                ...     4, abjad.TimeSignature((1, 4)),
-                ...     4,
-                ...     ])
-
-            ::
-
-                >>> stages.items
-                (4, 4, 4, TimeSignature((1, 4)), 4)
+            >>> stages.items
+            (4, 4, 4, TimeSignature((1, 4)), 4)
 
         Returns items.
         '''
@@ -131,19 +115,15 @@ class StageMeasureMap(abjad.AbjadObject):
 
         ..  container:: example
 
-            ::
+            >>> stages = baca.StageMeasureMap([
+            ...     4,
+            ...     4,
+            ...     4, abjad.TimeSignature((1, 4)),
+            ...     4,
+            ...     ])
 
-                >>> stages = baca.StageMeasureMap([
-                ...     4,
-                ...     4,
-                ...     4, abjad.TimeSignature((1, 4)),
-                ...     4,
-                ...     ])
-
-            ::
-
-                >>> stages.stage_count
-                5
+            >>> stages.stage_count
+            5
 
         Returns nonnegative integer.
         '''

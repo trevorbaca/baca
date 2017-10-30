@@ -10,27 +10,23 @@ class OverrideCommand(Command):
 
         With music-maker:
 
-        ::
+        >>> music_maker = baca.MusicMaker(
+        ...     baca.OverrideCommand(
+        ...         grob_name='beam',
+        ...         attribute_name='positions',
+        ...         attribute_value='(-6, -6)',
+        ...         ),
+        ...     baca.OverrideCommand(
+        ...         grob_name='stem',
+        ...         attribute_name='direction',
+        ...         attribute_value=abjad.Down,
+        ...         ),
+        ...     )
 
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.OverrideCommand(
-            ...         grob_name='beam',
-            ...         attribute_name='positions',
-            ...         attribute_value='(-6, -6)',
-            ...         ),
-            ...     baca.OverrideCommand(
-            ...         grob_name='stem',
-            ...         attribute_name='direction',
-            ...         attribute_value=abjad.Down,
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = music_maker('Voice 1', collections)
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> contribution = music_maker('Voice 1', collections)
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -80,52 +76,46 @@ class OverrideCommand(Command):
 
         With segment-maker:
 
-        ::
+        >>> segment_maker = baca.SegmentMaker(
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
 
-            >>> segment_maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.OverrideCommand(
+        ...         attribute_name='positions',
+        ...         attribute_value=(-6, -6),
+        ...         grob_name='beam',
+        ...         revert=True,
+        ...         ),
+        ...     baca.OverrideCommand(
+        ...         attribute_name='direction',
+        ...         attribute_value=abjad.Up,
+        ...         grob_name='rest',
+        ...         revert=True,
+        ...         selector=baca.select().rests().group(),
+        ...         ),
+        ...     baca.OverrideCommand(
+        ...         attribute_name='direction',
+        ...         attribute_value=abjad.Down,
+        ...         grob_name='stem',
+        ...         revert=True,
+        ...         ),
+        ...     baca.RhythmBuilder(
+        ...         rhythm_maker=abjad.rhythmmakertools.TaleaRhythmMaker(
+        ...             talea=abjad.rhythmmakertools.Talea(
+        ...                 counts=[1, 1, 1, -1],
+        ...                 denominator=8,
+        ...                 ),
+        ...             ),
+        ...         ),
+        ...     )
 
-        ::
-
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.OverrideCommand(
-            ...         attribute_name='positions',
-            ...         attribute_value=(-6, -6),
-            ...         grob_name='beam',
-            ...         revert=True,
-            ...         ),
-            ...     baca.OverrideCommand(
-            ...         attribute_name='direction',
-            ...         attribute_value=abjad.Up,
-            ...         grob_name='rest',
-            ...         revert=True,
-            ...         selector=baca.select().rests().group(),
-            ...         ),
-            ...     baca.OverrideCommand(
-            ...         attribute_name='direction',
-            ...         attribute_value=abjad.Down,
-            ...         grob_name='stem',
-            ...         revert=True,
-            ...         ),
-            ...     baca.RhythmBuilder(
-            ...         rhythm_maker=abjad.rhythmmakertools.TaleaRhythmMaker(
-            ...             talea=abjad.rhythmmakertools.Talea(
-            ...                 counts=[1, 1, 1, -1],
-            ...                 denominator=8,
-            ...                 ),
-            ...             ),
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -205,10 +195,8 @@ class OverrideCommand(Command):
 
     ..  container:: example
 
-        ::
-
-            >>> baca.OverrideCommand()
-            OverrideCommand(selector=baca.select().leaves().group())
+        >>> baca.OverrideCommand()
+        OverrideCommand(selector=baca.select().leaves().group())
 
     '''
 

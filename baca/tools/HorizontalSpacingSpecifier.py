@@ -8,28 +8,22 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
         No spacing command:
 
-        ::
+        >>> segment_maker = baca.SegmentMaker(
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
+        ...     )
 
-            >>> segment_maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
-            ...     )
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.pitches('E4 F4'),
+        ...     baca.RhythmBuilder(
+        ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
+        ...         ),
+        ...     )
 
-        ::
-
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.pitches('E4 F4'),
-            ...     baca.RhythmBuilder(
-            ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -114,29 +108,23 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
         Null spacing command:
 
-        ::
+        >>> segment_maker = baca.SegmentMaker(
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     spacing_specifier=baca.HorizontalSpacingSpecifier(),
+        ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
+        ...     )
 
-            >>> segment_maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.HorizontalSpacingSpecifier(),
-            ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
-            ...     )
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.pitches('E4 F4'),
+        ...     baca.RhythmBuilder(
+        ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
+        ...         ),
+        ...     )
 
-        ::
-
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.pitches('E4 F4'),
-            ...     baca.RhythmBuilder(
-            ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -229,31 +217,25 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
         Measurewise proportional spacing based on minimum duration per measure:
 
-        ::
+        >>> segment_maker = baca.SegmentMaker(
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
+        ...         multiplier=abjad.Multiplier(1),
+        ...         ),
+        ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
+        ...     )
 
-            >>> segment_maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
-            ...         multiplier=abjad.Multiplier(1),
-            ...         ),
-            ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
-            ...     )
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.pitches('E4 F4'),
+        ...     baca.RhythmBuilder(
+        ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
+        ...         ),
+        ...     )
 
-        ::
-
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.pitches('E4 F4'),
-            ...     baca.RhythmBuilder(
-            ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -347,31 +329,25 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         Measurewise proportional spacing based on twice the minimum duration
         per measure:
 
-        ::
+        >>> segment_maker = baca.SegmentMaker(
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
+        ...         multiplier=abjad.Multiplier(2),
+        ...         ),
+        ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
+        ...     )
 
-            >>> segment_maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
-            ...         multiplier=abjad.Multiplier(2),
-            ...         ),
-            ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
-            ...     )
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.pitches('E4 F4'),
+        ...     baca.RhythmBuilder(
+        ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
+        ...         ),
+        ...     )
 
-        ::
-
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.pitches('E4 F4'),
-            ...     baca.RhythmBuilder(
-            ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -465,32 +441,26 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         Measurewise proportional spacing based on twice the minimum duration
         per measure with minimum width equal to an eighth note:
 
-        ::
+        >>> segment_maker = baca.SegmentMaker(
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
+        ...         multiplier=abjad.Multiplier(2),
+        ...         minimum_width=abjad.Duration(1, 8),
+        ...         ),
+        ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
+        ...     )
 
-            >>> segment_maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
-            ...         multiplier=abjad.Multiplier(2),
-            ...         minimum_width=abjad.Duration(1, 8),
-            ...         ),
-            ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
-            ...     )
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.pitches('E4 F4'),
+        ...     baca.RhythmBuilder(
+        ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
+        ...         ),
+        ...     )
 
-        ::
-
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.pitches('E4 F4'),
-            ...     baca.RhythmBuilder(
-            ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -583,43 +553,37 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
         Works with accelerando and ritardando figures:
 
-        ::
+        >>> segment_maker = baca.SegmentMaker(
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
+        ...         minimum_width=abjad.Duration(1, 8),
+        ...         ),
+        ...     time_signatures=[(4, 8), (3, 8)],
+        ...     )
 
-            >>> segment_maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
-            ...         minimum_width=abjad.Duration(1, 8),
-            ...         ),
-            ...     time_signatures=[(4, 8), (3, 8)],
-            ...     )
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.pitches('E4 F4'),
+        ...     baca.RhythmBuilder(
+        ...         rhythm_maker=abjad.rhythmmakertools.AccelerandoRhythmMaker(
+        ...             beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
+        ...             use_feather_beams=True,
+        ...                 ),
+        ...             interpolation_specifiers=abjad.rhythmmakertools.InterpolationSpecifier(
+        ...                 start_duration=abjad.Duration(1, 8),
+        ...                 stop_duration=abjad.Duration(1, 20),
+        ...                 written_duration=abjad.Duration(1, 16),
+        ...                 ),
+        ...             tuplet_specifier=abjad.rhythmmakertools.TupletSpecifier(
+        ...                 use_note_duration_bracket=True,
+        ...                 ),
+        ...             ),
+        ...         ),
+        ...     )
 
-        ::
-
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.pitches('E4 F4'),
-            ...     baca.RhythmBuilder(
-            ...         rhythm_maker=abjad.rhythmmakertools.AccelerandoRhythmMaker(
-            ...             beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
-            ...             use_feather_beams=True,
-            ...                 ),
-            ...             interpolation_specifiers=abjad.rhythmmakertools.InterpolationSpecifier(
-            ...                 start_duration=abjad.Duration(1, 8),
-            ...                 stop_duration=abjad.Duration(1, 20),
-            ...                 written_duration=abjad.Duration(1, 16),
-            ...                 ),
-            ...             tuplet_specifier=abjad.rhythmmakertools.TupletSpecifier(
-            ...                 use_note_duration_bracket=True,
-            ...                 ),
-            ...             ),
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 

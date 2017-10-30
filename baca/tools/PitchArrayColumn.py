@@ -9,43 +9,35 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
         A pitch array column:
 
-        ::
+        >>> array = baca.PitchArray(
+        ...     [
+        ...         [1, (2, 1), (-1.5, 2)],
+        ...         [(7, 2), (6, 1), 1],
+        ...         ]
+        ...     )
 
-            >>> array = baca.PitchArray(
-            ...     [
-            ...         [1, (2, 1), (-1.5, 2)],
-            ...         [(7, 2), (6, 1), 1],
-            ...         ]
-            ...     )
+        >>> print(array)
+        [  ] [d'] [bqf    ]
+        [g'     ] [fs'] [ ]
 
-        ::
-
-            >>> print(array)
-            [  ] [d'] [bqf    ]
-            [g'     ] [fs'] [ ]
-
-        ::
-
-            >>> abjad.f(array.columns[0])
-            baca.PitchArrayColumn(
-                cells=(
-                    baca.PitchArrayCell(
-                        width=1,
-                        ),
-                    baca.PitchArrayCell(
-                        pitches=[
-                            abjad.NamedPitch("g'"),
-                            ],
-                        width=2,
-                        ),
+        >>> abjad.f(array.columns[0])
+        baca.PitchArrayColumn(
+            cells=(
+                baca.PitchArrayCell(
+                    width=1,
                     ),
-                )
+                baca.PitchArrayCell(
+                    pitches=[
+                        abjad.NamedPitch("g'"),
+                        ],
+                    width=2,
+                    ),
+                ),
+            )
 
-        ::
-
-            >>> print(array.columns[0])
-            [  ]
-            [g'     ]
+        >>> print(array.columns[0])
+        [  ]
+        [g'     ]
 
     '''
 
@@ -289,28 +281,22 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> array = baca.PitchArray([
+            ...     [1, (2, 1), (-1.5, 2)],
+            ...     [(7, 2), (6, 1), 1],
+            ...     ])
 
-                >>> array = baca.PitchArray([
-                ...     [1, (2, 1), (-1.5, 2)],
-                ...     [(7, 2), (6, 1), 1],
-                ...     ])
+            >>> print(array)
+            [  ] [d'] [bqf    ]
+            [g'     ] [fs'] [ ]
 
-            ::
-
-                >>> print(array)
-                [  ] [d'] [bqf    ]
-                [g'     ] [fs'] [ ]
-
-            ::
-
-                >>> for column in array.columns:
-                ...     column.has_voice_crossing
-                ...
-                False
-                True
-                True
-                False
+            >>> for column in array.columns:
+            ...     column.has_voice_crossing
+            ...
+            False
+            True
+            True
+            False
 
         Returns true or false.
         '''
@@ -359,28 +345,22 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> array = baca.PitchArray([
+            ...     [1, (2, 1), ([-2, -1.5], 2)],
+            ...     [(7, 2), (6, 1), 1],
+            ...     ])
 
-                >>> array = baca.PitchArray([
-                ...     [1, (2, 1), ([-2, -1.5], 2)],
-                ...     [(7, 2), (6, 1), 1],
-                ...     ])
+            >>> print(array)
+            [  ] [d'] [bf bqf    ]
+            [g'     ] [fs'   ] [ ]
 
-            ::
-
-                >>> print(array)
-                [  ] [d'] [bf bqf    ]
-                [g'     ] [fs'   ] [ ]
-
-            ::
-
-                >>> for column in array.columns:
-                ...     column.start_cells
-                ...
-                [PitchArrayCell(width=1), PitchArrayCell(pitches=[NamedPitch("g'")], width=2)]
-                [PitchArrayCell(pitches=[NamedPitch("d'")], width=1)]
-                [PitchArrayCell(pitches=[NamedPitch('bf'), NamedPitch('bqf')], width=2), PitchArrayCell(pitches=[NamedPitch("fs'")], width=1)]
-                [PitchArrayCell(width=1)]
+            >>> for column in array.columns:
+            ...     column.start_cells
+            ...
+            [PitchArrayCell(width=1), PitchArrayCell(pitches=[NamedPitch("g'")], width=2)]
+            [PitchArrayCell(pitches=[NamedPitch("d'")], width=1)]
+            [PitchArrayCell(pitches=[NamedPitch('bf'), NamedPitch('bqf')], width=2), PitchArrayCell(pitches=[NamedPitch("fs'")], width=1)]
+            [PitchArrayCell(width=1)]
 
         Returns list.
         '''
@@ -397,22 +377,18 @@ class PitchArrayColumn(abjad.AbjadValueObject):
 
         ..  container:: example
 
-            ::
+            >>> array = baca.PitchArray([
+            ...     [1, (2, 1), ([-2, -1.5], 2)],
+            ...     [(7, 2), (6, 1), 1],
+            ...     ])
 
-                >>> array = baca.PitchArray([
-                ...     [1, (2, 1), ([-2, -1.5], 2)],
-                ...     [(7, 2), (6, 1), 1],
-                ...     ])
-
-            ::
-
-                >>> for column in array.columns:
-                ...     column.start_pitches
-                ...
-                [NamedPitch("g'")]
-                [NamedPitch("d'")]
-                [NamedPitch('bf'), NamedPitch('bqf'), NamedPitch("fs'")]
-                []
+            >>> for column in array.columns:
+            ...     column.start_pitches
+            ...
+            [NamedPitch("g'")]
+            [NamedPitch("d'")]
+            [NamedPitch('bf'), NamedPitch('bqf'), NamedPitch("fs'")]
+            []
 
         Returns list.
         '''

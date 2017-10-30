@@ -10,24 +10,20 @@ class TrillCommand(Command):
 
         With music-maker:
 
-        ::
+        >>> music_maker = baca.MusicMaker(
+        ...     baca.TrillCommand(
+        ...         minimum_written_duration=abjad.Duration(1, 4),
+        ...         maximum_written_duration=None,
+        ...         ),
+        ...     )
 
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.TrillCommand(
-            ...         minimum_written_duration=abjad.Duration(1, 4),
-            ...         maximum_written_duration=None,
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     talea_denominator=4,
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     talea_denominator=4,
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -59,30 +55,24 @@ class TrillCommand(Command):
 
         With collection-maker:
 
-        ::
+        >>> segment_maker = baca.SegmentMaker(
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
 
-            >>> segment_maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.pitches('E4 F4'),
+        ...     baca.messiaen_notes(),
+        ...     baca.TrillCommand(
+        ...         minimum_written_duration=abjad.Duration(1, 4),
+        ...         maximum_written_duration=None,
+        ...         ),
+        ...     )
 
-        ::
-
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.pitches('E4 F4'),
-            ...     baca.messiaen_notes(),
-            ...     baca.TrillCommand(
-            ...         minimum_written_duration=abjad.Duration(1, 4),
-            ...         maximum_written_duration=None,
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, collection_metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, collection_metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 

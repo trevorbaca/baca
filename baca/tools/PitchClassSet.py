@@ -11,11 +11,9 @@ class PitchClassSet(abjad.PitchClassSet):
 
         ..  container:: example
 
-            ::
-
-                >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-                >>> setting = baca.pitch_class_set(items=items)
-                >>> abjad.show(setting) # doctest: +SKIP
+            >>> items = [-2, -1.5, 6, 7, -1.5, 7]
+            >>> setting = baca.pitch_class_set(items=items)
+            >>> abjad.show(setting) # doctest: +SKIP
 
             ..  docs::
 
@@ -43,20 +41,14 @@ class PitchClassSet(abjad.PitchClassSet):
 
             Works with Abjad pitch-class sets:
 
-            ::
+            >>> set_1 = abjad.PitchClassSet([0, 1, 2, 3])
+            >>> set_2 = baca.PitchClassSet([0, 1, 2, 3])
 
-                >>> set_1 = abjad.PitchClassSet([0, 1, 2, 3])
-                >>> set_2 = baca.PitchClassSet([0, 1, 2, 3])
+            >>> set_1 == set_2
+            True
 
-            ::
-
-                >>> set_1 == set_2
-                True
-
-            ::
-
-                >>> set_2 == set_1
-                True
+            >>> set_2 == set_1
+            True
 
         '''
         if (not issubclass(type(argument), type(self)) and
@@ -71,16 +63,12 @@ class PitchClassSet(abjad.PitchClassSet):
 
         ..  container:: example
 
-            ::
+            >>> setting = baca.pitch_class_set([-2, -1.5, 6, 7, -1.5, 7])
+            >>> setting
+            PitchClassSet([6, 7, 10, 10.5])
 
-                >>> setting = baca.pitch_class_set([-2, -1.5, 6, 7, -1.5, 7])
-                >>> setting
-                PitchClassSet([6, 7, 10, 10.5])
-
-            ::
-
-                >>> setting.to_pitch_classes()
-                PitchClassSet([6, 7, 10, 10.5])
+            >>> setting.to_pitch_classes()
+            PitchClassSet([6, 7, 10, 10.5])
 
         Returns new pitch-class set.
         '''
@@ -91,16 +79,12 @@ class PitchClassSet(abjad.PitchClassSet):
 
         ..  container:: example
 
-            ::
+            >>> setting = baca.pitch_class_set([-2, -1.5, 6, 7, -1.5, 7])
+            >>> setting
+            PitchClassSet([6, 7, 10, 10.5])
 
-                >>> setting = baca.pitch_class_set([-2, -1.5, 6, 7, -1.5, 7])
-                >>> setting
-                PitchClassSet([6, 7, 10, 10.5])
-
-            ::
-
-                >>> setting.to_pitches()
-                PitchSet([6, 7, 10, 10.5])
+            >>> setting.to_pitches()
+            PitchSet([6, 7, 10, 10.5])
 
         Returns pitch set.
         '''
