@@ -6134,7 +6134,7 @@ class LibraryAM(object):
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.Tie(use_messiaen_style_ties=True),
-            ),
+            )
 
     @staticmethod
     def molto_flaut_to_molto_grid(selector='baca.select().leaves().group()'):
