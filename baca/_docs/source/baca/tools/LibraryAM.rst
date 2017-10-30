@@ -65,6 +65,7 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.fused_tuplet_monads
       ~baca.tools.LibraryAM.LibraryAM.glissando
       ~baca.tools.LibraryAM.LibraryAM.grid_poss_to_flaut_poss
+      ~baca.tools.LibraryAM.LibraryAM.hairpin
       ~baca.tools.LibraryAM.LibraryAM.hairpins
       ~baca.tools.LibraryAM.LibraryAM.helianthate
       ~baca.tools.LibraryAM.LibraryAM.imbricate
@@ -181,6 +182,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAM.LibraryAM.glissando
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.grid_poss_to_flaut_poss
+
+.. automethod:: baca.tools.LibraryAM.LibraryAM.hairpin
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.hairpins
 

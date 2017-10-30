@@ -1342,7 +1342,7 @@ class MusicMaker(abjad.AbjadObject):
             Hairpin specifier selects all leaves:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.hairpins(['p < f']),
+            ...     baca.hairpin('p < f'),
             ...     )
 
             >>> collections = [
@@ -1388,16 +1388,13 @@ class MusicMaker(abjad.AbjadObject):
 
         ..  container:: example
 
-            Hairpin specifier selects each PLT run:
+            Maps hairpin to each run:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10, 18], [15, 23], [19, 13, 9, 8]],
-            ...     baca.hairpins(
-            ...         ['p < f'],
-            ...         selector=baca.select().runs(),
-            ...         ),
+            ...     baca.map(baca.hairpin('p < f'), baca.select().runs()),
             ...     baca.RestAffixSpecifier(
             ...         pattern=abjad.Pattern(
             ...             indices=[0, -1],
@@ -1449,14 +1446,8 @@ class MusicMaker(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
-            ...     baca.hairpins(
-            ...         ['p < f'],
-            ...         selector=baca.select().tuplets()[:1].tleaves().group(),
-            ...         ),
-            ...     baca.hairpins(
-            ...         ['f > p'],
-            ...         selector=baca.select().tuplets()[-1:].tleaves().group(),
-            ...         ),
+            ...     baca.map(baca.hairpin('p < f'), baca.select().tuplet(0)),
+            ...     baca.map(baca.hairpin('f > p'), baca.select().tuplet(-1)),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Staff]
@@ -1501,14 +1492,8 @@ class MusicMaker(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
-            ...     baca.hairpins(
-            ...         ['p < f'],
-            ...         selector=baca.select().tuplets()[:2].group(),
-            ...         ),
-            ...     baca.hairpins(
-            ...         ['f > p'],
-            ...         selector=baca.select().tuplets()[-1:].group(),
-            ...         ),
+            ...     baca.hairpin('p < f', baca.select().tuplets()[:2]),
+            ...     baca.hairpin('f > p', baca.select().tuplets()[-1:]),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Staff]

@@ -3418,10 +3418,7 @@ class LibraryAM(object):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dynamic_line_spanner_staff_padding(4),
-            ...     baca.hairpins(
-            ...         hairpins=['p < f'],
-            ...         selector=baca.select().tuplets().map(baca.select().tleaves()),
-            ...         ),
+            ...     baca.map(baca.hairpin('p < f'), baca.select().tuplets()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -3459,7 +3456,7 @@ class LibraryAM(object):
                                 g''16 \f ]
                             }
                             \times 4/5 {
-                                a'16 \p
+                                a'16
                                 r4
                                 \revert DynamicLineSpanner.staff-padding
                                 \revert TupletBracket.staff-padding
@@ -3480,10 +3477,7 @@ class LibraryAM(object):
             ...         n=4,
             ...         selector=baca.select().tuplets()[1:2].leaves().group(),
             ...         ),
-            ...     baca.hairpins(
-            ...         hairpins=['p < f'],
-            ...         selector=baca.select().tuplets().map(baca.select().tleaves()),
-            ...         ),
+            ...     baca.map(baca.hairpin('p < f'), baca.select().tuplets()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -3522,7 +3516,7 @@ class LibraryAM(object):
                                 \revert DynamicLineSpanner.staff-padding
                             }
                             \times 4/5 {
-                                a'16 \p
+                                a'16
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -3552,10 +3546,7 @@ class LibraryAM(object):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dynamic_line_spanner_up(),
-            ...     baca.hairpins(
-            ...         hairpins=['p < f'],
-            ...         selector=baca.select().tuplets().map(baca.select().tleaves()),
-            ...         ),
+            ...     baca.map(baca.hairpin('p < f'), baca.select().tuplets()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -3593,7 +3584,7 @@ class LibraryAM(object):
                                 g''16 \f ]
                             }
                             \times 4/5 {
-                                a'16 \p
+                                a'16
                                 r4
                                 \revert DynamicLineSpanner.direction
                                 \revert TupletBracket.staff-padding
@@ -3613,10 +3604,7 @@ class LibraryAM(object):
             ...     baca.dynamic_line_spanner_up(
             ...         baca.select().tuplets()[1:2].leaves().group(),
             ...         ),
-            ...     baca.hairpins(
-            ...         hairpins=['p < f'],
-            ...         selector=baca.select().tuplets().map(baca.select().tleaves()),
-            ...         ),
+            ...     baca.map(baca.hairpin('p < f'), baca.select().tuplets()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -3655,7 +3643,7 @@ class LibraryAM(object):
                                 \revert DynamicLineSpanner.direction
                             }
                             \times 4/5 {
-                                a'16 \p
+                                a'16
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -4966,6 +4954,173 @@ class LibraryAM(object):
             }
         )
         return spanner
+
+    @staticmethod
+    def hairpin(hairpin, selector='baca.select().tleaves()'):
+        r'''Attaches hairpin to trimmed leaves.
+
+        ..  container:: example
+
+            Attaches hairpin to trimmed leaves:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.hairpin('p < f'),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 \< \p [
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 [
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                g''16 ]
+                            }
+                            \times 4/5 {
+                                a'16 \f
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Attaches hairpin to trimmed leaves in tuplet 1:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.map(baca.hairpin('p < f'), baca.select().tuplet(1)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 [
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 \< \p [
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                g''16 \f ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Attaches hairpin to trimmed leaves in each tuplets:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.map(baca.hairpin('p < f'), baca.select().tuplets()),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 \< \p [
+                                d'16 ]
+                                bf'4 ~
+                                bf'16 \f
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 \< \p [
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                g''16 \f ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        hairpin = abjad.Hairpin(hairpin)
+        return baca.SpannerCommand(selector=selector, spanner=hairpin)
 
     @staticmethod
     def hairpins(
