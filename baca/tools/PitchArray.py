@@ -262,12 +262,13 @@ class PitchArray(abjad.AbjadObject):
 
     @staticmethod
     def _get_leaf_offsets(argment):
+        import abjad
         offsets = []
         for leaf in abjad.iterate(argment).leaves():
-            start_offset = leaf._get_timespan().start_offset
+            start_offset = abjad.inspect(leaf).get_timespan().start_offset
             if start_offset not in offsets:
                 offsets.append(start_offset)
-            stop_offset = leaf._get_timespan().stop_offset
+            stop_offset = abjad.inspect(leaf).get_timespan().stop_offset
             if stop_offset not in offsets:
                 offsets.append(stop_offset)
         offsets.sort()
