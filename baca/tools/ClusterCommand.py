@@ -10,16 +10,12 @@ class ClusterCommand(Command):
 
         With music-maker:
 
-        ::
+        >>> music_maker = baca.MusicMaker(baca.clusters([3, 4]))
 
-            >>> music_maker = baca.MusicMaker(baca.clusters([3, 4]))
-
-        ::
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = music_maker('Voice 1', collections)
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> contribution = music_maker('Voice 1', collections)
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -186,21 +182,17 @@ class ClusterCommand(Command):
 
         In tuplet 1:
 
-        ::
+        >>> music_maker = baca.MusicMaker(
+        ...     baca.clusters(
+        ...         [3, 4],
+        ...         selector=baca.select().tuplets()[1:2].plts().group(),
+        ...         ),
+        ...     )
 
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.clusters(
-            ...         [3, 4],
-            ...         selector=baca.select().tuplets()[1:2].plts().group(),
-            ...         ),
-            ...     )
-
-        ::
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = music_maker('Voice 1', collections)
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> contribution = music_maker('Voice 1', collections)
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -307,18 +299,14 @@ class ClusterCommand(Command):
 
         PLT -1:
 
-        ::
+        >>> music_maker = baca.MusicMaker(
+        ...     baca.clusters([3, 4], selector=baca.select().plt(-1)),
+        ...     )
 
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.clusters([3, 4], selector=baca.select().plt(-1)),
-            ...     )
-
-        ::
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = music_maker('Voice 1', collections)
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> contribution = music_maker('Voice 1', collections)
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -365,26 +353,20 @@ class ClusterCommand(Command):
 
         With segment-maker:
 
-        ::
+        >>> segment_maker = baca.SegmentMaker(
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
 
-            >>> segment_maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.clusters([3, 4], start_pitch='E4'),
+        ...     baca.messiaen_notes(),
+        ...     )
 
-        ::
-
-            >>> segment_maker(
-            ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.clusters([3, 4], start_pitch='E4'),
-            ...     baca.messiaen_notes(),
-            ...     )
-
-        ::
-
-            >>> result = segment_maker.run(is_doc_example=True)
-            >>> lilypond_file, metadata = result
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -521,7 +503,7 @@ class ClusterCommand(Command):
     def __init__(
         self,
         hide_flat_markup=None,
-        selector='baca.select().plts().group()',
+        selector='baca.select().plts()',
         start_pitch=None,
         widths=None,
         ):
@@ -537,24 +519,23 @@ class ClusterCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, music=None):
-        r'''Calls command on `music`.
+    def __call__(self, argument=None):
+        r'''Calls command on `argument`.
 
         Returns none.
         '''
-        selections = self._select(music)
-        if not selections:
-            return
         if not self.widths:
             return
-        leaf = baca.select().leaf(0)(selections)
+        if self.selector:
+            argument = self.selector(argument)
+        if not argument:
+            return
+        leaf = baca.select(argument).leaf(0)
         root = abjad.inspect(leaf).get_parentage().root
         with abjad.ForbidUpdate(component=root):
-            for selection in selections:
-                plts = baca.select().plts()(selection)
-                for i, plt in enumerate(plts):
-                    width = self.widths[i]
-                    self._make_cluster(plt, width)
+            for i, plt in enumerate(baca.select(argument).plts()):
+                width = self.widths[i]
+                self._make_cluster(plt, width)
 
     ### PRIVATE METHODS ###
 
@@ -597,27 +578,21 @@ class ClusterCommand(Command):
 
             Hides flat markup:
 
-            ::
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
 
-                >>> segment_maker = baca.SegmentMaker(
-                ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-                ...     )
+            >>> segment_maker(
+            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.pitches('E4'),
+            ...     baca.messiaen_notes(),
+            ...     baca.natural_clusters(widths=[3]),
+            ...     )
 
-            ::
-
-                >>> segment_maker(
-                ...     baca.scope('Violin Music Voice', 1),
-                ...     baca.pitches('E4'),
-                ...     baca.messiaen_notes(),
-                ...     baca.natural_clusters(widths=[3]),
-                ...     )
-
-            ::
-
-                >>> result = segment_maker.run(is_doc_example=True)
-                >>> lilypond_file, metadata = result
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = segment_maker.run(is_doc_example=True)
+            >>> lilypond_file, metadata = result
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -735,10 +710,8 @@ class ClusterCommand(Command):
 
         ..  container:: example
 
-            ::
-
-                >>> baca.clusters([3, 4]).selector
-                baca.select().plts().group()
+            >>> baca.clusters([3, 4]).selector
+            baca.select().plts()
 
         Returns selector.
         '''
@@ -752,27 +725,21 @@ class ClusterCommand(Command):
 
             Takes start pitch from input notes:
 
-            ::
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
 
-                >>> segment_maker = baca.SegmentMaker(
-                ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-                ...     )
+            >>> segment_maker(
+            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.messiaen_notes(),
+            ...     baca.pitches('C4 D4 E4 F4'),
+            ...     baca.clusters([3]),
+            ...     )
 
-            ::
-
-                >>> segment_maker(
-                ...     baca.scope('Violin Music Voice', 1),
-                ...     baca.messiaen_notes(),
-                ...     baca.pitches('C4 D4 E4 F4'),
-                ...     baca.clusters([3]),
-                ...     )
-
-            ::
-
-                >>> result = segment_maker.run(is_doc_example=True)
-                >>> lilypond_file, metadata = result
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = segment_maker.run(is_doc_example=True)
+            >>> lilypond_file, metadata = result
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -898,26 +865,20 @@ class ClusterCommand(Command):
 
             Sets start pitch explicitly:
 
-            ::
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
 
-                >>> segment_maker = baca.SegmentMaker(
-                ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-                ...     )
+            >>> segment_maker(
+            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.messiaen_notes(),
+            ...     baca.clusters([3], start_pitch='G4'),
+            ...     )
 
-            ::
-
-                >>> segment_maker(
-                ...     baca.scope('Violin Music Voice', 1),
-                ...     baca.messiaen_notes(),
-                ...     baca.clusters([3], start_pitch='G4'),
-                ...     )
-
-            ::
-
-                >>> result = segment_maker.run(is_doc_example=True)
-                >>> lilypond_file, metadata = result
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = segment_maker.run(is_doc_example=True)
+            >>> lilypond_file, metadata = result
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1053,26 +1014,20 @@ class ClusterCommand(Command):
 
             Increasing widths:
 
-            ::
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
 
-                >>> segment_maker = baca.SegmentMaker(
-                ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-                ...     )
+            >>> segment_maker(
+            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.clusters([1, 2, 3, 4], start_pitch='E4'),
+            ...     baca.messiaen_notes(),
+            ...     )
 
-            ::
-
-                >>> segment_maker(
-                ...     baca.scope('Violin Music Voice', 1),
-                ...     baca.clusters([1, 2, 3, 4], start_pitch='E4'),
-                ...     baca.messiaen_notes(),
-                ...     )
-
-            ::
-
-                >>> result = segment_maker.run(is_doc_example=True)
-                >>> lilypond_file, metadata = result
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = segment_maker.run(is_doc_example=True)
+            >>> lilypond_file, metadata = result
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1198,26 +1153,20 @@ class ClusterCommand(Command):
 
             Patterned widths:
 
-            ::
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
 
-                >>> segment_maker = baca.SegmentMaker(
-                ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-                ...     )
+            >>> segment_maker(
+            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.clusters([1, 3], start_pitch='E4'),
+            ...     baca.messiaen_notes(),
+            ...     )
 
-            ::
-
-                >>> segment_maker(
-                ...     baca.scope('Violin Music Voice', 1),
-                ...     baca.clusters([1, 3], start_pitch='E4'),
-                ...     baca.messiaen_notes(),
-                ...     )
-
-            ::
-
-                >>> result = segment_maker.run(is_doc_example=True)
-                >>> lilypond_file, metadata = result
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = segment_maker.run(is_doc_example=True)
+            >>> lilypond_file, metadata = result
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1343,27 +1292,21 @@ class ClusterCommand(Command):
 
             Leaves notes and chords unchanged:
 
-            ::
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
 
-                >>> segment_maker = baca.SegmentMaker(
-                ...     score_template=baca.ViolinSoloScoreTemplate(),
-                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-                ...     )
+            >>> segment_maker(
+            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.messiaen_notes(),
+            ...     baca.pitches('E4', allow_repeat_pitches=True),
+            ...     baca.clusters([]),
+            ...     )
 
-            ::
-
-                >>> segment_maker(
-                ...     baca.scope('Violin Music Voice', 1),
-                ...     baca.messiaen_notes(),
-                ...     baca.pitches('E4', allow_repeat_pitches=True),
-                ...     baca.clusters([]),
-                ...     )
-
-            ::
-
-                >>> result = segment_maker.run(is_doc_example=True)
-                >>> lilypond_file, metadata = result
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = segment_maker.run(is_doc_example=True)
+            >>> lilypond_file, metadata = result
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 

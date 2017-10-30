@@ -17,9 +17,9 @@ class LibraryNZ(object):
 
     @staticmethod
     def natural_clusters(
+        widths,
+        selector='baca.select().plts()',
         start_pitch=None,
-        widths=None,
-        selector='baca.select().plts().group()',
         ):
         r'''Makes natural clusters.
         '''

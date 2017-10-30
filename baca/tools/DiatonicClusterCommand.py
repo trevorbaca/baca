@@ -8,12 +8,10 @@ class DiatonicClusterCommand(Command):
 
     ..  container:: example
 
-        ::
-
-            >>> staff = abjad.Staff("c' d' e' f'")
-            >>> command = baca.diatonic_clusters([4, 6])
-            >>> command(staff)
-            >>> abjad.show(staff) # doctest: +SKIP
+        >>> staff = abjad.Staff("c' d' e' f'")
+        >>> command = baca.diatonic_clusters([4, 6])
+        >>> command(staff)
+        >>> abjad.show(staff) # doctest: +SKIP
 
         ..  docs::
 
@@ -35,7 +33,7 @@ class DiatonicClusterCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, widths, selector='baca.select().plts().group()'):
+    def __init__(self, widths, selector='baca.select().plts()'):
         Command.__init__(self, selector=selector)
         assert abjad.mathtools.all_are_nonnegative_integers(widths)
         widths = abjad.CyclicTuple(widths)
@@ -43,27 +41,29 @@ class DiatonicClusterCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, music=None):
-        r'''Calls command on `music`.
+    def __call__(self, argument=None):
+        r'''Calls command on `argument`.
 
         Returns none.
         '''
-        selections = self._select(music)
-        for selection in selections:
-            plts = baca.select().plts()(selection)
-            for i, plt in enumerate(plts):
-                width = self.widths[i]
-                start = self._get_lowest_diatonic_pitch_number(plt)
-                numbers = range(start, start + width)
-                class_ = abjad.PitchClass
-                change = \
-                    class_._diatonic_pitch_class_number_to_pitch_class_number
-                numbers = [(12 * (x // 7)) + change[x % 7] for x in numbers]
-                pitches = [abjad.NamedPitch(_) for _ in numbers]
-                for pleaf in plt:
-                    chord = abjad.Chord(pleaf)
-                    chord.note_heads[:] = pitches
-                    abjad.mutate(pleaf).replace(chord)
+        if not self.widths:
+            return
+        if self.selector:
+            argument = self.selector(argument)
+        if not argument:
+            return
+        for i, plt in enumerate(baca.select(argument).plts()):
+            width = self.widths[i]
+            start = self._get_lowest_diatonic_pitch_number(plt)
+            numbers = range(start, start + width)
+            class_ = abjad.PitchClass
+            change = class_._diatonic_pitch_class_number_to_pitch_class_number
+            numbers = [(12 * (x // 7)) + change[x % 7] for x in numbers]
+            pitches = [abjad.NamedPitch(_) for _ in numbers]
+            for pleaf in plt:
+                chord = abjad.Chord(pleaf)
+                chord.note_heads[:] = pitches
+                abjad.mutate(pleaf).replace(chord)
 
     ### PRIVATE METHODS ###
 
