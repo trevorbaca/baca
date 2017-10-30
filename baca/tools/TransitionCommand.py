@@ -261,7 +261,7 @@ class TransitionCommand(Command):
             abjad.attach(spanner, leaves)
             start_leaf, stop_leaf = leaves[0], leaves[-1]
             start_markup = self.start_markup
-            if isinstance(start_markup, baca.AttachCommand):
+            if isinstance(start_markup, baca.IndicatorCommand):
                 start_markup = start_markup.arguments[0]
             if start_markup is not None:
                 assert isinstance(start_markup, abjad.Markup)
@@ -271,7 +271,7 @@ class TransitionCommand(Command):
             arrow = self._get_arrow()
             spanner.attach(arrow, start_leaf)
             stop_markup = self.stop_markup
-            if isinstance(stop_markup, baca.AttachCommand):
+            if isinstance(stop_markup, baca.IndicatorCommand):
                 stop_markup = stop_markup.arguments[0]
             if stop_markup is not None:
                 assert isinstance(stop_markup, abjad.Markup), repr(stop_markup)

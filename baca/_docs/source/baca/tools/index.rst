@@ -32,7 +32,6 @@ Commands
 .. toctree::
    :hidden:
 
-   AttachCommand
    ClusterCommand
    ColorCommand
    ColorFingeringCommand
@@ -40,6 +39,7 @@ Commands
    DiatonicClusterCommand
    GlissandoCommand
    HairpinCommand
+   IndicatorCommand
    LabelCommand
    MapCommand
    MicrotoneDeviationCommand
@@ -59,7 +59,6 @@ Commands
 .. autosummary::
    :nosignatures:
 
-   AttachCommand
    ClusterCommand
    ColorCommand
    ColorFingeringCommand
@@ -67,6 +66,7 @@ Commands
    DiatonicClusterCommand
    GlissandoCommand
    HairpinCommand
+   IndicatorCommand
    LabelCommand
    MapCommand
    MicrotoneDeviationCommand

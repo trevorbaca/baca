@@ -1051,7 +1051,7 @@ class LibraryNZ(object):
         markup = abjad.Markup(dynamic).dynamic()
         markup += abjad.Markup('possibile').upright()
         markup = abjad.new(markup, direction=direction)
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[markup],
             selector=selector,
             )
@@ -1655,7 +1655,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.Articulation(dynamic)],
             selector=selector,
             )
@@ -3232,7 +3232,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.Articulation('shortfermata')],
             selector=selector,
             )
@@ -4325,7 +4325,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.Articulation('staccato')],
             selector=selector,
             )
@@ -4445,7 +4445,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.Articulation('staccatissimo')],
             selector=selector,
             )
@@ -5820,7 +5820,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.Articulation('tenuto')],
             selector=selector,
             )
@@ -9096,7 +9096,7 @@ class LibraryNZ(object):
                 >>
 
         """
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.Arpeggio(direction=abjad.Up)],
             selector=selector,
             )
@@ -9218,7 +9218,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.Articulation('upbow')],
             selector=selector,
             )
@@ -9340,7 +9340,7 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.Articulation('verylongfermata')],
             selector=selector,
             )

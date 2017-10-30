@@ -3,7 +3,7 @@ import baca
 from .Command import Command
 
 
-class AttachCommand(Command):
+class IndicatorCommand(Command):
     r'''Attach command.
 
     ..  container:: example
@@ -13,7 +13,7 @@ class AttachCommand(Command):
         ::
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.AttachCommand(
+            ...     baca.IndicatorCommand(
             ...         arguments=[abjad.Fermata()],
             ...         ),
             ...     baca.MusicRhythmSpecifier(
@@ -80,7 +80,7 @@ class AttachCommand(Command):
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.AttachCommand(
+            ...     baca.IndicatorCommand(
             ...         arguments=[abjad.Fermata()],
             ...         ),
             ...     )
@@ -230,7 +230,7 @@ class AttachCommand(Command):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.AttachCommand(
+                ...     baca.IndicatorCommand(
                 ...         arguments=[abjad.Fermata()],
                 ...         ),
                 ...     baca.MusicRhythmSpecifier(
@@ -287,7 +287,7 @@ class AttachCommand(Command):
             ::
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.AttachCommand(
+                ...     baca.IndicatorCommand(
                 ...         arguments=[
                 ...             abjad.Fermata(), None, None,
                 ...             abjad.Fermata(), None, None,

@@ -189,7 +189,7 @@ class MarkupLibrary(object):
         if not isinstance(markup, abjad.Markup):
             markup = abjad.Markup(markup, direction=direction)
         selector = selector or baca.select().phead(0)
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[markup],
             selector=selector,
             )

@@ -130,7 +130,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.Articulation('>')],
             selector=selector,
             )
@@ -316,7 +316,7 @@ class LibraryAM(object):
         else:
             articulations = ['upbow', 'downbow']
         articulations = [abjad.Articulation(_) for _ in articulations]
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=articulations,
             selector=selector,
             )
@@ -367,7 +367,7 @@ class LibraryAM(object):
             ::
 
                 >>> abjad.f(baca.ancora_dynamic('f'))
-                baca.AttachCommand(
+                baca.IndicatorCommand(
                     arguments=[
                         abjad.Markup(
                             contents=[
@@ -515,7 +515,7 @@ class LibraryAM(object):
         markup = abjad.Markup(dynamic).dynamic()
         markup += abjad.Markup('ancora').upright()
         markup = abjad.new(markup, direction=direction)
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[markup],
             selector=selector,
             )
@@ -631,7 +631,7 @@ class LibraryAM(object):
                 >>
 
         """
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.Articulation('arpeggio')],
             selector=selector,
             )
@@ -640,7 +640,7 @@ class LibraryAM(object):
     def articulations(articulations, selector='baca.select().pheads()'):
         r'''Attaches articulations.
         '''
-        return baca.AttachCommand(arguments=articulations)
+        return baca.IndicatorCommand(arguments=articulations)
 
     @staticmethod
     def bass_to_octave(n=4, selector=None):
@@ -1902,7 +1902,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.Clef(clef)],
             selector=selector,
             )
@@ -2829,7 +2829,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.LilyPondCommand(r'\crossStaff')],
             selector=selector,
             )
@@ -3143,7 +3143,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.Articulation('tongue #2')],
             selector=selector,
             )
@@ -3264,7 +3264,7 @@ class LibraryAM(object):
                 >>
 
         """
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.Arpeggio(direction=abjad.Down)],
             selector=selector,
             )
@@ -3386,7 +3386,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.Articulation('downbow')],
             selector=selector,
             )
@@ -3506,7 +3506,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.Dynamic(dynamic)],
             selector=selector,
             )
@@ -4045,7 +4045,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.LilyPondCommand('dynamicDown')],
             selector=selector,
             )
@@ -4171,7 +4171,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.LilyPondCommand('dynamicUp')],
             selector=selector,
             )
@@ -4332,7 +4332,7 @@ class LibraryAM(object):
         right_quotes = abjad.Markup('”').italic().larger()
         markup = left_quotes + dynamic_markup + right_quotes
         markup = abjad.new(markup, direction=direction)
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[markup],
             selector=selector,
             )
@@ -4460,7 +4460,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.Articulation('fermata')],
             selector=selector,
             )
@@ -4669,7 +4669,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.Articulation('flageolet')],
             selector=selector,
             )
@@ -5406,7 +5406,7 @@ class LibraryAM(object):
         r'''Attaches instrument.
         '''
         assert isinstance(instrument, abjad.Instrument)
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[instrument],
             selector=selector,
             )
@@ -5725,7 +5725,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.Articulation('laissezVibrer')],
             selector=selector,
             )
@@ -5848,7 +5848,7 @@ class LibraryAM(object):
 
         '''
         command = abjad.LilyPondCommand('break', format_slot='after')
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[command],
             selector=selector,
             )
@@ -5968,7 +5968,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.Articulation('longfermata')],
             selector=selector,
             )
@@ -6088,7 +6088,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.AttachCommand(
+        return baca.IndicatorCommand(
             arguments=[abjad.Articulation('marcato')],
             selector=selector,
             )
