@@ -4934,7 +4934,10 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.GlissandoCommand(selector=selector)
+        return baca.SpannerCommand(
+            selector=selector,
+            spanner=abjad.Glissando(),
+            )
 
     @staticmethod
     def grid_poss_to_flaut_poss():
