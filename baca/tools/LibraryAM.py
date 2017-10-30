@@ -2291,15 +2291,12 @@ class LibraryAM(object):
         return baca.ColorCommand(selector=selector)
 
     @staticmethod
-    def color_fingerings(numbers, selector='baca.select().pheads().group()'):
+    def color_fingerings(numbers, selector='baca.select().pheads()'):
         r'''Color fingerings.
 
         Returns color fingering command.
         '''
-        return baca.ColorFingeringCommand(
-            numbers=numbers,
-            selector=selector,
-            )
+        return baca.ColorFingeringCommand(numbers=numbers, selector=selector)
 
     @staticmethod
     def compound(scopes):
