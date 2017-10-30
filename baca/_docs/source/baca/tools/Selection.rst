@@ -119,9 +119,17 @@ Methods
 
 .. automethod:: baca.tools.Selection.Selection.cheads
 
-.. automethod:: baca.tools.Selection.Selection.chord
+.. only:: html
 
-.. automethod:: baca.tools.Selection.Selection.chords
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Selection.Selection.chord
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Selection.Selection.chords
 
 .. only:: html
 
@@ -207,9 +215,17 @@ Methods
 
       .. automethod:: baca.tools.Selection.Selection.in_same_parent
 
-.. automethod:: baca.tools.Selection.Selection.leaf
+.. only:: html
 
-.. automethod:: baca.tools.Selection.Selection.leaves
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Selection.Selection.leaf
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Selection.Selection.leaves
 
 .. automethod:: baca.tools.Selection.Selection.lleaves
 
@@ -243,9 +259,17 @@ Methods
 
       .. automethod:: baca.tools.Selection.Selection.map
 
-.. automethod:: baca.tools.Selection.Selection.note
+.. only:: html
 
-.. automethod:: baca.tools.Selection.Selection.notes
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Selection.Selection.note
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Selection.Selection.notes
 
 .. only:: html
 
@@ -285,9 +309,17 @@ Methods
 
 .. automethod:: baca.tools.Selection.Selection.qruns
 
-.. automethod:: baca.tools.Selection.Selection.rest
+.. only:: html
 
-.. automethod:: baca.tools.Selection.Selection.rests
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Selection.Selection.rest
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Selection.Selection.rests
 
 .. automethod:: baca.tools.Selection.Selection.rleaves
 
@@ -313,9 +345,17 @@ Methods
 
       .. automethod:: baca.tools.Selection.Selection.top
 
-.. automethod:: baca.tools.Selection.Selection.tuplet
+.. only:: html
 
-.. automethod:: baca.tools.Selection.Selection.tuplets
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Selection.Selection.tuplet
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Selection.Selection.tuplets
 
 .. only:: html
 
