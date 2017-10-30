@@ -4934,7 +4934,7 @@ class LibraryAM(object):
         return baca.map(baca.GlissandoCommand(), selector=selector)
 
     @staticmethod
-    def glissando(selector='baca.select().leaves()'):
+    def glissando(selector='baca.select().tleaves()'):
         r'''Attaches glissando to leaves.
 
         ..  container:: example
