@@ -56,7 +56,7 @@ Bases
       ~baca.tools.LibraryNZ.LibraryNZ.skips_after
       ~baca.tools.LibraryNZ.LibraryNZ.skips_around
       ~baca.tools.LibraryNZ.LibraryNZ.skips_before
-      ~baca.tools.LibraryNZ.LibraryNZ.slurs
+      ~baca.tools.LibraryNZ.LibraryNZ.slur
       ~baca.tools.LibraryNZ.LibraryNZ.slurs_down
       ~baca.tools.LibraryNZ.LibraryNZ.slurs_up
       ~baca.tools.LibraryNZ.LibraryNZ.soprano_to_octave
@@ -78,8 +78,8 @@ Bases
       ~baca.tools.LibraryNZ.LibraryNZ.text_scripts_down
       ~baca.tools.LibraryNZ.LibraryNZ.text_scripts_up
       ~baca.tools.LibraryNZ.LibraryNZ.text_spanner_staff_padding
+      ~baca.tools.LibraryNZ.LibraryNZ.tie
       ~baca.tools.LibraryNZ.LibraryNZ.tied_repeated_durations
-      ~baca.tools.LibraryNZ.LibraryNZ.ties
       ~baca.tools.LibraryNZ.LibraryNZ.ties_down
       ~baca.tools.LibraryNZ.LibraryNZ.ties_up
       ~baca.tools.LibraryNZ.LibraryNZ.time_signature_extra_offset
@@ -185,7 +185,7 @@ Class & static methods
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.skips_before
 
-.. automethod:: baca.tools.LibraryNZ.LibraryNZ.slurs
+.. automethod:: baca.tools.LibraryNZ.LibraryNZ.slur
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.slurs_down
 
@@ -229,9 +229,9 @@ Class & static methods
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.text_spanner_staff_padding
 
-.. automethod:: baca.tools.LibraryNZ.LibraryNZ.tied_repeated_durations
+.. automethod:: baca.tools.LibraryNZ.LibraryNZ.tie
 
-.. automethod:: baca.tools.LibraryNZ.LibraryNZ.ties
+.. automethod:: baca.tools.LibraryNZ.LibraryNZ.tied_repeated_durations
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.ties_down
 

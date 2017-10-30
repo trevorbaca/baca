@@ -12,7 +12,7 @@ class SpannerCommand(Command):
 
         >>> music_maker = baca.MusicMaker(
         ...     baca.SpannerCommand(
-        ...         selector=baca.select().tuplets(),
+        ...         selector=baca.select().tuplet(1),
         ...         spanner=abjad.Slur(),
         ...         ),
         ...     )
@@ -30,9 +30,9 @@ class SpannerCommand(Command):
                     \voiceOne
                     {
                         {
-                            c'16 [ (
+                            c'16 [
                             d'16
-                            bf'16 ] )
+                            bf'16 ]
                         }
                         {
                             fs''16 [ (
@@ -52,8 +52,6 @@ class SpannerCommand(Command):
 
         With collection-maker:
 
-        ..  note:: Teach SegmentMaker about SpannerCommand.
-
         >>> segment_maker = baca.SegmentMaker(
         ...     score_template=baca.ViolinSoloScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -64,7 +62,7 @@ class SpannerCommand(Command):
         ...     baca.even_runs(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.SpannerCommand(
-        ...         selector=baca.select().tuplets(),
+        ...         selector=baca.select().leaves()[4:7],
         ...         spanner=abjad.Slur(),
         ...         ),
         ...     )
@@ -130,9 +128,9 @@ class SpannerCommand(Command):
                                 e''8 ]
                             }
                             {
-                                g'8 [
+                                g'8 [ (
                                 f''8
-                                e'8 ]
+                                e'8 ] )
                             }
                             {
                                 d''8 [
@@ -154,7 +152,7 @@ class SpannerCommand(Command):
     ..  container:: example
 
         >>> baca.SpannerCommand()
-        SpannerCommand(selector=baca.select().leaves().group())
+        SpannerCommand(selector=baca.select().tleaves())
 
     '''
 
@@ -169,7 +167,7 @@ class SpannerCommand(Command):
 
     def __init__(
         self,
-        selector='baca.select().leaves().group()',
+        selector='baca.select().tleaves()',
         spanner=None,
         ):
         Command.__init__(self, selector=selector)
@@ -180,24 +178,23 @@ class SpannerCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, music=None):
-        r'''Calls command on `music`.
+    def __call__(self, argument=None):
+        r'''Calls command on `argument`.
 
         Returns none.
         '''
-        selections = self._select(music)
-        # self._debug_selections(music, selections)
         if self.spanner is None:
             return
-        for selection in selections:
-            spanner = abjad.new(self.spanner)
-            leaves = abjad.select(selection).leaves()
-            if len(leaves) <= 1:
-                continue
-            if isinstance(spanner, abjad.Tie):
-                for leaf in leaves:
-                    abjad.detach(abjad.Tie, leaf)
-            abjad.attach(spanner, leaves)
+        if self.selector:
+            argument = self.selector(argument)
+        leaves = abjad.select(argument).leaves()
+        if len(leaves) <= 1:
+            return
+        spanner = abjad.new(self.spanner)
+        if isinstance(spanner, abjad.Tie):
+            for leaf in leaves:
+                abjad.detach(abjad.Tie, leaf)
+        abjad.attach(spanner, leaves)
 
     ### PUBLIC PROPERTIES ###
 

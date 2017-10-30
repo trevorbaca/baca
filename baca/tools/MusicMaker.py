@@ -1599,10 +1599,7 @@ class MusicMaker(abjad.AbjadObject):
             Slur specifier selects leaves in each tuplet:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.SpannerCommand(
-            ...         selector=baca.select().tuplets(),
-            ...         spanner=abjad.Slur(),
-            ...         ),
+            ...     baca.map(baca.slur(), baca.select().tuplets()),
             ...     )
 
             >>> collections = [
@@ -1650,13 +1647,10 @@ class MusicMaker(abjad.AbjadObject):
 
             Slur specifier selects first two pitched leaves in each tuplet:
 
-            >>> selector = baca.select().tuplets()
-            >>> selector = selector.map(baca.select().pleaves()[:2])
+            >>> getter = baca.select().pleaves()[:2]
+            >>> selector = baca.select().tuplets().map(getter)
             >>> music_maker = baca.MusicMaker(
-            ...     baca.SpannerCommand(
-            ...         selector=selector,
-            ...         spanner=abjad.Slur(),
-            ...         ),
+            ...     baca.map(baca.slur(), selector),
             ...     )
 
             >>> collections = [
@@ -1704,13 +1698,10 @@ class MusicMaker(abjad.AbjadObject):
 
             Slur specifier selects last two pitched leaves in each tuplet:
 
-            >>> selector = baca.select().tuplets()
-            >>> selector = selector.map(baca.select().pleaves()[-2:])
+            >>> getter = baca.select().pleaves()[-2:]
+            >>> selector = baca.select().tuplets().map(getter)
             >>> music_maker = baca.MusicMaker(
-            ...     baca.SpannerCommand(
-            ...         selector=selector,
-            ...         spanner=abjad.Slur(),
-            ...         ),
+            ...     baca.map(baca.slur(), selector),
             ...     )
 
             >>> collections = [

@@ -6071,7 +6071,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def messiaen_ties(selector='baca.select().qruns()'):
+    def messiaen_ties(selector='baca.select().qrun(0)'):
         r'''Attaches Messaien ties.
 
         ..  container:: example
@@ -6127,63 +6127,13 @@ class LibraryAM(object):
                     }
                 >>
 
-        ..  container:: example
-
-            Attaches Messiaen tie to PLT p-run 0:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.messiaen_ties(baca.select().qrun(0)),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                c'16 [
-                                c'16 \repeatTie ]
-                                bf'4 ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                bf'16 [
-                                e''16 ]
-                                e''4 ~
-                                e''16
-                                r16
-                                fs''16 [
-                                af''16 ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
         '''
-        return baca.SpannerCommand(
-            selector=selector,
-            spanner=abjad.Tie(use_messiaen_style_ties=True),
+        return baca.map(
+            baca.SpannerCommand(
+                selector=selector,
+                spanner=abjad.Tie(use_messiaen_style_ties=True),
+                ),
+            baca.select().qruns(),
             )
 
     @staticmethod
