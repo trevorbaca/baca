@@ -358,7 +358,7 @@ class LibraryNZ(object):
         '''
         if repeat_ties:
             tie_specifier = abjad.rhythmmakertools.TieSpecifier(
-                use_messiaen_style_ties=True,
+                repeat_ties=True,
                 )
         else:
             tie_specifier = None
@@ -1774,7 +1774,7 @@ class LibraryNZ(object):
             rewrite_meter=True,
             rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
                 tie_specifier=abjad.rhythmmakertools.TieSpecifier(
-                    use_messiaen_style_ties=True,
+                    repeat_ties=True,
                     ),
                 ),
             )
@@ -3072,7 +3072,7 @@ class LibraryNZ(object):
                     ),
                 tie_specifier=abjad.rhythmmakertools.TieSpecifier(
                     tie_consecutive_notes=True,
-                    use_messiaen_style_ties=True,
+                    repeat_ties=True,
                     ),
                 ),
             )
@@ -6594,7 +6594,7 @@ class LibraryNZ(object):
         '''
         return baca.SpannerCommand(
             selector=selector,
-            spanner=abjad.Tie(use_messiaen_style_ties=repeat),
+            spanner=abjad.Tie(repeat_ties=repeat),
             )
 
     @staticmethod
@@ -6606,7 +6606,7 @@ class LibraryNZ(object):
             rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
                 tie_specifier=abjad.rhythmmakertools.TieSpecifier(
                     tie_across_divisions=True,
-                    use_messiaen_style_ties=repeat_ties,
+                    repeat_ties=repeat_ties,
                     ),
                 ),
             )

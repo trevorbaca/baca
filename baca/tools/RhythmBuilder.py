@@ -136,11 +136,11 @@ class RhythmBuilder(Builder):
         pitched_prototype = (abjad.Note, abjad.Chord)
         if self.tie_first and isinstance(first_leaf, pitched_prototype):
             abjad.attach('tie to me', first_leaf)
-            if self._use_messiaen_style_ties:
+            if self._repeat_ties:
                 abjad.attach('use messiaen style ties', first_leaf)
         if self.tie_last and isinstance(last_leaf, pitched_prototype):
             abjad.attach('tie from me', last_leaf)
-            if self._use_messiaen_style_ties:
+            if self._repeat_ties:
                 abjad.attach('use messiaen style ties', last_leaf)
         contribution = baca.SegmentContribution(
             payload=music,
@@ -164,10 +164,10 @@ class RhythmBuilder(Builder):
         return multimeasure_rests
 
     @property
-    def _use_messiaen_style_ties(self):
+    def _repeat_ties(self):
         if self.rhythm_maker.tie_specifier is None:
             return False
-        return self.rhythm_maker.tie_specifier.use_messiaen_style_ties
+        return self.rhythm_maker.tie_specifier.repeat_ties
 
     ### PRIVATE METHODS ###
 
@@ -277,7 +277,7 @@ class RhythmBuilder(Builder):
             selections = specifier._split_at_measure_boundaries(
                 selections,
                 time_signatures,
-                use_messiaen_style_ties=self._use_messiaen_style_ties,
+                repeat_ties=self._repeat_ties,
                 )
             assert self._all_are_selections(selections), repr(selections)
         if self.rewrite_meter:
@@ -287,7 +287,7 @@ class RhythmBuilder(Builder):
                 time_signatures,
                 reference_meters=self._reference_meters,
                 rewrite_tuplets=False,
-                use_messiaen_style_ties=self._use_messiaen_style_ties,
+                repeat_ties=self._repeat_ties,
                 )
         if not self.rhythm_overwrites:
             return selections, start_offset

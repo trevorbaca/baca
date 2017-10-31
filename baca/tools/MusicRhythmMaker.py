@@ -1666,7 +1666,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             ...         denominator=64,
             ...         ),
             ...     tie_specifier=abjad.rhythmmakertools.TieSpecifier(
-            ...         use_messiaen_style_ties=True,
+            ...         repeat_ties=True,
             ...         ),
             ...     )
 

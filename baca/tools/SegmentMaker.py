@@ -762,10 +762,10 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.detach(abjad.Tie, previous_leaf)
                         abjad.detach(abjad.Tie, current_leaf)
                         inspector = abjad.inspect(current_leaf)
-                        use_messiaen_style_ties = inspector.has_indicator(
+                        repeat_ties = inspector.has_indicator(
                             'use messiaen style ties')
                         tie = abjad.Tie(
-                            use_messiaen_style_ties=use_messiaen_style_ties)
+                            repeat_ties=repeat_ties)
                         abjad.attach(tie, leaves)
                 abjad.detach('tie to me', current_leaf)
             if abjad.inspect(current_leaf).has_indicator('tie from me'):
@@ -780,10 +780,10 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.detach(abjad.Tie, current_leaf)
                         abjad.detach(abjad.Tie, next_leaf)
                         inspector = abjad.inspect(current_leaf)
-                        use_messiaen_style_ties = inspector.has_indicator(
+                        repeat_ties = inspector.has_indicator(
                             'use messiaen style ties')
                         tie = abjad.Tie(
-                            use_messiaen_style_ties=use_messiaen_style_ties)
+                            repeat_ties=repeat_ties)
                         abjad.attach(tie, leaves)
                 abjad.detach('tie from me', current_leaf)
 
@@ -1795,7 +1795,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if not ties:
                 continue
             tie = ties.pop()
-            if not tie.use_messiaen_style_ties:
+            if not tie.repeat_ties:
                 continue
             previous_leaf = abjad.inspect(leaf).get_leaf(-1)
             if previous_leaf is None:
