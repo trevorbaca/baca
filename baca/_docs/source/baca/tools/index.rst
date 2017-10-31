@@ -53,7 +53,6 @@ Commands
    StemTremoloCommand
    SwellCommand
    TransitionCommand
-   TrillCommand
 
 .. autosummary::
    :nosignatures:
@@ -79,7 +78,6 @@ Commands
    StemTremoloCommand
    SwellCommand
    TransitionCommand
-   TrillCommand
 
 --------
 
