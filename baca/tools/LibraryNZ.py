@@ -7518,12 +7518,181 @@ class LibraryNZ(object):
             )
 
     @staticmethod
+    def trill(selector='baca.select().rrun(0)'):
+        r'''Attaches trill to run 0 (leaked to the right).
+
+        ..  container:: example
+
+            Attaches trill to run 0 (leaked to the right):
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.trill(),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 [ \startTrillSpan
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16 \stopTrillSpan
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 [
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                g''16 ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Attaches trill to every run (leaked to the right):
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.map(baca.trill(), baca.select().rruns()),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 [ \startTrillSpan
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16 \stopTrillSpan
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 [ \startTrillSpan
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16 \stopTrillSpan
+                                af''16 [ \startTrillSpan
+                                g''16 ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4 \stopTrillSpan
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Attaches trill to every equipitch run:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.map(baca.trill(), baca.select().qruns()),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 [ \startTrillSpan
+                                d'16 ] \stopTrillSpan \startTrillSpan
+                                bf'4 ~ \stopTrillSpan \startTrillSpan
+                                bf'16
+                                r16 \stopTrillSpan
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 [ \startTrillSpan
+                                e''16 ] \stopTrillSpan \startTrillSpan
+                                ef''4 ~ \stopTrillSpan \startTrillSpan
+                                ef''16
+                                r16 \stopTrillSpan
+                                af''16 [ \startTrillSpan
+                                g''16 ] \stopTrillSpan \startTrillSpan
+                            }
+                            \times 4/5 {
+                                a'16 \stopTrillSpan \startTrillSpan
+                                r4 \stopTrillSpan
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        return baca.SpannerCommand(
+            spanner=abjad.TrillSpanner(),
+            selector=selector,
+            )
+
+    @staticmethod
     def trills(selector='baca.select().qruns()'):
         r'''Attaches trills.
 
         ..  container:: example
 
-            Attaches trill to every PLT p-run:
+            Attaches trill to every equipitch run:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -7576,7 +7745,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Attaches trill to each PLT p-run in tuplet 1:
+            Attaches trill to every equipitch run in tuplet 1:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -7643,7 +7812,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Attaches trill to every PLT p-run:
+            Attaches trill to every equipitch run:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -7705,7 +7874,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Attaches trill to every PLT p-run in tuplet 1:
+            Attaches trill to every equipitch run in tuplet 1:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -7781,7 +7950,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Attaches trill to every PLT p-run:
+            Attaches trill to every equipitch run:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -7843,7 +8012,7 @@ class LibraryNZ(object):
 
         ..  container:: example
 
-            Attaches trill to every PLT p-run in tuplet 1:
+            Attaches trill to every equipitch run in tuplet 1:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(

@@ -77,6 +77,8 @@ Bases
       ~baca.tools.Selection.Selection.rest
       ~baca.tools.Selection.Selection.rests
       ~baca.tools.Selection.Selection.rleaves
+      ~baca.tools.Selection.Selection.rrun
+      ~baca.tools.Selection.Selection.rruns
       ~baca.tools.Selection.Selection.run
       ~baca.tools.Selection.Selection.runs
       ~baca.tools.Selection.Selection.stages
@@ -328,6 +330,10 @@ Methods
       .. automethod:: baca.tools.Selection.Selection.rests
 
 .. automethod:: baca.tools.Selection.Selection.rleaves
+
+.. automethod:: baca.tools.Selection.Selection.rrun
+
+.. automethod:: baca.tools.Selection.Selection.rruns
 
 .. only:: html
 

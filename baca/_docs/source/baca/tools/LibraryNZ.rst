@@ -92,6 +92,7 @@ Bases
       ~baca.tools.LibraryNZ.LibraryNZ.transpose
       ~baca.tools.LibraryNZ.LibraryNZ.transpose_segments
       ~baca.tools.LibraryNZ.LibraryNZ.tremolo_down
+      ~baca.tools.LibraryNZ.LibraryNZ.trill
       ~baca.tools.LibraryNZ.LibraryNZ.trills
       ~baca.tools.LibraryNZ.LibraryNZ.trills_at_interval
       ~baca.tools.LibraryNZ.LibraryNZ.trills_at_pitch
@@ -257,6 +258,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.transpose_segments
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.tremolo_down
+
+.. automethod:: baca.tools.LibraryNZ.LibraryNZ.trill
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.trills
 
