@@ -353,12 +353,20 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def notes():
-        r'''Makes notes.
+    def notes(repeat_ties=False):
+        r'''Makes notes; rewrites meter.
         '''
+        if repeat_ties:
+            tie_specifier = abjad.rhythmmakertools.TieSpecifier(
+                use_messiaen_style_ties=True,
+                )
+        else:
+            tie_specifier = None
         return baca.RhythmBuilder(
             rewrite_meter=True,
-            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker()
+            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
+                tie_specifier=tie_specifier,
+                )
             )
 
     @staticmethod
@@ -6587,6 +6595,20 @@ class LibraryNZ(object):
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.Tie(use_messiaen_style_ties=repeat),
+            )
+
+    @staticmethod
+    def tied_notes(repeat_ties=False):
+        r'''Makes tied notes; rewrites meter.
+        '''
+        return baca.RhythmBuilder(
+            rewrite_meter=True,
+            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
+                tie_specifier=abjad.rhythmmakertools.TieSpecifier(
+                    tie_across_divisions=True,
+                    use_messiaen_style_ties=repeat_ties,
+                    ),
+                ),
             )
 
     @staticmethod

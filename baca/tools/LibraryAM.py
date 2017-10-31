@@ -6202,33 +6202,6 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def messiaen_notes():
-        r'''Makes notes.
-        '''
-        return baca.RhythmBuilder(
-            rewrite_meter=True,
-            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
-                tie_specifier=abjad.rhythmmakertools.TieSpecifier(
-                    use_messiaen_style_ties=True,
-                    ),
-                ),
-            )
-
-    @staticmethod
-    def messiaen_tied_notes():
-        r'''Makes tied notes.
-        '''
-        return baca.RhythmBuilder(
-            rewrite_meter=True,
-            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
-                tie_specifier=abjad.rhythmmakertools.TieSpecifier(
-                    tie_across_divisions=True,
-                    use_messiaen_style_ties=True,
-                    ),
-                ),
-            )
-
-    @staticmethod
     def molto_flaut_to_molto_grid(selector='baca.select().leaves().group()'):
         r'''Makes color transition spanner.
         '''

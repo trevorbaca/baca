@@ -63,7 +63,7 @@ class TrillCommand(Command):
         >>> segment_maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches('E4 F4'),
-        ...     baca.messiaen_notes(),
+        ...     baca.notes(repeat_ties=True),
         ...     baca.TrillCommand(
         ...         minimum_written_duration=abjad.Duration(1, 4),
         ...         maximum_written_duration=None,
