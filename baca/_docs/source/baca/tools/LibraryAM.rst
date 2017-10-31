@@ -79,7 +79,6 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.long_fermata
       ~baca.tools.LibraryAM.LibraryAM.marcati
       ~baca.tools.LibraryAM.LibraryAM.messiaen_notes
-      ~baca.tools.LibraryAM.LibraryAM.messiaen_tie
       ~baca.tools.LibraryAM.LibraryAM.messiaen_tied_notes
       ~baca.tools.LibraryAM.LibraryAM.molto_flaut_to_molto_grid
       ~baca.tools.LibraryAM.LibraryAM.multimeasure_rests
@@ -210,8 +209,6 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAM.LibraryAM.marcati
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.messiaen_notes
-
-.. automethod:: baca.tools.LibraryAM.LibraryAM.messiaen_tie
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.messiaen_tied_notes
 
