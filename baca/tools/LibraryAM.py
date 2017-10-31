@@ -5119,7 +5119,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        hairpin = abjad.Hairpin(hairpin)
+        hairpin = abjad.Hairpin(hairpin, include_rests=True)
         return baca.SpannerCommand(selector=selector, spanner=hairpin)
 
     @staticmethod
