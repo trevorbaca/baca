@@ -1495,6 +1495,69 @@ class LibraryNZ(object):
             )
 
     @staticmethod
+    def repeat_tie(selector='baca.select().qrun(0)'):
+        r'''Attaches repeat tie to equipitch run 0.
+
+        ..  container:: example
+
+            Attaches repeat tie to each equipitch run:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
+            ...     baca.map(baca.repeat_tie(), baca.select().qruns()),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 [
+                                c'16 \repeatTie ]
+                                bf'4
+                                bf'16 \repeatTie
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                bf'16 [
+                                e''16 ]
+                                e''4 \repeatTie
+                                e''16 \repeatTie
+                                r16
+                                fs''16 [
+                                af''16 ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        return baca.SpannerCommand(
+            selector=selector,
+            spanner=abjad.Tie(use_messiaen_style_ties=True),
+            )
+
+    @staticmethod
     def repeat_ties_down(selector='baca.select().pleaves().group()'):
         r'''Overrides repeat tie direction.
 
@@ -1506,7 +1569,7 @@ class LibraryNZ(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[11, 11, 12], [11, 11, 11], [11]],
-            ...     baca.map(baca.messiaen_tie(), baca.select().qruns()),
+            ...     baca.map(baca.repeat_tie(), baca.select().qruns()),
             ...     baca.repeat_ties_down(),
             ...     baca.rests_around([2], [4]),
             ...     baca.stems_up(),
@@ -1563,7 +1626,7 @@ class LibraryNZ(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[11, 11, 12], [11, 11, 11], [11]],
-            ...     baca.map(baca.messiaen_tie(), baca.select().qruns()),
+            ...     baca.map(baca.repeat_tie(), baca.select().qruns()),
             ...     baca.repeat_ties_down(
             ...         baca.select().tuplets()[1:2].pleaves().group()
             ...         ),
@@ -1635,7 +1698,7 @@ class LibraryNZ(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[11, 11, 12], [11, 11, 11], [11]],
-            ...     baca.map(baca.messiaen_tie(), baca.select().qruns()),
+            ...     baca.map(baca.repeat_tie(), baca.select().qruns()),
             ...     baca.repeat_ties_up(),
             ...     baca.rests_around([2], [4]),
             ...     baca.stems_down(),
@@ -1692,7 +1755,7 @@ class LibraryNZ(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[11, 11, 12], [11, 11, 11], [11]],
-            ...     baca.map(baca.messiaen_tie(), baca.select().qruns()),
+            ...     baca.map(baca.repeat_tie(), baca.select().qruns()),
             ...     baca.repeat_ties_up(
             ...         baca.select().tuplets()[1:2].pleaves().group()
             ...         ),
@@ -6421,18 +6484,6 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def tied_repeated_durations(durations):
-        r'''Makes tied repeated durations.
-        '''
-        specifier = baca.repeated_durations(durations)
-        specifier = abjad.new(
-            specifier,
-            rewrite_meter=False,
-            rhythm_maker__tie_specifier__tie_across_divisions=True,
-            )
-        return specifier
-
-    @staticmethod
     def tie(selector='baca.select().qrun(0)'):
         r'''Attaches tie to equipitch run 0.
 
@@ -6547,6 +6598,18 @@ class LibraryNZ(object):
             selector=selector,
             spanner=abjad.Tie(),
             )
+
+    @staticmethod
+    def tied_repeated_durations(durations):
+        r'''Makes tied repeated durations.
+        '''
+        specifier = baca.repeated_durations(durations)
+        specifier = abjad.new(
+            specifier,
+            rewrite_meter=False,
+            rhythm_maker__tie_specifier__tie_across_divisions=True,
+            )
+        return specifier
 
     @staticmethod
     def ties_down(selector='baca.select().pleaves().group()'):

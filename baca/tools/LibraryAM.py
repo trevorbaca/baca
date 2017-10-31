@@ -6229,69 +6229,6 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def messiaen_tie(selector='baca.select().qrun(0)'):
-        r'''Attaches Messaien tie to equipitch run 0.
-
-        ..  container:: example
-
-            Attaches Messiaen tie to each equipitch run:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 0, 10], [10, 16, 16, 18, 20], [9]],
-            ...     baca.map(baca.messiaen_tie(), baca.select().qruns()),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                c'16 [
-                                c'16 \repeatTie ]
-                                bf'4
-                                bf'16 \repeatTie
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                bf'16 [
-                                e''16 ]
-                                e''4 \repeatTie
-                                e''16 \repeatTie
-                                r16
-                                fs''16 [
-                                af''16 ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        '''
-        return baca.SpannerCommand(
-            selector=selector,
-            spanner=abjad.Tie(use_messiaen_style_ties=True),
-            )
-
-    @staticmethod
     def molto_flaut_to_molto_grid(selector='baca.select().leaves().group()'):
         r'''Makes color transition spanner.
         '''
