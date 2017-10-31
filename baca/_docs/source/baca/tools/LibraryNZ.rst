@@ -26,6 +26,7 @@ Bases
       ~baca.tools.LibraryNZ.LibraryNZ.ottava
       ~baca.tools.LibraryNZ.LibraryNZ.ottava_bassa
       ~baca.tools.LibraryNZ.LibraryNZ.percussion_staff
+      ~baca.tools.LibraryNZ.LibraryNZ.pitched_trill
       ~baca.tools.LibraryNZ.LibraryNZ.pitches
       ~baca.tools.LibraryNZ.LibraryNZ.possibile_dynamic
       ~baca.tools.LibraryNZ.LibraryNZ.proportional_notation_duration
@@ -93,9 +94,7 @@ Bases
       ~baca.tools.LibraryNZ.LibraryNZ.transpose_segments
       ~baca.tools.LibraryNZ.LibraryNZ.tremolo_down
       ~baca.tools.LibraryNZ.LibraryNZ.trill
-      ~baca.tools.LibraryNZ.LibraryNZ.trills
       ~baca.tools.LibraryNZ.LibraryNZ.trills_at_interval
-      ~baca.tools.LibraryNZ.LibraryNZ.trills_at_pitch
       ~baca.tools.LibraryNZ.LibraryNZ.tuplet_bracket_extra_offset
       ~baca.tools.LibraryNZ.LibraryNZ.tuplet_bracket_staff_padding
       ~baca.tools.LibraryNZ.LibraryNZ.tuplet_brackets_down
@@ -126,6 +125,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.ottava_bassa
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.percussion_staff
+
+.. automethod:: baca.tools.LibraryNZ.LibraryNZ.pitched_trill
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.pitches
 
@@ -261,11 +262,7 @@ Class & static methods
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.trill
 
-.. automethod:: baca.tools.LibraryNZ.LibraryNZ.trills
-
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.trills_at_interval
-
-.. automethod:: baca.tools.LibraryNZ.LibraryNZ.trills_at_pitch
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.tuplet_bracket_extra_offset
 
