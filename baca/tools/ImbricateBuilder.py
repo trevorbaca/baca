@@ -1198,7 +1198,7 @@ class ImbricateBuilder(Builder):
         container = copy.deepcopy(container)
         abjad.override(container).tuplet_bracket.stencil = False
         abjad.override(container).tuplet_number.stencil = False
-        segment = baca.sequence(self.segment).flatten()
+        segment = baca.sequence(self.segment).flatten(depth=-1)
         if self.by_pitch_class:
             segment = [abjad.NumberedPitchClass(_) for _ in segment]
         cursor = baca.Cursor(

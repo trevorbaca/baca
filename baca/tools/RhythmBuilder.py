@@ -263,7 +263,7 @@ class RhythmBuilder(Builder):
                 start_offset,
                 )
             divisions = division_maker(divisions)
-            divisions = baca.Sequence(divisions).flatten()
+            divisions = baca.sequence(divisions).flatten(depth=-1)
             contribution = self._select_divisions(divisions, start_offset)
             divisions = contribution.payload
             start_offset = contribution.start_offset

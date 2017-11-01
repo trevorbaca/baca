@@ -105,10 +105,7 @@ class HairpinCommand(Command):
                 continue
             if isinstance(hairpin_token, tuple):
                 descriptor = ' '.join([_ for _ in hairpin_token if _])
-                hairpin = abjad.Hairpin(
-                    descriptor=descriptor,
-                    include_rests=True,
-                    )
+                hairpin = abjad.Hairpin(descriptor=descriptor)
                 abjad.attach(hairpin, leaves)
             # hook to allow callable custom classes like SwellCommand
             else:

@@ -45,7 +45,7 @@ class DivisionSequenceExpression(abjad.Expression):
         >>> expression = expression.split_by_durations(
         ...     durations=[(1, 4)],
         ...     )
-        >>> expression = expression.flatten()
+        >>> expression = expression.flatten(depth=-1)
 
         >>> divisions = [(4, 4), (6, 4)]
         >>> for item in expression(divisions):

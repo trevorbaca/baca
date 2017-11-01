@@ -24,7 +24,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
 
         >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
-        >>> divisions = baca.Sequence(division_lists).flatten()
+        >>> divisions = baca.sequence(division_lists).flatten(depth=-1)
         >>> music = rhythm_maker(divisions)
         >>> lilypond_file = division_maker.show(music, input_divisions)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -97,7 +97,7 @@ class DivisionMaker(abjad.AbjadValueObject):
         [Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 8))]
 
         >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
-        >>> divisions = baca.Sequence(division_lists).flatten()
+        >>> divisions = baca.sequence(division_lists).flatten(depth=-1)
         >>> music = rhythm_maker(divisions)
         >>> lilypond_file = division_maker.show(music, input_divisions)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -135,7 +135,7 @@ class DivisionMaker(abjad.AbjadValueObject):
         [Division((3, 8)), Division((2, 8))]
 
         >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
-        >>> divisions = baca.Sequence(division_lists).flatten()
+        >>> divisions = baca.sequence(division_lists).flatten(depth=-1)
         >>> music = rhythm_maker(divisions)
         >>> lilypond_file = division_maker.show(music, input_divisions)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -168,7 +168,7 @@ class DivisionMaker(abjad.AbjadValueObject):
         >>> division_maker = division_maker.split_by_durations(
         ...     durations=[(3, 8)],
         ...     )
-        >>> division_maker = division_maker.flatten()
+        >>> division_maker = division_maker.flatten(depth=-1)
         >>> division_maker = division_maker.fuse_by_counts(
         ...     counts=[2, 3, 1],
         ...     )
@@ -201,7 +201,7 @@ class DivisionMaker(abjad.AbjadValueObject):
         >>> division_maker = division_maker.split_by_durations(
         ...     durations=[(3, 8)],
         ...     )
-        >>> division_maker = division_maker.flatten()
+        >>> division_maker = division_maker.flatten(depth=-1)
         >>> division_maker = division_maker.fuse_by_counts(
         ...     counts=[2, 3, 1],
         ...     )
@@ -634,7 +634,7 @@ class DivisionMaker(abjad.AbjadValueObject):
             [Division((1, 4)), Division((3, 16))]
 
             >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
-            >>> divisions = baca.Sequence(division_lists).flatten()
+            >>> divisions = baca.sequence(division_lists).flatten(depth=-1)
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = division_maker.show(music, input_divisions)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -682,7 +682,7 @@ class DivisionMaker(abjad.AbjadValueObject):
             [Division((3, 16)), Division((1, 4))]
 
             >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
-            >>> divisions = baca.Sequence(division_lists).flatten()
+            >>> divisions = baca.sequence(division_lists).flatten(depth=-1)
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = division_maker.show(music, input_divisions)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -746,7 +746,7 @@ class DivisionMaker(abjad.AbjadValueObject):
             [Division((4, 8)), Division((2, 8))]
 
             >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
-            >>> divisions = baca.Sequence(division_lists).flatten()
+            >>> divisions = baca.sequence(division_lists).flatten(depth=-1)
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = division_maker.show(music, input_divisions)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -788,7 +788,7 @@ class DivisionMaker(abjad.AbjadValueObject):
             [Division((2, 8)), Division((2, 8)), Division((2, 8))]
 
             >>> rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker()
-            >>> divisions = baca.Sequence(division_lists).flatten()
+            >>> divisions = baca.sequence(division_lists).flatten(depth=-1)
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = division_maker.show(music, input_divisions)
             >>> abjad.show(lilypond_file) # doctest: +SKIP

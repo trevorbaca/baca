@@ -3964,14 +3964,14 @@ class LibraryNZ(object):
         '''
         expression = baca.DivisionSequenceExpression()
         expression = expression.division_sequence()
-        expression = expression.flatten()
+        expression = expression.flatten(depth=-1)
         expression = expression.sum()
         expression = expression.division_sequence()
         expression = expression.split_by_durations(
             cyclic=True,
             durations=durations,
             )
-        expression = expression.flatten()
+        expression = expression.flatten(depth=-1)
         return expression
 
     @staticmethod
@@ -4795,7 +4795,7 @@ class LibraryNZ(object):
             durations=[abjad.Duration(1, 4)]
             )
         expression = expression.sequence()
-        expression = expression.flatten()
+        expression = expression.flatten(depth=-1)
         return expression
 
     @staticmethod

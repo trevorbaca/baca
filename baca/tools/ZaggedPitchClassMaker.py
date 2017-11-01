@@ -109,7 +109,7 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
                 -1,
                 1,
                 )
-            division_ratios = baca.Sequence(division_ratios).flatten(depth=1)
+            division_ratios = baca.sequence(division_ratios).flatten(depth=1)
         division_ratios = [abjad.Ratio(_) for _ in division_ratios]
         division_ratios = abjad.CyclicTuple(division_ratios)
         pc_cells_copy = pc_cells[:]

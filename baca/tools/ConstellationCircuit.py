@@ -739,7 +739,7 @@ class ConstellationCircuit(abjad.AbjadObject):
         Returns LilyPond file.
         """
         chords = list(zip(self._colored_generator_chords, self.pivot_chords))
-        chords = baca.Sequence(chords).flatten(depth=1)
+        chords = baca.sequence(chords).flatten(depth=1)
         return self._illustrate_chords(chords)
 
     def illustrate_generator_chords(self):
@@ -855,7 +855,7 @@ class ConstellationCircuit(abjad.AbjadObject):
         Returns LilyPond file.
         """
         chords = list(zip(self.generator_chords, self.pivot_chords))
-        chords = baca.Sequence(chords).flatten(depth=1)
+        chords = baca.sequence(chords).flatten(depth=1)
         return self._illustrate_chords(chords)
 
     def illustrate_pivot_chords(self):

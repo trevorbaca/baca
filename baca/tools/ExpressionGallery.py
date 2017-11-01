@@ -112,7 +112,7 @@ class ExpressionGallery(object):
         >>> transposition = transposition.transpose(n=3)
         >>> expression = baca.sequence(name='J')
         >>> expression = expression.map(transposition)
-        >>> expression = expression.flatten()
+        >>> expression = expression.flatten(depth=-1)
 
         >>> for collection in expression(collections):
         ...     collection
@@ -127,7 +127,7 @@ class ExpressionGallery(object):
         NumberedPitchClass(0)
 
         >>> expression.get_string()
-        'flatten(T3(X) /@ J)'
+        'flatten(T3(X) /@ J, depth=-1)'
 
         >>> markup = expression.get_markup()
         >>> abjad.show(markup) # doctest: +SKIP
@@ -153,7 +153,7 @@ class ExpressionGallery(object):
                                 \bold
                                     J
                             }
-                        )
+                        ", depth=-1)"
                     }
                 }
 
@@ -168,7 +168,7 @@ class ExpressionGallery(object):
 
         >>> transposition = baca.pitch_class_segment().transpose(n=3)
         >>> expression = baca.sequence(name='J').map(transposition)
-        >>> expression = expression.flatten().partition([3])
+        >>> expression = expression.flatten(depth=-1).partition([3])
         >>> expression = expression.pitch_class_segments()
 
         >>> for collection in expression(collections):
@@ -179,7 +179,7 @@ class ExpressionGallery(object):
         PitchClassSegment([11, 0])
 
         >>> expression.get_string()
-        'X /@ P[3](flatten(T3(X) /@ J))'
+        'X /@ P[3](flatten(T3(X) /@ J, depth=-1))'
 
         >>> markup = expression.get_markup()
         >>> abjad.show(markup) # doctest: +SKIP
@@ -215,7 +215,7 @@ class ExpressionGallery(object):
                                                 \bold
                                                     J
                                             }
-                                        )
+                                        ", depth=-1)"
                                     }
                             }
                     }
@@ -232,7 +232,7 @@ class ExpressionGallery(object):
 
         >>> transposition = baca.pitch_class_segment().transpose(n=3)
         >>> expression = baca.sequence(name='J').map(transposition)
-        >>> expression = expression.flatten().partition([3])
+        >>> expression = expression.flatten(depth=-1).partition([3])
         >>> expression = expression.pitch_class_segments()
         >>> expression = expression.boustrophedon()
 
@@ -247,7 +247,7 @@ class ExpressionGallery(object):
         PitchClassSegment([5, 4, 3])
 
         >>> expression.get_string()
-        'β2(X /@ P[3](flatten(T3(X) /@ J)))'
+        'β2(X /@ P[3](flatten(T3(X) /@ J, depth=-1)))'
 
         >>> markup = expression.get_markup()
         >>> abjad.show(markup) # doctest: +SKIP
@@ -288,7 +288,7 @@ class ExpressionGallery(object):
                                                         \bold
                                                             J
                                                     }
-                                                )
+                                                ", depth=-1)"
                                             }
                                     }
                             }

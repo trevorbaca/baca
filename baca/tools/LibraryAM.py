@@ -2317,7 +2317,7 @@ class LibraryAM(object):
             compound_meter_multiplier=abjad.Multiplier((3, 2)),
             durations=[abjad.Duration(1, 4)],
             )
-        expression = expression.flatten()
+        expression = expression.flatten(depth=-1)
         return expression
 
     @staticmethod
@@ -2368,7 +2368,7 @@ class LibraryAM(object):
         result = list(result)
         if flatten:
             for i, part in enumerate(result):
-                result[i] = baca.Sequence(part).flatten()
+                result[i] = baca.sequence(part).flatten(depth=-1)
         for i, cell in enumerate(result[:]):
             result[i] = cell.sort()
         return result
@@ -4634,14 +4634,14 @@ class LibraryAM(object):
             compound_meter_multiplier=abjad.Multiplier((3, 2)),
             durations=[abjad.Duration(1, 4)],
             )
-        expression = expression.flatten()
+        expression = expression.flatten(depth=-1)
         expression = expression.partition_by_counts(
             counts=counts,
             cyclic=True,
             overhang=True,
             )
         expression = expression.map(baca.sequence().sum())
-        expression = expression.flatten()
+        expression = expression.flatten(depth=-1)
         return expression
 
     @staticmethod
@@ -5119,7 +5119,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        hairpin = abjad.Hairpin(hairpin, include_rests=True)
+        hairpin = abjad.Hairpin(hairpin)
         return baca.SpannerCommand(selector=selector, spanner=hairpin)
 
     @staticmethod

@@ -141,7 +141,7 @@ class Constellation(abjad.AbjadObject):
     @property
     def _generator_pitch_numbers(self):
         result = self._partitioned_generator_pitch_numbers
-        result = baca.Sequence(result).flatten()
+        result = baca.sequence(result).flatten(depth=-1)
         return list(sorted(result))
 
     @property

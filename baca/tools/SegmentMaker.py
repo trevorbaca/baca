@@ -1332,7 +1332,7 @@ class SegmentMaker(abjad.SegmentMaker):
         else:
             stop_index = stop_stage
             stages = stages[start_index:stop_index]
-            time_signatures = baca.Sequence(stages).flatten()
+            time_signatures = baca.sequence(stages).flatten(depth=-1)
         start_offset, stop_offset = self._get_offsets(start_stage, stop_stage)
         contribution = baca.SegmentContribution(
             payload=time_signatures,

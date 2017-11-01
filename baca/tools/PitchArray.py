@@ -373,7 +373,7 @@ class PitchArray(abjad.AbjadObject):
 
         Returns tuple.
         '''
-        return baca.Sequence(self.pitches_by_row).flatten()
+        return baca.sequence(self.pitches_by_row).flatten(depth=-1)
 
     @property
     def pitches_by_row(self):

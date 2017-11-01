@@ -103,7 +103,7 @@ class SwellCommand(Command):
         selections = self._select(music)
         for selection in selections:
             leaves = abjad.select(selection).leaves()
-            start_hairpin = abjad.Hairpin(self.start_token, include_rests=True)
+            start_hairpin = abjad.Hairpin(self.start_token)
             if len(leaves) < self.minimum_leaf_count:
                 if len(leaves) == 0:
                     return
@@ -116,7 +116,7 @@ class SwellCommand(Command):
                 return
             start_leaves = leaves[:self.start_count]
             abjad.attach(start_hairpin, start_leaves)
-            stop_hairpin = abjad.Hairpin(self.stop_token, include_rests=True)
+            stop_hairpin = abjad.Hairpin(self.stop_token)
             stop_leaves = leaves[-self.stop_count:]
             abjad.attach(stop_hairpin, stop_leaves)
 
