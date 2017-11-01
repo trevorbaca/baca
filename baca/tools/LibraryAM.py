@@ -4956,7 +4956,7 @@ class LibraryAM(object):
         return spanner
 
     @staticmethod
-    def hairpin(hairpin, selector='baca.select().tleaves()'):
+    def hairpin(hairpin='', selector='baca.select().tleaves()'):
         r'''Attaches hairpin to trimmed leaves.
 
         ..  container:: example
