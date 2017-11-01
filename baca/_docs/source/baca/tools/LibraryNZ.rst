@@ -26,6 +26,7 @@ Bases
       ~baca.tools.LibraryNZ.LibraryNZ.ottava
       ~baca.tools.LibraryNZ.LibraryNZ.ottava_bassa
       ~baca.tools.LibraryNZ.LibraryNZ.percussion_staff
+      ~baca.tools.LibraryNZ.LibraryNZ.piecewise
       ~baca.tools.LibraryNZ.LibraryNZ.pitches
       ~baca.tools.LibraryNZ.LibraryNZ.possibile_dynamic
       ~baca.tools.LibraryNZ.LibraryNZ.proportional_notation_duration
@@ -123,6 +124,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.ottava_bassa
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.percussion_staff
+
+.. automethod:: baca.tools.LibraryNZ.LibraryNZ.piecewise
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.pitches
 

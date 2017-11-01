@@ -216,6 +216,7 @@ Utilities
 .. toctree::
    :hidden:
 
+   Bookend
    Coat
    CollectionList
    CompoundScope
@@ -228,6 +229,7 @@ Utilities
    Interpolator
    Matrix
    MetronomeMarkMeasureMap
+   PiecewiseCommand
    PitchArray
    PitchArrayCell
    PitchArrayColumn
@@ -263,6 +265,7 @@ Utilities
 .. autosummary::
    :nosignatures:
 
+   Bookend
    Coat
    CollectionList
    CompoundScope
@@ -275,6 +278,7 @@ Utilities
    Interpolator
    Matrix
    MetronomeMarkMeasureMap
+   PiecewiseCommand
    PitchArray
    PitchArrayCell
    PitchArrayColumn

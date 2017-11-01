@@ -1440,6 +1440,13 @@ class LibraryAM(object):
             )
 
     @staticmethod
+    def bookend(indicators, selector, spanner):
+        r'''Cyclically bookend-attaches `indicators` to result of `selector`
+        via `spanner`.
+        '''
+        return baca.Bookend(indicators, selector, spanner)
+        
+    @staticmethod
     def center_to_octave(n=4, selector=None):
         r"""Octave-transposes music.
 
@@ -4956,7 +4963,7 @@ class LibraryAM(object):
         return spanner
 
     @staticmethod
-    def hairpin(hairpin='', selector='baca.select().tleaves()'):
+    def hairpin(hairpin=None, selector='baca.select().tleaves()'):
         r'''Attaches hairpin to trimmed leaves.
 
         ..  container:: example
