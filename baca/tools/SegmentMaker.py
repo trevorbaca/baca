@@ -1611,7 +1611,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _make_rests(self, time_signatures=None):
         time_signatures = time_signatures or self.time_signatures
-        mask = abjad.silence_all(use_multimeasure_rests=True)
+        mask = abjad.silence([0], 1, use_multimeasure_rests=True)
         rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker(
             division_masks=[mask],
             )

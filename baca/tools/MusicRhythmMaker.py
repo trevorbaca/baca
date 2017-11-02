@@ -1303,7 +1303,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             >>> rhythm_maker = baca.MusicRhythmMaker(
             ...     division_masks=[
-            ...         abjad.silence_every([1], period=2),
+            ...         abjad.silence([1], 2),
             ...         ],
             ...     talea=abjad.rhythmmakertools.Talea(
             ...         counts=[1, 1, 2],
@@ -1340,7 +1340,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             >>> rhythm_maker = baca.MusicRhythmMaker(
             ...     division_masks=[
-            ...         abjad.sustain_every([1], period=2),
+            ...         abjad.sustain([1], 2),
             ...         ],
             ...     talea=abjad.rhythmmakertools.Talea(
             ...         counts=[1, 1, 2],
@@ -1504,7 +1504,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             >>> rhythm_maker = baca.MusicRhythmMaker(
             ...     logical_tie_masks=[
-            ...         abjad.silence_every([2], period=3),
+            ...         abjad.silence([2], 3),
             ...         ],
             ...     talea=abjad.rhythmmakertools.Talea(
             ...         counts=[1, 1, 2],
@@ -1547,8 +1547,8 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             >>> rhythm_maker = baca.MusicRhythmMaker(
             ...     logical_tie_masks=[
-            ...         abjad.silence_first(1),
-            ...         abjad.silence_last(1),
+            ...         abjad.silence([0]),
+            ...         abjad.silence([-1]),
             ...         ],
             ...     talea=abjad.rhythmmakertools.Talea(
             ...         counts=[1, 1, 2],
