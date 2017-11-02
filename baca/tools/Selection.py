@@ -251,6 +251,15 @@ class Selection(abjad.Selection):
             overhang=True,
             )
 
+    def lleak(self):
+        r'''Leaks to the left.
+
+        Returns new selection.
+        '''
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.with_previous_leaf()
+
     def lleaves(self):
         r'''Selects leaves, leaked to the left.
 
@@ -2757,6 +2766,15 @@ class Selection(abjad.Selection):
         result = result.flatten(depth=1)
         result = result.map(abjad.Run)
         return result
+
+    def rleak(self):
+        r'''Leaks to the right.
+
+        Returns new selection.
+        '''
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.with_next_leaf()
 
     def rleaves(self):
         r'''Selects leaves, leaked to the right.
