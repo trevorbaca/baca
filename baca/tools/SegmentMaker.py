@@ -790,7 +790,6 @@ class SegmentMaker(abjad.SegmentMaker):
     def _apply_previous_segment_end_settings(self):
         if self._is_first_segment():
             return
-        print(self._previous_metadata, 'PPP')
         if not self._previous_metadata:
             segment = self._get_segment_identifier()
             print(f'can not find previous metadata before {segment}.')
