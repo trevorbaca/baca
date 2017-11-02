@@ -5,7 +5,7 @@ from baca.tools.Cursor import Cursor
 from baca.tools.Expression import Expression
 from baca.tools.LibraryAM import LibraryAM
 from baca.tools.LibraryNZ import LibraryNZ
-from baca.tools.Map import Map
+from baca.tools.MapCommand import MapCommand
 from baca.tools.MarkupLibrary import MarkupLibrary
 from baca.tools.MusicMaker import MusicMaker
 from baca.tools.PitchClassSegment import PitchClassSegment
@@ -25,7 +25,7 @@ from baca.tools.Sequence import _sequence as sequence
 from baca.tools import *
 
 def map(commands, selector):
-    return Map(commands, selector)
+    return MapCommand(commands, selector)
 
 def _import_static_methods(class_):
     for name in dir(class_):

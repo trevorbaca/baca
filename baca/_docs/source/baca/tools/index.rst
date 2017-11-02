@@ -40,7 +40,7 @@ Commands
    HairpinCommand
    IndicatorCommand
    LabelCommand
-   Map
+   MapCommand
    MicrotoneDeviationCommand
    OctaveDisplacementCommand
    OverrideCommand
@@ -67,7 +67,7 @@ Commands
    HairpinCommand
    IndicatorCommand
    LabelCommand
-   Map
+   MapCommand
    MicrotoneDeviationCommand
    OctaveDisplacementCommand
    OverrideCommand

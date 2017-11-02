@@ -4,13 +4,13 @@ import collections
 from .Command import Command
 
 
-class Map(Command):
+class MapCommand(Command):
     r'''Map command.
 
     ..  container:: example
 
-        >>> baca.Map()
-        Map()
+        >>> baca.MapCommand()
+        MapCommand()
 
     ..  container:: example
 
@@ -91,7 +91,6 @@ class Map(Command):
 
         Returns none.
         '''
-        #print(argument)
         if not self.commands:
             return
         if argument is None:
@@ -100,8 +99,6 @@ class Map(Command):
             argument = self.selector(argument)
             if self.selector._is_singular_get_item():
                 argument = [argument]
-        #print(argument)
-        #print()
         for i, item in enumerate(argument):
             command = self.commands[i]
             command(item)
