@@ -5990,6 +5990,16 @@ class LibraryAM(object):
             )
 
     @staticmethod
+    def literal(string, selector='baca.select().leaf(0)'):
+        r'''Makes LilyPond literal.
+        '''
+        literal = abjad.LilyPondLiteral(string)
+        return baca.IndicatorCommand(
+            arguments=[literal],
+            selector=selector,
+            )
+
+    @staticmethod
     def long_fermata(selector='baca.select().leaf(0)'):
         r'''Attaches long fermata to leaf.
 
