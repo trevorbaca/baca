@@ -790,9 +790,10 @@ class SegmentMaker(abjad.SegmentMaker):
     def _apply_previous_segment_end_settings(self):
         if self._is_first_segment():
             return
+        print(self._previous_metadata, 'PPP')
         if not self._previous_metadata:
             segment = self._get_segment_identifier()
-            print('can not find previous metadata before {segment}.')
+            print(f'can not find previous metadata before {segment}.')
             return
         for context in abjad.iterate(self._score).components(abjad.Context):
             previous_instrument = self._get_previous_instrument(context.name)
@@ -814,7 +815,6 @@ class SegmentMaker(abjad.SegmentMaker):
             clef = abjad.inspect(leaf).get_effective(abjad.Clef)
             if clef is not None:
                 continue
-            leaf = abjad.inspect(context).get_leaf(0)
             abjad.attach(previous_clef, leaf)
         context = self._score['Global Skips']
         leaf = abjad.inspect(context).get_leaf(0)
@@ -1235,12 +1235,13 @@ class SegmentMaker(abjad.SegmentMaker):
     def _get_previous_clef(self, context_name):
         if not self._previous_metadata:
             return
-        string = 'end_clefs_by_context'
+        string = 'end_clefs_by_staff'
         previous_clefs = self._previous_metadata.get(string)
         if not previous_clefs:
             return
         clef_name = previous_clefs.get(context_name)
-        return abjad.Clef(clef_name)
+        if clef_name is not None:
+            return abjad.Clef(clef_name)
 
     def _get_previous_instrument(self, context_name):
         if not self._previous_metadata:

@@ -49,6 +49,7 @@ Bases
       ~baca.tools.Selection.Selection.items
       ~baca.tools.Selection.Selection.leaf
       ~baca.tools.Selection.Selection.leaves
+      ~baca.tools.Selection.Selection.lleak
       ~baca.tools.Selection.Selection.lleaves
       ~baca.tools.Selection.Selection.logical_measures
       ~baca.tools.Selection.Selection.logical_ties
@@ -78,6 +79,7 @@ Bases
       ~baca.tools.Selection.Selection.qruns
       ~baca.tools.Selection.Selection.rest
       ~baca.tools.Selection.Selection.rests
+      ~baca.tools.Selection.Selection.rleak
       ~baca.tools.Selection.Selection.rleaves
       ~baca.tools.Selection.Selection.rrun
       ~baca.tools.Selection.Selection.rruns
@@ -241,6 +243,8 @@ Methods
 
       .. automethod:: baca.tools.Selection.Selection.leaves
 
+.. automethod:: baca.tools.Selection.Selection.lleak
+
 .. automethod:: baca.tools.Selection.Selection.lleaves
 
 .. only:: html
@@ -338,6 +342,8 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Selection.Selection.rests
+
+.. automethod:: baca.tools.Selection.Selection.rleak
 
 .. automethod:: baca.tools.Selection.Selection.rleaves
 
