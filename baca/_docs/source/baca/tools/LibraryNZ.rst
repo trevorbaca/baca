@@ -64,6 +64,7 @@ Bases
       ~baca.tools.LibraryNZ.LibraryNZ.split_by_durations
       ~baca.tools.LibraryNZ.LibraryNZ.staccati
       ~baca.tools.LibraryNZ.LibraryNZ.staccatissimi
+      ~baca.tools.LibraryNZ.LibraryNZ.staff_positions
       ~baca.tools.LibraryNZ.LibraryNZ.stem_color
       ~baca.tools.LibraryNZ.LibraryNZ.stem_tremolo
       ~baca.tools.LibraryNZ.LibraryNZ.stems_down
@@ -200,6 +201,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.staccati
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.staccatissimi
+
+.. automethod:: baca.tools.LibraryNZ.LibraryNZ.staff_positions
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.stem_color
 

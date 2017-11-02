@@ -763,14 +763,15 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def piecewise(spanner_command, indicators, selector, bookend=False):
-        r'''Makes piecewise command.
+    def piecewise(spanner, indicators, selector, bookend=False):
+        r'''Makes piecewise command from `spanner` command, `indicators` and
+        indicator `selector`.
         '''
         return baca.PiecewiseCommand(
             bookend=bookend,
             indicators=indicators,
             selector=selector,
-            spanner_command=spanner_command,
+            spanner=spanner,
             )
 
     @staticmethod
@@ -4216,6 +4217,12 @@ class LibraryNZ(object):
             arguments=[abjad.Articulation('staccatissimo')],
             selector=selector,
             )
+
+    @staticmethod
+    def staff_positions(numbers, selector='baca.select().plts()'):
+        r'''Makes staff position command.
+        '''
+        return baca.StaffPositionCommand(numbers=numbers, selector=selector) 
 
     @staticmethod
     def stem_color(

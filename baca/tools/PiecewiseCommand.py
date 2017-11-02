@@ -14,7 +14,7 @@ class PiecewiseCommand(Command):
         '_bookend',
         '_indicators',
         '_selector',
-        '_spanner_command',
+        '_spanner',
         )
 
     ### INITIALIZER ###
@@ -24,7 +24,7 @@ class PiecewiseCommand(Command):
         bookend=None,
         indicators=None,
         selector=None,
-        spanner_command=None,
+        spanner=None,
         ):
         Command.__init__(self, selector=selector)
         if bookend is not None:
@@ -33,9 +33,9 @@ class PiecewiseCommand(Command):
         if indicators is not None:
             indicators = abjad.CyclicTuple(indicators)
         self._indicators = indicators
-        if spanner_command is not None:
-            assert isinstance(spanner_command, baca.SpannerCommand)
-        self._spanner_command = spanner_command
+        if spanner is not None:
+            assert isinstance(spanner, baca.SpannerCommand)
+        self._spanner = spanner
 
     ### SPECIAL METHODS ###
 
@@ -44,25 +44,27 @@ class PiecewiseCommand(Command):
 
         Returns none.
         '''
-        if not self.spanner_command:
+        if not self.spanner:
             return
         if not self.indicators:
             return
         if argument is None:
             return
-        spanner = self.spanner_command(argument)
+        spanner = self.spanner(argument)
         if self.selector is not None:
             argument = self.selector(argument)
         for i, item in enumerate(argument):
-            indicator = self.indicators[i]
             leaf = baca.select(item).leaf(0)
+            indicator = self.indicators[i]
             spanner.attach(indicator, leaf)
             if not self.bookend:
                 continue
             if len(item) <= 1:
                 continue
-            indicator = self.indicators[i + 1]
             leaf = baca.select(item).leaf(-1)
+            if leaf not in spanner:
+                continue
+            indicator = self.indicators[i + 1]
             spanner.attach(indicator, leaf)
 
     ### PUBLIC PROPERTIES ###
@@ -92,9 +94,9 @@ class PiecewiseCommand(Command):
         return self._selector
 
     @property
-    def spanner_command(self):
+    def spanner(self):
         r'''Gets spanner command.
 
         Returns spanner command or none.
         '''
-        return self._spanner_command
+        return self._spanner

@@ -297,7 +297,8 @@ class ScorePitchCommand(Command):
                     raise Exception(f'pitch or segment: {pitch_expression!r}.')
                 for note in logical_tie:
                     if isinstance(pitch, abjad.Pitch):
-                        self._set_pitch(note, pitch)
+                        self._set_pitch(
+                            note, pitch, self.allow_repeat_pitches)
                     elif isinstance(pitch, abjad.PitchSegment):
                         assert isinstance(pitch, collections.Iterable)
                         chord = abjad.Chord(pitch, note.written_duration)
@@ -319,7 +320,8 @@ class ScorePitchCommand(Command):
                         pitch_expression = written_pitch.pitch_class
                         pitch_expression = operator_(pitch_expression)
                         written_pitch = abjad.NamedPitch(pitch_expression)
-                        self._set_pitch(note, written_pitch)
+                        self._set_pitch(
+                            note, written_pitch, self.allow_repeat_pitches)
 
     ### PRIVATE METHODS ###
 
@@ -329,7 +331,8 @@ class ScorePitchCommand(Command):
                 return True
         return False
 
-    def _set_pitch(self, leaf, pitch):
+    @staticmethod
+    def _set_pitch(leaf, pitch, allow_repeat_pitches=None):
         string = 'not yet pitched'
         if abjad.inspect(leaf).has_indicator(string):
             abjad.detach(string, leaf)
@@ -337,7 +340,7 @@ class ScorePitchCommand(Command):
             leaf.written_pitch = pitch
         elif isinstance(leaf, abjad.Chord):
             raise NotImplementedError
-        if self.allow_repeat_pitches:
+        if allow_repeat_pitches:
             abjad.attach('repeat pitch allowed', leaf)
 
     @staticmethod

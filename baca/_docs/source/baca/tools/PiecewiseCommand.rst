@@ -26,7 +26,7 @@ Bases
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.bookend
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.indicators
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.selector
-      ~baca.tools.PiecewiseCommand.PiecewiseCommand.spanner_command
+      ~baca.tools.PiecewiseCommand.PiecewiseCommand.spanner
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.__call__
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.__eq__
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.__format__
@@ -42,7 +42,7 @@ Read-only properties
 
 .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.selector
 
-.. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.spanner_command
+.. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.spanner
 
 Special methods
 ---------------

@@ -35,6 +35,7 @@ Bases
       ~baca.tools.Selection.Selection.chords
       ~baca.tools.Selection.Selection.components
       ~baca.tools.Selection.Selection.contiguous
+      ~baca.tools.Selection.Selection.enchain
       ~baca.tools.Selection.Selection.filter
       ~baca.tools.Selection.Selection.filter_duration
       ~baca.tools.Selection.Selection.filter_length
@@ -165,6 +166,8 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Selection.Selection.contiguous
+
+.. automethod:: baca.tools.Selection.Selection.enchain
 
 .. only:: html
 

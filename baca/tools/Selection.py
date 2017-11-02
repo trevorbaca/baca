@@ -237,6 +237,20 @@ class Selection(abjad.Selection):
             grace_notes=False,
             )
 
+    def enchain(self, counts):
+        r'''Enchains selection.
+
+        Returns new selection.
+        '''
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.partition_by_counts(
+            counts=counts,
+            cyclic=True,
+            enchain=True,
+            overhang=True,
+            )
+
     def lleaves(self):
         r'''Selects leaves, leaked to the left.
 

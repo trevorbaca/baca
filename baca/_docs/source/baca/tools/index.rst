@@ -51,6 +51,7 @@ Commands
    ScorePitchCommand
    SettingCommand
    SpannerCommand
+   StaffPositionCommand
    StemTremoloCommand
    SwellCommand
    TransitionCommand
@@ -77,6 +78,7 @@ Commands
    ScorePitchCommand
    SettingCommand
    SpannerCommand
+   StaffPositionCommand
    StemTremoloCommand
    SwellCommand
    TransitionCommand
