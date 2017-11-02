@@ -763,10 +763,15 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def piecewise(*commands):
+    def piecewise(spanner_command, indicators, selector, bookend=False):
         r'''Makes piecewise command.
         '''
-        return baca.PiecewiseCommand(commands)
+        return baca.PiecewiseCommand(
+            bookend=bookend,
+            indicators=indicators,
+            selector=selector,
+            spanner_command=spanner_command,
+            )
 
     @staticmethod
     def pitches(

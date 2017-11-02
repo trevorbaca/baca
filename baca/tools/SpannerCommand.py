@@ -181,7 +181,7 @@ class SpannerCommand(Command):
     def __call__(self, argument=None):
         r'''Calls command on `argument`.
 
-        Returns none.
+        Returns spanner (for handoff to piecewise command).
         '''
         if self.spanner is None:
             return
@@ -191,10 +191,12 @@ class SpannerCommand(Command):
         if len(leaves) <= 1:
             return
         spanner = abjad.new(self.spanner)
+        # TODO: remove special-casing; migrate into Abjad:
         if isinstance(spanner, abjad.Tie):
             for leaf in leaves:
                 abjad.detach(abjad.Tie, leaf)
         abjad.attach(spanner, leaves)
+        return spanner
 
     ### PUBLIC PROPERTIES ###
 

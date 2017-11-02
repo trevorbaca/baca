@@ -44,6 +44,7 @@ Commands
    MicrotoneDeviationCommand
    OctaveDisplacementCommand
    OverrideCommand
+   PiecewiseCommand
    RegisterCommand
    RegisterInterpolationCommand
    RegisterToOctaveCommand
@@ -69,6 +70,7 @@ Commands
    MicrotoneDeviationCommand
    OctaveDisplacementCommand
    OverrideCommand
+   PiecewiseCommand
    RegisterCommand
    RegisterInterpolationCommand
    RegisterToOctaveCommand
@@ -229,7 +231,6 @@ Utilities
    Interpolator
    Matrix
    MetronomeMarkMeasureMap
-   PiecewiseCommand
    PitchArray
    PitchArrayCell
    PitchArrayColumn
@@ -278,7 +279,6 @@ Utilities
    Interpolator
    Matrix
    MetronomeMarkMeasureMap
-   PiecewiseCommand
    PitchArray
    PitchArrayCell
    PitchArrayColumn

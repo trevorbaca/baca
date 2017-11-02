@@ -3799,6 +3799,19 @@ class LibraryAM(object):
             )
 
     @staticmethod
+    def dynamics(string):
+        r'''Makes dynamics from `string`.
+
+        ..  container::
+
+            >>> baca.dynamics('ff p f pp')
+            [Dynamic('ff'), Dynamic('p'), Dynamic('f'), Dynamic('pp')]
+
+        Returns list of dynamics.
+        '''
+        return [abjad.Dynamic(_) for _ in string.split()]
+
+    @staticmethod
     def dynamics_down(selector='baca.select().leaf(0)'):
         r'''Attaches dynamic-down command to leaf 0.
 

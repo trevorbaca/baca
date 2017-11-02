@@ -53,6 +53,7 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.dynamic_line_spanner_staff_padding
       ~baca.tools.LibraryAM.LibraryAM.dynamic_line_spanner_up
       ~baca.tools.LibraryAM.LibraryAM.dynamic_text_extra_offset
+      ~baca.tools.LibraryAM.LibraryAM.dynamics
       ~baca.tools.LibraryAM.LibraryAM.dynamics_down
       ~baca.tools.LibraryAM.LibraryAM.dynamics_up
       ~baca.tools.LibraryAM.LibraryAM.effort_dynamic
@@ -156,6 +157,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAM.LibraryAM.dynamic_line_spanner_up
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.dynamic_text_extra_offset
+
+.. automethod:: baca.tools.LibraryAM.LibraryAM.dynamics
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.dynamics_down
 

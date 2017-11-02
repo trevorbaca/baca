@@ -23,8 +23,10 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.PiecewiseCommand.PiecewiseCommand.commands
+      ~baca.tools.PiecewiseCommand.PiecewiseCommand.bookend
+      ~baca.tools.PiecewiseCommand.PiecewiseCommand.indicators
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.selector
+      ~baca.tools.PiecewiseCommand.PiecewiseCommand.spanner_command
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.__call__
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.__eq__
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.__format__
@@ -34,13 +36,13 @@ Bases
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.commands
+.. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.bookend
 
-.. only:: html
+.. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.indicators
 
-   .. container:: inherited
+.. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.selector
 
-      .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.selector
+.. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.spanner_command
 
 Special methods
 ---------------
