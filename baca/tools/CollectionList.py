@@ -958,7 +958,7 @@ class CollectionList(abjad.AbjadValueObject):
             ...     [16, 20, 19],
             ...     ])
 
-            >>> pattern = abjad.index_every([1], period=2)
+            >>> pattern = abjad.index([1], 2)
             >>> for collection in collections.chords(pattern=pattern):
             ...     collection
             ...
