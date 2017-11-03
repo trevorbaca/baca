@@ -188,13 +188,10 @@ class SpannerCommand(Command):
         if self.selector:
             argument = self.selector(argument)
         leaves = abjad.select(argument).leaves()
+        # TODO: remove
         if len(leaves) <= 1:
             return
         spanner = abjad.new(self.spanner)
-        # TODO: remove special-casing; migrate into Abjad:
-        if isinstance(spanner, abjad.Tie):
-            for leaf in leaves:
-                abjad.detach(abjad.Tie, leaf)
         abjad.attach(spanner, leaves)
         return spanner
 
