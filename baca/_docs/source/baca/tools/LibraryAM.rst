@@ -43,6 +43,7 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.constellate
       ~baca.tools.LibraryAM.LibraryAM.cross_note_heads
       ~baca.tools.LibraryAM.LibraryAM.cross_staff
+      ~baca.tools.LibraryAM.LibraryAM.dashed_arrow
       ~baca.tools.LibraryAM.LibraryAM.deviation
       ~baca.tools.LibraryAM.LibraryAM.diatonic_clusters
       ~baca.tools.LibraryAM.LibraryAM.displacement
@@ -137,6 +138,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAM.LibraryAM.cross_note_heads
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.cross_staff
+
+.. automethod:: baca.tools.LibraryAM.LibraryAM.dashed_arrow
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.deviation
 

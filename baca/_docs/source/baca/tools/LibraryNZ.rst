@@ -52,6 +52,7 @@ Bases
       ~baca.tools.LibraryNZ.LibraryNZ.scripts_up
       ~baca.tools.LibraryNZ.LibraryNZ.short_fermata
       ~baca.tools.LibraryNZ.LibraryNZ.single_attack
+      ~baca.tools.LibraryNZ.LibraryNZ.single_segment_transition
       ~baca.tools.LibraryNZ.LibraryNZ.single_taper
       ~baca.tools.LibraryNZ.LibraryNZ.skips_after
       ~baca.tools.LibraryNZ.LibraryNZ.skips_around
@@ -86,7 +87,7 @@ Bases
       ~baca.tools.LibraryNZ.LibraryNZ.ties_down
       ~baca.tools.LibraryNZ.LibraryNZ.ties_up
       ~baca.tools.LibraryNZ.LibraryNZ.time_signature_extra_offset
-      ~baca.tools.LibraryNZ.LibraryNZ.transition_spanner
+      ~baca.tools.LibraryNZ.LibraryNZ.transition
       ~baca.tools.LibraryNZ.LibraryNZ.transparent_bar_lines
       ~baca.tools.LibraryNZ.LibraryNZ.transparent_rests
       ~baca.tools.LibraryNZ.LibraryNZ.transparent_span_bars
@@ -104,6 +105,11 @@ Bases
       ~baca.tools.LibraryNZ.LibraryNZ.up_arpeggios
       ~baca.tools.LibraryNZ.LibraryNZ.up_bows
       ~baca.tools.LibraryNZ.LibraryNZ.very_long_fermata
+
+Methods
+-------
+
+.. automethod:: baca.tools.LibraryNZ.LibraryNZ.single_segment_transition
 
 Class & static methods
 ----------------------
@@ -246,7 +252,7 @@ Class & static methods
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.time_signature_extra_offset
 
-.. automethod:: baca.tools.LibraryNZ.LibraryNZ.transition_spanner
+.. automethod:: baca.tools.LibraryNZ.LibraryNZ.transition
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.transparent_bar_lines
 
