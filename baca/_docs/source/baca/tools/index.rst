@@ -37,7 +37,6 @@ Commands
    ColorFingeringCommand
    Command
    DiatonicClusterCommand
-   HairpinCommand
    IndicatorCommand
    LabelCommand
    MapCommand
@@ -64,7 +63,6 @@ Commands
    ColorFingeringCommand
    Command
    DiatonicClusterCommand
-   HairpinCommand
    IndicatorCommand
    LabelCommand
    MapCommand

@@ -68,7 +68,6 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.glissando
       ~baca.tools.LibraryAM.LibraryAM.grid_poss_to_flaut_poss
       ~baca.tools.LibraryAM.LibraryAM.hairpin
-      ~baca.tools.LibraryAM.LibraryAM.hairpins
       ~baca.tools.LibraryAM.LibraryAM.helianthate
       ~baca.tools.LibraryAM.LibraryAM.imbricate
       ~baca.tools.LibraryAM.LibraryAM.infinite_pitches
@@ -78,6 +77,7 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.label
       ~baca.tools.LibraryAM.LibraryAM.laissez_vibrer
       ~baca.tools.LibraryAM.LibraryAM.line_break
+      ~baca.tools.LibraryAM.LibraryAM.literal
       ~baca.tools.LibraryAM.LibraryAM.long_fermata
       ~baca.tools.LibraryAM.LibraryAM.marcati
       ~baca.tools.LibraryAM.LibraryAM.molto_flaut_to_molto_grid
@@ -188,8 +188,6 @@ Class & static methods
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.hairpin
 
-.. automethod:: baca.tools.LibraryAM.LibraryAM.hairpins
-
 .. automethod:: baca.tools.LibraryAM.LibraryAM.helianthate
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.imbricate
@@ -207,6 +205,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAM.LibraryAM.laissez_vibrer
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.line_break
+
+.. automethod:: baca.tools.LibraryAM.LibraryAM.literal
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.long_fermata
 
