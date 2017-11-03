@@ -239,14 +239,19 @@ class TransitionCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, music=None):
-        r'''Calls command on `music`.
+    def __call__(self, argument=None):
+        r'''Calls command on `argument`.
 
         Returns none.
         '''
-        selections = self._select(music)
-        for selection in selections:
-            leaves = abjad.select(selection).leaves()
+        if self.start_markup is None and self.stop_markup is None:
+            return
+        if argument is None:
+            return
+        if self.selector is not None:
+            argument = self.selector(argument)
+        for item in argument:
+            leaves = abjad.select(item).leaves()
             spanner = abjad.TextSpanner()
             abjad.attach(spanner, leaves)
             start_leaf, stop_leaf = leaves[0], leaves[-1]
