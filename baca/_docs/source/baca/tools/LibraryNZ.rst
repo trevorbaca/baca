@@ -80,6 +80,7 @@ Bases
       ~baca.tools.LibraryNZ.LibraryNZ.text_script_staff_padding
       ~baca.tools.LibraryNZ.LibraryNZ.text_scripts_down
       ~baca.tools.LibraryNZ.LibraryNZ.text_scripts_up
+      ~baca.tools.LibraryNZ.LibraryNZ.text_spanner
       ~baca.tools.LibraryNZ.LibraryNZ.text_spanner_staff_padding
       ~baca.tools.LibraryNZ.LibraryNZ.tie
       ~baca.tools.LibraryNZ.LibraryNZ.tied_notes
@@ -237,6 +238,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.text_scripts_down
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.text_scripts_up
+
+.. automethod:: baca.tools.LibraryNZ.LibraryNZ.text_spanner
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.text_spanner_staff_padding
 

@@ -6158,6 +6158,17 @@ class LibraryNZ(object):
             )
 
     @staticmethod
+    def text_spanner(selector='baca.select().tleaves()'):
+        r'''Makes text spanner.
+
+        Returns spanner command.
+        '''
+        return baca.SpannerCommand(
+            selector=selector,
+            spanner=abjad.TextSpanner(),
+            )
+
+    @staticmethod
     def text_spanner_staff_padding(
         n=0,
         selector='baca.select().leaves().group()',

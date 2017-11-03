@@ -51,14 +51,14 @@ class PiecewiseCommand(Command):
             return
         if argument is None:
             return
+        if self.selector is not None:
+            argument = self.selector(argument)
         if isinstance(self.spanner, abjad.Spanner):
             spanner = copy.copy(self.spanner)
             leaves = abjad.select(argument).leaves()
             abjad.attach(spanner, leaves)
         else:
             spanner = self.spanner(argument)
-        if self.selector is not None:
-            argument = self.selector(argument)
         for i, item in enumerate(argument):
             leaf = baca.select(item).leaf(0)
             indicator = self.indicators[i]
