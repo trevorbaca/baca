@@ -188,9 +188,6 @@ class SpannerCommand(Command):
         if self.selector:
             argument = self.selector(argument)
         leaves = abjad.select(argument).leaves()
-        # TODO: remove
-        if len(leaves) <= 1:
-            return
         spanner = abjad.new(self.spanner)
         abjad.attach(spanner, leaves)
         return spanner
@@ -203,11 +200,9 @@ class SpannerCommand(Command):
 
         ..  container:: example
 
-            Selects wrapped leaves:
+            Selects trimmed leaves by default:
 
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.SpannerCommand(spanner=abjad.Slur()),
-            ...     )
+            >>> music_maker = baca.MusicMaker(baca.slur())
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker('Voice 1', collections)
@@ -235,33 +230,6 @@ class SpannerCommand(Command):
                             }
                             {
                                 a'16 )
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Spanner refuses to span a single leaf:
-
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.SpannerCommand(spanner=abjad.Slur()),
-            ...     )
-
-            >>> collections = [[1]]
-            >>> contribution = music_maker('Voice 1', collections)
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            {
-                                cs'16
                             }
                         }
                     }

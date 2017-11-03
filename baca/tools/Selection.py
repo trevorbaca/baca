@@ -3383,6 +3383,13 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return super(Selection, self).leaves(trim=True, grace_notes=False)
 
+    def tuplet_tleaves(self):
+        r'''Selects trimmed leaves in each tuplet.
+        '''
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.tuplets().map(baca.select().tleaves())
+
     def wleaves(self):
         r'''Selects leaves, leaked "wide" (to both the left and right).
 

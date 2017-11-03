@@ -3271,7 +3271,10 @@ class LibraryNZ(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.slur(), baca.select().tuplets()),
+            ...     baca.map(
+            ...         baca.slur(),
+            ...         baca.select().tuplet_tleaves().nontrivial(),
+            ...         ),
             ...     baca.slurs_down(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -3327,7 +3330,10 @@ class LibraryNZ(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.slur(), baca.select().tuplets()),
+            ...     baca.map(
+            ...         baca.slur(),
+            ...         baca.select().tuplet_tleaves().nontrivial(),
+            ...         ),
             ...     baca.slurs_down(
             ...         baca.select().tuplets()[1:2].leaves().group(),
             ...         ),
@@ -3398,7 +3404,10 @@ class LibraryNZ(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.slur(), baca.select().tuplets()),
+            ...     baca.map(
+            ...         baca.slur(),
+            ...         baca.select().tuplet_tleaves().nontrivial(),
+            ...         ),
             ...     baca.slurs_up(),
             ...     baca.stems_down(),
             ...     baca.rests_around([2], [4]),
@@ -3460,7 +3469,10 @@ class LibraryNZ(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.slur(), baca.select().tuplets()),
+            ...     baca.map(
+            ...         baca.slur(),
+            ...         baca.select().tuplet_tleaves().nontrivial(),
+            ...         ),
             ...     baca.slurs_up(
             ...         baca.select().tuplets()[1:2].leaves().group(),
             ...         ),
@@ -4225,7 +4237,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def stem_tremolo(tremolo_flags=32, selector='baca.select().pleaves()'):
+    def stem_tremolo(selector='baca.select().pleaves()', tremolo_flags=32):
         r'''Attaches stem tremolo.
 
         ..  container:: example

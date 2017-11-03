@@ -60,6 +60,7 @@ Bases
       ~baca.tools.Selection.Selection.ltruns
       ~baca.tools.Selection.Selection.lts
       ~baca.tools.Selection.Selection.map
+      ~baca.tools.Selection.Selection.nontrivial
       ~baca.tools.Selection.Selection.note
       ~baca.tools.Selection.Selection.notes
       ~baca.tools.Selection.Selection.partition_by_counts
@@ -89,6 +90,7 @@ Bases
       ~baca.tools.Selection.Selection.tleaves
       ~baca.tools.Selection.Selection.top
       ~baca.tools.Selection.Selection.tuplet
+      ~baca.tools.Selection.Selection.tuplet_tleaves
       ~baca.tools.Selection.Selection.tuplets
       ~baca.tools.Selection.Selection.with_next_leaf
       ~baca.tools.Selection.Selection.with_previous_leaf
@@ -281,6 +283,12 @@ Methods
 
    .. container:: inherited
 
+      .. automethod:: baca.tools.Selection.Selection.nontrivial
+
+.. only:: html
+
+   .. container:: inherited
+
       .. automethod:: baca.tools.Selection.Selection.note
 
 .. only:: html
@@ -378,6 +386,8 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Selection.Selection.tuplet
+
+.. automethod:: baca.tools.Selection.Selection.tuplet_tleaves
 
 .. only:: html
 

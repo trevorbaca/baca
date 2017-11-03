@@ -3463,7 +3463,7 @@ class LibraryAM(object):
                                 g''16 \f ]
                             }
                             \times 4/5 {
-                                a'16
+                                a'16 \p
                                 r4
                                 \revert DynamicLineSpanner.staff-padding
                                 \revert TupletBracket.staff-padding
@@ -3523,7 +3523,7 @@ class LibraryAM(object):
                                 \revert DynamicLineSpanner.staff-padding
                             }
                             \times 4/5 {
-                                a'16
+                                a'16 \p
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -3591,7 +3591,7 @@ class LibraryAM(object):
                                 g''16 \f ]
                             }
                             \times 4/5 {
-                                a'16
+                                a'16 \p
                                 r4
                                 \revert DynamicLineSpanner.direction
                                 \revert TupletBracket.staff-padding
@@ -3650,7 +3650,7 @@ class LibraryAM(object):
                                 \revert DynamicLineSpanner.direction
                             }
                             \times 4/5 {
-                                a'16
+                                a'16 \p
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -5130,7 +5130,7 @@ class LibraryAM(object):
                                 g''16 \f ]
                             }
                             \times 4/5 {
-                                a'16
+                                a'16 \p
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
