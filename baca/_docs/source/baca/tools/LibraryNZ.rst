@@ -20,7 +20,6 @@ Bases
       ~baca.tools.LibraryNZ.LibraryNZ.natural_clusters
       ~baca.tools.LibraryNZ.LibraryNZ.natural_harmonics
       ~baca.tools.LibraryNZ.LibraryNZ.nest
-      ~baca.tools.LibraryNZ.LibraryNZ.niente_swells
       ~baca.tools.LibraryNZ.LibraryNZ.notes
       ~baca.tools.LibraryNZ.LibraryNZ.one_line_staff
       ~baca.tools.LibraryNZ.LibraryNZ.ottava
@@ -71,6 +70,7 @@ Bases
       ~baca.tools.LibraryNZ.LibraryNZ.stems_up
       ~baca.tools.LibraryNZ.LibraryNZ.strict_note_spacing_off
       ~baca.tools.LibraryNZ.LibraryNZ.strict_quarter_divisions
+      ~baca.tools.LibraryNZ.LibraryNZ.suite
       ~baca.tools.LibraryNZ.LibraryNZ.sustain_pedal
       ~baca.tools.LibraryNZ.LibraryNZ.sustain_pedal_staff_padding
       ~baca.tools.LibraryNZ.LibraryNZ.tenuti
@@ -113,8 +113,6 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.natural_harmonics
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.nest
-
-.. automethod:: baca.tools.LibraryNZ.LibraryNZ.niente_swells
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.notes
 
@@ -215,6 +213,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.strict_note_spacing_off
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.strict_quarter_divisions
+
+.. automethod:: baca.tools.LibraryNZ.LibraryNZ.suite
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.sustain_pedal
 

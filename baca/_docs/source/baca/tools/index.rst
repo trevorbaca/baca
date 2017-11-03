@@ -52,7 +52,7 @@ Commands
    SpannerCommand
    StaffPositionCommand
    StemTremoloCommand
-   SwellCommand
+   SuiteCommand
    TransitionCommand
 
 .. autosummary::
@@ -78,7 +78,7 @@ Commands
    SpannerCommand
    StaffPositionCommand
    StemTremoloCommand
-   SwellCommand
+   SuiteCommand
    TransitionCommand
 
 --------

@@ -222,137 +222,6 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def niente_swells(
-        dynamic,
-        selector='baca.select().tleaves().group()',
-        ):
-        r'''Attaches niente swells.
-
-        ..  container:: example
-
-            Attaches niente swell to trimmed leaves:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.niente_swells('p'),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                \once \override Hairpin.circled-tip = ##t
-                                c'16 \< [
-                                d'16 \p ]
-                                bf'4 ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~
-                                ef''16
-                                r16
-                                af''16 [
-                                \once \override Hairpin.circled-tip = ##t
-                                g''16 ] \> \p
-                            }
-                            \times 4/5 {
-                                a'16 \!
-                                r4
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Attaches niente swell to trimmed leaves in tuplet 1:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.niente_swells(
-            ...         'p',
-            ...         baca.select().tuplets()[1:2].tleaves().group(),
-            ...         ),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \once \override Hairpin.circled-tip = ##t
-                                fs''16 \< [
-                                e''16 \p ]
-                                ef''4 ~
-                                ef''16
-                                r16
-                                \once \override Hairpin.circled-tip = ##t
-                                af''16 \> \p [
-                                g''16 \! ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        '''
-        start_token = f'niente < {dynamic}'
-        stop_token = f'{dynamic} > niente'
-        return baca.SwellCommand(
-            selector=selector,
-            start_count=2,
-            start_token=start_token,
-            stop_count=2,
-            stop_token=stop_token,
-            )
-
-    @staticmethod
     def notes(repeat_ties=False):
         r'''Makes notes; rewrites meter.
         '''
@@ -4815,6 +4684,12 @@ class LibraryNZ(object):
         expression = expression.sequence()
         expression = expression.flatten(depth=-1)
         return expression
+
+    @staticmethod
+    def suite(commands, selector=None):
+        r'''Makes suite.
+        '''
+        return baca.SuiteCommand(commands=commands, selector=selector)
 
     @staticmethod
     def sustain_pedal(selector='baca.select().leaves()'):
