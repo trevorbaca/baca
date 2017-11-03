@@ -632,13 +632,14 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def piecewise(spanner, indicators, selector, bookend=False):
+    def piecewise(spanner, indicators, selector, bookend=False, preamble=None):
         r'''Makes piecewise command from `spanner` command, `indicators` and
         indicator `selector`.
         '''
         return baca.PiecewiseCommand(
             bookend=bookend,
             indicators=indicators,
+            preamble=preamble,
             selector=selector,
             spanner=spanner,
             )
@@ -2945,6 +2946,8 @@ class LibraryNZ(object):
         indicators = []
         if start is not None:
             indicators.append((start, baca.dashed_arrow()))
+        else:
+            indicators.append((None, baca.dashed_arrow()))
         if stop is not None:
             indicators.append(stop)
         return baca.piecewise(
@@ -2952,6 +2955,7 @@ class LibraryNZ(object):
             indicators,
             selector,
             bookend=True,
+            preamble=selector,
             )
 
     @staticmethod

@@ -14,6 +14,7 @@ class PiecewiseCommand(Command):
     __slots__ = (
         '_bookend',
         '_indicators',
+        '_preamble',
         '_selector',
         '_spanner',
         )
@@ -24,6 +25,7 @@ class PiecewiseCommand(Command):
         self,
         bookend=None,
         indicators=None,
+        preamble=None,
         selector=None,
         spanner=None,
         ):
@@ -34,6 +36,11 @@ class PiecewiseCommand(Command):
         if indicators is not None:
             indicators = abjad.CyclicTuple(indicators)
         self._indicators = indicators
+        if isinstance(preamble, str):
+            preamble = eval(preamble)
+        if preamble is not None:
+            assert isinstance(preamble, abjad.Expression), repr(preamble)
+        self._preamble = preamble
         if spanner is not None:
             assert isinstance(spanner, (abjad.Spanner, baca.SpannerCommand))
         self._spanner = spanner
@@ -51,14 +58,17 @@ class PiecewiseCommand(Command):
             return
         if argument is None:
             return
-        if self.selector is not None:
-            argument = self.selector(argument)
+        preprocessed_argument = argument
+        if self.preamble is not None:
+            preprocessed_argument = self.preamble(preprocessed_argument)
         if isinstance(self.spanner, abjad.Spanner):
             spanner = copy.copy(self.spanner)
-            leaves = abjad.select(argument).leaves()
+            leaves = abjad.select(preprocessed_argument).leaves()
             abjad.attach(spanner, leaves)
         else:
-            spanner = self.spanner(argument)
+            spanner = self.spanner(preprocessed_argument)
+        if self.selector is not None:
+            argument = self.selector(argument)
         for i, item in enumerate(argument):
             leaf = baca.select(item).leaf(0)
             indicator = self.indicators[i]
@@ -80,7 +90,9 @@ class PiecewiseCommand(Command):
         if not isinstance(argument, tuple):
             argument = (argument,)
         for argument_ in argument:
-            if isinstance(argument_, baca.IndicatorCommand):
+            if argument_ is None:
+                pass
+            elif isinstance(argument_, baca.IndicatorCommand):
                 for indicator in argument_.arguments:
                     spanner.attach(indicator, leaf)
             else:
@@ -103,6 +115,14 @@ class PiecewiseCommand(Command):
         Returns cyclic tuple or none.
         '''
         return self._indicators
+
+    @property
+    def preamble(self):
+        r'''Gets preamble selector.
+
+        Returns selector or none.
+        '''
+        return self._preamble
 
     @property
     def selector(self):
