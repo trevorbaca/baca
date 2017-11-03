@@ -1,6 +1,7 @@
 import abjad
 import baca
 import collections
+import copy
 from .Command import Command
 
 
@@ -34,7 +35,7 @@ class PiecewiseCommand(Command):
             indicators = abjad.CyclicTuple(indicators)
         self._indicators = indicators
         if spanner is not None:
-            assert isinstance(spanner, baca.SpannerCommand)
+            assert isinstance(spanner, (abjad.Spanner, baca.SpannerCommand))
         self._spanner = spanner
 
     ### SPECIAL METHODS ###
@@ -44,19 +45,24 @@ class PiecewiseCommand(Command):
 
         Returns none.
         '''
-        if not self.spanner:
+        if self.spanner is None:
             return
         if not self.indicators:
             return
         if argument is None:
             return
-        spanner = self.spanner(argument)
+        if isinstance(self.spanner, abjad.Spanner):
+            spanner = copy.copy(self.spanner)
+            leaves = abjad.select(argument).leaves()
+            abjad.attach(spanner, leaves)
+        else:
+            spanner = self.spanner(argument)
         if self.selector is not None:
             argument = self.selector(argument)
         for i, item in enumerate(argument):
             leaf = baca.select(item).leaf(0)
             indicator = self.indicators[i]
-            spanner.attach(indicator, leaf)
+            self._attach_indicators(spanner, indicator, leaf)
             if not self.bookend:
                 continue
             if len(item) <= 1:
@@ -65,7 +71,20 @@ class PiecewiseCommand(Command):
             if leaf not in spanner:
                 continue
             indicator = self.indicators[i + 1]
-            spanner.attach(indicator, leaf)
+            self._attach_indicators(spanner, indicator, leaf)
+
+    ### PRIVATE METHODS ###
+
+    @staticmethod
+    def _attach_indicators(spanner, argument, leaf):
+        if not isinstance(argument, tuple):
+            argument = (argument,)
+        for argument_ in argument:
+            if isinstance(argument_, baca.IndicatorCommand):
+                for indicator in argument_.arguments:
+                    spanner.attach(indicator, leaf)
+            else:
+                spanner.attach(argument_, leaf)
 
     ### PUBLIC PROPERTIES ###
 

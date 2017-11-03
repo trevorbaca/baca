@@ -2933,6 +2933,27 @@ class LibraryNZ(object):
             rhythm_maker=rhythm_maker,
             )
 
+    def single_segment_transition(
+        start=None,
+        stop=None,
+        selector='baca.select().runs()'
+        ):
+        r'''Makes single-segment transition spanner.
+
+        Returns piecewise command.
+        '''
+        indicators = []
+        if start is not None:
+            indicators.append((start, baca.dashed_arrow()))
+        if stop is not None:
+            indicators.append(stop)
+        return baca.piecewise(
+            abjad.TextSpanner(),
+            indicators,
+            selector,
+            bookend=True,
+            )
+
     @staticmethod
     def single_taper(
         denominator=16,

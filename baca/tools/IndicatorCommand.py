@@ -209,6 +209,7 @@ class IndicatorCommand(Command):
 
     ### PUBLIC PROPERTIES ###
 
+    # TODO: change name to self.indicators
     @property
     def arguments(self):
         r'''Gets arguments.
