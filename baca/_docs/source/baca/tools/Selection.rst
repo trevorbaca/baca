@@ -63,6 +63,7 @@ Bases
       ~baca.tools.Selection.Selection.nontrivial
       ~baca.tools.Selection.Selection.note
       ~baca.tools.Selection.Selection.notes
+      ~baca.tools.Selection.Selection.ntruns
       ~baca.tools.Selection.Selection.partition_by_counts
       ~baca.tools.Selection.Selection.partition_by_durations
       ~baca.tools.Selection.Selection.partition_by_ratio
@@ -296,6 +297,8 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Selection.Selection.notes
+
+.. automethod:: baca.tools.Selection.Selection.ntruns
 
 .. only:: html
 
