@@ -2937,9 +2937,184 @@ class LibraryNZ(object):
     def single_segment_transition(
         start=None,
         stop=None,
+        # TODO: change to baca.select().tleaves().group():
         selector='baca.select().runs()'
         ):
         r'''Makes single-segment transition spanner.
+
+        ..  container:: example
+
+            Attaches transition spanner to trimmed leaves:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.text_spanner_staff_padding(6),
+            ...     baca.text_script_staff_padding(6),
+            ...     baca.single_segment_transition(
+            ...         baca.markup.pont(),
+            ...         baca.markup.ord_(),
+            ...         baca.select().tleaves().group(),
+            ...         ),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TextSpanner.staff-padding = #6
+                                \override TextScript.staff-padding = #6
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                \once \override TextSpanner.arrow-width = 0.25
+                                \once \override TextSpanner.bound-details.left-broken.text = ##f
+                                \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center
+                                \once \override TextSpanner.bound-details.left.text = \markup {
+                                    \concat
+                                        {
+                                            \whiteout
+                                                \upright
+                                                    pont.
+                                            \hspace
+                                                #0.5
+                                        }
+                                    }
+                                \once \override TextSpanner.bound-details.right-broken.arrow = ##f
+                                \once \override TextSpanner.bound-details.right-broken.padding = 0
+                                \once \override TextSpanner.bound-details.right.arrow = ##t
+                                \once \override TextSpanner.bound-details.right.padding = 1.75
+                                \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center
+                                \once \override TextSpanner.dash-fraction = 0.25
+                                \once \override TextSpanner.dash-period = 1.5
+                                c'16 [ \startTextSpan
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 [
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                g''16 ]
+                            }
+                            \times 4/5 {
+                                a'16 \stopTextSpan ^ \markup {
+                                    \whiteout
+                                        \upright
+                                            ord.
+                                    }
+                                r4
+                                \revert TextSpanner.staff-padding
+                                \revert TextScript.staff-padding
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Attaches transition spanner to trimmed leaves in tuplet 1:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.rests_around([2], [4]),
+            ...     baca.text_spanner_staff_padding(6),
+            ...     baca.text_script_staff_padding(6),
+            ...     baca.single_segment_transition(
+            ...         baca.markup.pont(),
+            ...         baca.markup.ord_(),
+            ...         baca.select().tuplet_tleaves()[1:2],
+            ...         ),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TextSpanner.staff-padding = #6
+                                \override TextScript.staff-padding = #6
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 [
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \once \override TextSpanner.arrow-width = 0.25
+                                \once \override TextSpanner.bound-details.left-broken.text = ##f
+                                \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center
+                                \once \override TextSpanner.bound-details.left.text = \markup {
+                                    \concat
+                                        {
+                                            \whiteout
+                                                \upright
+                                                    pont.
+                                            \hspace
+                                                #0.5
+                                        }
+                                    }
+                                \once \override TextSpanner.bound-details.right-broken.arrow = ##f
+                                \once \override TextSpanner.bound-details.right-broken.padding = 0
+                                \once \override TextSpanner.bound-details.right.arrow = ##t
+                                \once \override TextSpanner.bound-details.right.padding = 1.75
+                                \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center
+                                \once \override TextSpanner.dash-fraction = 0.25
+                                \once \override TextSpanner.dash-period = 1.5
+                                fs''16 [ \startTextSpan
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                g''16 ] \stopTextSpan ^ \markup {
+                                    \whiteout
+                                        \upright
+                                            ord.
+                                    }
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TextSpanner.staff-padding
+                                \revert TextScript.staff-padding
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
 
         Returns piecewise command.
         '''
@@ -6190,9 +6365,10 @@ class LibraryNZ(object):
             ...     baca.rests_around([2], [4]),
             ...     baca.text_spanner_staff_padding(6),
             ...     baca.text_script_staff_padding(6),
-            ...     baca.transition(
+            ...     baca.single_segment_transition(
             ...         baca.markup.pont(),
             ...         baca.markup.ord_(),
+            ...         baca.select().tleaves().group(),
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -6220,11 +6396,9 @@ class LibraryNZ(object):
                                 \once \override TextSpanner.bound-details.left.text = \markup {
                                     \concat
                                         {
-                                            \override
-                                                #'(font-name . "Palatino")
-                                                \whiteout
-                                                    \upright
-                                                        pont.
+                                            \whiteout
+                                                \upright
+                                                    pont.
                                             \hspace
                                                 #0.5
                                         }
@@ -6254,11 +6428,9 @@ class LibraryNZ(object):
                             }
                             \times 4/5 {
                                 a'16 \stopTextSpan ^ \markup {
-                                    \override
-                                        #'(font-name . "Palatino")
-                                        \whiteout
-                                            \upright
-                                                ord.
+                                    \whiteout
+                                        \upright
+                                            ord.
                                     }
                                 r4
                                 \revert TextSpanner.staff-padding
@@ -6283,10 +6455,10 @@ class LibraryNZ(object):
             ...         selector=baca.select().tuplets()[1:2].pleaves().group(),
             ...         ),
             ...     baca.text_script_staff_padding(6),
-            ...     baca.transition(
+            ...     baca.single_segment_transition(
             ...         baca.markup.pont(),
             ...         baca.markup.ord_(),
-            ...         baca.select().tuplets()[1:2].tleaves().group(),
+            ...         baca.select().tuplet_tleaves()[1:2],
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -6321,11 +6493,9 @@ class LibraryNZ(object):
                                 \once \override TextSpanner.bound-details.left.text = \markup {
                                     \concat
                                         {
-                                            \override
-                                                #'(font-name . "Palatino")
-                                                \whiteout
-                                                    \upright
-                                                        pont.
+                                            \whiteout
+                                                \upright
+                                                    pont.
                                             \hspace
                                                 #0.5
                                         }
@@ -6345,11 +6515,9 @@ class LibraryNZ(object):
                                 r16
                                 af''16 [
                                 g''16 ] \stopTextSpan ^ \markup {
-                                    \override
-                                        #'(font-name . "Palatino")
-                                        \whiteout
-                                            \upright
-                                                ord.
+                                    \whiteout
+                                        \upright
+                                            ord.
                                     }
                                 \revert TextSpanner.staff-padding
                             }
@@ -6892,202 +7060,6 @@ class LibraryNZ(object):
             grob_name='time_signature',
             revert=True,
             selector=selector,
-            )
-
-    @staticmethod
-    def transition(
-        start_markup=None,
-        stop_markup=None,
-        selector='baca.select().tleaves().group()',
-        ):
-        r'''Attaches transition spanner.
-
-        ..  container:: example
-
-            Attaches transition spanner to leaves:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.rests_around([2], [4]),
-            ...     baca.text_spanner_staff_padding(6),
-            ...     baca.text_script_staff_padding(6),
-            ...     baca.transition(
-            ...         baca.markup.pont(),
-            ...         baca.markup.ord_(),
-            ...         ),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TextSpanner.staff-padding = #6
-                                \override TextScript.staff-padding = #6
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                \once \override TextSpanner.arrow-width = 0.25
-                                \once \override TextSpanner.bound-details.left-broken.text = ##f
-                                \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center
-                                \once \override TextSpanner.bound-details.left.text = \markup {
-                                    \concat
-                                        {
-                                            \override
-                                                #'(font-name . "Palatino")
-                                                \whiteout
-                                                    \upright
-                                                        pont.
-                                            \hspace
-                                                #0.5
-                                        }
-                                    }
-                                \once \override TextSpanner.bound-details.right-broken.arrow = ##f
-                                \once \override TextSpanner.bound-details.right-broken.padding = 0
-                                \once \override TextSpanner.bound-details.right.arrow = ##t
-                                \once \override TextSpanner.bound-details.right.padding = 1.75
-                                \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center
-                                \once \override TextSpanner.dash-fraction = 0.25
-                                \once \override TextSpanner.dash-period = 1.5
-                                c'16 [ \startTextSpan
-                                d'16 ]
-                                bf'4 ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~
-                                ef''16
-                                r16
-                                af''16 [
-                                g''16 ]
-                            }
-                            \times 4/5 {
-                                a'16 \stopTextSpan ^ \markup {
-                                    \override
-                                        #'(font-name . "Palatino")
-                                        \whiteout
-                                            \upright
-                                                ord.
-                                    }
-                                r4
-                                \revert TextSpanner.staff-padding
-                                \revert TextScript.staff-padding
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Attaches transition spanner to trimmed leaves in tuplet 1:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.rests_around([2], [4]),
-            ...     baca.text_spanner_staff_padding(6),
-            ...     baca.text_script_staff_padding(6),
-            ...     baca.transition(
-            ...         baca.markup.pont(),
-            ...         baca.markup.ord_(),
-            ...         baca.select().tuplets()[1:2].tleaves().group(),
-            ...         ),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TextSpanner.staff-padding = #6
-                                \override TextScript.staff-padding = #6
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \once \override TextSpanner.arrow-width = 0.25
-                                \once \override TextSpanner.bound-details.left-broken.text = ##f
-                                \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center
-                                \once \override TextSpanner.bound-details.left.text = \markup {
-                                    \concat
-                                        {
-                                            \override
-                                                #'(font-name . "Palatino")
-                                                \whiteout
-                                                    \upright
-                                                        pont.
-                                            \hspace
-                                                #0.5
-                                        }
-                                    }
-                                \once \override TextSpanner.bound-details.right-broken.arrow = ##f
-                                \once \override TextSpanner.bound-details.right-broken.padding = 0
-                                \once \override TextSpanner.bound-details.right.arrow = ##t
-                                \once \override TextSpanner.bound-details.right.padding = 1.75
-                                \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center
-                                \once \override TextSpanner.dash-fraction = 0.25
-                                \once \override TextSpanner.dash-period = 1.5
-                                fs''16 [ \startTextSpan
-                                e''16 ]
-                                ef''4 ~
-                                ef''16
-                                r16
-                                af''16 [
-                                g''16 ] \stopTextSpan ^ \markup {
-                                    \override
-                                        #'(font-name . "Palatino")
-                                        \whiteout
-                                            \upright
-                                                ord.
-                                    }
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TextSpanner.staff-padding
-                                \revert TextScript.staff-padding
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        '''
-        return baca.TransitionCommand(
-            selector=selector,
-            start_markup=start_markup,
-            stop_markup=stop_markup,
             )
 
     @staticmethod

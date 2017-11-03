@@ -709,6 +709,7 @@ class MarkupLibrary(object):
             selector=selector,
             )
 
+    # TODO: change name to self.ord()
     @staticmethod
     def ord_(selector=None):
         return MarkupLibrary.make_markup(

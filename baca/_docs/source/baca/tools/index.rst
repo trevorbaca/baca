@@ -52,7 +52,6 @@ Commands
    SpannerCommand
    StaffPositionCommand
    SuiteCommand
-   TransitionCommand
 
 .. autosummary::
    :nosignatures:
@@ -77,7 +76,6 @@ Commands
    SpannerCommand
    StaffPositionCommand
    SuiteCommand
-   TransitionCommand
 
 --------
 
