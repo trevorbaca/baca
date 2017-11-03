@@ -6154,7 +6154,7 @@ class LibraryNZ(object):
             ...     baca.rests_around([2], [4]),
             ...     baca.text_spanner_staff_padding(6),
             ...     baca.text_script_staff_padding(6),
-            ...     baca.transition_spanner(
+            ...     baca.transition(
             ...         baca.markup.pont(),
             ...         baca.markup.ord_(),
             ...         ),
@@ -6247,7 +6247,7 @@ class LibraryNZ(object):
             ...         selector=baca.select().tuplets()[1:2].pleaves().group(),
             ...         ),
             ...     baca.text_script_staff_padding(6),
-            ...     baca.transition_spanner(
+            ...     baca.transition(
             ...         baca.markup.pont(),
             ...         baca.markup.ord_(),
             ...         baca.select().tuplets()[1:2].tleaves().group(),
@@ -6859,7 +6859,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def transition_spanner(
+    def transition(
         start_markup=None,
         stop_markup=None,
         selector='baca.select().tleaves().group()',
@@ -6877,7 +6877,7 @@ class LibraryNZ(object):
             ...     baca.rests_around([2], [4]),
             ...     baca.text_spanner_staff_padding(6),
             ...     baca.text_script_staff_padding(6),
-            ...     baca.transition_spanner(
+            ...     baca.transition(
             ...         baca.markup.pont(),
             ...         baca.markup.ord_(),
             ...         ),
@@ -6967,7 +6967,7 @@ class LibraryNZ(object):
             ...     baca.rests_around([2], [4]),
             ...     baca.text_spanner_staff_padding(6),
             ...     baca.text_script_staff_padding(6),
-            ...     baca.transition_spanner(
+            ...     baca.transition(
             ...         baca.markup.pont(),
             ...         baca.markup.ord_(),
             ...         baca.select().tuplets()[1:2].tleaves().group(),
