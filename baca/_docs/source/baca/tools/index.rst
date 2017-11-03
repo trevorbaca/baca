@@ -51,7 +51,6 @@ Commands
    SettingCommand
    SpannerCommand
    StaffPositionCommand
-   StemTremoloCommand
    SuiteCommand
    TransitionCommand
 
@@ -77,7 +76,6 @@ Commands
    SettingCommand
    SpannerCommand
    StaffPositionCommand
-   StemTremoloCommand
    SuiteCommand
    TransitionCommand
 

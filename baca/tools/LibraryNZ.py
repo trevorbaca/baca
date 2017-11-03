@@ -4225,7 +4225,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def stem_tremolo(selector='baca.select().pleaves()'):
+    def stem_tremolo(tremolo_flags=32, selector='baca.select().pleaves()'):
         r'''Attaches stem tremolo.
 
         ..  container:: example
@@ -4290,7 +4290,7 @@ class LibraryNZ(object):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
-            ...     baca.stem_tremolo(baca.select().tuplet(1)),
+            ...     baca.map(baca.stem_tremolo(), baca.select().tuplet(1)),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -4335,7 +4335,10 @@ class LibraryNZ(object):
                 >>
 
         '''
-        return baca.StemTremoloCommand(selector=selector, tremolo_flags=32)
+        return baca.IndicatorCommand(
+            arguments=[abjad.StemTremolo(tremolo_flags=tremolo_flags)],
+            selector=selector,
+            )
 
     @staticmethod
     def stems_down(selector='baca.select().pleaves().group()'):
