@@ -16,11 +16,7 @@ class LibraryNZ(object):
     ### PUBLIC METHODS ###
 
     @staticmethod
-    def natural_clusters(
-        widths,
-        selector='baca.plts()',
-        start_pitch=None,
-        ):
+    def natural_clusters(widths, selector='baca.plts()', start_pitch=None):
         r'''Makes natural clusters.
         '''
         return baca.ClusterCommand(
@@ -222,7 +218,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def one_line_staff(selector='baca.leaves().group()'):
+    def one_line_staff(selector='baca.leaves()'):
         r'''Attaches one-line staff spanner.
 
         ..  container:: example
@@ -485,7 +481,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def percussion_staff(selector='baca.leaves().group()'):
+    def percussion_staff(selector='baca.leaves()'):
         r'''Attaches percussion staff spanner.
 
         ..  container:: example
@@ -782,10 +778,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def proportional_notation_duration(
-        duration=None,
-        selector='baca.leaf(0)',
-        ):
+    def proportional_notation_duration(duration, selector='baca.leaf(0)'):
         r'''Sets proportional notation duration.
 
         ..  container:: example
@@ -953,6 +946,7 @@ class LibraryNZ(object):
             setting_value=moment,
             )
 
+    # TODO: adjust selector after removing _select()
     @staticmethod
     def register(start, stop=None, selector='baca.plts().group()'):
         r'''Octave-transposes PLTs.
@@ -1249,7 +1243,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def reiterated_dynamic(dynamic=None, selector='baca.pheads()'):
+    def reiterated_dynamic(dynamic, selector='baca.pheads()'):
         r'''Attaches `dynamic` to pitched heads.
 
         ..  container:: example
@@ -1645,7 +1639,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def rest_position(n=None, selector='baca.rests()'):
+    def rest_position(n, selector='baca.rests()'):
         r'''Overrides position of rests.
 
         ..  container:: example
@@ -2386,7 +2380,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def script_extra_offset(pair=None, selector='baca.leaf(0)'):
+    def script_extra_offset(pair, selector='baca.leaf(0)'):
         r'''Overrides script extra offset.
 
         ..  container:: example
@@ -3103,6 +3097,7 @@ class LibraryNZ(object):
             preamble=selector,
             )
 
+    # TODO: out-migrate to Fabergé
     @staticmethod
     def single_taper(
         denominator=16,
@@ -3707,6 +3702,7 @@ class LibraryNZ(object):
             selector=selector,
             )
 
+    # TODO: set selector
     @staticmethod
     def soprano_to_octave(n=4, selector=None):
         r"""Octave-transposes music.
@@ -4276,11 +4272,7 @@ class LibraryNZ(object):
         return baca.StaffPositionCommand(numbers=numbers, selector=selector) 
 
     @staticmethod
-    def stem_color(
-        color='red',
-        context_name=None,
-        selector='baca.tleaves()',
-        ):
+    def stem_color(color='red', context_name=None, selector='baca.tleaves()'):
         r'''Overrides stem color.
 
         ..  container:: example
@@ -4523,7 +4515,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def stems_down(selector='baca.pleaves().group()'):
+    def stems_down(selector='baca.tleaves()'):
         r'''Down-overrides stem direction.
 
         ..  container:: example
@@ -4777,7 +4769,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def strict_note_spacing_off(selector='baca.leaves().group()'):
+    def strict_note_spacing_off(selector='baca.leaves()'):
         r'''Turns strict note spacing off.
 
         ..  container:: example
@@ -5365,7 +5357,7 @@ class LibraryNZ(object):
 
     @staticmethod
     def sustain_pedal_staff_padding(
-        n=None,
+        n,
         context='Staff',
         selector='baca.leaves()',
         ):
@@ -5758,7 +5750,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def text_script_padding(n=0, selector='baca.leaves()'):
+    def text_script_padding(n, selector='baca.leaves()'):
         r'''Overrides text script padding.
 
         ..  container:: example
@@ -5895,7 +5887,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def text_script_staff_padding(n=0, selector='baca.leaves()'):
+    def text_script_staff_padding(n, selector='baca.leaves()'):
         r'''Overrides text script staff padding.
 
         ..  container:: example
@@ -6301,7 +6293,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def text_spanner(selector='baca.tleaves()'):
+    def text_spanner(selector='baca.leaves()'):
         r'''Makes text spanner.
 
         Returns spanner command.
@@ -6312,7 +6304,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def text_spanner_staff_padding(n=0, selector='baca.leaves()'):
+    def text_spanner_staff_padding(n, selector='baca.leaves()'):
         r'''Overrides text spanner staff padding.
 
         ..  container:: example
@@ -7285,6 +7277,7 @@ class LibraryNZ(object):
             selector=selector,
             )
 
+    # TODO: change selector to baca.leaves()
     @staticmethod
     def transparent_time_signatures(selector='baca.rests()'):
         r'''Makes time signatures transparent.
@@ -7354,6 +7347,7 @@ class LibraryNZ(object):
             selector=selector,
             )
 
+    # TODO: remove
     @staticmethod
     def transpose(n=0):
         r'''Transposes pitches.
@@ -7362,6 +7356,7 @@ class LibraryNZ(object):
             operators=[abjad.Transposition(n=n)],
             )
 
+    # TODO: remove
     @staticmethod
     def transpose_segments(n=0):
         r'''Transposes segments.
@@ -7377,7 +7372,7 @@ class LibraryNZ(object):
     def tremolo_down(
         n,
         maximum_adjustment=-1.5,
-        selector='baca.leaves()',
+        selector='baca.tleaves()',
         ):
         r'''Overrides stem tremolo extra offset on leaves.
         '''
@@ -7766,7 +7761,7 @@ class LibraryNZ(object):
 
     @staticmethod
     def tuplet_bracket_extra_offset(
-        pair=None,
+        pair,
         # TODO: change to baca.leaf(0)
         selector='baca.leaves()',
         ):
@@ -7895,10 +7890,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def tuplet_bracket_staff_padding(
-        n=None,
-        selector='baca.leaves()',
-        ):
+    def tuplet_bracket_staff_padding(n, selector='baca.leaves()'):
         r'''Overrides tuplet bracket staff padding.
 
         ..  container:: example
@@ -8267,12 +8259,9 @@ class LibraryNZ(object):
             selector=selector,
             )
 
+    # TODO: change selector to baca.leaf(0)
     @staticmethod
-    def tuplet_number_extra_offset(
-        pair=None,
-        # TODO: change to baca.leaf(0)
-        selector='baca.leaves().group()',
-        ):
+    def tuplet_number_extra_offset(pair, selector='baca.leaves().group()'):
         r'''Overrides tuplet number extra offset.
 
         ..  container:: example
@@ -8398,7 +8387,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def two_line_staff(selector='baca.leaves().group()'):
+    def two_line_staff(selector='baca.leaves()'):
         r'''Attaches two-line staff spanner.
 
         ..  container:: example

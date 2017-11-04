@@ -214,7 +214,6 @@ Utilities
 .. toctree::
    :hidden:
 
-   Bookend
    Coat
    CollectionList
    CompoundScope
@@ -262,7 +261,6 @@ Utilities
 .. autosummary::
    :nosignatures:
 
-   Bookend
    Coat
    CollectionList
    CompoundScope

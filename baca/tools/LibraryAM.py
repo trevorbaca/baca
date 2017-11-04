@@ -132,10 +132,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def alternate_bow_strokes(
-        downbow_first=True,
-        selector='baca.pheads()',
-        ):
+    def alternate_bow_strokes(downbow_first=True, selector='baca.pheads()'):
         r'''Attaches alternate bow strokes.
 
         ..  container:: example
@@ -1417,13 +1414,7 @@ class LibraryAM(object):
             hide_nibs=hide_nibs,
             )
 
-    @staticmethod
-    def bookend(indicators, selector, spanner):
-        r'''Cyclically bookend-attaches `indicators` to result of `selector`
-        via `spanner`.
-        '''
-        return baca.Bookend(indicators, selector, spanner)
-        
+    # TODO: set selector to baca.plts()?
     @staticmethod
     def center_to_octave(n=4, selector=None):
         r"""Octave-transposes music.
@@ -1839,10 +1830,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def clef_spanner(
-        clef='percussion',
-        selector='baca.leaves().group()',
-        ):
+    def clef_spanner(clef='percussion', selector='baca.leaves()'):
         r'''Attaches clef spanner.
 
         ..  container:: example
@@ -2065,6 +2053,7 @@ class LibraryAM(object):
         '''
         return baca.Coat(pitch)
 
+    # TODO: deafault baca.leaves()?
     @staticmethod
     def color(selector=None):
         r'''Colors leaves.
@@ -2305,6 +2294,7 @@ class LibraryAM(object):
         expression = expression.flatten(depth=-1)
         return expression
 
+    # TODO: remove flatten keyword
     @staticmethod
     def constellate(cells, range, flatten=True):
         '''Constellates `cells`.
@@ -2748,6 +2738,7 @@ class LibraryAM(object):
             right_padding=1.75,
             )
 
+    # TODO: add selector=baca.plts()?
     @staticmethod
     def deviation(deviations):
         r''''Makes microtone deviation.
@@ -2755,7 +2746,7 @@ class LibraryAM(object):
         return baca.MicrotoneDeviationCommand(deviations=deviations)
 
     @staticmethod
-    def diatonic_clusters(widths, selector='baca.plts().group()'):
+    def diatonic_clusters(widths, selector='baca.plts()'):
         r'''Makes diatonic clusters.
         '''
         return baca.DiatonicClusterCommand(
@@ -2763,6 +2754,7 @@ class LibraryAM(object):
             widths=widths,
             )
 
+    # TODO: change to baca.plts() after removing _select()
     @staticmethod
     def displacement(displacements, selector='baca.plts().group()'):
         r'''Octave-displaces PLTs.
@@ -3404,10 +3396,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def dynamic_line_spanner_staff_padding(
-        n=None,
-        selector='baca.leaves()',
-        ):
+    def dynamic_line_spanner_staff_padding(n, selector='baca.leaves()'):
         r'''Overrides dynamic line spanner staff padding on leaves.
 
         ..  container:: example
@@ -4331,7 +4320,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def five_line_staff(selector='baca.leaves().group()'):
+    def five_line_staff(selector='baca.leaves()'):
         r'''Attaches five-line staff spanner.
 
         ..  container:: example
@@ -4941,6 +4930,7 @@ class LibraryAM(object):
             spanner=abjad.Glissando(),
             )
 
+    # TODO: remove
     @staticmethod
     def grid_poss_to_flaut_poss():
         r'''Makes color transition spanner.
@@ -5364,6 +5354,7 @@ class LibraryAM(object):
             selector=selector,
             )
 
+    # TODO: remove
     @staticmethod
     def invert(axis=None):
         r'''Inverts pitches.
@@ -5374,6 +5365,7 @@ class LibraryAM(object):
                 ]
             )
 
+    # TODO: remove
     @staticmethod
     def invert_segments(axis=None):
         r'''Inverts pitch-class segments.
@@ -5385,6 +5377,7 @@ class LibraryAM(object):
             to_pitch_classes=True,
             )
 
+    # TODO: change to baca.leaves() after removing _select()
     @staticmethod
     def label(expression, selector='baca.leaves().group()'):
         r'''Labels selections with label `expression`.
@@ -6067,6 +6060,7 @@ class LibraryAM(object):
             selector=selector,
             )
 
+    # TODO: remove
     @staticmethod
     def molto_flaut_to_molto_grid(selector='baca.leaves().group()'):
         r'''Makes color transition spanner.
