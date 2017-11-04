@@ -196,7 +196,7 @@ class OverrideCommand(Command):
     ..  container:: example
 
         >>> baca.OverrideCommand()
-        OverrideCommand(selector=baca.select().leaves().group())
+        OverrideCommand(selector=baca.select().leaves())
 
     '''
 
@@ -223,7 +223,7 @@ class OverrideCommand(Command):
         maximum_written_duration=None,
         maximum_settings=None,
         revert=None,
-        selector='baca.select().leaves().group()',
+        selector='baca.select().leaves()',
         ):
         Command.__init__(self, selector=selector)
         if context_name is not None:
@@ -253,7 +253,12 @@ class OverrideCommand(Command):
 
         Returns none.
         '''
-        selections = self._select(argument)
+        if argument is None:
+            return
+        if self.selector:
+            argument = self.selector(argument)
+        if argument is None:
+            return
         # self._debug_selections(argument, selections)
         statement = 'abjad.override(leaf)'
         if self.context_name is not None:
@@ -292,17 +297,16 @@ class OverrideCommand(Command):
             )
         revert = revert.replace('\\', '')
         revert = abjad.LilyPondCommand(revert, format_slot='after')
-        for selection in selections:
-            leaves = abjad.select(selection).leaves(grace_notes=False)
-            if self.revert:
-                abjad.attach(command, leaves[0])
-                abjad.attach(revert, leaves[-1])
-            else:
-                for leaf in leaves:
-                    if (self.maximum_written_duration is None or
-                        (self.maximum_written_duration is not None and
-                        self.maximum_written_duration <= leaf.written_duration)):
-                        exec(statement, globals(), locals())
+        leaves = abjad.select(argument).leaves(grace_notes=False)
+        if self.revert:
+            abjad.attach(command, leaves[0])
+            abjad.attach(revert, leaves[-1])
+        else:
+            for leaf in leaves:
+                if (self.maximum_written_duration is None or
+                    (self.maximum_written_duration is not None and
+                    self.maximum_written_duration <= leaf.written_duration)):
+                    exec(statement, globals(), locals())
 
     ### PUBLIC PROPERTIES ###
 

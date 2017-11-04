@@ -1197,7 +1197,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def beam_positions(n=None, selector='baca.select().leaves().group()'):
+    def beam_positions(n=None, selector='baca.select().leaves()'):
         r'''Overrides beam positions.
 
         ..  container:: example
@@ -2381,7 +2381,7 @@ class LibraryAM(object):
         return result
 
     @staticmethod
-    def cross_note_heads(selector='baca.select().pleaves().group()'):
+    def cross_note_heads(selector='baca.select().tleaves()'):
         r'''Overrides note-head style on pitched leaves.
 
         ..  container:: example
@@ -3428,7 +3428,7 @@ class LibraryAM(object):
     @staticmethod
     def dynamic_line_spanner_staff_padding(
         n=None,
-        selector='baca.select().leaves().group()',
+        selector='baca.select().leaves()',
         ):
         r'''Overrides dynamic line spanner staff padding on leaves.
 
@@ -3557,7 +3557,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def dynamic_line_spanner_up(selector='baca.select().leaves().group()'):
+    def dynamic_line_spanner_up(selector='baca.select().leaves()'):
         r'''Up-overrides dynamic line spanner direction.
 
         ..  container:: example

@@ -31,7 +31,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def natural_harmonics(selector='baca.select().plts().group()'):
+    def natural_harmonics(selector='baca.select().tleaves()'):
         r'''Overrides note-head style on PLTs.
 
         ..  container:: example
@@ -1385,7 +1385,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def repeat_ties_down(selector='baca.select().pleaves().group()'):
+    def repeat_ties_down(selector='baca.select().tleaves()'):
         r'''Overrides repeat tie direction.
 
         ..  container:: example
@@ -1514,7 +1514,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def repeat_ties_up(selector='baca.select().pleaves().group()'):
+    def repeat_ties_up(selector='baca.select().tleaves()'):
         r'''Overrides repeat tie direction on leaves.
 
         ..  container:: example
@@ -1662,7 +1662,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def rest_position(n=None, selector='baca.select().rests().group()'):
+    def rest_position(n=None, selector='baca.select().rests()'):
         r'''Overrides position of rests.
 
         ..  container:: example
@@ -1977,7 +1977,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def rests_down(selector='baca.select().rests().group()'):
+    def rests_down(selector='baca.select().rests()'):
         r'''Overrides direction of rests.
 
         ..  container:: example
@@ -2102,7 +2102,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def rests_up(selector='baca.select().rests().group()'):
+    def rests_up(selector='baca.select().rests()'):
         r'''Up-overrides direction of rests.
 
         ..  container:: example
@@ -2288,7 +2288,7 @@ class LibraryNZ(object):
         return scopes
 
     @staticmethod
-    def script_color(color='red', selector='baca.select().leaves().group()'):
+    def script_color(color='red', selector='baca.select().leaves()'):
         r'''Overrides script color.
 
         ..  container:: example
@@ -2544,7 +2544,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def scripts_down(selector='baca.select().leaves().group()'):
+    def scripts_down(selector='baca.select().leaves()'):
         r'''Down-overrides script direction on leaves.
 
         ..  container:: example
@@ -2671,7 +2671,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def scripts_up(selector='baca.select().leaves().group()'):
+    def scripts_up(selector='baca.select().leaves()'):
         r'''Up-overrides script direction.
 
         ..  container:: example
@@ -3460,7 +3460,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def slurs_down(selector='baca.select().leaves().group()'):
+    def slurs_down(selector='baca.select().leaves()'):
         r'''Overrides slur direction.
 
         ..  container:: example
@@ -3593,7 +3593,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def slurs_up(selector='baca.select().leaves().group()'):
+    def slurs_up(selector='baca.select().leaves()'):
         r'''Overrides slur direction.
 
         ..  container:: example
@@ -4309,7 +4309,7 @@ class LibraryNZ(object):
     def stem_color(
         color='red',
         context_name=None,
-        selector='baca.select().pleaves().group()',
+        selector='baca.select().tleaves()',
         ):
         r'''Overrides stem color.
 
@@ -4681,7 +4681,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def stems_up(selector='baca.select().pleaves().group()'):
+    def stems_up(selector='baca.select().tleaves()'):
         r'''Up-overrides stem direction.
 
         ..  container:: example
@@ -5397,7 +5397,7 @@ class LibraryNZ(object):
     def sustain_pedal_staff_padding(
         n=None,
         context='Staff',
-        selector='baca.select().leaves().group()',
+        selector='baca.select().leaves()',
         ):
         r'''Overrides sustain pedal staff padding.
 
@@ -5652,10 +5652,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def text_script_color(
-        color='red',
-        selector='baca.select().leaves().group()',
-        ):
+    def text_script_color(color='red', selector='baca.select().leaves()'):
         r'''Overrides text script color.
 
         ..  container:: example
@@ -5791,7 +5788,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def text_script_padding(n=0, selector='baca.select().leaves().group()'):
+    def text_script_padding(n=0, selector='baca.select().leaves()'):
         r'''Overrides text script padding.
 
         ..  container:: example
@@ -5928,10 +5925,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def text_script_staff_padding(
-        n=0,
-        selector='baca.select().leaves().group()',
-        ):
+    def text_script_staff_padding(n=0, selector='baca.select().leaves()'):
         r'''Overrides text script staff padding.
 
         ..  container:: example
@@ -6067,7 +6061,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def text_scripts_down(selector='baca.select().leaves().group()'):
+    def text_scripts_down(selector='baca.select().leaves()'):
         r'''Down-overrides text script.
 
         ..  container:: example
@@ -6202,7 +6196,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def text_scripts_up(selector='baca.select().leaves().group()'):
+    def text_scripts_up(selector='baca.select().leaves()'):
         r'''Up-overrides text script direction.
 
         ..  container:: example
@@ -6348,10 +6342,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def text_spanner_staff_padding(
-        n=0,
-        selector='baca.select().leaves().group()',
-        ):
+    def text_spanner_staff_padding(n=0, selector='baca.select().leaves()'):
         r'''Overrides text spanner staff padding.
 
         ..  container:: example
@@ -6736,7 +6727,7 @@ class LibraryNZ(object):
         return specifier
 
     @staticmethod
-    def ties_down(selector='baca.select().pleaves().group()'):
+    def ties_down(selector='baca.select().tleaves()'):
         r'''Overrides tie direction.
 
         ..  container:: example
@@ -6863,7 +6854,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def ties_up(selector='baca.select().pleaves().group()'):
+    def ties_up(selector='baca.select().tleaves()'):
         r'''Overrides tie direction.
 
         ..  container:: example
@@ -6992,6 +6983,7 @@ class LibraryNZ(object):
     @staticmethod
     def time_signature_extra_offset(
         pair=None,
+        # TODO: change to baca.select().leaf(0)
         selector='baca.select().leaves().group()',
         ):
         r'''Overrides time signature extra offset.
@@ -7131,7 +7123,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def transparent_rests(selector='baca.select().rests().group()'):
+    def transparent_rests(selector='baca.select().rests()'):
         r'''Makes rests transparent.
 
         ..  container:: example
@@ -7324,7 +7316,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def transparent_time_signatures(selector='baca.select().rests().group()'):
+    def transparent_time_signatures(selector='baca.select().rests()'):
         r'''Makes time signatures transparent.
 
         ..  container:: example
@@ -7415,7 +7407,7 @@ class LibraryNZ(object):
     def tremolo_down(
         n,
         maximum_adjustment=-1.5,
-        selector='baca.select().leaves().group()',
+        selector='baca.select().leaves()',
         ):
         r'''Overrides stem tremolo extra offset on leaves.
         '''
@@ -7805,7 +7797,8 @@ class LibraryNZ(object):
     @staticmethod
     def tuplet_bracket_extra_offset(
         pair=None,
-        selector='baca.select().leaves().group()',
+        # TODO: change to baca.select().leaf(0)
+        selector='baca.select().leaves()',
         ):
         r'''Overrides tuplet bracket extra offset.
 
@@ -7934,7 +7927,7 @@ class LibraryNZ(object):
     @staticmethod
     def tuplet_bracket_staff_padding(
         n=None,
-        selector='baca.select().leaves().group()',
+        selector='baca.select().leaves()',
         ):
         r'''Overrides tuplet bracket staff padding.
 
@@ -8055,7 +8048,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def tuplet_brackets_down(selector='baca.select().leaves().group()'):
+    def tuplet_brackets_down(selector='baca.select().leaves()'):
         r'''Overrides tuplet bracket direction.
 
         ..  container:: example
@@ -8180,7 +8173,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def tuplet_brackets_up(selector='baca.select().leaves().group()'):
+    def tuplet_brackets_up(selector='baca.select().leaves()'):
         r'''Overrides tuplet bracket direction.
 
         ..  container:: example
@@ -8307,6 +8300,7 @@ class LibraryNZ(object):
     @staticmethod
     def tuplet_number_extra_offset(
         pair=None,
+        # TODO: change to baca.select().leaf(0)
         selector='baca.select().leaves().group()',
         ):
         r'''Overrides tuplet number extra offset.
