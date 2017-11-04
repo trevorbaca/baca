@@ -2727,12 +2727,14 @@ class LibraryAM(object):
             right_padding=1.75,
             )
 
-    # TODO: add selector=baca.plts()?
     @staticmethod
-    def deviation(deviations):
+    def deviation(deviations, selector='baca.plts()'):
         r''''Makes microtone deviation.
         '''
-        return baca.MicrotoneDeviationCommand(deviations=deviations)
+        return baca.MicrotoneDeviationCommand(
+            deviations=deviations,
+            selector=selector,
+            )
 
     @staticmethod
     def diatonic_clusters(widths, selector='baca.plts()'):

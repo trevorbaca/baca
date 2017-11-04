@@ -239,9 +239,9 @@ class LabelCommand(Command):
 
         Returns none.
         '''
-        if self.expression is None:
-            return
         if argument is None:
+            return
+        if self.expression is None:
             return
         if self.selector:
             argument = self.selector(argument)

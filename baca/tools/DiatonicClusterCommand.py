@@ -46,6 +46,8 @@ class DiatonicClusterCommand(Command):
 
         Returns none.
         '''
+        if argument is None:
+            return
         if not self.widths:
             return
         if self.selector:

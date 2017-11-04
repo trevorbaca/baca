@@ -168,11 +168,9 @@ class IndicatorCommand(Command):
         '_indicators',
         )
 
-    _publish_storage_format = True
-
     ### INITIALIZER ###
 
-    def __init__(self, arguments=None, selector='baca.pheads().group()'):
+    def __init__(self, arguments=None, selector='baca.pheads()'):
         Command.__init__(self, selector=selector)
         if arguments is not None:
             if isinstance(arguments, collections.Iterable):
@@ -188,6 +186,8 @@ class IndicatorCommand(Command):
 
         Returns none.
         '''
+        if argument is None:
+            return
         if self.indicators is None:
             return
         if self.selector:
@@ -195,10 +195,10 @@ class IndicatorCommand(Command):
         if not argument:
             return
         for i, leaf in enumerate(baca.select(argument).leaves()):
-                indicators = self.indicators[i]
-                indicators = self._token_to_arguments(indicators)
-                for indicator in indicators:
-                    abjad.attach(indicator, leaf)
+            indicators = self.indicators[i]
+            indicators = self._token_to_arguments(indicators)
+            for indicator in indicators:
+                abjad.attach(indicator, leaf)
 
     ### PRIVATE METHODS ###
 

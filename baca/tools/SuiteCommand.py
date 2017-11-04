@@ -37,9 +37,9 @@ class SuiteCommand(Command):
 
         Returns none.
         '''
-        if not self.commands:
-            return
         if argument is None:
+            return
+        if not self.commands:
             return
         if self.selector is not None:
             argument = self.selector(argument)

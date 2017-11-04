@@ -240,6 +240,35 @@ class RegisterCommand(Command):
                 >>
             >>
 
+    ..  container:: example
+
+        Works with chords:
+
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice 1',
+        ...     [{10, 12, 14}],
+        ...     baca.RegisterCommand(
+        ...         baca.Registration([('[A0, C8]', -6)]),
+        ...         ),
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Staff])
+            \new Staff <<
+                \context Voice = "Voice 1" {
+                    \voiceOne
+                    {
+                        {
+                            <bf c' d'>16
+                        }
+                    }
+                }
+            >>
+
     """
 
     ### CLASS VARIABLES ###
@@ -263,40 +292,11 @@ class RegisterCommand(Command):
     def __call__(self, argument=None):
         r'''Calls command on `argument`.
 
-        ..  container:: example
-
-            Works with chords:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [{10, 12, 14}],
-            ...     baca.RegisterCommand(
-            ...         baca.Registration([('[A0, C8]', -6)]),
-            ...         ),
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            {
-                                <bf c' d'>16
-                            }
-                        }
-                    }
-                >>
-
         Returns none.
         '''
-        if self.registration is None:
-            return
         if argument is None:
+            return
+        if self.registration is None:
             return
         if self.selector:
             argument = self.selector(argument)

@@ -524,6 +524,8 @@ class ClusterCommand(Command):
 
         Returns none.
         '''
+        if argument is None:
+            return
         if not self.widths:
             return
         if self.selector:

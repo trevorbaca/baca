@@ -9,7 +9,7 @@ class SettingCommand(Command):
     ..  container:: example
 
         >>> baca.SettingCommand()
-        SettingCommand()
+        SettingCommand(selector=baca.leaf(0))
 
     '''
 
@@ -26,7 +26,7 @@ class SettingCommand(Command):
     def __init__(
         self,
         context_name=None,
-        selector=None,
+        selector='baca.leaf(0)',
         setting_name=None,
         setting_value=None,
         ):
@@ -46,7 +46,11 @@ class SettingCommand(Command):
 
         Returns none.
         '''
-        if self.setting_name is None or self.setting_value is None:
+        if argument is None:
+            return
+        if self.setting_name is None:
+            return
+        if self.setting_value is None:
             return
         if self.selector:
             argument = self.selector(argument)

@@ -129,9 +129,9 @@ class OctaveDisplacementCommand(Command):
 
         Returns none.
         '''
-        if self.displacements is None:
-            return
         if argument is None:
+            return
+        if self.displacements is None:
             return
         if self.selector:
             argument = self.selector(argument)

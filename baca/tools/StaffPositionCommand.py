@@ -68,12 +68,12 @@ class StaffPositionCommand(Command):
 
         Returns none.
         '''
+        if argument is None:
+            return
         if not self.numbers:
             return
         if self.selector:
             argument = self.selector(argument)
-        if not argument:
-            return
         for i, plt in enumerate(baca.select(argument).plts()):
             clef = abjad.inspect(plt.head).get_effective(abjad.Clef)
             number = self.numbers[i]

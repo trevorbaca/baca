@@ -165,11 +165,7 @@ class SpannerCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        selector='baca.tleaves()',
-        spanner=None,
-        ):
+    def __init__(self, selector='baca.tleaves()', spanner=None):
         Command.__init__(self, selector=selector)
         if spanner is not None:
             assert isinstance(spanner, abjad.Spanner)
@@ -183,6 +179,8 @@ class SpannerCommand(Command):
 
         Returns spanner (for handoff to piecewise command).
         '''
+        if argument is None:
+            return
         if self.spanner is None:
             return
         if self.selector:

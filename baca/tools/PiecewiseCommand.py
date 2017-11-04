@@ -52,11 +52,11 @@ class PiecewiseCommand(Command):
 
         Returns none.
         '''
+        if argument is None:
+            return
         if self.spanner is None:
             return
         if not self.indicators:
-            return
-        if argument is None:
             return
         preprocessed_argument = argument
         if self.preamble is not None:
