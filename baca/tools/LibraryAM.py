@@ -2043,9 +2043,8 @@ class LibraryAM(object):
         '''
         return baca.Coat(pitch)
 
-    # TODO: default baca.leaves()?
     @staticmethod
-    def color(selector=None):
+    def color(selector='baca.leaves()'):
         r'''Colors leaves.
 
         ..  container:: example

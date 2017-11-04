@@ -10,10 +10,10 @@ class ColorCommand(Command):
 
         With music-maker:
 
-        Selects leaves by default:
+        Colors leaves by default:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.ColorCommand(),
+        ...     baca.color(),
         ...     baca.MusicRhythmSpecifier(
         ...         rhythm_maker=baca.MusicRhythmMaker(
         ...             talea=abjad.rhythmmakertools.Talea(
@@ -135,9 +135,9 @@ class ColorCommand(Command):
 
         >>> segment_maker(
         ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.color(),
         ...     baca.even_runs(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     baca.ColorCommand(),
         ...     )
 
         >>> result = segment_maker.run(is_doc_example=True)
@@ -299,6 +299,12 @@ class ColorCommand(Command):
     __slots__ = (
         )
 
+    ### INITIALIZER ###
+
+    def __init__(self, selector='baca.leaves()'):
+        assert selector is not None
+        Command.__init__(self, selector=selector)
+
     ### SPECIAL METHODS ###
 
     def __call__(self, argument=None):
@@ -306,12 +312,8 @@ class ColorCommand(Command):
 
         Returns colored selector result.
         '''
-        if not argument:
+        if argument is None:
             return
-        selector = self.selector or baca.leaves()
-        try:
-            result = selector(argument)
-        except IndexError:
-            return
-        selector.color(result)
-        return result
+        argument = self.selector(argument)
+        self.selector.color(argument)
+        return argument
