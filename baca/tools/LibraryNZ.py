@@ -946,9 +946,8 @@ class LibraryNZ(object):
             setting_value=moment,
             )
 
-    # TODO: adjust selector after removing _select()
     @staticmethod
-    def register(start, stop=None, selector='baca.plts().group()'):
+    def register(start, stop=None, selector='baca.plts()'):
         r'''Octave-transposes PLTs.
 
         ..  container:: example
@@ -1149,11 +1148,7 @@ class LibraryNZ(object):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.color(baca.tuplet(1)),
-            ...     baca.register(
-            ...         start=-6,
-            ...         stop=18,
-            ...         selector=baca.tuplet(1),
-            ...         ),
+            ...     baca.register(-6, 18, baca.tuplet(1)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],

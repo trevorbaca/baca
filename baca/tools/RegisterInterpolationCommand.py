@@ -892,7 +892,7 @@ class RegisterInterpolationCommand(Command):
 
     def __init__(
         self,
-        selector='baca.plts().group()',
+        selector='baca.plts()',
         start_pitch=None,
         stop_pitch=None,
         ):
@@ -904,27 +904,31 @@ class RegisterInterpolationCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, music=None):
-        r'''Calls command on `music`.
+    def __call__(self, argument=None):
+        r'''Calls command on `argument`.
 
         Returns none.
         '''
-        selections = self._select(music)
-        for selection in selections:
-            plts = baca.plts()(selection)
-            length = len(plts)
-            for i, plt in enumerate(plts):
-                registration = self._get_registration(i, length)
-                for pleaf in plt:
-                    if isinstance(pleaf, abjad.Note):
-                        written_pitches = registration([pleaf.written_pitch])
-                        pleaf.written_pitch = written_pitches[0]
-                    elif isinstance(pleaf, abjad.Chord):
-                        written_pitches = registration(pleaf.written_pitches)
-                        pleaf.written_pitches = written_pitches
-                    else:
-                        raise TypeError(pleaf)
-                    abjad.detach('not yet registered', pleaf)
+        if argument is None:
+            return
+        if self.start_pitch is None or self.stop_pitch is None:
+            return
+        if self.selector:
+            argument = self.selector(argument)
+        plts = baca.select(argument).plts()
+        length = len(plts)
+        for i, plt in enumerate(plts):
+            registration = self._get_registration(i, length)
+            for pleaf in plt:
+                if isinstance(pleaf, abjad.Note):
+                    written_pitches = registration([pleaf.written_pitch])
+                    pleaf.written_pitch = written_pitches[0]
+                elif isinstance(pleaf, abjad.Chord):
+                    written_pitches = registration(pleaf.written_pitches)
+                    pleaf.written_pitches = written_pitches
+                else:
+                    raise TypeError(pleaf)
+                abjad.detach('not yet registered', pleaf)
 
     ### PRIVATE METHODS ###
 
@@ -1176,7 +1180,7 @@ class RegisterInterpolationCommand(Command):
 
         ..  container:: example
 
-            Selects tuplets:
+            Maps to tuplets:
 
             >>> music_maker = baca.MusicMaker()
 
@@ -1185,7 +1189,7 @@ class RegisterInterpolationCommand(Command):
             ...     'Voice 1',
             ...     collections,
             ...     baca.color(baca.tuplets()),
-            ...     baca.register(0, 24, baca.tuplets()),
+            ...     baca.map(baca.register(0, 24), baca.tuplets()),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
