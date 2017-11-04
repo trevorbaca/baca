@@ -81,7 +81,7 @@ class MarkupLibrary(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup('più mosso', baca.select().tuplets()[1:2].phead(0)),
+            ...     baca.markup('più mosso', baca.tuplets()[1:2].phead(0)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -134,7 +134,7 @@ class MarkupLibrary(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup('*', baca.select().tuplets()[1:2].pheads()),
+            ...     baca.markup('*', baca.tuplets()[1:2].pheads()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -182,7 +182,7 @@ class MarkupLibrary(object):
         '''
         if not isinstance(markup, abjad.Markup):
             markup = abjad.Markup(markup, direction=direction)
-        selector = selector or baca.select().phead(0)
+        selector = selector or baca.phead(0)
         return baca.IndicatorCommand(
             arguments=[markup],
             selector=selector,
@@ -1411,7 +1411,7 @@ class MarkupLibrary(object):
         second_is_new=True,
         selector=None,
         ):
-        selector = selector or baca.select().pleaf(0)
+        selector = selector or baca.pleaf(0)
         if first_is_new:
             if second_is_new:
                 composite_string = f'{string_1} + {string_2}'

@@ -33,7 +33,7 @@ class DiatonicClusterCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, widths, selector='baca.select().plts()'):
+    def __init__(self, widths, selector='baca.plts()'):
         Command.__init__(self, selector=selector)
         assert abjad.mathtools.all_are_nonnegative_integers(widths)
         widths = abjad.CyclicTuple(widths)

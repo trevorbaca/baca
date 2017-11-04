@@ -61,7 +61,7 @@ class RegisterCommand(Command):
         ...         registration=baca.Registration(
         ...             [('[A0, C8]', 0)],
         ...             ),
-        ...         selector=baca.select().tuplet(0),
+        ...         selector=baca.tuplet(0),
         ...         ),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
@@ -106,7 +106,7 @@ class RegisterCommand(Command):
         ...         registration=baca.Registration(
         ...             [('[A0, C8]', 0)],
         ...             ),
-        ...         selector=baca.select().tuplet(-1),
+        ...         selector=baca.tuplet(-1),
         ...         ),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
@@ -296,7 +296,7 @@ class RegisterCommand(Command):
         '''
         selections = self._select(music)
         for selection in selections:
-            plts = baca.select().plts()(selection)
+            plts = baca.plts()(selection)
             for plt in plts:
                 for pleaf in plt:
                     if isinstance(pleaf, abjad.Note):

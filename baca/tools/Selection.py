@@ -9,7 +9,7 @@ class Selection(abjad.Selection):
     ..  container:: example
 
         >>> baca.select()
-        baca.select()
+        baca
 
     '''
 
@@ -52,7 +52,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().chead(-1)
+                >>> selector = baca.chead(-1)
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -146,7 +146,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().cheads()
+                >>> selector = baca.cheads()
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -298,7 +298,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().tuplets()[1:2].lleaves()
+                >>> selector = baca.tuplets()[1:2].lleaves()
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -418,7 +418,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().lt(-1)
+                >>> selector = baca.lt(-1)
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -510,7 +510,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().ltqrun(-1)
+                >>> selector = baca.ltqrun(-1)
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -609,7 +609,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().ltqruns()
+                >>> selector = baca.ltqruns()
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -741,7 +741,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         result = self.plts()
         result = result.group_pitches()
-        result = result.map(baca.select().contiguous())
+        result = result.map(baca.contiguous())
         result = result.flatten(depth=1)
         result = result.map(abjad.Run)
         return result
@@ -776,7 +776,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().ltrun(-1)
+                >>> selector = baca.ltrun(-1)
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -887,7 +887,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().ltruns()
+                >>> selector = baca.ltruns()
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -1062,7 +1062,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().lts()
+                >>> selector = baca.lts()
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -1243,7 +1243,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().ntruns()
+                >>> selector = baca.ntruns()
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -1402,7 +1402,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().phead(-1)
+                >>> selector = baca.phead(-1)
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -1502,7 +1502,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().pheads()
+                >>> selector = baca.pheads()
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -1655,7 +1655,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().pleaf(-1)
+                >>> selector = baca.pleaf(-1)
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -1758,7 +1758,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().pleaves()
+                >>> selector = baca.pleaves()
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -1932,7 +1932,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().plt(-1)
+                >>> selector = baca.plt(-1)
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -2037,7 +2037,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().plts()
+                >>> selector = baca.plts()
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -2205,7 +2205,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().ptail(-1)
+                >>> selector = baca.ptail(-1)
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -2305,7 +2305,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().ptails()
+                >>> selector = baca.ptails()
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -2458,7 +2458,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().ptlt(-1)
+                >>> selector = baca.ptlt(-1)
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -2555,7 +2555,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().ptlts()
+                >>> selector = baca.ptlts()
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -2694,7 +2694,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().qrun(-1)
+                >>> selector = baca.qrun(-1)
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -2793,7 +2793,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().qruns()
+                >>> selector = baca.qruns()
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -2925,7 +2925,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         result = self.pleaves()
         result = result.group_pitches()
-        result = result.map(baca.select().contiguous())
+        result = result.map(baca.contiguous())
         result = result.flatten(depth=1)
         result = result.map(abjad.Run)
         return result
@@ -2977,7 +2977,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().tuplets()[1:2].rleaves()
+                >>> selector = baca.tuplets()[1:2].rleaves()
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -3094,7 +3094,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().rrun(1)
+                >>> selector = baca.rrun(1)
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -3207,7 +3207,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().rruns()
+                >>> selector = baca.rruns()
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -3338,7 +3338,7 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        result = self.runs().map(baca.select().with_next_leaf())
+        result = self.runs().map(baca.with_next_leaf())
         return result.map(abjad.Run)
 
     def stages(self, start, stop=None):
@@ -3399,7 +3399,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().tleaves()
+                >>> selector = baca.tleaves()
                 >>> result = selector(staff)
 
                 >>> selector.print(result)
@@ -3551,7 +3551,7 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.tuplets().map(baca.select().tleaves())
+        return self.tuplets().map(baca.tleaves())
 
     def wleaves(self):
         r'''Selects leaves, leaked "wide" (to both the left and right).
@@ -3592,7 +3592,7 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().tuplets()[1:2].wleaves()
+                >>> selector = baca.tuplets()[1:2].wleaves()
                 >>> result = selector(staff)
 
                 >>> selector.print(result)

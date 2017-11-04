@@ -54,7 +54,7 @@ class StaffPositionCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, numbers, selector='baca.select().plts()'):
+    def __init__(self, numbers, selector='baca.plts()'):
         Command.__init__(self, selector=selector)
         if numbers is not None:
             assert all(isinstance(_, int) for _ in numbers), repr(numbers)

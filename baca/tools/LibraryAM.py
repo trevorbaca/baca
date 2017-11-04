@@ -16,7 +16,7 @@ class LibraryAM(object):
     ### PUBLIC METHODS ###
 
     @staticmethod
-    def accents(selector='baca.select().pheads()'):
+    def accents(selector='baca.pheads()'):
         r'''Attaches accents to pitched heads.
 
         ..  container:: example
@@ -80,7 +80,7 @@ class LibraryAM(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.accents(), baca.select().tuplet(1)),
+            ...     baca.map(baca.accents(), baca.tuplet(1)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -134,7 +134,7 @@ class LibraryAM(object):
     @staticmethod
     def alternate_bow_strokes(
         downbow_first=True,
-        selector='baca.select().pheads()',
+        selector='baca.pheads()',
         ):
         r'''Attaches alternate bow strokes.
 
@@ -254,7 +254,7 @@ class LibraryAM(object):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.alternate_bow_strokes(
-            ...         selector=baca.select().tuplets()[1:2].pheads().group(),
+            ...         selector=baca.tuplets()[1:2].pheads().group(),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(6),
@@ -347,7 +347,7 @@ class LibraryAM(object):
     @staticmethod
     def ancora_dynamic(
         dynamic,
-        selector='baca.select().phead(0)',
+        selector='baca.phead(0)',
         direction=abjad.Down,
         ):
         r'''Attaches ancora dynamic pitched head 0.
@@ -421,7 +421,7 @@ class LibraryAM(object):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.ancora_dynamic(
             ...         'ff',
-            ...         baca.select().tuplets()[1:2].phead(0),
+            ...         baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -483,7 +483,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def arpeggios(selector='baca.select().cheads()'):
+    def arpeggios(selector='baca.cheads()'):
         r"""Attaches arpeggios.
 
         ..  container:: example
@@ -545,7 +545,7 @@ class LibraryAM(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-            ...     baca.arpeggios(baca.select().cheads()[-2:]),
+            ...     baca.arpeggios(baca.cheads()[-2:]),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -595,7 +595,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def articulations(articulations, selector='baca.select().pheads()'):
+    def articulations(articulations, selector='baca.pheads()'):
         r'''Attaches articulations.
         '''
         return baca.IndicatorCommand(arguments=articulations)
@@ -613,8 +613,8 @@ class LibraryAM(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-            ...     baca.bass_to_octave(3, baca.select().plts().group()),
-            ...     baca.color(baca.select().plts().group()),
+            ...     baca.bass_to_octave(3, baca.plts().group()),
+            ...     baca.color(baca.plts().group()),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -718,9 +718,9 @@ class LibraryAM(object):
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
             ...     baca.bass_to_octave(
             ...         n=3,
-            ...         selector=baca.select().plts(),
+            ...         selector=baca.plts(),
             ...         ),
-            ...     baca.color(baca.select().plts()),
+            ...     baca.color(baca.plts()),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -824,9 +824,9 @@ class LibraryAM(object):
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
             ...     baca.bass_to_octave(
             ...         n=3,
-            ...         selector=baca.select().plts()[-2:],
+            ...         selector=baca.plts()[-2:],
             ...         ),
-            ...     baca.color(baca.select().plts()[-2:]),
+            ...     baca.color(baca.plts()[-2:]),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -1175,7 +1175,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def beam_positions(n=None, selector='baca.select().leaves()'):
+    def beam_positions(n=None, selector='baca.leaves()'):
         r'''Overrides beam positions.
 
         ..  container:: example
@@ -1233,7 +1233,7 @@ class LibraryAM(object):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.beam_positions(
             ...         6,
-            ...         baca.select().tuplets()[1:2].leaves().group(),
+            ...         baca.tuplets()[1:2].leaves().group(),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     time_treatments=[-1],
@@ -1437,8 +1437,8 @@ class LibraryAM(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-            ...     baca.center_to_octave(3, baca.select().plts().group()),
-            ...     baca.color(baca.select().plts().group()),
+            ...     baca.center_to_octave(3, baca.plts().group()),
+            ...     baca.color(baca.plts().group()),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -1540,8 +1540,8 @@ class LibraryAM(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-            ...     baca.center_to_octave(3, baca.select().plts()),
-            ...     baca.color(baca.select().plts()),
+            ...     baca.center_to_octave(3, baca.plts()),
+            ...     baca.color(baca.plts()),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -1645,9 +1645,9 @@ class LibraryAM(object):
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
             ...     baca.center_to_octave(
             ...         n=3,
-            ...         selector=baca.select().plts()[-2:],
+            ...         selector=baca.plts()[-2:],
             ...         ),
-            ...     baca.color(baca.select().plts()[-2:]),
+            ...     baca.color(baca.plts()[-2:]),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -1718,7 +1718,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def clef(clef='treble', selector='baca.select().leaf(0)'):
+    def clef(clef='treble', selector='baca.leaf(0)'):
         r'''Attaches clef to leaf 0.
 
         ..  container:: example
@@ -1785,7 +1785,7 @@ class LibraryAM(object):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.clef(
             ...         clef='alto',
-            ...         selector=baca.select().tuplets()[1:2].leaf(0),
+            ...         selector=baca.tuplets()[1:2].leaf(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(7),
@@ -1841,7 +1841,7 @@ class LibraryAM(object):
     @staticmethod
     def clef_spanner(
         clef='percussion',
-        selector='baca.select().leaves().group()',
+        selector='baca.leaves().group()',
         ):
         r'''Attaches clef spanner.
 
@@ -1915,9 +1915,9 @@ class LibraryAM(object):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.clef_spanner(
             ...         clef='percussion',
-            ...         selector=baca.select().tuplet(1),
+            ...         selector=baca.tuplet(1),
             ...         ),
-            ...     baca.one_line_staff(selector=baca.select().tuplet(1)),
+            ...     baca.one_line_staff(selector=baca.tuplet(1)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(9),
             ...     counts=[1, 1, 5, -1],
@@ -1975,7 +1975,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def clusters(widths, selector='baca.select().plts()', start_pitch=None):
+    def clusters(widths, selector='baca.plts()', start_pitch=None):
         r'''Makes clusters.
         '''
         return baca.ClusterCommand(
@@ -2194,7 +2194,7 @@ class LibraryAM(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.color(selector=baca.select().tuplets()[1:2].leaves()),
+            ...     baca.color(selector=baca.tuplets()[1:2].leaves()),
             ...     baca.flags(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -2276,7 +2276,7 @@ class LibraryAM(object):
         return baca.ColorCommand(selector=selector)
 
     @staticmethod
-    def color_fingerings(numbers, selector='baca.select().pheads()'):
+    def color_fingerings(numbers, selector='baca.pheads()'):
         r'''Color fingerings.
 
         Returns color fingering command.
@@ -2359,7 +2359,7 @@ class LibraryAM(object):
         return result
 
     @staticmethod
-    def cross_note_heads(selector='baca.select().tleaves()'):
+    def cross_note_heads(selector='baca.tleaves()'):
         r'''Overrides note-head style on pitched leaves.
 
         ..  container:: example
@@ -2426,7 +2426,7 @@ class LibraryAM(object):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.cross_note_heads(
-            ...         baca.select().tuplets()[1:2].leaves().group(),
+            ...         baca.tuplets()[1:2].leaves().group(),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -2484,7 +2484,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def cross_staff(selector='baca.select().pheads()'):
+    def cross_staff(selector='baca.pheads()'):
         r'''Attaches cross-staff command to leaves.
 
         ..  container:: example
@@ -2630,7 +2630,7 @@ class LibraryAM(object):
             ...         'Viola Music Voice',
             ...         [[0, 2, 4, 5, 7]],
             ...         baca.anchor('Violin Music Voice'),
-            ...         baca.cross_staff(selector=baca.select().pleaves()[-2:]),
+            ...         baca.cross_staff(selector=baca.pleaves()[-2:]),
             ...         baca.flags(),
             ...         baca.stems_up(),
             ...         figure_name='vn 2',
@@ -2755,7 +2755,7 @@ class LibraryAM(object):
         return baca.MicrotoneDeviationCommand(deviations=deviations)
 
     @staticmethod
-    def diatonic_clusters(widths, selector='baca.select().plts().group()'):
+    def diatonic_clusters(widths, selector='baca.plts().group()'):
         r'''Makes diatonic clusters.
         '''
         return baca.DiatonicClusterCommand(
@@ -2764,7 +2764,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def displacement(displacements, selector='baca.select().plts().group()'):
+    def displacement(displacements, selector='baca.plts().group()'):
         r'''Octave-displaces PLTs.
 
         ..  container:: example
@@ -2879,7 +2879,7 @@ class LibraryAM(object):
             ...     3 * [[0, 2, 3]],
             ...     baca.displacement(
             ...         [0, 0, -1, -1, 1, 1],
-            ...         baca.select().plts()[-6:].group(),
+            ...         baca.plts()[-6:].group(),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -2935,7 +2935,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def double_tonguing(selector='baca.select().pheads()'):
+    def double_tonguing(selector='baca.pheads()'):
         r'''Attaches double-staccati to pitched heads.
 
         ..  container:: example
@@ -3000,7 +3000,7 @@ class LibraryAM(object):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.double_tonguing(
-            ...         baca.select().tuplets()[1:2].pheads(),
+            ...         baca.tuplets()[1:2].pheads(),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -3053,7 +3053,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def down_arpeggios(selector='baca.select().cheads()'):
+    def down_arpeggios(selector='baca.cheads()'):
         r"""Attaches down-arpeggios to chord heads.
 
         ..  container:: example
@@ -3118,7 +3118,7 @@ class LibraryAM(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-            ...     baca.down_arpeggios(baca.select().cheads()[-2:]),
+            ...     baca.down_arpeggios(baca.cheads()[-2:]),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -3170,7 +3170,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def down_bows(selector='baca.select().pheads()'):
+    def down_bows(selector='baca.pheads()'):
         r'''Attaches down-bows to pitched heads.
 
         ..  container:: example
@@ -3235,7 +3235,7 @@ class LibraryAM(object):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.down_bows(
-            ...         baca.select().tuplets()[1:2].pheads(),
+            ...         baca.tuplets()[1:2].pheads(),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -3288,7 +3288,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def dynamic(dynamic=None, selector='baca.select().phead(0)'):
+    def dynamic(dynamic=None, selector='baca.phead(0)'):
         r'''Attaches dynamic to pitched head 0.
 
         ..  container:: example
@@ -3352,7 +3352,7 @@ class LibraryAM(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.dynamic('f', baca.select().tuplets()[1:2].phead(0)),
+            ...     baca.dynamic('f', baca.tuplets()[1:2].phead(0)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -3406,7 +3406,7 @@ class LibraryAM(object):
     @staticmethod
     def dynamic_line_spanner_staff_padding(
         n=None,
-        selector='baca.select().leaves()',
+        selector='baca.leaves()',
         ):
         r'''Overrides dynamic line spanner staff padding on leaves.
 
@@ -3419,7 +3419,7 @@ class LibraryAM(object):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dynamic_line_spanner_staff_padding(4),
-            ...     baca.map(baca.hairpin('p < f'), baca.select().tuplets()),
+            ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -3476,9 +3476,9 @@ class LibraryAM(object):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dynamic_line_spanner_staff_padding(
             ...         n=4,
-            ...         selector=baca.select().tuplets()[1:2].leaves().group(),
+            ...         selector=baca.tuplets()[1:2].leaves().group(),
             ...         ),
-            ...     baca.map(baca.hairpin('p < f'), baca.select().tuplets()),
+            ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -3535,7 +3535,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def dynamic_line_spanner_up(selector='baca.select().leaves()'):
+    def dynamic_line_spanner_up(selector='baca.leaves()'):
         r'''Up-overrides dynamic line spanner direction.
 
         ..  container:: example
@@ -3547,7 +3547,7 @@ class LibraryAM(object):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dynamic_line_spanner_up(),
-            ...     baca.map(baca.hairpin('p < f'), baca.select().tuplets()),
+            ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -3603,9 +3603,9 @@ class LibraryAM(object):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dynamic_line_spanner_up(
-            ...         baca.select().tuplets()[1:2].leaves().group(),
+            ...         baca.tuplets()[1:2].leaves().group(),
             ...         ),
-            ...     baca.map(baca.hairpin('p < f'), baca.select().tuplets()),
+            ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -3662,7 +3662,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def dynamic_text_extra_offset(pair, selector='baca.select().pleaf(0)'):
+    def dynamic_text_extra_offset(pair, selector='baca.pleaf(0)'):
         r'''Overrides dynamic text extra offset.
 
         ..  container:: example
@@ -3674,7 +3674,7 @@ class LibraryAM(object):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dynamic('p'),
-            ...     baca.dynamic('f', baca.select().tuplets()[1:2].pleaf(0)),
+            ...     baca.dynamic('f', baca.tuplets()[1:2].pleaf(0)),
             ...     baca.dynamic_text_extra_offset((-3, 0)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -3731,10 +3731,10 @@ class LibraryAM(object):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dynamic('p'),
-            ...     baca.dynamic('f', baca.select().tuplets()[1:2].leaf(0)),
+            ...     baca.dynamic('f', baca.tuplets()[1:2].leaf(0)),
             ...     baca.dynamic_text_extra_offset(
             ...         (-3, 0),
-            ...         baca.select().tuplets()[1:2].leaf(0),
+            ...         baca.tuplets()[1:2].leaf(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -3806,7 +3806,7 @@ class LibraryAM(object):
         return [abjad.Dynamic(_) for _ in string.split()]
 
     @staticmethod
-    def dynamics_down(selector='baca.select().leaf(0)'):
+    def dynamics_down(selector='baca.leaf(0)'):
         r'''Attaches dynamic-down command to leaf 0.
 
         ..  container:: example
@@ -3818,7 +3818,7 @@ class LibraryAM(object):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dynamic('p'),
-            ...     baca.dynamic('f', baca.select().tuplets()[1:2].phead(0)),
+            ...     baca.dynamic('f', baca.tuplets()[1:2].phead(0)),
             ...     baca.dynamics_down(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -3874,8 +3874,8 @@ class LibraryAM(object):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dynamic('p'),
-            ...     baca.dynamic('f', baca.select().tuplets()[1:2].phead(0)),
-            ...     baca.dynamics_down(baca.select().tuplets()[1:2].leaf(0)),
+            ...     baca.dynamic('f', baca.tuplets()[1:2].phead(0)),
+            ...     baca.dynamics_down(baca.tuplets()[1:2].leaf(0)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -3928,7 +3928,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def dynamics_up(selector='baca.select().leaf(0)'):
+    def dynamics_up(selector='baca.leaf(0)'):
         r'''Attaches dynamic-up command to leaf 0.
 
         ..  container:: example
@@ -3940,7 +3940,7 @@ class LibraryAM(object):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dynamic('p'),
-            ...     baca.dynamic('f', baca.select().tuplets()[1:2].phead(0)),
+            ...     baca.dynamic('f', baca.tuplets()[1:2].phead(0)),
             ...     baca.dynamics_up(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -3996,8 +3996,8 @@ class LibraryAM(object):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.dynamic('p'),
-            ...     baca.dynamic('f', baca.select().tuplets()[1:2].phead(0)),
-            ...     baca.dynamics_up(baca.select().tuplets()[1:2].leaf(0)),
+            ...     baca.dynamic('f', baca.tuplets()[1:2].phead(0)),
+            ...     baca.dynamics_up(baca.tuplets()[1:2].leaf(0)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -4052,7 +4052,7 @@ class LibraryAM(object):
     @staticmethod
     def effort_dynamic(
         dynamic=None,
-        selector='baca.select().phead(0)',
+        selector='baca.phead(0)',
         direction=abjad.Down,
         ):
         r'''Attaches effort dynamic to pitched head 0.
@@ -4132,7 +4132,7 @@ class LibraryAM(object):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.effort_dynamic(
             ...         'f',
-            ...         baca.select().tuplets()[1:2].phead(0),
+            ...         baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -4215,7 +4215,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def fermata(selector='baca.select().leaf(0)'):
+    def fermata(selector='baca.leaf(0)'):
         r'''Attaches fermata to leaf.
 
         ..  container:: example
@@ -4279,7 +4279,7 @@ class LibraryAM(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.fermata(baca.select().tuplets()[1:2].phead(0)),
+            ...     baca.fermata(baca.tuplets()[1:2].phead(0)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -4331,7 +4331,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def five_line_staff(selector='baca.select().leaves().group()'):
+    def five_line_staff(selector='baca.leaves().group()'):
         r'''Attaches five-line staff spanner.
 
         ..  container:: example
@@ -4343,8 +4343,8 @@ class LibraryAM(object):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.clef_spanner(clef='percussion'),
-            ...     baca.clef_spanner('treble', baca.select().tuplet(1)),
-            ...     baca.five_line_staff(baca.select().tuplet(1)),
+            ...     baca.clef_spanner('treble', baca.tuplet(1)),
+            ...     baca.five_line_staff(baca.tuplet(1)),
             ...     baca.one_line_staff(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(9),
@@ -4418,7 +4418,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def flageolets(selector='baca.select().pheads()'):
+    def flageolets(selector='baca.pheads()'):
         r'''Attaches flageolets to pitched heads.
 
         ..  container:: example
@@ -4482,7 +4482,7 @@ class LibraryAM(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.flageolets(baca.select().tuplets()[1:2].pheads()),
+            ...     baca.flageolets(baca.tuplets()[1:2].pheads()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -4679,7 +4679,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def glissando(selector='baca.select().tleaves()'):
+    def glissando(selector='baca.tleaves()'):
         r'''Attaches glissando to trimmed leaves.
 
         ..  container:: example
@@ -4793,8 +4793,8 @@ class LibraryAM(object):
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.even_runs(),
-            ...     baca.glissando(baca.select().plts()[:2]),
-            ...     baca.glissando(baca.select().plts()[-2:]),
+            ...     baca.glissando(baca.plts()[:2]),
+            ...     baca.glissando(baca.plts()[-2:]),
             ...     )
 
             >>> result = segment_maker.run(is_doc_example=True)
@@ -4889,7 +4889,7 @@ class LibraryAM(object):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
             ...         baca.glissando(),
-            ...         baca.select().tuplets()[1:2].runs(),
+            ...         baca.tuplets()[1:2].runs(),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -4970,7 +4970,7 @@ class LibraryAM(object):
         return spanner
 
     @staticmethod
-    def hairpin(hairpin=None, selector='baca.select().tleaves()'):
+    def hairpin(hairpin=None, selector='baca.tleaves()'):
         r'''Attaches hairpin to trimmed leaves.
 
         ..  container:: example
@@ -5034,7 +5034,7 @@ class LibraryAM(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.hairpin('p < f'), baca.select().tuplet(1)),
+            ...     baca.map(baca.hairpin('p < f'), baca.tuplet(1)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -5087,7 +5087,7 @@ class LibraryAM(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.map(baca.hairpin('p < f'), baca.select().tuplets()),
+            ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -5355,7 +5355,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def instrument(instrument, selector='baca.select().leaf(0)'):
+    def instrument(instrument, selector='baca.leaf(0)'):
         r'''Attaches instrument.
         '''
         assert isinstance(instrument, abjad.Instrument)
@@ -5386,7 +5386,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def label(expression, selector='baca.select().leaves().group()'):
+    def label(expression, selector='baca.leaves().group()'):
         r'''Labels selections with label `expression`.
 
         ..  container:: example
@@ -5488,7 +5488,7 @@ class LibraryAM(object):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.label(
             ...         expression=abjad.label().with_pitches(locale='us'),
-            ...         selector=baca.select().tuplets()[1:2].pheads(),
+            ...         selector=baca.tuplets()[1:2].pheads(),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -5561,7 +5561,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def laissez_vibrer(selector='baca.select().ptails()'):
+    def laissez_vibrer(selector='baca.ptails()'):
         r'''Attaches laissez vibrer to PLT tails.
 
         ..  container:: example
@@ -5624,7 +5624,7 @@ class LibraryAM(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.laissez_vibrer(baca.select().tuplets()[1:2].ptails()),
+            ...     baca.laissez_vibrer(baca.tuplets()[1:2].ptails()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -5676,7 +5676,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def line_break(selector='baca.select().leaf(-1)'):
+    def line_break(selector='baca.leaf(-1)'):
         r'''Attaches line break command after last leaf.
 
         ..  container:: example
@@ -5741,7 +5741,7 @@ class LibraryAM(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.line_break(baca.select().tuplets()[1:2].leaf(-1)),
+            ...     baca.line_break(baca.tuplets()[1:2].leaf(-1)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -5795,7 +5795,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def literal(string, selector='baca.select().leaf(0)'):
+    def literal(string, selector='baca.leaf(0)'):
         r'''Makes LilyPond literal.
         '''
         literal = abjad.LilyPondLiteral(string)
@@ -5805,7 +5805,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def long_fermata(selector='baca.select().leaf(0)'):
+    def long_fermata(selector='baca.leaf(0)'):
         r'''Attaches long fermata to leaf.
 
         ..  container:: example
@@ -5869,7 +5869,7 @@ class LibraryAM(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.long_fermata(baca.select().tuplets()[1:2].phead(0)),
+            ...     baca.long_fermata(baca.tuplets()[1:2].phead(0)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -5938,7 +5938,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def marcati(selector='baca.select().pheads()'):
+    def marcati(selector='baca.pheads()'):
         r'''Attaches marcati to pitched heads.
 
         ..  container:: example
@@ -6002,7 +6002,7 @@ class LibraryAM(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.marcati(baca.select().tuplets()[1:2].pheads()),
+            ...     baca.marcati(baca.tuplets()[1:2].pheads()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -6054,7 +6054,7 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def molto_flaut_to_molto_grid(selector='baca.select().leaves().group()'):
+    def molto_flaut_to_molto_grid(selector='baca.leaves().group()'):
         r'''Makes color transition spanner.
         '''
         left_text = abjad.Markup('molto flautando').italic().larger() + abjad.Markup.hspace(1)

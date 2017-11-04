@@ -308,7 +308,7 @@ class ColorCommand(Command):
         '''
         if not argument:
             return
-        selector = self.selector or baca.select().leaves()
+        selector = self.selector or baca.leaves()
         try:
             result = selector(argument)
         except IndexError:

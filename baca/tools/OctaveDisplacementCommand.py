@@ -117,7 +117,7 @@ class OctaveDisplacementCommand(Command):
     def __init__(
         self,
         displacements=None,
-        selector='baca.select().plts().group()',
+        selector='baca.plts().group()',
         ):
         Command.__init__(self, selector=selector)
         if displacements is not None:
@@ -137,7 +137,7 @@ class OctaveDisplacementCommand(Command):
         if self.displacements is None:
             return
         for selection in selections:
-            plts = baca.select().plts()(selection)
+            plts = baca.plts()(selection)
             for i, plt in enumerate(plts):
                 displacement = self.displacements[i]
                 interval = abjad.NumberedInterval(12 * displacement)

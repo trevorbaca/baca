@@ -172,7 +172,7 @@ class LabelCommand(Command):
         ...     collections,
         ...     baca.label(
         ...         abjad.label().with_pitches(locale='us'),
-        ...         baca.select().tuplet(0),
+        ...         baca.tuplet(0),
         ...         ),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
@@ -229,7 +229,7 @@ class LabelCommand(Command):
     def __init__(
         self,
         expression=None,
-        selector='baca.select().leaves().group()',
+        selector='baca.leaves().group()',
         ):
         Command.__init__(self, selector=selector)
         if expression is not None:

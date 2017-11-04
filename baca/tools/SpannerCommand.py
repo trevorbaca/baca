@@ -12,7 +12,7 @@ class SpannerCommand(Command):
 
         >>> music_maker = baca.MusicMaker(
         ...     baca.SpannerCommand(
-        ...         selector=baca.select().tuplet(1),
+        ...         selector=baca.tuplet(1),
         ...         spanner=abjad.Slur(),
         ...         ),
         ...     )
@@ -62,7 +62,7 @@ class SpannerCommand(Command):
         ...     baca.even_runs(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.SpannerCommand(
-        ...         selector=baca.select().leaves()[4:7],
+        ...         selector=baca.leaves()[4:7],
         ...         spanner=abjad.Slur(),
         ...         ),
         ...     )
@@ -152,7 +152,7 @@ class SpannerCommand(Command):
     ..  container:: example
 
         >>> baca.SpannerCommand()
-        SpannerCommand(selector=baca.select().tleaves())
+        SpannerCommand(selector=baca.tleaves())
 
     '''
 
@@ -167,7 +167,7 @@ class SpannerCommand(Command):
 
     def __init__(
         self,
-        selector='baca.select().tleaves()',
+        selector='baca.tleaves()',
         spanner=None,
         ):
         Command.__init__(self, selector=selector)

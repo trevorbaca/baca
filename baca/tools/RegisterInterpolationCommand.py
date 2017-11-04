@@ -892,7 +892,7 @@ class RegisterInterpolationCommand(Command):
 
     def __init__(
         self,
-        selector='baca.select().plts().group()',
+        selector='baca.plts().group()',
         start_pitch=None,
         stop_pitch=None,
         ):
@@ -911,7 +911,7 @@ class RegisterInterpolationCommand(Command):
         '''
         selections = self._select(music)
         for selection in selections:
-            plts = baca.select().plts()(selection)
+            plts = baca.plts()(selection)
             length = len(plts)
             for i, plt in enumerate(plts):
                 registration = self._get_registration(i, length)
@@ -954,8 +954,8 @@ class RegisterInterpolationCommand(Command):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     collections,
-            ...     baca.color(baca.select().tuplet(0)),
-            ...     baca.register(0, 24, baca.select().tuplet(0)),
+            ...     baca.color(baca.tuplet(0)),
+            ...     baca.register(0, 24, baca.tuplet(0)),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1069,8 +1069,8 @@ class RegisterInterpolationCommand(Command):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     collections,
-            ...     baca.color(baca.select().tuplet(-1)),
-            ...     baca.register(0, 24, baca.select().tuplet(-1)),
+            ...     baca.color(baca.tuplet(-1)),
+            ...     baca.register(0, 24, baca.tuplet(-1)),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1184,8 +1184,8 @@ class RegisterInterpolationCommand(Command):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     collections,
-            ...     baca.color(baca.select().tuplets()),
-            ...     baca.register(0, 24, baca.select().tuplets()),
+            ...     baca.color(baca.tuplets()),
+            ...     baca.register(0, 24, baca.tuplets()),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file) # doctest: +SKIP

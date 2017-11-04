@@ -34,7 +34,18 @@ def _import_static_methods(class_):
         statement = f'{name} = {class_.__name__}.{name}'
         exec(statement, globals())
 
+def _publish_selectors(class_):
+    for name in dir(class_):
+        if name.startswith('_'):
+            continue
+        if name in ('map',):
+            continue
+        statement = f'''def {name}(*arguments, **keywords):
+            return select().{name}(*arguments, **keywords)'''
+        exec(statement, globals())
+
 
 _import_static_methods(LibraryAM)
 _import_static_methods(LibraryNZ)
+_publish_selectors(Selection)
 markup = MarkupLibrary()

@@ -147,5 +147,5 @@ class Expression(abjad.Expression):
         return abjad.new(
             expression,
             proxy_class=class_,
-            template='baca.select()',
+            template='baca',
             )

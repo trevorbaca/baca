@@ -172,7 +172,7 @@ class IndicatorCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, arguments=None, selector='baca.select().pheads().group()'):
+    def __init__(self, arguments=None, selector='baca.pheads().group()'):
         Command.__init__(self, selector=selector)
         if arguments is not None:
             if isinstance(arguments, collections.Iterable):

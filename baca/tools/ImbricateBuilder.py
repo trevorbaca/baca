@@ -1705,7 +1705,7 @@ class ImbricateBuilder(Builder):
             ...         [2, 18, 16, 15],
             ...         baca.accents(),
             ...         baca.beam_everything(),
-            ...         selector=baca.select().plts()[-9:],
+            ...         selector=baca.plts()[-9:],
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
