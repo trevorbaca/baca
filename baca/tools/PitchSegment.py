@@ -120,12 +120,12 @@ class PitchSegment(abjad.PitchSegment):
 
         Returns new segment.
         '''
-        specifier = baca.RegisterToOctaveCommand(
+        command = baca.RegisterToOctaveCommand(
             anchor=abjad.Bottom,
             octave_number=n,
             )
         selection = self._to_selection()
-        specifier([selection])
+        command([selection])
         segment = PitchSegment.from_selection(selection)
         return abjad.new(self, items=segment)
 
@@ -195,12 +195,12 @@ class PitchSegment(abjad.PitchSegment):
 
         Returns new segment.
         '''
-        specifier = baca.RegisterToOctaveCommand(
+        command = baca.RegisterToOctaveCommand(
             anchor=abjad.Center,
             octave_number=n,
             )
         selection = self._to_selection()
-        specifier([selection])
+        command([selection])
         segment = PitchSegment.from_selection(selection)
         return abjad.new(self, items=segment)
 
@@ -306,12 +306,12 @@ class PitchSegment(abjad.PitchSegment):
 
         Returns new segment.
         '''
-        specifier = baca.RegisterToOctaveCommand(
+        command = baca.RegisterToOctaveCommand(
             anchor=abjad.Top,
             octave_number=n,
             )
         selection = self._to_selection()
-        specifier([selection])
+        command([selection])
         segment = PitchSegment.from_selection(selection)
         return abjad.new(self, items=segment)
 

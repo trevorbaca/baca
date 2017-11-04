@@ -3697,22 +3697,21 @@ class LibraryNZ(object):
             selector=selector,
             )
 
-    # TODO: set selector
     @staticmethod
-    def soprano_to_octave(n=4, selector=None):
+    def soprano_to_octave(n, selector='baca.plts()'):
         r"""Octave-transposes music.
 
         ..  container:: example
 
-            Octave-transposes music such that the highest note in the entire
-            selection appears in octave 3:
+            Octave-transposes music such that the highest note in the
+            collection of all PLTs appears in octave 3:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
             ...     baca.color(baca.plts().group()),
-            ...     baca.soprano_to_octave(3, baca.plts().group()),
+            ...     baca.soprano_to_octave(3),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
             ...     )
@@ -3814,7 +3813,7 @@ class LibraryNZ(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-            ...     baca.soprano_to_octave(3, baca.plts()),
+            ...     baca.map(baca.soprano_to_octave(3), baca.plts()),
             ...     baca.color(baca.plts()),
             ...     counts=[5, -3],
             ...     talea_denominator=32,
@@ -3917,7 +3916,7 @@ class LibraryNZ(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
-            ...     baca.soprano_to_octave(3, baca.plts()[-2:]),
+            ...     baca.map(baca.soprano_to_octave(3), baca.plts()[-2:]),
             ...     baca.color(baca.plts()[-2:]),
             ...     counts=[5, -3],
             ...     talea_denominator=32,

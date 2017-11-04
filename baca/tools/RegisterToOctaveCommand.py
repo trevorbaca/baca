@@ -264,7 +264,7 @@ class RegisterToOctaveCommand(Command):
     ..  container:: example
 
         >>> baca.RegisterToOctaveCommand()
-        RegisterToOctaveCommand()
+        RegisterToOctaveCommand(selector=baca.plts())
 
     """
 
@@ -281,7 +281,7 @@ class RegisterToOctaveCommand(Command):
         self,
         anchor=None,
         octave_number=None,
-        selector=None,
+        selector='baca.plts()',
         ):
         Command.__init__(self, selector=selector)
         if anchor is not None:
@@ -294,21 +294,23 @@ class RegisterToOctaveCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, music=None):
-        r'''Calls command on `music`.
+    def __call__(self, argument=None):
+        r'''Calls command on `argument`.
 
         Returns none.
         '''
-        selections = self._select(music)
+        if argument is None:
+            return
         if self.octave_number is None:
             return
-        for selection in selections:
-            target_octave_number = self.octave_number or 4
-            current_octave_number = self._get_anchor_octave_number(selection)
-            octave_adjustment = target_octave_number - current_octave_number
-            transposition = abjad.Transposition(12 * octave_adjustment)
-            for leaf in abjad.select(selection).leaves():
-                self._set_pitch(leaf, transposition)
+        if self.selector:
+            argument = self.selector(argument)
+        target_octave_number = self.octave_number or 4
+        current_octave_number = self._get_anchor_octave_number(argument)
+        octave_adjustment = target_octave_number - current_octave_number
+        transposition = abjad.Transposition(12 * octave_adjustment)
+        for pleaf in baca.select(argument).pleaves():
+            self._set_pitch(pleaf, transposition)
 
     ### PRIVATE METHODS ###
 
@@ -436,9 +438,7 @@ class RegisterToOctaveCommand(Command):
         ..  container:: example
 
             >>> chord = abjad.Chord("<c, d e'>1")
-            >>> command = baca.RegisterToOctaveCommand(
-            ...     octave_number=1,
-            ...     )
+            >>> command = baca.RegisterToOctaveCommand(octave_number=1)
             >>> command(chord)
             >>> staff = abjad.Staff([chord])
             >>> abjad.attach(abjad.Clef('bass'), staff[0])
@@ -453,9 +453,7 @@ class RegisterToOctaveCommand(Command):
         ..  container:: example
 
             >>> chord = abjad.Chord("<c, d e'>1")
-            >>> command = baca.RegisterToOctaveCommand(
-            ...     octave_number=2,
-            ...     )
+            >>> command = baca.RegisterToOctaveCommand(octave_number=2)
             >>> command(chord)
             >>> staff = abjad.Staff([chord])
             >>> abjad.attach(abjad.Clef('bass'), staff[0])
@@ -470,9 +468,7 @@ class RegisterToOctaveCommand(Command):
         ..  container:: example
 
             >>> chord = abjad.Chord("<c, d e'>1")
-            >>> command = baca.RegisterToOctaveCommand(
-            ...     octave_number=3,
-            ...     )
+            >>> command = baca.RegisterToOctaveCommand(octave_number=3)
             >>> command(chord)
             >>> staff = abjad.Staff([chord])
             >>> abjad.attach(abjad.Clef('bass'), staff[0])
@@ -487,9 +483,7 @@ class RegisterToOctaveCommand(Command):
         ..  container:: example
 
             >>> chord = abjad.Chord("<c, d e'>1")
-            >>> command = baca.RegisterToOctaveCommand(
-            ...     octave_number=4,
-            ...     )
+            >>> command = baca.RegisterToOctaveCommand(octave_number=4)
             >>> command(chord)
             >>> abjad.show(chord) # doctest: +SKIP
 
@@ -501,9 +495,7 @@ class RegisterToOctaveCommand(Command):
         ..  container:: example
 
             >>> chord = abjad.Chord("<c, d e'>1")
-            >>> command = baca.RegisterToOctaveCommand(
-            ...     octave_number=5,
-            ...     )
+            >>> command = baca.RegisterToOctaveCommand(octave_number=5)
             >>> command(chord)
             >>> abjad.show(chord) # doctest: +SKIP
 
