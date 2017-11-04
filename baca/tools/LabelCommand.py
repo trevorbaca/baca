@@ -226,11 +226,7 @@ class LabelCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        expression=None,
-        selector='baca.leaves().group()',
-        ):
+    def __init__(self, expression=None, selector='baca.leaves()'):
         Command.__init__(self, selector=selector)
         if expression is not None:
             assert isinstance(expression, abjad.Expression)
@@ -238,16 +234,18 @@ class LabelCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, music=None):
-        r'''Calls command on `music`.
+    def __call__(self, argument=None):
+        r'''Calls command on `argument`.
 
         Returns none.
         '''
-        selections = self._select(music)
         if self.expression is None:
             return
-        for selection in selections:
-            self.expression(selection)
+        if argument is None:
+            return
+        if self.selector:
+            argument = self.selector(argument)
+        self.expression(argument)
 
     ### PUBLIC PROPERTIES ###
 

@@ -5377,9 +5377,8 @@ class LibraryAM(object):
             to_pitch_classes=True,
             )
 
-    # TODO: change to baca.leaves() after removing _select()
     @staticmethod
-    def label(expression, selector='baca.leaves().group()'):
+    def label(expression, selector='baca.leaves()'):
         r'''Labels selections with label `expression`.
 
         ..  container:: example
@@ -5480,8 +5479,8 @@ class LibraryAM(object):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.label(
-            ...         expression=abjad.label().with_pitches(locale='us'),
-            ...         selector=baca.tuplets()[1:2].pheads(),
+            ...         abjad.label().with_pitches(locale='us'),
+            ...         baca.tuplet(1),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -5548,10 +5547,7 @@ class LibraryAM(object):
                 >>
 
         '''
-        return baca.LabelCommand(
-            expression=expression,
-            selector=selector,
-            )
+        return baca.LabelCommand(expression=expression, selector=selector)
 
     @staticmethod
     def laissez_vibrer(selector='baca.ptails()'):
