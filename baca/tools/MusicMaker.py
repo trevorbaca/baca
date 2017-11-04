@@ -1261,13 +1261,7 @@ class MusicMaker(abjad.AbjadObject):
 
             Register specifier transposes to octave rooted on F#3:
 
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.RegisterCommand(
-            ...         registration=baca.Registration(
-            ...             [('[A0, C8]', -6)],
-            ...             ),
-            ...         ),
-            ...     )
+            >>> music_maker = baca.MusicMaker(baca.register(-6))
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker('Voice 1', collections)

@@ -250,7 +250,7 @@ class RegisterCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, registration=None, selector=None):
+    def __init__(self, registration=None, selector='baca.plts()'):
         import baca
         Command.__init__(self, selector=selector)
         if registration is not None:
@@ -260,8 +260,8 @@ class RegisterCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, music=None):
-        r'''Calls command on `music`.
+    def __call__(self, argument=None):
+        r'''Calls command on `argument`.
 
         ..  container:: example
 
@@ -294,22 +294,25 @@ class RegisterCommand(Command):
 
         Returns none.
         '''
-        selections = self._select(music)
-        for selection in selections:
-            plts = baca.plts()(selection)
-            for plt in plts:
-                for pleaf in plt:
-                    if isinstance(pleaf, abjad.Note):
-                        pitch = pleaf.written_pitch
-                        pitches = self.registration([pitch])
-                        pleaf.written_pitch = pitches[0]
-                    elif isinstance(pleaf, abjad.Chord):
-                        pitches = pleaf.written_pitches
-                        pitches = self.registration(pitches)
-                        pleaf.written_pitches = pitches
-                    else:
-                        raise TypeError(pleaf)
-                    abjad.detach('not yet registered', pleaf)
+        if self.registration is None:
+            return
+        if argument is None:
+            return
+        if self.selector:
+            argument = self.selector(argument)
+        for plt in baca.select(argument).plts():
+            for pleaf in plt:
+                if isinstance(pleaf, abjad.Note):
+                    pitch = pleaf.written_pitch
+                    pitches = self.registration([pitch])
+                    pleaf.written_pitch = pitches[0]
+                elif isinstance(pleaf, abjad.Chord):
+                    pitches = pleaf.written_pitches
+                    pitches = self.registration(pitches)
+                    pleaf.written_pitches = pitches
+                else:
+                    raise TypeError(pleaf)
+                abjad.detach('not yet registered', pleaf)
 
     ### PUBLIC PROPERTIES ###
 

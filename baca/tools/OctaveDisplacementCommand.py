@@ -114,11 +114,7 @@ class OctaveDisplacementCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        displacements=None,
-        selector='baca.plts().group()',
-        ):
+    def __init__(self, displacements=None, selector='baca.plts()'):
         Command.__init__(self, selector=selector)
         if displacements is not None:
             displacements = tuple(displacements)
@@ -128,29 +124,30 @@ class OctaveDisplacementCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, music=None):
-        r'''Calls command on `music`.
+    def __call__(self, argument=None):
+        r'''Calls command on `argument`.
 
         Returns none.
         '''
-        selections = self._select(music)
         if self.displacements is None:
             return
-        for selection in selections:
-            plts = baca.plts()(selection)
-            for i, plt in enumerate(plts):
-                displacement = self.displacements[i]
-                interval = abjad.NumberedInterval(12 * displacement)
-                for pleaf in plt:
-                    if isinstance(pleaf, abjad.Note):
-                        pitch = pleaf.written_pitch
-                        pitch += interval
-                        pleaf.written_pitch = pitch
-                    elif isinstance(pleaf, abjad.Chord):
-                        pitches = [_ + interval for _ in pleaf.written_pitches]
-                        pleaf.written_pitches = pitches
-                    else:
-                        raise TypeError(pleaf)
+        if argument is None:
+            return
+        if self.selector:
+            argument = self.selector(argument)
+        for i, plt in enumerate(baca.select(argument).plts()):
+            displacement = self.displacements[i]
+            interval = abjad.NumberedInterval(12 * displacement)
+            for pleaf in plt:
+                if isinstance(pleaf, abjad.Note):
+                    pitch = pleaf.written_pitch
+                    pitch += interval
+                    pleaf.written_pitch = pitch
+                elif isinstance(pleaf, abjad.Chord):
+                    pitches = [_ + interval for _ in pleaf.written_pitches]
+                    pleaf.written_pitches = pitches
+                else:
+                    raise TypeError(pleaf)
 
     ### PRIVATE METHODS ###
 

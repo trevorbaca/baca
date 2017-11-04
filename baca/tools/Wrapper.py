@@ -102,7 +102,7 @@ class Wrapper(abjad.AbjadObject):
                 displacements=abjad.CyclicTuple(
                     [0, 0, 0, 0, 1, 1, 1, 1]
                     ),
-                selector=baca.plts().group(),
+                selector=baca.plts(),
                 ),
             scope=baca.Scope(
                 voice_name='Violin Music Voice',

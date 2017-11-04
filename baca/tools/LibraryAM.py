@@ -2754,9 +2754,8 @@ class LibraryAM(object):
             widths=widths,
             )
 
-    # TODO: change to baca.plts() after removing _select()
     @staticmethod
-    def displacement(displacements, selector='baca.plts().group()'):
+    def displacement(displacements, selector='baca.plts()'):
         r'''Octave-displaces PLTs.
 
         ..  container:: example
@@ -2869,10 +2868,7 @@ class LibraryAM(object):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     3 * [[0, 2, 3]],
-            ...     baca.displacement(
-            ...         [0, 0, -1, -1, 1, 1],
-            ...         baca.plts()[-6:].group(),
-            ...         ),
+            ...     baca.displacement([0, 0, -1, -1, 1, 1], baca.plts()[-6:]),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
