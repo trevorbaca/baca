@@ -20,7 +20,6 @@ Bases
       ~baca.tools.LibraryNZ.LibraryNZ.natural_clusters
       ~baca.tools.LibraryNZ.LibraryNZ.natural_harmonics
       ~baca.tools.LibraryNZ.LibraryNZ.nest
-      ~baca.tools.LibraryNZ.LibraryNZ.notes
       ~baca.tools.LibraryNZ.LibraryNZ.one_line_staff
       ~baca.tools.LibraryNZ.LibraryNZ.ottava
       ~baca.tools.LibraryNZ.LibraryNZ.ottava_bassa
@@ -119,8 +118,6 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.natural_harmonics
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.nest
-
-.. automethod:: baca.tools.LibraryNZ.LibraryNZ.notes
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.one_line_staff
 

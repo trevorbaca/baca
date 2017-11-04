@@ -361,7 +361,7 @@ class ClusterCommand(Command):
         >>> segment_maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.clusters([3, 4], start_pitch='E4'),
-        ...     baca.notes(repeat_ties=True),
+        ...     baca.make_notes(repeat_ties=True),
         ...     )
 
         >>> result = segment_maker.run(is_doc_example=True)
@@ -586,7 +586,7 @@ class ClusterCommand(Command):
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4'),
-            ...     baca.notes(repeat_ties=True),
+            ...     baca.make_notes(repeat_ties=True),
             ...     baca.natural_clusters(widths=[3]),
             ...     )
 
@@ -732,7 +732,7 @@ class ClusterCommand(Command):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.notes(repeat_ties=True),
+            ...     baca.make_notes(repeat_ties=True),
             ...     baca.pitches('C4 D4 E4 F4'),
             ...     baca.clusters([3]),
             ...     )
@@ -872,7 +872,7 @@ class ClusterCommand(Command):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.notes(repeat_ties=True),
+            ...     baca.make_notes(repeat_ties=True),
             ...     baca.clusters([3], start_pitch='G4'),
             ...     )
 
@@ -1022,7 +1022,7 @@ class ClusterCommand(Command):
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.clusters([1, 2, 3, 4], start_pitch='E4'),
-            ...     baca.notes(repeat_ties=True),
+            ...     baca.make_notes(repeat_ties=True),
             ...     )
 
             >>> result = segment_maker.run(is_doc_example=True)
@@ -1161,7 +1161,7 @@ class ClusterCommand(Command):
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.clusters([1, 3], start_pitch='E4'),
-            ...     baca.notes(repeat_ties=True),
+            ...     baca.make_notes(repeat_ties=True),
             ...     )
 
             >>> result = segment_maker.run(is_doc_example=True)
@@ -1299,7 +1299,7 @@ class ClusterCommand(Command):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.notes(repeat_ties=True),
+            ...     baca.make_notes(repeat_ties=True),
             ...     baca.pitches('E4', allow_repeat_pitches=True),
             ...     baca.clusters([]),
             ...     )

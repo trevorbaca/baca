@@ -134,7 +134,7 @@ class LibraryAM(object):
     @staticmethod
     def alternate_bow_strokes(
         downbow_first=True,
-        selector='baca.select().pheads().group()',
+        selector='baca.select().pheads()',
         ):
         r'''Attaches alternate bow strokes.
 
@@ -351,28 +351,6 @@ class LibraryAM(object):
         direction=abjad.Down,
         ):
         r'''Attaches ancora dynamic pitched head 0.
-
-        ..  container::
-
-            >>> abjad.f(baca.ancora_dynamic('f'))
-            baca.IndicatorCommand(
-                arguments=[
-                    abjad.Markup(
-                        contents=[
-                            abjad.MarkupCommand(
-                                'dynamic',
-                                'f'
-                                ),
-                            abjad.MarkupCommand(
-                                'upright',
-                                'ancora'
-                                ),
-                            ],
-                        direction=Down,
-                        ),
-                    ],
-                selector=baca.select().phead(0),
-                )
 
         ..  container:: example
 
@@ -5940,6 +5918,23 @@ class LibraryAM(object):
         return baca.IndicatorCommand(
             arguments=[abjad.Articulation('longfermata')],
             selector=selector,
+            )
+
+    @staticmethod
+    def make_notes(repeat_ties=False):
+        r'''Makes notes; rewrites meter.
+        '''
+        if repeat_ties:
+            tie_specifier = abjad.rhythmmakertools.TieSpecifier(
+                repeat_ties=True,
+                )
+        else:
+            tie_specifier = None
+        return baca.RhythmBuilder(
+            rewrite_meter=True,
+            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
+                tie_specifier=tie_specifier,
+                )
             )
 
     @staticmethod

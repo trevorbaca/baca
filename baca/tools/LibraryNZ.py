@@ -222,23 +222,6 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def notes(repeat_ties=False):
-        r'''Makes notes; rewrites meter.
-        '''
-        if repeat_ties:
-            tie_specifier = abjad.rhythmmakertools.TieSpecifier(
-                repeat_ties=True,
-                )
-        else:
-            tie_specifier = None
-        return baca.RhythmBuilder(
-            rewrite_meter=True,
-            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
-                tie_specifier=tie_specifier,
-                )
-            )
-
-    @staticmethod
     def one_line_staff(selector='baca.select().leaves().group()'):
         r'''Attaches one-line staff spanner.
 

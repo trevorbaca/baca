@@ -17,7 +17,7 @@ class VoltaMeasureMap(abjad.AbjadObject):
         >>> segment_maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches('E4', allow_repeat_pitches=True),
-        ...     baca.notes(repeat_ties=True),
+        ...     baca.make_notes(repeat_ties=True),
         ...     )
 
         >>> result = segment_maker.run(is_doc_example=True)

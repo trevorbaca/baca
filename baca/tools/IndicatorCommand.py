@@ -1,5 +1,6 @@
 import abjad
 import baca
+import collections
 from .Command import Command
 
 
@@ -164,7 +165,7 @@ class IndicatorCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_arguments',
+        '_indicators',
         )
 
     _publish_storage_format = True
@@ -173,26 +174,31 @@ class IndicatorCommand(Command):
 
     def __init__(self, arguments=None, selector='baca.select().pheads().group()'):
         Command.__init__(self, selector=selector)
-        self._arguments = arguments
+        if arguments is not None:
+            if isinstance(arguments, collections.Iterable):
+                arguments = abjad.CyclicTuple(arguments)
+            else:
+                arguments = abjad.CyclicTuple([arguments])
+        self._indicators = arguments
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, music=None):
-        r'''Calls command on `music`.
+    def __call__(self, argument=None):
+        r'''Calls command on `argument`.
 
         Returns none.
         '''
-        selections = self._select(music)
-        if self.arguments is None:
+        if self.indicators is None:
             return
-        arguments = abjad.CyclicTuple(self.arguments)
-        for selection in selections:
-            leaves = abjad.select(selection).leaves()
-            for i, leaf in enumerate(leaves):
-                arguments_ = arguments[i]
-                arguments_ = self._token_to_arguments(arguments_)
-                for argument_ in arguments_:
-                    abjad.attach(argument_, leaf)
+        if self.selector:
+            argument = self.selector(argument)
+        if not argument:
+            return
+        for i, leaf in enumerate(baca.select(argument).leaves()):
+                indicators = self.indicators[i]
+                indicators = self._token_to_arguments(indicators)
+                for indicator in indicators:
+                    abjad.attach(indicator, leaf)
 
     ### PRIVATE METHODS ###
 
@@ -330,4 +336,12 @@ class IndicatorCommand(Command):
 
         Returns arguments or none.
         '''
-        return self._arguments
+        return self._indicators
+
+    @property
+    def indicators(self):
+        r'''Gets indicators.
+
+        Returns cyclic tuple or none.
+        '''
+        return self._indicators

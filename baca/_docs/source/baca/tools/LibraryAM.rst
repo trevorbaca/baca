@@ -80,6 +80,7 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.line_break
       ~baca.tools.LibraryAM.LibraryAM.literal
       ~baca.tools.LibraryAM.LibraryAM.long_fermata
+      ~baca.tools.LibraryAM.LibraryAM.make_notes
       ~baca.tools.LibraryAM.LibraryAM.marcati
       ~baca.tools.LibraryAM.LibraryAM.molto_flaut_to_molto_grid
       ~baca.tools.LibraryAM.LibraryAM.multimeasure_rests
@@ -212,6 +213,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAM.LibraryAM.literal
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.long_fermata
+
+.. automethod:: baca.tools.LibraryAM.LibraryAM.make_notes
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.marcati
 

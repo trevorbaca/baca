@@ -24,6 +24,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.IndicatorCommand.IndicatorCommand.arguments
+      ~baca.tools.IndicatorCommand.IndicatorCommand.indicators
       ~baca.tools.IndicatorCommand.IndicatorCommand.selector
       ~baca.tools.IndicatorCommand.IndicatorCommand.__call__
       ~baca.tools.IndicatorCommand.IndicatorCommand.__eq__
@@ -35,6 +36,8 @@ Read-only properties
 --------------------
 
 .. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.arguments
+
+.. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.indicators
 
 .. only:: html
 
