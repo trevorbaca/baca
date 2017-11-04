@@ -313,6 +313,5 @@ class ColorCommand(Command):
             result = selector(argument)
         except IndexError:
             return
-        # self._debug_selections(argument, result)
         selector.color(result)
         return result

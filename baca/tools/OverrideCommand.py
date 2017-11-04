@@ -259,7 +259,6 @@ class OverrideCommand(Command):
             argument = self.selector(argument)
         if argument is None:
             return
-        # self._debug_selections(argument, selections)
         statement = 'abjad.override(leaf)'
         if self.context_name is not None:
             statement += '.{context_name}'
