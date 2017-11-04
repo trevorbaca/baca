@@ -705,8 +705,9 @@ class SegmentMaker(abjad.SegmentMaker):
             scopes = [scopes]
         else:
             assert all(isinstance(_, prototype) for _ in scopes), repr(scopes)
-        prototype = (baca.Builder, baca.Command)
-        assert all(isinstance(_, prototype) for _ in commands)
+        for command in commands:
+            if not isinstance(command, (baca.Builder, baca.Command)):
+                raise Exception(f'commands only:\n\n{format(command)}')
         for scope in scopes:
             for command in commands:
                 wrapper = baca.Wrapper(

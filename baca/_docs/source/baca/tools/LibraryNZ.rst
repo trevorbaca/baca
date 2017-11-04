@@ -34,7 +34,6 @@ Bases
       ~baca.tools.LibraryNZ.LibraryNZ.repeat_ties_up
       ~baca.tools.LibraryNZ.LibraryNZ.repeated_durations
       ~baca.tools.LibraryNZ.LibraryNZ.rest_position
-      ~baca.tools.LibraryNZ.LibraryNZ.rests
       ~baca.tools.LibraryNZ.LibraryNZ.rests_after
       ~baca.tools.LibraryNZ.LibraryNZ.rests_around
       ~baca.tools.LibraryNZ.LibraryNZ.rests_before
@@ -146,8 +145,6 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.repeated_durations
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.rest_position
-
-.. automethod:: baca.tools.LibraryNZ.LibraryNZ.rests
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.rests_after
 

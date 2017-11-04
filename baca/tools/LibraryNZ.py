@@ -1771,19 +1771,6 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def rests():
-        r'''Makes rests.
-        '''
-        mask = abjad.rhythmmakertools.SilenceMask(
-            pattern=abjad.index_all(),
-            )
-        return baca.RhythmBuilder(
-            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
-                division_masks=[mask],
-                ),
-            )
-
-    @staticmethod
     def rests_after(counts):
         r'''Makes rests after music.
 
