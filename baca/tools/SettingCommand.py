@@ -41,24 +41,26 @@ class SettingCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, music=None):
-        r'''Calls command on `music`.
+    def __call__(self, argument=None):
+        r'''Calls command on `argument`.
 
         Returns none.
         '''
-        selections = self._select(music)
-        for selection in selections:
-            context = self.context_name
-            setting = self.setting_name
-            value = self.setting_value
-            if self.context_name is not None:
-                string = f'abjad.setting(leaf).{context}.{setting} = {value!r}'
-            else:
-                string = f'abjad.setting(leaf).{setting} = {value!r}'
-            globals_ = globals()
-            globals_.update(abjad.__dict__.copy())
-            for leaf in abjad.iterate(selection).leaves():
-                exec(string, globals_, locals())
+        if self.setting_name is None or self.setting_value is None:
+            return
+        if self.selector:
+            argument = self.selector(argument)
+        leaf = abjad.select(argument).leaf(0)
+        context = self.context_name
+        setting = self.setting_name
+        value = self.setting_value
+        if self.context_name is not None:
+            string = f'abjad.setting(leaf).{context}.{setting} = {value!r}'
+        else:
+            string = f'abjad.setting(leaf).{setting} = {value!r}'
+        globals_ = globals()
+        globals_.update(abjad.__dict__.copy())
+        exec(string, globals_, locals())
 
     ### PUBLIC PROPERTIES ###
 
