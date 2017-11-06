@@ -51,7 +51,6 @@ Bases
       ~baca.tools.LibraryNZ.LibraryNZ.short_fermata
       ~baca.tools.LibraryNZ.LibraryNZ.single_attack
       ~baca.tools.LibraryNZ.LibraryNZ.single_segment_transition
-      ~baca.tools.LibraryNZ.LibraryNZ.single_taper
       ~baca.tools.LibraryNZ.LibraryNZ.skips_after
       ~baca.tools.LibraryNZ.LibraryNZ.skips_around
       ~baca.tools.LibraryNZ.LibraryNZ.skips_before
@@ -177,8 +176,6 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.short_fermata
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.single_attack
-
-.. automethod:: baca.tools.LibraryNZ.LibraryNZ.single_taper
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.skips_after
 

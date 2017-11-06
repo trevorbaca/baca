@@ -65,7 +65,6 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.fuse_compound_quarter_divisions
       ~baca.tools.LibraryAM.LibraryAM.fused_tuplet_monads
       ~baca.tools.LibraryAM.LibraryAM.glissando
-      ~baca.tools.LibraryAM.LibraryAM.grid_poss_to_flaut_poss
       ~baca.tools.LibraryAM.LibraryAM.hairpin
       ~baca.tools.LibraryAM.LibraryAM.helianthate
       ~baca.tools.LibraryAM.LibraryAM.imbricate
@@ -81,7 +80,6 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.make_notes
       ~baca.tools.LibraryAM.LibraryAM.make_rests
       ~baca.tools.LibraryAM.LibraryAM.marcati
-      ~baca.tools.LibraryAM.LibraryAM.molto_flaut_to_molto_grid
       ~baca.tools.LibraryAM.LibraryAM.multimeasure_rests
 
 Class & static methods
@@ -183,8 +181,6 @@ Class & static methods
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.glissando
 
-.. automethod:: baca.tools.LibraryAM.LibraryAM.grid_poss_to_flaut_poss
-
 .. automethod:: baca.tools.LibraryAM.LibraryAM.hairpin
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.helianthate
@@ -214,7 +210,5 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAM.LibraryAM.make_rests
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.marcati
-
-.. automethod:: baca.tools.LibraryAM.LibraryAM.molto_flaut_to_molto_grid
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.multimeasure_rests

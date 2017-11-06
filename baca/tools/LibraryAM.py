@@ -4863,35 +4863,6 @@ class LibraryAM(object):
             spanner=abjad.Glissando(),
             )
 
-    # TODO: remove
-    @staticmethod
-    def grid_poss_to_flaut_poss():
-        r'''Makes color transition spanner.
-
-        Returns text spanner.
-        '''
-        left_text = abjad.Markup('grid. possibile').italic().larger()
-        left_text += abjad.Markup.hspace(1)
-        right_text = abjad.Markup.hspace(1) + abjad.Markup('flaut. possibile')
-        right_text = right_text.italic().larger()
-        spanner = abjad.TextSpanner(
-            overrides={
-                'text_spanner__bound_details__left__padding': -1,
-                'text_spanner__bound_details__left__stencil_align_dir_y': 0,
-                'text_spanner__bound_details__left__text': left_text,
-                'text_spanner__bound_details__left_broken__text': None,
-                'text_spanner__bound_details__right__arrow': True,
-                'text_spanner__bound_details__right__padding': 1,
-                'text_spanner__bound_details__right__stencil_align_dir_y': 0,
-                'text_spanner__bound_details__right__text': right_text,
-                'text_spanner__bound_details__right_broken__padding': 0,
-                'text_spanner__bound_details__right_broken__text': None,
-                'text_spanner__dash_fraction': 0.25,
-                'text_spanner__dash_period': 1.5,
-            }
-        )
-        return spanner
-
     @staticmethod
     def hairpin(hairpin=None, selector='baca.tleaves()'):
         r'''Attaches hairpin to trimmed leaves.
@@ -5987,34 +5958,6 @@ class LibraryAM(object):
         return baca.IndicatorCommand(
             indicators=[abjad.Articulation('marcato')],
             selector=selector,
-            )
-
-    # TODO: remove
-    @staticmethod
-    def molto_flaut_to_molto_grid(selector='baca.leaves().group()'):
-        r'''Makes color transition spanner.
-        '''
-        left_text = abjad.Markup('molto flautando').italic().larger() + abjad.Markup.hspace(1)
-        right_text = abjad.Markup.hspace(1) + abjad.Markup('molto gridato').italic().larger()
-        spanner = abjad.TextSpanner(
-            overrides={
-                'text_spanner__bound_details__left__padding': -1,
-                'text_spanner__bound_details__left__stencil_align_dir_y': 0,
-                'text_spanner__bound_details__left__text': left_text,
-                'text_spanner__bound_details__left_broken__text': None,
-                'text_spanner__bound_details__right__arrow': True,
-                'text_spanner__bound_details__right__padding': 1,
-                'text_spanner__bound_details__right__stencil_align_dir_y': 0,
-                'text_spanner__bound_details__right__text': right_text,
-                'text_spanner__bound_details__right_broken__padding': 0,
-                'text_spanner__bound_details__right_broken__text': None,
-                'text_spanner__dash_fraction': 0.25,
-                'text_spanner__dash_period': 1.5,
-            }
-        )
-        return baca.SpannerCommand(
-            selector=selector,
-            spanner=spanner
             )
 
     @staticmethod
