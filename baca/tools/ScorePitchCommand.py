@@ -333,6 +333,8 @@ class ScorePitchCommand(Command):
         start_index = self.start_index
         if start_index is None:
             start_index = 0
+        if not self.source:
+            raise Exception
         if self.source:
             source_length = len(self.source)
             logical_tie_count = len(lts)
@@ -384,7 +386,6 @@ class ScorePitchCommand(Command):
                         pitch_expression = abjad.NumberedPitch(
                             pitch_expression)
                         pitch = abjad.NamedPitch(pitch_expression)
-                #elif isinstance(pitch_expression, abjad.Segment):
                 elif isinstance(pitch_expression, (abjad.Segment, abjad.Set)):
                     pitch = pitch_expression
                 else:
@@ -393,9 +394,7 @@ class ScorePitchCommand(Command):
                     if isinstance(pitch, abjad.Pitch):
                         self._set_pitch(
                             note, pitch, self.allow_repeat_pitches)
-                    #elif isinstance(pitch, abjad.PitchSegment):
                     elif isinstance(pitch, collections.Iterable):
-                        #assert isinstance(pitch, collections.Iterable)
                         chord = abjad.Chord(pitch, note.written_duration)
                         # TODO: check and make sure *overrides* are preserved!
                         abjad.mutate(note).replace(chord)
@@ -407,6 +406,7 @@ class ScorePitchCommand(Command):
                     current_count_index += 1
                     current_count = counts[current_count_index]
         else:
+            raise Exception
             assert self.operators, repr(self.operators)
             allow_repeat_pitches = self.allow_repeat_pitches
             for lt in lts:
@@ -532,32 +532,6 @@ class ScorePitchCommand(Command):
     @property
     def operators(self):
         r"""Gets operators.
-
-        ..  container:: example
-
-            Transposes input pitches:
-
-            >>> command = baca.ScorePitchCommand(
-            ...     operators=[abjad.Transposition(n=2)],
-            ...     )
-
-            >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
-            >>> command(staff)
-            >>> abjad.show(staff) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(staff)
-                \new Staff {
-                    d'8
-                    d'8
-                    d'8
-                    d'8
-                    d'8
-                    d'8
-                    d'8
-                    d'8
-                }
 
         ..  container:: example
 

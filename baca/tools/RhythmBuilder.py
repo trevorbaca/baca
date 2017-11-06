@@ -301,34 +301,34 @@ class RhythmBuilder(Builder):
             dummy_music_voice,
             ])
         dummy_staff.is_simultaneous = True
-        for rhythm_overwrite in self.rhythm_overwrites:
-            selector, division_maker, rhythm_maker = rhythm_overwrite
-            old_selection = selector(dummy_music_voice)
-            #if 1 < len(old_selection):
-            if True:
-                old_selection = abjad.select(old_selection)
-                result = old_selection._get_parent_and_start_stop_indices()
-                parent, start_index, stop_index = result
-                old_duration = abjad.inspect(old_selection).get_duration()
-                division_lists = division_maker([old_duration])
-                assert len(division_lists) == 1
-                division_list = division_lists[0]
-                new_selection = rhythm_maker(division_list)
-                stop = stop_index + 1
-                dummy_music_voice[start_index:stop] = new_selection
-            #elif len(old_selection) == 1:
-            #    assert isinstance(old_selection[0], abjad.Selection)
-            #    old_selection = old_selection[0]
-            #    old_duration = abjad.inspect(old_selection).get_duration()
-            #    division_lists = division_maker([old_duration])
-            #    assert len(division_lists) == 1
-            #    division_list = division_lists[0]
-            #    new_selection = rhythm_maker(division_list)
-            #    old_component = old_selection[0]
-            #    index = dummy_music_voice.index(old_component)
-            #    dummy_music_voice[index:index+1] = new_selection
+        assert len(self.rhythm_overwrites) == 1, repr(self.rhythm_overwrites)
+        selector, division_maker, rhythm_maker = self.rhythm_overwrites[0]
+        #print('SELECTOR', selector)
+        #print('DIVISION-MAKER', division_maker)
+        #print('RHYTHM-MAKER', rhythm_maker)
+        old_selection = selector(dummy_music_voice)
+        #print('OLD SELECTION', old_selection)
+        old_selection = abjad.select(old_selection)
+        result = old_selection._get_parent_and_start_stop_indices()
+        parent, start_index, stop_index = result
+        old_duration = abjad.inspect(old_selection).get_duration()
+        #print('OLD DURATION', old_duration)
+        division_lists = division_maker([old_duration])
+        #print('DIVISION LISTS', division_lists)
+        assert len(division_lists) == 1
+        division_list = division_lists[0]
+        new_selection = rhythm_maker(division_list)
+        #print('NEW SELECTION', new_selection)
+        #print('DUMMY MUSIC VOICE BEFORE:')
+        #for item in dummy_music_voice:
+        #    print(repr(item))
+        stop_index += 1
+        dummy_music_voice[start_index:stop_index] = new_selection
+        #print('DUMMY MUSIC VOICE AFTER:')
+        #for item in dummy_music_voice:
+        #    print(repr(item))
+        #print()
         music = dummy_music_voice[:]
-        #return dummy_music_voice, start_offset
         selections = [abjad.select(_) for _ in music]
         return selections, start_offset
 
