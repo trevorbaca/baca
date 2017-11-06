@@ -711,10 +711,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 raise Exception(f'commands only:\n\n{format(command)}')
         for scope in scopes:
             for command in commands:
-                wrapper = baca.Wrapper(
-                    command=command,
-                    scope=scope,
-                    )
+                wrapper = baca.CommandWrapper(command=command, scope=scope)
                 self.wrappers.append(wrapper)
 
     ### PRIVATE METHODS ###
@@ -1405,7 +1402,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _interpret_commands(self):
         start_time = time.time()
         for wrapper in self.wrappers:
-            assert isinstance(wrapper, baca.Wrapper)
+            assert isinstance(wrapper, baca.CommandWrapper)
             assert isinstance(wrapper.command, (baca.Builder, baca.Command))
             if isinstance(wrapper.command, baca.RhythmBuilder):
                 continue
@@ -1444,7 +1441,7 @@ class SegmentMaker(abjad.SegmentMaker):
         effective_staff_name = effective_staff.context_name
         contributions = []
         for rhythm_command in rhythm_commands:
-            assert isinstance(rhythm_command, baca.Wrapper)
+            assert isinstance(rhythm_command, baca.CommandWrapper)
             if rhythm_command.scope.stages is not None:
                 result = self._get_stage_numbers(rhythm_command.scope.stages)
                 contribution = self._get_time_signatures(*result)
@@ -6981,10 +6978,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 break
         else:
             raise Exception(f'no {voice_name!r} rhythm command for {stage}.')
-        assert isinstance(wrapper, baca.Wrapper)
+        assert isinstance(wrapper, baca.CommandWrapper)
         assert isinstance(wrapper.command, baca.RhythmBuilder)
         command = abjad.new(wrapper.command, **keywords)
-        wrapper = baca.Wrapper(command, target)
+        wrapper = baca.CommandWrapper(command, target)
         self.wrappers.append(wrapper)
 
     def run(

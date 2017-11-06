@@ -216,6 +216,7 @@ Utilities
 
    Coat
    CollectionList
+   CommandWrapper
    CompoundScope
    Constellation
    ConstellationCircuit
@@ -255,7 +256,6 @@ Utilities
    ViolinSoloScoreTemplate
    VoltaMeasureMap
    WellformednessManager
-   Wrapper
    ZaggedPitchClassMaker
 
 .. autosummary::
@@ -263,6 +263,7 @@ Utilities
 
    Coat
    CollectionList
+   CommandWrapper
    CompoundScope
    Constellation
    ConstellationCircuit
@@ -302,5 +303,4 @@ Utilities
    ViolinSoloScoreTemplate
    VoltaMeasureMap
    WellformednessManager
-   Wrapper
    ZaggedPitchClassMaker

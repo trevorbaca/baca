@@ -2,23 +2,22 @@ import abjad
 import baca
 
 
-class Wrapper(abjad.AbjadObject):
-    r'''Scoped command.
+class CommandWrapper(abjad.AbjadObject):
+    r'''Command wrapper.
 
     ..  container:: example
 
-        Wrapped pitch command:
+        Pitch command wrapped with simple scope:
 
-        >>> command = baca.Wrapper(
-        ...     baca.ScorePitchCommand(
-        ...         source=[7, 1, 3, 4, 5, 11],
-        ...         ),
+        >>> command = baca.CommandWrapper(
+        ...     baca.pitches([7, 1, 3, 4, 5, 11]),
         ...     baca.scope('Violin Music Voice', 1, 4),
         ...     )
 
         >>> abjad.f(command)
-        baca.Wrapper(
+        baca.CommandWrapper(
             command=baca.ScorePitchCommand(
+                allow_repeat_pitches=True,
                 source=abjad.CyclicTuple(
                     [
                         abjad.NamedPitch("g'"),
@@ -43,10 +42,8 @@ class Wrapper(abjad.AbjadObject):
 
         Pitch command wrapped with compound scope:
 
-        >>> command = baca.Wrapper(
-        ...     baca.ScorePitchCommand(
-        ...         source=[7, 1, 3, 4, 5, 11],
-        ...         ),
+        >>> command = baca.CommandWrapper(
+        ...     baca.pitches([7, 1, 3, 4, 5, 11]),
         ...     baca.compound([
         ...         baca.scope('Violin Music Voice', 1, 4),
         ...         baca.scope('Violin Music Voice', 8, 12),
@@ -54,8 +51,9 @@ class Wrapper(abjad.AbjadObject):
         ...     )
 
         >>> abjad.f(command)
-        baca.Wrapper(
+        baca.CommandWrapper(
             command=baca.ScorePitchCommand(
+                allow_repeat_pitches=True,
                 source=abjad.CyclicTuple(
                     [
                         abjad.NamedPitch("g'"),
@@ -83,32 +81,6 @@ class Wrapper(abjad.AbjadObject):
                             stop=12,
                             ),
                         ),
-                    ),
-                ),
-            )
-
-    ..  container:: example
-
-        Wrapped displacement command:
-
-        >>> command = baca.Wrapper(
-        ...     baca.displacement([0, 0, 0, 0, 1, 1, 1, 1]),
-        ...     baca.scope('Violin Music Voice', 1, 4),
-        ...     )
-
-        >>> abjad.f(command)
-        baca.Wrapper(
-            command=baca.OctaveDisplacementCommand(
-                displacements=abjad.CyclicTuple(
-                    [0, 0, 0, 0, 1, 1, 1, 1]
-                    ),
-                selector=baca.plts(),
-                ),
-            scope=baca.Scope(
-                voice_name='Violin Music Voice',
-                stages=baca.StageSpecifier(
-                    start=1,
-                    stop=4,
                     ),
                 ),
             )
@@ -146,15 +118,14 @@ class Wrapper(abjad.AbjadObject):
 
         ..  container:: example
 
-            >>> command = baca.Wrapper(
-            ...     baca.ScorePitchCommand(
-            ...         source=[7, 1, 3, 4, 5, 11],
-            ...         ),
+            >>> command = baca.CommandWrapper(
+            ...     baca.pitches([7, 1, 3, 4, 5, 11]),
             ...     baca.scope('Violin Music Voice', 1, 4),
             ...     )
 
             >>> abjad.f(command.command)
             baca.ScorePitchCommand(
+                allow_repeat_pitches=True,
                 source=abjad.CyclicTuple(
                     [
                         abjad.NamedPitch("g'"),
@@ -183,10 +154,8 @@ class Wrapper(abjad.AbjadObject):
 
             Gets scope:
 
-            >>> command = baca.Wrapper(
-            ...     baca.ScorePitchCommand(
-            ...         source=[7, 1, 3, 4, 5, 11],
-            ...         ),
+            >>> command = baca.CommandWrapper(
+            ...     baca.pitches([7, 1, 3, 4, 5, 11]),
             ...     baca.scope('Violin Music Voice', 1, 4),
             ...     )
 
