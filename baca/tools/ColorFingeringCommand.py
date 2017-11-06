@@ -144,8 +144,6 @@ class ColorFingeringCommand(Command):
             if number != 0:
                 fingering = abjad.ColorFingering(number)
                 abjad.attach(fingering, phead)
-            # TODO: maybe no longer necessary to annotate
-            abjad.attach({'color fingering': True}, phead)
 
     ### PUBLIC PROPERTIES ###
 
