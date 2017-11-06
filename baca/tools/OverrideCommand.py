@@ -207,8 +207,6 @@ class OverrideCommand(Command):
         '_attribute_value',
         '_context_name',
         '_grob_name',
-        '_maximum_settings',
-        '_maximum_written_duration',
         '_revert',
         )
 
@@ -220,8 +218,6 @@ class OverrideCommand(Command):
         grob_name=None,
         attribute_name=None,
         attribute_value=None,
-        maximum_written_duration=None,
-        maximum_settings=None,
         revert=None,
         selector='baca.leaves()',
         ):
@@ -236,12 +232,6 @@ class OverrideCommand(Command):
             assert isinstance(attribute_name, str), repr(attribute_name)
         self._attribute_name = attribute_name
         self._attribute_value = attribute_value
-        if maximum_written_duration is not None:
-            maximum_written_duration = abjad.Duration(maximum_written_duration)
-        self._maximum_written_duration = maximum_written_duration
-        if maximum_settings is not None:
-            assert isinstance(maximum_settings, dict), maximum_settings
-        self._maximum_settings = maximum_settings
         if revert is not None:
             revert = bool(revert)
         self._revert = revert
@@ -263,16 +253,10 @@ class OverrideCommand(Command):
         if self.context_name is not None:
             statement += '.{context_name}'
         statement += '.{grob_name}.{attribute_name} = {attribute_value}'
-        if self.maximum_written_duration is not None:
-            context_name = self.maximum_settings['context_name']
-            grob_name = self.maximum_settings['grob_name']
-            attribute_name = self.maximum_settings['attribute_name']
-            attribute_value = self.maximum_settings['attribute_value']
-        else:
-            context_name = self.context_name
-            grob_name = self.grob_name
-            attribute_name = self.attribute_name
-            attribute_value = self.attribute_value
+        context_name = self.context_name
+        grob_name = self.grob_name
+        attribute_name = self.attribute_name
+        attribute_value = self.attribute_value
         statement = statement.format(
             context_name=context_name,
             grob_name=grob_name,
@@ -302,10 +286,7 @@ class OverrideCommand(Command):
             abjad.attach(revert, leaves[-1])
         else:
             for leaf in leaves:
-                if (self.maximum_written_duration is None or
-                    (self.maximum_written_duration is not None and
-                    self.maximum_written_duration <= leaf.written_duration)):
-                    exec(statement, globals(), locals())
+                exec(statement, globals(), locals())
 
     ### PUBLIC PROPERTIES ###
 
@@ -344,30 +325,6 @@ class OverrideCommand(Command):
         Set to string or none.
         '''
         return self._grob_name
-
-    # TODO: replace with explicit inequality
-    @property
-    def maximum_settings(self):
-        r'''Gets maximum settings for leaves with written duration
-        greater than or equal to maximum written duration of command.
-
-        ..  note:: Write examples and tests.
-
-        Set to dictionary or none.
-        '''
-        return self._maximum_settings
-
-    # TODO: replace with explicit inequality
-    @property
-    def maximum_written_duration(self):
-        r'''Gets maximum written duration.
-
-        Written durations equal to or greater than this will
-        not be handled.
-
-        Set to duration or none.
-        '''
-        return self._maximum_written_duration
 
     @property
     def revert(self):

@@ -7331,24 +7331,14 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def tremolo_down(
-        n,
-        maximum_adjustment=-1.5,
-        selector='baca.tleaves()',
-        ):
-        r'''Overrides stem tremolo extra offset on leaves.
+    def tremolo_down(n, selector='baca.tleaves()'):
+        r'''Overrides stem tremolo extra offset on trimmed leaves.
         '''
         pair = (0, -n)
         return baca.OverrideCommand(
             attribute_name='extra_offset',
             attribute_value=str(pair),
             grob_name='stem_tremolo',
-            maximum_written_duration=abjad.Duration(1),
-            maximum_settings={
-                'grob_name': 'stem_tremolo',
-                'attribute_name': 'extra_offset',
-                'attribute_value': str((0, maximum_adjustment)),
-                },
             selector=selector,
             )
 
