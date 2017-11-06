@@ -28,27 +28,22 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
 
     __documentation_section__ = 'Specifiers'
 
-    # TODO: remove selector? selectors are for components
     __slots__ = (
         '_direction',
         '_pattern',
-        '_selector',
         )
 
     _publish_storage_format = True
 
     ### INITIALIZER ###
 
-    def __init__(self, direction=None, pattern=None, selector=None):
+    def __init__(self, direction=None, pattern=None):
         if direction is not None:
             assert direction in (abjad.Up, abjad.Down), repr(direction)
         self._direction = direction
         if pattern is not None:
             assert isinstance(pattern, abjad.Pattern), repr(pattern)
         self._pattern = pattern
-        if selector is not None:
-            assert isinstance(selector, abjad.Expression), repr(selector)
-        self._selector = selector
 
     ### SPECIAL METHODS ###
 
@@ -210,13 +205,3 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
         Returns pattern or none.
         '''
         return self._pattern
-
-    @property
-    def selector(self):
-        r'''Gets selector.
-
-        Set to selector or none.
-
-        Returns selector or none.
-        '''
-        return self._selector

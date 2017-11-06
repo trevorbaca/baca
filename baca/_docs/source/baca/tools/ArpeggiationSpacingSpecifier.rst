@@ -25,7 +25,6 @@ Bases
 
       ~baca.tools.ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier.direction
       ~baca.tools.ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier.pattern
-      ~baca.tools.ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier.selector
       ~baca.tools.ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier.__call__
       ~baca.tools.ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier.__copy__
       ~baca.tools.ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier.__eq__
@@ -39,8 +38,6 @@ Read-only properties
 .. autoattribute:: baca.tools.ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier.direction
 
 .. autoattribute:: baca.tools.ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier.pattern
-
-.. autoattribute:: baca.tools.ArpeggiationSpacingSpecifier.ArpeggiationSpacingSpecifier.selector
 
 Special methods
 ---------------
