@@ -2896,8 +2896,7 @@ class LibraryNZ(object):
     def single_segment_transition(
         start=None,
         stop=None,
-        # TODO: change to baca.tleaves().group():
-        selector='baca.runs()'
+        selector='baca.tleaves().group()'
         ):
         r'''Makes single-segment transition spanner.
 

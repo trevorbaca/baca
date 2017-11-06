@@ -598,7 +598,7 @@ class MarkupLibrary(object):
     def molto_pont_plus_vib_molto(
         first_is_new=True,
         second_is_new=True,
-        selector=None,
+        selector='baca.pleaf(0)',
         ):
         return MarkupLibrary.two_part_transition(
             'molto pont.',
@@ -790,7 +790,7 @@ class MarkupLibrary(object):
     def PO_plus_non_vib(
         first_is_new=True,
         second_is_new=True,
-        selector=None,
+        selector='baca.pleaf(0)',
         ):
         return MarkupLibrary.two_part_transition(
             'PO',
@@ -804,7 +804,7 @@ class MarkupLibrary(object):
     def PO_plus_poco_vib(
         first_is_new=True,
         second_is_new=True,
-        selector=None,
+        selector='baca.pleaf(0)',
         ):
         return MarkupLibrary.two_part_transition(
             'PO',
@@ -862,7 +862,7 @@ class MarkupLibrary(object):
     def poco_pont_plus_non_vib(
         first_is_new=True,
         second_is_new=True,
-        selector=None,
+        selector='baca.pleaf(0)',
         ):
         return MarkupLibrary.two_part_transition(
             'poco pont.',
@@ -876,7 +876,7 @@ class MarkupLibrary(object):
     def poco_pont_plus_sub_non_vib(
         first_is_new=True,
         second_is_new=True,
-        selector=None,
+        selector='baca.pleaf(0)',
         ):
         return MarkupLibrary.two_part_transition(
             'poco pont.',
@@ -890,7 +890,7 @@ class MarkupLibrary(object):
     def poco_pont_plus_sub_vib_mod(
         first_is_new=True,
         second_is_new=True,
-        selector=None,
+        selector='baca.pleaf(0)',
         ):
         return MarkupLibrary.two_part_transition(
             'poco pont.',
@@ -904,7 +904,7 @@ class MarkupLibrary(object):
     def poco_pont_plus_vib_mod(
         first_is_new=True,
         second_is_new=True,
-        selector=None,
+        selector='baca.pleaf(0)',
         ):
         return MarkupLibrary.two_part_transition(
             'poco pont.',
@@ -1275,7 +1275,7 @@ class MarkupLibrary(object):
     def tasto_plus_non_vib(
         first_is_new=True,
         second_is_new=True,
-        selector=None,
+        selector='baca.pleaf(0)',
         ):
         return MarkupLibrary.two_part_transition(
             'tasto',
@@ -1303,7 +1303,7 @@ class MarkupLibrary(object):
     def tasto_plus_poco_vib(
         first_is_new=True,
         second_is_new=True,
-        selector=None,
+        selector='baca.pleaf(0)',
         ):
         return MarkupLibrary.two_part_transition(
             'tasto',
@@ -1446,7 +1446,7 @@ class MarkupLibrary(object):
     def XFB_plus_pochiss_pont(
         first_is_new=True,
         second_is_new=True,
-        selector=None,
+        selector='baca.pleaf(0)',
         ):
         return MarkupLibrary.two_part_transition(
             'XFB',
@@ -1460,7 +1460,7 @@ class MarkupLibrary(object):
     def XFB_plus_tasto(
         first_is_new=True,
         second_is_new=True,
-        selector=None,
+        selector='baca.pleaf(0)',
         ):
         return MarkupLibrary.two_part_transition(
             'XFB',
