@@ -93,7 +93,7 @@ class PiecewiseCommand(Command):
             if argument_ is None:
                 pass
             elif isinstance(argument_, baca.IndicatorCommand):
-                for indicator in argument_.arguments:
+                for indicator in argument_.indicators:
                     spanner.attach(indicator, leaf)
             else:
                 spanner.attach(argument_, leaf)

@@ -773,7 +773,7 @@ class LibraryNZ(object):
         markup += abjad.Markup('possibile').upright()
         markup = abjad.new(markup, direction=direction)
         return baca.IndicatorCommand(
-            arguments=[markup],
+            indicators=[markup],
             selector=selector,
             )
 
@@ -1352,7 +1352,7 @@ class LibraryNZ(object):
 
         '''
         return baca.IndicatorCommand(
-            arguments=[abjad.Articulation(dynamic)],
+            indicators=[abjad.Articulation(dynamic)],
             selector=selector,
             )
 
@@ -2870,7 +2870,7 @@ class LibraryNZ(object):
 
         '''
         return baca.IndicatorCommand(
-            arguments=[abjad.Articulation('shortfermata')],
+            indicators=[abjad.Articulation('shortfermata')],
             selector=selector,
             )
 
@@ -4139,7 +4139,7 @@ class LibraryNZ(object):
 
         '''
         return baca.IndicatorCommand(
-            arguments=[abjad.Articulation('staccato')],
+            indicators=[abjad.Articulation('staccato')],
             selector=selector,
             )
 
@@ -4255,7 +4255,7 @@ class LibraryNZ(object):
 
         '''
         return baca.IndicatorCommand(
-            arguments=[abjad.Articulation('staccatissimo')],
+            indicators=[abjad.Articulation('staccatissimo')],
             selector=selector,
             )
 
@@ -4504,7 +4504,7 @@ class LibraryNZ(object):
 
         '''
         return baca.IndicatorCommand(
-            arguments=[abjad.StemTremolo(tremolo_flags=tremolo_flags)],
+            indicators=[abjad.StemTremolo(tremolo_flags=tremolo_flags)],
             selector=selector,
             )
 
@@ -5603,7 +5603,7 @@ class LibraryNZ(object):
 
         '''
         return baca.IndicatorCommand(
-            arguments=[abjad.Articulation('tenuto')],
+            indicators=[abjad.Articulation('tenuto')],
             selector=selector,
             )
 
@@ -8625,7 +8625,7 @@ class LibraryNZ(object):
 
         """
         return baca.IndicatorCommand(
-            arguments=[abjad.Arpeggio(direction=abjad.Up)],
+            indicators=[abjad.Arpeggio(direction=abjad.Up)],
             selector=selector,
             )
 
@@ -8743,7 +8743,7 @@ class LibraryNZ(object):
 
         '''
         return baca.IndicatorCommand(
-            arguments=[abjad.Articulation('upbow')],
+            indicators=[abjad.Articulation('upbow')],
             selector=selector,
             )
 
@@ -8861,6 +8861,6 @@ class LibraryNZ(object):
 
         '''
         return baca.IndicatorCommand(
-            arguments=[abjad.Articulation('verylongfermata')],
+            indicators=[abjad.Articulation('verylongfermata')],
             selector=selector,
             )

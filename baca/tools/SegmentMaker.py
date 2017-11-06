@@ -742,7 +742,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         command = baca.markup.final_markup(*self.final_markup)
         self._score.add_final_markup(
-            command.arguments[0],
+            command.indicators[0],
             extra_offset=self.final_markup_extra_offset,
             )
 

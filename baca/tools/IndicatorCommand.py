@@ -12,9 +12,7 @@ class IndicatorCommand(Command):
         With music-maker:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.IndicatorCommand(
-        ...         arguments=[abjad.Fermata()],
-        ...         ),
+        ...     baca.IndicatorCommand([abjad.Fermata()]),
         ...     baca.MusicRhythmSpecifier(
         ...         rhythm_maker=baca.MusicRhythmMaker(
         ...             talea=abjad.rhythmmakertools.Talea(
@@ -73,9 +71,7 @@ class IndicatorCommand(Command):
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.even_runs(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     baca.IndicatorCommand(
-        ...         arguments=[abjad.Fermata()],
-        ...         ),
+        ...     baca.IndicatorCommand([abjad.Fermata()]),
         ...     )
 
         >>> result = segment_maker.run(is_doc_example=True)
@@ -170,14 +166,14 @@ class IndicatorCommand(Command):
 
     ### INITIALIZER ###
 
-    def __init__(self, arguments=None, selector='baca.pheads()'):
+    def __init__(self, indicators=None, selector='baca.pheads()'):
         Command.__init__(self, selector=selector)
-        if arguments is not None:
-            if isinstance(arguments, collections.Iterable):
-                arguments = abjad.CyclicTuple(arguments)
+        if indicators is not None:
+            if isinstance(indicators, collections.Iterable):
+                indicators = abjad.CyclicTuple(indicators)
             else:
-                arguments = abjad.CyclicTuple([arguments])
-        self._indicators = arguments
+                indicators = abjad.CyclicTuple([indicators])
+        self._indicators = indicators
 
     ### SPECIAL METHODS ###
 
@@ -196,14 +192,14 @@ class IndicatorCommand(Command):
             return
         for i, leaf in enumerate(baca.select(argument).leaves()):
             indicators = self.indicators[i]
-            indicators = self._token_to_arguments(indicators)
+            indicators = self._token_to_indicators(indicators)
             for indicator in indicators:
                 abjad.attach(indicator, leaf)
 
     ### PRIVATE METHODS ###
 
     @staticmethod
-    def _token_to_arguments(token):
+    def _token_to_indicators(token):
         result = []
         if not isinstance(token, (tuple, list)):
             token = [token]
@@ -215,19 +211,16 @@ class IndicatorCommand(Command):
 
     ### PUBLIC PROPERTIES ###
 
-    # TODO: change name to self.indicators
     @property
-    def arguments(self):
-        r'''Gets arguments.
+    def indicators(self):
+        r'''Gets indicators.
 
         ..  container:: example
 
             Attaches fermata to head of every pitched logical tie:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.IndicatorCommand(
-            ...         arguments=[abjad.Fermata()],
-            ...         ),
+            ...     baca.IndicatorCommand([abjad.Fermata()]),
             ...     baca.MusicRhythmSpecifier(
             ...         rhythm_maker=baca.MusicRhythmMaker(
             ...             talea=abjad.rhythmmakertools.Talea(
@@ -279,7 +272,7 @@ class IndicatorCommand(Command):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.IndicatorCommand(
-            ...         arguments=[
+            ...         indicators=[
             ...             abjad.Fermata(), None, None,
             ...             abjad.Fermata(), None, None,
             ...             abjad.Fermata(), None,
@@ -332,16 +325,8 @@ class IndicatorCommand(Command):
 
         Defaults to none.
 
-        Set to arguments or none.
+        Set to indicators or none.
 
-        Returns arguments or none.
-        '''
-        return self._indicators
-
-    @property
-    def indicators(self):
-        r'''Gets indicators.
-
-        Returns cyclic tuple or none.
+        Returns indicators or none.
         '''
         return self._indicators

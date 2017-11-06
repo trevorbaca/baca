@@ -184,7 +184,7 @@ class MarkupLibrary(object):
             markup = abjad.Markup(markup, direction=direction)
         selector = selector or baca.phead(0)
         return baca.IndicatorCommand(
-            arguments=[markup],
+            indicators=[markup],
             selector=selector,
             )
 

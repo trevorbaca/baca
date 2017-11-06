@@ -127,7 +127,7 @@ class LibraryAM(object):
 
         '''
         return baca.IndicatorCommand(
-            arguments=[abjad.Articulation('>')],
+            indicators=[abjad.Articulation('>')],
             selector=selector,
             )
 
@@ -304,7 +304,7 @@ class LibraryAM(object):
             articulations = ['upbow', 'downbow']
         articulations = [abjad.Articulation(_) for _ in articulations]
         return baca.IndicatorCommand(
-            arguments=articulations,
+            indicators=articulations,
             selector=selector,
             )
 
@@ -475,7 +475,7 @@ class LibraryAM(object):
         markup += abjad.Markup('ancora').upright()
         markup = abjad.new(markup, direction=direction)
         return baca.IndicatorCommand(
-            arguments=[markup],
+            indicators=[markup],
             selector=selector,
             )
 
@@ -587,7 +587,7 @@ class LibraryAM(object):
 
         """
         return baca.IndicatorCommand(
-            arguments=[abjad.Articulation('arpeggio')],
+            indicators=[abjad.Articulation('arpeggio')],
             selector=selector,
             )
 
@@ -595,7 +595,7 @@ class LibraryAM(object):
     def articulations(articulations, selector='baca.pheads()'):
         r'''Attaches articulations.
         '''
-        return baca.IndicatorCommand(arguments=articulations)
+        return baca.IndicatorCommand(indicators=articulations)
 
     @staticmethod
     def bass_to_octave(n, selector='baca.plts()'):
@@ -1815,7 +1815,7 @@ class LibraryAM(object):
 
         '''
         return baca.IndicatorCommand(
-            arguments=[abjad.Clef(clef)],
+            indicators=[abjad.Clef(clef)],
             selector=selector,
             )
 
@@ -2707,7 +2707,7 @@ class LibraryAM(object):
 
         '''
         return baca.IndicatorCommand(
-            arguments=[abjad.LilyPondCommand(r'\crossStaff')],
+            indicators=[abjad.LilyPondCommand(r'\crossStaff')],
             selector=selector,
             )
 
@@ -3027,7 +3027,7 @@ class LibraryAM(object):
 
         '''
         return baca.IndicatorCommand(
-            arguments=[abjad.Articulation('tongue #2')],
+            indicators=[abjad.Articulation('tongue #2')],
             selector=selector,
             )
 
@@ -3144,7 +3144,7 @@ class LibraryAM(object):
 
         """
         return baca.IndicatorCommand(
-            arguments=[abjad.Arpeggio(direction=abjad.Down)],
+            indicators=[abjad.Arpeggio(direction=abjad.Down)],
             selector=selector,
             )
 
@@ -3262,7 +3262,7 @@ class LibraryAM(object):
 
         '''
         return baca.IndicatorCommand(
-            arguments=[abjad.Articulation('downbow')],
+            indicators=[abjad.Articulation('downbow')],
             selector=selector,
             )
 
@@ -3378,7 +3378,7 @@ class LibraryAM(object):
 
         '''
         return baca.IndicatorCommand(
-            arguments=[abjad.Dynamic(dynamic)],
+            indicators=[abjad.Dynamic(dynamic)],
             selector=selector,
             )
 
@@ -3899,7 +3899,7 @@ class LibraryAM(object):
 
         '''
         return baca.IndicatorCommand(
-            arguments=[abjad.LilyPondCommand('dynamicDown')],
+            indicators=[abjad.LilyPondCommand('dynamicDown')],
             selector=selector,
             )
 
@@ -4021,7 +4021,7 @@ class LibraryAM(object):
 
         '''
         return baca.IndicatorCommand(
-            arguments=[abjad.LilyPondCommand('dynamicUp')],
+            indicators=[abjad.LilyPondCommand('dynamicUp')],
             selector=selector,
             )
 
@@ -4178,7 +4178,7 @@ class LibraryAM(object):
         markup = left_quotes + dynamic_markup + right_quotes
         markup = abjad.new(markup, direction=direction)
         return baca.IndicatorCommand(
-            arguments=[markup],
+            indicators=[markup],
             selector=selector,
             )
 
@@ -4302,7 +4302,7 @@ class LibraryAM(object):
 
         '''
         return baca.IndicatorCommand(
-            arguments=[abjad.Articulation('fermata')],
+            indicators=[abjad.Articulation('fermata')],
             selector=selector,
             )
 
@@ -4505,7 +4505,7 @@ class LibraryAM(object):
 
         '''
         return baca.IndicatorCommand(
-            arguments=[abjad.Articulation('flageolet')],
+            indicators=[abjad.Articulation('flageolet')],
             selector=selector,
             )
 
@@ -5337,7 +5337,7 @@ class LibraryAM(object):
         '''
         assert isinstance(instrument, abjad.Instrument)
         return baca.IndicatorCommand(
-            arguments=[instrument],
+            indicators=[instrument],
             selector=selector,
             )
 
@@ -5647,7 +5647,7 @@ class LibraryAM(object):
 
         '''
         return baca.IndicatorCommand(
-            arguments=[abjad.Articulation('laissezVibrer')],
+            indicators=[abjad.Articulation('laissezVibrer')],
             selector=selector,
             )
 
@@ -5766,7 +5766,7 @@ class LibraryAM(object):
         '''
         command = abjad.LilyPondCommand('break', format_slot='after')
         return baca.IndicatorCommand(
-            arguments=[command],
+            indicators=[command],
             selector=selector,
             )
 
@@ -5776,7 +5776,7 @@ class LibraryAM(object):
         '''
         literal = abjad.LilyPondLiteral(string)
         return baca.IndicatorCommand(
-            arguments=[literal],
+            indicators=[literal],
             selector=selector,
             )
 
@@ -5892,7 +5892,7 @@ class LibraryAM(object):
 
         '''
         return baca.IndicatorCommand(
-            arguments=[abjad.Articulation('longfermata')],
+            indicators=[abjad.Articulation('longfermata')],
             selector=selector,
             )
 
@@ -6039,7 +6039,7 @@ class LibraryAM(object):
 
         '''
         return baca.IndicatorCommand(
-            arguments=[abjad.Articulation('marcato')],
+            indicators=[abjad.Articulation('marcato')],
             selector=selector,
             )
 
