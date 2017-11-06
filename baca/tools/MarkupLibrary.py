@@ -709,9 +709,8 @@ class MarkupLibrary(object):
             selector=selector,
             )
 
-    # TODO: change name to self.ord()
     @staticmethod
-    def ord_(selector=None):
+    def ord(selector=None):
         return MarkupLibrary.make_markup(
             'ord.',
             selector=selector,
@@ -1156,23 +1155,6 @@ class MarkupLibrary(object):
             selector=selector,
             )
 
-    # TODO: remove in favor of self.__call__()?
-    @staticmethod
-    def specifier(
-        string,
-        direction=abjad.Up,
-        is_new=True,
-        selector=None,
-        whiteout=True,
-        ):
-        markup = MarkupLibrary.make_markup(
-            string,
-            direction=direction,
-            is_new=is_new,
-            whiteout=whiteout,
-            )
-        return MarkupLibrary()(markup=markup)
-
     @staticmethod
     def still(is_new=True, selector=None):
         return MarkupLibrary.make_markup(
@@ -1402,16 +1384,14 @@ class MarkupLibrary(object):
             selector=selector,
             )
 
-    # TODO: change name to something with 'transition'
     @staticmethod
     def two_part_transition(
         string_1,
         string_2,
         first_is_new=True,
         second_is_new=True,
-        selector=None,
+        selector='baca.pleaf(0)',
         ):
-        selector = selector or baca.pleaf(0)
         if first_is_new:
             if second_is_new:
                 composite_string = f'{string_1} + {string_2}'

@@ -2914,7 +2914,7 @@ class LibraryNZ(object):
             ...     baca.text_script_staff_padding(6),
             ...     baca.single_segment_transition(
             ...         baca.markup.pont(),
-            ...         baca.markup.ord_(),
+            ...         baca.markup.ord(),
             ...         baca.tleaves().group(),
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -3001,7 +3001,7 @@ class LibraryNZ(object):
             ...     baca.text_script_staff_padding(6),
             ...     baca.single_segment_transition(
             ...         baca.markup.pont(),
-            ...         baca.markup.ord_(),
+            ...         baca.markup.ord(),
             ...         baca.tuplet_tleaves()[1:2],
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -6288,7 +6288,7 @@ class LibraryNZ(object):
             ...     baca.text_script_staff_padding(6),
             ...     baca.single_segment_transition(
             ...         baca.markup.pont(),
-            ...         baca.markup.ord_(),
+            ...         baca.markup.ord(),
             ...         baca.tleaves().group(),
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -6378,7 +6378,7 @@ class LibraryNZ(object):
             ...     baca.text_script_staff_padding(6),
             ...     baca.single_segment_transition(
             ...         baca.markup.pont(),
-            ...         baca.markup.ord_(),
+            ...         baca.markup.ord(),
             ...         baca.tuplet_tleaves()[1:2],
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -6911,16 +6911,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def time_signature_extra_offset(
-        pair=None,
-        # TODO: change to baca.leaf(0)
-        selector='baca.leaves().group()',
-        ):
+    def time_signature_extra_offset(pair, selector='baca.leaf(0)'):
         r'''Overrides time signature extra offset.
 
         ..  container:: example
 
-            Overrides time signature extra offset on leaves:
+            Overrides time signature extra offset on leaf 0:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -6947,6 +6943,7 @@ class LibraryNZ(object):
                                 \override Score.TimeSignature.extra-offset = #'(-6 . 0)
                                 \override TupletBracket.staff-padding = #5
                                 r8
+                                \revert Score.TimeSignature.extra-offset
                                 c'16 [
                                 d'16 ]
                                 bf'4 ~
@@ -6966,7 +6963,6 @@ class LibraryNZ(object):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert Score.TimeSignature.extra-offset
                                 \revert TupletBracket.staff-padding
                             }
                         }
@@ -7245,9 +7241,8 @@ class LibraryNZ(object):
             selector=selector,
             )
 
-    # TODO: change selector to baca.leaves()
     @staticmethod
-    def transparent_time_signatures(selector='baca.rests()'):
+    def transparent_time_signatures(selector='baca.leaves()'):
         r'''Makes time signatures transparent.
 
         ..  container:: example
@@ -7728,16 +7723,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def tuplet_bracket_extra_offset(
-        pair,
-        # TODO: change to baca.leaf(0)
-        selector='baca.leaves()',
-        ):
+    def tuplet_bracket_extra_offset(pair, selector='baca.leaf(0)'):
         r'''Overrides tuplet bracket extra offset.
 
         ..  container:: example
 
-            Overrides tuplet bracket extra offset on leaves:
+            Overrides tuplet bracket extra offset on leaf 0:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -7764,6 +7755,7 @@ class LibraryNZ(object):
                                 \override TupletBracket.extra-offset = #'(-1 . 0)
                                 \override TupletBracket.staff-padding = #5
                                 r8
+                                \revert TupletBracket.extra-offset
                                 c'16 [
                                 d'16 ]
                                 bf'4 ~
@@ -7783,7 +7775,6 @@ class LibraryNZ(object):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.extra-offset
                                 \revert TupletBracket.staff-padding
                             }
                         }
@@ -8227,14 +8218,13 @@ class LibraryNZ(object):
             selector=selector,
             )
 
-    # TODO: change selector to baca.leaf(0)
     @staticmethod
-    def tuplet_number_extra_offset(pair, selector='baca.leaves().group()'):
+    def tuplet_number_extra_offset(pair, selector='baca.leaf(0)'):
         r'''Overrides tuplet number extra offset.
 
         ..  container:: example
 
-            Overrides tuplet number extra offset on leaves:
+            Overrides tuplet number extra offset on leaf 0:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
@@ -8261,6 +8251,7 @@ class LibraryNZ(object):
                                 \override TupletBracket.staff-padding = #5
                                 \override TupletNumber.extra-offset = #'(-1 . 0)
                                 r8
+                                \revert TupletNumber.extra-offset
                                 c'16 [
                                 d'16 ]
                                 bf'4 ~
@@ -8281,7 +8272,6 @@ class LibraryNZ(object):
                                 a'16
                                 r4
                                 \revert TupletBracket.staff-padding
-                                \revert TupletNumber.extra-offset
                             }
                         }
                     }

@@ -93,7 +93,7 @@ Bases
       ~baca.tools.MarkupLibrary.MarkupLibrary.nut
       ~baca.tools.MarkupLibrary.MarkupLibrary.off_string_bowing_on_staccati
       ~baca.tools.MarkupLibrary.MarkupLibrary.one_click_every
-      ~baca.tools.MarkupLibrary.MarkupLibrary.ord_
+      ~baca.tools.MarkupLibrary.MarkupLibrary.ord
       ~baca.tools.MarkupLibrary.MarkupLibrary.ord_poco_scratch
       ~baca.tools.MarkupLibrary.MarkupLibrary.ord_senza_scratch
       ~baca.tools.MarkupLibrary.MarkupLibrary.ordinario
@@ -133,7 +133,6 @@ Bases
       ~baca.tools.MarkupLibrary.MarkupLibrary.spazz
       ~baca.tools.MarkupLibrary.MarkupLibrary.spazzolato
       ~baca.tools.MarkupLibrary.MarkupLibrary.spazzolato_1_2_clt
-      ~baca.tools.MarkupLibrary.MarkupLibrary.specifier
       ~baca.tools.MarkupLibrary.MarkupLibrary.still
       ~baca.tools.MarkupLibrary.MarkupLibrary.string_number
       ~baca.tools.MarkupLibrary.MarkupLibrary.string_numbers
@@ -322,7 +321,7 @@ Class & static methods
 
 .. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.one_click_every
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.ord_
+.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.ord
 
 .. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.ord_poco_scratch
 
@@ -401,8 +400,6 @@ Class & static methods
 .. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.spazzolato
 
 .. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.spazzolato_1_2_clt
-
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.specifier
 
 .. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.still
 

@@ -5834,13 +5834,9 @@ class LibraryAM(object):
     def make_rests():
         r'''Makes rests.
         '''
-        mask = abjad.rhythmmakertools.SilenceMask(
-            # TODO: remove abjad.index_all() in favor of abjad.index()
-            pattern=abjad.index_all(),
-            )
         return baca.RhythmBuilder(
             rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
-                division_masks=[mask],
+                division_masks=[abjad.silence([0], 1)],
                 ),
             )
 
