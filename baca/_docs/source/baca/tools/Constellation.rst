@@ -21,6 +21,7 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.Constellation.Constellation.constellate
       ~baca.tools.Constellation.Constellation.constellation_number
       ~baca.tools.Constellation.Constellation.generator_chord
       ~baca.tools.Constellation.Constellation.get_chord
@@ -79,6 +80,11 @@ Methods
 .. automethod:: baca.tools.Constellation.Constellation.show_generator_chord_and_pivot_chord
 
 .. automethod:: baca.tools.Constellation.Constellation.show_pivot_chord
+
+Class & static methods
+----------------------
+
+.. automethod:: baca.tools.Constellation.Constellation.constellate
 
 Special methods
 ---------------

@@ -167,14 +167,14 @@ class Constellation(abjad.AbjadObject):
         return next_constellation
 
     def _constellate_partitioned_generator_pitch_numbers(self):
-        self._pitch_number_lists = baca.constellate(
+        self._pitch_number_lists = self.constellate(
             self._partitioned_generator_pitch_numbers,
             self.pitch_range,
             )
 
     def _label_chord(self, chord):
         chord_number = self.get_number_of_chord(chord)
-        label = '%s-%s' % (self._constellation_number, chord_number)
+        label = f'{self._constellation_number}-{chord_number}'
         markup = abjad.Markup(label)
         abjad.attach(markup, chord)
 
@@ -296,6 +296,58 @@ class Constellation(abjad.AbjadObject):
 
     ### PUBLIC METHODS ###
 
+    @staticmethod
+    def constellate(cells, range):
+        r'''Constellates `cells`.
+
+        ..  container:: example
+
+            >>> pitches = [[0, 2, 10], [16, 19, 20]]
+            >>> range_ = abjad.PitchRange('[C4, C#7]')
+            >>> segments = baca.Constellation.constellate(pitches, range_)
+            >>> for segment in segments:
+            ...     segment
+            Sequence([0, 2, 4, 7, 8, 10])
+            Sequence([0, 2, 10, 16, 19, 20])
+            Sequence([0, 2, 10, 28, 31, 32])
+            Sequence([4, 7, 8, 12, 14, 22])
+            Sequence([12, 14, 16, 19, 20, 22])
+            Sequence([12, 14, 22, 28, 31, 32])
+            Sequence([4, 7, 8, 24, 26, 34])
+            Sequence([16, 19, 20, 24, 26, 34])
+            Sequence([24, 26, 28, 31, 32, 34])
+
+        ..  container:: example
+
+            >>> pitches = [[4, 8, 11], [7, 15, 17]]
+            >>> range_ = abjad.PitchRange('[C4, C#7]')
+            >>> segments = baca.Constellation.constellate(pitches, range_)
+            >>> for segment in segments:
+            ...     segment
+            Sequence([4, 7, 8, 11, 15, 17])
+            Sequence([4, 8, 11, 19, 27, 29])
+            Sequence([7, 15, 16, 17, 20, 23])
+            Sequence([16, 19, 20, 23, 27, 29])
+            Sequence([7, 15, 17, 28, 32, 35])
+            Sequence([19, 27, 28, 29, 32, 35])
+
+        Returns outer product of octave transpositions of `cells` in `range`.
+        '''
+        if not isinstance(range, abjad.PitchRange):
+            raise TypeError(f'pitch range only: {range!r}.')
+        transposition_list = []
+        for cell in cells:
+            transpositions = range.list_octave_transpositions(cell)
+            transposition_list.append(transpositions)
+        enumerator = abjad.Enumerator(transposition_list)
+        result = enumerator.yield_outer_product()
+        result = list(result)
+        for i, part in enumerate(result):
+            result[i] = baca.sequence(part).flatten(depth=-1)
+        for i, cell in enumerate(result[:]):
+            result[i] = cell.sort()
+        return result
+
     def get_chord(self, chord_number):
         '''Gets chord with 1-indexed chord number.
 
@@ -325,7 +377,7 @@ class Constellation(abjad.AbjadObject):
         '''
         chord = abjad.Chord(chord, (1, 4))
         pitch_numbers = [_.number for _ in chord.written_pitches]
-        pitch_numbers = baca.Sequence(items=pitch_numbers)
+        pitch_numbers = baca.sequence(items=pitch_numbers)
         for i, pitch_number_list in enumerate(self):
             if pitch_number_list == pitch_numbers:
                 return i + 1

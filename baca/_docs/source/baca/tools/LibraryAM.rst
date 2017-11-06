@@ -39,7 +39,6 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.color_fingerings
       ~baca.tools.LibraryAM.LibraryAM.compound
       ~baca.tools.LibraryAM.LibraryAM.compound_quarter_divisions
-      ~baca.tools.LibraryAM.LibraryAM.constellate
       ~baca.tools.LibraryAM.LibraryAM.cross_note_heads
       ~baca.tools.LibraryAM.LibraryAM.cross_staff
       ~baca.tools.LibraryAM.LibraryAM.dashed_arrow
@@ -131,8 +130,6 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAM.LibraryAM.compound
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.compound_quarter_divisions
-
-.. automethod:: baca.tools.LibraryAM.LibraryAM.constellate
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.cross_note_heads
 

@@ -2283,60 +2283,6 @@ class LibraryAM(object):
         expression = expression.flatten(depth=-1)
         return expression
 
-    # TODO: remove flatten keyword
-    @staticmethod
-    def constellate(cells, range, flatten=True):
-        '''Constellates `cells`.
-
-        ..  container:: example
-
-            >>> pitches = [[0, 2, 10], [16, 19, 20]]
-            >>> range_ = abjad.PitchRange('[C4, C#7]')
-            >>> segments = baca.constellate(pitches, range_)
-            >>> for segment in segments:
-            ...     segment
-            Sequence([0, 2, 4, 7, 8, 10])
-            Sequence([0, 2, 10, 16, 19, 20])
-            Sequence([0, 2, 10, 28, 31, 32])
-            Sequence([4, 7, 8, 12, 14, 22])
-            Sequence([12, 14, 16, 19, 20, 22])
-            Sequence([12, 14, 22, 28, 31, 32])
-            Sequence([4, 7, 8, 24, 26, 34])
-            Sequence([16, 19, 20, 24, 26, 34])
-            Sequence([24, 26, 28, 31, 32, 34])
-
-        ..  container:: example
-
-            >>> pitches = [[4, 8, 11], [7, 15, 17]]
-            >>> range_ = abjad.PitchRange('[C4, C#7]')
-            >>> segments = baca.constellate(pitches, range_)
-            >>> for segment in segments:
-            ...     segment
-            Sequence([4, 7, 8, 11, 15, 17])
-            Sequence([4, 8, 11, 19, 27, 29])
-            Sequence([7, 15, 16, 17, 20, 23])
-            Sequence([16, 19, 20, 23, 27, 29])
-            Sequence([7, 15, 17, 28, 32, 35])
-            Sequence([19, 27, 28, 29, 32, 35])
-
-        Returns outer product of octave transpositions of `cells` in `range`.
-        '''
-        if not isinstance(range, abjad.PitchRange):
-            raise TypeError(f'pitch range only: {range!r}.')
-        transposition_list = []
-        for cell in cells:
-            transpositions = range.list_octave_transpositions(cell)
-            transposition_list.append(transpositions)
-        enumerator = abjad.Enumerator(transposition_list)
-        result = enumerator.yield_outer_product()
-        result = list(result)
-        if flatten:
-            for i, part in enumerate(result):
-                result[i] = baca.sequence(part).flatten(depth=-1)
-        for i, cell in enumerate(result[:]):
-            result[i] = cell.sort()
-        return result
-
     @staticmethod
     def cross_note_heads(selector='baca.tleaves()'):
         r'''Overrides note-head style on pitched leaves.
