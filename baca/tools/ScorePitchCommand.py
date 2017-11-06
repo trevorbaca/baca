@@ -20,9 +20,7 @@ class ScorePitchCommand(Command):
         >>> segment_maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.even_runs(),
-        ...     baca.ScorePitchCommand(
-        ...         source=[19, 13, 15, 16, 17, 23],
-        ...         ),
+        ...     baca.pitches([19, 13, 15, 16, 17, 23]),
         ...     )
 
         >>> result = segment_maker.run(is_doc_example=True)
@@ -107,6 +105,103 @@ class ScorePitchCommand(Command):
                 >>
             >>
 
+    ..  container:: example
+
+        With pitch numbers:
+
+        >>> segment_maker = baca.SegmentMaker(
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.even_runs(),
+        ...     baca.pitches('C4 F4 F#4 <B4 C#5> D5'), 
+        ...     )
+
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score])
+            \context Score = "Score" <<
+                \tag violin
+                \context GlobalContext = "Global Context" <<
+                    \context GlobalRests = "Global Rests" {
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                    }
+                    \context GlobalSkips = "Global Skips" {
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" {
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            {
+                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
+                                \clef "treble"
+                                c'8 [
+                                f'8
+                                fs'8
+                                <b' cs''>8 ]
+                            }
+                            {
+                                d''8 [
+                                c'8
+                                f'8 ]
+                            }
+                            {
+                                fs'8 [
+                                <b' cs''>8
+                                d''8
+                                c'8 ]
+                            }
+                            {
+                                f'8 [
+                                fs'8
+                                <b' cs''>8 ]
+                                \bar "|"
+                            }
+                        }
+                    }
+                >>
+            >>
+
     '''
 
     ### CLASS VARIABLES ###
@@ -171,15 +266,8 @@ class ScorePitchCommand(Command):
             self._use_exact_spelling = False
         if source is not None:
             if isinstance(source, str):
-                source = source.split()
-            source_ = []
-            for element in source:
-                try:
-                    element = abjad.NamedPitch(element)
-                except ValueError:
-                    pass
-                source_.append(element)
-            source = source_
+                source = self._parse_string(source)
+            source = self._coerce_source(source)
             source = abjad.CyclicTuple(source)
         self._source = source
         if start_index is not None:
@@ -291,7 +379,8 @@ class ScorePitchCommand(Command):
                         pitch_expression = abjad.NumberedPitch(
                             pitch_expression)
                         pitch = abjad.NamedPitch(pitch_expression)
-                elif isinstance(pitch_expression, abjad.Segment):
+                #elif isinstance(pitch_expression, abjad.Segment):
+                elif isinstance(pitch_expression, (abjad.Segment, abjad.Set)):
                     pitch = pitch_expression
                 else:
                     raise Exception(f'pitch or segment: {pitch_expression!r}.')
@@ -299,8 +388,9 @@ class ScorePitchCommand(Command):
                     if isinstance(pitch, abjad.Pitch):
                         self._set_pitch(
                             note, pitch, self.allow_repeat_pitches)
-                    elif isinstance(pitch, abjad.PitchSegment):
-                        assert isinstance(pitch, collections.Iterable)
+                    #elif isinstance(pitch, abjad.PitchSegment):
+                    elif isinstance(pitch, collections.Iterable):
+                        #assert isinstance(pitch, collections.Iterable)
                         chord = abjad.Chord(pitch, note.written_duration)
                         # TODO: check and make sure *overrides* are preserved!
                         abjad.mutate(note).replace(chord)
@@ -325,11 +415,44 @@ class ScorePitchCommand(Command):
 
     ### PRIVATE METHODS ###
 
+    @staticmethod
+    def _coerce_source(source):
+        items = []
+        for item in source:
+            if isinstance(item, str) and '<' in item and '>' in item:
+                item = item.strip('<')
+                item = item.strip('>')
+                item = abjad.PitchSet(item, abjad.NamedPitch)
+            elif isinstance(item, str):
+                item = abjad.NamedPitch(item)
+            elif isinstance(item, collections.Iterable):
+                item = abjad.PitchSet(item, abjad.NamedPitch)
+            else:
+                item = abjad.NamedPitch(item)
+            items.append(item)
+        return items
+
     def _mutates_score(self):
-        for item in self.source or []:
-            if isinstance(item, abjad.PitchSegment):
-                return True
-        return False
+        source = self.source or []
+        return any(isinstance(_, collections.Iterable) for _ in source)
+
+    @staticmethod
+    def _parse_string(string):
+        items, current_chord = [], []
+        for part in string.split():
+            if '<' in part:
+                assert not current_chord
+                current_chord.append(part)
+            elif '>' in part:
+                assert current_chord
+                current_chord.append(part)
+                item = ' '.join(current_chord)
+                items.append(item)
+                current_chord = []
+            else:
+                items.append(part)
+        assert not current_chord, repr(current_chord)
+        return items
 
     @staticmethod
     def _set_pitch(leaf, pitch, allow_repeat_pitches=None):
