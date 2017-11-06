@@ -251,6 +251,8 @@ class ScorePitchCommand(Command):
         if reverse is not None:
             reverse = bool(reverse)
         self._reverse = reverse
+    
+        # TODO: remove _use_exact_spelling and always use exact spelling
         if isinstance(source, str):
             self._use_exact_spelling = True
         elif (isinstance(source, collections.Iterable) and
@@ -264,6 +266,7 @@ class ScorePitchCommand(Command):
             self._use_exact_spelling = True
         else:
             self._use_exact_spelling = False
+
         if source is not None:
             if isinstance(source, str):
                 source = self._parse_string(source)
@@ -279,6 +282,8 @@ class ScorePitchCommand(Command):
     # TODO: write comprehensive tests
     def __call__(self, argument=None):
         r'''Calls command on `argument`.
+
+        ..  todo:: return number of pitches consumed.
 
         ..  note:: Write comprehensive tests.
 
@@ -403,15 +408,14 @@ class ScorePitchCommand(Command):
                     current_count = counts[current_count_index]
         else:
             assert self.operators, repr(self.operators)
-            for logical_tie in lts:
-                for note in logical_tie:
-                    for operator_ in self.operators:
-                        written_pitch = note.written_pitch
-                        pitch_expression = written_pitch.pitch_class
-                        pitch_expression = operator_(pitch_expression)
-                        written_pitch = abjad.NamedPitch(pitch_expression)
-                        self._set_pitch(
-                            note, written_pitch, self.allow_repeat_pitches)
+            allow_repeat_pitches = self.allow_repeat_pitches
+            for lt in lts:
+                for pleaf in lt:
+                    for operator in self.operators:
+                        pitch = pleaf.written_pitch
+                        pitch = operator(pitch.pitch_class)
+                        pitch = abjad.NamedPitch(pitch)
+                        self._set_pitch(pleaf, pitch, allow_repeat_pitches)
 
     ### PRIVATE METHODS ###
 
@@ -515,23 +519,7 @@ class ScorePitchCommand(Command):
 
     @property
     def counts(self):
-        r'''Gets command counts.
-
-        ..  container:: example
-
-            Gets counts:
-
-            >>> command = baca.ScorePitchCommand(
-            ...     counts=[20, 12, 12, 6],
-            ...     operators=[
-            ...         abjad.Inversion(),
-            ...         abjad.Transposition(n=2),
-            ...         ],
-            ...     source=[19, 13, 15, 16, 17, 23],
-            ...     )
-
-            >>> command.counts
-            [20, 12, 12, 6]
+        r'''Gets counts.
 
         Defaults to none.
 
