@@ -27,12 +27,9 @@ Bases
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.allow_repeat_pitches
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.counts
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.get_pitch
-      ~baca.tools.ScorePitchCommand.ScorePitchCommand.operators
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.repetition_intervals
-      ~baca.tools.ScorePitchCommand.ScorePitchCommand.reverse
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.selector
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.source
-      ~baca.tools.ScorePitchCommand.ScorePitchCommand.start_index
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.__call__
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.__eq__
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.__format__
@@ -48,11 +45,7 @@ Read-only properties
 
 .. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.counts
 
-.. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.operators
-
 .. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.repetition_intervals
-
-.. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.reverse
 
 .. only:: html
 
@@ -61,8 +54,6 @@ Read-only properties
       .. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.selector
 
 .. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.source
-
-.. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.start_index
 
 Methods
 -------

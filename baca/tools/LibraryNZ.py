@@ -624,19 +624,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def pitches(
-        source,
-        allow_repeat_pitches=True,
-        operators=None,
-        start_index=None,
-        ):
+    def pitches(source, allow_repeat_pitches=True):
         r'''Sets pitches.
         '''
         return baca.ScorePitchCommand(
             allow_repeat_pitches=allow_repeat_pitches,
-            operators=operators,
             source=source,
-            start_index=start_index,
             )
 
     @staticmethod
@@ -7307,15 +7300,6 @@ class LibraryNZ(object):
             grob_name='time_signature',
             revert=True,
             selector=selector,
-            )
-
-    # TODO: remove
-    @staticmethod
-    def transpose(n=0):
-        r'''Transposes pitches.
-        '''
-        return baca.ScorePitchCommand(
-            operators=[abjad.Transposition(n=n)],
             )
 
     # TODO: remove

@@ -70,7 +70,6 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.imbricate
       ~baca.tools.LibraryAM.LibraryAM.infinite_pitches
       ~baca.tools.LibraryAM.LibraryAM.instrument
-      ~baca.tools.LibraryAM.LibraryAM.invert
       ~baca.tools.LibraryAM.LibraryAM.invert_segments
       ~baca.tools.LibraryAM.LibraryAM.label
       ~baca.tools.LibraryAM.LibraryAM.laissez_vibrer
@@ -190,8 +189,6 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAM.LibraryAM.infinite_pitches
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.instrument
-
-.. automethod:: baca.tools.LibraryAM.LibraryAM.invert
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.invert_segments
 

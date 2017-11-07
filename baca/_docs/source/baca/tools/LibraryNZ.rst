@@ -89,7 +89,6 @@ Bases
       ~baca.tools.LibraryNZ.LibraryNZ.transparent_rests
       ~baca.tools.LibraryNZ.LibraryNZ.transparent_span_bars
       ~baca.tools.LibraryNZ.LibraryNZ.transparent_time_signatures
-      ~baca.tools.LibraryNZ.LibraryNZ.transpose
       ~baca.tools.LibraryNZ.LibraryNZ.transpose_segments
       ~baca.tools.LibraryNZ.LibraryNZ.tremolo_down
       ~baca.tools.LibraryNZ.LibraryNZ.trill
@@ -252,8 +251,6 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.transparent_span_bars
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.transparent_time_signatures
-
-.. automethod:: baca.tools.LibraryNZ.LibraryNZ.transpose
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.transpose_segments
 

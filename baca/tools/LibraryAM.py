@@ -5260,17 +5260,6 @@ class LibraryAM(object):
 
     # TODO: remove
     @staticmethod
-    def invert(axis=None):
-        r'''Inverts pitches.
-        '''
-        return baca.ScorePitchCommand(
-            operators=[
-                abjad.Inversion(axis=axis),
-                ]
-            )
-
-    # TODO: remove
-    @staticmethod
     def invert_segments(axis=None):
         r'''Inverts pitch-class segments.
         '''
