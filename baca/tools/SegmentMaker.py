@@ -1751,7 +1751,8 @@ class SegmentMaker(abjad.SegmentMaker):
         counter = abjad.Strin('second').pluralize(total_duration)
         print(f'segment duration {total_duration} {counter} ...')
 
-    # TODO: refactor as _scope_to_leaf_selections() in plural
+    # TODO: refactor as _scope_to_leaf_selections();
+    #       probably not necessary!
     def _scope_to_leaf_selection(self, wrapper):
         leaves = []
         selections = self._scope_to_leaf_selections(wrapper.scope)
@@ -1764,6 +1765,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 print(message)
             else:
                 raise Exception(message)
+        assert selection.are_leaves(), repr(selection)
+        if getattr(wrapper.scope, 'timeline', False):
+            selection = baca.ScorePitchCommand._sort_by_timeline(selection)
         return selection
 
     def _scope_to_leaf_selections(self, scope):

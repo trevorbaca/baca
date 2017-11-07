@@ -383,14 +383,8 @@ class ScorePitchCommand(Command):
             return
         if not self.source:
             return
-        pleaves = []
-        for pleaf in baca.select(argument).pleaves():
-            if abjad.inspect(pleaf).get_logical_tie().head is pleaf:
-                pleaves.append(pleaf)
-        pleaves = abjad.select(pleaves)
-        pleaves = self._sort_by_timeline(pleaves)
         plts = []
-        for pleaf in pleaves:
+        for pleaf in baca.select(argument).pleaves():
             plt = abjad.inspect(pleaf).get_logical_tie()
             if plt.head is pleaf:
                 plts.append(plt)
@@ -434,6 +428,21 @@ class ScorePitchCommand(Command):
                 item = abjad.NamedPitch(item)
             items.append(item)
         return items
+
+    @staticmethod
+    def _get_plts_by_timeline(argument):
+        pleaves = []
+        for pleaf in baca.select(argument).pleaves():
+            if abjad.inspect(pleaf).get_logical_tie().head is pleaf:
+                pleaves.append(pleaf)
+        pleaves = abjad.select(pleaves)
+        pleaves = ScorePitchCommand._sort_by_timeline(pleaves)
+        plts = []
+        for pleaf in pleaves:
+            plt = abjad.inspect(pleaf).get_logical_tie()
+            if plt.head is pleaf:
+                plts.append(plt)
+        return plts
 
     def _mutates_score(self):
         source = self.source or []

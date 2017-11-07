@@ -2262,12 +2262,12 @@ class LibraryAM(object):
         return baca.ColorFingeringCommand(numbers=numbers, selector=selector)
 
     @staticmethod
-    def compound(scopes):
+    def compound(scopes, timeline=None):
         r'''Makes compound scope.
 
         Returns compound scope.
         '''
-        return baca.CompoundScope(scopes=scopes)
+        return baca.CompoundScope(scopes=scopes, timeline=timeline)
 
     @staticmethod
     def compound_quarter_divisions():

@@ -61,13 +61,14 @@ class CompoundScope(abjad.AbjadObject):
 
     __slots__ = (
         '_scopes',
+        '_timeline',
         )
 
     _publish_storage_format = True
 
     ### INITIALIZER ###
 
-    def __init__(self, scopes=None):
+    def __init__(self, scopes=None, timeline=None):
         if scopes is not None:
             assert isinstance(scopes, (tuple, list))
             scopes_ = []
@@ -78,6 +79,9 @@ class CompoundScope(abjad.AbjadObject):
             scopes = scopes_
             scopes = tuple(scopes)
         self._scopes = scopes
+        if timeline is not None:
+            timeline = bool(timeline)
+        self._timeline = timeline
 
     ### PUBLIC PROPERTIES ###
 
@@ -88,3 +92,13 @@ class CompoundScope(abjad.AbjadObject):
         Returns tuple.
         '''
         return self._scopes
+
+    @property
+    def timeline(self):
+        r'''Is true when scope sorts PLTs by timeline.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        '''
+        return self._timeline

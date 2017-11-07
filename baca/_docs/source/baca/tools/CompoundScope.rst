@@ -22,6 +22,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.CompoundScope.CompoundScope.scopes
+      ~baca.tools.CompoundScope.CompoundScope.timeline
       ~baca.tools.CompoundScope.CompoundScope.__eq__
       ~baca.tools.CompoundScope.CompoundScope.__format__
       ~baca.tools.CompoundScope.CompoundScope.__hash__
@@ -31,6 +32,8 @@ Read-only properties
 --------------------
 
 .. autoattribute:: baca.tools.CompoundScope.CompoundScope.scopes
+
+.. autoattribute:: baca.tools.CompoundScope.CompoundScope.timeline
 
 Special methods
 ---------------
