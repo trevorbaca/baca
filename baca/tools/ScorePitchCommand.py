@@ -422,22 +422,7 @@ class ScorePitchCommand(Command):
                 else:
                     message = 'named repetition intervals not implemented.'
                     raise NotImplementedError(message)
-
-#            if isinstance(pitch_expression, abjad.Pitch):
-#                if self._use_exact_spelling:
-#                    pitch = pitch_expression
-#                    assert isinstance(pitch, abjad.NamedPitch)
-#                else:
-#                    pitch_expression = abjad.NumberedPitch(
-#                        pitch_expression)
-#                    pitch = abjad.NamedPitch(pitch_expression)
-#            elif isinstance(pitch_expression, (abjad.Segment, abjad.Set)):
-#                pitch = pitch_expression
-#            else:
-#                raise Exception(f'pitch or segment: {pitch_expression!r}.')
-
             pitch = pitch_expression
-            
             allow_repeat_pitches = self.allow_repeat_pitches
             for pleaf in plt:
                 if isinstance(pitch, abjad.Pitch):
@@ -448,7 +433,6 @@ class ScorePitchCommand(Command):
                     abjad.mutate(pleaf).replace(chord)
                 else:
                     raise Exception(f'pitch or segment: {pitch!r}.')
-
             current_count -= 1
             if current_count == 0:
                 current_logical_tie_index += 1

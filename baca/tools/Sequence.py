@@ -1374,6 +1374,199 @@ class Sequence(abjad.Sequence):
             )
 
     @abjad.Signature()
+    def repeat_by(self, counts=None, cyclic=None):
+        r'''Repeat sequence elements at `counts`.
+
+        ..  container:: example
+
+            With no counts:
+
+            ..  container:: example
+
+                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).repeat_by()
+                Sequence([[1, 2, 3], 4, [5, 6]])
+
+            ..  container:: example expression
+
+                >>> expression = baca.sequence(name='J').repeat_by()
+
+                >>> expression([[1, 2, 3], 4, [5, 6]])
+                Sequence([[1, 2, 3], 4, [5, 6]])
+
+                >>> expression.get_string()
+                'repeat_by(J)'
+
+                >>> markup = expression.get_markup()
+                >>> abjad.show(markup) # doctest: +SKIP
+
+                ..  docs::
+
+                    >>> abjad.f(markup)
+                    \markup {
+                        \concat
+                            {
+                                repeat_by(
+                                \bold
+                                    J
+                                )
+                            }
+                        }
+
+        ..  container:: example
+
+            With acyclic counts:
+
+            >>> sequence = baca.sequence([[1, 2, 3], 4, [5, 6]])
+
+            ..  container:: example
+
+                >>> sequence.repeat_by([0])
+                Sequence([4, [5, 6]])
+
+                >>> sequence.repeat_by([1])
+                Sequence([[1, 2, 3], 4, [5, 6]])
+
+                >>> sequence.repeat_by([2])
+                Sequence([[1, 2, 3], [1, 2, 3], 4, [5, 6]])
+
+                >>> sequence.repeat_by([3])
+                Sequence([[1, 2, 3], [1, 2, 3], [1, 2, 3], 4, [5, 6]])
+
+            ..  container:: example
+
+                >>> sequence.repeat_by([1, 0])
+                Sequence([[1, 2, 3], [5, 6]])
+
+                >>> sequence.repeat_by([1, 1])
+                Sequence([[1, 2, 3], 4, [5, 6]])
+
+                >>> sequence.repeat_by([1, 2])
+                Sequence([[1, 2, 3], 4, 4, [5, 6]])
+
+                >>> sequence.repeat_by([1, 3])
+                Sequence([[1, 2, 3], 4, 4, 4, [5, 6]])
+
+            ..  container:: example
+
+                >>> sequence.repeat_by([1, 1, 0])
+                Sequence([[1, 2, 3], 4])
+
+                >>> sequence.repeat_by([1, 1, 1])
+                Sequence([[1, 2, 3], 4, [5, 6]])
+
+                >>> sequence.repeat_by([1, 1, 2])
+                Sequence([[1, 2, 3], 4, [5, 6], [5, 6]])
+
+                >>> sequence.repeat_by([1, 1, 3])
+                Sequence([[1, 2, 3], 4, [5, 6], [5, 6], [5, 6]])
+
+            ..  container:: example expression
+
+                >>> expression = baca.sequence(name='J').repeat_by([2])
+
+                >>> expression([[1, 2, 3], 4, [5, 6]])
+                Sequence([[1, 2, 3], [1, 2, 3], 4, [5, 6]])
+
+                >>> expression.get_string()
+                'repeat_by(J, counts=[2])'
+
+                >>> markup = expression.get_markup()
+                >>> abjad.show(markup) # doctest: +SKIP
+
+                ..  docs::
+
+                    >>> abjad.f(markup)
+                    \markup {
+                        \concat
+                            {
+                                repeat_by(
+                                \bold
+                                    J
+                                ", counts=[2])"
+                            }
+                        }
+
+        ..  container:: example
+
+            With cyclic counts:
+
+            ..  container:: example
+
+                >>> sequence.repeat_by([0], cyclic=True)
+                Sequence([])
+
+                >>> sequence.repeat_by([1], cyclic=True)
+                Sequence([[1, 2, 3], 4, [5, 6]])
+
+                >>> sequence.repeat_by([2], cyclic=True)
+                Sequence([[1, 2, 3], [1, 2, 3], 4, 4, [5, 6], [5, 6]])
+
+                >>> sequence.repeat_by([3], cyclic=True)
+                Sequence([[1, 2, 3], [1, 2, 3], [1, 2, 3], 4, 4, 4, [5, 6], [5, 6], [5, 6]])
+
+            ..  container:: example
+
+                >>> sequence.repeat_by([2, 0], cyclic=True)
+                Sequence([[1, 2, 3], [1, 2, 3], [5, 6], [5, 6]])
+
+                >>> sequence.repeat_by([2, 1], cyclic=True)
+                Sequence([[1, 2, 3], [1, 2, 3], 4, [5, 6], [5, 6]])
+
+                >>> sequence.repeat_by([2, 2], cyclic=True)
+                Sequence([[1, 2, 3], [1, 2, 3], 4, 4, [5, 6], [5, 6]])
+
+                >>> sequence.repeat_by([2, 3], cyclic=True)
+                Sequence([[1, 2, 3], [1, 2, 3], 4, 4, 4, [5, 6], [5, 6]])
+
+            ..  container:: example expression
+
+                >>> expression = baca.sequence(name='J')
+                >>> expression = expression.repeat_by([2], cyclic=True)
+
+                >>> expression([[1, 2, 3], 4, [5, 6]])
+                Sequence([[1, 2, 3], [1, 2, 3], 4, 4, [5, 6], [5, 6]])
+
+                >>> expression.get_string()
+                'repeat_by(J, counts=[2], cyclic=True)'
+
+                >>> markup = expression.get_markup()
+                >>> abjad.show(markup) # doctest: +SKIP
+
+                ..  docs::
+
+                    >>> abjad.f(markup)
+                    \markup {
+                        \concat
+                            {
+                                repeat_by(
+                                \bold
+                                    J
+                                ", counts=[2], cyclic=True)"
+                            }
+                        }
+
+        Raises exception on negative counts.
+
+        Returns new sequence.
+        '''
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        if counts is None:
+            return type(self)(self)
+        counts = counts or [1]
+        assert isinstance(counts, collections.Iterable)
+        if cyclic is True:
+            counts = abjad.CyclicTuple(counts)
+        items = []
+        for i, item in enumerate(self):
+            try:
+                count = counts[i]
+            except IndexError:
+                count = 1
+            items.extend(count * [item])
+        return type(self)(items)
+
+    @abjad.Signature()
     def reveal(self, count=None):
         r'''Reveals contents of sequence.
 

@@ -46,6 +46,7 @@ Bases
       ~baca.tools.PitchClassSegment.PitchClassSegment.permute
       ~baca.tools.PitchClassSegment.PitchClassSegment.retrograde
       ~baca.tools.PitchClassSegment.PitchClassSegment.rotate
+      ~baca.tools.PitchClassSegment.PitchClassSegment.sequence
       ~baca.tools.PitchClassSegment.PitchClassSegment.space_down
       ~baca.tools.PitchClassSegment.PitchClassSegment.space_up
       ~baca.tools.PitchClassSegment.PitchClassSegment.to_pitch_classes
@@ -144,6 +145,8 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.rotate
+
+.. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.sequence
 
 .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.space_down
 

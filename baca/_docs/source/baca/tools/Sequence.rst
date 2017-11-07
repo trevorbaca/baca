@@ -51,6 +51,7 @@ Bases
       ~baca.tools.Sequence.Sequence.remove
       ~baca.tools.Sequence.Sequence.remove_repeats
       ~baca.tools.Sequence.Sequence.repeat
+      ~baca.tools.Sequence.Sequence.repeat_by
       ~baca.tools.Sequence.Sequence.repeat_to_length
       ~baca.tools.Sequence.Sequence.repeat_to_weight
       ~baca.tools.Sequence.Sequence.replace
@@ -209,6 +210,8 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Sequence.Sequence.repeat
+
+.. automethod:: baca.tools.Sequence.Sequence.repeat_by
 
 .. only:: html
 

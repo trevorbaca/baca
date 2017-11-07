@@ -486,6 +486,35 @@ class PitchClassSegment(abjad.PitchClassSegment):
             previous_item = item
         return False
 
+    def sequence(self):
+        r'''Changes pitch-class segment into a sequence.
+
+        ..  container:: example
+
+            >>> segment = baca.pitch_class_segment([10, 11, 5, 6, 7])
+            >>> abjad.show(segment) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> lilypond_file = segment.__illustrate__()
+                >>> abjad.f(lilypond_file[abjad.Voice])
+                \new Voice {
+                    bf'8
+                    b'8
+                    f'8
+                    fs'8
+                    g'8
+                    \bar "|."
+                    \override Score.BarLine.transparent = ##f
+                }
+
+            >>> segment.sequence()
+            Sequence([NumberedPitchClass(10), NumberedPitchClass(11), NumberedPitchClass(5), NumberedPitchClass(6), NumberedPitchClass(7)])
+
+        Returns sequence.
+        '''
+        return baca.sequence(self)
+
     def space_down(self, bass=None, semitones=None, soprano=None):
         r'''Spaces segment down.
 
