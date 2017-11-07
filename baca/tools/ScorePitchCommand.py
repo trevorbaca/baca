@@ -1,6 +1,8 @@
 import abjad
+import baca
 import collections
 import functools
+import numbers
 from .Command import Command
 
 
@@ -306,7 +308,7 @@ class ScorePitchCommand(Command):
     __slots__ = (
         '_acyclic',
         '_allow_repeat_pitches',
-        '_counts',
+        '_mutated_score',
         '_repetition_intervals',
         '_source',
         )
@@ -317,7 +319,6 @@ class ScorePitchCommand(Command):
         self,
         acyclic=None,
         allow_repeat_pitches=None,
-        counts=None,
         repetition_intervals=None,
         selector=None,
         source=None,
@@ -329,9 +330,14 @@ class ScorePitchCommand(Command):
         if allow_repeat_pitches is not None:
             allow_repeat_pitches = bool(allow_repeat_pitches)
         self._allow_repeat_pitches = allow_repeat_pitches
-        if counts is not None:
-            assert abjad.mathtools.all_are_positive_integers(counts)
-        self._counts = counts
+        self._mutated_score = None
+        if repetition_intervals is not None:
+            assert isinstance(repetition_intervals, collections.Iterable)
+            if not all(
+                isinstance(_, numbers.Number) for _ in repetition_intervals):
+                message = 'named repetition intervals not implemented.'
+                raise NotImplementedError(message)
+            repetition_intervals = abjad.CyclicTuple(repetition_intervals)
         self._repetition_intervals = repetition_intervals
         if source is not None:
             if isinstance(source, str):
@@ -342,11 +348,8 @@ class ScorePitchCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    # TODO: write comprehensive tests
     def __call__(self, argument=None):
         r'''Calls command on `argument`.
-
-        ..  note:: Write comprehensive tests.
 
         ..  container:: example
 
@@ -378,8 +381,10 @@ class ScorePitchCommand(Command):
         '''
         if argument is None:
             return
+        if not self.source:
+            return
         pleaves = []
-        for pleaf in abjad.select(argument).leaves(pitched=True):
+        for pleaf in baca.select(argument).pleaves():
             if abjad.inspect(pleaf).get_logical_tie().head is pleaf:
                 pleaves.append(pleaf)
         pleaves = abjad.select(pleaves)
@@ -389,55 +394,27 @@ class ScorePitchCommand(Command):
             plt = abjad.inspect(pleaf).get_logical_tie()
             if plt.head is pleaf:
                 plts.append(plt)
-        counts = self.counts or [1]
-        counts = abjad.CyclicTuple(counts)
-        start_index = 0
-        source_length = len(self.source)
-        logical_tie_count = len(plts)
-        if self.acyclic and source_length < logical_tie_count:
-            message = f'only {source_length} pitches'
-            message += f' for {logical_tie_count} logical ties:'
-            message += f' {self!r} and {plts!r}.'
+        if self.acyclic and len(self.source) < len(plts):
+            message = f'only {len(self.source)} pitches'
+            message += f' for {len(plts)} logical ties:\n\n'
+            message += f'{self!r} and {plts!r}.'
             raise Exception(message)
-        absolute_start_index = start_index
         source = self.source
-        current_count_index = 0
-        current_count = counts[current_count_index]
-        current_logical_tie_index = 0
-        source_length = len(self.source)
-        for plt in plts:
-            index = absolute_start_index + current_logical_tie_index
-            pitch_expression = source[index]
-            repetition_count = index // len(self.source)
-            if (self.repetition_intervals is not None and
-                0 < repetition_count):
-                repetition_intervals = abjad.CyclicTuple(
-                    self.repetition_intervals)
-                repetition_intervals = repetition_intervals[:repetition_count]
-                repetition_interval = sum(repetition_intervals)
-                if isinstance(repetition_interval, int):
-                    pitch_number = pitch_expression.number
-                    pitch_number += repetition_interval
-                    pitch_expression = type(pitch_expression)(pitch_number)
-                else:
-                    message = 'named repetition intervals not implemented.'
-                    raise NotImplementedError(message)
-            pitch = pitch_expression
-            allow_repeat_pitches = self.allow_repeat_pitches
-            for pleaf in plt:
-                if isinstance(pitch, abjad.Pitch):
-                    self._set_pitch(pleaf, pitch, allow_repeat_pitches)
-                elif isinstance(pitch, collections.Iterable):
-                    chord = abjad.Chord(pitch, pleaf.written_duration)
-                    # TODO: *overrides* and *indicators* are lost!
-                    abjad.mutate(pleaf).replace(chord)
-                else:
-                    raise Exception(f'pitch or segment: {pitch!r}.')
-            current_count -= 1
-            if current_count == 0:
-                current_logical_tie_index += 1
-                current_count_index += 1
-                current_count = counts[current_count_index]
+        if not bool(self.acyclic):
+            source = abjad.CyclicTuple(source)
+        allow_repeat_pitches = self.allow_repeat_pitches
+        for i, plt in enumerate(plts):
+            pitch = source[i]
+            iteration = i // len(self.source)
+            if self.repetition_intervals and 0 < iteration:
+                transposition = sum(self.repetition_intervals[:iteration])
+                pitch = type(pitch)(pitch.number + transposition)
+            mutated_score = self._set_lt_pitch(plt, pitch)
+            if mutated_score:
+                self._mutated_score = True
+            if self.allow_repeat_pitches:
+                for pleaf in plt:
+                    abjad.attach('repeat pitch allowed', pleaf)
 
     ### PRIVATE METHODS ###
 
@@ -460,7 +437,9 @@ class ScorePitchCommand(Command):
 
     def _mutates_score(self):
         source = self.source or []
-        return any(isinstance(_, collections.Iterable) for _ in source)
+        if any(isinstance(_, collections.Iterable) for _ in source):
+            return True
+        return self._mutated_score
 
     @staticmethod
     def _parse_string(string):
@@ -483,16 +462,43 @@ class ScorePitchCommand(Command):
         return items
 
     @staticmethod
-    def _set_pitch(leaf, pitch, allow_repeat_pitches=None):
+    def _set_lt_pitch(lt, pitch):
+        mutated_score = False
         string = 'not yet pitched'
-        if abjad.inspect(leaf).has_indicator(string):
+        for leaf in lt:
             abjad.detach(string, leaf)
-        if isinstance(leaf, abjad.Note):
-            leaf.written_pitch = pitch
-        elif isinstance(leaf, abjad.Chord):
-            raise NotImplementedError
-        if allow_repeat_pitches:
-            abjad.attach('repeat pitch allowed', leaf)
+        if pitch is None:
+            if not lt.is_pitched:
+                pass
+            else:
+                for leaf in lt:
+                    rest = abjad.Rest(leaf.written_duration)
+                    # TODO: overrides and indicators are lost!
+                    abjad.mutate(leaf).replace(rest)
+                    mutated_score = True
+        elif isinstance(pitch, collections.Iterable):
+            if isinstance(lt.head, abjad.Chord):
+                for chord in lt:
+                    chord.written_pitches = pitch
+            else:
+                assert isinstance(lt.head, (abjad.Note, abjad.Rest))
+                for leaf in lt:
+                    chord = abjad.Chord(pitch, leaf.written_duration)
+                    # TODO: overrides and indicators are lost!
+                    abjad.mutate(leaf).replace(chord)
+                    mutated_score = True
+        else:
+            if isinstance(lt.head, abjad.Note):
+                for note in lt:
+                    note.written_pitch = pitch
+            else:
+                assert isinstance(lt.head, (abjad.Chord, abjad.Rest))
+                for leaf in lt:
+                    note = abjad.Note(pitch, leaf.written_duration)
+                    # TODO: overrides and indicators are lost!
+                    abjad.mutate(leaf).replace(note)
+                    mutated_score = True
+        return mutated_score
 
     @staticmethod
     def _sort_by_timeline(leaves):
@@ -595,7 +601,7 @@ class ScorePitchCommand(Command):
             ...     )
 
             >>> command.repetition_intervals
-            [12]
+            CyclicTuple([12])
 
             >>> for index in range(12):
             ...     pitch = command.get_pitch(index)
@@ -623,7 +629,7 @@ class ScorePitchCommand(Command):
             ...     )
 
             >>> command.repetition_intervals
-            [12, 1]
+            CyclicTuple([12, 1])
 
             >>> for index in range(12):
             ...     pitch = command.get_pitch(index)
@@ -719,11 +725,11 @@ class ScorePitchCommand(Command):
         start_index = 0
         index += start_index
         pitch_expression = source[index]
-        repetition_count = index // len(self.source)
-        if self.repetition_intervals is not None and 0 < repetition_count:
+        iteration = index // len(self.source)
+        if self.repetition_intervals is not None and 0 < iteration:
             repetition_intervals = abjad.CyclicTuple(
                 self.repetition_intervals)
-            repetition_intervals = repetition_intervals[:repetition_count]
+            repetition_intervals = repetition_intervals[:iteration]
             repetition_interval = sum(repetition_intervals)
             if isinstance(repetition_interval, int):
                 pitch_number = pitch_expression.number
