@@ -202,6 +202,103 @@ class ScorePitchCommand(Command):
                 >>
             >>
 
+    ..  container:: example
+
+        Large chord:
+
+        >>> segment_maker = baca.SegmentMaker(
+        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> segment_maker(
+        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.even_runs(),
+        ...     baca.pitches('<C4 D4 E4 F4 G4 A4 B4 C4>'),
+        ...     )
+
+        >>> result = segment_maker.run(is_doc_example=True)
+        >>> lilypond_file, metadata = result
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score])
+            \context Score = "Score" <<
+                \tag violin
+                \context GlobalContext = "Global Context" <<
+                    \context GlobalRests = "Global Rests" {
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                    }
+                    \context GlobalSkips = "Global Skips" {
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" {
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            {
+                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
+                                \clef "treble"
+                                <c' d' e' f' g' a' b'>8 [
+                                <c' d' e' f' g' a' b'>8
+                                <c' d' e' f' g' a' b'>8
+                                <c' d' e' f' g' a' b'>8 ]
+                            }
+                            {
+                                <c' d' e' f' g' a' b'>8 [
+                                <c' d' e' f' g' a' b'>8
+                                <c' d' e' f' g' a' b'>8 ]
+                            }
+                            {
+                                <c' d' e' f' g' a' b'>8 [
+                                <c' d' e' f' g' a' b'>8
+                                <c' d' e' f' g' a' b'>8
+                                <c' d' e' f' g' a' b'>8 ]
+                            }
+                            {
+                                <c' d' e' f' g' a' b'>8 [
+                                <c' d' e' f' g' a' b'>8
+                                <c' d' e' f' g' a' b'>8 ]
+                                \bar "|"
+                            }
+                        }
+                    }
+                >>
+            >>
+
     '''
 
     ### CLASS VARIABLES ###
@@ -282,8 +379,6 @@ class ScorePitchCommand(Command):
     # TODO: write comprehensive tests
     def __call__(self, argument=None):
         r'''Calls command on `argument`.
-
-        ..  todo:: return number of pitches consumed.
 
         ..  note:: Write comprehensive tests.
 
@@ -453,6 +548,8 @@ class ScorePitchCommand(Command):
                 item = ' '.join(current_chord)
                 items.append(item)
                 current_chord = []
+            elif current_chord:
+                current_chord.append(part)
             else:
                 items.append(part)
         assert not current_chord, repr(current_chord)
