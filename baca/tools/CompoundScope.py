@@ -1,5 +1,6 @@
 import abjad
 import baca
+import functools
 
 
 class CompoundScope(abjad.AbjadObject):
@@ -82,6 +83,29 @@ class CompoundScope(abjad.AbjadObject):
         if timeline is not None:
             timeline = bool(timeline)
         self._timeline = timeline
+
+    ### PRIVATE METHODS ###
+
+    @staticmethod
+    def _sort_by_timeline(leaves):
+        assert leaves.are_leaves(), repr(leaves)
+        def compare(leaf_1, leaf_2):
+            start_offset_1 = abjad.inspect(leaf_1).get_timespan().start_offset
+            start_offset_2 = abjad.inspect(leaf_2).get_timespan().start_offset
+            if start_offset_1 < start_offset_2:
+                return -1
+            if start_offset_2 < start_offset_1:
+                return 1
+            index_1 = abjad.inspect(leaf_1).get_parentage().score_index
+            index_2 = abjad.inspect(leaf_2).get_parentage().score_index
+            if index_1 < index_2:
+                return -1
+            if index_2 < index_1:
+                return 1
+            return 0
+        leaves = list(leaves)
+        leaves.sort(key=functools.cmp_to_key(compare))
+        return abjad.select(leaves)
 
     ### PUBLIC PROPERTIES ###
 

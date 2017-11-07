@@ -1767,7 +1767,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 raise Exception(message)
         assert selection.are_leaves(), repr(selection)
         if getattr(wrapper.scope, 'timeline', False):
-            selection = baca.ScorePitchCommand._sort_by_timeline(selection)
+            selection = wrapper.scope._sort_by_timeline(selection)
         return selection
 
     def _scope_to_leaf_selections(self, scope):
