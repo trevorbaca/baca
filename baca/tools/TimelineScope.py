@@ -3,20 +3,20 @@ import baca
 import functools
 
 
-class CompoundScope(abjad.AbjadObject):
-    r'''Compound scope.
+class TimelineScope(abjad.AbjadObject):
+    r'''Timeline scope.
 
     ..  container:: example
 
-        >>> scope = baca.compound([
-        ...     baca.scope('Piano Music Voice', 5, 9),
-        ...     baca.scope('Clarinet Music Voice', 7, 12),
-        ...     baca.scope('Violin Music Voice', 8, 12),
-        ...     baca.scope('Oboe Music Voice', 9, 12),
+        >>> scope = baca.timeline([
+        ...     ('Piano Music Voice', 5, 9),
+        ...     ('Clarinet Music Voice', 7, 12),
+        ...     ('Violin Music Voice', 8, 12),
+        ...     ('Oboe Music Voice', 9, 12),
         ...     ])
 
         >>> abjad.f(scope)
-        baca.CompoundScope(
+        baca.TimelineScope(
             scopes=(
                 baca.Scope(
                     voice_name='Piano Music Voice',
@@ -51,8 +51,8 @@ class CompoundScope(abjad.AbjadObject):
 
         ..  container:: example
 
-            >>> baca.CompoundScope()
-            CompoundScope()
+            >>> baca.TimelineScope()
+            TimelineScope()
 
     '''
 
@@ -62,14 +62,13 @@ class CompoundScope(abjad.AbjadObject):
 
     __slots__ = (
         '_scopes',
-        '_timeline',
         )
 
     _publish_storage_format = True
 
     ### INITIALIZER ###
 
-    def __init__(self, scopes=None, timeline=None):
+    def __init__(self, scopes=None):
         if scopes is not None:
             assert isinstance(scopes, (tuple, list))
             scopes_ = []
@@ -80,9 +79,6 @@ class CompoundScope(abjad.AbjadObject):
             scopes = scopes_
             scopes = tuple(scopes)
         self._scopes = scopes
-        if timeline is not None:
-            timeline = bool(timeline)
-        self._timeline = timeline
 
     ### PRIVATE METHODS ###
 
@@ -116,13 +112,3 @@ class CompoundScope(abjad.AbjadObject):
         Returns tuple.
         '''
         return self._scopes
-
-    @property
-    def timeline(self):
-        r'''Is true when scope sorts PLTs by timeline.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
-        '''
-        return self._timeline

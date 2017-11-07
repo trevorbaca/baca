@@ -40,13 +40,13 @@ class CommandWrapper(abjad.AbjadObject):
 
     ..  container:: example
 
-        Pitch command wrapped with compound scope:
+        Pitch command wrapped with timeline scope:
 
         >>> command = baca.CommandWrapper(
         ...     baca.pitches([7, 1, 3, 4, 5, 11]),
-        ...     baca.compound([
-        ...         baca.scope('Violin Music Voice', 1, 4),
-        ...         baca.scope('Violin Music Voice', 8, 12),
+        ...     baca.timeline([
+        ...         ('Violin Music Voice', 1, 4),
+        ...         ('Viola Music Voice', 1, 4),
         ...         ]),
         ...     )
 
@@ -65,7 +65,7 @@ class CommandWrapper(abjad.AbjadObject):
                         ]
                     ),
                 ),
-            scope=baca.CompoundScope(
+            scope=baca.TimelineScope(
                 scopes=(
                     baca.Scope(
                         voice_name='Violin Music Voice',
@@ -75,10 +75,10 @@ class CommandWrapper(abjad.AbjadObject):
                             ),
                         ),
                     baca.Scope(
-                        voice_name='Violin Music Voice',
+                        voice_name='Viola Music Voice',
                         stages=baca.StageSpecifier(
-                            start=8,
-                            stop=12,
+                            start=1,
+                            stop=4,
                             ),
                         ),
                     ),
@@ -102,7 +102,7 @@ class CommandWrapper(abjad.AbjadObject):
 
     def __init__(self, command=None, scope=None):
         if scope is not None:
-            prototype = (baca.Scope, baca.CompoundScope)
+            prototype = (baca.Scope, baca.TimelineScope)
             assert isinstance(scope, prototype), format(scope)
         self._scope = scope
         if command is not None:

@@ -6903,6 +6903,15 @@ class LibraryNZ(object):
             )
 
     @staticmethod
+    def timeline(scopes):
+        r'''Makes timeline scope.
+
+        Returns timeline scope.
+        '''
+        scopes = [baca.scope(*_) for _ in scopes]
+        return baca.TimelineScope(scopes)
+
+    @staticmethod
     def time_signature_extra_offset(pair, selector='baca.leaf(0)'):
         r'''Overrides time signature extra offset.
 

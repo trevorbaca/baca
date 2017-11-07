@@ -217,7 +217,6 @@ Utilities
    Coat
    CollectionList
    CommandWrapper
-   CompoundScope
    Constellation
    ConstellationCircuit
    Counter
@@ -251,6 +250,7 @@ Utilities
    StringTrioScoreTemplate
    TimeSignatureGroups
    TimeSignatureMaker
+   TimelineScope
    Tree
    TwoVoiceStaffScoreTemplate
    ViolinSoloScoreTemplate
@@ -264,7 +264,6 @@ Utilities
    Coat
    CollectionList
    CommandWrapper
-   CompoundScope
    Constellation
    ConstellationCircuit
    Counter
@@ -298,6 +297,7 @@ Utilities
    StringTrioScoreTemplate
    TimeSignatureGroups
    TimeSignatureMaker
+   TimelineScope
    Tree
    TwoVoiceStaffScoreTemplate
    ViolinSoloScoreTemplate

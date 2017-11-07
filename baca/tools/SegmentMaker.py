@@ -701,7 +701,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         Returns none.
         '''
-        prototype = (baca.Scope, baca.CompoundScope)
+        prototype = (baca.Scope, baca.TimelineScope)
         if isinstance(scopes, prototype):
             scopes = [scopes]
         else:
@@ -1766,7 +1766,7 @@ class SegmentMaker(abjad.SegmentMaker):
             else:
                 raise Exception(message)
         assert selection.are_leaves(), repr(selection)
-        if getattr(wrapper.scope, 'timeline', False):
+        if isinstance(wrapper.scope, baca.TimelineScope):
             selection = wrapper.scope._sort_by_timeline(selection)
         return selection
 
@@ -1776,7 +1776,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if isinstance(scope, baca.Scope):
             scopes = [scope]
         else:
-            assert isinstance(scope, baca.CompoundScope)
+            assert isinstance(scope, baca.TimelineScope)
             scopes = list(scope.scopes)
         leaf_selections = []
         for scope in scopes:

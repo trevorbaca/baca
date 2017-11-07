@@ -85,6 +85,7 @@ Bases
       ~baca.tools.LibraryNZ.LibraryNZ.ties_down
       ~baca.tools.LibraryNZ.LibraryNZ.ties_up
       ~baca.tools.LibraryNZ.LibraryNZ.time_signature_extra_offset
+      ~baca.tools.LibraryNZ.LibraryNZ.timeline
       ~baca.tools.LibraryNZ.LibraryNZ.transparent_bar_lines
       ~baca.tools.LibraryNZ.LibraryNZ.transparent_rests
       ~baca.tools.LibraryNZ.LibraryNZ.transparent_span_bars
@@ -243,6 +244,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.ties_up
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.time_signature_extra_offset
+
+.. automethod:: baca.tools.LibraryNZ.LibraryNZ.timeline
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.transparent_bar_lines
 
