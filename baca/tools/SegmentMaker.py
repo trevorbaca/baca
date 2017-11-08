@@ -840,6 +840,12 @@ class SegmentMaker(abjad.SegmentMaker):
         if 3 < total_time:
             raise Exception(f'spacing specifier time {total_time} seconds!')
 
+    def _apply_layout_measure_map(self):
+        if self.layout_measure_map is None:
+            return
+        context = self._score['Global Skips']
+        self.layout_measure_map(context)
+
     def _assert_valid_stage_number(self, stage_number):
         if not 1 <= stage_number <= self.stage_count:
             message = f'must be 1 <= x <= {self.stage_count}: {stage_number}.'
@@ -5408,6 +5414,16 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._label_stage_numbers
 
     @property
+    def layout_measure_map(self):
+        r'''Gets layout measure map.
+
+        Set to layout measure map or none.
+
+        Returns layout measure map or none.
+        '''
+        return self._layout_measure_map
+
+    @property
     def measure_count(self):
         r'''Gets measure count.
 
@@ -7025,6 +7041,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._check_range()
         self._color_repeat_pitch_classes_()
         self._color_octaves_()
+        self._apply_layout_measure_map()
         self._update_metadata()
         self._print_segment_duration_()
         return self._lilypond_file, self._metadata

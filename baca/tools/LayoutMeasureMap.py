@@ -10,9 +10,8 @@ class LayoutMeasureMap(abjad.AbjadObject):
         ...     score_template=baca.ViolinSoloScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     layout_measure_map=baca.LayoutMeasureMap([
-        ...         baca.line_break(baca.logical_measure(0)),
-        ...         baca.line_break(baca.logical_measure(1)),
-        ...         baca.page_break(baca.logical_measure(2)),
+        ...         baca.line_break(baca.components(abjad.Measure)[0]),
+        ...         baca.page_break(baca.components(abjad.Measure)[1]),
         ...         ]),
         ...     )
 
@@ -54,10 +53,12 @@ class LayoutMeasureMap(abjad.AbjadObject):
                         {
                             \time 4/8
                             s1 * 1/2
+                            \break
                         }
                         {
                             \time 3/8
                             s1 * 3/8
+                            \pageBreak
                         }
                         {
                             \time 4/8
@@ -104,6 +105,16 @@ class LayoutMeasureMap(abjad.AbjadObject):
         self._items = items
 
     ### SPECIAL METHODS ###
+
+    def __call__(self, context=None):
+        r'''Calls map on `context`.
+
+        Returns none.
+        '''
+        if context is None:
+            return
+        for indicator in self.items:
+            indicator(context)
 
     def __getitem__(self, argument):
         r'''Gets `argument`.

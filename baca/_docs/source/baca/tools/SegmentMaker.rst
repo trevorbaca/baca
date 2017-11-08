@@ -40,6 +40,7 @@ Bases
       ~baca.tools.SegmentMaker.SegmentMaker.instruments
       ~baca.tools.SegmentMaker.SegmentMaker.label_clock_time
       ~baca.tools.SegmentMaker.SegmentMaker.label_stages
+      ~baca.tools.SegmentMaker.SegmentMaker.layout_measure_map
       ~baca.tools.SegmentMaker.SegmentMaker.measure_count
       ~baca.tools.SegmentMaker.SegmentMaker.measures_per_stage
       ~baca.tools.SegmentMaker.SegmentMaker.metronome_mark_measure_map
@@ -105,6 +106,8 @@ Read-only properties
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.label_clock_time
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.label_stages
+
+.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.layout_measure_map
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.measure_count
 
