@@ -35,6 +35,8 @@ Bases
       ~baca.tools.PitchClassSegment.PitchClassSegment.chord
       ~baca.tools.PitchClassSegment.PitchClassSegment.count
       ~baca.tools.PitchClassSegment.PitchClassSegment.from_selection
+      ~baca.tools.PitchClassSegment.PitchClassSegment.get_matching_transforms
+      ~baca.tools.PitchClassSegment.PitchClassSegment.get_transforms
       ~baca.tools.PitchClassSegment.PitchClassSegment.has_duplicates
       ~baca.tools.PitchClassSegment.PitchClassSegment.has_repeats
       ~baca.tools.PitchClassSegment.PitchClassSegment.index
@@ -99,6 +101,10 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.count
+
+.. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.get_matching_transforms
+
+.. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.get_transforms
 
 .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.has_duplicates
 

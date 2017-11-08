@@ -234,7 +234,6 @@ Utilities
    PitchArrayRow
    PitchClassSegment
    PitchClassSet
-   PitchManager
    PitchSegment
    PitchSet
    PitchTree
@@ -282,7 +281,6 @@ Utilities
    PitchArrayRow
    PitchClassSegment
    PitchClassSet
-   PitchManager
    PitchSegment
    PitchSet
    PitchTree
