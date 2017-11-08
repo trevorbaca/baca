@@ -18,7 +18,7 @@ class CommandWrapper(abjad.AbjadObject):
         baca.CommandWrapper(
             command=baca.ScorePitchCommand(
                 allow_repeat_pitches=True,
-                source=abjad.CyclicTuple(
+                pitches=abjad.CyclicTuple(
                     [
                         abjad.NamedPitch("g'"),
                         abjad.NamedPitch("cs'"),
@@ -54,7 +54,7 @@ class CommandWrapper(abjad.AbjadObject):
         baca.CommandWrapper(
             command=baca.ScorePitchCommand(
                 allow_repeat_pitches=True,
-                source=abjad.CyclicTuple(
+                pitches=abjad.CyclicTuple(
                     [
                         abjad.NamedPitch("g'"),
                         abjad.NamedPitch("cs'"),
@@ -126,7 +126,7 @@ class CommandWrapper(abjad.AbjadObject):
             >>> abjad.f(command.command)
             baca.ScorePitchCommand(
                 allow_repeat_pitches=True,
-                source=abjad.CyclicTuple(
+                pitches=abjad.CyclicTuple(
                     [
                         abjad.NamedPitch("g'"),
                         abjad.NamedPitch("cs'"),

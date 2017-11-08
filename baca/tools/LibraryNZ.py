@@ -624,12 +624,12 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def pitches(source, allow_repeat_pitches=True):
+    def pitches(pitches, allow_repeat_pitches=True):
         r'''Sets pitches.
         '''
         return baca.ScorePitchCommand(
             allow_repeat_pitches=allow_repeat_pitches,
-            source=source,
+            pitches=pitches,
             )
 
     @staticmethod

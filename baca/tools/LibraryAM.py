@@ -4323,12 +4323,12 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def fixed_pitches(source):
+    def fixed_pitches(pitches):
         r'''Sets fixed pitches.
         '''
         return baca.ScorePitchCommand(
             acyclic=True,
-            source=source,
+            pitches=pitches,
             )
 
     @staticmethod
@@ -5230,15 +5230,6 @@ class LibraryAM(object):
             selector=selector,
             truncate_ties=truncate_ties,
             )
-
-#    @staticmethod
-#    def infinite_pitches(source, repetition_intervals):
-#        r'''Sets infinite pitches.
-#        '''
-#        return baca.ScorePitchCommand(
-#            repetition_intervals=repetition_intervals,
-#            source=source,
-#            )
 
     @staticmethod
     def instrument(instrument, selector='baca.leaf(0)'):

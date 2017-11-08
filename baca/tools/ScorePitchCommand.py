@@ -308,7 +308,7 @@ class ScorePitchCommand(Command):
         '_acyclic',
         '_allow_repeat_pitches',
         '_mutated_score',
-        '_source',
+        '_pitches',
         )
 
     ### INITIALIZER ###
@@ -317,8 +317,8 @@ class ScorePitchCommand(Command):
         self,
         acyclic=None,
         allow_repeat_pitches=None,
+        pitches=None,
         selector=None,
-        source=None,
         ):
         Command.__init__(self, selector=selector)
         if acyclic is not None:
@@ -328,11 +328,11 @@ class ScorePitchCommand(Command):
             allow_repeat_pitches = bool(allow_repeat_pitches)
         self._allow_repeat_pitches = allow_repeat_pitches
         self._mutated_score = None
-        if source is not None:
-            if isinstance(source, str):
-                source = self._parse_string(source)
-            source = self._coerce_source(source)
-        self._source = source
+        if pitches is not None:
+            if isinstance(pitches, str):
+                pitches = self._parse_string(pitches)
+            pitches = self._coerce_pitches(pitches)
+        self._pitches = pitches
 
     ### SPECIAL METHODS ###
 
@@ -344,7 +344,7 @@ class ScorePitchCommand(Command):
             Calls command on Abjad container:
 
             >>> command = baca.ScorePitchCommand(
-            ...     source=[19, 13, 15, 16, 17, 23],
+            ...     pitches=[19, 13, 15, 16, 17, 23],
             ...     )
 
             >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
@@ -369,25 +369,25 @@ class ScorePitchCommand(Command):
         '''
         if argument is None:
             return
-        if not self.source:
+        if not self.pitches:
             return
         plts = []
         for pleaf in baca.select(argument).pleaves():
             plt = abjad.inspect(pleaf).get_logical_tie()
             if plt.head is pleaf:
                 plts.append(plt)
-        if self.acyclic and len(self.source) < len(plts):
-            message = f'only {len(self.source)} pitches'
+        if self.acyclic and len(self.pitches) < len(plts):
+            message = f'only {len(self.pitches)} pitches'
             message += f' for {len(plts)} logical ties:\n\n'
             message += f'{self!r} and {plts!r}.'
             raise Exception(message)
-        source = self.source
+        pitches = self.pitches
         cyclic = not self.acyclic
-        if cyclic and not isinstance(source, abjad.CyclicTuple):
-            source = abjad.CyclicTuple(source)
+        if cyclic and not isinstance(pitches, abjad.CyclicTuple):
+            pitches = abjad.CyclicTuple(pitches)
         allow_repeat_pitches = self.allow_repeat_pitches
         for i, plt in enumerate(plts):
-            pitch = source[i]
+            pitch = pitches[i]
             mutated_score = self._set_lt_pitch(plt, pitch)
             if mutated_score:
                 self._mutated_score = True
@@ -398,9 +398,9 @@ class ScorePitchCommand(Command):
     ### PRIVATE METHODS ###
 
     @staticmethod
-    def _coerce_source(source):
+    def _coerce_pitches(pitches):
         items = []
-        for item in source:
+        for item in pitches:
             if isinstance(item, str) and '<' in item and '>' in item:
                 item = item.strip('<')
                 item = item.strip('>')
@@ -412,15 +412,15 @@ class ScorePitchCommand(Command):
             else:
                 item = abjad.NamedPitch(item)
             items.append(item)
-        if isinstance(source, baca.Loop):
-            source = type(source)(items=items, intervals=source.intervals)
+        if isinstance(pitches, baca.Loop):
+            pitches = type(pitches)(items=items, intervals=pitches.intervals)
         else:
-            source = abjad.CyclicTuple(items)
-        return source
+            pitches = abjad.CyclicTuple(items)
+        return pitches
 
     def _mutates_score(self):
-        source = self.source or []
-        if any(isinstance(_, collections.Iterable) for _ in source):
+        pitches = self.pitches or []
+        if any(isinstance(_, collections.Iterable) for _ in pitches):
             return True
         return self._mutated_score
 
@@ -510,32 +510,20 @@ class ScorePitchCommand(Command):
         '''
         return self._allow_repeat_pitches
 
-    @property
-    def counts(self):
-        r'''Gets counts.
-
-        Defaults to none.
-
-        Set to positive integers or none.
-
-        Returns positive integers or none.
-        '''
-        return self._counts
-
     # TODO: change name to self.pitches
     @property
-    def source(self):
-        r'''Gets source.
+    def pitches(self):
+        r'''Gets pitches.
 
         ..  container:: example
 
-            Gets source:
+            Gets pitches:
 
             >>> command = baca.ScorePitchCommand(
-            ...     source=[19, 13, 15, 16, 17, 23],
+            ...     pitches=[19, 13, 15, 16, 17, 23],
             ...     )
 
-            >>> for pitch in command.source:
+            >>> for pitch in command.pitches:
             ...     pitch
             NamedPitch("g''")
             NamedPitch("cs''")
@@ -546,8 +534,8 @@ class ScorePitchCommand(Command):
 
         Defaults to none.
 
-        Set to pitch source or none.
+        Set to pitches or none.
 
-        Returns pitch source or none.
+        Returns pitches or none.
         '''
-        return self._source
+        return self._pitches

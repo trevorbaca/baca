@@ -44,7 +44,7 @@ class Loop(abjad.CyclicTuple):
         >>> abjad.f(command)
         baca.ScorePitchCommand(
             allow_repeat_pitches=True,
-            source=baca.Loop(
+            pitches=baca.Loop(
                 [
                     abjad.NamedPitch("c'"),
                     abjad.NamedPitch("d'"),

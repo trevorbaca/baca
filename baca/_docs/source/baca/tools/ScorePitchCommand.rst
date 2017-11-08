@@ -25,9 +25,8 @@ Bases
 
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.acyclic
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.allow_repeat_pitches
-      ~baca.tools.ScorePitchCommand.ScorePitchCommand.counts
+      ~baca.tools.ScorePitchCommand.ScorePitchCommand.pitches
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.selector
-      ~baca.tools.ScorePitchCommand.ScorePitchCommand.source
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.__call__
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.__eq__
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.__format__
@@ -41,15 +40,13 @@ Read-only properties
 
 .. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.allow_repeat_pitches
 
-.. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.counts
+.. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.pitches
 
 .. only:: html
 
    .. container:: inherited
 
       .. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.selector
-
-.. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.source
 
 Special methods
 ---------------
