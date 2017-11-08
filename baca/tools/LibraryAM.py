@@ -4326,7 +4326,7 @@ class LibraryAM(object):
     def fixed_pitches(pitches):
         r'''Sets fixed pitches.
         '''
-        return baca.ScorePitchCommand(
+        return baca.PitchCommand(
             acyclic=True,
             pitches=pitches,
             )

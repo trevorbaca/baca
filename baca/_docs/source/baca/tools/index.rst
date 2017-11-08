@@ -44,10 +44,10 @@ Commands
    OctaveDisplacementCommand
    OverrideCommand
    PiecewiseCommand
+   PitchCommand
    RegisterCommand
    RegisterInterpolationCommand
    RegisterToOctaveCommand
-   ScorePitchCommand
    SettingCommand
    SpannerCommand
    StaffPositionCommand
@@ -68,10 +68,10 @@ Commands
    OctaveDisplacementCommand
    OverrideCommand
    PiecewiseCommand
+   PitchCommand
    RegisterCommand
    RegisterInterpolationCommand
    RegisterToOctaveCommand
-   ScorePitchCommand
    SettingCommand
    SpannerCommand
    StaffPositionCommand

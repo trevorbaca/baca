@@ -4,7 +4,7 @@ import collections
 from .Command import Command
 
 
-class ScorePitchCommand(Command):
+class PitchCommand(Command):
     r'''Score pitch command.
 
     ..  container:: example
@@ -302,7 +302,7 @@ class ScorePitchCommand(Command):
 
         Works with Abjad container:
 
-        >>> command = baca.ScorePitchCommand(
+        >>> command = baca.PitchCommand(
         ...     cyclic=True,
         ...     pitches=[19, 13, 15, 16, 17, 23],
         ...     )
@@ -401,7 +401,7 @@ class ScorePitchCommand(Command):
     @staticmethod
     def _coerce_pitches(pitches):
         if isinstance(pitches, str):
-            pitches = ScorePitchCommand._parse_string(pitches)
+            pitches = PitchCommand._parse_string(pitches)
         items = []
         for item in pitches:
             if isinstance(item, str) and '<' in item and '>' in item:
@@ -520,7 +520,7 @@ class ScorePitchCommand(Command):
 
             Gets pitches:
 
-            >>> command = baca.ScorePitchCommand(
+            >>> command = baca.PitchCommand(
             ...     pitches=[19, 13, 15, 16, 17, 23],
             ...     )
 

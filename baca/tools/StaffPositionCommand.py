@@ -79,7 +79,7 @@ class StaffPositionCommand(Command):
             number = self.numbers[i]
             position = abjad.StaffPosition(number)
             pitch = position.to_pitch(clef)
-            baca.ScorePitchCommand._set_lt_pitch(plt, pitch)
+            baca.PitchCommand._set_lt_pitch(plt, pitch)
 
     ### PUBLIC PROPERTIES ###
 

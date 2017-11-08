@@ -42,7 +42,7 @@ class Loop(abjad.CyclicTuple):
 
         >>> command = baca.loop([0, 2, 4], [1])
         >>> abjad.f(command)
-        baca.ScorePitchCommand(
+        baca.PitchCommand(
             allow_repeat_pitches=True,
             cyclic=True,
             pitches=baca.Loop(

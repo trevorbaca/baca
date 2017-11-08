@@ -627,7 +627,7 @@ class LibraryNZ(object):
     def pitches(pitches, allow_repeat_pitches=True):
         r'''Sets pitches.
         '''
-        return baca.ScorePitchCommand(
+        return baca.PitchCommand(
             allow_repeat_pitches=allow_repeat_pitches,
             cyclic=True,
             pitches=pitches,
