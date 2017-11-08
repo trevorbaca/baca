@@ -58,7 +58,6 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.even_runs
       ~baca.tools.LibraryAM.LibraryAM.fermata
       ~baca.tools.LibraryAM.LibraryAM.five_line_staff
-      ~baca.tools.LibraryAM.LibraryAM.fixed_pitches
       ~baca.tools.LibraryAM.LibraryAM.flageolets
       ~baca.tools.LibraryAM.LibraryAM.flags
       ~baca.tools.LibraryAM.LibraryAM.fuse_compound_quarter_divisions
@@ -164,8 +163,6 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAM.LibraryAM.fermata
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.five_line_staff
-
-.. automethod:: baca.tools.LibraryAM.LibraryAM.fixed_pitches
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.flageolets
 

@@ -4323,15 +4323,6 @@ class LibraryAM(object):
             )
 
     @staticmethod
-    def fixed_pitches(pitches):
-        r'''Sets fixed pitches.
-        '''
-        return baca.PitchCommand(
-            cyclic=False,
-            pitches=pitches,
-            )
-
-    @staticmethod
     def flageolets(selector='baca.pheads()'):
         r'''Attaches flageolets to pitched heads.
 

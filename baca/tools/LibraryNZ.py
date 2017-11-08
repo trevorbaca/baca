@@ -624,12 +624,16 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def pitches(pitches, allow_repeat_pitches=True):
+    def pitches(pitches, allow_repeat_pitches=True, exact=None):
         r'''Sets pitches.
         '''
+        if bool(exact):
+            cyclic = False
+        else:
+            cyclic = True
         return baca.PitchCommand(
             allow_repeat_pitches=allow_repeat_pitches,
-            cyclic=True,
+            cyclic=cyclic,
             pitches=pitches,
             )
 
