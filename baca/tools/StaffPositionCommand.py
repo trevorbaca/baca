@@ -50,16 +50,20 @@ class StaffPositionCommand(Command):
 
     __slots__ = (
         '_numbers',
+        '_repeats',
         )
 
     ### INITIALIZER ###
 
-    def __init__(self, numbers, selector='baca.plts()'):
+    def __init__(self, numbers, repeats=None, selector='baca.plts()'):
         Command.__init__(self, selector=selector)
         if numbers is not None:
             assert all(isinstance(_, int) for _ in numbers), repr(numbers)
             numbers = abjad.CyclicTuple(numbers)
         self._numbers = numbers
+        if repeats is not None:
+            repeats = bool(repeats)
+        self._repeats = repeats
 
     ### SPECIAL METHODS ###
 
@@ -80,6 +84,9 @@ class StaffPositionCommand(Command):
             position = abjad.StaffPosition(number)
             pitch = position.to_pitch(clef)
             baca.PitchCommand._set_lt_pitch(plt, pitch)
+            if self.repeats:
+                for pleaf in plt:
+                    abjad.attach('repeat pitch allowed', pleaf)
 
     ### PUBLIC PROPERTIES ###
 
@@ -94,3 +101,13 @@ class StaffPositionCommand(Command):
         Returns cyclic tuple of integers or none.
         '''
         return self._numbers
+
+    @property
+    def repeats(self):
+        r'''Is true when repeat staff positions are allowed.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        '''
+        return self._repeats

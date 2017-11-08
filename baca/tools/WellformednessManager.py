@@ -83,12 +83,10 @@ class WellformednessManager(abjad.AbjadObject):
 
             Finds repeat pitch-classes between sequential voices:
 
-            ::
-
-                >>> voice_1 = abjad.Voice("c'4 d'")
-                >>> voice_2 = abjad.Voice("d''4 e''")
-                >>> staff = abjad.Staff([voice_1, voice_2])
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> voice_1 = abjad.Voice("c'4 d'")
+            >>> voice_2 = abjad.Voice("d''4 e''")
+            >>> staff = abjad.Staff([voice_1, voice_2])
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -104,11 +102,9 @@ class WellformednessManager(abjad.AbjadObject):
                     }
                 }
 
-            ::
-
-                >>> manager = baca.WellformednessManager
-                >>> manager.check_repeat_pitch_classes(staff)
-                ([LogicalTie([Note("d''4")])], 4)
+            >>> manager = baca.WellformednessManager
+            >>> manager.check_repeat_pitch_classes(staff)
+            ([LogicalTie([Note("d''4")])], 4)
 
         Returns violators and total.
         '''
@@ -151,23 +147,19 @@ class WellformednessManager(abjad.AbjadObject):
 
             Is well-formed:
 
-            ::
-
-                >>> staff = abjad.Staff("c'4 d' e' f'")
-                >>> manager = baca.WellformednessManager()
-                >>> manager.is_well_formed(staff)
-                True
+            >>> staff = abjad.Staff("c'4 d' e' f'")
+            >>> manager = baca.WellformednessManager()
+            >>> manager.is_well_formed(staff)
+            True
 
         ..  container:: example
 
             Repeat pitches are not well-formed:
 
-            ::
-
-                >>> staff = abjad.Staff("c'4 c' d' d'")
-                >>> manager = baca.WellformednessManager()
-                >>> manager.is_well_formed(staff)
-                False
+            >>> staff = abjad.Staff("c'4 c' d' d'")
+            >>> manager = baca.WellformednessManager()
+            >>> manager.is_well_formed(staff)
+            False
 
         Returns true or false.
         '''
@@ -184,25 +176,21 @@ class WellformednessManager(abjad.AbjadObject):
 
             Is well-formed:
 
-            ::
-
-                >>> staff = abjad.Staff("c'4 d' e' f'")
-                >>> manager = baca.WellformednessManager()
-                >>> string = manager.tabulate_wellformedness(staff)
-                >>> print(string)
-                0 /	4 repeat pitch classes
+            >>> staff = abjad.Staff("c'4 d' e' f'")
+            >>> manager = baca.WellformednessManager()
+            >>> string = manager.tabulate_wellformedness(staff)
+            >>> print(string)
+            0 /	4 repeat pitch classes
 
         ..  container:: example
 
             Repeat pitches are not well-formed:
 
-            ::
-
-                >>> staff = abjad.Staff("c'4 c' d' d'")
-                >>> manager = baca.WellformednessManager()
-                >>> string = manager.tabulate_wellformedness(staff)
-                >>> print(string)
-                2 /	4 repeat pitch classes
+            >>> staff = abjad.Staff("c'4 c' d' d'")
+            >>> manager = baca.WellformednessManager()
+            >>> string = manager.tabulate_wellformedness(staff)
+            >>> print(string)
+            2 /	4 repeat pitch classes
 
         Returns string.
         '''

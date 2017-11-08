@@ -17,9 +17,11 @@ class OctaveDisplacementCommand(Command):
 
         >>> segment_maker(
         ...     baca.scope('Violin Music Voice', 1),
-        ...     baca.pitches('G4'),
         ...     baca.even_runs(),
-        ...     baca.displacement([0, 0, 1, 1, 0, 0, -1, -1, 2, 2]),
+        ...     baca.suite([
+        ...         baca.pitches('G4', repeats=True),
+        ...         baca.displacement([0, 0, 1, 1, 0, 0, -1, -1, 2, 2]),
+        ...         ]),
         ...     )
 
         >>> result = segment_maker.run(is_doc_example=True)

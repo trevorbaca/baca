@@ -1,5 +1,6 @@
 import abjad
 import baca
+import collections
 
 
 class LibraryNZ(object):
@@ -624,7 +625,7 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def pitches(pitches, allow_repeat_pitches=True, exact=None):
+    def pitches(pitches, exact=None, repeats=None):
         r'''Sets pitches.
         '''
         if bool(exact):
@@ -632,7 +633,7 @@ class LibraryNZ(object):
         else:
             cyclic = True
         return baca.PitchCommand(
-            allow_repeat_pitches=allow_repeat_pitches,
+            allow_repeat_pitches=repeats,
             cyclic=cyclic,
             pitches=pitches,
             )
@@ -4231,10 +4232,14 @@ class LibraryNZ(object):
             )
 
     @staticmethod
-    def staff_positions(numbers, selector='baca.plts()'):
+    def staff_positions(numbers, repeats=None, selector='baca.plts()'):
         r'''Makes staff position command.
         '''
-        return baca.StaffPositionCommand(numbers=numbers, selector=selector) 
+        return baca.StaffPositionCommand(
+            numbers=numbers,
+            repeats=repeats,
+            selector=selector,
+            ) 
 
     @staticmethod
     def stem_color(color='red', context_name=None, selector='baca.tleaves()'):
@@ -4831,6 +4836,11 @@ class LibraryNZ(object):
     def suite(commands, selector=None):
         r'''Makes suite.
         '''
+        prototype = (baca.Command, collections.Iterable)
+        if not isinstance(commands, prototype):
+            raise Exception(f'must be command(s):\n\n{commands}')
+        if not isinstance(selector, (abjad.Expression, type(None))):
+            raise Exception(f'must be selector or none:\n\n{selector}')
         return baca.SuiteCommand(commands=commands, selector=selector)
 
     @staticmethod

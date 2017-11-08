@@ -17,7 +17,6 @@ class CommandWrapper(abjad.AbjadObject):
         >>> abjad.f(command)
         baca.CommandWrapper(
             command=baca.PitchCommand(
-                allow_repeat_pitches=True,
                 cyclic=True,
                 pitches=abjad.CyclicTuple(
                     [
@@ -54,7 +53,6 @@ class CommandWrapper(abjad.AbjadObject):
         >>> abjad.f(command)
         baca.CommandWrapper(
             command=baca.PitchCommand(
-                allow_repeat_pitches=True,
                 cyclic=True,
                 pitches=abjad.CyclicTuple(
                     [
@@ -127,7 +125,6 @@ class CommandWrapper(abjad.AbjadObject):
 
             >>> abjad.f(command.command)
             baca.PitchCommand(
-                allow_repeat_pitches=True,
                 cyclic=True,
                 pitches=abjad.CyclicTuple(
                     [

@@ -17,7 +17,7 @@ class ColorFingeringCommand(Command):
 
         >>> segment_maker(
         ...     baca.scope('Violin Music Voice', 1),
-        ...     baca.pitches('E4', allow_repeat_pitches=True),
+        ...     baca.pitches('E4', repeats=True),
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.ColorFingeringCommand(numbers=[0, 1, 2, 1]),
         ...     )

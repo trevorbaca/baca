@@ -24,6 +24,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.numbers
+      ~baca.tools.StaffPositionCommand.StaffPositionCommand.repeats
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.selector
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.__call__
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.__eq__
@@ -35,6 +36,8 @@ Read-only properties
 --------------------
 
 .. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.numbers
+
+.. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.repeats
 
 .. only:: html
 

@@ -1302,7 +1302,7 @@ class ClusterCommand(Command):
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.make_notes(repeat_ties=True),
-            ...     baca.pitches('E4', allow_repeat_pitches=True),
+            ...     baca.pitches('E4', repeats=True),
             ...     baca.clusters([]),
             ...     )
 
