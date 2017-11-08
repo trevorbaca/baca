@@ -11,9 +11,9 @@ class LayoutMeasureMap(abjad.AbjadObject):
         ...     score_template=baca.StringTrioScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8)],
         ...     layout_measure_map=baca.LayoutMeasureMap([
+        ...         baca.line_break(baca.measure(0)),
+        ...         baca.lbsd(100, [30, 30], baca.measure(1)),
         ...         baca.line_break(baca.measure(1)),
-        ...         baca.lbsd(100, [30, 30], baca.measure(2)),
-        ...         baca.line_break(baca.measure(2)),
         ...         ]),
         ...     )
 
@@ -187,12 +187,12 @@ class LayoutMeasureMap(abjad.AbjadObject):
         ..  container:: example
 
             >>> layout = baca.LayoutMeasureMap([
-            ...     baca.line_break(baca.measure(1)),
-            ...     baca.page_break(baca.measure(2)),
+            ...     baca.line_break(baca.measure(0)),
+            ...     baca.page_break(baca.measure(1)),
             ...     ])
 
             >>> layout[1]
-            IndicatorCommand(indicators=CyclicTuple([PageBreak()]), selector=baca.measure(2))
+            IndicatorCommand(indicators=CyclicTuple([PageBreak()]), selector=baca.measure(1))
 
         Returns item.
         '''
@@ -207,14 +207,14 @@ class LayoutMeasureMap(abjad.AbjadObject):
         ..  container:: example
 
             >>> layout = baca.LayoutMeasureMap([
-            ...     baca.line_break(baca.measure(1)),
-            ...     baca.page_break(baca.measure(2)),
+            ...     baca.line_break(baca.measure(0)),
+            ...     baca.page_break(baca.measure(1)),
             ...     ])
 
             >>> for item in layout.items:
             ...     item
-            IndicatorCommand(indicators=CyclicTuple([SystemBreak()]), selector=baca.measure(1))
-            IndicatorCommand(indicators=CyclicTuple([PageBreak()]), selector=baca.measure(2))
+            IndicatorCommand(indicators=CyclicTuple([SystemBreak()]), selector=baca.measure(0))
+            IndicatorCommand(indicators=CyclicTuple([PageBreak()]), selector=baca.measure(1))
 
         Returns items.
         '''

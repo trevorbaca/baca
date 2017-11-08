@@ -1218,11 +1218,11 @@ class Selection(abjad.Selection):
         return self.logical_ties(grace_notes=None)
 
     def measure(self, n):
-        r'''Selects measure **number** `n`.
+        r'''Selects measure `n`.
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.measures()[n-1]
+        return self.measures()[n]
 
     def measures(self):
         r'''Selects measures.
