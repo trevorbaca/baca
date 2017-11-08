@@ -629,6 +629,7 @@ class LibraryNZ(object):
         '''
         return baca.ScorePitchCommand(
             allow_repeat_pitches=allow_repeat_pitches,
+            cyclic=True,
             pitches=pitches,
             )
 

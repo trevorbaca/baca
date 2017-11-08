@@ -1,11 +1,9 @@
 import abjad
 import baca
 import collections
-import numbers
 from .Command import Command
 
 
-# TODO: write comprehensive tests
 class ScorePitchCommand(Command):
     r'''Score pitch command.
 
@@ -300,13 +298,41 @@ class ScorePitchCommand(Command):
                 >>
             >>
 
+    ..  container:: example
+
+        Works with Abjad container:
+
+        >>> command = baca.ScorePitchCommand(
+        ...     cyclic=True,
+        ...     pitches=[19, 13, 15, 16, 17, 23],
+        ...     )
+
+        >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
+        >>> command(staff)
+        >>> abjad.show(staff) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(staff)
+            \new Staff {
+                g''8
+                cs''8
+                ef''8
+                e''8
+                f''8
+                b''8
+                g''8
+                cs''8
+            }
+
+
     '''
 
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_acyclic',
         '_allow_repeat_pitches',
+        '_cyclic',
         '_mutated_score',
         '_pitches',
         )
@@ -315,22 +341,20 @@ class ScorePitchCommand(Command):
 
     def __init__(
         self,
-        acyclic=None,
         allow_repeat_pitches=None,
+        cyclic=None,
         pitches=None,
         selector=None,
         ):
         Command.__init__(self, selector=selector)
-        if acyclic is not None:
-            acyclic = bool(acyclic)
-        self._acyclic = acyclic
         if allow_repeat_pitches is not None:
             allow_repeat_pitches = bool(allow_repeat_pitches)
         self._allow_repeat_pitches = allow_repeat_pitches
+        if cyclic is not None:
+            cyclic = bool(cyclic)
+        self._cyclic = cyclic
         self._mutated_score = None
         if pitches is not None:
-            if isinstance(pitches, str):
-                pitches = self._parse_string(pitches)
             pitches = self._coerce_pitches(pitches)
         self._pitches = pitches
 
@@ -338,32 +362,6 @@ class ScorePitchCommand(Command):
 
     def __call__(self, argument=None):
         r'''Calls command on `argument`.
-
-        ..  container:: example
-
-            Calls command on Abjad container:
-
-            >>> command = baca.ScorePitchCommand(
-            ...     pitches=[19, 13, 15, 16, 17, 23],
-            ...     )
-
-            >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
-            >>> command(staff)
-            >>> abjad.show(staff) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(staff)
-                \new Staff {
-                    g''8
-                    cs''8
-                    ef''8
-                    e''8
-                    f''8
-                    b''8
-                    g''8
-                    cs''8
-                }
 
         Returns none.
         '''
@@ -376,16 +374,10 @@ class ScorePitchCommand(Command):
             plt = abjad.inspect(pleaf).get_logical_tie()
             if plt.head is pleaf:
                 plts.append(plt)
-        if self.acyclic and len(self.pitches) < len(plts):
-            message = f'only {len(self.pitches)} pitches'
-            message += f' for {len(plts)} logical ties:\n\n'
-            message += f'{self!r} and {plts!r}.'
-            raise Exception(message)
+        self._check_length(plts)
         pitches = self.pitches
-        cyclic = not self.acyclic
-        if cyclic and not isinstance(pitches, abjad.CyclicTuple):
+        if self.cyclic and not isinstance(pitches, abjad.CyclicTuple):
             pitches = abjad.CyclicTuple(pitches)
-        allow_repeat_pitches = self.allow_repeat_pitches
         for i, plt in enumerate(plts):
             pitch = pitches[i]
             mutated_score = self._set_lt_pitch(plt, pitch)
@@ -397,8 +389,19 @@ class ScorePitchCommand(Command):
 
     ### PRIVATE METHODS ###
 
+    def _check_length(self, plts):
+        if self.cyclic:
+            return
+        if len(self.pitches) < len(plts):
+            message = f'only {len(self.pitches)} pitches'
+            message += f' for {len(plts)} logical ties:\n\n'
+            message += f'{self!r} and {plts!r}.'
+            raise Exception(message)
+
     @staticmethod
     def _coerce_pitches(pitches):
+        if isinstance(pitches, str):
+            pitches = ScorePitchCommand._parse_string(pitches)
         items = []
         for item in pitches:
             if isinstance(item, str) and '<' in item and '>' in item:
@@ -485,19 +488,6 @@ class ScorePitchCommand(Command):
 
     ### PUBLIC PROPERTIES ###
 
-    # TODO: change to self.cyclic
-    @property
-    def acyclic(self):
-        r'''Is true when command reads pitches once only.
-
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
-        '''
-        return self._acyclic
-
     @property
     def allow_repeat_pitches(self):
         r'''Is true when command allows repeat pitches.
@@ -510,7 +500,18 @@ class ScorePitchCommand(Command):
         '''
         return self._allow_repeat_pitches
 
-    # TODO: change name to self.pitches
+    @property
+    def cyclic(self):
+        r'''Is true when command reads pitches cyclically.
+
+        Defaults to none.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        '''
+        return self._cyclic
+
     @property
     def pitches(self):
         r'''Gets pitches.

@@ -23,8 +23,8 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.ScorePitchCommand.ScorePitchCommand.acyclic
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.allow_repeat_pitches
+      ~baca.tools.ScorePitchCommand.ScorePitchCommand.cyclic
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.pitches
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.selector
       ~baca.tools.ScorePitchCommand.ScorePitchCommand.__call__
@@ -36,9 +36,9 @@ Bases
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.acyclic
-
 .. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.allow_repeat_pitches
+
+.. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.cyclic
 
 .. autoattribute:: baca.tools.ScorePitchCommand.ScorePitchCommand.pitches
 
