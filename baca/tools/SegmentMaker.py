@@ -278,7 +278,9 @@ class SegmentMaker(abjad.SegmentMaker):
         '_is_doc_example',
         '_label_clock_time',
         '_label_stage_numbers',
+        '_layout_measure_map',
         '_measures_per_stage',
+        '_metronome_mark_measure_map',
         '_metronome_marks',
         '_print_segment_duration',
         '_print_timings',
@@ -292,7 +294,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_spacing_specifier',
         '_stage_label_base_string',
         '_stages',
-        '_metronome_mark_measure_map',
         '_time_signatures',
         '_transpose_score',
         '_volta_measure_map',
@@ -373,7 +374,9 @@ class SegmentMaker(abjad.SegmentMaker):
         instruments=None,
         label_clock_time=None,
         label_stages=None,
+        layout_measure_map=None,
         measures_per_stage=None,
+        metronome_mark_measure_map=None,
         metronome_marks=None,
         print_segment_duration=None,
         print_timings=None,
@@ -385,7 +388,6 @@ class SegmentMaker(abjad.SegmentMaker):
         spacing_map=None,
         spacing_specifier=None,
         stage_label_base_string=None,
-        metronome_mark_measure_map=None,
         time_signatures=None,
         transpose_score=None,
         volta_measure_map=None,
@@ -441,7 +443,11 @@ class SegmentMaker(abjad.SegmentMaker):
         if label_stages is not None:
             label_stages = bool(label_stages)
         self._label_stage_numbers = label_stages
+        if layout_measure_map is not None:
+            assert isinstance(layout_measure_map, baca.LayoutMeasureMap)
+        self._layout_measure_map = layout_measure_map
         self._measures_per_stage = measures_per_stage
+        self._metronome_mark_measure_map = metronome_mark_measure_map
         if metronome_marks is not None:
             assert isinstance(metronome_marks, abjad.TypedOrderedDict)
         self._metronome_marks = metronome_marks
@@ -466,7 +472,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if stage_label_base_string is not None:
             assert isinstance(stage_label_base_string, str)
         self._stage_label_base_string = stage_label_base_string
-        self._metronome_mark_measure_map = metronome_mark_measure_map
         if transpose_score is not None:
             transpose_score = bool(transpose_score)
         self._transpose_score = transpose_score

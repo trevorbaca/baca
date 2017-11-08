@@ -224,6 +224,7 @@ Utilities
    DesignMaker
    Division
    Interpolator
+   LayoutMeasureMap
    Loop
    Matrix
    MetronomeMarkMeasureMap
@@ -271,6 +272,7 @@ Utilities
    DesignMaker
    Division
    Interpolator
+   LayoutMeasureMap
    Loop
    Matrix
    MetronomeMarkMeasureMap

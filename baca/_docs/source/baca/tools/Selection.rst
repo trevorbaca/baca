@@ -51,6 +51,7 @@ Bases
       ~baca.tools.Selection.Selection.leaves
       ~baca.tools.Selection.Selection.lleak
       ~baca.tools.Selection.Selection.lleaves
+      ~baca.tools.Selection.Selection.logical_measure
       ~baca.tools.Selection.Selection.logical_measures
       ~baca.tools.Selection.Selection.logical_ties
       ~baca.tools.Selection.Selection.lt
@@ -249,6 +250,8 @@ Methods
 .. automethod:: baca.tools.Selection.Selection.lleak
 
 .. automethod:: baca.tools.Selection.Selection.lleaves
+
+.. automethod:: baca.tools.Selection.Selection.logical_measure
 
 .. only:: html
 

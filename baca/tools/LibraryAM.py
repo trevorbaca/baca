@@ -5644,9 +5644,8 @@ class LibraryAM(object):
                 >>
 
         '''
-        command = abjad.LilyPondCommand('break', format_slot='after')
         return baca.IndicatorCommand(
-            indicators=[command],
+            indicators=[abjad.SystemBreak()],
             selector=selector,
             )
 

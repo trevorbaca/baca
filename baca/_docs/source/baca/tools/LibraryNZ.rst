@@ -23,6 +23,7 @@ Bases
       ~baca.tools.LibraryNZ.LibraryNZ.one_line_staff
       ~baca.tools.LibraryNZ.LibraryNZ.ottava
       ~baca.tools.LibraryNZ.LibraryNZ.ottava_bassa
+      ~baca.tools.LibraryNZ.LibraryNZ.page_break
       ~baca.tools.LibraryNZ.LibraryNZ.percussion_staff
       ~baca.tools.LibraryNZ.LibraryNZ.piecewise
       ~baca.tools.LibraryNZ.LibraryNZ.pitches
@@ -122,6 +123,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.ottava
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.ottava_bassa
+
+.. automethod:: baca.tools.LibraryNZ.LibraryNZ.page_break
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.percussion_staff
 

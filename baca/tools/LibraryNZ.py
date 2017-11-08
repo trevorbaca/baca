@@ -482,6 +482,70 @@ class LibraryNZ(object):
             )
 
     @staticmethod
+    def page_break(selector='baca.leaf(-1)'):
+        r'''Attaches page break command after last leaf.
+
+        ..  container:: example
+
+            Attaches page break after last leaf:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.page_break(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 [
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 [
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                g''16 ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \pageBreak
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        return baca.IndicatorCommand(
+            indicators=[abjad.PageBreak()],
+            selector=selector,
+            )
+
+    @staticmethod
     def percussion_staff(selector='baca.leaves()'):
         r'''Attaches percussion staff spanner.
 
