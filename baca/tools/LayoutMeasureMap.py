@@ -6,18 +6,20 @@ class LayoutMeasureMap(abjad.AbjadObject):
 
     ..  container:: example
 
+        >>> measures = baca.components
         >>> segment_maker = baca.SegmentMaker(
-        ...     score_template=baca.ViolinSoloScoreTemplate(),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     score_template=baca.StringTrioScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8)],
         ...     layout_measure_map=baca.LayoutMeasureMap([
-        ...         baca.line_break(baca.components(abjad.Measure)[0]),
-        ...         baca.page_break(baca.components(abjad.Measure)[1]),
+        ...         baca.line_break(baca.measure(1)),
+        ...         baca.lbsd(100, [30, 30], baca.measure(2)),
+        ...         baca.line_break(baca.measure(2)),
         ...         ]),
         ...     )
 
         >>> segment_maker(
         ...     baca.scope('Violin Music Voice', 1),
-        ...     baca.make_notes(repeat_ties=True),
+        ...     baca.even_runs(),
         ...     baca.pitches('E4', repeats=True),
         ...     )
 
@@ -29,7 +31,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
 
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
-                \tag violin
+                \tag violin.viola.cello
                 \context GlobalContext = "Global Context" <<
                     \context GlobalRests = "Global Rests" {
                         {
@@ -48,17 +50,22 @@ class LayoutMeasureMap(abjad.AbjadObject):
                             \time 3/8
                             R1 * 3/8
                         }
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
                     }
                     \context GlobalSkips = "Global Skips" {
                         {
-                            \time 4/8
                             s1 * 1/2
                             \break
                         }
                         {
                             \time 3/8
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details
+                            #'((Y-offset . 100) (alignment-distances . (30 30)))
                             s1 * 3/8
-                            \pageBreak
+                            \break
                         }
                         {
                             \time 4/8
@@ -68,22 +75,80 @@ class LayoutMeasureMap(abjad.AbjadObject):
                             \time 3/8
                             s1 * 3/8
                         }
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \context ViolinMusicVoice = "Violin Music Voice" {
-                            \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                            \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                            \clef "treble"
-                            e'2
-                            e'4.
-                            e'2
-                            e'4.
-                            \bar "|"
+                    \context StringSectionStaffGroup = "String Section Staff Group" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
+                                    e'8 [
+                                    e'8
+                                    e'8
+                                    e'8 ]
+                                }
+                                {
+                                    e'8 [
+                                    e'8
+                                    e'8 ]
+                                }
+                                {
+                                    e'8 [
+                                    e'8
+                                    e'8
+                                    e'8 ]
+                                }
+                                {
+                                    e'8 [
+                                    e'8
+                                    e'8 ]
+                                }
+                                {
+                                    e'8 [
+                                    e'8
+                                    e'8
+                                    e'8 ]
+                                    \bar "|"
+                                }
+                            }
                         }
-                    }
+                        \tag viola
+                        \context ViolaMusicStaff = "Viola Music Staff" {
+                            \context ViolaMusicVoice = "Viola Music Voice" {
+                                \set ViolaMusicStaff.instrumentName = \markup { Viola }
+                                \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
+                                \clef "alto"
+                                R1 * 1/2
+                                R1 * 3/8
+                                R1 * 1/2
+                                R1 * 3/8
+                                R1 * 1/2
+                                \bar "|"
+                            }
+                        }
+                        \tag cello
+                        \context CelloMusicStaff = "Cello Music Staff" {
+                            \context CelloMusicVoice = "Cello Music Voice" {
+                                \set CelloMusicStaff.instrumentName = \markup { Cello }
+                                \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
+                                \clef "bass"
+                                R1 * 1/2
+                                R1 * 3/8
+                                R1 * 1/2
+                                R1 * 3/8
+                                R1 * 1/2
+                                \bar "|"
+                            }
+                        }
+                    >>
                 >>
             >>
 
@@ -122,13 +187,12 @@ class LayoutMeasureMap(abjad.AbjadObject):
         ..  container:: example
 
             >>> layout = baca.LayoutMeasureMap([
-            ...     baca.line_break(baca.logical_measure(0)),
-            ...     baca.line_break(baca.logical_measure(1)),
-            ...     baca.page_break(baca.logical_measure(2)),
+            ...     baca.line_break(baca.measure(1)),
+            ...     baca.page_break(baca.measure(2)),
             ...     ])
 
             >>> layout[1]
-            IndicatorCommand(indicators=CyclicTuple([SystemBreak()]), selector=baca.logical_measure(1))
+            IndicatorCommand(indicators=CyclicTuple([PageBreak()]), selector=baca.measure(2))
 
         Returns item.
         '''
@@ -143,16 +207,14 @@ class LayoutMeasureMap(abjad.AbjadObject):
         ..  container:: example
 
             >>> layout = baca.LayoutMeasureMap([
-            ...     baca.line_break(baca.logical_measure(0)),
-            ...     baca.line_break(baca.logical_measure(1)),
-            ...     baca.page_break(baca.logical_measure(2)),
+            ...     baca.line_break(baca.measure(1)),
+            ...     baca.page_break(baca.measure(2)),
             ...     ])
 
             >>> for item in layout.items:
             ...     item
-            IndicatorCommand(indicators=CyclicTuple([SystemBreak()]), selector=baca.logical_measure(0))
-            IndicatorCommand(indicators=CyclicTuple([SystemBreak()]), selector=baca.logical_measure(1))
-            IndicatorCommand(indicators=CyclicTuple([PageBreak()]), selector=baca.logical_measure(2))
+            IndicatorCommand(indicators=CyclicTuple([SystemBreak()]), selector=baca.measure(1))
+            IndicatorCommand(indicators=CyclicTuple([PageBreak()]), selector=baca.measure(2))
 
         Returns items.
         '''

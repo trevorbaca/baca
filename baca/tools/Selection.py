@@ -1217,6 +1217,20 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.logical_ties(grace_notes=None)
 
+    def measure(self, n):
+        r'''Selects measure **number** `n`.
+        '''
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.measures()[n-1]
+
+    def measures(self):
+        r'''Selects measures.
+        '''
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.components(abjad.Measure)
+
     def ntruns(self):
         r'''Selects nontrivial runs.
 

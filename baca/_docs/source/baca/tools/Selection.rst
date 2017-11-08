@@ -61,6 +61,8 @@ Bases
       ~baca.tools.Selection.Selection.ltruns
       ~baca.tools.Selection.Selection.lts
       ~baca.tools.Selection.Selection.map
+      ~baca.tools.Selection.Selection.measure
+      ~baca.tools.Selection.Selection.measures
       ~baca.tools.Selection.Selection.nontrivial
       ~baca.tools.Selection.Selection.note
       ~baca.tools.Selection.Selection.notes
@@ -282,6 +284,10 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Selection.Selection.map
+
+.. automethod:: baca.tools.Selection.Selection.measure
+
+.. automethod:: baca.tools.Selection.Selection.measures
 
 .. only:: html
 

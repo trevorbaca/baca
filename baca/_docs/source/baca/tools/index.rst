@@ -224,6 +224,7 @@ Utilities
    DesignMaker
    Division
    Interpolator
+   LBSD
    LayoutMeasureMap
    Loop
    Matrix
@@ -272,6 +273,7 @@ Utilities
    DesignMaker
    Division
    Interpolator
+   LBSD
    LayoutMeasureMap
    Loop
    Matrix

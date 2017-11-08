@@ -1,4 +1,7 @@
-class Coat(object):
+import abjad
+
+
+class Coat(abjad.AbjadObject):
     r'''Coat.
     '''
 

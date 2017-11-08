@@ -2,7 +2,7 @@ import abjad
 import baca
 
 
-class LibraryAM(object):
+class LibraryAM(abjad.AbjadObject):
     r'''Library A - M.
     '''
 
@@ -5528,6 +5528,21 @@ class LibraryAM(object):
         '''
         return baca.IndicatorCommand(
             indicators=[abjad.Articulation('laissezVibrer')],
+            selector=selector,
+            )
+
+    @staticmethod
+    def lbsd(y_offset, alignment_distances, selector='baca.leaf(0)'):
+        r'''Makes line-break system details.
+
+        Returns indicator command.
+        '''
+        lbsd = baca.LBSD(
+            alignment_distances=alignment_distances,
+            y_offset=y_offset,
+            )
+        return baca.IndicatorCommand(
+            indicators=[lbsd],
             selector=selector,
             )
 

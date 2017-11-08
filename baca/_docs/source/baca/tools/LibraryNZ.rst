@@ -8,6 +8,10 @@ LibraryNZ
 Bases
 -----
 
+- :py:class:`abjad.tools.abctools.AbjadObject`
+
+- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+
 - :py:class:`builtins.object`
 
 .. only:: html
@@ -103,6 +107,10 @@ Bases
       ~baca.tools.LibraryNZ.LibraryNZ.up_arpeggios
       ~baca.tools.LibraryNZ.LibraryNZ.up_bows
       ~baca.tools.LibraryNZ.LibraryNZ.very_long_fermata
+      ~baca.tools.LibraryNZ.LibraryNZ.__eq__
+      ~baca.tools.LibraryNZ.LibraryNZ.__format__
+      ~baca.tools.LibraryNZ.LibraryNZ.__hash__
+      ~baca.tools.LibraryNZ.LibraryNZ.__repr__
 
 Methods
 -------
@@ -281,3 +289,30 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.up_bows
 
 .. automethod:: baca.tools.LibraryNZ.LibraryNZ.very_long_fermata
+
+Special methods
+---------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.LibraryNZ.LibraryNZ.__eq__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.LibraryNZ.LibraryNZ.__format__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.LibraryNZ.LibraryNZ.__hash__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.LibraryNZ.LibraryNZ.__repr__

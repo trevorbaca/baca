@@ -8,6 +8,10 @@ MarkupLibrary
 Bases
 -----
 
+- :py:class:`abjad.tools.abctools.AbjadObject`
+
+- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+
 - :py:class:`builtins.object`
 
 .. only:: html
@@ -165,6 +169,10 @@ Bases
       ~baca.tools.MarkupLibrary.MarkupLibrary.vib_pochiss
       ~baca.tools.MarkupLibrary.MarkupLibrary.vib_poco
       ~baca.tools.MarkupLibrary.MarkupLibrary.__call__
+      ~baca.tools.MarkupLibrary.MarkupLibrary.__eq__
+      ~baca.tools.MarkupLibrary.MarkupLibrary.__format__
+      ~baca.tools.MarkupLibrary.MarkupLibrary.__hash__
+      ~baca.tools.MarkupLibrary.MarkupLibrary.__repr__
 
 Class & static methods
 ----------------------
@@ -467,3 +475,27 @@ Special methods
 ---------------
 
 .. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.__call__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.__eq__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.__format__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.__hash__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.__repr__

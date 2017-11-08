@@ -2,7 +2,7 @@ import abjad
 import baca
 
 
-class MarkupLibrary(object):
+class MarkupLibrary(abjad.AbjadObject):
     r'''Markup interface.
     '''
 

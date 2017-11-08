@@ -3,7 +3,7 @@ import baca
 import collections
 
 
-class LibraryNZ(object):
+class LibraryNZ(abjad.AbjadObject):
     r'''Library N - Z.
     '''
 

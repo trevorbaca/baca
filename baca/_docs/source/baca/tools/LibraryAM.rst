@@ -8,6 +8,10 @@ LibraryAM
 Bases
 -----
 
+- :py:class:`abjad.tools.abctools.AbjadObject`
+
+- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+
 - :py:class:`builtins.object`
 
 .. only:: html
@@ -70,6 +74,7 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.invert_segments
       ~baca.tools.LibraryAM.LibraryAM.label
       ~baca.tools.LibraryAM.LibraryAM.laissez_vibrer
+      ~baca.tools.LibraryAM.LibraryAM.lbsd
       ~baca.tools.LibraryAM.LibraryAM.line_break
       ~baca.tools.LibraryAM.LibraryAM.literal
       ~baca.tools.LibraryAM.LibraryAM.long_fermata
@@ -78,6 +83,10 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.make_rests
       ~baca.tools.LibraryAM.LibraryAM.marcati
       ~baca.tools.LibraryAM.LibraryAM.multimeasure_rests
+      ~baca.tools.LibraryAM.LibraryAM.__eq__
+      ~baca.tools.LibraryAM.LibraryAM.__format__
+      ~baca.tools.LibraryAM.LibraryAM.__hash__
+      ~baca.tools.LibraryAM.LibraryAM.__repr__
 
 Class & static methods
 ----------------------
@@ -188,6 +197,8 @@ Class & static methods
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.laissez_vibrer
 
+.. automethod:: baca.tools.LibraryAM.LibraryAM.lbsd
+
 .. automethod:: baca.tools.LibraryAM.LibraryAM.line_break
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.literal
@@ -203,3 +214,30 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAM.LibraryAM.marcati
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.multimeasure_rests
+
+Special methods
+---------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.LibraryAM.LibraryAM.__eq__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.LibraryAM.LibraryAM.__format__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.LibraryAM.LibraryAM.__hash__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.LibraryAM.LibraryAM.__repr__

@@ -1,4 +1,7 @@
-class ExpressionGallery(object):
+import abjad
+
+
+class ExpressionGallery(abjad.AbjadObject):
     r'''Expression gallery.
 
     ..  container:: example expression
