@@ -4327,7 +4327,7 @@ class LibraryAM(object):
         r'''Sets fixed pitches.
         '''
         return baca.PitchCommand(
-            acyclic=True,
+            cyclic=False,
             pitches=pitches,
             )
 
