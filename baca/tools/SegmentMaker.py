@@ -1022,31 +1022,14 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(markup, leaf)
 
     def _color_repeat_pitch_classes_(self):
-        if not self.color_repeat_pitch_classes:
-            return
+        manager = baca.WellformednessManager
+        lts = manager._find_repeat_pitch_classes(self._score)
         markup = abjad.Markup('@', direction=abjad.Up)
         abjad.tweak(markup).color = 'red'
-        for voice in abjad.iterate(self._score).components(abjad.Voice):
-            previous_logical_tie, previous_pitch_classes = None, []
-            agent = abjad.iterate(voice)
-            for logical_tie in agent.logical_ties(pitched=True):
-                head = logical_tie.head
-                if isinstance(head, abjad.Note):
-                    written_pitches = [head.written_pitch]
-                elif isinstance(head, abjad.Chord):
-                    written_pitches = head.written_pitches
-                else:
-                    raise TypeError(head)
-                pitch_classes = [_.pitch_class for _ in written_pitches]
-                if set(pitch_classes) & set(previous_pitch_classes):
-                    abjad.label(previous_logical_tie).color_leaves('red')
-                    for leaf in previous_logical_tie:
-                        abjad.attach(markup, leaf)
-                    abjad.label(logical_tie).color_leaves('red')
-                    for leaf in logical_tie:
-                        abjad.attach(markup, leaf)
-                previous_logical_tie = logical_tie
-                previous_pitch_classes = pitch_classes
+        for lt in lts:
+            abjad.label(lt).color_leaves('red')
+            for leaf in lt:
+                abjad.attach(markup, leaf)
 
     def _color_unpitched_notes(self):
         if self.ignore_unpitched_notes:

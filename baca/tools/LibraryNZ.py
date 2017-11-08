@@ -4235,6 +4235,8 @@ class LibraryNZ(object):
     def staff_positions(numbers, repeats=None, selector='baca.plts()'):
         r'''Makes staff position command.
         '''
+        if repeats is None and len(numbers) == 1:
+            repeats = True
         return baca.StaffPositionCommand(
             numbers=numbers,
             repeats=repeats,

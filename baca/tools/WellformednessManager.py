@@ -1,4 +1,5 @@
 import abjad
+import baca
 
 
 class WellformednessManager(abjad.AbjadObject):
@@ -22,23 +23,49 @@ class WellformednessManager(abjad.AbjadObject):
 
         ..  container:: example
 
-            >>> staff = abjad.Staff("c'4 c' d' d'")
-            >>> manager = baca.WellformednessManager()
-            >>> manager(staff)
-            [([LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")])], 4, 'check_repeat_pitch_classes')]
+            >>> voice = abjad.Voice("c'4 c' d' d'")
+            >>> baca.WellformednessManager()(voice)
+            [([LogicalTie([Note("c'4")]), LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")]), LogicalTie([Note("d'4")])], 4, 'check_repeat_pitch_classes')]
 
-        Returns violators, total, check triples.
+        Returns list of violators / total / check triples.
         '''
         if argument is None:
             return
-        check_names = [x for x in dir(self) if x.startswith('check_')]
+        check_names = [_ for _ in dir(self) if _.startswith('check_')]
         triples = []
-        for current_check_name in sorted(check_names):
-            current_check = getattr(self, current_check_name)
-            current_violators, current_total = current_check(argument=argument)
-            triple = (current_violators, current_total, current_check_name)
-            triples.append(triple)
+        for check_name in sorted(check_names):
+            check = getattr(self, check_name)
+            violators, total = check(argument=argument)
+            triples.append((violators, total, check_name))
         return triples
+
+    ### PRIVATE METHODS ###
+
+    @staticmethod
+    def _find_repeat_pitch_classes(argument):
+        violators = []
+        for voice in abjad.iterate(argument).components(abjad.Voice):
+            previous_lt, previous_pcs = None, []
+            for lt in abjad.iterate(voice).logical_ties():
+                if isinstance(lt.head, abjad.Note):
+                    written_pitches = [lt.head.written_pitch]
+                elif isinstance(lt.head, abjad.Chord):
+                    written_pitches = lt.head.written_pitches
+                else:
+                    written_pitches = []
+                pcs = [_.pitch_class for _ in written_pitches]
+                inspection = abjad.inspect(lt.head)
+                if (inspection.has_indicator('not yet pitched') or
+                    inspection.has_indicator('repeat pitch allowed')):
+                    pass
+                elif set(pcs) & set(previous_pcs):
+                    if previous_lt not in violators:
+                        violators.append(previous_lt)
+                    if lt not in violators:
+                        violators.append(lt)
+                previous_lt = lt
+                previous_pcs = pcs
+        return violators
 
     ### PUBLIC METHODS ###
 
@@ -50,94 +77,39 @@ class WellformednessManager(abjad.AbjadObject):
 
             Finds no repeats:
 
-            >>> staff = abjad.Staff("c'4 d' e' f'")
-            >>> abjad.show(staff) # doctest: +SKIP
+            >>> voice = abjad.Voice("c'4 d' e' f'")
+            >>> abjad.show(voice) # doctest: +SKIP
 
             >>> manager = baca.WellformednessManager
-            >>> manager.check_repeat_pitch_classes(staff)
+            >>> manager.check_repeat_pitch_classes(voice)
             ([], 4)
 
         ..  container:: example
 
             Finds repeat pitches:
 
-            >>> staff = abjad.Staff("c'4 c' d' d'")
-            >>> abjad.show(staff) # doctest: +SKIP
+            >>> voice = abjad.Voice("c'4 c' d' d'")
+            >>> abjad.show(voice) # doctest: +SKIP
 
             >>> manager = baca.WellformednessManager
-            >>> manager.check_repeat_pitch_classes(staff)
-            ([LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")])], 4)
+            >>> manager.check_repeat_pitch_classes(voice)
+            ([LogicalTie([Note("c'4")]), LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")]), LogicalTie([Note("d'4")])], 4)
 
         ..  container:: example
 
             Finds repeat pitch-classes:
 
-            >>> staff = abjad.Staff("c'4 d' e' e''")
-            >>> abjad.show(staff) # doctest: +SKIP
+            >>> voice = abjad.Voice("c'4 d' e' e''")
+            >>> abjad.show(voice) # doctest: +SKIP
 
             >>> manager = baca.WellformednessManager
-            >>> manager.check_repeat_pitch_classes(staff)
-            ([LogicalTie([Note("e''4")])], 4)
-
-        ..  container:: example
-
-            Finds repeat pitch-classes between sequential voices:
-
-            >>> voice_1 = abjad.Voice("c'4 d'")
-            >>> voice_2 = abjad.Voice("d''4 e''")
-            >>> staff = abjad.Staff([voice_1, voice_2])
-            >>> abjad.show(staff) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(staff)
-                \new Staff {
-                    \new Voice {
-                        c'4
-                        d'4
-                    }
-                    \new Voice {
-                        d''4
-                        e''4
-                    }
-                }
-
-            >>> manager = baca.WellformednessManager
-            >>> manager.check_repeat_pitch_classes(staff)
-            ([LogicalTie([Note("d''4")])], 4)
+            >>> manager.check_repeat_pitch_classes(voice)
+            ([LogicalTie([Note("e'4")]), LogicalTie([Note("e''4")])], 4)
 
         Returns violators and total.
         '''
-        violators = []
-        total = 0
-        not_yet_string = 'not yet pitched'
-        plts = abjad.iterate(argument).logical_ties(
-            grace_notes=None,
-            pitched=True,
-            )
-        plts = list(plts)
-        plts.sort(
-            key=lambda _: abjad.inspect(_.head).get_timespan().start_offset)
-        for plt_1, plt_2 in abjad.Sequence(plts).nwise():
-            if not isinstance(plt_1.head, abjad.Note):
-                continue
-            if not isinstance(plt_2.head, abjad.Note):
-                continue
-            total += 1
-            if abjad.inspect(plt_1.head).has_indicator(not_yet_string):
-                continue
-            if abjad.inspect(plt_2.head).has_indicator(not_yet_string):
-                continue
-            pitch_class_1 = plt_1.head.written_pitch.pitch_class
-            pitch_class_2 = plt_2.head.written_pitch.pitch_class
-            if not pitch_class_1 == pitch_class_2:
-                continue
-            string = 'repeat pitch allowed'
-            if (abjad.inspect(plt_1.head).has_indicator(string) and
-                abjad.inspect(plt_2.head).has_indicator(string)):
-                continue
-            violators.append(plt_2)
-        total += 1
+        total = len(baca.select(argument).plts())
+        violators = WellformednessManager._find_repeat_pitch_classes(argument)
         return violators, total
 
     def is_well_formed(self, argument=None):
@@ -147,18 +119,18 @@ class WellformednessManager(abjad.AbjadObject):
 
             Is well-formed:
 
-            >>> staff = abjad.Staff("c'4 d' e' f'")
+            >>> voice = abjad.Voice("c'4 d' e' f'")
             >>> manager = baca.WellformednessManager()
-            >>> manager.is_well_formed(staff)
+            >>> manager.is_well_formed(voice)
             True
 
         ..  container:: example
 
             Repeat pitches are not well-formed:
 
-            >>> staff = abjad.Staff("c'4 c' d' d'")
+            >>> voice = abjad.Voice("c'4 c' d' d'")
             >>> manager = baca.WellformednessManager()
-            >>> manager.is_well_formed(staff)
+            >>> manager.is_well_formed(voice)
             False
 
         Returns true or false.
@@ -176,9 +148,9 @@ class WellformednessManager(abjad.AbjadObject):
 
             Is well-formed:
 
-            >>> staff = abjad.Staff("c'4 d' e' f'")
+            >>> voice = abjad.Voice("c'4 d' e' f'")
             >>> manager = baca.WellformednessManager()
-            >>> string = manager.tabulate_wellformedness(staff)
+            >>> string = manager.tabulate_wellformedness(voice)
             >>> print(string)
             0 /	4 repeat pitch classes
 
@@ -186,11 +158,11 @@ class WellformednessManager(abjad.AbjadObject):
 
             Repeat pitches are not well-formed:
 
-            >>> staff = abjad.Staff("c'4 c' d' d'")
+            >>> voice = abjad.Voice("c'4 c' d' d'")
             >>> manager = baca.WellformednessManager()
-            >>> string = manager.tabulate_wellformedness(staff)
+            >>> string = manager.tabulate_wellformedness(voice)
             >>> print(string)
-            2 /	4 repeat pitch classes
+            4 /	4 repeat pitch classes
 
         Returns string.
         '''

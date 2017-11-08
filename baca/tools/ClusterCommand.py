@@ -553,10 +553,11 @@ class ClusterCommand(Command):
         indicator = abjad.KeyCluster(
             include_black_keys=not self.hide_flat_markup,
             )
-        for leaf in plt:
-            chord = abjad.Chord(pitches, leaf.written_duration)
-            abjad.mutate(leaf).replace(chord)
+        for pleaf in plt:
+            chord = abjad.Chord(pitches, pleaf.written_duration)
+            abjad.mutate(pleaf).replace(chord)
             abjad.attach(indicator, chord)
+            abjad.attach('repeat pitch allowed', chord)
 
     def _make_pitches(self, start_pitch, width):
         pitches = [start_pitch]

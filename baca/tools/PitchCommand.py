@@ -213,7 +213,7 @@ class PitchCommand(Command):
         >>> segment_maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.even_runs(),
-        ...     baca.pitches('<C4 D4 E4 F4 G4 A4 B4 C4>'),
+        ...     baca.pitches('<C4 D4 E4 F4 G4 A4 B4 C4>', repeats=True)
         ...     )
 
         >>> result = segment_maker.run(is_doc_example=True)
@@ -380,9 +380,10 @@ class PitchCommand(Command):
             pitches = abjad.CyclicTuple(pitches)
         for i, plt in enumerate(plts):
             pitch = pitches[i]
-            mutated_score = self._set_lt_pitch(plt, pitch)
-            if mutated_score:
+            new_plt = self._set_lt_pitch(plt, pitch)
+            if new_plt is not None:
                 self._mutated_score = True
+                plt = new_plt
             if self.allow_repeat_pitches:
                 for pleaf in plt:
                     abjad.attach('repeat pitch allowed', pleaf)
@@ -449,7 +450,8 @@ class PitchCommand(Command):
 
     @staticmethod
     def _set_lt_pitch(lt, pitch):
-        mutated_score = False
+        #mutated_score = False
+        new_lt = None
         string = 'not yet pitched'
         for leaf in lt:
             abjad.detach(string, leaf)
@@ -461,7 +463,8 @@ class PitchCommand(Command):
                     rest = abjad.Rest(leaf.written_duration)
                     # TODO: overrides and indicators are lost!
                     abjad.mutate(leaf).replace(rest)
-                    mutated_score = True
+                    #mutated_score = True
+                new_lt = abjad.inspect(rest).get_logical_tie()
         elif isinstance(pitch, collections.Iterable):
             if isinstance(lt.head, abjad.Chord):
                 for chord in lt:
@@ -472,7 +475,8 @@ class PitchCommand(Command):
                     chord = abjad.Chord(pitch, leaf.written_duration)
                     # TODO: overrides and indicators are lost!
                     abjad.mutate(leaf).replace(chord)
-                    mutated_score = True
+                    #mutated_score = True
+                new_lt = abjad.inspect(chord).get_logical_tie()
         else:
             if isinstance(lt.head, abjad.Note):
                 for note in lt:
@@ -483,8 +487,10 @@ class PitchCommand(Command):
                     note = abjad.Note(pitch, leaf.written_duration)
                     # TODO: overrides and indicators are lost!
                     abjad.mutate(leaf).replace(note)
-                    mutated_score = True
-        return mutated_score
+                    #mutated_score = True
+                new_lt = abjad.inspect(note).get_logical_tie()
+        #return mutated_score
+        return new_lt
 
     ### PUBLIC PROPERTIES ###
 
