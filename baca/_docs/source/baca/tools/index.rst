@@ -224,6 +224,7 @@ Utilities
    DesignMaker
    Division
    Interpolator
+   Loop
    Matrix
    MetronomeMarkMeasureMap
    PitchArray
@@ -271,6 +272,7 @@ Utilities
    DesignMaker
    Division
    Interpolator
+   Loop
    Matrix
    MetronomeMarkMeasureMap
    PitchArray

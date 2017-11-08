@@ -5231,14 +5231,14 @@ class LibraryAM(object):
             truncate_ties=truncate_ties,
             )
 
-    @staticmethod
-    def infinite_pitches(source, repetition_intervals):
-        r'''Sets infinite pitches.
-        '''
-        return baca.ScorePitchCommand(
-            repetition_intervals=repetition_intervals,
-            source=source,
-            )
+#    @staticmethod
+#    def infinite_pitches(source, repetition_intervals):
+#        r'''Sets infinite pitches.
+#        '''
+#        return baca.ScorePitchCommand(
+#            repetition_intervals=repetition_intervals,
+#            source=source,
+#            )
 
     @staticmethod
     def instrument(instrument, selector='baca.leaf(0)'):
@@ -5793,6 +5793,15 @@ class LibraryAM(object):
             indicators=[abjad.Articulation('longfermata')],
             selector=selector,
             )
+
+    @staticmethod
+    def loop(pitches, intervals):
+        r'''Loops `pitches` at `intervals`.
+
+        Returns loop.
+        '''
+        loop = baca.Loop(items=pitches, intervals=intervals)
+        return baca.pitches(loop)
 
     @staticmethod
     def make_notes(repeat_ties=False):

@@ -67,7 +67,6 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.hairpin
       ~baca.tools.LibraryAM.LibraryAM.helianthate
       ~baca.tools.LibraryAM.LibraryAM.imbricate
-      ~baca.tools.LibraryAM.LibraryAM.infinite_pitches
       ~baca.tools.LibraryAM.LibraryAM.instrument
       ~baca.tools.LibraryAM.LibraryAM.invert_segments
       ~baca.tools.LibraryAM.LibraryAM.label
@@ -75,6 +74,7 @@ Bases
       ~baca.tools.LibraryAM.LibraryAM.line_break
       ~baca.tools.LibraryAM.LibraryAM.literal
       ~baca.tools.LibraryAM.LibraryAM.long_fermata
+      ~baca.tools.LibraryAM.LibraryAM.loop
       ~baca.tools.LibraryAM.LibraryAM.make_notes
       ~baca.tools.LibraryAM.LibraryAM.make_rests
       ~baca.tools.LibraryAM.LibraryAM.marcati
@@ -183,8 +183,6 @@ Class & static methods
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.imbricate
 
-.. automethod:: baca.tools.LibraryAM.LibraryAM.infinite_pitches
-
 .. automethod:: baca.tools.LibraryAM.LibraryAM.instrument
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.invert_segments
@@ -198,6 +196,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAM.LibraryAM.literal
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.long_fermata
+
+.. automethod:: baca.tools.LibraryAM.LibraryAM.loop
 
 .. automethod:: baca.tools.LibraryAM.LibraryAM.make_notes
 

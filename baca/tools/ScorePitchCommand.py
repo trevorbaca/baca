@@ -308,7 +308,6 @@ class ScorePitchCommand(Command):
         '_acyclic',
         '_allow_repeat_pitches',
         '_mutated_score',
-        '_repetition_intervals',
         '_source',
         )
 
@@ -318,7 +317,6 @@ class ScorePitchCommand(Command):
         self,
         acyclic=None,
         allow_repeat_pitches=None,
-        repetition_intervals=None,
         selector=None,
         source=None,
         ):
@@ -330,19 +328,10 @@ class ScorePitchCommand(Command):
             allow_repeat_pitches = bool(allow_repeat_pitches)
         self._allow_repeat_pitches = allow_repeat_pitches
         self._mutated_score = None
-        if repetition_intervals is not None:
-            assert isinstance(repetition_intervals, collections.Iterable)
-            if not all(
-                isinstance(_, numbers.Number) for _ in repetition_intervals):
-                message = 'named repetition intervals not implemented.'
-                raise NotImplementedError(message)
-            repetition_intervals = abjad.CyclicTuple(repetition_intervals)
-        self._repetition_intervals = repetition_intervals
         if source is not None:
             if isinstance(source, str):
                 source = self._parse_string(source)
             source = self._coerce_source(source)
-            source = abjad.CyclicTuple(source)
         self._source = source
 
     ### SPECIAL METHODS ###
@@ -393,15 +382,12 @@ class ScorePitchCommand(Command):
             message += f'{self!r} and {plts!r}.'
             raise Exception(message)
         source = self.source
-        if not bool(self.acyclic):
+        cyclic = not self.acyclic
+        if cyclic and not isinstance(source, abjad.CyclicTuple):
             source = abjad.CyclicTuple(source)
         allow_repeat_pitches = self.allow_repeat_pitches
         for i, plt in enumerate(plts):
             pitch = source[i]
-            iteration = i // len(self.source)
-            if self.repetition_intervals and 0 < iteration:
-                transposition = sum(self.repetition_intervals[:iteration])
-                pitch = type(pitch)(pitch.number + transposition)
             mutated_score = self._set_lt_pitch(plt, pitch)
             if mutated_score:
                 self._mutated_score = True
@@ -426,7 +412,11 @@ class ScorePitchCommand(Command):
             else:
                 item = abjad.NamedPitch(item)
             items.append(item)
-        return items
+        if isinstance(source, baca.Loop):
+            source = type(source)(items=items, intervals=source.intervals)
+        else:
+            source = abjad.CyclicTuple(items)
+        return source
 
     def _mutates_score(self):
         source = self.source or []
@@ -495,6 +485,7 @@ class ScorePitchCommand(Command):
 
     ### PUBLIC PROPERTIES ###
 
+    # TODO: change to self.cyclic
     @property
     def acyclic(self):
         r'''Is true when command reads pitches once only.
@@ -531,102 +522,7 @@ class ScorePitchCommand(Command):
         '''
         return self._counts
 
-    @property
-    def repetition_intervals(self):
-        r'''Gets repetition intervals.
-
-
-        ..  container:: example
-
-            With no repetition intervals:
-
-            >>> command = baca.ScorePitchCommand(
-            ...     source=[0, 1, 2, 3],
-            ...     )
-
-            >>> command.repetition_intervals is None
-            True
-
-            >>> for index in range(12):
-            ...     pitch = command.get_pitch(index)
-            ...     pitch.number
-            0
-            1
-            2
-            3
-            0
-            1
-            2
-            3
-            0
-            1
-            2
-            3
-
-        ..  container:: example
-
-            With fixed repetition interval:
-
-            >>> command = baca.ScorePitchCommand(
-            ...     repetition_intervals=[12],
-            ...     source=[0, 1, 2, 3],
-            ...     )
-
-            >>> command.repetition_intervals
-            CyclicTuple([12])
-
-            >>> for index in range(12):
-            ...     pitch = command.get_pitch(index)
-            ...     pitch.number
-            0
-            1
-            2
-            3
-            12
-            13
-            14
-            15
-            24
-            25
-            26
-            27
-
-        ..  container:: example
-
-            With patterned repetition intervals:
-
-            >>> command = baca.ScorePitchCommand(
-            ...     repetition_intervals=[12, 1],
-            ...     source=[0, 1, 2, 3],
-            ...     )
-
-            >>> command.repetition_intervals
-            CyclicTuple([12, 1])
-
-            >>> for index in range(12):
-            ...     pitch = command.get_pitch(index)
-            ...     pitch.number
-            0
-            1
-            2
-            3
-            12
-            13
-            14
-            15
-            13
-            14
-            15
-            16
-
-        Defaults to none.
-
-        Set to intervals or none.
-
-        Returns intervals or none.
-        '''
-        return self._repetition_intervals
-
+    # TODO: change name to self.pitches
     @property
     def source(self):
         r'''Gets source.
@@ -655,59 +551,3 @@ class ScorePitchCommand(Command):
         Returns pitch source or none.
         '''
         return self._source
-
-    ### PUBLIC METHODS ###
-
-    def get_pitch(self, index):
-        r'''Gets pitch at `index`.
-
-        ..  container:: example
-
-            Gets pitches:
-
-            >>> command = baca.ScorePitchCommand(
-            ...     source=[12, 13, 14, 15]
-            ...     )
-
-            >>> for index in range(12):
-            ...     command.get_pitch(index)
-            ...
-            NamedPitch("c''")
-            NamedPitch("cs''")
-            NamedPitch("d''")
-            NamedPitch("ef''")
-            NamedPitch("c''")
-            NamedPitch("cs''")
-            NamedPitch("d''")
-            NamedPitch("ef''")
-            NamedPitch("c''")
-            NamedPitch("cs''")
-            NamedPitch("d''")
-            NamedPitch("ef''")
-
-        Returns pitch.
-        '''
-        if not self.source:
-            message = 'no source pitches.'
-            raise Exception(message)
-        if self.acyclic:
-            source = list(self.source)
-        else:
-            source = abjad.CyclicTuple(self.source)
-        start_index = 0
-        index += start_index
-        pitch_expression = source[index]
-        iteration = index // len(self.source)
-        if self.repetition_intervals is not None and 0 < iteration:
-            repetition_intervals = abjad.CyclicTuple(
-                self.repetition_intervals)
-            repetition_intervals = repetition_intervals[:iteration]
-            repetition_interval = sum(repetition_intervals)
-            if isinstance(repetition_interval, int):
-                pitch_number = pitch_expression.number
-                pitch_number += repetition_interval
-                pitch_expression = type(pitch_expression)(pitch_number)
-            else:
-                message = 'named repetition intervals not yet implemented.'
-                raise NotImplementedError(message)
-        return pitch_expression
