@@ -5,195 +5,62 @@ baca.tools
 
 --------
 
-1: Libraries
-------------
-
-.. toctree::
-   :hidden:
-
-   LibraryAM
-   LibraryNZ
-
-.. autosummary::
-   :nosignatures:
-
-   LibraryAM
-   LibraryNZ
-
---------
-
-Builders
---------
-
-.. toctree::
-   :hidden:
-
-   Builder
-   ImbricateBuilder
-   NestBuilder
-   RhythmBuilder
-
-.. autosummary::
-   :nosignatures:
-
-   Builder
-   ImbricateBuilder
-   NestBuilder
-   RhythmBuilder
-
---------
-
-Commands
---------
-
-.. toctree::
-   :hidden:
-
-   ClusterCommand
-   ColorCommand
-   ColorFingeringCommand
-   Command
-   DiatonicClusterCommand
-   IndicatorCommand
-   LabelCommand
-   MapCommand
-   MicrotoneDeviationCommand
-   OctaveDisplacementCommand
-   OverrideCommand
-   PiecewiseCommand
-   PitchCommand
-   RegisterCommand
-   RegisterInterpolationCommand
-   RegisterToOctaveCommand
-   SettingCommand
-   SpannerCommand
-   StaffPositionCommand
-   SuiteCommand
-
-.. autosummary::
-   :nosignatures:
-
-   ClusterCommand
-   ColorCommand
-   ColorFingeringCommand
-   Command
-   DiatonicClusterCommand
-   IndicatorCommand
-   LabelCommand
-   MapCommand
-   MicrotoneDeviationCommand
-   OctaveDisplacementCommand
-   OverrideCommand
-   PiecewiseCommand
-   PitchCommand
-   RegisterCommand
-   RegisterInterpolationCommand
-   RegisterToOctaveCommand
-   SettingCommand
-   SpannerCommand
-   StaffPositionCommand
-   SuiteCommand
-
---------
-
-Divisions
----------
-
-.. toctree::
-   :hidden:
-
-   DivisionMaker
-   DivisionSequence
-   FlattenDivisionCallback
-   FuseByCountsDivisionCallback
-   PartitionDivisionCallback
-   SplitByDurationsDivisionCallback
-   SplitByRoundedRatiosDivisionCallback
-
-.. autosummary::
-   :nosignatures:
-
-   DivisionMaker
-   DivisionSequence
-   FlattenDivisionCallback
-   FuseByCountsDivisionCallback
-   PartitionDivisionCallback
-   SplitByDurationsDivisionCallback
-   SplitByRoundedRatiosDivisionCallback
-
---------
-
-Expressions
+(1) Library
 -----------
 
 .. toctree::
    :hidden:
 
-   DivisionSequenceExpression
-   Expression
-   ExpressionGallery
-
-.. autosummary::
-   :nosignatures:
-
-   DivisionSequenceExpression
-   Expression
-   ExpressionGallery
-
---------
-
-Libraries
----------
-
-.. toctree::
-   :hidden:
-
+   LibraryAM
+   LibraryNZ
    MarkupLibrary
 
 .. autosummary::
    :nosignatures:
 
+   LibraryAM
+   LibraryNZ
    MarkupLibrary
 
 --------
 
-Music
------
-
-.. toctree::
-   :hidden:
-
-   FloatingSelection
-   MusicAccumulator
-   MusicContribution
-   MusicMaker
-   MusicPitchSpecifier
-   MusicRhythmMaker
-   MusicRhythmSpecifier
-   SegmentContribution
-   SegmentMaker
-
-.. autosummary::
-   :nosignatures:
-
-   FloatingSelection
-   MusicAccumulator
-   MusicContribution
-   MusicMaker
-   MusicPitchSpecifier
-   MusicRhythmMaker
-   MusicRhythmSpecifier
-   SegmentContribution
-   SegmentMaker
-
---------
-
-Specifiers
+(2) Makers
 ----------
 
 .. toctree::
    :hidden:
 
+   FloatingSelection
+   MusicAccumulator
+   MusicContribution
+   MusicMaker
+   MusicPitchSpecifier
+   MusicRhythmMaker
+   MusicRhythmSpecifier
+   SegmentContribution
+   SegmentMaker
+
+.. autosummary::
+   :nosignatures:
+
+   FloatingSelection
+   MusicAccumulator
+   MusicContribution
+   MusicMaker
+   MusicPitchSpecifier
+   MusicRhythmMaker
+   MusicRhythmSpecifier
+   SegmentContribution
+   SegmentMaker
+
+--------
+
+(3) Specifiers
+--------------
+
+.. toctree::
+   :hidden:
+
    AcciaccaturaSpecifier
    AnchorSpecifier
    ArpeggiationSpacingSpecifier
@@ -221,8 +88,82 @@ Specifiers
 
 --------
 
-Utilities
----------
+(4) Commands
+------------
+
+.. toctree::
+   :hidden:
+
+   ClusterCommand
+   ColorCommand
+   ColorFingeringCommand
+   Command
+   DiatonicClusterCommand
+   IndicatorCommand
+   LabelCommand
+   MapCommand
+   MicrotoneDeviationCommand
+   OctaveDisplacementCommand
+   OverrideCommand
+   PiecewiseCommand
+   PitchCommand
+   RegisterCommand
+   RegisterInterpolationCommand
+   RegisterToOctaveCommand
+   SettingCommand
+   SpannerCommand
+   StaffPositionCommand
+   SuiteCommand
+
+.. autosummary::
+   :nosignatures:
+
+   ClusterCommand
+   ColorCommand
+   ColorFingeringCommand
+   Command
+   DiatonicClusterCommand
+   IndicatorCommand
+   LabelCommand
+   MapCommand
+   MicrotoneDeviationCommand
+   OctaveDisplacementCommand
+   OverrideCommand
+   PiecewiseCommand
+   PitchCommand
+   RegisterCommand
+   RegisterInterpolationCommand
+   RegisterToOctaveCommand
+   SettingCommand
+   SpannerCommand
+   StaffPositionCommand
+   SuiteCommand
+
+--------
+
+(5) Builders
+------------
+
+.. toctree::
+   :hidden:
+
+   Builder
+   ImbricateBuilder
+   NestBuilder
+   RhythmBuilder
+
+.. autosummary::
+   :nosignatures:
+
+   Builder
+   ImbricateBuilder
+   NestBuilder
+   RhythmBuilder
+
+--------
+
+(6) Utilities
+-------------
 
 .. toctree::
    :hidden:
@@ -236,6 +177,8 @@ Utilities
    Cursor
    DesignMaker
    Division
+   Expression
+   ExpressionGallery
    Interpolator
    LBSD
    LayoutMeasureMap
@@ -285,6 +228,8 @@ Utilities
    Cursor
    DesignMaker
    Division
+   Expression
+   ExpressionGallery
    Interpolator
    LBSD
    LayoutMeasureMap
@@ -321,3 +266,32 @@ Utilities
    VoltaMeasureMap
    WellformednessManager
    ZaggedPitchClassMaker
+
+--------
+
+(7) Divisions
+-------------
+
+.. toctree::
+   :hidden:
+
+   DivisionMaker
+   DivisionSequence
+   DivisionSequenceExpression
+   FlattenDivisionCallback
+   FuseByCountsDivisionCallback
+   PartitionDivisionCallback
+   SplitByDurationsDivisionCallback
+   SplitByRoundedRatiosDivisionCallback
+
+.. autosummary::
+   :nosignatures:
+
+   DivisionMaker
+   DivisionSequence
+   DivisionSequenceExpression
+   FlattenDivisionCallback
+   FuseByCountsDivisionCallback
+   PartitionDivisionCallback
+   SplitByDurationsDivisionCallback
+   SplitByRoundedRatiosDivisionCallback

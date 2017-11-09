@@ -44,7 +44,7 @@ class PitchSegment(abjad.PitchSegment):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Utilities'
+    __documentation_section__ = '(6) Utilities'
 
     ### PRIVATE METHODS ###
 

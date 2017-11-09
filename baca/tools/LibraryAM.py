@@ -8,7 +8,7 @@ class LibraryAM(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '1: Libraries'
+    __documentation_section__ = '(1) Library'
 
     __slots__ = (
         )

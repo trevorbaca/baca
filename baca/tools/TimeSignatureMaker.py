@@ -36,7 +36,7 @@ class TimeSignatureMaker(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Utilities'
+    __documentation_section__ = '(6) Utilities'
 
     __slots__ = (
         '_repeat_count',

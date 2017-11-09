@@ -15,7 +15,7 @@ class DivisionSequence(abjad.Sequence):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Divisions'
+    __documentation_section__ = '(7) Divisions'
 
     __slots__ = (
         )

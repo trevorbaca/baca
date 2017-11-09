@@ -106,7 +106,7 @@ class DivisionSequenceExpression(abjad.Expression):
 
     ### CLASS VARIALBES ###
 
-    __documentation_section__ = 'Expressions'
+    __documentation_section__ = '(7) Divisions'
 
     __slots__ = (
         )

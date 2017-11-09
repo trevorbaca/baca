@@ -8,7 +8,7 @@ class MarkupLibrary(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Libraries'
+    __documentation_section__ = '(1) Library'
 
     ### SPECIAL METHODS ###
 

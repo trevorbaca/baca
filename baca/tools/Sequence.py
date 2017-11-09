@@ -168,7 +168,7 @@ class Sequence(abjad.Sequence):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Utilities'
+    __documentation_section__ = '(6) Utilities'
 
     __slots__ = (
         )

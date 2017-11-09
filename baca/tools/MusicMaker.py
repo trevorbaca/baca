@@ -47,7 +47,7 @@ class MusicMaker(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Music'
+    __documentation_section__ = '(2) Makers'
 
     __slots__ = (
         '_allow_repeat_pitches',

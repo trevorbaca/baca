@@ -66,7 +66,7 @@ class RangeDictionary(TypedOrderedDict):
 
     __slots__ = ()
 
-    __documentation_section__ = 'Utilities'
+    __documentation_section__ = '(6) Utilities'
 
     ### SPECIAL METHODS ###
 

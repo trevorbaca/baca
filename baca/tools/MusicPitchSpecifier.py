@@ -100,7 +100,7 @@ class MusicPitchSpecifier(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Music'
+    __documentation_section__ = '(2) Makers'
 
     __slots__ = (
         '_expressions',

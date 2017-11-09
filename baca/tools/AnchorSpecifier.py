@@ -13,7 +13,7 @@ class AnchorSpecifier(abjad.AbjadValueObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Specifiers'
+    __documentation_section__ = '(3) Specifiers'
 
     __slots__ = (
         '_figure_name',

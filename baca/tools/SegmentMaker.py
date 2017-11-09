@@ -254,7 +254,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     ### CLASS ATTRIBUTES ###
 
-    __documentation_section__ = 'Music'
+    __documentation_section__ = '(2) Makers'
 
     __slots__ = (
         '_allow_empty_selections',
@@ -791,6 +791,12 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.attach(tie, leaves)
                 abjad.detach('tie from me', current_leaf)
 
+    def _apply_layout_measure_map(self):
+        if self.layout_measure_map is None:
+            return
+        context = self._score['Global Skips']
+        self.layout_measure_map(context)
+
     def _apply_previous_segment_end_settings(self):
         if self._is_first_segment():
             return
@@ -839,12 +845,6 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         if 3 < total_time:
             raise Exception(f'spacing specifier time {total_time} seconds!')
-
-    def _apply_layout_measure_map(self):
-        if self.layout_measure_map is None:
-            return
-        context = self._score['Global Skips']
-        self.layout_measure_map(context)
 
     def _assert_valid_stage_number(self, stage_number):
         if not 1 <= stage_number <= self.stage_count:

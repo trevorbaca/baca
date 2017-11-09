@@ -34,7 +34,7 @@ class Registration(abjad.AbjadValueObject):
         '_components',
         )
 
-    __documentation_section__ = 'Utilities'
+    __documentation_section__ = '(6) Utilities'
 
     _publish_storage_format = True
 

@@ -302,4 +302,4 @@ class ExpressionGallery(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Expressions'
+    __documentation_section__ = '(6) Utilities'

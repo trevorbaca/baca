@@ -7,7 +7,7 @@ class Expression(abjad.Expression):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Expressions'
+    __documentation_section__ = '(6) Utilities'
 
     ### PRIVATE METHODS ###
 

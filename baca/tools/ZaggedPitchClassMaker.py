@@ -64,7 +64,7 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
 
     ### CLASS ATTRIBUTES ###
 
-    __documentation_section__ = 'Utilities'
+    __documentation_section__ = '(6) Utilities'
 
     __slots__ = (
         '_division_ratios',

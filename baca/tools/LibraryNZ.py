@@ -9,7 +9,7 @@ class LibraryNZ(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '1: Libraries'
+    __documentation_section__ = '(1) Library'
 
     __slots__ = (
         )
@@ -6851,15 +6851,6 @@ class LibraryNZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def timeline(scopes):
-        r'''Makes timeline scope.
-
-        Returns timeline scope.
-        '''
-        scopes = [baca.scope(*_) for _ in scopes]
-        return baca.TimelineScope(scopes)
-
-    @staticmethod
     def time_signature_extra_offset(pair, selector='baca.leaf(0)'):
         r'''Overrides time signature extra offset.
 
@@ -6928,6 +6919,15 @@ class LibraryNZ(abjad.AbjadObject):
             revert=True,
             selector=selector,
             )
+
+    @staticmethod
+    def timeline(scopes):
+        r'''Makes timeline scope.
+
+        Returns timeline scope.
+        '''
+        scopes = [baca.scope(*_) for _ in scopes]
+        return baca.TimelineScope(scopes)
 
     @staticmethod
     def transparent_bar_lines(selector='baca.leaf(0)'):

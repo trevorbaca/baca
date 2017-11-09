@@ -7,7 +7,7 @@ class Builder(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Builders'
+    __documentation_section__ = '(5) Builders'
 
     ### SPECIAL METHODS ###
 
