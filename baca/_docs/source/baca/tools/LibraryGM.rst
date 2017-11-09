@@ -34,11 +34,18 @@ Bases
       ~baca.tools.LibraryGM.LibraryGM.literal
       ~baca.tools.LibraryGM.LibraryGM.long_fermata
       ~baca.tools.LibraryGM.LibraryGM.loop
+      ~baca.tools.LibraryGM.LibraryGM.make_even_runs
+      ~baca.tools.LibraryGM.LibraryGM.make_fused_tuplet_monads
+      ~baca.tools.LibraryGM.LibraryGM.make_multimeasure_rests
       ~baca.tools.LibraryGM.LibraryGM.make_notes
+      ~baca.tools.LibraryGM.LibraryGM.make_repeated_durations
       ~baca.tools.LibraryGM.LibraryGM.make_rests
+      ~baca.tools.LibraryGM.LibraryGM.make_rhythm
       ~baca.tools.LibraryGM.LibraryGM.make_scopes
+      ~baca.tools.LibraryGM.LibraryGM.make_single_attack
+      ~baca.tools.LibraryGM.LibraryGM.make_tied_notes
+      ~baca.tools.LibraryGM.LibraryGM.make_tied_repeated_durations
       ~baca.tools.LibraryGM.LibraryGM.marcati
-      ~baca.tools.LibraryGM.LibraryGM.multimeasure_rests
       ~baca.tools.LibraryGM.LibraryGM.__eq__
       ~baca.tools.LibraryGM.LibraryGM.__format__
       ~baca.tools.LibraryGM.LibraryGM.__hash__
@@ -73,15 +80,29 @@ Class & static methods
 
 .. automethod:: baca.tools.LibraryGM.LibraryGM.loop
 
+.. automethod:: baca.tools.LibraryGM.LibraryGM.make_even_runs
+
+.. automethod:: baca.tools.LibraryGM.LibraryGM.make_fused_tuplet_monads
+
+.. automethod:: baca.tools.LibraryGM.LibraryGM.make_multimeasure_rests
+
 .. automethod:: baca.tools.LibraryGM.LibraryGM.make_notes
+
+.. automethod:: baca.tools.LibraryGM.LibraryGM.make_repeated_durations
 
 .. automethod:: baca.tools.LibraryGM.LibraryGM.make_rests
 
+.. automethod:: baca.tools.LibraryGM.LibraryGM.make_rhythm
+
 .. automethod:: baca.tools.LibraryGM.LibraryGM.make_scopes
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.marcati
+.. automethod:: baca.tools.LibraryGM.LibraryGM.make_single_attack
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.multimeasure_rests
+.. automethod:: baca.tools.LibraryGM.LibraryGM.make_tied_notes
+
+.. automethod:: baca.tools.LibraryGM.LibraryGM.make_tied_repeated_durations
+
+.. automethod:: baca.tools.LibraryGM.LibraryGM.marcati
 
 Special methods
 ---------------

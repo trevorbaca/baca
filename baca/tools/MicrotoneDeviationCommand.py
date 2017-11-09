@@ -20,7 +20,7 @@ class MicrotoneDeviationCommand(Command):
         >>> segment_maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches('E4'),
-        ...     baca.even_runs(),
+        ...     baca.make_even_runs(),
         ...     baca.deviation([0, 0.5, 0, -0.5]),
         ...     )
 

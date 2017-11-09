@@ -96,7 +96,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         >>> segment_maker(
         ...     baca.scope('Violin Music Voice', 1),
-        ...     baca.even_runs(),
+        ...     baca.make_even_runs(),
         ...     )
 
         >>> result = segment_maker.run(is_doc_example=True)
@@ -495,7 +495,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     baca.label(abjad.label().with_indices()),
             ...     )
 
@@ -2730,7 +2730,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     )
 
             >>> result = segment_maker.run(is_doc_example=True)
@@ -2896,7 +2896,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     )
 
             >>> metadata = {'segment_count': 1}
@@ -3067,7 +3067,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     )
 
             >>> result = segment_maker.run(is_doc_example=True)
@@ -3234,7 +3234,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     )
 
             >>> metadata = {'segment_count': 1}
@@ -3414,7 +3414,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     )
 
             >>> result = segment_maker.run(is_doc_example=True)
@@ -3583,7 +3583,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     )
 
             >>> result = segment_maker.run(is_doc_example=True)
@@ -3820,7 +3820,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     )
 
             >>> result = segment_maker.run(is_doc_example=True)
@@ -3987,7 +3987,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     )
 
             >>> result = segment_maker.run(is_doc_example=True)
@@ -4519,7 +4519,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     )
 
             >>> result = segment_maker.run(is_doc_example=True)
@@ -4704,7 +4704,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     )
 
             >>> result = segment_maker.run(is_doc_example=True) # doctest: +SKIP
@@ -4899,7 +4899,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     )
 
             >>> result = segment_maker.run(is_doc_example=True)
@@ -5066,7 +5066,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     )
 
             >>> result = segment_maker.run(is_doc_example=True)
@@ -5240,7 +5240,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     )
 
             >>> metadata = {'name': 'K'}
@@ -5462,7 +5462,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     )
 
             >>> result = segment_maker.run(is_doc_example=True)
@@ -5631,7 +5631,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     )
 
             >>> result = segment_maker.run(is_doc_example=True)
@@ -6128,7 +6128,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     )
 
             >>> metadata = {'name': 'K'}
@@ -6307,7 +6307,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     )
 
             >>> metadata = {'name': 'K'}
@@ -6506,7 +6506,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     baca.pitches('E4 F4'),
             ...     )
 
@@ -6618,7 +6618,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     )
 
             >>> result = segment_maker.run(is_doc_example=True)
@@ -6787,7 +6787,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     )
 
             >>> result = segment_maker.run(is_doc_example=True)

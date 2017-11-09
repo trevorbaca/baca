@@ -19,7 +19,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
         >>> segment_maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches('E4 F4'),
-        ...     baca.even_runs(),
+        ...     baca.make_even_runs(),
         ...     )
 
         >>> result = segment_maker.run(is_doc_example=True)

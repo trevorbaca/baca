@@ -121,7 +121,7 @@ class RegisterInterpolationCommand(Command):
         >>> segment_maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches(pitches),
-        ...     baca.even_runs(),
+        ...     baca.make_even_runs(),
         ...     baca.register(12, 12),
         ...     )
 
@@ -275,7 +275,7 @@ class RegisterInterpolationCommand(Command):
         >>> segment_maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches(pitches),
-        ...     baca.even_runs(),
+        ...     baca.make_even_runs(),
         ...     baca.register(12, 0),
         ...     )
 
@@ -429,7 +429,7 @@ class RegisterInterpolationCommand(Command):
         >>> segment_maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches(pitches),
-        ...     baca.even_runs(),
+        ...     baca.make_even_runs(),
         ...     baca.register(0, 12),
         ...     )
 
@@ -583,7 +583,7 @@ class RegisterInterpolationCommand(Command):
         >>> segment_maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches(pitches),
-        ...     baca.even_runs(),
+        ...     baca.make_even_runs(),
         ...     baca.register(12, -12),
         ...     )
 
@@ -737,7 +737,7 @@ class RegisterInterpolationCommand(Command):
         >>> segment_maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches(pitches),
-        ...     baca.even_runs(),
+        ...     baca.make_even_runs(),
         ...     baca.register(-12, 12),
         ...     )
 

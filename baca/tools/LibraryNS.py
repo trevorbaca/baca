@@ -1416,25 +1416,6 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def repeated_durations(durations):
-        r'''Makes repeated durations.
-        '''
-        if isinstance(durations, abjad.Duration):
-            durations = [durations]
-        elif isinstance(durations, tuple):
-            assert len(durations) == 2
-            durations = [abjad.Duration(durations)]
-        return baca.RhythmBuilder(
-            division_expression=baca.split_by_durations(durations=durations),
-            rewrite_meter=True,
-            rhythm_maker=rhythmos.NoteRhythmMaker(
-                tie_specifier=rhythmos.TieSpecifier(
-                    repeat_ties=True,
-                    ),
-                ),
-            )
-
-    @staticmethod
     def rest_position(n, selector='baca.rests()'):
         r'''Overrides position of rests.
 
@@ -1998,18 +1979,6 @@ class LibraryNS(abjad.AbjadObject):
             remote_selector=baca.leaf(-1),
             remote_voice_name=remote_voice_name,
             use_remote_stop_offset=True,
-            )
-
-    @staticmethod
-    def rhythm(selection):
-        r'''Set rhythm to `selection`.
-
-        Return rhythm builder.
-        '''
-        assert isinstance(selection, abjad.Selection), repr(selection)
-        assert all(isinstance(_,  abjad.Component) for _ in selection)
-        return baca.RhythmBuilder(
-            rhythm_maker=selection,
             )
 
     @staticmethod
@@ -2666,25 +2635,6 @@ class LibraryNS(abjad.AbjadObject):
         return baca.IndicatorCommand(
             indicators=[abjad.Articulation('shortfermata')],
             selector=selector,
-            )
-
-    @staticmethod
-    def single_attack(duration):
-        r'''Makes single attacks with `duration`.
-        '''
-        duration = abjad.Duration(duration)
-        numerator, denominator = duration.pair
-        rhythm_maker = rhythmos.IncisedRhythmMaker(
-            incise_specifier=rhythmos.InciseSpecifier(
-                fill_with_notes=False,
-                outer_divisions_only=True,
-                prefix_talea=[numerator],
-                prefix_counts=[1],
-                talea_denominator=denominator,
-                ),
-            )
-        return baca.RhythmBuilder(
-            rhythm_maker=rhythm_maker,
             )
 
     def single_segment_transition(

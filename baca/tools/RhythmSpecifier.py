@@ -1,5 +1,5 @@
 import abjad
-from abjad import rhythmmakertools
+from abjad import rhythmmakertools as rhythmos
 
 
 class RhythmSpecifier(abjad.AbjadObject):

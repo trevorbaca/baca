@@ -1183,32 +1183,6 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def tied_notes(repeat_ties=False):
-        r'''Makes tied notes; rewrites meter.
-        '''
-        return baca.RhythmBuilder(
-            rewrite_meter=True,
-            rhythm_maker=rhythmos.NoteRhythmMaker(
-                tie_specifier=rhythmos.TieSpecifier(
-                    tie_across_divisions=True,
-                    repeat_ties=repeat_ties,
-                    ),
-                ),
-            )
-
-    @staticmethod
-    def tied_repeated_durations(durations):
-        r'''Makes tied repeated durations.
-        '''
-        specifier = baca.repeated_durations(durations)
-        specifier = abjad.new(
-            specifier,
-            rewrite_meter=False,
-            rhythm_maker__tie_specifier__tie_across_divisions=True,
-            )
-        return specifier
-
-    @staticmethod
     def ties_down(selector='baca.tleaves()'):
         r'''Overrides tie direction.
 

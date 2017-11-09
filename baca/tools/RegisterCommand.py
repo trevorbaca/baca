@@ -150,7 +150,7 @@ class RegisterCommand(Command):
         >>> segment_maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches('G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4'),
-        ...     baca.even_runs(),
+        ...     baca.make_even_runs(),
         ...     baca.RegisterCommand(
         ...         registration=baca.Registration(
         ...             [('[A0, C8]', 15)],

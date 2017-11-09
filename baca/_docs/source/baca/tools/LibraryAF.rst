@@ -58,12 +58,10 @@ Bases
       ~baca.tools.LibraryAF.LibraryAF.dynamics_down
       ~baca.tools.LibraryAF.LibraryAF.dynamics_up
       ~baca.tools.LibraryAF.LibraryAF.effort_dynamic
-      ~baca.tools.LibraryAF.LibraryAF.even_runs
       ~baca.tools.LibraryAF.LibraryAF.fermata
       ~baca.tools.LibraryAF.LibraryAF.flageolets
       ~baca.tools.LibraryAF.LibraryAF.flags
       ~baca.tools.LibraryAF.LibraryAF.fuse_compound_quarter_divisions
-      ~baca.tools.LibraryAF.LibraryAF.fused_tuplet_monads
       ~baca.tools.LibraryAF.LibraryAF.__eq__
       ~baca.tools.LibraryAF.LibraryAF.__format__
       ~baca.tools.LibraryAF.LibraryAF.__hash__
@@ -146,8 +144,6 @@ Class & static methods
 
 .. automethod:: baca.tools.LibraryAF.LibraryAF.effort_dynamic
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.even_runs
-
 .. automethod:: baca.tools.LibraryAF.LibraryAF.fermata
 
 .. automethod:: baca.tools.LibraryAF.LibraryAF.flageolets
@@ -155,8 +151,6 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAF.LibraryAF.flags
 
 .. automethod:: baca.tools.LibraryAF.LibraryAF.fuse_compound_quarter_divisions
-
-.. automethod:: baca.tools.LibraryAF.LibraryAF.fused_tuplet_monads
 
 Special methods
 ---------------

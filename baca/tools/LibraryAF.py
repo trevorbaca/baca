@@ -3989,14 +3989,6 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def even_runs():
-        r'''Makes even runs.
-        '''
-        return baca.RhythmBuilder(
-            rhythm_maker=rhythmos.EvenRunRhythmMaker()
-            )
-
-    @staticmethod
     def fermata(selector='baca.leaf(0)'):
         r'''Attaches fermata to leaf.
 
@@ -4352,23 +4344,3 @@ class LibraryAF(abjad.AbjadObject):
         expression = expression.map(baca.sequence().sum())
         expression = expression.flatten(depth=-1)
         return expression
-
-    @staticmethod
-    def fused_tuplet_monads(tuplet_ratio=None):
-        r'''Makes fused tuplet monads.
-        '''
-        if tuplet_ratio is None:
-            tuplet_ratios = [(1,)]
-        else:
-            tuplet_ratios = [tuplet_ratio]
-        return baca.RhythmBuilder(
-            division_expression=abjad.sequence()
-                .sum()
-                .sequence(),
-            rhythm_maker=rhythmos.TupletRhythmMaker(
-                tie_specifier=rhythmos.TieSpecifier(
-                    repeat_ties=True,
-                    ),
-                tuplet_ratios=tuplet_ratios,
-                ),
-            )

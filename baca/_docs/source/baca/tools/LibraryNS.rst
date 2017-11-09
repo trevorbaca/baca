@@ -35,7 +35,6 @@ Bases
       ~baca.tools.LibraryNS.LibraryNS.reiterated_dynamic
       ~baca.tools.LibraryNS.LibraryNS.repeat_ties_down
       ~baca.tools.LibraryNS.LibraryNS.repeat_ties_up
-      ~baca.tools.LibraryNS.LibraryNS.repeated_durations
       ~baca.tools.LibraryNS.LibraryNS.rest_position
       ~baca.tools.LibraryNS.LibraryNS.rests_after
       ~baca.tools.LibraryNS.LibraryNS.rests_around
@@ -44,7 +43,6 @@ Bases
       ~baca.tools.LibraryNS.LibraryNS.rests_up
       ~baca.tools.LibraryNS.LibraryNS.resume
       ~baca.tools.LibraryNS.LibraryNS.resume_after
-      ~baca.tools.LibraryNS.LibraryNS.rhythm
       ~baca.tools.LibraryNS.LibraryNS.scope
       ~baca.tools.LibraryNS.LibraryNS.scopes
       ~baca.tools.LibraryNS.LibraryNS.script_color
@@ -52,7 +50,6 @@ Bases
       ~baca.tools.LibraryNS.LibraryNS.scripts_down
       ~baca.tools.LibraryNS.LibraryNS.scripts_up
       ~baca.tools.LibraryNS.LibraryNS.short_fermata
-      ~baca.tools.LibraryNS.LibraryNS.single_attack
       ~baca.tools.LibraryNS.LibraryNS.single_segment_transition
       ~baca.tools.LibraryNS.LibraryNS.skips_after
       ~baca.tools.LibraryNS.LibraryNS.skips_around
@@ -116,8 +113,6 @@ Class & static methods
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.repeat_ties_up
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.repeated_durations
-
 .. automethod:: baca.tools.LibraryNS.LibraryNS.rest_position
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.rests_after
@@ -134,8 +129,6 @@ Class & static methods
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.resume_after
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.rhythm
-
 .. automethod:: baca.tools.LibraryNS.LibraryNS.scope
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.scopes
@@ -149,8 +142,6 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNS.LibraryNS.scripts_up
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.short_fermata
-
-.. automethod:: baca.tools.LibraryNS.LibraryNS.single_attack
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.skips_after
 

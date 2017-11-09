@@ -30,8 +30,6 @@ Bases
       ~baca.tools.LibraryTZ.LibraryTZ.text_spanner
       ~baca.tools.LibraryTZ.LibraryTZ.text_spanner_staff_padding
       ~baca.tools.LibraryTZ.LibraryTZ.tie
-      ~baca.tools.LibraryTZ.LibraryTZ.tied_notes
-      ~baca.tools.LibraryTZ.LibraryTZ.tied_repeated_durations
       ~baca.tools.LibraryTZ.LibraryTZ.ties_down
       ~baca.tools.LibraryTZ.LibraryTZ.ties_up
       ~baca.tools.LibraryTZ.LibraryTZ.time_signature_extra_offset
@@ -76,10 +74,6 @@ Class & static methods
 .. automethod:: baca.tools.LibraryTZ.LibraryTZ.text_spanner_staff_padding
 
 .. automethod:: baca.tools.LibraryTZ.LibraryTZ.tie
-
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.tied_notes
-
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.tied_repeated_durations
 
 .. automethod:: baca.tools.LibraryTZ.LibraryTZ.ties_down
 

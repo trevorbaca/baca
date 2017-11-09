@@ -31,7 +31,7 @@ class LibraryGM(abjad.AbjadObject):
 
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.glissando()
             ...     )
@@ -130,7 +130,7 @@ class LibraryGM(abjad.AbjadObject):
             >>> segment_maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-            ...     baca.even_runs(),
+            ...     baca.make_even_runs(),
             ...     baca.glissando(baca.plts()[:2]),
             ...     baca.glissando(baca.plts()[-2:]),
             ...     )
@@ -1233,6 +1233,34 @@ class LibraryGM(abjad.AbjadObject):
         return baca.pitches(loop)
 
     @staticmethod
+    def make_even_runs():
+        r'''Makes even runs.
+        '''
+        return baca.RhythmBuilder(
+            rhythm_maker=rhythmos.EvenRunRhythmMaker()
+            )
+
+    @staticmethod
+    def make_fused_tuplet_monads(tuplet_ratio=None):
+        r'''Makes fused tuplet monads.
+        '''
+        if tuplet_ratio is None:
+            tuplet_ratios = [(1,)]
+        else:
+            tuplet_ratios = [tuplet_ratio]
+        return baca.RhythmBuilder(
+            division_expression=abjad.sequence()
+                .sum()
+                .sequence(),
+            rhythm_maker=rhythmos.TupletRhythmMaker(
+                tie_specifier=rhythmos.TieSpecifier(
+                    repeat_ties=True,
+                    ),
+                tuplet_ratios=tuplet_ratios,
+                ),
+            )
+
+    @staticmethod
     def make_notes(repeat_ties=False):
         r'''Makes notes; rewrites meter.
         '''
@@ -1250,6 +1278,25 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
+    def make_repeated_durations(durations):
+        r'''Makes repeated durations.
+        '''
+        if isinstance(durations, abjad.Duration):
+            durations = [durations]
+        elif isinstance(durations, tuple):
+            assert len(durations) == 2
+            durations = [abjad.Duration(durations)]
+        return baca.RhythmBuilder(
+            division_expression=baca.split_by_durations(durations=durations),
+            rewrite_meter=True,
+            rhythm_maker=rhythmos.NoteRhythmMaker(
+                tie_specifier=rhythmos.TieSpecifier(
+                    repeat_ties=True,
+                    ),
+                ),
+            )
+
+    @staticmethod
     def make_rests():
         r'''Makes rests.
         '''
@@ -1257,6 +1304,18 @@ class LibraryGM(abjad.AbjadObject):
             rhythm_maker=rhythmos.NoteRhythmMaker(
                 division_masks=[abjad.silence([0], 1)],
                 ),
+            )
+    
+    @staticmethod
+    def make_rhythm(selection):
+        r'''Set rhythm to `selection`.
+
+        Return rhythm builder.
+        '''
+        assert isinstance(selection, abjad.Selection), repr(selection)
+        assert all(isinstance(_,  abjad.Component) for _ in selection)
+        return baca.RhythmBuilder(
+            rhythm_maker=selection,
             )
 
     @staticmethod
@@ -1277,6 +1336,51 @@ class LibraryGM(abjad.AbjadObject):
                     scope = baca.scope(voice, *item)
                 scopes.append(scope)
         return scopes
+
+    @staticmethod
+    def make_single_attack(duration):
+        r'''Makes single attacks with `duration`.
+        '''
+        duration = abjad.Duration(duration)
+        numerator, denominator = duration.pair
+        rhythm_maker = rhythmos.IncisedRhythmMaker(
+            incise_specifier=rhythmos.InciseSpecifier(
+                fill_with_notes=False,
+                outer_divisions_only=True,
+                prefix_talea=[numerator],
+                prefix_counts=[1],
+                talea_denominator=denominator,
+                ),
+            )
+        return baca.RhythmBuilder(
+            rhythm_maker=rhythm_maker,
+            )
+
+    @staticmethod
+    def make_tied_notes(repeat_ties=False):
+        r'''Makes tied notes; rewrites meter.
+        '''
+        return baca.RhythmBuilder(
+            rewrite_meter=True,
+            rhythm_maker=rhythmos.NoteRhythmMaker(
+                tie_specifier=rhythmos.TieSpecifier(
+                    tie_across_divisions=True,
+                    repeat_ties=repeat_ties,
+                    ),
+                ),
+            )
+
+    @staticmethod
+    def make_tied_repeated_durations(durations):
+        r'''Makes tied repeated durations.
+        '''
+        specifier = baca.make_repeated_durations(durations)
+        specifier = abjad.new(
+            specifier,
+            rewrite_meter=False,
+            rhythm_maker__tie_specifier__tie_across_divisions=True,
+            )
+        return specifier
 
     @staticmethod
     def marcati(selector='baca.pheads()'):
@@ -1394,8 +1498,9 @@ class LibraryGM(abjad.AbjadObject):
             selector=selector,
             )
 
+    # S&R
     @staticmethod
-    def multimeasure_rests():
+    def make_multimeasure_rests():
         r'''Makes multimeasure rests.
         '''
         mask = rhythmos.SilenceMask(
