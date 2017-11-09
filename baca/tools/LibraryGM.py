@@ -1260,6 +1260,25 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
+    def make_scopes(voices, stages):
+        r'''Makes scope crossproduct of `voices` against `stages`.
+
+        Returns list of scopes.
+        '''
+        assert isinstance(voices, list), repr(voices)
+        assert isinstance(stages, list), repr(stages)
+        scopes = []
+        for voice in voices:
+            for item in stages:
+                if isinstance(item, int):
+                    scope = baca.scope(voice, item)
+                else:
+                    assert isinstance(item, tuple), repr(item)
+                    scope = baca.scope(voice, *item)
+                scopes.append(scope)
+        return scopes
+
+    @staticmethod
     def marcati(selector='baca.pheads()'):
         r'''Attaches marcati to pitched heads.
 

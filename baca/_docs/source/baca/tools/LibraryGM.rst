@@ -36,6 +36,7 @@ Bases
       ~baca.tools.LibraryGM.LibraryGM.loop
       ~baca.tools.LibraryGM.LibraryGM.make_notes
       ~baca.tools.LibraryGM.LibraryGM.make_rests
+      ~baca.tools.LibraryGM.LibraryGM.make_scopes
       ~baca.tools.LibraryGM.LibraryGM.marcati
       ~baca.tools.LibraryGM.LibraryGM.multimeasure_rests
       ~baca.tools.LibraryGM.LibraryGM.__eq__
@@ -75,6 +76,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryGM.LibraryGM.make_notes
 
 .. automethod:: baca.tools.LibraryGM.LibraryGM.make_rests
+
+.. automethod:: baca.tools.LibraryGM.LibraryGM.make_scopes
 
 .. automethod:: baca.tools.LibraryGM.LibraryGM.marcati
 
