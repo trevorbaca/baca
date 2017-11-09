@@ -46,6 +46,7 @@ Bases
       ~baca.tools.LibraryNS.LibraryNS.resume_after
       ~baca.tools.LibraryNS.LibraryNS.rhythm
       ~baca.tools.LibraryNS.LibraryNS.scope
+      ~baca.tools.LibraryNS.LibraryNS.scopes
       ~baca.tools.LibraryNS.LibraryNS.script_color
       ~baca.tools.LibraryNS.LibraryNS.script_extra_offset
       ~baca.tools.LibraryNS.LibraryNS.scripts_down
@@ -136,6 +137,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNS.LibraryNS.rhythm
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.scope
+
+.. automethod:: baca.tools.LibraryNS.LibraryNS.scopes
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.script_color
 

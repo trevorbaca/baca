@@ -2029,6 +2029,18 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
+    def scopes(*arguments):
+        r'''Makes scopes from `arguments`.
+
+        Returns list of scopes.
+        '''
+        scopes = []
+        for argument in arguments:
+            scope = baca.Scope(*argument)
+            scopes.append(scope)
+        return scopes
+
+    @staticmethod
     def script_color(color='red', selector='baca.leaves()'):
         r'''Overrides script color.
 
