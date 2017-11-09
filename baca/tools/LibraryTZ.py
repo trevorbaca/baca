@@ -145,8 +145,8 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup('più mosso'),
-            ...     baca.markup(
+            ...     baca.make_markup('più mosso'),
+            ...     baca.make_markup(
             ...         'lo stesso tempo',
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
@@ -171,7 +171,12 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextScript.color = #red
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [ - \markup { "più mosso" }
+                                c'16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "più mosso"
+                                        }
                                 d'16 ]
                                 bf'4 ~
                                 bf'16
@@ -179,7 +184,12 @@ class LibraryTZ(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 [ - \markup { "lo stesso tempo" }
+                                fs''16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "lo stesso tempo"
+                                        }
                                 e''16 ]
                                 ef''4 ~
                                 ef''16
@@ -205,8 +215,8 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup('più mosso'),
-            ...     baca.markup(
+            ...     baca.make_markup('più mosso'),
+            ...     baca.make_markup(
             ...         'lo stesso tempo',
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
@@ -233,7 +243,12 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [ - \markup { "più mosso" }
+                                c'16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "più mosso"
+                                        }
                                 d'16 ]
                                 bf'4 ~
                                 bf'16
@@ -242,7 +257,12 @@ class LibraryTZ(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override TextScript.color = #red
-                                fs''16 [ - \markup { "lo stesso tempo" }
+                                fs''16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "lo stesso tempo"
+                                        }
                                 e''16 ]
                                 ef''4 ~
                                 ef''16
@@ -282,8 +302,8 @@ class LibraryTZ(abjad.AbjadObject):
                 >>> contribution = music_maker(
                 ...     'Voice 1',
                 ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-                ...     baca.markup('più mosso'),
-                ...     baca.markup(
+                ...     baca.make_markup('più mosso'),
+                ...     baca.make_markup(
                 ...         'lo stesso tempo',
                 ...         baca.tuplets()[1:2].phead(0),
                 ...         ),
@@ -308,7 +328,12 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextScript.padding = #4
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [ - \markup { "più mosso" }
+                                c'16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "più mosso"
+                                        }
                                 d'16 ]
                                 bf'4 ~
                                 bf'16
@@ -316,7 +341,12 @@ class LibraryTZ(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 [ - \markup { "lo stesso tempo" }
+                                fs''16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "lo stesso tempo"
+                                        }
                                 e''16 ]
                                 ef''4 ~
                                 ef''16
@@ -342,8 +372,8 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup('più mosso'),
-            ...     baca.markup(
+            ...     baca.make_markup('più mosso'),
+            ...     baca.make_markup(
             ...         'lo stesso tempo',
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
@@ -370,7 +400,12 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [ - \markup { "più mosso" }
+                                c'16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "più mosso"
+                                        }
                                 d'16 ]
                                 bf'4 ~
                                 bf'16
@@ -379,7 +414,12 @@ class LibraryTZ(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override TextScript.padding = #4
-                                fs''16 [ - \markup { "lo stesso tempo" }
+                                fs''16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "lo stesso tempo"
+                                        }
                                 e''16 ]
                                 ef''4 ~
                                 ef''16
@@ -418,8 +458,8 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup('più mosso'),
-            ...     baca.markup(
+            ...     baca.make_markup('più mosso'),
+            ...     baca.make_markup(
             ...         'lo stesso tempo',
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
@@ -444,7 +484,12 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextScript.staff-padding = #4
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [ - \markup { "più mosso" }
+                                c'16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "più mosso"
+                                        }
                                 d'16 ]
                                 bf'4 ~
                                 bf'16
@@ -452,7 +497,12 @@ class LibraryTZ(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 [ - \markup { "lo stesso tempo" }
+                                fs''16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "lo stesso tempo"
+                                        }
                                 e''16 ]
                                 ef''4 ~
                                 ef''16
@@ -478,8 +528,8 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup('più mosso'),
-            ...     baca.markup(
+            ...     baca.make_markup('più mosso'),
+            ...     baca.make_markup(
             ...         'lo stesso tempo',
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
@@ -506,7 +556,12 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [ - \markup { "più mosso" }
+                                c'16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "più mosso"
+                                        }
                                 d'16 ]
                                 bf'4 ~
                                 bf'16
@@ -515,7 +570,12 @@ class LibraryTZ(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override TextScript.staff-padding = #4
-                                fs''16 [ - \markup { "lo stesso tempo" }
+                                fs''16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "lo stesso tempo"
+                                        }
                                 e''16 ]
                                 ef''4 ~
                                 ef''16
@@ -554,8 +614,8 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup('più mosso'),
-            ...     baca.markup(
+            ...     baca.make_markup('più mosso'),
+            ...     baca.make_markup(
             ...         'lo stesso tempo',
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
@@ -580,7 +640,12 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextScript.direction = #down
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [ - \markup { "più mosso" }
+                                c'16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "più mosso"
+                                        }
                                 d'16 ]
                                 bf'4 ~
                                 bf'16
@@ -588,7 +653,12 @@ class LibraryTZ(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 [ - \markup { "lo stesso tempo" }
+                                fs''16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "lo stesso tempo"
+                                        }
                                 e''16 ]
                                 ef''4 ~
                                 ef''16
@@ -614,8 +684,8 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup('più mosso'),
-            ...     baca.markup(
+            ...     baca.make_markup('più mosso'),
+            ...     baca.make_markup(
             ...         'lo stesso tempo',
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
@@ -641,7 +711,12 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [ - \markup { "più mosso" }
+                                c'16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "più mosso"
+                                        }
                                 d'16 ]
                                 bf'4 ~
                                 bf'16
@@ -650,7 +725,12 @@ class LibraryTZ(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override TextScript.direction = #down
-                                fs''16 [ - \markup { "lo stesso tempo" }
+                                fs''16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "lo stesso tempo"
+                                        }
                                 e''16 ]
                                 ef''4 ~
                                 ef''16
@@ -689,8 +769,8 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup('più mosso'),
-            ...     baca.markup(
+            ...     baca.make_markup('più mosso'),
+            ...     baca.make_markup(
             ...         'lo stesso tempo',
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
@@ -715,7 +795,12 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextScript.direction = #up
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [ - \markup { "più mosso" }
+                                c'16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "più mosso"
+                                        }
                                 d'16 ]
                                 bf'4 ~
                                 bf'16
@@ -723,7 +808,12 @@ class LibraryTZ(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 [ - \markup { "lo stesso tempo" }
+                                fs''16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "lo stesso tempo"
+                                        }
                                 e''16 ]
                                 ef''4 ~
                                 ef''16
@@ -749,8 +839,8 @@ class LibraryTZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup('più mosso'),
-            ...     baca.markup(
+            ...     baca.make_markup('più mosso'),
+            ...     baca.make_markup(
             ...         'lo stesso tempo',
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
@@ -776,7 +866,12 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [ - \markup { "più mosso" }
+                                c'16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "più mosso"
+                                        }
                                 d'16 ]
                                 bf'4 ~
                                 bf'16
@@ -785,7 +880,12 @@ class LibraryTZ(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override TextScript.direction = #up
-                                fs''16 [ - \markup { "lo stesso tempo" }
+                                fs''16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "lo stesso tempo"
+                                        }
                                 e''16 ]
                                 ef''4 ~
                                 ef''16

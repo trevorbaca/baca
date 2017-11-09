@@ -28,7 +28,7 @@ class MarkupLibrary(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup('più mosso'),
+            ...     baca.make_markup('più mosso'),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -48,7 +48,12 @@ class MarkupLibrary(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [ - \markup { "più mosso" }
+                                c'16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "più mosso"
+                                        }
                                 d'16 ]
                                 bf'4 ~
                                 bf'16
@@ -81,7 +86,7 @@ class MarkupLibrary(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup('più mosso', baca.tuplets()[1:2].phead(0)),
+            ...     baca.make_markup('più mosso', baca.tuplets()[1:2].phead(0)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -109,7 +114,12 @@ class MarkupLibrary(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 [ - \markup { "più mosso" }
+                                fs''16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "più mosso"
+                                        }
                                 e''16 ]
                                 ef''4 ~
                                 ef''16
@@ -134,7 +144,7 @@ class MarkupLibrary(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup('*', baca.tuplets()[1:2].pheads()),
+            ...     baca.make_markup('*', baca.tuplets()[1:2].pheads()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -162,13 +172,38 @@ class MarkupLibrary(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 [ - \markup { * }
-                                e''16 ] - \markup { * }
-                                ef''4 ~ - \markup { * }
+                                fs''16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                *
+                                        }
+                                e''16 ]
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                *
+                                        }
+                                ef''4 ~
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                *
+                                        }
                                 ef''16
                                 r16
-                                af''16 [ - \markup { * }
-                                g''16 ] - \markup { * }
+                                af''16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                *
+                                        }
+                                g''16 ]
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                *
+                                        }
                             }
                             \times 4/5 {
                                 a'16
