@@ -208,6 +208,7 @@ baca.tools
    Selection
    Sequence
    SpacingIndication
+   StaffLines
    StageMeasureMap
    StringTrioScoreTemplate
    TimeSignatureGroups
@@ -259,6 +260,7 @@ baca.tools
    Selection
    Sequence
    SpacingIndication
+   StaffLines
    StageMeasureMap
    StringTrioScoreTemplate
    TimeSignatureGroups
