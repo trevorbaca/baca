@@ -10,219 +10,6 @@ class MarkupLibrary(abjad.AbjadObject):
 
     __documentation_section__ = '(1) Library'
 
-    ### SPECIAL METHODS ###
-
-    @staticmethod
-    def __call__(
-        markup=None,
-        selector=None,
-        direction=None,
-        ):
-        r'''Attaches markup.
-
-        ..  container:: example
-
-            Attaches markup to pitched head 0:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.make_markup('più mosso'),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                c'16 [
-                                    ^ \markup {
-                                        \whiteout
-                                            \upright
-                                                "più mosso"
-                                        }
-                                d'16 ]
-                                bf'4 ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~
-                                ef''16
-                                r16
-                                af''16 [
-                                g''16 ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Attaches markup to pitched head 0 in tuplet 1:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.make_markup('più mosso', baca.tuplets()[1:2].phead(0)),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16 [
-                                    ^ \markup {
-                                        \whiteout
-                                            \upright
-                                                "più mosso"
-                                        }
-                                e''16 ]
-                                ef''4 ~
-                                ef''16
-                                r16
-                                af''16 [
-                                g''16 ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Attaches markup to pitched heads in tuplet 1:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.make_markup('*', baca.tuplets()[1:2].pheads()),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16 [
-                                    ^ \markup {
-                                        \whiteout
-                                            \upright
-                                                *
-                                        }
-                                e''16 ]
-                                    ^ \markup {
-                                        \whiteout
-                                            \upright
-                                                *
-                                        }
-                                ef''4 ~
-                                    ^ \markup {
-                                        \whiteout
-                                            \upright
-                                                *
-                                        }
-                                ef''16
-                                r16
-                                af''16 [
-                                    ^ \markup {
-                                        \whiteout
-                                            \upright
-                                                *
-                                        }
-                                g''16 ]
-                                    ^ \markup {
-                                        \whiteout
-                                            \upright
-                                                *
-                                        }
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        '''
-        if not isinstance(markup, abjad.Markup):
-            markup = abjad.Markup(markup, direction=direction)
-        selector = selector or baca.phead(0)
-        return baca.IndicatorCommand(
-            indicators=[markup],
-            selector=selector,
-            )
-
     ### PRIVATE FUNCTIONS ###
 
     @staticmethod
@@ -301,13 +88,11 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def boxed(string, selector=None, whiteout=True):
+    def boxed(string, selector=None):
         markup = abjad.Markup(string, direction=abjad.Up)
         markup = markup.box().override(('box-padding', 0.5))
-        if whiteout:
-            markup = markup.whiteout()
-        return MarkupLibrary()(
-            markup=markup,
+        return MarkupLibrary.make_markup(
+            markup,
             selector=selector,
             )
 
@@ -316,15 +101,12 @@ class MarkupLibrary(abjad.AbjadObject):
         strings,
         direction=abjad.Up,
         selector=None,
-        whiteout=True,
         ):
         assert isinstance(strings, list), repr(strings)
         markup = abjad.MarkupList(strings).column(direction=direction)
         markup = markup.box().override(('box-padding', 0.5))
-        if whiteout:
-            markup = markup.whiteout()
-        return MarkupLibrary()(
-            markup=markup,
+        return MarkupLibrary.make_markup(
+            markup,
             selector=selector,
             )
 
@@ -332,21 +114,19 @@ class MarkupLibrary(abjad.AbjadObject):
     def boxed_repeat_count(count, selector=None):
         string = f'x{count}'
         markup = abjad.Markup(string, direction=abjad.Up)
-        markup = markup.sans().bold().fontsize(6).upright()
+        markup = markup.sans().bold().fontsize(6)
         markup = markup.box().override(('box-padding', 0.5))
-        return MarkupLibrary()(
-            markup=markup,
+        return MarkupLibrary.make_markup(
+            markup,
             selector=selector,
             )
 
     @staticmethod
-    def boxed_specifier(string, selector=None, whiteout=True):
+    def boxed_specifier(string, selector=None):
         markup = abjad.Markup(string, direction=abjad.Up)
         markup = markup.box().override(('box-padding', 0.5))
-        if whiteout:
-            markup = markup.whiteout()
-        return MarkupLibrary()(
-            markup=markup,
+        return MarkupLibrary.make_markup(
+            markup,
             selector=selector,
             )
 
@@ -578,8 +358,8 @@ class MarkupLibrary(abjad.AbjadObject):
     def lines(strings, direction=abjad.Up, selector=None):
         assert isinstance(strings, list), repr(strings)
         markup = abjad.MarkupList(strings).column(direction=direction)
-        return MarkupLibrary()(
-            markup=markup,
+        return MarkupLibrary.make_markup(
+            markup,
             selector=selector,
             )
 
@@ -592,21 +372,226 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def make_markup(
-        string,
-        selector=None,
+        argument,
+        selector='baca.phead(0)',
         direction=abjad.Up,
         is_new=True,
         upright=True,
         whiteout=True,
         ):
-        if not is_new:
-            string = f'({string})'
-        markup = abjad.Markup(string, direction=direction)
+        r'''Makes markup and inserts into indicator command.
+
+        ..  container:: example
+
+            Attaches markup to pitched head 0:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.make_markup('più mosso'),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "più mosso"
+                                        }
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 [
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                g''16 ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Attaches markup to pitched head 0 in tuplet 1:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.make_markup('più mosso', baca.tuplets()[1:2].phead(0)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 [
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                "più mosso"
+                                        }
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                g''16 ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Attaches markup to pitched heads in tuplet 1:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.make_markup('*', baca.tuplets()[1:2].pheads()),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 [
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                *
+                                        }
+                                e''16 ]
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                *
+                                        }
+                                ef''4 ~
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                *
+                                        }
+                                ef''16
+                                r16
+                                af''16 [
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                *
+                                        }
+                                g''16 ]
+                                    ^ \markup {
+                                        \whiteout
+                                            \upright
+                                                *
+                                        }
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        Returns indicator command.
+        '''
+        selector = selector or baca.phead(0)
+        if isinstance(argument, str):
+            if not is_new:
+                argument = f'({argument})'
+            markup = abjad.Markup(argument, direction=direction)
+        elif isinstance(argument, abjad.Markup):
+            markup = abjad.new(argument, direction=direction)
         if upright:
             markup = markup.upright()
         if whiteout:
             markup = markup.whiteout()
-        return MarkupLibrary()(markup=markup, selector=selector)
+        return baca.IndicatorCommand(
+            indicators=[markup],
+            selector=selector,
+            )
 
     @staticmethod
     def molto_flautando(selector=None):
@@ -1164,8 +1149,8 @@ class MarkupLibrary(abjad.AbjadObject):
         second_line = abjad.Markup('(1-2/sec. in irregular rhythm)').line()
         markup = abjad.Markup.column(
             [first_line, second_line], direction=abjad.Up)
-        return MarkupLibrary()(
-            markup=markup,
+        return MarkupLibrary.make_markup(
+            markup,
             selector=selector,
             )
 

@@ -168,7 +168,6 @@ Bases
       ~baca.tools.MarkupLibrary.MarkupLibrary.vib_moltiss
       ~baca.tools.MarkupLibrary.MarkupLibrary.vib_pochiss
       ~baca.tools.MarkupLibrary.MarkupLibrary.vib_poco
-      ~baca.tools.MarkupLibrary.MarkupLibrary.__call__
       ~baca.tools.MarkupLibrary.MarkupLibrary.__eq__
       ~baca.tools.MarkupLibrary.MarkupLibrary.__format__
       ~baca.tools.MarkupLibrary.MarkupLibrary.__hash__
@@ -473,8 +472,6 @@ Class & static methods
 
 Special methods
 ---------------
-
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.__call__
 
 .. only:: html
 
