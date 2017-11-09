@@ -9,7 +9,7 @@ class LibraryNZ(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Libraries'
+    __documentation_section__ = '1: Libraries'
 
     __slots__ = (
         )
@@ -224,13 +224,12 @@ class LibraryNZ(abjad.AbjadObject):
 
         ..  container:: example
 
-            Attaches clef spanner and one-line spanner to leaves:
+            Attaches one-line spanner to leaves:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.clef_spanner(),
             ...     baca.one_line_staff(),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(9),
@@ -252,7 +251,6 @@ class LibraryNZ(abjad.AbjadObject):
                                 \stopStaff
                                 \once \override Staff.StaffSymbol.line-count = 1
                                 \startStaff
-                                \clef "percussion"
                                 \override TupletBracket.staff-padding = #9
                                 r8
                                 c'16 [
@@ -284,19 +282,17 @@ class LibraryNZ(abjad.AbjadObject):
 
         ..  container:: example
 
-            Attaches clef spanner and one-line spanner to leaves in tuplet 1:
+            Attaches one-line spanner to leaves in tuplet 1:
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.clef_spanner(
-            ...         clef='percussion',
-            ...         selector=baca.tuplet(1),
-            ...         ),
-            ...     baca.one_line_staff(selector=baca.tuplet(1)),
+            ...     baca.one_line_staff(baca.tuplet(1)),
             ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(9),
+            ...     baca.tuplet_bracket_staff_padding(7, baca.tuplet(0)),
+            ...     baca.tuplet_bracket_staff_padding(9, baca.tuplet(1)),
+            ...     baca.tuplet_bracket_staff_padding(7, baca.tuplet(0)),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
             ...     )
@@ -312,20 +308,21 @@ class LibraryNZ(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #9
+                                \override TupletBracket.staff-padding = #7
                                 r8
                                 c'16 [
                                 d'16 ]
                                 bf'4 ~
                                 bf'16
                                 r16
+                                \revert TupletBracket.staff-padding
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \stopStaff
                                 \once \override Staff.StaffSymbol.line-count = 1
                                 \startStaff
-                                \clef "percussion"
+                                \override TupletBracket.staff-padding = #9
                                 fs''16 [
                                 e''16 ]
                                 ef''4 ~
@@ -333,13 +330,13 @@ class LibraryNZ(abjad.AbjadObject):
                                 r16
                                 af''16 [
                                 g''16 ]
+                                \revert TupletBracket.staff-padding
                                 \stopStaff
                                 \startStaff
                             }
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding
                             }
                         }
                     }
@@ -543,136 +540,6 @@ class LibraryNZ(abjad.AbjadObject):
         return baca.IndicatorCommand(
             indicators=[abjad.PageBreak()],
             selector=selector,
-            )
-
-    @staticmethod
-    def percussion_staff(selector='baca.leaves()'):
-        r'''Attaches percussion staff spanner.
-
-        ..  container:: example
-
-            Attaches percussion staff spanner to leaves:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.percussion_staff(),
-            ...     baca.one_line_staff(),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(9),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \stopStaff
-                                \once \override Staff.StaffSymbol.line-count = 1
-                                \startStaff
-                                \clef "percussion"
-                                \override TupletBracket.staff-padding = #9
-                                r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~
-                                ef''16
-                                r16
-                                af''16 [
-                                g''16 ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding
-                                \stopStaff
-                                \startStaff
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Attaches percussion staff spanner to leaves in tuplet 1:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.one_line_staff(baca.tuplet(1)),
-            ...     baca.percussion_staff(baca.tuplet(1)),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(9),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #9
-                                r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \stopStaff
-                                \once \override Staff.StaffSymbol.line-count = 1
-                                \startStaff
-                                \clef "percussion"
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~
-                                ef''16
-                                r16
-                                af''16 [
-                                g''16 ]
-                                \stopStaff
-                                \startStaff
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        '''
-        return baca.SpannerCommand(
-            selector=selector,
-            spanner=abjad.ClefSpanner(clef='percussion'),
             )
 
     @staticmethod
@@ -8419,7 +8286,7 @@ class LibraryNZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.percussion_staff(),
+            ...     baca.clef('percussion'),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(9),
             ...     baca.two_line_staff(),
@@ -8479,7 +8346,6 @@ class LibraryNZ(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.percussion_staff(baca.tuplet(1)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(9),
             ...     baca.two_line_staff(baca.tuplet(1)),
@@ -8511,7 +8377,6 @@ class LibraryNZ(abjad.AbjadObject):
                                 \stopStaff
                                 \once \override Staff.StaffSymbol.line-count = 2
                                 \startStaff
-                                \clef "percussion"
                                 fs''16 [
                                 e''16 ]
                                 ef''4 ~

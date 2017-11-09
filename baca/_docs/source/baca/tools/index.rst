@@ -5,6 +5,23 @@ baca.tools
 
 --------
 
+1: Libraries
+------------
+
+.. toctree::
+   :hidden:
+
+   LibraryAM
+   LibraryNZ
+
+.. autosummary::
+   :nosignatures:
+
+   LibraryAM
+   LibraryNZ
+
+--------
+
 Builders
 --------
 
@@ -131,15 +148,11 @@ Libraries
 .. toctree::
    :hidden:
 
-   LibraryAM
-   LibraryNZ
    MarkupLibrary
 
 .. autosummary::
    :nosignatures:
 
-   LibraryAM
-   LibraryNZ
    MarkupLibrary
 
 --------
