@@ -4,22 +4,17 @@ import abjad
 class Division(abjad.NonreducedFraction):
     r'''Division.
 
+    >>> from abjad import rhythmmakertools as rhythmos
+
     ..  container:: example
 
         Division with duration, start offset and payload:
 
         >>> division = baca.Division(
         ...     (3, 8),
-        ...     payload=abjad.rhythmmakertools.NoteRhythmMaker(),
+        ...     payload=rhythmos.NoteRhythmMaker(),
         ...     start_offset=abjad.Offset((5, 4)),
         ...     )
-
-        >>> abjad.f(division)
-        baca.Division(
-            (3, 8),
-            payload=abjad.rhythmmakertools.NoteRhythmMaker(),
-            start_offset=abjad.Offset(5, 4),
-            )
 
     ..  container:: example
 
@@ -53,17 +48,12 @@ class Division(abjad.NonreducedFraction):
 
         >>> division = baca.Division(
         ...     (3, 8),
-        ...     payload=abjad.rhythmmakertools.NoteRhythmMaker(),
+        ...     payload=rhythmos.NoteRhythmMaker(),
         ...     start_offset=abjad.Offset((5, 4)),
         ...     )
         >>> new_division = baca.Division(division)
-
-        >>> abjad.f(new_division)
-        baca.Division(
-            (3, 8),
-            payload=abjad.rhythmmakertools.NoteRhythmMaker(),
-            start_offset=abjad.Offset(5, 4),
-            )
+        >>> division == new_division
+        True
 
     ..  container:: example
 
@@ -72,17 +62,12 @@ class Division(abjad.NonreducedFraction):
         >>> fraction = abjad.NonreducedFraction((6, 4))
         >>> division = baca.Division(
         ...     fraction,
-        ...     payload=abjad.rhythmmakertools.NoteRhythmMaker(),
+        ...     payload=rhythmos.NoteRhythmMaker(),
         ...     start_offset=abjad.Offset((5, 4)),
         ...     )
         >>> new_division = baca.Division(division)
-
-        >>> abjad.f(new_division)
-        baca.Division(
-            (6, 4),
-            payload=abjad.rhythmmakertools.NoteRhythmMaker(),
-            start_offset=abjad.Offset(5, 4),
-            )
+        >>> division == new_division
+        True
 
     ..  container:: example
 
@@ -588,7 +573,7 @@ class Division(abjad.NonreducedFraction):
 
             >>> division = baca.Division(
             ...     (3, 8),
-            ...     payload=abjad.rhythmmakertools.NoteRhythmMaker(),
+            ...     payload=rhythmos.NoteRhythmMaker(),
             ...     start_offset=abjad.Offset((5, 4)),
             ...     )
 

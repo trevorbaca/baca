@@ -1,18 +1,21 @@
 import abjad
 import baca
 import copy
+from abjad import rhythmmakertools as rhythmos
 from .Builder import Builder
 
 
 class ImbricateBuilder(Builder):
     r'''Imbricate builder.
 
+    >>> from abjad import rhythmmakertools as rhythmos
+
     ..  container:: example
 
         Defaults:
 
         >>> music_maker = baca.MusicMaker(
-        ...     abjad.rhythmmakertools.BeamSpecifier(
+        ...     rhythmos.BeamSpecifier(
         ...         beam_divisions_together=True,
         ...         ),
         ...     )
@@ -138,7 +141,7 @@ class ImbricateBuilder(Builder):
         Multiple imbricated voices:
 
         >>> music_maker = baca.MusicMaker(
-        ...     abjad.rhythmmakertools.BeamSpecifier(
+        ...     rhythmos.BeamSpecifier(
         ...         beam_divisions_together=True,
         ...         ),
         ...     )
@@ -314,14 +317,14 @@ class ImbricateBuilder(Builder):
         Hides tuplet brackets above imbricated voice:
 
         >>> music_maker = baca.MusicMaker(
-        ...     abjad.rhythmmakertools.BeamSpecifier(
+        ...     rhythmos.BeamSpecifier(
         ...         beam_divisions_together=True,
         ...         beam_rests=True,
         ...         ),
         ...     baca.staccati(),
-        ...     baca.MusicRhythmSpecifier(
-        ...         rhythm_maker=baca.MusicRhythmMaker(
-        ...             talea=abjad.rhythmmakertools.Talea(
+        ...     baca.RhythmSpecifier(
+        ...         rhythm_maker=baca.CollectionRhythmMaker(
+        ...             talea=rhythmos.Talea(
         ...                 counts=[1],
         ...                 denominator=16,
         ...                 ),
@@ -531,9 +534,9 @@ class ImbricateBuilder(Builder):
             Works with pitch-classes:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.MusicRhythmSpecifier(
-            ...         rhythm_maker=baca.MusicRhythmMaker(
-            ...             talea=abjad.rhythmmakertools.Talea(
+            ...     baca.RhythmSpecifier(
+            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...             talea=rhythmos.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
             ...                 ),
@@ -749,7 +752,7 @@ class ImbricateBuilder(Builder):
             Extends beam across figures:
 
                 >>> music_maker = baca.MusicMaker(
-                ...     abjad.rhythmmakertools.BeamSpecifier(
+                ...     rhythmos.BeamSpecifier(
                 ...         beam_divisions_together=True,
                 ...         ),
                 ...     )
@@ -956,7 +959,7 @@ class ImbricateBuilder(Builder):
             Works with chords:
 
             >>> music_maker = baca.MusicMaker(
-            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...     rhythmos.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
@@ -1066,7 +1069,7 @@ class ImbricateBuilder(Builder):
             Works with rests:
 
             >>> music_maker = baca.MusicMaker(
-            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...     rhythmos.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
@@ -1278,13 +1281,13 @@ class ImbricateBuilder(Builder):
         specifiers = self.specifiers or []
         selections = container[:]
         for specifier in specifiers:
-            if isinstance(specifier, baca.MusicRhythmSpecifier):
+            if isinstance(specifier, baca.RhythmSpecifier):
                 continue
             if isinstance(specifier, baca.RhythmBuilder):
                 continue
             if isinstance(specifier, baca.ImbricateBuilder):
                 continue
-            if isinstance(specifier, abjad.rhythmmakertools.BeamSpecifier):
+            if isinstance(specifier, rhythmos.BeamSpecifier):
                 specifier._detach_all_beams(selections)
             if isinstance(specifier, baca.NestBuilder):
                 nested_selections = specifier(selections)
@@ -1345,7 +1348,7 @@ class ImbricateBuilder(Builder):
             Allows unused pitches:
 
             >>> music_maker = baca.MusicMaker(
-            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...     rhythmos.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         beam_rests=True,
             ...         ),
@@ -1457,7 +1460,7 @@ class ImbricateBuilder(Builder):
             Raises exception on unused pitches:
 
             >>> music_maker = baca.MusicMaker(
-            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...     rhythmos.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         beam_rests=True,
             ...         ),
@@ -1529,7 +1532,7 @@ class ImbricateBuilder(Builder):
             Hockets voices:
 
             >>> music_maker = baca.MusicMaker(
-            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...     rhythmos.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         beam_rests=True,
             ...         ),
@@ -1686,7 +1689,7 @@ class ImbricateBuilder(Builder):
             Selects last nine notes:
 
             >>> music_maker = baca.MusicMaker(
-            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...     rhythmos.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         beam_rests=True,
             ...         ),
@@ -1858,7 +1861,7 @@ class ImbricateBuilder(Builder):
             Beams nothing:
 
             >>> music_maker = baca.MusicMaker(
-            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...     rhythmos.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
@@ -1874,7 +1877,7 @@ class ImbricateBuilder(Builder):
             ...     baca.ImbricateBuilder(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
-            ...         abjad.rhythmmakertools.BeamSpecifier(
+            ...         rhythmos.BeamSpecifier(
             ...             beam_each_division=False,
             ...             ),
             ...         ),
@@ -1987,7 +1990,7 @@ class ImbricateBuilder(Builder):
             Beams divisions together but excludes skips:
 
             >>> music_maker = baca.MusicMaker(
-            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...     rhythmos.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
@@ -2003,7 +2006,7 @@ class ImbricateBuilder(Builder):
             ...     baca.ImbricateBuilder(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
-            ...         abjad.rhythmmakertools.BeamSpecifier(
+            ...         rhythmos.BeamSpecifier(
             ...             beam_divisions_together=True,
             ...             ),
             ...         ),
@@ -2126,7 +2129,7 @@ class ImbricateBuilder(Builder):
             Beams divisions together and includes skips:
 
             >>> music_maker = baca.MusicMaker(
-            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...     rhythmos.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
@@ -2263,7 +2266,7 @@ class ImbricateBuilder(Builder):
             Beams each division and includes skips:
 
             >>> music_maker = baca.MusicMaker(
-            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...     rhythmos.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
@@ -2279,7 +2282,7 @@ class ImbricateBuilder(Builder):
             ...     baca.ImbricateBuilder(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
-            ...         abjad.rhythmmakertools.BeamSpecifier(
+            ...         rhythmos.BeamSpecifier(
             ...             beam_rests=True,
             ...             ),
             ...         ),
@@ -2400,9 +2403,9 @@ class ImbricateBuilder(Builder):
             Truncates ties:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.MusicRhythmSpecifier(
-            ...         rhythm_maker=baca.MusicRhythmMaker(
-            ...             talea=abjad.rhythmmakertools.Talea(
+            ...     baca.RhythmSpecifier(
+            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...             talea=rhythmos.Talea(
             ...                 counts=[5],
             ...                 denominator=32,
             ...                 ),

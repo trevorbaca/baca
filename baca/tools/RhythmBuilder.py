@@ -1,55 +1,26 @@
 import abjad
 import baca
+from abjad import rhythmmakertools as rhythmos
 from .Builder import Builder
 
 
 class RhythmBuilder(Builder):
     r'''Rhythm builder.
 
-    >>> from abjad import rhythmmakertools
+    >>> from abjad import rhythmmakertools as rhythmos
 
     ..  container:: example
 
         >>> builder = baca.RhythmBuilder(
-        ...     rhythm_maker=rhythmmakertools.NoteRhythmMaker(),
+        ...     rhythm_maker=rhythmos.NoteRhythmMaker(),
         ...     )
-
-        >>> abjad.f(builder)
-        baca.RhythmBuilder(
-            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(),
-            )
 
     ..  container:: example
 
         >>> builder = baca.RhythmBuilder(
         ...     division_expression=abjad.sequence().sum().sequence(),
-        ...     rhythm_maker=rhythmmakertools.NoteRhythmMaker(),
+        ...     rhythm_maker=rhythmos.NoteRhythmMaker(),
         ...     )
-
-        >>> abjad.f(builder)
-        baca.RhythmBuilder(
-            division_expression=abjad.Expression(
-                callbacks=[
-                    abjad.Expression(
-                        evaluation_template='abjad.Sequence',
-                        is_initializer=True,
-                        string_template='{}',
-                        ),
-                    abjad.Expression(
-                        evaluation_template='{}.sum()',
-                        qualified_method_name='abjad.Sequence.sum',
-                        string_template='sum({})',
-                        ),
-                    abjad.Expression(
-                        evaluation_template='abjad.Sequence',
-                        is_initializer=True,
-                        string_template='{}',
-                        ),
-                    ],
-                proxy_class=abjad.Sequence,
-                ),
-            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(),
-            )
 
     '''
 
@@ -158,9 +129,7 @@ class RhythmBuilder(Builder):
     @property
     def _default_rhythm_maker(self):
         mask = abjad.silence([0], 1, use_multimeasure_rests=True)
-        multimeasure_rests = abjad.rhythmmakertools.NoteRhythmMaker(
-            division_masks=[mask],
-            )
+        multimeasure_rests = rhythmos.NoteRhythmMaker(division_masks=[mask])
         return multimeasure_rests
 
     @property
@@ -256,7 +225,7 @@ class RhythmBuilder(Builder):
         rhythm_maker = self.rhythm_maker or self._default_rhythm_maker
         if isinstance(rhythm_maker, abjad.Selection):
             selections = [rhythm_maker]
-        elif isinstance(rhythm_maker, abjad.rhythmmakertools.RhythmMaker):
+        elif isinstance(rhythm_maker, rhythmos.RhythmMaker):
             division_maker = self._get_division_maker()
             divisions = self._durations_to_divisions(
                 time_signatures,
@@ -273,7 +242,7 @@ class RhythmBuilder(Builder):
             raise TypeError(f'rhythm-maker or selection: {rhythm_maker!r}.')
         assert self._all_are_selections(selections), repr(selections)
         if self.split_at_measure_boundaries:
-            specifier = abjad.rhythmmakertools.DurationSpecifier
+            specifier = rhythmos.DurationSpecifier
             selections = specifier._split_at_measure_boundaries(
                 selections,
                 time_signatures,
@@ -281,7 +250,7 @@ class RhythmBuilder(Builder):
                 )
             assert self._all_are_selections(selections), repr(selections)
         if self.rewrite_meter:
-            specifier = abjad.rhythmmakertools.DurationSpecifier
+            specifier = rhythmos.DurationSpecifier
             selections = specifier._rewrite_meter_(
                 selections,
                 time_signatures,

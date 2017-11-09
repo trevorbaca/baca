@@ -1,5 +1,6 @@
 import abjad
 import baca
+from abjad import rhythmmakertools as rhythmos
 
 
 class MusicAccumulator(abjad.AbjadObject):
@@ -247,12 +248,12 @@ class MusicAccumulator(abjad.AbjadObject):
     @staticmethod
     def _make_default_figure_maker():
         return baca.MusicMaker(
-            abjad.rhythmmakertools.BeamSpecifier(
+            rhythmos.BeamSpecifier(
                 beam_divisions_together=True,
                 ),
-            baca.MusicRhythmSpecifier(
-                rhythm_maker=baca.MusicRhythmMaker(
-                    talea=abjad.rhythmmakertools.Talea(
+            baca.RhythmSpecifier(
+                rhythm_maker=baca.CollectionRhythmMaker(
+                    talea=rhythmos.Talea(
                         counts=[1],
                         denominator=16,
                         ),

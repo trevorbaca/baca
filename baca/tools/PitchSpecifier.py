@@ -2,8 +2,8 @@ import abjad
 import baca
 
 
-class MusicPitchSpecifier(abjad.AbjadObject):
-    r'''Music pitch specifier.
+class PitchSpecifier(abjad.AbjadObject):
+    r'''Pitch specifier.
 
     ..  container:: example
 
@@ -14,7 +14,7 @@ class MusicPitchSpecifier(abjad.AbjadObject):
         >>> expression = baca.sequence().accumulate([transposition])
         >>> expression = expression.join()[0]
         >>> music_maker = baca.MusicMaker(
-        ...     baca.MusicPitchSpecifier(
+        ...     baca.PitchSpecifier(
         ...         expressions=[expression],
         ...         to_pitch_classes=True,
         ...         ),
@@ -100,7 +100,7 @@ class MusicPitchSpecifier(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(2) Makers'
+    __documentation_section__ = '(3) Specifiers'
 
     __slots__ = (
         '_expressions',
@@ -134,7 +134,7 @@ class MusicPitchSpecifier(abjad.AbjadObject):
 
             Returns none when `collections` is none:
 
-            >>> specifier = baca.MusicPitchSpecifier()
+            >>> specifier = baca.PitchSpecifier()
             >>> specifier() is None
             True
 
@@ -142,7 +142,7 @@ class MusicPitchSpecifier(abjad.AbjadObject):
 
             Returns sequence of numbered pitch collections by default:
 
-            >>> specifier = baca.MusicPitchSpecifier()
+            >>> specifier = baca.PitchSpecifier()
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> for collection in specifier(collections):
             ...     collection
@@ -167,12 +167,12 @@ class MusicPitchSpecifier(abjad.AbjadObject):
 
         ..  container:: example
 
-            >>> baca.MusicPitchSpecifier()
-            MusicPitchSpecifier()
+            >>> baca.PitchSpecifier()
+            PitchSpecifier()
 
         Returns string.
         '''
-        superclass = super(MusicPitchSpecifier, self)
+        superclass = super(PitchSpecifier, self)
         return superclass.__repr__()
 
     ### PRIVATE METHODS ###
@@ -213,7 +213,7 @@ class MusicPitchSpecifier(abjad.AbjadObject):
             >>> transposition = baca.pitch_class_segment().transpose(n=3)
             >>> transposition = baca.sequence().map(transposition)
             >>> music_maker = baca.MusicMaker(
-            ...     baca.MusicPitchSpecifier(
+            ...     baca.PitchSpecifier(
             ...         expressions=[transposition],
             ...         to_pitch_classes=True,
             ...         ),
@@ -254,7 +254,7 @@ class MusicPitchSpecifier(abjad.AbjadObject):
 
             Defaults to none:
 
-            >>> specifier = baca.MusicPitchSpecifier()
+            >>> specifier = baca.PitchSpecifier()
             >>> specifier.expressions is None
             True
 
@@ -271,7 +271,7 @@ class MusicPitchSpecifier(abjad.AbjadObject):
 
         ..  container:: example
 
-            >>> specifier = baca.MusicPitchSpecifier(
+            >>> specifier = baca.PitchSpecifier(
             ...     remove_duplicate_pitch_classes=True
             ...     )
             >>> collections = [[0, 2, 10], [18, 16, 15, 22, 19], [9]]
@@ -292,7 +292,7 @@ class MusicPitchSpecifier(abjad.AbjadObject):
 
         ..  container:: example
 
-            >>> specifier = baca.MusicPitchSpecifier(
+            >>> specifier = baca.PitchSpecifier(
             ...     remove_duplicates=True
             ...     )
             >>> collections = [[0, 2, 10], [18, 16, 15, 10, 19], [9]]
@@ -356,7 +356,7 @@ class MusicPitchSpecifier(abjad.AbjadObject):
             Changes pitches to pitch-classes:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.MusicPitchSpecifier(
+            ...     baca.PitchSpecifier(
             ...         to_pitch_classes=True,
             ...         ),
             ...     )
@@ -394,7 +394,7 @@ class MusicPitchSpecifier(abjad.AbjadObject):
 
         ..  container:: example
 
-            >>> specifier = baca.MusicPitchSpecifier(
+            >>> specifier = baca.PitchSpecifier(
             ...     to_pitch_classes=True,
             ...     )
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -407,7 +407,7 @@ class MusicPitchSpecifier(abjad.AbjadObject):
 
         ..  container:: example
 
-            >>> specifier = baca.MusicPitchSpecifier(
+            >>> specifier = baca.PitchSpecifier(
             ...     to_pitch_classes=True,
             ...     )
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -423,7 +423,7 @@ class MusicPitchSpecifier(abjad.AbjadObject):
 
             Defaults to none:
 
-            >>> specifier = baca.MusicPitchSpecifier()
+            >>> specifier = baca.PitchSpecifier()
             >>> specifier.to_pitch_classes is None
             True
 

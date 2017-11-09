@@ -4,6 +4,8 @@ import abjad
 class HorizontalSpacingSpecifier(abjad.AbjadObject):
     r'''Horizontal spacing specifier.
 
+    >>> from abjad import rhythmmakertools as rhythmos
+
     ..  container:: example
 
         No spacing command:
@@ -17,7 +19,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmBuilder(
-        ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
+        ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
         ...         ),
         ...     )
 
@@ -118,7 +120,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmBuilder(
-        ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
+        ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
         ...         ),
         ...     )
 
@@ -229,7 +231,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmBuilder(
-        ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
+        ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
         ...         ),
         ...     )
 
@@ -341,7 +343,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmBuilder(
-        ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
+        ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
         ...         ),
         ...     )
 
@@ -454,7 +456,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmBuilder(
-        ...         rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker(),
+        ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
         ...         ),
         ...     )
 
@@ -565,16 +567,16 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmBuilder(
-        ...         rhythm_maker=abjad.rhythmmakertools.AccelerandoRhythmMaker(
-        ...             beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
+        ...         rhythm_maker=rhythmos.AccelerandoRhythmMaker(
+        ...             beam_specifier=rhythmos.BeamSpecifier(
         ...             use_feather_beams=True,
         ...                 ),
-        ...             interpolation_specifiers=abjad.rhythmmakertools.InterpolationSpecifier(
+        ...             interpolation_specifiers=rhythmos.InterpolationSpecifier(
         ...                 start_duration=abjad.Duration(1, 8),
         ...                 stop_duration=abjad.Duration(1, 20),
         ...                 written_duration=abjad.Duration(1, 16),
         ...                 ),
-        ...             tuplet_specifier=abjad.rhythmmakertools.TupletSpecifier(
+        ...             tuplet_specifier=rhythmos.TupletSpecifier(
         ...                 use_note_duration_bracket=True,
         ...                 ),
         ...             ),

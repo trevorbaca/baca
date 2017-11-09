@@ -34,26 +34,22 @@ baca.tools
 .. toctree::
    :hidden:
 
+   CollectionRhythmMaker
    FloatingSelection
    MusicAccumulator
    MusicContribution
    MusicMaker
-   MusicPitchSpecifier
-   MusicRhythmMaker
-   MusicRhythmSpecifier
    SegmentContribution
    SegmentMaker
 
 .. autosummary::
    :nosignatures:
 
+   CollectionRhythmMaker
    FloatingSelection
    MusicAccumulator
    MusicContribution
    MusicMaker
-   MusicPitchSpecifier
-   MusicRhythmMaker
-   MusicRhythmSpecifier
    SegmentContribution
    SegmentMaker
 
@@ -72,7 +68,9 @@ baca.tools
    HorizontalSpacingSpecifier
    LMRSpecifier
    MeasureSpecifier
+   PitchSpecifier
    RestAffixSpecifier
+   RhythmSpecifier
    StageSliceSpecifier
    StageSpecifier
 
@@ -86,7 +84,9 @@ baca.tools
    HorizontalSpacingSpecifier
    LMRSpecifier
    MeasureSpecifier
+   PitchSpecifier
    RestAffixSpecifier
+   RhythmSpecifier
    StageSliceSpecifier
    StageSpecifier
 

@@ -1,5 +1,6 @@
 import abjad
 import baca
+from abjad import rhythmmakertools as rhythmos
 
 
 class LibraryGM(abjad.AbjadObject):
@@ -671,7 +672,7 @@ class LibraryGM(abjad.AbjadObject):
         '''
         operator = baca.pitch_class_segment().invert(axis=axis)
         expression = baca.sequence().map(operator)
-        return baca.MusicPitchSpecifier(
+        return baca.PitchSpecifier(
             expressions=[expression],
             to_pitch_classes=True,
             )
@@ -1236,14 +1237,14 @@ class LibraryGM(abjad.AbjadObject):
         r'''Makes notes; rewrites meter.
         '''
         if repeat_ties:
-            tie_specifier = abjad.rhythmmakertools.TieSpecifier(
+            tie_specifier = rhythmos.TieSpecifier(
                 repeat_ties=True,
                 )
         else:
             tie_specifier = None
         return baca.RhythmBuilder(
             rewrite_meter=True,
-            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
+            rhythm_maker=rhythmos.NoteRhythmMaker(
                 tie_specifier=tie_specifier,
                 )
             )
@@ -1253,7 +1254,7 @@ class LibraryGM(abjad.AbjadObject):
         r'''Makes rests.
         '''
         return baca.RhythmBuilder(
-            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
+            rhythm_maker=rhythmos.NoteRhythmMaker(
                 division_masks=[abjad.silence([0], 1)],
                 ),
             )
@@ -1378,12 +1379,12 @@ class LibraryGM(abjad.AbjadObject):
     def multimeasure_rests():
         r'''Makes multimeasure rests.
         '''
-        mask = abjad.rhythmmakertools.SilenceMask(
+        mask = rhythmos.SilenceMask(
             pattern=abjad.index_all(),
             use_multimeasure_rests=True,
             )
         return baca.RhythmBuilder(
-            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
+            rhythm_maker=rhythmos.NoteRhythmMaker(
                 division_masks=[mask],
                 ),
             )

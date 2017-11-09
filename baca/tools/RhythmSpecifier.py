@@ -1,19 +1,20 @@
 import abjad
+from abjad import rhythmmakertools
 
 
-class MusicRhythmSpecifier(abjad.AbjadObject):
-    r'''Music rhythm specifier.
+class RhythmSpecifier(abjad.AbjadObject):
+    r'''Rhythm specifier.
 
     ..  container:: example
 
-        >>> baca.MusicRhythmSpecifier()
-        MusicRhythmSpecifier()
+        >>> baca.RhythmSpecifier()
+        RhythmSpecifier()
 
     '''
 
     ### CLASS ATTRIBUTES ###
 
-    __documentation_section__ = '(2) Makers'
+    __documentation_section__ = '(3) Specifiers'
 
     __slots__ = (
         '_pattern',
@@ -137,7 +138,7 @@ class MusicRhythmSpecifier(abjad.AbjadObject):
         if tuplet_denominator is not None:
             specifier = rhythm_maker.tuplet_specifier
             if specifier is None:
-                specifier = abjad.rhythmmakertools.TupletSpecifier()
+                specifier = rhythmos.TupletSpecifier()
             specifier = abjad.new(
                 specifier,
                 preferred_denominator=tuplet_denominator,

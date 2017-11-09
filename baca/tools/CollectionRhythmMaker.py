@@ -2,17 +2,20 @@ import abjad
 import baca
 import collections
 import math
+from abjad import rhythmmakertools as rhythmos
 
 
-class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
-    r'''Music rhythm-maker.
+class CollectionRhythmMaker(rhythmos.RhythmMaker):
+    r'''Collection rhythm-maker.
+
+    >>> from abjad import rhythmmakertools as rhythmos
 
     ..  container:: example
 
         Sixteenths and eighths:
 
-        >>> rhythm_maker = baca.MusicRhythmMaker(
-        ...     talea=abjad.rhythmmakertools.Talea(
+        >>> rhythm_maker = baca.CollectionRhythmMaker(
+        ...     talea=rhythmos.Talea(
         ...         counts=[1, 1, 2],
         ...         denominator=16,
         ...         ),
@@ -140,7 +143,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         time_treatments=None,
         tuplet_specifier=None,
         ):
-        abjad.rhythmmakertools.RhythmMaker.__init__(
+        rhythmos.RhythmMaker.__init__(
             self,
             beam_specifier=beam_specifier,
             duration_specifier=duration_specifier,
@@ -157,8 +160,8 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         self._next_attack = 0
         self._next_segment = 0
         self._state_manifest = collections.OrderedDict()
-        talea = talea or abjad.rhythmmakertools.Talea()
-        if not isinstance(talea, abjad.rhythmmakertools.Talea):
+        talea = talea or rhythmos.Talea()
+        if not isinstance(talea, rhythmos.Talea):
             raise TypeError(f'must be talea: {talea!r}.')
         self._talea = talea
         if time_treatments is not None:
@@ -183,8 +186,8 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Without state manifest:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
-            ...     talea=abjad.rhythmmakertools.Talea(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -227,8 +230,8 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             With state manifest:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
-            ...     talea=abjad.rhythmmakertools.Talea(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -354,7 +357,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
     def _get_talea(self):
         if self.talea is not None:
             return self.talea
-        return abjad.rhythmmakertools.Talea()
+        return rhythmos.Talea()
 
     def _get_time_treatments(self):
         if not self.time_treatments:
@@ -394,7 +397,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         assert len(leaf_selection) == len(multipliers)
         for multiplier, leaf in zip(multipliers, leaf_selection):
             abjad.attach(multiplier, leaf)
-        rhythm_maker_class = abjad.rhythmmakertools.AccelerandoRhythmMaker
+        rhythm_maker_class = rhythmos.AccelerandoRhythmMaker
         if rhythm_maker_class._is_accelerando(leaf_selection):
             abjad.override(leaf_selection[0]).beam.grow_direction = abjad.Right
         elif rhythm_maker_class._is_ritardando(leaf_selection):
@@ -415,7 +418,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Set exponent less than 1 for decreasing durations:
 
-            >>> class_ = baca.MusicRhythmMaker
+            >>> class_ = baca.CollectionRhythmMaker
             >>> durations = 4 * [abjad.Duration(1)]
             >>> result = class_._make_accelerando_multipliers(
             ...     durations,
@@ -432,7 +435,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Set exponent to 1 for trivial multipliers:
 
-            >>> class_ = baca.MusicRhythmMaker
+            >>> class_ = baca.CollectionRhythmMaker
             >>> durations = 4 * [abjad.Duration(1)]
             >>> result = class_._make_accelerando_multipliers(durations, 1)
             >>> for multiplier in result: multiplier
@@ -446,7 +449,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Set exponent greater than 1 for increasing durations:
 
-            >>> class_ = baca.MusicRhythmMaker
+            >>> class_ = baca.CollectionRhythmMaker
             >>> durations = 4 * [abjad.Duration(1)]
             >>> result = class_._make_accelerando_multipliers(
             ...     durations,
@@ -470,7 +473,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
         start_offsets = [_ / total_duration for _ in start_offsets]
         #print(total_duration, start_offsets)
         start_offsets_ = []
-        rhythm_maker_class = abjad.rhythmmakertools.AccelerandoRhythmMaker
+        rhythm_maker_class = rhythmos.AccelerandoRhythmMaker
         for start_offset in start_offsets:
             start_offset_ = rhythm_maker_class._interpolate_exponential(
                 0,
@@ -728,11 +731,11 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Graced quarters:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier()
             ...         ],
-            ...     talea=abjad.rhythmmakertools.Talea(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1],
             ...         denominator=4,
             ...         ),
@@ -809,13 +812,13 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Graced rests:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             lmr_specifier=baca.LMRSpecifier()
             ...             ),
             ...         ],
-            ...     talea=abjad.rhythmmakertools.Talea(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1],
             ...         denominator=4,
             ...         ),
@@ -904,7 +907,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Defaults to none:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker()
+            >>> rhythm_maker = baca.CollectionRhythmMaker()
             >>> rhythm_maker.acciaccatura_specifiers is None
             True
 
@@ -922,8 +925,8 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Beams each division by default:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
-            ...     talea=abjad.rhythmmakertools.Talea(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -970,11 +973,11 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Beams divisions together:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
-            ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            ...     beam_specifier=rhythmos.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
-            ...     talea=abjad.rhythmmakertools.Talea(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1039,11 +1042,11 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Beams nothing:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
-            ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            ...     beam_specifier=rhythmos.BeamSpecifier(
             ...         beam_each_division=False,
             ...         ),
-            ...     talea=abjad.rhythmmakertools.Talea(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1086,8 +1089,8 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Does not beam rests:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
-            ...     talea=abjad.rhythmmakertools.Talea(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1134,11 +1137,11 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Does beam rests:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
-            ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            ...     beam_specifier=rhythmos.BeamSpecifier(
             ...         beam_rests=True,
             ...     ),
-            ...     talea=abjad.rhythmmakertools.Talea(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1185,12 +1188,12 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Beams rests with stemlets:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
-            ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            ...     beam_specifier=rhythmos.BeamSpecifier(
             ...         beam_rests=True,
             ...         stemlet_length=0.75,
             ...     ),
-            ...     talea=abjad.rhythmmakertools.Talea(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1243,7 +1246,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Defaults to none:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker()
+            >>> rhythm_maker = baca.CollectionRhythmMaker()
             >>> rhythm_maker.beam_specifier is None
             True
 
@@ -1251,7 +1254,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         Returns beam specifier or none.
         '''
-        return abjad.rhythmmakertools.RhythmMaker.beam_specifier.fget(self)
+        return rhythmos.RhythmMaker.beam_specifier.fget(self)
 
     @property
     def division_masks(self):
@@ -1261,8 +1264,8 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             No division masks:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
-            ...     talea=abjad.rhythmmakertools.Talea(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1301,11 +1304,11 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Silences every other division:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
             ...     division_masks=[
             ...         abjad.silence([1], 2),
             ...         ],
-            ...     talea=abjad.rhythmmakertools.Talea(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1338,11 +1341,11 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Sustains every other division:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
             ...     division_masks=[
             ...         abjad.sustain([1], 2),
             ...         ],
-            ...     talea=abjad.rhythmmakertools.Talea(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1375,7 +1378,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Defaults to none:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker()
+            >>> rhythm_maker = baca.CollectionRhythmMaker()
             >>> rhythm_maker.division_masks is None
             True
 
@@ -1383,7 +1386,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         Returns tuple of division masks or none.
         '''
-        return abjad.rhythmmakertools.RhythmMaker.division_masks.fget(self)
+        return rhythmos.RhythmMaker.division_masks.fget(self)
 
     @property
     def duration_specifier(self):
@@ -1394,8 +1397,8 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             Spells nonassignable durations with monontonically decreasing
             durations by default:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
-            ...     talea=abjad.rhythmmakertools.Talea(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            ...     talea=rhythmos.Talea(
             ...         counts=[4, 4, 5],
             ...         denominator=32,
             ...         ),
@@ -1438,11 +1441,11 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             Spells nonassignable durations with monontonically increasing
             durations:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
-            ...     duration_specifier=abjad.rhythmmakertools.DurationSpecifier(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            ...     duration_specifier=rhythmos.DurationSpecifier(
             ...         decrease_monotonic=False,
             ...         ),
-            ...     talea=abjad.rhythmmakertools.Talea(
+            ...     talea=rhythmos.Talea(
             ...         counts=[4, 4, 5],
             ...         denominator=32,
             ...         ),
@@ -1484,7 +1487,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Defaults to none:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker()
+            >>> rhythm_maker = baca.CollectionRhythmMaker()
             >>> rhythm_maker.duration_specifier is None
             True
 
@@ -1492,7 +1495,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         Returns duration specifier or none.
         '''
-        return abjad.rhythmmakertools.RhythmMaker.duration_specifier.fget(self)
+        return rhythmos.RhythmMaker.duration_specifier.fget(self)
 
     @property
     def logical_tie_masks(self):
@@ -1502,11 +1505,11 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Silences every third logical tie:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
             ...     logical_tie_masks=[
             ...         abjad.silence([2], 3),
             ...         ],
-            ...     talea=abjad.rhythmmakertools.Talea(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1545,12 +1548,12 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Silences first and last logical ties:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
             ...     logical_tie_masks=[
             ...         abjad.silence([0]),
             ...         abjad.silence([-1]),
             ...         ],
-            ...     talea=abjad.rhythmmakertools.Talea(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1589,7 +1592,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Defaults to none:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker()
+            >>> rhythm_maker = baca.CollectionRhythmMaker()
             >>> rhythm_maker.logical_tie_masks is None
             True
 
@@ -1597,7 +1600,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         Returns tuple patterns or none.
         '''
-        return abjad.rhythmmakertools.RhythmMaker.logical_tie_masks.fget(self)
+        return rhythmos.RhythmMaker.logical_tie_masks.fget(self)
 
     @property
     def talea(self):
@@ -1607,12 +1610,12 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             With rests:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
-            ...     beam_specifier=abjad.rhythmmakertools.BeamSpecifier(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            ...     beam_specifier=rhythmos.BeamSpecifier(
             ...         beam_rests=True,
             ...         stemlet_length=1.5,
             ...         ),
-            ...     talea=abjad.rhythmmakertools.Talea(
+            ...     talea=rhythmos.Talea(
             ...         counts=[3, -1, 2, 2],
             ...         denominator=16,
             ...         ),
@@ -1660,12 +1663,12 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             With very large nonassignable counts:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
-            ...     talea=abjad.rhythmmakertools.Talea(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            ...     talea=rhythmos.Talea(
             ...         counts=[29],
             ...         denominator=64,
             ...         ),
-            ...     tie_specifier=abjad.rhythmmakertools.TieSpecifier(
+            ...     tie_specifier=rhythmos.TieSpecifier(
             ...         repeat_ties=True,
             ...         ),
             ...     )
@@ -1694,7 +1697,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Defaults to even sixteenths:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker()
+            >>> rhythm_maker = baca.CollectionRhythmMaker()
             >>> rhythm_maker.talea
             Talea(counts=[1], denominator=16)
 
@@ -1712,12 +1715,12 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Ties across divisions with matching pitches:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
-            ...     talea=abjad.rhythmmakertools.Talea(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
-            ...     tie_specifier=abjad.rhythmmakertools.TieSpecifier(
+            ...     tie_specifier=rhythmos.TieSpecifier(
             ...         tie_across_divisions=True,
             ...         ),
             ...     )
@@ -1755,12 +1758,12 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Ties consecutive notes with matching pitches:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
-            ...     talea=abjad.rhythmmakertools.Talea(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
-            ...     tie_specifier=abjad.rhythmmakertools.TieSpecifier(
+            ...     tie_specifier=rhythmos.TieSpecifier(
             ...         tie_consecutive_notes=True,
             ...         ),
             ...     )
@@ -1798,7 +1801,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Defaults to none:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker()
+            >>> rhythm_maker = baca.CollectionRhythmMaker()
             >>> rhythm_maker.tie_specifier is None
             True
 
@@ -1806,7 +1809,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         Returns tie specifier or none.
         '''
-        return abjad.rhythmmakertools.RhythmMaker.tie_specifier.fget(self)
+        return rhythmos.RhythmMaker.tie_specifier.fget(self)
 
     @property
     def time_treatments(self):
@@ -1816,9 +1819,9 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             One extra count per division:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
             ...     time_treatments=[1],
-            ...     talea=abjad.rhythmmakertools.Talea(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1860,9 +1863,9 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             One missing count per division:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
             ...     time_treatments=[-1],
-            ...     talea=abjad.rhythmmakertools.Talea(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
             ...         ),
@@ -1903,9 +1906,9 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Accelerandi:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
             ...     time_treatments=['accel'],
-            ...     talea=abjad.rhythmmakertools.Talea(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1],
             ...         denominator=16,
             ...         ),
@@ -2136,9 +2139,9 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Ritardandi:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
             ...     time_treatments=['rit'],
-            ...     talea=abjad.rhythmmakertools.Talea(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1],
             ...         denominator=16,
             ...         ),
@@ -2369,9 +2372,9 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Accelerandi followed by ritardandi:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
             ...     time_treatments=['accel', 'rit'],
-            ...     talea=abjad.rhythmmakertools.Talea(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1],
             ...         denominator=16,
             ...         ),
@@ -2566,9 +2569,9 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Mixed accelerandi, ritardandi and prolation:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
             ...     time_treatments=['accel', -2, 'rit'],
-            ...     talea=abjad.rhythmmakertools.Talea(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1],
             ...         denominator=16,
             ...         ),
@@ -2781,9 +2784,9 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Specified by tuplet multiplier:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
             ...     time_treatments=[abjad.Ratio((3, 2))],
-            ...     talea=abjad.rhythmmakertools.Talea(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1],
             ...         denominator=8,
             ...         ),
@@ -2857,13 +2860,13 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Segment durations equal to a quarter:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
             ...     time_treatments=[abjad.Duration(1, 4)],
-            ...     talea=abjad.rhythmmakertools.Talea(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1],
             ...         denominator=8,
             ...         ),
-            ...     tuplet_specifier=abjad.rhythmmakertools.TupletSpecifier(
+            ...     tuplet_specifier=rhythmos.TupletSpecifier(
             ...         preferred_denominator=abjad.Duration(1, 16),
             ...         ),
             ...     )
@@ -2933,13 +2936,13 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
             Segment durations alternating between a quarter and a dotted
             quarter:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
             ...     time_treatments=[abjad.Duration(1, 4), abjad.Duration(3, 8)],
-            ...     talea=abjad.rhythmmakertools.Talea(
+            ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=8,
             ...         ),
-            ...     tuplet_specifier=abjad.rhythmmakertools.TupletSpecifier(
+            ...     tuplet_specifier=rhythmos.TupletSpecifier(
             ...         preferred_denominator=abjad.Duration(1, 16),
             ...         ),
             ...     )
@@ -3019,7 +3022,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Defaults to none:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker()
+            >>> rhythm_maker = baca.CollectionRhythmMaker()
             >>> rhythm_maker.time_treatments is None
             True
 
@@ -3040,8 +3043,8 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Does not simplify redudant tuplets by default:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
-            ...     talea=abjad.rhythmmakertools.Talea(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            ...     talea=rhythmos.Talea(
             ...         counts=[3],
             ...         denominator=16,
             ...         ),
@@ -3090,13 +3093,13 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Simplifies redundant tuplets:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker(
-            ...     talea=abjad.rhythmmakertools.Talea(
+            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            ...     talea=rhythmos.Talea(
             ...         counts=[3],
             ...         denominator=16,
             ...         ),
             ...     time_treatments=[-2],
-            ...     tuplet_specifier=abjad.rhythmmakertools.TupletSpecifier(
+            ...     tuplet_specifier=rhythmos.TupletSpecifier(
             ...         simplify_redundant_tuplets=True,
             ...         ),
             ...     )
@@ -3143,7 +3146,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
             Defaults to none:
 
-            >>> rhythm_maker = baca.MusicRhythmMaker()
+            >>> rhythm_maker = baca.CollectionRhythmMaker()
             >>> rhythm_maker.tuplet_specifier is None
             True
 
@@ -3151,7 +3154,7 @@ class MusicRhythmMaker(abjad.rhythmmakertools.RhythmMaker):
 
         Returns tuplet specifier or none.
         '''
-        return abjad.rhythmmakertools.RhythmMaker.tuplet_specifier.fget(self)
+        return rhythmos.RhythmMaker.tuplet_specifier.fget(self)
 
     ### PUBLIC METHODS ###
 

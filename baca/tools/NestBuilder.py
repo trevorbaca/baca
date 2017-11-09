@@ -6,6 +6,8 @@ from .Builder import Builder
 class NestBuilder(Builder):
     r'''Nest builder.
 
+    >>> from abjad import rhythmmakertools as rhythmos
+
     ..  container:: example
 
         Nest builder augments one sixteenth:
@@ -14,7 +16,7 @@ class NestBuilder(Builder):
         ...     baca.NestBuilder(
         ...         time_treatments=['+1/16'],
         ...         ),
-        ...     abjad.rhythmmakertools.BeamSpecifier(
+        ...     rhythmos.BeamSpecifier(
         ...         beam_divisions_together=True,
         ...         ),
         ...     )
@@ -87,7 +89,7 @@ class NestBuilder(Builder):
         extend beam:
 
             >>> music_maker = baca.MusicMaker(
-            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...     rhythmos.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
@@ -242,7 +244,7 @@ class NestBuilder(Builder):
         self._lmr_specifier = lmr_specifier
         if time_treatments is not None:
             assert isinstance(time_treatments, (list, tuple))
-            is_time_treatment = baca.MusicRhythmMaker._is_time_treatment
+            is_time_treatment = baca.CollectionRhythmMaker._is_time_treatment
             for time_treatment in time_treatments:
                 assert is_time_treatment(time_treatment), repr(time_treatment)
         self._time_treatments = time_treatments
@@ -262,7 +264,7 @@ class NestBuilder(Builder):
             ...         prefix=[2],
             ...         suffix=[3],
             ...         ),
-            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...     rhythmos.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )

@@ -1,5 +1,6 @@
 import abjad
 import baca
+from abjad import rhythmmakertools as rhythmos
 
 
 class LibraryAF(abjad.AbjadObject):
@@ -982,7 +983,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return abjad.rhythmmakertools.BeamSpecifier(
+        return rhythmos.BeamSpecifier(
             beam_each_division=True,
             beam_rests=bool(stemlets),
             stemlet_length=stemlets,
@@ -1157,7 +1158,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return abjad.rhythmmakertools.BeamSpecifier(
+        return rhythmos.BeamSpecifier(
             beam_divisions_together=True,
             beam_each_division=True,
             beam_rests=True,
@@ -1401,7 +1402,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return abjad.rhythmmakertools.BeamSpecifier(
+        return rhythmos.BeamSpecifier(
             beam_divisions_together=True,
             beam_each_division=True,
             beam_rests=False,
@@ -3992,7 +3993,7 @@ class LibraryAF(abjad.AbjadObject):
         r'''Makes even runs.
         '''
         return baca.RhythmBuilder(
-            rhythm_maker=abjad.rhythmmakertools.EvenRunRhythmMaker()
+            rhythm_maker=rhythmos.EvenRunRhythmMaker()
             )
 
     @staticmethod
@@ -4371,7 +4372,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return abjad.rhythmmakertools.BeamSpecifier(
+        return rhythmos.BeamSpecifier(
             beam_divisions_together=False,
             beam_each_division=False,
             )
@@ -4450,8 +4451,8 @@ class LibraryAF(abjad.AbjadObject):
             division_expression=abjad.sequence()
                 .sum()
                 .sequence(),
-            rhythm_maker=abjad.rhythmmakertools.TupletRhythmMaker(
-                tie_specifier=abjad.rhythmmakertools.TieSpecifier(
+            rhythm_maker=rhythmos.TupletRhythmMaker(
+                tie_specifier=rhythmos.TieSpecifier(
                     repeat_ties=True,
                     ),
                 tuplet_ratios=tuplet_ratios,

@@ -1,10 +1,13 @@
 import abjad
 import baca
 import copy
+from abjad import rhythmmakertools as rhythmos
 
 
 class MusicMaker(abjad.AbjadObject):
     r'''Music-maker.
+
+    >>> from abjad import rhythmmakertools as rhythmos
 
     ..  container:: example
 
@@ -569,7 +572,7 @@ class MusicMaker(abjad.AbjadObject):
             selections = [abjad.select(tuplet)]
             specifiers = [
                 _ for _ in specifiers
-                if not isinstance(_, baca.MusicRhythmSpecifier)
+                if not isinstance(_, baca.RhythmSpecifier)
                 ]
         else:
             collections = self._coerce_collections(collections)
@@ -705,7 +708,7 @@ class MusicMaker(abjad.AbjadObject):
         assert isinstance(collections, prototype), repr(collections)
         unused_specifiers = []
         for specifier in specifiers:
-            if isinstance(specifier, baca.MusicPitchSpecifier):
+            if isinstance(specifier, baca.PitchSpecifier):
                 collections = specifier(collections)
             else:
                 unused_specifiers.append(specifier)
@@ -753,7 +756,7 @@ class MusicMaker(abjad.AbjadObject):
         assert self._all_are_selections(selections), repr(selections)
         #selection = abjad.select(selections)
         for specifier in specifiers:
-            if isinstance(specifier, abjad.rhythmmakertools.BeamSpecifier):
+            if isinstance(specifier, rhythmos.BeamSpecifier):
                 specifier._detach_all_beams(selections)
             specifier(selections)
             #specifier(selection)
@@ -773,7 +776,7 @@ class MusicMaker(abjad.AbjadObject):
         selections = len(collections) * [None]
         rhythm_specifiers, rest_affix_specifiers, specifiers_ = [], [], []
         for specifier in specifiers:
-            if isinstance(specifier, baca.MusicRhythmSpecifier):
+            if isinstance(specifier, baca.RhythmSpecifier):
                 rhythm_specifiers.append(specifier)
             elif isinstance(specifier, baca.RestAffixSpecifier):
                 rest_affix_specifiers.append(specifier)
@@ -973,8 +976,8 @@ class MusicMaker(abjad.AbjadObject):
 
     @staticmethod
     def _make_default_rhythm_specifier():
-        return baca.MusicRhythmSpecifier(
-            rhythm_maker=baca.MusicRhythmMaker(),
+        return baca.RhythmSpecifier(
+            rhythm_maker=baca.CollectionRhythmMaker(),
             )
 
     def _make_state_manifest(self):
@@ -1729,7 +1732,7 @@ class MusicMaker(abjad.AbjadObject):
             Beam specifier beams divisions together:
 
             >>> music_maker = baca.MusicMaker(
-            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...     rhythmos.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
@@ -1802,7 +1805,7 @@ class MusicMaker(abjad.AbjadObject):
             Beam specifier beams nothing:
 
             >>> music_maker = baca.MusicMaker(
-            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...     rhythmos.BeamSpecifier(
             ...         beam_each_division=False,
             ...         ),
             ...     )
@@ -1852,7 +1855,7 @@ class MusicMaker(abjad.AbjadObject):
             ...     baca.NestBuilder(
             ...         time_treatments=['+1/16'],
             ...         ),
-            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...     rhythmos.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
@@ -1934,7 +1937,7 @@ class MusicMaker(abjad.AbjadObject):
             ...             ),
             ...         time_treatments=['+1/16', None],
             ...         ),
-            ...     abjad.rhythmmakertools.BeamSpecifier(
+            ...     rhythmos.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     )
@@ -2010,18 +2013,18 @@ class MusicMaker(abjad.AbjadObject):
             Sixteenths followed by eighths:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.MusicRhythmSpecifier(
-            ...         rhythm_maker=baca.MusicRhythmMaker(
-            ...             talea=abjad.rhythmmakertools.Talea(
+            ...     baca.RhythmSpecifier(
+            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...             talea=rhythmos.Talea(
             ...                 counts=[1],
             ...                 denominator=8,
             ...                 ),
             ...             ),
             ...         ),
-            ...     baca.MusicRhythmSpecifier(
+            ...     baca.RhythmSpecifier(
             ...         pattern=abjad.index_first(1),
-            ...         rhythm_maker=baca.MusicRhythmMaker(
-            ...             talea=abjad.rhythmmakertools.Talea(
+            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...             talea=rhythmos.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
             ...                 ),
@@ -2065,18 +2068,18 @@ class MusicMaker(abjad.AbjadObject):
             Sixteenths surrounding dotted eighths:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.MusicRhythmSpecifier(
-            ...         rhythm_maker=baca.MusicRhythmMaker(
-            ...             talea=abjad.rhythmmakertools.Talea(
+            ...     baca.RhythmSpecifier(
+            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...             talea=rhythmos.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
             ...                 ),
             ...             ),
             ...         ),
-            ...     baca.MusicRhythmSpecifier(
+            ...     baca.RhythmSpecifier(
             ...         pattern=abjad.Pattern(indices=[0, -1]),
-            ...         rhythm_maker=baca.MusicRhythmMaker(
-            ...             talea=abjad.rhythmmakertools.Talea(
+            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...             talea=rhythmos.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
             ...                 ),
@@ -2120,19 +2123,19 @@ class MusicMaker(abjad.AbjadObject):
             Sixteenths surrounding argumented dotted eighths:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.MusicRhythmSpecifier(
-            ...         rhythm_maker=baca.MusicRhythmMaker(
-            ...             talea=abjad.rhythmmakertools.Talea(
+            ...     baca.RhythmSpecifier(
+            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...             talea=rhythmos.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
             ...                 ),
             ...             time_treatments=[1],
             ...             ),
             ...         ),
-            ...     baca.MusicRhythmSpecifier(
+            ...     baca.RhythmSpecifier(
             ...         pattern=abjad.Pattern(indices=[0, -1]),
-            ...         rhythm_maker=baca.MusicRhythmMaker(
-            ...             talea=abjad.rhythmmakertools.Talea(
+            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...             talea=rhythmos.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
             ...                 ),
@@ -2177,18 +2180,18 @@ class MusicMaker(abjad.AbjadObject):
             Augmented sixteenths surrounding dotted eighths:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.MusicRhythmSpecifier(
-            ...         rhythm_maker=baca.MusicRhythmMaker(
-            ...             talea=abjad.rhythmmakertools.Talea(
+            ...     baca.RhythmSpecifier(
+            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...             talea=rhythmos.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
             ...                 ),
             ...             ),
             ...         ),
-            ...     baca.MusicRhythmSpecifier(
+            ...     baca.RhythmSpecifier(
             ...         pattern=abjad.Pattern(indices=[0, -1]),
-            ...         rhythm_maker=baca.MusicRhythmMaker(
-            ...             talea=abjad.rhythmmakertools.Talea(
+            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...             talea=rhythmos.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
             ...                 ),
@@ -2234,18 +2237,18 @@ class MusicMaker(abjad.AbjadObject):
             Diminished sixteenths surrounding dotted eighths:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.MusicRhythmSpecifier(
-            ...         rhythm_maker=baca.MusicRhythmMaker(
-            ...             talea=abjad.rhythmmakertools.Talea(
+            ...     baca.RhythmSpecifier(
+            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...             talea=rhythmos.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
             ...                 ),
             ...             ),
             ...         ),
-            ...     baca.MusicRhythmSpecifier(
+            ...     baca.RhythmSpecifier(
             ...         pattern=abjad.Pattern(indices=[0, -1]),
-            ...         rhythm_maker=baca.MusicRhythmMaker(
-            ...             talea=abjad.rhythmmakertools.Talea(
+            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...             talea=rhythmos.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
             ...                 ),

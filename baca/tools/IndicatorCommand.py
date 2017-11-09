@@ -7,15 +7,17 @@ from .Command import Command
 class IndicatorCommand(Command):
     r'''Attach command.
 
+    >>> from abjad import rhythmmakertools as rhythmos
+
     ..  container:: example
 
         With music-maker:
 
         >>> music_maker = baca.MusicMaker(
         ...     baca.IndicatorCommand([abjad.Fermata()]),
-        ...     baca.MusicRhythmSpecifier(
-        ...         rhythm_maker=baca.MusicRhythmMaker(
-        ...             talea=abjad.rhythmmakertools.Talea(
+        ...     baca.RhythmSpecifier(
+        ...         rhythm_maker=baca.CollectionRhythmMaker(
+        ...             talea=rhythmos.Talea(
         ...                 counts=[5, 4, 4, 5, 4, 4, 4],
         ...                 denominator=32,
         ...                 ),
@@ -221,9 +223,9 @@ class IndicatorCommand(Command):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.IndicatorCommand([abjad.Fermata()]),
-            ...     baca.MusicRhythmSpecifier(
-            ...         rhythm_maker=baca.MusicRhythmMaker(
-            ...             talea=abjad.rhythmmakertools.Talea(
+            ...     baca.RhythmSpecifier(
+            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...             talea=rhythmos.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],
             ...                 denominator=32,
             ...                 ),
@@ -278,9 +280,9 @@ class IndicatorCommand(Command):
             ...             abjad.Fermata(), None,
             ...             ],
             ...         ),
-            ...     baca.MusicRhythmSpecifier(
-            ...         rhythm_maker=baca.MusicRhythmMaker(
-            ...             talea=abjad.rhythmmakertools.Talea(
+            ...     baca.RhythmSpecifier(
+            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...             talea=rhythmos.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],
             ...                 denominator=32,
             ...                 ),

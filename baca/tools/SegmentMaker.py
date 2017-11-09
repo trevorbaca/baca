@@ -4,10 +4,13 @@ import os
 import pathlib
 import time
 import traceback
+from abjad import rhythmmakertools as rhythmos
 
 
 class SegmentMaker(abjad.SegmentMaker):
     r'''Segment-maker.
+
+    >>> from abjad import rhythmmakertools as rhythmos
 
     ..  container:: example
 
@@ -1607,9 +1610,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _make_rests(self, time_signatures=None):
         time_signatures = time_signatures or self.time_signatures
         mask = abjad.silence([0], 1, use_multimeasure_rests=True)
-        rhythm_maker = abjad.rhythmmakertools.NoteRhythmMaker(
-            division_masks=[mask],
-            )
+        rhythm_maker = rhythmos.NoteRhythmMaker(division_masks=[mask])
         selections = rhythm_maker(time_signatures)
         return selections
 
@@ -1628,7 +1629,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _make_skips(self, time_signatures=None):
         time_signatures = time_signatures or self.time_signatures
-        rhythm_maker = abjad.rhythmmakertools.SkipRhythmMaker()
+        rhythm_maker = rhythmos.SkipRhythmMaker()
         selections = rhythm_maker(time_signatures)
         return selections
 
@@ -4090,12 +4091,12 @@ class SegmentMaker(abjad.SegmentMaker):
             Colors unregistered pitches by default:
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.MusicRhythmSpecifier(
-                ...         rhythm_maker=baca.MusicRhythmMaker(
+                ...     baca.RhythmSpecifier(
+                ...         rhythm_maker=baca.CollectionRhythmMaker(
                 ...             acciaccatura_specifiers=[
                 ...                 baca.AcciaccaturaSpecifier(),
                 ...                 ],
-                ...             talea=abjad.rhythmmakertools.Talea(
+                ...             talea=rhythmos.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
                 ...                 ),
@@ -4334,12 +4335,12 @@ class SegmentMaker(abjad.SegmentMaker):
             Ignores unregistered pitches:
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.MusicRhythmSpecifier(
-                ...         rhythm_maker=baca.MusicRhythmMaker(
+                ...     baca.RhythmSpecifier(
+                ...         rhythm_maker=baca.CollectionRhythmMaker(
                 ...             acciaccatura_specifiers=[
                 ...                 baca.AcciaccaturaSpecifier(),
                 ...                 ],
-                ...             talea=abjad.rhythmmakertools.Talea(
+                ...             talea=rhythmos.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
                 ...                 ),

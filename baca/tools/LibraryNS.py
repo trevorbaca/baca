@@ -1,6 +1,7 @@
 import abjad
 import baca
 import collections
+from abjad import rhythmmakertools as rhythmos
 
 
 class LibraryNS(abjad.AbjadObject):
@@ -1556,8 +1557,8 @@ class LibraryNS(abjad.AbjadObject):
         return baca.RhythmBuilder(
             division_expression=baca.split_by_durations(durations=durations),
             rewrite_meter=True,
-            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
-                tie_specifier=abjad.rhythmmakertools.TieSpecifier(
+            rhythm_maker=rhythmos.NoteRhythmMaker(
+                tie_specifier=rhythmos.TieSpecifier(
                     repeat_ties=True,
                     ),
                 ),
@@ -2810,8 +2811,8 @@ class LibraryNS(abjad.AbjadObject):
         '''
         duration = abjad.Duration(duration)
         numerator, denominator = duration.pair
-        rhythm_maker = abjad.rhythmmakertools.IncisedRhythmMaker(
-            incise_specifier=abjad.rhythmmakertools.InciseSpecifier(
+        rhythm_maker = rhythmos.IncisedRhythmMaker(
+            incise_specifier=rhythmos.InciseSpecifier(
                 fill_with_notes=False,
                 outer_divisions_only=True,
                 prefix_talea=[numerator],

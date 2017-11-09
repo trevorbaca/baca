@@ -1,6 +1,7 @@
 import abjad
 import baca
 import collections
+from abjad import rhythmmakertools as rhythmos
 
 
 class LibraryTZ(abjad.AbjadObject):
@@ -1187,8 +1188,8 @@ class LibraryTZ(abjad.AbjadObject):
         '''
         return baca.RhythmBuilder(
             rewrite_meter=True,
-            rhythm_maker=abjad.rhythmmakertools.NoteRhythmMaker(
-                tie_specifier=abjad.rhythmmakertools.TieSpecifier(
+            rhythm_maker=rhythmos.NoteRhythmMaker(
+                tie_specifier=rhythmos.TieSpecifier(
                     tie_across_divisions=True,
                     repeat_ties=repeat_ties,
                     ),
@@ -1877,7 +1878,7 @@ class LibraryTZ(abjad.AbjadObject):
         '''
         operator = baca.pitch_class_segment().transpose(n=n)
         expression = baca.sequence().map(operator)
-        return baca.MusicPitchSpecifier(
+        return baca.PitchSpecifier(
             expressions=[expression],
             to_pitch_classes=True,
             )

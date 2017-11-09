@@ -6,6 +6,8 @@ from .Command import Command
 class OverrideCommand(Command):
     r'''Override command.
 
+    >>> from abjad import rhythmmakertools as rhythmos
+
     ..  container:: example
 
         With music-maker:
@@ -104,8 +106,8 @@ class OverrideCommand(Command):
         ...         revert=True,
         ...         ),
         ...     baca.RhythmBuilder(
-        ...         rhythm_maker=abjad.rhythmmakertools.TaleaRhythmMaker(
-        ...             talea=abjad.rhythmmakertools.Talea(
+        ...         rhythm_maker=rhythmos.TaleaRhythmMaker(
+        ...             talea=rhythmos.Talea(
         ...                 counts=[1, 1, 1, -1],
         ...                 denominator=8,
         ...                 ),
