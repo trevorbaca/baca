@@ -60,7 +60,6 @@ Bases
       ~baca.tools.LibraryAF.LibraryAF.effort_dynamic
       ~baca.tools.LibraryAF.LibraryAF.even_runs
       ~baca.tools.LibraryAF.LibraryAF.fermata
-      ~baca.tools.LibraryAF.LibraryAF.five_line_staff
       ~baca.tools.LibraryAF.LibraryAF.flageolets
       ~baca.tools.LibraryAF.LibraryAF.flags
       ~baca.tools.LibraryAF.LibraryAF.fuse_compound_quarter_divisions
@@ -150,8 +149,6 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAF.LibraryAF.even_runs
 
 .. automethod:: baca.tools.LibraryAF.LibraryAF.fermata
-
-.. automethod:: baca.tools.LibraryAF.LibraryAF.five_line_staff
 
 .. automethod:: baca.tools.LibraryAF.LibraryAF.flageolets
 

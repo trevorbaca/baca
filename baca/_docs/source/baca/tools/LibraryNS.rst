@@ -24,7 +24,6 @@ Bases
       ~baca.tools.LibraryNS.LibraryNS.natural_clusters
       ~baca.tools.LibraryNS.LibraryNS.natural_harmonics
       ~baca.tools.LibraryNS.LibraryNS.nest
-      ~baca.tools.LibraryNS.LibraryNS.one_line_staff
       ~baca.tools.LibraryNS.LibraryNS.ottava
       ~baca.tools.LibraryNS.LibraryNS.ottava_bassa
       ~baca.tools.LibraryNS.LibraryNS.page_break
@@ -65,6 +64,7 @@ Bases
       ~baca.tools.LibraryNS.LibraryNS.split_by_durations
       ~baca.tools.LibraryNS.LibraryNS.staccati
       ~baca.tools.LibraryNS.LibraryNS.staccatissimi
+      ~baca.tools.LibraryNS.LibraryNS.staff_lines
       ~baca.tools.LibraryNS.LibraryNS.staff_positions
       ~baca.tools.LibraryNS.LibraryNS.stem_color
       ~baca.tools.LibraryNS.LibraryNS.stem_tremolo
@@ -93,8 +93,6 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNS.LibraryNS.natural_harmonics
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.nest
-
-.. automethod:: baca.tools.LibraryNS.LibraryNS.one_line_staff
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.ottava
 
@@ -173,6 +171,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNS.LibraryNS.staccati
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.staccatissimi
+
+.. automethod:: baca.tools.LibraryNS.LibraryNS.staff_lines
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.staff_positions
 

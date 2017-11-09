@@ -48,7 +48,6 @@ Bases
       ~baca.tools.LibraryTZ.LibraryTZ.tuplet_brackets_down
       ~baca.tools.LibraryTZ.LibraryTZ.tuplet_brackets_up
       ~baca.tools.LibraryTZ.LibraryTZ.tuplet_number_extra_offset
-      ~baca.tools.LibraryTZ.LibraryTZ.two_line_staff
       ~baca.tools.LibraryTZ.LibraryTZ.up_arpeggios
       ~baca.tools.LibraryTZ.LibraryTZ.up_bows
       ~baca.tools.LibraryTZ.LibraryTZ.very_long_fermata
@@ -113,8 +112,6 @@ Class & static methods
 .. automethod:: baca.tools.LibraryTZ.LibraryTZ.tuplet_brackets_up
 
 .. automethod:: baca.tools.LibraryTZ.LibraryTZ.tuplet_number_extra_offset
-
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.two_line_staff
 
 .. automethod:: baca.tools.LibraryTZ.LibraryTZ.up_arpeggios
 

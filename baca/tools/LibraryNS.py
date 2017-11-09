@@ -220,136 +220,6 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def one_line_staff(selector='baca.leaves()'):
-        r'''Attaches one-line staff spanner.
-
-        ..  container:: example
-
-            Attaches one-line spanner to leaves:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.one_line_staff(),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(9),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \stopStaff
-                                \once \override Staff.StaffSymbol.line-count = 1
-                                \startStaff
-                                \override TupletBracket.staff-padding = #9
-                                r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~
-                                ef''16
-                                r16
-                                af''16 [
-                                g''16 ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding
-                                \stopStaff
-                                \startStaff
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Attaches one-line spanner to leaves in tuplet 1:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.one_line_staff(baca.tuplet(1)),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(7, baca.tuplet(0)),
-            ...     baca.tuplet_bracket_staff_padding(9, baca.tuplet(1)),
-            ...     baca.tuplet_bracket_staff_padding(7, baca.tuplet(0)),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #7
-                                r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
-                                bf'16
-                                r16
-                                \revert TupletBracket.staff-padding
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \stopStaff
-                                \once \override Staff.StaffSymbol.line-count = 1
-                                \startStaff
-                                \override TupletBracket.staff-padding = #9
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~
-                                ef''16
-                                r16
-                                af''16 [
-                                g''16 ]
-                                \revert TupletBracket.staff-padding
-                                \stopStaff
-                                \startStaff
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                            }
-                        }
-                    }
-                >>
-
-        '''
-        return baca.SpannerCommand(
-            selector=selector,
-            spanner=abjad.StaffLinesSpanner(lines=1),
-            )
-
-    @staticmethod
     def ottava(selector='baca.tleaves()'):
         r'''Attaches ottava spanner to trimmed leaves.
 
@@ -4161,6 +4031,76 @@ class LibraryNS(abjad.AbjadObject):
         return baca.IndicatorCommand(
             indicators=[abjad.Articulation('staccatissimo')],
             selector=selector,
+            )
+
+    @staticmethod
+    def staff_lines(n, selector='baca.leaves()'):
+        r'''Attaches staff spanner to leaves.
+
+        ..  container:: example
+
+            Attaches two-line staff spanner to leaves:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.clef('percussion'),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.staff_lines(2),
+            ...     baca.tuplet_bracket_staff_padding(9),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \stopStaff
+                                \once \override Staff.StaffSymbol.line-count = 2
+                                \startStaff
+                                \clef "percussion"
+                                \override TupletBracket.staff-padding = #9
+                                r8
+                                c'16 [
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 [
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                g''16 ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding
+                                \stopStaff
+                                \startStaff
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        return baca.SpannerCommand(
+            selector=selector,
+            spanner=abjad.StaffLinesSpanner(lines=n),
             )
 
     @staticmethod
