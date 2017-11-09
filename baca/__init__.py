@@ -30,8 +30,7 @@ _import_static_methods(LibraryGM)
 _import_static_methods(LibraryNS)
 _import_static_methods(LibraryTZ)
 _publish_selectors(Selection)
-markup = MarkupLibrary
-make_markup = MarkupLibrary.make_markup
+markup = MarkupLibrary()
 
 def map(commands, selector):
     r'''Maps `commands` to result of `selector`.

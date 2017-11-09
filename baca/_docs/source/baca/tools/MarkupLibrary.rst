@@ -84,7 +84,6 @@ Bases
       ~baca.tools.MarkupLibrary.MarkupLibrary.leggierissimo_off_string_bowing_on_staccati
       ~baca.tools.MarkupLibrary.MarkupLibrary.lines
       ~baca.tools.MarkupLibrary.MarkupLibrary.lv_possibile
-      ~baca.tools.MarkupLibrary.MarkupLibrary.make_markup
       ~baca.tools.MarkupLibrary.MarkupLibrary.molto_flautando
       ~baca.tools.MarkupLibrary.MarkupLibrary.molto_flautando_e_pont
       ~baca.tools.MarkupLibrary.MarkupLibrary.molto_gridato
@@ -168,6 +167,7 @@ Bases
       ~baca.tools.MarkupLibrary.MarkupLibrary.vib_moltiss
       ~baca.tools.MarkupLibrary.MarkupLibrary.vib_pochiss
       ~baca.tools.MarkupLibrary.MarkupLibrary.vib_poco
+      ~baca.tools.MarkupLibrary.MarkupLibrary.__call__
       ~baca.tools.MarkupLibrary.MarkupLibrary.__eq__
       ~baca.tools.MarkupLibrary.MarkupLibrary.__format__
       ~baca.tools.MarkupLibrary.MarkupLibrary.__hash__
@@ -301,8 +301,6 @@ Class & static methods
 .. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.lines
 
 .. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.lv_possibile
-
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.make_markup
 
 .. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.molto_flautando
 
@@ -472,6 +470,8 @@ Class & static methods
 
 Special methods
 ---------------
+
+.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.__call__
 
 .. only:: html
 
