@@ -3,7 +3,7 @@ import baca
 
 
 class Scope(abjad.AbjadObject):
-    r'''Simple scope.
+    r'''Scope.
 
     ..  container:: example
 

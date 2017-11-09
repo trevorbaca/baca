@@ -4,7 +4,7 @@ from .Command import Command
 
 
 class SettingCommand(Command):
-    r'''Set command.
+    r'''Setting command.
 
     ..  container:: example
 

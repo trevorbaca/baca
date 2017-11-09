@@ -3,7 +3,7 @@ import collections
 
 
 class RestAffixSpecifier(abjad.AbjadValueObject):
-    r'''Rest affix command.
+    r'''Rest affix specifier.
 
     ..  container:: example
 

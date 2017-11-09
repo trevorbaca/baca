@@ -4,7 +4,7 @@ from .Command import Command
 
 
 class SuiteCommand(Command):
-    r'''Map command.
+    r'''Suite command.
 
     ..  container:: example
 

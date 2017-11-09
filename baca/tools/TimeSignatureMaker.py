@@ -3,7 +3,7 @@ import baca
 
 
 class TimeSignatureMaker(abjad.AbjadObject):
-    r'''Time signature maker.
+    r'''Time-signature-maker.
 
     ..  container:: example
 

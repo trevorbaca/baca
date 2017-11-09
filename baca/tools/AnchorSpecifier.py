@@ -2,7 +2,7 @@ import abjad
 
 
 class AnchorSpecifier(abjad.AbjadValueObject):
-    r'''Anchor command.
+    r'''Anchor specifier.
 
     ..  container:: example
 

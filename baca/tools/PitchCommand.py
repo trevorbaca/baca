@@ -5,7 +5,7 @@ from .Command import Command
 
 
 class PitchCommand(Command):
-    r'''Score pitch command.
+    r'''Pitch command.
 
     ..  container:: example
 

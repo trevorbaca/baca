@@ -3,7 +3,7 @@ import baca
 
 
 class ZaggedPitchClassMaker(abjad.AbjadObject):
-    r'''Zagged pitch-class maker.
+    r'''Zagged-pitch-class-maker.
 
     ..  container:: example
 

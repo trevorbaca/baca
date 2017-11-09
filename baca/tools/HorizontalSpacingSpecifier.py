@@ -2,7 +2,7 @@ import abjad
 
 
 class HorizontalSpacingSpecifier(abjad.AbjadObject):
-    r'''Horizontal spacing command.
+    r'''Horizontal spacing specifier.
 
     ..  container:: example
 

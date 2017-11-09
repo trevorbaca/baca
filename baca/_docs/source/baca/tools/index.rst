@@ -11,15 +11,19 @@ baca.tools
 .. toctree::
    :hidden:
 
-   LibraryAM
-   LibraryNZ
+   LibraryAF
+   LibraryGM
+   LibraryNS
+   LibraryTZ
    MarkupLibrary
 
 .. autosummary::
    :nosignatures:
 
-   LibraryAM
-   LibraryNZ
+   LibraryAF
+   LibraryGM
+   LibraryNS
+   LibraryTZ
    MarkupLibrary
 
 --------

@@ -3,7 +3,7 @@ import baca
 
 
 class MarkupLibrary(abjad.AbjadObject):
-    r'''Markup interface.
+    r'''Markup library.
     '''
 
     ### CLASS VARIABLES ###
