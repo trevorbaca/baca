@@ -599,6 +599,19 @@ class LibraryAF(abjad.AbjadObject):
         return baca.IndicatorCommand(indicators=articulations)
 
     @staticmethod
+    def bar_extent(pair, selector='baca.leaf(0)'):
+        r'''Overrides bar line bar extent.
+        '''
+        return baca.OverrideCommand(
+            attribute_name='bar_extent',
+            attribute_value=pair,
+            context_name='staff',
+            grob_name='bar_line',
+            revert=True,
+            selector=selector,
+            )
+
+    @staticmethod
     def bass_to_octave(n, selector='baca.plts()'):
         r"""Octave-transposes music.
 
