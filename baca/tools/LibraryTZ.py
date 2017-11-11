@@ -1561,10 +1561,9 @@ class LibraryTZ(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Score.TimeSignature.extra-offset = #'(-6 . 0)
+                                \once \override Score.TimeSignature.extra-offset = #'(-6 . 0)
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                \revert Score.TimeSignature.extra-offset
                                 c'16 [
                                 d'16 ]
                                 bf'4 ~
@@ -1921,9 +1920,8 @@ class LibraryTZ(abjad.AbjadObject):
                                 e''16 ]
                                 ef''4 ~
                                 ef''16
-                                \override Rest.transparent = ##t
+                                \once \override Rest.transparent = ##t
                                 r16
-                                \revert Rest.transparent
                                 af''16 [
                                 g''16 ]
                             }
@@ -1974,10 +1972,9 @@ class LibraryTZ(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Score.SpanBar.transparent = ##t
+                                \once \override Score.SpanBar.transparent = ##t
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                \revert Score.SpanBar.transparent
                                 c'16 [
                                 d'16 ]
                                 bf'4 ~
@@ -2503,10 +2500,9 @@ class LibraryTZ(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.extra-offset = #'(-1 . 0)
+                                \once \override TupletBracket.extra-offset = #'(-1 . 0)
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                \revert TupletBracket.extra-offset
                                 c'16 [
                                 d'16 ]
                                 bf'4 ~
@@ -2996,9 +2992,8 @@ class LibraryTZ(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
-                                \override TupletNumber.extra-offset = #'(-1 . 0)
+                                \once \override TupletNumber.extra-offset = #'(-1 . 0)
                                 r8
-                                \revert TupletNumber.extra-offset
                                 c'16 [
                                 d'16 ]
                                 bf'4 ~

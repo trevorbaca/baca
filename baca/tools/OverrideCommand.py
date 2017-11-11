@@ -208,19 +208,24 @@ class OverrideCommand(Command):
             argument = self.selector(argument)
         if not argument:
             return
+        leaves = abjad.select(argument).leaves(grace_notes=False)
         context_name = self.context_name
         grob_name = self.grob_name
         attribute_name = self.attribute_name
         attribute_value = self.attribute_value
+        is_once = bool(len(leaves) == 1)
         string = abjad.LilyPondFormatManager.make_lilypond_override_string(
             grob_name,
             attribute_name,
             attribute_value,
             context_name=context_name,
-            is_once=False,
+            is_once=is_once,
             )
-        string = string.replace('\\', '')
+        string = string[1:]
         override = abjad.LilyPondCommand(string)
+        abjad.attach(override, leaves[0])
+        if is_once:
+            return
         string = abjad.LilyPondFormatManager.make_lilypond_revert_string(
             grob_name,
             attribute_name,
@@ -228,8 +233,6 @@ class OverrideCommand(Command):
             )
         string = string.replace('\\', '')
         revert = abjad.LilyPondCommand(string, format_slot='after')
-        leaves = abjad.select(argument).leaves(grace_notes=False)
-        abjad.attach(override, leaves[0])
         abjad.attach(revert, leaves[-1])
 
     ### PUBLIC PROPERTIES ###

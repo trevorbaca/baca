@@ -1514,9 +1514,8 @@ class LibraryNS(abjad.AbjadObject):
                                 e''16 ]
                                 ef''4 ~
                                 ef''16
-                                \override Rest.staff-position = #-6
+                                \once \override Rest.staff-position = #-6
                                 r16
-                                \revert Rest.staff-position
                                 af''16 [
                                 g''16 ]
                             }
@@ -1814,9 +1813,8 @@ class LibraryNS(abjad.AbjadObject):
                                 e''16 ]
                                 ef''4 ~
                                 ef''16
-                                \override Rest.direction = #down
+                                \once \override Rest.direction = #down
                                 r16
-                                \revert Rest.direction
                                 af''16 [
                                 g''16 ]
                             }
@@ -1936,9 +1934,8 @@ class LibraryNS(abjad.AbjadObject):
                                 e''16 ]
                                 ef''4 ~
                                 ef''16
-                                \override Rest.direction = #up
+                                \once \override Rest.direction = #up
                                 r16
-                                \revert Rest.direction
                                 af''16 [
                                 g''16 ]
                             }
@@ -2144,7 +2141,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.accents(),
             ...     baca.rests_around([2], [4]),
-            ...     baca.script_extra_offset((-1.5, 0)),
+            ...     baca.script_extra_offset((-1.5, 0), baca.leaf(1)),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -2161,10 +2158,9 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Script.extra-offset = #'(-1.5 . 0)
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                \revert Script.extra-offset
+                                \once \override Script.extra-offset = #'(-1.5 . 0)
                                 c'16 -\accent [
                                 d'16 -\accent ]
                                 bf'4 -\accent ~
@@ -2200,9 +2196,9 @@ class LibraryNS(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.accents(),
             ...     baca.rests_around([2], [4]),
-            ...     baca.script_extra_offset(
-            ...         (-1.5, 0),
-            ...         baca.tuplets()[1:2].leaf(0),
+            ...     baca.map(
+            ...         baca.script_extra_offset((-1.5, 0), baca.leaf(0)),
+            ...         baca.tuplet(1),
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -2230,9 +2226,8 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override Script.extra-offset = #'(-1.5 . 0)
+                                \once \override Script.extra-offset = #'(-1.5 . 0)
                                 fs''16 -\accent [
-                                \revert Script.extra-offset
                                 e''16 -\accent ]
                                 ef''4 -\accent ~
                                 ef''16

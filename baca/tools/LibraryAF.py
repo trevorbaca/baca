@@ -3485,9 +3485,8 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                \override DynamicText.extra-offset = #'(-3 . 0)
+                                \once \override DynamicText.extra-offset = #'(-3 . 0)
                                 c'16 \p [
-                                \revert DynamicText.extra-offset
                                 d'16 ]
                                 bf'4 ~
                                 bf'16
@@ -3554,9 +3553,8 @@ class LibraryAF(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override DynamicText.extra-offset = #'(-3 . 0)
+                                \once \override DynamicText.extra-offset = #'(-3 . 0)
                                 fs''16 \f [
-                                \revert DynamicText.extra-offset
                                 e''16 ]
                                 ef''4 ~
                                 ef''16
