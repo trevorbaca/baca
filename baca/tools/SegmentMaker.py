@@ -816,7 +816,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if instrument is not None:
                 continue
             copied_previous_instrument = abjad.new(previous_instrument)
-            copied_previous_instrument._default_scope = context.context_name
+            copied_previous_instrument._context = context.context_name
             leaf = abjad.inspect(context).get_leaf(0)
             abjad.attach(copied_previous_instrument, leaf)
         for context in abjad.iterate(self._score).components(abjad.Context):
