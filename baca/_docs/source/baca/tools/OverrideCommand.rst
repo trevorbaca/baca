@@ -27,7 +27,6 @@ Bases
       ~baca.tools.OverrideCommand.OverrideCommand.attribute_value
       ~baca.tools.OverrideCommand.OverrideCommand.context_name
       ~baca.tools.OverrideCommand.OverrideCommand.grob_name
-      ~baca.tools.OverrideCommand.OverrideCommand.revert
       ~baca.tools.OverrideCommand.OverrideCommand.selector
       ~baca.tools.OverrideCommand.OverrideCommand.__call__
       ~baca.tools.OverrideCommand.OverrideCommand.__eq__
@@ -45,8 +44,6 @@ Read-only properties
 .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.context_name
 
 .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.grob_name
-
-.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.revert
 
 .. only:: html
 

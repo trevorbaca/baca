@@ -605,9 +605,8 @@ class LibraryAF(abjad.AbjadObject):
         return baca.OverrideCommand(
             attribute_name='bar_extent',
             attribute_value=pair,
-            context_name='staff',
+            context_name='Staff',
             grob_name='bar_line',
-            revert=True,
             selector=selector,
             )
 
@@ -1282,7 +1281,6 @@ class LibraryAF(abjad.AbjadObject):
             attribute_name='positions',
             attribute_value=(n, n),
             grob_name='beam',
-            revert=True,
             selector=selector,
             )
 
@@ -2277,7 +2275,6 @@ class LibraryAF(abjad.AbjadObject):
             attribute_name='style',
             attribute_value='cross',
             grob_name='note_head',
-            revert=True,
             selector=selector,
             )
 
@@ -3325,7 +3322,6 @@ class LibraryAF(abjad.AbjadObject):
             attribute_name='staff_padding',
             attribute_value=str(n),
             grob_name='dynamic_line_spanner',
-            revert=True,
             selector=selector,
             )
 
@@ -3452,7 +3448,6 @@ class LibraryAF(abjad.AbjadObject):
             attribute_name='direction',
             attribute_value=abjad.Up,
             grob_name='dynamic_line_spanner',
-            revert=True,
             selector=selector,
             )
 
@@ -3583,7 +3578,6 @@ class LibraryAF(abjad.AbjadObject):
             attribute_name='extra_offset',
             attribute_value=pair,
             grob_name='dynamic_text',
-            revert=True,
             selector=selector,
             )
 

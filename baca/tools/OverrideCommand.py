@@ -13,16 +13,8 @@ class OverrideCommand(Command):
         With music-maker:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.OverrideCommand(
-        ...         grob_name='beam',
-        ...         attribute_name='positions',
-        ...         attribute_value='(-6, -6)',
-        ...         ),
-        ...     baca.OverrideCommand(
-        ...         grob_name='stem',
-        ...         attribute_name='direction',
-        ...         attribute_value=abjad.Down,
-        ...         ),
+        ...     baca.beam_positions(6),
+        ...     baca.stems_up(),
         ...     )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -38,37 +30,23 @@ class OverrideCommand(Command):
                     \voiceOne
                     {
                         {
-                            \once \override Beam.positions = #'(-6 . -6)
-                            \once \override Stem.direction = #down
+                            \override Beam.positions = #'(6 . 6)
+                            \override Stem.direction = #up
                             c'16 [
-                            \once \override Beam.positions = #'(-6 . -6)
-                            \once \override Stem.direction = #down
                             d'16
-                            \once \override Beam.positions = #'(-6 . -6)
-                            \once \override Stem.direction = #down
                             bf'16 ]
                         }
                         {
-                            \once \override Beam.positions = #'(-6 . -6)
-                            \once \override Stem.direction = #down
                             fs''16 [
-                            \once \override Beam.positions = #'(-6 . -6)
-                            \once \override Stem.direction = #down
                             e''16
-                            \once \override Beam.positions = #'(-6 . -6)
-                            \once \override Stem.direction = #down
                             ef''16
-                            \once \override Beam.positions = #'(-6 . -6)
-                            \once \override Stem.direction = #down
                             af''16
-                            \once \override Beam.positions = #'(-6 . -6)
-                            \once \override Stem.direction = #down
                             g''16 ]
                         }
                         {
-                            \once \override Beam.positions = #'(-6 . -6)
-                            \once \override Stem.direction = #down
                             a'16
+                            \revert Beam.positions
+                            \revert Stem.direction
                         }
                     }
                 }
@@ -86,25 +64,9 @@ class OverrideCommand(Command):
         >>> segment_maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     baca.OverrideCommand(
-        ...         attribute_name='positions',
-        ...         attribute_value=(-6, -6),
-        ...         grob_name='beam',
-        ...         revert=True,
-        ...         ),
-        ...     baca.OverrideCommand(
-        ...         attribute_name='direction',
-        ...         attribute_value=abjad.Up,
-        ...         grob_name='rest',
-        ...         revert=True,
-        ...         selector=baca.rests().group(),
-        ...         ),
-        ...     baca.OverrideCommand(
-        ...         attribute_name='direction',
-        ...         attribute_value=abjad.Down,
-        ...         grob_name='stem',
-        ...         revert=True,
-        ...         ),
+        ...     baca.beam_positions(6),
+        ...     baca.rests_up(),
+        ...     baca.stems_up(),
         ...     baca.RhythmBuilder(
         ...         rhythm_maker=rhythmos.TaleaRhythmMaker(
         ...             talea=rhythmos.Talea(
@@ -169,8 +131,8 @@ class OverrideCommand(Command):
                             \set ViolinMusicStaff.instrumentName = \markup { Violin }
                             \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                             \clef "treble"
-                            \override Beam.positions = #'(-6 . -6)
-                            \override Stem.direction = #down
+                            \override Beam.positions = #'(6 . 6)
+                            \override Stem.direction = #up
                             e'8 [
                             d''8
                             f'8 ]
@@ -209,7 +171,6 @@ class OverrideCommand(Command):
         '_attribute_value',
         '_context_name',
         '_grob_name',
-        '_revert',
         )
 
     ### INITIALIZER ###
@@ -220,7 +181,6 @@ class OverrideCommand(Command):
         grob_name=None,
         attribute_name=None,
         attribute_value=None,
-        revert=None,
         selector='baca.leaves()',
         ):
         Command.__init__(self, selector=selector)
@@ -234,9 +194,6 @@ class OverrideCommand(Command):
             assert isinstance(attribute_name, str), repr(attribute_name)
         self._attribute_name = attribute_name
         self._attribute_value = attribute_value
-        if revert is not None:
-            revert = bool(revert)
-        self._revert = revert
 
     ### SPECIAL METHODS ###
 
@@ -251,44 +208,29 @@ class OverrideCommand(Command):
             argument = self.selector(argument)
         if not argument:
             return
-        statement = 'abjad.override(leaf)'
-        if self.context_name is not None:
-            statement += '.{context_name}'
-        statement += '.{grob_name}.{attribute_name} = {attribute_value}'
         context_name = self.context_name
         grob_name = self.grob_name
         attribute_name = self.attribute_name
         attribute_value = self.attribute_value
-        statement = statement.format(
-            context_name=context_name,
-            grob_name=grob_name,
-            attribute_name=attribute_name,
-            attribute_value=attribute_value,
-            )
-        manager = abjad.LilyPondFormatManager
-        command = manager.make_lilypond_override_string(
+        string = abjad.LilyPondFormatManager.make_lilypond_override_string(
             grob_name,
             attribute_name,
             attribute_value,
             context_name=context_name,
             is_once=False,
             )
-        command = command.replace('\\', '')
-        command = abjad.LilyPondCommand(command)
-        revert = manager.make_lilypond_revert_string(
+        string = string.replace('\\', '')
+        override = abjad.LilyPondCommand(string)
+        string = abjad.LilyPondFormatManager.make_lilypond_revert_string(
             grob_name,
             attribute_name,
             context_name=context_name,
             )
-        revert = revert.replace('\\', '')
-        revert = abjad.LilyPondCommand(revert, format_slot='after')
+        string = string.replace('\\', '')
+        revert = abjad.LilyPondCommand(string, format_slot='after')
         leaves = abjad.select(argument).leaves(grace_notes=False)
-        if self.revert:
-            abjad.attach(command, leaves[0])
-            abjad.attach(revert, leaves[-1])
-        else:
-            for leaf in leaves:
-                exec(statement, globals(), locals())
+        abjad.attach(override, leaves[0])
+        abjad.attach(revert, leaves[-1])
 
     ### PUBLIC PROPERTIES ###
 
@@ -327,16 +269,3 @@ class OverrideCommand(Command):
         Set to string or none.
         '''
         return self._grob_name
-
-    @property
-    def revert(self):
-        r'''Is true when command uses override / revert pair instead of
-        multiple once commands.
-
-        Set to true, false or none.
-
-        Defaults to none.
-
-        Returns true, false or none.
-        '''
-        return self._revert

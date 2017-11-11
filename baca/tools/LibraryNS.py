@@ -149,7 +149,6 @@ class LibraryNS(abjad.AbjadObject):
             attribute_name='style',
             attribute_value='harmonic',
             grob_name='note_head',
-            revert=True,
             selector=selector,
             )
 
@@ -741,7 +740,7 @@ class LibraryNS(abjad.AbjadObject):
         assert len(duration) == 2, repr(duration)
         moment = abjad.SchemeMoment(duration)
         return baca.SettingCommand(
-            context_name='score',
+            context_name='Score',
             selector=selector,
             setting_name='proportional_notation_duration',
             setting_value=moment,
@@ -1282,7 +1281,6 @@ class LibraryNS(abjad.AbjadObject):
             attribute_name='direction',
             attribute_value=abjad.Down,
             grob_name='repeat_tie',
-            revert=True,
             selector=selector,
             )
 
@@ -1411,7 +1409,6 @@ class LibraryNS(abjad.AbjadObject):
             attribute_name='direction',
             attribute_value=abjad.Up,
             grob_name='repeat_tie',
-            revert=True,
             selector=selector,
             )
 
@@ -1537,7 +1534,6 @@ class LibraryNS(abjad.AbjadObject):
             attribute_name='staff_position',
             attribute_value=n,
             grob_name='rest',
-            revert=True,
             selector=selector,
             )
 
@@ -1838,7 +1834,6 @@ class LibraryNS(abjad.AbjadObject):
             attribute_name='direction',
             attribute_value=abjad.Down,
             grob_name='rest',
-            revert=True,
             selector=selector,
             )
 
@@ -1961,7 +1956,6 @@ class LibraryNS(abjad.AbjadObject):
             attribute_name='direction',
             attribute_value=abjad.Up,
             grob_name='rest',
-            revert=True,
             selector=selector,
             )
 
@@ -2133,7 +2127,6 @@ class LibraryNS(abjad.AbjadObject):
             attribute_name='color',
             attribute_value=color,
             grob_name='script',
-            revert=True,
             selector=selector,
             )
 
@@ -2261,7 +2254,6 @@ class LibraryNS(abjad.AbjadObject):
             attribute_name='extra_offset',
             attribute_value=pair,
             grob_name='script',
-            revert=True,
             selector=selector,
             )
 
@@ -2388,7 +2380,6 @@ class LibraryNS(abjad.AbjadObject):
             attribute_name='direction',
             attribute_value=abjad.Down,
             grob_name='script',
-            revert=True,
             selector=selector,
             )
 
@@ -2515,7 +2506,6 @@ class LibraryNS(abjad.AbjadObject):
             attribute_name='direction',
             attribute_value=abjad.Up,
             grob_name='script',
-            revert=True,
             selector=selector,
             )
 
@@ -3265,7 +3255,6 @@ class LibraryNS(abjad.AbjadObject):
             attribute_name='direction',
             attribute_value=abjad.Down,
             grob_name='slur',
-            revert=True,
             selector=selector,
             )
 
@@ -3410,7 +3399,6 @@ class LibraryNS(abjad.AbjadObject):
             attribute_name='direction',
             attribute_value=abjad.Up,
             grob_name='slur',
-            revert=True,
             selector=selector,
             )
 
@@ -4122,7 +4110,6 @@ class LibraryNS(abjad.AbjadObject):
             attribute_value=color,
             context_name=context_name,
             grob_name='stem',
-            revert=True,
             selector=selector,
             )
 
@@ -4366,7 +4353,6 @@ class LibraryNS(abjad.AbjadObject):
             attribute_name='direction',
             attribute_value=abjad.Down,
             grob_name='stem',
-            revert=True,
             selector=selector,
             )
 
@@ -4492,7 +4478,6 @@ class LibraryNS(abjad.AbjadObject):
             attribute_name='direction',
             attribute_value=abjad.Up,
             grob_name='stem',
-            revert=True,
             selector=selector,
             )
 
@@ -4559,9 +4544,8 @@ class LibraryNS(abjad.AbjadObject):
         return baca.OverrideCommand(
             attribute_name='strict_note_spacing',
             attribute_value=False,
-            context_name='score',
+            context_name='Score',
             grob_name='spacing_spanner',
-            revert=True,
             selector=selector,
             )
 
@@ -5226,6 +5210,5 @@ class LibraryNS(abjad.AbjadObject):
             attribute_value=n,
             context_name=context,
             grob_name='sustain_pedal_line_spanner',
-            revert=True,
             selector=selector,
             )

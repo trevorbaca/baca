@@ -388,7 +388,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.leaves().with_previous_leaf()
 
-    def logical_measure(self, n):
+    def lm(self, n):
         r'''Selects logical measure `n`.
 
         '''

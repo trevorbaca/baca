@@ -29,6 +29,7 @@ Bases
       ~baca.tools.LibraryAF.LibraryAF.ancora_dynamic
       ~baca.tools.LibraryAF.LibraryAF.arpeggios
       ~baca.tools.LibraryAF.LibraryAF.articulations
+      ~baca.tools.LibraryAF.LibraryAF.bar_extent
       ~baca.tools.LibraryAF.LibraryAF.bass_to_octave
       ~baca.tools.LibraryAF.LibraryAF.beam_divisions
       ~baca.tools.LibraryAF.LibraryAF.beam_everything
@@ -85,6 +86,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAF.LibraryAF.arpeggios
 
 .. automethod:: baca.tools.LibraryAF.LibraryAF.articulations
+
+.. automethod:: baca.tools.LibraryAF.LibraryAF.bar_extent
 
 .. automethod:: baca.tools.LibraryAF.LibraryAF.bass_to_octave
 
