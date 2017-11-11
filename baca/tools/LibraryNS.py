@@ -3977,7 +3977,7 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def staff_lines(n, selector='baca.leaves(0)'):
+    def staff_lines(n, selector='baca.leaf(0)'):
         r'''Makes staff lines.
 
         Returns indicator command.

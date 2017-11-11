@@ -10,12 +10,14 @@ class StaffLines(abjad.AbjadObject):
     __documentation_section__ = '(6) Utilities'
 
     __slots__ = (
+        '_default_scope',
         '_line_count',
         )
 
     ### INITIALIZER ###
 
     def __init__(self, line_count=None):
+        self._default_scope = abjad.Staff
         self._line_count = line_count
 
     ### PRIVATE METHODS ###
@@ -30,6 +32,19 @@ class StaffLines(abjad.AbjadObject):
         return bundle
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def default_scope(self):
+        r'''Is staff.
+
+        ..  container:: example
+
+            >>> baca.StaffLines(1).default_scope
+            <class 'abjad.tools.scoretools.Staff.Staff'>
+
+        Returns staff.
+        '''
+        return self._default_scope
 
     @property
     def line_count(self):

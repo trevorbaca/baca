@@ -21,6 +21,7 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.StaffLines.StaffLines.default_scope
       ~baca.tools.StaffLines.StaffLines.line_count
       ~baca.tools.StaffLines.StaffLines.__eq__
       ~baca.tools.StaffLines.StaffLines.__format__
@@ -29,6 +30,8 @@ Bases
 
 Read-only properties
 --------------------
+
+.. autoattribute:: baca.tools.StaffLines.StaffLines.default_scope
 
 .. autoattribute:: baca.tools.StaffLines.StaffLines.line_count
 
