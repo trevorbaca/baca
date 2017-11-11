@@ -21,7 +21,7 @@ class SegmentMaker(abjad.SegmentMaker):
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> result = segment_maker.run(is_doc_example=True)
+        >>> result = segment_maker.run(docs=True)
         >>> lilypond_file, metadata = result
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -99,7 +99,7 @@ class SegmentMaker(abjad.SegmentMaker):
         ...     baca.make_even_runs(),
         ...     )
 
-        >>> result = segment_maker.run(is_doc_example=True)
+        >>> result = segment_maker.run(docs=True)
         >>> lilypond_file, metadata = result
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -278,7 +278,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_ignore_unpitched_notes',
         '_ignore_unregistered_pitches',
         '_instruments',
-        '_is_doc_example',
+        '_docs',
         '_label_clock_time',
         '_label_stage_numbers',
         '_layout_measure_map',
@@ -499,7 +499,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.label(abjad.label().with_indices()),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1194,7 +1194,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _get_end_settings(self):
         result = {}
-        if self._is_doc_example:
+        if self._docs:
             return result
         result['end_clefs_by_staff'] = self._get_end_clefs()
         result['end_instruments_by_context'] = self._get_end_instruments()
@@ -1300,8 +1300,8 @@ class SegmentMaker(abjad.SegmentMaker):
             raise TypeError(f'must be specifier or tuple: {argument!r}.')
         return start, stop
 
-    def _get_stylesheet_includes(self, is_doc_example=None, is_test=None):
-        if is_doc_example:
+    def _get_stylesheet_includes(self, docs=None, is_test=None):
+        if docs:
             if is_test:
                 if abjad.inspect(self._score).get_indicator('two-voice'):
                     return [self._absolute_two_voice_staff_stylesheet_path]
@@ -1549,12 +1549,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _make_lilypond_file(
         self,
-        is_doc_example=None,
+        docs=None,
         is_test=None,
         midi=None,
         ):
         includes = self._get_stylesheet_includes(
-            is_doc_example=is_doc_example,
+            docs=docs,
             is_test=is_test,
             )
         lilypond_file = abjad.LilyPondFile.new(
@@ -1570,7 +1570,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if midi:
             block = abjad.Block(name='midi')
             lilypond_file.items.append(block)
-        if not is_doc_example:
+        if not docs:
             block_names = ('header',)
             for item in lilypond_file.items[:]:
                 if getattr(item, 'name', None) in block_names:
@@ -1901,7 +1901,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2043,7 +2043,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).text_script.staff_padding = 3
@@ -2260,7 +2260,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2407,7 +2407,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2566,7 +2566,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2733,7 +2733,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2901,7 +2901,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> metadata = {'segment_count': 1}
             >>> result = segment_maker.run(
-            ...     is_doc_example=True,
+            ...     docs=True,
             ...     metadata=metadata,
             ...     )
             >>> lilypond_file, metadata = result
@@ -3070,7 +3070,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3239,7 +3239,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> metadata = {'segment_count': 1}
             >>> result = segment_maker.run(
-            ...     is_doc_example=True,
+            ...     docs=True,
             ...     metadata=metadata,
             ...     )
             >>> lilypond_file, metadata = result
@@ -3417,7 +3417,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3586,7 +3586,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3823,7 +3823,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3990,7 +3990,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4138,7 +4138,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -4383,7 +4383,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -4522,7 +4522,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4707,7 +4707,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True) # doctest: +SKIP
+            >>> result = segment_maker.run(docs=True) # doctest: +SKIP
             >>> lilypond_file, metadata = result # doctest: +SKIP
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4902,7 +4902,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5069,7 +5069,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5245,7 +5245,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> metadata = {'name': 'K'}
             >>> result = segment_maker.run(
-            ...     is_doc_example=True,
+            ...     docs=True,
             ...     metadata=metadata,
             ...     )
             >>> lilypond_file, metadata = result
@@ -5465,7 +5465,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5634,7 +5634,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5934,7 +5934,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -6008,7 +6008,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -6133,7 +6133,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> metadata = {'name': 'K'}
             >>> result = segment_maker.run(
-            ...     is_doc_example=True,
+            ...     docs=True,
             ...     metadata=metadata,
             ...     )
             >>> lilypond_file, metadata = result
@@ -6312,7 +6312,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> metadata = {'name': 'K'}
             >>> result = segment_maker.run(
-            ...     is_doc_example=True,
+            ...     docs=True,
             ...     metadata=metadata,
             ...     )
             >>> lilypond_file, metadata = result
@@ -6510,7 +6510,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.pitches('E4 F4'),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -6621,7 +6621,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -6790,7 +6790,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -6995,7 +6995,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def run(
         self,
-        is_doc_example=None,
+        docs=None,
         is_test=None,
         metadata=None,
         midi=None,
@@ -7010,10 +7010,10 @@ class SegmentMaker(abjad.SegmentMaker):
         '''
         self._metadata = metadata or abjad.TypedOrderedDict()
         self._previous_metadata = previous_metadata or abjad.TypedOrderedDict()
-        self._is_doc_example = is_doc_example
+        self._docs = docs
         self._make_score()
         self._make_lilypond_file(
-            is_doc_example=is_doc_example,
+            docs=docs,
             is_test=is_test,
             midi=midi,
             )

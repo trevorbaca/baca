@@ -364,7 +364,7 @@ class ClusterCommand(Command):
         ...     baca.make_notes(repeat_ties=True),
         ...     )
 
-        >>> result = segment_maker.run(is_doc_example=True)
+        >>> result = segment_maker.run(docs=True)
         >>> lilypond_file, metadata = result
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -593,7 +593,7 @@ class ClusterCommand(Command):
             ...     baca.natural_clusters(widths=[3]),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -740,7 +740,7 @@ class ClusterCommand(Command):
             ...     baca.clusters([3]),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -879,7 +879,7 @@ class ClusterCommand(Command):
             ...     baca.clusters([3], start_pitch='G4'),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1028,7 +1028,7 @@ class ClusterCommand(Command):
             ...     baca.make_notes(repeat_ties=True),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1167,7 +1167,7 @@ class ClusterCommand(Command):
             ...     baca.make_notes(repeat_ties=True),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1307,7 +1307,7 @@ class ClusterCommand(Command):
             ...     baca.clusters([]),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 

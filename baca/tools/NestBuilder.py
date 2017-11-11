@@ -124,7 +124,7 @@ class NestBuilder(Builder):
         ...         ),
         ...     )
 
-        >>> result = segment_maker.run(is_doc_example=True)
+        >>> result = segment_maker.run(docs=True)
         >>> lilypond_file, metadata = result
         >>> staff = lilypond_file[abjad.Staff]
         >>> abjad.override(staff).beam.positions = (-5.5, -5.5)

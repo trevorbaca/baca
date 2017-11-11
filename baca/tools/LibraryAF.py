@@ -2320,7 +2320,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_signatures=accumulator.time_signatures,
             ...     )
             >>> accumulator.populate_segment_maker(segment_maker)
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2441,7 +2441,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_signatures=accumulator.time_signatures,
             ...     )
             >>> accumulator.populate_segment_maker(segment_maker)
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 

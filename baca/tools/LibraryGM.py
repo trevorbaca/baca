@@ -36,7 +36,7 @@ class LibraryGM(abjad.AbjadObject):
             ...     baca.glissando()
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -135,7 +135,7 @@ class LibraryGM(abjad.AbjadObject):
             ...     baca.glissando(baca.plts()[-2:]),
             ...     )
 
-            >>> result = segment_maker.run(is_doc_example=True)
+            >>> result = segment_maker.run(docs=True)
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
