@@ -31,24 +31,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
-                    \context GlobalRests = "Global Rests" {
-                        {
-                            \time 8/16
-                            R1 * 1/2
-                        }
-                        {
-                            \time 4/8
-                            R1 * 1/2
-                        }
-                        {
-                            \time 2/4
-                            R1 * 1/2
-                        }
-                        {
-                            \time 1/2
-                            R1 * 1/2
-                        }
-                    }
                     \context GlobalSkips = "Global Skips" {
                         {
                             \time 8/16
@@ -127,24 +109,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
-                    \context GlobalRests = "Global Rests" {
-                        {
-                            \time 8/16
-                            R1 * 1/2
-                        }
-                        {
-                            \time 4/8
-                            R1 * 1/2
-                        }
-                        {
-                            \time 2/4
-                            R1 * 1/2
-                        }
-                        {
-                            \time 1/2
-                            R1 * 1/2
-                        }
-                    }
                     \context GlobalSkips = "Global Skips" {
                         {
                             \time 8/16
@@ -233,24 +197,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
-                    \context GlobalRests = "Global Rests" {
-                        {
-                            \time 8/16
-                            R1 * 1/2
-                        }
-                        {
-                            \time 4/8
-                            R1 * 1/2
-                        }
-                        {
-                            \time 2/4
-                            R1 * 1/2
-                        }
-                        {
-                            \time 1/2
-                            R1 * 1/2
-                        }
-                    }
                     \context GlobalSkips = "Global Skips" {
                         {
                             \time 8/16
@@ -340,24 +286,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
-                    \context GlobalRests = "Global Rests" {
-                        {
-                            \time 8/16
-                            R1 * 1/2
-                        }
-                        {
-                            \time 4/8
-                            R1 * 1/2
-                        }
-                        {
-                            \time 2/4
-                            R1 * 1/2
-                        }
-                        {
-                            \time 1/2
-                            R1 * 1/2
-                        }
-                    }
                     \context GlobalSkips = "Global Skips" {
                         {
                             \time 8/16
@@ -448,24 +376,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
-                    \context GlobalRests = "Global Rests" {
-                        {
-                            \time 8/16
-                            R1 * 1/2
-                        }
-                        {
-                            \time 4/8
-                            R1 * 1/2
-                        }
-                        {
-                            \time 2/4
-                            R1 * 1/2
-                        }
-                        {
-                            \time 1/2
-                            R1 * 1/2
-                        }
-                    }
                     \context GlobalSkips = "Global Skips" {
                         {
                             \time 8/16
@@ -566,16 +476,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
-                    \context GlobalRests = "Global Rests" {
-                        {
-                            \time 4/8
-                            R1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            R1 * 3/8
-                        }
-                    }
                     \context GlobalSkips = "Global Skips" {
                         {
                             \time 4/8

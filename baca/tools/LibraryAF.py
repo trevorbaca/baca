@@ -625,24 +625,6 @@ class LibraryAF(abjad.AbjadObject):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -2426,14 +2408,9 @@ class LibraryAF(abjad.AbjadObject):
                 \context Score = "Score" <<
                     \tag violin.viola.cello
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 5/8
-                                R1 * 5/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
+                                \time 5/8
                                 s1 * 5/8
                             }
                         }
@@ -2546,14 +2523,9 @@ class LibraryAF(abjad.AbjadObject):
                 \context Score = "Score" <<
                     \tag violin.viola.cello
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 5/8
-                                R1 * 5/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
+                                \time 5/8
                                 s1 * 5/8
                             }
                         }

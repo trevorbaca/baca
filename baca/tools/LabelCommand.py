@@ -30,24 +30,6 @@ class LabelCommand(Command):
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
-                    \context GlobalRests = "Global Rests" {
-                        {
-                            \time 4/8
-                            R1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            R1 * 3/8
-                        }
-                        {
-                            \time 4/8
-                            R1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            R1 * 3/8
-                        }
-                    }
                     \context GlobalSkips = "Global Skips" {
                         {
                             \time 4/8

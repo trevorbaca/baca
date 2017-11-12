@@ -31,30 +31,9 @@ class LayoutMeasureMap(abjad.AbjadObject):
             \context Score = "Score" <<
                 \tag violin.viola.cello
                 \context GlobalContext = "Global Context" <<
-                    \context GlobalRests = "Global Rests" {
-                        {
-                            \time 4/8
-                            R1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            R1 * 3/8
-                        }
-                        {
-                            \time 4/8
-                            R1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            R1 * 3/8
-                        }
-                        {
-                            \time 4/8
-                            R1 * 1/2
-                        }
-                    }
                     \context GlobalSkips = "Global Skips" {
                         {
+                            \time 4/8
                             s1 * 1/2
                             \break
                         }

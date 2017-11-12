@@ -134,16 +134,6 @@ class NestBuilder(Builder):
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
-                    \context GlobalRests = "Global Rests" {
-                        {
-                            \time 1/2
-                            R1 * 1/2
-                        }
-                        {
-                            \time 1/4
-                            R1 * 1/4
-                        }
-                    }
                     \context GlobalSkips = "Global Skips" {
                         {
                             \time 1/2

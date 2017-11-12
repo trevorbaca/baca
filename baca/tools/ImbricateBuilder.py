@@ -834,16 +834,6 @@ class ImbricateBuilder(Builder):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 7/16
-                                R1 * 7/16
-                            }
-                            {
-                                \time 1/4
-                                R1 * 1/4
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 7/16

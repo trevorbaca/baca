@@ -29,24 +29,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
-                    \context GlobalRests = "Global Rests" {
-                        {
-                            \time 4/8
-                            R1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            R1 * 3/8
-                        }
-                        {
-                            \time 4/8
-                            R1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            R1 * 3/8
-                        }
-                    }
                     \context GlobalSkips = "Global Skips" {
                         {
                             \time 4/8
@@ -102,24 +84,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
-                    \context GlobalRests = "Global Rests" {
-                        {
-                            \time 4/8
-                            R1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            R1 * 3/8
-                        }
-                        {
-                            \time 4/8
-                            R1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            R1 * 3/8
-                        }
-                    }
                     \context GlobalSkips = "Global Skips" {
                         {
                             \time 4/8
@@ -497,24 +461,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -841,8 +787,18 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _attach_fermatas(self):
         if not self.metronome_mark_measure_map:
+            del(self._score['Global Rests'])
+            return
+        has_fermata = False
+        for entry in self.metronome_mark_measure_map:
+            if isinstance(entry[1], abjad.Fermata):
+                has_fermata = True
+        if not has_fermata:
+            del(self._score['Global Rests'])
             return
         context = self._score['Global Rests']
+        measures = self._make_multimeasure_rest_filled_measures()
+        context.extend(measures)
         directive_prototype = (
             abjad.Fermata,
             abjad.BreathMark,
@@ -1663,9 +1619,6 @@ class SegmentMaker(abjad.SegmentMaker):
         context = self._score['Global Skips']
         measures = self._make_skip_filled_measures()
         context.extend(measures)
-        context = self._score['Global Rests']
-        measures = self._make_multimeasure_rest_filled_measures()
-        context.extend(measures)
 
     def _print_cache(self):
         for context in self._cache:
@@ -1891,24 +1844,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 1/16
-                                R1 * 1/16
-                            }
-                            {
-                                \time 7/16
-                                R1 * 7/16
-                            }
-                            {
-                                \time 1/16
-                                R1 * 1/16
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 1/16
@@ -2032,24 +1967,6 @@ class SegmentMaker(abjad.SegmentMaker):
                     \override TextScript.staff-padding = #3
                 } <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 1/16
-                                R1 * 1/16
-                            }
-                            {
-                                \time 7/16
-                                R1 * 7/16
-                            }
-                            {
-                                \time 1/16
-                                R1 * 1/16
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 1/16
@@ -2241,14 +2158,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \tag violin.viola.cello
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 6/16
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
+                                \time 6/16
                                 \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                                 \newSpacingSection
                                 s1 * 3/8
@@ -2363,24 +2275,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 1/16
-                                R1 * 1/16
-                            }
-                            {
-                                \time 7/16
-                                R1 * 7/16
-                            }
-                            {
-                                \time 1/16
-                                R1 * 1/16
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 1/16
@@ -2517,24 +2411,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 1/16
-                                R1 * 1/16
-                            }
-                            {
-                                \time 7/16
-                                R1 * 7/16
-                            }
-                            {
-                                \time 1/16
-                                R1 * 1/16
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 1/16
@@ -2679,24 +2555,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -2844,24 +2702,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -3006,24 +2846,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -3172,24 +2994,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -3343,24 +3147,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -3507,24 +3293,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -3739,24 +3507,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -3901,24 +3651,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -4050,23 +3782,9 @@ class SegmentMaker(abjad.SegmentMaker):
                     \override SpacingSpanner.strict-note-spacing = ##f
                 } <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 3/16
-                                R1 * 3/16
-                            }
-                            {
-                                R1 * 3/16
-                            }
-                            {
-                                R1 * 3/16
-                            }
-                            {
-                                R1 * 3/16
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
+                                \time 3/16
                                 \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                                 \newSpacingSection
                                 s1 * 3/16
@@ -4290,23 +4008,9 @@ class SegmentMaker(abjad.SegmentMaker):
                     \override SpacingSpanner.strict-note-spacing = ##f
                 } <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 3/16
-                                R1 * 3/16
-                            }
-                            {
-                                R1 * 3/16
-                            }
-                            {
-                                R1 * 3/16
-                            }
-                            {
-                                R1 * 3/16
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
+                                \time 3/16
                                 \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                                 \newSpacingSection
                                 s1 * 3/16
@@ -4418,24 +4122,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -4600,24 +4286,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -4788,24 +4456,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -4950,24 +4600,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -5123,24 +4755,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -5336,24 +4950,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -5500,24 +5096,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -5795,24 +5373,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -5864,24 +5424,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -5986,24 +5528,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -6160,24 +5684,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -6351,24 +5857,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -6457,24 +5945,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
@@ -6621,24 +6091,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalRests = "Global Rests" {
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                R1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                R1 * 3/8
-                            }
-                        }
                         \context GlobalSkips = "Global Skips" {
                             {
                                 \time 4/8
