@@ -1215,6 +1215,20 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
+    def make_multimeasure_rests():
+        r'''Makes multimeasure rests.
+        '''
+        mask = rhythmos.SilenceMask(
+            pattern=abjad.index_all(),
+            use_multimeasure_rests=True,
+            )
+        return baca.RhythmBuilder(
+            rhythm_maker=rhythmos.NoteRhythmMaker(
+                division_masks=[mask],
+                ),
+            )
+
+    @staticmethod
     def make_notes(repeat_ties=False):
         r'''Makes notes; rewrites meter.
         '''
@@ -1450,19 +1464,4 @@ class LibraryGM(abjad.AbjadObject):
         return baca.IndicatorCommand(
             indicators=[abjad.Articulation('marcato')],
             selector=selector,
-            )
-
-    # S&R
-    @staticmethod
-    def make_multimeasure_rests():
-        r'''Makes multimeasure rests.
-        '''
-        mask = rhythmos.SilenceMask(
-            pattern=abjad.index_all(),
-            use_multimeasure_rests=True,
-            )
-        return baca.RhythmBuilder(
-            rhythm_maker=rhythmos.NoteRhythmMaker(
-                division_masks=[mask],
-                ),
             )

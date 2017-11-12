@@ -797,24 +797,20 @@ class SegmentMaker(abjad.SegmentMaker):
             del(self._score['Global Rests'])
             return
         context = self._score['Global Rests']
-        measures = self._make_multimeasure_rest_filled_measures()
-        context.extend(measures)
+        rests = self._make_multimeasure_rests()
+        context.extend(rests)
         directive_prototype = (
-            abjad.Fermata,
             abjad.BreathMark,
+            abjad.Fermata,
             )
-        rest_prototype = abjad.MultimeasureRest
         for stage_number, directive in self.metronome_mark_measure_map:
             if not isinstance(directive, directive_prototype):
                 continue
             assert 0 < stage_number <= self.stage_count
             result = self._stage_number_to_measure_indices(stage_number)
             start_measure_index, stop_measure_index = result
-            start_measure = context[start_measure_index]
-            assert isinstance(start_measure, abjad.Measure), repr(
-                start_measure)
-            start_skip = start_measure[0]
-            assert isinstance(start_skip, rest_prototype), start_skip
+            rest = context[start_measure_index]
+            assert isinstance(rest, abjad.MultimeasureRest)
             fermata_y_offset = None
             if isinstance(directive, abjad.Fermata):
                 if directive.command == 'shortfermata':
@@ -834,15 +830,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 directive = abjad.Markup.musicglyph(string)
             else:
                 directive = abjad.new(directive)
-            abjad.attach(directive, start_skip)
+            abjad.attach(directive, rest)
             if fermata_y_offset is not None:
-                grob_proxy = abjad.override(start_skip).multi_measure_rest_text
-                grob_proxy.extra_offset = (0, fermata_y_offset)
-            proxy = abjad.override(start_skip)
+                proxy = abjad.override(rest).multi_measure_rest_text
+                proxy.extra_offset = (0, fermata_y_offset)
+            proxy = abjad.override(rest)
             proxy.score.multi_measure_rest.transparent = True
-            abjad.override(start_skip).score.time_signature.stencil = False
-            abjad.attach('fermata measure', start_skip)
-            start_offset = abjad.inspect(start_skip).get_timespan().start_offset
+            abjad.override(rest).score.time_signature.stencil = False
+            abjad.attach('fermata measure', rest)
+            start_offset = abjad.inspect(rest).get_timespan().start_offset
             self._fermata_start_offsets.append(start_offset)
 
     def _attach_first_segment_score_template_defaults(self):
@@ -1513,21 +1509,14 @@ class SegmentMaker(abjad.SegmentMaker):
                     lilypond_file.items.remove(item)
         self._lilypond_file = lilypond_file
 
-    def _make_multimeasure_rest_filled_measures(self, time_signatures=None):
-        measures = []
-        time_signatures = time_signatures or self.time_signatures
-        for time_signature in time_signatures:
-            time_signature = abjad.TimeSignature(time_signature)
+    def _make_multimeasure_rests(self):
+        rests = []
+        for time_signature in self.time_signatures:
             rest = abjad.MultimeasureRest(abjad.Duration(1))
             multiplier = abjad.Multiplier(time_signature.duration)
             abjad.attach(multiplier, rest)
-            measure = abjad.Measure(
-                time_signature,
-                [rest],
-                )
-            measures.append(measure)
-        measures = abjad.Selection(measures)
-        return measures
+            rests.append(rest)
+        return rests
 
     def _make_music_for_time_signature_context(self):
         voice_name = 'Global Skips'

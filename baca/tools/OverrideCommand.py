@@ -237,14 +237,6 @@ class OverrideCommand(Command):
         return self._attribute
 
     @property
-    def value(self):
-        r'''Gets attribute value.
-
-        Set to string or none.
-        '''
-        return self._value
-
-    @property
     def context(self):
         r'''Gets context name.
 
@@ -263,3 +255,11 @@ class OverrideCommand(Command):
         Set to string or none.
         '''
         return self._grob
+
+    @property
+    def value(self):
+        r'''Gets attribute value.
+
+        Set to string or none.
+        '''
+        return self._value
