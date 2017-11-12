@@ -16,28 +16,28 @@ class SettingCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_context_name',
-        '_setting_name',
-        '_setting_value',
+        '_context',
+        '_setting',
+        '_value',
         )
 
     ### INITIALIZER ###
 
     def __init__(
         self,
-        context_name=None,
+        context=None,
         selector='baca.leaf(0)',
-        setting_name=None,
-        setting_value=None,
+        setting=None,
+        value=None,
         ):
         Command.__init__(self, selector=selector)
-        if context_name is not None:
-            assert isinstance(context_name, str), repr(context_name)
-        self._context_name = context_name
-        if setting_name is not None:
-            assert isinstance(setting_name, str), repr(setting_name)
-        self._setting_name = setting_name
-        self._setting_value = setting_value
+        if context is not None:
+            assert isinstance(context, str), repr(context)
+        self._context = context
+        if setting is not None:
+            assert isinstance(setting, str), repr(setting)
+        self._setting = setting
+        self._value = value
 
     ### SPECIAL METHODS ###
 
@@ -48,17 +48,17 @@ class SettingCommand(Command):
         '''
         if argument is None:
             return
-        if self.setting_name is None:
+        if self.setting is None:
             return
-        if self.setting_value is None:
+        if self.value is None:
             return
         if self.selector:
             argument = self.selector(argument)
         leaf = abjad.select(argument).leaf(0)
-        context = self.context_name
-        setting = self.setting_name
-        value = self.setting_value
-        if self.context_name is not None:
+        context = self.context
+        setting = self.setting
+        value = self.value
+        if self.context is not None:
             string = f'abjad.setting(leaf).{context}.{setting} = {value!r}'
         else:
             string = f'abjad.setting(leaf).{setting} = {value!r}'
@@ -69,7 +69,7 @@ class SettingCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def context_name(self):
+    def context(self):
         r'''Gets context name.
 
         Defaults to none.
@@ -78,20 +78,20 @@ class SettingCommand(Command):
 
         Returns string or none.
         '''
-        return self._context_name
+        return self._context
 
     @property
-    def setting_name(self):
+    def setting(self):
         r'''Gets setting name.
 
         Set to string or none.
         '''
-        return self._setting_name
+        return self._setting
 
     @property
-    def setting_value(self):
+    def value(self):
         r'''Gets setting value.
 
         Set to string or none.
         '''
-        return self._setting_value
+        return self._value

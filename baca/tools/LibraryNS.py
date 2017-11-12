@@ -146,9 +146,9 @@ class LibraryNS(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='style',
-            attribute_value='harmonic',
-            grob_name='note_head',
+            attribute='style',
+            value='harmonic',
+            grob='note_head',
             selector=selector,
             )
 
@@ -740,10 +740,10 @@ class LibraryNS(abjad.AbjadObject):
         assert len(duration) == 2, repr(duration)
         moment = abjad.SchemeMoment(duration)
         return baca.SettingCommand(
-            context_name='Score',
+            context='Score',
             selector=selector,
-            setting_name='proportional_notation_duration',
-            setting_value=moment,
+            setting='proportional_notation_duration',
+            value=moment,
             )
 
     @staticmethod
@@ -1278,9 +1278,9 @@ class LibraryNS(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='direction',
-            attribute_value=abjad.Down,
-            grob_name='repeat_tie',
+            attribute='direction',
+            value=abjad.Down,
+            grob='repeat_tie',
             selector=selector,
             )
 
@@ -1406,9 +1406,9 @@ class LibraryNS(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='direction',
-            attribute_value=abjad.Up,
-            grob_name='repeat_tie',
+            attribute='direction',
+            value=abjad.Up,
+            grob='repeat_tie',
             selector=selector,
             )
 
@@ -1530,9 +1530,9 @@ class LibraryNS(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='staff_position',
-            attribute_value=n,
-            grob_name='rest',
+            attribute='staff_position',
+            value=n,
+            grob='rest',
             selector=selector,
             )
 
@@ -1829,9 +1829,9 @@ class LibraryNS(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='direction',
-            attribute_value=abjad.Down,
-            grob_name='rest',
+            attribute='direction',
+            value=abjad.Down,
+            grob='rest',
             selector=selector,
             )
 
@@ -1950,9 +1950,9 @@ class LibraryNS(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='direction',
-            attribute_value=abjad.Up,
-            grob_name='rest',
+            attribute='direction',
+            value=abjad.Up,
+            grob='rest',
             selector=selector,
             )
 
@@ -2121,9 +2121,9 @@ class LibraryNS(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='color',
-            attribute_value=color,
-            grob_name='script',
+            attribute='color',
+            value=color,
+            grob='script',
             selector=selector,
             )
 
@@ -2246,9 +2246,9 @@ class LibraryNS(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='extra_offset',
-            attribute_value=pair,
-            grob_name='script',
+            attribute='extra_offset',
+            value=pair,
+            grob='script',
             selector=selector,
             )
 
@@ -2372,9 +2372,9 @@ class LibraryNS(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='direction',
-            attribute_value=abjad.Down,
-            grob_name='script',
+            attribute='direction',
+            value=abjad.Down,
+            grob='script',
             selector=selector,
             )
 
@@ -2498,9 +2498,9 @@ class LibraryNS(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='direction',
-            attribute_value=abjad.Up,
-            grob_name='script',
+            attribute='direction',
+            value=abjad.Up,
+            grob='script',
             selector=selector,
             )
 
@@ -3247,9 +3247,9 @@ class LibraryNS(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='direction',
-            attribute_value=abjad.Down,
-            grob_name='slur',
+            attribute='direction',
+            value=abjad.Down,
+            grob='slur',
             selector=selector,
             )
 
@@ -3391,9 +3391,9 @@ class LibraryNS(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='direction',
-            attribute_value=abjad.Up,
-            grob_name='slur',
+            attribute='direction',
+            value=abjad.Up,
+            grob='slur',
             selector=selector,
             )
 
@@ -3983,7 +3983,7 @@ class LibraryNS(abjad.AbjadObject):
             ) 
 
     @staticmethod
-    def stem_color(color='red', context_name=None, selector='baca.tleaves()'):
+    def stem_color(color='red', context=None, selector='baca.tleaves()'):
         r'''Overrides stem color.
 
         ..  container:: example
@@ -4101,10 +4101,10 @@ class LibraryNS(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='color',
-            attribute_value=color,
-            context_name=context_name,
-            grob_name='stem',
+            attribute='color',
+            value=color,
+            context=context,
+            grob='stem',
             selector=selector,
             )
 
@@ -4345,9 +4345,9 @@ class LibraryNS(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='direction',
-            attribute_value=abjad.Down,
-            grob_name='stem',
+            attribute='direction',
+            value=abjad.Down,
+            grob='stem',
             selector=selector,
             )
 
@@ -4470,9 +4470,9 @@ class LibraryNS(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='direction',
-            attribute_value=abjad.Up,
-            grob_name='stem',
+            attribute='direction',
+            value=abjad.Up,
+            grob='stem',
             selector=selector,
             )
 
@@ -4537,10 +4537,10 @@ class LibraryNS(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='strict_note_spacing',
-            attribute_value=False,
-            context_name='Score',
-            grob_name='spacing_spanner',
+            attribute='strict_note_spacing',
+            value=False,
+            context='Score',
+            grob='spacing_spanner',
             selector=selector,
             )
 
@@ -5201,9 +5201,9 @@ class LibraryNS(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='staff_padding',
-            attribute_value=n,
-            context_name=context,
-            grob_name='sustain_pedal_line_spanner',
+            attribute='staff_padding',
+            value=n,
+            context=context,
+            grob='sustain_pedal_line_spanner',
             selector=selector,
             )

@@ -705,10 +705,10 @@ class LibraryAF(abjad.AbjadObject):
         '''
         return baca.OverrideCommand(
             after=after,
-            attribute_name='bar_extent',
-            attribute_value=pair,
-            context_name='Staff',
-            grob_name='bar_line',
+            attribute='bar_extent',
+            value=pair,
+            context='Staff',
+            grob='bar_line',
             selector=selector,
             )
 
@@ -1380,9 +1380,9 @@ class LibraryAF(abjad.AbjadObject):
         '''
         assert isinstance(n, (int, float)), repr(n)
         return baca.OverrideCommand(
-            attribute_name='positions',
-            attribute_value=(n, n),
-            grob_name='beam',
+            attribute='positions',
+            value=(n, n),
+            grob='beam',
             selector=selector,
             )
 
@@ -2374,9 +2374,9 @@ class LibraryAF(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='style',
-            attribute_value='cross',
-            grob_name='note_head',
+            attribute='style',
+            value='cross',
+            grob='note_head',
             selector=selector,
             )
 
@@ -3421,9 +3421,9 @@ class LibraryAF(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='staff_padding',
-            attribute_value=str(n),
-            grob_name='dynamic_line_spanner',
+            attribute='staff_padding',
+            value=str(n),
+            grob='dynamic_line_spanner',
             selector=selector,
             )
 
@@ -3547,9 +3547,9 @@ class LibraryAF(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='direction',
-            attribute_value=abjad.Up,
-            grob_name='dynamic_line_spanner',
+            attribute='direction',
+            value=abjad.Up,
+            grob='dynamic_line_spanner',
             selector=selector,
             )
 
@@ -3675,9 +3675,9 @@ class LibraryAF(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='extra_offset',
-            attribute_value=pair,
-            grob_name='dynamic_text',
+            attribute='extra_offset',
+            value=pair,
+            grob='dynamic_text',
             selector=selector,
             )
 

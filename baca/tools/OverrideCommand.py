@@ -168,10 +168,10 @@ class OverrideCommand(Command):
 
     __slots__ = (
         '_after',
-        '_attribute_name',
-        '_attribute_value',
-        '_context_name',
-        '_grob_name',
+        '_attribute',
+        '_context',
+        '_grob',
+        '_value',
         )
 
     ### INITIALIZER ###
@@ -179,26 +179,26 @@ class OverrideCommand(Command):
     def __init__(
         self,
         after=None,
-        context_name=None,
-        grob_name=None,
-        attribute_name=None,
-        attribute_value=None,
+        attribute=None,
+        context=None,
+        grob=None,
         selector='baca.leaves()',
+        value=None,
         ):
         Command.__init__(self, selector=selector)
         if after is not None:
             after = bool(after)
         self._after = after
-        if context_name is not None:
-            assert isinstance(context_name, str), repr(context_name)
-        self._context_name = context_name
-        if grob_name is not None:
-            assert isinstance(grob_name, str), repr(grob_name)
-        self._grob_name = grob_name
-        if attribute_name is not None:
-            assert isinstance(attribute_name, str), repr(attribute_name)
-        self._attribute_name = attribute_name
-        self._attribute_value = attribute_value
+        if attribute is not None:
+            assert isinstance(attribute, str), repr(attribute)
+        self._attribute = attribute
+        if context is not None:
+            assert isinstance(context, str), repr(context)
+        self._context = context
+        if grob is not None:
+            assert isinstance(grob, str), repr(grob)
+        self._grob = grob
+        self._value = value
 
     ### SPECIAL METHODS ###
 
@@ -214,17 +214,17 @@ class OverrideCommand(Command):
         if not argument:
             return
         leaves = abjad.select(argument).leaves(grace_notes=False)
-        context_name = self.context_name
-        grob_name = self.grob_name
-        attribute_name = self.attribute_name
-        attribute_value = self.attribute_value
-        is_once = bool(len(leaves) == 1)
+        context = self.context
+        grob = self.grob
+        attribute = self.attribute
+        value = self.value
+        once = bool(len(leaves) == 1)
         string = abjad.LilyPondFormatManager.make_lilypond_override_string(
-            grob_name,
-            attribute_name,
-            attribute_value,
-            context_name=context_name,
-            is_once=is_once,
+            grob,
+            attribute,
+            value,
+            context=context,
+            once=once,
             )
         string = string[1:]
         format_slot = None
@@ -232,14 +232,14 @@ class OverrideCommand(Command):
             format_slot = 'after'
         override = abjad.LilyPondCommand(string, format_slot=format_slot)
         abjad.attach(override, leaves[0])
-        if is_once:
+        if once:
             return
         string = abjad.LilyPondFormatManager.make_lilypond_revert_string(
-            grob_name,
-            attribute_name,
-            context_name=context_name,
+            grob,
+            attribute,
+            context=context,
             )
-        string = string.replace('\\', '')
+        string = string[1:]
         revert = abjad.LilyPondCommand(string, format_slot='after')
         abjad.attach(revert, leaves[-1])
 
@@ -252,23 +252,23 @@ class OverrideCommand(Command):
         return self._after 
 
     @property
-    def attribute_name(self):
+    def attribute(self):
         r'''Gets attribute name.
 
         Set to string or none.
         '''
-        return self._attribute_name
+        return self._attribute
 
     @property
-    def attribute_value(self):
+    def value(self):
         r'''Gets attribute value.
 
         Set to string or none.
         '''
-        return self._attribute_value
+        return self._value
 
     @property
-    def context_name(self):
+    def context(self):
         r'''Gets context name.
 
         Defaults to none.
@@ -277,12 +277,12 @@ class OverrideCommand(Command):
 
         Returns string or none.
         '''
-        return self._context_name
+        return self._context
 
     @property
-    def grob_name(self):
+    def grob(self):
         r'''Gets grob name.
 
         Set to string or none.
         '''
-        return self._grob_name
+        return self._grob

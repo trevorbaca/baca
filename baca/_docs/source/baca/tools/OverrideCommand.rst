@@ -24,11 +24,11 @@ Bases
    .. autosummary::
 
       ~baca.tools.OverrideCommand.OverrideCommand.after
-      ~baca.tools.OverrideCommand.OverrideCommand.attribute_name
-      ~baca.tools.OverrideCommand.OverrideCommand.attribute_value
-      ~baca.tools.OverrideCommand.OverrideCommand.context_name
-      ~baca.tools.OverrideCommand.OverrideCommand.grob_name
+      ~baca.tools.OverrideCommand.OverrideCommand.attribute
+      ~baca.tools.OverrideCommand.OverrideCommand.context
+      ~baca.tools.OverrideCommand.OverrideCommand.grob
       ~baca.tools.OverrideCommand.OverrideCommand.selector
+      ~baca.tools.OverrideCommand.OverrideCommand.value
       ~baca.tools.OverrideCommand.OverrideCommand.__call__
       ~baca.tools.OverrideCommand.OverrideCommand.__eq__
       ~baca.tools.OverrideCommand.OverrideCommand.__format__
@@ -40,19 +40,19 @@ Read-only properties
 
 .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.after
 
-.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.attribute_name
+.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.attribute
 
-.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.attribute_value
+.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.context
 
-.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.context_name
-
-.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.grob_name
+.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.grob
 
 .. only:: html
 
    .. container:: inherited
 
       .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.selector
+
+.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.value
 
 Special methods
 ---------------

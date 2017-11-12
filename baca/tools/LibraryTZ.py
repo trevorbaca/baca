@@ -285,9 +285,9 @@ class LibraryTZ(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='color',
-            attribute_value=color,
-            grob_name='text_script',
+            attribute='color',
+            value=color,
+            grob='text_script',
             selector=selector,
             )
 
@@ -441,9 +441,9 @@ class LibraryTZ(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='padding',
-            attribute_value=n,
-            grob_name='text_script',
+            attribute='padding',
+            value=n,
+            grob='text_script',
             selector=selector,
             )
 
@@ -596,9 +596,9 @@ class LibraryTZ(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='staff_padding',
-            attribute_value=n,
-            grob_name='text_script',
+            attribute='staff_padding',
+            value=n,
+            grob='text_script',
             selector=selector,
             )
 
@@ -750,9 +750,9 @@ class LibraryTZ(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='direction',
-            attribute_value=abjad.Down,
-            grob_name='text_script',
+            attribute='direction',
+            value=abjad.Down,
+            grob='text_script',
             selector=selector,
             )
 
@@ -904,9 +904,9 @@ class LibraryTZ(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='direction',
-            attribute_value=abjad.Up,
-            grob_name='text_script',
+            attribute='direction',
+            value=abjad.Up,
+            grob='text_script',
             selector=selector,
             )
 
@@ -1104,9 +1104,9 @@ class LibraryTZ(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='staff_padding',
-            attribute_value=n,
-            grob_name='text_spanner',
+            attribute='staff_padding',
+            value=n,
+            grob='text_spanner',
             selector=selector,
             )
 
@@ -1399,9 +1399,9 @@ class LibraryTZ(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='direction',
-            attribute_value=abjad.Down,
-            grob_name='tie',
+            attribute='direction',
+            value=abjad.Down,
+            grob='tie',
             selector=selector,
             )
 
@@ -1525,9 +1525,9 @@ class LibraryTZ(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='direction',
-            attribute_value=abjad.Up,
-            grob_name='tie',
+            attribute='direction',
+            value=abjad.Up,
+            grob='tie',
             selector=selector,
             )
 
@@ -1592,10 +1592,10 @@ class LibraryTZ(abjad.AbjadObject):
         '''
         assert isinstance(pair, tuple), repr(pair)
         return baca.OverrideCommand(
-            attribute_name='extra_offset',
-            attribute_value=pair,
-            context_name='Score',
-            grob_name='time_signature',
+            attribute='extra_offset',
+            value=pair,
+            context='Score',
+            grob='time_signature',
             selector=selector,
             )
 
@@ -1812,10 +1812,10 @@ class LibraryTZ(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='transparent',
-            attribute_value=True,
-            context_name='Score',
-            grob_name='bar_line',
+            attribute='transparent',
+            value=True,
+            context='Score',
+            grob='bar_line',
             selector=selector,
             )
 
@@ -1936,9 +1936,9 @@ class LibraryTZ(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='transparent',
-            attribute_value=True,
-            grob_name='rest',
+            attribute='transparent',
+            value=True,
+            grob='rest',
             selector=selector,
             )
 
@@ -2002,10 +2002,10 @@ class LibraryTZ(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='transparent',
-            attribute_value=True,
-            context_name='Score',
-            grob_name='span_bar',
+            attribute='transparent',
+            value=True,
+            context='Score',
+            grob='span_bar',
             selector=selector,
             )
 
@@ -2070,10 +2070,10 @@ class LibraryTZ(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='transparent',
-            attribute_value=True,
-            context_name='GlobalContext',
-            grob_name='time_signature',
+            attribute='transparent',
+            value=True,
+            context='GlobalContext',
+            grob='time_signature',
             selector=selector,
             )
 
@@ -2095,9 +2095,9 @@ class LibraryTZ(abjad.AbjadObject):
         '''
         pair = (0, -n)
         return baca.OverrideCommand(
-            attribute_name='extra_offset',
-            attribute_value=str(pair),
-            grob_name='stem_tremolo',
+            attribute='extra_offset',
+            value=str(pair),
+            grob='stem_tremolo',
             selector=selector,
             )
 
@@ -2588,9 +2588,9 @@ class LibraryTZ(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='extra_offset',
-            attribute_value=pair,
-            grob_name='tuplet_bracket',
+            attribute='extra_offset',
+            value=pair,
+            grob='tuplet_bracket',
             selector=selector,
             )
 
@@ -2707,9 +2707,9 @@ class LibraryTZ(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='staff_padding',
-            attribute_value=n,
-            grob_name='tuplet_bracket',
+            attribute='staff_padding',
+            value=n,
+            grob='tuplet_bracket',
             selector=selector,
             )
 
@@ -2831,9 +2831,9 @@ class LibraryTZ(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='direction',
-            attribute_value=abjad.Down,
-            grob_name='tuplet_bracket',
+            attribute='direction',
+            value=abjad.Down,
+            grob='tuplet_bracket',
             selector=selector,
             )
 
@@ -2955,9 +2955,9 @@ class LibraryTZ(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='direction',
-            attribute_value=abjad.Up,
-            grob_name='tuplet_bracket',
+            attribute='direction',
+            value=abjad.Up,
+            grob='tuplet_bracket',
             selector=selector,
             )
 
@@ -3079,9 +3079,9 @@ class LibraryTZ(abjad.AbjadObject):
 
         '''
         return baca.OverrideCommand(
-            attribute_name='extra_offset',
-            attribute_value=pair,
-            grob_name='tuplet_number',
+            attribute='extra_offset',
+            value=pair,
+            grob='tuplet_number',
             selector=selector,
             )
 

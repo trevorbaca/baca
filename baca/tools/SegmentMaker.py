@@ -1229,25 +1229,25 @@ class SegmentMaker(abjad.SegmentMaker):
         stop_offset = abjad.inspect(stop_measure).get_timespan().stop_offset
         return start_offset, stop_offset
 
-    def _get_previous_clef(self, context_name):
+    def _get_previous_clef(self, context):
         if not self._previous_metadata:
             return
         string = 'end_clefs_by_staff'
         previous_clefs = self._previous_metadata.get(string)
         if not previous_clefs:
             return
-        clef_name = previous_clefs.get(context_name)
+        clef_name = previous_clefs.get(context)
         if clef_name is not None:
             return abjad.Clef(clef_name)
 
-    def _get_previous_instrument(self, context_name):
+    def _get_previous_instrument(self, context):
         if not self._previous_metadata:
             return
         string = 'end_instruments_by_context'
         previous_instruments = self._previous_metadata.get(string)
         if not previous_instruments:
             return
-        instrument_name = previous_instruments.get(context_name)
+        instrument_name = previous_instruments.get(context)
         instrument = self.instruments.get(instrument_name)
         return instrument
 
@@ -1688,9 +1688,9 @@ class SegmentMaker(abjad.SegmentMaker):
         context.extend(measures)
 
     def _print_cache(self):
-        for context_name in self._cache:
-            print(f'CONTEXT {context_name} ...')
-            leaves_by_stage_number = self._cache[context_name]
+        for context in self._cache:
+            print(f'CONTEXT {context} ...')
+            leaves_by_stage_number = self._cache[context]
             for stage_number in leaves_by_stage_number:
                 print(f'STAGE {stage_number} ...')
                 for leaf in leaves_by_stage_number[stage_number]:
