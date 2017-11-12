@@ -12,12 +12,12 @@ class PitchCommand(Command):
         With pitch numbers:
 
         >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
         >>> maker(
-        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.scope('Music Voice', 1),
         ...     baca.make_even_runs(),
         ...     baca.pitches([19, 13, 15, 16, 17, 23]),
         ...     )
@@ -29,7 +29,6 @@ class PitchCommand(Command):
 
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
-                \tag violin
                 \context GlobalContext = "Global Context" <<
                     \context GlobalRests = "Global Rests" {
                         {
@@ -69,12 +68,9 @@ class PitchCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \context ViolinMusicVoice = "Violin Music Voice" {
+                    \context Staff = "Music Staff" {
+                        \context Voice = "Music Voice" {
                             {
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 g''8 [
                                 cs''8
@@ -108,12 +104,12 @@ class PitchCommand(Command):
         With pitch numbers:
 
         >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
         >>> maker(
-        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.scope('Music Voice', 1),
         ...     baca.make_even_runs(),
         ...     baca.pitches('C4 F4 F#4 <B4 C#5> D5'), 
         ...     )
@@ -125,7 +121,6 @@ class PitchCommand(Command):
 
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
-                \tag violin
                 \context GlobalContext = "Global Context" <<
                     \context GlobalRests = "Global Rests" {
                         {
@@ -165,12 +160,9 @@ class PitchCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \context ViolinMusicVoice = "Violin Music Voice" {
+                    \context Staff = "Music Staff" {
+                        \context Voice = "Music Voice" {
                             {
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 c'8 [
                                 f'8
@@ -204,12 +196,12 @@ class PitchCommand(Command):
         Large chord:
 
         >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
         >>> maker(
-        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.scope('Music Voice', 1),
         ...     baca.make_even_runs(),
         ...     baca.pitches('<C4 D4 E4 F4 G4 A4 B4 C4>', repeats=True)
         ...     )
@@ -221,7 +213,6 @@ class PitchCommand(Command):
 
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
-                \tag violin
                 \context GlobalContext = "Global Context" <<
                     \context GlobalRests = "Global Rests" {
                         {
@@ -261,12 +252,9 @@ class PitchCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \context ViolinMusicVoice = "Violin Music Voice" {
+                    \context Staff = "Music Staff" {
+                        \context Voice = "Music Voice" {
                             {
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 <c' d' e' f' g' a' b'>8 [
                                 <c' d' e' f' g' a' b'>8

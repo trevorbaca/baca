@@ -1,5 +1,6 @@
 import abjad
-from baca.tools.ScoreTemplate import ScoreTemplate
+import baca
+from .ScoreTemplate import ScoreTemplate
 
 
 class ViolinSoloScoreTemplate(ScoreTemplate):
@@ -62,8 +63,16 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
                         \context ViolinMusicVoice = "Violin Music Voice" {
-                            \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                            \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
+                            \set ViolinMusicStaff.instrumentName = \markup {
+                                \hcenter-in
+                                    #16
+                                    Violin
+                                }
+                            \set ViolinMusicStaff.shortInstrumentName = \markup {
+                                \hcenter-in
+                                    #10
+                                    Vn.
+                                }
                             \clef "treble"
                             R1 * 1/2
                             R1 * 3/8
@@ -110,7 +119,10 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             context_name='ViolinMusicStaff',
             name='Violin Music Staff',
             )
-        violin = abjad.instrumenttools.Violin()
+        violin = abjad.instrumenttools.Violin(
+            name_markup=baca.markup.instrument('Violin'),
+            short_name_markup=baca.markup.short_instrument('Vn.'),
+            )
         abjad.annotate(
             violin_music_staff,
             'default_instrument',

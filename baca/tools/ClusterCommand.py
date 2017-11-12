@@ -354,12 +354,12 @@ class ClusterCommand(Command):
         With segment-maker:
 
         >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
         >>> maker(
-        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.scope('Music Voice', 1),
         ...     baca.clusters([3, 4], start_pitch='E4'),
         ...     baca.make_notes(repeat_ties=True),
         ...     )
@@ -371,7 +371,6 @@ class ClusterCommand(Command):
 
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
-                \tag violin
                 \context GlobalContext = "Global Context" <<
                     \context GlobalRests = "Global Rests" {
                         {
@@ -411,9 +410,8 @@ class ClusterCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \context ViolinMusicVoice = "Violin Music Voice" {
+                    \context Staff = "Music Staff" {
+                        \context Voice = "Music Voice" {
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -421,8 +419,6 @@ class ClusterCommand(Command):
                             \once \override NoteHead.text = \markup {
                                 \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
-                            \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                            \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                             \clef "treble"
                             <e' g' b'>2
                                 ^ \markup {
@@ -581,12 +577,12 @@ class ClusterCommand(Command):
             Hides flat markup:
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.pitches('E4'),
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.natural_clusters(widths=[3]),
@@ -599,7 +595,6 @@ class ClusterCommand(Command):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -639,9 +634,8 @@ class ClusterCommand(Command):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -649,8 +643,6 @@ class ClusterCommand(Command):
                                 \once \override NoteHead.text = \markup {
                                     \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 <e' g' b'>2
                                     ^ \markup {
@@ -727,12 +719,12 @@ class ClusterCommand(Command):
             Takes start pitch from input notes:
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.pitches('C4 D4 E4 F4'),
             ...     baca.clusters([3]),
@@ -745,7 +737,6 @@ class ClusterCommand(Command):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -785,9 +776,8 @@ class ClusterCommand(Command):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -795,8 +785,6 @@ class ClusterCommand(Command):
                                 \once \override NoteHead.text = \markup {
                                     \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 <c' e' g'>2
                                     ^ \markup {
@@ -866,12 +854,12 @@ class ClusterCommand(Command):
             Sets start pitch explicitly:
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.clusters([3], start_pitch='G4'),
             ...     )
@@ -883,7 +871,6 @@ class ClusterCommand(Command):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -923,9 +910,8 @@ class ClusterCommand(Command):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -933,8 +919,6 @@ class ClusterCommand(Command):
                                 \once \override NoteHead.text = \markup {
                                     \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 <g' b' d''>2
                                     ^ \markup {
@@ -1014,12 +998,12 @@ class ClusterCommand(Command):
             Increasing widths:
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.clusters([1, 2, 3, 4], start_pitch='E4'),
             ...     baca.make_notes(repeat_ties=True),
             ...     )
@@ -1031,7 +1015,6 @@ class ClusterCommand(Command):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -1071,9 +1054,8 @@ class ClusterCommand(Command):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1081,8 +1063,6 @@ class ClusterCommand(Command):
                                 \once \override NoteHead.text = \markup {
                                     \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 <e'>2
                                     ^ \markup {
@@ -1152,12 +1132,12 @@ class ClusterCommand(Command):
             Patterned widths:
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.clusters([1, 3], start_pitch='E4'),
             ...     baca.make_notes(repeat_ties=True),
             ...     )
@@ -1169,7 +1149,6 @@ class ClusterCommand(Command):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -1209,9 +1188,8 @@ class ClusterCommand(Command):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1219,8 +1197,6 @@ class ClusterCommand(Command):
                                 \once \override NoteHead.text = \markup {
                                     \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 <e'>2
                                     ^ \markup {
@@ -1290,12 +1266,12 @@ class ClusterCommand(Command):
             Leaves notes and chords unchanged:
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.pitches('E4', repeats=True),
             ...     baca.clusters([]),
@@ -1308,7 +1284,6 @@ class ClusterCommand(Command):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -1348,11 +1323,8 @@ class ClusterCommand(Command):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 \clef "treble"
                                 e'2
                                 e'4.

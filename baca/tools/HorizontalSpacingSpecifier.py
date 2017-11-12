@@ -11,12 +11,12 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         No spacing command:
 
         >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
         ...     )
 
         >>> maker(
-        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.scope('Music Voice', 1),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmBuilder(
         ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
@@ -30,7 +30,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
-                \tag violin
                 \context GlobalContext = "Global Context" <<
                     \context GlobalRests = "Global Rests" {
                         {
@@ -70,12 +69,9 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \context ViolinMusicVoice = "Violin Music Voice" {
+                    \context Staff = "Music Staff" {
+                        \context Voice = "Music Voice" {
                             {
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 e'16 [
                                 f'16
@@ -110,13 +106,13 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         Null spacing command:
 
         >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing_specifier=baca.HorizontalSpacingSpecifier(),
         ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
         ...     )
 
         >>> maker(
-        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.scope('Music Voice', 1),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmBuilder(
         ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
@@ -130,7 +126,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
-                \tag violin
                 \context GlobalContext = "Global Context" <<
                     \context GlobalRests = "Global Rests" {
                         {
@@ -178,12 +173,9 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \context ViolinMusicVoice = "Violin Music Voice" {
+                    \context Staff = "Music Staff" {
+                        \context Voice = "Music Voice" {
                             {
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 e'16 [
                                 f'16
@@ -218,7 +210,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         Measurewise proportional spacing based on minimum duration per measure:
 
         >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
         ...         multiplier=abjad.Multiplier(1),
         ...         ),
@@ -226,7 +218,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.scope('Music Voice', 1),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmBuilder(
         ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
@@ -240,7 +232,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
-                \tag violin
                 \context GlobalContext = "Global Context" <<
                     \context GlobalRests = "Global Rests" {
                         {
@@ -288,12 +279,9 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \context ViolinMusicVoice = "Violin Music Voice" {
+                    \context Staff = "Music Staff" {
+                        \context Voice = "Music Voice" {
                             {
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 e'16 [
                                 f'16
@@ -329,7 +317,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         per measure:
 
         >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
         ...         multiplier=abjad.Multiplier(2),
         ...         ),
@@ -337,7 +325,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.scope('Music Voice', 1),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmBuilder(
         ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
@@ -351,7 +339,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
-                \tag violin
                 \context GlobalContext = "Global Context" <<
                     \context GlobalRests = "Global Rests" {
                         {
@@ -399,12 +386,9 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \context ViolinMusicVoice = "Violin Music Voice" {
+                    \context Staff = "Music Staff" {
+                        \context Voice = "Music Voice" {
                             {
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 e'16 [
                                 f'16
@@ -440,7 +424,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         per measure with minimum width equal to an eighth note:
 
         >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
         ...         multiplier=abjad.Multiplier(2),
         ...         minimum_width=abjad.Duration(1, 8),
@@ -449,7 +433,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.scope('Music Voice', 1),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmBuilder(
         ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
@@ -463,7 +447,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
-                \tag violin
                 \context GlobalContext = "Global Context" <<
                     \context GlobalRests = "Global Rests" {
                         {
@@ -511,12 +494,9 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \context ViolinMusicVoice = "Violin Music Voice" {
+                    \context Staff = "Music Staff" {
+                        \context Voice = "Music Voice" {
                             {
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 e'16 [
                                 f'16
@@ -551,7 +531,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         Works with accelerando and ritardando figures:
 
         >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
         ...         minimum_width=abjad.Duration(1, 8),
         ...         ),
@@ -559,7 +539,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.scope('Music Voice', 1),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmBuilder(
         ...         rhythm_maker=rhythmos.AccelerandoRhythmMaker(
@@ -585,7 +565,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
-                \tag violin
                 \context GlobalContext = "Global Context" <<
                     \context GlobalRests = "Global Rests" {
                         {
@@ -613,9 +592,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \context ViolinMusicVoice = "Violin Music Voice" {
+                    \context Staff = "Music Staff" {
+                        \context Voice = "Music Voice" {
                             \override TupletNumber.text = \markup {
                                 \scale
                                     #'(0.75 . 0.75)
@@ -648,8 +626,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 }
                             \times 1/1 {
                                 \once \override Beam.grow-direction = #right
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 e'16 * 63/32 [
                                 f'16 * 115/64

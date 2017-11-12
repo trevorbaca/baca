@@ -113,13 +113,13 @@ class RegisterInterpolationCommand(Command):
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=time_signatures,
             ...     )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
-        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.scope('Music Voice', 1),
         ...     baca.pitches(pitches),
         ...     baca.make_even_runs(),
         ...     baca.register(12, 12),
@@ -132,7 +132,6 @@ class RegisterInterpolationCommand(Command):
 
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
-                \tag violin
                 \context GlobalContext = "Global Context" <<
                     \context GlobalRests = "Global Rests" {
                         {
@@ -204,12 +203,9 @@ class RegisterInterpolationCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \context ViolinMusicVoice = "Violin Music Voice" {
+                    \context Staff = "Music Staff" {
+                        \context Voice = "Music Voice" {
                             {
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 fs''8 [
                                 e''8
@@ -266,13 +262,13 @@ class RegisterInterpolationCommand(Command):
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=time_signatures,
             ...     )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
-        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.scope('Music Voice', 1),
         ...     baca.pitches(pitches),
         ...     baca.make_even_runs(),
         ...     baca.register(12, 0),
@@ -285,7 +281,6 @@ class RegisterInterpolationCommand(Command):
 
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
-                \tag violin
                 \context GlobalContext = "Global Context" <<
                     \context GlobalRests = "Global Rests" {
                         {
@@ -357,12 +352,9 @@ class RegisterInterpolationCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \context ViolinMusicVoice = "Violin Music Voice" {
+                    \context Staff = "Music Staff" {
+                        \context Voice = "Music Voice" {
                             {
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 fs''8 [
                                 e''8
@@ -419,13 +411,13 @@ class RegisterInterpolationCommand(Command):
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=time_signatures,
             ...     )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
-        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.scope('Music Voice', 1),
         ...     baca.pitches(pitches),
         ...     baca.make_even_runs(),
         ...     baca.register(0, 12),
@@ -438,7 +430,6 @@ class RegisterInterpolationCommand(Command):
 
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
-                \tag violin
                 \context GlobalContext = "Global Context" <<
                     \context GlobalRests = "Global Rests" {
                         {
@@ -510,12 +501,9 @@ class RegisterInterpolationCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \context ViolinMusicVoice = "Violin Music Voice" {
+                    \context Staff = "Music Staff" {
+                        \context Voice = "Music Voice" {
                             {
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 fs'8 [
                                 e'8
@@ -572,13 +560,13 @@ class RegisterInterpolationCommand(Command):
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=time_signatures,
             ...     )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
-        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.scope('Music Voice', 1),
         ...     baca.pitches(pitches),
         ...     baca.make_even_runs(),
         ...     baca.register(12, -12),
@@ -591,7 +579,6 @@ class RegisterInterpolationCommand(Command):
 
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
-                \tag violin
                 \context GlobalContext = "Global Context" <<
                     \context GlobalRests = "Global Rests" {
                         {
@@ -663,12 +650,9 @@ class RegisterInterpolationCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \context ViolinMusicVoice = "Violin Music Voice" {
+                    \context Staff = "Music Staff" {
+                        \context Voice = "Music Voice" {
                             {
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 fs''8 [
                                 e''8
@@ -725,13 +709,13 @@ class RegisterInterpolationCommand(Command):
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=time_signatures,
             ...     )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
-        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.scope('Music Voice', 1),
         ...     baca.pitches(pitches),
         ...     baca.make_even_runs(),
         ...     baca.register(-12, 12),
@@ -744,7 +728,6 @@ class RegisterInterpolationCommand(Command):
 
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
-                \tag violin
                 \context GlobalContext = "Global Context" <<
                     \context GlobalRests = "Global Rests" {
                         {
@@ -816,12 +799,9 @@ class RegisterInterpolationCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \context ViolinMusicVoice = "Violin Music Voice" {
+                    \context Staff = "Music Staff" {
+                        \context Voice = "Music Voice" {
                             {
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 fs8 [
                                 e8

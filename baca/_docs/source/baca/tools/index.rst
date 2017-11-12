@@ -207,6 +207,7 @@ baca.tools
    ScoreTemplate
    Selection
    Sequence
+   SingleStaffScoreTemplate
    SpacingIndication
    StaffLines
    StageMeasureMap
@@ -259,6 +260,7 @@ baca.tools
    ScoreTemplate
    Selection
    Sequence
+   SingleStaffScoreTemplate
    SpacingIndication
    StaffLines
    StageMeasureMap

@@ -131,12 +131,12 @@ class ColorCommand(Command):
         With segment-maker:
 
         >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
         >>> maker(
-        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.scope('Music Voice', 1),
         ...     baca.color(),
         ...     baca.make_even_runs(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -149,7 +149,6 @@ class ColorCommand(Command):
 
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
-                \tag violin
                 \context GlobalContext = "Global Context" <<
                     \context GlobalRests = "Global Rests" {
                         {
@@ -189,17 +188,14 @@ class ColorCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \context ViolinMusicVoice = "Violin Music Voice" {
+                    \context Staff = "Music Staff" {
+                        \context Voice = "Music Voice" {
                             {
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 e'8 [
                                 \once \override Accidental.color = #blue

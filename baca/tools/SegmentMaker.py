@@ -17,7 +17,7 @@ class SegmentMaker(abjad.SegmentMaker):
         With empty input:
 
         >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
@@ -28,7 +28,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
-                \tag violin
                 \context GlobalContext = "Global Context" <<
                     \context GlobalRests = "Global Rests" {
                         {
@@ -68,11 +67,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \context ViolinMusicVoice = "Violin Music Voice" {
-                            \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                            \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
+                    \context Staff = "Music Staff" {
+                        \context Voice = "Music Voice" {
                             \clef "treble"
                             R1 * 1/2
                             R1 * 3/8
@@ -89,12 +85,12 @@ class SegmentMaker(abjad.SegmentMaker):
         With notes:
 
         >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
         >>> maker(
-        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.scope('Music Voice', 1),
         ...     baca.make_even_runs(),
         ...     )
 
@@ -105,7 +101,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
-                \tag violin
                 \context GlobalContext = "Global Context" <<
                     \context GlobalRests = "Global Rests" {
                         {
@@ -145,17 +140,14 @@ class SegmentMaker(abjad.SegmentMaker):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \context ViolinMusicVoice = "Violin Music Voice" {
+                    \context Staff = "Music Staff" {
+                        \context Voice = "Music Voice" {
                             {
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 c'8 [
                                 \once \override Beam.color = #blue
@@ -487,12 +479,12 @@ class SegmentMaker(abjad.SegmentMaker):
         ..  container:: example
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     baca.label(abjad.label().with_indices()),
             ...     )
@@ -504,7 +496,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -544,17 +535,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                         ^ \markup {
@@ -1882,14 +1870,14 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> figures = abjad.select(figures_)
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
             ...         minimum_width=abjad.Duration(1, 24),
             ...         ),
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.RhythmBuilder(
             ...         rhythm_maker=figures,
             ...         ),
@@ -1902,7 +1890,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -1950,13 +1937,10 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     {
-                                        \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                        \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                         \clef "treble"
                                         e'16
                                     }
@@ -2023,14 +2007,14 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     allow_figure_names=True,
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
             ...         minimum_width=abjad.Duration(1, 24),
             ...         ),
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.RhythmBuilder(
             ...         rhythm_maker=figures,
             ...         ),
@@ -2047,7 +2031,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" \with {
                     \override TextScript.staff-padding = #3
                 } <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -2095,13 +2078,10 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     {
-                                        \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                        \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                         \clef "treble"
                                         e'16
                                             ^ \markup {
@@ -2231,13 +2211,13 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
-            ...     'Violin Music Voice',
+            ...     'Music Voice',
             ...     [[2, 4, 5, 7, 9, 11]],
             ...     )
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.RhythmBuilder(
-            ...         rhythm_maker=contribution['Violin Music Voice'],
+            ...         rhythm_maker=contribution['Music Voice'],
             ...         ),
             ...     )
 
@@ -2280,27 +2260,11 @@ class SegmentMaker(abjad.SegmentMaker):
                             \tag violin
                             \context ViolinMusicStaff = "Violin Music Staff" {
                                 \context ViolinMusicVoice = "Violin Music Voice" {
-                                    {
-                                        {
-                                            \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                            \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                            \clef "treble"
-                                            d'16 [
-                                            e'16
-                                            \once \override Accidental.color = #red
-                                            \once \override Beam.color = #red
-                                            \once \override Dots.color = #red
-                                            \once \override NoteHead.color = #red
-                                            \once \override Stem.color = #red
-                                            f'16
-                                                - \tweak color #red
-                                                ^ \markup { OCTAVE }
-                                            g'16
-                                            a'16
-                                            b'16 ]
-                                            \bar "|"
-                                        }
-                                    }
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
+                                    R1 * 3/8
+                                    \bar "|"
                                 }
                             }
                             \tag viola
@@ -2323,14 +2287,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \clef "bass"
                                             a16 [
                                             g16
-                                            \once \override Accidental.color = #red
-                                            \once \override Beam.color = #red
-                                            \once \override Dots.color = #red
-                                            \once \override NoteHead.color = #red
-                                            \once \override Stem.color = #red
                                             f16
-                                                - \tweak color #red
-                                                ^ \markup { OCTAVE }
                                             e16
                                             d16
                                             c16 ]
@@ -2385,14 +2342,14 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     color_out_of_range_pitches=True,
             ...     range_checker=pitch_range,
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
             ...         minimum_width=abjad.Duration(1, 24),
             ...         ),
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.RhythmBuilder(
             ...         rhythm_maker=figures,
             ...         ),
@@ -2405,7 +2362,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -2453,13 +2409,10 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     {
-                                        \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                        \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                         \clef "treble"
                                         e'16
                                     }
@@ -2543,14 +2496,14 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     color_repeat_pitch_classes=True,
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
             ...         minimum_width=abjad.Duration(1, 24),
             ...         ),
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.RhythmBuilder(
             ...         rhythm_maker=figures,
             ...         ),
@@ -2563,7 +2516,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -2611,13 +2563,10 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     {
-                                        \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                        \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                         \clef "treble"
                                         e'16
                                     }
@@ -2713,12 +2662,12 @@ class SegmentMaker(abjad.SegmentMaker):
             Nonlast segment sets final barline to ``'|'`` by default:
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -2729,7 +2678,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -2769,17 +2717,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -2878,12 +2823,12 @@ class SegmentMaker(abjad.SegmentMaker):
             Last segment in score sets final barline to ``'|.'`` by default:
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -2898,7 +2843,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -2938,17 +2882,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -3048,12 +2989,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     final_barline='||',
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -3064,7 +3005,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -3104,17 +3044,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -3214,12 +3151,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     final_barline='||',
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -3234,7 +3171,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -3274,17 +3210,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -3393,12 +3326,12 @@ class SegmentMaker(abjad.SegmentMaker):
             No final markup by default:
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -3409,7 +3342,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -3449,17 +3381,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -3561,12 +3490,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     final_barline='|.',
             ...     final_markup=(['Madison, WI'], ['October 2016']),
             ...     final_markup_extra_offset=(-9, -2),
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -3577,7 +3506,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -3617,17 +3545,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -3797,12 +3722,12 @@ class SegmentMaker(abjad.SegmentMaker):
             Colors unpitched notes by default:
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -3813,7 +3738,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -3853,17 +3777,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -3963,12 +3884,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -3979,7 +3900,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -4019,12 +3939,9 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     c'8
@@ -4106,14 +4023,14 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> figures = abjad.select(figures_)
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
             ...         minimum_width=abjad.Duration(1, 24),
             ...         ),
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.RhythmBuilder(
             ...         rhythm_maker=figures,
             ...         ),
@@ -4132,7 +4049,6 @@ class SegmentMaker(abjad.SegmentMaker):
                     \override SpacingSpanner.strict-grace-spacing = ##f
                     \override SpacingSpanner.strict-note-spacing = ##f
                 } <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -4173,9 +4089,8 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     {
                                         \once \override Accidental.color = #magenta
@@ -4184,8 +4099,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override Flag.color = #magenta
                                         \once \override NoteHead.color = #magenta
                                         \once \override Stem.color = #magenta
-                                        \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                        \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                         \clef "treble"
                                         e'8.
                                     }
@@ -4350,14 +4263,14 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unregistered_pitches=True,
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
             ...         minimum_width=abjad.Duration(1, 24),
             ...         ),
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.RhythmBuilder(
             ...         rhythm_maker=figures,
             ...         ),
@@ -4376,7 +4289,6 @@ class SegmentMaker(abjad.SegmentMaker):
                     \override SpacingSpanner.strict-grace-spacing = ##f
                     \override SpacingSpanner.strict-note-spacing = ##f
                 } <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -4417,13 +4329,10 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     {
-                                        \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                        \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                         \clef "treble"
                                         e'8.
                                     }
@@ -4489,7 +4398,7 @@ class SegmentMaker(abjad.SegmentMaker):
             Does not label clock time:
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
             ...         (1, abjad.MetronomeMark((1, 8), 90)),
             ...         ]),
@@ -4497,7 +4406,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -4508,7 +4417,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -4563,17 +4471,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -4673,7 +4578,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     label_clock_time=True,
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
             ...         (1, abjad.MetronomeMark((1, 8), 90)),
             ...         ]),
@@ -4681,7 +4586,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -4694,7 +4599,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -4749,17 +4653,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -4870,12 +4771,12 @@ class SegmentMaker(abjad.SegmentMaker):
             Does not label stages by default:
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -4886,7 +4787,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -4926,17 +4826,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -5036,12 +4933,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     label_stages=True,
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -5052,7 +4949,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -5099,17 +4995,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -5209,12 +5102,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     label_stages=True,
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -5229,7 +5122,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -5276,17 +5168,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -5430,12 +5319,12 @@ class SegmentMaker(abjad.SegmentMaker):
             Without metronome mark measure map:
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -5446,7 +5335,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -5486,17 +5374,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -5595,7 +5480,7 @@ class SegmentMaker(abjad.SegmentMaker):
             With metronome mark measure map:
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
             ...         (1, abjad.MetronomeMark((1, 8), 90)),
             ...         ]),
@@ -5603,7 +5488,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -5614,7 +5499,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -5669,17 +5553,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -5869,11 +5750,11 @@ class SegmentMaker(abjad.SegmentMaker):
             Gets score template:
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     )
 
             >>> maker.score_template
-            ViolinSoloScoreTemplate()
+            SingleStaffScoreTemplate()
 
         Defaults to none.
 
@@ -5902,7 +5783,7 @@ class SegmentMaker(abjad.SegmentMaker):
             Fills empty measures with multimeasure rests by default:
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -5913,7 +5794,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -5953,11 +5833,8 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 \clef "treble"
                                 R1 * 1/2
                                 R1 * 3/8
@@ -5974,7 +5851,7 @@ class SegmentMaker(abjad.SegmentMaker):
             Fills empty measures with skips:
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     skips_instead_of_rests=True,
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
@@ -5986,7 +5863,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -6026,11 +5902,8 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 \clef "treble"
                                 s1 * 1/2
                                 s1 * 3/8
@@ -6092,12 +5965,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     label_stages=True,
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -6112,7 +5985,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -6159,17 +6031,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -6269,13 +6138,13 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     label_stages=True,
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     stage_label_base_string='intermezzo',
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -6290,7 +6159,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -6337,17 +6205,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -6468,12 +6333,12 @@ class SegmentMaker(abjad.SegmentMaker):
             Does not transpose score by default:
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     baca.pitches('E4 F4'),
             ...     )
@@ -6485,7 +6350,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -6525,12 +6389,9 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     e'8 [
                                     f'8
@@ -6579,12 +6440,12 @@ class SegmentMaker(abjad.SegmentMaker):
             Without volta measure map.
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -6595,7 +6456,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -6635,17 +6495,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue
@@ -6744,7 +6601,7 @@ class SegmentMaker(abjad.SegmentMaker):
             With volta measure map:
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     volta_measure_map=baca.VoltaMeasureMap([
             ...         baca.MeasureSpecifier(1, 2),
@@ -6752,7 +6609,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -6763,7 +6620,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -6806,17 +6662,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 {
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     c'8 [
                                     \once \override Beam.color = #blue

@@ -1617,12 +1617,12 @@ class LibraryTZ(abjad.AbjadObject):
             Makes all bar lines transparent:
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.RhythmBuilder(
             ...         rhythm_maker=rhythmos.TaleaRhythmMaker(
@@ -1642,7 +1642,6 @@ class LibraryTZ(abjad.AbjadObject):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -1682,11 +1681,8 @@ class LibraryTZ(abjad.AbjadObject):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 \clef "treble"
                                 \override Score.BarLine.transparent = ##t
                                 e'8 [
@@ -1715,12 +1711,12 @@ class LibraryTZ(abjad.AbjadObject):
             Makes bar line before measure 1 transparent:
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
             >>> maker(
-            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.scope('Music Voice', 1),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.RhythmBuilder(
             ...         rhythm_maker=rhythmos.TaleaRhythmMaker(
@@ -1740,7 +1736,6 @@ class LibraryTZ(abjad.AbjadObject):
 
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "Global Context" <<
                         \context GlobalRests = "Global Rests" {
                             {
@@ -1780,11 +1775,8 @@ class LibraryTZ(abjad.AbjadObject):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
                                 \clef "treble"
                                 e'8 [
                                 d''8

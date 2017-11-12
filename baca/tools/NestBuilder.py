@@ -111,14 +111,14 @@ class NestBuilder(Builder):
         >>> selection = abjad.select(containers)
 
         >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
         ...         minimum_width=abjad.Duration(1, 24),
         ...         ),
         ...     time_signatures=time_signatures,
         ...     )
         >>> maker(
-        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.scope('Music Voice', 1),
         ...     baca.RhythmBuilder(
         ...         rhythm_maker=selection,
         ...         ),
@@ -133,7 +133,6 @@ class NestBuilder(Builder):
 
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
-                \tag violin
                 \context GlobalContext = "Global Context" <<
                     \context GlobalRests = "Global Rests" {
                         {
@@ -161,19 +160,16 @@ class NestBuilder(Builder):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" \with {
+                    \context Staff = "Music Staff" \with {
                         \override Beam.positions = #'(-5.5 . -5.5)
                     } {
-                        \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context Voice = "Music Voice" {
                             {
                                 \tweak text #tuplet-number::calc-fraction-text
                                 \times 8/7 {
                                     {
                                         \set stemLeftBeamCount = #0
                                         \set stemRightBeamCount = #2
-                                        \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                        \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                         \clef "treble"
                                         c'16 [
                                         \set stemLeftBeamCount = #2

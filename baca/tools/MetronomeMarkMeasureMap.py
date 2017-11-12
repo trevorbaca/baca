@@ -8,7 +8,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
 
         >>> maker = baca.SegmentMaker(
         ...     measures_per_stage=[2, 2],
-        ...     score_template=baca.ViolinSoloScoreTemplate(),
+        ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
         ...         (1, abjad.MetronomeMark((1, 4), 90)),
         ...         (2, abjad.MetronomeMark((1, 4), 72)),
@@ -17,7 +17,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Violin Music Voice', 1),
+        ...     baca.scope('Music Voice', 1),
         ...     baca.pitches('E4 F4'),
         ...     baca.make_even_runs(),
         ...     )
@@ -29,7 +29,6 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
 
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
-                \tag violin
                 \context GlobalContext = "Global Context" <<
                     \context GlobalRests = "Global Rests" {
                         {
@@ -99,12 +98,9 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \context ViolinMusicVoice = "Violin Music Voice" {
+                    \context Staff = "Music Staff" {
+                        \context Voice = "Music Voice" {
                             {
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 e'8 [
                                 f'8

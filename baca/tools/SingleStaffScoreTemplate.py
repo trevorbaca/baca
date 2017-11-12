@@ -1,23 +1,16 @@
 import abjad
+import baca
+from .ScoreTemplate import ScoreTemplate
 
 
-class VoltaMeasureMap(abjad.AbjadObject):
-    r'''Volta measure map.
+class SingleStaffScoreTemplate(ScoreTemplate):
+    r'''Single-staff score template.
 
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     volta_measure_map=baca.VoltaMeasureMap([
-        ...         baca.MeasureSpecifier(1, 3),
-        ...         ]),
-        ...     )
-
-        >>> maker(
-        ...     baca.scope('Music Voice', 1),
-        ...     baca.make_notes(repeat_ties=True),
-        ...     baca.pitches('E4', repeats=True),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -51,16 +44,13 @@ class VoltaMeasureMap(abjad.AbjadObject):
                             \time 4/8
                             s1 * 1/2
                         }
-                        \repeat volta 2
                         {
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            s1 * 1/2
                         }
                         {
                             \time 3/8
@@ -72,10 +62,10 @@ class VoltaMeasureMap(abjad.AbjadObject):
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             \clef "treble"
-                            e'2
-                            e'4.
-                            e'2
-                            e'4.
+                            R1 * 1/2
+                            R1 * 3/8
+                            R1 * 1/2
+                            R1 * 3/8
                             \bar "|"
                         }
                     }
@@ -88,54 +78,42 @@ class VoltaMeasureMap(abjad.AbjadObject):
 
     __documentation_section__ = '(6) Utilities'
 
-    __slots__ = (
-        '_items',
-        )
-
-    ### INITIALIZER ###
-
-    def __init__(self, items=None):
-        if items is not None:
-            items = tuple(items)
-        self._items = items
-
     ### SPECIAL METHODS ###
 
-    def __getitem__(self, argument):
-        r'''Gets `argument`.
+    def __call__(self):
+        r'''Calls score template.
 
-        ..  container:: example
-
-            >>> voltas = baca.VoltaMeasureMap([
-            ...     baca.MeasureSpecifier(2, 4),
-            ...     baca.MeasureSpecifier(16, 18),
-            ...     ])
-
-            >>> voltas[1]
-            MeasureSpecifier(start=16, stop=18)
-
-        Returns item.
+        Returns score.
         '''
-        return self.items.__getitem__(argument)
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def items(self):
-        r'''Gets items.
-
-        ..  container:: example
-
-            >>> voltas = baca.VoltaMeasureMap([
-            ...     baca.MeasureSpecifier(2, 4),
-            ...     baca.MeasureSpecifier(16, 18),
-            ...     ])
-
-            >>> for item in voltas.items:
-            ...     item
-            MeasureSpecifier(start=2, stop=4)
-            MeasureSpecifier(start=16, stop=18)
-
-        Returns items.
-        '''
-        return self._items
+        time_signature_context = self._make_time_signature_context()
+        # 
+        music_voice = abjad.Voice(
+            [],
+            name='Music Voice',
+            )
+        music_staff = abjad.Staff(
+            [music_voice],
+            name='Music Staff',
+            )
+        abjad.annotate(
+            music_staff,
+            'default_clef',
+            abjad.Clef('treble'),
+            )
+        # SCORE
+        music_context = abjad.Context(
+            [
+                music_staff,
+                ],
+            context_name='MusicContext',
+            is_simultaneous=True,
+            name='Music Context',
+            )
+        score = abjad.Score(
+            [
+                time_signature_context,
+                music_context,
+                ],
+            name='Score',
+            )
+        return score
