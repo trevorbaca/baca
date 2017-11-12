@@ -125,8 +125,7 @@ class RegisterInterpolationCommand(Command):
         ...     baca.register(12, 12),
         ...     )
 
-        >>> result = maker.run(environment='docs')
-        >>> lilypond_file, metadata = result
+        >>> lilypond_file, _ = maker.run(environment='docs')
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -279,8 +278,7 @@ class RegisterInterpolationCommand(Command):
         ...     baca.register(12, 0),
         ...     )
 
-        >>> result = maker.run(environment='docs')
-        >>> lilypond_file, metadata = result
+        >>> lilypond_file, _ = maker.run(environment='docs')
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -433,8 +431,7 @@ class RegisterInterpolationCommand(Command):
         ...     baca.register(0, 12),
         ...     )
 
-        >>> result = maker.run(environment='docs')
-        >>> lilypond_file, metadata = result
+        >>> lilypond_file, _ = maker.run(environment='docs')
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -587,8 +584,7 @@ class RegisterInterpolationCommand(Command):
         ...     baca.register(12, -12),
         ...     )
 
-        >>> result = maker.run(environment='docs')
-        >>> lilypond_file, metadata = result
+        >>> lilypond_file, _ = maker.run(environment='docs')
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -741,8 +737,7 @@ class RegisterInterpolationCommand(Command):
         ...     baca.register(-12, 12),
         ...     )
 
-        >>> result = maker.run(environment='docs')
-        >>> lilypond_file, metadata = result
+        >>> lilypond_file, _ = maker.run(environment='docs')
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

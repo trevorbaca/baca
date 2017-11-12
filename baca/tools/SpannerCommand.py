@@ -67,8 +67,7 @@ class SpannerCommand(Command):
         ...         ),
         ...     )
 
-        >>> result = maker.run(environment='docs')
-        >>> lilypond_file, collection_metadata = result
+        >>> lilypond_file, _ = maker.run(environment='docs')
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

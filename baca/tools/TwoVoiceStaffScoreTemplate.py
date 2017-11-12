@@ -12,8 +12,7 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> result = maker.run(environment='docs')
-        >>> lilypond_file, metadata = result
+        >>> lilypond_file, _ = maker.run(environment='docs')
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

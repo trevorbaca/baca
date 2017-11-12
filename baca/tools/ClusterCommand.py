@@ -364,8 +364,7 @@ class ClusterCommand(Command):
         ...     baca.make_notes(repeat_ties=True),
         ...     )
 
-        >>> result = maker.run(environment='docs')
-        >>> lilypond_file, metadata = result
+        >>> lilypond_file, _ = maker.run(environment='docs')
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -593,8 +592,7 @@ class ClusterCommand(Command):
             ...     baca.natural_clusters(widths=[3]),
             ...     )
 
-            >>> result = maker.run(environment='docs')
-            >>> lilypond_file, metadata = result
+            >>> lilypond_file, _ = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -740,8 +738,7 @@ class ClusterCommand(Command):
             ...     baca.clusters([3]),
             ...     )
 
-            >>> result = maker.run(environment='docs')
-            >>> lilypond_file, metadata = result
+            >>> lilypond_file, _ = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -879,8 +876,7 @@ class ClusterCommand(Command):
             ...     baca.clusters([3], start_pitch='G4'),
             ...     )
 
-            >>> result = maker.run(environment='docs')
-            >>> lilypond_file, metadata = result
+            >>> lilypond_file, _ = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1028,8 +1024,7 @@ class ClusterCommand(Command):
             ...     baca.make_notes(repeat_ties=True),
             ...     )
 
-            >>> result = maker.run(environment='docs')
-            >>> lilypond_file, metadata = result
+            >>> lilypond_file, _ = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1167,8 +1162,7 @@ class ClusterCommand(Command):
             ...     baca.make_notes(repeat_ties=True),
             ...     )
 
-            >>> result = maker.run(environment='docs')
-            >>> lilypond_file, metadata = result
+            >>> lilypond_file, _ = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1307,8 +1301,7 @@ class ClusterCommand(Command):
             ...     baca.clusters([]),
             ...     )
 
-            >>> result = maker.run(environment='docs')
-            >>> lilypond_file, metadata = result
+            >>> lilypond_file, _ = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::

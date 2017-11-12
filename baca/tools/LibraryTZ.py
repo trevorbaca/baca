@@ -1635,8 +1635,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.transparent_bar_lines(),
             ...     )
 
-            >>> result = maker.run(environment='docs')
-            >>> lilypond_file, metadata = result
+            >>> lilypond_file, _ = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1734,8 +1733,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.transparent_bar_lines(baca.lm(1)),
             ...     )
 
-            >>> result = maker.run(environment='docs')
-            >>> lilypond_file, metadata = result
+            >>> lilypond_file, _ = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
