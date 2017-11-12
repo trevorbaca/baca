@@ -16,12 +16,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
         With empty input:
 
-        >>> segment_maker = baca.SegmentMaker(
+        >>> maker = baca.SegmentMaker(
         ...     score_template=baca.ViolinSoloScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> result = segment_maker.run(environment='docs')
+        >>> result = maker.run(environment='docs')
         >>> lilypond_file, metadata = result
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -89,17 +89,17 @@ class SegmentMaker(abjad.SegmentMaker):
 
         With notes:
 
-        >>> segment_maker = baca.SegmentMaker(
+        >>> maker = baca.SegmentMaker(
         ...     score_template=baca.ViolinSoloScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> segment_maker(
+        >>> maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.make_even_runs(),
         ...     )
 
-        >>> result = segment_maker.run(environment='docs')
+        >>> result = maker.run(environment='docs')
         >>> lilypond_file, metadata = result
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -488,18 +488,18 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     baca.label(abjad.label().with_indices()),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1884,21 +1884,21 @@ class SegmentMaker(abjad.SegmentMaker):
             ...
             >>> figures = abjad.select(figures_)
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
             ...         minimum_width=abjad.Duration(1, 24),
             ...         ),
             ...     time_signatures=time_signatures,
             ...     )
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.RhythmBuilder(
             ...         rhythm_maker=figures,
             ...         ),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2025,7 +2025,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...
             >>> figures = abjad.select(figures_)
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     allow_figure_names=True,
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
@@ -2033,14 +2033,14 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     time_signatures=time_signatures,
             ...     )
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.RhythmBuilder(
             ...         rhythm_maker=figures,
             ...         ),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).text_script.staff_padding = 3
@@ -2225,7 +2225,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     color_octaves=True,
             ...     score_template=baca.StringTrioScoreTemplate(),
             ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
@@ -2239,7 +2239,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     'Violin Music Voice',
             ...     [[2, 4, 5, 7, 9, 11]],
             ...     )
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.RhythmBuilder(
             ...         rhythm_maker=contribution['Violin Music Voice'],
@@ -2250,14 +2250,14 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     'Cello Music Voice',
             ...     [[-3, -5, -7, -8, -10, -12]],
             ...     )
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Cello Music Voice', 1),
             ...     baca.RhythmBuilder(
             ...         rhythm_maker=contribution['Cello Music Voice'],
             ...         ),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2388,7 +2388,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> figures = abjad.select(figures_)
 
             >>> pitch_range = abjad.instrumenttools.Violin().pitch_range
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     color_out_of_range_pitches=True,
             ...     range_checker=pitch_range,
             ...     score_template=baca.ViolinSoloScoreTemplate(),
@@ -2397,14 +2397,14 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     time_signatures=time_signatures,
             ...     )
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.RhythmBuilder(
             ...         rhythm_maker=figures,
             ...         ),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2548,7 +2548,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...
             >>> figures = abjad.select(figures_)
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     color_repeat_pitch_classes=True,
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
@@ -2556,14 +2556,14 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     time_signatures=time_signatures,
             ...     )
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.RhythmBuilder(
             ...         rhythm_maker=figures,
             ...         ),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2720,17 +2720,17 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Nonlast segment sets final barline to ``'|'`` by default:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2886,18 +2886,18 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Last segment in score sets final barline to ``'|.'`` by default:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
             >>> metadata = {'segment_count': 1}
-            >>> result = segment_maker.run(
+            >>> result = maker.run(
             ...     environment='docs',
             ...     metadata=metadata,
             ...     )
@@ -3056,18 +3056,18 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Nonlast segment sets final barline explicitly:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     final_barline='||',
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3223,19 +3223,19 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Last segment in score sets final barline explicitly:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     final_barline='||',
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
             >>> metadata = {'segment_count': 1}
-            >>> result = segment_maker.run(
+            >>> result = maker.run(
             ...     environment='docs',
             ...     metadata=metadata,
             ...     )
@@ -3404,17 +3404,17 @@ class SegmentMaker(abjad.SegmentMaker):
 
             No final markup by default:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3570,7 +3570,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             With final markup:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     final_barline='|.',
             ...     final_markup=(['Madison, WI'], ['October 2016']),
             ...     final_markup_extra_offset=(-9, -2),
@@ -3578,12 +3578,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3810,17 +3810,17 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Colors unpitched notes by default:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3976,18 +3976,18 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Ignores unpitched notes:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4121,21 +4121,21 @@ class SegmentMaker(abjad.SegmentMaker):
             ...
             >>> figures = abjad.select(figures_)
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
             ...         minimum_width=abjad.Duration(1, 24),
             ...         ),
             ...     time_signatures=time_signatures,
             ...     )
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.RhythmBuilder(
             ...         rhythm_maker=figures,
             ...         ),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -4365,7 +4365,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...
             >>> figures = abjad.select(figures_)
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     ignore_unregistered_pitches=True,
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
@@ -4373,14 +4373,14 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     time_signatures=time_signatures,
             ...     )
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.RhythmBuilder(
             ...         rhythm_maker=figures,
             ...         ),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -4506,7 +4506,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Does not label clock time:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
             ...         (1, abjad.MetronomeMark((1, 8), 90)),
@@ -4514,12 +4514,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4690,7 +4690,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Does label clock time:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     label_clock_time=True,
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
@@ -4699,12 +4699,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs') # doctest: +SKIP
+            >>> result = maker.run(environment='docs') # doctest: +SKIP
             >>> lilypond_file, metadata = result # doctest: +SKIP
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4889,17 +4889,17 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Does not label stages by default:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5055,18 +5055,18 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Labels stage numbers:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     label_stages=True,
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5229,19 +5229,19 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Labels numbers with segment name:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     label_stages=True,
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
             >>> metadata = {'name': 'K'}
-            >>> result = segment_maker.run(
+            >>> result = maker.run(
             ...     environment='docs',
             ...     metadata=metadata,
             ...     )
@@ -5452,17 +5452,17 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Without metronome mark measure map:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5618,7 +5618,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             With metronome mark measure map:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
             ...         (1, abjad.MetronomeMark((1, 8), 90)),
@@ -5626,12 +5626,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5884,20 +5884,20 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Gets none:
 
-            >>> segment_maker = baca.SegmentMaker()
+            >>> maker = baca.SegmentMaker()
 
-            >>> segment_maker.score_template is None
+            >>> maker.score_template is None
             True
 
         ..  container:: example
 
             Gets score template:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     )
 
-            >>> segment_maker.score_template
+            >>> maker.score_template
             ViolinSoloScoreTemplate()
 
         Defaults to none.
@@ -5926,12 +5926,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Fills empty measures with multimeasure rests by default:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5999,13 +5999,13 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Fills empty measures with skips:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     skips_instead_of_rests=True,
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -6117,19 +6117,19 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Takes base string from segment name by default:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     label_stages=True,
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
             >>> metadata = {'name': 'K'}
-            >>> result = segment_maker.run(
+            >>> result = maker.run(
             ...     environment='docs',
             ...     metadata=metadata,
             ...     )
@@ -6295,20 +6295,20 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Takes base string from stage label property:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     label_stages=True,
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     stage_label_base_string='intermezzo',
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
             >>> metadata = {'name': 'K'}
-            >>> result = segment_maker.run(
+            >>> result = maker.run(
             ...     environment='docs',
             ...     metadata=metadata,
             ...     )
@@ -6496,18 +6496,18 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Does not transpose score by default:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     baca.pitches('E4 F4'),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -6608,17 +6608,17 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Without volta measure map.
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -6774,7 +6774,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             With volta measure map:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     volta_measure_map=baca.VoltaMeasureMap([
@@ -6782,12 +6782,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ]),
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 

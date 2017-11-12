@@ -6,7 +6,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
 
     ..  container:: example
 
-        >>> segment_maker = baca.SegmentMaker(
+        >>> maker = baca.SegmentMaker(
         ...     measures_per_stage=[2, 2],
         ...     score_template=baca.ViolinSoloScoreTemplate(),
         ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
@@ -16,13 +16,13 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> segment_maker(
+        >>> maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches('E4 F4'),
         ...     baca.make_even_runs(),
         ...     )
 
-        >>> result = segment_maker.run(environment='docs')
+        >>> result = maker.run(environment='docs')
         >>> lilypond_file, metadata = result
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 

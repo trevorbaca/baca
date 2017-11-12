@@ -112,20 +112,20 @@ class RegisterInterpolationCommand(Command):
         Holds register constant:
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=time_signatures,
             ...     )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-        >>> segment_maker(
+        >>> maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches(pitches),
         ...     baca.make_even_runs(),
         ...     baca.register(12, 12),
         ...     )
 
-        >>> result = segment_maker.run(environment='docs')
+        >>> result = maker.run(environment='docs')
         >>> lilypond_file, metadata = result
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -266,20 +266,20 @@ class RegisterInterpolationCommand(Command):
         Octave-transposes to a target interpolated from 12 down to 0:
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=time_signatures,
             ...     )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-        >>> segment_maker(
+        >>> maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches(pitches),
         ...     baca.make_even_runs(),
         ...     baca.register(12, 0),
         ...     )
 
-        >>> result = segment_maker.run(environment='docs')
+        >>> result = maker.run(environment='docs')
         >>> lilypond_file, metadata = result
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -420,20 +420,20 @@ class RegisterInterpolationCommand(Command):
         Octave-transposes to a target interpolated from 0 up to 12:
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=time_signatures,
             ...     )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-        >>> segment_maker(
+        >>> maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches(pitches),
         ...     baca.make_even_runs(),
         ...     baca.register(0, 12),
         ...     )
 
-        >>> result = segment_maker.run(environment='docs')
+        >>> result = maker.run(environment='docs')
         >>> lilypond_file, metadata = result
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -574,20 +574,20 @@ class RegisterInterpolationCommand(Command):
         Octave-transposes to a target interpolated from 12 down to -12:
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=time_signatures,
             ...     )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-        >>> segment_maker(
+        >>> maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches(pitches),
         ...     baca.make_even_runs(),
         ...     baca.register(12, -12),
         ...     )
 
-        >>> result = segment_maker.run(environment='docs')
+        >>> result = maker.run(environment='docs')
         >>> lilypond_file, metadata = result
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -728,20 +728,20 @@ class RegisterInterpolationCommand(Command):
         Octave-transposes to a target interpolated from -12 up to 12:
 
             >>> time_signatures = 4 * [(4, 8), (3, 8)]
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=time_signatures,
             ...     )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-        >>> segment_maker(
+        >>> maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches(pitches),
         ...     baca.make_even_runs(),
         ...     baca.register(-12, 12),
         ...     )
 
-        >>> result = segment_maker.run(environment='docs')
+        >>> result = maker.run(environment='docs')
         >>> lilypond_file, metadata = result
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 

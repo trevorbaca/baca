@@ -110,21 +110,21 @@ class NestBuilder(Builder):
         >>> time_signatures.append(contribution.time_signature)
         >>> selection = abjad.select(containers)
 
-        >>> segment_maker = baca.SegmentMaker(
+        >>> maker = baca.SegmentMaker(
         ...     score_template=baca.ViolinSoloScoreTemplate(),
         ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
         ...         minimum_width=abjad.Duration(1, 24),
         ...         ),
         ...     time_signatures=time_signatures,
         ...     )
-        >>> segment_maker(
+        >>> maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.RhythmBuilder(
         ...         rhythm_maker=selection,
         ...         ),
         ...     )
 
-        >>> result = segment_maker.run(environment='docs')
+        >>> result = maker.run(environment='docs')
         >>> lilypond_file, metadata = result
         >>> staff = lilypond_file[abjad.Staff]
         >>> abjad.override(staff).beam.positions = (-5.5, -5.5)

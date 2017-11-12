@@ -1616,12 +1616,12 @@ class LibraryTZ(abjad.AbjadObject):
 
             Makes all bar lines transparent:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.RhythmBuilder(
@@ -1635,7 +1635,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.transparent_bar_lines(),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1715,12 +1715,12 @@ class LibraryTZ(abjad.AbjadObject):
 
             Makes bar line before measure 1 transparent:
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.RhythmBuilder(
@@ -1734,7 +1734,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.transparent_bar_lines(baca.lm(1)),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 

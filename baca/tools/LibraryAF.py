@@ -604,12 +604,12 @@ class LibraryAF(abjad.AbjadObject):
 
         ..  container:: example
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     score_template=baca.ViolinSoloScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Violin Music Voice', 1),
             ...     baca.bar_extent((-4, 4), baca.lm(1)),
             ...     baca.bar_extent((-4, 4), baca.leaf(-1), after=True),
@@ -617,8 +617,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
-            >>> lilypond_file, metadata = result
+            >>> lilypond_file, _ = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -2414,15 +2413,15 @@ class LibraryAF(abjad.AbjadObject):
             ...         ),
             ...     )
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     allow_figure_names=False,
             ...     ignore_repeat_pitch_classes=True,
             ...     ignore_unregistered_pitches=True,
             ...     score_template=accumulator.score_template,
             ...     time_signatures=accumulator.time_signatures,
             ...     )
-            >>> accumulator.populate_segment_maker(segment_maker)
-            >>> result = segment_maker.run(environment='docs')
+            >>> accumulator.populate_segment_maker(maker)
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2535,15 +2534,15 @@ class LibraryAF(abjad.AbjadObject):
             ...         ),
             ...     )
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     allow_figure_names=False,
             ...     ignore_repeat_pitch_classes=True,
             ...     ignore_unregistered_pitches=True,
             ...     score_template=accumulator.score_template,
             ...     time_signatures=accumulator.time_signatures,
             ...     )
-            >>> accumulator.populate_segment_maker(segment_maker)
-            >>> result = segment_maker.run(environment='docs')
+            >>> accumulator.populate_segment_maker(maker)
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 

@@ -790,7 +790,7 @@ class ImbricateBuilder(Builder):
             >>> voice_2_selections.append(dictionary['Voice 2'])
             >>> time_signatures.append(contribution.time_signature)
 
-            >>> segment_maker = baca.SegmentMaker(
+            >>> maker = baca.SegmentMaker(
             ...     ignore_repeat_pitch_classes=True,
             ...     measures_per_stage=[1, 1],
             ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
@@ -799,32 +799,32 @@ class ImbricateBuilder(Builder):
             ...         ),
             ...     time_signatures=time_signatures,
             ...     )
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Music Voice 2', 1),
             ...     baca.RhythmBuilder(
             ...         rhythm_maker=voice_2_selections[0],
             ...         ),
             ...     )
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Music Voice 2', 2),
             ...     baca.RhythmBuilder(
             ...         rhythm_maker=voice_2_selections[1],
             ...         ),
             ...     )
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Music Voice 1', 1),
             ...     baca.RhythmBuilder(
             ...         rhythm_maker=voice_1_selections[0],
             ...         ),
             ...     )
-            >>> segment_maker(
+            >>> maker(
             ...     baca.scope('Music Voice 1', 2),
             ...     baca.RhythmBuilder(
             ...         rhythm_maker=voice_1_selections[1],
             ...         ),
             ...     )
 
-            >>> result = segment_maker.run(environment='docs')
+            >>> result = maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> voice = lilypond_file['Music Voice 2']
             >>> abjad.override(voice).beam.positions = (-5, -5)

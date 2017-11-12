@@ -12,19 +12,19 @@ class MicrotoneDeviationCommand(Command):
 
         With alternating up- and down-quatertones:
 
-        >>> segment_maker = baca.SegmentMaker(
+        >>> maker = baca.SegmentMaker(
         ...     score_template=baca.ViolinSoloScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> segment_maker(
+        >>> maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.pitches('E4'),
         ...     baca.make_even_runs(),
         ...     baca.deviation([0, 0.5, 0, -0.5]),
         ...     )
 
-        >>> result = segment_maker.run(environment='docs')
+        >>> result = maker.run(environment='docs')
         >>> lilypond_file, metadata = result
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 

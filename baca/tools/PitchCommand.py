@@ -11,18 +11,18 @@ class PitchCommand(Command):
 
         With pitch numbers:
 
-        >>> segment_maker = baca.SegmentMaker(
+        >>> maker = baca.SegmentMaker(
         ...     score_template=baca.ViolinSoloScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> segment_maker(
+        >>> maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.make_even_runs(),
         ...     baca.pitches([19, 13, 15, 16, 17, 23]),
         ...     )
 
-        >>> result = segment_maker.run(environment='docs')
+        >>> result = maker.run(environment='docs')
         >>> lilypond_file, metadata = result
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -108,18 +108,18 @@ class PitchCommand(Command):
 
         With pitch numbers:
 
-        >>> segment_maker = baca.SegmentMaker(
+        >>> maker = baca.SegmentMaker(
         ...     score_template=baca.ViolinSoloScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> segment_maker(
+        >>> maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.make_even_runs(),
         ...     baca.pitches('C4 F4 F#4 <B4 C#5> D5'), 
         ...     )
 
-        >>> result = segment_maker.run(environment='docs')
+        >>> result = maker.run(environment='docs')
         >>> lilypond_file, metadata = result
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -205,18 +205,18 @@ class PitchCommand(Command):
 
         Large chord:
 
-        >>> segment_maker = baca.SegmentMaker(
+        >>> maker = baca.SegmentMaker(
         ...     score_template=baca.ViolinSoloScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> segment_maker(
+        >>> maker(
         ...     baca.scope('Violin Music Voice', 1),
         ...     baca.make_even_runs(),
         ...     baca.pitches('<C4 D4 E4 F4 G4 A4 B4 C4>', repeats=True)
         ...     )
 
-        >>> result = segment_maker.run(environment='docs')
+        >>> result = maker.run(environment='docs')
         >>> lilypond_file, metadata = result
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
