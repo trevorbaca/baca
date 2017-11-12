@@ -21,7 +21,7 @@ class SegmentMaker(abjad.SegmentMaker):
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> lilypond_file, _ = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment='docs')
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -98,7 +98,7 @@ class SegmentMaker(abjad.SegmentMaker):
         ...     baca.make_even_runs(),
         ...     )
 
-        >>> lilypond_file, _ = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment='docs')
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -497,7 +497,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.label(abjad.label().with_indices()),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1895,7 +1895,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -2036,7 +2036,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).text_script.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2252,7 +2252,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -2398,7 +2398,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -2556,7 +2556,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -2722,7 +2722,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -2888,7 +2888,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> metadata = {'segment_count': 1}
-            >>> lilypond_file, _ = maker.run(
+            >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     metadata=metadata,
             ...     )
@@ -3057,7 +3057,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3224,7 +3224,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> metadata = {'segment_count': 1}
-            >>> lilypond_file, _ = maker.run(
+            >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     metadata=metadata,
             ...     )
@@ -3402,7 +3402,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3570,7 +3570,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3806,7 +3806,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3972,7 +3972,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4119,7 +4119,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
@@ -4363,7 +4363,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
@@ -4501,7 +4501,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4685,7 +4685,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs') # doctest: +SKIP
+            >>> lilypond_file = maker.run(environment='docs') # doctest: +SKIP
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  todo:: MAKE THIS WORK AGAIN.
@@ -4879,7 +4879,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5045,7 +5045,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5219,7 +5219,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> metadata = {'name': 'K'}
-            >>> lilypond_file, _ = maker.run(
+            >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     metadata=metadata,
             ...     )
@@ -5439,7 +5439,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5607,7 +5607,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5906,7 +5906,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5979,7 +5979,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6102,7 +6102,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> metadata = {'name': 'K'}
-            >>> lilypond_file, _ = maker.run(
+            >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     metadata=metadata,
             ...     )
@@ -6280,7 +6280,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> metadata = {'name': 'K'}
-            >>> lilypond_file, _ = maker.run(
+            >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     metadata=metadata,
             ...     )
@@ -6478,7 +6478,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.pitches('E4 F4'),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6588,7 +6588,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6756,7 +6756,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -7004,7 +7004,10 @@ class SegmentMaker(abjad.SegmentMaker):
         self._apply_layout_measure_map()
         self._update_metadata(environment=environment)
         self._print_segment_duration_()
-        return self._lilypond_file, self._metadata
+        if environment is None:
+            return self._lilypond_file, self._metadata
+        else:
+            return self._lilypond_file
 
     def validate_measure_count(self, measure_count):
         r'''Validates measure count.

@@ -22,7 +22,7 @@ class PitchCommand(Command):
         ...     baca.pitches([19, 13, 15, 16, 17, 23]),
         ...     )
 
-        >>> lilypond_file, _ = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment='docs')
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -118,7 +118,7 @@ class PitchCommand(Command):
         ...     baca.pitches('C4 F4 F#4 <B4 C#5> D5'), 
         ...     )
 
-        >>> lilypond_file, _ = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment='docs')
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -214,7 +214,7 @@ class PitchCommand(Command):
         ...     baca.pitches('<C4 D4 E4 F4 G4 A4 B4 C4>', repeats=True)
         ...     )
 
-        >>> lilypond_file, _ = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment='docs')
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

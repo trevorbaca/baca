@@ -22,7 +22,7 @@ class LabelCommand(Command):
         ...     baca.label(abjad.label().with_pitches(locale='us')),
         ...     )
 
-        >>> lilypond_file, _ = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment='docs')
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

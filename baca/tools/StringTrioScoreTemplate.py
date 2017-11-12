@@ -12,7 +12,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> lilypond_file, _ = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment='docs')
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

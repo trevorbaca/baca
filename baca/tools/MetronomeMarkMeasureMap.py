@@ -22,7 +22,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
         ...     baca.make_even_runs(),
         ...     )
 
-        >>> lilypond_file, _ = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment='docs')
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

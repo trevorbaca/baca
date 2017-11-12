@@ -22,7 +22,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
         ...     baca.pitches('E4', repeats=True),
         ...     )
 
-        >>> lilypond_file, _ = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment='docs')
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

@@ -824,7 +824,7 @@ class ImbricateBuilder(Builder):
             ...         ),
             ...     )
 
-            >>> lilypond_file, _ = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment='docs')
             >>> voice = lilypond_file['Music Voice 2']
             >>> abjad.override(voice).beam.positions = (-5, -5)
             >>> abjad.show(lilypond_file) # doctest: +SKIP

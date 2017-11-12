@@ -124,7 +124,7 @@ class NestBuilder(Builder):
         ...         ),
         ...     )
 
-        >>> lilypond_file, _ = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment='docs')
         >>> staff = lilypond_file[abjad.Staff]
         >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
