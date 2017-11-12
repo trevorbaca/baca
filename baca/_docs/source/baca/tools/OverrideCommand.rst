@@ -23,6 +23,7 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.OverrideCommand.OverrideCommand.after
       ~baca.tools.OverrideCommand.OverrideCommand.attribute_name
       ~baca.tools.OverrideCommand.OverrideCommand.attribute_value
       ~baca.tools.OverrideCommand.OverrideCommand.context_name
@@ -36,6 +37,8 @@ Bases
 
 Read-only properties
 --------------------
+
+.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.after
 
 .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.attribute_name
 

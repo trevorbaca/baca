@@ -167,6 +167,7 @@ class OverrideCommand(Command):
     ### CLASS ATTRIBUTES ###
 
     __slots__ = (
+        '_after',
         '_attribute_name',
         '_attribute_value',
         '_context_name',
@@ -177,6 +178,7 @@ class OverrideCommand(Command):
 
     def __init__(
         self,
+        after=None,
         context_name=None,
         grob_name=None,
         attribute_name=None,
@@ -184,6 +186,9 @@ class OverrideCommand(Command):
         selector='baca.leaves()',
         ):
         Command.__init__(self, selector=selector)
+        if after is not None:
+            after = bool(after)
+        self._after = after
         if context_name is not None:
             assert isinstance(context_name, str), repr(context_name)
         self._context_name = context_name
@@ -222,7 +227,10 @@ class OverrideCommand(Command):
             is_once=is_once,
             )
         string = string[1:]
-        override = abjad.LilyPondCommand(string)
+        format_slot = None
+        if self.after is True:
+            format_slot = 'after'
+        override = abjad.LilyPondCommand(string, format_slot=format_slot)
         abjad.attach(override, leaves[0])
         if is_once:
             return
@@ -236,6 +244,12 @@ class OverrideCommand(Command):
         abjad.attach(revert, leaves[-1])
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def after(self):
+        r'''Is true if command positions LilyPond command after selection.
+        '''
+        return self._after 
 
     @property
     def attribute_name(self):

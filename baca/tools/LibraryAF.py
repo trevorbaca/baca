@@ -599,10 +599,112 @@ class LibraryAF(abjad.AbjadObject):
         return baca.IndicatorCommand(indicators=articulations)
 
     @staticmethod
-    def bar_extent(pair, selector='baca.leaf(0)'):
+    def bar_extent(pair, selector='baca.leaf(0)', after=None):
         r'''Overrides bar line bar extent.
+
+        ..  container:: example
+
+            >>> segment_maker = baca.SegmentMaker(
+            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> segment_maker(
+            ...     baca.scope('Violin Music Voice', 1),
+            ...     baca.bar_extent((-4, 4), baca.lm(1)),
+            ...     baca.bar_extent((-4, 4), baca.leaf(-1), after=True),
+            ...     baca.make_even_runs(),
+            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+            ...     )
+
+            >>> result = segment_maker.run(docs=True)
+            >>> lilypond_file, metadata = result
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score])
+                \context Score = "Score" <<
+                    \tag violin
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalRests = "Global Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context GlobalSkips = "Global Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
+                                    \clef "treble"
+                                    e'8 [
+                                    d''8
+                                    f'8
+                                    e''8 ]
+                                }
+                                {
+                                    \override Staff.BarLine.bar-extent = #'(-4 . 4)
+                                    g'8 [
+                                    f''8
+                                    e'8 ]
+                                    \revert Staff.BarLine.bar-extent
+                                }
+                                {
+                                    d''8 [
+                                    f'8
+                                    e''8
+                                    g'8 ]
+                                }
+                                {
+                                    f''8 [
+                                    e'8
+                                    d''8 ]
+                                    \bar "|"
+                                    \once \override Staff.BarLine.bar-extent = #'(-4 . 4)
+                                }
+                            }
+                        }
+                    >>
+                >>
+
         '''
         return baca.OverrideCommand(
+            after=after,
             attribute_name='bar_extent',
             attribute_value=pair,
             context_name='Staff',
