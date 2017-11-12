@@ -824,7 +824,7 @@ class ImbricateBuilder(Builder):
             ...         ),
             ...     )
 
-            >>> result = segment_maker.run(docs=True)
+            >>> result = segment_maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> voice = lilypond_file['Music Voice 2']
             >>> abjad.override(voice).beam.positions = (-5, -5)

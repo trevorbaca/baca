@@ -20,7 +20,7 @@ class VoltaMeasureMap(abjad.AbjadObject):
         ...     baca.pitches('E4', repeats=True),
         ...     )
 
-        >>> result = segment_maker.run(docs=True)
+        >>> result = segment_maker.run(environment='docs')
         >>> lilypond_file, metadata = result
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 

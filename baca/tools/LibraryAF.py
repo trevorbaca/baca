@@ -617,7 +617,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     )
 
-            >>> result = segment_maker.run(docs=True)
+            >>> result = segment_maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2422,7 +2422,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_signatures=accumulator.time_signatures,
             ...     )
             >>> accumulator.populate_segment_maker(segment_maker)
-            >>> result = segment_maker.run(docs=True)
+            >>> result = segment_maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2543,7 +2543,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_signatures=accumulator.time_signatures,
             ...     )
             >>> accumulator.populate_segment_maker(segment_maker)
-            >>> result = segment_maker.run(docs=True)
+            >>> result = segment_maker.run(environment='docs')
             >>> lilypond_file, metadata = result
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 

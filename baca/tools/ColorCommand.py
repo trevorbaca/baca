@@ -142,7 +142,7 @@ class ColorCommand(Command):
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     )
 
-        >>> result = segment_maker.run(docs=True)
+        >>> result = segment_maker.run(environment='docs')
         >>> lilypond_file, metadata = result
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 

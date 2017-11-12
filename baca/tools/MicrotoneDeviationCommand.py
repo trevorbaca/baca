@@ -24,7 +24,7 @@ class MicrotoneDeviationCommand(Command):
         ...     baca.deviation([0, 0.5, 0, -0.5]),
         ...     )
 
-        >>> result = segment_maker.run(docs=True)
+        >>> result = segment_maker.run(environment='docs')
         >>> lilypond_file, metadata = result
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
