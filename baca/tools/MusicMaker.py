@@ -601,17 +601,17 @@ class MusicMaker(abjad.AbjadObject):
             container,
             color_unregistered_pitches=color_unregistered_pitches,
             )
-        specifiers = self._apply_tie_specifiers(selections, specifiers)
-        specifiers = self._apply_cluster_specifiers(selections, specifiers)
-        specifiers = self._apply_nesting_specifiers(selections, specifiers)
-        specifiers = self._apply_register_specifiers(selections, specifiers)
-        imbricated_selections, specifiers = self._apply_imbrication_specifiers(
+        specifiers = self._apply_tie_commands(selections, specifiers)
+        specifiers = self._apply_cluster_commands(selections, specifiers)
+        specifiers = self._apply_nesting_command(selections, specifiers)
+        specifiers = self._apply_register_commands(selections, specifiers)
+        imbricated_selections, specifiers = self._apply_imbrication_commands(
             container,
             specifiers,
             )
-        result = self._apply_color_specifiers(selections, specifiers)
+        result = self._apply_color_commands(selections, specifiers)
         specifiers, color_selector, color_selector_result = result
-        self._apply_remaining_specifiers(selections, specifiers)
+        self._apply_remaining_commands(selections, specifiers)
         self._label_figure_name_(container, figure_name, figure_index)
         self._annotate_collection_list(container, collections)
         self._annotate_deployment(
@@ -679,19 +679,17 @@ class MusicMaker(abjad.AbjadObject):
         for leaf in abjad.iterate(container).leaves(pitched=True):
             abjad.attach(self._repeat_pitch_allowed_string, leaf)
 
-    def _apply_cluster_specifiers(self, selections, specifiers):
+    def _apply_cluster_commands(self, selections, specifiers):
         assert self._all_are_selections(selections), repr(selections)
-        selection = abjad.select(selections)
         specifiers_ = []
         for specifier in specifiers:
             if isinstance(specifier, baca.ClusterCommand):
-                #specifier(selections)
-                specifier([selection])
+                specifier(selections)
             else:
                 specifiers_.append(specifier)
         return specifiers_
 
-    def _apply_color_specifiers(self, selections, specifiers):
+    def _apply_color_commands(self, selections, specifiers):
         assert self._all_are_selections(selections), repr(selections)
         specifiers_ = []
         color_selector, color_selector_result = None, None
@@ -703,18 +701,18 @@ class MusicMaker(abjad.AbjadObject):
                 specifiers_.append(specifier)
         return specifiers_, color_selector, color_selector_result
 
-    def _apply_imbrication_specifiers(self, container, specifiers):
+    def _apply_imbrication_commands(self, container, specifiers):
         specifiers_ = []
         imbricated_selections = {}
         for specifier in specifiers:
-            if not isinstance(specifier, baca.ImbricateBuilder):
+            if isinstance(specifier, baca.ImbricateBuilder):
+                imbricated_selection = specifier(container)
+                imbricated_selections.update(imbricated_selection)
+            else:
                 specifiers_.append(specifier)
-                continue
-            imbricated_selection = specifier(container)
-            imbricated_selections.update(imbricated_selection)
         return imbricated_selections, specifiers_
 
-    def _apply_nesting_specifiers(self, selections, specifiers):
+    def _apply_nesting_command(self, selections, specifiers):
         assert self._all_are_selections(selections), repr(selections)
         specifiers_ = []
         for specifier in specifiers:
@@ -735,7 +733,7 @@ class MusicMaker(abjad.AbjadObject):
                 specifiers_.append(specifier)
         return collections, specifiers_
 
-    def _apply_register_specifiers(self, selections, specifiers):
+    def _apply_register_commands(self, selections, specifiers):
         assert self._all_are_selections(selections), repr(selections)
         specifiers_ = []
         prototype = (
@@ -743,23 +741,22 @@ class MusicMaker(abjad.AbjadObject):
             baca.RegisterInterpolationCommand,
             baca.RegisterToOctaveCommand,
             )
-        selection = abjad.select(selections)
         for specifier in specifiers:
             if isinstance(specifier, prototype):
-                #specifier(selections)
-                specifier(selection)
+                specifier(selections)
             else:
                 specifiers_.append(specifier)
         return specifiers_
 
-    def _apply_remaining_specifiers(self, selections, specifiers):
+    def _apply_remaining_commands(self, selections, specifiers):
         assert self._all_are_selections(selections), repr(selections)
-        #selection = abjad.select(selections)
         for specifier in specifiers:
+            if not isinstance(specifier, rhythmos.BeamSpecifier):
+                assert isinstance(specifier, baca.Command), format(specifier)
+            # TODO: move to BeamSpecifier:
             if isinstance(specifier, rhythmos.BeamSpecifier):
                 specifier._detach_all_beams(selections)
             specifier(selections)
-            #specifier(selection)
 
     def _apply_rhythm_specifiers(
         self,
@@ -829,15 +826,13 @@ class MusicMaker(abjad.AbjadObject):
             value = state_manifest[key]
             setattr(self, key, value)
 
-    def _apply_tie_specifiers(self, selections, specifiers):
+    def _apply_tie_commands(self, selections, specifiers):
         assert self._all_are_selections(selections), repr(selections)
-        selection = abjad.select(selections)
         specifiers_ = []
         for specifier in specifiers:
             if (isinstance(specifier, baca.SpannerCommand) and
                 isinstance(specifier.spanner, abjad.Tie)):
-                #specifier(selections)
-                specifier(selection)
+                specifier(selections)
             else:
                 specifiers_.append(specifier)
         return specifiers_
