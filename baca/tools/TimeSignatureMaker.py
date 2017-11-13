@@ -144,9 +144,9 @@ class TimeSignatureMaker(abjad.AbjadObject):
 
     @property
     def stage_measure_map(self):
-        r'''Gets stage specifier.
+        r'''Gets stage measure map.
 
-        Returns stage specifier.
+        Returns stage measure map.
         '''
         return self._stage_measure_map
 

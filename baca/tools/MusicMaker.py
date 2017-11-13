@@ -576,7 +576,7 @@ class MusicMaker(abjad.AbjadObject):
                 ]
         else:
             collections = self._coerce_collections(collections)
-            collections, specifiers = self._apply_figure_pitch_specifiers(
+            collections, specifiers = self._apply_pitch_specifiers(
                 collections,
                 specifiers,
                 )
@@ -703,27 +703,16 @@ class MusicMaker(abjad.AbjadObject):
                 specifiers_.append(specifier)
         return specifiers_, color_selector, color_selector_result
 
-    def _apply_figure_pitch_specifiers(self, collections, specifiers):
-        prototype = (baca.CollectionList, list, abjad.Sequence)
-        assert isinstance(collections, prototype), repr(collections)
-        unused_specifiers = []
-        for specifier in specifiers:
-            if isinstance(specifier, baca.PitchSpecifier):
-                collections = specifier(collections)
-            else:
-                unused_specifiers.append(specifier)
-        return collections, unused_specifiers
-
     def _apply_imbrication_specifiers(self, container, specifiers):
-        unused_specifiers = []
+        specifiers_ = []
         imbricated_selections = {}
         for specifier in specifiers:
             if not isinstance(specifier, baca.ImbricateBuilder):
-                unused_specifiers.append(specifier)
+                specifiers_.append(specifier)
                 continue
             imbricated_selection = specifier(container)
             imbricated_selections.update(imbricated_selection)
-        return imbricated_selections, unused_specifiers
+        return imbricated_selections, specifiers_
 
     def _apply_nesting_specifiers(self, selections, specifiers):
         assert self._all_are_selections(selections), repr(selections)
@@ -734,6 +723,17 @@ class MusicMaker(abjad.AbjadObject):
             else:
                 specifiers_.append(specifier)
         return specifiers_
+
+    def _apply_pitch_specifiers(self, collections, specifiers):
+        prototype = (baca.CollectionList, list, abjad.Sequence)
+        assert isinstance(collections, prototype), repr(collections)
+        specifiers_ = []
+        for specifier in specifiers:
+            if isinstance(specifier, baca.PitchSpecifier):
+                collections = specifier(collections)
+            else:
+                specifiers_.append(specifier)
+        return collections, specifiers_
 
     def _apply_register_specifiers(self, selections, specifiers):
         assert self._all_are_selections(selections), repr(selections)
@@ -810,7 +810,7 @@ class MusicMaker(abjad.AbjadObject):
     def _apply_spacing_specifiers(self, collections, specifiers):
         prototype = (baca.CollectionList, list, abjad.Sequence)
         assert isinstance(collections, prototype), repr(collections)
-        unused_specifiers = []
+        specifiers_ = []
         prototype = (
             baca.ArpeggiationSpacingSpecifier,
             baca.ChordalSpacingSpecifier,
@@ -819,8 +819,8 @@ class MusicMaker(abjad.AbjadObject):
             if isinstance(specifier, prototype):
                 collections = specifier(collections)
             else:
-                unused_specifiers.append(specifier)
-        return collections, unused_specifiers
+                specifiers_.append(specifier)
+        return collections, specifiers_
 
     def _apply_state_manifest(self, state_manifest=None):
         state_manifest = state_manifest or {}
