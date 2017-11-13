@@ -95,7 +95,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(7) Divisions'
+    __documentation_section__ = '(6) Divisions'
 
     __slots__ = (
         '_cyclic',

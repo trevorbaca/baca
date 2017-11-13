@@ -16,7 +16,7 @@ class DesignMaker(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(6) Utilities'
+    __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
         '_result',

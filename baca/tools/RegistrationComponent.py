@@ -25,7 +25,7 @@ class RegistrationComponent(AbjadValueObject):
         '_target_octave_start_pitch',
         )
 
-    __documentation_section__ = '(6) Utilities'
+    __documentation_section__ = '(5) Utilities'
 
     ### INITIALIZER ###
 

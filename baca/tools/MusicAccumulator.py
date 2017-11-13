@@ -251,7 +251,7 @@ class MusicAccumulator(abjad.AbjadObject):
             rhythmos.BeamSpecifier(
                 beam_divisions_together=True,
                 ),
-            baca.RhythmSpecifier(
+            baca.PitchFirstRhythmCommand(
                 rhythm_maker=baca.CollectionRhythmMaker(
                     talea=rhythmos.Talea(
                         counts=[1],

@@ -97,7 +97,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(6) Utilities'
+    __documentation_section__ = '(5) Utilities'
 
     ### SPECIAL METHODS ###
 

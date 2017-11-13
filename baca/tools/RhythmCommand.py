@@ -26,8 +26,6 @@ class RhythmCommand(Command):
 
     ### CLASS ATTRIBUTES ###
 
-    __documentation_section__ = 'Commands'
-
     __slots__ = (
         '_division_maker',
         '_division_expression',

@@ -322,7 +322,7 @@ class ImbricationCommand(Command):
         ...         beam_rests=True,
         ...         ),
         ...     baca.staccati(),
-        ...     baca.RhythmSpecifier(
+        ...     baca.PitchFirstRhythmCommand(
         ...         rhythm_maker=baca.CollectionRhythmMaker(
         ...             talea=rhythmos.Talea(
         ...                 counts=[1],
@@ -534,7 +534,7 @@ class ImbricationCommand(Command):
             Works with pitch-classes:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.RhythmSpecifier(
+            ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.CollectionRhythmMaker(
             ...             talea=rhythmos.Talea(
             ...                 counts=[3],
@@ -1272,7 +1272,7 @@ class ImbricationCommand(Command):
         specifiers = self.specifiers or []
         selections = container[:]
         for specifier in specifiers:
-            if isinstance(specifier, baca.RhythmSpecifier):
+            if isinstance(specifier, baca.PitchFirstRhythmCommand):
                 continue
             if isinstance(specifier, baca.RhythmCommand):
                 continue
@@ -2394,7 +2394,7 @@ class ImbricationCommand(Command):
             Truncates ties:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.RhythmSpecifier(
+            ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.CollectionRhythmMaker(
             ...             talea=rhythmos.Talea(
             ...                 counts=[5],

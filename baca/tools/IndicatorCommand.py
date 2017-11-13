@@ -15,7 +15,7 @@ class IndicatorCommand(Command):
 
         >>> music_maker = baca.MusicMaker(
         ...     baca.IndicatorCommand([abjad.Fermata()]),
-        ...     baca.RhythmSpecifier(
+        ...     baca.PitchFirstRhythmCommand(
         ...         rhythm_maker=baca.CollectionRhythmMaker(
         ...             talea=rhythmos.Talea(
         ...                 counts=[5, 4, 4, 5, 4, 4, 4],
@@ -200,7 +200,7 @@ class IndicatorCommand(Command):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.IndicatorCommand([abjad.Fermata()]),
-            ...     baca.RhythmSpecifier(
+            ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.CollectionRhythmMaker(
             ...             talea=rhythmos.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],
@@ -257,7 +257,7 @@ class IndicatorCommand(Command):
             ...             abjad.Fermata(), None,
             ...             ],
             ...         ),
-            ...     baca.RhythmSpecifier(
+            ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.CollectionRhythmMaker(
             ...             talea=rhythmos.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],

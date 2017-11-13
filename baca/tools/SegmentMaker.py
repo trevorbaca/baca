@@ -3714,7 +3714,7 @@ class SegmentMaker(abjad.SegmentMaker):
             Colors unregistered pitches by default:
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.RhythmSpecifier(
+                ...     baca.PitchFirstRhythmCommand(
                 ...         rhythm_maker=baca.CollectionRhythmMaker(
                 ...             acciaccatura_specifiers=[
                 ...                 baca.AcciaccaturaSpecifier(),
@@ -3942,7 +3942,7 @@ class SegmentMaker(abjad.SegmentMaker):
             Ignores unregistered pitches:
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.RhythmSpecifier(
+                ...     baca.PitchFirstRhythmCommand(
                 ...         rhythm_maker=baca.CollectionRhythmMaker(
                 ...             acciaccatura_specifiers=[
                 ...                 baca.AcciaccaturaSpecifier(),

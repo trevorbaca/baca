@@ -1,20 +1,19 @@
 import abjad
 from abjad import rhythmmakertools as rhythmos
+from .Command import Command
 
 
-class RhythmSpecifier(abjad.AbjadObject):
-    r'''Rhythm specifier.
+class PitchFirstRhythmCommand(Command):
+    r'''Pitch-first rhythm command.
 
     ..  container:: example
 
-        >>> baca.RhythmSpecifier()
-        RhythmSpecifier()
+        >>> baca.PitchFirstRhythmCommand()
+        PitchFirstRhythmCommand()
 
     '''
 
     ### CLASS ATTRIBUTES ###
-
-    __documentation_section__ = '(3) Specifiers'
 
     __slots__ = (
         '_pattern',

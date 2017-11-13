@@ -189,7 +189,7 @@ class CollectionList(abjad.AbjadValueObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(6) Utilities'
+    __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
         '_collections',

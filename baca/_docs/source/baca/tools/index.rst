@@ -69,7 +69,6 @@ baca.tools
    LMRSpecifier
    PitchSpecifier
    RestAffixSpecifier
-   RhythmSpecifier
 
 .. autosummary::
    :nosignatures:
@@ -82,7 +81,6 @@ baca.tools
    LMRSpecifier
    PitchSpecifier
    RestAffixSpecifier
-   RhythmSpecifier
 
 --------
 
@@ -107,9 +105,11 @@ baca.tools
    OverrideCommand
    PiecewiseCommand
    PitchCommand
+   PitchFirstRhythmCommand
    RegisterCommand
    RegisterInterpolationCommand
    RegisterToOctaveCommand
+   RhythmCommand
    SettingCommand
    SpannerCommand
    StaffPositionCommand
@@ -133,9 +133,11 @@ baca.tools
    OverrideCommand
    PiecewiseCommand
    PitchCommand
+   PitchFirstRhythmCommand
    RegisterCommand
    RegisterInterpolationCommand
    RegisterToOctaveCommand
+   RhythmCommand
    SettingCommand
    SpannerCommand
    StaffPositionCommand
@@ -143,7 +145,7 @@ baca.tools
 
 --------
 
-(6) Utilities
+(5) Utilities
 -------------
 
 .. toctree::
@@ -254,7 +256,7 @@ baca.tools
 
 --------
 
-(7) Divisions
+(6) Divisions
 -------------
 
 .. toctree::
@@ -280,18 +282,3 @@ baca.tools
    PartitionDivisionCallback
    SplitByDurationsDivisionCallback
    SplitByRoundedRatiosDivisionCallback
-
---------
-
-Commands
---------
-
-.. toctree::
-   :hidden:
-
-   RhythmCommand
-
-.. autosummary::
-   :nosignatures:
-
-   RhythmCommand

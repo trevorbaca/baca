@@ -28,7 +28,7 @@ class ConstellationCircuit(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(6) Utilities'
+    __documentation_section__ = '(5) Utilities'
 
     CC1 = [
         [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]],
