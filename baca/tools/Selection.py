@@ -3363,6 +3363,221 @@ class Selection(abjad.Selection):
         result = self.runs().map(baca.with_next_leaf())
         return result.map(abjad.Run)
 
+    def stage(self, n, stage_measure_map):
+        r'''Selects group `n` of output grouped into stages.
+
+        ..  container:: example
+
+            Selects group 1 of leaves grouped into stages:
+
+            ..  container:: example
+
+                >>> stage_measure_map = baca.StageMeasureMap([1, 2, 1])
+                >>> staff = abjad.Staff("c'8 d' e' f' g' a' b' c''")
+                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
+                >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
+                >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
+                >>> abjad.show(staff) # doctest: +SKIP
+
+                >>> result = baca.select(staff).leaves()
+                >>> result = result.stage(1, stage_measure_map)
+
+                >>> result
+                Selection([Note("e'8"), Note("f'8"), Note("g'8"), Note("a'8"), Note("b'8")])
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().leaves()
+                >>> selector = selector.stage(1, stage_measure_map)
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Selection([Note("e'8"), Note("f'8"), Note("g'8"), Note("a'8"), Note("b'8")])
+
+                >>> selector.color(result)
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.show(staff) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff)
+                \new Staff \with {
+                    autoBeaming = ##f
+                } {
+                    \time 2/8
+                    c'8
+                    d'8
+                    \once \override Accidental.color = #green
+                    \once \override Beam.color = #green
+                    \once \override Dots.color = #green
+                    \once \override NoteHead.color = #green
+                    \once \override Stem.color = #green
+                    e'8
+                    \once \override Accidental.color = #green
+                    \once \override Beam.color = #green
+                    \once \override Dots.color = #green
+                    \once \override NoteHead.color = #green
+                    \once \override Stem.color = #green
+                    f'8
+                    \once \override Accidental.color = #green
+                    \once \override Beam.color = #green
+                    \once \override Dots.color = #green
+                    \once \override NoteHead.color = #green
+                    \once \override Stem.color = #green
+                    \time 3/8
+                    g'8
+                    \once \override Accidental.color = #green
+                    \once \override Beam.color = #green
+                    \once \override Dots.color = #green
+                    \once \override NoteHead.color = #green
+                    \once \override Stem.color = #green
+                    a'8
+                    \once \override Accidental.color = #green
+                    \once \override Beam.color = #green
+                    \once \override Dots.color = #green
+                    \once \override NoteHead.color = #green
+                    \once \override Stem.color = #green
+                    b'8
+                    \time 1/8
+                    c''8
+                }
+
+        Returns selector.
+        '''
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.stages(stage_measure_map)[n]
+
+    def stages(self, stage_measure_map):
+        r'''Groups previous output into stages.
+
+        ..  container:: example
+
+            Groups leaves into stages:
+
+            ..  container:: example
+
+                >>> stage_measure_map = baca.StageMeasureMap([1, 2, 1])
+                >>> staff = abjad.Staff("c'8 d' e' f' g' a' b' c''")
+                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
+                >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
+                >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
+                >>> abjad.show(staff) # doctest: +SKIP
+
+                >>> result = baca.select(staff).leaves()
+                >>> result = result.stages(stage_measure_map)
+
+                >>> for item in result:
+                ...     item
+                Selection([Note("c'8"), Note("d'8")])
+                Selection([Note("e'8"), Note("f'8"), Note("g'8"), Note("a'8"), Note("b'8")])
+                Selection([Note("c''8")])
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().leaves()
+                >>> selector = selector.stages(stage_measure_map)
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Selection([Note("c'8"), Note("d'8")])
+                Selection([Note("e'8"), Note("f'8"), Note("g'8"), Note("a'8"), Note("b'8")])
+                Selection([Note("c''8")])
+
+                >>> selector.color(result)
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.show(staff) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff)
+                \new Staff \with {
+                    autoBeaming = ##f
+                } {
+                    \once \override Accidental.color = #red
+                    \once \override Beam.color = #red
+                    \once \override Dots.color = #red
+                    \once \override NoteHead.color = #red
+                    \once \override Stem.color = #red
+                    \time 2/8
+                    c'8
+                    \once \override Accidental.color = #red
+                    \once \override Beam.color = #red
+                    \once \override Dots.color = #red
+                    \once \override NoteHead.color = #red
+                    \once \override Stem.color = #red
+                    d'8
+                    \once \override Accidental.color = #blue
+                    \once \override Beam.color = #blue
+                    \once \override Dots.color = #blue
+                    \once \override NoteHead.color = #blue
+                    \once \override Stem.color = #blue
+                    e'8
+                    \once \override Accidental.color = #blue
+                    \once \override Beam.color = #blue
+                    \once \override Dots.color = #blue
+                    \once \override NoteHead.color = #blue
+                    \once \override Stem.color = #blue
+                    f'8
+                    \once \override Accidental.color = #blue
+                    \once \override Beam.color = #blue
+                    \once \override Dots.color = #blue
+                    \once \override NoteHead.color = #blue
+                    \once \override Stem.color = #blue
+                    \time 3/8
+                    g'8
+                    \once \override Accidental.color = #blue
+                    \once \override Beam.color = #blue
+                    \once \override Dots.color = #blue
+                    \once \override NoteHead.color = #blue
+                    \once \override Stem.color = #blue
+                    a'8
+                    \once \override Accidental.color = #blue
+                    \once \override Beam.color = #blue
+                    \once \override Dots.color = #blue
+                    \once \override NoteHead.color = #blue
+                    \once \override Stem.color = #blue
+                    b'8
+                    \once \override Accidental.color = #red
+                    \once \override Beam.color = #red
+                    \once \override Dots.color = #red
+                    \once \override NoteHead.color = #red
+                    \once \override Stem.color = #red
+                    \time 1/8
+                    c''8
+                }
+
+        Returns selector.
+        '''
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        counts = []
+        for item in stage_measure_map:
+            if isinstance(item, int):
+                counts.append(item)
+            elif isinstance(item, abjad.Fermata):
+                counts.append(1)
+            else:
+                raise TypeError(item)
+        logical_measures = self.logical_measures()
+        if len(logical_measures) != sum(counts):
+            message = f'{len(logical_measures)} measures found;'
+            message += f' stage measure map gives {sum(counts)} instead.'
+            raise Exception(message)
+        logical_measures = baca.sequence(logical_measures)
+        parts = logical_measures.partition_by_counts(
+            counts,
+            overhang=abjad.Exact,
+            )
+        selections = []
+        for part in parts:
+            selection = []
+            for logical_measure in part:
+                selection.extend(logical_measure)
+            selection = baca.select(selection)
+            selections.append(selection)
+        return selections
+
     def skip(self, n):
         r'''Selects skip `n`.
         '''
