@@ -224,7 +224,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_color_repeat_pitch_classes',
         '_design_checker',
         '_fermata_start_offsets',
-        '_final_barline',
+        '_final_bar_line',
         '_final_markup',
         '_final_markup_extra_offset',
         '_hide_instrument_names',
@@ -321,7 +321,7 @@ class SegmentMaker(abjad.SegmentMaker):
         color_out_of_range_pitches=None,
         color_repeat_pitch_classes=None,
         design_checker=None,
-        final_barline=None,
+        final_bar_line=None,
         final_markup=None,
         final_markup_extra_offset=None,
         hide_instrument_names=None,
@@ -369,9 +369,9 @@ class SegmentMaker(abjad.SegmentMaker):
         self._cache = None
         self._design_checker = design_checker
         self._fermata_start_offsets = []
-        if final_barline not in (None, False, abjad.Exact):
-            assert isinstance(final_barline, str), repr(final_barline)
-        self._final_barline = final_barline
+        if final_bar_line not in (None, False, abjad.Exact):
+            assert isinstance(final_bar_line, str), repr(final_bar_line)
+        self._final_bar_line = final_bar_line
         if final_markup is not None:
             assert isinstance(final_markup, (tuple, list))
         self._final_markup = final_markup
@@ -655,19 +655,19 @@ class SegmentMaker(abjad.SegmentMaker):
 
     ### PRIVATE METHODS ###
 
-    def _add_final_barline(self):
-        if self.final_barline is False:
+    def _add_final_bar_line(self):
+        if self.final_bar_line is False:
             return
         abbreviation = '|'
         if self._is_last_segment():
             abbreviation = '|.'
-        if isinstance(self.final_barline, str):
-            abbreviation = self.final_barline
+        if isinstance(self.final_bar_line, str):
+            abbreviation = self.final_bar_line
         self._score.add_final_bar_line(
             abbreviation=abbreviation,
             to_each_voice=True,
             )
-        if self.final_barline == abjad.Exact:
+        if self.final_bar_line == abjad.Exact:
             selection = abjad.select(self._score)
             last_leaf = selection._get_component(abjad.Leaf, -1)
             command = 'override Score.BarLine.transparent = ##f'
@@ -2532,14 +2532,14 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._design_checker
 
     # TODO: write examples showing Score.BarLine.transparent = ##f
-    #       for mensurstriche final_barline=abjad.Exact
+    #       for mensurstriche final_bar_line=abjad.Exact
     @property
-    def final_barline(self):
-        r'''Gets final barline.
+    def final_bar_line(self):
+        r'''Gets final bar line.
 
         ..  container:: example
 
-            Nonlast segment sets final barline to ``'|'`` by default:
+            Nonlast segment sets final bar line to ``'|'`` by default:
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -2682,7 +2682,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            Last segment in score sets final barline to ``'|.'`` by default:
+            Last segment in score sets final bar line to ``'|.'`` by default:
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -2829,10 +2829,10 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            Nonlast segment sets final barline explicitly:
+            Nonlast segment sets final bar line explicitly:
 
             >>> maker = baca.SegmentMaker(
-            ...     final_barline='||',
+            ...     final_bar_line='||',
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
@@ -2973,10 +2973,10 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            Last segment in score sets final barline explicitly:
+            Last segment in score sets final bar line explicitly:
 
             >>> maker = baca.SegmentMaker(
-            ...     final_barline='||',
+            ...     final_bar_line='||',
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
@@ -3119,11 +3119,11 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        Set to barline string or none.
+        Set to bar line string or none.
 
-        Returns barline string or none.
+        Returns bar line string or none.
         '''
-        return self._final_barline
+        return self._final_bar_line
 
     @property
     def final_markup(self):
@@ -3277,7 +3277,7 @@ class SegmentMaker(abjad.SegmentMaker):
             With final markup:
 
             >>> maker = baca.SegmentMaker(
-            ...     final_barline='|.',
+            ...     final_bar_line='|.',
             ...     final_markup=(['Madison, WI'], ['October 2016']),
             ...     final_markup_extra_offset=(-9, -2),
             ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -6308,7 +6308,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._transpose_score_()
         self._attach_rehearsal_mark()
         self._comment_measure_numbers()
-        self._add_final_barline()
+        self._add_final_bar_line()
         self._add_final_markup()
         self._color_unregistered_pitches()
         self._color_unpitched_notes()

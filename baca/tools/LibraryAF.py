@@ -606,6 +606,9 @@ class LibraryAF(abjad.AbjadObject):
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
+            ...         minimum_width=(1, 12),
+            ...         ),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -627,16 +630,24 @@ class LibraryAF(abjad.AbjadObject):
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
                             % measure 1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)
                             \time 4/8
+                            \newSpacingSection
                             s1 * 1/2
                             % measure 2
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)
                             \time 3/8
+                            \newSpacingSection
                             s1 * 3/8
                             % measure 3
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)
                             \time 4/8
+                            \newSpacingSection
                             s1 * 1/2
                             % measure 4
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)
                             \time 3/8
+                            \newSpacingSection
                             s1 * 3/8
                         }
                     >>

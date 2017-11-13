@@ -30,7 +30,7 @@ Bases
       ~baca.tools.SegmentMaker.SegmentMaker.color_repeat_pitch_classes
       ~baca.tools.SegmentMaker.SegmentMaker.copy_rhythm
       ~baca.tools.SegmentMaker.SegmentMaker.design_checker
-      ~baca.tools.SegmentMaker.SegmentMaker.final_barline
+      ~baca.tools.SegmentMaker.SegmentMaker.final_bar_line
       ~baca.tools.SegmentMaker.SegmentMaker.final_markup
       ~baca.tools.SegmentMaker.SegmentMaker.final_markup_extra_offset
       ~baca.tools.SegmentMaker.SegmentMaker.hide_instrument_names
@@ -87,7 +87,7 @@ Read-only properties
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.design_checker
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.final_barline
+.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.final_bar_line
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.final_markup
 
