@@ -70,7 +70,6 @@ baca.tools
    PitchSpecifier
    RestAffixSpecifier
    RhythmSpecifier
-   StageSliceSpecifier
 
 .. autosummary::
    :nosignatures:
@@ -84,7 +83,6 @@ baca.tools
    PitchSpecifier
    RestAffixSpecifier
    RhythmSpecifier
-   StageSliceSpecifier
 
 --------
 

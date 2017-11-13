@@ -3576,7 +3576,7 @@ class Selection(abjad.Selection):
                 selection.extend(logical_measure)
             selection = baca.select(selection)
             selections.append(selection)
-        return selections
+        return baca.select(selections)
 
     def skip(self, n):
         r'''Selects skip `n`.

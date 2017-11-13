@@ -1592,27 +1592,19 @@ class SegmentMaker(abjad.SegmentMaker):
         if not self.volta_measure_map:
             return
         context = self._score['Global Skips']
-        skips = abjad.select(context).components(abjad.Skip)
-        for specifier in self.volta_measure_map:
-            if isinstance(specifier, tuple):
-                assert len(specifier) == 2, repr(specifier)
-                measure_start_number = specifier[0]
-                measure_stop_number = specifier[-1]
-            elif isinstance(specifier, baca.StageSliceSpecifier):
-                start = specifier.start
-                stop = specifier.stop
-                pair = self._stage_number_to_measure_indices(start)
-                measure_start_number, _ = pair
-                stop -= 1
-                pair = self._stage_number_to_measure_indices(stop)
-                measure_stop_number = pair[-1] + 1
+        skips = baca.select(context).skips()
+        for item in self.volta_measure_map:
+            if isinstance(item, tuple):
+                assert len(item) == 2, repr(item)
+                start, stop = item
+                skips_ = skips[start:stop]
+            elif isinstance(item, abjad.Expression):
+                skips_ = item(skips).flatten()
             else:
-                raise TypeError(specifier)
-            volta_skips = skips[measure_start_number:measure_stop_number]
+                raise TypeError(item)
             container = abjad.Container()
-            abjad.mutate(volta_skips).wrap(container)
-            command = abjad.Repeat()
-            abjad.attach(command, container)
+            abjad.mutate(skips_).wrap(container)
+            abjad.attach(abjad.Repeat(), container)
 
     def _populate_global_skips(self):
         context = self._score['Global Skips']
