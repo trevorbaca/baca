@@ -11,7 +11,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
         Default acciaccatura specifier:
 
-        >>> rhythm_maker = baca.CollectionRhythmMaker(
+        >>> rhythm_maker = baca.PitchFirstRhythmMaker(
         ...     acciaccatura_specifiers=[
         ...         baca.AcciaccaturaSpecifier()
         ...         ],
@@ -172,7 +172,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             Sixteenth-note acciaccaturas by default:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier()
             ...         ],
@@ -253,7 +253,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             Eighth-note acciaccaturas:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             durations=[(1, 8)],
@@ -348,7 +348,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             As many acciaccaturas as possible per collection:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier()
             ...         ],
@@ -429,7 +429,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             At most two acciaccaturas at the beginning of every collection:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             lmr_specifier=baca.LMRSpecifier(
@@ -516,7 +516,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             At most two acciaccaturas at the end of every collection:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             lmr_specifier=baca.LMRSpecifier(
@@ -604,7 +604,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             At most two acciaccaturas at the beginning of every collection and
             then at most two acciaccaturas at the end of every collection:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             lmr_specifier=baca.LMRSpecifier(
@@ -696,7 +696,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             As many acciaccaturas as possible in the middle of every collection:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             lmr_specifier=baca.LMRSpecifier(
@@ -791,7 +791,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             Applies to all collections by default:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier()
             ...         ],
@@ -872,7 +872,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             Applies to last collection:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             pattern=abjad.index_last(1),
@@ -947,7 +947,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             Applies to every other collection:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             pattern=abjad.index([1], 2),

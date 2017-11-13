@@ -17,7 +17,7 @@ class ColorCommand(Command):
         >>> music_maker = baca.MusicMaker(
         ...     baca.color(),
         ...     baca.PitchFirstRhythmCommand(
-        ...         rhythm_maker=baca.CollectionRhythmMaker(
+        ...         rhythm_maker=baca.PitchFirstRhythmMaker(
         ...             talea=rhythmos.Talea(
         ...                 counts=[5, 4, 4, 5, 4, 4, 4],
         ...                 denominator=32,

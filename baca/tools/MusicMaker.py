@@ -969,7 +969,7 @@ class MusicMaker(abjad.AbjadObject):
     @staticmethod
     def _make_default_rhythm_specifier():
         return baca.PitchFirstRhythmCommand(
-            rhythm_maker=baca.CollectionRhythmMaker(),
+            rhythm_maker=baca.PitchFirstRhythmMaker(),
             )
 
     def _make_state_manifest(self):
@@ -2006,7 +2006,7 @@ class MusicMaker(abjad.AbjadObject):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
-            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             talea=rhythmos.Talea(
             ...                 counts=[1],
             ...                 denominator=8,
@@ -2015,7 +2015,7 @@ class MusicMaker(abjad.AbjadObject):
             ...         ),
             ...     baca.PitchFirstRhythmCommand(
             ...         pattern=abjad.index_first(1),
-            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             talea=rhythmos.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
@@ -2061,7 +2061,7 @@ class MusicMaker(abjad.AbjadObject):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
-            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             talea=rhythmos.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
@@ -2070,7 +2070,7 @@ class MusicMaker(abjad.AbjadObject):
             ...         ),
             ...     baca.PitchFirstRhythmCommand(
             ...         pattern=abjad.Pattern(indices=[0, -1]),
-            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             talea=rhythmos.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
@@ -2116,7 +2116,7 @@ class MusicMaker(abjad.AbjadObject):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
-            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             talea=rhythmos.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
@@ -2126,7 +2126,7 @@ class MusicMaker(abjad.AbjadObject):
             ...         ),
             ...     baca.PitchFirstRhythmCommand(
             ...         pattern=abjad.Pattern(indices=[0, -1]),
-            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             talea=rhythmos.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
@@ -2173,7 +2173,7 @@ class MusicMaker(abjad.AbjadObject):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
-            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             talea=rhythmos.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
@@ -2182,7 +2182,7 @@ class MusicMaker(abjad.AbjadObject):
             ...         ),
             ...     baca.PitchFirstRhythmCommand(
             ...         pattern=abjad.Pattern(indices=[0, -1]),
-            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             talea=rhythmos.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
@@ -2230,7 +2230,7 @@ class MusicMaker(abjad.AbjadObject):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
-            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             talea=rhythmos.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
@@ -2239,7 +2239,7 @@ class MusicMaker(abjad.AbjadObject):
             ...         ),
             ...     baca.PitchFirstRhythmCommand(
             ...         pattern=abjad.Pattern(indices=[0, -1]),
-            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             talea=rhythmos.Talea(
             ...                 counts=[1],
             ...                 denominator=16,

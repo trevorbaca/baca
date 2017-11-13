@@ -34,22 +34,22 @@ baca.tools
 .. toctree::
    :hidden:
 
-   CollectionRhythmMaker
    FloatingSelection
    MusicAccumulator
    MusicContribution
    MusicMaker
+   PitchFirstRhythmMaker
    SegmentContribution
    SegmentMaker
 
 .. autosummary::
    :nosignatures:
 
-   CollectionRhythmMaker
    FloatingSelection
    MusicAccumulator
    MusicContribution
    MusicMaker
+   PitchFirstRhythmMaker
    SegmentContribution
    SegmentMaker
 
@@ -153,7 +153,6 @@ baca.tools
 
    Coat
    CollectionList
-   CommandWrapper
    Constellation
    ConstellationCircuit
    Counter
@@ -206,7 +205,6 @@ baca.tools
 
    Coat
    CollectionList
-   CommandWrapper
    Constellation
    ConstellationCircuit
    Counter
@@ -253,6 +251,21 @@ baca.tools
    VoltaMeasureMap
    WellformednessManager
    ZaggedPitchClassMaker
+
+--------
+
+(6) Commands
+------------
+
+.. toctree::
+   :hidden:
+
+   CommandWrapper
+
+.. autosummary::
+   :nosignatures:
+
+   CommandWrapper
 
 --------
 

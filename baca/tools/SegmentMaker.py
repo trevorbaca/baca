@@ -3715,7 +3715,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> music_maker = baca.MusicMaker(
                 ...     baca.PitchFirstRhythmCommand(
-                ...         rhythm_maker=baca.CollectionRhythmMaker(
+                ...         rhythm_maker=baca.PitchFirstRhythmMaker(
                 ...             acciaccatura_specifiers=[
                 ...                 baca.AcciaccaturaSpecifier(),
                 ...                 ],
@@ -3943,7 +3943,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> music_maker = baca.MusicMaker(
                 ...     baca.PitchFirstRhythmCommand(
-                ...         rhythm_maker=baca.CollectionRhythmMaker(
+                ...         rhythm_maker=baca.PitchFirstRhythmMaker(
                 ...             acciaccatura_specifiers=[
                 ...                 baca.AcciaccaturaSpecifier(),
                 ...                 ],

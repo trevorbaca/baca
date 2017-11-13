@@ -323,7 +323,7 @@ class ImbricationCommand(Command):
         ...         ),
         ...     baca.staccati(),
         ...     baca.PitchFirstRhythmCommand(
-        ...         rhythm_maker=baca.CollectionRhythmMaker(
+        ...         rhythm_maker=baca.PitchFirstRhythmMaker(
         ...             talea=rhythmos.Talea(
         ...                 counts=[1],
         ...                 denominator=16,
@@ -535,7 +535,7 @@ class ImbricationCommand(Command):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
-            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             talea=rhythmos.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
@@ -2395,7 +2395,7 @@ class ImbricationCommand(Command):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
-            ...         rhythm_maker=baca.CollectionRhythmMaker(
+            ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             talea=rhythmos.Talea(
             ...                 counts=[5],
             ...                 denominator=32,

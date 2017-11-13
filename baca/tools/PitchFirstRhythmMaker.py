@@ -5,7 +5,7 @@ import math
 from abjad import rhythmmakertools as rhythmos
 
 
-class CollectionRhythmMaker(rhythmos.RhythmMaker):
+class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
     r'''Collection rhythm-maker.
 
     >>> from abjad import rhythmmakertools as rhythmos
@@ -14,7 +14,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
         Sixteenths and eighths:
 
-        >>> rhythm_maker = baca.CollectionRhythmMaker(
+        >>> rhythm_maker = baca.PitchFirstRhythmMaker(
         ...     talea=rhythmos.Talea(
         ...         counts=[1, 1, 2],
         ...         denominator=16,
@@ -186,7 +186,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Without state manifest:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
@@ -230,7 +230,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             With state manifest:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
@@ -418,7 +418,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Set exponent less than 1 for decreasing durations:
 
-            >>> class_ = baca.CollectionRhythmMaker
+            >>> class_ = baca.PitchFirstRhythmMaker
             >>> durations = 4 * [abjad.Duration(1)]
             >>> result = class_._make_accelerando_multipliers(
             ...     durations,
@@ -435,7 +435,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Set exponent to 1 for trivial multipliers:
 
-            >>> class_ = baca.CollectionRhythmMaker
+            >>> class_ = baca.PitchFirstRhythmMaker
             >>> durations = 4 * [abjad.Duration(1)]
             >>> result = class_._make_accelerando_multipliers(durations, 1)
             >>> for multiplier in result: multiplier
@@ -449,7 +449,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Set exponent greater than 1 for increasing durations:
 
-            >>> class_ = baca.CollectionRhythmMaker
+            >>> class_ = baca.PitchFirstRhythmMaker
             >>> durations = 4 * [abjad.Duration(1)]
             >>> result = class_._make_accelerando_multipliers(
             ...     durations,
@@ -731,7 +731,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Graced quarters:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier()
             ...         ],
@@ -812,7 +812,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Graced rests:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             lmr_specifier=baca.LMRSpecifier()
@@ -907,7 +907,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Defaults to none:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker()
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker()
             >>> rhythm_maker.acciaccatura_specifiers is None
             True
 
@@ -925,7 +925,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Beams each division by default:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
@@ -973,7 +973,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Beams divisions together:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     beam_specifier=rhythmos.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
@@ -1042,7 +1042,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Beams nothing:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     beam_specifier=rhythmos.BeamSpecifier(
             ...         beam_each_division=False,
             ...         ),
@@ -1089,7 +1089,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Does not beam rests:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
@@ -1137,7 +1137,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Does beam rests:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     beam_specifier=rhythmos.BeamSpecifier(
             ...         beam_rests=True,
             ...     ),
@@ -1188,7 +1188,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Beams rests with stemlets:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     beam_specifier=rhythmos.BeamSpecifier(
             ...         beam_rests=True,
             ...         stemlet_length=0.75,
@@ -1246,7 +1246,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Defaults to none:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker()
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker()
             >>> rhythm_maker.beam_specifier is None
             True
 
@@ -1264,7 +1264,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             No division masks:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
@@ -1304,7 +1304,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Silences every other division:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     division_masks=[
             ...         abjad.silence([1], 2),
             ...         ],
@@ -1341,7 +1341,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Sustains every other division:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     division_masks=[
             ...         abjad.sustain([1], 2),
             ...         ],
@@ -1378,7 +1378,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Defaults to none:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker()
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker()
             >>> rhythm_maker.division_masks is None
             True
 
@@ -1397,7 +1397,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
             Spells nonassignable durations with monontonically decreasing
             durations by default:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     talea=rhythmos.Talea(
             ...         counts=[4, 4, 5],
             ...         denominator=32,
@@ -1441,7 +1441,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
             Spells nonassignable durations with monontonically increasing
             durations:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     duration_specifier=rhythmos.DurationSpecifier(
             ...         decrease_monotonic=False,
             ...         ),
@@ -1487,7 +1487,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Defaults to none:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker()
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker()
             >>> rhythm_maker.duration_specifier is None
             True
 
@@ -1505,7 +1505,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Silences every third logical tie:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     logical_tie_masks=[
             ...         abjad.silence([2], 3),
             ...         ],
@@ -1548,7 +1548,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Silences first and last logical ties:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     logical_tie_masks=[
             ...         abjad.silence([0]),
             ...         abjad.silence([-1]),
@@ -1592,7 +1592,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Defaults to none:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker()
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker()
             >>> rhythm_maker.logical_tie_masks is None
             True
 
@@ -1610,7 +1610,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             With rests:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     beam_specifier=rhythmos.BeamSpecifier(
             ...         beam_rests=True,
             ...         stemlet_length=1.5,
@@ -1663,7 +1663,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             With very large nonassignable counts:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     talea=rhythmos.Talea(
             ...         counts=[29],
             ...         denominator=64,
@@ -1697,7 +1697,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Defaults to even sixteenths:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker()
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker()
             >>> rhythm_maker.talea
             Talea(counts=[1], denominator=16)
 
@@ -1715,7 +1715,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Ties across divisions with matching pitches:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
@@ -1758,7 +1758,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Ties consecutive notes with matching pitches:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
@@ -1801,7 +1801,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Defaults to none:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker()
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker()
             >>> rhythm_maker.tie_specifier is None
             True
 
@@ -1819,7 +1819,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             One extra count per division:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     time_treatments=[1],
             ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
@@ -1863,7 +1863,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             One missing count per division:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     time_treatments=[-1],
             ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
@@ -1906,7 +1906,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Accelerandi:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     time_treatments=['accel'],
             ...     talea=rhythmos.Talea(
             ...         counts=[1],
@@ -2139,7 +2139,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Ritardandi:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     time_treatments=['rit'],
             ...     talea=rhythmos.Talea(
             ...         counts=[1],
@@ -2372,7 +2372,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Accelerandi followed by ritardandi:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     time_treatments=['accel', 'rit'],
             ...     talea=rhythmos.Talea(
             ...         counts=[1],
@@ -2569,7 +2569,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Mixed accelerandi, ritardandi and prolation:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     time_treatments=['accel', -2, 'rit'],
             ...     talea=rhythmos.Talea(
             ...         counts=[1],
@@ -2784,7 +2784,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Specified by tuplet multiplier:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     time_treatments=[abjad.Ratio((3, 2))],
             ...     talea=rhythmos.Talea(
             ...         counts=[1],
@@ -2860,7 +2860,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Segment durations equal to a quarter:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     time_treatments=[abjad.Duration(1, 4)],
             ...     talea=rhythmos.Talea(
             ...         counts=[1],
@@ -2936,7 +2936,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
             Segment durations alternating between a quarter and a dotted
             quarter:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     time_treatments=[abjad.Duration(1, 4), abjad.Duration(3, 8)],
             ...     talea=rhythmos.Talea(
             ...         counts=[1, 1, 2],
@@ -3022,7 +3022,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Defaults to none:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker()
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker()
             >>> rhythm_maker.time_treatments is None
             True
 
@@ -3043,7 +3043,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Does not simplify redudant tuplets by default:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     talea=rhythmos.Talea(
             ...         counts=[3],
             ...         denominator=16,
@@ -3093,7 +3093,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Simplifies redundant tuplets:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker(
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     talea=rhythmos.Talea(
             ...         counts=[3],
             ...         denominator=16,
@@ -3146,7 +3146,7 @@ class CollectionRhythmMaker(rhythmos.RhythmMaker):
 
             Defaults to none:
 
-            >>> rhythm_maker = baca.CollectionRhythmMaker()
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker()
             >>> rhythm_maker.tuplet_specifier is None
             True
 
