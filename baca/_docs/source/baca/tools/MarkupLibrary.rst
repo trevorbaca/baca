@@ -61,7 +61,6 @@ Bases
       ~baca.tools.MarkupLibrary.MarkupLibrary.boxed
       ~baca.tools.MarkupLibrary.MarkupLibrary.boxed_lines
       ~baca.tools.MarkupLibrary.MarkupLibrary.boxed_repeat_count
-      ~baca.tools.MarkupLibrary.MarkupLibrary.boxed_specifier
       ~baca.tools.MarkupLibrary.MarkupLibrary.clicks_per_second
       ~baca.tools.MarkupLibrary.MarkupLibrary.col_legno_battuto
       ~baca.tools.MarkupLibrary.MarkupLibrary.delicatiss
@@ -255,8 +254,6 @@ Class & static methods
 .. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.boxed_lines
 
 .. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.boxed_repeat_count
-
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.boxed_specifier
 
 .. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.clicks_per_second
 

@@ -10,7 +10,7 @@ class VoltaMeasureMap(abjad.AbjadObject):
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     volta_measure_map=baca.VoltaMeasureMap([
-        ...         baca.MeasureSpecifier(1, 3),
+        ...         (1, 3),
         ...         ]),
         ...     )
 
@@ -89,12 +89,12 @@ class VoltaMeasureMap(abjad.AbjadObject):
         ..  container:: example
 
             >>> voltas = baca.VoltaMeasureMap([
-            ...     baca.MeasureSpecifier(2, 4),
-            ...     baca.MeasureSpecifier(16, 18),
+            ...     (2, 4),
+            ...     (16, 18),
             ...     ])
 
             >>> voltas[1]
-            MeasureSpecifier(start=16, stop=18)
+            (16, 18)
 
         Returns item.
         '''
@@ -109,14 +109,14 @@ class VoltaMeasureMap(abjad.AbjadObject):
         ..  container:: example
 
             >>> voltas = baca.VoltaMeasureMap([
-            ...     baca.MeasureSpecifier(2, 4),
-            ...     baca.MeasureSpecifier(16, 18),
+            ...     (2, 4),
+            ...     (16, 18),
             ...     ])
 
             >>> for item in voltas.items:
             ...     item
-            MeasureSpecifier(start=2, stop=4)
-            MeasureSpecifier(start=16, stop=18)
+            (2, 4)
+            (16, 18)
 
         Returns items.
         '''

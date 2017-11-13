@@ -67,7 +67,6 @@ baca.tools
    ChordalSpacingSpecifier
    HorizontalSpacingSpecifier
    LMRSpecifier
-   MeasureSpecifier
    PitchSpecifier
    RestAffixSpecifier
    RhythmSpecifier
@@ -83,7 +82,6 @@ baca.tools
    ChordalSpacingSpecifier
    HorizontalSpacingSpecifier
    LMRSpecifier
-   MeasureSpecifier
    PitchSpecifier
    RestAffixSpecifier
    RhythmSpecifier

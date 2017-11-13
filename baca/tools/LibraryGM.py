@@ -1233,9 +1233,7 @@ class LibraryGM(abjad.AbjadObject):
         r'''Makes notes; rewrites meter.
         '''
         if repeat_ties:
-            tie_specifier = rhythmos.TieSpecifier(
-                repeat_ties=True,
-                )
+            tie_specifier = rhythmos.TieSpecifier(repeat_ties=True)
         else:
             tie_specifier = None
         return baca.RhythmBuilder(
@@ -1342,13 +1340,12 @@ class LibraryGM(abjad.AbjadObject):
     def make_tied_repeated_durations(durations):
         r'''Makes tied repeated durations.
         '''
-        specifier = baca.make_repeated_durations(durations)
-        specifier = abjad.new(
-            specifier,
+        builder = baca.make_repeated_durations(durations)
+        return abjad.new(
+            builder,
             rewrite_meter=False,
             rhythm_maker__tie_specifier__tie_across_divisions=True,
             )
-        return specifier
 
     @staticmethod
     def marcati(selector='baca.pheads()'):

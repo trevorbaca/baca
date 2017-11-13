@@ -1598,9 +1598,10 @@ class SegmentMaker(abjad.SegmentMaker):
         context = self._score['Global Skips']
         skips = abjad.select(context).components(abjad.Skip)
         for specifier in self.volta_measure_map:
-            if isinstance(specifier, baca.MeasureSpecifier):
-                measure_start_number = specifier.start
-                measure_stop_number = specifier.stop
+            if isinstance(specifier, tuple):
+                assert len(specifier) == 2, repr(specifier)
+                measure_start_number = specifier[0]
+                measure_stop_number = specifier[-1]
             elif isinstance(specifier, baca.StageSliceSpecifier):
                 start = specifier.start
                 stop = specifier.stop
@@ -6084,7 +6085,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     volta_measure_map=baca.VoltaMeasureMap([
-            ...         baca.MeasureSpecifier(1, 2),
+            ...         (1, 2),
             ...         ]),
             ...     )
 

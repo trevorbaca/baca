@@ -347,15 +347,6 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def boxed_specifier(string, selector=None):
-        markup = abjad.Markup(string, direction=abjad.Up)
-        markup = markup.box().override(('box-padding', 0.5))
-        return baca.markup(
-            markup,
-            selector=selector,
-            )
-
-    @staticmethod
     def clicks_per_second(lower, upper, selector=None):
         string = f'{lower}-{upper} clicks/sec.'
         return baca.markup(
