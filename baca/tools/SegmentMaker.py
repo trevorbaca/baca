@@ -1544,11 +1544,8 @@ class SegmentMaker(abjad.SegmentMaker):
             self._assert_valid_stage_number(stage_number)
             result = self._stage_number_to_measure_indices(stage_number)
             start_measure_index, stop_measure_index = result
-            start_measure = context[start_measure_index]
-            assert isinstance(start_measure, abjad.Measure), repr(
-                start_measure)
-            start_skip = start_measure[0]
-            assert isinstance(start_skip, abjad.Skip), start_skip
+            start_skip = context[start_measure_index]
+            assert isinstance(start_skip, abjad.Skip)
             command = abjad.LilyPondCommand('newSpacingSection')
             abjad.attach(command, start_skip)
             moment = abjad.SchemeMoment(duration)
