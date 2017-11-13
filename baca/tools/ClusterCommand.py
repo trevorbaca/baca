@@ -373,22 +373,14 @@ class ClusterCommand(Command):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        {
-                            \time 4/8
-                            s1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            s1 * 3/8
-                        }
-                        {
-                            \time 4/8
-                            s1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            s1 * 3/8
-                        }
+                        \time 4/8
+                        s1 * 1/2
+                        \time 3/8
+                        s1 * 3/8
+                        \time 4/8
+                        s1 * 1/2
+                        \time 3/8
+                        s1 * 3/8
                     }
                 >>
                 \context MusicContext = "Music Context" <<
@@ -579,22 +571,14 @@ class ClusterCommand(Command):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -703,22 +687,14 @@ class ClusterCommand(Command):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -819,22 +795,14 @@ class ClusterCommand(Command):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -945,22 +913,14 @@ class ClusterCommand(Command):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -1061,22 +1021,14 @@ class ClusterCommand(Command):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -1178,22 +1130,14 @@ class ClusterCommand(Command):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<

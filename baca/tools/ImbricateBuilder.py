@@ -835,18 +835,14 @@ class ImbricateBuilder(Builder):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 7/16
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 7/16
-                            }
-                            {
-                                \time 1/4
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 1/4
-                            }
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 7/16
+                            \newSpacingSection
+                            s1 * 7/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 1/4
+                            \newSpacingSection
+                            s1 * 1/4
                         }
                     >>
                     \context MusicContext = "Music Context" <<

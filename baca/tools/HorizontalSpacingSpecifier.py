@@ -32,22 +32,14 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        {
-                            \time 8/16
-                            s1 * 1/2
-                        }
-                        {
-                            \time 4/8
-                            s1 * 1/2
-                        }
-                        {
-                            \time 2/4
-                            s1 * 1/2
-                        }
-                        {
-                            \time 1/2
-                            s1 * 1/2
-                        }
+                        \time 8/16
+                        s1 * 1/2
+                        \time 4/8
+                        s1 * 1/2
+                        \time 2/4
+                        s1 * 1/2
+                        \time 1/2
+                        s1 * 1/2
                     }
                 >>
                 \context MusicContext = "Music Context" <<
@@ -110,30 +102,22 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        {
-                            \time 8/16
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
-                            \newSpacingSection
-                            s1 * 1/2
-                        }
-                        {
-                            \time 4/8
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
-                            \newSpacingSection
-                            s1 * 1/2
-                        }
-                        {
-                            \time 2/4
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)
-                            \newSpacingSection
-                            s1 * 1/2
-                        }
-                        {
-                            \time 1/2
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 2)
-                            \newSpacingSection
-                            s1 * 1/2
-                        }
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
+                        \time 8/16
+                        \newSpacingSection
+                        s1 * 1/2
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
+                        \time 4/8
+                        \newSpacingSection
+                        s1 * 1/2
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)
+                        \time 2/4
+                        \newSpacingSection
+                        s1 * 1/2
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 2)
+                        \time 1/2
+                        \newSpacingSection
+                        s1 * 1/2
                     }
                 >>
                 \context MusicContext = "Music Context" <<
@@ -198,30 +182,22 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        {
-                            \time 8/16
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
-                            \newSpacingSection
-                            s1 * 1/2
-                        }
-                        {
-                            \time 4/8
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
-                            \newSpacingSection
-                            s1 * 1/2
-                        }
-                        {
-                            \time 2/4
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)
-                            \newSpacingSection
-                            s1 * 1/2
-                        }
-                        {
-                            \time 1/2
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 2)
-                            \newSpacingSection
-                            s1 * 1/2
-                        }
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
+                        \time 8/16
+                        \newSpacingSection
+                        s1 * 1/2
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
+                        \time 4/8
+                        \newSpacingSection
+                        s1 * 1/2
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)
+                        \time 2/4
+                        \newSpacingSection
+                        s1 * 1/2
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 2)
+                        \time 1/2
+                        \newSpacingSection
+                        s1 * 1/2
                     }
                 >>
                 \context MusicContext = "Music Context" <<
@@ -287,30 +263,22 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        {
-                            \time 8/16
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)
-                            \newSpacingSection
-                            s1 * 1/2
-                        }
-                        {
-                            \time 4/8
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
-                            \newSpacingSection
-                            s1 * 1/2
-                        }
-                        {
-                            \time 2/4
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
-                            \newSpacingSection
-                            s1 * 1/2
-                        }
-                        {
-                            \time 1/2
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)
-                            \newSpacingSection
-                            s1 * 1/2
-                        }
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)
+                        \time 8/16
+                        \newSpacingSection
+                        s1 * 1/2
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
+                        \time 4/8
+                        \newSpacingSection
+                        s1 * 1/2
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
+                        \time 2/4
+                        \newSpacingSection
+                        s1 * 1/2
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)
+                        \time 1/2
+                        \newSpacingSection
+                        s1 * 1/2
                     }
                 >>
                 \context MusicContext = "Music Context" <<
@@ -377,30 +345,22 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        {
-                            \time 8/16
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)
-                            \newSpacingSection
-                            s1 * 1/2
-                        }
-                        {
-                            \time 4/8
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
-                            \newSpacingSection
-                            s1 * 1/2
-                        }
-                        {
-                            \time 2/4
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
-                            \newSpacingSection
-                            s1 * 1/2
-                        }
-                        {
-                            \time 1/2
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
-                            \newSpacingSection
-                            s1 * 1/2
-                        }
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)
+                        \time 8/16
+                        \newSpacingSection
+                        s1 * 1/2
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
+                        \time 4/8
+                        \newSpacingSection
+                        s1 * 1/2
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
+                        \time 2/4
+                        \newSpacingSection
+                        s1 * 1/2
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
+                        \time 1/2
+                        \newSpacingSection
+                        s1 * 1/2
                     }
                 >>
                 \context MusicContext = "Music Context" <<
@@ -477,18 +437,14 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        {
-                            \time 4/8
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
-                            \newSpacingSection
-                            s1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
-                            \newSpacingSection
-                            s1 * 3/8
-                        }
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
+                        \time 4/8
+                        \newSpacingSection
+                        s1 * 1/2
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
+                        \time 3/8
+                        \newSpacingSection
+                        s1 * 3/8
                     }
                 >>
                 \context MusicContext = "Music Context" <<

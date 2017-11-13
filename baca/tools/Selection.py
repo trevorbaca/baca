@@ -3363,6 +3363,20 @@ class Selection(abjad.Selection):
         result = self.runs().map(baca.with_next_leaf())
         return result.map(abjad.Run)
 
+    def skip(self, n):
+        r'''Selects skip `n`.
+        '''
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.skips()[n]
+
+    def skips(self):
+        r'''Selects skips.
+        '''
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.components(abjad.Skip)
+
     def stages(self, start, stop=None):
         r'''Selects stages.
         '''

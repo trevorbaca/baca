@@ -626,22 +626,14 @@ class LibraryAF(abjad.AbjadObject):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -2409,10 +2401,8 @@ class LibraryAF(abjad.AbjadObject):
                     \tag violin.viola.cello
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 5/8
-                                s1 * 5/8
-                            }
+                            \time 5/8
+                            s1 * 5/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -2524,10 +2514,8 @@ class LibraryAF(abjad.AbjadObject):
                     \tag violin.viola.cello
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 5/8
-                                s1 * 5/8
-                            }
+                            \time 5/8
+                            s1 * 5/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<

@@ -90,6 +90,8 @@ Bases
       ~baca.tools.Selection.Selection.rruns
       ~baca.tools.Selection.Selection.run
       ~baca.tools.Selection.Selection.runs
+      ~baca.tools.Selection.Selection.skip
+      ~baca.tools.Selection.Selection.skips
       ~baca.tools.Selection.Selection.stages
       ~baca.tools.Selection.Selection.tleaves
       ~baca.tools.Selection.Selection.top
@@ -382,6 +384,10 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Selection.Selection.runs
+
+.. automethod:: baca.tools.Selection.Selection.skip
+
+.. automethod:: baca.tools.Selection.Selection.skips
 
 .. automethod:: baca.tools.Selection.Selection.stages
 

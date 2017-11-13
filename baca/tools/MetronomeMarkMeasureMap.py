@@ -31,52 +31,44 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        {
-                            \time 4/8
-                            s1 * 1/2 ^ \markup {
-                                \fontsize
-                                    #-6
-                                    \general-align
-                                        #Y
-                                        #DOWN
-                                        \note-by-number
-                                            #2
-                                            #0
-                                            #1
-                                \upright
-                                    {
-                                        =
-                                        90
-                                    }
+                        \time 4/8
+                        s1 * 1/2 ^ \markup {
+                            \fontsize
+                                #-6
+                                \general-align
+                                    #Y
+                                    #DOWN
+                                    \note-by-number
+                                        #2
+                                        #0
+                                        #1
+                            \upright
+                                {
+                                    =
+                                    90
                                 }
-                        }
-                        {
-                            \time 3/8
-                            s1 * 3/8
-                        }
-                        {
-                            \time 4/8
-                            s1 * 1/2 ^ \markup {
-                                \fontsize
-                                    #-6
-                                    \general-align
-                                        #Y
-                                        #DOWN
-                                        \note-by-number
-                                            #2
-                                            #0
-                                            #1
-                                \upright
-                                    {
-                                        =
-                                        72
-                                    }
+                            }
+                        \time 3/8
+                        s1 * 3/8
+                        \time 4/8
+                        s1 * 1/2 ^ \markup {
+                            \fontsize
+                                #-6
+                                \general-align
+                                    #Y
+                                    #DOWN
+                                    \note-by-number
+                                        #2
+                                        #0
+                                        #1
+                            \upright
+                                {
+                                    =
+                                    72
                                 }
-                        }
-                        {
-                            \time 3/8
-                            s1 * 3/8
-                        }
+                            }
+                        \time 3/8
+                        s1 * 3/8
                     }
                 >>
                 \context MusicContext = "Music Context" <<

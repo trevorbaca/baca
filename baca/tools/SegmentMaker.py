@@ -30,22 +30,14 @@ class SegmentMaker(abjad.SegmentMaker):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        {
-                            \time 4/8
-                            s1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            s1 * 3/8
-                        }
-                        {
-                            \time 4/8
-                            s1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            s1 * 3/8
-                        }
+                        \time 4/8
+                        s1 * 1/2
+                        \time 3/8
+                        s1 * 3/8
+                        \time 4/8
+                        s1 * 1/2
+                        \time 3/8
+                        s1 * 3/8
                     }
                 >>
                 \context MusicContext = "Music Context" <<
@@ -85,22 +77,14 @@ class SegmentMaker(abjad.SegmentMaker):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        {
-                            \time 4/8
-                            s1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            s1 * 3/8
-                        }
-                        {
-                            \time 4/8
-                            s1 * 1/2
-                        }
-                        {
-                            \time 3/8
-                            s1 * 3/8
-                        }
+                        \time 4/8
+                        s1 * 1/2
+                        \time 3/8
+                        s1 * 3/8
+                        \time 4/8
+                        s1 * 1/2
+                        \time 3/8
+                        s1 * 3/8
                     }
                 >>
                 \context MusicContext = "Music Context" <<
@@ -462,22 +446,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -882,12 +858,9 @@ class SegmentMaker(abjad.SegmentMaker):
             self._assert_valid_stage_number(stage_number)
             result = self._stage_number_to_measure_indices(stage_number)
             start_measure_index, stop_measure_index = result
-            start_measure = context[start_measure_index]
-            assert isinstance(start_measure, abjad.Measure)
-            start_skip = start_measure[0]
+            start_skip = context[start_measure_index]
             prototype = (abjad.Skip, abjad.MultimeasureRest)
             assert isinstance(start_skip, prototype), start_skip
-            #abjad.attach(directive, start_skip)
             spanner.attach(directive, start_skip)
 
     def _cache_leaves(self):
@@ -1156,14 +1129,14 @@ class SegmentMaker(abjad.SegmentMaker):
         context = self._score['Global Skips']
         result = self._stage_number_to_measure_indices(start_stage)
         start_measure_index, stop_measure_index = result
-        start_measure = context[start_measure_index]
-        assert isinstance(start_measure, abjad.Measure), start_measure
-        start_offset = abjad.inspect(start_measure).get_timespan().start_offset
+        start_skip = context[start_measure_index]
+        assert isinstance(start_skip, abjad.Skip), start_skip
+        start_offset = abjad.inspect(start_skip).get_timespan().start_offset
         result = self._stage_number_to_measure_indices(stop_stage)
         start_measure_index, stop_measure_index = result
-        stop_measure = context[stop_measure_index]
-        assert isinstance(stop_measure, abjad.Measure), stop_measure
-        stop_offset = abjad.inspect(stop_measure).get_timespan().stop_offset
+        stop_skip = context[stop_measure_index]
+        assert isinstance(stop_skip, abjad.Skip), stop_skip
+        stop_offset = abjad.inspect(stop_skip).get_timespan().stop_offset
         return start_offset, stop_offset
 
     def _get_previous_clef(self, context):
@@ -1546,11 +1519,16 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.setting(score).current_bar_number = first_bar_number
         self._score = score
 
-    def _make_skip_filled_measures(self, time_signatures=None):
-        time_signatures = time_signatures or self.time_signatures
-        maker = abjad.MeasureMaker()
-        measures = maker(time_signatures)
-        return measures
+    def _make_global_skips(self, time_signatures=None):
+        skips = []
+        for time_signature in self.time_signatures:
+            skip = abjad.Skip(1)
+            multiplier = abjad.Multiplier(time_signature.duration)
+            abjad.attach(multiplier, skip)
+            time_signature = abjad.new(time_signature, context='Score')
+            abjad.attach(time_signature, skip)
+            skips.append(skip)
+        return skips
 
     def _make_skips(self, time_signatures=None):
         time_signatures = time_signatures or self.time_signatures
@@ -1581,9 +1559,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if not self.volta_measure_map:
             return
         context = self._score['Global Skips']
-        measures = context[:]
-        for measure in measures:
-            assert isinstance(measure, abjad.Measure), repr(measure)
+        skips = abjad.select(context).components(abjad.Skip)
         for specifier in self.volta_measure_map:
             if isinstance(specifier, baca.MeasureSpecifier):
                 measure_start_number = specifier.start
@@ -1598,16 +1574,16 @@ class SegmentMaker(abjad.SegmentMaker):
                 measure_stop_number = pair[-1] + 1
             else:
                 raise TypeError(specifier)
-            volta_measures = measures[measure_start_number:measure_stop_number]
+            volta_skips = skips[measure_start_number:measure_stop_number]
             container = abjad.Container()
-            abjad.mutate(volta_measures).wrap(container)
+            abjad.mutate(volta_skips).wrap(container)
             command = abjad.Repeat()
             abjad.attach(command, container)
 
-    def _populate_time_signature_context(self):
+    def _populate_global_skips(self):
         context = self._score['Global Skips']
-        measures = self._make_skip_filled_measures()
-        context.extend(measures)
+        skips = self._make_global_skips()
+        context.extend(skips)
 
     def _print_cache(self):
         for context in self._cache:
@@ -1834,30 +1810,22 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 1/16
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 1/16
-                            }
-                            {
-                                \time 7/16
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 7/16
-                            }
-                            {
-                                \time 1/16
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 1/16
-                            }
-                            {
-                                \time 3/8
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 3/8
-                            }
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 1/16
+                            \newSpacingSection
+                            s1 * 1/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 7/16
+                            \newSpacingSection
+                            s1 * 7/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 1/16
+                            \newSpacingSection
+                            s1 * 1/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 3/8
+                            \newSpacingSection
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -1957,30 +1925,22 @@ class SegmentMaker(abjad.SegmentMaker):
                 } <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 1/16
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 1/16
-                            }
-                            {
-                                \time 7/16
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 7/16
-                            }
-                            {
-                                \time 1/16
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 1/16
-                            }
-                            {
-                                \time 3/8
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 3/8
-                            }
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 1/16
+                            \newSpacingSection
+                            s1 * 1/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 7/16
+                            \newSpacingSection
+                            s1 * 7/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 1/16
+                            \newSpacingSection
+                            s1 * 1/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 3/8
+                            \newSpacingSection
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -2148,12 +2108,10 @@ class SegmentMaker(abjad.SegmentMaker):
                     \tag violin.viola.cello
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 6/16
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 3/8
-                            }
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 6/16
+                            \newSpacingSection
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -2265,30 +2223,22 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 1/16
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 1/16
-                            }
-                            {
-                                \time 7/16
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 7/16
-                            }
-                            {
-                                \time 1/16
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 1/16
-                            }
-                            {
-                                \time 3/8
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 3/8
-                            }
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 1/16
+                            \newSpacingSection
+                            s1 * 1/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 7/16
+                            \newSpacingSection
+                            s1 * 7/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 1/16
+                            \newSpacingSection
+                            s1 * 1/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 3/8
+                            \newSpacingSection
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -2401,30 +2351,22 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 1/16
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 1/16
-                            }
-                            {
-                                \time 7/16
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 7/16
-                            }
-                            {
-                                \time 1/16
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 1/16
-                            }
-                            {
-                                \time 3/8
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 3/8
-                            }
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 1/16
+                            \newSpacingSection
+                            s1 * 1/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 7/16
+                            \newSpacingSection
+                            s1 * 7/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 1/16
+                            \newSpacingSection
+                            s1 * 1/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 3/8
+                            \newSpacingSection
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -2545,22 +2487,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -2692,22 +2626,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -2836,22 +2762,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -2984,22 +2902,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -3137,22 +3047,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -3283,22 +3185,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -3497,22 +3391,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -3641,22 +3527,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -3772,27 +3650,22 @@ class SegmentMaker(abjad.SegmentMaker):
                 } <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 3/16
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 3/16
-                            }
-                            {
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 3/16
-                            }
-                            {
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 3/16
-                            }
-                            {
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 3/16
-                            }
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 3/16
+                            \newSpacingSection
+                            s1 * 3/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 3/16
+                            \newSpacingSection
+                            s1 * 3/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 3/16
+                            \newSpacingSection
+                            s1 * 3/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 3/16
+                            \newSpacingSection
+                            s1 * 3/16
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -3998,27 +3871,22 @@ class SegmentMaker(abjad.SegmentMaker):
                 } <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 3/16
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 3/16
-                            }
-                            {
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 3/16
-                            }
-                            {
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 3/16
-                            }
-                            {
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                                \newSpacingSection
-                                s1 * 3/16
-                            }
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 3/16
+                            \newSpacingSection
+                            s1 * 3/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 3/16
+                            \newSpacingSection
+                            s1 * 3/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 3/16
+                            \newSpacingSection
+                            s1 * 3/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
+                            \time 3/16
+                            \newSpacingSection
+                            s1 * 3/16
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -4112,37 +3980,29 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2 ^ \markup {
-                                    \fontsize
-                                        #-6
-                                        \general-align
-                                            #Y
-                                            #DOWN
-                                            \note-by-number
-                                                #3
-                                                #0
-                                                #1
-                                    \upright
-                                        {
-                                            =
-                                            90
-                                        }
+                            \time 4/8
+                            s1 * 1/2 ^ \markup {
+                                \fontsize
+                                    #-6
+                                    \general-align
+                                        #Y
+                                        #DOWN
+                                        \note-by-number
+                                            #3
+                                            #0
+                                            #1
+                                \upright
+                                    {
+                                        =
+                                        90
                                     }
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                                }
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -4276,37 +4136,29 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2 ^ \markup {
-                                    \fontsize
-                                        #-6
-                                        \general-align
-                                            #Y
-                                            #DOWN
-                                            \note-by-number
-                                                #3
-                                                #0
-                                                #1
-                                    \upright
-                                        {
-                                            =
-                                            90
-                                        }
+                            \time 4/8
+                            s1 * 1/2 ^ \markup {
+                                \fontsize
+                                    #-6
+                                    \general-align
+                                        #Y
+                                        #DOWN
+                                        \note-by-number
+                                            #3
+                                            #0
+                                            #1
+                                \upright
+                                    {
+                                        =
+                                        90
                                     }
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                                }
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -4446,22 +4298,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -4590,29 +4434,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                                    - \markup {
-                                        \fontsize
-                                            #-3
-                                            \with-color
-                                                #blue
-                                                [1]
-                                        }
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                                - \markup {
+                                    \fontsize
+                                        #-3
+                                        \with-color
+                                            #blue
+                                            [1]
+                                    }
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -4745,29 +4581,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                                    - \markup {
-                                        \fontsize
-                                            #-3
-                                            \with-color
-                                                #blue
-                                                [K.1]
-                                        }
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                                - \markup {
+                                    \fontsize
+                                        #-3
+                                        \with-color
+                                            #blue
+                                            [K.1]
+                                    }
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -4940,22 +4768,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -5086,37 +4906,29 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2 ^ \markup {
-                                    \fontsize
-                                        #-6
-                                        \general-align
-                                            #Y
-                                            #DOWN
-                                            \note-by-number
-                                                #3
-                                                #0
-                                                #1
-                                    \upright
-                                        {
-                                            =
-                                            90
-                                        }
+                            \time 4/8
+                            s1 * 1/2 ^ \markup {
+                                \fontsize
+                                    #-6
+                                    \general-align
+                                        #Y
+                                        #DOWN
+                                        \note-by-number
+                                            #3
+                                            #0
+                                            #1
+                                \upright
+                                    {
+                                        =
+                                        90
                                     }
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                                }
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -5363,22 +5175,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -5414,22 +5218,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -5518,29 +5314,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                                    - \markup {
-                                        \fontsize
-                                            #-3
-                                            \with-color
-                                                #blue
-                                                [K.1]
-                                        }
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                                - \markup {
+                                    \fontsize
+                                        #-3
+                                        \with-color
+                                            #blue
+                                            [K.1]
+                                    }
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -5674,29 +5462,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                                    - \markup {
-                                        \fontsize
-                                            #-3
-                                            \with-color
-                                                #blue
-                                                [intermezzo.1]
-                                        }
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                                - \markup {
+                                    \fontsize
+                                        #-3
+                                        \with-color
+                                            #blue
+                                            [intermezzo.1]
+                                    }
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -5847,22 +5627,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -5935,22 +5707,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -6081,25 +5845,17 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
+                            \time 4/8
+                            s1 * 1/2
                             \repeat volta 2
                             {
-                                {
                                     \time 3/8
                                     s1 * 3/8
-                                }
                             }
-                            {
-                                \time 4/8
-                                s1 * 1/2
-                            }
-                            {
-                                \time 3/8
-                                s1 * 3/8
-                            }
+                            \time 4/8
+                            s1 * 1/2
+                            \time 3/8
+                            s1 * 3/8
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -6270,7 +6026,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._previous_metadata = previous_metadata or abjad.TypedOrderedDict()
         self._make_score()
         self._make_lilypond_file(environment=environment, midi=midi)
-        self._populate_time_signature_context()
+        self._populate_global_skips()
         self._label_stage_numbers_()
         self._interpret_rhythm_commands()
         self._extend_beams()
