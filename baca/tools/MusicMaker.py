@@ -753,9 +753,6 @@ class MusicMaker(abjad.AbjadObject):
         for specifier in specifiers:
             if not isinstance(specifier, rhythmos.BeamSpecifier):
                 assert isinstance(specifier, baca.Command), format(specifier)
-            # TODO: move to BeamSpecifier:
-            if isinstance(specifier, rhythmos.BeamSpecifier):
-                specifier._detach_all_beams(selections)
             specifier(selections)
 
     def _apply_rhythm_specifiers(
