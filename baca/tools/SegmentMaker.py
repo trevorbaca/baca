@@ -1240,14 +1240,10 @@ class SegmentMaker(abjad.SegmentMaker):
     def _get_segment_number(self):
         return self._metadata.get('segment_number', 1)
 
+    # TODO: remove
     def _get_stage_numbers(self, argument):
-        if isinstance(argument, baca.StageSpecifier):
-            start = argument.start
-            stop = argument.stop
-        elif isinstance(argument, tuple):
-            start, stop = argument
-        else:
-            raise TypeError(f'must be specifier or tuple: {argument!r}.')
+        assert isinstance(argument, tuple), repr(argument)
+        start, stop = argument
         return start, stop
 
     def _get_stylesheets(self, environment=None):
@@ -1713,12 +1709,12 @@ class SegmentMaker(abjad.SegmentMaker):
         for scope in scopes:
             leaves = []
             leaves_by_stage_number = self._cache[scope.voice_name]
-            start = scope.stages.start
-            if (scope.stages.stop == abjad.Infinity or
-                scope.stages.stop is abjad.Infinity):
+            start = scope.stages[0]
+            if (scope.stages[1] == abjad.Infinity or
+                scope.stages[1] is abjad.Infinity):
                 stop = self.stage_count + 1
             else:
-                stop = scope.stages.stop + 1
+                stop = scope.stages[1] + 1
             for stage_number in range(start, stop):
                 leaves.extend(leaves_by_stage_number[stage_number])
             leaf_selections.append(abjad.select(leaves))
@@ -6260,11 +6256,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             if wrapper.scope.voice_name != source.voice_name:
                 continue
-            assert isinstance(wrapper.scope.stages, baca.StageSpecifier)
-            start = wrapper.scope.stages.start
-            stop = wrapper.scope.stages.stop + 1
+            assert isinstance(wrapper.scope.stages, tuple)
+            start = wrapper.scope.stages[0]
+            stop = wrapper.scope.stages[1] + 1
             stages = range(start, stop)
-            if source.stages.start in stages:
+            if source.stages[0] in stages:
                 break
         else:
             raise Exception(f'no {voice_name!r} rhythm command for {stage}.')

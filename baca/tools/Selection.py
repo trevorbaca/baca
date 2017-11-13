@@ -3377,16 +3377,6 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.components(abjad.Skip)
 
-    def stages(self, start, stop=None):
-        r'''Selects stages.
-        '''
-        if stop is None:
-            stop = start
-        return baca.StageSpecifier(
-            start=start,
-            stop=stop,
-            )
-
     def tleaves(self):
         r'''Selects trimmed leaves.
 

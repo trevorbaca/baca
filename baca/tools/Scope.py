@@ -15,10 +15,7 @@ class Scope(abjad.AbjadObject):
         >>> abjad.f(scope)
         baca.Scope(
             voice_name='Violin Music Voice',
-            stages=baca.StageSpecifier(
-                start=1,
-                stop=9,
-                ),
+            stages=(1, 9),
             )
 
     '''
@@ -44,13 +41,10 @@ class Scope(abjad.AbjadObject):
         if voice_name is not None:
             assert isinstance(voice_name, str), repr(voice_name)
         self._voice_name = voice_name
-        if isinstance(stages, baca.StageSpecifier):
-            pass
-        elif isinstance(stages, int):
-            stages = baca.StageSpecifier(stages, stages)
+        if isinstance(stages, int):
+            stages = (stages, stages)
         elif isinstance(stages, tuple):
             assert len(stages) == 2, repr(stages)
-            stages = baca.StageSpecifier(*stages)
         else:
             raise TypeError(stages)
         self._stages = stages

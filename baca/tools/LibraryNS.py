@@ -1980,9 +1980,9 @@ class LibraryNS(abjad.AbjadObject):
         '''
         assert isinstance(start, int), repr(start)
         if stop is None:
-            stages = baca.StageSpecifier(start, start)
+            stages = (start, start)
         else:
-            stages = baca.StageSpecifier(start, stop)
+            stages = (start, stop)
         return baca.Scope(
             voice_name=voice,
             stages=stages,

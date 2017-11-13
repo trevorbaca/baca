@@ -71,7 +71,6 @@ baca.tools
    RestAffixSpecifier
    RhythmSpecifier
    StageSliceSpecifier
-   StageSpecifier
 
 .. autosummary::
    :nosignatures:
@@ -86,7 +85,6 @@ baca.tools
    RestAffixSpecifier
    RhythmSpecifier
    StageSliceSpecifier
-   StageSpecifier
 
 --------
 

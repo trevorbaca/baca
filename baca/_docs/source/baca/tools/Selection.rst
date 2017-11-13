@@ -92,7 +92,6 @@ Bases
       ~baca.tools.Selection.Selection.runs
       ~baca.tools.Selection.Selection.skip
       ~baca.tools.Selection.Selection.skips
-      ~baca.tools.Selection.Selection.stages
       ~baca.tools.Selection.Selection.tleaves
       ~baca.tools.Selection.Selection.top
       ~baca.tools.Selection.Selection.tuplet
@@ -388,8 +387,6 @@ Methods
 .. automethod:: baca.tools.Selection.Selection.skip
 
 .. automethod:: baca.tools.Selection.Selection.skips
-
-.. automethod:: baca.tools.Selection.Selection.stages
 
 .. automethod:: baca.tools.Selection.Selection.tleaves
 

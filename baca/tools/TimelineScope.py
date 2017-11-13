@@ -20,31 +20,19 @@ class TimelineScope(abjad.AbjadObject):
             scopes=(
                 baca.Scope(
                     voice_name='Piano Music Voice',
-                    stages=baca.StageSpecifier(
-                        start=5,
-                        stop=9,
-                        ),
+                    stages=(5, 9),
                     ),
                 baca.Scope(
                     voice_name='Clarinet Music Voice',
-                    stages=baca.StageSpecifier(
-                        start=7,
-                        stop=12,
-                        ),
+                    stages=(7, 12),
                     ),
                 baca.Scope(
                     voice_name='Violin Music Voice',
-                    stages=baca.StageSpecifier(
-                        start=8,
-                        stop=12,
-                        ),
+                    stages=(8, 12),
                     ),
                 baca.Scope(
                     voice_name='Oboe Music Voice',
-                    stages=baca.StageSpecifier(
-                        start=9,
-                        stop=12,
-                        ),
+                    stages=(9, 12),
                     ),
                 ),
             )
