@@ -1475,6 +1475,17 @@ class SegmentMaker(abjad.SegmentMaker):
             leaf = abjad.inspect(start_measure).get_leaf(0)
             abjad.attach(markup, leaf)
 
+    def _make_global_skips(self, time_signatures=None):
+        skips = []
+        for time_signature in self.time_signatures:
+            skip = abjad.Skip(1)
+            multiplier = abjad.Multiplier(time_signature.duration)
+            abjad.attach(multiplier, skip)
+            time_signature = abjad.new(time_signature, context='Score')
+            abjad.attach(time_signature, skip)
+            skips.append(skip)
+        return skips
+
     def _make_instrument_change_markup(self, instrument):
         string = f'to {instrument.name}'
         markup = abjad.Markup(string, direction=abjad.Up)
@@ -1554,17 +1565,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if first_bar_number is not None:
             abjad.setting(score).current_bar_number = first_bar_number
         self._score = score
-
-    def _make_global_skips(self, time_signatures=None):
-        skips = []
-        for time_signature in self.time_signatures:
-            skip = abjad.Skip(1)
-            multiplier = abjad.Multiplier(time_signature.duration)
-            abjad.attach(multiplier, skip)
-            time_signature = abjad.new(time_signature, context='Score')
-            abjad.attach(time_signature, skip)
-            skips.append(skip)
-        return skips
 
     def _make_skips(self, time_signatures=None):
         time_signatures = time_signatures or self.time_signatures

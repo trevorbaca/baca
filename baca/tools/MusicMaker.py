@@ -584,7 +584,7 @@ class MusicMaker(abjad.AbjadObject):
                 collections,
                 specifiers,
                 )
-            selections, specifiers = self._apply_rhythm_specifiers(
+            selections, specifiers = self._call_rhythm_commands(
                 collections,
                 specifiers,
                 counts=counts,
@@ -601,17 +601,17 @@ class MusicMaker(abjad.AbjadObject):
             container,
             color_unregistered_pitches=color_unregistered_pitches,
             )
-        specifiers = self._apply_tie_commands(selections, specifiers)
-        specifiers = self._apply_cluster_commands(selections, specifiers)
-        specifiers = self._apply_nesting_command(selections, specifiers)
-        specifiers = self._apply_register_commands(selections, specifiers)
-        imbricated_selections, specifiers = self._apply_imbrication_commands(
+        specifiers = self._call_tie_commands(selections, specifiers)
+        specifiers = self._call_cluster_commands(selections, specifiers)
+        specifiers = self._call_nesting_commands(selections, specifiers)
+        specifiers = self._call_register_commands(selections, specifiers)
+        imbricated_selections, specifiers = self._call_imbrication_commands(
             container,
             specifiers,
             )
-        result = self._apply_color_commands(selections, specifiers)
+        result = self._call_color_commands(selections, specifiers)
         specifiers, color_selector, color_selector_result = result
-        self._apply_remaining_commands(selections, specifiers)
+        self._call_remaining_commands(selections, specifiers)
         self._label_figure_name_(container, figure_name, figure_index)
         self._annotate_collection_list(container, collections)
         self._annotate_deployment(
@@ -679,49 +679,6 @@ class MusicMaker(abjad.AbjadObject):
         for leaf in abjad.iterate(container).leaves(pitched=True):
             abjad.attach(self._repeat_pitch_allowed_string, leaf)
 
-    def _apply_cluster_commands(self, selections, specifiers):
-        assert self._all_are_selections(selections), repr(selections)
-        specifiers_ = []
-        for specifier in specifiers:
-            if isinstance(specifier, baca.ClusterCommand):
-                specifier(selections)
-            else:
-                specifiers_.append(specifier)
-        return specifiers_
-
-    def _apply_color_commands(self, selections, specifiers):
-        assert self._all_are_selections(selections), repr(selections)
-        specifiers_ = []
-        color_selector, color_selector_result = None, None
-        for specifier in specifiers:
-            if isinstance(specifier, baca.ColorCommand):
-                color_selector = specifier.selector
-                color_selector_result = specifier(selections)
-            else:
-                specifiers_.append(specifier)
-        return specifiers_, color_selector, color_selector_result
-
-    def _apply_imbrication_commands(self, container, specifiers):
-        specifiers_ = []
-        imbricated_selections = {}
-        for specifier in specifiers:
-            if isinstance(specifier, baca.ImbricationCommand):
-                imbricated_selection = specifier(container)
-                imbricated_selections.update(imbricated_selection)
-            else:
-                specifiers_.append(specifier)
-        return imbricated_selections, specifiers_
-
-    def _apply_nesting_command(self, selections, specifiers):
-        assert self._all_are_selections(selections), repr(selections)
-        specifiers_ = []
-        for specifier in specifiers:
-            if isinstance(specifier, baca.NestingCommand):
-                specifier(selections)
-            else:
-                specifiers_.append(specifier)
-        return specifiers_
-
     def _apply_pitch_specifiers(self, collections, specifiers):
         prototype = (baca.CollectionList, list, abjad.Sequence)
         assert isinstance(collections, prototype), repr(collections)
@@ -732,74 +689,6 @@ class MusicMaker(abjad.AbjadObject):
             else:
                 specifiers_.append(specifier)
         return collections, specifiers_
-
-    def _apply_register_commands(self, selections, specifiers):
-        assert self._all_are_selections(selections), repr(selections)
-        specifiers_ = []
-        prototype = (
-            baca.RegisterCommand,
-            baca.RegisterInterpolationCommand,
-            baca.RegisterToOctaveCommand,
-            )
-        for specifier in specifiers:
-            if isinstance(specifier, prototype):
-                specifier(selections)
-            else:
-                specifiers_.append(specifier)
-        return specifiers_
-
-    def _apply_remaining_commands(self, selections, specifiers):
-        assert self._all_are_selections(selections), repr(selections)
-        for specifier in specifiers:
-            if not isinstance(specifier, rhythmos.BeamSpecifier):
-                assert isinstance(specifier, baca.Command), format(specifier)
-            specifier(selections)
-
-    def _apply_rhythm_specifiers(
-        self,
-        collections,
-        specifiers,
-        counts=None,
-        division_masks=None,
-        logical_tie_masks=None,
-        talea_denominator=None,
-        thread=None,
-        time_treatments=None,
-        tuplet_denominator=None,
-        ):
-        selections = len(collections) * [None]
-        rhythm_specifiers, rest_affix_specifiers, specifiers_ = [], [], []
-        for specifier in specifiers:
-            if isinstance(specifier, baca.PitchFirstRhythmCommand):
-                rhythm_specifiers.append(specifier)
-            elif isinstance(specifier, baca.RestAffixSpecifier):
-                rest_affix_specifiers.append(specifier)
-            else:
-                specifiers_.append(specifier)
-        if not rhythm_specifiers:
-            rhythm_specifiers.append(self._make_default_rhythm_specifier())
-        if not rest_affix_specifiers:
-            rest_affix_specifier = None
-        elif len(rest_affix_specifiers) == 1:
-            rest_affix_specifier = rest_affix_specifiers[0]
-        else:
-            message = f'max 1 rest affix specifier: {rest_affix_specifiers!r}.'
-            raise Exception(message)
-        thread = thread or self.thread
-        for specifier in rhythm_specifiers:
-            specifier(
-                collections=collections,
-                selections=selections,
-                division_masks=division_masks,
-                logical_tie_masks=logical_tie_masks,
-                rest_affix_specifier=rest_affix_specifier,
-                talea_counts=counts,
-                talea_denominator=talea_denominator,
-                thread=thread,
-                time_treatments=time_treatments,
-                tuplet_denominator=tuplet_denominator,
-                )
-        return selections, specifiers_
 
     def _apply_spacing_specifiers(self, collections, specifiers):
         prototype = (baca.CollectionList, list, abjad.Sequence)
@@ -823,7 +712,118 @@ class MusicMaker(abjad.AbjadObject):
             value = state_manifest[key]
             setattr(self, key, value)
 
-    def _apply_tie_commands(self, selections, specifiers):
+    def _call_cluster_commands(self, selections, specifiers):
+        assert self._all_are_selections(selections), repr(selections)
+        specifiers_ = []
+        for specifier in specifiers:
+            if isinstance(specifier, baca.ClusterCommand):
+                specifier(selections)
+            else:
+                specifiers_.append(specifier)
+        return specifiers_
+
+    def _call_color_commands(self, selections, specifiers):
+        assert self._all_are_selections(selections), repr(selections)
+        specifiers_ = []
+        color_selector, color_selector_result = None, None
+        for specifier in specifiers:
+            if isinstance(specifier, baca.ColorCommand):
+                color_selector = specifier.selector
+                color_selector_result = specifier(selections)
+            else:
+                specifiers_.append(specifier)
+        return specifiers_, color_selector, color_selector_result
+
+    def _call_imbrication_commands(self, container, specifiers):
+        specifiers_ = []
+        imbricated_selections = {}
+        for specifier in specifiers:
+            if isinstance(specifier, baca.ImbricationCommand):
+                imbricated_selection = specifier(container)
+                imbricated_selections.update(imbricated_selection)
+            else:
+                specifiers_.append(specifier)
+        return imbricated_selections, specifiers_
+
+    def _call_nesting_commands(self, selections, specifiers):
+        assert self._all_are_selections(selections), repr(selections)
+        specifiers_ = []
+        for specifier in specifiers:
+            if isinstance(specifier, baca.NestingCommand):
+                specifier(selections)
+            else:
+                specifiers_.append(specifier)
+        return specifiers_
+
+    def _call_register_commands(self, selections, specifiers):
+        assert self._all_are_selections(selections), repr(selections)
+        specifiers_ = []
+        prototype = (
+            baca.RegisterCommand,
+            baca.RegisterInterpolationCommand,
+            baca.RegisterToOctaveCommand,
+            )
+        for specifier in specifiers:
+            if isinstance(specifier, prototype):
+                specifier(selections)
+            else:
+                specifiers_.append(specifier)
+        return specifiers_
+
+    def _call_remaining_commands(self, selections, specifiers):
+        assert self._all_are_selections(selections), repr(selections)
+        for specifier in specifiers:
+            if not isinstance(specifier, rhythmos.BeamSpecifier):
+                assert isinstance(specifier, baca.Command), format(specifier)
+            specifier(selections)
+
+    def _call_rhythm_commands(
+        self,
+        collections,
+        specifiers,
+        counts=None,
+        division_masks=None,
+        logical_tie_masks=None,
+        talea_denominator=None,
+        thread=None,
+        time_treatments=None,
+        tuplet_denominator=None,
+        ):
+        selections = len(collections) * [None]
+        rhythm_commands, rest_affix_specifiers, specifiers_ = [], [], []
+        for specifier in specifiers:
+            if isinstance(specifier, baca.PitchFirstRhythmCommand):
+                rhythm_commands.append(specifier)
+            elif isinstance(specifier, baca.RestAffixSpecifier):
+                rest_affix_specifiers.append(specifier)
+            else:
+                specifiers_.append(specifier)
+        if not rhythm_commands:
+            rhythm_commands.append(self._make_default_rhythm_command())
+        if not rest_affix_specifiers:
+            rest_affix_specifier = None
+        elif len(rest_affix_specifiers) == 1:
+            rest_affix_specifier = rest_affix_specifiers[0]
+        else:
+            message = f'max 1 rest affix specifier: {rest_affix_specifiers!r}.'
+            raise Exception(message)
+        thread = thread or self.thread
+        for rhythm_command in rhythm_commands:
+            rhythm_command(
+                collections=collections,
+                selections=selections,
+                division_masks=division_masks,
+                logical_tie_masks=logical_tie_masks,
+                rest_affix_specifier=rest_affix_specifier,
+                talea_counts=counts,
+                talea_denominator=talea_denominator,
+                thread=thread,
+                time_treatments=time_treatments,
+                tuplet_denominator=tuplet_denominator,
+                )
+        return selections, specifiers_
+
+    def _call_tie_commands(self, selections, specifiers):
         assert self._all_are_selections(selections), repr(selections)
         specifiers_ = []
         for specifier in specifiers:
@@ -967,7 +967,7 @@ class MusicMaker(abjad.AbjadObject):
         abjad.attach(figure_name_markup, leaves[0])
 
     @staticmethod
-    def _make_default_rhythm_specifier():
+    def _make_default_rhythm_command():
         return baca.PitchFirstRhythmCommand(
             rhythm_maker=baca.PitchFirstRhythmMaker(),
             )

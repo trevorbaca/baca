@@ -3363,6 +3363,20 @@ class Selection(abjad.Selection):
         result = self.runs().map(baca.with_next_leaf())
         return result.map(abjad.Run)
 
+    def skip(self, n):
+        r'''Selects skip `n`.
+        '''
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.skips()[n]
+
+    def skips(self):
+        r'''Selects skips.
+        '''
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        return self.components(abjad.Skip)
+
     def stage(self, n, stage_measure_map):
         r'''Selects group `n` of output grouped into stages.
 
@@ -3577,20 +3591,6 @@ class Selection(abjad.Selection):
             selection = baca.select(selection)
             selections.append(selection)
         return baca.select(selections)
-
-    def skip(self, n):
-        r'''Selects skip `n`.
-        '''
-        if self._expression:
-            return self._update_expression(inspect.currentframe())
-        return self.skips()[n]
-
-    def skips(self):
-        r'''Selects skips.
-        '''
-        if self._expression:
-            return self._update_expression(inspect.currentframe())
-        return self.components(abjad.Skip)
 
     def tleaves(self):
         r'''Selects trimmed leaves.
