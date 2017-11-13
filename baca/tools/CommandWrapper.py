@@ -97,8 +97,7 @@ class CommandWrapper(abjad.AbjadObject):
             assert isinstance(scope, prototype), format(scope)
         self._scope = scope
         if command is not None:
-            prototype = (baca.Builder, baca.Command)
-            assert isinstance(command, prototype), format(command)
+            assert isinstance(command, baca.Command), format(command)
         self._command = command
 
     ### PUBLIC PROPERTIES ###

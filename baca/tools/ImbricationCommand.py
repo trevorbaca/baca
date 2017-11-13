@@ -2,11 +2,11 @@ import abjad
 import baca
 import copy
 from abjad import rhythmmakertools as rhythmos
-from .Builder import Builder
+from .Command import Command
 
 
-class ImbricateBuilder(Builder):
-    r'''Imbricate builder.
+class ImbricationCommand(Command):
+    r'''Imbricate command.
 
     >>> from abjad import rhythmmakertools as rhythmos
 
@@ -28,7 +28,7 @@ class ImbricateBuilder(Builder):
         >>> contribution = music_maker(
         ...     'Voice 2',
         ...     collections,
-        ...     baca.ImbricateBuilder(
+        ...     baca.ImbricationCommand(
         ...         'Voice 1',
         ...         [2, 19, 9, 18, 16],
         ...         ),
@@ -154,13 +154,13 @@ class ImbricateBuilder(Builder):
         >>> contribution = music_maker(
         ...     'Voice 2',
         ...     collections,
-        ...     baca.ImbricateBuilder(
+        ...     baca.ImbricationCommand(
         ...         'Voice 1',
         ...         [2, 19, 9],
         ...         baca.beam_everything(),
         ...         baca.staccati(),
         ...         ),
-        ...     baca.ImbricateBuilder(
+        ...     baca.ImbricationCommand(
         ...         'Voice 3',
         ...         [16, 10, 18],
         ...         baca.beam_everything(),
@@ -341,7 +341,7 @@ class ImbricateBuilder(Builder):
         >>> contribution = music_maker(
         ...     'Voice 2',
         ...     collections,
-        ...     baca.ImbricateBuilder(
+        ...     baca.ImbricationCommand(
         ...         'Voice 1',
         ...         [2, 19, 9, 18, 16],
         ...         baca.accents(),
@@ -527,7 +527,7 @@ class ImbricateBuilder(Builder):
     ### SPECIAL METHODS ###
 
     def __call__(self, container=None):
-        r'''Calls builder on `container`.
+        r'''Calls command on `container`.
 
         ..  container:: example
 
@@ -554,7 +554,7 @@ class ImbricateBuilder(Builder):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
-            ...     baca.ImbricateBuilder(
+            ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         segment,
             ...         baca.accents(),
@@ -649,7 +649,7 @@ class ImbricateBuilder(Builder):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
-            ...     baca.ImbricateBuilder(
+            ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         segment,
             ...         baca.accents(),
@@ -763,7 +763,7 @@ class ImbricateBuilder(Builder):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     [[0, 2, 10, 18], [16, 15, 23]],
-            ...     baca.ImbricateBuilder(
+            ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 10],
             ...         baca.staccati(),
@@ -778,7 +778,7 @@ class ImbricateBuilder(Builder):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     [[19, 13, 9, 8]],
-            ...     baca.ImbricateBuilder(
+            ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [13, 9],
             ...         baca.staccati(),
@@ -801,25 +801,25 @@ class ImbricateBuilder(Builder):
             ...     )
             >>> maker(
             ...     baca.scope('Music Voice 2', 1),
-            ...     baca.RhythmBuilder(
+            ...     baca.RhythmCommand(
             ...         rhythm_maker=voice_2_selections[0],
             ...         ),
             ...     )
             >>> maker(
             ...     baca.scope('Music Voice 2', 2),
-            ...     baca.RhythmBuilder(
+            ...     baca.RhythmCommand(
             ...         rhythm_maker=voice_2_selections[1],
             ...         ),
             ...     )
             >>> maker(
             ...     baca.scope('Music Voice 1', 1),
-            ...     baca.RhythmBuilder(
+            ...     baca.RhythmCommand(
             ...         rhythm_maker=voice_1_selections[0],
             ...         ),
             ...     )
             >>> maker(
             ...     baca.scope('Music Voice 1', 2),
-            ...     baca.RhythmBuilder(
+            ...     baca.RhythmCommand(
             ...         rhythm_maker=voice_1_selections[1],
             ...         ),
             ...     )
@@ -963,7 +963,7 @@ class ImbricateBuilder(Builder):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
-            ...     baca.ImbricateBuilder(
+            ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
             ...         ),
@@ -1073,7 +1073,7 @@ class ImbricateBuilder(Builder):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
-            ...     baca.ImbricateBuilder(
+            ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
             ...         ),
@@ -1274,13 +1274,13 @@ class ImbricateBuilder(Builder):
         for specifier in specifiers:
             if isinstance(specifier, baca.RhythmSpecifier):
                 continue
-            if isinstance(specifier, baca.RhythmBuilder):
+            if isinstance(specifier, baca.RhythmCommand):
                 continue
-            if isinstance(specifier, baca.ImbricateBuilder):
+            if isinstance(specifier, baca.ImbricationCommand):
                 continue
             if isinstance(specifier, rhythmos.BeamSpecifier):
                 specifier._detach_all_beams(selections)
-            if isinstance(specifier, baca.NestBuilder):
+            if isinstance(specifier, baca.NestingCommand):
                 nested_selections = specifier(selections)
             else:
                 specifier(selections)
@@ -1353,7 +1353,7 @@ class ImbricateBuilder(Builder):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
-            ...     baca.ImbricateBuilder(
+            ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
             ...         baca.accents(),
@@ -1465,7 +1465,7 @@ class ImbricateBuilder(Builder):
             >>> result = music_maker(
             ...     'Voice 2',
             ...     collections,
-            ...     baca.ImbricateBuilder(
+            ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
             ...         baca.accents(),
@@ -1482,7 +1482,7 @@ class ImbricateBuilder(Builder):
 
             Defaults to none:
 
-            >>> specifier = baca.ImbricateBuilder()
+            >>> specifier = baca.ImbricationCommand()
             >>> specifier.allow_unused_pitches is None
             True
 
@@ -1538,7 +1538,7 @@ class ImbricateBuilder(Builder):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
-            ...     baca.ImbricateBuilder(
+            ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
             ...         baca.accents(),
@@ -1653,7 +1653,7 @@ class ImbricateBuilder(Builder):
 
             Defaults to none:
 
-            >>> specifier = baca.ImbricateBuilder()
+            >>> specifier = baca.ImbricationCommand()
             >>> specifier.hocket is None
             True
 
@@ -1694,7 +1694,7 @@ class ImbricateBuilder(Builder):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
-            ...     baca.ImbricateBuilder(
+            ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 18, 16, 15],
             ...         baca.accents(),
@@ -1833,7 +1833,7 @@ class ImbricateBuilder(Builder):
 
             Defaults to none:
 
-            >>> specifier = baca.ImbricateBuilder()
+            >>> specifier = baca.ImbricationCommand()
             >>> specifier.selector is None
             True
 
@@ -1865,7 +1865,7 @@ class ImbricateBuilder(Builder):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
-            ...     baca.ImbricateBuilder(
+            ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
             ...         rhythmos.BeamSpecifier(
@@ -1994,7 +1994,7 @@ class ImbricateBuilder(Builder):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
-            ...     baca.ImbricateBuilder(
+            ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
             ...         rhythmos.BeamSpecifier(
@@ -2133,7 +2133,7 @@ class ImbricateBuilder(Builder):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
-            ...     baca.ImbricateBuilder(
+            ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
             ...         baca.beam_everything(),
@@ -2270,7 +2270,7 @@ class ImbricateBuilder(Builder):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
-            ...     baca.ImbricateBuilder(
+            ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 19, 9, 18, 16],
             ...         rhythmos.BeamSpecifier(
@@ -2408,7 +2408,7 @@ class ImbricateBuilder(Builder):
             >>> contribution = music_maker(
             ...     'Voice 2',
             ...     collections,
-            ...     baca.ImbricateBuilder(
+            ...     baca.ImbricationCommand(
             ...         'Voice 1',
             ...         [2, 10, 18, 19, 9],
             ...         baca.beam_everything(),
@@ -2508,7 +2508,7 @@ class ImbricateBuilder(Builder):
 
             Defaults to none:
 
-            >>> specifier = baca.ImbricateBuilder()
+            >>> specifier = baca.ImbricationCommand()
             >>> specifier.truncate_ties is None
             True
 

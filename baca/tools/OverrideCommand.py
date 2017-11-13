@@ -67,7 +67,7 @@ class OverrideCommand(Command):
         ...     baca.beam_positions(6),
         ...     baca.rests_up(),
         ...     baca.stems_up(),
-        ...     baca.RhythmBuilder(
+        ...     baca.RhythmCommand(
         ...         rhythm_maker=rhythmos.TaleaRhythmMaker(
         ...             talea=rhythmos.Talea(
         ...                 counts=[1, 1, 1, -1],

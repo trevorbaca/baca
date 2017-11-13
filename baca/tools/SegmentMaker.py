@@ -646,7 +646,7 @@ class SegmentMaker(abjad.SegmentMaker):
         else:
             assert all(isinstance(_, prototype) for _ in scopes), repr(scopes)
         for command in commands:
-            if not isinstance(command, (baca.Builder, baca.Command)):
+            if not isinstance(command, baca.Command):
                 raise Exception(f'commands only:\n\n{format(command)}')
         for scope in scopes:
             for command in commands:
@@ -1224,7 +1224,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _get_rhythm_wrappers_for_voice(self, voice_name):
         wrappers = []
         for wrapper in self.wrappers:
-            if not isinstance(wrapper.command, baca.RhythmBuilder):
+            if not isinstance(wrapper.command, baca.RhythmCommand):
                 continue
             if wrapper.scope.voice_name == voice_name:
                 wrappers.append(wrapper)
@@ -1345,8 +1345,8 @@ class SegmentMaker(abjad.SegmentMaker):
         start_time = time.time()
         for wrapper in self.wrappers:
             assert isinstance(wrapper, baca.CommandWrapper)
-            assert isinstance(wrapper.command, (baca.Builder, baca.Command))
-            if isinstance(wrapper.command, baca.RhythmBuilder):
+            assert isinstance(wrapper.command, baca.Command)
+            if isinstance(wrapper.command, baca.RhythmCommand):
                 continue
             selection = self._scope_to_leaf_selection(wrapper)
             try:
@@ -1822,7 +1822,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker(
             ...     baca.scope('Music Voice', 1),
-            ...     baca.RhythmBuilder(
+            ...     baca.RhythmCommand(
             ...         rhythm_maker=figures,
             ...         ),
             ...     )
@@ -1941,7 +1941,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker(
             ...     baca.scope('Music Voice', 1),
-            ...     baca.RhythmBuilder(
+            ...     baca.RhythmCommand(
             ...         rhythm_maker=figures,
             ...         ),
             ...     )
@@ -2124,7 +2124,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker(
             ...     baca.scope('Music Voice', 1),
-            ...     baca.RhythmBuilder(
+            ...     baca.RhythmCommand(
             ...         rhythm_maker=contribution['Music Voice'],
             ...         ),
             ...     )
@@ -2135,7 +2135,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker(
             ...     baca.scope('Cello Music Voice', 1),
-            ...     baca.RhythmBuilder(
+            ...     baca.RhythmCommand(
             ...         rhythm_maker=contribution['Cello Music Voice'],
             ...         ),
             ...     )
@@ -2255,7 +2255,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker(
             ...     baca.scope('Music Voice', 1),
-            ...     baca.RhythmBuilder(
+            ...     baca.RhythmCommand(
             ...         rhythm_maker=figures,
             ...         ),
             ...     )
@@ -2391,7 +2391,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker(
             ...     baca.scope('Music Voice', 1),
-            ...     baca.RhythmBuilder(
+            ...     baca.RhythmCommand(
             ...         rhythm_maker=figures,
             ...         ),
             ...     )
@@ -3756,7 +3756,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker(
             ...     baca.scope('Music Voice', 1),
-            ...     baca.RhythmBuilder(
+            ...     baca.RhythmCommand(
             ...         rhythm_maker=figures,
             ...         ),
             ...     )
@@ -3985,7 +3985,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker(
             ...     baca.scope('Music Voice', 1),
-            ...     baca.RhythmBuilder(
+            ...     baca.RhythmCommand(
             ...         rhythm_maker=figures,
             ...         ),
             ...     )
@@ -6244,7 +6244,7 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(source, baca.Scope)
         assert isinstance(target, baca.Scope)
         for wrapper in self.wrappers:
-            if not isinstance(wrapper.command, baca.RhythmBuilder):
+            if not isinstance(wrapper.command, baca.RhythmCommand):
                 continue
             if wrapper.scope.voice_name != source.voice_name:
                 continue
@@ -6257,7 +6257,7 @@ class SegmentMaker(abjad.SegmentMaker):
         else:
             raise Exception(f'no {voice_name!r} rhythm command for {stage}.')
         assert isinstance(wrapper, baca.CommandWrapper)
-        assert isinstance(wrapper.command, baca.RhythmBuilder)
+        assert isinstance(wrapper.command, baca.RhythmCommand)
         command = abjad.new(wrapper.command, **keywords)
         wrapper = baca.CommandWrapper(command, target)
         self.wrappers.append(wrapper)

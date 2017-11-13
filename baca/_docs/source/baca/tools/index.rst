@@ -97,10 +97,12 @@ baca.tools
    ColorFingeringCommand
    Command
    DiatonicClusterCommand
+   ImbricationCommand
    IndicatorCommand
    LabelCommand
    MapCommand
    MicrotoneDeviationCommand
+   NestingCommand
    OctaveDisplacementCommand
    OverrideCommand
    PiecewiseCommand
@@ -121,10 +123,12 @@ baca.tools
    ColorFingeringCommand
    Command
    DiatonicClusterCommand
+   ImbricationCommand
    IndicatorCommand
    LabelCommand
    MapCommand
    MicrotoneDeviationCommand
+   NestingCommand
    OctaveDisplacementCommand
    OverrideCommand
    PiecewiseCommand
@@ -136,27 +140,6 @@ baca.tools
    SpannerCommand
    StaffPositionCommand
    SuiteCommand
-
---------
-
-(5) Builders
-------------
-
-.. toctree::
-   :hidden:
-
-   Builder
-   ImbricateBuilder
-   NestBuilder
-   RhythmBuilder
-
-.. autosummary::
-   :nosignatures:
-
-   Builder
-   ImbricateBuilder
-   NestBuilder
-   RhythmBuilder
 
 --------
 
@@ -297,3 +280,18 @@ baca.tools
    PartitionDivisionCallback
    SplitByDurationsDivisionCallback
    SplitByRoundedRatiosDivisionCallback
+
+--------
+
+Commands
+--------
+
+.. toctree::
+   :hidden:
+
+   RhythmCommand
+
+.. autosummary::
+   :nosignatures:
+
+   RhythmCommand

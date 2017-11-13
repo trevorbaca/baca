@@ -597,7 +597,7 @@ class LibraryGM(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.ImbricateBuilder(
+        return baca.ImbricationCommand(
             voice_name,
             segment,
             *specifiers,
@@ -1190,7 +1190,7 @@ class LibraryGM(abjad.AbjadObject):
     def make_even_runs():
         r'''Makes even runs.
         '''
-        return baca.RhythmBuilder(
+        return baca.RhythmCommand(
             rhythm_maker=rhythmos.EvenRunRhythmMaker()
             )
 
@@ -1202,7 +1202,7 @@ class LibraryGM(abjad.AbjadObject):
             tuplet_ratios = [(1,)]
         else:
             tuplet_ratios = [tuplet_ratio]
-        return baca.RhythmBuilder(
+        return baca.RhythmCommand(
             division_expression=abjad.sequence()
                 .sum()
                 .sequence(),
@@ -1222,7 +1222,7 @@ class LibraryGM(abjad.AbjadObject):
             pattern=abjad.index_all(),
             use_multimeasure_rests=True,
             )
-        return baca.RhythmBuilder(
+        return baca.RhythmCommand(
             rhythm_maker=rhythmos.NoteRhythmMaker(
                 division_masks=[mask],
                 ),
@@ -1236,7 +1236,7 @@ class LibraryGM(abjad.AbjadObject):
             tie_specifier = rhythmos.TieSpecifier(repeat_ties=True)
         else:
             tie_specifier = None
-        return baca.RhythmBuilder(
+        return baca.RhythmCommand(
             rewrite_meter=True,
             rhythm_maker=rhythmos.NoteRhythmMaker(
                 tie_specifier=tie_specifier,
@@ -1252,7 +1252,7 @@ class LibraryGM(abjad.AbjadObject):
         elif isinstance(durations, tuple):
             assert len(durations) == 2
             durations = [abjad.Duration(durations)]
-        return baca.RhythmBuilder(
+        return baca.RhythmCommand(
             division_expression=baca.split_by_durations(durations=durations),
             rewrite_meter=True,
             rhythm_maker=rhythmos.NoteRhythmMaker(
@@ -1266,7 +1266,7 @@ class LibraryGM(abjad.AbjadObject):
     def make_rests():
         r'''Makes rests.
         '''
-        return baca.RhythmBuilder(
+        return baca.RhythmCommand(
             rhythm_maker=rhythmos.NoteRhythmMaker(
                 division_masks=[abjad.silence([0], 1)],
                 ),
@@ -1276,11 +1276,11 @@ class LibraryGM(abjad.AbjadObject):
     def make_rhythm(selection):
         r'''Set rhythm to `selection`.
 
-        Return rhythm builder.
+        Return rhythm command.
         '''
         assert isinstance(selection, abjad.Selection), repr(selection)
         assert all(isinstance(_,  abjad.Component) for _ in selection)
-        return baca.RhythmBuilder(
+        return baca.RhythmCommand(
             rhythm_maker=selection,
             )
 
@@ -1318,7 +1318,7 @@ class LibraryGM(abjad.AbjadObject):
                 talea_denominator=denominator,
                 ),
             )
-        return baca.RhythmBuilder(
+        return baca.RhythmCommand(
             rhythm_maker=rhythm_maker,
             )
 
@@ -1326,7 +1326,7 @@ class LibraryGM(abjad.AbjadObject):
     def make_tied_notes(repeat_ties=False):
         r'''Makes tied notes; rewrites meter.
         '''
-        return baca.RhythmBuilder(
+        return baca.RhythmCommand(
             rewrite_meter=True,
             rhythm_maker=rhythmos.NoteRhythmMaker(
                 tie_specifier=rhythmos.TieSpecifier(
@@ -1340,9 +1340,9 @@ class LibraryGM(abjad.AbjadObject):
     def make_tied_repeated_durations(durations):
         r'''Makes tied repeated durations.
         '''
-        builder = baca.make_repeated_durations(durations)
+        command = baca.make_repeated_durations(durations)
         return abjad.new(
-            builder,
+            command,
             rewrite_meter=False,
             rhythm_maker__tie_specifier__tie_across_divisions=True,
             )

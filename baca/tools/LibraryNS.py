@@ -213,7 +213,7 @@ class LibraryNS(abjad.AbjadObject):
         '''
         if not isinstance(time_treatments, list):
             time_treatments = [time_treatments]
-        return baca.NestBuilder(
+        return baca.NestingCommand(
             lmr_specifier=None,
             time_treatments=time_treatments,
             )

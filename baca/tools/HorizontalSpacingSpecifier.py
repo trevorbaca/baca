@@ -18,7 +18,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         >>> maker(
         ...     baca.scope('Music Voice', 1),
         ...     baca.pitches('E4 F4'),
-        ...     baca.RhythmBuilder(
+        ...     baca.RhythmCommand(
         ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
         ...         ),
         ...     )
@@ -96,7 +96,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         >>> maker(
         ...     baca.scope('Music Voice', 1),
         ...     baca.pitches('E4 F4'),
-        ...     baca.RhythmBuilder(
+        ...     baca.RhythmCommand(
         ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
         ...         ),
         ...     )
@@ -184,7 +184,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         >>> maker(
         ...     baca.scope('Music Voice', 1),
         ...     baca.pitches('E4 F4'),
-        ...     baca.RhythmBuilder(
+        ...     baca.RhythmCommand(
         ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
         ...         ),
         ...     )
@@ -273,7 +273,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         >>> maker(
         ...     baca.scope('Music Voice', 1),
         ...     baca.pitches('E4 F4'),
-        ...     baca.RhythmBuilder(
+        ...     baca.RhythmCommand(
         ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
         ...         ),
         ...     )
@@ -363,7 +363,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         >>> maker(
         ...     baca.scope('Music Voice', 1),
         ...     baca.pitches('E4 F4'),
-        ...     baca.RhythmBuilder(
+        ...     baca.RhythmCommand(
         ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
         ...         ),
         ...     )
@@ -451,7 +451,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         >>> maker(
         ...     baca.scope('Music Voice', 1),
         ...     baca.pitches('E4 F4'),
-        ...     baca.RhythmBuilder(
+        ...     baca.RhythmCommand(
         ...         rhythm_maker=rhythmos.AccelerandoRhythmMaker(
         ...             beam_specifier=rhythmos.BeamSpecifier(
         ...             use_feather_beams=True,

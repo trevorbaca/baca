@@ -1,23 +1,23 @@
 import abjad
 import baca
 from abjad import rhythmmakertools as rhythmos
-from .Builder import Builder
+from .Command import Command
 
 
-class RhythmBuilder(Builder):
-    r'''Rhythm builder.
+class RhythmCommand(Command):
+    r'''Rhythm command.
 
     >>> from abjad import rhythmmakertools as rhythmos
 
     ..  container:: example
 
-        >>> builder = baca.RhythmBuilder(
+        >>> command = baca.RhythmCommand(
         ...     rhythm_maker=rhythmos.NoteRhythmMaker(),
         ...     )
 
     ..  container:: example
 
-        >>> builder = baca.RhythmBuilder(
+        >>> command = baca.RhythmCommand(
         ...     division_expression=abjad.sequence().sum().sequence(),
         ...     rhythm_maker=rhythmos.NoteRhythmMaker(),
         ...     )
@@ -25,6 +25,8 @@ class RhythmBuilder(Builder):
     '''
 
     ### CLASS ATTRIBUTES ###
+
+    __documentation_section__ = 'Commands'
 
     __slots__ = (
         '_division_maker',
@@ -91,7 +93,7 @@ class RhythmBuilder(Builder):
         start_offset=None,
         time_signatures=None,
         ):
-        r'''Calls builder.
+        r'''Calls command on `time_signatures`.
 
         Returns contribution with music payload.
         '''
@@ -351,7 +353,7 @@ class RhythmBuilder(Builder):
 
     @property
     def rewrite_meter(self):
-        r'''Is true when builder rewrites meter.
+        r'''Is true when command rewrites meter.
 
         Set to true or false.
 
@@ -379,7 +381,7 @@ class RhythmBuilder(Builder):
 
     @property
     def split_at_measure_boundaries(self):
-        r'''Is true when builder splits at measure boundaries.
+        r'''Is true when command splits at measure boundaries.
 
         Set to true, false or none.
 
@@ -415,7 +417,7 @@ class RhythmBuilder(Builder):
 
     @property
     def tie_first(self):
-        r'''Is true when builder ties into first note or chord.
+        r'''Is true when command ties into first note or chord.
         Otherwise false.
 
         Set to true, false or none.
@@ -426,7 +428,7 @@ class RhythmBuilder(Builder):
 
     @property
     def tie_last(self):
-        r'''Is true when builder ties into last note or chord.
+        r'''Is true when command ties into last note or chord.
         Otherwise false.
 
         Set to true, false or none.

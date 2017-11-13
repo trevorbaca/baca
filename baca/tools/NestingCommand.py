@@ -1,19 +1,19 @@
 import abjad
 import baca
-from .Builder import Builder
+from .Command import Command
 
 
-class NestBuilder(Builder):
-    r'''Nest builder.
+class NestingCommand(Command):
+    r'''Nesting command.
 
     >>> from abjad import rhythmmakertools as rhythmos
 
     ..  container:: example
 
-        Nest builder augments one sixteenth:
+        Augments one sixteenth:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.NestBuilder(
+        ...     baca.NestingCommand(
         ...         time_treatments=['+1/16'],
         ...         ),
         ...     rhythmos.BeamSpecifier(
@@ -85,7 +85,7 @@ class NestBuilder(Builder):
 
     ..  container:: example
 
-        Calltime nest builder preserves beam subdivisions and works with
+        Calltime nesting command preserves beam subdivisions and works with
         extend beam:
 
             >>> music_maker = baca.MusicMaker(
@@ -98,7 +98,7 @@ class NestBuilder(Builder):
         >>> contribution = music_maker(
         ...     'Voice 1',
         ...     [[0, 2, 10, 18], [16, 15, 23]],
-        ...     baca.NestBuilder(
+        ...     baca.NestingCommand(
         ...         time_treatments=['+1/16'],
         ...         ),
         ...     extend_beam=True,
@@ -119,7 +119,7 @@ class NestBuilder(Builder):
         ...     )
         >>> maker(
         ...     baca.scope('Music Voice', 1),
-        ...     baca.RhythmBuilder(
+        ...     baca.RhythmCommand(
         ...         rhythm_maker=selection,
         ...         ),
         ...     )
@@ -237,14 +237,14 @@ class NestBuilder(Builder):
     ### SPECIAL METHODS ###
 
     def __call__(self, selections=None):
-        r'''Calls builder on `selections`.
+        r'''Calls command on `selections`.
 
         ..  container:: example
 
             With rest affixes:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.NestBuilder(time_treatments=['+1/16']),
+            ...     baca.NestingCommand(time_treatments=['+1/16']),
             ...     baca.RestAffixSpecifier(
             ...         prefix=[2],
             ...         suffix=[3],
