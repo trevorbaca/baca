@@ -29,15 +29,19 @@ class VoltaMeasureMap(abjad.AbjadObject):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
+                        % measure 1
                         \time 4/8
                         s1 * 1/2
                         \repeat volta 2
                         {
-                                \time 3/8
-                                s1 * 3/8
-                                \time 4/8
-                                s1 * 1/2
+                            % measure 2
+                            \time 3/8
+                            s1 * 3/8
+                            % measure 3
+                            \time 4/8
+                            s1 * 1/2
                         }
+                        % measure 4
                         \time 3/8
                         s1 * 3/8
                     }
@@ -45,10 +49,14 @@ class VoltaMeasureMap(abjad.AbjadObject):
                 \context MusicContext = "Music Context" <<
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
+                            % measure 1
                             \clef "treble"
                             e'2
+                            % measure 2
                             e'4.
+                            % measure 3
                             e'2
+                            % measure 4
                             e'4.
                             \bar "|"
                         }

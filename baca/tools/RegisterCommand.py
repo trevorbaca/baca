@@ -167,12 +167,16 @@ class RegisterCommand(Command):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
+                        % measure 1
                         \time 4/8
                         s1 * 1/2
+                        % measure 2
                         \time 3/8
                         s1 * 3/8
+                        % measure 3
                         \time 4/8
                         s1 * 1/2
+                        % measure 4
                         \time 3/8
                         s1 * 3/8
                     }
@@ -181,6 +185,7 @@ class RegisterCommand(Command):
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
+                                % measure 1
                                 \clef "treble"
                                 g''8 [
                                 gqs''8
@@ -188,17 +193,20 @@ class RegisterCommand(Command):
                                 gtqs''8 ]
                             }
                             {
+                                % measure 2
                                 aqf''8 [
                                 af''8
                                 atqf''8 ]
                             }
                             {
+                                % measure 3
                                 g''8 [
                                 gqs''8
                                 gs''8
                                 gtqs''8 ]
                             }
                             {
+                                % measure 4
                                 aqf''8 [
                                 af''8
                                 atqf''8 ]

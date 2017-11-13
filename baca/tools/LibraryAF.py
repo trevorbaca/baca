@@ -626,12 +626,16 @@ class LibraryAF(abjad.AbjadObject):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -640,6 +644,7 @@ class LibraryAF(abjad.AbjadObject):
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
+                                    % measure 1
                                     \clef "treble"
                                     e'8 [
                                     d''8
@@ -647,6 +652,7 @@ class LibraryAF(abjad.AbjadObject):
                                     e''8 ]
                                 }
                                 {
+                                    % measure 2
                                     \override Staff.BarLine.bar-extent = #'(-4 . 4)
                                     g'8 [
                                     f''8
@@ -654,12 +660,14 @@ class LibraryAF(abjad.AbjadObject):
                                     \revert Staff.BarLine.bar-extent
                                 }
                                 {
+                                    % measure 3
                                     d''8 [
                                     f'8
                                     e''8
                                     g'8 ]
                                 }
                                 {
+                                    % measure 4
                                     f''8 [
                                     e'8
                                     d''8 ]
@@ -2401,6 +2409,7 @@ class LibraryAF(abjad.AbjadObject):
                     \tag violin.viola.cello
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 5/8
                             s1 * 5/8
                         }
@@ -2412,6 +2421,7 @@ class LibraryAF(abjad.AbjadObject):
                                 \context ViolinMusicVoice = "Violin Music Voice" {
                                     {
                                         {
+                                            % measure 1
                                             \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                             \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                             \clef "treble"
@@ -2432,6 +2442,7 @@ class LibraryAF(abjad.AbjadObject):
                                 \context ViolaMusicVoice = "Viola Music Voice" {
                                     {
                                         {
+                                            % measure 1
                                             \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                             \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
                                             \clef "alto"
@@ -2455,6 +2466,7 @@ class LibraryAF(abjad.AbjadObject):
                             \tag cello
                             \context CelloMusicStaff = "Cello Music Staff" {
                                 \context CelloMusicVoice = "Cello Music Voice" {
+                                    % measure 1
                                     \set CelloMusicStaff.instrumentName = \markup { Cello }
                                     \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
                                     \clef "bass"
@@ -2514,6 +2526,7 @@ class LibraryAF(abjad.AbjadObject):
                     \tag violin.viola.cello
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 5/8
                             s1 * 5/8
                         }
@@ -2525,6 +2538,7 @@ class LibraryAF(abjad.AbjadObject):
                                 \context ViolinMusicVoice = "Violin Music Voice" {
                                     {
                                         {
+                                            % measure 1
                                             \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                             \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                             \clef "treble"
@@ -2545,6 +2559,7 @@ class LibraryAF(abjad.AbjadObject):
                                 \context ViolaMusicVoice = "Viola Music Voice" {
                                     {
                                         {
+                                            % measure 1
                                             \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                             \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
                                             \clef "alto"
@@ -2565,6 +2580,7 @@ class LibraryAF(abjad.AbjadObject):
                             \tag cello
                             \context CelloMusicStaff = "Cello Music Staff" {
                                 \context CelloMusicVoice = "Cello Music Voice" {
+                                    % measure 1
                                     \set CelloMusicStaff.instrumentName = \markup { Cello }
                                     \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
                                     \clef "bass"

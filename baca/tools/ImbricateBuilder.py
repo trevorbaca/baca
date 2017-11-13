@@ -835,10 +835,12 @@ class ImbricateBuilder(Builder):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 7/16
                             \newSpacingSection
                             s1 * 7/16
+                            % measure 2
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/4
                             \newSpacingSection
@@ -852,6 +854,7 @@ class ImbricateBuilder(Builder):
                                     \override TupletBracket.stencil = ##f
                                     \override TupletNumber.stencil = ##f
                                     {
+                                        % measure 1
                                         s16 [
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
@@ -873,6 +876,7 @@ class ImbricateBuilder(Builder):
                                     \override TupletBracket.stencil = ##f
                                     \override TupletNumber.stencil = ##f
                                     {
+                                        % measure 2
                                         s16
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
@@ -892,6 +896,7 @@ class ImbricateBuilder(Builder):
                             } {
                                 {
                                     {
+                                        % measure 1
                                         \set stemLeftBeamCount = #0
                                         \set stemRightBeamCount = #2
                                         c'16 [
@@ -919,6 +924,7 @@ class ImbricateBuilder(Builder):
                                 }
                                 {
                                     {
+                                        % measure 2
                                         \set stemLeftBeamCount = #0
                                         \set stemRightBeamCount = #2
                                         g''16 [

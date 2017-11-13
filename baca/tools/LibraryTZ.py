@@ -1644,12 +1644,16 @@ class LibraryTZ(abjad.AbjadObject):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -1657,19 +1661,23 @@ class LibraryTZ(abjad.AbjadObject):
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
+                                % measure 1
                                 \clef "treble"
                                 \override Score.BarLine.transparent = ##t
                                 e'8 [
                                 d''8
                                 f'8 ]
                                 r8
+                                % measure 2
                                 e''8 [
                                 g'8
                                 f''8 ]
+                                % measure 3
                                 r8
                                 e'8 [
                                 d''8
                                 f'8 ]
+                                % measure 4
                                 r8
                                 e''8 [
                                 g'8 ]
@@ -1712,12 +1720,16 @@ class LibraryTZ(abjad.AbjadObject):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -1725,20 +1737,24 @@ class LibraryTZ(abjad.AbjadObject):
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
+                                % measure 1
                                 \clef "treble"
                                 e'8 [
                                 d''8
                                 f'8 ]
                                 r8
+                                % measure 2
                                 \override Score.BarLine.transparent = ##t
                                 e''8 [
                                 g'8
                                 f''8 ]
                                 \revert Score.BarLine.transparent
+                                % measure 3
                                 r8
                                 e'8 [
                                 d''8
                                 f'8 ]
+                                % measure 4
                                 r8
                                 e''8 [
                                 g'8 ]

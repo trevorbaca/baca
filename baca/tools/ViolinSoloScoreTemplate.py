@@ -23,12 +23,16 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                 \tag violin
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
+                        % measure 1
                         \time 4/8
                         s1 * 1/2
+                        % measure 2
                         \time 3/8
                         s1 * 3/8
+                        % measure 3
                         \time 4/8
                         s1 * 1/2
+                        % measure 4
                         \time 3/8
                         s1 * 3/8
                     }
@@ -37,6 +41,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                     \tag violin
                     \context ViolinMusicStaff = "Violin Music Staff" {
                         \context ViolinMusicVoice = "Violin Music Voice" {
+                            % measure 1
                             \set ViolinMusicStaff.instrumentName = \markup {
                                 \hcenter-in
                                     #16
@@ -49,8 +54,11 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                                 }
                             \clef "treble"
                             R1 * 1/2
+                            % measure 2
                             R1 * 3/8
+                            % measure 3
                             R1 * 1/2
+                            % measure 4
                             R1 * 3/8
                             \bar "|"
                         }

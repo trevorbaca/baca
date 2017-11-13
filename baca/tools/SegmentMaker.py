@@ -30,12 +30,16 @@ class SegmentMaker(abjad.SegmentMaker):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
+                        % measure 1
                         \time 4/8
                         s1 * 1/2
+                        % measure 2
                         \time 3/8
                         s1 * 3/8
+                        % measure 3
                         \time 4/8
                         s1 * 1/2
+                        % measure 4
                         \time 3/8
                         s1 * 3/8
                     }
@@ -43,10 +47,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context MusicContext = "Music Context" <<
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
+                            % measure 1
                             \clef "treble"
                             R1 * 1/2
+                            % measure 2
                             R1 * 3/8
+                            % measure 3
                             R1 * 1/2
+                            % measure 4
                             R1 * 3/8
                             \bar "|"
                         }
@@ -77,12 +85,16 @@ class SegmentMaker(abjad.SegmentMaker):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
+                        % measure 1
                         \time 4/8
                         s1 * 1/2
+                        % measure 2
                         \time 3/8
                         s1 * 3/8
+                        % measure 3
                         \time 4/8
                         s1 * 1/2
+                        % measure 4
                         \time 3/8
                         s1 * 3/8
                     }
@@ -91,6 +103,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
+                                % measure 1
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
@@ -118,6 +131,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8 ]
                             }
                             {
+                                % measure 2
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
@@ -138,6 +152,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8 ]
                             }
                             {
+                                % measure 3
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
@@ -164,6 +179,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8 ]
                             }
                             {
+                                % measure 4
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
@@ -446,12 +462,16 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -460,6 +480,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
+                                    % measure 1
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -503,6 +524,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             }
                                 }
                                 {
+                                    % measure 2
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -535,6 +557,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             }
                                 }
                                 {
+                                    % measure 3
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -577,6 +600,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             }
                                 }
                                 {
+                                    % measure 4
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -979,6 +1003,22 @@ class SegmentMaker(abjad.SegmentMaker):
                 abjad.override(pleaf).flag.color = color
                 abjad.override(pleaf).note_head.color = color
                 abjad.override(pleaf).stem.color = color
+
+    def _comment_measure_numbers(self):
+        offset_to_measure_number = {}
+        measure_number = self._metadata.get('first_bar_number', 1)
+        context = self._score['Global Skips']
+        for skip in baca.select(context).skips():
+            offset = abjad.inspect(skip).get_timespan().start_offset
+            offset_to_measure_number[offset] = measure_number
+            measure_number += 1
+        for leaf in baca.select(self._score).leaves():
+            offset = abjad.inspect(leaf).get_timespan().start_offset
+            measure_number = offset_to_measure_number.get(offset, None)
+            if measure_number is None:
+                continue
+            comment = abjad.LilyPondComment(f'measure {measure_number}')
+            abjad.attach(comment, leaf)
 
     def _contributions_do_not_overlap(self, contributions):
         previous_stop_offset = 0
@@ -1807,18 +1847,22 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
+                            % measure 2
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 7/16
                             \newSpacingSection
                             s1 * 7/16
+                            % measure 3
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
+                            % measure 4
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/8
                             \newSpacingSection
@@ -1830,12 +1874,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "Music Voice" {
                                 {
                                     {
+                                        % measure 1
                                         \clef "treble"
                                         e'16
                                     }
                                 }
                                 {
                                     {
+                                        % measure 2
                                         fs'16 [
                                         d'16
                                         ef'16
@@ -1847,11 +1893,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                                     {
+                                        % measure 3
                                         b'16
                                     }
                                 }
                                 {
                                     {
+                                        % measure 4
                                         bf'16 [
                                         g'16
                                         a'16
@@ -1922,18 +1970,22 @@ class SegmentMaker(abjad.SegmentMaker):
                 } <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
+                            % measure 2
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 7/16
                             \newSpacingSection
                             s1 * 7/16
+                            % measure 3
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
+                            % measure 4
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/8
                             \newSpacingSection
@@ -1945,6 +1997,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "Music Voice" {
                                 {
                                     {
+                                        % measure 1
                                         \clef "treble"
                                         e'16
                                             ^ \markup {
@@ -1968,6 +2021,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                                     {
+                                        % measure 2
                                         fs'16 [
                                             ^ \markup {
                                                 \fontsize
@@ -1996,6 +2050,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                                     {
+                                        % measure 3
                                         b'16
                                             ^ \markup {
                                                 \fontsize
@@ -2018,6 +2073,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                                     {
+                                        % measure 4
                                         bf'16 [
                                             ^ \markup {
                                                 \fontsize
@@ -2105,6 +2161,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     \tag violin.viola.cello
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 6/16
                             \newSpacingSection
@@ -2116,6 +2173,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \tag violin
                             \context ViolinMusicStaff = "Violin Music Staff" {
                                 \context ViolinMusicVoice = "Violin Music Voice" {
+                                    % measure 1
                                     \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                     \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
@@ -2126,6 +2184,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \tag viola
                             \context ViolaMusicStaff = "Viola Music Staff" {
                                 \context ViolaMusicVoice = "Viola Music Voice" {
+                                    % measure 1
                                     \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                     \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
                                     \clef "alto"
@@ -2138,6 +2197,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \context CelloMusicVoice = "Cello Music Voice" {
                                     {
                                         {
+                                            % measure 1
                                             \set CelloMusicStaff.instrumentName = \markup { Cello }
                                             \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
                                             \clef "bass"
@@ -2220,18 +2280,22 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
+                            % measure 2
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 7/16
                             \newSpacingSection
                             s1 * 7/16
+                            % measure 3
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
+                            % measure 4
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/8
                             \newSpacingSection
@@ -2243,12 +2307,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "Music Voice" {
                                 {
                                     {
+                                        % measure 1
                                         \clef "treble"
                                         e'16
                                     }
                                 }
                                 {
                                     {
+                                        % measure 2
                                         \once \override Accidental.color = #red
                                         \once \override Beam.color = #red
                                         \once \override Dots.color = #red
@@ -2267,11 +2333,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                                     {
+                                        % measure 3
                                         b'16
                                     }
                                 }
                                 {
                                     {
+                                        % measure 4
                                         bf'16 [
                                         g'16
                                         a'16
@@ -2348,18 +2416,22 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
+                            % measure 2
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 7/16
                             \newSpacingSection
                             s1 * 7/16
+                            % measure 3
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
+                            % measure 4
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/8
                             \newSpacingSection
@@ -2371,12 +2443,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "Music Voice" {
                                 {
                                     {
+                                        % measure 1
                                         \clef "treble"
                                         e'16
                                     }
                                 }
                                 {
                                     {
+                                        % measure 2
                                         fs'16 [
                                         d'16
                                         ef'16
@@ -2402,11 +2476,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                                     {
+                                        % measure 3
                                         b'16
                                     }
                                 }
                                 {
                                     {
+                                        % measure 4
                                         bf'16 [
                                         g'16
                                         a'16
@@ -2484,12 +2560,16 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -2498,6 +2578,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
+                                    % measure 1
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2525,6 +2606,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 2
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2545,6 +2627,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 3
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2571,6 +2654,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 4
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2623,12 +2707,16 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -2637,6 +2725,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
+                                    % measure 1
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2664,6 +2753,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 2
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2684,6 +2774,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 3
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2710,6 +2801,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 4
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2759,12 +2851,16 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -2773,6 +2869,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
+                                    % measure 1
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2800,6 +2897,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 2
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2820,6 +2918,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 3
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2846,6 +2945,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 4
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2899,12 +2999,16 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -2913,6 +3017,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
+                                    % measure 1
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2940,6 +3045,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 2
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2960,6 +3066,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 3
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2986,6 +3093,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 4
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3044,12 +3152,16 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -3058,6 +3170,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
+                                    % measure 1
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3085,6 +3198,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 2
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3105,6 +3219,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 3
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3131,6 +3246,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 4
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3182,12 +3298,16 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -3196,6 +3316,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
+                                    % measure 1
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3223,6 +3344,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 2
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3243,6 +3365,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 3
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3269,6 +3392,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 4
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3388,12 +3512,16 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -3402,6 +3530,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
+                                    % measure 1
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3429,6 +3558,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 2
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3449,6 +3579,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 3
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3475,6 +3606,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 4
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3524,12 +3656,16 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -3538,6 +3674,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
+                                    % measure 1
                                     \clef "treble"
                                     c'8 [
                                     c'8
@@ -3545,17 +3682,20 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 2
                                     c'8 [
                                     c'8
                                     c'8 ]
                                 }
                                 {
+                                    % measure 3
                                     c'8 [
                                     c'8
                                     c'8
                                     c'8 ]
                                 }
                                 {
+                                    % measure 4
                                     c'8 [
                                     c'8
                                     c'8 ]
@@ -3647,18 +3787,22 @@ class SegmentMaker(abjad.SegmentMaker):
                 } <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
                             s1 * 3/16
+                            % measure 2
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
                             s1 * 3/16
+                            % measure 3
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
                             s1 * 3/16
+                            % measure 4
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
@@ -3670,6 +3814,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "Music Voice" {
                                 {
                                     {
+                                        % measure 1
                                         \once \override Accidental.color = #magenta
                                         \once \override Beam.color = #magenta
                                         \once \override Dots.color = #magenta
@@ -3726,6 +3871,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override Stem.color = #magenta
                                             af'16 ]
                                         }
+                                        % measure 2
                                         \once \override Accidental.color = #magenta
                                         \once \override Beam.color = #magenta
                                         \once \override Dots.color = #magenta
@@ -3737,6 +3883,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                                     {
+                                        % measure 3
                                         \once \override Accidental.color = #magenta
                                         \once \override Beam.color = #magenta
                                         \once \override Dots.color = #magenta
@@ -3785,6 +3932,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override Stem.color = #magenta
                                             c'16 ]
                                         }
+                                        % measure 4
                                         \once \override Accidental.color = #magenta
                                         \once \override Beam.color = #magenta
                                         \once \override Dots.color = #magenta
@@ -3868,18 +4016,22 @@ class SegmentMaker(abjad.SegmentMaker):
                 } <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
                             s1 * 3/16
+                            % measure 2
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
                             s1 * 3/16
+                            % measure 3
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
                             s1 * 3/16
+                            % measure 4
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
@@ -3891,6 +4043,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "Music Voice" {
                                 {
                                     {
+                                        % measure 1
                                         \clef "treble"
                                         e'8.
                                     }
@@ -3905,11 +4058,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                             a'16
                                             af'16 ]
                                         }
+                                        % measure 2
                                         c'8.
                                     }
                                 }
                                 {
                                     {
+                                        % measure 3
                                         b'8.
                                     }
                                 }
@@ -3922,6 +4077,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             af'16
                                             c'16 ]
                                         }
+                                        % measure 4
                                         f'8.
                                         \bar "|"
                                     }
@@ -3977,6 +4133,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2 ^ \markup {
                                 \fontsize
@@ -3994,10 +4151,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                         90
                                     }
                                 }
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -4006,6 +4166,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
+                                    % measure 1
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4033,6 +4194,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 2
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4053,6 +4215,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 3
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4079,6 +4242,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 4
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4133,6 +4297,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2 ^ \markup {
                                 \fontsize
@@ -4150,10 +4315,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                         90
                                     }
                                 }
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -4162,6 +4330,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
+                                    % measure 1
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4189,6 +4358,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 2
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4209,6 +4379,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 3
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4235,6 +4406,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 4
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4295,12 +4467,16 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -4309,6 +4485,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
+                                    % measure 1
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4336,6 +4513,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 2
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4356,6 +4534,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 3
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4382,6 +4561,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 4
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4431,6 +4611,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
                                 - \markup {
@@ -4440,10 +4621,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                             #blue
                                             [1]
                                     }
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -4452,6 +4636,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
+                                    % measure 1
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4479,6 +4664,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 2
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4499,6 +4685,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 3
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4525,6 +4712,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 4
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4578,6 +4766,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
                                 - \markup {
@@ -4587,10 +4776,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                             #blue
                                             [K.1]
                                     }
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -4599,6 +4791,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
+                                    % measure 1
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4626,6 +4819,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 2
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4646,6 +4840,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 3
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4672,6 +4867,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 4
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4765,12 +4961,16 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -4779,6 +4979,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
+                                    % measure 1
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4806,6 +5007,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 2
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4826,6 +5028,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 3
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4852,6 +5055,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 4
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4903,6 +5107,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2 ^ \markup {
                                 \fontsize
@@ -4920,10 +5125,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                         90
                                     }
                                 }
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -4932,6 +5140,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
+                                    % measure 1
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4959,6 +5168,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 2
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4979,6 +5189,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 3
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5005,6 +5216,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 4
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5172,12 +5384,16 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -5185,10 +5401,14 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
+                                % measure 1
                                 \clef "treble"
                                 R1 * 1/2
+                                % measure 2
                                 R1 * 3/8
+                                % measure 3
                                 R1 * 1/2
+                                % measure 4
                                 R1 * 3/8
                                 \bar "|"
                             }
@@ -5215,12 +5435,16 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -5228,10 +5452,14 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
+                                % measure 1
                                 \clef "treble"
                                 s1 * 1/2
+                                % measure 2
                                 s1 * 3/8
+                                % measure 3
                                 s1 * 1/2
+                                % measure 4
                                 s1 * 3/8
                                 \bar "|"
                             }
@@ -5311,6 +5539,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
                                 - \markup {
@@ -5320,10 +5549,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                             #blue
                                             [K.1]
                                     }
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -5332,6 +5564,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
+                                    % measure 1
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5359,6 +5592,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 2
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5379,6 +5613,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 3
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5405,6 +5640,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 4
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5459,6 +5695,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
                                 - \markup {
@@ -5468,10 +5705,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                             #blue
                                             [intermezzo.1]
                                     }
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -5480,6 +5720,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
+                                    % measure 1
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5507,6 +5748,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 2
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5527,6 +5769,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 3
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5553,6 +5796,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 4
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5624,12 +5868,16 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -5638,6 +5886,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
+                                    % measure 1
                                     \clef "treble"
                                     e'8 [
                                     f'8
@@ -5645,17 +5894,20 @@ class SegmentMaker(abjad.SegmentMaker):
                                     f'8 ]
                                 }
                                 {
+                                    % measure 2
                                     e'8 [
                                     f'8
                                     e'8 ]
                                 }
                                 {
+                                    % measure 3
                                     f'8 [
                                     e'8
                                     f'8
                                     e'8 ]
                                 }
                                 {
+                                    % measure 4
                                     f'8 [
                                     e'8
                                     f'8 ]
@@ -5704,12 +5956,16 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
+                            % measure 2
                             \time 3/8
                             s1 * 3/8
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -5718,6 +5974,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
+                                    % measure 1
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5745,6 +6002,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 2
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5765,6 +6023,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 3
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5791,6 +6050,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 4
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5842,15 +6102,19 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
+                            % measure 1
                             \time 4/8
                             s1 * 1/2
                             \repeat volta 2
                             {
-                                    \time 3/8
-                                    s1 * 3/8
+                                % measure 2
+                                \time 3/8
+                                s1 * 3/8
                             }
+                            % measure 3
                             \time 4/8
                             s1 * 1/2
+                            % measure 4
                             \time 3/8
                             s1 * 3/8
                         }
@@ -5859,6 +6123,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
+                                    % measure 1
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5886,6 +6151,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 2
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5906,6 +6172,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 3
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5932,6 +6199,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
+                                    % measure 4
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -6039,6 +6307,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._label_instrument_changes()
         self._transpose_score_()
         self._attach_rehearsal_mark()
+        self._comment_measure_numbers()
         self._add_final_barline()
         self._add_final_markup()
         self._color_unregistered_pitches()

@@ -31,12 +31,16 @@ class PitchCommand(Command):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
+                        % measure 1
                         \time 4/8
                         s1 * 1/2
+                        % measure 2
                         \time 3/8
                         s1 * 3/8
+                        % measure 3
                         \time 4/8
                         s1 * 1/2
+                        % measure 4
                         \time 3/8
                         s1 * 3/8
                     }
@@ -45,6 +49,7 @@ class PitchCommand(Command):
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
+                                % measure 1
                                 \clef "treble"
                                 g''8 [
                                 cs''8
@@ -52,17 +57,20 @@ class PitchCommand(Command):
                                 e''8 ]
                             }
                             {
+                                % measure 2
                                 f''8 [
                                 b''8
                                 g''8 ]
                             }
                             {
+                                % measure 3
                                 cs''8 [
                                 ef''8
                                 e''8
                                 f''8 ]
                             }
                             {
+                                % measure 4
                                 b''8 [
                                 g''8
                                 cs''8 ]
@@ -97,12 +105,16 @@ class PitchCommand(Command):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
+                        % measure 1
                         \time 4/8
                         s1 * 1/2
+                        % measure 2
                         \time 3/8
                         s1 * 3/8
+                        % measure 3
                         \time 4/8
                         s1 * 1/2
+                        % measure 4
                         \time 3/8
                         s1 * 3/8
                     }
@@ -111,6 +123,7 @@ class PitchCommand(Command):
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
+                                % measure 1
                                 \clef "treble"
                                 c'8 [
                                 f'8
@@ -118,17 +131,20 @@ class PitchCommand(Command):
                                 <b' cs''>8 ]
                             }
                             {
+                                % measure 2
                                 d''8 [
                                 c'8
                                 f'8 ]
                             }
                             {
+                                % measure 3
                                 fs'8 [
                                 <b' cs''>8
                                 d''8
                                 c'8 ]
                             }
                             {
+                                % measure 4
                                 f'8 [
                                 fs'8
                                 <b' cs''>8 ]
@@ -163,12 +179,16 @@ class PitchCommand(Command):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
+                        % measure 1
                         \time 4/8
                         s1 * 1/2
+                        % measure 2
                         \time 3/8
                         s1 * 3/8
+                        % measure 3
                         \time 4/8
                         s1 * 1/2
+                        % measure 4
                         \time 3/8
                         s1 * 3/8
                     }
@@ -177,6 +197,7 @@ class PitchCommand(Command):
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
+                                % measure 1
                                 \clef "treble"
                                 <c' d' e' f' g' a' b'>8 [
                                 <c' d' e' f' g' a' b'>8
@@ -184,17 +205,20 @@ class PitchCommand(Command):
                                 <c' d' e' f' g' a' b'>8 ]
                             }
                             {
+                                % measure 2
                                 <c' d' e' f' g' a' b'>8 [
                                 <c' d' e' f' g' a' b'>8
                                 <c' d' e' f' g' a' b'>8 ]
                             }
                             {
+                                % measure 3
                                 <c' d' e' f' g' a' b'>8 [
                                 <c' d' e' f' g' a' b'>8
                                 <c' d' e' f' g' a' b'>8
                                 <c' d' e' f' g' a' b'>8 ]
                             }
                             {
+                                % measure 4
                                 <c' d' e' f' g' a' b'>8 [
                                 <c' d' e' f' g' a' b'>8
                                 <c' d' e' f' g' a' b'>8 ]

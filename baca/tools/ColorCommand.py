@@ -151,12 +151,16 @@ class ColorCommand(Command):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
+                        % measure 1
                         \time 4/8
                         s1 * 1/2
+                        % measure 2
                         \time 3/8
                         s1 * 3/8
+                        % measure 3
                         \time 4/8
                         s1 * 1/2
+                        % measure 4
                         \time 3/8
                         s1 * 3/8
                     }
@@ -165,6 +169,7 @@ class ColorCommand(Command):
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
+                                % measure 1
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
@@ -192,6 +197,7 @@ class ColorCommand(Command):
                                 e''8 ]
                             }
                             {
+                                % measure 2
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
@@ -212,6 +218,7 @@ class ColorCommand(Command):
                                 e'8 ]
                             }
                             {
+                                % measure 3
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
@@ -238,6 +245,7 @@ class ColorCommand(Command):
                                 g'8 ]
                             }
                             {
+                                % measure 4
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue

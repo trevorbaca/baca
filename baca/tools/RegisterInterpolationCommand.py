@@ -134,20 +134,28 @@ class RegisterInterpolationCommand(Command):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
+                        % measure 1
                         \time 4/8
                         s1 * 1/2
+                        % measure 2
                         \time 3/8
                         s1 * 3/8
+                        % measure 3
                         \time 4/8
                         s1 * 1/2
+                        % measure 4
                         \time 3/8
                         s1 * 3/8
+                        % measure 5
                         \time 4/8
                         s1 * 1/2
+                        % measure 6
                         \time 3/8
                         s1 * 3/8
+                        % measure 7
                         \time 4/8
                         s1 * 1/2
+                        % measure 8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -156,6 +164,7 @@ class RegisterInterpolationCommand(Command):
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
+                                % measure 1
                                 \clef "treble"
                                 fs''8 [
                                 e''8
@@ -163,39 +172,46 @@ class RegisterInterpolationCommand(Command):
                                 f''8 ]
                             }
                             {
+                                % measure 2
                                 a''8 [
                                 bf''8
                                 c''8 ]
                             }
                             {
+                                % measure 3
                                 b''8 [
                                 af''8
                                 g''8
                                 cs''8 ]
                             }
                             {
+                                % measure 4
                                 d''8 [
                                 fs''8
                                 e''8 ]
                             }
                             {
+                                % measure 5
                                 ef''8 [
                                 f''8
                                 a''8
                                 bf''8 ]
                             }
                             {
+                                % measure 6
                                 c''8 [
                                 b''8
                                 af''8 ]
                             }
                             {
+                                % measure 7
                                 g''8 [
                                 cs''8
                                 d''8
                                 fs''8 ]
                             }
                             {
+                                % measure 8
                                 e''8 [
                                 ef''8
                                 f''8 ]
@@ -233,20 +249,28 @@ class RegisterInterpolationCommand(Command):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
+                        % measure 1
                         \time 4/8
                         s1 * 1/2
+                        % measure 2
                         \time 3/8
                         s1 * 3/8
+                        % measure 3
                         \time 4/8
                         s1 * 1/2
+                        % measure 4
                         \time 3/8
                         s1 * 3/8
+                        % measure 5
                         \time 4/8
                         s1 * 1/2
+                        % measure 6
                         \time 3/8
                         s1 * 3/8
+                        % measure 7
                         \time 4/8
                         s1 * 1/2
+                        % measure 8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -255,6 +279,7 @@ class RegisterInterpolationCommand(Command):
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
+                                % measure 1
                                 \clef "treble"
                                 fs''8 [
                                 e''8
@@ -262,39 +287,46 @@ class RegisterInterpolationCommand(Command):
                                 f''8 ]
                             }
                             {
+                                % measure 2
                                 a''8 [
                                 bf'8
                                 c''8 ]
                             }
                             {
+                                % measure 3
                                 b'8 [
                                 af'8
                                 g''8
                                 cs''8 ]
                             }
                             {
+                                % measure 4
                                 d''8 [
                                 fs'8
                                 e''8 ]
                             }
                             {
+                                % measure 5
                                 ef''8 [
                                 f'8
                                 a'8
                                 bf'8 ]
                             }
                             {
+                                % measure 6
                                 c''8 [
                                 b'8
                                 af'8 ]
                             }
                             {
+                                % measure 7
                                 g'8 [
                                 cs''8
                                 d'8
                                 fs'8 ]
                             }
                             {
+                                % measure 8
                                 e'8 [
                                 ef'8
                                 f'8 ]
@@ -332,20 +364,28 @@ class RegisterInterpolationCommand(Command):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
+                        % measure 1
                         \time 4/8
                         s1 * 1/2
+                        % measure 2
                         \time 3/8
                         s1 * 3/8
+                        % measure 3
                         \time 4/8
                         s1 * 1/2
+                        % measure 4
                         \time 3/8
                         s1 * 3/8
+                        % measure 5
                         \time 4/8
                         s1 * 1/2
+                        % measure 6
                         \time 3/8
                         s1 * 3/8
+                        % measure 7
                         \time 4/8
                         s1 * 1/2
+                        % measure 8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -354,6 +394,7 @@ class RegisterInterpolationCommand(Command):
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
+                                % measure 1
                                 \clef "treble"
                                 fs'8 [
                                 e'8
@@ -361,39 +402,46 @@ class RegisterInterpolationCommand(Command):
                                 f'8 ]
                             }
                             {
+                                % measure 2
                                 a'8 [
                                 bf'8
                                 c''8 ]
                             }
                             {
+                                % measure 3
                                 b'8 [
                                 af'8
                                 g'8
                                 cs''8 ]
                             }
                             {
+                                % measure 4
                                 d''8 [
                                 fs'8
                                 e''8 ]
                             }
                             {
+                                % measure 5
                                 ef''8 [
                                 f''8
                                 a'8
                                 bf'8 ]
                             }
                             {
+                                % measure 6
                                 c''8 [
                                 b'8
                                 af'8 ]
                             }
                             {
+                                % measure 7
                                 g''8 [
                                 cs''8
                                 d''8
                                 fs''8 ]
                             }
                             {
+                                % measure 8
                                 e''8 [
                                 ef''8
                                 f''8 ]
@@ -431,20 +479,28 @@ class RegisterInterpolationCommand(Command):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
+                        % measure 1
                         \time 4/8
                         s1 * 1/2
+                        % measure 2
                         \time 3/8
                         s1 * 3/8
+                        % measure 3
                         \time 4/8
                         s1 * 1/2
+                        % measure 4
                         \time 3/8
                         s1 * 3/8
+                        % measure 5
                         \time 4/8
                         s1 * 1/2
+                        % measure 6
                         \time 3/8
                         s1 * 3/8
+                        % measure 7
                         \time 4/8
                         s1 * 1/2
+                        % measure 8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -453,6 +509,7 @@ class RegisterInterpolationCommand(Command):
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
+                                % measure 1
                                 \clef "treble"
                                 fs''8 [
                                 e''8
@@ -460,39 +517,46 @@ class RegisterInterpolationCommand(Command):
                                 f''8 ]
                             }
                             {
+                                % measure 2
                                 a'8 [
                                 bf'8
                                 c''8 ]
                             }
                             {
+                                % measure 3
                                 b'8 [
                                 af'8
                                 g'8
                                 cs''8 ]
                             }
                             {
+                                % measure 4
                                 d'8 [
                                 fs'8
                                 e'8 ]
                             }
                             {
+                                % measure 5
                                 ef'8 [
                                 f'8
                                 a'8
                                 bf8 ]
                             }
                             {
+                                % measure 6
                                 c'8 [
                                 b8
                                 af8 ]
                             }
                             {
+                                % measure 7
                                 g8 [
                                 cs'8
                                 d'8
                                 fs8 ]
                             }
                             {
+                                % measure 8
                                 e8 [
                                 ef8
                                 f8 ]
@@ -530,20 +594,28 @@ class RegisterInterpolationCommand(Command):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
+                        % measure 1
                         \time 4/8
                         s1 * 1/2
+                        % measure 2
                         \time 3/8
                         s1 * 3/8
+                        % measure 3
                         \time 4/8
                         s1 * 1/2
+                        % measure 4
                         \time 3/8
                         s1 * 3/8
+                        % measure 5
                         \time 4/8
                         s1 * 1/2
+                        % measure 6
                         \time 3/8
                         s1 * 3/8
+                        % measure 7
                         \time 4/8
                         s1 * 1/2
+                        % measure 8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -552,6 +624,7 @@ class RegisterInterpolationCommand(Command):
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
+                                % measure 1
                                 \clef "treble"
                                 fs8 [
                                 e8
@@ -559,39 +632,46 @@ class RegisterInterpolationCommand(Command):
                                 f8 ]
                             }
                             {
+                                % measure 2
                                 a8 [
                                 bf8
                                 c'8 ]
                             }
                             {
+                                % measure 3
                                 b8 [
                                 af8
                                 g'8
                                 cs'8 ]
                             }
                             {
+                                % measure 4
                                 d'8 [
                                 fs'8
                                 e'8 ]
                             }
                             {
+                                % measure 5
                                 ef'8 [
                                 f'8
                                 a'8
                                 bf'8 ]
                             }
                             {
+                                % measure 6
                                 c''8 [
                                 b'8
                                 af'8 ]
                             }
                             {
+                                % measure 7
                                 g'8 [
                                 cs''8
                                 d''8
                                 fs''8 ]
                             }
                             {
+                                % measure 8
                                 e''8 [
                                 ef''8
                                 f''8 ]

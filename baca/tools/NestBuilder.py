@@ -135,10 +135,12 @@ class NestBuilder(Builder):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
+                        % measure 1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                         \time 1/2
                         \newSpacingSection
                         s1 * 1/2
+                        % measure 2
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                         \time 1/4
                         \newSpacingSection
@@ -154,6 +156,7 @@ class NestBuilder(Builder):
                                 \tweak text #tuplet-number::calc-fraction-text
                                 \times 8/7 {
                                     {
+                                        % measure 1
                                         \set stemLeftBeamCount = #0
                                         \set stemRightBeamCount = #2
                                         \clef "treble"
@@ -183,6 +186,7 @@ class NestBuilder(Builder):
                             }
                             {
                                 {
+                                    % measure 2
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #2
                                     g''16

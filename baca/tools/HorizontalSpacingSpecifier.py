@@ -32,12 +32,16 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
+                        % measure 1
                         \time 8/16
                         s1 * 1/2
+                        % measure 2
                         \time 4/8
                         s1 * 1/2
+                        % measure 3
                         \time 2/4
                         s1 * 1/2
+                        % measure 4
                         \time 1/2
                         s1 * 1/2
                     }
@@ -46,6 +50,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
+                                % measure 1
                                 \clef "treble"
                                 e'16 [
                                 f'16
@@ -57,16 +62,19 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 f'16 ]
                             }
                             {
+                                % measure 2
                                 e'8 [
                                 f'8
                                 e'8
                                 f'8 ]
                             }
                             {
+                                % measure 3
                                 e'4
                                 f'4
                             }
                             {
+                                % measure 4
                                 e'2
                                 \bar "|"
                             }
@@ -102,18 +110,22 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
+                        % measure 1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                         \time 8/16
                         \newSpacingSection
                         s1 * 1/2
+                        % measure 2
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
                         \time 4/8
                         \newSpacingSection
                         s1 * 1/2
+                        % measure 3
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)
                         \time 2/4
                         \newSpacingSection
                         s1 * 1/2
+                        % measure 4
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 2)
                         \time 1/2
                         \newSpacingSection
@@ -124,6 +136,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
+                                % measure 1
                                 \clef "treble"
                                 e'16 [
                                 f'16
@@ -135,16 +148,19 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 f'16 ]
                             }
                             {
+                                % measure 2
                                 e'8 [
                                 f'8
                                 e'8
                                 f'8 ]
                             }
                             {
+                                % measure 3
                                 e'4
                                 f'4
                             }
                             {
+                                % measure 4
                                 e'2
                                 \bar "|"
                             }
@@ -182,18 +198,22 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
+                        % measure 1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                         \time 8/16
                         \newSpacingSection
                         s1 * 1/2
+                        % measure 2
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
                         \time 4/8
                         \newSpacingSection
                         s1 * 1/2
+                        % measure 3
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)
                         \time 2/4
                         \newSpacingSection
                         s1 * 1/2
+                        % measure 4
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 2)
                         \time 1/2
                         \newSpacingSection
@@ -204,6 +224,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
+                                % measure 1
                                 \clef "treble"
                                 e'16 [
                                 f'16
@@ -215,16 +236,19 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 f'16 ]
                             }
                             {
+                                % measure 2
                                 e'8 [
                                 f'8
                                 e'8
                                 f'8 ]
                             }
                             {
+                                % measure 3
                                 e'4
                                 f'4
                             }
                             {
+                                % measure 4
                                 e'2
                                 \bar "|"
                             }
@@ -263,18 +287,22 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
+                        % measure 1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)
                         \time 8/16
                         \newSpacingSection
                         s1 * 1/2
+                        % measure 2
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                         \time 4/8
                         \newSpacingSection
                         s1 * 1/2
+                        % measure 3
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
                         \time 2/4
                         \newSpacingSection
                         s1 * 1/2
+                        % measure 4
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)
                         \time 1/2
                         \newSpacingSection
@@ -285,6 +313,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
+                                % measure 1
                                 \clef "treble"
                                 e'16 [
                                 f'16
@@ -296,16 +325,19 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 f'16 ]
                             }
                             {
+                                % measure 2
                                 e'8 [
                                 f'8
                                 e'8
                                 f'8 ]
                             }
                             {
+                                % measure 3
                                 e'4
                                 f'4
                             }
                             {
+                                % measure 4
                                 e'2
                                 \bar "|"
                             }
@@ -345,18 +377,22 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
+                        % measure 1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)
                         \time 8/16
                         \newSpacingSection
                         s1 * 1/2
+                        % measure 2
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                         \time 4/8
                         \newSpacingSection
                         s1 * 1/2
+                        % measure 3
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                         \time 2/4
                         \newSpacingSection
                         s1 * 1/2
+                        % measure 4
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                         \time 1/2
                         \newSpacingSection
@@ -367,6 +403,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
+                                % measure 1
                                 \clef "treble"
                                 e'16 [
                                 f'16
@@ -378,16 +415,19 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 f'16 ]
                             }
                             {
+                                % measure 2
                                 e'8 [
                                 f'8
                                 e'8
                                 f'8 ]
                             }
                             {
+                                % measure 3
                                 e'4
                                 f'4
                             }
                             {
+                                % measure 4
                                 e'2
                                 \bar "|"
                             }
@@ -437,10 +477,12 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
+                        % measure 1
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                         \time 4/8
                         \newSpacingSection
                         s1 * 1/2
+                        % measure 2
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                         \time 3/8
                         \newSpacingSection
@@ -481,6 +523,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                         }
                                 }
                             \times 1/1 {
+                                % measure 1
                                 \once \override Beam.grow-direction = #right
                                 \clef "treble"
                                 e'16 * 63/32 [
@@ -522,6 +565,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                         }
                                 }
                             \times 1/1 {
+                                % measure 2
                                 \once \override Beam.grow-direction = #right
                                 e'16 * 117/64 [
                                 f'16 * 99/64

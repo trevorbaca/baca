@@ -85,12 +85,16 @@ class IndicatorCommand(Command):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
+                        % measure 1
                         \time 4/8
                         s1 * 1/2
+                        % measure 2
                         \time 3/8
                         s1 * 3/8
+                        % measure 3
                         \time 4/8
                         s1 * 1/2
+                        % measure 4
                         \time 3/8
                         s1 * 3/8
                     }
@@ -99,6 +103,7 @@ class IndicatorCommand(Command):
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
+                                % measure 1
                                 \clef "treble"
                                 e'8 \fermata [
                                 d''8 \fermata
@@ -106,17 +111,20 @@ class IndicatorCommand(Command):
                                 e''8 \fermata ]
                             }
                             {
+                                % measure 2
                                 g'8 \fermata [
                                 f''8 \fermata
                                 e'8 \fermata ]
                             }
                             {
+                                % measure 3
                                 d''8 \fermata [
                                 f'8 \fermata
                                 e''8 \fermata
                                 g'8 \fermata ]
                             }
                             {
+                                % measure 4
                                 f''8 \fermata [
                                 e'8 \fermata
                                 d''8 \fermata ]
