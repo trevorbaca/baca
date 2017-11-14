@@ -40,7 +40,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             >>> abjad.f(lilypond_file[abjad.Staff])
             \new Staff {
-                {
+                { % measure
                     \time 3/4
                     {
                         c'8
@@ -85,7 +85,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         bf'8
                     }
-                }
+                } % measure
             }
 
     '''
@@ -201,7 +201,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 3/4
                         {
                             c'8
@@ -246,7 +246,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             bf'8
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -284,7 +284,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 3/4
                         {
                             c'8
@@ -329,7 +329,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             bf'8
                         }
-                    }
+                    } % measure
                 }
 
         Defaults to none.
@@ -377,7 +377,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 3/4
                         {
                             c'8
@@ -422,7 +422,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             bf'8
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -464,7 +464,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 3/2
                         {
                             c'8
@@ -509,7 +509,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             d'8
                             bf'8 ]
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -551,7 +551,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 3/2
                         {
                             c'8
@@ -596,7 +596,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             bf'8 ]
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -640,7 +640,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 9/8
                         {
                             c'8
@@ -689,7 +689,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             bf'8 ]
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -729,7 +729,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 11/8
                         {
                             c'8
@@ -772,7 +772,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             bf'8 ]
                         }
-                    }
+                    } % measure
                 }
 
         Defaults to none.
@@ -820,7 +820,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 3/4
                         {
                             c'8
@@ -865,7 +865,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             bf'8
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -903,7 +903,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 2/1
                         {
                             c'8
@@ -940,7 +940,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             bf'8
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -978,7 +978,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 3/2
                         {
                             c'8
@@ -1019,7 +1019,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             bf'8
                         }
-                    }
+                    } % measure
                 }
 
         Defaults to none.

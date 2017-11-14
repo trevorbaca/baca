@@ -150,24 +150,24 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
-                    {
+                    { % measure
                         \time 2/8
                         c'4
-                    }
-                    {
+                    } % measure
+                    { % measure
                         c'4
-                    }
-                    {
+                    } % measure
+                    { % measure
                         \time 4/8
                         c'2
-                    }
-                    {
+                    } % measure
+                    { % measure
                         c'2
-                    }
-                    {
+                    } % measure
+                    { % measure
                         \time 2/4
                         c'2
-                    }
+                    } % measure
                 }
 
         ..  container:: example

@@ -685,12 +685,12 @@ class PitchArrayRow(abjad.AbjadObject):
             ..  docs::
 
                 >>> abjad.f(measure)
-                {
+                { % measure
                     \time 4/8
                     r8
                     d'8
                     <bf bqf>4
-                }
+                } % measure
 
         Returns measure.
         '''

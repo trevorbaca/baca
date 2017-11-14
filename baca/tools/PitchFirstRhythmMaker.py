@@ -30,7 +30,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             >>> abjad.f(lilypond_file[abjad.Staff])
             \new Staff {
-                {
+                { % measure
                     \time 5/16
                     {
                         c'16 [
@@ -38,7 +38,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         bf'8
                         af'16 ]
                     }
-                }
+                } % measure
             }
 
         >>> collections = [[18, 16, 15, 20, 19]]
@@ -50,7 +50,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             >>> abjad.f(lilypond_file[abjad.Staff])
             \new Staff {
-                {
+                { % measure
                     \time 3/8
                     {
                         fs''16 [
@@ -59,7 +59,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         af''16
                         g''16 ]
                     }
-                }
+                } % measure
             }
 
         >>> collections = [[9]]
@@ -71,12 +71,12 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             >>> abjad.f(lilypond_file[abjad.Staff])
             \new Staff {
-                {
+                { % measure
                     \time 1/16
                     {
                         a'16
                     }
-                }
+                } % measure
             }
 
         >>> collections = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
@@ -88,7 +88,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             >>> abjad.f(lilypond_file[abjad.Staff])
             \new Staff {
-                {
+                { % measure
                     \time 13/16
                     {
                         c'16 [
@@ -106,7 +106,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                     {
                         a'16
                     }
-                }
+                } % measure
             }
 
     '''
@@ -202,7 +202,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 3/4
                         {
                             c'16 [
@@ -219,7 +219,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         {
                             a'8
                         }
-                    }
+                    } % measure
                 }
 
             >>> rhythm_maker._print_state_manifest()
@@ -250,7 +250,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 3/4
                         {
                             c'8 [
@@ -267,7 +267,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         {
                             a'16
                         }
-                    }
+                    } % measure
                 }
 
             >>> rhythm_maker._print_state_manifest()
@@ -760,7 +760,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 3/2
                         {
                             c'4
@@ -805,7 +805,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             }
                             bf'4
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -844,7 +844,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 7/4
                         {
                             r4
@@ -900,7 +900,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             }
                             r4
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -946,7 +946,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
-                    {
+                    { % measure
                         \time 15/16
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 5/4 {
@@ -966,7 +966,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         \times 3/2 {
                             a'8
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -997,7 +997,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                 \new Staff \with {
                     \override Beam.positions = #'(-5.5 . -5.5)
                 } {
-                    {
+                    { % measure
                         \time 15/16
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 5/4 {
@@ -1035,7 +1035,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             \set stemRightBeamCount = #0
                             a'8 ]
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -1062,7 +1062,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 15/16
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 5/4 {
@@ -1082,7 +1082,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         \times 3/2 {
                             a'8
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -1110,7 +1110,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
-                    {
+                    { % measure
                         \time 15/16
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 5/4 {
@@ -1130,7 +1130,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         \times 3/2 {
                             a'8
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -1161,7 +1161,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
-                    {
+                    { % measure
                         \time 15/16
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 5/4 {
@@ -1181,7 +1181,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         \times 3/2 {
                             a'8
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -1213,7 +1213,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
-                    {
+                    { % measure
                         \time 15/16
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 5/4 {
@@ -1239,7 +1239,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             \override Staff.Stem.stemlet-length = #0.75
                             a'8
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -1280,7 +1280,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 3/4
                         {
                             c'16 [
@@ -1297,7 +1297,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         {
                             a'8
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -1323,7 +1323,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 3/4
                         {
                             c'16 [
@@ -1334,7 +1334,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         {
                             a'8
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -1360,7 +1360,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 3/4
                         {
                             c'16 [
@@ -1371,7 +1371,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         {
                             a'8
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -1413,7 +1413,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 39/32
                         {
                             c'8 [
@@ -1433,7 +1433,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             a'8 ~ [
                             a'32 ]
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -1460,7 +1460,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 39/32
                         {
                             c'8 [
@@ -1480,7 +1480,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             a'32 ~ [
                             a'8 ]
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -1524,7 +1524,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 3/4
                         {
                             c'16 [
@@ -1541,7 +1541,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         {
                             r8
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -1568,7 +1568,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 3/4
                         {
                             r16
@@ -1585,7 +1585,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         {
                             r8
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -1630,7 +1630,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 3/2
                         {
                             \override Staff.Stem.stemlet-length = #1.5
@@ -1656,7 +1656,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             \override Staff.Stem.stemlet-length = #1.5
                             a'8
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -1682,7 +1682,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 29/32
                         {
                             c'4..
@@ -1690,7 +1690,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             d'4..
                             d'64 \repeatTie
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -1734,7 +1734,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 3/4
                         {
                             c'16 [
@@ -1751,7 +1751,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         {
                             a'8
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -1777,7 +1777,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 3/4
                         {
                             c'16 [
@@ -1794,7 +1794,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         {
                             g''8
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -1836,7 +1836,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 15/16
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 5/4 {
@@ -1856,7 +1856,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         \times 3/2 {
                             a'8
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -1880,7 +1880,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new Staff {
-                    {
+                    { % measure
                         \time 5/8
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 3/4 {
@@ -1899,7 +1899,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         {
                             a'8
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -1936,7 +1936,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                     \override Beam.positions = #'(-5 . -5)
                     \override Stem.direction = #down
                 } {
-                    {
+                    { % measure
                         \time 21/16
                         {
                             c'16
@@ -2132,7 +2132,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             bf'16 * 656/1024 ]
                         }
                         \revert TupletNumber.text
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -2169,7 +2169,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                     \override Beam.positions = #'(-5 . -5)
                     \override Stem.direction = #down
                 } {
-                    {
+                    { % measure
                         \time 21/16
                         {
                             c'16
@@ -2365,7 +2365,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             bf'16 * 1568/1024 ]
                         }
                         \revert TupletNumber.text
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -2400,7 +2400,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                     \override Beam.positions = #'(-5 . -5)
                     \override Stem.direction = #down
                 } {
-                    {
+                    { % measure
                         \time 11/8
                         \override TupletNumber.text = \markup {
                             \scale
@@ -2562,7 +2562,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             fs''16 * 1568/1024 ]
                         }
                         \revert TupletNumber.text
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -2599,7 +2599,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                     \override Beam.positions = #'(-5 . -5)
                     \override Stem.direction = #down
                 } {
-                    {
+                    { % measure
                         \time 13/8
                         \override TupletNumber.text = \markup {
                             \scale
@@ -2777,7 +2777,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             bf'16 * 1568/1024 ]
                         }
                         \revert TupletNumber.text
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -2814,7 +2814,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                     \override Beam.positions = #'(-6 . -6)
                     \override Stem.direction = #down
                 } {
-                    {
+                    { % measure
                         \time 7/4
                         \tweak edge-height #'(0.7 . 0)
                         \times 2/3 {
@@ -2853,7 +2853,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             d'8
                             bf'8 ]
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -2893,7 +2893,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                     \override Beam.positions = #'(-6 . -6)
                     \override Stem.direction = #down
                 } {
-                    {
+                    { % measure
                         \time 3/2
                         {
                             c'4
@@ -2928,7 +2928,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             d'16
                             bf'16 ]
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -2969,7 +2969,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                     \override Beam.positions = #'(-6 . -6)
                     \override Stem.direction = #down
                 } {
-                    {
+                    { % measure
                         \time 15/8
                         \times 4/6 {
                             c'16 [
@@ -3015,7 +3015,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             d'16
                             bf'8 ]
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -3064,7 +3064,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
-                    {
+                    { % measure
                         \time 11/8
                         \times 2/3 {
                             c'8. [
@@ -3086,7 +3086,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             a'8. ]
                             r8.
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -3117,7 +3117,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
-                    {
+                    { % measure
                         \time 11/8
                         {
                             c'8 [
@@ -3139,7 +3139,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             a'8. ]
                             r8.
                         }
-                    }
+                    } % measure
                 }
 
         ..  container:: example

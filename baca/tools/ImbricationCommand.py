@@ -41,10 +41,10 @@ class ImbricationCommand(Command):
             >>> abjad.f(lilypond_file[abjad.Score])
             \new Score <<
                 \new GlobalContext {
-                    {
+                    { % measure
                         \time 15/16
                         s1 * 15/16
-                    }
+                    } % measure
                 }
                 \new Staff <<
                     \context Voice = "Voice 1" {
@@ -175,10 +175,10 @@ class ImbricationCommand(Command):
             >>> abjad.f(lilypond_file[abjad.Score])
             \new Score <<
                 \new GlobalContext {
-                    {
+                    { % measure
                         \time 15/16
                         s1 * 15/16
-                    }
+                    } % measure
                 }
                 \new Staff <<
                     \context Voice = "Voice 1" {
@@ -356,10 +356,10 @@ class ImbricationCommand(Command):
             >>> abjad.f(lilypond_file[abjad.Score])
             \new Score <<
                 \new GlobalContext {
-                    {
+                    { % measure
                         \time 9/8
                         s1 * 9/8
-                    }
+                    } % measure
                 }
                 \new Staff <<
                     \context Voice = "Voice 1" {
@@ -569,10 +569,10 @@ class ImbricationCommand(Command):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
-                        {
+                        { % measure
                             \time 27/16
                             s1 * 27/16
-                        }
+                        } % measure
                     }
                     \new Staff <<
                         \context Voice = "Voice 1" {
@@ -664,10 +664,10 @@ class ImbricationCommand(Command):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
-                        {
+                        { % measure
                             \time 9/8
                             s1 * 9/8
-                        }
+                        } % measure
                     }
                     \new Staff <<
                         \context Voice = "Voice 1" {
@@ -976,10 +976,10 @@ class ImbricationCommand(Command):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
-                        {
+                        { % measure
                             \time 11/16
                             s1 * 11/16
-                        }
+                        } % measure
                     }
                     \new Staff <<
                         \context Voice = "Voice 1" {
@@ -1087,10 +1087,10 @@ class ImbricationCommand(Command):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
-                        {
+                        { % measure
                             \time 19/16
                             s1 * 19/16
-                        }
+                        } % measure
                     }
                     \new Staff <<
                         \context Voice = "Voice 1" {
@@ -1369,10 +1369,10 @@ class ImbricationCommand(Command):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
-                        {
+                        { % measure
                             \time 5/8
                             s1 * 5/8
-                        }
+                        } % measure
                     }
                     \new Staff <<
                         \context Voice = "Voice 1" {
@@ -1554,10 +1554,10 @@ class ImbricationCommand(Command):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
-                        {
+                        { % measure
                             \time 15/16
                             s1 * 15/16
-                        }
+                        } % measure
                     }
                     \new Staff <<
                         \context Voice = "Voice 1" {
@@ -1710,10 +1710,10 @@ class ImbricationCommand(Command):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
-                        {
+                        { % measure
                             \time 9/8
                             s1 * 9/8
-                        }
+                        } % measure
                     }
                     \new Staff <<
                         \context Voice = "Voice 1" {
@@ -1881,10 +1881,10 @@ class ImbricationCommand(Command):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
-                        {
+                        { % measure
                             \time 15/16
                             s1 * 15/16
-                        }
+                        } % measure
                     }
                     \new Staff <<
                         \context Voice = "Voice 1" {
@@ -2010,10 +2010,10 @@ class ImbricationCommand(Command):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
-                        {
+                        { % measure
                             \time 15/16
                             s1 * 15/16
-                        }
+                        } % measure
                     }
                     \new Staff <<
                         \context Voice = "Voice 1" {
@@ -2147,10 +2147,10 @@ class ImbricationCommand(Command):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
-                        {
+                        { % measure
                             \time 15/16
                             s1 * 15/16
-                        }
+                        } % measure
                     }
                     \new Staff <<
                         \context Voice = "Voice 1" {
@@ -2286,10 +2286,10 @@ class ImbricationCommand(Command):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
-                        {
+                        { % measure
                             \time 15/16
                             s1 * 15/16
-                        }
+                        } % measure
                     }
                     \new Staff <<
                         \context Voice = "Voice 1" {
@@ -2423,10 +2423,10 @@ class ImbricationCommand(Command):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \new Score <<
                     \new GlobalContext {
-                        {
+                        { % measure
                             \time 45/32
                             s1 * 45/32
-                        }
+                        } % measure
                     }
                     \new Staff <<
                         \context Voice = "Voice 1" {

@@ -79,7 +79,7 @@ class TimeSignatureGroups(abjad.AbjadObject):
                     \override TextScript.extra-offset = #'(-4 . 0)
                     \override TextScript.staff-padding = #4.5
                 } {
-                    {
+                    { % measure
                         \time 3/8
                         r1 * 3/8 \startGroup
                             ^ \markup {
@@ -87,16 +87,16 @@ class TimeSignatureGroups(abjad.AbjadObject):
                                     \smaller
                                         0
                                 }
-                    }
-                    {
+                    } % measure
+                    { % measure
                         \time 3/16
                         r1 * 3/16
-                    }
-                    {
+                    } % measure
+                    { % measure
                         \time 3/16
                         r1 * 3/16 \stopGroup
-                    }
-                    {
+                    } % measure
+                    { % measure
                         \time 5/8
                         r1 * 5/8 \startGroup
                             ^ \markup {
@@ -104,19 +104,19 @@ class TimeSignatureGroups(abjad.AbjadObject):
                                     \smaller
                                         1
                                 }
-                    }
-                    {
+                    } % measure
+                    { % measure
                         \time 5/16
                         r1 * 5/16
-                    }
-                    {
+                    } % measure
+                    { % measure
                         \time 5/16
                         r1 * 5/16
-                    }
-                    {
+                    } % measure
+                    { % measure
                         \time 5/16
                         r1 * 5/16 \stopGroup
-                    }
+                    } % measure
                 }
             >>
 

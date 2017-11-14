@@ -828,17 +828,17 @@ class PitchArray(abjad.AbjadObject):
 
                 >>> abjad.f(staff)
                 \new Staff {
-                    {
+                    { % measure
                         \time 4/8
                         r8
                         d'8
                         <bf bqf>4
-                    }
-                    {
+                    } % measure
+                    { % measure
                         g'4
                         fs'8
                         r8
-                    }
+                    } % measure
                 }
 
         Returns list of measures.

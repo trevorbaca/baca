@@ -136,32 +136,32 @@ class PitchArrayList(abjad.TypedList):
                 \new Score <<
                     \new StaffGroup <<
                         \new Staff {
-                            {
+                            { % measure
                                 \time 4/8
                                 r8
                                 d'8
                                 <bf bqf>4
-                            }
-                            {
+                            } % measure
+                            { % measure
                                 \time 3/8
                                 r8
                                 r8
                                 r8
-                            }
+                            } % measure
                         }
                         \new Staff {
-                            {
+                            { % measure
                                 \time 4/8
                                 g'4
                                 fs'8
                                 r8
-                            }
-                            {
+                            } % measure
+                            { % measure
                                 \time 3/8
                                 r8
                                 r8
                                 r8
-                            }
+                            } % measure
                         }
                     >>
                 >>

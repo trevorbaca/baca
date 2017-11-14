@@ -35,24 +35,24 @@ class DivisionMaker(abjad.AbjadValueObject):
 
             >>> abjad.f(lilypond_file[abjad.Staff])
             \new RhythmicStaff {
-                {
+                { % measure
                     \time 7/8
                     c'4
                     c'4
                     c'4
                     c'8
-                }
-                {
+                } % measure
+                { % measure
                     \time 3/8
                     c'4
                     c'8
-                }
-                {
+                } % measure
+                { % measure
                     \time 5/8
                     c'4
                     c'4
                     c'8
-                }
+                } % measure
             }
 
     ..  container:: example
@@ -146,21 +146,21 @@ class DivisionMaker(abjad.AbjadValueObject):
 
             >>> abjad.f(lilypond_file[abjad.Staff])
             \new RhythmicStaff {
-                {
+                { % measure
                     \time 7/8
                     c'4.
                     c'4.
                     c'8
-                }
-                {
+                } % measure
+                { % measure
                     \time 3/8
                     c'4.
-                }
-                {
+                } % measure
+                { % measure
                     \time 5/8
                     c'4.
                     c'4
-                }
+                } % measure
             }
 
         Splits every division by ``3/8`` and then fuses flattened divisions
@@ -645,24 +645,24 @@ class DivisionMaker(abjad.AbjadValueObject):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
-                    {
+                    { % measure
                         \time 7/8
                         c'4
                         c'4
                         c'4
                         c'8
-                    }
-                    {
+                    } % measure
+                    { % measure
                         c'4
                         c'4
                         c'4
                         c'8
-                    }
-                    {
+                    } % measure
+                    { % measure
                         \time 7/16
                         c'4
                         c'8.
-                    }
+                    } % measure
                 }
 
         ..  container:: example
@@ -693,24 +693,24 @@ class DivisionMaker(abjad.AbjadValueObject):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
-                    {
+                    { % measure
                         \time 7/8
                         c'8
                         c'4
                         c'4
                         c'4
-                    }
-                    {
+                    } % measure
+                    { % measure
                         c'8
                         c'4
                         c'4
                         c'4
-                    }
-                    {
+                    } % measure
+                    { % measure
                         \time 7/16
                         c'8.
                         c'4
-                    }
+                    } % measure
                 }
 
         Returns new division-maker.
@@ -757,16 +757,16 @@ class DivisionMaker(abjad.AbjadValueObject):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
-                    {
+                    { % measure
                         \time 5/8
                         c'4.
                         c'4
-                    }
-                    {
+                    } % measure
+                    { % measure
                         \time 6/8
                         c'2
                         c'4
-                    }
+                    } % measure
                 }
 
 
@@ -799,17 +799,17 @@ class DivisionMaker(abjad.AbjadValueObject):
 
                 >>> abjad.f(lilypond_file[abjad.Staff])
                 \new RhythmicStaff {
-                    {
+                    { % measure
                         \time 5/8
                         c'4.
                         c'4
-                    }
-                    {
+                    } % measure
+                    { % measure
                         \time 6/8
                         c'4
                         c'4
                         c'4
-                    }
+                    } % measure
                 }
 
         Returns new division-maker.

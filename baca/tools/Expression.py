@@ -103,19 +103,19 @@ class Expression(abjad.Expression):
 
                     >>> abjad.f(staff)
                     \new Staff {
-                        {
+                        { % measure
                             \time 2/8
                             <c' bf'>8
                             <g' a'>8
-                        }
-                        {
+                        } % measure
+                        { % measure
                             af'8
                             r8
-                        }
-                        {
+                        } % measure
+                        { % measure
                             r8
                             gf'8
-                        }
+                        } % measure
                     }
 
             ..  container:: example expression
