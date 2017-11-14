@@ -251,8 +251,9 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.alternate_bow_strokes(
-            ...         selector=baca.tuplets()[1:2].pheads().group(),
+            ...     baca.map(
+            ...         baca.alternate_bow_strokes(),
+            ...         baca.tuplet(1),
             ...         ),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(6),
@@ -1325,10 +1326,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.beam_positions(
-            ...         6,
-            ...         baca.tuplets()[1:2].leaves().group(),
-            ...         ),
+            ...     baca.beam_positions(6, baca.tuplet(1)),
             ...     baca.rests_around([2], [4]),
             ...     time_treatments=[-1],
             ...     )
@@ -2311,9 +2309,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.cross_note_heads(
-            ...         baca.tuplets()[1:2].leaves().group(),
-            ...         ),
+            ...     baca.cross_note_heads(baca.tuplet(1)),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -3348,10 +3344,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.dynamic_line_spanner_staff_padding(
-            ...         n=4,
-            ...         selector=baca.tuplets()[1:2].leaves().group(),
-            ...         ),
+            ...     baca.dynamic_line_spanner_staff_padding(4, baca.tuplet(1)),
             ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
@@ -3475,9 +3468,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> contribution = music_maker(
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.dynamic_line_spanner_up(
-            ...         baca.tuplets()[1:2].leaves().group(),
-            ...         ),
+            ...     baca.dynamic_line_spanner_up(baca.tuplet(1)),
             ...     baca.map(baca.hairpin('p < f'), baca.tuplets()),
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),

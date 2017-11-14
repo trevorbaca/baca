@@ -224,10 +224,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
-            ...     baca.text_script_color(
-            ...         'red',
-            ...         baca.tuplets()[1:2].leaves().group(),
-            ...         ),
+            ...     baca.map(baca.text_script_color('red'), baca.tuplet(1)),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -380,10 +377,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
-            ...     baca.text_script_padding(
-            ...         4,
-            ...         baca.tuplets()[1:2].leaves().group(),
-            ...         ),
+            ...     baca.map(baca.text_script_padding(4), baca.tuplet(1)),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -535,9 +529,9 @@ class LibraryTZ(abjad.AbjadObject):
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
-            ...     baca.text_script_staff_padding(
-            ...         n=4,
-            ...         selector=baca.tuplets()[1:2].leaves().group(),
+            ...     baca.map(
+            ...         baca.text_script_staff_padding(4),
+            ...         baca.tuplet(1),
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -690,9 +684,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
-            ...     baca.text_scripts_down(
-            ...         selector=baca.tuplets()[1:2].leaves().group(),
-            ...         ),
+            ...     baca.map(baca.text_scripts_down(), baca.tuplet(1)),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -844,9 +836,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...         baca.tuplets()[1:2].phead(0),
             ...         ),
             ...     baca.rests_around([2], [4]),
-            ...     baca.text_scripts_up(
-            ...         selector=baca.tuplets()[1:2].leaves().group(),
-            ...         ),
+            ...     baca.map(baca.text_scripts_up(), baca.tuplet(1)),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -1021,9 +1011,9 @@ class LibraryTZ(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
-            ...     baca.text_spanner_staff_padding(
-            ...         n=6,
-            ...         selector=baca.tuplets()[1:2].pleaves().group(),
+            ...     baca.map(
+            ...         baca.text_spanner_staff_padding(6),
+            ...         baca.tuplet(1),
             ...         ),
             ...     baca.text_script_staff_padding(6),
             ...     baca.single_segment_transition(
@@ -1351,7 +1341,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.rests_around([2], [4]),
             ...     baca.stems_up(),
             ...     baca.map(baca.tie(), baca.qruns()),
-            ...     baca.ties_down(baca.tuplets()[1:2].pleaves().group()),
+            ...     baca.map(baca.ties_down(), baca.tuplet(1)),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -1477,7 +1467,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.rests_around([2], [4]),
             ...     baca.stems_down(),
             ...     baca.map(baca.tie(), baca.qruns()),
-            ...     baca.ties_up(baca.tuplets()[1:2].pleaves().group()),
+            ...     baca.map(baca.ties_up(), baca.tuplet(1)),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -1841,9 +1831,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
-            ...     baca.transparent_rests(
-            ...         baca.tuplets()[1:2].rests().group(),
-            ...         ),
+            ...     baca.map(baca.transparent_rests(), baca.tuplet(1)),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -2491,9 +2479,9 @@ class LibraryTZ(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_extra_offset(
-            ...         (-1, 0),
-            ...         baca.tuplets()[1:2].leaves().group(),
+            ...     baca.map(
+            ...         baca.tuplet_bracket_extra_offset((-1, 0)),
+            ...         baca.tuplet(1),
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -2521,7 +2509,7 @@ class LibraryTZ(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.extra-offset = #'(-1 . 0)
+                                \once \override TupletBracket.extra-offset = #'(-1 . 0)
                                 fs''16 [
                                 e''16 ]
                                 ef''4 ~
@@ -2529,7 +2517,6 @@ class LibraryTZ(abjad.AbjadObject):
                                 r16
                                 af''16 [
                                 g''16 ]
-                                \revert TupletBracket.extra-offset
                             }
                             \times 4/5 {
                                 a'16
@@ -2613,9 +2600,9 @@ class LibraryTZ(abjad.AbjadObject):
             ...     'Voice 1',
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(
-            ...         n=5,
-            ...         selector=baca.tuplets()[1:2].leaves().group(),
+            ...     baca.map(
+            ...         baca.tuplet_bracket_staff_padding(5),
+            ...         baca.tuplet(1),
             ...         ),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -2736,9 +2723,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
-            ...     baca.tuplet_brackets_down(
-            ...         baca.tuplets()[1:2].leaves().group(),
-            ...         ),
+            ...     baca.map(baca.tuplet_brackets_down(), baca.tuplet(1)),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
             ...     )
@@ -2860,9 +2845,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
-            ...     baca.tuplet_brackets_up(
-            ...         baca.tuplets()[1:2].leaves().group(),
-            ...         ),
+            ...     baca.map(baca.tuplet_brackets_up(), baca.tuplet(1)),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
             ...     )
@@ -2983,9 +2966,9 @@ class LibraryTZ(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.rests_around([2], [4]),
             ...     baca.tuplet_bracket_staff_padding(5),
-            ...     baca.tuplet_number_extra_offset(
-            ...         (-1, 0),
-            ...         baca.tuplets()[1:2].leaves().group(),
+            ...     baca.map(
+            ...         baca.tuplet_number_extra_offset((-1, 0)),
+            ...         baca.tuplet(1),
             ...         ),
             ...     counts=[1, 1, 5, -1],
             ...     time_treatments=[-1],
@@ -3012,7 +2995,7 @@ class LibraryTZ(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletNumber.extra-offset = #'(-1 . 0)
+                                \once \override TupletNumber.extra-offset = #'(-1 . 0)
                                 fs''16 [
                                 e''16 ]
                                 ef''4 ~
@@ -3020,7 +3003,6 @@ class LibraryTZ(abjad.AbjadObject):
                                 r16
                                 af''16 [
                                 g''16 ]
-                                \revert TupletNumber.extra-offset
                             }
                             \times 4/5 {
                                 a'16
