@@ -758,7 +758,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         result = self.plts()
         result = result.group_by_pitch()
-        result = result.map(baca.contiguous())
+        result = result.map(baca.group_by_contiguity())
         result = result.flatten(depth=1)
         result = result.map(abjad.Run)
         return result
@@ -1031,7 +1031,8 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.logical_ties(pitched=True).contiguous().map(abjad.Run)
+        result = self.logical_ties(pitched=True).group_by_contiguity()
+        return result.map(abjad.Run)
 
     def lts(self):
         r'''Selects logical ties.
@@ -2956,7 +2957,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         result = self.pleaves()
         result = result.group_by_pitch()
-        result = result.map(baca.contiguous())
+        result = result.map(baca.group_by_contiguity())
         result = result.flatten(depth=1)
         result = result.map(abjad.Run)
         return result

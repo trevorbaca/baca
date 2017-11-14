@@ -26,15 +26,14 @@ Bases
    .. autosummary::
 
       ~baca.tools.Selection.Selection.are_contiguous_logical_voice
+      ~baca.tools.Selection.Selection.are_contiguous_same_parent
       ~baca.tools.Selection.Selection.are_leaves
       ~baca.tools.Selection.Selection.are_logical_voice
-      ~baca.tools.Selection.Selection.are_same_parent
       ~baca.tools.Selection.Selection.chead
       ~baca.tools.Selection.Selection.cheads
       ~baca.tools.Selection.Selection.chord
       ~baca.tools.Selection.Selection.chords
       ~baca.tools.Selection.Selection.components
-      ~baca.tools.Selection.Selection.contiguous
       ~baca.tools.Selection.Selection.enchain
       ~baca.tools.Selection.Selection.filter
       ~baca.tools.Selection.Selection.filter_duration
@@ -44,6 +43,7 @@ Bases
       ~baca.tools.Selection.Selection.flatten
       ~baca.tools.Selection.Selection.group
       ~baca.tools.Selection.Selection.group_by
+      ~baca.tools.Selection.Selection.group_by_contiguity
       ~baca.tools.Selection.Selection.group_by_duration
       ~baca.tools.Selection.Selection.group_by_length
       ~baca.tools.Selection.Selection.group_by_measure
@@ -137,6 +137,12 @@ Methods
 
    .. container:: inherited
 
+      .. automethod:: baca.tools.Selection.Selection.are_contiguous_same_parent
+
+.. only:: html
+
+   .. container:: inherited
+
       .. automethod:: baca.tools.Selection.Selection.are_leaves
 
 .. only:: html
@@ -144,12 +150,6 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Selection.Selection.are_logical_voice
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Selection.Selection.are_same_parent
 
 .. automethod:: baca.tools.Selection.Selection.chead
 
@@ -172,12 +172,6 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Selection.Selection.components
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Selection.Selection.contiguous
 
 .. automethod:: baca.tools.Selection.Selection.enchain
 
@@ -224,6 +218,12 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Selection.Selection.group_by
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Selection.Selection.group_by_contiguity
 
 .. only:: html
 
