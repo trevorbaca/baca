@@ -31,7 +31,7 @@ Bases
       ~baca.tools.Sequence.Sequence.flatten
       ~baca.tools.Sequence.Sequence.get_degree_of_rotational_symmetry
       ~baca.tools.Sequence.Sequence.get_period_of_rotation
-      ~baca.tools.Sequence.Sequence.group
+      ~baca.tools.Sequence.Sequence.group_by
       ~baca.tools.Sequence.Sequence.group_by_sign
       ~baca.tools.Sequence.Sequence.helianthate
       ~baca.tools.Sequence.Sequence.is_decreasing
@@ -113,7 +113,7 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.group
+      .. automethod:: baca.tools.Sequence.Sequence.group_by
 
 .. automethod:: baca.tools.Sequence.Sequence.group_by_sign
 

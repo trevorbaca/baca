@@ -251,6 +251,15 @@ class Selection(abjad.Selection):
             overhang=True,
             )
 
+    def group(self):
+        r'''Groups selection.
+
+        Returns new selection (or expression).
+        '''
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.group_by()
+
     def lleak(self):
         r'''Leaks to the left.
 
@@ -394,7 +403,7 @@ class Selection(abjad.Selection):
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.logical_measures()[n]
+        return self.group_by_measure()[n]
 
     def lt(self, n):
         r'''Selects logical tie `n`.
@@ -748,7 +757,7 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         result = self.plts()
-        result = result.group_pitches()
+        result = result.group_by_pitch()
         result = result.map(baca.contiguous())
         result = result.flatten(depth=1)
         result = result.map(abjad.Run)
@@ -2946,7 +2955,7 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         result = self.pleaves()
-        result = result.group_pitches()
+        result = result.group_by_pitch()
         result = result.map(baca.contiguous())
         result = result.flatten(depth=1)
         result = result.map(abjad.Run)
@@ -3573,21 +3582,21 @@ class Selection(abjad.Selection):
                 counts.append(1)
             else:
                 raise TypeError(item)
-        logical_measures = self.logical_measures()
-        if len(logical_measures) != sum(counts):
-            message = f'{len(logical_measures)} measures found;'
+        measures = self.group_by_measure()
+        if len(measures) != sum(counts):
+            message = f'{len(measures)} measures found;'
             message += f' stage measure map gives {sum(counts)} instead.'
             raise Exception(message)
-        logical_measures = baca.sequence(logical_measures)
-        parts = logical_measures.partition_by_counts(
+        measures = baca.sequence(measures)
+        parts = measures.partition_by_counts(
             counts,
             overhang=abjad.Exact,
             )
         selections = []
         for part in parts:
             selection = []
-            for logical_measure in part:
-                selection.extend(logical_measure)
+            for measure in part:
+                selection.extend(measure)
             selection = baca.select(selection)
             selections.append(selection)
         return baca.select(selections)

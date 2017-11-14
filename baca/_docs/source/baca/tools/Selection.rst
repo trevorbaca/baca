@@ -43,16 +43,17 @@ Bases
       ~baca.tools.Selection.Selection.filter_preprolated
       ~baca.tools.Selection.Selection.flatten
       ~baca.tools.Selection.Selection.group
-      ~baca.tools.Selection.Selection.group_duration
-      ~baca.tools.Selection.Selection.group_length
-      ~baca.tools.Selection.Selection.group_pitches
+      ~baca.tools.Selection.Selection.group_by
+      ~baca.tools.Selection.Selection.group_by_duration
+      ~baca.tools.Selection.Selection.group_by_length
+      ~baca.tools.Selection.Selection.group_by_measure
+      ~baca.tools.Selection.Selection.group_by_pitch
       ~baca.tools.Selection.Selection.items
       ~baca.tools.Selection.Selection.leaf
       ~baca.tools.Selection.Selection.leaves
       ~baca.tools.Selection.Selection.lleak
       ~baca.tools.Selection.Selection.lleaves
       ~baca.tools.Selection.Selection.lm
-      ~baca.tools.Selection.Selection.logical_measures
       ~baca.tools.Selection.Selection.logical_ties
       ~baca.tools.Selection.Selection.lt
       ~baca.tools.Selection.Selection.ltqrun
@@ -216,29 +217,37 @@ Methods
 
       .. automethod:: baca.tools.Selection.Selection.flatten
 
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Selection.Selection.group
+.. automethod:: baca.tools.Selection.Selection.group
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.group_duration
+      .. automethod:: baca.tools.Selection.Selection.group_by
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.group_length
+      .. automethod:: baca.tools.Selection.Selection.group_by_duration
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.group_pitches
+      .. automethod:: baca.tools.Selection.Selection.group_by_length
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Selection.Selection.group_by_measure
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.Selection.Selection.group_by_pitch
 
 .. only:: html
 
@@ -257,12 +266,6 @@ Methods
 .. automethod:: baca.tools.Selection.Selection.lleaves
 
 .. automethod:: baca.tools.Selection.Selection.lm
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Selection.Selection.logical_measures
 
 .. only:: html
 

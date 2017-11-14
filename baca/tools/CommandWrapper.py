@@ -80,7 +80,7 @@ class CommandWrapper(abjad.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = '(6) Commands'
+    __documentation_section__ = '(4) Commands'
 
     __slots__ = (
         '_command',

@@ -94,6 +94,7 @@ baca.tools
    ColorCommand
    ColorFingeringCommand
    Command
+   CommandWrapper
    DiatonicClusterCommand
    ImbricationCommand
    IndicatorCommand
@@ -122,6 +123,7 @@ baca.tools
    ColorCommand
    ColorFingeringCommand
    Command
+   CommandWrapper
    DiatonicClusterCommand
    ImbricationCommand
    IndicatorCommand
@@ -251,21 +253,6 @@ baca.tools
    VoltaMeasureMap
    WellformednessManager
    ZaggedPitchClassMaker
-
---------
-
-(6) Commands
-------------
-
-.. toctree::
-   :hidden:
-
-   CommandWrapper
-
-.. autosummary::
-   :nosignatures:
-
-   CommandWrapper
 
 --------
 

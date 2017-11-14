@@ -27,7 +27,7 @@ Bases
 
       ~baca.tools.DivisionSequence.DivisionSequence.filter
       ~baca.tools.DivisionSequence.DivisionSequence.flatten
-      ~baca.tools.DivisionSequence.DivisionSequence.group
+      ~baca.tools.DivisionSequence.DivisionSequence.group_by
       ~baca.tools.DivisionSequence.DivisionSequence.is_decreasing
       ~baca.tools.DivisionSequence.DivisionSequence.is_increasing
       ~baca.tools.DivisionSequence.DivisionSequence.is_permutation
@@ -97,7 +97,7 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.group
+      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.group_by
 
 .. only:: html
 
