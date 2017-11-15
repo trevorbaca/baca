@@ -247,7 +247,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_score_template',
         '_skip_wellformedness_checks',
         '_skips_instead_of_rests',
-        '_spacing_map',
         '_spacing_specifier',
         '_stage_label_base_string',
         '_stages',
@@ -342,7 +341,6 @@ class SegmentMaker(abjad.SegmentMaker):
         score_template=None,
         skip_wellformedness_checks=None,
         skips_instead_of_rests=None,
-        spacing_map=None,
         spacing_specifier=None,
         stage_label_base_string=None,
         time_signatures=None,
@@ -422,7 +420,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if skips_instead_of_rests is not None:
             skips_instead_of_rests = bool(skips_instead_of_rests)
         self._skips_instead_of_rests = skips_instead_of_rests
-        self._spacing_map = spacing_map
         if spacing_specifier is not None:
             assert isinstance(spacing_specifier, baca.HorizontalSpacingSpecifier)
         self._spacing_specifier = spacing_specifier
@@ -929,10 +926,8 @@ class SegmentMaker(abjad.SegmentMaker):
             print(f'command interpretation {count} {counter} ...')
 
     def _call_rhythm_commands(self):
-#        self._attach_metronome_marks_to_global_skips()
         self._attach_metronome_marks()
         self._attach_fermatas()
-        self._make_spacing_regions()
         for voice in abjad.iterate(self._score).components(abjad.Voice):
             assert not len(voice), repr(voice)
             wrappers = self._get_rhythm_wrappers_for_voice(voice.name)
@@ -1551,22 +1546,6 @@ class SegmentMaker(abjad.SegmentMaker):
         rhythm_maker = rhythmos.SkipRhythmMaker()
         selections = rhythm_maker(time_signatures)
         return selections
-
-    def _make_spacing_regions(self):
-        if not self.spacing_map:
-            return
-        context = self._score['Global Skips']
-        for stage_number, duration in self.spacing_map:
-            self._assert_valid_stage_number(stage_number)
-            result = self._stage_number_to_measure_indices(stage_number)
-            start_measure_index, stop_measure_index = result
-            start_skip = context[start_measure_index]
-            assert isinstance(start_skip, abjad.Skip)
-            command = abjad.LilyPondCommand('newSpacingSection')
-            abjad.attach(command, start_skip)
-            moment = abjad.SchemeMoment(duration)
-            agent = abjad.setting(start_skip)
-            agent.score.proportional_notation_duration = moment
 
     def _make_volta_containers(self):
         if not self.volta_measure_map:
@@ -5446,14 +5425,6 @@ class SegmentMaker(abjad.SegmentMaker):
         Returns true, false or none.
         '''
         return self._skips_instead_of_rests
-
-    @property
-    def spacing_map(self):
-        r'''Gets spacing map.
-
-        Returns tuple of pairs.
-        '''
-        return self._spacing_map
 
     @property
     def spacing_specifier(self):
