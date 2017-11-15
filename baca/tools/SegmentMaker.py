@@ -201,7 +201,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>
             >>
 
-        Segment colors unpitched notes blue.
+        Segment-maker colors unpitched notes blue.
 
     '''
 
@@ -219,6 +219,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_color_out_of_range_pitches',
         '_color_repeat_pitch_classes',
         '_design_checker',
+        '_expression',
         '_fermata_start_offsets',
         '_final_bar_line',
         '_final_markup',
@@ -1650,6 +1651,23 @@ class SegmentMaker(abjad.SegmentMaker):
     def _transpose_score_(self):
         if self.transpose_score:
             abjad.Instrument.transpose_from_sounding_pitch(self._score)
+
+    def _update_expression(
+        self,
+        frame,
+        evaluation_template=None,
+        lone=None,
+        template=None,
+        ):
+        callback = abjad.Expression._frame_to_callback(
+            frame,
+            evaluation_template=evaluation_template,
+            )
+        callback = abjad.new(callback, lone=lone)
+        expression = self._expression.append_callback(callback)
+        if template is None:
+            template = self._get_template(frame, self._expression)
+        return abjad.new(expression, template=template)
 
     def _update_metadata(self, environment=None):
         if environment is not None:
@@ -6220,6 +6238,49 @@ class SegmentMaker(abjad.SegmentMaker):
         self._update_metadata(environment=environment)
         self._print_segment_duration_()
         return self._lilypond_file
+
+    def stage(self, n):
+        r'''Gets group `n` of items grouped by stage.
+
+        Returns selection (or expression).
+        '''
+        if self._expression:
+            return self._update_expression(inspect.currentframe(), lone=True)
+        return self.stages()[n]
+
+    def stages(self):
+        r'''Groups items by stage.
+
+        Returns selection (or expression).
+        '''
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        counts = []
+        for item in self.stage_measure_map:
+            if isinstance(item, int):
+                counts.append(item)
+            elif isinstance(item, abjad.Fermata):
+                counts.append(1)
+            else:
+                raise TypeError(item)
+        measures = self.group_by_measure()
+        if len(measures) != sum(counts):
+            message = f'{len(measures)} measures found;'
+            message += f' stage measure map gives {sum(counts)} instead.'
+            raise Exception(message)
+        measures = baca.sequence(measures)
+        parts = measures.partition_by_counts(
+            counts,
+            overhang=abjad.Exact,
+            )
+        selections = []
+        for part in parts:
+            selection = []
+            for measure in part:
+                selection.extend(measure)
+            selection = baca.select(selection)
+            selections.append(selection)
+        return baca.select(selections)
 
     def validate_measure_count(self, measure_count):
         r'''Validates measure count.

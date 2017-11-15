@@ -49,6 +49,7 @@ Bases
       ~baca.tools.LibraryTZ.LibraryTZ.up_arpeggios
       ~baca.tools.LibraryTZ.LibraryTZ.up_bows
       ~baca.tools.LibraryTZ.LibraryTZ.very_long_fermata
+      ~baca.tools.LibraryTZ.LibraryTZ.volta
       ~baca.tools.LibraryTZ.LibraryTZ.__eq__
       ~baca.tools.LibraryTZ.LibraryTZ.__format__
       ~baca.tools.LibraryTZ.LibraryTZ.__hash__
@@ -112,6 +113,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryTZ.LibraryTZ.up_bows
 
 .. automethod:: baca.tools.LibraryTZ.LibraryTZ.very_long_fermata
+
+.. automethod:: baca.tools.LibraryTZ.LibraryTZ.volta
 
 Special methods
 ---------------

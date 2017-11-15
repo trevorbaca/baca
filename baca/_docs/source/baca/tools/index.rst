@@ -111,6 +111,7 @@ baca.tools
    SpannerCommand
    StaffPositionCommand
    SuiteCommand
+   VoltaCommand
 
 .. autosummary::
    :nosignatures:
@@ -140,6 +141,7 @@ baca.tools
    SpannerCommand
    StaffPositionCommand
    SuiteCommand
+   VoltaCommand
 
 --------
 

@@ -3375,3 +3375,172 @@ class LibraryTZ(abjad.AbjadObject):
             indicators=[abjad.Articulation('verylongfermata')],
             selector=selector,
             )
+
+    @staticmethod
+    def volta(selector='baca.leaves()'):
+        r'''Wraps leaves in volta container.
+
+        ..  container:: example
+
+            Wraps stage 1 global skips in volta container:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('Music Voice', 1),
+            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+            ...     baca.RhythmCommand(
+            ...         rhythm_maker=rhythmos.TaleaRhythmMaker(
+            ...             talea=rhythmos.Talea(
+            ...                 counts=[1, 1, 1, -1],
+            ...                 denominator=8,
+            ...                 ),
+            ...             ),
+            ...         ),
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('Global Skips', 1),
+            ...     baca.volta(),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score])
+                \context Score = "Score" <<
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalSkips = "Global Skips" {
+                            \repeat volta 2
+                            {
+                                % measure 1
+                                \time 4/8
+                                s1 * 1/2
+                                % measure 2
+                                \time 3/8
+                                s1 * 3/8
+                                % measure 3
+                                \time 4/8
+                                s1 * 1/2
+                                % measure 4
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
+                                % measure 1
+                                \clef "treble"
+                                e'8 [
+                                d''8
+                                f'8 ]
+                                r8
+                                % measure 2
+                                e''8 [
+                                g'8
+                                f''8 ]
+                                % measure 3
+                                r8
+                                e'8 [
+                                d''8
+                                f'8 ]
+                                % measure 4
+                                r8
+                                e''8 [
+                                g'8 ]
+                                \bar "|"
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Wraps global skips 1 and 2 in volta container:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('Music Voice', 1),
+            ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+            ...     baca.RhythmCommand(
+            ...         rhythm_maker=rhythmos.TaleaRhythmMaker(
+            ...             talea=rhythmos.Talea(
+            ...                 counts=[1, 1, 1, -1],
+            ...                 denominator=8,
+            ...                 ),
+            ...             ),
+            ...         ),
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('Global Skips', 1),
+            ...     baca.volta(baca.skips()[1:3]),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score])
+                \context Score = "Score" <<
+                    \context GlobalContext = "Global Context" <<
+                        \context GlobalSkips = "Global Skips" {
+                            % measure 1
+                            \time 4/8
+                            s1 * 1/2
+                            \repeat volta 2
+                            {
+                                % measure 2
+                                \time 3/8
+                                s1 * 3/8
+                                % measure 3
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            % measure 4
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \context Staff = "Music Staff" {
+                            \context Voice = "Music Voice" {
+                                % measure 1
+                                \clef "treble"
+                                e'8 [
+                                d''8
+                                f'8 ]
+                                r8
+                                % measure 2
+                                e''8 [
+                                g'8
+                                f''8 ]
+                                % measure 3
+                                r8
+                                e'8 [
+                                d''8
+                                f'8 ]
+                                % measure 4
+                                r8
+                                e''8 [
+                                g'8 ]
+                                \bar "|"
+                            }
+                        }
+                    >>
+                >>
+
+        '''
+        return baca.VoltaCommand(selector=selector)
