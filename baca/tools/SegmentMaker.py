@@ -14,8 +14,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
     ..  container:: example
 
-        With empty input:
-
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -63,8 +61,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>
 
     ..  container:: example
-
-        With notes:
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -777,6 +773,16 @@ class SegmentMaker(abjad.SegmentMaker):
         if 3 < total_time:
             raise Exception(f'spacing specifier time {total_time} seconds!')
 
+    def _assert_nonoverlapping_rhythms(self, contributions, voice):
+        previous_stop_offset = 0
+        for contribution in contributions:
+            if contribution.start_offset < previous_stop_offset:
+                raise Exception(f'{voice!r} has overlapping rhythms.')
+            start_offset = contribution.start_offset
+            duration = abjad.inspect(contribution.payload).get_duration()
+            stop_offset = start_offset + duration
+            previous_stop_offset = stop_offset
+
     def _assert_valid_stage_number(self, stage_number):
         if not 1 <= stage_number <= self.stage_count:
             message = f'must be 1 <= x <= {self.stage_count}: {stage_number}.'
@@ -933,24 +939,21 @@ class SegmentMaker(abjad.SegmentMaker):
             wrappers = self._get_rhythm_wrappers_for_voice(voice.name)
             if not wrappers:
                 if self.skips_instead_of_rests:
-                    measures = self._make_skips()
+                    maker = rhythmos.SkipRhythmMaker()
                 else:
-                    measures = self._make_rests()
-                voice.extend(measures)
+                    mask = abjad.silence([0], 1, use_multimeasure_rests=True)
+                    maker = rhythmos.NoteRhythmMaker(division_masks=[mask])
+                selections = maker(self.time_signatures)
+                voice.extend(selections)
                 continue
-            effective_staff = abjad.inspect(voice).get_effective_staff()
-            effective_staff_name = effective_staff.context_name
             contributions = []
             for wrapper in wrappers:
                 assert isinstance(wrapper, baca.CommandWrapper)
-                if wrapper.scope.stages is not None:
-                    result = self._get_stage_numbers(wrapper.scope.stages)
-                    contribution = self._get_time_signatures(*result)
-                else:
+                if wrapper.scope.stages is None:
                     continue
+                contribution = self._get_time_signatures(*wrapper.scope.stages)
                 try:
                     contribution = wrapper.command(
-                        effective_staff_name,
                         start_offset=contribution.start_offset,
                         time_signatures=contribution.payload,
                         )
@@ -959,8 +962,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 assert contribution.start_offset is not None
                 contributions.append(contribution)
             contributions.sort(key=lambda _: _.start_offset)
-            if not self._contributions_do_not_overlap(contributions):
-                raise Exception(f'{voice.name!r} has overlapping rhythms.')
+            self._assert_nonoverlapping_rhythms(contributions, voice.name)
             contributions = self._intercalate_rests(contributions)
             voice.extend(contributions)
             self._apply_first_and_last_ties(voice)
@@ -1074,17 +1076,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             comment = abjad.LilyPondComment(f'measure {measure_number}')
             abjad.attach(comment, leaf)
-
-    def _contributions_do_not_overlap(self, contributions):
-        previous_stop_offset = 0
-        for contribution in contributions:
-            if contribution.start_offset < previous_stop_offset:
-                return False
-            start_offset = contribution.start_offset
-            duration = abjad.inspect(contribution.payload).get_duration()
-            stop_offset = start_offset + duration
-            previous_stop_offset = stop_offset
-        return True
 
     def _detach_figure_names(self):
         if self.allow_figure_names:
@@ -1295,12 +1286,6 @@ class SegmentMaker(abjad.SegmentMaker):
     def _get_segment_number(self):
         return self._metadata.get('segment_number', 1)
 
-    # TODO: remove
-    def _get_stage_numbers(self, argument):
-        assert isinstance(argument, tuple), repr(argument)
-        start, stop = argument
-        return start, stop
-
     def _get_stylesheets(self, environment=None):
         if environment == 'docs':
             if abjad.inspect(self._score).get_indicator('two-voice'):
@@ -1319,8 +1304,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return includes
 
     def _get_time_signatures(self, start_stage=None, stop_stage=None):
-        counts = len(self.time_signatures), sum(self.measures_per_stage)
-        assert counts[0] == counts[1], counts
+        assert len(self.time_signatures) == sum(self.measures_per_stage)
         stages = baca.Sequence(self.time_signatures).partition_by_counts(
             self.measures_per_stage,
             )
@@ -1332,11 +1316,10 @@ class SegmentMaker(abjad.SegmentMaker):
             stages = stages[start_index:stop_index]
             time_signatures = baca.sequence(stages).flatten(depth=-1)
         start_offset, stop_offset = self._get_offsets(start_stage, stop_stage)
-        contribution = baca.SegmentContribution(
+        return baca.SegmentContribution(
             payload=time_signatures,
             start_offset=start_offset
             )
-        return contribution
 
     def _handle_mutator(self, command):
         if (hasattr(command.command, '_mutates_score') and
@@ -1494,7 +1477,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _make_lilypond_file(self, environment=None, midi=None):
         includes = self._get_stylesheets(environment=environment)
-        if environment == 'docs:absolute':
+        if environment == 'external':
             use_relative_includes = False
         else:
             use_relative_includes = True
@@ -1511,11 +1494,9 @@ class SegmentMaker(abjad.SegmentMaker):
         if midi:
             block = abjad.Block(name='midi')
             lilypond_file.items.append(block)
-        #if not docs:
-        if True:
-            for item in lilypond_file.items[:]:
-                if getattr(item, 'name', None) == 'header':
-                    lilypond_file.items.remove(item)
+        for item in lilypond_file.items[:]:
+            if getattr(item, 'name', None) == 'header':
+                lilypond_file.items.remove(item)
         self._lilypond_file = lilypond_file
 
     def _make_multimeasure_rests(self):
@@ -1527,25 +1508,12 @@ class SegmentMaker(abjad.SegmentMaker):
             rests.append(rest)
         return rests
 
-    def _make_rests(self, time_signatures=None):
-        time_signatures = time_signatures or self.time_signatures
-        mask = abjad.silence([0], 1, use_multimeasure_rests=True)
-        rhythm_maker = rhythmos.NoteRhythmMaker(division_masks=[mask])
-        selections = rhythm_maker(time_signatures)
-        return selections
-
     def _make_score(self):
         score = self.score_template()
         first_bar_number = self._metadata.get('first_bar_number')
         if first_bar_number is not None:
             abjad.setting(score).current_bar_number = first_bar_number
         self._score = score
-
-    def _make_skips(self, time_signatures=None):
-        time_signatures = time_signatures or self.time_signatures
-        rhythm_maker = rhythmos.SkipRhythmMaker()
-        selections = rhythm_maker(time_signatures)
-        return selections
 
     def _make_volta_containers(self):
         if not self.volta_measure_map:
@@ -5315,11 +5283,9 @@ class SegmentMaker(abjad.SegmentMaker):
     def skips_instead_of_rests(self):
         r'''Is true when segment fills empty measures with skips.
 
-        Is false when segment fills empty measures with multimeasure rests.
-
         ..  container:: example
 
-            Fills empty measures with multimeasure rests by default:
+            Fills empty measures with multimeasure rests:
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -6229,7 +6195,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         Set `environment` to `'docs'` for API examples.
         
-        Set `environment` to `'test'` to debug API examples in an external
+        Set `environment` to `'external'` to debug API examples in an external
         file.
 
         Returns LilyPond file.

@@ -85,13 +85,8 @@ class RhythmCommand(Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(
-        self,
-        effective_staff_name,
-        start_offset=None,
-        time_signatures=None,
-        ):
-        r'''Calls command on `time_signatures`.
+    def __call__(self, start_offset=None, time_signatures=None):
+        r'''Calls command on `time_signatures` with `start_offset`.
 
         Returns contribution with music payload.
         '''
@@ -113,11 +108,10 @@ class RhythmCommand(Command):
             abjad.attach('tie from me', last_leaf)
             if self._repeat_ties:
                 abjad.attach('use messiaen style ties', last_leaf)
-        contribution = baca.SegmentContribution(
+        return baca.SegmentContribution(
             payload=music,
             start_offset=start_offset,
             )
-        return contribution
 
     ### PRIVATE PROPERTIES ###
 
@@ -307,11 +301,10 @@ class RhythmCommand(Command):
             if not isinstance(divisions, abjad.Sequence):
                 raise Exception(f'division sequence: {divisions!r}.')
         new_start_offset = divisions[0].start_offset
-        contribution = baca.SegmentContribution(
+        return baca.SegmentContribution(
             payload=divisions,
             start_offset=new_start_offset,
             )
-        return contribution
 
     ### PUBLIC PROPERTIES ###
 

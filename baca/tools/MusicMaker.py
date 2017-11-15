@@ -2397,14 +2397,14 @@ class MusicMaker(abjad.AbjadObject):
     ### PUBLIC METHODS ###
 
     @staticmethod
-    def show(figure_contribution, time_signatures=None):
+    def show(music_contribution, time_signatures=None):
         r'''Makes rhythm-maker-style LilyPond file for documentation examples.
 
         Returns LilyPond file.
         '''
-        assert isinstance(figure_contribution, baca.MusicContribution)
+        assert isinstance(music_contribution, baca.MusicContribution)
         return abjad.LilyPondFile.rhythm(
-            figure_contribution.selections,
+            music_contribution.selections,
             time_signatures=time_signatures,
             attach_lilypond_voice_commands=True,
             )
