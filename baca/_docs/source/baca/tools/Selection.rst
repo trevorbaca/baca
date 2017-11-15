@@ -91,12 +91,9 @@ Bases
       ~baca.tools.Selection.Selection.runs
       ~baca.tools.Selection.Selection.skip
       ~baca.tools.Selection.Selection.skips
-      ~baca.tools.Selection.Selection.stage
-      ~baca.tools.Selection.Selection.stages
       ~baca.tools.Selection.Selection.tleaves
       ~baca.tools.Selection.Selection.top
       ~baca.tools.Selection.Selection.tuplet
-      ~baca.tools.Selection.Selection.tuplet_tleaves
       ~baca.tools.Selection.Selection.tuplets
       ~baca.tools.Selection.Selection.with_next_leaf
       ~baca.tools.Selection.Selection.with_previous_leaf
@@ -387,10 +384,6 @@ Methods
 
 .. automethod:: baca.tools.Selection.Selection.skips
 
-.. automethod:: baca.tools.Selection.Selection.stage
-
-.. automethod:: baca.tools.Selection.Selection.stages
-
 .. automethod:: baca.tools.Selection.Selection.tleaves
 
 .. only:: html
@@ -404,8 +397,6 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Selection.Selection.tuplet
-
-.. automethod:: baca.tools.Selection.Selection.tuplet_tleaves
 
 .. only:: html
 
