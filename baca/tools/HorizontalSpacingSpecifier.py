@@ -1,4 +1,5 @@
 import abjad
+import baca
 
 
 class HorizontalSpacingSpecifier(abjad.AbjadObject):
@@ -626,10 +627,11 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         Returns none.
         '''
         score = segment_maker._score
-        skip_context = score['Global Skips']
+        context = score['Global Skips']
+        skips = baca.select(context).skips()
         leaves = abjad.iterate(score).leaves(grace_notes=False)
         minimum_durations_by_measure = self._get_minimum_durations_by_measure(
-            skip_context,
+            skips,
             leaves,
             )
         fermata_start_offsets = getattr(
@@ -637,7 +639,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             '_fermata_start_offsets',
             [],
             )
-        skips = abjad.iterate(skip_context).leaves(abjad.Skip)
         for measure_index, skip in enumerate(skips):
             measure_timespan = abjad.inspect(skip).get_timespan()
             if (self.fermata_measure_width is not None and
@@ -657,10 +658,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
     ### PRIVATE METHODS ###
 
-    def _get_minimum_durations_by_measure(self, skip_context, leaves):
+    def _get_minimum_durations_by_measure(self, skips, leaves):
         measure_timespans = []
         durations_by_measure = []
-        for skip in skip_context:
+        for skip in skips:
             measure_timespan = abjad.inspect(skip).get_timespan()
             measure_timespans.append(measure_timespan)
             durations_by_measure.append([])

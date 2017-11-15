@@ -196,7 +196,6 @@ baca.tools
    Tree
    TwoVoiceStaffScoreTemplate
    ViolinSoloScoreTemplate
-   VoltaMeasureMap
    WellformednessManager
    ZaggedPitchClassMaker
 
@@ -248,7 +247,6 @@ baca.tools
    Tree
    TwoVoiceStaffScoreTemplate
    ViolinSoloScoreTemplate
-   VoltaMeasureMap
    WellformednessManager
    ZaggedPitchClassMaker
 

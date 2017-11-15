@@ -249,7 +249,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_stages',
         '_time_signatures',
         '_transpose_score',
-        '_volta_measure_map',
         '_wrappers',
         )
 
@@ -342,7 +341,6 @@ class SegmentMaker(abjad.SegmentMaker):
         stage_label_base_string=None,
         time_signatures=None,
         transpose_score=None,
-        volta_measure_map=None,
         ):
         superclass = super(SegmentMaker, self)
         superclass.__init__()
@@ -426,7 +424,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if transpose_score is not None:
             transpose_score = bool(transpose_score)
         self._transpose_score = transpose_score
-        self._volta_measure_map = volta_measure_map
         self._wrappers = []
 
     ### SPECIAL METHODS ###
@@ -722,8 +719,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _apply_layout_measure_map(self):
         if self.layout_measure_map is None:
             return
-        context = self._score['Global Skips']
-        self.layout_measure_map(context)
+        self.layout_measure_map(self._score['Global Skips'])
 
     def _apply_previous_segment_end_settings(self):
         if self._is_first_segment():
@@ -753,12 +749,13 @@ class SegmentMaker(abjad.SegmentMaker):
             if clef is not None:
                 continue
             abjad.attach(previous_clef, leaf)
-        context = self._score['Global Skips']
-        leaf = abjad.inspect(context).get_leaf(0)
-        mark = abjad.inspect(leaf).get_effective(abjad.MetronomeMark)
+        skip = baca.select(self._score['Global Skips']).skip(0)
+        mark = abjad.inspect(skip).get_piecewise(abjad.MetronomeMark)
         if mark is None:
+            prototype = abjad.MetronomeMarkSpanner
+            spanner = abjad.inspect(skip).get_spanner(prototype)
             previous_mark = self._get_previous_metronome_mark()
-            abjad.attach(previous_mark, leaf)
+            spanner.attach(previous_mark, skip)
 
     def _apply_spacing_specifier(self):
         start_time = time.time()
@@ -852,8 +849,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _attach_metronome_marks(self):
         if not self.metronome_mark_measure_map:
             return
-        context = self._score['Global Skips']
-        skips = abjad.select(context).leaves(abjad.Skip)
+        skips = baca.select(self._score['Global Skips']).skips()
         left_broken_text = abjad.Markup().null()
         left_broken_text = abjad.new(left_broken_text, direction=None)
         spanner = abjad.MetronomeMarkSpanner(
@@ -864,10 +860,9 @@ class SegmentMaker(abjad.SegmentMaker):
         abjad.attach(spanner, skips)
         for stage_number, directive in self.metronome_mark_measure_map:
             self._assert_valid_stage_number(stage_number)
-            result = self._stage_number_to_measure_indices(stage_number)
-            start, stop = result
-            start_skip = context[start]
-            spanner.attach(directive, start_skip)
+            start, _ = self._stage_number_to_measure_indices(stage_number)
+            skip = skips[start]
+            spanner.attach(directive, skip)
 
     def _attach_rehearsal_mark(self):
         if self.rehearsal_letter == '':
@@ -885,15 +880,14 @@ class SegmentMaker(abjad.SegmentMaker):
         rehearsal_mark = abjad.RehearsalMark(
             number=letter_number
             )
-        voice = self._score['Global Skips']
-        leaf = abjad.inspect(voice).get_leaf(0)
-        abjad.attach(rehearsal_mark, leaf)
+        skip = baca.select(self._score['Global Skips']).skip(0)
+        abjad.attach(rehearsal_mark, skip)
 
     def _cache_leaves(self):
         stage_timespans = []
         for stage_index in range(self.stage_count):
             stage_number = stage_index + 1
-            stage_offsets = self._get_offsets(stage_number, stage_number)
+            stage_offsets = self._get_stage_offsets(stage_number, stage_number)
             stage_timespan = abjad.Timespan(*stage_offsets)
             stage_timespans.append(stage_timespan)
         self._cache = abjad.TypedOrderedDict()
@@ -1062,8 +1056,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _comment_measure_numbers(self):
         offset_to_measure_number = {}
         measure_number = self._metadata.get('first_bar_number', 1)
-        context = self._score['Global Skips']
-        for skip in baca.select(context).skips():
+        for skip in baca.select(self._score['Global Skips']).skips():
             offset = abjad.inspect(skip).get_timespan().start_offset
             offset_to_measure_number[offset] = measure_number
             measure_number += 1
@@ -1170,9 +1163,8 @@ class SegmentMaker(abjad.SegmentMaker):
         return result
 
     def _get_end_metronome_mark(self):
-        context = self._score['Global Skips']
-        leaf = abjad.inspect(context).get_leaf(-1)
-        mark = abjad.inspect(leaf).get_effective(abjad.MetronomeMark)
+        skip = baca.select(self._score['Global Skips']).skip(-1)
+        mark = abjad.inspect(skip).get_effective(abjad.MetronomeMark)
         if not mark:
             return
         if not self.metronome_marks:
@@ -1197,10 +1189,8 @@ class SegmentMaker(abjad.SegmentMaker):
         return result
 
     def _get_end_time_signature(self):
-        context = self._score['Global Skips']
-        last_measure = context[-1]
-        prototype = abjad.TimeSignature
-        time_signature = abjad.inspect(last_measure).get_effective(prototype)
+        skip = baca.select(self._score['Global Skips']).skip(-1)
+        time_signature = abjad.inspect(skip).get_effective(abjad.TimeSignature)
         if not time_signature:
             return
         string = str(time_signature)
@@ -1208,20 +1198,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _get_name(self):
         return self._metadata.get('name')
-
-    def _get_offsets(self, start_stage, stop_stage):
-        context = self._score['Global Skips']
-        result = self._stage_number_to_measure_indices(start_stage)
-        start_measure_index, stop_measure_index = result
-        start_skip = context[start_measure_index]
-        assert isinstance(start_skip, abjad.Skip), start_skip
-        start_offset = abjad.inspect(start_skip).get_timespan().start_offset
-        result = self._stage_number_to_measure_indices(stop_stage)
-        start_measure_index, stop_measure_index = result
-        stop_skip = context[stop_measure_index]
-        assert isinstance(stop_skip, abjad.Skip), stop_skip
-        stop_offset = abjad.inspect(stop_skip).get_timespan().stop_offset
-        return start_offset, stop_offset
 
     def _get_previous_clef(self, context):
         if not self._previous_metadata:
@@ -1292,6 +1268,20 @@ class SegmentMaker(abjad.SegmentMaker):
             includes.append(self._score_package_nonfirst_stylesheet_path)
         return includes
 
+    def _get_stage_offsets(self, start_stage, stop_stage):
+        skips = baca.select(self._score['Global Skips']).skips()
+        result = self._stage_number_to_measure_indices(start_stage)
+        start_measure_index, stop_measure_index = result
+        start_skip = skips[start_measure_index]
+        assert isinstance(start_skip, abjad.Skip), start_skip
+        start_offset = abjad.inspect(start_skip).get_timespan().start_offset
+        result = self._stage_number_to_measure_indices(stop_stage)
+        start_measure_index, stop_measure_index = result
+        stop_skip = skips[stop_measure_index]
+        assert isinstance(stop_skip, abjad.Skip), stop_skip
+        stop_offset = abjad.inspect(stop_skip).get_timespan().stop_offset
+        return start_offset, stop_offset
+
     def _get_stage_time_signatures(self, start_stage=None, stop_stage=None):
         assert len(self.time_signatures) == sum(self.measures_per_stage)
         stages = baca.Sequence(self.time_signatures).partition_by_counts(
@@ -1304,7 +1294,8 @@ class SegmentMaker(abjad.SegmentMaker):
             stop_index = stop_stage
             stages = stages[start_index:stop_index]
             time_signatures = baca.sequence(stages).flatten(depth=-1)
-        start_offset, stop_offset = self._get_offsets(start_stage, stop_stage)
+        pair = (start_stage, stop_stage)
+        start_offset, stop_offset = self._get_stage_offsets(*pair)
         return start_offset, time_signatures
 
     def _handle_mutator(self, command):
@@ -1382,9 +1373,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _label_clock_time_(self):
         if not self.label_clock_time:
             return
-        skip_context = self._score['Global Skips']
-        skips = []
-        for skip in abjad.iterate(skip_context).leaves(abjad.Skip):
+        for skip in baca.select(self._score['Global Skips']).skips():
             start_offset = abjad.inspect(skip).get_timespan().start_offset
             if start_offset in self._fermata_start_offsets:
                 continue
@@ -1420,7 +1409,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _label_stage_numbers_(self):
         if not self.label_stages:
             return
-        context = self._score['Global Skips']
+        skips = baca.select(self._score['Global Skips']).skips()
         for stage_index in range(self.stage_count):
             stage_number = stage_index + 1
             result = self._stage_number_to_measure_indices(stage_number)
@@ -1435,9 +1424,8 @@ class SegmentMaker(abjad.SegmentMaker):
             markup = abjad.Markup(string)
             markup = markup.with_color('blue')
             markup = markup.fontsize(-3)
-            start_measure = context[start_measure_index]
-            leaf = abjad.inspect(start_measure).get_leaf(0)
-            abjad.attach(markup, leaf)
+            skip = skips[start_measure_index]
+            abjad.attach(markup, skip)
 
     def _make_global_skips(self):
         context = self._score['Global Skips']
@@ -1495,24 +1483,6 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.setting(score).current_bar_number = first_bar_number
         self._score = score
 
-    def _make_volta_containers(self):
-        if not self.volta_measure_map:
-            return
-        context = self._score['Global Skips']
-        skips = baca.select(context).skips()
-        for item in self.volta_measure_map:
-            if isinstance(item, tuple):
-                assert len(item) == 2, repr(item)
-                start, stop = item
-                skips_ = skips[start:stop]
-            elif isinstance(item, abjad.Expression):
-                skips_ = item(skips).flatten()
-            else:
-                raise TypeError(item)
-            container = abjad.Container()
-            abjad.mutate(skips_).wrap(container)
-            abjad.attach(abjad.Repeat(), container)
-
     def _print_cache(self):
         for context in self._cache:
             print(f'CONTEXT {context} ...')
@@ -1525,15 +1495,14 @@ class SegmentMaker(abjad.SegmentMaker):
     def _print_segment_duration_(self):
         if not self.print_segment_duration:
             return
-        context = self._score['Global Skips']
         current_tempo = None
-        leaves = abjad.iterate(context).leaves()
+        skips = baca.select(self._score['Global Skips']).skips()
         measure_summaries = []
         tempo_index = 0
         is_trending = False
-        for i, leaf in enumerate(leaves):
-            duration = abjad.inspect(leaf).get_duration()
-            tempi = abjad.inspect(leaf).get_indicators(abjad.MetronomeMark)
+        for i, skip in enumerate(skips):
+            duration = abjad.inspect(skip).get_duration()
+            tempi = abjad.inspect(skip).get_indicators(abjad.MetronomeMark)
             if tempi:
                 current_tempo = tempi[0]
                 for measure_summary in measure_summaries[tempo_index:]:
@@ -1541,9 +1510,9 @@ class SegmentMaker(abjad.SegmentMaker):
                     measure_summary[-1] = current_tempo
                 tempo_index = i
                 is_trending = False
-            if abjad.inspect(leaf).has_indicator(abjad.Accelerando):
+            if abjad.inspect(skip).has_indicator(abjad.Accelerando):
                 is_trending = True
-            if abjad.inspect(leaf).has_indicator(abjad.Ritardando):
+            if abjad.inspect(skip).has_indicator(abjad.Ritardando):
                 is_trending = True
             next_tempo = None
             measure_summary = [
@@ -5843,310 +5812,6 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._transpose_score
 
     @property
-    def volta_measure_map(self):
-        r'''Gets volta measure map.
-
-        ..  container:: example
-
-            Without volta measure map.
-
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     baca.scope('Music Voice', 1),
-            ...     baca.make_even_runs(),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score])
-                \context Score = "Score" <<
-                    \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
-                            % measure 1
-                            \time 4/8
-                            s1 * 1/2
-                            % measure 2
-                            \time 3/8
-                            s1 * 3/8
-                            % measure 3
-                            \time 4/8
-                            s1 * 1/2
-                            % measure 4
-                            \time 3/8
-                            s1 * 3/8
-                        }
-                    >>
-                    \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
-                                {
-                                    % measure 1
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    \clef "treble"
-                                    c'8 [
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                                    % measure 2
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                                    % measure 3
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                                    % measure 4
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                    \bar "|"
-                                }
-                            }
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
-            With volta measure map:
-
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     volta_measure_map=baca.VoltaMeasureMap([
-            ...         (1, 2),
-            ...         ]),
-            ...     )
-
-            >>> maker(
-            ...     baca.scope('Music Voice', 1),
-            ...     baca.make_even_runs(),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score])
-                \context Score = "Score" <<
-                    \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
-                            % measure 1
-                            \time 4/8
-                            s1 * 1/2
-                            \repeat volta 2
-                            {
-                                % measure 2
-                                \time 3/8
-                                s1 * 3/8
-                            }
-                            % measure 3
-                            \time 4/8
-                            s1 * 1/2
-                            % measure 4
-                            \time 3/8
-                            s1 * 3/8
-                        }
-                    >>
-                    \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
-                                {
-                                    % measure 1
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    \clef "treble"
-                                    c'8 [
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                                    % measure 2
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                                    % measure 3
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                                    % measure 4
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                    \bar "|"
-                                }
-                            }
-                        }
-                    >>
-                >>
-
-        Defaults to none.
-
-        Set to volta measure map or none.
-
-        Returns volta measure map or none.
-        '''
-        return self._volta_measure_map
-
-    @property
     def wrappers(self):
         r'''Gets wrappers.
 
@@ -6218,7 +5883,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._apply_previous_segment_end_settings()
         self._attach_first_segment_score_template_defaults()
         self._apply_spacing_specifier()
-        self._make_volta_containers()
         self._label_clock_time_()
         self._hide_instrument_names_()
         self._label_instrument_changes()

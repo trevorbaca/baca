@@ -65,7 +65,6 @@ Bases
       ~baca.tools.SegmentMaker.SegmentMaker.validate_measure_count
       ~baca.tools.SegmentMaker.SegmentMaker.validate_measures_per_stage
       ~baca.tools.SegmentMaker.SegmentMaker.validate_stage_count
-      ~baca.tools.SegmentMaker.SegmentMaker.volta_measure_map
       ~baca.tools.SegmentMaker.SegmentMaker.wrappers
       ~baca.tools.SegmentMaker.SegmentMaker.__call__
       ~baca.tools.SegmentMaker.SegmentMaker.__eq__
@@ -146,8 +145,6 @@ Read-only properties
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.time_signatures
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.transpose_score
-
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.volta_measure_map
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.wrappers
 
