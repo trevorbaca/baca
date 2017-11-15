@@ -108,9 +108,9 @@ class RhythmCommand(Command):
             abjad.attach('tie from me', last_leaf)
             if self._repeat_ties:
                 abjad.attach('use messiaen style ties', last_leaf)
-        return baca.SegmentContribution(
-            payload=music,
-            start_offset=start_offset,
+        return baca.FloatingSelection(
+            selection=music,
+            timespan=abjad.Timespan(start_offset, start_offset),
             )
 
     ### PRIVATE PROPERTIES ###
@@ -227,9 +227,9 @@ class RhythmCommand(Command):
                 )
             divisions = division_maker(divisions)
             divisions = baca.sequence(divisions).flatten(depth=-1)
-            contribution = self._select_divisions(divisions, start_offset)
-            divisions = contribution.payload
-            start_offset = contribution.start_offset
+            floating_selection = self._select_divisions(divisions, start_offset)
+            divisions = floating_selection.selection
+            start_offset = floating_selection.timespan.start_offset
             selections = rhythm_maker(divisions)
             self._annotate_unpitched_notes(selections)
         else:
@@ -301,9 +301,9 @@ class RhythmCommand(Command):
             if not isinstance(divisions, abjad.Sequence):
                 raise Exception(f'division sequence: {divisions!r}.')
         new_start_offset = divisions[0].start_offset
-        return baca.SegmentContribution(
-            payload=divisions,
-            start_offset=new_start_offset,
+        return baca.FloatingSelection(
+            selection=divisions,
+            timespan=abjad.Timespan(new_start_offset, new_start_offset),
             )
 
     ### PUBLIC PROPERTIES ###

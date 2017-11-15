@@ -39,7 +39,6 @@ baca.tools
    MusicContribution
    MusicMaker
    PitchFirstRhythmMaker
-   SegmentContribution
    SegmentMaker
 
 .. autosummary::
@@ -50,7 +49,6 @@ baca.tools
    MusicContribution
    MusicMaker
    PitchFirstRhythmMaker
-   SegmentContribution
    SegmentMaker
 
 --------

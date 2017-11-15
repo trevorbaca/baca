@@ -25,8 +25,6 @@ class FloatingSelection(abjad.AbjadValueObject):
     ### INITIALIZER ###
 
     def __init__(self, selection=None, timespan=None):
-        if selection is not None:
-            assert isinstance(selection, abjad.Selection)
         self._selection = selection
         if timespan is not None:
             assert isinstance(timespan, abjad.Timespan)
