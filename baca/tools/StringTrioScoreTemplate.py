@@ -106,7 +106,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
         Returns score.
         '''
-        time_signature_context = self._make_time_signature_context()
+        global_context = self._make_global_context()
         instrument_tags = (
             'violin',
             'viola',
@@ -118,7 +118,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             tag_string,
             'before',
             )
-        abjad.attach(tag_command, time_signature_context)
+        abjad.attach(tag_command, global_context)
 
         # VIOLIN
         violin_music_voice = abjad.Voice(
@@ -210,7 +210,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             )
         score = abjad.Score(
             [
-                time_signature_context,
+                global_context,
                 music_context,
                 ],
             name='Score',

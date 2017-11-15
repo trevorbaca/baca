@@ -930,6 +930,14 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.print_timings:
             print(f'command interpretation {count} {counter} ...')
 
+    def _call_rhythm_commands(self):
+        self._make_music_for_global_context()
+        self._attach_tempo_indicators()
+        self._attach_fermatas()
+        self._make_spacing_regions()
+        for voice in abjad.iterate(self._score).components(abjad.Voice):
+            self._interpret_rhythm_commands_for_voice(voice)
+
     def _check_design(self):
         if self.design_checker is None:
             return
@@ -1361,14 +1369,6 @@ class SegmentMaker(abjad.SegmentMaker):
             result.append(selection)
         return result
 
-    def _interpret_rhythm_commands(self):
-        self._make_music_for_time_signature_context()
-        self._attach_tempo_indicators()
-        self._attach_fermatas()
-        self._make_spacing_regions()
-        for voice in abjad.iterate(self._score).components(abjad.Voice):
-            self._interpret_rhythm_commands_for_voice(voice)
-
     def _interpret_rhythm_commands_for_voice(self, voice):
         assert not len(voice), repr(voice)
         rhythm_commands = self._get_rhythm_wrappers_for_voice(voice.name)
@@ -1538,7 +1538,7 @@ class SegmentMaker(abjad.SegmentMaker):
             rests.append(rest)
         return rests
 
-    def _make_music_for_time_signature_context(self):
+    def _make_music_for_global_context(self):
         voice_name = 'Global Skips'
         context = self._score[voice_name]
         rhythm_commands = self._get_rhythm_wrappers_for_voice(voice_name)
@@ -6294,7 +6294,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._make_lilypond_file(environment=environment, midi=midi)
         self._populate_global_skips()
         self._label_stage_numbers_()
-        self._interpret_rhythm_commands()
+        self._call_rhythm_commands()
         self._extend_beams()
         self._call_commands()
         self._detach_figure_names()

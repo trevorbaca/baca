@@ -23,25 +23,25 @@ class ScoreTemplate(abjad.ScoreTemplate):
             )
         abjad.attach(tag_command, context)
 
-    def _make_time_signature_context(self):
-        time_signature_context_multimeasure_rests = abjad.Context(
+    def _make_global_context(self):
+        global_context_multimeasure_rests = abjad.Context(
             context_name='GlobalRests',
             name='Global Rests',
             )
-        time_signature_context_skips = abjad.Context(
+        global_context_skips = abjad.Context(
             context_name='GlobalSkips',
             name='Global Skips',
             )
-        time_signature_context = abjad.Context(
+        global_context = abjad.Context(
             [
-                time_signature_context_multimeasure_rests,
-                time_signature_context_skips,
+                global_context_multimeasure_rests,
+                global_context_skips,
             ],
             context_name='GlobalContext',
             is_simultaneous=True,
             name='Global Context',
             )
-        return time_signature_context
+        return global_context
 
     def _validate_voice_names(self, score):
         voice_names = []
