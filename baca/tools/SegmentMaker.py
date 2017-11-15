@@ -960,7 +960,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 rhythms.append(rhythm)
             rhythms.sort(key=lambda _: _.timespan)
             self._assert_good_rhythms(rhythms, voice.name)
-            rhythms = self._intercalate_rests(rhythms)
+            rhythms = self._intercalate_silences(rhythms)
             voice.extend(rhythms)
             self._apply_first_and_last_ties(voice)
 
@@ -1332,7 +1332,7 @@ class SegmentMaker(abjad.SegmentMaker):
             time_signatures_ = None
         self._time_signatures = time_signatures_
 
-    def _intercalate_rests(self, rhythms):
+    def _intercalate_silences(self, rhythms):
         durations = [_.duration for _ in self.time_signatures]
         start_offsets = abjad.mathtools.cumulative_sums(durations)
         segment_duration = start_offsets[-1]
@@ -1347,23 +1347,26 @@ class SegmentMaker(abjad.SegmentMaker):
             if start_offset < previous_stop_offset:
                 raise Exception('overlapping offsets: {rhythm!r}.')
             if previous_stop_offset < start_offset:
-                selection = self._make_intercalated_rests(
-                    previous_stop_offset,
-                    start_offset,
-                    pairs,
-                    )
-                result.append(selection)
+                duration = start_offset - previous_stop_offset
+                multiplier = abjad.Multiplier(duration)
+                if self.skips_instead_of_rests:
+                    silence = abjad.Skip(1)
+                else:
+                    silence = abjad.MultimeasureRest(1)
+                abjad.attach(multiplier, silence)
+                result.append(silence)
             result.extend(rhythm.selection)
-            duration = abjad.inspect(
-                rhythm.selection).get_duration()
+            duration = abjad.inspect(rhythm.selection).get_duration()
             previous_stop_offset = start_offset + duration
         if previous_stop_offset < segment_duration:
-            selection = self._make_intercalated_rests(
-                previous_stop_offset,
-                segment_duration,
-                pairs,
-                )
-            result.append(selection)
+            duration = segment_duration - previous_stop_offset
+            multiplier = abjad.Multiplier(duration)
+            if self.skips_instead_of_rests:
+                silence = abjad.Skip(1)
+            else:
+                silence = abjad.MultimeasureRest(1)
+            abjad.attach(multiplier, silence)
+            result.append(silence)
         return result
 
     def _is_first_segment(self):
@@ -1450,17 +1453,6 @@ class SegmentMaker(abjad.SegmentMaker):
         markup = abjad.Markup(string, direction=abjad.Up)
         markup = markup.box().override(('box-padding', 0.75))
         return markup
-
-    def _make_intercalated_rests(self, start_offset, stop_offset, pairs):
-        duration = stop_offset - start_offset
-        multiplier = abjad.Multiplier(duration)
-        #rest = abjad.MultimeasureRest(abjad.Duration(1))
-        #abjad.attach(multiplier, rest)
-        #selection = abjad.select(rest)
-        skip = abjad.Skip(abjad.Duration(1))
-        abjad.attach(multiplier, skip)
-        selection = abjad.select(skip)
-        return selection
 
     def _make_lilypond_file(self, environment=None, midi=None):
         includes = self._get_stylesheets(environment=environment)

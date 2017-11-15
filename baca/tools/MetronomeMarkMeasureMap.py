@@ -93,7 +93,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                                 e'8 ]
                             }
                             % measure 3
-                            s1 * 7/8
+                            R1 * 7/8
                             \bar "|"
                         }
                     }
