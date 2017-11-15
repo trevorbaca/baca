@@ -1,13 +1,13 @@
 import abjad
 
 
-class FloatingSelection(abjad.AbjadValueObject):
-    r'''Floating selection.
+class TimespannedItem(abjad.AbjadValueObject):
+    r'''Timespanned item.
 
     ..  container:: example
 
-        >>> baca.FloatingSelection()
-        FloatingSelection()
+        >>> baca.TimespannedItem()
+        TimespannedItem()
 
     '''
 
@@ -16,7 +16,7 @@ class FloatingSelection(abjad.AbjadValueObject):
     __documentation_section__ = '(2) Makers'
 
     __slots__ = (
-        '_selection',
+        '_item',
         '_timespan',
         )
 
@@ -24,8 +24,8 @@ class FloatingSelection(abjad.AbjadValueObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, selection=None, timespan=None):
-        self._selection = selection
+    def __init__(self, item=None, timespan=None):
+        self._item = item
         if timespan is not None:
             assert isinstance(timespan, abjad.Timespan)
         self._timespan = timespan
@@ -33,12 +33,12 @@ class FloatingSelection(abjad.AbjadValueObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def selection(self):
-        r'''Gets selection.
+    def item(self):
+        r'''Gets item.
 
-        Returns selection or none.
+        Returns item or none.
         '''
-        return self._selection
+        return self._item
 
     @property
     def timespan(self):

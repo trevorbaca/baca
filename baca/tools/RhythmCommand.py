@@ -108,8 +108,8 @@ class RhythmCommand(Command):
             abjad.attach('tie from me', last_leaf)
             if self.repeat_ties:
                 abjad.attach('use messiaen style ties', last_leaf)
-        return baca.FloatingSelection(
-            selection=music,
+        return baca.TimespannedItem(
+            item=music,
             timespan=abjad.Timespan(start_offset, start_offset),
             )
 

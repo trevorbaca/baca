@@ -34,22 +34,22 @@ baca.tools
 .. toctree::
    :hidden:
 
-   FloatingSelection
    MusicAccumulator
    MusicContribution
    MusicMaker
    PitchFirstRhythmMaker
    SegmentMaker
+   TimespannedItem
 
 .. autosummary::
    :nosignatures:
 
-   FloatingSelection
    MusicAccumulator
    MusicContribution
    MusicMaker
    PitchFirstRhythmMaker
    SegmentMaker
+   TimespannedItem
 
 --------
 

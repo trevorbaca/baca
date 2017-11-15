@@ -98,8 +98,8 @@ class MusicAccumulator(abjad.AbjadObject):
                 )
             stop_offset = start_offset + abjad.inspect(selection).get_duration()
             timespan = abjad.Timespan(start_offset, stop_offset)
-            floating_selection = baca.FloatingSelection(
-                selection=selection,
+            floating_selection = baca.TimespannedItem(
+                item=selection,
                 timespan=timespan,
                 )
             self._floating_selections[voice_name].append(floating_selection)
@@ -119,7 +119,7 @@ class MusicAccumulator(abjad.AbjadObject):
         for voice_name in sorted(self._floating_selections.keys()):
             for floating_selection in self._floating_selections[voice_name]:
                 leaf_start_offset = floating_selection.timespan.start_offset
-                leaves = abjad.iterate(floating_selection.selection).leaves()
+                leaves = abjad.iterate(floating_selection.item).leaves()
                 for leaf in leaves:
                     markup = abjad.inspect(leaf).get_indicators(abjad.Markup)
                     for markup_ in markup:
@@ -140,7 +140,7 @@ class MusicAccumulator(abjad.AbjadObject):
         found_leaf = False
         for floating_selection in floating_selections:
             leaf_start_offset = abjad.Offset(0)
-            for leaf_ in abjad.iterate(floating_selection.selection).leaves():
+            for leaf_ in abjad.iterate(floating_selection.item).leaves():
                 leaf_duration = abjad.inspect(leaf_).get_duration()
                 if leaf_ is leaf:
                     found_leaf = True
@@ -178,7 +178,7 @@ class MusicAccumulator(abjad.AbjadObject):
             return self._score_stop_offset
         remote_selector = remote_selector or baca.leaf(0)
         floating_selections = self._floating_selections[remote_voice_name]
-        selections = [_.selection for _ in floating_selections]
+        selections = [_.item for _ in floating_selections]
         result = remote_selector(selections)
         selected_leaves = list(abjad.iterate(result).leaves())
         first_selected_leaf = selected_leaves[0]
@@ -209,7 +209,7 @@ class MusicAccumulator(abjad.AbjadObject):
     @staticmethod
     def _insert_skips(floating_selections, voice_name):
         for floating_selection in floating_selections:
-            assert isinstance(floating_selection, baca.FloatingSelection)
+            assert isinstance(floating_selection, baca.TimespannedItem)
         floating_selections = list(floating_selections)
         floating_selections.sort(key=lambda _: _.timespan)
         try:
@@ -225,7 +225,7 @@ class MusicAccumulator(abjad.AbjadObject):
         selections = floating_selections + list(gaps)
 
         def sort_function(argument):
-            if isinstance(argument, baca.FloatingSelection):
+            if isinstance(argument, baca.TimespannedItem):
                 return argument.timespan
             elif isinstance(argument, abjad.Timespan):
                 return argument
@@ -234,8 +234,8 @@ class MusicAccumulator(abjad.AbjadObject):
         selections.sort(key=sort_function)
         fused_selection = []
         for selection in selections:
-            if isinstance(selection, baca.FloatingSelection):
-                fused_selection.extend(selection.selection)
+            if isinstance(selection, baca.TimespannedItem):
+                fused_selection.extend(selection.item)
             else:
                 assert isinstance(selection, abjad.Timespan)
                 multiplier = abjad.Multiplier(selection.duration)

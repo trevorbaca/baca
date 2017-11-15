@@ -779,7 +779,7 @@ class SegmentMaker(abjad.SegmentMaker):
             start_offset = rhythm.timespan.start_offset
             if start_offset < previous_stop_offset:
                 raise Exception(f'{voice!r} has overlapping rhythms.')
-            duration = abjad.inspect(rhythm.selection).get_duration()
+            duration = abjad.inspect(rhythm.item).get_duration()
             stop_offset = start_offset + duration
             previous_stop_offset = stop_offset
 
@@ -1355,8 +1355,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     silence = abjad.MultimeasureRest(1)
                 abjad.attach(multiplier, silence)
                 result.append(silence)
-            result.extend(rhythm.selection)
-            duration = abjad.inspect(rhythm.selection).get_duration()
+            result.extend(rhythm.item)
+            duration = abjad.inspect(rhythm.item).get_duration()
             previous_stop_offset = start_offset + duration
         if previous_stop_offset < segment_duration:
             duration = segment_duration - previous_stop_offset
@@ -1571,8 +1571,6 @@ class SegmentMaker(abjad.SegmentMaker):
         counter = abjad.Strin('second').pluralize(total_duration)
         print(f'segment duration {total_duration} {counter} ...')
 
-    # TODO: refactor as _scope_to_leaf_selections();
-    #       probably not necessary!
     def _scope_to_leaf_selection(self, wrapper):
         leaves = []
         selections = self._scope_to_leaf_selections(wrapper.scope)
