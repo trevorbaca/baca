@@ -845,18 +845,25 @@ class SegmentMaker(abjad.SegmentMaker):
         if self._is_first_segment():
             self.score_template.attach_defaults(self._score)
 
-#    def _attach_metronome_marks_to_global_skips(self):
-#        context = self._score['Global Skips']
-#        wrappers = self._get_rhythm_wrappers_for_voice('Global Skips')
-#        for wrapper in wrappers:
-#            if wrapper.start_tempo is not None:
-#                start_tempo = abjad.new(wrapper.start_tempo)
-#                first_leaf = abjad.inspect(context).get_leaf(0)
-#                abjad.attach(start_tempo, first_leaf, scope='Score')
-#            if wrapper.stop_tempo is not None:
-#                stop_tempo = abjad.new(wrapper.stop_tempo)
-#                leaf = abjad.inspect(context).get_leaf(-1)
-#                abjad.attach(stop_tempo, leaf, scope='Score')
+    def _attach_metronome_marks(self):
+        if not self.metronome_mark_measure_map:
+            return
+        context = self._score['Global Skips']
+        skips = abjad.select(context).leaves(abjad.Skip)
+        left_broken_text = abjad.Markup().null()
+        left_broken_text = abjad.new(left_broken_text, direction=None)
+        spanner = abjad.MetronomeMarkSpanner(
+            left_broken_padding=0,
+            left_broken_text=left_broken_text,
+            start_with_parenthesized_tempo=False,
+            )
+        abjad.attach(spanner, skips)
+        for stage_number, directive in self.metronome_mark_measure_map:
+            self._assert_valid_stage_number(stage_number)
+            result = self._stage_number_to_measure_indices(stage_number)
+            start, stop = result
+            start_skip = context[start]
+            spanner.attach(directive, start_skip)
 
     def _attach_rehearsal_mark(self):
         if self.rehearsal_letter == '':
@@ -877,28 +884,6 @@ class SegmentMaker(abjad.SegmentMaker):
         voice = self._score['Global Skips']
         leaf = abjad.inspect(voice).get_leaf(0)
         abjad.attach(rehearsal_mark, leaf)
-
-    def _attach_tempo_indicators(self):
-        if not self.metronome_mark_measure_map:
-            return
-        context = self._score['Global Skips']
-        skips = abjad.select(context).leaves(abjad.Skip)
-        left_broken_text = abjad.Markup().null()
-        left_broken_text._direction = None
-        spanner = abjad.MetronomeMarkSpanner(
-            left_broken_padding=0,
-            left_broken_text=left_broken_text,
-            start_with_parenthesized_tempo=False,
-            )
-        abjad.attach(spanner, skips)
-        for stage_number, directive in self.metronome_mark_measure_map:
-            self._assert_valid_stage_number(stage_number)
-            result = self._stage_number_to_measure_indices(stage_number)
-            start_measure_index, stop_measure_index = result
-            start_skip = context[start_measure_index]
-            prototype = (abjad.Skip, abjad.MultimeasureRest)
-            assert isinstance(start_skip, prototype), start_skip
-            spanner.attach(directive, start_skip)
 
     def _cache_leaves(self):
         stage_timespans = []
@@ -945,7 +930,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _call_rhythm_commands(self):
 #        self._attach_metronome_marks_to_global_skips()
-        self._attach_tempo_indicators()
+        self._attach_metronome_marks()
         self._attach_fermatas()
         self._make_spacing_regions()
         for voice in abjad.iterate(self._score).components(abjad.Voice):
