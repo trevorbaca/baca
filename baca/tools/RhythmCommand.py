@@ -266,11 +266,6 @@ class RhythmCommand(Command):
             divisions = self.division_expression(divisions)
             assert isinstance(divisions, abjad.Sequence), repr(divisions)
         return divisions
-#        start_offset = divisions[0].start_offset
-#        return baca.FloatingSelection(
-#            selection=divisions,
-#            timespan=abjad.Timespan(start_offset, start_offset),
-#            )
 
     ### PUBLIC PROPERTIES ###
 

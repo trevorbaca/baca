@@ -3361,13 +3361,120 @@ class Selection(abjad.Selection):
 
     def skip(self, n):
         r'''Selects skip `n`.
+
+        ..  container:: example
+
+            Selects skip -1:
+
+            ..  container:: example
+
+                >>> staff = abjad.Staff("c'8 s e' f' g' s b' s")
+                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
+                >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
+                >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
+                >>> abjad.show(staff) # doctest: +SKIP
+
+                >>> result = baca.select(staff).skip(-1)
+
+                >>> result
+                Skip('s8')
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().skip(-1)
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Skip('s8')
+
+                >>> selector.color(result)
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.show(staff) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff)
+                \new Staff \with {
+                    autoBeaming = ##f
+                } {
+                    \time 2/8
+                    c'8
+                    s8
+                    e'8
+                    f'8
+                    \time 3/8
+                    g'8
+                    s8
+                    b'8
+                    % green
+                    \time 1/8
+                    s8
+                }
+
         '''
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(inspect.currentframe(), lone=True)
         return self.skips()[n]
 
     def skips(self):
         r'''Selects skips.
+
+        ..  container:: example
+
+            Selects skips:
+
+            ..  container:: example
+
+                >>> staff = abjad.Staff("c'8 s e' f' g' s b' s")
+                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
+                >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
+                >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
+                >>> abjad.show(staff) # doctest: +SKIP
+
+                >>> result = baca.select(staff).skips()
+
+                >>> for item in result:
+                ...     item
+                Skip('s8')
+                Skip('s8')
+                Skip('s8')
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().skips()
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Skip('s8')
+                Skip('s8')
+                Skip('s8')
+
+                >>> selector.color(result)
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.show(staff) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff)
+                \new Staff \with {
+                    autoBeaming = ##f
+                } {
+                    \time 2/8
+                    c'8
+                    % red
+                    s8
+                    e'8
+                    f'8
+                    \time 3/8
+                    g'8
+                    % blue
+                    s8
+                    b'8
+                    % red
+                    \time 1/8
+                    s8
+                }
+
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
