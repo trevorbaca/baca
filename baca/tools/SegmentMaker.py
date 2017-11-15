@@ -845,6 +845,19 @@ class SegmentMaker(abjad.SegmentMaker):
         if self._is_first_segment():
             self.score_template.attach_defaults(self._score)
 
+#    def _attach_metronome_marks_to_global_skips(self):
+#        context = self._score['Global Skips']
+#        wrappers = self._get_rhythm_wrappers_for_voice('Global Skips')
+#        for wrapper in wrappers:
+#            if wrapper.start_tempo is not None:
+#                start_tempo = abjad.new(wrapper.start_tempo)
+#                first_leaf = abjad.inspect(context).get_leaf(0)
+#                abjad.attach(start_tempo, first_leaf, scope='Score')
+#            if wrapper.stop_tempo is not None:
+#                stop_tempo = abjad.new(wrapper.stop_tempo)
+#                leaf = abjad.inspect(context).get_leaf(-1)
+#                abjad.attach(stop_tempo, leaf, scope='Score')
+
     def _attach_rehearsal_mark(self):
         if self.rehearsal_letter == '':
             return
@@ -931,12 +944,46 @@ class SegmentMaker(abjad.SegmentMaker):
             print(f'command interpretation {count} {counter} ...')
 
     def _call_rhythm_commands(self):
-        self._make_music_for_global_context()
+#        self._attach_metronome_marks_to_global_skips()
         self._attach_tempo_indicators()
         self._attach_fermatas()
         self._make_spacing_regions()
         for voice in abjad.iterate(self._score).components(abjad.Voice):
-            self._interpret_rhythm_commands_for_voice(voice)
+            assert not len(voice), repr(voice)
+            wrappers = self._get_rhythm_wrappers_for_voice(voice.name)
+            if not wrappers:
+                if self.skips_instead_of_rests:
+                    measures = self._make_skips()
+                else:
+                    measures = self._make_rests()
+                voice.extend(measures)
+                continue
+            effective_staff = abjad.inspect(voice).get_effective_staff()
+            effective_staff_name = effective_staff.context_name
+            contributions = []
+            for wrapper in wrappers:
+                assert isinstance(wrapper, baca.CommandWrapper)
+                if wrapper.scope.stages is not None:
+                    result = self._get_stage_numbers(wrapper.scope.stages)
+                    contribution = self._get_time_signatures(*result)
+                else:
+                    continue
+                try:
+                    contribution = wrapper.command(
+                        effective_staff_name,
+                        start_offset=contribution.start_offset,
+                        time_signatures=contribution.payload,
+                        )
+                except:
+                    raise Exception(format(wrapper))
+                assert contribution.start_offset is not None
+                contributions.append(contribution)
+            contributions.sort(key=lambda _: _.start_offset)
+            if not self._contributions_do_not_overlap(contributions):
+                raise Exception(f'{voice.name!r} has overlapping rhythms.')
+            contributions = self._intercalate_rests(contributions)
+            voice.extend(contributions)
+            self._apply_first_and_last_ties(voice)
 
     def _check_design(self):
         if self.design_checker is None:
@@ -1369,43 +1416,6 @@ class SegmentMaker(abjad.SegmentMaker):
             result.append(selection)
         return result
 
-    def _interpret_rhythm_commands_for_voice(self, voice):
-        assert not len(voice), repr(voice)
-        rhythm_commands = self._get_rhythm_wrappers_for_voice(voice.name)
-        if not rhythm_commands:
-            if self.skips_instead_of_rests:
-                measures = self._make_skips()
-            else:
-                measures = self._make_rests()
-            voice.extend(measures)
-            return
-        effective_staff = abjad.inspect(voice).get_effective_staff()
-        effective_staff_name = effective_staff.context_name
-        contributions = []
-        for rhythm_command in rhythm_commands:
-            assert isinstance(rhythm_command, baca.CommandWrapper)
-            if rhythm_command.scope.stages is not None:
-                result = self._get_stage_numbers(rhythm_command.scope.stages)
-                contribution = self._get_time_signatures(*result)
-            else:
-                continue
-            try:
-                contribution = rhythm_command.command(
-                    effective_staff_name,
-                    start_offset=contribution.start_offset,
-                    time_signatures=contribution.payload,
-                    )
-            except:
-                raise Exception(format(rhythm_command))
-            assert contribution.start_offset is not None
-            contributions.append(contribution)
-        contributions.sort(key=lambda _: _.start_offset)
-        if not self._contributions_do_not_overlap(contributions):
-            raise Exception(f'{voice.name!r} has overlapping rhythms.')
-        contributions = self._intercalate_rests(contributions)
-        voice.extend(contributions)
-        self._apply_first_and_last_ties(voice)
-
     def _is_first_segment(self):
         segment_number = self._get_segment_number()
         return segment_number == 1
@@ -1475,16 +1485,15 @@ class SegmentMaker(abjad.SegmentMaker):
             leaf = abjad.inspect(start_measure).get_leaf(0)
             abjad.attach(markup, leaf)
 
-    def _make_global_skips(self, time_signatures=None):
-        skips = []
+    def _make_global_skips(self):
+        context = self._score['Global Skips']
         for time_signature in self.time_signatures:
             skip = abjad.Skip(1)
             multiplier = abjad.Multiplier(time_signature.duration)
             abjad.attach(multiplier, skip)
             time_signature = abjad.new(time_signature, context='Score')
             abjad.attach(time_signature, skip)
-            skips.append(skip)
-        return skips
+            context.append(skip)
 
     def _make_instrument_change_markup(self, instrument):
         string = f'to {instrument.name}'
@@ -1537,20 +1546,6 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.attach(multiplier, rest)
             rests.append(rest)
         return rests
-
-    def _make_music_for_global_context(self):
-        voice_name = 'Global Skips'
-        context = self._score[voice_name]
-        rhythm_commands = self._get_rhythm_wrappers_for_voice(voice_name)
-        for rhythm_command in rhythm_commands:
-            if rhythm_command.start_tempo is not None:
-                start_tempo = abjad.new(rhythm_command.start_tempo)
-                first_leaf = abjad.inspect(context).get_leaf(0)
-                abjad.attach(start_tempo, first_leaf, scope=abjad.Score)
-            if rhythm_command.stop_tempo is not None:
-                stop_tempo = abjad.new(rhythm_command.stop_tempo)
-                leaf = abjad.inspect(context).get_leaf(-1)
-                abjad.attach(stop_tempo, leaf, scope=abjad.Score)
 
     def _make_rests(self, time_signatures=None):
         time_signatures = time_signatures or self.time_signatures
@@ -1605,11 +1600,6 @@ class SegmentMaker(abjad.SegmentMaker):
             container = abjad.Container()
             abjad.mutate(skips_).wrap(container)
             abjad.attach(abjad.Repeat(), container)
-
-    def _populate_global_skips(self):
-        context = self._score['Global Skips']
-        skips = self._make_global_skips()
-        context.extend(skips)
 
     def _print_cache(self):
         for context in self._cache:
@@ -6292,7 +6282,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._previous_metadata = previous_metadata or abjad.TypedOrderedDict()
         self._make_score()
         self._make_lilypond_file(environment=environment, midi=midi)
-        self._populate_global_skips()
+        self._make_global_skips()
         self._label_stage_numbers_()
         self._call_rhythm_commands()
         self._extend_beams()
