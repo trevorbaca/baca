@@ -86,7 +86,7 @@ class RhythmCommand(Command):
     ### SPECIAL METHODS ###
 
     def __call__(self, start_offset=None, time_signatures=None):
-        r'''Calls command on `time_signatures` with `start_offset`.
+        r'''Calls command on `start_offset` and `time_signatures`.
 
         Returns contribution with music payload.
         '''
@@ -95,18 +95,18 @@ class RhythmCommand(Command):
             assert isinstance(time_signature, prototype), repr(time_signature)
         if start_offset is not None:
             assert isinstance(start_offset, abjad.Offset)
-        music, start_offset = self._make_rhythm(time_signatures, start_offset)
+        music, start_offset = self._make_rhythm(start_offset, time_signatures)
         assert isinstance(music, (tuple, list, abjad.Voice))
-        first_leaf = self._get_first_leaf(music)
-        last_leaf = self._get_last_leaf(music)
+        first_leaf = abjad.inspect(music).get_leaf(0)
+        last_leaf = abjad.inspect(music).get_leaf(-1)
         pitched_prototype = (abjad.Note, abjad.Chord)
         if self.tie_first and isinstance(first_leaf, pitched_prototype):
             abjad.attach('tie to me', first_leaf)
-            if self._repeat_ties:
+            if self.repeat_ties:
                 abjad.attach('use messiaen style ties', first_leaf)
         if self.tie_last and isinstance(last_leaf, pitched_prototype):
             abjad.attach('tie from me', last_leaf)
-            if self._repeat_ties:
+            if self.repeat_ties:
                 abjad.attach('use messiaen style ties', last_leaf)
         return baca.FloatingSelection(
             selection=music,
@@ -125,12 +125,6 @@ class RhythmCommand(Command):
         mask = abjad.silence([0], 1, use_multimeasure_rests=True)
         multimeasure_rests = rhythmos.NoteRhythmMaker(division_masks=[mask])
         return multimeasure_rests
-
-    @property
-    def _repeat_ties(self):
-        if self.rhythm_maker.tie_specifier is None:
-            return False
-        return self.rhythm_maker.tie_specifier.repeat_ties
 
     ### PRIVATE METHODS ###
 
@@ -175,35 +169,6 @@ class RhythmCommand(Command):
         assert not any(_.start_offset is None for _ in divisions_)
         return divisions_
 
-    def _get_division_maker(self):
-        if self.division_maker is not None:
-            return self.division_maker
-        return self._default_division_maker
-
-    def _get_first_leaf(self, music):
-        first_item = music[0]
-        if isinstance(first_item, abjad.Selection):
-            first_component = first_item[0]
-        else:
-            first_component = first_item
-        first_leaf = abjad.inspect(first_component).get_leaf(0)
-        assert isinstance(first_leaf, abjad.Leaf), repr(first_leaf)
-        return first_leaf
-
-    def _get_last_leaf(self, music):
-        last_item = music[-1]
-        if isinstance(last_item, abjad.Selection):
-            last_component = last_item[-1]
-        else:
-            last_component = last_item
-        assert isinstance(last_component, abjad.Component)
-        if isinstance(last_component, abjad.Leaf):
-            last_leaf = last_component
-        else:
-            last_leaf = abjad.inspect(last_component).get_leaf(-1)
-        assert isinstance(last_leaf, abjad.Leaf)
-        return last_leaf
-
     def _get_storage_format_specification(self):
         agent = abjad.StorageFormatManager(self)
         keyword_argument_names = agent.signature_keyword_names
@@ -215,32 +180,33 @@ class RhythmCommand(Command):
             keyword_argument_names=keyword_argument_names,
             )
 
-    def _make_rhythm(self, time_signatures, start_offset):
+    def _make_rhythm(self, start_offset, time_signatures):
         rhythm_maker = self.rhythm_maker or self._default_rhythm_maker
         if isinstance(rhythm_maker, abjad.Selection):
             selections = [rhythm_maker]
-        elif isinstance(rhythm_maker, rhythmos.RhythmMaker):
-            division_maker = self._get_division_maker()
+        elif not isinstance(rhythm_maker, rhythmos.RhythmMaker):
+            raise TypeError(f'rhythm-maker or selection: {rhythm_maker!r}.')
+        else:
+            division_maker = self.division_maker
+            if division_maker is None:
+                division_maker = self._default_division_maker
             divisions = self._durations_to_divisions(
                 time_signatures,
                 start_offset,
                 )
             divisions = division_maker(divisions)
             divisions = baca.sequence(divisions).flatten(depth=-1)
-            floating_selection = self._select_divisions(divisions, start_offset)
-            divisions = floating_selection.selection
-            start_offset = floating_selection.timespan.start_offset
+            divisions = self._transform_divisions(divisions)
+            start_offset = divisions[0].start_offset
             selections = rhythm_maker(divisions)
             self._annotate_unpitched_notes(selections)
-        else:
-            raise TypeError(f'rhythm-maker or selection: {rhythm_maker!r}.')
         assert self._all_are_selections(selections), repr(selections)
         if self.split_at_measure_boundaries:
             specifier = rhythmos.DurationSpecifier
             selections = specifier._split_at_measure_boundaries(
                 selections,
                 time_signatures,
-                repeat_ties=self._repeat_ties,
+                repeat_ties=self.repeat_ties,
                 )
             assert self._all_are_selections(selections), repr(selections)
         if self.rewrite_meter:
@@ -248,9 +214,9 @@ class RhythmCommand(Command):
             selections = specifier._rewrite_meter_(
                 selections,
                 time_signatures,
-                reference_meters=self._reference_meters,
+                reference_meters=self.reference_meters,
                 rewrite_tuplets=False,
-                repeat_ties=self._repeat_ties,
+                repeat_ties=self.repeat_ties,
                 )
         if not self.rhythm_overwrites:
             return selections, start_offset
@@ -295,16 +261,16 @@ class RhythmCommand(Command):
         selections = [abjad.select(_) for _ in music]
         return selections, start_offset
 
-    def _select_divisions(self, divisions, start_offset):
+    def _transform_divisions(self, divisions):
         if self.division_expression is not None:
             divisions = self.division_expression(divisions)
-            if not isinstance(divisions, abjad.Sequence):
-                raise Exception(f'division sequence: {divisions!r}.')
-        new_start_offset = divisions[0].start_offset
-        return baca.FloatingSelection(
-            selection=divisions,
-            timespan=abjad.Timespan(new_start_offset, new_start_offset),
-            )
+            assert isinstance(divisions, abjad.Sequence), repr(divisions)
+        return divisions
+#        start_offset = divisions[0].start_offset
+#        return baca.FloatingSelection(
+#            selection=divisions,
+#            timespan=abjad.Timespan(start_offset, start_offset),
+#            )
 
     ### PUBLIC PROPERTIES ###
 
@@ -341,6 +307,12 @@ class RhythmCommand(Command):
         Returns list of meters or none.
         '''
         return self._reference_meters
+
+    @property
+    def repeat_ties(self):
+        if self.rhythm_maker.tie_specifier is None:
+            return False
+        return self.rhythm_maker.tie_specifier.repeat_ties
 
     @property
     def rewrite_meter(self):

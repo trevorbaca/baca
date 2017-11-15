@@ -773,14 +773,13 @@ class SegmentMaker(abjad.SegmentMaker):
         if 3 < total_time:
             raise Exception(f'spacing specifier time {total_time} seconds!')
 
-    def _assert_good_rhythms(self, floating_selections, voice):
+    def _assert_good_rhythms(self, rhythms, voice):
         previous_stop_offset = 0
-        for floating_selection in floating_selections:
-            start_offset = floating_selection.timespan.start_offset
+        for rhythm in rhythms:
+            start_offset = rhythm.timespan.start_offset
             if start_offset < previous_stop_offset:
                 raise Exception(f'{voice!r} has overlapping rhythms.')
-            selection = floating_selection.selection
-            duration = abjad.inspect(selection).get_duration()
+            duration = abjad.inspect(rhythm.selection).get_duration()
             stop_offset = start_offset + duration
             previous_stop_offset = stop_offset
 
@@ -937,7 +936,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._attach_fermatas()
         for voice in abjad.iterate(self._score).components(abjad.Voice):
             assert not len(voice), repr(voice)
-            wrappers = self._get_rhythm_wrappers_for_voice(voice.name)
+            wrappers = self._voice_to_rhythm_wrappers(voice)
             if not wrappers:
                 if self.skips_instead_of_rests:
                     maker = rhythmos.SkipRhythmMaker()
@@ -947,25 +946,22 @@ class SegmentMaker(abjad.SegmentMaker):
                 selections = maker(self.time_signatures)
                 voice.extend(selections)
                 continue
-            floating_selections = []
+            rhythms = []
             for wrapper in wrappers:
                 assert isinstance(wrapper, baca.CommandWrapper)
                 if wrapper.scope.stages is None:
-                    continue
-                floating_selection = self._get_time_signatures(
-                    *wrapper.scope.stages)
+                    raise Exception(format(wrapper))
+                result = self._get_stage_time_signatures(*wrapper.scope.stages)
+                start_offset, time_signatures = result
                 try:
-                    floating_selection = wrapper.command(
-                        start_offset=floating_selection.timespan.start_offset,
-                        time_signatures=floating_selection.selection,
-                        )
+                    rhythm = wrapper.command(start_offset, time_signatures)
                 except:
                     raise Exception(format(wrapper))
-                floating_selections.append(floating_selection)
-            floating_selections.sort(key=lambda _: _.timespan)
-            self._assert_good_rhythms(floating_selections, voice.name)
-            floating_selections = self._intercalate_rests(floating_selections)
-            voice.extend(floating_selections)
+                rhythms.append(rhythm)
+            rhythms.sort(key=lambda _: _.timespan)
+            self._assert_good_rhythms(rhythms, voice.name)
+            rhythms = self._intercalate_rests(rhythms)
+            voice.extend(rhythms)
             self._apply_first_and_last_ties(voice)
 
     def _check_design(self):
@@ -1268,15 +1264,6 @@ class SegmentMaker(abjad.SegmentMaker):
         rehearsal_letter = chr(rehearsal_ordinal)
         return rehearsal_letter
 
-    def _get_rhythm_wrappers_for_voice(self, voice_name):
-        wrappers = []
-        for wrapper in self.wrappers:
-            if not isinstance(wrapper.command, baca.RhythmCommand):
-                continue
-            if wrapper.scope.voice_name == voice_name:
-                wrappers.append(wrapper)
-        return wrappers
-
     def _get_segment_identifier(self):
         segment_name = self._metadata.get('segment_name')
         if segment_name is not None:
@@ -1304,7 +1291,7 @@ class SegmentMaker(abjad.SegmentMaker):
             includes.append(self._score_package_nonfirst_stylesheet_path)
         return includes
 
-    def _get_time_signatures(self, start_stage=None, stop_stage=None):
+    def _get_stage_time_signatures(self, start_stage=None, stop_stage=None):
         assert len(self.time_signatures) == sum(self.measures_per_stage)
         stages = baca.Sequence(self.time_signatures).partition_by_counts(
             self.measures_per_stage,
@@ -1317,10 +1304,7 @@ class SegmentMaker(abjad.SegmentMaker):
             stages = stages[start_index:stop_index]
             time_signatures = baca.sequence(stages).flatten(depth=-1)
         start_offset, stop_offset = self._get_offsets(start_stage, stop_stage)
-        return baca.FloatingSelection(
-            selection=time_signatures,
-            timespan=abjad.Timespan(start_offset, start_offset)
-            )
+        return start_offset, time_signatures
 
     def _handle_mutator(self, command):
         if (hasattr(command.command, '_mutates_score') and
@@ -1348,7 +1332,7 @@ class SegmentMaker(abjad.SegmentMaker):
             time_signatures_ = None
         self._time_signatures = time_signatures_
 
-    def _intercalate_rests(self, floating_selections):
+    def _intercalate_rests(self, rhythms):
         durations = [_.duration for _ in self.time_signatures]
         start_offsets = abjad.mathtools.cumulative_sums(durations)
         segment_duration = start_offsets[-1]
@@ -1358,10 +1342,10 @@ class SegmentMaker(abjad.SegmentMaker):
         pairs = zip(start_offsets, self.time_signatures)
         result = []
         previous_stop_offset = abjad.Offset(0)
-        for floating_selection in floating_selections:
-            start_offset = floating_selection.timespan.start_offset
+        for rhythm in rhythms:
+            start_offset = rhythm.timespan.start_offset
             if start_offset < previous_stop_offset:
-                raise Exception('overlapping offsets: {floating_selection!r}.')
+                raise Exception('overlapping offsets: {rhythm!r}.')
             if previous_stop_offset < start_offset:
                 selection = self._make_intercalated_rests(
                     previous_stop_offset,
@@ -1369,9 +1353,9 @@ class SegmentMaker(abjad.SegmentMaker):
                     pairs,
                     )
                 result.append(selection)
-            result.extend(floating_selection.selection)
+            result.extend(rhythm.selection)
             duration = abjad.inspect(
-                floating_selection.selection).get_duration()
+                rhythm.selection).get_duration()
             previous_stop_offset = start_offset + duration
         if previous_stop_offset < segment_duration:
             selection = self._make_intercalated_rests(
@@ -1687,6 +1671,15 @@ class SegmentMaker(abjad.SegmentMaker):
         items = sorted(self._metadata.items())
         metadata = class_(items)
         self._metadata = metadata
+
+    def _voice_to_rhythm_wrappers(self, voice):
+        wrappers = []
+        for wrapper in self.wrappers:
+            if not isinstance(wrapper.command, baca.RhythmCommand):
+                continue
+            if wrapper.scope.voice_name == voice.name:
+                wrappers.append(wrapper)
+        return wrappers
 
     ### PUBLIC PROPERTIES ###
 

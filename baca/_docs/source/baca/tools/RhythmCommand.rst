@@ -26,6 +26,7 @@ Bases
       ~baca.tools.RhythmCommand.RhythmCommand.division_expression
       ~baca.tools.RhythmCommand.RhythmCommand.division_maker
       ~baca.tools.RhythmCommand.RhythmCommand.reference_meters
+      ~baca.tools.RhythmCommand.RhythmCommand.repeat_ties
       ~baca.tools.RhythmCommand.RhythmCommand.rewrite_meter
       ~baca.tools.RhythmCommand.RhythmCommand.rhythm_maker
       ~baca.tools.RhythmCommand.RhythmCommand.rhythm_overwrites
@@ -50,6 +51,8 @@ Read-only properties
 .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.division_maker
 
 .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.reference_meters
+
+.. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.repeat_ties
 
 .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.rewrite_meter
 
