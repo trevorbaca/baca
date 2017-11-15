@@ -773,13 +773,13 @@ class SegmentMaker(abjad.SegmentMaker):
         if 3 < total_time:
             raise Exception(f'spacing specifier time {total_time} seconds!')
 
-    def _assert_good_rhythms(self, rhythms, voice):
+    def _assert_nonoverlapping_rhythms(self, rhythms, voice):
         previous_stop_offset = 0
         for rhythm in rhythms:
-            start_offset = rhythm.timespan.start_offset
+            start_offset = rhythm.start_offset
             if start_offset < previous_stop_offset:
                 raise Exception(f'{voice!r} has overlapping rhythms.')
-            duration = abjad.inspect(rhythm.item).get_duration()
+            duration = abjad.inspect(rhythm.annotation).get_duration()
             stop_offset = start_offset + duration
             previous_stop_offset = stop_offset
 
@@ -958,8 +958,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 except:
                     raise Exception(format(wrapper))
                 rhythms.append(rhythm)
-            rhythms.sort(key=lambda _: _.timespan)
-            self._assert_good_rhythms(rhythms, voice.name)
+            rhythms.sort()
+            self._assert_nonoverlapping_rhythms(rhythms, voice.name)
             rhythms = self._intercalate_silences(rhythms)
             voice.extend(rhythms)
             self._apply_first_and_last_ties(voice)
@@ -1343,7 +1343,7 @@ class SegmentMaker(abjad.SegmentMaker):
         result = []
         previous_stop_offset = abjad.Offset(0)
         for rhythm in rhythms:
-            start_offset = rhythm.timespan.start_offset
+            start_offset = rhythm.start_offset
             if start_offset < previous_stop_offset:
                 raise Exception('overlapping offsets: {rhythm!r}.')
             if previous_stop_offset < start_offset:
@@ -1355,8 +1355,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     silence = abjad.MultimeasureRest(1)
                 abjad.attach(multiplier, silence)
                 result.append(silence)
-            result.extend(rhythm.item)
-            duration = abjad.inspect(rhythm.item).get_duration()
+            result.extend(rhythm.annotation)
+            duration = abjad.inspect(rhythm.annotation).get_duration()
             previous_stop_offset = start_offset + duration
         if previous_stop_offset < segment_duration:
             duration = segment_duration - previous_stop_offset

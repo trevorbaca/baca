@@ -98,9 +98,10 @@ class MusicAccumulator(abjad.AbjadObject):
                 )
             stop_offset = start_offset + abjad.inspect(selection).get_duration()
             timespan = abjad.Timespan(start_offset, stop_offset)
-            floating_selection = baca.TimespannedItem(
-                item=selection,
-                timespan=timespan,
+            floating_selection = abjad.AnnotatedTimespan(
+                timespan.start_offset,
+                timespan.stop_offset,
+                annotation=selection,
                 )
             self._floating_selections[voice_name].append(floating_selection)
         self._current_offset = stop_offset
@@ -118,8 +119,8 @@ class MusicAccumulator(abjad.AbjadObject):
     def _get_figure_start_offset(self, figure_name):
         for voice_name in sorted(self._floating_selections.keys()):
             for floating_selection in self._floating_selections[voice_name]:
-                leaf_start_offset = floating_selection.timespan.start_offset
-                leaves = abjad.iterate(floating_selection.item).leaves()
+                leaf_start_offset = floating_selection.start_offset
+                leaves = abjad.iterate(floating_selection.annotation).leaves()
                 for leaf in leaves:
                     markup = abjad.inspect(leaf).get_indicators(abjad.Markup)
                     for markup_ in markup:
@@ -140,7 +141,7 @@ class MusicAccumulator(abjad.AbjadObject):
         found_leaf = False
         for floating_selection in floating_selections:
             leaf_start_offset = abjad.Offset(0)
-            for leaf_ in abjad.iterate(floating_selection.item).leaves():
+            for leaf_ in abjad.iterate(floating_selection.annotation).leaves():
                 leaf_duration = abjad.inspect(leaf_).get_duration()
                 if leaf_ is leaf:
                     found_leaf = True
@@ -150,7 +151,7 @@ class MusicAccumulator(abjad.AbjadObject):
                 break
         if not found_leaf:
             raise Exception(f'can not find {leaf!r} in floating selections.')
-        selection_start_offset = floating_selection.timespan.start_offset
+        selection_start_offset = floating_selection.start_offset
         leaf_start_offset = selection_start_offset + leaf_start_offset
         leaf_stop_offset = leaf_start_offset + leaf_duration
         return abjad.Timespan(leaf_start_offset, leaf_stop_offset)
@@ -178,7 +179,7 @@ class MusicAccumulator(abjad.AbjadObject):
             return self._score_stop_offset
         remote_selector = remote_selector or baca.leaf(0)
         floating_selections = self._floating_selections[remote_voice_name]
-        selections = [_.item for _ in floating_selections]
+        selections = [_.annotation for _ in floating_selections]
         result = remote_selector(selections)
         selected_leaves = list(abjad.iterate(result).leaves())
         first_selected_leaf = selected_leaves[0]
@@ -209,33 +210,26 @@ class MusicAccumulator(abjad.AbjadObject):
     @staticmethod
     def _insert_skips(floating_selections, voice_name):
         for floating_selection in floating_selections:
-            assert isinstance(floating_selection, baca.TimespannedItem)
+            assert isinstance(floating_selection, abjad.AnnotatedTimespan)
         floating_selections = list(floating_selections)
-        floating_selections.sort(key=lambda _: _.timespan)
+        floating_selections.sort()
         try:
-            first_start_offset = floating_selections[0].timespan.start_offset
+            first_start_offset = floating_selections[0].start_offset
         except:
             raise Exception(floating_selections, voice_name)
-        timespans = [_.timespan for _ in floating_selections]
-        timespans = abjad.TimespanList(timespans)
+        #timespans = [_.timespan for _ in floating_selections]
+        #timespans = abjad.TimespanList(timespans)
+        timespans = abjad.TimespanList(floating_selections)
         gaps = ~timespans
         if 0 < first_start_offset:
             first_gap = abjad.Timespan(0, first_start_offset)
             gaps.append(first_gap)
         selections = floating_selections + list(gaps)
-
-        def sort_function(argument):
-            if isinstance(argument, baca.TimespannedItem):
-                return argument.timespan
-            elif isinstance(argument, abjad.Timespan):
-                return argument
-            else:
-                raise TypeError(argument)
-        selections.sort(key=sort_function)
+        selections.sort()
         fused_selection = []
         for selection in selections:
-            if isinstance(selection, baca.TimespannedItem):
-                fused_selection.extend(selection.item)
+            if isinstance(selection, abjad.AnnotatedTimespan):
+                fused_selection.extend(selection.annotation)
             else:
                 assert isinstance(selection, abjad.Timespan)
                 multiplier = abjad.Multiplier(selection.duration)

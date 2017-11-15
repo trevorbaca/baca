@@ -39,7 +39,6 @@ baca.tools
    MusicMaker
    PitchFirstRhythmMaker
    SegmentMaker
-   TimespannedItem
 
 .. autosummary::
    :nosignatures:
@@ -49,7 +48,6 @@ baca.tools
    MusicMaker
    PitchFirstRhythmMaker
    SegmentMaker
-   TimespannedItem
 
 --------
 
