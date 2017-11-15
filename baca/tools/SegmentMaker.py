@@ -910,6 +910,26 @@ class SegmentMaker(abjad.SegmentMaker):
                     if leaf_timespan.starts_during_timespan(stage_timespan):
                         leaves_by_stage_number[stage_number].append(leaf)
 
+    def _call_commands(self):
+        start_time = time.time()
+        for wrapper in self.wrappers:
+            assert isinstance(wrapper, baca.CommandWrapper)
+            assert isinstance(wrapper.command, baca.Command)
+            if isinstance(wrapper.command, baca.RhythmCommand):
+                continue
+            selection = self._scope_to_leaf_selection(wrapper)
+            try:
+                wrapper.command(selection)
+            except:
+                traceback.print_exc()
+                raise Exception(f'can not interpret ...\n\n{format(wrapper)}')
+            self._handle_mutator(wrapper)
+        stop_time = time.time()
+        count = int(stop_time - start_time)
+        counter = abjad.String('second').pluralize(count)
+        if self.print_timings:
+            print(f'command interpretation {count} {counter} ...')
+
     def _check_design(self):
         if self.design_checker is None:
             return
@@ -1340,26 +1360,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
             result.append(selection)
         return result
-
-    def _interpret_commands(self):
-        start_time = time.time()
-        for wrapper in self.wrappers:
-            assert isinstance(wrapper, baca.CommandWrapper)
-            assert isinstance(wrapper.command, baca.Command)
-            if isinstance(wrapper.command, baca.RhythmCommand):
-                continue
-            selection = self._scope_to_leaf_selection(wrapper)
-            try:
-                wrapper.command(selection)
-            except:
-                traceback.print_exc()
-                raise Exception(f'can not interpret ...\n\n{format(wrapper)}')
-            self._handle_mutator(wrapper)
-        stop_time = time.time()
-        count = int(stop_time - start_time)
-        counter = abjad.String('second').pluralize(count)
-        if self.print_timings:
-            print(f'command interpretation {count} {counter} ...')
 
     def _interpret_rhythm_commands(self):
         self._make_music_for_time_signature_context()
@@ -4924,6 +4924,14 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._measures_per_stage
 
     @property
+    def metadata(self):
+        r'''Gets segment metadata after run.
+
+        Returns ordered dictionary.
+        '''
+        return self._metadata
+
+    @property
     def metronome_mark_measure_map(self):
         r'''Gets metronome mark measure map.
 
@@ -6271,10 +6279,14 @@ class SegmentMaker(abjad.SegmentMaker):
         ):
         r'''Runs segment-maker.
 
-        Set `absolute` to true to use an absolute stylesheet path for tests run
-        outside of in-place doctest.
+        Leave `environment` set to none to render segments in real score.
 
-        Returns LilyPond file and segment metadata.
+        Set `environment` to `'docs'` for API examples.
+        
+        Set `environment` to `'test'` to debug API examples in an external
+        file.
+
+        Returns LilyPond file.
         '''
         self._metadata = metadata or abjad.TypedOrderedDict()
         self._previous_metadata = previous_metadata or abjad.TypedOrderedDict()
@@ -6284,7 +6296,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._label_stage_numbers_()
         self._interpret_rhythm_commands()
         self._extend_beams()
-        self._interpret_commands()
+        self._call_commands()
         self._detach_figure_names()
         self._shorten_long_repeat_ties()
         self._apply_previous_segment_end_settings()
@@ -6309,10 +6321,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._apply_layout_measure_map()
         self._update_metadata(environment=environment)
         self._print_segment_duration_()
-        if environment is None:
-            return self._lilypond_file, self._metadata
-        else:
-            return self._lilypond_file
+        return self._lilypond_file
 
     def validate_measure_count(self, measure_count):
         r'''Validates measure count.

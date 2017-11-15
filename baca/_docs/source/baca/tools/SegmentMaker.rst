@@ -43,6 +43,7 @@ Bases
       ~baca.tools.SegmentMaker.SegmentMaker.layout_measure_map
       ~baca.tools.SegmentMaker.SegmentMaker.measure_count
       ~baca.tools.SegmentMaker.SegmentMaker.measures_per_stage
+      ~baca.tools.SegmentMaker.SegmentMaker.metadata
       ~baca.tools.SegmentMaker.SegmentMaker.metronome_mark_measure_map
       ~baca.tools.SegmentMaker.SegmentMaker.metronome_marks
       ~baca.tools.SegmentMaker.SegmentMaker.midi
@@ -112,6 +113,8 @@ Read-only properties
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.measure_count
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.measures_per_stage
+
+.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.metadata
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.metronome_mark_measure_map
 
