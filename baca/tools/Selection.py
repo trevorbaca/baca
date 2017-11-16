@@ -237,11 +237,236 @@ class Selection(abjad.Selection):
             grace_notes=False,
             )
 
-    # TODO: examples
     def enchain(self, counts):
-        r'''Enchains selection.
+        r'''Enchains items in selection.
 
-        Returns new selection.
+        ..  container:: example
+
+            Enchains leaves in alternating groups of 5:
+
+            ..  container:: example
+
+                >>> tuplets = [
+                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+                ...     ]
+                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+                >>> tuplets = [abjad.select(tuplets)]
+                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> staff = lilypond_file[abjad.Staff]
+                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
+                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+                >>> result = baca.select(staff).leaves().enchain([5])
+
+                >>> for item in result:
+                ...     item
+                Selection([Rest('r16'), Note("bf'16"), Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
+                Selection([Chord("<d' e'>4"), Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
+                Selection([Chord("<a'' b''>16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
+                Selection([Rest('r16'), Note("bf'16"), Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4")])
+                Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+
+            ..  container:: example expression
+
+                >>> selector = baca.leaves().enchain([5])
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Selection([Rest('r16'), Note("bf'16"), Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
+                Selection([Chord("<d' e'>4"), Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
+                Selection([Chord("<a'' b''>16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
+                Selection([Rest('r16'), Note("bf'16"), Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4")])
+                Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+
+                >>> for i, selection in enumerate(result):
+                ...     if i % 2 == 0:
+                ...         color, direction = 'red', abjad.Up
+                ...     else:
+                ...         color, direction = 'blue', abjad.Down
+                ...     for leaf in selection:
+                ...         markup = abjad.Markup('*').with_color(color).bold()
+                ...         markup = abjad.new(markup, direction=direction)
+                ...         abjad.attach(markup, leaf)
+
+                >>> abjad.override(staff).text_script.staff_padding = 6
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff)
+                \new Staff \with {
+                    \override TextScript.staff-padding = #6
+                    \override TupletBracket.direction = #up
+                    \override TupletBracket.staff-padding = #3
+                } {
+                    { % measure
+                        \time 7/4
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 10/9 {
+                            r16
+                                ^ \markup {
+                                    \bold
+                                        \with-color
+                                            #red
+                                            *
+                                    }
+                            bf'16
+                                ^ \markup {
+                                    \bold
+                                        \with-color
+                                            #red
+                                            *
+                                    }
+                            <a'' b''>16
+                                ^ \markup {
+                                    \bold
+                                        \with-color
+                                            #red
+                                            *
+                                    }
+                            c'16
+                                ^ \markup {
+                                    \bold
+                                        \with-color
+                                            #red
+                                            *
+                                    }
+                            <d' e'>4 ~
+                                ^ \markup {
+                                    \bold
+                                        \with-color
+                                            #red
+                                            *
+                                    }
+                                _ \markup {
+                                    \bold
+                                        \with-color
+                                            #blue
+                                            *
+                                    }
+                            <d' e'>16
+                                _ \markup {
+                                    \bold
+                                        \with-color
+                                            #blue
+                                            *
+                                    }
+                        }
+                        \times 8/9 {
+                            r16
+                                _ \markup {
+                                    \bold
+                                        \with-color
+                                            #blue
+                                            *
+                                    }
+                            bf'16
+                                _ \markup {
+                                    \bold
+                                        \with-color
+                                            #blue
+                                            *
+                                    }
+                            <a'' b''>16
+                                ^ \markup {
+                                    \bold
+                                        \with-color
+                                            #red
+                                            *
+                                    }
+                                _ \markup {
+                                    \bold
+                                        \with-color
+                                            #blue
+                                            *
+                                    }
+                            d'16
+                                ^ \markup {
+                                    \bold
+                                        \with-color
+                                            #red
+                                            *
+                                    }
+                            <e' fs'>4 ~
+                                ^ \markup {
+                                    \bold
+                                        \with-color
+                                            #red
+                                            *
+                                    }
+                            <e' fs'>16
+                                ^ \markup {
+                                    \bold
+                                        \with-color
+                                            #red
+                                            *
+                                    }
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 10/9 {
+                            r16
+                                ^ \markup {
+                                    \bold
+                                        \with-color
+                                            #red
+                                            *
+                                    }
+                                _ \markup {
+                                    \bold
+                                        \with-color
+                                            #blue
+                                            *
+                                    }
+                            bf'16
+                                _ \markup {
+                                    \bold
+                                        \with-color
+                                            #blue
+                                            *
+                                    }
+                            <a'' b''>16
+                                _ \markup {
+                                    \bold
+                                        \with-color
+                                            #blue
+                                            *
+                                    }
+                            e'16
+                                _ \markup {
+                                    \bold
+                                        \with-color
+                                            #blue
+                                            *
+                                    }
+                            <fs' gs'>4 ~
+                                ^ \markup {
+                                    \bold
+                                        \with-color
+                                            #red
+                                            *
+                                    }
+                                _ \markup {
+                                    \bold
+                                        \with-color
+                                            #blue
+                                            *
+                                    }
+                            <fs' gs'>16
+                                ^ \markup {
+                                    \bold
+                                        \with-color
+                                            #red
+                                            *
+                                    }
+                        }
+                    } % measure
+                }
+
+        Returns new selection (or expression).
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
@@ -252,21 +477,200 @@ class Selection(abjad.Selection):
             overhang=True,
             )
 
-    # TODO: examples
     def group(self):
         r'''Groups selection.
 
-        Returns new selection (or expression).
+        ..  container:: example
+
+            ..  container:: example
+
+                >>> staff = abjad.Staff(r"""
+                ...     c'8 ~ c'16 c'16 r8 c'16 c'16
+                ...     d'8 ~ d'16 d'16 r8 d'16 d'16
+                ...     """)
+                >>> abjad.show(staff) # doctest: +SKIP
+
+                >>> result = baca.select(staff).pleaves().group()
+
+                >>> for item in result:
+                ...     item
+                ...
+                Selection([Note("c'8"), Note("c'16"), Note("c'16"), Note("c'16"), Note("c'16"), Note("d'8"), Note("d'16"), Note("d'16"), Note("d'16"), Note("d'16")])
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().pleaves().group()
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Selection([Selection([Note("c'8"), Note("c'16"), Note("c'16"), Note("c'16"), Note("c'16"), Note("d'8"), Note("d'16"), Note("d'16"), Note("d'16"), Note("d'16")])])
+
+                >>> selector.color(result)
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.show(staff) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff)
+                \new Staff \with {
+                    autoBeaming = ##f
+                } {
+                    \once \override Accidental.color = #green
+                    \once \override Beam.color = #green
+                    \once \override Dots.color = #green
+                    \once \override NoteHead.color = #green
+                    \once \override Stem.color = #green
+                    c'8 ~
+                    \once \override Accidental.color = #green
+                    \once \override Beam.color = #green
+                    \once \override Dots.color = #green
+                    \once \override NoteHead.color = #green
+                    \once \override Stem.color = #green
+                    c'16
+                    \once \override Accidental.color = #green
+                    \once \override Beam.color = #green
+                    \once \override Dots.color = #green
+                    \once \override NoteHead.color = #green
+                    \once \override Stem.color = #green
+                    c'16
+                    r8
+                    \once \override Accidental.color = #green
+                    \once \override Beam.color = #green
+                    \once \override Dots.color = #green
+                    \once \override NoteHead.color = #green
+                    \once \override Stem.color = #green
+                    c'16
+                    \once \override Accidental.color = #green
+                    \once \override Beam.color = #green
+                    \once \override Dots.color = #green
+                    \once \override NoteHead.color = #green
+                    \once \override Stem.color = #green
+                    c'16
+                    \once \override Accidental.color = #green
+                    \once \override Beam.color = #green
+                    \once \override Dots.color = #green
+                    \once \override NoteHead.color = #green
+                    \once \override Stem.color = #green
+                    d'8 ~
+                    \once \override Accidental.color = #green
+                    \once \override Beam.color = #green
+                    \once \override Dots.color = #green
+                    \once \override NoteHead.color = #green
+                    \once \override Stem.color = #green
+                    d'16
+                    \once \override Accidental.color = #green
+                    \once \override Beam.color = #green
+                    \once \override Dots.color = #green
+                    \once \override NoteHead.color = #green
+                    \once \override Stem.color = #green
+                    d'16
+                    r8
+                    \once \override Accidental.color = #green
+                    \once \override Beam.color = #green
+                    \once \override Dots.color = #green
+                    \once \override NoteHead.color = #green
+                    \once \override Stem.color = #green
+                    d'16
+                    \once \override Accidental.color = #green
+                    \once \override Beam.color = #green
+                    \once \override Dots.color = #green
+                    \once \override NoteHead.color = #green
+                    \once \override Stem.color = #green
+                    d'16
+                }
+
+        Returns nested selection (or expression).
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.group_by()
 
-    # TODO: examples
     def lleak(self):
         r'''Leaks to the left.
 
-        Returns new selection.
+        ..  container:: example
+
+            Selects runs (each leaked to the left):
+
+            ..  container:: example
+
+                >>> staff = abjad.Staff("c'8 r8 d'8 e'8 r8 f'8 g'8 a'8")
+                >>> abjad.show(staff) # doctest: +SKIP
+
+                >>> result = baca.select(staff).runs().map(baca.lleak())
+
+                >>> for item in result:
+                ...     item
+                ...
+                Selection([Note("c'8")])
+                Selection([Rest('r8'), Note("d'8"), Note("e'8")])
+                Selection([Rest('r8'), Note("f'8"), Note("g'8"), Note("a'8")])
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().runs().map(baca.lleak())
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Selection([Note("c'8")])
+                Selection([Rest('r8'), Note("d'8"), Note("e'8")])
+                Selection([Rest('r8'), Note("f'8"), Note("g'8"), Note("a'8")])
+
+                >>> selector.color(result)
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.show(staff) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff)
+                \new Staff \with {
+                    autoBeaming = ##f
+                } {
+                    \once \override Accidental.color = #red
+                    \once \override Beam.color = #red
+                    \once \override Dots.color = #red
+                    \once \override NoteHead.color = #red
+                    \once \override Stem.color = #red
+                    c'8
+                    \once \override Dots.color = #blue
+                    \once \override Rest.color = #blue
+                    r8
+                    \once \override Accidental.color = #blue
+                    \once \override Beam.color = #blue
+                    \once \override Dots.color = #blue
+                    \once \override NoteHead.color = #blue
+                    \once \override Stem.color = #blue
+                    d'8
+                    \once \override Accidental.color = #blue
+                    \once \override Beam.color = #blue
+                    \once \override Dots.color = #blue
+                    \once \override NoteHead.color = #blue
+                    \once \override Stem.color = #blue
+                    e'8
+                    \once \override Dots.color = #red
+                    \once \override Rest.color = #red
+                    r8
+                    \once \override Accidental.color = #red
+                    \once \override Beam.color = #red
+                    \once \override Dots.color = #red
+                    \once \override NoteHead.color = #red
+                    \once \override Stem.color = #red
+                    f'8
+                    \once \override Accidental.color = #red
+                    \once \override Beam.color = #red
+                    \once \override Dots.color = #red
+                    \once \override NoteHead.color = #red
+                    \once \override Stem.color = #red
+                    g'8
+                    \once \override Accidental.color = #red
+                    \once \override Beam.color = #red
+                    \once \override Dots.color = #red
+                    \once \override NoteHead.color = #red
+                    \once \override Stem.color = #red
+                    a'8
+                }
+
+        Returns new selection (or expression).
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
@@ -2943,11 +3347,92 @@ class Selection(abjad.Selection):
         result = result.map(abjad.Run)
         return result
 
-    # TODO: examples
     def rleak(self):
         r'''Leaks to the right.
 
-        Returns new selection.
+        ..  container:: example
+
+            Selects runs (each leaked to the right):
+
+            ..  container:: example
+
+                >>> staff = abjad.Staff("c'8 r8 d'8 e'8 r8 f'8 g'8 a'8")
+                >>> abjad.show(staff) # doctest: +SKIP
+
+                >>> result = baca.select(staff).runs().map(baca.rleak())
+
+                >>> for item in result:
+                ...     item
+                ...
+                Selection([Note("c'8"), Rest('r8')])
+                Selection([Note("d'8"), Note("e'8"), Rest('r8')])
+                Selection([Note("f'8"), Note("g'8"), Note("a'8")])
+
+            ..  container:: example expression
+
+                >>> selector = baca.select().runs().map(baca.rleak())
+                >>> result = selector(staff)
+
+                >>> selector.print(result)
+                Selection([Note("c'8"), Rest('r8')])
+                Selection([Note("d'8"), Note("e'8"), Rest('r8')])
+                Selection([Note("f'8"), Note("g'8"), Note("a'8")])
+
+                >>> selector.color(result)
+                >>> abjad.setting(staff).auto_beaming = False
+                >>> abjad.show(staff) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(staff)
+                \new Staff \with {
+                    autoBeaming = ##f
+                } {
+                    \once \override Accidental.color = #red
+                    \once \override Beam.color = #red
+                    \once \override Dots.color = #red
+                    \once \override NoteHead.color = #red
+                    \once \override Stem.color = #red
+                    c'8
+                    \once \override Dots.color = #red
+                    \once \override Rest.color = #red
+                    r8
+                    \once \override Accidental.color = #blue
+                    \once \override Beam.color = #blue
+                    \once \override Dots.color = #blue
+                    \once \override NoteHead.color = #blue
+                    \once \override Stem.color = #blue
+                    d'8
+                    \once \override Accidental.color = #blue
+                    \once \override Beam.color = #blue
+                    \once \override Dots.color = #blue
+                    \once \override NoteHead.color = #blue
+                    \once \override Stem.color = #blue
+                    e'8
+                    \once \override Dots.color = #blue
+                    \once \override Rest.color = #blue
+                    r8
+                    \once \override Accidental.color = #red
+                    \once \override Beam.color = #red
+                    \once \override Dots.color = #red
+                    \once \override NoteHead.color = #red
+                    \once \override Stem.color = #red
+                    f'8
+                    \once \override Accidental.color = #red
+                    \once \override Beam.color = #red
+                    \once \override Dots.color = #red
+                    \once \override NoteHead.color = #red
+                    \once \override Stem.color = #red
+                    g'8
+                    \once \override Accidental.color = #red
+                    \once \override Beam.color = #red
+                    \once \override Dots.color = #red
+                    \once \override NoteHead.color = #red
+                    \once \override Stem.color = #red
+                    a'8
+                }
+
+        Returns new selection (or expression).
         '''
         if self._expression:
             return self._update_expression(inspect.currentframe())
