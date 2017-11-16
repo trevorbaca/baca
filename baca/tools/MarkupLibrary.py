@@ -256,7 +256,7 @@ class MarkupLibrary(abjad.AbjadObject):
     ### PUBLIC METHODS ###
 
     @staticmethod
-    def accent_changes_of_direction(selector=None):
+    def accent_changes_of_direction(selector='baca.pleaf(0)'):
         string = 'accent changes of direction noticeably at each attack'
         return baca.markup(
             string,
@@ -264,56 +264,56 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def airtone(selector=None):
+    def airtone(selector='baca.pleaf(0)'):
         return baca.markup(
             'airtone',
             selector=selector,
             )
 
     @staticmethod
-    def allow_bowing_to_convey_accelerando(selector=None):
+    def allow_bowing_to_convey_accelerando(selector='baca.pleaf(0)'):
         return baca.markup(
             'allow bowing to convey accelerando',
             selector=selector,
             )
 
     @staticmethod
-    def arco(selector=None):
+    def arco(selector='baca.pleaf(0)'):
         return baca.markup(
             'arco',
             selector=selector,
             )
 
     @staticmethod
-    def arco_ordinario(selector=None):
+    def arco_ordinario(selector='baca.pleaf(0)'):
         return baca.markup(
             'arco ordinario',
             selector=selector,
             )
 
     @staticmethod
-    def attackless(selector=None):
+    def attackless(selector='baca.pleaf(0)'):
         return baca.markup(
             'attackless',
             selector=selector,
             )
 
     @staticmethod
-    def bow_on_tailpiece(selector=None):
+    def bow_on_tailpiece(selector='baca.pleaf(0)'):
         return baca.markup(
             'bow on tailpiece',
             selector=selector,
             )
 
     @staticmethod
-    def bow_on_wooden_mute(selector=None):
+    def bow_on_wooden_mute(selector='baca.pleaf(0)'):
         return baca.markup(
             'bow on wooden mute',
             selector=selector,
             )
 
     @staticmethod
-    def boxed(string, selector=None):
+    def boxed(string, selector='baca.leaf(0)'):
         markup = abjad.Markup(string, direction=abjad.Up)
         markup = markup.box().override(('box-padding', 0.5))
         return baca.markup(
@@ -325,7 +325,7 @@ class MarkupLibrary(abjad.AbjadObject):
     def boxed_lines(
         strings,
         direction=abjad.Up,
-        selector=None,
+        selector='baca.leaf(0)',
         ):
         assert isinstance(strings, list), repr(strings)
         markup = abjad.MarkupList(strings).column(direction=direction)
@@ -336,7 +336,7 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def boxed_repeat_count(count, selector=None):
+    def boxed_repeat_count(count, selector='baca.leaf(0)'):
         string = f'x{count}'
         markup = abjad.Markup(string, direction=abjad.Up)
         markup = markup.sans().bold().fontsize(6)
@@ -347,7 +347,7 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def clicks_per_second(lower, upper, selector=None):
+    def clicks_per_second(lower, upper, selector='baca.pleaf(0)'):
         string = f'{lower}-{upper} clicks/sec.'
         return baca.markup(
             string,
@@ -355,28 +355,28 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def col_legno_battuto(selector=None):
+    def col_legno_battuto(selector='baca.pleaf(0)'):
         return baca.markup(
             'col legno battuto',
             selector=selector,
             )
 
     @staticmethod
-    def delicatiss(selector=None):
+    def delicatiss(selector='baca.pleaf(0)'):
         return baca.markup(
             'delicatiss.',
             selector=selector,
             )
 
     @staticmethod
-    def delicatissimo(selector=None):
+    def delicatissimo(selector='baca.pleaf(0)'):
         return baca.markup(
             'delicatissimo',
             selector=selector,
             )
 
     @staticmethod
-    def directly_on_bridge_bow_diagonally(selector=None):
+    def directly_on_bridge_bow_diagonally(selector='baca.pleaf(0)'):
         string = 'directly on bridge:'
         string += ' bow diagonally to produce white noise w/ no pitch'
         return baca.markup(
@@ -385,7 +385,7 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def directly_on_bridge_very_slow_bow(selector=None):
+    def directly_on_bridge_very_slow_bow(selector='baca.pleaf(0)'):
         string = 'directly on bridge:'
         string += ' very slow bow, imperceptible bow changes'
         return baca.markup(
@@ -394,28 +394,28 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def estr_sul_pont(selector=None):
+    def estr_sul_pont(selector='baca.pleaf(0)'):
         return baca.markup(
             'estr. sul pont.',
             selector=selector,
             )
 
     @staticmethod
-    def FB(selector=None):
+    def FB(selector='baca.pleaf(0)'):
         return baca.markup(
             'FB',
             selector=selector,
             )
 
     @staticmethod
-    def FB_flaut(selector=None):
+    def FB_flaut(selector='baca.pleaf(0)'):
         return baca.markup(
             'FB flaut.',
             selector=selector,
             )
 
     @staticmethod
-    def final_markup(places, dates, selector=None):
+    def final_markup(places, dates, selector='baca.leaf(-1)'):
         places = r' \hspace #0.75 – \hspace #0.75 '.join(places)
         places = abjad.Markup(places)
         places = abjad.Markup.line([places])
@@ -431,14 +431,14 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def fluttertongue(selector=None):
+    def fluttertongue(selector='baca.pleaf(0)'):
         return baca.markup(
             'fluttertongue',
             selector=selector,
             )
 
     @staticmethod
-    def fractional_OB(numerator, denominator, selector=None):
+    def fractional_OB(numerator, denominator, selector='baca.pleaf(0)'):
         string = f'{numerator}/{denominator}OB'
         return baca.markup(
             string,
@@ -446,7 +446,7 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def fractional_scratch(numerator, denominator, selector=None):
+    def fractional_scratch(numerator, denominator, selector='baca.pleaf(0)'):
         string = f'{numerator}/{denominator} scratch'
         return baca.markup(
             string,
@@ -454,21 +454,21 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def full_bow_strokes(selector=None):
+    def full_bow_strokes(selector='baca.pleaf(0)'):
         return baca.markup(
             'full bow strokes',
             selector=selector,
             )
 
     @staticmethod
-    def glissando_lentissimo(selector=None):
+    def glissando_lentissimo(selector='baca.pleaf(0)'):
         return baca.markup(
             'glissando lentissimo',
             selector=selector,
             )
 
     @staticmethod
-    def gridato_possibile(selector=None):
+    def gridato_possibile(selector='baca.pleaf(0)'):
         return baca.markup(
             'gridato possibile',
             selector=selector,
@@ -534,7 +534,7 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def kn_rasg(is_new=True, selector=None):
+    def kn_rasg(is_new=True, selector='baca.pleaf(0)'):
         return baca.markup(
             'kn. rasg.',
             is_new=is_new,
@@ -542,7 +542,7 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def knuckle_rasg(is_new=True, selector=None):
+    def knuckle_rasg(is_new=True, selector='baca.pleaf(0)'):
         return baca.markup(
             'knuckle rasg.',
             is_new=is_new,
@@ -550,28 +550,28 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def leggieriss(selector=None):
+    def leggieriss(selector='baca.pleaf(0)'):
         return baca.markup(
             'leggieriss.',
             selector=selector,
             )
 
     @staticmethod
-    def leggierissimo(selector=None):
+    def leggierissimo(selector='baca.pleaf(0)'):
         return baca.markup(
             'leggierissimo',
             selector=selector,
             )
 
     @staticmethod
-    def leggierissimo_off_string_bowing_on_staccati(selector=None):
+    def leggierissimo_off_string_bowing_on_staccati(selector='baca.pleaf(0)'):
         return baca.markup(
             'leggierissimo: off-string bowing on staccati',
             selector=selector,
             )
 
     @staticmethod
-    def lines(strings, direction=abjad.Up, selector=None):
+    def lines(strings, direction=abjad.Up, selector='baca.leaf(0)'):
         assert isinstance(strings, list), repr(strings)
         markup = abjad.MarkupList(strings).column(direction=direction)
         return baca.markup(
@@ -580,28 +580,28 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def lv_possibile(selector=None):
+    def lv_possibile(selector='baca.ptail(0)'):
         return baca.markup(
             'l.v. possibile',
             selector=selector,
             )
 
     @staticmethod
-    def molto_flautando(selector=None):
+    def molto_flautando(selector='baca.pleaf(0)'):
         return baca.markup(
             'molto flautando',
             selector=selector,
             )
 
     @staticmethod
-    def molto_flautando_e_pont(selector=None):
+    def molto_flautando_e_pont(selector='baca.pleaf(0)'):
         return baca.markup(
             'molto flautando ed estr. sul pont.',
             selector=selector,
             )
 
     @staticmethod
-    def molto_gridato(selector=None):
+    def molto_gridato(selector='baca.pleaf(0)'):
         return baca.markup(
             'molto gridato ed estr. sul pont.',
             selector=selector,
@@ -622,14 +622,14 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def MP_XFB_flaut(selector=None):
+    def MP_XFB_flaut(selector='baca.pleaf(0)'):
         return baca.markup(
             'MP + XFB flaut.',
             selector=selector,
             )
 
     @staticmethod
-    def nail_rasg(is_new=True, selector=None):
+    def nail_rasg(is_new=True, selector='baca.pleaf(0)'):
         return baca.markup(
             'nail rasg.',
             is_new=is_new,
@@ -637,7 +637,7 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def nail_rasgueado(is_new=True, selector=None):
+    def nail_rasgueado(is_new=True, selector='baca.pleaf(0)'):
         return baca.markup(
             'nail rasgueado',
             is_new=is_new,
@@ -645,77 +645,77 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def non_flautando(selector=None):
+    def non_flautando(selector='baca.pleaf(0)'):
         return baca.markup(
             'non flautando',
             selector=selector,
             )
 
     @staticmethod
-    def non_flutt(selector=None):
+    def non_flutt(selector='baca.pleaf(0)'):
         return baca.markup(
             'non flutt.',
             selector=selector,
             )
 
     @staticmethod
-    def non_spazz(selector=None):
+    def non_spazz(selector='baca.pleaf(0)'):
         return baca.markup(
             'non spazz.',
             selector=selector,
             )
 
     @staticmethod
-    def nut(selector=None):
+    def nut(selector='baca.pleaf(0)'):
         return baca.markup(
             'nut',
             selector=selector,
             )
 
     @staticmethod
-    def OB(selector=None):
+    def OB(selector='baca.pleaf(0)'):
         return baca.markup(
             'OB',
             selector=selector,
             )
 
     @staticmethod
-    def OB_full_bow_strokes(selector=None):
+    def OB_full_bow_strokes(selector='baca.pleaf(0)'):
         return baca.markup(
             'OB + full bow strokes',
             selector=selector,
             )
 
     @staticmethod
-    def OB_no_pitch(selector=None):
+    def OB_no_pitch(selector='baca.pleaf(0)'):
         return baca.markup(
             'OB (no pitch)',
             selector=selector,
             )
 
     @staticmethod
-    def OB_terminate_abruptly(selector=None):
+    def OB_terminate_abruptly(selector='baca.pleaf(0)'):
         return baca.markup(
             'OB + terminate abruptly',
             selector=selector,
             )
 
     @staticmethod
-    def OB_terminate_each_note_abruptly(selector=None):
+    def OB_terminate_each_note_abruptly(selector='baca.pleaf(0)'):
         return baca.markup(
             'OB + terminate each note abruptly',
             selector=selector,
             )
 
     @staticmethod
-    def off_string_bowing_on_staccati(selector=None):
+    def off_string_bowing_on_staccati(selector='baca.pleaf(0)'):
         return baca.markup(
             'off-string bowing on staccati',
             selector=selector,
             )
 
     @staticmethod
-    def one_click_every(lower, upper, selector=None):
+    def one_click_every(lower, upper, selector='baca.pleaf(0)'):
         string = f'1 click/{lower}-{upper} sec.'
         return baca.markup(
             string,
@@ -723,77 +723,77 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def ord(selector=None):
+    def ord(selector='baca.pleaf(0)'):
         return baca.markup(
             'ord.',
             selector=selector,
             )
 
     @staticmethod
-    def ord_poco_scratch(selector=None):
+    def ord_poco_scratch(selector='baca.pleaf(0)'):
         return baca.markup(
             'ord. + poco scratch',
             selector=selector,
             )
 
     @staticmethod
-    def ord_senza_scratch(selector=None):
+    def ord_senza_scratch(selector='baca.pleaf(0)'):
         return baca.markup(
             'ord. (senza scratch)',
             selector=selector,
             )
 
     @staticmethod
-    def ordinario(selector=None):
+    def ordinario(selector='baca.pleaf(0)'):
         return baca.markup(
             'ordinario',
             selector=selector,
             )
 
     @staticmethod
-    def overblow(selector=None):
+    def overblow(selector='baca.pleaf(0)'):
         return baca.markup(
             'overblow',
             selector=selector,
             )
 
     @staticmethod
-    def P_XFB_flaut(selector=None):
+    def P_XFB_flaut(selector='baca.pleaf(0)'):
         return baca.markup(
             'P + XFB flaut.',
             selector=selector,
             )
 
     @staticmethod
-    def pizz(selector=None):
+    def pizz(selector='baca.pleaf(0)'):
         return baca.markup(
             'pizz.',
             selector=selector,
             )
 
     @staticmethod
-    def PO(selector=None):
+    def PO(selector='baca.pleaf(0)'):
         return baca.markup(
             'PO',
             selector=selector,
             )
 
     @staticmethod
-    def PO_FB_flaut(selector=None):
+    def PO_FB_flaut(selector='baca.pleaf(0)'):
         return baca.markup(
             'PO + FB flaut.',
             selector=selector,
             )
 
     @staticmethod
-    def po_meno_scratch(selector=None):
+    def po_meno_scratch(selector='baca.pleaf(0)'):
         return baca.markup(
             "po' meno scratch",
             selector=selector,
             )
 
     @staticmethod
-    def PO_NBS(selector=None):
+    def PO_NBS(selector='baca.pleaf(0)'):
         return baca.markup(
             'PO + NBS',
             selector=selector,
@@ -828,28 +828,28 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def PO_scratch(selector=None):
+    def PO_scratch(selector='baca.pleaf(0)'):
         return baca.markup(
             'PO + scratch',
             selector=selector,
             )
 
     @staticmethod
-    def PO_slow_bow(selector=None):
+    def PO_slow_bow(selector='baca.pleaf(0)'):
         return baca.markup(
             'PO + slow bow (poco scratch)',
             selector=selector,
             )
 
     @staticmethod
-    def PO_XFB_flaut(selector=None):
+    def PO_XFB_flaut(selector='baca.pleaf(0)'):
         return baca.markup(
             'PO + XFB flaut.',
             selector=selector,
             )
 
     @staticmethod
-    def pochiss_pont(is_new=True, selector=None):
+    def pochiss_pont(is_new=True, selector='baca.pleaf(0)'):
         return baca.markup(
             'pochiss. pont.',
             is_new=is_new,
@@ -857,7 +857,7 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def pochiss_scratch(is_new=True, selector=None):
+    def pochiss_scratch(is_new=True, selector='baca.pleaf(0)'):
         return baca.markup(
             'pochiss. scratch',
             is_new=is_new,
@@ -865,7 +865,7 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def pochiss_vib(selector=None):
+    def pochiss_vib(selector='baca.pleaf(0)'):
         return baca.markup(
             'pochiss. vib.',
             selector=selector,
@@ -928,35 +928,35 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def poco_scratch(selector=None):
+    def poco_scratch(selector='baca.pleaf(0)'):
         return baca.markup(
             'poco scratch',
             selector=selector,
             )
 
     @staticmethod
-    def pont(selector=None):
+    def pont(selector='baca.pleaf(0)'):
         return baca.markup(
             'pont.',
             selector=selector,
             )
 
     @staticmethod
-    def pont_XFB(selector=None):
+    def pont_XFB(selector='baca.pleaf(0)'):
         return baca.markup(
             'pont. + XFB',
             selector=selector,
             )
 
     @staticmethod
-    def pont_XFB_flaut(selector=None):
+    def pont_XFB_flaut(selector='baca.pleaf(0)'):
         return baca.markup(
             'pont. + XFB flaut.',
             selector=selector,
             )
 
     @staticmethod
-    def ponticello(is_new=True, selector=None):
+    def ponticello(is_new=True, selector='baca.pleaf(0)'):
         return baca.markup(
             'ponticello',
             is_new=is_new,
@@ -964,112 +964,112 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def pos_ord(selector=None):
+    def pos_ord(selector='baca.pleaf(0)'):
         return baca.markup(
             'pos. ord.',
             selector=selector,
             )
 
     @staticmethod
-    def pos_ord_poco_scratch(selector=None):
+    def pos_ord_poco_scratch(selector='baca.pleaf(0)'):
         return baca.markup(
             'pos. ord. + poco scratch',
             selector=selector,
             )
 
     @staticmethod
-    def pos_ord_senza_vib(selector=None):
+    def pos_ord_senza_vib(selector='baca.pleaf(0)'):
         return baca.markup(
             'pos. ord. + senza vib',
             selector=selector,
             )
 
     @staticmethod
-    def pos_ord_vib_poco(selector=None):
+    def pos_ord_vib_poco(selector='baca.pleaf(0)'):
         return baca.markup(
             'pos. ord. + vib. poco',
             selector=selector,
             )
 
     @staticmethod
-    def pos_ord_XFB(selector=None):
+    def pos_ord_XFB(selector='baca.pleaf(0)'):
         return baca.markup(
             'pos. ord. + XFB',
             selector=selector,
             )
 
     @staticmethod
-    def pos_ord_XFB_flaut(selector=None):
+    def pos_ord_XFB_flaut(selector='baca.pleaf(0)'):
         return baca.markup(
             'pos. ord. + XFB flaut.',
             selector=selector,
             )
 
     @staticmethod
-    def pP_XFB_flaut(selector=None):
+    def pP_XFB_flaut(selector='baca.pleaf(0)'):
         return baca.markup(
             'pP + XFB flaut.',
             selector=selector,
             )
 
     @staticmethod
-    def pT_XFB_flaut(selector=None):
+    def pT_XFB_flaut(selector='baca.pleaf(0)'):
         return baca.markup(
             'pT + XFB flaut.',
             selector=selector,
             )
 
     @staticmethod
-    def put_reed_back_in(selector=None):
+    def put_reed_back_in(selector='baca.leaf(0)'):
         return MarkupLibrary.boxed(
             'put reed back in',
             selector=selector,
             )
 
     @staticmethod
-    def remove_reed(selector=None):
+    def remove_reed(selector='baca.leaf(0)'):
         return MarkupLibrary.boxed(
             'remove reed',
             selector=selector,
             )
 
     @staticmethod
-    def remove_staple(selector=None):
+    def remove_staple(selector='baca.leaf(0)'):
         return MarkupLibrary.boxed(
             'remove staple',
             selector=selector,
             )
 
     @staticmethod
-    def scratch_moltiss(selector=None):
+    def scratch_moltiss(selector='baca.pleaf(0)'):
         return baca.markup(
             'scratch moltiss.',
             selector=selector,
             )
 
     @staticmethod
-    def senza_pedale(selector=None):
+    def senza_pedale(selector='baca.pleaf(0)'):
         return baca.markup(
             'senza pedale',
             selector=selector,
             )
 
     @staticmethod
-    def senza_scratch(selector=None):
+    def senza_scratch(selector='baca.pleaf(0)'):
         return baca.markup(
             'senza scratch',
             selector=selector,
             )
 
     @staticmethod
-    def senza_vib(selector=None):
+    def senza_vib(selector='baca.pleaf(0)'):
         return baca.markup(
             'senza vib.',
             selector=selector,
             )
 
     @staticmethod
-    def shakers(selector=None):
+    def shakers(selector='baca.leaf(0)'):
         return baca.markup(
             'shakers',
             selector=selector,
@@ -1135,7 +1135,7 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def sparse_clicks(selector=None):
+    def sparse_clicks(selector='baca.pleaf(0)'):
         first_line = abjad.Markup(
             'sparse, individual clicks with extremely slow bow')
         first_line = first_line.line()
@@ -1148,28 +1148,28 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def spazz(selector=None):
+    def spazz(selector='baca.pleaf(0)'):
         return baca.markup(
             'spazz.',
             selector=selector,
             )
 
     @staticmethod
-    def spazzolato(selector=None):
+    def spazzolato(selector='baca.pleaf(0)'):
         return baca.markup(
             'spazzolato',
             selector=selector,
             )
 
     @staticmethod
-    def spazzolato_1_2_clt(selector=None):
+    def spazzolato_1_2_clt(selector='baca.pleaf(0)'):
         return baca.markup(
             'spazzolato (1/2 clt)',
             selector=selector,
             )
 
     @staticmethod
-    def still(is_new=True, selector=None):
+    def still(is_new=True, selector='baca.leaf(0)'):
         return baca.markup(
             'still',
             is_new=is_new,
@@ -1177,7 +1177,7 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def string_number(n, selector=None):
+    def string_number(n, selector='baca.pleaf(0)'):
         to_roman_numeral = {
             1: 'I',
             2: 'II',
@@ -1192,7 +1192,7 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def string_numbers(numbers, selector=None):
+    def string_numbers(numbers, selector='baca.pleaf(0)'):
         to_roman_numeral = {
             1: 'I',
             2: 'II',
@@ -1208,21 +1208,21 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def subito_non_armonichi_e_non_gridato(selector=None):
+    def subito_non_armonichi_e_non_gridato(selector='baca.pleaf(0)'):
         return baca.markup(
             'subito non armonichi e non gridato',
             selector=selector,
             )
 
     @staticmethod
-    def subito_ordinario(selector=None):
+    def subito_ordinario(selector='baca.pleaf(0)'):
         return baca.markup(
             'subito ordinario',
             selector=selector,
             )
 
     @staticmethod
-    def tamb_tr(is_new=True, selector=None):
+    def tamb_tr(is_new=True, selector='baca.pleaf(0)'):
         return baca.markup(
             'tamb. tr.',
             is_new=is_new,
@@ -1230,7 +1230,7 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def tasto(is_new=True, selector=None):
+    def tasto(is_new=True, selector='baca.pleaf(0)'):
         return baca.markup(
             'tasto',
             is_new=is_new,
@@ -1238,14 +1238,14 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def tasto_FB(selector=None):
+    def tasto_FB(selector='baca.pleaf(0)'):
         return baca.markup(
             'tasto + FB',
             selector=selector,
             )
 
     @staticmethod
-    def tasto_FB_flaut(selector=None):
+    def tasto_FB_flaut(selector='baca.pleaf(0)'):
         return baca.markup(
             'tasto + FB flaut.',
             selector=selector,
@@ -1255,7 +1255,7 @@ class MarkupLibrary(abjad.AbjadObject):
     def tasto_fractional_scratch(
         numerator,
         denominator,
-        selector=None,
+        selector='baca.pleaf(0)',
         ):
         string = f'tasto + {numerator}/{denominator} scratch'
         return baca.markup(
@@ -1264,21 +1264,21 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def tasto_half_scratch(selector=None):
+    def tasto_half_scratch(selector='baca.pleaf(0)'):
         return baca.markup(
             'tasto + 1/2 scratch',
             selector=selector,
             )
 
     @staticmethod
-    def tasto_moltiss(selector=None):
+    def tasto_moltiss(selector='baca.pleaf(0)'):
         return baca.markup(
             'tasto moltiss.',
             selector=selector,
             )
 
     @staticmethod
-    def tasto_NBS(selector=None):
+    def tasto_NBS(selector='baca.pleaf(0)'):
         return baca.markup(
             'tasto + NBS',
             selector=selector,
@@ -1299,14 +1299,14 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def tasto_plus_pochiss_scratch(selector=None):
+    def tasto_plus_pochiss_scratch(selector='baca.pleaf(0)'):
         return baca.markup(
             'tasto + pochiss. scratch',
             selector=selector,
             )
 
     @staticmethod
-    def tasto_plus_poco_scratch(selector=None):
+    def tasto_plus_poco_scratch(selector='baca.pleaf(0)'):
         return baca.markup(
             'tasto + poco scratch',
             selector=selector,
@@ -1327,14 +1327,14 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def tasto_plus_scratch_moltiss(selector=None):
+    def tasto_plus_scratch_moltiss(selector='baca.pleaf(0)'):
         return baca.markup(
             'tasto + scratch moltiss.',
             selector=selector,
             )
 
     @staticmethod
-    def tasto_poss(is_new=True, selector=None):
+    def tasto_poss(is_new=True, selector='baca.pleaf(0)'):
         return baca.markup(
             'tasto poss.',
             is_new=is_new,
@@ -1342,56 +1342,56 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def tasto_senza_vib(selector=None):
+    def tasto_senza_vib(selector='baca.pleaf(0)'):
         return baca.markup(
             'tasto + senza vib.',
             selector=selector,
             )
 
     @staticmethod
-    def tasto_slow_bow(selector=None):
+    def tasto_slow_bow(selector='baca.pleaf(0)'):
         return baca.markup(
             'tasto + slow bow (poco scratch)',
             selector=selector,
             )
 
     @staticmethod
-    def tasto_XFB(selector=None):
+    def tasto_XFB(selector='baca.pleaf(0)'):
         return baca.markup(
             'tasto + XFB',
             selector=selector,
             )
 
     @staticmethod
-    def tasto_XFB_flaut(selector=None):
+    def tasto_XFB_flaut(selector='baca.pleaf(0)'):
         return baca.markup(
             'tasto + XFB flaut.',
             selector=selector,
             )
 
     @staticmethod
-    def terminate_abruptly(selector=None):
+    def terminate_abruptly(selector='baca.pleaf(0)'):
         return baca.markup(
             'terminate abruptly',
             selector=selector,
             )
 
     @staticmethod
-    def terminate_each_note_abruptly(selector=None):
+    def terminate_each_note_abruptly(selector='baca.pleaf(0)'):
         return baca.markup(
             'terminate each note abruptly',
             selector=selector,
             )
 
     @staticmethod
-    def trans(selector=None):
+    def trans(selector='baca.pleaf(0)'):
         return baca.markup(
             'trans.',
             selector=selector,
             )
 
     @staticmethod
-    def trem_flaut_tast(selector=None):
+    def trem_flaut_tast(selector='baca.pleaf(0)'):
         return baca.markup(
             'trem. flaut. tast.',
             selector=selector,
@@ -1421,35 +1421,35 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def vib_moltiss(selector=None):
+    def vib_moltiss(selector='baca.pleaf(0)'):
         return baca.markup(
             'vib. moltiss.',
             selector=selector,
             )
 
     @staticmethod
-    def vib_pochiss(selector=None):
+    def vib_pochiss(selector='baca.pleaf(0)'):
         return baca.markup(
             'vib. pochiss.',
             selector=selector,
             )
 
     @staticmethod
-    def vib_poco(selector=None):
+    def vib_poco(selector='baca.pleaf(0)'):
         return baca.markup(
             'vib. poco.',
             selector=selector,
             )
 
     @staticmethod
-    def XFB(selector=None):
+    def XFB(selector='baca.pleaf(0)'):
         return baca.markup(
             'XFB',
             selector=selector,
             )
 
     @staticmethod
-    def XFB_flaut(selector=None):
+    def XFB_flaut(selector='baca.pleaf(0)'):
         return baca.markup(
             'XFB flaut.',
             selector=selector,
@@ -1484,56 +1484,56 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def XFB_sempre(selector=None):
+    def XFB_sempre(selector='baca.pleaf(0)'):
         return baca.markup(
             'XFB sempre',
             selector=selector,
             )
 
     @staticmethod
-    def XP(selector=None):
+    def XP(selector='baca.pleaf(0)'):
         return baca.markup(
             'XP',
             selector=selector,
             )
 
     @staticmethod
-    def XP_FB(selector=None):
+    def XP_FB(selector='baca.pleaf(0)'):
         return baca.markup(
             'XP + FB',
             selector=selector,
             )
 
     @staticmethod
-    def XP_FB_flaut(selector=None):
+    def XP_FB_flaut(selector='baca.pleaf(0)'):
         return baca.markup(
             'XP + FB flaut.',
             selector=selector,
             )
 
     @staticmethod
-    def XP_full_bow_strokes(selector=None):
+    def XP_full_bow_strokes(selector='baca.pleaf(0)'):
         return baca.markup(
             'XP + full bow strokes',
             selector=selector,
             )
 
     @staticmethod
-    def XP_XFB(selector=None):
+    def XP_XFB(selector='baca.pleaf(0)'):
         return baca.markup(
             'XP + XFB',
             selector=selector,
             )
 
     @staticmethod
-    def XP_XFB_flaut(selector=None):
+    def XP_XFB_flaut(selector='baca.pleaf(0)'):
         return baca.markup(
             'XP + XFB flaut.',
             selector=selector,
             )
 
     @staticmethod
-    def XT(selector=None):
+    def XT(selector='baca.pleaf(0)'):
         return baca.markup(
             'XT',
             selector=selector,
