@@ -23,7 +23,8 @@ class Command(abjad.AbjadObject):
         if isinstance(selector, str):
             selector = eval(selector)
         if selector is not None:
-            assert isinstance(selector, abjad.Expression), repr(selector)
+            prototype = (abjad.Expression, baca.MapCommand)
+            assert isinstance(selector, prototype), repr(selector)
         self._selector = selector
 
     ### SPECIAL METHODS ###

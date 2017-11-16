@@ -39,7 +39,8 @@ class PiecewiseCommand(Command):
         if isinstance(preamble, str):
             preamble = eval(preamble)
         if preamble is not None:
-            assert isinstance(preamble, abjad.Expression), repr(preamble)
+            prototype = (abjad.Expression, baca.MapCommand)
+            assert isinstance(preamble, prototype), repr(preamble)
         self._preamble = preamble
         if spanner is not None:
             assert isinstance(spanner, (abjad.Spanner, baca.SpannerCommand))

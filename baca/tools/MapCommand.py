@@ -78,10 +78,12 @@ class MapCommand(Command):
 
     def __init__(self, commands=None, selector=None):
         Command.__init__(self, selector=selector)
-        if isinstance(commands, baca.Command):
+        if isinstance(commands, (abjad.Expression, baca.Command)):
             commands = abjad.CyclicTuple([commands])
         elif isinstance(commands, collections.Iterable):
             commands = abjad.CyclicTuple(commands)
+        elif commands is not None:
+            raise TypeError(commands)
         self._commands = commands
 
     ### SPECIAL METHODS ###
@@ -99,9 +101,12 @@ class MapCommand(Command):
             argument = self.selector(argument)
             if self.selector._is_singular_get_item():
                 argument = [argument]
+        items_ = []
         for i, item in enumerate(argument):
             command = self.commands[i]
-            command(item)
+            item_ = command(item)
+            items_.append(item_)
+        return items_
 
     ### PUBLIC PROPERTIES ###
 

@@ -2712,7 +2712,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     baca.single_segment_transition(
             ...         baca.markup.pont(),
             ...         baca.markup.ord(),
-            ...         baca.tuplet_tleaves()[1:2],
+            ...         baca.map(baca.tleaves(), baca.tuplet(1)),
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
@@ -3117,7 +3117,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
             ...         baca.slur(),
-            ...         baca.tuplet_tleaves().nontrivial(),
+            ...         baca.tuplets().map(baca.tleaves()).nontrivial(),
             ...         ),
             ...     baca.slurs_down(),
             ...     baca.rests_around([2], [4]),
@@ -3176,7 +3176,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
             ...         baca.slur(),
-            ...         baca.tuplet_tleaves().nontrivial(),
+            ...         baca.tuplets().map(baca.tleaves()).nontrivial(),
             ...         ),
             ...     baca.map(baca.slurs_down(), baca.tuplet(1)),
             ...     baca.rests_around([2], [4]),
@@ -3247,7 +3247,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
             ...         baca.slur(),
-            ...         baca.tuplet_tleaves().nontrivial(),
+            ...         baca.tuplets().map(baca.tleaves()).nontrivial(),
             ...         ),
             ...     baca.slurs_up(),
             ...     baca.stems_down(),
@@ -3312,7 +3312,7 @@ class LibraryNS(abjad.AbjadObject):
             ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
             ...     baca.map(
             ...         baca.slur(),
-            ...         baca.tuplet_tleaves().nontrivial(),
+            ...         baca.tuplets().map(baca.tleaves()).nontrivial(),
             ...         ),
             ...     baca.map(baca.slurs_up(), baca.tuplet(1)),
             ...     baca.stems_down(),

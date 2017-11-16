@@ -1019,7 +1019,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     baca.single_segment_transition(
             ...         baca.markup.pont(),
             ...         baca.markup.ord(),
-            ...         baca.tuplet_tleaves()[1:2],
+            ...         baca.map(baca.tleaves(), baca.tuplet(1)),
             ...         ),
             ...     baca.tuplet_bracket_staff_padding(5),
             ...     counts=[1, 1, 5, -1],
