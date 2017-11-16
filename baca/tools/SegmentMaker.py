@@ -728,27 +728,6 @@ class SegmentMaker(abjad.SegmentMaker):
             segment = self._get_segment_identifier()
             print(f'can not find previous metadata before {segment}.')
             return
-        for context in abjad.iterate(self._score).components(abjad.Context):
-            previous_instrument = self._get_previous_instrument(context.name)
-            if not previous_instrument:
-                continue
-            leaf = abjad.inspect(context).get_leaf(0)
-            instrument = abjad.inspect(leaf).get_effective(abjad.Instrument)
-            if instrument is not None:
-                continue
-            copied_previous_instrument = abjad.new(previous_instrument)
-            copied_previous_instrument._context = context.context_name
-            leaf = abjad.inspect(context).get_leaf(0)
-            abjad.attach(copied_previous_instrument, leaf)
-        for context in abjad.iterate(self._score).components(abjad.Context):
-            previous_clef = self._get_previous_clef(context.name)
-            if previous_clef is None:
-                continue
-            leaf = abjad.inspect(context).get_leaf(0)
-            clef = abjad.inspect(leaf).get_effective(abjad.Clef)
-            if clef is not None:
-                continue
-            abjad.attach(previous_clef, leaf)
         skip = baca.select(self._score['Global Skips']).skip(0)
         mark = abjad.inspect(skip).get_piecewise(abjad.MetronomeMark)
         if mark is None:
@@ -759,6 +738,25 @@ class SegmentMaker(abjad.SegmentMaker):
             #abjad.tweak(previous_mark).color = 'darkgreen'
             abjad.override(skip).text_script.color = 'darkgreen'
             spanner.attach(previous_mark, skip)
+        for context in abjad.iterate(self._score).components(abjad.Context):
+            previous_clef = self._get_previous_clef(context.name)
+            previous_instrument = self._get_previous_instrument(context.name)
+            if not previous_instrument and not previous_clef:
+                continue
+            leaf = abjad.inspect(context).get_leaf(0)
+            if previous_instrument is not None:
+                prototype = abjad.Instrument
+                instrument = abjad.inspect(leaf).get_effective(prototype)
+                if instrument is None:
+                    instrument = abjad.new(
+                        previous_instrument,
+                        context=context.context_name,
+                        )
+                    abjad.attach(instrument, leaf)
+            if previous_clef is not None:
+                clef = abjad.inspect(leaf).get_effective(abjad.Clef)
+                if clef is None:
+                    abjad.attach(previous_clef, leaf)
 
     def _apply_spacing_specifier(self):
         start_time = time.time()
