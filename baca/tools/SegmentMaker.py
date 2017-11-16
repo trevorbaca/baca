@@ -1565,13 +1565,18 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(literal, leaf)
             if previous_staff_lines is not None:
                 prototype = baca.StaffLines
-                staff_lines = abjad.inspect(leaf).get_effective(prototype)
+                staff_lines = abjad.inspect(leaf).get_indicator(prototype)
                 if staff_lines is None:
                     abjad.attach(previous_staff_lines, leaf)
             if previous_clef is not None:
-                clef = abjad.inspect(leaf).get_effective(abjad.Clef)
+                clef = abjad.inspect(leaf).get_indicator(abjad.Clef)
                 if clef is None:
                     abjad.attach(previous_clef, leaf)
+                    string = rf'\once \override {context.context_name}'
+                    string += ".Clef.color = #(x11-color 'DeepPink1)"
+                    string += ' % FROM PREVIOUS SEGMENT'
+                    literal = abjad.LilyPondLiteral(string)
+                    abjad.attach(literal, leaf)
 
     def _scope_to_leaf_selection(self, wrapper):
         leaves = []
