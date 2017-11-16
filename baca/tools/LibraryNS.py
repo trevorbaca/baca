@@ -1985,7 +1985,10 @@ class LibraryNS(abjad.AbjadObject):
         '''
         scopes = []
         for argument in arguments:
-            scope = baca.Scope(*argument)
+            if isinstance(argument, tuple) and len(argument) == 3:
+                scope = baca.Scope(argument[0], argument[1:])
+            else:
+                scope = baca.Scope(*argument)
             scopes.append(scope)
         return scopes
 
