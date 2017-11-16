@@ -741,7 +741,10 @@ class SegmentMaker(abjad.SegmentMaker):
         for context in abjad.iterate(self._score).components(abjad.Context):
             previous_clef = self._get_previous_clef(context.name)
             previous_instrument = self._get_previous_instrument(context.name)
-            if not previous_instrument and not previous_clef:
+            previous_staff_lines = self._get_previous_staff_lines(context.name)
+            if (not previous_clef and
+                not previous_instrument and
+                not previous_staff_lines):
                 continue
             leaf = abjad.inspect(context).get_leaf(0)
             if previous_instrument is not None:
@@ -753,6 +756,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         context=context.context_name,
                         )
                     abjad.attach(instrument, leaf)
+            if previous_staff_lines is not None:
+                prototype = baca.StaffLines
+                staff_lines = abjad.inspect(leaf).get_effective(prototype)
+                if staff_lines is None:
+                    abjad.attach(previous_staff_lines, leaf)
             if previous_clef is not None:
                 clef = abjad.inspect(leaf).get_effective(abjad.Clef)
                 if clef is None:
@@ -1217,32 +1225,36 @@ class SegmentMaker(abjad.SegmentMaker):
         if not self._previous_metadata:
             return
         string = 'end_clefs_by_staff'
-        previous_clefs = self._previous_metadata.get(string)
-        if not previous_clefs:
-            return
-        clef_name = previous_clefs.get(context)
-        if clef_name is not None:
-            return abjad.Clef(clef_name)
+        dictionary = self._previous_metadata.get(string)
+        if dictionary:
+            clef_name = dictionary.get(context)
+            if clef_name is not None:
+                return abjad.Clef(clef_name)
 
     def _get_previous_instrument(self, context):
         if not self._previous_metadata:
             return
         string = 'end_instruments_by_context'
-        previous_instruments = self._previous_metadata.get(string)
-        if not previous_instruments:
-            return
-        instrument_name = previous_instruments.get(context)
-        instrument = self.instruments.get(instrument_name)
-        return instrument
+        dictionary = self._previous_metadata.get(string)
+        if dictionary:
+            instrument_name = dictionary.get(context)
+            return self.instruments.get(instrument_name)
 
     def _get_previous_metronome_mark(self):
         if not self._previous_metadata:
             return
         name = self._previous_metadata.get('end_metronome_mark')
-        if not name:
+        return self.metronome_marks.get(name)
+
+    def _get_previous_staff_lines(self, context):
+        if not self._previous_metadata:
             return
-        metronome_mark = self.metronome_marks.get(name)
-        return metronome_mark
+        string = 'end_staff_lines_by_staff'
+        dictionary = self._previous_metadata.get(string)
+        if dictionary:
+            line_count = dictionary.get(context)
+            if line_count is not None:
+                return baca.StaffLines(line_count=line_count)
 
     def _get_rehearsal_letter(self):
         if self.rehearsal_letter:
