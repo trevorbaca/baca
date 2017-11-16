@@ -1535,10 +1535,11 @@ class SegmentMaker(abjad.SegmentMaker):
             prototype = abjad.MetronomeMarkSpanner
             spanner = abjad.inspect(skip).get_spanner(prototype)
             previous_mark = self._get_previous_metronome_mark()
-            # TODO: implement MetronomeMark._lilypond_tweak_manager
-            #abjad.tweak(previous_mark).color = 'darkgreen'
-            abjad.override(skip).text_script.color = 'darkgreen'
             spanner.attach(previous_mark, skip)
+            string = rf'\once \override TextScript.color ='
+            string += " #(x11-color 'DeepPink1) % FROM PREVIOUS SEGMENT"
+            literal = abjad.LilyPondLiteral(string)
+            abjad.attach(literal, skip)
         for context in abjad.iterate(self._score).components(abjad.Context):
             previous_clef = self._get_previous_clef(context.name)
             previous_instrument = self._get_previous_instrument(context.name)
