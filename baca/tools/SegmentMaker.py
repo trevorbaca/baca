@@ -721,51 +721,6 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         self.layout_measure_map(self._score['Global Skips'])
 
-    def _apply_previous_segment_end_settings(self):
-        if self._is_first_segment():
-            return
-        if not self._previous_metadata:
-            segment = self._get_segment_identifier()
-            print(f'can not find previous metadata before {segment}.')
-            return
-        skip = baca.select(self._score['Global Skips']).skip(0)
-        mark = abjad.inspect(skip).get_piecewise(abjad.MetronomeMark)
-        if mark is None:
-            prototype = abjad.MetronomeMarkSpanner
-            spanner = abjad.inspect(skip).get_spanner(prototype)
-            previous_mark = self._get_previous_metronome_mark()
-            # TODO: implement MetronomeMark._lilypond_tweak_manager
-            #abjad.tweak(previous_mark).color = 'darkgreen'
-            abjad.override(skip).text_script.color = 'darkgreen'
-            spanner.attach(previous_mark, skip)
-        for context in abjad.iterate(self._score).components(abjad.Context):
-            previous_clef = self._get_previous_clef(context.name)
-            previous_instrument = self._get_previous_instrument(context.name)
-            previous_staff_lines = self._get_previous_staff_lines(context.name)
-            if (not previous_clef and
-                not previous_instrument and
-                not previous_staff_lines):
-                continue
-            leaf = abjad.inspect(context).get_leaf(0)
-            if previous_instrument is not None:
-                prototype = abjad.Instrument
-                instrument = abjad.inspect(leaf).get_effective(prototype)
-                if instrument is None:
-                    instrument = abjad.new(
-                        previous_instrument,
-                        context=context.context_name,
-                        )
-                    abjad.attach(instrument, leaf)
-            if previous_staff_lines is not None:
-                prototype = baca.StaffLines
-                staff_lines = abjad.inspect(leaf).get_effective(prototype)
-                if staff_lines is None:
-                    abjad.attach(previous_staff_lines, leaf)
-            if previous_clef is not None:
-                clef = abjad.inspect(leaf).get_effective(abjad.Clef)
-                if clef is None:
-                    abjad.attach(previous_clef, leaf)
-
     def _apply_spacing_specifier(self):
         start_time = time.time()
         if self.spacing_specifier is None:
@@ -1160,7 +1115,7 @@ class SegmentMaker(abjad.SegmentMaker):
         result = abjad.TypedOrderedDict()
         contexts = abjad.iterate(self._score).components(abjad.Context)
         contexts = list(contexts)
-        contexts.sort(key=lambda x: x.name)
+        contexts.sort(key=lambda _: _.name)
         for context in contexts:
             if not abjad.inspect(context).get_annotation('default_instrument'):
                 continue
@@ -1410,8 +1365,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _label_instrument_changes(self):
         prototype = abjad.Instrument
         for staff in abjad.iterate(self._score).components(abjad.Staff):
-            leaves = abjad.iterate(staff).leaves()
-            for leaf_index, leaf in enumerate(leaves):
+            for i, leaf in enumerate(abjad.iterate(staff).leaves()):
                 instrument = abjad.inspect(leaf).get_indicator(prototype)
                 if not instrument:
                     continue
@@ -1421,13 +1375,14 @@ class SegmentMaker(abjad.SegmentMaker):
                     agent = abjad.inspect(previous_leaf)
                     result = agent.get_effective(abjad.Instrument)
                     previous_instrument = result
-                elif (leaf_index == 0 and
-                    1 < self._get_segment_number()):
+                elif (i == 0 and 1 < self._get_segment_number()):
                     instrument = self._get_previous_instrument(staff.name)
                     previous_instrument = instrument
                 else:
                     continue
-                if previous_instrument != current_instrument:
+                previous_name = getattr(previous_instrument, 'name', None)
+                current_name = getattr(current_instrument, 'name', None)
+                if previous_name != current_name:
                     markup = self._make_instrument_change_markup(
                         current_instrument)
                     abjad.attach(markup, leaf)
@@ -1566,6 +1521,56 @@ class SegmentMaker(abjad.SegmentMaker):
         total_duration = int(round(total_duration))
         counter = abjad.Strin('second').pluralize(total_duration)
         print(f'segment duration {total_duration} {counter} ...')
+
+    def _reapply_previous_segment_settings(self):
+        if self._is_first_segment():
+            return
+        if not self._previous_metadata:
+            segment = self._get_segment_identifier()
+            print(f'can not find previous metadata before {segment}.')
+            return
+        skip = baca.select(self._score['Global Skips']).skip(0)
+        mark = abjad.inspect(skip).get_piecewise(abjad.MetronomeMark)
+        if mark is None:
+            prototype = abjad.MetronomeMarkSpanner
+            spanner = abjad.inspect(skip).get_spanner(prototype)
+            previous_mark = self._get_previous_metronome_mark()
+            # TODO: implement MetronomeMark._lilypond_tweak_manager
+            #abjad.tweak(previous_mark).color = 'darkgreen'
+            abjad.override(skip).text_script.color = 'darkgreen'
+            spanner.attach(previous_mark, skip)
+        for context in abjad.iterate(self._score).components(abjad.Context):
+            previous_clef = self._get_previous_clef(context.name)
+            previous_instrument = self._get_previous_instrument(context.name)
+            previous_staff_lines = self._get_previous_staff_lines(context.name)
+            if not any([
+                previous_clef, previous_instrument, previous_staff_lines,
+                ]):
+                continue
+            leaf = abjad.inspect(context).get_leaf(0)
+            if previous_instrument is not None:
+                prototype = abjad.Instrument
+                instrument = abjad.inspect(leaf).get_indicator(prototype)
+                if instrument is None:
+                    instrument = abjad.new(
+                        previous_instrument,
+                        context=context.context_name,
+                        )
+                    abjad.attach(instrument, leaf)
+                    string = rf'\once \override {context.context_name}'
+                    string += ".InstrumentName.color = #(x11-color 'DeepPink1)"
+                    string += ' % FROM PREVIOUS SEGMENT'
+                    literal = abjad.LilyPondLiteral(string)
+                    abjad.attach(literal, leaf)
+            if previous_staff_lines is not None:
+                prototype = baca.StaffLines
+                staff_lines = abjad.inspect(leaf).get_effective(prototype)
+                if staff_lines is None:
+                    abjad.attach(previous_staff_lines, leaf)
+            if previous_clef is not None:
+                clef = abjad.inspect(leaf).get_effective(abjad.Clef)
+                if clef is None:
+                    abjad.attach(previous_clef, leaf)
 
     def _scope_to_leaf_selection(self, wrapper):
         leaves = []
@@ -5906,7 +5911,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._call_commands()
         self._detach_figure_names()
         self._shorten_long_repeat_ties()
-        self._apply_previous_segment_end_settings()
+        self._reapply_previous_segment_settings()
         self._attach_first_segment_score_template_defaults()
         self._apply_spacing_specifier()
         self._label_clock_time_()
