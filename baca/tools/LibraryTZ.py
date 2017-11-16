@@ -1698,7 +1698,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...                 ),
             ...             ),
             ...         ),
-            ...     baca.transparent_bar_lines(baca.lm(1)),
+            ...     baca.transparent_bar_lines(baca.group_by_measure()[1]),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')

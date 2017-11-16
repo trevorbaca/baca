@@ -400,15 +400,6 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         return self.leaves().with_previous_leaf()
 
-    # TODO: remove
-    def lm(self, n):
-        r'''Selects logical measure `n`.
-
-        '''
-        if self._expression:
-            return self._update_expression(inspect.currentframe())
-        return self.group_by_measure()[n]
-
     def lt(self, n):
         r'''Selects logical tie `n`.
 

@@ -615,7 +615,7 @@ class LibraryAF(abjad.AbjadObject):
 
             >>> maker(
             ...     baca.scope('Music Voice', 1),
-            ...     baca.bar_extent((-4, 4), baca.lm(1)),
+            ...     baca.bar_extent((-4, 4), baca.group_by_measure()[1]),
             ...     baca.bar_extent((-4, 4), baca.leaf(-1), after=True),
             ...     baca.make_even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
