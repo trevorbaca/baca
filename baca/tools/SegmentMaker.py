@@ -1188,7 +1188,20 @@ class SegmentMaker(abjad.SegmentMaker):
         result['end_clefs_by_staff'] = self._get_end_clefs()
         result['end_instruments_by_context'] = self._get_end_instruments()
         result['end_metronome_mark'] = self._get_end_metronome_mark()
+        result['end_staff_lines_by_staff'] = self._get_end_staff_lines()
         result['end_time_signature'] = self._get_end_time_signature()
+        return result
+
+    def _get_end_staff_lines(self):
+        result = abjad.TypedOrderedDict()
+        staves = abjad.iterate(self._score).components(abjad.Staff)
+        staves = list(staves)
+        staves.sort(key=lambda _: _.name)
+        for staff in staves:
+            leaf = abjad.inspect(staff).get_leaf(-1)
+            lines = abjad.inspect(leaf).get_effective(baca.StaffLines)
+            if lines is not None:
+                result[staff.name] = lines.line_count
         return result
 
     def _get_end_time_signature(self):
@@ -1254,23 +1267,6 @@ class SegmentMaker(abjad.SegmentMaker):
     def _get_segment_number(self):
         return self._metadata.get('segment_number', 1)
 
-    def _get_stylesheets(self, environment=None):
-        if environment == 'docs':
-            if abjad.inspect(self._score).get_indicator('two-voice'):
-                return [self._relative_two_voice_staff_stylesheet_path]
-            else:
-                return [self._relative_string_trio_stylesheet_path]
-        elif environment == 'external':
-            if abjad.inspect(self._score).get_indicator('two-voice'):
-                return [self._absolute_two_voice_staff_stylesheet_path]
-            else:
-                return [self._absolute_string_trio_stylesheet_path]
-        includes = []
-        includes.append(self._score_package_stylesheet_path)
-        if 1 < self._get_segment_number():
-            includes.append(self._score_package_nonfirst_stylesheet_path)
-        return includes
-
     def _get_stage_offsets(self, start_stage, stop_stage):
         skips = baca.select(self._score['Global Skips']).skips()
         result = self._stage_number_to_measure_indices(start_stage)
@@ -1300,6 +1296,23 @@ class SegmentMaker(abjad.SegmentMaker):
         pair = (start_stage, stop_stage)
         start_offset, stop_offset = self._get_stage_offsets(*pair)
         return start_offset, time_signatures
+
+    def _get_stylesheets(self, environment=None):
+        if environment == 'docs':
+            if abjad.inspect(self._score).get_indicator('two-voice'):
+                return [self._relative_two_voice_staff_stylesheet_path]
+            else:
+                return [self._relative_string_trio_stylesheet_path]
+        elif environment == 'external':
+            if abjad.inspect(self._score).get_indicator('two-voice'):
+                return [self._absolute_two_voice_staff_stylesheet_path]
+            else:
+                return [self._absolute_string_trio_stylesheet_path]
+        includes = []
+        includes.append(self._score_package_stylesheet_path)
+        if 1 < self._get_segment_number():
+            includes.append(self._score_package_nonfirst_stylesheet_path)
+        return includes
 
     def _handle_mutator(self, command):
         if (hasattr(command.command, '_mutates_score') and

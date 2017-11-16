@@ -17,7 +17,7 @@ class StaffLines(abjad.AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self, line_count=None):
-        self._context = abjad.Staff
+        self._context = 'Staff'
         self._line_count = line_count
 
     ### PRIVATE METHODS ###
@@ -40,7 +40,7 @@ class StaffLines(abjad.AbjadObject):
         ..  container:: example
 
             >>> baca.StaffLines(1).context
-            <class 'abjad.tools.scoretools.Staff.Staff'>
+            'Staff'
 
         Returns staff.
         '''
