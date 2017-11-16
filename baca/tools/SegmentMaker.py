@@ -755,6 +755,9 @@ class SegmentMaker(abjad.SegmentMaker):
             prototype = abjad.MetronomeMarkSpanner
             spanner = abjad.inspect(skip).get_spanner(prototype)
             previous_mark = self._get_previous_metronome_mark()
+            # TODO: implement MetronomeMark._lilypond_tweak_manager
+            #abjad.tweak(previous_mark).color = 'darkgreen'
+            abjad.override(skip).text_script.color = 'darkgreen'
             spanner.attach(previous_mark, skip)
 
     def _apply_spacing_specifier(self):
@@ -847,8 +850,6 @@ class SegmentMaker(abjad.SegmentMaker):
             self.score_template.attach_defaults(self._score)
 
     def _attach_metronome_marks(self):
-        if not self.metronome_mark_measure_map:
-            return
         skips = baca.select(self._score['Global Skips']).skips()
         left_broken_text = abjad.Markup().null()
         left_broken_text = abjad.new(left_broken_text, direction=None)
@@ -858,6 +859,8 @@ class SegmentMaker(abjad.SegmentMaker):
             start_with_parenthesized_tempo=False,
             )
         abjad.attach(spanner, skips)
+        if not self.metronome_mark_measure_map:
+            return
         for stage_number, directive in self.metronome_mark_measure_map:
             self._assert_valid_stage_number(stage_number)
             start, _ = self._stage_number_to_measure_indices(stage_number)
