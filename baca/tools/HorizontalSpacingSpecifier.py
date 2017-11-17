@@ -17,7 +17,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
@@ -53,11 +53,11 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 e'16 [
             <BLANKLINE>
@@ -77,7 +77,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 e'8 [
             <BLANKLINE>
                                 f'8
@@ -88,14 +88,14 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 e'4
             <BLANKLINE>
                                 f'4
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 e'2
                                 \bar "|"
             <BLANKLINE>
@@ -116,7 +116,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
@@ -160,11 +160,11 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 e'16 [
             <BLANKLINE>
@@ -184,7 +184,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 e'8 [
             <BLANKLINE>
                                 f'8
@@ -195,14 +195,14 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 e'4
             <BLANKLINE>
                                 f'4
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 e'2
                                 \bar "|"
             <BLANKLINE>
@@ -225,7 +225,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
@@ -269,11 +269,11 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 e'16 [
             <BLANKLINE>
@@ -293,7 +293,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 e'8 [
             <BLANKLINE>
                                 f'8
@@ -304,14 +304,14 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 e'4
             <BLANKLINE>
                                 f'4
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 e'2
                                 \bar "|"
             <BLANKLINE>
@@ -335,7 +335,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
@@ -379,11 +379,11 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 e'16 [
             <BLANKLINE>
@@ -403,7 +403,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 e'8 [
             <BLANKLINE>
                                 f'8
@@ -414,14 +414,14 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 e'4
             <BLANKLINE>
                                 f'4
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 e'2
                                 \bar "|"
             <BLANKLINE>
@@ -446,7 +446,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rhythmos.EvenRunRhythmMaker(),
@@ -490,11 +490,11 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 e'16 [
             <BLANKLINE>
@@ -514,7 +514,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 e'8 [
             <BLANKLINE>
                                 f'8
@@ -525,14 +525,14 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 e'4
             <BLANKLINE>
                                 f'4
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 e'2
                                 \bar "|"
             <BLANKLINE>
@@ -555,7 +555,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rhythmos.AccelerandoRhythmMaker(
@@ -599,8 +599,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
                             \override TupletNumber.text = \markup {
                                 \scale
                                     #'(0.75 . 0.75)
@@ -633,7 +633,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 }
                             \times 1/1 {
             <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \once \override Beam.grow-direction = #right
                                 \clef "treble"
                                 e'16 * 63/32 [
@@ -681,7 +681,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 }
                             \times 1/1 {
             <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 \once \override Beam.grow-direction = #right
                                 e'16 * 117/64 [
             <BLANKLINE>

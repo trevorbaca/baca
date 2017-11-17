@@ -16,7 +16,7 @@ class ColorFingeringCommand(Command):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.pitches('E4', repeats=True),
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.ColorFingeringCommand(numbers=[0, 1, 2, 1]),
@@ -51,14 +51,14 @@ class ColorFingeringCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
             <BLANKLINE>
-                            %%% Music Voice [measure 1] %%%
+                            %%% MusicVoice [measure 1] %%%
                             \clef "treble"
                             e'2
             <BLANKLINE>
-                            %%% Music Voice [measure 2] %%%
+                            %%% MusicVoice [measure 2] %%%
                             e'4.
                                 ^ \markup {
                                     \override
@@ -68,7 +68,7 @@ class ColorFingeringCommand(Command):
                                                 1
                                     }
             <BLANKLINE>
-                            %%% Music Voice [measure 3] %%%
+                            %%% MusicVoice [measure 3] %%%
                             e'2
                                 ^ \markup {
                                     \override
@@ -78,7 +78,7 @@ class ColorFingeringCommand(Command):
                                                 2
                                     }
             <BLANKLINE>
-                            %%% Music Voice [measure 4] %%%
+                            %%% MusicVoice [measure 4] %%%
                             e'4.
                                 ^ \markup {
                                     \override

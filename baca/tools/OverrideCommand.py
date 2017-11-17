@@ -62,7 +62,7 @@ class OverrideCommand(Command):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.beam_positions(6),
         ...     baca.rests_up(),
@@ -106,10 +106,10 @@ class OverrideCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
             <BLANKLINE>
-                            %%% Music Voice [measure 1] %%%
+                            %%% MusicVoice [measure 1] %%%
                             \override Beam.positions = #'(6 . 6)
                             \override Stem.direction = #up
                             \clef "treble"
@@ -122,14 +122,14 @@ class OverrideCommand(Command):
                             \override Rest.direction = #up
                             r8
             <BLANKLINE>
-                            %%% Music Voice [measure 2] %%%
+                            %%% MusicVoice [measure 2] %%%
                             e''8 [
             <BLANKLINE>
                             g'8
             <BLANKLINE>
                             f''8 ]
             <BLANKLINE>
-                            %%% Music Voice [measure 3] %%%
+                            %%% MusicVoice [measure 3] %%%
                             r8
             <BLANKLINE>
                             e'8 [
@@ -138,7 +138,7 @@ class OverrideCommand(Command):
             <BLANKLINE>
                             f'8 ]
             <BLANKLINE>
-                            %%% Music Voice [measure 4] %%%
+                            %%% MusicVoice [measure 4] %%%
                             r8
                             \revert Rest.direction
             <BLANKLINE>

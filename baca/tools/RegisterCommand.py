@@ -148,7 +148,7 @@ class RegisterCommand(Command):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.pitches('G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4'),
         ...     baca.make_even_runs(),
         ...     baca.RegisterCommand(
@@ -187,11 +187,11 @@ class RegisterCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 g''8 [
             <BLANKLINE>
@@ -203,7 +203,7 @@ class RegisterCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 aqf''8 [
             <BLANKLINE>
                                 af''8
@@ -212,7 +212,7 @@ class RegisterCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 g''8 [
             <BLANKLINE>
                                 gqs''8
@@ -223,7 +223,7 @@ class RegisterCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 aqf''8 [
             <BLANKLINE>
                                 af''8

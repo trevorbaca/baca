@@ -18,7 +18,7 @@ class MicrotoneDeviationCommand(Command):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.pitches('E4'),
         ...     baca.make_even_runs(),
         ...     baca.deviation([0, 0.5, 0, -0.5]),
@@ -53,11 +53,11 @@ class MicrotoneDeviationCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 e'8 [
             <BLANKLINE>
@@ -69,7 +69,7 @@ class MicrotoneDeviationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 e'8 [
             <BLANKLINE>
                                 eqs'8
@@ -78,7 +78,7 @@ class MicrotoneDeviationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 eqf'8 [
             <BLANKLINE>
                                 e'8
@@ -89,7 +89,7 @@ class MicrotoneDeviationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 eqf'8 [
             <BLANKLINE>
                                 e'8

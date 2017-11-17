@@ -16,7 +16,7 @@ class LabelCommand(Command):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.make_even_runs(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.label(abjad.label().with_pitches(locale='us')),
@@ -51,11 +51,11 @@ class LabelCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 e'8 [
                                     ^ \markup {
@@ -83,7 +83,7 @@ class LabelCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 g'8 [
                                     ^ \markup {
                                         \small
@@ -104,7 +104,7 @@ class LabelCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 d''8 [
                                     ^ \markup {
                                         \small
@@ -131,7 +131,7 @@ class LabelCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 f''8 [
                                     ^ \markup {
                                         \small

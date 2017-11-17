@@ -17,7 +17,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.pitches('E4 F4'),
         ...     baca.make_even_runs(),
         ...     )
@@ -81,11 +81,11 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 e'8 [
             <BLANKLINE>
@@ -97,7 +97,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 e'8 [
             <BLANKLINE>
                                 f'8
@@ -105,7 +105,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                                 e'8 ]
                             }
             <BLANKLINE>
-                            %%% Music Voice [measure 3] %%%
+                            %%% MusicVoice [measure 3] %%%
                             R1 * 7/8
                             \bar "|"
             <BLANKLINE>

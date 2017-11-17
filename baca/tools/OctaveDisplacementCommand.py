@@ -16,7 +16,7 @@ class OctaveDisplacementCommand(Command):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.make_even_runs(),
         ...     baca.suite([
         ...         baca.pitches('G4', repeats=True),
@@ -53,11 +53,11 @@ class OctaveDisplacementCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 g'8 [
             <BLANKLINE>
@@ -69,7 +69,7 @@ class OctaveDisplacementCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 g'8 [
             <BLANKLINE>
                                 g'8
@@ -78,7 +78,7 @@ class OctaveDisplacementCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 g8 [
             <BLANKLINE>
                                 g'''8
@@ -89,7 +89,7 @@ class OctaveDisplacementCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 g'8 [
             <BLANKLINE>
                                 g''8

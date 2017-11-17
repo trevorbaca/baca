@@ -53,7 +53,7 @@ class MusicAccumulator(abjad.AbjadObject):
             >>> accumulator = baca.MusicAccumulator(score_template)
             >>> accumulator(
             ...     accumulator.music_maker(
-            ...         'Violin Music Voice',
+            ...         'ViolinMusicVoice',
             ...         [[0, 1, 2, 3]],
             ...         figure_name='D',
             ...         ),
@@ -61,7 +61,7 @@ class MusicAccumulator(abjad.AbjadObject):
 
             >>> accumulator(
             ...     accumulator.music_maker(
-            ...         'Violin Music Voice',
+            ...         'ViolinMusicVoice',
             ...         [[4, 5, 6, 7]],
             ...         figure_name='D',
             ...         ),

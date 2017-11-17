@@ -42,20 +42,20 @@ class SingleStaffScoreTemplate(ScoreTemplate):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
             <BLANKLINE>
-                            %%% Music Voice [measure 1] %%%
+                            %%% MusicVoice [measure 1] %%%
                             \clef "treble"
                             R1 * 1/2
             <BLANKLINE>
-                            %%% Music Voice [measure 2] %%%
+                            %%% MusicVoice [measure 2] %%%
                             R1 * 3/8
             <BLANKLINE>
-                            %%% Music Voice [measure 3] %%%
+                            %%% MusicVoice [measure 3] %%%
                             R1 * 1/2
             <BLANKLINE>
-                            %%% Music Voice [measure 4] %%%
+                            %%% MusicVoice [measure 4] %%%
                             R1 * 3/8
                             \bar "|"
             <BLANKLINE>
@@ -81,11 +81,11 @@ class SingleStaffScoreTemplate(ScoreTemplate):
         # 
         music_voice = abjad.Voice(
             [],
-            name='Music Voice',
+            name='MusicVoice',
             )
         music_staff = abjad.Staff(
             [music_voice],
-            name='Music Staff',
+            name='MusicStaff',
             )
         abjad.annotate(
             music_staff,

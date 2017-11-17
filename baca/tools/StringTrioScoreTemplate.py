@@ -44,66 +44,66 @@ class StringTrioScoreTemplate(ScoreTemplate):
                 \context MusicContext = "Music Context" <<
                     \context StringSectionStaffGroup = "String Section Staff Group" <<
                         \tag violin
-                        \context ViolinMusicStaff = "Violin Music Staff" {
-                            \context ViolinMusicVoice = "Violin Music Voice" {
+                        \context ViolinMusicStaff = "ViolinMusicStaff" {
+                            \context ViolinMusicVoice = "ViolinMusicVoice" {
             <BLANKLINE>
-                                %%% Violin Music Voice [measure 1] %%%
+                                %%% ViolinMusicVoice [measure 1] %%%
                                 \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                 \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 R1 * 1/2
             <BLANKLINE>
-                                %%% Violin Music Voice [measure 2] %%%
+                                %%% ViolinMusicVoice [measure 2] %%%
                                 R1 * 3/8
             <BLANKLINE>
-                                %%% Violin Music Voice [measure 3] %%%
+                                %%% ViolinMusicVoice [measure 3] %%%
                                 R1 * 1/2
             <BLANKLINE>
-                                %%% Violin Music Voice [measure 4] %%%
+                                %%% ViolinMusicVoice [measure 4] %%%
                                 R1 * 3/8
                                 \bar "|"
             <BLANKLINE>
                             }
                         }
                         \tag viola
-                        \context ViolaMusicStaff = "Viola Music Staff" {
-                            \context ViolaMusicVoice = "Viola Music Voice" {
+                        \context ViolaMusicStaff = "ViolaMusicStaff" {
+                            \context ViolaMusicVoice = "ViolaMusicVoice" {
             <BLANKLINE>
-                                %%% Viola Music Voice [measure 1] %%%
+                                %%% ViolaMusicVoice [measure 1] %%%
                                 \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                 \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
                                 \clef "alto"
                                 R1 * 1/2
             <BLANKLINE>
-                                %%% Viola Music Voice [measure 2] %%%
+                                %%% ViolaMusicVoice [measure 2] %%%
                                 R1 * 3/8
             <BLANKLINE>
-                                %%% Viola Music Voice [measure 3] %%%
+                                %%% ViolaMusicVoice [measure 3] %%%
                                 R1 * 1/2
             <BLANKLINE>
-                                %%% Viola Music Voice [measure 4] %%%
+                                %%% ViolaMusicVoice [measure 4] %%%
                                 R1 * 3/8
                                 \bar "|"
             <BLANKLINE>
                             }
                         }
                         \tag cello
-                        \context CelloMusicStaff = "Cello Music Staff" {
-                            \context CelloMusicVoice = "Cello Music Voice" {
+                        \context CelloMusicStaff = "CelloMusicStaff" {
+                            \context CelloMusicVoice = "CelloMusicVoice" {
             <BLANKLINE>
-                                %%% Cello Music Voice [measure 1] %%%
+                                %%% CelloMusicVoice [measure 1] %%%
                                 \set CelloMusicStaff.instrumentName = \markup { Cello }
                                 \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
                                 \clef "bass"
                                 R1 * 1/2
             <BLANKLINE>
-                                %%% Cello Music Voice [measure 2] %%%
+                                %%% CelloMusicVoice [measure 2] %%%
                                 R1 * 3/8
             <BLANKLINE>
-                                %%% Cello Music Voice [measure 3] %%%
+                                %%% CelloMusicVoice [measure 3] %%%
                                 R1 * 1/2
             <BLANKLINE>
-                                %%% Cello Music Voice [measure 4] %%%
+                                %%% CelloMusicVoice [measure 4] %%%
                                 R1 * 3/8
                                 \bar "|"
             <BLANKLINE>
@@ -144,12 +144,12 @@ class StringTrioScoreTemplate(ScoreTemplate):
         violin_music_voice = abjad.Voice(
             [],
             context_name='ViolinMusicVoice',
-            name='Violin Music Voice',
+            name='ViolinMusicVoice',
             )
         violin_music_staff = abjad.Staff(
             [violin_music_voice],
             context_name='ViolinMusicStaff',
-            name='Violin Music Staff',
+            name='ViolinMusicStaff',
             )
         violin = abjad.instrumenttools.Violin()
         abjad.annotate(
@@ -168,12 +168,12 @@ class StringTrioScoreTemplate(ScoreTemplate):
         viola_music_voice = abjad.Voice(
             [],
             context_name='ViolaMusicVoice',
-            name='Viola Music Voice',
+            name='ViolaMusicVoice',
             )
         viola_music_staff = abjad.Staff(
             [viola_music_voice],
             context_name='ViolaMusicStaff',
-            name='Viola Music Staff',
+            name='ViolaMusicStaff',
             )
         abjad.annotate(
             viola_music_staff,
@@ -191,12 +191,12 @@ class StringTrioScoreTemplate(ScoreTemplate):
         cello_music_voice = abjad.Voice(
             [],
             context_name='CelloMusicVoice',
-            name='Cello Music Voice',
+            name='CelloMusicVoice',
             )
         cello_music_staff = abjad.Staff(
             [cello_music_voice],
             context_name='CelloMusicStaff',
-            name='Cello Music Staff',
+            name='CelloMusicStaff',
             )
         abjad.annotate(
             cello_music_staff,

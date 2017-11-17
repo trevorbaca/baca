@@ -8,13 +8,13 @@ class Scope(abjad.AbjadObject):
     ..  container:: example
 
         >>> scope = baca.Scope(
-        ...     voice_name='Violin Music Voice',
+        ...     voice_name='ViolinMusicVoice',
         ...     stages=(1, 9),
         ...     )
 
         >>> abjad.f(scope)
         baca.Scope(
-            voice_name='Violin Music Voice',
+            voice_name='ViolinMusicVoice',
             stages=(1, 9),
             )
 

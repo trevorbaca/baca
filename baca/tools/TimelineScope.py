@@ -9,29 +9,29 @@ class TimelineScope(abjad.AbjadObject):
     ..  container:: example
 
         >>> scope = baca.timeline([
-        ...     ('Piano Music Voice', 5, 9),
-        ...     ('Clarinet Music Voice', 7, 12),
-        ...     ('Violin Music Voice', 8, 12),
-        ...     ('Oboe Music Voice', 9, 12),
+        ...     ('PianoMusicVoice', 5, 9),
+        ...     ('ClarinetMusicVoice', 7, 12),
+        ...     ('ViolinMusicVoice', 8, 12),
+        ...     ('OboeMusicVoice', 9, 12),
         ...     ])
 
         >>> abjad.f(scope)
         baca.TimelineScope(
             scopes=(
                 baca.Scope(
-                    voice_name='Piano Music Voice',
+                    voice_name='PianoMusicVoice',
                     stages=(5, 9),
                     ),
                 baca.Scope(
-                    voice_name='Clarinet Music Voice',
+                    voice_name='ClarinetMusicVoice',
                     stages=(7, 12),
                     ),
                 baca.Scope(
-                    voice_name='Violin Music Voice',
+                    voice_name='ViolinMusicVoice',
                     stages=(8, 12),
                     ),
                 baca.Scope(
-                    voice_name='Oboe Music Voice',
+                    voice_name='OboeMusicVoice',
                     stages=(9, 12),
                     ),
                 ),

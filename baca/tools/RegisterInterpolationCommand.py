@@ -119,7 +119,7 @@ class RegisterInterpolationCommand(Command):
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.pitches(pitches),
         ...     baca.make_even_runs(),
         ...     baca.register(12, 12),
@@ -170,11 +170,11 @@ class RegisterInterpolationCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 fs''8 [
             <BLANKLINE>
@@ -186,7 +186,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 a''8 [
             <BLANKLINE>
                                 bf''8
@@ -195,7 +195,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 b''8 [
             <BLANKLINE>
                                 af''8
@@ -206,7 +206,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 d''8 [
             <BLANKLINE>
                                 fs''8
@@ -215,7 +215,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 5] %%%
+                                %%% MusicVoice [measure 5] %%%
                                 ef''8 [
             <BLANKLINE>
                                 f''8
@@ -226,7 +226,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 6] %%%
+                                %%% MusicVoice [measure 6] %%%
                                 c''8 [
             <BLANKLINE>
                                 b''8
@@ -235,7 +235,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 7] %%%
+                                %%% MusicVoice [measure 7] %%%
                                 g''8 [
             <BLANKLINE>
                                 cs''8
@@ -246,7 +246,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 8] %%%
+                                %%% MusicVoice [measure 8] %%%
                                 e''8 [
             <BLANKLINE>
                                 ef''8
@@ -272,7 +272,7 @@ class RegisterInterpolationCommand(Command):
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.pitches(pitches),
         ...     baca.make_even_runs(),
         ...     baca.register(12, 0),
@@ -323,11 +323,11 @@ class RegisterInterpolationCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 fs''8 [
             <BLANKLINE>
@@ -339,7 +339,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 a''8 [
             <BLANKLINE>
                                 bf'8
@@ -348,7 +348,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 b'8 [
             <BLANKLINE>
                                 af'8
@@ -359,7 +359,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 d''8 [
             <BLANKLINE>
                                 fs'8
@@ -368,7 +368,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 5] %%%
+                                %%% MusicVoice [measure 5] %%%
                                 ef''8 [
             <BLANKLINE>
                                 f'8
@@ -379,7 +379,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 6] %%%
+                                %%% MusicVoice [measure 6] %%%
                                 c''8 [
             <BLANKLINE>
                                 b'8
@@ -388,7 +388,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 7] %%%
+                                %%% MusicVoice [measure 7] %%%
                                 g'8 [
             <BLANKLINE>
                                 cs''8
@@ -399,7 +399,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 8] %%%
+                                %%% MusicVoice [measure 8] %%%
                                 e'8 [
             <BLANKLINE>
                                 ef'8
@@ -425,7 +425,7 @@ class RegisterInterpolationCommand(Command):
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.pitches(pitches),
         ...     baca.make_even_runs(),
         ...     baca.register(0, 12),
@@ -476,11 +476,11 @@ class RegisterInterpolationCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 fs'8 [
             <BLANKLINE>
@@ -492,7 +492,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 a'8 [
             <BLANKLINE>
                                 bf'8
@@ -501,7 +501,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 b'8 [
             <BLANKLINE>
                                 af'8
@@ -512,7 +512,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 d''8 [
             <BLANKLINE>
                                 fs'8
@@ -521,7 +521,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 5] %%%
+                                %%% MusicVoice [measure 5] %%%
                                 ef''8 [
             <BLANKLINE>
                                 f''8
@@ -532,7 +532,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 6] %%%
+                                %%% MusicVoice [measure 6] %%%
                                 c''8 [
             <BLANKLINE>
                                 b'8
@@ -541,7 +541,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 7] %%%
+                                %%% MusicVoice [measure 7] %%%
                                 g''8 [
             <BLANKLINE>
                                 cs''8
@@ -552,7 +552,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 8] %%%
+                                %%% MusicVoice [measure 8] %%%
                                 e''8 [
             <BLANKLINE>
                                 ef''8
@@ -578,7 +578,7 @@ class RegisterInterpolationCommand(Command):
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.pitches(pitches),
         ...     baca.make_even_runs(),
         ...     baca.register(12, -12),
@@ -629,11 +629,11 @@ class RegisterInterpolationCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 fs''8 [
             <BLANKLINE>
@@ -645,7 +645,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 a'8 [
             <BLANKLINE>
                                 bf'8
@@ -654,7 +654,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 b'8 [
             <BLANKLINE>
                                 af'8
@@ -665,7 +665,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 d'8 [
             <BLANKLINE>
                                 fs'8
@@ -674,7 +674,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 5] %%%
+                                %%% MusicVoice [measure 5] %%%
                                 ef'8 [
             <BLANKLINE>
                                 f'8
@@ -685,7 +685,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 6] %%%
+                                %%% MusicVoice [measure 6] %%%
                                 c'8 [
             <BLANKLINE>
                                 b8
@@ -694,7 +694,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 7] %%%
+                                %%% MusicVoice [measure 7] %%%
                                 g8 [
             <BLANKLINE>
                                 cs'8
@@ -705,7 +705,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 8] %%%
+                                %%% MusicVoice [measure 8] %%%
                                 e8 [
             <BLANKLINE>
                                 ef8
@@ -731,7 +731,7 @@ class RegisterInterpolationCommand(Command):
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.pitches(pitches),
         ...     baca.make_even_runs(),
         ...     baca.register(-12, 12),
@@ -782,11 +782,11 @@ class RegisterInterpolationCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 fs8 [
             <BLANKLINE>
@@ -798,7 +798,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 a8 [
             <BLANKLINE>
                                 bf8
@@ -807,7 +807,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 b8 [
             <BLANKLINE>
                                 af8
@@ -818,7 +818,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 d'8 [
             <BLANKLINE>
                                 fs'8
@@ -827,7 +827,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 5] %%%
+                                %%% MusicVoice [measure 5] %%%
                                 ef'8 [
             <BLANKLINE>
                                 f'8
@@ -838,7 +838,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 6] %%%
+                                %%% MusicVoice [measure 6] %%%
                                 c''8 [
             <BLANKLINE>
                                 b'8
@@ -847,7 +847,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 7] %%%
+                                %%% MusicVoice [measure 7] %%%
                                 g'8 [
             <BLANKLINE>
                                 cs''8
@@ -858,7 +858,7 @@ class RegisterInterpolationCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 8] %%%
+                                %%% MusicVoice [measure 8] %%%
                                 e''8 [
             <BLANKLINE>
                                 ef''8

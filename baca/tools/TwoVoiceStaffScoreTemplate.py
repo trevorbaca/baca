@@ -41,35 +41,35 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context MusicStaff = "Music Staff" <<
-                        \context MusicVoiceOne = "Music Voice 1" {
+                    \context MusicStaff = "MusicStaff" <<
+                        \context MusicVoiceOne = "MusicVoiceOne" {
             <BLANKLINE>
-                            %%% Music Voice 1 [measure 1] %%%
+                            %%% MusicVoiceOne [measure 1] %%%
                             R1 * 1/2
             <BLANKLINE>
-                            %%% Music Voice 1 [measure 2] %%%
+                            %%% MusicVoiceOne [measure 2] %%%
                             R1 * 3/8
             <BLANKLINE>
-                            %%% Music Voice 1 [measure 3] %%%
+                            %%% MusicVoiceOne [measure 3] %%%
                             R1 * 1/2
             <BLANKLINE>
-                            %%% Music Voice 1 [measure 4] %%%
+                            %%% MusicVoiceOne [measure 4] %%%
                             R1 * 3/8
                             \bar "|"
             <BLANKLINE>
                         }
-                        \context MusicVoiceTwo = "Music Voice 2" {
+                        \context MusicVoiceTwo = "MusicVoiceTwo" {
             <BLANKLINE>
-                            %%% Music Voice 2 [measure 1] %%%
+                            %%% MusicVoiceTwo [measure 1] %%%
                             R1 * 1/2
             <BLANKLINE>
-                            %%% Music Voice 2 [measure 2] %%%
+                            %%% MusicVoiceTwo [measure 2] %%%
                             R1 * 3/8
             <BLANKLINE>
-                            %%% Music Voice 2 [measure 3] %%%
+                            %%% MusicVoiceTwo [measure 3] %%%
                             R1 * 1/2
             <BLANKLINE>
-                            %%% Music Voice 2 [measure 4] %%%
+                            %%% MusicVoiceTwo [measure 4] %%%
                             R1 * 3/8
                             \bar "|"
             <BLANKLINE>
@@ -97,12 +97,12 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
         music_voice_1 = abjad.Voice(
             [],
             context_name='MusicVoiceOne',
-            name='Music Voice 1',
+            name='MusicVoiceOne',
             )
         music_voice_2 = abjad.Voice(
             [],
             context_name='MusicVoiceTwo',
-            name='Music Voice 2',
+            name='MusicVoiceTwo',
             )
         music_staff = abjad.Staff([
             music_voice_1,
@@ -110,7 +110,7 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
             ],
             context_name='MusicStaff',
             is_simultaneous=True,
-            name='Music Staff',
+            name='MusicStaff',
             )
 
         music_context = abjad.Context([

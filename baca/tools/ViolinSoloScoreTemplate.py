@@ -44,10 +44,10 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                 >>
                 \context MusicContext = "Music Context" <<
                     \tag violin
-                    \context ViolinMusicStaff = "Violin Music Staff" {
-                        \context ViolinMusicVoice = "Violin Music Voice" {
+                    \context ViolinMusicStaff = "ViolinMusicStaff" {
+                        \context ViolinMusicVoice = "ViolinMusicVoice" {
             <BLANKLINE>
-                            %%% Violin Music Voice [measure 1] %%%
+                            %%% ViolinMusicVoice [measure 1] %%%
                             \set ViolinMusicStaff.instrumentName = \markup {
                                 \hcenter-in
                                     #16
@@ -61,13 +61,13 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                             \clef "treble"
                             R1 * 1/2
             <BLANKLINE>
-                            %%% Violin Music Voice [measure 2] %%%
+                            %%% ViolinMusicVoice [measure 2] %%%
                             R1 * 3/8
             <BLANKLINE>
-                            %%% Violin Music Voice [measure 3] %%%
+                            %%% ViolinMusicVoice [measure 3] %%%
                             R1 * 1/2
             <BLANKLINE>
-                            %%% Violin Music Voice [measure 4] %%%
+                            %%% ViolinMusicVoice [measure 4] %%%
                             R1 * 3/8
                             \bar "|"
             <BLANKLINE>
@@ -104,12 +104,12 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
         violin_music_voice = abjad.Voice(
             [],
             context_name='ViolinMusicVoice',
-            name='Violin Music Voice',
+            name='ViolinMusicVoice',
             )
         violin_music_staff = abjad.Staff(
             [violin_music_voice],
             context_name='ViolinMusicStaff',
-            name='Violin Music Staff',
+            name='ViolinMusicStaff',
             )
         violin = abjad.instrumenttools.Violin(
             name_markup=baca.markup.instrument('Violin'),

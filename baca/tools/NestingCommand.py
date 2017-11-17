@@ -118,7 +118,7 @@ class NestingCommand(Command):
         ...     time_signatures=time_signatures,
         ...     )
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=selection,
         ...         ),
@@ -151,16 +151,16 @@ class NestingCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" \with {
+                    \context Staff = "MusicStaff" \with {
                         \override Beam.positions = #'(-5.5 . -5.5)
                     } {
-                        \context Voice = "Music Voice" {
+                        \context Voice = "MusicVoice" {
                             {
                                 \tweak text #tuplet-number::calc-fraction-text
                                 \times 8/7 {
                                     {
             <BLANKLINE>
-                                        %%% Music Voice [measure 1] %%%
+                                        %%% MusicVoice [measure 1] %%%
                                         \set stemLeftBeamCount = #0
                                         \set stemRightBeamCount = #2
                                         \clef "treble"
@@ -197,7 +197,7 @@ class NestingCommand(Command):
                             {
                                 {
             <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #2
                                     g''16

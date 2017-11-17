@@ -359,7 +359,7 @@ class ClusterCommand(Command):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.clusters([3, 4], start_pitch='E4'),
         ...     baca.make_notes(repeat_ties=True),
         ...     )
@@ -393,10 +393,10 @@ class ClusterCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
             <BLANKLINE>
-                            %%% Music Voice [measure 1] %%%
+                            %%% MusicVoice [measure 1] %%%
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -415,7 +415,7 @@ class ClusterCommand(Command):
                                             }
                                     }
             <BLANKLINE>
-                            %%% Music Voice [measure 2] %%%
+                            %%% MusicVoice [measure 2] %%%
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -433,7 +433,7 @@ class ClusterCommand(Command):
                                             }
                                     }
             <BLANKLINE>
-                            %%% Music Voice [measure 3] %%%
+                            %%% MusicVoice [measure 3] %%%
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -451,7 +451,7 @@ class ClusterCommand(Command):
                                             }
                                     }
             <BLANKLINE>
-                            %%% Music Voice [measure 4] %%%
+                            %%% MusicVoice [measure 4] %%%
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -574,7 +574,7 @@ class ClusterCommand(Command):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.pitches('E4'),
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.natural_clusters(widths=[3]),
@@ -609,10 +609,10 @@ class ClusterCommand(Command):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -627,7 +627,7 @@ class ClusterCommand(Command):
                                             \natural
                                         }
                 <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -641,7 +641,7 @@ class ClusterCommand(Command):
                                             \natural
                                         }
                 <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -655,7 +655,7 @@ class ClusterCommand(Command):
                                             \natural
                                         }
                 <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -708,7 +708,7 @@ class ClusterCommand(Command):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.pitches('C4 D4 E4 F4'),
             ...     baca.clusters([3]),
@@ -743,10 +743,10 @@ class ClusterCommand(Command):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -765,7 +765,7 @@ class ClusterCommand(Command):
                                                 }
                                         }
                 <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -783,7 +783,7 @@ class ClusterCommand(Command):
                                                 }
                                         }
                 <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -801,7 +801,7 @@ class ClusterCommand(Command):
                                                 }
                                         }
                 <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -835,7 +835,7 @@ class ClusterCommand(Command):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.clusters([3], start_pitch='G4'),
             ...     )
@@ -869,10 +869,10 @@ class ClusterCommand(Command):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -891,7 +891,7 @@ class ClusterCommand(Command):
                                                 }
                                         }
                 <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -909,7 +909,7 @@ class ClusterCommand(Command):
                                                 }
                                         }
                 <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -927,7 +927,7 @@ class ClusterCommand(Command):
                                                 }
                                         }
                 <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -971,7 +971,7 @@ class ClusterCommand(Command):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.clusters([1, 2, 3, 4], start_pitch='E4'),
             ...     baca.make_notes(repeat_ties=True),
             ...     )
@@ -1005,10 +1005,10 @@ class ClusterCommand(Command):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1027,7 +1027,7 @@ class ClusterCommand(Command):
                                                 }
                                         }
                 <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1045,7 +1045,7 @@ class ClusterCommand(Command):
                                                 }
                                         }
                 <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1063,7 +1063,7 @@ class ClusterCommand(Command):
                                                 }
                                         }
                 <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1097,7 +1097,7 @@ class ClusterCommand(Command):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.clusters([1, 3], start_pitch='E4'),
             ...     baca.make_notes(repeat_ties=True),
             ...     )
@@ -1131,10 +1131,10 @@ class ClusterCommand(Command):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1153,7 +1153,7 @@ class ClusterCommand(Command):
                                                 }
                                         }
                 <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1171,7 +1171,7 @@ class ClusterCommand(Command):
                                                 }
                                         }
                 <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1189,7 +1189,7 @@ class ClusterCommand(Command):
                                                 }
                                         }
                 <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1223,7 +1223,7 @@ class ClusterCommand(Command):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.pitches('E4', repeats=True),
             ...     baca.clusters([]),
@@ -1258,20 +1258,20 @@ class ClusterCommand(Command):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 e'2
                 <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 e'4.
                 <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 e'2
                 <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 e'4.
                                 \bar "|"
                 <BLANKLINE>

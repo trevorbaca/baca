@@ -614,7 +614,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.bar_extent((-4, 4), baca.group_by_measure()[1]),
             ...     baca.bar_extent((-4, 4), baca.leaf(-1), after=True),
             ...     baca.make_even_runs(),
@@ -658,11 +658,11 @@ class LibraryAF(abjad.AbjadObject):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 1] %%%
+                                    %%% MusicVoice [measure 1] %%%
                                     \clef "treble"
                                     e'8 [
                 <BLANKLINE>
@@ -674,7 +674,7 @@ class LibraryAF(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     \override Staff.BarLine.bar-extent = #'(-4 . 4)
                                     g'8 [
                 <BLANKLINE>
@@ -685,7 +685,7 @@ class LibraryAF(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 3] %%%
+                                    %%% MusicVoice [measure 3] %%%
                                     d''8 [
                 <BLANKLINE>
                                     f'8
@@ -696,7 +696,7 @@ class LibraryAF(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 4] %%%
+                                    %%% MusicVoice [measure 4] %%%
                                     f''8 [
                 <BLANKLINE>
                                     e'8
@@ -2396,7 +2396,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> accumulator = baca.MusicAccumulator(score_template)
             >>> accumulator(
             ...     accumulator.music_maker(
-            ...         'Violin Music Voice',
+            ...         'ViolinMusicVoice',
             ...         [[9, 11, 12, 14, 16]],
             ...         baca.flags(),
             ...         baca.stems_up(),
@@ -2407,9 +2407,9 @@ class LibraryAF(abjad.AbjadObject):
             ...     )
             >>> accumulator(
             ...     accumulator.music_maker(
-            ...         'Viola Music Voice',
+            ...         'ViolaMusicVoice',
             ...         [[0, 2, 4, 5, 7]],
-            ...         baca.anchor('Violin Music Voice'),
+            ...         baca.anchor('ViolinMusicVoice'),
             ...         baca.cross_staff(),
             ...         baca.flags(),
             ...         baca.stems_up(),
@@ -2446,12 +2446,12 @@ class LibraryAF(abjad.AbjadObject):
                     \context MusicContext = "Music Context" <<
                         \context StringSectionStaffGroup = "String Section Staff Group" <<
                             \tag violin
-                            \context ViolinMusicStaff = "Violin Music Staff" {
-                                \context ViolinMusicVoice = "Violin Music Voice" {
+                            \context ViolinMusicStaff = "ViolinMusicStaff" {
+                                \context ViolinMusicVoice = "ViolinMusicVoice" {
                                     {
                                         {
                 <BLANKLINE>
-                                            %%% Violin Music Voice [measure 1] %%%
+                                            %%% ViolinMusicVoice [measure 1] %%%
                                             \override Stem.direction = #up
                                             \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                             \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
@@ -2473,12 +2473,12 @@ class LibraryAF(abjad.AbjadObject):
                                 }
                             }
                             \tag viola
-                            \context ViolaMusicStaff = "Viola Music Staff" {
-                                \context ViolaMusicVoice = "Viola Music Voice" {
+                            \context ViolaMusicStaff = "ViolaMusicStaff" {
+                                \context ViolaMusicVoice = "ViolaMusicVoice" {
                                     {
                                         {
                 <BLANKLINE>
-                                            %%% Viola Music Voice [measure 1] %%%
+                                            %%% ViolaMusicVoice [measure 1] %%%
                                             \override Stem.direction = #up
                                             \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                             \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
@@ -2505,10 +2505,10 @@ class LibraryAF(abjad.AbjadObject):
                                 }
                             }
                             \tag cello
-                            \context CelloMusicStaff = "Cello Music Staff" {
-                                \context CelloMusicVoice = "Cello Music Voice" {
+                            \context CelloMusicStaff = "CelloMusicStaff" {
+                                \context CelloMusicVoice = "CelloMusicVoice" {
                 <BLANKLINE>
-                                    %%% Cello Music Voice [measure 1] %%%
+                                    %%% CelloMusicVoice [measure 1] %%%
                                     \set CelloMusicStaff.instrumentName = \markup { Cello }
                                     \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
                                     \clef "bass"
@@ -2529,7 +2529,7 @@ class LibraryAF(abjad.AbjadObject):
             >>> accumulator = baca.MusicAccumulator(score_template)
             >>> accumulator(
             ...     accumulator.music_maker(
-            ...         'Violin Music Voice',
+            ...         'ViolinMusicVoice',
             ...         [[9, 11, 12, 14, 16]],
             ...         baca.flags(),
             ...         baca.stems_up(),
@@ -2540,9 +2540,9 @@ class LibraryAF(abjad.AbjadObject):
             ...     )
             >>> accumulator(
             ...     accumulator.music_maker(
-            ...         'Viola Music Voice',
+            ...         'ViolaMusicVoice',
             ...         [[0, 2, 4, 5, 7]],
-            ...         baca.anchor('Violin Music Voice'),
+            ...         baca.anchor('ViolinMusicVoice'),
             ...         baca.cross_staff(selector=baca.pleaves()[-2:]),
             ...         baca.flags(),
             ...         baca.stems_up(),
@@ -2579,12 +2579,12 @@ class LibraryAF(abjad.AbjadObject):
                     \context MusicContext = "Music Context" <<
                         \context StringSectionStaffGroup = "String Section Staff Group" <<
                             \tag violin
-                            \context ViolinMusicStaff = "Violin Music Staff" {
-                                \context ViolinMusicVoice = "Violin Music Voice" {
+                            \context ViolinMusicStaff = "ViolinMusicStaff" {
+                                \context ViolinMusicVoice = "ViolinMusicVoice" {
                                     {
                                         {
                 <BLANKLINE>
-                                            %%% Violin Music Voice [measure 1] %%%
+                                            %%% ViolinMusicVoice [measure 1] %%%
                                             \override Stem.direction = #up
                                             \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                             \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
@@ -2606,12 +2606,12 @@ class LibraryAF(abjad.AbjadObject):
                                 }
                             }
                             \tag viola
-                            \context ViolaMusicStaff = "Viola Music Staff" {
-                                \context ViolaMusicVoice = "Viola Music Voice" {
+                            \context ViolaMusicStaff = "ViolaMusicStaff" {
+                                \context ViolaMusicVoice = "ViolaMusicVoice" {
                                     {
                                         {
                 <BLANKLINE>
-                                            %%% Viola Music Voice [measure 1] %%%
+                                            %%% ViolaMusicVoice [measure 1] %%%
                                             \override Stem.direction = #up
                                             \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                             \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
@@ -2635,10 +2635,10 @@ class LibraryAF(abjad.AbjadObject):
                                 }
                             }
                             \tag cello
-                            \context CelloMusicStaff = "Cello Music Staff" {
-                                \context CelloMusicVoice = "Cello Music Voice" {
+                            \context CelloMusicStaff = "CelloMusicStaff" {
+                                \context CelloMusicVoice = "CelloMusicVoice" {
                 <BLANKLINE>
-                                    %%% Cello Music Voice [measure 1] %%%
+                                    %%% CelloMusicVoice [measure 1] %%%
                                     \set CelloMusicStaff.instrumentName = \markup { Cello }
                                     \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
                                     \clef "bass"

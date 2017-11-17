@@ -11,7 +11,7 @@ class CommandWrapper(abjad.AbjadObject):
 
         >>> command = baca.CommandWrapper(
         ...     baca.pitches([7, 1, 3, 4, 5, 11]),
-        ...     baca.scope('Violin Music Voice', 1, 4),
+        ...     baca.scope('ViolinMusicVoice', 1, 4),
         ...     )
 
         >>> abjad.f(command)
@@ -30,7 +30,7 @@ class CommandWrapper(abjad.AbjadObject):
                     ),
                 ),
             scope=baca.Scope(
-                voice_name='Violin Music Voice',
+                voice_name='ViolinMusicVoice',
                 stages=(1, 4),
                 ),
             )
@@ -42,8 +42,8 @@ class CommandWrapper(abjad.AbjadObject):
         >>> command = baca.CommandWrapper(
         ...     baca.pitches([7, 1, 3, 4, 5, 11]),
         ...     baca.timeline([
-        ...         ('Violin Music Voice', 1, 4),
-        ...         ('Viola Music Voice', 1, 4),
+        ...         ('ViolinMusicVoice', 1, 4),
+        ...         ('ViolaMusicVoice', 1, 4),
         ...         ]),
         ...     )
 
@@ -65,11 +65,11 @@ class CommandWrapper(abjad.AbjadObject):
             scope=baca.TimelineScope(
                 scopes=(
                     baca.Scope(
-                        voice_name='Violin Music Voice',
+                        voice_name='ViolinMusicVoice',
                         stages=(1, 4),
                         ),
                     baca.Scope(
-                        voice_name='Viola Music Voice',
+                        voice_name='ViolaMusicVoice',
                         stages=(1, 4),
                         ),
                     ),
@@ -110,7 +110,7 @@ class CommandWrapper(abjad.AbjadObject):
 
             >>> command = baca.CommandWrapper(
             ...     baca.pitches([7, 1, 3, 4, 5, 11]),
-            ...     baca.scope('Violin Music Voice', 1, 4),
+            ...     baca.scope('ViolinMusicVoice', 1, 4),
             ...     )
 
             >>> abjad.f(command.command)
@@ -146,12 +146,12 @@ class CommandWrapper(abjad.AbjadObject):
 
             >>> command = baca.CommandWrapper(
             ...     baca.pitches([7, 1, 3, 4, 5, 11]),
-            ...     baca.scope('Violin Music Voice', 1, 4),
+            ...     baca.scope('ViolinMusicVoice', 1, 4),
             ...     )
 
             >>> abjad.f(command.scope)
             baca.Scope(
-                voice_name='Violin Music Voice',
+                voice_name='ViolinMusicVoice',
                 stages=(1, 4),
                 )
 

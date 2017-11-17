@@ -30,7 +30,7 @@ class LibraryGM(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_even_runs(),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.glissando()
@@ -65,11 +65,11 @@ class LibraryGM(abjad.AbjadObject):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 1] %%%
+                                    %%% MusicVoice [measure 1] %%%
                                     \clef "treble"
                                     e'8 \glissando [
                 <BLANKLINE>
@@ -81,7 +81,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     g'8 \glissando [
                 <BLANKLINE>
                                     f''8 \glissando
@@ -90,7 +90,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 3] %%%
+                                    %%% MusicVoice [measure 3] %%%
                                     d''8 \glissando [
                 <BLANKLINE>
                                     f'8 \glissando
@@ -101,7 +101,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 4] %%%
+                                    %%% MusicVoice [measure 4] %%%
                                     f''8 \glissando [
                 <BLANKLINE>
                                     e'8 \glissando
@@ -125,7 +125,7 @@ class LibraryGM(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.make_even_runs(),
             ...     baca.glissando(baca.plts()[:2]),
@@ -161,11 +161,11 @@ class LibraryGM(abjad.AbjadObject):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 1] %%%
+                                    %%% MusicVoice [measure 1] %%%
                                     \clef "treble"
                                     e'8 \glissando [
                 <BLANKLINE>
@@ -177,7 +177,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     g'8 [
                 <BLANKLINE>
                                     f''8
@@ -186,7 +186,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 3] %%%
+                                    %%% MusicVoice [measure 3] %%%
                                     d''8 [
                 <BLANKLINE>
                                     f'8
@@ -197,7 +197,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 4] %%%
+                                    %%% MusicVoice [measure 4] %%%
                                     f''8 [
                 <BLANKLINE>
                                     e'8 \glissando

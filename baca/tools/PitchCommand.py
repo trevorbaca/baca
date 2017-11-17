@@ -17,7 +17,7 @@ class PitchCommand(Command):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.make_even_runs(),
         ...     baca.pitches([19, 13, 15, 16, 17, 23]),
         ...     )
@@ -51,11 +51,11 @@ class PitchCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 g''8 [
             <BLANKLINE>
@@ -67,7 +67,7 @@ class PitchCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 f''8 [
             <BLANKLINE>
                                 b''8
@@ -76,7 +76,7 @@ class PitchCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 cs''8 [
             <BLANKLINE>
                                 ef''8
@@ -87,7 +87,7 @@ class PitchCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 b''8 [
             <BLANKLINE>
                                 g''8
@@ -111,7 +111,7 @@ class PitchCommand(Command):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.make_even_runs(),
         ...     baca.pitches('C4 F4 F#4 <B4 C#5> D5'), 
         ...     )
@@ -145,11 +145,11 @@ class PitchCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 c'8 [
             <BLANKLINE>
@@ -161,7 +161,7 @@ class PitchCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 d''8 [
             <BLANKLINE>
                                 c'8
@@ -170,7 +170,7 @@ class PitchCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 fs'8 [
             <BLANKLINE>
                                 <b' cs''>8
@@ -181,7 +181,7 @@ class PitchCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 f'8 [
             <BLANKLINE>
                                 fs'8
@@ -205,7 +205,7 @@ class PitchCommand(Command):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.make_even_runs(),
         ...     baca.pitches('<C4 D4 E4 F4 G4 A4 B4 C4>', repeats=True)
         ...     )
@@ -239,11 +239,11 @@ class PitchCommand(Command):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 <c' d' e' f' g' a' b'>8 [
             <BLANKLINE>
@@ -255,7 +255,7 @@ class PitchCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 <c' d' e' f' g' a' b'>8 [
             <BLANKLINE>
                                 <c' d' e' f' g' a' b'>8
@@ -264,7 +264,7 @@ class PitchCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 <c' d' e' f' g' a' b'>8 [
             <BLANKLINE>
                                 <c' d' e' f' g' a' b'>8
@@ -275,7 +275,7 @@ class PitchCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 <c' d' e' f' g' a' b'>8 [
             <BLANKLINE>
                                 <c' d' e' f' g' a' b'>8

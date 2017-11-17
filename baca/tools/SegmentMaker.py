@@ -48,20 +48,20 @@ class SegmentMaker(abjad.SegmentMaker):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
             <BLANKLINE>
-                            %%% Music Voice [measure 1] %%%
+                            %%% MusicVoice [measure 1] %%%
                             \clef "treble"
                             R1 * 1/2
             <BLANKLINE>
-                            %%% Music Voice [measure 2] %%%
+                            %%% MusicVoice [measure 2] %%%
                             R1 * 3/8
             <BLANKLINE>
-                            %%% Music Voice [measure 3] %%%
+                            %%% MusicVoice [measure 3] %%%
                             R1 * 1/2
             <BLANKLINE>
-                            %%% Music Voice [measure 4] %%%
+                            %%% MusicVoice [measure 4] %%%
                             R1 * 3/8
                             \bar "|"
             <BLANKLINE>
@@ -78,7 +78,7 @@ class SegmentMaker(abjad.SegmentMaker):
         ...     )
 
         >>> maker(
-        ...     baca.scope('Music Voice', 1),
+        ...     baca.scope('MusicVoice', 1),
         ...     baca.make_even_runs(),
         ...     )
 
@@ -111,11 +111,11 @@ class SegmentMaker(abjad.SegmentMaker):
                     }
                 >>
                 \context MusicContext = "Music Context" <<
-                    \context Staff = "Music Staff" {
-                        \context Voice = "Music Voice" {
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
@@ -147,7 +147,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
@@ -171,7 +171,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
@@ -202,7 +202,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             }
                             {
             <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
@@ -469,7 +469,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_even_runs(),
             ...     baca.label(abjad.label().with_indices()),
             ...     )
@@ -503,11 +503,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 1] %%%
+                                    %%% MusicVoice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -555,7 +555,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -591,7 +591,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 3] %%%
+                                    %%% MusicVoice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -638,7 +638,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 4] %%%
+                                    %%% MusicVoice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -1819,7 +1819,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=figures,
             ...         ),
@@ -1862,12 +1862,12 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 1] %%%
+                                        %%% MusicVoice [measure 1] %%%
                                         \clef "treble"
                                         e'16
                                     }
@@ -1875,7 +1875,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 2] %%%
+                                        %%% MusicVoice [measure 2] %%%
                                         fs'16 [
                 <BLANKLINE>
                                         d'16
@@ -1894,14 +1894,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 3] %%%
+                                        %%% MusicVoice [measure 3] %%%
                                         b'16
                                     }
                                 }
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 4] %%%
+                                        %%% MusicVoice [measure 4] %%%
                                         bf'16 [
                 <BLANKLINE>
                                         g'16
@@ -1959,7 +1959,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=figures,
             ...         ),
@@ -2006,12 +2006,12 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 1] %%%
+                                        %%% MusicVoice [measure 1] %%%
                                         \clef "treble"
                                         e'16
                                             ^ \markup {
@@ -2036,7 +2036,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 2] %%%
+                                        %%% MusicVoice [measure 2] %%%
                                         fs'16 [
                                             ^ \markup {
                                                 \fontsize
@@ -2072,7 +2072,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 3] %%%
+                                        %%% MusicVoice [measure 3] %%%
                                         b'16
                                             ^ \markup {
                                                 \fontsize
@@ -2096,7 +2096,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 4] %%%
+                                        %%% MusicVoice [measure 4] %%%
                                         bf'16 [
                                             ^ \markup {
                                                 \fontsize
@@ -2159,24 +2159,24 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
-            ...     'Music Voice',
+            ...     'MusicVoice',
             ...     [[2, 4, 5, 7, 9, 11]],
             ...     )
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.RhythmCommand(
-            ...         rhythm_maker=contribution['Music Voice'],
+            ...         rhythm_maker=contribution['MusicVoice'],
             ...         ),
             ...     )
 
             >>> contribution = music_maker(
-            ...     'Cello Music Voice',
+            ...     'CelloMusicVoice',
             ...     [[-3, -5, -7, -8, -10, -12]],
             ...     )
             >>> maker(
-            ...     baca.scope('Cello Music Voice', 1),
+            ...     baca.scope('CelloMusicVoice', 1),
             ...     baca.RhythmCommand(
-            ...         rhythm_maker=contribution['Cello Music Voice'],
+            ...         rhythm_maker=contribution['CelloMusicVoice'],
             ...         ),
             ...     )
 
@@ -2202,10 +2202,10 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context MusicContext = "Music Context" <<
                         \context StringSectionStaffGroup = "String Section Staff Group" <<
                             \tag violin
-                            \context ViolinMusicStaff = "Violin Music Staff" {
-                                \context ViolinMusicVoice = "Violin Music Voice" {
+                            \context ViolinMusicStaff = "ViolinMusicStaff" {
+                                \context ViolinMusicVoice = "ViolinMusicVoice" {
                 <BLANKLINE>
-                                    %%% Violin Music Voice [measure 1] %%%
+                                    %%% ViolinMusicVoice [measure 1] %%%
                                     \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                     \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
@@ -2215,10 +2215,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                             }
                             \tag viola
-                            \context ViolaMusicStaff = "Viola Music Staff" {
-                                \context ViolaMusicVoice = "Viola Music Voice" {
+                            \context ViolaMusicStaff = "ViolaMusicStaff" {
+                                \context ViolaMusicVoice = "ViolaMusicVoice" {
                 <BLANKLINE>
-                                    %%% Viola Music Voice [measure 1] %%%
+                                    %%% ViolaMusicVoice [measure 1] %%%
                                     \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                     \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
                                     \clef "alto"
@@ -2228,12 +2228,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                             }
                             \tag cello
-                            \context CelloMusicStaff = "Cello Music Staff" {
-                                \context CelloMusicVoice = "Cello Music Voice" {
+                            \context CelloMusicStaff = "CelloMusicStaff" {
+                                \context CelloMusicVoice = "CelloMusicVoice" {
                                     {
                                         {
                 <BLANKLINE>
-                                            %%% Cello Music Voice [measure 1] %%%
+                                            %%% CelloMusicVoice [measure 1] %%%
                                             \set CelloMusicStaff.instrumentName = \markup { Cello }
                                             \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
                                             \clef "bass"
@@ -2307,7 +2307,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=figures,
             ...         ),
@@ -2350,12 +2350,12 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 1] %%%
+                                        %%% MusicVoice [measure 1] %%%
                                         \clef "treble"
                                         e'16
                                     }
@@ -2363,7 +2363,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 2] %%%
+                                        %%% MusicVoice [measure 2] %%%
                                         \once \override Accidental.color = #red
                                         \once \override Beam.color = #red
                                         \once \override Dots.color = #red
@@ -2389,14 +2389,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 3] %%%
+                                        %%% MusicVoice [measure 3] %%%
                                         b'16
                                     }
                                 }
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 4] %%%
+                                        %%% MusicVoice [measure 4] %%%
                                         bf'16 [
                 <BLANKLINE>
                                         g'16
@@ -2464,7 +2464,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=figures,
             ...         ),
@@ -2507,12 +2507,12 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 1] %%%
+                                        %%% MusicVoice [measure 1] %%%
                                         \clef "treble"
                                         e'16
                                     }
@@ -2520,7 +2520,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 2] %%%
+                                        %%% MusicVoice [measure 2] %%%
                                         fs'16 [
                 <BLANKLINE>
                                         d'16
@@ -2553,14 +2553,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 3] %%%
+                                        %%% MusicVoice [measure 3] %%%
                                         b'16
                                     }
                                 }
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 4] %%%
+                                        %%% MusicVoice [measure 4] %%%
                                         bf'16 [
                 <BLANKLINE>
                                         g'16
@@ -2631,7 +2631,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -2664,11 +2664,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 1] %%%
+                                    %%% MusicVoice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2700,7 +2700,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2724,7 +2724,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 3] %%%
+                                    %%% MusicVoice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2755,7 +2755,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 4] %%%
+                                    %%% MusicVoice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2794,7 +2794,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -2831,11 +2831,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 1] %%%
+                                    %%% MusicVoice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2867,7 +2867,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2891,7 +2891,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 3] %%%
+                                    %%% MusicVoice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2922,7 +2922,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 4] %%%
+                                    %%% MusicVoice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2962,7 +2962,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -2995,11 +2995,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 1] %%%
+                                    %%% MusicVoice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3031,7 +3031,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3055,7 +3055,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 3] %%%
+                                    %%% MusicVoice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3086,7 +3086,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 4] %%%
+                                    %%% MusicVoice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3126,7 +3126,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -3163,11 +3163,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 1] %%%
+                                    %%% MusicVoice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3199,7 +3199,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3223,7 +3223,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 3] %%%
+                                    %%% MusicVoice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3254,7 +3254,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 4] %%%
+                                    %%% MusicVoice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3303,7 +3303,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -3336,11 +3336,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 1] %%%
+                                    %%% MusicVoice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3372,7 +3372,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3396,7 +3396,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 3] %%%
+                                    %%% MusicVoice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3427,7 +3427,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 4] %%%
+                                    %%% MusicVoice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3469,7 +3469,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -3502,11 +3502,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 1] %%%
+                                    %%% MusicVoice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3538,7 +3538,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3562,7 +3562,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 3] %%%
+                                    %%% MusicVoice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3593,7 +3593,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 4] %%%
+                                    %%% MusicVoice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3703,7 +3703,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -3736,11 +3736,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 1] %%%
+                                    %%% MusicVoice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3772,7 +3772,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3796,7 +3796,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 3] %%%
+                                    %%% MusicVoice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3827,7 +3827,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 4] %%%
+                                    %%% MusicVoice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3867,7 +3867,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -3900,11 +3900,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 1] %%%
+                                    %%% MusicVoice [measure 1] %%%
                                     \clef "treble"
                                     c'8 [
                 <BLANKLINE>
@@ -3916,7 +3916,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     c'8 [
                 <BLANKLINE>
                                     c'8
@@ -3925,7 +3925,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 3] %%%
+                                    %%% MusicVoice [measure 3] %%%
                                     c'8 [
                 <BLANKLINE>
                                     c'8
@@ -3936,7 +3936,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 4] %%%
+                                    %%% MusicVoice [measure 4] %%%
                                     c'8 [
                 <BLANKLINE>
                                     c'8
@@ -4010,7 +4010,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=figures,
             ...         ),
@@ -4059,12 +4059,12 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 1] %%%
+                                        %%% MusicVoice [measure 1] %%%
                                         \once \override Accidental.color = #magenta
                                         \once \override Beam.color = #magenta
                                         \once \override Dots.color = #magenta
@@ -4078,7 +4078,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 2] %%%
+                                        %%% MusicVoice [measure 2] %%%
                                         \acciaccatura {
                 <BLANKLINE>
                                             \once \override Accidental.color = #magenta
@@ -4142,7 +4142,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 3] %%%
+                                        %%% MusicVoice [measure 3] %%%
                                         \once \override Accidental.color = #magenta
                                         \once \override Beam.color = #magenta
                                         \once \override Dots.color = #magenta
@@ -4155,7 +4155,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 4] %%%
+                                        %%% MusicVoice [measure 4] %%%
                                         \acciaccatura {
                 <BLANKLINE>
                                             \once \override Accidental.color = #magenta
@@ -4262,7 +4262,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=figures,
             ...         ),
@@ -4311,12 +4311,12 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 1] %%%
+                                        %%% MusicVoice [measure 1] %%%
                                         \clef "treble"
                                         e'8.
                                     }
@@ -4324,7 +4324,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 2] %%%
+                                        %%% MusicVoice [measure 2] %%%
                                         \acciaccatura {
                 <BLANKLINE>
                                             fs'16 [
@@ -4346,14 +4346,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 3] %%%
+                                        %%% MusicVoice [measure 3] %%%
                                         b'8.
                                     }
                                 }
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice [measure 4] %%%
+                                        %%% MusicVoice [measure 4] %%%
                                         \acciaccatura {
                 <BLANKLINE>
                                             bf'16 [
@@ -4410,7 +4410,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -4458,11 +4458,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 1] %%%
+                                    %%% MusicVoice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4494,7 +4494,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4518,7 +4518,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 3] %%%
+                                    %%% MusicVoice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4549,7 +4549,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 4] %%%
+                                    %%% MusicVoice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4592,7 +4592,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -4642,11 +4642,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 1] %%%
+                                    %%% MusicVoice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4678,7 +4678,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4702,7 +4702,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 3] %%%
+                                    %%% MusicVoice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4733,7 +4733,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 4] %%%
+                                    %%% MusicVoice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4784,7 +4784,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -4817,11 +4817,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 1] %%%
+                                    %%% MusicVoice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4853,7 +4853,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4877,7 +4877,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 3] %%%
+                                    %%% MusicVoice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4908,7 +4908,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 4] %%%
+                                    %%% MusicVoice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4948,7 +4948,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -4988,11 +4988,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 1] %%%
+                                    %%% MusicVoice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5024,7 +5024,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5048,7 +5048,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 3] %%%
+                                    %%% MusicVoice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5079,7 +5079,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 4] %%%
+                                    %%% MusicVoice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5119,7 +5119,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -5163,11 +5163,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 1] %%%
+                                    %%% MusicVoice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5199,7 +5199,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5223,7 +5223,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 3] %%%
+                                    %%% MusicVoice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5254,7 +5254,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 4] %%%
+                                    %%% MusicVoice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5346,7 +5346,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -5379,11 +5379,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 1] %%%
+                                    %%% MusicVoice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5415,7 +5415,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5439,7 +5439,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 3] %%%
+                                    %%% MusicVoice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5470,7 +5470,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 4] %%%
+                                    %%% MusicVoice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5512,7 +5512,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -5560,11 +5560,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 1] %%%
+                                    %%% MusicVoice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5596,7 +5596,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5620,7 +5620,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 3] %%%
+                                    %%% MusicVoice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5651,7 +5651,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 4] %%%
+                                    %%% MusicVoice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5840,20 +5840,20 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 R1 * 1/2
                 <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 R1 * 3/8
                 <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 R1 * 1/2
                 <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 R1 * 3/8
                                 \bar "|"
                 <BLANKLINE>
@@ -5901,20 +5901,20 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 s1 * 1/2
                 <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 s1 * 3/8
                 <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 s1 * 1/2
                 <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 s1 * 3/8
                                 \bar "|"
                 <BLANKLINE>
@@ -5970,7 +5970,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -6014,11 +6014,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 1] %%%
+                                    %%% MusicVoice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -6050,7 +6050,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -6074,7 +6074,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 3] %%%
+                                    %%% MusicVoice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -6105,7 +6105,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 4] %%%
+                                    %%% MusicVoice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -6146,7 +6146,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_even_runs(),
             ...     )
 
@@ -6190,11 +6190,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 1] %%%
+                                    %%% MusicVoice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -6226,7 +6226,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -6250,7 +6250,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 3] %%%
+                                    %%% MusicVoice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -6281,7 +6281,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 4] %%%
+                                    %%% MusicVoice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -6342,7 +6342,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_even_runs(),
             ...     baca.pitches('E4 F4'),
             ...     )
@@ -6376,11 +6376,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 1] %%%
+                                    %%% MusicVoice [measure 1] %%%
                                     \clef "treble"
                                     e'8 [
                 <BLANKLINE>
@@ -6392,7 +6392,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 2] %%%
+                                    %%% MusicVoice [measure 2] %%%
                                     e'8 [
                 <BLANKLINE>
                                     f'8
@@ -6401,7 +6401,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 3] %%%
+                                    %%% MusicVoice [measure 3] %%%
                                     f'8 [
                 <BLANKLINE>
                                     e'8
@@ -6412,7 +6412,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% Music Voice [measure 4] %%%
+                                    %%% MusicVoice [measure 4] %%%
                                     f'8 [
                 <BLANKLINE>
                                     e'8

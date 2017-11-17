@@ -1612,7 +1612,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=rhythmos.TaleaRhythmMaker(
@@ -1654,10 +1654,10 @@ class LibraryTZ(abjad.AbjadObject):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \override Score.BarLine.transparent = ##t
                                 \clef "treble"
                                 e'8 [
@@ -1668,14 +1668,14 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 r8
                 <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 e''8 [
                 <BLANKLINE>
                                 g'8
                 <BLANKLINE>
                                 f''8 ]
                 <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 r8
                 <BLANKLINE>
                                 e'8 [
@@ -1684,7 +1684,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 f'8 ]
                 <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 r8
                 <BLANKLINE>
                                 e''8 [
@@ -1708,7 +1708,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=rhythmos.TaleaRhythmMaker(
@@ -1750,10 +1750,10 @@ class LibraryTZ(abjad.AbjadObject):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 e'8 [
                 <BLANKLINE>
@@ -1763,7 +1763,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 r8
                 <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 \override Score.BarLine.transparent = ##t
                                 e''8 [
                 <BLANKLINE>
@@ -1772,7 +1772,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 f''8 ]
                                 \revert Score.BarLine.transparent
                 <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 r8
                 <BLANKLINE>
                                 e'8 [
@@ -1781,7 +1781,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 f'8 ]
                 <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 r8
                 <BLANKLINE>
                                 e''8 [
@@ -3430,7 +3430,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=rhythmos.TaleaRhythmMaker(
@@ -3479,10 +3479,10 @@ class LibraryTZ(abjad.AbjadObject):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 e'8 [
                 <BLANKLINE>
@@ -3492,14 +3492,14 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 r8
                 <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 e''8 [
                 <BLANKLINE>
                                 g'8
                 <BLANKLINE>
                                 f''8 ]
                 <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 r8
                 <BLANKLINE>
                                 e'8 [
@@ -3508,7 +3508,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 f'8 ]
                 <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 r8
                 <BLANKLINE>
                                 e''8 [
@@ -3533,7 +3533,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Music Voice', 1, 3),
+            ...     baca.scope('MusicVoice', 1, 3),
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=rhythmos.TaleaRhythmMaker(
@@ -3603,10 +3603,10 @@ class LibraryTZ(abjad.AbjadObject):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context Staff = "Music Staff" {
-                            \context Voice = "Music Voice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% Music Voice [measure 1] %%%
+                                %%% MusicVoice [measure 1] %%%
                                 \clef "treble"
                                 e'8 [
                 <BLANKLINE>
@@ -3616,14 +3616,14 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 r8
                 <BLANKLINE>
-                                %%% Music Voice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 e''8 [
                 <BLANKLINE>
                                 g'8
                 <BLANKLINE>
                                 f''8 ]
                 <BLANKLINE>
-                                %%% Music Voice [measure 3] %%%
+                                %%% MusicVoice [measure 3] %%%
                                 r8
                 <BLANKLINE>
                                 e'8 [
@@ -3632,7 +3632,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 f'8 ]
                 <BLANKLINE>
-                                %%% Music Voice [measure 4] %%%
+                                %%% MusicVoice [measure 4] %%%
                                 r8
                 <BLANKLINE>
                                 e''8 [

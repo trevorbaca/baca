@@ -800,32 +800,32 @@ class ImbricationCommand(Command):
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
-            ...     baca.scope('Music Voice 2', 1),
+            ...     baca.scope('MusicVoiceTwo', 1),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=voice_2_selections[0],
             ...         ),
             ...     )
             >>> maker(
-            ...     baca.scope('Music Voice 2', 2),
+            ...     baca.scope('MusicVoiceTwo', 2),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=voice_2_selections[1],
             ...         ),
             ...     )
             >>> maker(
-            ...     baca.scope('Music Voice 1', 1),
+            ...     baca.scope('MusicVoiceOne', 1),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=voice_1_selections[0],
             ...         ),
             ...     )
             >>> maker(
-            ...     baca.scope('Music Voice 1', 2),
+            ...     baca.scope('MusicVoiceOne', 2),
             ...     baca.RhythmCommand(
             ...         rhythm_maker=voice_1_selections[1],
             ...         ),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> voice = lilypond_file['Music Voice 2']
+            >>> voice = lilypond_file['MusicVoiceTwo']
             >>> abjad.override(voice).beam.positions = (-5, -5)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -851,14 +851,14 @@ class ImbricationCommand(Command):
                         }
                     >>
                     \context MusicContext = "Music Context" <<
-                        \context MusicStaff = "Music Staff" <<
-                            \context MusicVoiceOne = "Music Voice 1" {
+                        \context MusicStaff = "MusicStaff" <<
+                            \context MusicVoiceOne = "MusicVoiceOne" {
                                 {
                                     \override TupletBracket.stencil = ##f
                                     \override TupletNumber.stencil = ##f
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice 1 [measure 1] %%%
+                                        %%% MusicVoiceOne [measure 1] %%%
                                         s16 [
                 <BLANKLINE>
                                         \set stemLeftBeamCount = #2
@@ -887,7 +887,7 @@ class ImbricationCommand(Command):
                                     \override TupletNumber.stencil = ##f
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice 1 [measure 2] %%%
+                                        %%% MusicVoiceOne [measure 2] %%%
                                         s16
                 <BLANKLINE>
                                         \set stemLeftBeamCount = #2
@@ -906,13 +906,13 @@ class ImbricationCommand(Command):
                                     \revert TupletNumber.stencil
                                 }
                             }
-                            \context MusicVoiceTwo = "Music Voice 2" \with {
+                            \context MusicVoiceTwo = "MusicVoiceTwo" \with {
                                 \override Beam.positions = #'(-5 . -5)
                             } {
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice 2 [measure 1] %%%
+                                        %%% MusicVoiceTwo [measure 1] %%%
                                         \set stemLeftBeamCount = #0
                                         \set stemRightBeamCount = #2
                                         c'16 [
@@ -947,7 +947,7 @@ class ImbricationCommand(Command):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% Music Voice 2 [measure 2] %%%
+                                        %%% MusicVoiceTwo [measure 2] %%%
                                         \set stemLeftBeamCount = #0
                                         \set stemRightBeamCount = #2
                                         g''16 [
