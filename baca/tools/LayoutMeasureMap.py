@@ -31,7 +31,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin.viola.cello
-                \context GlobalContext = "Global Context" <<
+                \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%

@@ -39,7 +39,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
             ],
             context_name='GlobalContext',
             is_simultaneous=True,
-            name='Global Context',
+            name='GlobalContext',
             )
         return global_context
 
